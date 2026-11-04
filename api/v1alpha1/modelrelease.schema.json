@@ -1,0 +1,1036 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://maas.example.invalid/schemas/model-release/0.4",
+  "title": "ModelRelease strict spec review contract",
+  "$ref": "#/$defs/ModelRelease",
+  "$defs": {
+    "ProfileRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 63,
+          "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+        },
+        "revision": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._/-]*$"
+        }
+      },
+      "required": [
+        "name",
+        "revision"
+      ]
+    },
+    "SecretKeyRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 63,
+          "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+        },
+        "key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 253,
+          "pattern": "^[A-Za-z0-9._-]+$"
+        }
+      },
+      "required": [
+        "name",
+        "key"
+      ]
+    },
+    "Spec": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "modelAlias": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+        },
+        "source": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": [
+                "SelfHosted",
+                "ExternalAPI"
+              ]
+            },
+            "selfHosted": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "engine": {
+                  "const": "SGLang"
+                },
+                "workload": {
+                  "const": "LeaderWorkerSet"
+                },
+                "weights": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "pvcName": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 63,
+                      "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+                    },
+                    "path": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 256,
+                      "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))[A-Za-z0-9_./-]+$"
+                    },
+                    "sha256": {
+                      "type": "string",
+                      "pattern": "^[0-9a-f]{64}$"
+                    },
+                    "modelRevision": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 128,
+                      "pattern": "^[A-Za-z0-9][A-Za-z0-9._/-]*$"
+                    }
+                  },
+                  "required": [
+                    "pvcName",
+                    "path",
+                    "sha256",
+                    "modelRevision"
+                  ]
+                },
+                "runtimeProfileRef": {
+                  "$ref": "#/$defs/ProfileRef"
+                },
+                "placementProfileRef": {
+                  "$ref": "#/$defs/ProfileRef"
+                },
+                "image": {
+                  "type": "string",
+                  "maxLength": 512,
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9./:_-]*@sha256:[0-9a-f]{64}$"
+                },
+                "groups": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 16
+                },
+                "podsPerGroup": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 64
+                },
+                "gpusPerPod": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 8
+                },
+                "gpuResourceName": {
+                  "const": "nvidia.com/gpu"
+                },
+                "cpuPerPod": {
+                  "type": "string",
+                  "pattern": "^[1-9][0-9]*(m)?$"
+                },
+                "memoryPerPod": {
+                  "type": "string",
+                  "pattern": "^[1-9][0-9]*(Mi|Gi)$"
+                },
+                "tensorParallelSize": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 512
+                },
+                "pipelineParallelSize": {
+                  "const": 1
+                },
+                "startupTimeoutSeconds": {
+                  "type": "integer",
+                  "minimum": 30,
+                  "maximum": 7200
+                }
+              },
+              "required": [
+                "engine",
+                "workload",
+                "weights",
+                "runtimeProfileRef",
+                "placementProfileRef",
+                "image",
+                "groups",
+                "podsPerGroup",
+                "gpusPerPod",
+                "gpuResourceName",
+                "cpuPerPod",
+                "memoryPerPod",
+                "tensorParallelSize",
+                "pipelineParallelSize",
+                "startupTimeoutSeconds"
+              ]
+            },
+            "externalAPI": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "provider": {
+                  "type": "string",
+                  "enum": [
+                    "DeepSeek",
+                    "OpenAICompatible"
+                  ]
+                },
+                "endpointRef": {
+                  "$ref": "#/$defs/ProfileRef"
+                },
+                "upstreamModel": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 256
+                },
+                "protocol": {
+                  "const": "OpenAIChatCompletions"
+                },
+                "credentialSecretRef": {
+                  "$ref": "#/$defs/SecretKeyRef"
+                }
+              },
+              "required": [
+                "provider",
+                "endpointRef",
+                "upstreamModel",
+                "protocol",
+                "credentialSecretRef"
+              ]
+            }
+          },
+          "required": [
+            "type"
+          ],
+          "oneOf": [
+            {
+              "properties": {
+                "type": {
+                  "const": "SelfHosted"
+                }
+              },
+              "required": [
+                "selfHosted"
+              ],
+              "not": {
+                "required": [
+                  "externalAPI"
+                ]
+              }
+            },
+            {
+              "properties": {
+                "type": {
+                  "const": "ExternalAPI"
+                }
+              },
+              "required": [
+                "externalAPI"
+              ],
+              "not": {
+                "required": [
+                  "selfHosted"
+                ]
+              }
+            }
+          ]
+        },
+        "gatewayRef": {
+          "$ref": "#/$defs/ProfileRef"
+        },
+        "businessRefs": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "capabilityProfileRef": {
+              "$ref": "#/$defs/ProfileRef"
+            },
+            "pricePolicyRef": {
+              "$ref": "#/$defs/ProfileRef"
+            },
+            "intakePolicyRef": {
+              "$ref": "#/$defs/ProfileRef"
+            }
+          },
+          "required": [
+            "capabilityProfileRef",
+            "pricePolicyRef",
+            "intakePolicyRef"
+          ]
+        },
+        "lifecycle": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "desiredState": {
+              "type": "string",
+              "enum": [
+                "Published",
+                "Paused"
+              ]
+            },
+            "strategy": {
+              "type": "string",
+              "enum": [
+                "BlueGreen",
+                "Recreate"
+              ]
+            },
+            "drainTimeoutSeconds": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 3600
+            },
+            "progressDeadlineSeconds": {
+              "type": "integer",
+              "minimum": 60,
+              "maximum": 14400
+            },
+            "retainedRevisions": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 10
+            },
+            "retainUserData": {
+              "const": true
+            }
+          },
+          "required": [
+            "desiredState",
+            "strategy",
+            "drainTimeoutSeconds",
+            "progressDeadlineSeconds",
+            "retainedRevisions",
+            "retainUserData"
+          ]
+        }
+      },
+      "required": [
+        "modelAlias",
+        "source",
+        "gatewayRef",
+        "businessRefs",
+        "lifecycle"
+      ]
+    },
+    "CreateMetadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 63,
+          "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+        },
+        "namespace": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 63,
+          "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+        }
+      },
+      "required": [
+        "name",
+        "namespace"
+      ]
+    },
+    "Metadata": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 63,
+          "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+        },
+        "namespace": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 63,
+          "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+        },
+        "uid": {
+          "type": "string",
+          "format": "uuid",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+        },
+        "resourceVersion": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "generation": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "deletionTimestamp": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "finalizers": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 253
+          }
+        }
+      },
+      "required": [
+        "name",
+        "namespace"
+      ]
+    },
+    "InvocationBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "model_release_uid": {
+          "type": "string",
+          "format": "uuid",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+        },
+        "model_release_namespace": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 63,
+          "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+        },
+        "model_release_name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 63,
+          "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+        },
+        "model_release_generation": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "release_revision": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "publication_id": {
+          "type": "string",
+          "format": "uuid",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+        },
+        "activation_epoch": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "route_binding_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "admission_purpose": {
+          "type": "string",
+          "enum": [
+            "serving",
+            "validation"
+          ]
+        },
+        "price_snapshot_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "price_version": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._/-]*$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "model_release_uid",
+        "model_release_namespace",
+        "model_release_name",
+        "model_release_generation",
+        "release_revision",
+        "publication_id",
+        "activation_epoch",
+        "route_binding_sha256",
+        "admission_purpose",
+        "price_snapshot_id",
+        "price_version"
+      ]
+    },
+    "Condition": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Accepted",
+            "DependenciesReady",
+            "RuntimeReady",
+            "GatewayApplied",
+            "AccountingReady",
+            "ValidationPassed",
+            "Callable",
+            "Progressing",
+            "Degraded",
+            "AdmissionClosed",
+            "Drained",
+            "CleanupComplete"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "True",
+            "False",
+            "Unknown"
+          ]
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "message": {
+          "type": "string",
+          "maxLength": 1024
+        },
+        "observedGeneration": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "lastTransitionTime": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "type",
+        "status",
+        "reason",
+        "message",
+        "observedGeneration",
+        "lastTransitionTime"
+      ]
+    },
+    "ResourceRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "apiVersion": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "namespace": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 63,
+          "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 63,
+          "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+        },
+        "uid": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "ownership": {
+          "type": "string",
+          "enum": [
+            "exclusive",
+            "shared-entry",
+            "user-reference",
+            "installation"
+          ]
+        },
+        "publication_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "apiVersion",
+        "kind",
+        "namespace",
+        "name",
+        "uid",
+        "ownership",
+        "publication_id"
+      ]
+    },
+    "Operation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+        },
+        "action": {
+          "type": "string",
+          "enum": [
+            "Create",
+            "Update",
+            "Pause",
+            "Resume",
+            "Rollback",
+            "Delete"
+          ]
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "Accepted",
+            "Running",
+            "Succeeded",
+            "Failed",
+            "Unknown"
+          ]
+        },
+        "namespace": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 63,
+          "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 63,
+          "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+        },
+        "cr_uid": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "requested_generation": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "publication_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "reason": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 128
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "message": {
+          "type": "string",
+          "maxLength": 1024
+        }
+      },
+      "required": [
+        "id",
+        "action",
+        "state",
+        "namespace",
+        "name",
+        "cr_uid",
+        "requested_generation",
+        "publication_id",
+        "created_at",
+        "updated_at",
+        "reason",
+        "message"
+      ]
+    },
+    "Status": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "observedGeneration": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "phase": {
+          "type": "string",
+          "enum": [
+            "Pending",
+            "Preparing",
+            "Validating",
+            "Ready",
+            "Updating",
+            "Paused",
+            "Draining",
+            "Deleting",
+            "Degraded",
+            "Failed"
+          ]
+        },
+        "desiredRevision": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "activeRevision": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "activeGeneration": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "publication_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "activation_epoch": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "availableGroups": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 16
+        },
+        "conditions": {
+          "type": "array",
+          "maxItems": 12,
+          "items": {
+            "$ref": "#/$defs/Condition"
+          }
+        },
+        "resources": {
+          "type": "array",
+          "maxItems": 128,
+          "items": {
+            "$ref": "#/$defs/ResourceRef"
+          }
+        },
+        "operation": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Operation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "observedGeneration",
+        "phase",
+        "desiredRevision",
+        "activeRevision",
+        "activeGeneration",
+        "publication_id",
+        "activation_epoch",
+        "availableGroups",
+        "conditions",
+        "resources",
+        "operation"
+      ]
+    },
+    "ModelRelease": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "apiVersion": {
+          "const": "serving.maas.example/v1alpha1"
+        },
+        "kind": {
+          "const": "ModelRelease"
+        },
+        "metadata": {
+          "$ref": "#/$defs/Metadata"
+        },
+        "spec": {
+          "$ref": "#/$defs/Spec"
+        },
+        "status": {
+          "$ref": "#/$defs/Status"
+        }
+      },
+      "required": [
+        "apiVersion",
+        "kind",
+        "metadata",
+        "spec"
+      ]
+    },
+    "ReleaseInput": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "apiVersion": {
+          "const": "serving.maas.example/v1alpha1"
+        },
+        "kind": {
+          "const": "ModelRelease"
+        },
+        "metadata": {
+          "$ref": "#/$defs/CreateMetadata"
+        },
+        "spec": {
+          "$ref": "#/$defs/Spec"
+        }
+      },
+      "required": [
+        "apiVersion",
+        "kind",
+        "metadata",
+        "spec"
+      ]
+    },
+    "RollbackInput": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "target_revision": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "target_revision"
+      ]
+    },
+    "Accepted": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "operation": {
+          "$ref": "#/$defs/Operation"
+        },
+        "resource": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ModelRelease"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "operation",
+        "resource"
+      ]
+    },
+    "ControlCommand": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "command_id": {
+          "type": "string",
+          "format": "uuid",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+        },
+        "action": {
+          "type": "string",
+          "enum": [
+            "Prepare",
+            "RequestValidation",
+            "RecordGatewayReceipt",
+            "Activate",
+            "CloseAdmission",
+            "RetireRuntime",
+            "RecordCleanup"
+          ]
+        },
+        "cr_uid": {
+          "type": "string",
+          "format": "uuid",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+        },
+        "observed_generation": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "reconcile_epoch": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "expected_active_publication_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "target_publication_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "revision": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "evidence_refs": {
+          "type": "array",
+          "maxItems": 32,
+          "items": {
+            "type": "string",
+            "format": "uuid",
+            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+          }
+        }
+      },
+      "required": [
+        "command_id",
+        "action",
+        "cr_uid",
+        "observed_generation",
+        "reconcile_epoch",
+        "expected_active_publication_id",
+        "target_publication_id",
+        "revision",
+        "evidence_refs"
+      ]
+    }
+  },
+  "description": "Offline shape. References, permissions, old/new invariants, readiness, dual-system recovery and CAS need runtime verification."
+}
