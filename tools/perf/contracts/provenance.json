@@ -1,0 +1,18 @@
+{
+  "architecture": "v0.4",
+  "ticket": 3,
+  "terminal": "3.0",
+  "observation": "1.0",
+  "source_attachment": "01a1a637-5727-730d-9662-60ec324daa42",
+  "immutable_snapshots_not_shared_contract_edits": true,
+  "files": {
+    "observation.schema.json": {
+      "upstream_filename": "MAAS-2-observation-v0.4.schema.json",
+      "sha256": "0d7bb2370ea4d042d5b30d7598153d924e0aa9d5125949921bd48e83ebea9ef3"
+    },
+    "terminal.schema.json": {
+      "upstream_filename": "MAAS-2-usage-event-v0.4.schema.json",
+      "sha256": "3e9eac874ce12d294a91f81617f08cc982cd9f48fb8aade798db35416ab2a5a9"
+    }
+  }
+}

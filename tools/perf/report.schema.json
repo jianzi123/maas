@@ -1,0 +1,530 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MaaS offline calculator report 1.0; diagnostic only",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "report_version": {
+      "const": "1.0"
+    },
+    "synthetic": {
+      "type": "boolean"
+    },
+    "evidence_kind": {
+      "enum": [
+        "synthetic_fixture_calculation",
+        "offline_import_unverified"
+      ]
+    },
+    "authority": {
+      "const": "diagnostic_only_no_admission_settlement_refund_or_close_proof"
+    },
+    "protocols": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ticket": {
+          "const": 3
+        },
+        "terminal": {
+          "const": "3.0"
+        },
+        "observation": {
+          "const": "1.0"
+        }
+      },
+      "required": [
+        "ticket",
+        "terminal",
+        "observation"
+      ]
+    },
+    "registry": {
+      "type": "object"
+    },
+    "window": {
+      "type": "object"
+    },
+    "counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "sent": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "admitted": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "succeeded": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "failed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "cancelled": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "timed_out": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "interrupted": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "pending": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "rejected": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "sent",
+        "admitted",
+        "succeeded",
+        "failed",
+        "cancelled",
+        "timed_out",
+        "interrupted",
+        "pending",
+        "rejected"
+      ]
+    },
+    "rates": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "success_rps": {
+          "type": "number",
+          "minimum": 0
+        },
+        "technical_error_over_sent": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1
+        },
+        "rejection_over_sent": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1
+        },
+        "admitted_nonsuccess_over_admitted": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1
+        }
+      },
+      "required": [
+        "success_rps",
+        "technical_error_over_sent",
+        "rejection_over_sent",
+        "admitted_nonsuccess_over_admitted"
+      ]
+    },
+    "goodput": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "slo": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "eligible": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "count": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "rps": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "pass_over_sent": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1
+        }
+      },
+      "required": [
+        "slo",
+        "eligible",
+        "count",
+        "rps",
+        "pass_over_sent"
+      ]
+    },
+    "distributions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "all_sent_observed": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "client_visible_ttft_ms": {
+              "$ref": "#/$defs/distribution"
+            },
+            "client_e2e_ms": {
+              "$ref": "#/$defs/distribution"
+            },
+            "termination_ms": {
+              "$ref": "#/$defs/distribution"
+            },
+            "visible_tpot_proxy_ms": {
+              "$ref": "#/$defs/distribution"
+            },
+            "engine_generated_tpot_ms": {
+              "$ref": "#/$defs/distribution"
+            }
+          },
+          "required": [
+            "client_visible_ttft_ms",
+            "client_e2e_ms",
+            "termination_ms",
+            "visible_tpot_proxy_ms",
+            "engine_generated_tpot_ms"
+          ]
+        },
+        "success": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "client_visible_ttft_ms": {
+              "$ref": "#/$defs/distribution"
+            },
+            "client_e2e_ms": {
+              "$ref": "#/$defs/distribution"
+            },
+            "termination_ms": {
+              "$ref": "#/$defs/distribution"
+            },
+            "visible_tpot_proxy_ms": {
+              "$ref": "#/$defs/distribution"
+            },
+            "engine_generated_tpot_ms": {
+              "$ref": "#/$defs/distribution"
+            }
+          },
+          "required": [
+            "client_visible_ttft_ms",
+            "client_e2e_ms",
+            "termination_ms",
+            "visible_tpot_proxy_ms",
+            "engine_generated_tpot_ms"
+          ]
+        }
+      },
+      "required": [
+        "all_sent_observed",
+        "success"
+      ]
+    },
+    "usage": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "input_tokens": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "known_sum": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0
+            },
+            "known_requests": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "missing_admitted": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "coverage": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0,
+              "maximum": 1
+            },
+            "known_per_second": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0
+            }
+          },
+          "required": [
+            "known_sum",
+            "known_requests",
+            "missing_admitted",
+            "coverage",
+            "known_per_second"
+          ]
+        },
+        "output_tokens": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "known_sum": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0
+            },
+            "known_requests": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "missing_admitted": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "coverage": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0,
+              "maximum": 1
+            },
+            "known_per_second": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0
+            }
+          },
+          "required": [
+            "known_sum",
+            "known_requests",
+            "missing_admitted",
+            "coverage",
+            "known_per_second"
+          ]
+        },
+        "total_tokens": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "known_sum": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0
+            },
+            "known_requests": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "missing_admitted": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "coverage": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0,
+              "maximum": 1
+            },
+            "known_per_second": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0
+            }
+          },
+          "required": [
+            "known_sum",
+            "known_requests",
+            "missing_admitted",
+            "coverage",
+            "known_per_second"
+          ]
+        }
+      },
+      "required": [
+        "input_tokens",
+        "output_tokens",
+        "total_tokens"
+      ]
+    },
+    "diagnostic_reconciliation": {
+      "type": "object"
+    },
+    "duplicates_ignored": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "revision_groups": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "invocation_binding": {
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "request_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "invocation_binding",
+          "request_ids"
+        ]
+      }
+    },
+    "stages_inclusive_only": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/distribution"
+      }
+    },
+    "unattributed_ms": {
+      "type": "null"
+    },
+    "inclusive_stage_sum_ms": {
+      "type": "null"
+    },
+    "rows": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "input_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  },
+  "required": [
+    "report_version",
+    "synthetic",
+    "evidence_kind",
+    "authority",
+    "protocols",
+    "registry",
+    "window",
+    "counts",
+    "rates",
+    "goodput",
+    "distributions",
+    "usage",
+    "diagnostic_reconciliation",
+    "duplicates_ignored",
+    "revision_groups",
+    "stages_inclusive_only",
+    "unattributed_ms",
+    "inclusive_stage_sum_ms",
+    "rows",
+    "input_sha256"
+  ],
+  "$defs": {
+    "distribution": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "denominator": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "missing": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "coverage": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1
+        },
+        "p50": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "p95": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "quantile_method": {
+          "const": "linear_interpolation_n_minus_1"
+        },
+        "tail_evidence": {
+          "enum": [
+            "descriptive_only",
+            "sample_count_only_no_precision_guarantee"
+          ]
+        }
+      },
+      "required": [
+        "count",
+        "denominator",
+        "missing",
+        "coverage",
+        "p50",
+        "p95",
+        "quantile_method",
+        "tail_evidence"
+      ]
+    }
+  }
+}

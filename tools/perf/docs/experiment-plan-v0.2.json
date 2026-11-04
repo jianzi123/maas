@@ -1,0 +1,499 @@
+{
+  "schema_version": "maas10-method-0.2",
+  "kind": "review_only_experiment_plan",
+  "execution_enabled": false,
+  "evidence_status": "not_executed",
+  "date": "2026-11-04",
+  "issue": "MAAS-10",
+  "sources": {
+    "requirements": "v0.4",
+    "architecture_published": "v0.4",
+    "budget_baseline": "v0.3",
+    "ticket": 3,
+    "terminal_event": "3.0",
+    "observation_envelope": "1.0"
+  },
+  "approval": {
+    "record": null,
+    "environment": null,
+    "allowed_target_refs": null,
+    "model": null,
+    "weight_digest": null,
+    "license_access": null,
+    "gpu_sku": null,
+    "gpu_memory_gib": null,
+    "gpu_count": null,
+    "nodes_interconnect": null,
+    "version_matrix": null,
+    "max_inflight": null,
+    "max_requests_total_including_warmup": null,
+    "max_input_tokens": null,
+    "max_output_tokens": null,
+    "max_money_atomic": null,
+    "currency": null,
+    "price_snapshot": null,
+    "budget_policy": null,
+    "max_gpu_seconds": null,
+    "max_wall_seconds": null,
+    "slo_ttft_ms": null,
+    "slo_tpot_ms": null,
+    "slo_e2e_ms": null,
+    "approved_resource_thresholds": null,
+    "drain_deadline_policy": null
+  },
+  "invariants": [
+    "Go is sole admission/finalization authority",
+    "MySQL is durable budget/accounting truth",
+    "Redis rate permit is not a second business debit",
+    "All platform calls traverse Go and Higress",
+    "No retry, hedge, redirect or cross-source fallback for generation",
+    "Unknown usage is null; uncertainty held is not actual usage",
+    "Slot reclaim never refunds budget or rewrites terminal event",
+    "All requests including warmup/cancel/errors consume approved run caps",
+    "No target is contacted by this plan"
+  ],
+  "freeze_fields": [
+    "request_source_and_model",
+    "CR_UID_generation_active_revision",
+    "actual_route_and_gateway_config_revision",
+    "weights_tokenizer_template_digests",
+    "engine_image_digest_commit_effective_config_hash",
+    "precision_attention_backend",
+    "GPU_CPU_memory_topology_and_power_limits",
+    "LWS_group_pod_rank_mapping",
+    "Go_Higress_MySQL_Redis_versions",
+    "budget_rate_slot_settings_price_capability_revisions",
+    "load_generator_revision_seed_fixture_and_arrival_hashes",
+    "sampling_config_stop_thresholds_and_approval",
+    "invocation_binding_publication_epoch_route_digest_admission_purpose",
+    "runtime_metadata_and_gateway_observation_refs"
+  ],
+  "load": {
+    "seed": 20261104,
+    "shapes": [
+      {
+        "id": "S",
+        "input_tokens": 256,
+        "output_cap_tokens": 128
+      },
+      {
+        "id": "M",
+        "input_tokens": 2048,
+        "output_cap_tokens": 256
+      },
+      {
+        "id": "L",
+        "input_tokens": 8192,
+        "output_cap_tokens": 512
+      }
+    ],
+    "concurrencies": [
+      1,
+      2,
+      4,
+      8
+    ],
+    "prefixes": [
+      {
+        "id": "U",
+        "shared_fraction": 0,
+        "note": "unique beyond fixed template"
+      },
+      {
+        "id": "H",
+        "shared_fraction": 0.75,
+        "note": "prewarmed fixed prefix; actual shared token count/hash required"
+      }
+    ],
+    "core_cells": [
+      {
+        "id": "S-C1-U",
+        "shape": "S",
+        "concurrency": 1,
+        "prefix": "U",
+        "stream": true
+      },
+      {
+        "id": "S-C1-H",
+        "shape": "S",
+        "concurrency": 1,
+        "prefix": "H",
+        "stream": true
+      },
+      {
+        "id": "S-C2-U",
+        "shape": "S",
+        "concurrency": 2,
+        "prefix": "U",
+        "stream": true
+      },
+      {
+        "id": "S-C2-H",
+        "shape": "S",
+        "concurrency": 2,
+        "prefix": "H",
+        "stream": true
+      },
+      {
+        "id": "S-C4-U",
+        "shape": "S",
+        "concurrency": 4,
+        "prefix": "U",
+        "stream": true
+      },
+      {
+        "id": "S-C4-H",
+        "shape": "S",
+        "concurrency": 4,
+        "prefix": "H",
+        "stream": true
+      },
+      {
+        "id": "S-C8-U",
+        "shape": "S",
+        "concurrency": 8,
+        "prefix": "U",
+        "stream": true
+      },
+      {
+        "id": "S-C8-H",
+        "shape": "S",
+        "concurrency": 8,
+        "prefix": "H",
+        "stream": true
+      },
+      {
+        "id": "M-C1-U",
+        "shape": "M",
+        "concurrency": 1,
+        "prefix": "U",
+        "stream": true
+      },
+      {
+        "id": "M-C1-H",
+        "shape": "M",
+        "concurrency": 1,
+        "prefix": "H",
+        "stream": true
+      },
+      {
+        "id": "M-C2-U",
+        "shape": "M",
+        "concurrency": 2,
+        "prefix": "U",
+        "stream": true
+      },
+      {
+        "id": "M-C2-H",
+        "shape": "M",
+        "concurrency": 2,
+        "prefix": "H",
+        "stream": true
+      },
+      {
+        "id": "M-C4-U",
+        "shape": "M",
+        "concurrency": 4,
+        "prefix": "U",
+        "stream": true
+      },
+      {
+        "id": "M-C4-H",
+        "shape": "M",
+        "concurrency": 4,
+        "prefix": "H",
+        "stream": true
+      },
+      {
+        "id": "M-C8-U",
+        "shape": "M",
+        "concurrency": 8,
+        "prefix": "U",
+        "stream": true
+      },
+      {
+        "id": "M-C8-H",
+        "shape": "M",
+        "concurrency": 8,
+        "prefix": "H",
+        "stream": true
+      },
+      {
+        "id": "L-C1-U",
+        "shape": "L",
+        "concurrency": 1,
+        "prefix": "U",
+        "stream": true
+      },
+      {
+        "id": "L-C1-H",
+        "shape": "L",
+        "concurrency": 1,
+        "prefix": "H",
+        "stream": true
+      },
+      {
+        "id": "L-C2-U",
+        "shape": "L",
+        "concurrency": 2,
+        "prefix": "U",
+        "stream": true
+      },
+      {
+        "id": "L-C2-H",
+        "shape": "L",
+        "concurrency": 2,
+        "prefix": "H",
+        "stream": true
+      },
+      {
+        "id": "L-C4-U",
+        "shape": "L",
+        "concurrency": 4,
+        "prefix": "U",
+        "stream": true
+      },
+      {
+        "id": "L-C4-H",
+        "shape": "L",
+        "concurrency": 4,
+        "prefix": "H",
+        "stream": true
+      },
+      {
+        "id": "L-C8-U",
+        "shape": "L",
+        "concurrency": 8,
+        "prefix": "U",
+        "stream": true
+      },
+      {
+        "id": "L-C8-H",
+        "shape": "L",
+        "concurrency": 8,
+        "prefix": "H",
+        "stream": true
+      }
+    ],
+    "exploration_cells": [
+      "S-C1-U",
+      "M-C1-U",
+      "M-C4-U",
+      "M-C4-H"
+    ],
+    "non_stream_cells": [
+      {
+        "id": "S-C1-U-NS",
+        "shape": "S",
+        "concurrency": 1,
+        "prefix": "U",
+        "stream": false
+      },
+      {
+        "id": "S-C4-U-NS",
+        "shape": "S",
+        "concurrency": 4,
+        "prefix": "U",
+        "stream": false
+      },
+      {
+        "id": "M-C1-U-NS",
+        "shape": "M",
+        "concurrency": 1,
+        "prefix": "U",
+        "stream": false
+      },
+      {
+        "id": "M-C4-U-NS",
+        "shape": "M",
+        "concurrency": 4,
+        "prefix": "U",
+        "stream": false
+      },
+      {
+        "id": "L-C1-U-NS",
+        "shape": "L",
+        "concurrency": 1,
+        "prefix": "U",
+        "stream": false
+      },
+      {
+        "id": "L-C4-U-NS",
+        "shape": "L",
+        "concurrency": 4,
+        "prefix": "U",
+        "stream": false
+      }
+    ],
+    "mixed": {
+      "weights": {
+        "S": 0.6,
+        "M": 0.3,
+        "L": 0.1
+      },
+      "concurrencies": [
+        1,
+        4
+      ],
+      "prefixes": [
+        "U",
+        "H"
+      ],
+      "seed": 20261104
+    },
+    "cold_start": {
+      "shape": "S",
+      "concurrency": 1,
+      "prefix": "U",
+      "local_weight_cache_states": [
+        "hit",
+        "miss"
+      ],
+      "repetitions_proposed": 5,
+      "allow_download": false,
+      "allow_user_cache_deletion": false
+    },
+    "open_loop": {
+      "reference_lambda_per_second": null,
+      "multipliers": [
+        0.5,
+        0.8,
+        1,
+        1.2
+      ],
+      "max_inflight": null,
+      "note": "freeze lambda0 only after approved SLO-qualified baseline; log planned/sent delay"
+    }
+  },
+  "measurement": {
+    "target_sent_per_cell_per_variant_per_repeat": "max(200,20*C)",
+    "paired_repetitions": 3,
+    "paired_order": [
+      "AB",
+      "BA",
+      "AB"
+    ],
+    "max_sending_seconds_per_repeat_proposed": 180,
+    "warmup": {
+      "min_seconds_proposed": 30,
+      "min_successes": "2*C",
+      "max_seconds_proposed": 120,
+      "charged_to_run_caps": true
+    },
+    "percentiles": [
+      "p50",
+      "p95"
+    ],
+    "p99_min_eligible_proposed": 1000,
+    "client_results_sampling": 1,
+    "server_metric_sampling": 1,
+    "diagnostic_trace_sampling_proposed": 1,
+    "performance_trace_base_sampling_proposed": 0.01,
+    "resource_interval_seconds_proposed": 1,
+    "db_redis_interval_seconds_proposed": 5,
+    "profile_window_max": "10 requests OR 5 seconds, whichever first",
+    "sse_chunks_are_not_tokens": true,
+    "primary_throughput_window": "first scheduled request to last terminal or approved drain deadline; report unfinished",
+    "short_sample_policy": "descriptive_only_no_extra_unapproved_requests"
+  },
+  "correctness_cases": [
+    {
+      "id": "E01",
+      "scenario": "request budget rejection"
+    },
+    {
+      "id": "E02",
+      "scenario": "token budget rejection"
+    },
+    {
+      "id": "E03",
+      "scenario": "money budget rejection"
+    },
+    {
+      "id": "E04",
+      "scenario": "rate/slot/NOWAIT separately"
+    },
+    {
+      "id": "E05",
+      "scenario": "cancel before first content/after first content/before usage, separate cells"
+    },
+    {
+      "id": "E06",
+      "scenario": "slow reader/disconnect/deadline"
+    },
+    {
+      "id": "E07",
+      "scenario": "missing/partial/real-zero usage and stream errors"
+    },
+    {
+      "id": "E08",
+      "scenario": "Redis/MySQL failure and unknown ACK"
+    },
+    {
+      "id": "E09",
+      "scenario": "two Go replicas compete for last budget and slot"
+    },
+    {
+      "id": "E10",
+      "scenario": "terminal duplicate/conflicting hash/late usage or close evidence"
+    },
+    {
+      "id": "E11",
+      "scenario": "update/rollback with inflight stream"
+    },
+    {
+      "id": "E12",
+      "scenario": "two-model pause/delete/drain isolation"
+    }
+  ],
+  "correctness_repetitions_per_subcase_proposed": 10,
+  "stop": {
+    "hard": [
+      "revision/source/price mismatch",
+      "authorization/accounting invariant breach",
+      "unexpected extra upstream attempt",
+      "secret exposure",
+      "first OOM/Xid/OOMKill",
+      "next worst-case reservation exceeds remaining approved cap",
+      "max wall/GPU seconds reached",
+      "telemetry loss or load/hash drift"
+    ],
+    "proposed_review_thresholds": {
+      "gpu_used_fraction": {
+        "above": 0.95,
+        "seconds": 30
+      },
+      "host_memory_fraction": {
+        "above": 0.9,
+        "seconds": 30
+      },
+      "technical_error_rate": {
+        "above": 0.01,
+        "min_sent": 100
+      },
+      "consecutive_dependency_errors": 3,
+      "p95_slo_multiple": 2,
+      "consecutive_slo_windows": 2,
+      "slo_window_seconds": 30,
+      "queue_growth_seconds": 30
+    },
+    "on_stop": "stop sending; preserve original deadlines/cancel rules; record inflight, quarantine and held; do not auto retry or clear budget",
+    "thresholds_are_approved": false
+  },
+  "experiments": [
+    "P0 baseline",
+    "P1 parallelism/topology",
+    "P2 KV capacity/prefix cache",
+    "P3 chunked prefill",
+    "P4 batching/scheduling",
+    "P5 CUDA graph",
+    "P6 attention/communication backend",
+    "P7 separately gated quantization/speculation/kernel patch"
+  ],
+  "result": {
+    "baseline": null,
+    "optimization_delta": null,
+    "quality": null,
+    "runtime_acceptance": "not_executed"
+  }
+}

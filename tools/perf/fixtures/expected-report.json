@@ -1,0 +1,549 @@
+{
+  "report_version": "1.0",
+  "synthetic": true,
+  "evidence_kind": "synthetic_fixture_calculation",
+  "authority": "diagnostic_only_no_admission_settlement_refund_or_close_proof",
+  "protocols": {
+    "ticket": 3,
+    "terminal": "3.0",
+    "observation": "1.0"
+  },
+  "registry": {
+    "experiment_ref": "00000000-0000-4000-8000-000000000060",
+    "run_id": "synthetic-run",
+    "cell_id": "fixture-boundaries",
+    "replicate": 1
+  },
+  "window": {
+    "start_ms": 0,
+    "end_ms": 1000
+  },
+  "counts": {
+    "sent": 9,
+    "admitted": 8,
+    "succeeded": 4,
+    "failed": 2,
+    "cancelled": 1,
+    "timed_out": 0,
+    "interrupted": 0,
+    "pending": 1,
+    "rejected": 1
+  },
+  "rates": {
+    "success_rps": 4.0,
+    "technical_error_over_sent": 0.2222222222222222,
+    "rejection_over_sent": 0.1111111111111111,
+    "admitted_nonsuccess_over_admitted": 0.375
+  },
+  "goodput": {
+    "slo": {
+      "ttft_ms": 150,
+      "tpot_ms": 40,
+      "e2e_ms": 250
+    },
+    "eligible": 3,
+    "count": 2,
+    "rps": 2.0,
+    "pass_over_sent": 0.2222222222222222
+  },
+  "distributions": {
+    "all_sent_observed": {
+      "client_visible_ttft_ms": {
+        "count": 5,
+        "denominator": 9,
+        "missing": 4,
+        "coverage": 0.5555555555555556,
+        "p50": 100.0,
+        "p95": 343.99999999999994,
+        "quantile_method": "linear_interpolation_n_minus_1",
+        "tail_evidence": "descriptive_only"
+      },
+      "client_e2e_ms": {
+        "count": 4,
+        "denominator": 9,
+        "missing": 5,
+        "coverage": 0.4444444444444444,
+        "p50": 175.0,
+        "p95": 539.9999999999999,
+        "quantile_method": "linear_interpolation_n_minus_1",
+        "tail_evidence": "descriptive_only"
+      },
+      "termination_ms": {
+        "count": 8,
+        "denominator": 9,
+        "missing": 1,
+        "coverage": 0.8888888888888888,
+        "p50": 125.0,
+        "p95": 494.99999999999983,
+        "quantile_method": "linear_interpolation_n_minus_1",
+        "tail_evidence": "descriptive_only"
+      },
+      "visible_tpot_proxy_ms": {
+        "count": 2,
+        "denominator": 9,
+        "missing": 7,
+        "coverage": 0.2222222222222222,
+        "p50": 30.0,
+        "p95": 33.0,
+        "quantile_method": "linear_interpolation_n_minus_1",
+        "tail_evidence": "descriptive_only"
+      },
+      "engine_generated_tpot_ms": {
+        "count": 1,
+        "denominator": 9,
+        "missing": 8,
+        "coverage": 0.1111111111111111,
+        "p50": 30.0,
+        "p95": 30.0,
+        "quantile_method": "linear_interpolation_n_minus_1",
+        "tail_evidence": "descriptive_only"
+      }
+    },
+    "success": {
+      "client_visible_ttft_ms": {
+        "count": 3,
+        "denominator": 4,
+        "missing": 1,
+        "coverage": 0.75,
+        "p50": 100.0,
+        "p95": 370.0,
+        "quantile_method": "linear_interpolation_n_minus_1",
+        "tail_evidence": "descriptive_only"
+      },
+      "client_e2e_ms": {
+        "count": 4,
+        "denominator": 4,
+        "missing": 0,
+        "coverage": 1.0,
+        "p50": 175.0,
+        "p95": 539.9999999999999,
+        "quantile_method": "linear_interpolation_n_minus_1",
+        "tail_evidence": "descriptive_only"
+      },
+      "termination_ms": {
+        "count": 4,
+        "denominator": 4,
+        "missing": 0,
+        "coverage": 1.0,
+        "p50": 175.0,
+        "p95": 539.9999999999999,
+        "quantile_method": "linear_interpolation_n_minus_1",
+        "tail_evidence": "descriptive_only"
+      },
+      "visible_tpot_proxy_ms": {
+        "count": 2,
+        "denominator": 4,
+        "missing": 2,
+        "coverage": 0.5,
+        "p50": 30.0,
+        "p95": 33.0,
+        "quantile_method": "linear_interpolation_n_minus_1",
+        "tail_evidence": "descriptive_only"
+      },
+      "engine_generated_tpot_ms": {
+        "count": 1,
+        "denominator": 4,
+        "missing": 3,
+        "coverage": 0.25,
+        "p50": 30.0,
+        "p95": 30.0,
+        "quantile_method": "linear_interpolation_n_minus_1",
+        "tail_evidence": "descriptive_only"
+      }
+    }
+  },
+  "usage": {
+    "input_tokens": {
+      "known_sum": 26,
+      "known_requests": 4,
+      "missing_admitted": 4,
+      "coverage": 0.5,
+      "known_per_second": 26.0
+    },
+    "output_tokens": {
+      "known_sum": 15,
+      "known_requests": 4,
+      "missing_admitted": 4,
+      "coverage": 0.5,
+      "known_per_second": 15.0
+    },
+    "total_tokens": {
+      "known_sum": 41,
+      "known_requests": 4,
+      "missing_admitted": 4,
+      "coverage": 0.5,
+      "known_per_second": 41.0
+    }
+  },
+  "diagnostic_reconciliation": {
+    "admitted": 8,
+    "terminal_records": 7,
+    "pending": 1,
+    "balanced": true,
+    "unknown_held_not_actual": {
+      "request": "0",
+      "token": "420"
+    },
+    "money_by_frozen_price": [
+      {
+        "currency": "TST",
+        "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+        "price_version": "synthetic-price-v1",
+        "known_sum_atomic": "157600",
+        "known_requests": 4,
+        "unknown_held_atomic": "1560000"
+      }
+    ],
+    "limitation": "observed snapshot only; no database or slot release verified"
+  },
+  "duplicates_ignored": 0,
+  "revision_groups": [
+    {
+      "invocation_binding": null,
+      "request_ids": [
+        "00000000-0000-4000-8000-000000000303"
+      ]
+    },
+    {
+      "invocation_binding": {
+        "activation_epoch": 1,
+        "admission_purpose": "serving",
+        "model_release_generation": 1,
+        "model_release_name": "external-model-example",
+        "model_release_namespace": "maas-models-example",
+        "model_release_uid": "00000000-0000-4000-8000-000000000010",
+        "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+        "price_version": "synthetic-price-v1",
+        "publication_id": "00000000-0000-4000-8000-000000000011",
+        "release_revision": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "route_binding_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+      },
+      "request_ids": [
+        "00000000-0000-4000-8000-000000000301",
+        "00000000-0000-4000-8000-000000000302",
+        "00000000-0000-4000-8000-000000000304",
+        "00000000-0000-4000-8000-000000000305",
+        "00000000-0000-4000-8000-000000000306",
+        "00000000-0000-4000-8000-000000000307",
+        "00000000-0000-4000-8000-000000000309"
+      ]
+    },
+    {
+      "invocation_binding": {
+        "activation_epoch": 2,
+        "admission_purpose": "serving",
+        "model_release_generation": 2,
+        "model_release_name": "external-model-example",
+        "model_release_namespace": "maas-models-example",
+        "model_release_uid": "00000000-0000-4000-8000-000000000010",
+        "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+        "price_version": "synthetic-price-v1",
+        "publication_id": "00000000-0000-4000-8000-000000000012",
+        "release_revision": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "route_binding_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+      },
+      "request_ids": [
+        "00000000-0000-4000-8000-000000000308"
+      ]
+    }
+  ],
+  "stages_inclusive_only": {
+    "engine.prefill": {
+      "count": 1,
+      "denominator": 1,
+      "missing": 0,
+      "coverage": 1.0,
+      "p50": 70.0,
+      "p95": 70.0,
+      "quantile_method": "linear_interpolation_n_minus_1",
+      "tail_evidence": "descriptive_only"
+    },
+    "higress.ext_auth": {
+      "count": 1,
+      "denominator": 1,
+      "missing": 0,
+      "coverage": 1.0,
+      "p50": 150.0,
+      "p95": 150.0,
+      "quantile_method": "linear_interpolation_n_minus_1",
+      "tail_evidence": "descriptive_only"
+    },
+    "mysql.admission_commit": {
+      "count": 1,
+      "denominator": 1,
+      "missing": 0,
+      "coverage": 1.0,
+      "p50": 100.0,
+      "p95": 100.0,
+      "quantile_method": "linear_interpolation_n_minus_1",
+      "tail_evidence": "descriptive_only"
+    }
+  },
+  "unattributed_ms": null,
+  "inclusive_stage_sum_ms": null,
+  "rows": [
+    {
+      "request_id": "00000000-0000-4000-8000-000000000301",
+      "result": "succeeded",
+      "rejection_code": null,
+      "invocation_binding": {
+        "model_release_uid": "00000000-0000-4000-8000-000000000010",
+        "model_release_namespace": "maas-models-example",
+        "model_release_name": "external-model-example",
+        "model_release_generation": 1,
+        "release_revision": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "publication_id": "00000000-0000-4000-8000-000000000011",
+        "activation_epoch": 1,
+        "route_binding_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "admission_purpose": "serving",
+        "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+        "price_version": "synthetic-price-v1"
+      },
+      "runtime_metadata_ref": "00000000-0000-4000-8000-000000000081",
+      "server_first_chunk_ms": 60,
+      "model_native_ttft_ms": null,
+      "client_visible_ttft_ms": 100,
+      "client_scheduled_ttft_ms": 100,
+      "client_e2e_ms": 200,
+      "termination_ms": 200,
+      "visible_tpot_proxy_ms": 26.666666666666668,
+      "engine_generated_tpot_ms": 30.0,
+      "chunk_gap_ms": [
+        80
+      ],
+      "goodput_eligible": true,
+      "within_slo_and_quality": true
+    },
+    {
+      "request_id": "00000000-0000-4000-8000-000000000302",
+      "result": "succeeded",
+      "rejection_code": null,
+      "invocation_binding": {
+        "model_release_uid": "00000000-0000-4000-8000-000000000010",
+        "model_release_namespace": "maas-models-example",
+        "model_release_name": "external-model-example",
+        "model_release_generation": 1,
+        "release_revision": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "publication_id": "00000000-0000-4000-8000-000000000011",
+        "activation_epoch": 1,
+        "route_binding_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "admission_purpose": "serving",
+        "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+        "price_version": "synthetic-price-v1"
+      },
+      "runtime_metadata_ref": "00000000-0000-4000-8000-000000000081",
+      "server_first_chunk_ms": null,
+      "model_native_ttft_ms": null,
+      "client_visible_ttft_ms": null,
+      "client_scheduled_ttft_ms": null,
+      "client_e2e_ms": 100,
+      "termination_ms": 100,
+      "visible_tpot_proxy_ms": null,
+      "engine_generated_tpot_ms": null,
+      "chunk_gap_ms": [],
+      "goodput_eligible": false,
+      "within_slo_and_quality": null
+    },
+    {
+      "request_id": "00000000-0000-4000-8000-000000000303",
+      "result": "rejected",
+      "rejection_code": "token_budget_exceeded",
+      "invocation_binding": null,
+      "runtime_metadata_ref": null,
+      "server_first_chunk_ms": null,
+      "model_native_ttft_ms": null,
+      "client_visible_ttft_ms": null,
+      "client_scheduled_ttft_ms": null,
+      "client_e2e_ms": null,
+      "termination_ms": 50,
+      "visible_tpot_proxy_ms": null,
+      "engine_generated_tpot_ms": null,
+      "chunk_gap_ms": [],
+      "goodput_eligible": false,
+      "within_slo_and_quality": null
+    },
+    {
+      "request_id": "00000000-0000-4000-8000-000000000304",
+      "result": "failed",
+      "rejection_code": null,
+      "invocation_binding": {
+        "model_release_uid": "00000000-0000-4000-8000-000000000010",
+        "model_release_namespace": "maas-models-example",
+        "model_release_name": "external-model-example",
+        "model_release_generation": 1,
+        "release_revision": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "publication_id": "00000000-0000-4000-8000-000000000011",
+        "activation_epoch": 1,
+        "route_binding_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "admission_purpose": "serving",
+        "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+        "price_version": "synthetic-price-v1"
+      },
+      "runtime_metadata_ref": "00000000-0000-4000-8000-000000000081",
+      "server_first_chunk_ms": 80,
+      "model_native_ttft_ms": null,
+      "client_visible_ttft_ms": 120,
+      "client_scheduled_ttft_ms": 120,
+      "client_e2e_ms": null,
+      "termination_ms": 300,
+      "visible_tpot_proxy_ms": null,
+      "engine_generated_tpot_ms": null,
+      "chunk_gap_ms": [],
+      "goodput_eligible": false,
+      "within_slo_and_quality": null
+    },
+    {
+      "request_id": "00000000-0000-4000-8000-000000000305",
+      "result": "failed",
+      "rejection_code": null,
+      "invocation_binding": {
+        "model_release_uid": "00000000-0000-4000-8000-000000000010",
+        "model_release_namespace": "maas-models-example",
+        "model_release_name": "external-model-example",
+        "model_release_generation": 1,
+        "release_revision": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "publication_id": "00000000-0000-4000-8000-000000000011",
+        "activation_epoch": 1,
+        "route_binding_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "admission_purpose": "serving",
+        "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+        "price_version": "synthetic-price-v1"
+      },
+      "runtime_metadata_ref": "00000000-0000-4000-8000-000000000081",
+      "server_first_chunk_ms": 40,
+      "model_native_ttft_ms": null,
+      "client_visible_ttft_ms": 60,
+      "client_scheduled_ttft_ms": 60,
+      "client_e2e_ms": null,
+      "termination_ms": 90,
+      "visible_tpot_proxy_ms": null,
+      "engine_generated_tpot_ms": null,
+      "chunk_gap_ms": [],
+      "goodput_eligible": false,
+      "within_slo_and_quality": null
+    },
+    {
+      "request_id": "00000000-0000-4000-8000-000000000306",
+      "result": "cancelled",
+      "rejection_code": null,
+      "invocation_binding": {
+        "model_release_uid": "00000000-0000-4000-8000-000000000010",
+        "model_release_namespace": "maas-models-example",
+        "model_release_name": "external-model-example",
+        "model_release_generation": 1,
+        "release_revision": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "publication_id": "00000000-0000-4000-8000-000000000011",
+        "activation_epoch": 1,
+        "route_binding_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "admission_purpose": "serving",
+        "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+        "price_version": "synthetic-price-v1"
+      },
+      "runtime_metadata_ref": "00000000-0000-4000-8000-000000000081",
+      "server_first_chunk_ms": null,
+      "model_native_ttft_ms": null,
+      "client_visible_ttft_ms": null,
+      "client_scheduled_ttft_ms": null,
+      "client_e2e_ms": null,
+      "termination_ms": 80,
+      "visible_tpot_proxy_ms": null,
+      "engine_generated_tpot_ms": null,
+      "chunk_gap_ms": [],
+      "goodput_eligible": false,
+      "within_slo_and_quality": null
+    },
+    {
+      "request_id": "00000000-0000-4000-8000-000000000307",
+      "result": "succeeded",
+      "rejection_code": null,
+      "invocation_binding": {
+        "model_release_uid": "00000000-0000-4000-8000-000000000010",
+        "model_release_namespace": "maas-models-example",
+        "model_release_name": "external-model-example",
+        "model_release_generation": 1,
+        "release_revision": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "publication_id": "00000000-0000-4000-8000-000000000011",
+        "activation_epoch": 1,
+        "route_binding_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "admission_purpose": "serving",
+        "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+        "price_version": "synthetic-price-v1"
+      },
+      "runtime_metadata_ref": "00000000-0000-4000-8000-000000000081",
+      "server_first_chunk_ms": 70,
+      "model_native_ttft_ms": null,
+      "client_visible_ttft_ms": 90,
+      "client_scheduled_ttft_ms": 90,
+      "client_e2e_ms": 150,
+      "termination_ms": 150,
+      "visible_tpot_proxy_ms": null,
+      "engine_generated_tpot_ms": null,
+      "chunk_gap_ms": [],
+      "goodput_eligible": true,
+      "within_slo_and_quality": true
+    },
+    {
+      "request_id": "00000000-0000-4000-8000-000000000308",
+      "result": "succeeded",
+      "rejection_code": null,
+      "invocation_binding": {
+        "model_release_uid": "00000000-0000-4000-8000-000000000010",
+        "model_release_namespace": "maas-models-example",
+        "model_release_name": "external-model-example",
+        "model_release_generation": 2,
+        "release_revision": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "publication_id": "00000000-0000-4000-8000-000000000012",
+        "activation_epoch": 2,
+        "route_binding_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "admission_purpose": "serving",
+        "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+        "price_version": "synthetic-price-v1"
+      },
+      "runtime_metadata_ref": "00000000-0000-4000-8000-000000000082",
+      "server_first_chunk_ms": 350,
+      "model_native_ttft_ms": null,
+      "client_visible_ttft_ms": 400,
+      "client_scheduled_ttft_ms": 400,
+      "client_e2e_ms": 600,
+      "termination_ms": 600,
+      "visible_tpot_proxy_ms": 33.333333333333336,
+      "engine_generated_tpot_ms": null,
+      "chunk_gap_ms": [
+        100
+      ],
+      "goodput_eligible": true,
+      "within_slo_and_quality": false
+    },
+    {
+      "request_id": "00000000-0000-4000-8000-000000000309",
+      "result": "pending",
+      "rejection_code": null,
+      "invocation_binding": {
+        "model_release_uid": "00000000-0000-4000-8000-000000000010",
+        "model_release_namespace": "maas-models-example",
+        "model_release_name": "external-model-example",
+        "model_release_generation": 1,
+        "release_revision": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "publication_id": "00000000-0000-4000-8000-000000000011",
+        "activation_epoch": 1,
+        "route_binding_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "admission_purpose": "serving",
+        "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+        "price_version": "synthetic-price-v1"
+      },
+      "runtime_metadata_ref": "00000000-0000-4000-8000-000000000081",
+      "server_first_chunk_ms": null,
+      "model_native_ttft_ms": null,
+      "client_visible_ttft_ms": null,
+      "client_scheduled_ttft_ms": null,
+      "client_e2e_ms": null,
+      "termination_ms": null,
+      "visible_tpot_proxy_ms": null,
+      "engine_generated_tpot_ms": null,
+      "chunk_gap_ms": [],
+      "goodput_eligible": false,
+      "within_slo_and_quality": null
+    }
+  ],
+  "input_sha256": "b8581faa3bc97b87e744f36dfd1b3d817b82e04fa5634370b8b823c4aa63c6b8"
+}

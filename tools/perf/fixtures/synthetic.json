@@ -1,0 +1,1869 @@
+{
+  "schema_version": "1.0",
+  "synthetic": true,
+  "protocols": {
+    "ticket": 3,
+    "terminal": "3.0",
+    "observation": "1.0"
+  },
+  "window": {
+    "start_ms": 0,
+    "end_ms": 1000
+  },
+  "registry": {
+    "experiment_ref": "00000000-0000-4000-8000-000000000060",
+    "run_id": "synthetic-run",
+    "cell_id": "fixture-boundaries",
+    "replicate": 1
+  },
+  "requests": [
+    {
+      "request_id": "00000000-0000-4000-8000-000000000301",
+      "scheduled_ms": 0,
+      "sent_ms": 0,
+      "end_ms": 200,
+      "stream": true,
+      "transport_result": "complete",
+      "quality_pass": true,
+      "visible_tokens": 4,
+      "tokenizer_sha256": "9999999999999999999999999999999999999999999999999999999999999999",
+      "engine_token_times_ms": [
+        0,
+        10,
+        20,
+        60,
+        100,
+        150,
+        180
+      ],
+      "engine_clock_scope": "fixture-engine-monotonic",
+      "clock_scope": "fixture-client-monotonic",
+      "frames": [
+        {
+          "at_ms": 10,
+          "wire": "data: {\"choices\":[{\"delta\":{\"role\":\"assistant\"}}]}\n\n"
+        },
+        {
+          "at_ms": 20,
+          "wire": ": heartbeat\n\n"
+        },
+        {
+          "at_ms": 50,
+          "wire": "data: {\"choices\":[],\"usage\":{\"total_tokens\":19}}\n\n"
+        },
+        {
+          "at_ms": 60,
+          "wire": "data: {\"choices\":[{\"delta\":{\"content\":\"\"}}]}\n\n"
+        },
+        {
+          "at_ms": 100,
+          "wire": "data: {\"choices\":[{\"delta\":{\"content\":\"ab\"}}]}\n\n"
+        },
+        {
+          "at_ms": 180,
+          "wire": "data: {\"choices\":[{\"delta\":{\"content\":\"cd\"}}]}\n\n"
+        },
+        {
+          "at_ms": 200,
+          "wire": "data: [DONE]\n\n"
+        }
+      ],
+      "rejection_code": null
+    },
+    {
+      "request_id": "00000000-0000-4000-8000-000000000302",
+      "scheduled_ms": 0,
+      "sent_ms": 0,
+      "end_ms": 100,
+      "stream": true,
+      "transport_result": "complete",
+      "quality_pass": true,
+      "visible_tokens": 0,
+      "tokenizer_sha256": "9999999999999999999999999999999999999999999999999999999999999999",
+      "engine_token_times_ms": null,
+      "engine_clock_scope": null,
+      "clock_scope": "fixture-client-monotonic",
+      "frames": [
+        {
+          "at_ms": 40,
+          "wire": "data: {\"choices\":[],\"usage\":{\"total_tokens\":0}}\n\n"
+        },
+        {
+          "at_ms": 100,
+          "wire": "data: [DONE]\n\n"
+        }
+      ],
+      "rejection_code": null
+    },
+    {
+      "request_id": "00000000-0000-4000-8000-000000000303",
+      "scheduled_ms": 0,
+      "sent_ms": 0,
+      "end_ms": 50,
+      "stream": true,
+      "transport_result": "rejected",
+      "quality_pass": null,
+      "visible_tokens": null,
+      "tokenizer_sha256": null,
+      "engine_token_times_ms": null,
+      "engine_clock_scope": null,
+      "clock_scope": "fixture-client-monotonic",
+      "frames": [],
+      "rejection_code": "token_budget_exceeded"
+    },
+    {
+      "request_id": "00000000-0000-4000-8000-000000000304",
+      "scheduled_ms": 0,
+      "sent_ms": 0,
+      "end_ms": 300,
+      "stream": true,
+      "transport_result": "raw_eof",
+      "quality_pass": null,
+      "visible_tokens": null,
+      "tokenizer_sha256": null,
+      "engine_token_times_ms": null,
+      "engine_clock_scope": null,
+      "clock_scope": "fixture-client-monotonic",
+      "frames": [
+        {
+          "at_ms": 120,
+          "wire": "data: {\"choices\":[{\"delta\":{\"content\":\"x\"}}]}\n\n"
+        },
+        {
+          "at_ms": 150,
+          "wire": "data: {"
+        }
+      ],
+      "rejection_code": null
+    },
+    {
+      "request_id": "00000000-0000-4000-8000-000000000305",
+      "scheduled_ms": 0,
+      "sent_ms": 0,
+      "end_ms": 90,
+      "stream": true,
+      "transport_result": "error",
+      "quality_pass": null,
+      "visible_tokens": null,
+      "tokenizer_sha256": null,
+      "engine_token_times_ms": null,
+      "engine_clock_scope": null,
+      "clock_scope": "fixture-client-monotonic",
+      "frames": [
+        {
+          "at_ms": 60,
+          "wire": "data: {\"choices\":[{\"delta\":{\"content\":\"x\"}}]}\n\n"
+        },
+        {
+          "at_ms": 90,
+          "wire": "event: error\ndata: {\"error\":{}}\n\n"
+        }
+      ],
+      "rejection_code": null
+    },
+    {
+      "request_id": "00000000-0000-4000-8000-000000000306",
+      "scheduled_ms": 0,
+      "sent_ms": 0,
+      "end_ms": 80,
+      "stream": true,
+      "transport_result": "cancelled",
+      "quality_pass": null,
+      "visible_tokens": null,
+      "tokenizer_sha256": null,
+      "engine_token_times_ms": null,
+      "engine_clock_scope": null,
+      "clock_scope": "fixture-client-monotonic",
+      "frames": [
+        {
+          "at_ms": 30,
+          "wire": ": heartbeat\n\n"
+        }
+      ],
+      "rejection_code": null
+    },
+    {
+      "request_id": "00000000-0000-4000-8000-000000000307",
+      "scheduled_ms": 0,
+      "sent_ms": 0,
+      "end_ms": 150,
+      "stream": true,
+      "transport_result": "complete",
+      "quality_pass": true,
+      "visible_tokens": 1,
+      "tokenizer_sha256": "9999999999999999999999999999999999999999999999999999999999999999",
+      "engine_token_times_ms": null,
+      "engine_clock_scope": null,
+      "clock_scope": "fixture-client-monotonic",
+      "frames": [
+        {
+          "at_ms": 90,
+          "wire": "data: {\"choices\":[{\"delta\":{\"content\":\"x\"}}]}\n\n"
+        },
+        {
+          "at_ms": 150,
+          "wire": "data: [DONE]\n\n"
+        }
+      ],
+      "rejection_code": null
+    },
+    {
+      "request_id": "00000000-0000-4000-8000-000000000308",
+      "scheduled_ms": 0,
+      "sent_ms": 0,
+      "end_ms": 600,
+      "stream": true,
+      "transport_result": "complete",
+      "quality_pass": true,
+      "visible_tokens": 4,
+      "tokenizer_sha256": "9999999999999999999999999999999999999999999999999999999999999999",
+      "engine_token_times_ms": null,
+      "engine_clock_scope": null,
+      "clock_scope": "fixture-client-monotonic",
+      "frames": [
+        {
+          "at_ms": 400,
+          "wire": "data: {\"choices\":[{\"delta\":{\"content\":\"ab\"}}]}\n\n"
+        },
+        {
+          "at_ms": 500,
+          "wire": "data: {\"choices\":[{\"delta\":{\"content\":\"cd\"}}]}\n\n"
+        },
+        {
+          "at_ms": 600,
+          "wire": "data: [DONE]\n\n"
+        }
+      ],
+      "rejection_code": null
+    },
+    {
+      "request_id": "00000000-0000-4000-8000-000000000309",
+      "scheduled_ms": 0,
+      "sent_ms": 0,
+      "end_ms": null,
+      "stream": true,
+      "transport_result": "pending",
+      "quality_pass": null,
+      "visible_tokens": null,
+      "tokenizer_sha256": null,
+      "engine_token_times_ms": null,
+      "engine_clock_scope": null,
+      "clock_scope": "fixture-client-monotonic",
+      "frames": [
+        {
+          "at_ms": 100,
+          "wire": ": heartbeat\n\n"
+        }
+      ],
+      "rejection_code": null
+    }
+  ],
+  "observations": [
+    {
+      "schema_version": "1.0",
+      "observation_id": "00000000-0000-4000-8000-000000000101",
+      "event_type": "request.observation",
+      "observed_at": "2026-11-04T10:00:00Z",
+      "producer": "client",
+      "producer_revision": "synthetic-fixture-v1",
+      "actor_ref": null,
+      "experiment_ref": "00000000-0000-4000-8000-000000000060",
+      "gateway_observation_ref": "00000000-0000-4000-8000-000000000501",
+      "request_id": "00000000-0000-4000-8000-000000000301",
+      "trace_id": "00000000000000000000000000000001",
+      "span_id": "0000000000000001",
+      "parent_span_id": null,
+      "invocation_binding": {
+        "model_release_uid": "00000000-0000-4000-8000-000000000010",
+        "model_release_namespace": "maas-models-example",
+        "model_release_name": "external-model-example",
+        "model_release_generation": 1,
+        "release_revision": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "publication_id": "00000000-0000-4000-8000-000000000011",
+        "activation_epoch": 1,
+        "route_binding_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "admission_purpose": "serving",
+        "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+        "price_version": "synthetic-price-v1"
+      },
+      "runtime_metadata_ref": "00000000-0000-4000-8000-000000000081",
+      "cr_uid": "00000000-0000-4000-8000-000000000010",
+      "desired_generation": 2,
+      "observed_generation": 1,
+      "desired_revision": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "active_revision": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "resource_ref": null,
+      "disposition": "admitted",
+      "outcome": "ok",
+      "clock_scope": "fixture-client-monotonic",
+      "timing": {
+        "server_first_chunk_ms": 60,
+        "client_visible_ttft_ms": null,
+        "client_scheduled_ttft_ms": null,
+        "model_native_ttft_ms": null,
+        "client_e2e_ms": null,
+        "tpot_ms": null,
+        "chunk_gap_ms": null,
+        "tpot_scope": "unavailable",
+        "token_sample_count": null,
+        "missing_fields": [
+          "client_visible_ttft_ms",
+          "client_scheduled_ttft_ms",
+          "model_native_ttft_ms",
+          "client_e2e_ms",
+          "tpot_ms",
+          "chunk_gap_ms"
+        ]
+      },
+      "stages": [
+        {
+          "name": "higress.ext_auth",
+          "duration_ms": 150,
+          "provenance": "measured"
+        },
+        {
+          "name": "mysql.admission_commit",
+          "duration_ms": 100,
+          "provenance": "measured"
+        },
+        {
+          "name": "engine.prefill",
+          "duration_ms": 70,
+          "provenance": "measured"
+        }
+      ],
+      "terminal_event_ref": "00000000-0000-4000-8000-000000000201",
+      "slot_release_ref": null,
+      "transport_evidence_ref": null,
+      "sampling_fraction": 1,
+      "retention_policy_ref": {
+        "name": "approved-diagnostics-example",
+        "revision": "retention-example-v1"
+      }
+    },
+    {
+      "schema_version": "1.0",
+      "observation_id": "00000000-0000-4000-8000-000000000102",
+      "event_type": "request.observation",
+      "observed_at": "2026-11-04T10:00:00Z",
+      "producer": "client",
+      "producer_revision": "synthetic-fixture-v1",
+      "actor_ref": null,
+      "experiment_ref": "00000000-0000-4000-8000-000000000060",
+      "gateway_observation_ref": "00000000-0000-4000-8000-000000000502",
+      "request_id": "00000000-0000-4000-8000-000000000302",
+      "trace_id": "00000000000000000000000000000002",
+      "span_id": "0000000000000002",
+      "parent_span_id": null,
+      "invocation_binding": {
+        "model_release_uid": "00000000-0000-4000-8000-000000000010",
+        "model_release_namespace": "maas-models-example",
+        "model_release_name": "external-model-example",
+        "model_release_generation": 1,
+        "release_revision": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "publication_id": "00000000-0000-4000-8000-000000000011",
+        "activation_epoch": 1,
+        "route_binding_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "admission_purpose": "serving",
+        "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+        "price_version": "synthetic-price-v1"
+      },
+      "runtime_metadata_ref": "00000000-0000-4000-8000-000000000081",
+      "cr_uid": "00000000-0000-4000-8000-000000000010",
+      "desired_generation": 2,
+      "observed_generation": 1,
+      "desired_revision": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "active_revision": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "resource_ref": null,
+      "disposition": "admitted",
+      "outcome": "ok",
+      "clock_scope": "fixture-client-monotonic",
+      "timing": {
+        "server_first_chunk_ms": null,
+        "client_visible_ttft_ms": null,
+        "client_scheduled_ttft_ms": null,
+        "model_native_ttft_ms": null,
+        "client_e2e_ms": null,
+        "tpot_ms": null,
+        "chunk_gap_ms": null,
+        "tpot_scope": "unavailable",
+        "token_sample_count": null,
+        "missing_fields": [
+          "server_first_chunk_ms",
+          "client_visible_ttft_ms",
+          "client_scheduled_ttft_ms",
+          "model_native_ttft_ms",
+          "client_e2e_ms",
+          "tpot_ms",
+          "chunk_gap_ms"
+        ]
+      },
+      "stages": [],
+      "terminal_event_ref": "00000000-0000-4000-8000-000000000202",
+      "slot_release_ref": null,
+      "transport_evidence_ref": null,
+      "sampling_fraction": 1,
+      "retention_policy_ref": {
+        "name": "approved-diagnostics-example",
+        "revision": "retention-example-v1"
+      }
+    },
+    {
+      "schema_version": "1.0",
+      "observation_id": "00000000-0000-4000-8000-000000000103",
+      "event_type": "request.observation",
+      "observed_at": "2026-11-04T10:00:00Z",
+      "producer": "client",
+      "producer_revision": "synthetic-fixture-v1",
+      "actor_ref": null,
+      "experiment_ref": "00000000-0000-4000-8000-000000000060",
+      "gateway_observation_ref": null,
+      "request_id": "00000000-0000-4000-8000-000000000303",
+      "trace_id": "00000000000000000000000000000003",
+      "span_id": "0000000000000003",
+      "parent_span_id": null,
+      "invocation_binding": null,
+      "runtime_metadata_ref": null,
+      "cr_uid": null,
+      "desired_generation": null,
+      "observed_generation": null,
+      "desired_revision": null,
+      "active_revision": null,
+      "resource_ref": null,
+      "disposition": "not_admitted",
+      "outcome": "rejected",
+      "clock_scope": "fixture-client-monotonic",
+      "timing": {
+        "server_first_chunk_ms": null,
+        "client_visible_ttft_ms": null,
+        "client_scheduled_ttft_ms": null,
+        "model_native_ttft_ms": null,
+        "client_e2e_ms": null,
+        "tpot_ms": null,
+        "chunk_gap_ms": null,
+        "tpot_scope": "unavailable",
+        "token_sample_count": null,
+        "missing_fields": [
+          "server_first_chunk_ms",
+          "client_visible_ttft_ms",
+          "client_scheduled_ttft_ms",
+          "model_native_ttft_ms",
+          "client_e2e_ms",
+          "tpot_ms",
+          "chunk_gap_ms"
+        ]
+      },
+      "stages": [],
+      "terminal_event_ref": null,
+      "slot_release_ref": null,
+      "transport_evidence_ref": null,
+      "sampling_fraction": 1,
+      "retention_policy_ref": {
+        "name": "approved-diagnostics-example",
+        "revision": "retention-example-v1"
+      }
+    },
+    {
+      "schema_version": "1.0",
+      "observation_id": "00000000-0000-4000-8000-000000000104",
+      "event_type": "request.observation",
+      "observed_at": "2026-11-04T10:00:00Z",
+      "producer": "client",
+      "producer_revision": "synthetic-fixture-v1",
+      "actor_ref": null,
+      "experiment_ref": "00000000-0000-4000-8000-000000000060",
+      "gateway_observation_ref": "00000000-0000-4000-8000-000000000504",
+      "request_id": "00000000-0000-4000-8000-000000000304",
+      "trace_id": "00000000000000000000000000000004",
+      "span_id": "0000000000000004",
+      "parent_span_id": null,
+      "invocation_binding": {
+        "model_release_uid": "00000000-0000-4000-8000-000000000010",
+        "model_release_namespace": "maas-models-example",
+        "model_release_name": "external-model-example",
+        "model_release_generation": 1,
+        "release_revision": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "publication_id": "00000000-0000-4000-8000-000000000011",
+        "activation_epoch": 1,
+        "route_binding_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "admission_purpose": "serving",
+        "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+        "price_version": "synthetic-price-v1"
+      },
+      "runtime_metadata_ref": "00000000-0000-4000-8000-000000000081",
+      "cr_uid": "00000000-0000-4000-8000-000000000010",
+      "desired_generation": 2,
+      "observed_generation": 1,
+      "desired_revision": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "active_revision": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "resource_ref": null,
+      "disposition": "admitted",
+      "outcome": "error",
+      "clock_scope": "fixture-client-monotonic",
+      "timing": {
+        "server_first_chunk_ms": 80,
+        "client_visible_ttft_ms": null,
+        "client_scheduled_ttft_ms": null,
+        "model_native_ttft_ms": null,
+        "client_e2e_ms": null,
+        "tpot_ms": null,
+        "chunk_gap_ms": null,
+        "tpot_scope": "unavailable",
+        "token_sample_count": null,
+        "missing_fields": [
+          "client_visible_ttft_ms",
+          "client_scheduled_ttft_ms",
+          "model_native_ttft_ms",
+          "client_e2e_ms",
+          "tpot_ms",
+          "chunk_gap_ms"
+        ]
+      },
+      "stages": [],
+      "terminal_event_ref": "00000000-0000-4000-8000-000000000204",
+      "slot_release_ref": null,
+      "transport_evidence_ref": null,
+      "sampling_fraction": 1,
+      "retention_policy_ref": {
+        "name": "approved-diagnostics-example",
+        "revision": "retention-example-v1"
+      }
+    },
+    {
+      "schema_version": "1.0",
+      "observation_id": "00000000-0000-4000-8000-000000000105",
+      "event_type": "request.observation",
+      "observed_at": "2026-11-04T10:00:00Z",
+      "producer": "client",
+      "producer_revision": "synthetic-fixture-v1",
+      "actor_ref": null,
+      "experiment_ref": "00000000-0000-4000-8000-000000000060",
+      "gateway_observation_ref": "00000000-0000-4000-8000-000000000505",
+      "request_id": "00000000-0000-4000-8000-000000000305",
+      "trace_id": "00000000000000000000000000000005",
+      "span_id": "0000000000000005",
+      "parent_span_id": null,
+      "invocation_binding": {
+        "model_release_uid": "00000000-0000-4000-8000-000000000010",
+        "model_release_namespace": "maas-models-example",
+        "model_release_name": "external-model-example",
+        "model_release_generation": 1,
+        "release_revision": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "publication_id": "00000000-0000-4000-8000-000000000011",
+        "activation_epoch": 1,
+        "route_binding_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "admission_purpose": "serving",
+        "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+        "price_version": "synthetic-price-v1"
+      },
+      "runtime_metadata_ref": "00000000-0000-4000-8000-000000000081",
+      "cr_uid": "00000000-0000-4000-8000-000000000010",
+      "desired_generation": 2,
+      "observed_generation": 1,
+      "desired_revision": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "active_revision": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "resource_ref": null,
+      "disposition": "admitted",
+      "outcome": "error",
+      "clock_scope": "fixture-client-monotonic",
+      "timing": {
+        "server_first_chunk_ms": 40,
+        "client_visible_ttft_ms": null,
+        "client_scheduled_ttft_ms": null,
+        "model_native_ttft_ms": null,
+        "client_e2e_ms": null,
+        "tpot_ms": null,
+        "chunk_gap_ms": null,
+        "tpot_scope": "unavailable",
+        "token_sample_count": null,
+        "missing_fields": [
+          "client_visible_ttft_ms",
+          "client_scheduled_ttft_ms",
+          "model_native_ttft_ms",
+          "client_e2e_ms",
+          "tpot_ms",
+          "chunk_gap_ms"
+        ]
+      },
+      "stages": [],
+      "terminal_event_ref": "00000000-0000-4000-8000-000000000205",
+      "slot_release_ref": null,
+      "transport_evidence_ref": null,
+      "sampling_fraction": 1,
+      "retention_policy_ref": {
+        "name": "approved-diagnostics-example",
+        "revision": "retention-example-v1"
+      }
+    },
+    {
+      "schema_version": "1.0",
+      "observation_id": "00000000-0000-4000-8000-000000000106",
+      "event_type": "request.observation",
+      "observed_at": "2026-11-04T10:00:00Z",
+      "producer": "client",
+      "producer_revision": "synthetic-fixture-v1",
+      "actor_ref": null,
+      "experiment_ref": "00000000-0000-4000-8000-000000000060",
+      "gateway_observation_ref": "00000000-0000-4000-8000-000000000506",
+      "request_id": "00000000-0000-4000-8000-000000000306",
+      "trace_id": "00000000000000000000000000000006",
+      "span_id": "0000000000000006",
+      "parent_span_id": null,
+      "invocation_binding": {
+        "model_release_uid": "00000000-0000-4000-8000-000000000010",
+        "model_release_namespace": "maas-models-example",
+        "model_release_name": "external-model-example",
+        "model_release_generation": 1,
+        "release_revision": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "publication_id": "00000000-0000-4000-8000-000000000011",
+        "activation_epoch": 1,
+        "route_binding_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "admission_purpose": "serving",
+        "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+        "price_version": "synthetic-price-v1"
+      },
+      "runtime_metadata_ref": "00000000-0000-4000-8000-000000000081",
+      "cr_uid": "00000000-0000-4000-8000-000000000010",
+      "desired_generation": 2,
+      "observed_generation": 1,
+      "desired_revision": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "active_revision": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "resource_ref": null,
+      "disposition": "admitted",
+      "outcome": "cancelled",
+      "clock_scope": "fixture-client-monotonic",
+      "timing": {
+        "server_first_chunk_ms": null,
+        "client_visible_ttft_ms": null,
+        "client_scheduled_ttft_ms": null,
+        "model_native_ttft_ms": null,
+        "client_e2e_ms": null,
+        "tpot_ms": null,
+        "chunk_gap_ms": null,
+        "tpot_scope": "unavailable",
+        "token_sample_count": null,
+        "missing_fields": [
+          "server_first_chunk_ms",
+          "client_visible_ttft_ms",
+          "client_scheduled_ttft_ms",
+          "model_native_ttft_ms",
+          "client_e2e_ms",
+          "tpot_ms",
+          "chunk_gap_ms"
+        ]
+      },
+      "stages": [],
+      "terminal_event_ref": "00000000-0000-4000-8000-000000000206",
+      "slot_release_ref": null,
+      "transport_evidence_ref": null,
+      "sampling_fraction": 1,
+      "retention_policy_ref": {
+        "name": "approved-diagnostics-example",
+        "revision": "retention-example-v1"
+      }
+    },
+    {
+      "schema_version": "1.0",
+      "observation_id": "00000000-0000-4000-8000-000000000107",
+      "event_type": "request.observation",
+      "observed_at": "2026-11-04T10:00:00Z",
+      "producer": "client",
+      "producer_revision": "synthetic-fixture-v1",
+      "actor_ref": null,
+      "experiment_ref": "00000000-0000-4000-8000-000000000060",
+      "gateway_observation_ref": "00000000-0000-4000-8000-000000000507",
+      "request_id": "00000000-0000-4000-8000-000000000307",
+      "trace_id": "00000000000000000000000000000007",
+      "span_id": "0000000000000007",
+      "parent_span_id": null,
+      "invocation_binding": {
+        "model_release_uid": "00000000-0000-4000-8000-000000000010",
+        "model_release_namespace": "maas-models-example",
+        "model_release_name": "external-model-example",
+        "model_release_generation": 1,
+        "release_revision": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "publication_id": "00000000-0000-4000-8000-000000000011",
+        "activation_epoch": 1,
+        "route_binding_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "admission_purpose": "serving",
+        "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+        "price_version": "synthetic-price-v1"
+      },
+      "runtime_metadata_ref": "00000000-0000-4000-8000-000000000081",
+      "cr_uid": "00000000-0000-4000-8000-000000000010",
+      "desired_generation": 2,
+      "observed_generation": 1,
+      "desired_revision": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "active_revision": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "resource_ref": null,
+      "disposition": "admitted",
+      "outcome": "ok",
+      "clock_scope": "fixture-client-monotonic",
+      "timing": {
+        "server_first_chunk_ms": 70,
+        "client_visible_ttft_ms": null,
+        "client_scheduled_ttft_ms": null,
+        "model_native_ttft_ms": null,
+        "client_e2e_ms": null,
+        "tpot_ms": null,
+        "chunk_gap_ms": null,
+        "tpot_scope": "unavailable",
+        "token_sample_count": null,
+        "missing_fields": [
+          "client_visible_ttft_ms",
+          "client_scheduled_ttft_ms",
+          "model_native_ttft_ms",
+          "client_e2e_ms",
+          "tpot_ms",
+          "chunk_gap_ms"
+        ]
+      },
+      "stages": [],
+      "terminal_event_ref": "00000000-0000-4000-8000-000000000207",
+      "slot_release_ref": null,
+      "transport_evidence_ref": null,
+      "sampling_fraction": 1,
+      "retention_policy_ref": {
+        "name": "approved-diagnostics-example",
+        "revision": "retention-example-v1"
+      }
+    },
+    {
+      "schema_version": "1.0",
+      "observation_id": "00000000-0000-4000-8000-000000000108",
+      "event_type": "request.observation",
+      "observed_at": "2026-11-04T10:00:00Z",
+      "producer": "client",
+      "producer_revision": "synthetic-fixture-v1",
+      "actor_ref": null,
+      "experiment_ref": "00000000-0000-4000-8000-000000000060",
+      "gateway_observation_ref": "00000000-0000-4000-8000-000000000508",
+      "request_id": "00000000-0000-4000-8000-000000000308",
+      "trace_id": "00000000000000000000000000000008",
+      "span_id": "0000000000000008",
+      "parent_span_id": null,
+      "invocation_binding": {
+        "model_release_uid": "00000000-0000-4000-8000-000000000010",
+        "model_release_namespace": "maas-models-example",
+        "model_release_name": "external-model-example",
+        "model_release_generation": 2,
+        "release_revision": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "publication_id": "00000000-0000-4000-8000-000000000012",
+        "activation_epoch": 2,
+        "route_binding_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "admission_purpose": "serving",
+        "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+        "price_version": "synthetic-price-v1"
+      },
+      "runtime_metadata_ref": "00000000-0000-4000-8000-000000000082",
+      "cr_uid": "00000000-0000-4000-8000-000000000010",
+      "desired_generation": 2,
+      "observed_generation": 2,
+      "desired_revision": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "active_revision": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "resource_ref": null,
+      "disposition": "admitted",
+      "outcome": "ok",
+      "clock_scope": "fixture-client-monotonic",
+      "timing": {
+        "server_first_chunk_ms": 350,
+        "client_visible_ttft_ms": null,
+        "client_scheduled_ttft_ms": null,
+        "model_native_ttft_ms": null,
+        "client_e2e_ms": null,
+        "tpot_ms": null,
+        "chunk_gap_ms": null,
+        "tpot_scope": "unavailable",
+        "token_sample_count": null,
+        "missing_fields": [
+          "client_visible_ttft_ms",
+          "client_scheduled_ttft_ms",
+          "model_native_ttft_ms",
+          "client_e2e_ms",
+          "tpot_ms",
+          "chunk_gap_ms"
+        ]
+      },
+      "stages": [],
+      "terminal_event_ref": "00000000-0000-4000-8000-000000000208",
+      "slot_release_ref": null,
+      "transport_evidence_ref": null,
+      "sampling_fraction": 1,
+      "retention_policy_ref": {
+        "name": "approved-diagnostics-example",
+        "revision": "retention-example-v1"
+      }
+    },
+    {
+      "schema_version": "1.0",
+      "observation_id": "00000000-0000-4000-8000-000000000109",
+      "event_type": "request.observation",
+      "observed_at": "2026-11-04T10:00:00Z",
+      "producer": "client",
+      "producer_revision": "synthetic-fixture-v1",
+      "actor_ref": null,
+      "experiment_ref": "00000000-0000-4000-8000-000000000060",
+      "gateway_observation_ref": "00000000-0000-4000-8000-000000000509",
+      "request_id": "00000000-0000-4000-8000-000000000309",
+      "trace_id": "00000000000000000000000000000009",
+      "span_id": "0000000000000009",
+      "parent_span_id": null,
+      "invocation_binding": {
+        "model_release_uid": "00000000-0000-4000-8000-000000000010",
+        "model_release_namespace": "maas-models-example",
+        "model_release_name": "external-model-example",
+        "model_release_generation": 1,
+        "release_revision": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "publication_id": "00000000-0000-4000-8000-000000000011",
+        "activation_epoch": 1,
+        "route_binding_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "admission_purpose": "serving",
+        "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+        "price_version": "synthetic-price-v1"
+      },
+      "runtime_metadata_ref": "00000000-0000-4000-8000-000000000081",
+      "cr_uid": "00000000-0000-4000-8000-000000000010",
+      "desired_generation": 2,
+      "observed_generation": 1,
+      "desired_revision": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "active_revision": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "resource_ref": null,
+      "disposition": "admitted",
+      "outcome": "pending",
+      "clock_scope": "fixture-client-monotonic",
+      "timing": {
+        "server_first_chunk_ms": null,
+        "client_visible_ttft_ms": null,
+        "client_scheduled_ttft_ms": null,
+        "model_native_ttft_ms": null,
+        "client_e2e_ms": null,
+        "tpot_ms": null,
+        "chunk_gap_ms": null,
+        "tpot_scope": "unavailable",
+        "token_sample_count": null,
+        "missing_fields": [
+          "server_first_chunk_ms",
+          "client_visible_ttft_ms",
+          "client_scheduled_ttft_ms",
+          "model_native_ttft_ms",
+          "client_e2e_ms",
+          "tpot_ms",
+          "chunk_gap_ms"
+        ]
+      },
+      "stages": [],
+      "terminal_event_ref": null,
+      "slot_release_ref": null,
+      "transport_evidence_ref": null,
+      "sampling_fraction": 1,
+      "retention_policy_ref": {
+        "name": "approved-diagnostics-example",
+        "revision": "retention-example-v1"
+      }
+    }
+  ],
+  "terminals": [
+    {
+      "schema_version": "3.0",
+      "event_type": "request.finalized",
+      "event_id": "00000000-0000-4000-8000-000000000201",
+      "request_id": "00000000-0000-4000-8000-000000000301",
+      "key_id": "00000000-0000-4000-8000-000000000002",
+      "quota_date": "2026-11-04",
+      "model_alias": "model-a",
+      "upstream_model": "provider-model-example",
+      "source_id": "00000000-0000-4000-8000-000000000004",
+      "source_type": "internal",
+      "config_revision": "rev-example-17",
+      "received_at": "2026-11-04T08:00:00Z",
+      "admitted_at": "2026-11-04T08:00:00.001Z",
+      "observed_at": "2026-11-04T08:00:00.200000Z",
+      "result": "succeeded",
+      "submission_state": "submitted",
+      "quota_consumed": 1,
+      "error_code": null,
+      "duration_ms": 200,
+      "first_chunk_ms": 60,
+      "usage": {
+        "input_tokens": 12,
+        "output_tokens": 7,
+        "total_tokens": 19,
+        "input_cached_tokens": 4,
+        "reasoning_tokens": 3,
+        "source": "upstream",
+        "missing_reason": null
+      },
+      "metering_state": "complete",
+      "owner_instance_id": "00000000-0000-4000-8000-000000000003",
+      "owner_fence": 1,
+      "not_submitted_evidence_ref": null,
+      "slot_binding": {
+        "slot_id": 1,
+        "allocation_fence": 7
+      },
+      "reservation_plan": {
+        "schema_version": "1.0",
+        "model_alias": "model-a",
+        "source_id": "00000000-0000-4000-8000-000000000004",
+        "config_revision": "rev-example-17",
+        "capability_revision": "cap-example-verified-fixture-only",
+        "budget_policy_revision": "budget-example-v3",
+        "window_kind": "utc_day",
+        "token_metric": "prompt_plus_completion",
+        "request_reserved": "1",
+        "input_upper_tokens": "100",
+        "output_upper_tokens": "40",
+        "total_upper_tokens": "140",
+        "token_reserved": "140",
+        "money_reserved_atomic": "520000",
+        "currency": "TST",
+        "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+        "price_snapshot_sha256": "866cb1f5f808b8403dba1e733974f8e1caf9c2a9c7c1d1897d678849c948103f",
+        "price_version": "synthetic-price-v1",
+        "rate_policy_revision": "rate-example-v1"
+      },
+      "budget_accounting": {
+        "policy_revision": "budget-example-v3",
+        "window_kind": "utc_day",
+        "window_start": "2026-11-04T00:00:00Z",
+        "window_end": "2026-11-05T00:00:00Z",
+        "request": {
+          "reserved": "1",
+          "known_used": "1",
+          "unknown_held": "0",
+          "released": "0",
+          "overrun": "0",
+          "state": "known"
+        },
+        "token": {
+          "reserved": "140",
+          "known_used": "19",
+          "unknown_held": "0",
+          "released": "121",
+          "overrun": "0",
+          "state": "known"
+        },
+        "money": {
+          "reserved": "520000",
+          "known_used": "72800",
+          "unknown_held": "0",
+          "released": "447200",
+          "overrun": "0",
+          "state": "known"
+        },
+        "token_actual": "19",
+        "token_basis": "upstream_total",
+        "cost_actual_atomic": "72800",
+        "cost_state": "known",
+        "currency": "TST",
+        "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+        "price_version": "synthetic-price-v1",
+        "missing_reason": null
+      },
+      "rate_witness": {
+        "permit_id": "00000000-0000-4000-8000-000000000008",
+        "rate_epoch": "1",
+        "policy_id": "rate-policy-example",
+        "policy_revision": "rate-example-v1",
+        "windows": [
+          {
+            "scope_id": "global",
+            "window_start": "2026-11-04T08:00:00Z",
+            "window_end": "2026-11-04T08:00:01Z",
+            "limit": "5"
+          }
+        ]
+      },
+      "invocation_binding": {
+        "model_release_uid": "00000000-0000-4000-8000-000000000010",
+        "model_release_namespace": "maas-models-example",
+        "model_release_name": "external-model-example",
+        "model_release_generation": 1,
+        "release_revision": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "publication_id": "00000000-0000-4000-8000-000000000011",
+        "activation_epoch": 1,
+        "route_binding_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "admission_purpose": "serving",
+        "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+        "price_version": "synthetic-price-v1"
+      }
+    },
+    {
+      "schema_version": "3.0",
+      "event_type": "request.finalized",
+      "event_id": "00000000-0000-4000-8000-000000000202",
+      "request_id": "00000000-0000-4000-8000-000000000302",
+      "key_id": "00000000-0000-4000-8000-000000000002",
+      "quota_date": "2026-11-04",
+      "model_alias": "model-a",
+      "upstream_model": "provider-model-example",
+      "source_id": "00000000-0000-4000-8000-000000000004",
+      "source_type": "internal",
+      "config_revision": "rev-example-17",
+      "received_at": "2026-11-04T08:00:00Z",
+      "admitted_at": "2026-11-04T08:00:00.001Z",
+      "observed_at": "2026-11-04T08:00:00.100000Z",
+      "result": "succeeded",
+      "submission_state": "submitted",
+      "quota_consumed": 1,
+      "error_code": null,
+      "duration_ms": 100,
+      "first_chunk_ms": null,
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_cached_tokens": 0,
+        "reasoning_tokens": 0,
+        "source": "upstream",
+        "missing_reason": null
+      },
+      "metering_state": "complete",
+      "owner_instance_id": "00000000-0000-4000-8000-000000000003",
+      "owner_fence": 1,
+      "not_submitted_evidence_ref": null,
+      "slot_binding": {
+        "slot_id": 2,
+        "allocation_fence": 7
+      },
+      "reservation_plan": {
+        "schema_version": "1.0",
+        "model_alias": "model-a",
+        "source_id": "00000000-0000-4000-8000-000000000004",
+        "config_revision": "rev-example-17",
+        "capability_revision": "cap-example-verified-fixture-only",
+        "budget_policy_revision": "budget-example-v3",
+        "window_kind": "utc_day",
+        "token_metric": "prompt_plus_completion",
+        "request_reserved": "1",
+        "input_upper_tokens": "100",
+        "output_upper_tokens": "40",
+        "total_upper_tokens": "140",
+        "token_reserved": "140",
+        "money_reserved_atomic": "520000",
+        "currency": "TST",
+        "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+        "price_snapshot_sha256": "866cb1f5f808b8403dba1e733974f8e1caf9c2a9c7c1d1897d678849c948103f",
+        "price_version": "synthetic-price-v1",
+        "rate_policy_revision": "rate-example-v1"
+      },
+      "budget_accounting": {
+        "policy_revision": "budget-example-v3",
+        "window_kind": "utc_day",
+        "window_start": "2026-11-04T00:00:00Z",
+        "window_end": "2026-11-05T00:00:00Z",
+        "request": {
+          "reserved": "1",
+          "known_used": "1",
+          "unknown_held": "0",
+          "released": "0",
+          "overrun": "0",
+          "state": "known"
+        },
+        "token": {
+          "reserved": "140",
+          "known_used": "0",
+          "unknown_held": "0",
+          "released": "140",
+          "overrun": "0",
+          "state": "known"
+        },
+        "money": {
+          "reserved": "520000",
+          "known_used": "0",
+          "unknown_held": "0",
+          "released": "520000",
+          "overrun": "0",
+          "state": "known"
+        },
+        "token_actual": "0",
+        "token_basis": "upstream_total",
+        "cost_actual_atomic": "0",
+        "cost_state": "known",
+        "currency": "TST",
+        "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+        "price_version": "synthetic-price-v1",
+        "missing_reason": null
+      },
+      "rate_witness": {
+        "permit_id": "00000000-0000-4000-8000-000000000008",
+        "rate_epoch": "1",
+        "policy_id": "rate-policy-example",
+        "policy_revision": "rate-example-v1",
+        "windows": [
+          {
+            "scope_id": "global",
+            "window_start": "2026-11-04T08:00:00Z",
+            "window_end": "2026-11-04T08:00:01Z",
+            "limit": "5"
+          }
+        ]
+      },
+      "invocation_binding": {
+        "model_release_uid": "00000000-0000-4000-8000-000000000010",
+        "model_release_namespace": "maas-models-example",
+        "model_release_name": "external-model-example",
+        "model_release_generation": 1,
+        "release_revision": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "publication_id": "00000000-0000-4000-8000-000000000011",
+        "activation_epoch": 1,
+        "route_binding_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "admission_purpose": "serving",
+        "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+        "price_version": "synthetic-price-v1"
+      }
+    },
+    {
+      "schema_version": "3.0",
+      "event_type": "request.finalized",
+      "event_id": "00000000-0000-4000-8000-000000000204",
+      "request_id": "00000000-0000-4000-8000-000000000304",
+      "key_id": "00000000-0000-4000-8000-000000000002",
+      "quota_date": "2026-11-04",
+      "model_alias": "model-a",
+      "upstream_model": "provider-model-example",
+      "source_id": "00000000-0000-4000-8000-000000000004",
+      "source_type": "internal",
+      "config_revision": "rev-example-17",
+      "received_at": "2026-11-04T08:00:00Z",
+      "admitted_at": "2026-11-04T08:00:00.001Z",
+      "observed_at": "2026-11-04T08:00:00.300000Z",
+      "result": "failed",
+      "submission_state": "submitted",
+      "quota_consumed": 1,
+      "error_code": "upstream_protocol_error",
+      "duration_ms": 300,
+      "first_chunk_ms": 80,
+      "usage": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "total_tokens": null,
+        "input_cached_tokens": null,
+        "reasoning_tokens": null,
+        "source": "unavailable",
+        "missing_reason": "not_provided"
+      },
+      "metering_state": "incomplete",
+      "owner_instance_id": "00000000-0000-4000-8000-000000000003",
+      "owner_fence": 1,
+      "not_submitted_evidence_ref": null,
+      "slot_binding": {
+        "slot_id": 4,
+        "allocation_fence": 7
+      },
+      "reservation_plan": {
+        "schema_version": "1.0",
+        "model_alias": "model-a",
+        "source_id": "00000000-0000-4000-8000-000000000004",
+        "config_revision": "rev-example-17",
+        "capability_revision": "cap-example-verified-fixture-only",
+        "budget_policy_revision": "budget-example-v3",
+        "window_kind": "utc_day",
+        "token_metric": "prompt_plus_completion",
+        "request_reserved": "1",
+        "input_upper_tokens": "100",
+        "output_upper_tokens": "40",
+        "total_upper_tokens": "140",
+        "token_reserved": "140",
+        "money_reserved_atomic": "520000",
+        "currency": "TST",
+        "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+        "price_snapshot_sha256": "866cb1f5f808b8403dba1e733974f8e1caf9c2a9c7c1d1897d678849c948103f",
+        "price_version": "synthetic-price-v1",
+        "rate_policy_revision": "rate-example-v1"
+      },
+      "budget_accounting": {
+        "policy_revision": "budget-example-v3",
+        "window_kind": "utc_day",
+        "window_start": "2026-11-04T00:00:00Z",
+        "window_end": "2026-11-05T00:00:00Z",
+        "request": {
+          "reserved": "1",
+          "known_used": "1",
+          "unknown_held": "0",
+          "released": "0",
+          "overrun": "0",
+          "state": "known"
+        },
+        "token": {
+          "reserved": "140",
+          "known_used": "0",
+          "unknown_held": "140",
+          "released": "0",
+          "overrun": "0",
+          "state": "held"
+        },
+        "money": {
+          "reserved": "520000",
+          "known_used": "0",
+          "unknown_held": "520000",
+          "released": "0",
+          "overrun": "0",
+          "state": "held"
+        },
+        "token_actual": null,
+        "token_basis": "unavailable",
+        "cost_actual_atomic": null,
+        "cost_state": "upper_bound",
+        "currency": "TST",
+        "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+        "price_version": "synthetic-price-v1",
+        "missing_reason": "not_provided"
+      },
+      "rate_witness": {
+        "permit_id": "00000000-0000-4000-8000-000000000008",
+        "rate_epoch": "1",
+        "policy_id": "rate-policy-example",
+        "policy_revision": "rate-example-v1",
+        "windows": [
+          {
+            "scope_id": "global",
+            "window_start": "2026-11-04T08:00:00Z",
+            "window_end": "2026-11-04T08:00:01Z",
+            "limit": "5"
+          }
+        ]
+      },
+      "invocation_binding": {
+        "model_release_uid": "00000000-0000-4000-8000-000000000010",
+        "model_release_namespace": "maas-models-example",
+        "model_release_name": "external-model-example",
+        "model_release_generation": 1,
+        "release_revision": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "publication_id": "00000000-0000-4000-8000-000000000011",
+        "activation_epoch": 1,
+        "route_binding_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "admission_purpose": "serving",
+        "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+        "price_version": "synthetic-price-v1"
+      }
+    },
+    {
+      "schema_version": "3.0",
+      "event_type": "request.finalized",
+      "event_id": "00000000-0000-4000-8000-000000000205",
+      "request_id": "00000000-0000-4000-8000-000000000305",
+      "key_id": "00000000-0000-4000-8000-000000000002",
+      "quota_date": "2026-11-04",
+      "model_alias": "model-a",
+      "upstream_model": "provider-model-example",
+      "source_id": "00000000-0000-4000-8000-000000000004",
+      "source_type": "internal",
+      "config_revision": "rev-example-17",
+      "received_at": "2026-11-04T08:00:00Z",
+      "admitted_at": "2026-11-04T08:00:00.001Z",
+      "observed_at": "2026-11-04T08:00:00.090000Z",
+      "result": "failed",
+      "submission_state": "submitted",
+      "quota_consumed": 1,
+      "error_code": "upstream_protocol_error",
+      "duration_ms": 90,
+      "first_chunk_ms": 40,
+      "usage": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "total_tokens": null,
+        "input_cached_tokens": null,
+        "reasoning_tokens": null,
+        "source": "unavailable",
+        "missing_reason": "not_provided"
+      },
+      "metering_state": "incomplete",
+      "owner_instance_id": "00000000-0000-4000-8000-000000000003",
+      "owner_fence": 1,
+      "not_submitted_evidence_ref": null,
+      "slot_binding": {
+        "slot_id": 5,
+        "allocation_fence": 7
+      },
+      "reservation_plan": {
+        "schema_version": "1.0",
+        "model_alias": "model-a",
+        "source_id": "00000000-0000-4000-8000-000000000004",
+        "config_revision": "rev-example-17",
+        "capability_revision": "cap-example-verified-fixture-only",
+        "budget_policy_revision": "budget-example-v3",
+        "window_kind": "utc_day",
+        "token_metric": "prompt_plus_completion",
+        "request_reserved": "1",
+        "input_upper_tokens": "100",
+        "output_upper_tokens": "40",
+        "total_upper_tokens": "140",
+        "token_reserved": "140",
+        "money_reserved_atomic": "520000",
+        "currency": "TST",
+        "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+        "price_snapshot_sha256": "866cb1f5f808b8403dba1e733974f8e1caf9c2a9c7c1d1897d678849c948103f",
+        "price_version": "synthetic-price-v1",
+        "rate_policy_revision": "rate-example-v1"
+      },
+      "budget_accounting": {
+        "policy_revision": "budget-example-v3",
+        "window_kind": "utc_day",
+        "window_start": "2026-11-04T00:00:00Z",
+        "window_end": "2026-11-05T00:00:00Z",
+        "request": {
+          "reserved": "1",
+          "known_used": "1",
+          "unknown_held": "0",
+          "released": "0",
+          "overrun": "0",
+          "state": "known"
+        },
+        "token": {
+          "reserved": "140",
+          "known_used": "0",
+          "unknown_held": "140",
+          "released": "0",
+          "overrun": "0",
+          "state": "held"
+        },
+        "money": {
+          "reserved": "520000",
+          "known_used": "0",
+          "unknown_held": "520000",
+          "released": "0",
+          "overrun": "0",
+          "state": "held"
+        },
+        "token_actual": null,
+        "token_basis": "unavailable",
+        "cost_actual_atomic": null,
+        "cost_state": "upper_bound",
+        "currency": "TST",
+        "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+        "price_version": "synthetic-price-v1",
+        "missing_reason": "not_provided"
+      },
+      "rate_witness": {
+        "permit_id": "00000000-0000-4000-8000-000000000008",
+        "rate_epoch": "1",
+        "policy_id": "rate-policy-example",
+        "policy_revision": "rate-example-v1",
+        "windows": [
+          {
+            "scope_id": "global",
+            "window_start": "2026-11-04T08:00:00Z",
+            "window_end": "2026-11-04T08:00:01Z",
+            "limit": "5"
+          }
+        ]
+      },
+      "invocation_binding": {
+        "model_release_uid": "00000000-0000-4000-8000-000000000010",
+        "model_release_namespace": "maas-models-example",
+        "model_release_name": "external-model-example",
+        "model_release_generation": 1,
+        "release_revision": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "publication_id": "00000000-0000-4000-8000-000000000011",
+        "activation_epoch": 1,
+        "route_binding_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "admission_purpose": "serving",
+        "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+        "price_version": "synthetic-price-v1"
+      }
+    },
+    {
+      "schema_version": "3.0",
+      "event_type": "request.finalized",
+      "event_id": "00000000-0000-4000-8000-000000000206",
+      "request_id": "00000000-0000-4000-8000-000000000306",
+      "key_id": "00000000-0000-4000-8000-000000000002",
+      "quota_date": "2026-11-04",
+      "model_alias": "model-a",
+      "upstream_model": "provider-model-example",
+      "source_id": "00000000-0000-4000-8000-000000000004",
+      "source_type": "internal",
+      "config_revision": "rev-example-17",
+      "received_at": "2026-11-04T08:00:00Z",
+      "admitted_at": "2026-11-04T08:00:00.001Z",
+      "observed_at": "2026-11-04T08:00:00.080000Z",
+      "result": "cancelled",
+      "submission_state": "submitted",
+      "quota_consumed": 1,
+      "error_code": "client_cancelled",
+      "duration_ms": 80,
+      "first_chunk_ms": null,
+      "usage": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "total_tokens": null,
+        "input_cached_tokens": null,
+        "reasoning_tokens": null,
+        "source": "unavailable",
+        "missing_reason": "cancelled_before_usage"
+      },
+      "metering_state": "incomplete",
+      "owner_instance_id": "00000000-0000-4000-8000-000000000003",
+      "owner_fence": 1,
+      "not_submitted_evidence_ref": null,
+      "slot_binding": {
+        "slot_id": 6,
+        "allocation_fence": 7
+      },
+      "reservation_plan": {
+        "schema_version": "1.0",
+        "model_alias": "model-a",
+        "source_id": "00000000-0000-4000-8000-000000000004",
+        "config_revision": "rev-example-17",
+        "capability_revision": "cap-example-verified-fixture-only",
+        "budget_policy_revision": "budget-example-v3",
+        "window_kind": "utc_day",
+        "token_metric": "prompt_plus_completion",
+        "request_reserved": "1",
+        "input_upper_tokens": "100",
+        "output_upper_tokens": "40",
+        "total_upper_tokens": "140",
+        "token_reserved": "140",
+        "money_reserved_atomic": "520000",
+        "currency": "TST",
+        "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+        "price_snapshot_sha256": "866cb1f5f808b8403dba1e733974f8e1caf9c2a9c7c1d1897d678849c948103f",
+        "price_version": "synthetic-price-v1",
+        "rate_policy_revision": "rate-example-v1"
+      },
+      "budget_accounting": {
+        "policy_revision": "budget-example-v3",
+        "window_kind": "utc_day",
+        "window_start": "2026-11-04T00:00:00Z",
+        "window_end": "2026-11-05T00:00:00Z",
+        "request": {
+          "reserved": "1",
+          "known_used": "1",
+          "unknown_held": "0",
+          "released": "0",
+          "overrun": "0",
+          "state": "known"
+        },
+        "token": {
+          "reserved": "140",
+          "known_used": "0",
+          "unknown_held": "140",
+          "released": "0",
+          "overrun": "0",
+          "state": "held"
+        },
+        "money": {
+          "reserved": "520000",
+          "known_used": "0",
+          "unknown_held": "520000",
+          "released": "0",
+          "overrun": "0",
+          "state": "held"
+        },
+        "token_actual": null,
+        "token_basis": "unavailable",
+        "cost_actual_atomic": null,
+        "cost_state": "upper_bound",
+        "currency": "TST",
+        "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+        "price_version": "synthetic-price-v1",
+        "missing_reason": "not_provided"
+      },
+      "rate_witness": {
+        "permit_id": "00000000-0000-4000-8000-000000000008",
+        "rate_epoch": "1",
+        "policy_id": "rate-policy-example",
+        "policy_revision": "rate-example-v1",
+        "windows": [
+          {
+            "scope_id": "global",
+            "window_start": "2026-11-04T08:00:00Z",
+            "window_end": "2026-11-04T08:00:01Z",
+            "limit": "5"
+          }
+        ]
+      },
+      "invocation_binding": {
+        "model_release_uid": "00000000-0000-4000-8000-000000000010",
+        "model_release_namespace": "maas-models-example",
+        "model_release_name": "external-model-example",
+        "model_release_generation": 1,
+        "release_revision": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "publication_id": "00000000-0000-4000-8000-000000000011",
+        "activation_epoch": 1,
+        "route_binding_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "admission_purpose": "serving",
+        "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+        "price_version": "synthetic-price-v1"
+      }
+    },
+    {
+      "schema_version": "3.0",
+      "event_type": "request.finalized",
+      "event_id": "00000000-0000-4000-8000-000000000207",
+      "request_id": "00000000-0000-4000-8000-000000000307",
+      "key_id": "00000000-0000-4000-8000-000000000002",
+      "quota_date": "2026-11-04",
+      "model_alias": "model-a",
+      "upstream_model": "provider-model-example",
+      "source_id": "00000000-0000-4000-8000-000000000004",
+      "source_type": "internal",
+      "config_revision": "rev-example-17",
+      "received_at": "2026-11-04T08:00:00Z",
+      "admitted_at": "2026-11-04T08:00:00.001Z",
+      "observed_at": "2026-11-04T08:00:00.150000Z",
+      "result": "succeeded",
+      "submission_state": "submitted",
+      "quota_consumed": 1,
+      "error_code": null,
+      "duration_ms": 150,
+      "first_chunk_ms": 70,
+      "usage": {
+        "input_tokens": 2,
+        "output_tokens": 1,
+        "total_tokens": 3,
+        "input_cached_tokens": 0,
+        "reasoning_tokens": 0,
+        "source": "upstream",
+        "missing_reason": null
+      },
+      "metering_state": "complete",
+      "owner_instance_id": "00000000-0000-4000-8000-000000000003",
+      "owner_fence": 1,
+      "not_submitted_evidence_ref": null,
+      "slot_binding": {
+        "slot_id": 7,
+        "allocation_fence": 7
+      },
+      "reservation_plan": {
+        "schema_version": "1.0",
+        "model_alias": "model-a",
+        "source_id": "00000000-0000-4000-8000-000000000004",
+        "config_revision": "rev-example-17",
+        "capability_revision": "cap-example-verified-fixture-only",
+        "budget_policy_revision": "budget-example-v3",
+        "window_kind": "utc_day",
+        "token_metric": "prompt_plus_completion",
+        "request_reserved": "1",
+        "input_upper_tokens": "100",
+        "output_upper_tokens": "40",
+        "total_upper_tokens": "140",
+        "token_reserved": "140",
+        "money_reserved_atomic": "520000",
+        "currency": "TST",
+        "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+        "price_snapshot_sha256": "866cb1f5f808b8403dba1e733974f8e1caf9c2a9c7c1d1897d678849c948103f",
+        "price_version": "synthetic-price-v1",
+        "rate_policy_revision": "rate-example-v1"
+      },
+      "budget_accounting": {
+        "policy_revision": "budget-example-v3",
+        "window_kind": "utc_day",
+        "window_start": "2026-11-04T00:00:00Z",
+        "window_end": "2026-11-05T00:00:00Z",
+        "request": {
+          "reserved": "1",
+          "known_used": "1",
+          "unknown_held": "0",
+          "released": "0",
+          "overrun": "0",
+          "state": "known"
+        },
+        "token": {
+          "reserved": "140",
+          "known_used": "3",
+          "unknown_held": "0",
+          "released": "137",
+          "overrun": "0",
+          "state": "known"
+        },
+        "money": {
+          "reserved": "520000",
+          "known_used": "12000",
+          "unknown_held": "0",
+          "released": "508000",
+          "overrun": "0",
+          "state": "known"
+        },
+        "token_actual": "3",
+        "token_basis": "upstream_total",
+        "cost_actual_atomic": "12000",
+        "cost_state": "known",
+        "currency": "TST",
+        "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+        "price_version": "synthetic-price-v1",
+        "missing_reason": null
+      },
+      "rate_witness": {
+        "permit_id": "00000000-0000-4000-8000-000000000008",
+        "rate_epoch": "1",
+        "policy_id": "rate-policy-example",
+        "policy_revision": "rate-example-v1",
+        "windows": [
+          {
+            "scope_id": "global",
+            "window_start": "2026-11-04T08:00:00Z",
+            "window_end": "2026-11-04T08:00:01Z",
+            "limit": "5"
+          }
+        ]
+      },
+      "invocation_binding": {
+        "model_release_uid": "00000000-0000-4000-8000-000000000010",
+        "model_release_namespace": "maas-models-example",
+        "model_release_name": "external-model-example",
+        "model_release_generation": 1,
+        "release_revision": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "publication_id": "00000000-0000-4000-8000-000000000011",
+        "activation_epoch": 1,
+        "route_binding_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "admission_purpose": "serving",
+        "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+        "price_version": "synthetic-price-v1"
+      }
+    },
+    {
+      "schema_version": "3.0",
+      "event_type": "request.finalized",
+      "event_id": "00000000-0000-4000-8000-000000000208",
+      "request_id": "00000000-0000-4000-8000-000000000308",
+      "key_id": "00000000-0000-4000-8000-000000000002",
+      "quota_date": "2026-11-04",
+      "model_alias": "model-a",
+      "upstream_model": "provider-model-example",
+      "source_id": "00000000-0000-4000-8000-000000000004",
+      "source_type": "internal",
+      "config_revision": "rev-example-17",
+      "received_at": "2026-11-04T08:00:00Z",
+      "admitted_at": "2026-11-04T08:00:00.001Z",
+      "observed_at": "2026-11-04T08:00:00.600000Z",
+      "result": "succeeded",
+      "submission_state": "submitted",
+      "quota_consumed": 1,
+      "error_code": null,
+      "duration_ms": 600,
+      "first_chunk_ms": 350,
+      "usage": {
+        "input_tokens": 12,
+        "output_tokens": 7,
+        "total_tokens": 19,
+        "input_cached_tokens": 4,
+        "reasoning_tokens": 3,
+        "source": "upstream",
+        "missing_reason": null
+      },
+      "metering_state": "complete",
+      "owner_instance_id": "00000000-0000-4000-8000-000000000003",
+      "owner_fence": 1,
+      "not_submitted_evidence_ref": null,
+      "slot_binding": {
+        "slot_id": 8,
+        "allocation_fence": 7
+      },
+      "reservation_plan": {
+        "schema_version": "1.0",
+        "model_alias": "model-a",
+        "source_id": "00000000-0000-4000-8000-000000000004",
+        "config_revision": "rev-example-17",
+        "capability_revision": "cap-example-verified-fixture-only",
+        "budget_policy_revision": "budget-example-v3",
+        "window_kind": "utc_day",
+        "token_metric": "prompt_plus_completion",
+        "request_reserved": "1",
+        "input_upper_tokens": "100",
+        "output_upper_tokens": "40",
+        "total_upper_tokens": "140",
+        "token_reserved": "140",
+        "money_reserved_atomic": "520000",
+        "currency": "TST",
+        "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+        "price_snapshot_sha256": "866cb1f5f808b8403dba1e733974f8e1caf9c2a9c7c1d1897d678849c948103f",
+        "price_version": "synthetic-price-v1",
+        "rate_policy_revision": "rate-example-v1"
+      },
+      "budget_accounting": {
+        "policy_revision": "budget-example-v3",
+        "window_kind": "utc_day",
+        "window_start": "2026-11-04T00:00:00Z",
+        "window_end": "2026-11-05T00:00:00Z",
+        "request": {
+          "reserved": "1",
+          "known_used": "1",
+          "unknown_held": "0",
+          "released": "0",
+          "overrun": "0",
+          "state": "known"
+        },
+        "token": {
+          "reserved": "140",
+          "known_used": "19",
+          "unknown_held": "0",
+          "released": "121",
+          "overrun": "0",
+          "state": "known"
+        },
+        "money": {
+          "reserved": "520000",
+          "known_used": "72800",
+          "unknown_held": "0",
+          "released": "447200",
+          "overrun": "0",
+          "state": "known"
+        },
+        "token_actual": "19",
+        "token_basis": "upstream_total",
+        "cost_actual_atomic": "72800",
+        "cost_state": "known",
+        "currency": "TST",
+        "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+        "price_version": "synthetic-price-v1",
+        "missing_reason": null
+      },
+      "rate_witness": {
+        "permit_id": "00000000-0000-4000-8000-000000000008",
+        "rate_epoch": "1",
+        "policy_id": "rate-policy-example",
+        "policy_revision": "rate-example-v1",
+        "windows": [
+          {
+            "scope_id": "global",
+            "window_start": "2026-11-04T08:00:00Z",
+            "window_end": "2026-11-04T08:00:01Z",
+            "limit": "5"
+          }
+        ]
+      },
+      "invocation_binding": {
+        "model_release_uid": "00000000-0000-4000-8000-000000000010",
+        "model_release_namespace": "maas-models-example",
+        "model_release_name": "external-model-example",
+        "model_release_generation": 2,
+        "release_revision": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "publication_id": "00000000-0000-4000-8000-000000000012",
+        "activation_epoch": 2,
+        "route_binding_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "admission_purpose": "serving",
+        "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+        "price_version": "synthetic-price-v1"
+      }
+    }
+  ],
+  "runtime_metadata": [
+    {
+      "id": "00000000-0000-4000-8000-000000000081",
+      "publication_id": "00000000-0000-4000-8000-000000000011",
+      "runtime_instance_id": "00000000-0000-4000-8000-000000000091",
+      "observed_at": "2026-11-04T08:00:00Z",
+      "state": "observed",
+      "weights_sha256": "8888888888888888888888888888888888888888888888888888888888888888",
+      "tokenizer_sha256": "9999999999999999999999999999999999999999999999999999999999999999",
+      "chat_template_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "engine_image_digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "engine_commit": "synthetic-engine-v1",
+      "effective_config_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+      "profile_revision": "synthetic-profile-v1",
+      "rank_mapping_ref": "00000000-0000-4000-8000-000000000071"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000082",
+      "publication_id": "00000000-0000-4000-8000-000000000012",
+      "runtime_instance_id": "00000000-0000-4000-8000-000000000092",
+      "observed_at": "2026-11-04T08:00:00Z",
+      "state": "observed",
+      "weights_sha256": "8888888888888888888888888888888888888888888888888888888888888888",
+      "tokenizer_sha256": "9999999999999999999999999999999999999999999999999999999999999999",
+      "chat_template_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "engine_image_digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "engine_commit": "synthetic-engine-v1",
+      "effective_config_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+      "profile_revision": "synthetic-profile-v1",
+      "rank_mapping_ref": "00000000-0000-4000-8000-000000000072"
+    }
+  ],
+  "gateway_observations": [
+    {
+      "id": "00000000-0000-4000-8000-000000000501",
+      "request_id": "00000000-0000-4000-8000-000000000301",
+      "publication_id": "00000000-0000-4000-8000-000000000011",
+      "gateway_binding_id": "synthetic-gateway",
+      "gateway_instance_id": "00000000-0000-4000-8000-000000000065",
+      "gateway_epoch": 1,
+      "gateway_config_revision": "synthetic-gateway-v1",
+      "route_name": "synthetic-model",
+      "route_binding_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000502",
+      "request_id": "00000000-0000-4000-8000-000000000302",
+      "publication_id": "00000000-0000-4000-8000-000000000011",
+      "gateway_binding_id": "synthetic-gateway",
+      "gateway_instance_id": "00000000-0000-4000-8000-000000000065",
+      "gateway_epoch": 1,
+      "gateway_config_revision": "synthetic-gateway-v1",
+      "route_name": "synthetic-model",
+      "route_binding_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000504",
+      "request_id": "00000000-0000-4000-8000-000000000304",
+      "publication_id": "00000000-0000-4000-8000-000000000011",
+      "gateway_binding_id": "synthetic-gateway",
+      "gateway_instance_id": "00000000-0000-4000-8000-000000000065",
+      "gateway_epoch": 1,
+      "gateway_config_revision": "synthetic-gateway-v1",
+      "route_name": "synthetic-model",
+      "route_binding_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000505",
+      "request_id": "00000000-0000-4000-8000-000000000305",
+      "publication_id": "00000000-0000-4000-8000-000000000011",
+      "gateway_binding_id": "synthetic-gateway",
+      "gateway_instance_id": "00000000-0000-4000-8000-000000000065",
+      "gateway_epoch": 1,
+      "gateway_config_revision": "synthetic-gateway-v1",
+      "route_name": "synthetic-model",
+      "route_binding_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000506",
+      "request_id": "00000000-0000-4000-8000-000000000306",
+      "publication_id": "00000000-0000-4000-8000-000000000011",
+      "gateway_binding_id": "synthetic-gateway",
+      "gateway_instance_id": "00000000-0000-4000-8000-000000000065",
+      "gateway_epoch": 1,
+      "gateway_config_revision": "synthetic-gateway-v1",
+      "route_name": "synthetic-model",
+      "route_binding_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000507",
+      "request_id": "00000000-0000-4000-8000-000000000307",
+      "publication_id": "00000000-0000-4000-8000-000000000011",
+      "gateway_binding_id": "synthetic-gateway",
+      "gateway_instance_id": "00000000-0000-4000-8000-000000000065",
+      "gateway_epoch": 1,
+      "gateway_config_revision": "synthetic-gateway-v1",
+      "route_name": "synthetic-model",
+      "route_binding_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000508",
+      "request_id": "00000000-0000-4000-8000-000000000308",
+      "publication_id": "00000000-0000-4000-8000-000000000012",
+      "gateway_binding_id": "synthetic-gateway",
+      "gateway_instance_id": "00000000-0000-4000-8000-000000000065",
+      "gateway_epoch": 1,
+      "gateway_config_revision": "synthetic-gateway-v1",
+      "route_name": "synthetic-model",
+      "route_binding_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000509",
+      "request_id": "00000000-0000-4000-8000-000000000309",
+      "publication_id": "00000000-0000-4000-8000-000000000011",
+      "gateway_binding_id": "synthetic-gateway",
+      "gateway_instance_id": "00000000-0000-4000-8000-000000000065",
+      "gateway_epoch": 1,
+      "gateway_config_revision": "synthetic-gateway-v1",
+      "route_name": "synthetic-model",
+      "route_binding_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+    }
+  ],
+  "slo": {
+    "ttft_ms": 150,
+    "tpot_ms": 40,
+    "e2e_ms": 250
+  }
+}
