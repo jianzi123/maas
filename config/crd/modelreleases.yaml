@@ -1,0 +1,594 @@
+# Review draft; not installed or API-server/CEL validated.
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: modelreleases.serving.maas.example
+spec:
+  group: serving.maas.example
+  scope: Namespaced
+  names:
+    plural: modelreleases
+    singular: modelrelease
+    kind: ModelRelease
+    shortNames:
+    - mr
+  versions:
+  - name: v1alpha1
+    served: true
+    storage: true
+    subresources:
+      status: {}
+    schema:
+      openAPIV3Schema:
+        type: object
+        properties:
+          apiVersion:
+            enum:
+            - serving.maas.example/v1alpha1
+            type: string
+          kind:
+            enum:
+            - ModelRelease
+            type: string
+          metadata:
+            type: object
+          spec:
+            type: object
+            properties:
+              modelAlias:
+                type: string
+                minLength: 1
+                maxLength: 64
+                pattern: ^[A-Za-z0-9][A-Za-z0-9._-]*$
+              source:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    enum:
+                    - SelfHosted
+                    - ExternalAPI
+                  selfHosted:
+                    type: object
+                    properties:
+                      engine:
+                        enum:
+                        - SGLang
+                        type: string
+                      workload:
+                        enum:
+                        - LeaderWorkerSet
+                        type: string
+                      weights:
+                        type: object
+                        properties:
+                          pvcName:
+                            type: string
+                            minLength: 1
+                            maxLength: 63
+                            pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?$
+                          path:
+                            type: string
+                            minLength: 1
+                            maxLength: 256
+                            pattern: ^[A-Za-z0-9_./-]+$
+                            x-kubernetes-validations:
+                            - rule: '!self.startsWith(''/'') && !self.split(''/'').exists(p,
+                                p == ''..'')'
+                              message: PVC-relative path without parent traversal
+                          sha256:
+                            type: string
+                            pattern: ^[0-9a-f]{64}$
+                          modelRevision:
+                            type: string
+                            minLength: 1
+                            maxLength: 128
+                            pattern: ^[A-Za-z0-9][A-Za-z0-9._/-]*$
+                        required:
+                        - pvcName
+                        - path
+                        - sha256
+                        - modelRevision
+                      runtimeProfileRef:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            minLength: 1
+                            maxLength: 63
+                            pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?$
+                          revision:
+                            type: string
+                            minLength: 1
+                            maxLength: 128
+                            pattern: ^[A-Za-z0-9][A-Za-z0-9._/-]*$
+                        required:
+                        - name
+                        - revision
+                      placementProfileRef:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            minLength: 1
+                            maxLength: 63
+                            pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?$
+                          revision:
+                            type: string
+                            minLength: 1
+                            maxLength: 128
+                            pattern: ^[A-Za-z0-9][A-Za-z0-9._/-]*$
+                        required:
+                        - name
+                        - revision
+                      image:
+                        type: string
+                        maxLength: 512
+                        pattern: ^[A-Za-z0-9][A-Za-z0-9./:_-]*@sha256:[0-9a-f]{64}$
+                      groups:
+                        type: integer
+                        minimum: 1
+                        maximum: 16
+                      podsPerGroup:
+                        type: integer
+                        minimum: 1
+                        maximum: 64
+                      gpusPerPod:
+                        type: integer
+                        minimum: 1
+                        maximum: 8
+                      gpuResourceName:
+                        enum:
+                        - nvidia.com/gpu
+                        type: string
+                      cpuPerPod:
+                        type: string
+                        pattern: ^[1-9][0-9]*(m)?$
+                      memoryPerPod:
+                        type: string
+                        pattern: ^[1-9][0-9]*(Mi|Gi)$
+                      tensorParallelSize:
+                        type: integer
+                        minimum: 1
+                        maximum: 512
+                      pipelineParallelSize:
+                        enum:
+                        - 1
+                        type: integer
+                      startupTimeoutSeconds:
+                        type: integer
+                        minimum: 30
+                        maximum: 7200
+                    required:
+                    - engine
+                    - workload
+                    - weights
+                    - runtimeProfileRef
+                    - placementProfileRef
+                    - image
+                    - groups
+                    - podsPerGroup
+                    - gpusPerPod
+                    - gpuResourceName
+                    - cpuPerPod
+                    - memoryPerPod
+                    - tensorParallelSize
+                    - pipelineParallelSize
+                    - startupTimeoutSeconds
+                  externalAPI:
+                    type: object
+                    properties:
+                      provider:
+                        type: string
+                        enum:
+                        - DeepSeek
+                        - OpenAICompatible
+                      endpointRef:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            minLength: 1
+                            maxLength: 63
+                            pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?$
+                          revision:
+                            type: string
+                            minLength: 1
+                            maxLength: 128
+                            pattern: ^[A-Za-z0-9][A-Za-z0-9._/-]*$
+                        required:
+                        - name
+                        - revision
+                      upstreamModel:
+                        type: string
+                        minLength: 1
+                        maxLength: 256
+                      protocol:
+                        enum:
+                        - OpenAIChatCompletions
+                        type: string
+                      credentialSecretRef:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            minLength: 1
+                            maxLength: 63
+                            pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?$
+                          key:
+                            type: string
+                            minLength: 1
+                            maxLength: 253
+                            pattern: ^[A-Za-z0-9._-]+$
+                        required:
+                        - name
+                        - key
+                    required:
+                    - provider
+                    - endpointRef
+                    - upstreamModel
+                    - protocol
+                    - credentialSecretRef
+                required:
+                - type
+                x-kubernetes-validations:
+                - rule: 'self.type == ''SelfHosted'' ? has(self.selfHosted) && !has(self.externalAPI)
+                    : has(self.externalAPI) && !has(self.selfHosted)'
+                  message: one matching source only
+              gatewayRef:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    minLength: 1
+                    maxLength: 63
+                    pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?$
+                  revision:
+                    type: string
+                    minLength: 1
+                    maxLength: 128
+                    pattern: ^[A-Za-z0-9][A-Za-z0-9._/-]*$
+                required:
+                - name
+                - revision
+              businessRefs:
+                type: object
+                properties:
+                  capabilityProfileRef:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        minLength: 1
+                        maxLength: 63
+                        pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?$
+                      revision:
+                        type: string
+                        minLength: 1
+                        maxLength: 128
+                        pattern: ^[A-Za-z0-9][A-Za-z0-9._/-]*$
+                    required:
+                    - name
+                    - revision
+                  pricePolicyRef:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        minLength: 1
+                        maxLength: 63
+                        pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?$
+                      revision:
+                        type: string
+                        minLength: 1
+                        maxLength: 128
+                        pattern: ^[A-Za-z0-9][A-Za-z0-9._/-]*$
+                    required:
+                    - name
+                    - revision
+                  intakePolicyRef:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        minLength: 1
+                        maxLength: 63
+                        pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?$
+                      revision:
+                        type: string
+                        minLength: 1
+                        maxLength: 128
+                        pattern: ^[A-Za-z0-9][A-Za-z0-9._/-]*$
+                    required:
+                    - name
+                    - revision
+                required:
+                - capabilityProfileRef
+                - pricePolicyRef
+                - intakePolicyRef
+              lifecycle:
+                type: object
+                properties:
+                  desiredState:
+                    type: string
+                    enum:
+                    - Published
+                    - Paused
+                  strategy:
+                    type: string
+                    enum:
+                    - BlueGreen
+                    - Recreate
+                  drainTimeoutSeconds:
+                    type: integer
+                    minimum: 1
+                    maximum: 3600
+                  progressDeadlineSeconds:
+                    type: integer
+                    minimum: 60
+                    maximum: 14400
+                  retainedRevisions:
+                    type: integer
+                    minimum: 1
+                    maximum: 10
+                  retainUserData:
+                    enum:
+                    - true
+                    type: boolean
+                required:
+                - desiredState
+                - strategy
+                - drainTimeoutSeconds
+                - progressDeadlineSeconds
+                - retainedRevisions
+                - retainUserData
+            required:
+            - modelAlias
+            - source
+            - gatewayRef
+            - businessRefs
+            - lifecycle
+            x-kubernetes-validations:
+            - rule: self.modelAlias == oldSelf.modelAlias
+              message: modelAlias is immutable
+            - rule: self.source.type == oldSelf.source.type
+              message: source type is immutable
+            - rule: '!has(self.source.selfHosted) || self.source.selfHosted.tensorParallelSize
+                * self.source.selfHosted.pipelineParallelSize == self.source.selfHosted.podsPerGroup
+                * self.source.selfHosted.gpusPerPod'
+              message: parallelism must match homogeneous group devices
+          status:
+            type: object
+            properties:
+              observedGeneration:
+                type: integer
+                minimum: 1
+                maximum: 9007199254740991
+              phase:
+                type: string
+                enum:
+                - Pending
+                - Preparing
+                - Validating
+                - Ready
+                - Updating
+                - Paused
+                - Draining
+                - Deleting
+                - Degraded
+                - Failed
+              desiredRevision:
+                type: string
+                pattern: ^[0-9a-f]{64}$
+                nullable: true
+              activeRevision:
+                type: string
+                pattern: ^[0-9a-f]{64}$
+                nullable: true
+              activeGeneration:
+                type: integer
+                minimum: 1
+                maximum: 9007199254740991
+                nullable: true
+              publication_id:
+                type: string
+                format: uuid
+                pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+                nullable: true
+              activation_epoch:
+                type: integer
+                minimum: 0
+                maximum: 9007199254740991
+              availableGroups:
+                type: integer
+                minimum: 0
+                maximum: 16
+              conditions:
+                type: array
+                maxItems: 12
+                items:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                      enum:
+                      - Accepted
+                      - DependenciesReady
+                      - RuntimeReady
+                      - GatewayApplied
+                      - AccountingReady
+                      - ValidationPassed
+                      - Callable
+                      - Progressing
+                      - Degraded
+                      - AdmissionClosed
+                      - Drained
+                      - CleanupComplete
+                    status:
+                      type: string
+                      enum:
+                      - 'True'
+                      - 'False'
+                      - Unknown
+                    reason:
+                      type: string
+                      minLength: 1
+                      maxLength: 128
+                    message:
+                      type: string
+                      maxLength: 1024
+                    observedGeneration:
+                      type: integer
+                      minimum: 1
+                      maximum: 9007199254740991
+                    lastTransitionTime:
+                      type: string
+                      format: date-time
+                  required:
+                  - type
+                  - status
+                  - reason
+                  - message
+                  - observedGeneration
+                  - lastTransitionTime
+                x-kubernetes-list-type: map
+                x-kubernetes-list-map-keys:
+                - type
+              resources:
+                type: array
+                maxItems: 128
+                items:
+                  type: object
+                  properties:
+                    apiVersion:
+                      type: string
+                    kind:
+                      type: string
+                    namespace:
+                      type: string
+                      minLength: 1
+                      maxLength: 63
+                      pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?$
+                    name:
+                      type: string
+                      minLength: 1
+                      maxLength: 63
+                      pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?$
+                    uid:
+                      type: string
+                      format: uuid
+                      pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+                      nullable: true
+                    ownership:
+                      type: string
+                      enum:
+                      - exclusive
+                      - shared-entry
+                      - user-reference
+                      - installation
+                    publication_id:
+                      type: string
+                      format: uuid
+                      pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+                      nullable: true
+                  required:
+                  - apiVersion
+                  - kind
+                  - namespace
+                  - name
+                  - uid
+                  - ownership
+                  - publication_id
+              operation:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                    pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+                  action:
+                    type: string
+                    enum:
+                    - Create
+                    - Update
+                    - Pause
+                    - Resume
+                    - Rollback
+                    - Delete
+                  state:
+                    type: string
+                    enum:
+                    - Accepted
+                    - Running
+                    - Succeeded
+                    - Failed
+                    - Unknown
+                  namespace:
+                    type: string
+                    minLength: 1
+                    maxLength: 63
+                    pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?$
+                  name:
+                    type: string
+                    minLength: 1
+                    maxLength: 63
+                    pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?$
+                  cr_uid:
+                    type: string
+                    format: uuid
+                    pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+                    nullable: true
+                  requested_generation:
+                    type: integer
+                    minimum: 1
+                    maximum: 9007199254740991
+                    nullable: true
+                  publication_id:
+                    type: string
+                    format: uuid
+                    pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+                    nullable: true
+                  created_at:
+                    type: string
+                    format: date-time
+                  updated_at:
+                    type: string
+                    format: date-time
+                  reason:
+                    type: string
+                    maxLength: 128
+                    nullable: true
+                  message:
+                    type: string
+                    maxLength: 1024
+                required:
+                - id
+                - action
+                - state
+                - namespace
+                - name
+                - cr_uid
+                - requested_generation
+                - publication_id
+                - created_at
+                - updated_at
+                - reason
+                - message
+                nullable: true
+            required:
+            - observedGeneration
+            - phase
+            - desiredRevision
+            - activeRevision
+            - activeGeneration
+            - publication_id
+            - activation_epoch
+            - availableGroups
+            - conditions
+            - resources
+            - operation
+        required:
+        - apiVersion
+        - kind
+        - metadata
+        - spec

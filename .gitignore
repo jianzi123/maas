@@ -1,0 +1,11 @@
+.cache/
+.agent_context/
+.multica/
+AGENTS.md
+attachments/
+baseline/
+reply.md
+*.exe
+coverage.out
+test-results.json
+artifacts/
