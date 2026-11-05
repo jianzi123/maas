@@ -92,3 +92,9 @@ analyze.py仍是纯文件离线分析器。独立入口controlled_transport.py�
 其报告证据级别为measured_loopback_fixture_transport，platform_path_exercised=false；只测本地连接与采样机制。它不代表完整MaaS链路、模型/GPU、Token、质量或预算验收，也不输出平台收益通过结论。原始fixture中的业务终态和本地传输成功不能混成同一份账本。
 
 [首批E1–E3计划](experiments/first-batch-v0.4.json)保留execution_enabled=false及空审批值，不提供模型调用器。[实验手册](../../docs/performance/optimization-playbook.md)说明真实平台/引擎实验各自的进入条件和单因素比较。
+
+## 算子与推理运行时增量
+
+[算子/Profiler指南](../../docs/performance/operator-lab.md)提供默认CPU参考、禁用GPU计划及CUDA/Triton/PyTorch骨架；[固定源码分析](../../docs/performance/sglang-source-analysis-v0.5.md)记录SGLang不可变SHA；[运行实验方法](../../docs/performance/runtime-experiments-v0.5.md)补J02与合理基线/未恢复分母/热路径开销。
+
+原analyze.py仍只需要原依赖；完整测试新增NumPy2.3.5，见operators/requirements-cpu.txt。CPU参考不导入Torch或Triton。GPU和Profiler执行必须先有批准的完整计划，默认拒绝；本轮未编译/执行GPU内核。

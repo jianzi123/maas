@@ -15,7 +15,7 @@
 
 ## 1. 准备Python
 
-Python至少3.10，依赖为jsonschema==4.25.0；本轮验证使用Python3.13.9。先检查已安装版本：
+Python至少3.10；原分析器依赖jsonschema==4.25.0，新增算子CPU参考/完整回归还需NumPy2.3.5（operators/requirements-cpu.txt）。本轮使用Python3.13.9，无需Torch或GPU即可跑CPU参考。先检查已安装版本：
 
     python --version
     python -c "import importlib.metadata; print(importlib.metadata.version('jsonschema'))"
@@ -23,7 +23,7 @@ Python至少3.10，依赖为jsonschema==4.25.0；本轮验证使用Python3.13.9�
 缺依赖时在工具自己的venv内使用团队批准的离线wheelhouse：
 
     python -m venv tools/perf/.venv
-    tools/perf/.venv/Scripts/python -m pip install --no-index --find-links <approved-wheelhouse> -r tools/perf/requirements.txt
+    tools/perf/.venv/Scripts/python -m pip install --no-index --find-links <approved-wheelhouse> -r tools/perf/requirements.txt -r tools/perf/operators/requirements-cpu.txt
 
 Windows后续将python替换成该venv解释器；Linux使用tools/perf/.venv/bin/python。不要因为练习失败就升级团队共享工具链。
 
