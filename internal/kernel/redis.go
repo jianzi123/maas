@@ -15,6 +15,7 @@ import (
 	"time"
 )
 
+type redisConnection = net.Conn
 type RedisGate struct {
 	Network, Address, Prefix string
 	TLS                      *tls.Config
@@ -135,7 +136,7 @@ func (r *RedisGate) InitializeEpoch(ctx context.Context, p RatePolicy) error {
 		return e
 	}
 	defer c.Close()
-	_, e = command(c, "EVAL", `redis.call('SET',KEYS[1],ARGV[1]); return 1`, "1", r.Prefix+"{maas-rate}:epoch", decimal(p.Epoch)+"/"+p.Revision)
+	_, e = command(c, "EVAL", `redis.call('SET',KEYS[1],ARGV[1]); return 1`, "1", r.Prefix+"{maas-rate}:epoch", rateMarker(p))
 	return e
 }
 
@@ -166,6 +167,12 @@ func (r *RedisGate) Acquire(ctx context.Context, request, key string, p RatePoli
 		return out, e
 	}
 	defer c.Close()
+	if p.RedisIdentity != "" {
+		identity, e := redisIdentity(c)
+		if e != nil || identity != p.RedisIdentity {
+			return out, ErrUnavailable
+		}
+	}
 	tm, e := command(c, "TIME")
 	if e != nil || len(tm.array) != 2 {
 		return out, ErrUnavailable
@@ -182,7 +189,7 @@ func (r *RedisGate) Acquire(ctx context.Context, request, key string, p RatePoli
 	prefix := r.Prefix + "{maas-rate}:"
 	bucket := prefix + decimal(p.Epoch) + ":" + p.Revision + ":" + decimal(start) + ":"
 	id := uuid.NewString()
-	reply, e := command(c, "EVAL", rateScript, "4", prefix+"epoch", bucket+"global", bucket+key, prefix+"request:"+decimal(p.Epoch)+":"+request, decimal(p.Epoch)+"/"+p.Revision, decimal(p.WindowMS), decimal(start), decimal(p.GlobalLimit), decimal(p.KeyLimit), id)
+	reply, e := command(c, "EVAL", rateScript, "4", prefix+"epoch", bucket+"global", bucket+key, prefix+"request:"+decimal(p.Epoch)+":"+request, rateMarker(p), decimal(p.WindowMS), decimal(start), decimal(p.GlobalLimit), decimal(p.KeyLimit), id)
 	if e != nil || len(reply.array) != 2 {
 		return out, ErrUnavailable
 	}

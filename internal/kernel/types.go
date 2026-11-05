@@ -107,6 +107,7 @@ type Permit struct {
 	Windows  []RateWindow `json:"windows"`
 }
 type RatePolicy struct {
+	RedisIdentity, RebuildNonce            string
 	Revision                               string
 	Epoch, WindowMS, GlobalLimit, KeyLimit int64
 	Ready                                  bool
@@ -137,6 +138,7 @@ type Closure struct {
 	Observed                time.Time
 }
 type Input struct {
+	Purpose, ValidationIntentID         string
 	RequestID, KeyID, Owner, TicketHash string
 	KeyEpoch                            int64
 	Profile                             Profile

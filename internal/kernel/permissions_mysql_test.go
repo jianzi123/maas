@@ -19,6 +19,11 @@ func TestMySQLPublisherCannotWriteRealLedger(t *testing.T) {
 	}
 	username := "pub_" + strings.ReplaceAll(uuid.NewString(), "-", "")[:16]
 	password := uuid.NewString()
+	role := "role_" + strings.ReplaceAll(uuid.NewString(), "-", "")[:16]
+	if _, e := f.db.Exec("CREATE ROLE '" + role + "'"); e != nil {
+		t.Fatal(e)
+	}
+	t.Cleanup(func() { _, _ = f.db.Exec("DROP ROLE '" + role + "'") })
 	// CREATE USER password syntax is not a server-prepared placeholder. Both
 	// interpolated values here are generated UUID-derived test-only literals.
 	if _, e := f.db.Exec("CREATE USER '" + username + "'@'localhost' IDENTIFIED BY '" + password + "'"); e != nil {
@@ -32,12 +37,19 @@ func TestMySQLPublisherCannotWriteRealLedger(t *testing.T) {
 	for _, grant := range []string{
 		"SELECT,INSERT,UPDATE ON release_links", "SELECT,INSERT ON release_revisions", "SELECT,INSERT ON publish_intents", "SELECT,INSERT,UPDATE ON publications", "SELECT,INSERT,UPDATE,DELETE ON active_model_bindings", "SELECT,INSERT,UPDATE ON resource_inventory", "SELECT,INSERT ON release_operations",
 		"SELECT ON kernel_guard", "SELECT ON invocation_profiles", "SELECT(publication_id,result) ON generation_requests", "SELECT(publication_id,state) ON concurrency_slots",
+		"SELECT ON publication_proofs", "SELECT ON validation_intents", "SELECT ON validation_receipts",
 	} {
 		parts := strings.SplitN(grant, " ON ", 2)
-		q := "GRANT " + parts[0] + " ON `" + f.config.DBName + "`." + parts[1] + " TO '" + username + "'@'localhost'"
+		q := "GRANT " + parts[0] + " ON `" + f.config.DBName + "`." + parts[1] + " TO '" + role + "'"
 		if _, e := f.db.Exec(q); e != nil {
 			t.Fatal(e)
 		}
+	}
+	if _, e := f.db.Exec("GRANT '" + role + "' TO '" + username + "'@'localhost'"); e != nil {
+		t.Fatal(e)
+	}
+	if _, e := f.db.Exec("SET DEFAULT ROLE '" + role + "' TO '" + username + "'@'localhost'"); e != nil {
+		t.Fatal(e)
 	}
 	cfg := f.config.Clone()
 	cfg.User = username
@@ -47,6 +59,11 @@ func TestMySQLPublisherCannotWriteRealLedger(t *testing.T) {
 		t.Fatal(e)
 	}
 	defer low.Close()
+	var activeRole string
+	if e = low.QueryRow("SELECT CURRENT_ROLE()").Scan(&activeRole); e != nil || !strings.Contains(activeRole, role) {
+		t.Fatal("default role not active", e)
+	}
+	f.core.proofs = DurableProofs{Cluster: "controlled-test"}
 	publisher, e := mysqlstore.New(low, "controlled-test", f.core)
 	if e != nil {
 		t.Fatal(e)
@@ -68,7 +85,9 @@ func TestMySQLPublisherCannotWriteRealLedger(t *testing.T) {
 			t.Fatal("publisher permission violation", q)
 		}
 	}
-	if e = f.core.Release(ctx, s.Input.RequestID, uuid.NewString(), uuid.NewString()); e != nil {
+	// Only H2 remains a fixture. Keep the publisher on DurableProofs throughout.
+	reclaimer, _ := New(f.db, "controlled-test", f.core.pepper, f.rate, f.proofs)
+	if e = reclaimer.Release(ctx, s.Input.RequestID, uuid.NewString(), uuid.NewString()); e != nil {
 		t.Fatal(e)
 	}
 	safe, e = publisher.Drain(ctx, st.CRUID, "")
