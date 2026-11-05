@@ -453,7 +453,17 @@ func (s *Store) Recover(ctx context.Context, id, newOwner string) error {
 	if e != nil || fence == 0 {
 		return e
 	}
-	return s.Finalize(ctx, Final{EventID: uuid.NewSHA1(uuid.NameSpaceOID, []byte(id+"/recovery")).String(), RequestID: id, Owner: newOwner, OwnerFence: fence, Result: "interrupted", Usage: Usage{Source: "unavailable", Missing: ptr("interrupted_before_usage")}})
+	missing := "interrupted_before_usage"
+	records, readErr := s.ReadDiagnostics(ctx, id)
+	if readErr != nil {
+		missing = "not_provided"
+	}
+	for _, d := range records {
+		if d.Type == "receipt" {
+			missing = "not_provided"
+		}
+	}
+	return s.Finalize(ctx, Final{EventID: uuid.NewSHA1(uuid.NameSpaceOID, []byte(id+"/recovery")).String(), RequestID: id, Owner: newOwner, OwnerFence: fence, Result: "interrupted", Usage: Usage{Source: "unavailable", Missing: ptr(missing)}})
 }
 
 // Release performs no request, usage, Key, budget or summary UPDATE. Late proof

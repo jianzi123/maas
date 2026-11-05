@@ -26,6 +26,9 @@ var ErrInvalid = errors.New("invalid private protocol")
 
 //go:embed contracts/management.schema.json
 var managementBytes []byte
+
+//go:embed contracts/diagnostic.schema.json
+var diagnosticBytes []byte
 var schemas = compile()
 
 func compile() map[string]*jsonschema.Schema {
@@ -40,7 +43,11 @@ func compile() map[string]*jsonschema.Schema {
 	if e := c.AddResource("https://maas.local/management.json", bytes.NewReader(managementBytes)); e != nil {
 		panic(e)
 	}
+	if e := c.AddResource("https://maas.local/diagnostic.json", bytes.NewReader(diagnosticBytes)); e != nil {
+		panic(e)
+	}
 	out := map[string]*jsonschema.Schema{}
+	out["Diagnostic"] = c.MustCompile("https://maas.local/diagnostic.json")
 	for _, n := range []string{"KeyCreate", "KeyPatch", "Key", "KeyCreated", "KeyPage", "RequestPage", "RequestLookupPage", "SummaryPage"} {
 		out[n] = c.MustCompile("https://maas.local/management.json#/$defs/" + n)
 	}

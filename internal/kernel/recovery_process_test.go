@@ -149,6 +149,10 @@ func TestOwnerCrashChild(t *testing.T) {
 	if _, e := core.Admit(context.Background(), gate, in); e != nil {
 		os.Exit(22)
 	}
+	d := diagnosticExample(t, core, in, 1)
+	if core.AppendDiagnostic(context.Background(), d) != nil {
+		os.Exit(24)
+	}
 	os.Exit(23) // abrupt owner exit AFTER durable admission; no terminal cleanup.
 }
 func TestMySQLOwnerProcessRecovery(t *testing.T) {
@@ -174,6 +178,14 @@ func TestMySQLOwnerProcessRecovery(t *testing.T) {
 		t.Fatal(e)
 	}
 	assertSQL(t, f.db, "SELECT COUNT(*) FROM generation_requests WHERE result='interrupted'", 1)
+	diagnostics, e := restarted.ReadDiagnostics(context.Background(), in.RequestID)
+	if e != nil || len(diagnostics) != 1 || *diagnostics[0].Usage.Total != 19 {
+		t.Fatal("owner exit lost durable observation", e)
+	}
+	var missing string
+	if e = f.db.QueryRow("SELECT JSON_UNQUOTE(JSON_EXTRACT(event_json,'$.usage.missing_reason')) FROM usage_events WHERE request_id=?", in.RequestID).Scan(&missing); e != nil || missing != "not_provided" {
+		t.Fatal("recovery mislabeled before_usage", missing, e)
+	}
 	if c := readCounter(t, f, "tokens"); c.Held != "140" || c.Reserved != "0" {
 		t.Fatal(c)
 	}
