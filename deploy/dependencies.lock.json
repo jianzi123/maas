@@ -1,0 +1,363 @@
+{
+  "schemaVersion": "1.0",
+  "status": "pending-environment-inputs",
+  "deploymentApproved": false,
+  "sourceBaseline": {
+    "chartBase": "86f5408e100de6c276a2af543051098c3d4d5669",
+    "backendInspected": "4f3eb9358f26ebab637a549b795651171d3b924f",
+    "contracts": "MAAS-2-v0.4 + retained-v0.3 + OPS01-OPS08",
+    "terminal": "3.0",
+    "ticket": "3",
+    "proposedTerminal": "3.1 (not enabled)"
+  },
+  "target": {
+    "cluster": null,
+    "kubernetesVersion": null,
+    "apiGroup": null,
+    "authorizationRef": null,
+    "namespace": null,
+    "rpo": null,
+    "rto": null,
+    "retention": null,
+    "modelSources": null
+  },
+  "dependencies": [
+    {
+      "id": "kubernetes",
+      "owner": "platform-owner",
+      "artifact": false,
+      "status": "pending",
+      "version": null,
+      "digest": null,
+      "mirror": null,
+      "evidenceRef": null,
+      "note": "目标 minor/patch、CNI/CSI 与 webhook/CEL 未批准",
+      "requiredFor": [
+        "ExternalAPI",
+        "SelfHosted"
+      ]
+    },
+    {
+      "id": "helm",
+      "owner": "ops",
+      "artifact": true,
+      "status": "pending",
+      "version": null,
+      "digest": null,
+      "mirror": null,
+      "evidenceRef": null,
+      "note": "本地 WSL 可用 Helm 4.3.1；仅做模板验证，目标版本待批准",
+      "requiredFor": [
+        "ExternalAPI",
+        "SelfHosted"
+      ]
+    },
+    {
+      "id": "platform-chart",
+      "owner": "ops",
+      "artifact": true,
+      "status": "pending",
+      "version": "0.1.0",
+      "digest": null,
+      "mirror": null,
+      "evidenceRef": null,
+      "note": "本仓库 Chart；待打包签名及目标验证",
+      "requiredFor": [
+        "ExternalAPI",
+        "SelfHosted"
+      ]
+    },
+    {
+      "id": "operator",
+      "owner": "backend",
+      "artifact": true,
+      "status": "pending",
+      "version": null,
+      "digest": null,
+      "mirror": null,
+      "evidenceRef": null,
+      "note": "源码 4f3eb93；Go 1.26.0/controller-runtime 0.24.1/K8s Go库0.36.0，非运行矩阵",
+      "requiredFor": [
+        "ExternalAPI",
+        "SelfHosted"
+      ]
+    },
+    {
+      "id": "core",
+      "owner": "backend",
+      "artifact": true,
+      "status": "pending",
+      "version": null,
+      "digest": null,
+      "mirror": null,
+      "evidenceRef": null,
+      "note": "内核为 Go 库，尚无生产 main/健康/指标入口",
+      "requiredFor": [
+        "ExternalAPI",
+        "SelfHosted"
+      ]
+    },
+    {
+      "id": "console",
+      "owner": "frontend",
+      "artifact": true,
+      "status": "pending",
+      "version": null,
+      "digest": null,
+      "mirror": null,
+      "evidenceRef": null,
+      "note": "镜像和静态服务器/接口路径尚待原负责人交付",
+      "requiredFor": [
+        "ExternalAPI",
+        "SelfHosted"
+      ]
+    },
+    {
+      "id": "mysql",
+      "owner": "backend+ops",
+      "artifact": true,
+      "status": "pending",
+      "version": null,
+      "digest": null,
+      "mirror": null,
+      "evidenceRef": null,
+      "note": "8.4.7 是前序临时测试值；目标发行版、HA/备份未批准",
+      "requiredFor": [
+        "ExternalAPI",
+        "SelfHosted"
+      ]
+    },
+    {
+      "id": "redis",
+      "owner": "backend+ops",
+      "artifact": true,
+      "status": "pending",
+      "version": null,
+      "digest": null,
+      "mirror": null,
+      "evidenceRef": null,
+      "note": "6.0.16 是前序局部测试值，7.2+ 是历史候选；版本/许可待批准",
+      "requiredFor": [
+        "ExternalAPI",
+        "SelfHosted"
+      ]
+    },
+    {
+      "id": "higress-chart",
+      "owner": "gateway-owner",
+      "artifact": true,
+      "status": "pending",
+      "version": null,
+      "digest": null,
+      "mirror": null,
+      "evidenceRef": null,
+      "note": "2.2.5 是历史候选；安装或复用单独负责",
+      "requiredFor": [
+        "ExternalAPI",
+        "SelfHosted"
+      ]
+    },
+    {
+      "id": "higress-images-envoy",
+      "owner": "gateway-owner",
+      "artifact": true,
+      "status": "pending",
+      "version": null,
+      "digest": null,
+      "mirror": null,
+      "evidenceRef": null,
+      "note": "控制器/console/gateway/data-plane 与 Envoy 一并枚举，不能只列一个镜像",
+      "requiredFor": [
+        "ExternalAPI",
+        "SelfHosted"
+      ]
+    },
+    {
+      "id": "higress-crds",
+      "owner": "gateway-owner",
+      "artifact": true,
+      "status": "pending",
+      "version": null,
+      "digest": null,
+      "mirror": null,
+      "evidenceRef": null,
+      "note": "McpBridge/WasmPlugin 与所有权/兼容性待批准",
+      "requiredFor": [
+        "ExternalAPI",
+        "SelfHosted"
+      ]
+    },
+    {
+      "id": "higress-H1-H4-wasm",
+      "owner": "backend+gateway-owner",
+      "artifact": true,
+      "status": "pending",
+      "version": null,
+      "digest": null,
+      "mirror": null,
+      "evidenceRef": null,
+      "note": "真实 Wasm/扩展/secret agent/reporter/receipt adapter 尚未装配",
+      "requiredFor": [
+        "ExternalAPI",
+        "SelfHosted"
+      ]
+    },
+    {
+      "id": "modelrelease-crd",
+      "owner": "architect+backend",
+      "artifact": true,
+      "status": "pending",
+      "version": null,
+      "digest": null,
+      "mirror": null,
+      "evidenceRef": null,
+      "note": "serving.maas.example/v1alpha1 为占位；与客户端/二进制/RBAC统一替换",
+      "requiredFor": [
+        "ExternalAPI",
+        "SelfHosted"
+      ]
+    },
+    {
+      "id": "lws-chart-controller-crd",
+      "owner": "ops+algorithm",
+      "artifact": true,
+      "status": "pending",
+      "version": null,
+      "digest": null,
+      "mirror": null,
+      "evidenceRef": null,
+      "note": "v1.0.0/API v1 是历史候选；现有安装所有权及升级路径待核",
+      "requiredFor": [
+        "SelfHosted"
+      ]
+    },
+    {
+      "id": "sglang",
+      "owner": "algorithm",
+      "artifact": true,
+      "status": "pending",
+      "version": null,
+      "digest": null,
+      "mirror": null,
+      "evidenceRef": null,
+      "note": "须一起锁 engine/torch/CUDA/NCCL/模板/分词器和 target GPU",
+      "requiredFor": [
+        "SelfHosted"
+      ]
+    },
+    {
+      "id": "gpu-driver-device-plugin",
+      "owner": "cluster-owner",
+      "artifact": true,
+      "status": "pending",
+      "version": null,
+      "digest": null,
+      "mirror": null,
+      "evidenceRef": null,
+      "note": "驱动、device plugin、必要的 GPU Operator 及拓扑/CNI/RDMA 组件",
+      "requiredFor": [
+        "SelfHosted"
+      ]
+    },
+    {
+      "id": "weights-tokenizer",
+      "owner": "algorithm",
+      "artifact": true,
+      "status": "pending",
+      "version": null,
+      "digest": null,
+      "mirror": null,
+      "evidenceRef": null,
+      "note": "权重/分词器来源、修订、许可、校验、PVC预置；禁止自动下载",
+      "requiredFor": [
+        "SelfHosted"
+      ]
+    },
+    {
+      "id": "dns-cni-csi",
+      "owner": "cluster-owner",
+      "artifact": true,
+      "status": "pending",
+      "version": null,
+      "digest": null,
+      "mirror": null,
+      "evidenceRef": null,
+      "note": "内部DNS、策略执行、存储类、快照/恢复、容量/拓扑",
+      "requiredFor": [
+        "ExternalAPI",
+        "SelfHosted"
+      ]
+    },
+    {
+      "id": "tls-mtls-ca",
+      "owner": "security+ops",
+      "artifact": false,
+      "status": "pending",
+      "version": null,
+      "digest": null,
+      "mirror": null,
+      "evidenceRef": null,
+      "note": "CA链/服务端SAN/轮换和受保护客户端身份；只记录引用，不散列秘密",
+      "requiredFor": [
+        "ExternalAPI",
+        "SelfHosted"
+      ]
+    },
+    {
+      "id": "build-runtime-images",
+      "owner": "ops",
+      "artifact": true,
+      "status": "pending",
+      "version": null,
+      "digest": null,
+      "mirror": null,
+      "evidenceRef": null,
+      "note": "构建工具链与runtime base均需digest/镜像映射，缓存完整依赖",
+      "requiredFor": [
+        "ExternalAPI",
+        "SelfHosted"
+      ]
+    },
+    {
+      "id": "monitor-backup-tooling",
+      "owner": "ops",
+      "artifact": true,
+      "status": "pending",
+      "version": null,
+      "digest": null,
+      "mirror": null,
+      "evidenceRef": null,
+      "note": "采集器/exporter/备份镜像、存储和访问策略",
+      "requiredFor": [
+        "ExternalAPI",
+        "SelfHosted"
+      ]
+    }
+  ],
+  "runtimeGates": {
+    "core-entrypoint-health-metrics": "missing",
+    "release-adapters-H1-H4": "missing",
+    "secret-agent-instance-channel": "missing",
+    "protected-validation-key-budget": "missing",
+    "mysql-migrations-roles": "unverified-target",
+    "redis-rebuild-epoch": "missing-coordinator",
+    "network-cni-egress": "unverified-target",
+    "backup-restore-fencing": "unverified-target",
+    "LWS-SGLang-GPU": "unverified-target"
+  },
+  "offlineScope": {
+    "confirmed": false,
+    "required": [
+      "Chart/tgz及签名",
+      "所有镜像含hook/sidecar/init/exporter和父镜像",
+      "CRD和安装器",
+      "Wasm与原生扩展",
+      "Go modules/Python wheels等构建缓存（若要求离线重建）",
+      "CA/CRL/证书轮换的内网途径",
+      "DNS/时钟/registry/存储等内网服务",
+      "权重/分词器/模板许可及预置校验",
+      "备份恢复工具及加密材料安全渠道"
+    ],
+    "policy": "缺任一必需依赖不声称全离线可安装"
+  }
+}

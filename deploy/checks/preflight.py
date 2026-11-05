@@ -1,0 +1,79 @@
+#!/usr/bin/env python3
+"""Read-only input gate. Success is input completeness, never deployment authorization."""
+import argparse
+import json
+from pathlib import Path
+from jsonschema import Draft7Validator
+from verify import CHART, ROOT, load_values, validate_network
+
+def blockers(values, lock):
+    result = []
+    schema = json.loads((CHART / "values.schema.json").read_text())
+    if not Draft7Validator(schema).is_valid(values):
+        result.append("values.schema")
+        return result
+    try:
+        validate_network(values)
+    except ValueError:
+        result.append("network.constraints")
+    if not lock.get("deploymentApproved"):
+        result.append("deploymentApproved")
+    for key in ("cluster", "kubernetesVersion", "apiGroup", "authorizationRef", "namespace"):
+        if not lock.get("target", {}).get(key):
+            result.append("target." + key)
+    sources = lock.get("target", {}).get("modelSources")
+    if not isinstance(sources, list) or not sources or not set(sources) <= {"ExternalAPI", "SelfHosted"}:
+        result.append("target.modelSources")
+        sources = ["ExternalAPI", "SelfHosted"]
+    expected = ["kubernetes","helm","platform-chart","operator","core","console","mysql","redis","higress-chart","higress-images-envoy","higress-crds","higress-H1-H4-wasm","modelrelease-crd","lws-chart-controller-crd","sglang","gpu-driver-device-plugin","weights-tokenizer","dns-cni-csi","tls-mtls-ca","build-runtime-images","monitor-backup-tooling"]
+    if {d["id"] for d in lock.get("dependencies", [])} != set(expected):
+        result.append("dependencies.inventory")
+    if set(lock.get("runtimeGates", {})) != set(["core-entrypoint-health-metrics","release-adapters-H1-H4","secret-agent-instance-channel","protected-validation-key-budget","mysql-migrations-roles","redis-rebuild-epoch","network-cni-egress","backup-restore-fencing","LWS-SGLang-GPU"]):
+        result.append("runtimeGates.inventory")
+    if values["api"]["group"] in ("", "serving.maas.example") or values["api"]["reviewPlaceholderAcknowledged"]:
+        result.append("api.group.pending")
+    if values["api"]["group"] != lock.get("target", {}).get("apiGroup"):
+        result.append("api.group.mismatch")
+    for name in ("operator", "core", "console"):
+        w = values[name]
+        if not w["enabled"]:
+            result.append(name + ".disabled")
+        if w["enabled"] and (".invalid/" in w["image"]["repository"] or len(set(w["image"]["digest"].split(":")[-1])) == 1):
+            result.append(name + ".syntheticImage")
+    for key in ("namespace", "gatewayService"):
+        if not values["higress"][key]:
+            result.append("higress." + key)
+    if values["mode"] == "hybrid" and (not values["higress"]["externalEgressPolicyRef"] or "PENDING" in values["higress"]["externalEgressPolicyRef"] or "synthetic" in values["higress"]["externalEgressPolicyRef"]):
+        result.append("higress.externalEgressPolicyRef")
+    by_id = {d["id"]: d for d in lock.get("dependencies", [])}
+    for name in ("operator", "core", "console"):
+        w = values[name]
+        item = by_id.get(name, {})
+        if w["enabled"] and (item.get("digest") != w["image"]["digest"] or item.get("mirror") != w["image"]["repository"]):
+            result.append(name + ".imageLockMismatch")
+    for item in lock.get("dependencies", []):
+        if not set(item.get("requiredFor", sources)) & set(sources):
+            continue
+        if item.get("status") != "approved" or not item.get("version") or not item.get("evidenceRef"):
+            result.append("dependency." + item["id"])
+        if item.get("artifact") and (not item.get("digest") or not item.get("mirror")):
+            result.append("artifact." + item["id"])
+    for key, state in lock.get("runtimeGates", {}).items():
+        if key == "LWS-SGLang-GPU" and "SelfHosted" not in sources:
+            continue
+        if state != "verified":
+            result.append("runtimeGate." + key)
+    return result
+
+def main():
+    p = argparse.ArgumentParser(description=__doc__)
+    p.add_argument("--values", required=True)
+    p.add_argument("--lock", default=str(ROOT / "dependencies.lock.json"))
+    args = p.parse_args()
+    lock = json.loads(Path(args.lock).read_text(encoding="utf-8"))
+    result = blockers(load_values(args.values), lock)
+    print(json.dumps({"ready": not result, "blockers": result, "scope": "offline-input-completeness-only"}, ensure_ascii=False, indent=2))
+    raise SystemExit(1 if result else 0)
+
+if __name__ == "__main__":
+    main()

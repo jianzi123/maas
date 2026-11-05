@@ -1,0 +1,58 @@
+# Workloads stay disabled until their actual artifacts and references exist.
+mode: internal
+imagePullSecrets: []
+api:
+  group: ""
+  version: v1alpha1
+  reviewPlaceholderAcknowledged: false
+operator:
+  enabled: false
+  replicas: 1
+  image: {repository: "", digest: ""}
+  resources:
+    requests: {cpu: 100m, memory: 128Mi}
+    limits: {cpu: "1", memory: 512Mi}
+  webhookTLSSecret: ""
+  webhookCABundle: ""
+  # Current binary watches all namespaces. Cluster-wide CR read is explicit opt-in.
+  acknowledgeClusterWatch: false
+core:
+  enabled: false
+  replicas: 1
+  image: {repository: "", digest: ""}
+  command: []
+  args: []
+  existingConfigMap: ""
+  existingSecret: ""
+  port: 8080
+  probes: {port: 8081, livePath: /healthz, readyPath: /readyz}
+  resources:
+    requests: {cpu: 100m, memory: 128Mi}
+    limits: {cpu: "1", memory: 512Mi}
+console:
+  enabled: false
+  replicas: 1
+  image: {repository: "", digest: ""}
+  command: []
+  args: []
+  existingConfigMap: ""
+  port: 8080
+  probes: {port: 8080, livePath: /healthz, readyPath: /readyz}
+  resources:
+    requests: {cpu: 50m, memory: 64Mi}
+    limits: {cpu: 500m, memory: 256Mi}
+higress:
+  strategy: reuse
+  namespace: ""
+  gatewayService: ""
+  # Hybrid egress is managed by the gateway owner, outside this Chart.
+  externalEgressPolicyRef: ""
+network:
+  operator: {ingress: [], egress: []}
+  core: {ingress: [], egress: []}
+  console: {ingress: [], egress: []}
+ingress:
+  enabled: false
+  className: ""
+  host: ""
+  existingTLSSecret: ""
