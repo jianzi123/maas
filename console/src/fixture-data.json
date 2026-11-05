@@ -1,0 +1,2282 @@
+{
+  "kind": "synthetic_document_examples_not_runtime_results",
+  "cases": [
+    {
+      "name": "cancelled_usage_unknown_slot_quarantined",
+      "schema": "RequestLookupPage",
+      "expected_valid": true,
+      "value": {
+        "data": [
+          {
+            "request_id": "00000000-0000-4000-8000-000000000001",
+            "key_id": "00000000-0000-4000-8000-000000000002",
+            "model_alias": "model-a",
+            "upstream_model": "provider-model-example",
+            "source_id": "00000000-0000-4000-8000-000000000004",
+            "source_type": "external",
+            "config_revision": "rev-example-17",
+            "received_at": "2026-11-04T08:00:00Z",
+            "admitted_at": "2026-11-04T08:00:00.500Z",
+            "finished_at": "2026-11-04T08:00:01Z",
+            "quota_date": "2026-11-04",
+            "status": "cancelled",
+            "submission_state": "submitted",
+            "quota_consumed": 1,
+            "error_code": "client_cancelled",
+            "duration_ms": 1000,
+            "first_chunk_ms": 200,
+            "usage": {
+              "input_tokens": null,
+              "output_tokens": null,
+              "total_tokens": null,
+              "input_cached_tokens": null,
+              "reasoning_tokens": null,
+              "source": "unavailable",
+              "missing_reason": "not_provided"
+            },
+            "metering_state": "complete",
+            "reservation_plan": {
+              "schema_version": "1.0",
+              "model_alias": "model-a",
+              "source_id": "00000000-0000-4000-8000-000000000004",
+              "config_revision": "rev-example-17",
+              "capability_revision": "cap-example-verified-fixture-only",
+              "budget_policy_revision": "budget-example-v3",
+              "window_kind": "utc_day",
+              "token_metric": "prompt_plus_completion",
+              "request_reserved": "1",
+              "input_upper_tokens": "100",
+              "output_upper_tokens": "40",
+              "total_upper_tokens": "140",
+              "token_reserved": "140",
+              "money_reserved_atomic": "520000",
+              "currency": "TST",
+              "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+              "price_snapshot_sha256": "866cb1f5f808b8403dba1e733974f8e1caf9c2a9c7c1d1897d678849c948103f",
+              "price_version": "synthetic-price-v1",
+              "rate_policy_revision": "rate-example-v1"
+            },
+            "budget_accounting": {
+              "policy_revision": "budget-example-v3",
+              "window_kind": "utc_day",
+              "window_start": "2026-11-04T00:00:00Z",
+              "window_end": "2026-11-05T00:00:00Z",
+              "request": {
+                "reserved": "1",
+                "known_used": "1",
+                "unknown_held": "0",
+                "released": "0",
+                "overrun": "0",
+                "state": "known"
+              },
+              "token": {
+                "reserved": "140",
+                "known_used": "0",
+                "unknown_held": "140",
+                "released": "0",
+                "overrun": "0",
+                "state": "held"
+              },
+              "money": {
+                "reserved": "520000",
+                "known_used": "0",
+                "unknown_held": "520000",
+                "released": "0",
+                "overrun": "0",
+                "state": "held"
+              },
+              "token_actual": null,
+              "token_basis": "unavailable",
+              "cost_actual_atomic": null,
+              "cost_state": "upper_bound",
+              "currency": "TST",
+              "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+              "price_version": "synthetic-price-v1",
+              "missing_reason": "not_provided"
+            },
+            "rate_witness": {
+              "permit_id": "00000000-0000-4000-8000-000000000008",
+              "rate_epoch": "1",
+              "policy_id": "rate-policy-example",
+              "policy_revision": "rate-example-v1",
+              "windows": [
+                {
+                  "scope_id": "global",
+                  "window_start": "2026-11-04T08:00:00Z",
+                  "window_end": "2026-11-04T08:00:01Z",
+                  "limit": "5"
+                }
+              ]
+            },
+            "invocation_binding": {
+              "model_release_uid": "00000000-0000-4000-8000-000000000010",
+              "model_release_namespace": "maas-models-example",
+              "model_release_name": "external-model-example",
+              "model_release_generation": 1,
+              "release_revision": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+              "publication_id": "00000000-0000-4000-8000-000000000011",
+              "activation_epoch": 1,
+              "route_binding_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+              "admission_purpose": "serving",
+              "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+              "price_version": "synthetic-price-v1"
+            }
+          }
+        ],
+        "next_cursor": null,
+        "generated_at": "2026-11-05T09:50:00Z",
+        "data_complete": true,
+        "lookup": {
+          "request_id": "00000000-0000-4000-8000-000000000001",
+          "resolution": "recorded",
+          "evidence_source": "generation_request",
+          "checked_at": "2026-11-05T09:50:00Z",
+          "reason": null,
+          "rejection_code": null,
+          "capacity": {
+            "state": "quarantined",
+            "checked_at": "2026-11-05T09:50:00Z",
+            "data_source": "current_allocation",
+            "release_reason": null
+          }
+        }
+      }
+    },
+    {
+      "name": "same_terminal_accounting_after_proven_release",
+      "schema": "RequestLookupPage",
+      "expected_valid": true,
+      "value": {
+        "data": [
+          {
+            "request_id": "00000000-0000-4000-8000-000000000001",
+            "key_id": "00000000-0000-4000-8000-000000000002",
+            "model_alias": "model-a",
+            "upstream_model": "provider-model-example",
+            "source_id": "00000000-0000-4000-8000-000000000004",
+            "source_type": "external",
+            "config_revision": "rev-example-17",
+            "received_at": "2026-11-04T08:00:00Z",
+            "admitted_at": "2026-11-04T08:00:00.500Z",
+            "finished_at": "2026-11-04T08:00:01Z",
+            "quota_date": "2026-11-04",
+            "status": "cancelled",
+            "submission_state": "submitted",
+            "quota_consumed": 1,
+            "error_code": "client_cancelled",
+            "duration_ms": 1000,
+            "first_chunk_ms": 200,
+            "usage": {
+              "input_tokens": null,
+              "output_tokens": null,
+              "total_tokens": null,
+              "input_cached_tokens": null,
+              "reasoning_tokens": null,
+              "source": "unavailable",
+              "missing_reason": "not_provided"
+            },
+            "metering_state": "complete",
+            "reservation_plan": {
+              "schema_version": "1.0",
+              "model_alias": "model-a",
+              "source_id": "00000000-0000-4000-8000-000000000004",
+              "config_revision": "rev-example-17",
+              "capability_revision": "cap-example-verified-fixture-only",
+              "budget_policy_revision": "budget-example-v3",
+              "window_kind": "utc_day",
+              "token_metric": "prompt_plus_completion",
+              "request_reserved": "1",
+              "input_upper_tokens": "100",
+              "output_upper_tokens": "40",
+              "total_upper_tokens": "140",
+              "token_reserved": "140",
+              "money_reserved_atomic": "520000",
+              "currency": "TST",
+              "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+              "price_snapshot_sha256": "866cb1f5f808b8403dba1e733974f8e1caf9c2a9c7c1d1897d678849c948103f",
+              "price_version": "synthetic-price-v1",
+              "rate_policy_revision": "rate-example-v1"
+            },
+            "budget_accounting": {
+              "policy_revision": "budget-example-v3",
+              "window_kind": "utc_day",
+              "window_start": "2026-11-04T00:00:00Z",
+              "window_end": "2026-11-05T00:00:00Z",
+              "request": {
+                "reserved": "1",
+                "known_used": "1",
+                "unknown_held": "0",
+                "released": "0",
+                "overrun": "0",
+                "state": "known"
+              },
+              "token": {
+                "reserved": "140",
+                "known_used": "0",
+                "unknown_held": "140",
+                "released": "0",
+                "overrun": "0",
+                "state": "held"
+              },
+              "money": {
+                "reserved": "520000",
+                "known_used": "0",
+                "unknown_held": "520000",
+                "released": "0",
+                "overrun": "0",
+                "state": "held"
+              },
+              "token_actual": null,
+              "token_basis": "unavailable",
+              "cost_actual_atomic": null,
+              "cost_state": "upper_bound",
+              "currency": "TST",
+              "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+              "price_version": "synthetic-price-v1",
+              "missing_reason": "not_provided"
+            },
+            "rate_witness": {
+              "permit_id": "00000000-0000-4000-8000-000000000008",
+              "rate_epoch": "1",
+              "policy_id": "rate-policy-example",
+              "policy_revision": "rate-example-v1",
+              "windows": [
+                {
+                  "scope_id": "global",
+                  "window_start": "2026-11-04T08:00:00Z",
+                  "window_end": "2026-11-04T08:00:01Z",
+                  "limit": "5"
+                }
+              ]
+            },
+            "invocation_binding": {
+              "model_release_uid": "00000000-0000-4000-8000-000000000010",
+              "model_release_namespace": "maas-models-example",
+              "model_release_name": "external-model-example",
+              "model_release_generation": 1,
+              "release_revision": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+              "publication_id": "00000000-0000-4000-8000-000000000011",
+              "activation_epoch": 1,
+              "route_binding_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+              "admission_purpose": "serving",
+              "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+              "price_version": "synthetic-price-v1"
+            }
+          }
+        ],
+        "next_cursor": null,
+        "generated_at": "2026-11-05T09:50:00Z",
+        "data_complete": true,
+        "lookup": {
+          "request_id": "00000000-0000-4000-8000-000000000001",
+          "resolution": "recorded",
+          "evidence_source": "generation_request",
+          "checked_at": "2026-11-05T09:50:00Z",
+          "reason": null,
+          "rejection_code": null,
+          "capacity": {
+            "state": "released",
+            "checked_at": "2026-11-05T09:50:00Z",
+            "data_source": "release_log",
+            "release_reason": "closed_confirmed"
+          }
+        }
+      }
+    },
+    {
+      "name": "late_terminal_not_yet_recorded",
+      "schema": "RequestLookupPage",
+      "expected_valid": true,
+      "value": {
+        "data": [
+          {
+            "request_id": "00000000-0000-4000-8000-000000000001",
+            "key_id": "00000000-0000-4000-8000-000000000002",
+            "model_alias": "model-a",
+            "upstream_model": "provider-model-example",
+            "source_id": "00000000-0000-4000-8000-000000000004",
+            "source_type": "external",
+            "config_revision": "rev-example-17",
+            "received_at": "2026-11-04T08:00:00Z",
+            "admitted_at": "2026-11-04T08:00:00.500Z",
+            "finished_at": null,
+            "quota_date": "2026-11-04",
+            "status": "in_progress",
+            "submission_state": "submitted",
+            "quota_consumed": 1,
+            "error_code": null,
+            "duration_ms": null,
+            "first_chunk_ms": 200,
+            "usage": {
+              "input_tokens": null,
+              "output_tokens": null,
+              "total_tokens": null,
+              "input_cached_tokens": null,
+              "reasoning_tokens": null,
+              "source": "unavailable",
+              "missing_reason": "not_provided"
+            },
+            "metering_state": "complete",
+            "reservation_plan": {
+              "schema_version": "1.0",
+              "model_alias": "model-a",
+              "source_id": "00000000-0000-4000-8000-000000000004",
+              "config_revision": "rev-example-17",
+              "capability_revision": "cap-example-verified-fixture-only",
+              "budget_policy_revision": "budget-example-v3",
+              "window_kind": "utc_day",
+              "token_metric": "prompt_plus_completion",
+              "request_reserved": "1",
+              "input_upper_tokens": "100",
+              "output_upper_tokens": "40",
+              "total_upper_tokens": "140",
+              "token_reserved": "140",
+              "money_reserved_atomic": "520000",
+              "currency": "TST",
+              "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+              "price_snapshot_sha256": "866cb1f5f808b8403dba1e733974f8e1caf9c2a9c7c1d1897d678849c948103f",
+              "price_version": "synthetic-price-v1",
+              "rate_policy_revision": "rate-example-v1"
+            },
+            "budget_accounting": null,
+            "rate_witness": {
+              "permit_id": "00000000-0000-4000-8000-000000000008",
+              "rate_epoch": "1",
+              "policy_id": "rate-policy-example",
+              "policy_revision": "rate-example-v1",
+              "windows": [
+                {
+                  "scope_id": "global",
+                  "window_start": "2026-11-04T08:00:00Z",
+                  "window_end": "2026-11-04T08:00:01Z",
+                  "limit": "5"
+                }
+              ]
+            },
+            "invocation_binding": {
+              "model_release_uid": "00000000-0000-4000-8000-000000000010",
+              "model_release_namespace": "maas-models-example",
+              "model_release_name": "external-model-example",
+              "model_release_generation": 1,
+              "release_revision": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+              "publication_id": "00000000-0000-4000-8000-000000000011",
+              "activation_epoch": 1,
+              "route_binding_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+              "admission_purpose": "serving",
+              "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+              "price_version": "synthetic-price-v1"
+            }
+          }
+        ],
+        "next_cursor": null,
+        "generated_at": "2026-11-05T09:50:00Z",
+        "data_complete": true,
+        "lookup": {
+          "request_id": "00000000-0000-4000-8000-000000000001",
+          "resolution": "recorded",
+          "evidence_source": "generation_request",
+          "checked_at": "2026-11-05T09:50:00Z",
+          "reason": null,
+          "rejection_code": null,
+          "capacity": {
+            "state": "held",
+            "checked_at": "2026-11-05T09:50:00Z",
+            "data_source": "current_allocation",
+            "release_reason": null
+          }
+        }
+      }
+    },
+    {
+      "name": "no_authoritative_record",
+      "schema": "RequestLookupPage",
+      "expected_valid": true,
+      "value": {
+        "data": [],
+        "next_cursor": null,
+        "generated_at": "2026-11-05T09:50:00Z",
+        "data_complete": false,
+        "lookup": {
+          "request_id": "00000000-0000-4000-8000-000000000001",
+          "resolution": "unknown",
+          "evidence_source": "none",
+          "checked_at": "2026-11-05T09:50:00Z",
+          "reason": "no_authoritative_record",
+          "rejection_code": null,
+          "capacity": {
+            "state": "unknown",
+            "checked_at": "2026-11-05T09:50:00Z",
+            "data_source": "none",
+            "release_reason": null
+          }
+        }
+      }
+    },
+    {
+      "name": "final_rejection_with_evidence",
+      "schema": "RequestLookupPage",
+      "expected_valid": true,
+      "value": {
+        "data": [],
+        "next_cursor": null,
+        "generated_at": "2026-11-05T09:50:00Z",
+        "data_complete": true,
+        "lookup": {
+          "request_id": "00000000-0000-4000-8000-000000000001",
+          "resolution": "not_admitted",
+          "evidence_source": "admission_rejection",
+          "checked_at": "2026-11-05T09:50:00Z",
+          "reason": "verified_admission_rejection",
+          "rejection_code": "request_budget_exceeded",
+          "capacity": {
+            "state": "not_allocated",
+            "checked_at": "2026-11-05T09:50:00Z",
+            "data_source": "admission_rejection",
+            "release_reason": null
+          }
+        }
+      }
+    },
+    {
+      "name": "verified_retention_marker",
+      "schema": "RequestLookupPage",
+      "expected_valid": true,
+      "value": {
+        "data": [],
+        "next_cursor": null,
+        "generated_at": "2026-11-05T09:50:00Z",
+        "data_complete": true,
+        "lookup": {
+          "request_id": "00000000-0000-4000-8000-000000000001",
+          "resolution": "expired",
+          "evidence_source": "retention_marker",
+          "checked_at": "2026-11-05T09:50:00Z",
+          "reason": "verified_retention_expired",
+          "rejection_code": null,
+          "capacity": {
+            "state": "unknown",
+            "checked_at": "2026-11-05T09:50:00Z",
+            "data_source": "none",
+            "release_reason": null
+          }
+        }
+      }
+    },
+    {
+      "name": "ordinary_list_unchanged",
+      "schema": "RequestPage",
+      "expected_valid": true,
+      "value": {
+        "data": [
+          {
+            "request_id": "00000000-0000-4000-8000-000000000001",
+            "key_id": "00000000-0000-4000-8000-000000000002",
+            "model_alias": "model-a",
+            "upstream_model": "provider-model-example",
+            "source_id": "00000000-0000-4000-8000-000000000004",
+            "source_type": "external",
+            "config_revision": "rev-example-17",
+            "received_at": "2026-11-04T08:00:00Z",
+            "admitted_at": "2026-11-04T08:00:00.500Z",
+            "finished_at": "2026-11-04T08:00:01Z",
+            "quota_date": "2026-11-04",
+            "status": "cancelled",
+            "submission_state": "submitted",
+            "quota_consumed": 1,
+            "error_code": "client_cancelled",
+            "duration_ms": 1000,
+            "first_chunk_ms": 200,
+            "usage": {
+              "input_tokens": null,
+              "output_tokens": null,
+              "total_tokens": null,
+              "input_cached_tokens": null,
+              "reasoning_tokens": null,
+              "source": "unavailable",
+              "missing_reason": "not_provided"
+            },
+            "metering_state": "complete",
+            "reservation_plan": {
+              "schema_version": "1.0",
+              "model_alias": "model-a",
+              "source_id": "00000000-0000-4000-8000-000000000004",
+              "config_revision": "rev-example-17",
+              "capability_revision": "cap-example-verified-fixture-only",
+              "budget_policy_revision": "budget-example-v3",
+              "window_kind": "utc_day",
+              "token_metric": "prompt_plus_completion",
+              "request_reserved": "1",
+              "input_upper_tokens": "100",
+              "output_upper_tokens": "40",
+              "total_upper_tokens": "140",
+              "token_reserved": "140",
+              "money_reserved_atomic": "520000",
+              "currency": "TST",
+              "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+              "price_snapshot_sha256": "866cb1f5f808b8403dba1e733974f8e1caf9c2a9c7c1d1897d678849c948103f",
+              "price_version": "synthetic-price-v1",
+              "rate_policy_revision": "rate-example-v1"
+            },
+            "budget_accounting": {
+              "policy_revision": "budget-example-v3",
+              "window_kind": "utc_day",
+              "window_start": "2026-11-04T00:00:00Z",
+              "window_end": "2026-11-05T00:00:00Z",
+              "request": {
+                "reserved": "1",
+                "known_used": "1",
+                "unknown_held": "0",
+                "released": "0",
+                "overrun": "0",
+                "state": "known"
+              },
+              "token": {
+                "reserved": "140",
+                "known_used": "0",
+                "unknown_held": "140",
+                "released": "0",
+                "overrun": "0",
+                "state": "held"
+              },
+              "money": {
+                "reserved": "520000",
+                "known_used": "0",
+                "unknown_held": "520000",
+                "released": "0",
+                "overrun": "0",
+                "state": "held"
+              },
+              "token_actual": null,
+              "token_basis": "unavailable",
+              "cost_actual_atomic": null,
+              "cost_state": "upper_bound",
+              "currency": "TST",
+              "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+              "price_version": "synthetic-price-v1",
+              "missing_reason": "not_provided"
+            },
+            "rate_witness": {
+              "permit_id": "00000000-0000-4000-8000-000000000008",
+              "rate_epoch": "1",
+              "policy_id": "rate-policy-example",
+              "policy_revision": "rate-example-v1",
+              "windows": [
+                {
+                  "scope_id": "global",
+                  "window_start": "2026-11-04T08:00:00Z",
+                  "window_end": "2026-11-04T08:00:01Z",
+                  "limit": "5"
+                }
+              ]
+            },
+            "invocation_binding": {
+              "model_release_uid": "00000000-0000-4000-8000-000000000010",
+              "model_release_namespace": "maas-models-example",
+              "model_release_name": "external-model-example",
+              "model_release_generation": 1,
+              "release_revision": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+              "publication_id": "00000000-0000-4000-8000-000000000011",
+              "activation_epoch": 1,
+              "route_binding_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+              "admission_purpose": "serving",
+              "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+              "price_version": "synthetic-price-v1"
+            }
+          }
+        ],
+        "next_cursor": null,
+        "generated_at": "2026-11-05T09:50:00Z",
+        "data_complete": true
+      }
+    },
+    {
+      "name": "unknown_must_not_claim_complete",
+      "schema": "RequestLookupPage",
+      "expected_valid": false,
+      "value": {
+        "data": [],
+        "next_cursor": null,
+        "generated_at": "2026-11-05T09:50:00Z",
+        "data_complete": true,
+        "lookup": {
+          "request_id": "00000000-0000-4000-8000-000000000001",
+          "resolution": "unknown",
+          "evidence_source": "none",
+          "checked_at": "2026-11-05T09:50:00Z",
+          "reason": "no_authoritative_record",
+          "rejection_code": null,
+          "capacity": {
+            "state": "unknown",
+            "checked_at": "2026-11-05T09:50:00Z",
+            "data_source": "none",
+            "release_reason": null
+          }
+        }
+      }
+    },
+    {
+      "name": "unknown_must_have_no_rows",
+      "schema": "RequestLookupPage",
+      "expected_valid": false,
+      "value": {
+        "data": [
+          {
+            "request_id": "00000000-0000-4000-8000-000000000001",
+            "key_id": "00000000-0000-4000-8000-000000000002",
+            "model_alias": "model-a",
+            "upstream_model": "provider-model-example",
+            "source_id": "00000000-0000-4000-8000-000000000004",
+            "source_type": "external",
+            "config_revision": "rev-example-17",
+            "received_at": "2026-11-04T08:00:00Z",
+            "admitted_at": "2026-11-04T08:00:00.500Z",
+            "finished_at": "2026-11-04T08:00:01Z",
+            "quota_date": "2026-11-04",
+            "status": "cancelled",
+            "submission_state": "submitted",
+            "quota_consumed": 1,
+            "error_code": "client_cancelled",
+            "duration_ms": 1000,
+            "first_chunk_ms": 200,
+            "usage": {
+              "input_tokens": null,
+              "output_tokens": null,
+              "total_tokens": null,
+              "input_cached_tokens": null,
+              "reasoning_tokens": null,
+              "source": "unavailable",
+              "missing_reason": "not_provided"
+            },
+            "metering_state": "complete",
+            "reservation_plan": {
+              "schema_version": "1.0",
+              "model_alias": "model-a",
+              "source_id": "00000000-0000-4000-8000-000000000004",
+              "config_revision": "rev-example-17",
+              "capability_revision": "cap-example-verified-fixture-only",
+              "budget_policy_revision": "budget-example-v3",
+              "window_kind": "utc_day",
+              "token_metric": "prompt_plus_completion",
+              "request_reserved": "1",
+              "input_upper_tokens": "100",
+              "output_upper_tokens": "40",
+              "total_upper_tokens": "140",
+              "token_reserved": "140",
+              "money_reserved_atomic": "520000",
+              "currency": "TST",
+              "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+              "price_snapshot_sha256": "866cb1f5f808b8403dba1e733974f8e1caf9c2a9c7c1d1897d678849c948103f",
+              "price_version": "synthetic-price-v1",
+              "rate_policy_revision": "rate-example-v1"
+            },
+            "budget_accounting": {
+              "policy_revision": "budget-example-v3",
+              "window_kind": "utc_day",
+              "window_start": "2026-11-04T00:00:00Z",
+              "window_end": "2026-11-05T00:00:00Z",
+              "request": {
+                "reserved": "1",
+                "known_used": "1",
+                "unknown_held": "0",
+                "released": "0",
+                "overrun": "0",
+                "state": "known"
+              },
+              "token": {
+                "reserved": "140",
+                "known_used": "0",
+                "unknown_held": "140",
+                "released": "0",
+                "overrun": "0",
+                "state": "held"
+              },
+              "money": {
+                "reserved": "520000",
+                "known_used": "0",
+                "unknown_held": "520000",
+                "released": "0",
+                "overrun": "0",
+                "state": "held"
+              },
+              "token_actual": null,
+              "token_basis": "unavailable",
+              "cost_actual_atomic": null,
+              "cost_state": "upper_bound",
+              "currency": "TST",
+              "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+              "price_version": "synthetic-price-v1",
+              "missing_reason": "not_provided"
+            },
+            "rate_witness": {
+              "permit_id": "00000000-0000-4000-8000-000000000008",
+              "rate_epoch": "1",
+              "policy_id": "rate-policy-example",
+              "policy_revision": "rate-example-v1",
+              "windows": [
+                {
+                  "scope_id": "global",
+                  "window_start": "2026-11-04T08:00:00Z",
+                  "window_end": "2026-11-04T08:00:01Z",
+                  "limit": "5"
+                }
+              ]
+            },
+            "invocation_binding": {
+              "model_release_uid": "00000000-0000-4000-8000-000000000010",
+              "model_release_namespace": "maas-models-example",
+              "model_release_name": "external-model-example",
+              "model_release_generation": 1,
+              "release_revision": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+              "publication_id": "00000000-0000-4000-8000-000000000011",
+              "activation_epoch": 1,
+              "route_binding_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+              "admission_purpose": "serving",
+              "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+              "price_version": "synthetic-price-v1"
+            }
+          }
+        ],
+        "next_cursor": null,
+        "generated_at": "2026-11-05T09:50:00Z",
+        "data_complete": false,
+        "lookup": {
+          "request_id": "00000000-0000-4000-8000-000000000001",
+          "resolution": "unknown",
+          "evidence_source": "none",
+          "checked_at": "2026-11-05T09:50:00Z",
+          "reason": "no_authoritative_record",
+          "rejection_code": null,
+          "capacity": {
+            "state": "unknown",
+            "checked_at": "2026-11-05T09:50:00Z",
+            "data_source": "none",
+            "release_reason": null
+          }
+        }
+      }
+    },
+    {
+      "name": "no_rejection_without_evidence",
+      "schema": "RequestLookupPage",
+      "expected_valid": false,
+      "value": {
+        "data": [],
+        "next_cursor": null,
+        "generated_at": "2026-11-05T09:50:00Z",
+        "data_complete": false,
+        "lookup": {
+          "request_id": "00000000-0000-4000-8000-000000000001",
+          "resolution": "not_admitted",
+          "evidence_source": "none",
+          "checked_at": "2026-11-05T09:50:00Z",
+          "reason": "verified_admission_rejection",
+          "rejection_code": "request_budget_exceeded",
+          "capacity": {
+            "state": "unknown",
+            "checked_at": "2026-11-05T09:50:00Z",
+            "data_source": "none",
+            "release_reason": null
+          }
+        }
+      }
+    },
+    {
+      "name": "no_expiry_from_empty_result",
+      "schema": "RequestLookupPage",
+      "expected_valid": false,
+      "value": {
+        "data": [],
+        "next_cursor": null,
+        "generated_at": "2026-11-05T09:50:00Z",
+        "data_complete": false,
+        "lookup": {
+          "request_id": "00000000-0000-4000-8000-000000000001",
+          "resolution": "expired",
+          "evidence_source": "none",
+          "checked_at": "2026-11-05T09:50:00Z",
+          "reason": "verified_retention_expired",
+          "rejection_code": null,
+          "capacity": {
+            "state": "unknown",
+            "checked_at": "2026-11-05T09:50:00Z",
+            "data_source": "none",
+            "release_reason": null
+          }
+        }
+      }
+    },
+    {
+      "name": "recorded_requires_one_row",
+      "schema": "RequestLookupPage",
+      "expected_valid": false,
+      "value": {
+        "data": [],
+        "next_cursor": null,
+        "generated_at": "2026-11-05T09:50:00Z",
+        "data_complete": true,
+        "lookup": {
+          "request_id": "00000000-0000-4000-8000-000000000001",
+          "resolution": "recorded",
+          "evidence_source": "generation_request",
+          "checked_at": "2026-11-05T09:50:00Z",
+          "reason": null,
+          "rejection_code": null,
+          "capacity": {
+            "state": "quarantined",
+            "checked_at": "2026-11-05T09:50:00Z",
+            "data_source": "current_allocation",
+            "release_reason": null
+          }
+        }
+      }
+    },
+    {
+      "name": "exact_never_two_rows",
+      "schema": "RequestLookupPage",
+      "expected_valid": false,
+      "value": {
+        "data": [
+          {
+            "request_id": "00000000-0000-4000-8000-000000000001",
+            "key_id": "00000000-0000-4000-8000-000000000002",
+            "model_alias": "model-a",
+            "upstream_model": "provider-model-example",
+            "source_id": "00000000-0000-4000-8000-000000000004",
+            "source_type": "external",
+            "config_revision": "rev-example-17",
+            "received_at": "2026-11-04T08:00:00Z",
+            "admitted_at": "2026-11-04T08:00:00.500Z",
+            "finished_at": "2026-11-04T08:00:01Z",
+            "quota_date": "2026-11-04",
+            "status": "cancelled",
+            "submission_state": "submitted",
+            "quota_consumed": 1,
+            "error_code": "client_cancelled",
+            "duration_ms": 1000,
+            "first_chunk_ms": 200,
+            "usage": {
+              "input_tokens": null,
+              "output_tokens": null,
+              "total_tokens": null,
+              "input_cached_tokens": null,
+              "reasoning_tokens": null,
+              "source": "unavailable",
+              "missing_reason": "not_provided"
+            },
+            "metering_state": "complete",
+            "reservation_plan": {
+              "schema_version": "1.0",
+              "model_alias": "model-a",
+              "source_id": "00000000-0000-4000-8000-000000000004",
+              "config_revision": "rev-example-17",
+              "capability_revision": "cap-example-verified-fixture-only",
+              "budget_policy_revision": "budget-example-v3",
+              "window_kind": "utc_day",
+              "token_metric": "prompt_plus_completion",
+              "request_reserved": "1",
+              "input_upper_tokens": "100",
+              "output_upper_tokens": "40",
+              "total_upper_tokens": "140",
+              "token_reserved": "140",
+              "money_reserved_atomic": "520000",
+              "currency": "TST",
+              "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+              "price_snapshot_sha256": "866cb1f5f808b8403dba1e733974f8e1caf9c2a9c7c1d1897d678849c948103f",
+              "price_version": "synthetic-price-v1",
+              "rate_policy_revision": "rate-example-v1"
+            },
+            "budget_accounting": {
+              "policy_revision": "budget-example-v3",
+              "window_kind": "utc_day",
+              "window_start": "2026-11-04T00:00:00Z",
+              "window_end": "2026-11-05T00:00:00Z",
+              "request": {
+                "reserved": "1",
+                "known_used": "1",
+                "unknown_held": "0",
+                "released": "0",
+                "overrun": "0",
+                "state": "known"
+              },
+              "token": {
+                "reserved": "140",
+                "known_used": "0",
+                "unknown_held": "140",
+                "released": "0",
+                "overrun": "0",
+                "state": "held"
+              },
+              "money": {
+                "reserved": "520000",
+                "known_used": "0",
+                "unknown_held": "520000",
+                "released": "0",
+                "overrun": "0",
+                "state": "held"
+              },
+              "token_actual": null,
+              "token_basis": "unavailable",
+              "cost_actual_atomic": null,
+              "cost_state": "upper_bound",
+              "currency": "TST",
+              "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+              "price_version": "synthetic-price-v1",
+              "missing_reason": "not_provided"
+            },
+            "rate_witness": {
+              "permit_id": "00000000-0000-4000-8000-000000000008",
+              "rate_epoch": "1",
+              "policy_id": "rate-policy-example",
+              "policy_revision": "rate-example-v1",
+              "windows": [
+                {
+                  "scope_id": "global",
+                  "window_start": "2026-11-04T08:00:00Z",
+                  "window_end": "2026-11-04T08:00:01Z",
+                  "limit": "5"
+                }
+              ]
+            },
+            "invocation_binding": {
+              "model_release_uid": "00000000-0000-4000-8000-000000000010",
+              "model_release_namespace": "maas-models-example",
+              "model_release_name": "external-model-example",
+              "model_release_generation": 1,
+              "release_revision": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+              "publication_id": "00000000-0000-4000-8000-000000000011",
+              "activation_epoch": 1,
+              "route_binding_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+              "admission_purpose": "serving",
+              "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+              "price_version": "synthetic-price-v1"
+            }
+          },
+          {
+            "request_id": "00000000-0000-4000-8000-000000000001",
+            "key_id": "00000000-0000-4000-8000-000000000002",
+            "model_alias": "model-a",
+            "upstream_model": "provider-model-example",
+            "source_id": "00000000-0000-4000-8000-000000000004",
+            "source_type": "external",
+            "config_revision": "rev-example-17",
+            "received_at": "2026-11-04T08:00:00Z",
+            "admitted_at": "2026-11-04T08:00:00.500Z",
+            "finished_at": "2026-11-04T08:00:01Z",
+            "quota_date": "2026-11-04",
+            "status": "cancelled",
+            "submission_state": "submitted",
+            "quota_consumed": 1,
+            "error_code": "client_cancelled",
+            "duration_ms": 1000,
+            "first_chunk_ms": 200,
+            "usage": {
+              "input_tokens": null,
+              "output_tokens": null,
+              "total_tokens": null,
+              "input_cached_tokens": null,
+              "reasoning_tokens": null,
+              "source": "unavailable",
+              "missing_reason": "not_provided"
+            },
+            "metering_state": "complete",
+            "reservation_plan": {
+              "schema_version": "1.0",
+              "model_alias": "model-a",
+              "source_id": "00000000-0000-4000-8000-000000000004",
+              "config_revision": "rev-example-17",
+              "capability_revision": "cap-example-verified-fixture-only",
+              "budget_policy_revision": "budget-example-v3",
+              "window_kind": "utc_day",
+              "token_metric": "prompt_plus_completion",
+              "request_reserved": "1",
+              "input_upper_tokens": "100",
+              "output_upper_tokens": "40",
+              "total_upper_tokens": "140",
+              "token_reserved": "140",
+              "money_reserved_atomic": "520000",
+              "currency": "TST",
+              "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+              "price_snapshot_sha256": "866cb1f5f808b8403dba1e733974f8e1caf9c2a9c7c1d1897d678849c948103f",
+              "price_version": "synthetic-price-v1",
+              "rate_policy_revision": "rate-example-v1"
+            },
+            "budget_accounting": {
+              "policy_revision": "budget-example-v3",
+              "window_kind": "utc_day",
+              "window_start": "2026-11-04T00:00:00Z",
+              "window_end": "2026-11-05T00:00:00Z",
+              "request": {
+                "reserved": "1",
+                "known_used": "1",
+                "unknown_held": "0",
+                "released": "0",
+                "overrun": "0",
+                "state": "known"
+              },
+              "token": {
+                "reserved": "140",
+                "known_used": "0",
+                "unknown_held": "140",
+                "released": "0",
+                "overrun": "0",
+                "state": "held"
+              },
+              "money": {
+                "reserved": "520000",
+                "known_used": "0",
+                "unknown_held": "520000",
+                "released": "0",
+                "overrun": "0",
+                "state": "held"
+              },
+              "token_actual": null,
+              "token_basis": "unavailable",
+              "cost_actual_atomic": null,
+              "cost_state": "upper_bound",
+              "currency": "TST",
+              "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+              "price_version": "synthetic-price-v1",
+              "missing_reason": "not_provided"
+            },
+            "rate_witness": {
+              "permit_id": "00000000-0000-4000-8000-000000000008",
+              "rate_epoch": "1",
+              "policy_id": "rate-policy-example",
+              "policy_revision": "rate-example-v1",
+              "windows": [
+                {
+                  "scope_id": "global",
+                  "window_start": "2026-11-04T08:00:00Z",
+                  "window_end": "2026-11-04T08:00:01Z",
+                  "limit": "5"
+                }
+              ]
+            },
+            "invocation_binding": {
+              "model_release_uid": "00000000-0000-4000-8000-000000000010",
+              "model_release_namespace": "maas-models-example",
+              "model_release_name": "external-model-example",
+              "model_release_generation": 1,
+              "release_revision": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+              "publication_id": "00000000-0000-4000-8000-000000000011",
+              "activation_epoch": 1,
+              "route_binding_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+              "admission_purpose": "serving",
+              "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+              "price_version": "synthetic-price-v1"
+            }
+          }
+        ],
+        "next_cursor": null,
+        "generated_at": "2026-11-05T09:50:00Z",
+        "data_complete": true,
+        "lookup": {
+          "request_id": "00000000-0000-4000-8000-000000000001",
+          "resolution": "recorded",
+          "evidence_source": "generation_request",
+          "checked_at": "2026-11-05T09:50:00Z",
+          "reason": null,
+          "rejection_code": null,
+          "capacity": {
+            "state": "quarantined",
+            "checked_at": "2026-11-05T09:50:00Z",
+            "data_source": "current_allocation",
+            "release_reason": null
+          }
+        }
+      }
+    },
+    {
+      "name": "exact_no_cursor",
+      "schema": "RequestLookupPage",
+      "expected_valid": false,
+      "value": {
+        "data": [
+          {
+            "request_id": "00000000-0000-4000-8000-000000000001",
+            "key_id": "00000000-0000-4000-8000-000000000002",
+            "model_alias": "model-a",
+            "upstream_model": "provider-model-example",
+            "source_id": "00000000-0000-4000-8000-000000000004",
+            "source_type": "external",
+            "config_revision": "rev-example-17",
+            "received_at": "2026-11-04T08:00:00Z",
+            "admitted_at": "2026-11-04T08:00:00.500Z",
+            "finished_at": "2026-11-04T08:00:01Z",
+            "quota_date": "2026-11-04",
+            "status": "cancelled",
+            "submission_state": "submitted",
+            "quota_consumed": 1,
+            "error_code": "client_cancelled",
+            "duration_ms": 1000,
+            "first_chunk_ms": 200,
+            "usage": {
+              "input_tokens": null,
+              "output_tokens": null,
+              "total_tokens": null,
+              "input_cached_tokens": null,
+              "reasoning_tokens": null,
+              "source": "unavailable",
+              "missing_reason": "not_provided"
+            },
+            "metering_state": "complete",
+            "reservation_plan": {
+              "schema_version": "1.0",
+              "model_alias": "model-a",
+              "source_id": "00000000-0000-4000-8000-000000000004",
+              "config_revision": "rev-example-17",
+              "capability_revision": "cap-example-verified-fixture-only",
+              "budget_policy_revision": "budget-example-v3",
+              "window_kind": "utc_day",
+              "token_metric": "prompt_plus_completion",
+              "request_reserved": "1",
+              "input_upper_tokens": "100",
+              "output_upper_tokens": "40",
+              "total_upper_tokens": "140",
+              "token_reserved": "140",
+              "money_reserved_atomic": "520000",
+              "currency": "TST",
+              "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+              "price_snapshot_sha256": "866cb1f5f808b8403dba1e733974f8e1caf9c2a9c7c1d1897d678849c948103f",
+              "price_version": "synthetic-price-v1",
+              "rate_policy_revision": "rate-example-v1"
+            },
+            "budget_accounting": {
+              "policy_revision": "budget-example-v3",
+              "window_kind": "utc_day",
+              "window_start": "2026-11-04T00:00:00Z",
+              "window_end": "2026-11-05T00:00:00Z",
+              "request": {
+                "reserved": "1",
+                "known_used": "1",
+                "unknown_held": "0",
+                "released": "0",
+                "overrun": "0",
+                "state": "known"
+              },
+              "token": {
+                "reserved": "140",
+                "known_used": "0",
+                "unknown_held": "140",
+                "released": "0",
+                "overrun": "0",
+                "state": "held"
+              },
+              "money": {
+                "reserved": "520000",
+                "known_used": "0",
+                "unknown_held": "520000",
+                "released": "0",
+                "overrun": "0",
+                "state": "held"
+              },
+              "token_actual": null,
+              "token_basis": "unavailable",
+              "cost_actual_atomic": null,
+              "cost_state": "upper_bound",
+              "currency": "TST",
+              "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+              "price_version": "synthetic-price-v1",
+              "missing_reason": "not_provided"
+            },
+            "rate_witness": {
+              "permit_id": "00000000-0000-4000-8000-000000000008",
+              "rate_epoch": "1",
+              "policy_id": "rate-policy-example",
+              "policy_revision": "rate-example-v1",
+              "windows": [
+                {
+                  "scope_id": "global",
+                  "window_start": "2026-11-04T08:00:00Z",
+                  "window_end": "2026-11-04T08:00:01Z",
+                  "limit": "5"
+                }
+              ]
+            },
+            "invocation_binding": {
+              "model_release_uid": "00000000-0000-4000-8000-000000000010",
+              "model_release_namespace": "maas-models-example",
+              "model_release_name": "external-model-example",
+              "model_release_generation": 1,
+              "release_revision": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+              "publication_id": "00000000-0000-4000-8000-000000000011",
+              "activation_epoch": 1,
+              "route_binding_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+              "admission_purpose": "serving",
+              "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+              "price_version": "synthetic-price-v1"
+            }
+          }
+        ],
+        "next_cursor": "opaque",
+        "generated_at": "2026-11-05T09:50:00Z",
+        "data_complete": true,
+        "lookup": {
+          "request_id": "00000000-0000-4000-8000-000000000001",
+          "resolution": "recorded",
+          "evidence_source": "generation_request",
+          "checked_at": "2026-11-05T09:50:00Z",
+          "reason": null,
+          "rejection_code": null,
+          "capacity": {
+            "state": "quarantined",
+            "checked_at": "2026-11-05T09:50:00Z",
+            "data_source": "current_allocation",
+            "release_reason": null
+          }
+        }
+      }
+    },
+    {
+      "name": "release_requires_original_release_log",
+      "schema": "RequestLookupPage",
+      "expected_valid": false,
+      "value": {
+        "data": [
+          {
+            "request_id": "00000000-0000-4000-8000-000000000001",
+            "key_id": "00000000-0000-4000-8000-000000000002",
+            "model_alias": "model-a",
+            "upstream_model": "provider-model-example",
+            "source_id": "00000000-0000-4000-8000-000000000004",
+            "source_type": "external",
+            "config_revision": "rev-example-17",
+            "received_at": "2026-11-04T08:00:00Z",
+            "admitted_at": "2026-11-04T08:00:00.500Z",
+            "finished_at": "2026-11-04T08:00:01Z",
+            "quota_date": "2026-11-04",
+            "status": "cancelled",
+            "submission_state": "submitted",
+            "quota_consumed": 1,
+            "error_code": "client_cancelled",
+            "duration_ms": 1000,
+            "first_chunk_ms": 200,
+            "usage": {
+              "input_tokens": null,
+              "output_tokens": null,
+              "total_tokens": null,
+              "input_cached_tokens": null,
+              "reasoning_tokens": null,
+              "source": "unavailable",
+              "missing_reason": "not_provided"
+            },
+            "metering_state": "complete",
+            "reservation_plan": {
+              "schema_version": "1.0",
+              "model_alias": "model-a",
+              "source_id": "00000000-0000-4000-8000-000000000004",
+              "config_revision": "rev-example-17",
+              "capability_revision": "cap-example-verified-fixture-only",
+              "budget_policy_revision": "budget-example-v3",
+              "window_kind": "utc_day",
+              "token_metric": "prompt_plus_completion",
+              "request_reserved": "1",
+              "input_upper_tokens": "100",
+              "output_upper_tokens": "40",
+              "total_upper_tokens": "140",
+              "token_reserved": "140",
+              "money_reserved_atomic": "520000",
+              "currency": "TST",
+              "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+              "price_snapshot_sha256": "866cb1f5f808b8403dba1e733974f8e1caf9c2a9c7c1d1897d678849c948103f",
+              "price_version": "synthetic-price-v1",
+              "rate_policy_revision": "rate-example-v1"
+            },
+            "budget_accounting": {
+              "policy_revision": "budget-example-v3",
+              "window_kind": "utc_day",
+              "window_start": "2026-11-04T00:00:00Z",
+              "window_end": "2026-11-05T00:00:00Z",
+              "request": {
+                "reserved": "1",
+                "known_used": "1",
+                "unknown_held": "0",
+                "released": "0",
+                "overrun": "0",
+                "state": "known"
+              },
+              "token": {
+                "reserved": "140",
+                "known_used": "0",
+                "unknown_held": "140",
+                "released": "0",
+                "overrun": "0",
+                "state": "held"
+              },
+              "money": {
+                "reserved": "520000",
+                "known_used": "0",
+                "unknown_held": "520000",
+                "released": "0",
+                "overrun": "0",
+                "state": "held"
+              },
+              "token_actual": null,
+              "token_basis": "unavailable",
+              "cost_actual_atomic": null,
+              "cost_state": "upper_bound",
+              "currency": "TST",
+              "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+              "price_version": "synthetic-price-v1",
+              "missing_reason": "not_provided"
+            },
+            "rate_witness": {
+              "permit_id": "00000000-0000-4000-8000-000000000008",
+              "rate_epoch": "1",
+              "policy_id": "rate-policy-example",
+              "policy_revision": "rate-example-v1",
+              "windows": [
+                {
+                  "scope_id": "global",
+                  "window_start": "2026-11-04T08:00:00Z",
+                  "window_end": "2026-11-04T08:00:01Z",
+                  "limit": "5"
+                }
+              ]
+            },
+            "invocation_binding": {
+              "model_release_uid": "00000000-0000-4000-8000-000000000010",
+              "model_release_namespace": "maas-models-example",
+              "model_release_name": "external-model-example",
+              "model_release_generation": 1,
+              "release_revision": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+              "publication_id": "00000000-0000-4000-8000-000000000011",
+              "activation_epoch": 1,
+              "route_binding_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+              "admission_purpose": "serving",
+              "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+              "price_version": "synthetic-price-v1"
+            }
+          }
+        ],
+        "next_cursor": null,
+        "generated_at": "2026-11-05T09:50:00Z",
+        "data_complete": true,
+        "lookup": {
+          "request_id": "00000000-0000-4000-8000-000000000001",
+          "resolution": "recorded",
+          "evidence_source": "generation_request",
+          "checked_at": "2026-11-05T09:50:00Z",
+          "reason": null,
+          "rejection_code": null,
+          "capacity": {
+            "state": "released",
+            "checked_at": "2026-11-05T09:50:00Z",
+            "data_source": "current_allocation",
+            "release_reason": "closed_confirmed"
+          }
+        }
+      }
+    },
+    {
+      "name": "release_requires_sanitized_reason",
+      "schema": "RequestLookupPage",
+      "expected_valid": false,
+      "value": {
+        "data": [
+          {
+            "request_id": "00000000-0000-4000-8000-000000000001",
+            "key_id": "00000000-0000-4000-8000-000000000002",
+            "model_alias": "model-a",
+            "upstream_model": "provider-model-example",
+            "source_id": "00000000-0000-4000-8000-000000000004",
+            "source_type": "external",
+            "config_revision": "rev-example-17",
+            "received_at": "2026-11-04T08:00:00Z",
+            "admitted_at": "2026-11-04T08:00:00.500Z",
+            "finished_at": "2026-11-04T08:00:01Z",
+            "quota_date": "2026-11-04",
+            "status": "cancelled",
+            "submission_state": "submitted",
+            "quota_consumed": 1,
+            "error_code": "client_cancelled",
+            "duration_ms": 1000,
+            "first_chunk_ms": 200,
+            "usage": {
+              "input_tokens": null,
+              "output_tokens": null,
+              "total_tokens": null,
+              "input_cached_tokens": null,
+              "reasoning_tokens": null,
+              "source": "unavailable",
+              "missing_reason": "not_provided"
+            },
+            "metering_state": "complete",
+            "reservation_plan": {
+              "schema_version": "1.0",
+              "model_alias": "model-a",
+              "source_id": "00000000-0000-4000-8000-000000000004",
+              "config_revision": "rev-example-17",
+              "capability_revision": "cap-example-verified-fixture-only",
+              "budget_policy_revision": "budget-example-v3",
+              "window_kind": "utc_day",
+              "token_metric": "prompt_plus_completion",
+              "request_reserved": "1",
+              "input_upper_tokens": "100",
+              "output_upper_tokens": "40",
+              "total_upper_tokens": "140",
+              "token_reserved": "140",
+              "money_reserved_atomic": "520000",
+              "currency": "TST",
+              "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+              "price_snapshot_sha256": "866cb1f5f808b8403dba1e733974f8e1caf9c2a9c7c1d1897d678849c948103f",
+              "price_version": "synthetic-price-v1",
+              "rate_policy_revision": "rate-example-v1"
+            },
+            "budget_accounting": {
+              "policy_revision": "budget-example-v3",
+              "window_kind": "utc_day",
+              "window_start": "2026-11-04T00:00:00Z",
+              "window_end": "2026-11-05T00:00:00Z",
+              "request": {
+                "reserved": "1",
+                "known_used": "1",
+                "unknown_held": "0",
+                "released": "0",
+                "overrun": "0",
+                "state": "known"
+              },
+              "token": {
+                "reserved": "140",
+                "known_used": "0",
+                "unknown_held": "140",
+                "released": "0",
+                "overrun": "0",
+                "state": "held"
+              },
+              "money": {
+                "reserved": "520000",
+                "known_used": "0",
+                "unknown_held": "520000",
+                "released": "0",
+                "overrun": "0",
+                "state": "held"
+              },
+              "token_actual": null,
+              "token_basis": "unavailable",
+              "cost_actual_atomic": null,
+              "cost_state": "upper_bound",
+              "currency": "TST",
+              "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+              "price_version": "synthetic-price-v1",
+              "missing_reason": "not_provided"
+            },
+            "rate_witness": {
+              "permit_id": "00000000-0000-4000-8000-000000000008",
+              "rate_epoch": "1",
+              "policy_id": "rate-policy-example",
+              "policy_revision": "rate-example-v1",
+              "windows": [
+                {
+                  "scope_id": "global",
+                  "window_start": "2026-11-04T08:00:00Z",
+                  "window_end": "2026-11-04T08:00:01Z",
+                  "limit": "5"
+                }
+              ]
+            },
+            "invocation_binding": {
+              "model_release_uid": "00000000-0000-4000-8000-000000000010",
+              "model_release_namespace": "maas-models-example",
+              "model_release_name": "external-model-example",
+              "model_release_generation": 1,
+              "release_revision": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+              "publication_id": "00000000-0000-4000-8000-000000000011",
+              "activation_epoch": 1,
+              "route_binding_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+              "admission_purpose": "serving",
+              "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+              "price_version": "synthetic-price-v1"
+            }
+          }
+        ],
+        "next_cursor": null,
+        "generated_at": "2026-11-05T09:50:00Z",
+        "data_complete": true,
+        "lookup": {
+          "request_id": "00000000-0000-4000-8000-000000000001",
+          "resolution": "recorded",
+          "evidence_source": "generation_request",
+          "checked_at": "2026-11-05T09:50:00Z",
+          "reason": null,
+          "rejection_code": null,
+          "capacity": {
+            "state": "released",
+            "checked_at": "2026-11-05T09:50:00Z",
+            "data_source": "release_log",
+            "release_reason": null
+          }
+        }
+      }
+    },
+    {
+      "name": "old_ordinary_response_is_not_exact_success",
+      "schema": "RequestLookupPage",
+      "expected_valid": false,
+      "value": {
+        "data": [
+          {
+            "request_id": "00000000-0000-4000-8000-000000000001",
+            "key_id": "00000000-0000-4000-8000-000000000002",
+            "model_alias": "model-a",
+            "upstream_model": "provider-model-example",
+            "source_id": "00000000-0000-4000-8000-000000000004",
+            "source_type": "external",
+            "config_revision": "rev-example-17",
+            "received_at": "2026-11-04T08:00:00Z",
+            "admitted_at": "2026-11-04T08:00:00.500Z",
+            "finished_at": "2026-11-04T08:00:01Z",
+            "quota_date": "2026-11-04",
+            "status": "cancelled",
+            "submission_state": "submitted",
+            "quota_consumed": 1,
+            "error_code": "client_cancelled",
+            "duration_ms": 1000,
+            "first_chunk_ms": 200,
+            "usage": {
+              "input_tokens": null,
+              "output_tokens": null,
+              "total_tokens": null,
+              "input_cached_tokens": null,
+              "reasoning_tokens": null,
+              "source": "unavailable",
+              "missing_reason": "not_provided"
+            },
+            "metering_state": "complete",
+            "reservation_plan": {
+              "schema_version": "1.0",
+              "model_alias": "model-a",
+              "source_id": "00000000-0000-4000-8000-000000000004",
+              "config_revision": "rev-example-17",
+              "capability_revision": "cap-example-verified-fixture-only",
+              "budget_policy_revision": "budget-example-v3",
+              "window_kind": "utc_day",
+              "token_metric": "prompt_plus_completion",
+              "request_reserved": "1",
+              "input_upper_tokens": "100",
+              "output_upper_tokens": "40",
+              "total_upper_tokens": "140",
+              "token_reserved": "140",
+              "money_reserved_atomic": "520000",
+              "currency": "TST",
+              "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+              "price_snapshot_sha256": "866cb1f5f808b8403dba1e733974f8e1caf9c2a9c7c1d1897d678849c948103f",
+              "price_version": "synthetic-price-v1",
+              "rate_policy_revision": "rate-example-v1"
+            },
+            "budget_accounting": {
+              "policy_revision": "budget-example-v3",
+              "window_kind": "utc_day",
+              "window_start": "2026-11-04T00:00:00Z",
+              "window_end": "2026-11-05T00:00:00Z",
+              "request": {
+                "reserved": "1",
+                "known_used": "1",
+                "unknown_held": "0",
+                "released": "0",
+                "overrun": "0",
+                "state": "known"
+              },
+              "token": {
+                "reserved": "140",
+                "known_used": "0",
+                "unknown_held": "140",
+                "released": "0",
+                "overrun": "0",
+                "state": "held"
+              },
+              "money": {
+                "reserved": "520000",
+                "known_used": "0",
+                "unknown_held": "520000",
+                "released": "0",
+                "overrun": "0",
+                "state": "held"
+              },
+              "token_actual": null,
+              "token_basis": "unavailable",
+              "cost_actual_atomic": null,
+              "cost_state": "upper_bound",
+              "currency": "TST",
+              "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+              "price_version": "synthetic-price-v1",
+              "missing_reason": "not_provided"
+            },
+            "rate_witness": {
+              "permit_id": "00000000-0000-4000-8000-000000000008",
+              "rate_epoch": "1",
+              "policy_id": "rate-policy-example",
+              "policy_revision": "rate-example-v1",
+              "windows": [
+                {
+                  "scope_id": "global",
+                  "window_start": "2026-11-04T08:00:00Z",
+                  "window_end": "2026-11-04T08:00:01Z",
+                  "limit": "5"
+                }
+              ]
+            },
+            "invocation_binding": {
+              "model_release_uid": "00000000-0000-4000-8000-000000000010",
+              "model_release_namespace": "maas-models-example",
+              "model_release_name": "external-model-example",
+              "model_release_generation": 1,
+              "release_revision": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+              "publication_id": "00000000-0000-4000-8000-000000000011",
+              "activation_epoch": 1,
+              "route_binding_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+              "admission_purpose": "serving",
+              "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+              "price_version": "synthetic-price-v1"
+            }
+          }
+        ],
+        "next_cursor": null,
+        "generated_at": "2026-11-05T09:50:00Z",
+        "data_complete": true
+      }
+    },
+    {
+      "name": "retained_external_revision",
+      "schema": "ReleaseRevisionPage",
+      "expected_valid": true,
+      "value": {
+        "requested_cr_uid": "00000000-0000-4000-8000-000000000010",
+        "resource_state": "present",
+        "resource_version": "420",
+        "data": [
+          {
+            "revision": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+            "cr_uid": "00000000-0000-4000-8000-000000000010",
+            "created_at": "2026-11-04T08:00:00Z",
+            "generation": 1,
+            "source_type": "ExternalAPI",
+            "model_alias": "model-a",
+            "is_active": true,
+            "snapshot_state": "retained",
+            "summary": {
+              "upstream_model": "provider-model-example",
+              "runtime_profile_ref": null,
+              "capability_ref": {
+                "name": "external-capability-example",
+                "revision": "cap-example-1"
+              },
+              "price_ref": {
+                "name": "synthetic-price-example",
+                "revision": "synthetic-price-v1"
+              }
+            },
+            "rollback_eligibility": {
+              "state": "eligible",
+              "reason_codes": [],
+              "checked_at": "2026-11-05T09:50:00Z",
+              "evaluated_resource_version": "420"
+            }
+          }
+        ],
+        "next_cursor": null,
+        "generated_at": "2026-11-05T09:50:00Z"
+      }
+    },
+    {
+      "name": "retained_private_revision",
+      "schema": "ReleaseRevisionPage",
+      "expected_valid": true,
+      "value": {
+        "requested_cr_uid": "00000000-0000-4000-8000-000000000010",
+        "resource_state": "present",
+        "resource_version": "420",
+        "data": [
+          {
+            "revision": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+            "cr_uid": "00000000-0000-4000-8000-000000000010",
+            "created_at": "2026-11-04T08:00:00Z",
+            "generation": 1,
+            "source_type": "SelfHosted",
+            "model_alias": "model-a",
+            "is_active": true,
+            "snapshot_state": "retained",
+            "summary": {
+              "upstream_model": "provider-model-example",
+              "runtime_profile_ref": {
+                "name": "sglang-example",
+                "revision": "fixture-only-1"
+              },
+              "capability_ref": {
+                "name": "external-capability-example",
+                "revision": "cap-example-1"
+              },
+              "price_ref": {
+                "name": "synthetic-price-example",
+                "revision": "synthetic-price-v1"
+              }
+            },
+            "rollback_eligibility": {
+              "state": "eligible",
+              "reason_codes": [],
+              "checked_at": "2026-11-05T09:50:00Z",
+              "evaluated_resource_version": "420"
+            }
+          }
+        ],
+        "next_cursor": null,
+        "generated_at": "2026-11-05T09:50:00Z"
+      }
+    },
+    {
+      "name": "history_deleting",
+      "schema": "ReleaseRevisionPage",
+      "expected_valid": true,
+      "value": {
+        "requested_cr_uid": "00000000-0000-4000-8000-000000000010",
+        "resource_state": "deleting",
+        "resource_version": "420",
+        "data": [
+          {
+            "revision": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+            "cr_uid": "00000000-0000-4000-8000-000000000010",
+            "created_at": "2026-11-04T08:00:00Z",
+            "generation": 1,
+            "source_type": "ExternalAPI",
+            "model_alias": "model-a",
+            "is_active": false,
+            "snapshot_state": "retained",
+            "summary": {
+              "upstream_model": "provider-model-example",
+              "runtime_profile_ref": null,
+              "capability_ref": {
+                "name": "external-capability-example",
+                "revision": "cap-example-1"
+              },
+              "price_ref": {
+                "name": "synthetic-price-example",
+                "revision": "synthetic-price-v1"
+              }
+            },
+            "rollback_eligibility": {
+              "state": "blocked",
+              "reason_codes": ["cr_deleting"],
+              "checked_at": "2026-11-05T09:50:00Z",
+              "evaluated_resource_version": "420"
+            }
+          }
+        ],
+        "next_cursor": null,
+        "generated_at": "2026-11-05T09:50:00Z"
+      }
+    },
+    {
+      "name": "history_deleted",
+      "schema": "ReleaseRevisionPage",
+      "expected_valid": true,
+      "value": {
+        "requested_cr_uid": "00000000-0000-4000-8000-000000000010",
+        "resource_state": "deleted",
+        "resource_version": null,
+        "data": [
+          {
+            "revision": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+            "cr_uid": "00000000-0000-4000-8000-000000000010",
+            "created_at": "2026-11-04T08:00:00Z",
+            "generation": 1,
+            "source_type": "ExternalAPI",
+            "model_alias": "model-a",
+            "is_active": false,
+            "snapshot_state": "retained",
+            "summary": {
+              "upstream_model": "provider-model-example",
+              "runtime_profile_ref": null,
+              "capability_ref": {
+                "name": "external-capability-example",
+                "revision": "cap-example-1"
+              },
+              "price_ref": {
+                "name": "synthetic-price-example",
+                "revision": "synthetic-price-v1"
+              }
+            },
+            "rollback_eligibility": {
+              "state": "blocked",
+              "reason_codes": ["cr_deleted"],
+              "checked_at": "2026-11-05T09:50:00Z",
+              "evaluated_resource_version": null
+            }
+          }
+        ],
+        "next_cursor": null,
+        "generated_at": "2026-11-05T09:50:00Z"
+      }
+    },
+    {
+      "name": "history_replaced",
+      "schema": "ReleaseRevisionPage",
+      "expected_valid": true,
+      "value": {
+        "requested_cr_uid": "00000000-0000-4000-8000-000000000010",
+        "resource_state": "replaced",
+        "resource_version": null,
+        "data": [
+          {
+            "revision": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+            "cr_uid": "00000000-0000-4000-8000-000000000010",
+            "created_at": "2026-11-04T08:00:00Z",
+            "generation": 1,
+            "source_type": "ExternalAPI",
+            "model_alias": "model-a",
+            "is_active": false,
+            "snapshot_state": "retained",
+            "summary": {
+              "upstream_model": "provider-model-example",
+              "runtime_profile_ref": null,
+              "capability_ref": {
+                "name": "external-capability-example",
+                "revision": "cap-example-1"
+              },
+              "price_ref": {
+                "name": "synthetic-price-example",
+                "revision": "synthetic-price-v1"
+              }
+            },
+            "rollback_eligibility": {
+              "state": "blocked",
+              "reason_codes": ["cr_replaced"],
+              "checked_at": "2026-11-05T09:50:00Z",
+              "evaluated_resource_version": null
+            }
+          }
+        ],
+        "next_cursor": null,
+        "generated_at": "2026-11-05T09:50:00Z"
+      }
+    },
+    {
+      "name": "history_unknown",
+      "schema": "ReleaseRevisionPage",
+      "expected_valid": true,
+      "value": {
+        "requested_cr_uid": "00000000-0000-4000-8000-000000000010",
+        "resource_state": "unknown",
+        "resource_version": null,
+        "data": [
+          {
+            "revision": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+            "cr_uid": "00000000-0000-4000-8000-000000000010",
+            "created_at": "2026-11-04T08:00:00Z",
+            "generation": 1,
+            "source_type": "ExternalAPI",
+            "model_alias": "model-a",
+            "is_active": false,
+            "snapshot_state": "retained",
+            "summary": {
+              "upstream_model": "provider-model-example",
+              "runtime_profile_ref": null,
+              "capability_ref": {
+                "name": "external-capability-example",
+                "revision": "cap-example-1"
+              },
+              "price_ref": {
+                "name": "synthetic-price-example",
+                "revision": "synthetic-price-v1"
+              }
+            },
+            "rollback_eligibility": {
+              "state": "unknown",
+              "reason_codes": ["state_unavailable"],
+              "checked_at": "2026-11-05T09:50:00Z",
+              "evaluated_resource_version": null
+            }
+          }
+        ],
+        "next_cursor": null,
+        "generated_at": "2026-11-05T09:50:00Z"
+      }
+    },
+    {
+      "name": "deleted_cannot_offer_eligible_rollback",
+      "schema": "ReleaseRevisionPage",
+      "expected_valid": false,
+      "value": {
+        "requested_cr_uid": "00000000-0000-4000-8000-000000000010",
+        "resource_state": "deleted",
+        "resource_version": null,
+        "data": [
+          {
+            "revision": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+            "cr_uid": "00000000-0000-4000-8000-000000000010",
+            "created_at": "2026-11-04T08:00:00Z",
+            "generation": 1,
+            "source_type": "ExternalAPI",
+            "model_alias": "model-a",
+            "is_active": true,
+            "snapshot_state": "retained",
+            "summary": {
+              "upstream_model": "provider-model-example",
+              "runtime_profile_ref": null,
+              "capability_ref": {
+                "name": "external-capability-example",
+                "revision": "cap-example-1"
+              },
+              "price_ref": {
+                "name": "synthetic-price-example",
+                "revision": "synthetic-price-v1"
+              }
+            },
+            "rollback_eligibility": {
+              "state": "eligible",
+              "reason_codes": [],
+              "checked_at": "2026-11-05T09:50:00Z",
+              "evaluated_resource_version": "420"
+            }
+          }
+        ],
+        "next_cursor": null,
+        "generated_at": "2026-11-05T09:50:00Z"
+      }
+    },
+    {
+      "name": "unknown_live_state_not_eligible",
+      "schema": "ReleaseRevisionPage",
+      "expected_valid": false,
+      "value": {
+        "requested_cr_uid": "00000000-0000-4000-8000-000000000010",
+        "resource_state": "unknown",
+        "resource_version": null,
+        "data": [
+          {
+            "revision": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+            "cr_uid": "00000000-0000-4000-8000-000000000010",
+            "created_at": "2026-11-04T08:00:00Z",
+            "generation": 1,
+            "source_type": "ExternalAPI",
+            "model_alias": "model-a",
+            "is_active": true,
+            "snapshot_state": "retained",
+            "summary": {
+              "upstream_model": "provider-model-example",
+              "runtime_profile_ref": null,
+              "capability_ref": {
+                "name": "external-capability-example",
+                "revision": "cap-example-1"
+              },
+              "price_ref": {
+                "name": "synthetic-price-example",
+                "revision": "synthetic-price-v1"
+              }
+            },
+            "rollback_eligibility": {
+              "state": "eligible",
+              "reason_codes": [],
+              "checked_at": "2026-11-05T09:50:00Z",
+              "evaluated_resource_version": "420"
+            }
+          }
+        ],
+        "next_cursor": null,
+        "generated_at": "2026-11-05T09:50:00Z"
+      }
+    },
+    {
+      "name": "lost_snapshot_not_eligible",
+      "schema": "ReleaseRevisionPage",
+      "expected_valid": false,
+      "value": {
+        "requested_cr_uid": "00000000-0000-4000-8000-000000000010",
+        "resource_state": "present",
+        "resource_version": "420",
+        "data": [
+          {
+            "revision": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+            "cr_uid": "00000000-0000-4000-8000-000000000010",
+            "created_at": "2026-11-04T08:00:00Z",
+            "generation": 1,
+            "source_type": "ExternalAPI",
+            "model_alias": "model-a",
+            "is_active": true,
+            "snapshot_state": "unavailable",
+            "summary": {
+              "upstream_model": "provider-model-example",
+              "runtime_profile_ref": null,
+              "capability_ref": {
+                "name": "external-capability-example",
+                "revision": "cap-example-1"
+              },
+              "price_ref": {
+                "name": "synthetic-price-example",
+                "revision": "synthetic-price-v1"
+              }
+            },
+            "rollback_eligibility": {
+              "state": "eligible",
+              "reason_codes": [],
+              "checked_at": "2026-11-05T09:50:00Z",
+              "evaluated_resource_version": "420"
+            }
+          }
+        ],
+        "next_cursor": null,
+        "generated_at": "2026-11-05T09:50:00Z"
+      }
+    },
+    {
+      "name": "summary_rejects_credential_field",
+      "schema": "ReleaseRevisionPage",
+      "expected_valid": false,
+      "value": {
+        "requested_cr_uid": "00000000-0000-4000-8000-000000000010",
+        "resource_state": "present",
+        "resource_version": "420",
+        "data": [
+          {
+            "revision": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+            "cr_uid": "00000000-0000-4000-8000-000000000010",
+            "created_at": "2026-11-04T08:00:00Z",
+            "generation": 1,
+            "source_type": "ExternalAPI",
+            "model_alias": "model-a",
+            "is_active": true,
+            "snapshot_state": "retained",
+            "summary": {
+              "upstream_model": "provider-model-example",
+              "runtime_profile_ref": null,
+              "capability_ref": {
+                "name": "external-capability-example",
+                "revision": "cap-example-1"
+              },
+              "price_ref": {
+                "name": "synthetic-price-example",
+                "revision": "synthetic-price-v1"
+              },
+              "secret": "forbidden-example"
+            },
+            "rollback_eligibility": {
+              "state": "eligible",
+              "reason_codes": [],
+              "checked_at": "2026-11-05T09:50:00Z",
+              "evaluated_resource_version": "420"
+            }
+          }
+        ],
+        "next_cursor": null,
+        "generated_at": "2026-11-05T09:50:00Z"
+      }
+    },
+    {
+      "name": "legacy_rollback_input",
+      "schema": "ReleaseRollbackInput",
+      "expected_valid": true,
+      "value": {
+        "target_revision": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+      }
+    },
+    {
+      "name": "uid_guarded_rollback_input",
+      "schema": "ReleaseRollbackInput",
+      "expected_valid": true,
+      "value": {
+        "target_revision": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "expected_cr_uid": "00000000-0000-4000-8000-000000000010"
+      }
+    },
+    {
+      "name": "bad_rollback_uid",
+      "schema": "ReleaseRollbackInput",
+      "expected_valid": false,
+      "value": {
+        "target_revision": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "expected_cr_uid": "bad"
+      }
+    },
+    {
+      "name": "explicit_request_limit_None",
+      "schema": "KeyCreate",
+      "expected_valid": true,
+      "value": {
+        "name": "example-key",
+        "budget_policy": {
+          "window_kind": "utc_day",
+          "limits": {
+            "requests": null,
+            "tokens": null,
+            "money": null
+          }
+        }
+      }
+    },
+    {
+      "name": "explicit_request_limit_0",
+      "schema": "KeyCreate",
+      "expected_valid": true,
+      "value": {
+        "name": "example-key",
+        "budget_policy": {
+          "window_kind": "utc_day",
+          "limits": {
+            "requests": "0",
+            "tokens": null,
+            "money": null
+          }
+        }
+      }
+    },
+    {
+      "name": "explicit_request_limit_7",
+      "schema": "KeyCreate",
+      "expected_valid": true,
+      "value": {
+        "name": "example-key",
+        "budget_policy": {
+          "window_kind": "utc_day",
+          "limits": {
+            "requests": "7",
+            "tokens": null,
+            "money": null
+          }
+        }
+      }
+    },
+    {
+      "name": "key_missing_budget_policy",
+      "schema": "KeyCreate",
+      "expected_valid": false,
+      "value": {
+        "name": "example-key"
+      }
+    },
+    {
+      "name": "key_missing_dimension",
+      "schema": "KeyCreate",
+      "expected_valid": false,
+      "value": {
+        "name": "example-key",
+        "budget_policy": {
+          "window_kind": "utc_day",
+          "limits": {
+            "requests": "7",
+            "tokens": null
+          }
+        }
+      }
+    }
+  ],
+  "external": {
+    "apiVersion": "serving.maas.example/v1alpha1",
+    "kind": "ModelRelease",
+    "metadata": {
+      "namespace": "maas-models-example",
+      "name": "external-model-example"
+    },
+    "spec": {
+      "modelAlias": "model-a",
+      "source": {
+        "type": "ExternalAPI",
+        "externalAPI": {
+          "provider": "DeepSeek",
+          "endpointRef": {
+            "name": "approved-deepseek-example",
+            "revision": "example-v1"
+          },
+          "upstreamModel": "provider-model-example",
+          "protocol": "OpenAIChatCompletions",
+          "credentialSecretRef": {
+            "name": "approved-provider-secret-example",
+            "key": "api-key"
+          }
+        }
+      },
+      "gatewayRef": {
+        "name": "private-inference-example",
+        "revision": "example-v1"
+      },
+      "businessRefs": {
+        "capabilityProfileRef": {
+          "name": "external-text-example",
+          "revision": "example-v1"
+        },
+        "pricePolicyRef": {
+          "name": "approved-price-example",
+          "revision": "example-v1"
+        },
+        "intakePolicyRef": {
+          "name": "approved-intake-example",
+          "revision": "example-v1"
+        }
+      },
+      "lifecycle": {
+        "desiredState": "Published",
+        "strategy": "BlueGreen",
+        "drainTimeoutSeconds": 150,
+        "progressDeadlineSeconds": 3600,
+        "retainedRevisions": 2,
+        "retainUserData": true
+      }
+    }
+  },
+  "privateCR": {
+    "apiVersion": "serving.maas.example/v1alpha1",
+    "kind": "ModelRelease",
+    "metadata": {
+      "namespace": "maas-models-example",
+      "name": "private-model-example"
+    },
+    "spec": {
+      "modelAlias": "private-model-example",
+      "source": {
+        "type": "SelfHosted",
+        "selfHosted": {
+          "engine": "SGLang",
+          "workload": "LeaderWorkerSet",
+          "weights": {
+            "pvcName": "approved-weights-example",
+            "path": "models/example",
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "modelRevision": "approved-model-revision-example"
+          },
+          "runtimeProfileRef": {
+            "name": "sglang-lws-bf16-example",
+            "revision": "example-v1"
+          },
+          "placementProfileRef": {
+            "name": "single-node-example",
+            "revision": "example-v1"
+          },
+          "image": "registry.example.invalid/sglang@sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "groups": 1,
+          "podsPerGroup": 1,
+          "gpusPerPod": 1,
+          "gpuResourceName": "nvidia.com/gpu",
+          "cpuPerPod": "4",
+          "memoryPerPod": "32Gi",
+          "tensorParallelSize": 1,
+          "pipelineParallelSize": 1,
+          "startupTimeoutSeconds": 1800
+        }
+      },
+      "gatewayRef": {
+        "name": "private-inference-example",
+        "revision": "example-v1"
+      },
+      "businessRefs": {
+        "capabilityProfileRef": {
+          "name": "private-text-example",
+          "revision": "example-v1"
+        },
+        "pricePolicyRef": {
+          "name": "approved-price-example",
+          "revision": "example-v1"
+        },
+        "intakePolicyRef": {
+          "name": "approved-intake-example",
+          "revision": "example-v1"
+        }
+      },
+      "lifecycle": {
+        "desiredState": "Published",
+        "strategy": "BlueGreen",
+        "drainTimeoutSeconds": 150,
+        "progressDeadlineSeconds": 3600,
+        "retainedRevisions": 2,
+        "retainUserData": true
+      }
+    }
+  }
+}
