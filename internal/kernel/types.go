@@ -162,6 +162,7 @@ type Usage struct {
 	Reasoning *int64  `json:"reasoning_tokens"`
 }
 type Final struct {
+	ErrorCode                 string `json:"error_code,omitempty"`
 	EventID, RequestID, Owner string
 	OwnerFence                int64
 	Result                    string

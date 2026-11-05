@@ -48,7 +48,7 @@ func compile() map[string]*jsonschema.Schema {
 	}
 	out := map[string]*jsonschema.Schema{}
 	out["Diagnostic"] = c.MustCompile("https://maas.local/diagnostic.json")
-	for _, n := range []string{"KeyCreate", "KeyPatch", "Key", "KeyCreated", "KeyPage", "RequestPage", "RequestLookupPage", "SummaryPage"} {
+	for _, n := range []string{"KeyCreate", "KeyPatch", "Key", "KeyCreated", "KeyPage", "RequestPage", "RequestLookupPage", "SummaryPage", "ReleaseRevisionPage", "ChatChunk", "ChatResponse", "Error"} {
 		out[n] = c.MustCompile("https://maas.local/management.json#/$defs/" + n)
 	}
 	for _, name := range []string{"AdmissionHeader", "AdmissionClaims", "ReservationPlan"} {

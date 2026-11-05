@@ -290,6 +290,7 @@ func (s *Store) Finalize(ctx context.Context, f Final) error {
 				return e
 			}
 		}
+
 		if breached {
 			if _, e = tx.ExecContext(ctx, "UPDATE platform_keys SET blocked=TRUE WHERE key_id=?", key); e != nil {
 				return e
@@ -388,6 +389,9 @@ func buildEvent(s Snapshot, f Final, t time.Time, noSend bool, token, cost *stri
 		code = ptr("upstream_timeout")
 	case "interrupted":
 		code = ptr("owner_lost")
+	}
+	if f.ErrorCode != "" {
+		code = ptr(f.ErrorCode)
 	}
 	if breached {
 		result = "failed"

@@ -11,6 +11,7 @@ import (
 	"github.com/google/uuid"
 	"github.com/jianzi123/maas/internal/kernel"
 	"github.com/jianzi123/maas/internal/protocol"
+	"github.com/jianzi123/maas/internal/release/history"
 	"io"
 	"net/http"
 	"net/url"
@@ -217,6 +218,7 @@ func (h Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			e = kernel.ErrUnavailable
 		} else {
 			out, e = h.Revisions.ReadRevisions(r.Context(), p[1], p[2], q)
+			schema = "ReleaseRevisionPage"
 		}
 	default:
 		failure(404, "not_found")
@@ -225,7 +227,11 @@ func (h Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if e != nil {
 		code, s := "dependency_unavailable", 503
 		switch {
-		case errors.Is(e, kernel.ErrNotFound):
+		case errors.Is(e, history.ErrForbidden):
+			code, s = "forbidden", 403
+		case errors.Is(e, history.ErrInvalid):
+			code, s = "invalid_request", 400
+		case errors.Is(e, kernel.ErrNotFound), errors.Is(e, history.ErrNotFound):
 			code, s = "not_found", 404
 		case errors.Is(e, kernel.ErrConflict):
 			code, s = "state_conflict", 409

@@ -7,12 +7,17 @@ import (
 	"database/sql"
 	"fmt"
 	_ "github.com/go-sql-driver/mysql"
+	api "github.com/jianzi123/maas/api/v1alpha1"
 	"github.com/jianzi123/maas/internal/controlapi"
 	"github.com/jianzi123/maas/internal/kernel"
+	"github.com/jianzi123/maas/internal/release/history"
+	"k8s.io/apimachinery/pkg/runtime"
+	"k8s.io/client-go/tools/clientcmd"
 	"net"
 	"net/http"
 	"os"
 	"os/signal"
+	"sigs.k8s.io/controller-runtime/pkg/client"
 	"strings"
 	"syscall"
 	"time"
@@ -46,6 +51,39 @@ func run() error {
 		return e
 	}
 	h := controlapi.Handler{Core: core, Sessions: controlapi.BootstrapSession{SessionSHA256: os.Getenv("MAAS_ADMIN_SESSION_SHA256"), CSRFSHA256: os.Getenv("MAAS_ADMIN_CSRF_SHA256"), Origin: os.Getenv("MAAS_ADMIN_ORIGIN"), Expires: expires}}
+	if namespaces := os.Getenv("MAAS_HISTORY_NAMESPACES"); namespaces != "" {
+		scope := os.Getenv("MAAS_HISTORY_SCOPE")
+		domains := os.Getenv("MAAS_HISTORY_DOMAINS")
+		key := []byte(os.Getenv("MAAS_HISTORY_CURSOR_KEY"))
+		if scope == "" || domains == "" || len(key) < 32 {
+			return fmt.Errorf("explicit original-domain visibility and cursor key required")
+		}
+		allowed := map[string]bool{}
+		for _, n := range strings.Split(namespaces, ",") {
+			allowed[n] = true
+		}
+		owned := map[string]bool{}
+		for _, n := range strings.Split(domains, ",") {
+			owned[n] = true
+		}
+		hr := &history.Reader{DB: db, Cluster: os.Getenv("MAAS_CLUSTER_ID"), Access: history.NamespaceAccess{Namespaces: allowed, Domains: owned, ScopeID: scope}, CursorKey: key}
+		if configPath := os.Getenv("MAAS_HISTORY_KUBECONFIG"); configPath != "" {
+			cfg, err := clientcmd.BuildConfigFromFlags("", configPath)
+			if err != nil {
+				return fmt.Errorf("history API reader unavailable")
+			}
+			scheme := runtime.NewScheme()
+			_ = api.AddToScheme(scheme)
+			reader, err := client.New(cfg, client.Options{Scheme: scheme})
+			if err != nil {
+				return fmt.Errorf("history API reader unavailable")
+			}
+			hr.Live = history.KubeLive{Reader: reader}
+		}
+		// No approved reference registry is implicitly manufactured: eligibility stays
+		// unknown until an installation supplies ResolverEvaluator through the port.
+		h.Revisions = hr
+	}
 	server := &http.Server{Addr: address, Handler: h, ReadHeaderTimeout: 5 * time.Second, ReadTimeout: 10 * time.Second, WriteTimeout: 15 * time.Second, IdleTimeout: 30 * time.Second}
 	signals, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
 	defer stop()

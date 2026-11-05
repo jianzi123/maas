@@ -30,7 +30,7 @@ type usageFailWriter struct {
 func (w *usageFailWriter) Header() http.Header { return w.header }
 func (w *usageFailWriter) WriteHeader(int)     {}
 func (w *usageFailWriter) Write(b []byte) (int, error) {
-	if bytes.Contains(b, []byte(`"usage"`)) {
+	if rows, e := w.core.ReadDiagnostics(context.Background(), w.id); e == nil && len(rows) > 0 && rows[0].Type == "receipt" {
 		rows, e := w.core.ReadDiagnostics(context.Background(), w.id)
 		w.durable = e == nil && len(rows) > 0 && rows[0].Type == "receipt"
 		return 0, io.ErrClosedPipe
@@ -92,7 +92,7 @@ func TestMySQLDurableUsageRelay(t *testing.T) {
 				writer = failing
 			}
 			if mode == "cancel_after_usage" {
-				writer = &cancelAfterReceipt{header: http.Header{}, cancel: cancel}
+				writer = &cancelAfterReceipt{header: http.Header{}, cancel: cancel, core: f.core, id: in.RequestID}
 			}
 			relay := &Relay{core: f.core, endpoint: server.URL, client: server.Client(), maxBytes: 65536, maxLine: 65536}
 			e := relay.Forward(ctx, writer, RelayCall{Input: in, Body: []byte(`{"model":"synthetic"}`), Stream: true})
@@ -177,6 +177,8 @@ func TestMySQLDurableUsageRelay(t *testing.T) {
 }
 
 type cancelAfterReceipt struct {
+	core   *Store
+	id     string
 	header http.Header
 	cancel context.CancelFunc
 }
@@ -184,7 +186,7 @@ type cancelAfterReceipt struct {
 func (w *cancelAfterReceipt) Header() http.Header { return w.header }
 func (w *cancelAfterReceipt) WriteHeader(int)     {}
 func (w *cancelAfterReceipt) Write(b []byte) (int, error) {
-	if bytes.Contains(b, []byte(`"usage"`)) {
+	if rows, e := w.core.ReadDiagnostics(context.Background(), w.id); e == nil && len(rows) > 0 && rows[0].Type == "receipt" {
 		w.cancel()
 	}
 	return len(b), nil

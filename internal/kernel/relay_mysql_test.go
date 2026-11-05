@@ -33,7 +33,7 @@ func TestMySQLControlledRelay(t *testing.T) {
 				}
 				called++
 				if mode == "nonstream" {
-					io.WriteString(w, `{"choices":[],"usage":{"prompt_tokens":12,"completion_tokens":7,"total_tokens":19,"prompt_tokens_details":{"cached_tokens":4},"completion_tokens_details":{"reasoning_tokens":3}}}`)
+					io.WriteString(w, `{"choices":[{"index":0,"message":{"role":"assistant","content":"ok"},"finish_reason":"stop"}],"usage":{"prompt_tokens":12,"completion_tokens":7,"total_tokens":19,"prompt_tokens_details":{"cached_tokens":4},"completion_tokens_details":{"reasoning_tokens":3}}}`)
 					return
 				}
 				io.WriteString(w, "data: {\"choices\":[{\"delta\":{\"content\":\"ok\"}}]}\n\n")
@@ -60,7 +60,7 @@ func TestMySQLControlledRelay(t *testing.T) {
 				if mode == "accounting_failure" {
 					_, _ = f.db.Exec("RENAME TABLE usage_events TO offline_usage_events")
 				}
-				io.WriteString(w, "data: [DONE]\n\n")
+				io.WriteString(w, "data: {\"choices\":[{\"index\":0,\"delta\":{},\"finish_reason\":\"stop\"}]}\n\ndata: [DONE]\n\n")
 			}))
 			defer gateway.Close()
 			relay := &Relay{core: f.core, endpoint: gateway.URL, client: gateway.Client(), maxBytes: 1 << 20, maxLine: 65536}

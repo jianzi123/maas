@@ -1,14 +1,14 @@
 package kernel
 
 import (
-	"bufio"
 	"bytes"
 	"context"
+	"encoding/json"
 	"errors"
 	"github.com/google/uuid"
+	"github.com/jianzi123/maas/internal/protocol"
 	"io"
 	"net/http"
-	"strings"
 	"time"
 )
 
@@ -55,10 +55,11 @@ func (d *relayDiagnostics) append(kind string, u *Usage, cause string) error {
 	return nil
 }
 
-// Forward uses the one approved private gateway. Diagnostic receipts commit
-// before frame forwarding; observations never become final usage on interruption.
+// Forward emits only the stable public schema. Raw provider usage is diagnostic
+// until the one successful terminal is confirmed; it is never a public midstream
+// accounting claim. No redirect, retry, fallback or direct supplier path exists.
 func (r *Relay) Forward(ctx context.Context, w http.ResponseWriter, call RelayCall) error {
-	if r == nil || r.core == nil || r.client == nil || r.endpoint == "" || len(call.Body) == 0 || int64(len(call.Body)) > r.maxBytes {
+	if r == nil || r.core == nil || r.client == nil || r.endpoint == "" || len(call.Body) == 0 || int64(len(call.Body)) > r.maxBytes || !validUUID(call.Input.RequestID) {
 		return ErrUnavailable
 	}
 	sendCtx, cancel := context.WithDeadline(ctx, call.Input.Deadline)
@@ -73,7 +74,10 @@ func (r *Relay) Forward(ctx context.Context, w http.ResponseWriter, call RelayCa
 	req.Header.Set("X-Request-ID", call.Input.RequestID)
 	req.Header.Set("X-Maas-Admission-Ticket", call.Ticket)
 	req.Header.Set("X-Maas-Reservation-Plan", call.PlanHeader)
+	w.Header().Set("X-Request-ID", call.Input.RequestID)
 	diagnostic := &relayDiagnostics{core: r.core, call: call}
+	wrote := false
+	finalCode := ""
 	finish := func(result string, usage Usage, first *int64) error {
 		terminalCtx, done := context.WithTimeout(context.Background(), 5*time.Second)
 		defer done()
@@ -81,7 +85,7 @@ func (r *Relay) Forward(ctx context.Context, w http.ResponseWriter, call RelayCa
 		if e != nil || state != "in_progress" || snap.Input.Owner != call.Input.Owner || snap.OwnerFence != 1 {
 			return ErrUnavailable
 		}
-		f := Final{EventID: uuid.NewSHA1(uuid.NameSpaceOID, []byte(call.Input.RequestID+"/owner-terminal")).String(), RequestID: call.Input.RequestID, Owner: call.Input.Owner, OwnerFence: 1, Result: result, Usage: usage, FirstChunkMS: first, Submitted: result == "succeeded"}
+		f := Final{ErrorCode: finalCode, EventID: uuid.NewSHA1(uuid.NameSpaceOID, []byte(call.Input.RequestID+"/owner-terminal")).String(), RequestID: call.Input.RequestID, Owner: call.Input.Owner, OwnerFence: 1, Result: result, Usage: usage, FirstChunkMS: first, Submitted: result == "succeeded"}
 		if e = r.core.Finalize(terminalCtx, f); e != nil {
 			return e
 		}
@@ -108,154 +112,223 @@ func (r *Relay) Forward(ctx context.Context, w http.ResponseWriter, call RelayCa
 			}
 			usage = unavailableUsage("not_provided")
 		}
-		finalErr := finish(result, usage, first)
+		err := finish(result, usage, first)
 		if diagErr != nil {
 			return ErrUnavailable
 		}
-		return finalErr
+		return err
+	}
+	errorOutput := func(code string) {
+		b, _ := json.Marshal(publicError(call.Input, code))
+		if call.Stream && wrote {
+			_, _ = io.WriteString(w, "event: error\ndata: "+string(b)+"\n\n")
+			if flush, ok := w.(http.Flusher); ok {
+				flush.Flush()
+			}
+		} else {
+			w.Header().Set("Content-Type", "application/json")
+			status := 502
+			if code == "upstream_timeout" {
+				status = 504
+			}
+			if code == "accounting_unavailable" {
+				status = 503
+			}
+			w.WriteHeader(status)
+			_, _ = w.Write(b)
+		}
+	}
+	abort := func(cause, result, reason, code string, first *int64) error {
+		finalCode = code
+		_ = end(cause, result, unknown(reason), first)
+		errorOutput(code)
+		return ErrUnavailable
 	}
 	receiptFailure := func(err error, first *int64) error {
 		cancel()
+		finalCode = "accounting_unavailable"
 		if errors.Is(err, ErrDiagnosticLimit) {
 			_ = end("diagnostic_limit", "failed", unavailableUsage("not_provided"), first)
 		} else {
 			_ = finish("failed", unavailableUsage("not_provided"), first)
 		}
+		errorOutput(finalCode)
 		return ErrUnavailable
 	}
-	resp, sendErr := r.client.Do(req)
-	if sendErr != nil {
-		result, reason := relayFailure(ctx, sendCtx, sendErr, "interrupted")
-		if result == "timed_out" {
-			_ = end("deadline_exceeded", result, unknown(reason), nil)
-		} else if result == "cancelled" {
-			_ = end("explicit_cancel", result, unknown(reason), nil)
-		} else {
-			_ = finish(result, unknown(reason), nil)
-		}
-		return ErrUnavailable
-	}
-	defer resp.Body.Close()
-	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
-		_ = finish("failed", unknown("not_provided"), nil)
-		return ErrUnavailable
-	}
-	if !call.Stream {
-		body, e := io.ReadAll(io.LimitReader(resp.Body, r.maxBytes+1))
-		if e != nil || int64(len(body)) > r.maxBytes {
-			result, reason := relayFailure(ctx, sendCtx, e, "failed")
-			cause := "eof"
-			if result == "timed_out" {
-				cause = "deadline_exceeded"
-			} else if result == "cancelled" {
-				cause = "explicit_cancel"
-			}
-			_ = end(cause, result, unknown(reason), nil)
-			return ErrUnavailable
-		}
-		usage, ok, e := parseUsage(body)
-		if e != nil {
-			_ = end("parse_invalid", "failed", unknown("not_provided"), nil)
-			return ErrUnavailable
-		}
-		if !ok {
-			usage = unavailableUsage("not_provided")
-		} else if e = diagnostic.append("receipt", &usage, ""); e != nil {
-			return receiptFailure(e, nil)
-		}
-		if e = end("normal_completion", "succeeded", usage, nil); e != nil {
-			return e
-		}
-		w.Header().Set("Content-Type", "application/json")
-		w.Header().Set("X-Request-ID", call.Input.RequestID)
-		_, e = w.Write(body)
-		if e != nil {
-			_ = diagnostic.append("termination", nil, "client_write_error")
-		}
-		return e
-	}
-	w.Header().Set("Content-Type", "text/event-stream")
-	w.Header().Set("X-Request-ID", call.Input.RequestID)
-	scanner := bufio.NewScanner(io.LimitReader(resp.Body, r.maxBytes+1))
-	scanner.Buffer(make([]byte, 4096), r.maxLine)
-	usage := unavailableUsage("not_provided")
-	var first *int64
-	var total int64
-	for scanner.Scan() {
-		line := scanner.Text()
-		total += int64(len(line) + 1)
-		if total > r.maxBytes {
-			cancel()
-			_ = end("parse_invalid", "failed", unknown("interrupted_before_usage"), first)
-			return ErrUnavailable
-		}
-		if strings.HasPrefix(line, "data:") {
-			data := strings.TrimSpace(strings.TrimPrefix(line, "data:"))
-			if data == "[DONE]" {
-				if e = end("normal_completion", "succeeded", usage, first); e != nil {
-					return e
-				}
-				_, e = io.WriteString(w, "data: [DONE]\n\n")
-				if e != nil {
-					_ = diagnostic.append("termination", nil, "client_write_error")
-				}
-				if flush, ok := w.(http.Flusher); ok {
-					flush.Flush()
-				}
-				return e
-			}
-			if data != "" {
-				u, ok, parseErr := parseUsage([]byte(data))
-				if parseErr != nil {
-					cancel()
-					_ = end("parse_invalid", "failed", unknown("not_provided"), first)
-					return ErrUnavailable
-				}
-				if ok {
-					if usage.Source == "upstream" && !monotonicUsage(usage, u) {
-						cancel()
-						_ = end("usage_conflict", "failed", unknown("not_provided"), first)
-						return ErrUnavailable
-					}
-					if e = diagnostic.append("receipt", &u, ""); e != nil {
-						return receiptFailure(e, first)
-					}
-					usage = u
-				}
-			}
-		}
-		// A context may expire during the diagnostic commit; classify it before any
-		// cleanup cancel and before forwarding another frame.
-		if sendCtx.Err() != nil {
-			result, reason := relayFailure(ctx, sendCtx, sendCtx.Err(), "interrupted")
-			cause := "deadline_exceeded"
-			if result == "cancelled" {
-				cause = "explicit_cancel"
-			}
-			_ = end(cause, result, unknown(reason), first)
-			return ErrUnavailable
-		}
-		if first == nil && line != "" {
-			ms := time.Since(call.Input.Received).Milliseconds()
-			first = &ms
-		}
-		if _, e = io.WriteString(w, line+"\n"); e != nil {
-			result, reason := relayFailure(ctx, sendCtx, e, "cancelled")
-			cancel()
-			_ = end("client_write_error", result, unknown(reason), first)
-			return ErrUnavailable
+	writeChunk := func(value map[string]any) error {
+		b, _ := json.Marshal(value)
+		w.Header().Set("Content-Type", "text/event-stream")
+		n, err := io.WriteString(w, "data: "+string(b)+"\n\n")
+		if n > 0 {
+			wrote = true
 		}
 		if flush, ok := w.(http.Flusher); ok {
 			flush.Flush()
 		}
+		return err
 	}
-	result, reason := relayFailure(ctx, sendCtx, scanner.Err(), "interrupted")
-	cause := "eof"
-	if result == "timed_out" {
-		cause = "deadline_exceeded"
-	} else if result == "cancelled" {
-		cause = "explicit_cancel"
+	resp, sendErr := r.client.Do(req)
+	if sendErr != nil {
+		result, reason := relayFailure(ctx, sendCtx, sendErr, "interrupted")
+		cause, code := "eof", "upstream_error"
+		if result == "timed_out" {
+			cause, code = "deadline_exceeded", "upstream_timeout"
+		} else if result == "cancelled" {
+			cause, code = "explicit_cancel", "client_cancelled"
+		}
+		return abort(cause, result, reason, code, nil)
 	}
-	_ = end(cause, result, unknown(reason), first)
-	return ErrUnavailable
+	defer resp.Body.Close()
+	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
+		finalCode = "upstream_error"
+		_ = finish("failed", unknown("not_provided"), nil)
+		errorOutput(finalCode)
+		return ErrUnavailable
+	}
+	if !call.Stream {
+		body, err := io.ReadAll(io.LimitReader(resp.Body, r.maxBytes+1))
+		if err != nil || int64(len(body)) > r.maxBytes {
+			result, reason := relayFailure(ctx, sendCtx, err, "failed")
+			cause, code := "eof", "upstream_error"
+			if result == "timed_out" {
+				cause, code = "deadline_exceeded", "upstream_timeout"
+			} else if result == "cancelled" {
+				cause, code = "explicit_cancel", "client_cancelled"
+			}
+			return abort(cause, result, reason, code, nil)
+		}
+		usage, ok, err := parseUsage(body)
+		if err != nil {
+			return abort("parse_invalid", "failed", "not_provided", "upstream_protocol_error", nil)
+		}
+		if !ok {
+			usage = unavailableUsage("not_provided")
+		} else if err = diagnostic.append("receipt", &usage, ""); err != nil {
+			return receiptFailure(err, nil)
+		}
+		if _, err = normalizeResponse(body, call.Input, usage); err != nil {
+			return abort("parse_invalid", "failed", "not_provided", "upstream_protocol_error", nil)
+		}
+		if err = end("normal_completion", "succeeded", usage, nil); err != nil {
+			errorOutput("accounting_unavailable")
+			return err
+		}
+		terminalCtx, done := context.WithTimeout(context.Background(), 5*time.Second)
+		defer done()
+		finalUsage, err := r.core.successfulUsage(terminalCtx, call.Input.RequestID)
+		if err != nil {
+			errorOutput("accounting_unavailable")
+			return err
+		}
+		out, err := normalizeResponse(body, call.Input, finalUsage)
+		if err != nil {
+			return ErrUnavailable
+		}
+		b, _ := json.Marshal(out)
+		w.Header().Set("Content-Type", "application/json")
+		_, err = w.Write(b)
+		if err != nil {
+			_ = diagnostic.append("termination", nil, "client_write_error")
+		}
+		return err
+	}
+	reader := newPublicEventReader(resp.Body, r.maxLine, r.maxBytes)
+	usage := unavailableUsage("not_provided")
+	var first *int64
+	seenFinish, seenDone := false, false
+	for {
+		data, err := reader.Next()
+		if err != nil {
+			if err == io.EOF && seenDone && seenFinish {
+				break
+			}
+			result, reason := relayFailure(ctx, sendCtx, err, "interrupted")
+			cause, code := "eof", "upstream_error"
+			if result == "timed_out" {
+				cause, code = "deadline_exceeded", "upstream_timeout"
+			} else if result == "cancelled" {
+				cause, code = "explicit_cancel", "client_cancelled"
+			} else if errors.Is(err, ErrConflict) {
+				cause, code, result = "parse_invalid", "upstream_protocol_error", "failed"
+			}
+			return abort(cause, result, reason, code, first)
+		}
+		if seenDone {
+			return abort("parse_invalid", "failed", "not_provided", "upstream_protocol_error", first)
+		}
+		if string(data) == "[DONE]" {
+			if !seenFinish {
+				return abort("parse_invalid", "failed", "not_provided", "upstream_protocol_error", first)
+			}
+			seenDone = true
+			continue
+		}
+		u, ok, parseErr := parseUsage(data)
+		if parseErr != nil {
+			cancel()
+			return abort("parse_invalid", "failed", "not_provided", "upstream_protocol_error", first)
+		}
+		if ok {
+			if usage.Source == "upstream" && !monotonicUsage(usage, u) {
+				cancel()
+				return abort("usage_conflict", "failed", "not_provided", "upstream_protocol_error", first)
+			}
+			if err = diagnostic.append("receipt", &u, ""); err != nil {
+				return receiptFailure(err, first)
+			}
+			usage = u
+		}
+		out, finished, err := normalizeChunk(data, call.Input)
+		if err != nil {
+			cancel()
+			return abort("parse_invalid", "failed", "not_provided", "upstream_protocol_error", first)
+		}
+		seenFinish = seenFinish || finished
+		if sendCtx.Err() != nil {
+			result, reason := relayFailure(ctx, sendCtx, sendCtx.Err(), "interrupted")
+			cause, code := "deadline_exceeded", "upstream_timeout"
+			if result == "cancelled" {
+				cause, code = "explicit_cancel", "client_cancelled"
+			}
+			return abort(cause, result, reason, code, first)
+		}
+		if first == nil {
+			ms := time.Since(call.Input.Received).Milliseconds()
+			first = &ms
+		}
+		if err = writeChunk(out); err != nil {
+			result, reason := relayFailure(ctx, sendCtx, err, "cancelled")
+			cancel()
+			return abort("client_write_error", result, reason, "client_cancelled", first)
+		}
+	}
+	if e = end("normal_completion", "succeeded", usage, first); e != nil {
+		errorOutput("accounting_unavailable")
+		return e
+	}
+	terminalCtx, done := context.WithTimeout(context.Background(), 5*time.Second)
+	defer done()
+	finalUsage, e := r.core.successfulUsage(terminalCtx, call.Input.RequestID)
+	if e != nil {
+		errorOutput("accounting_unavailable")
+		return e
+	}
+	out := publicRoot(call.Input, true)
+	out["choices"] = []any{}
+	out["usage"] = finalUsage
+	if protocol.Validate("ChatChunk", out) != nil {
+		return ErrUnavailable
+	}
+	if e = writeChunk(out); e != nil {
+		_ = diagnostic.append("termination", nil, "client_write_error")
+		return e
+	}
+	_, e = io.WriteString(w, "data: [DONE]\n\n")
+	if e != nil {
+		_ = diagnostic.append("termination", nil, "client_write_error")
+	}
+	if flush, ok := w.(http.Flusher); ok {
+		flush.Flush()
+	}
+	return e
 }
