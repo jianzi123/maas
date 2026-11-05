@@ -35,7 +35,7 @@ func historyDesired(t *testing.T) release.Desired {
 	if yaml.Unmarshal(b, &m) != nil {
 		t.Fatal("sample")
 	}
-	r := release.Resolution{Versions: map[string]string{"approved-registry": "1", "secretUID": "synthetic-uid", "secretRV": "1"}, GatewayNamespace: "higress", HostSuffix: "private.test", IngressClass: "higress", EndpointDNS: "approved.test", EndpointPort: 443, CredentialHandle: "never-export-handle", PluginDigest: "test-only"}
+	r := release.Resolution{Versions: map[string]string{"approved-registry": "1", "authorization_domain": "test-domain", "secretUID": "synthetic-uid", "secretRV": "1"}, GatewayNamespace: "higress", HostSuffix: "private.test", IngressClass: "higress", EndpointDNS: "approved.test", EndpointPort: 443, CredentialHandle: "never-export-handle", PluginDigest: "test-only"}
 	return release.Desired{CRUID: uuid.NewString(), Namespace: m.Namespace, Name: m.Name, Alias: m.Spec.ModelAlias, Gateway: m.Spec.GatewayRef, Generation: 1, Revision: release.Revision(m.Spec, r), History: &release.HistoryCapture{Spec: m.Spec, Resolution: r, ResourceVersion: "1", AuthorizationDomain: "test-domain"}}
 }
 
