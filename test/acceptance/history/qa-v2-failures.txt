@@ -1,0 +1,178 @@
+=== RUN   TestMySQLRelease
+=== RUN   TestMySQLRelease/idempotent_observe_restart_and_monotonic_epoch
+=== RUN   TestMySQLRelease/activation_CAS_exact_replay_and_closed_publication
+=== RUN   TestMySQLRelease/fail_closed_missing_expired_mismatched_or_unready_evidence
+=== RUN   TestMySQLRelease/tombstone_alias_reservation_and_UID_isolation
+=== RUN   TestMySQLRelease/inventory_pending_UID_recovery_and_safe_slot_cleanup
+=== RUN   TestMySQLRelease/shared_admission_transaction_blocks_close_until_settlement_boundary
+=== RUN   TestMySQLRelease/parallel_generations_do_not_lower_fence_or_epoch
+=== RUN   TestMySQLRelease/migration_checksum_conflict
+=== RUN   TestMySQLRelease/concurrent_activation_has_one_winner
+=== RUN   TestMySQLRelease/migration_resume_and_unversioned_tables_are_not_adopted
+=== RUN   TestMySQLRelease/least_privilege_cannot_write_core_or_run_DDL
+=== RUN   TestMySQLRelease/counter_exhaustion_never_wraps
+=== RUN   TestMySQLRelease/committed_ACK_loss_does_not_duplicate_publication_or_activation
+--- PASS: TestMySQLRelease (7.79s)
+    --- PASS: TestMySQLRelease/idempotent_observe_restart_and_monotonic_epoch (0.71s)
+    --- PASS: TestMySQLRelease/activation_CAS_exact_replay_and_closed_publication (0.70s)
+    --- PASS: TestMySQLRelease/fail_closed_missing_expired_mismatched_or_unready_evidence (0.54s)
+    --- PASS: TestMySQLRelease/tombstone_alias_reservation_and_UID_isolation (0.57s)
+    --- PASS: TestMySQLRelease/inventory_pending_UID_recovery_and_safe_slot_cleanup (0.65s)
+    --- PASS: TestMySQLRelease/shared_admission_transaction_blocks_close_until_settlement_boundary (0.56s)
+    --- PASS: TestMySQLRelease/parallel_generations_do_not_lower_fence_or_epoch (0.53s)
+    --- PASS: TestMySQLRelease/migration_checksum_conflict (0.55s)
+    --- PASS: TestMySQLRelease/concurrent_activation_has_one_winner (0.54s)
+    --- PASS: TestMySQLRelease/migration_resume_and_unversioned_tables_are_not_adopted (0.64s)
+    --- PASS: TestMySQLRelease/least_privilege_cannot_write_core_or_run_DDL (0.54s)
+    --- PASS: TestMySQLRelease/counter_exhaustion_never_wraps (0.63s)
+    --- PASS: TestMySQLRelease/committed_ACK_loss_does_not_duplicate_publication_or_activation (0.64s)
+=== RUN   TestInputAndErrorBoundary
+--- PASS: TestInputAndErrorBoundary (0.00s)
+=== RUN   TestInventoryIdentityAndAllowlist
+--- PASS: TestInventoryIdentityAndAllowlist (0.00s)
+PASS
+ok  	github.com/jianzi123/maas/internal/release/mysqlstore	7.831s
+=== RUN   TestMySQLQueriesAndCAS
+--- PASS: TestMySQLQueriesAndCAS (1.42s)
+=== RUN   TestMySQLDurableProofAndCandidateValidation
+--- PASS: TestMySQLDurableProofAndCandidateValidation (1.30s)
+=== RUN   TestMySQLLastBudgetTwoReplicas
+--- PASS: TestMySQLLastBudgetTwoReplicas (1.13s)
+=== RUN   TestMySQLRedisCompleteRebuild
+--- PASS: TestMySQLRedisCompleteRebuild (1.21s)
+=== RUN   TestMySQLLateExpiryAndCluster
+--- PASS: TestMySQLLateExpiryAndCluster (1.84s)
+=== RUN   TestPriceAndReservation
+--- PASS: TestPriceAndReservation (0.00s)
+=== RUN   TestUsageIndependentDimensions
+--- PASS: TestUsageIndependentDimensions (0.00s)
+=== RUN   TestMySQLKernel
+=== RUN   TestMySQLKernel/atomic_three_dimensions_and_duplicate_ticket
+=== RUN   TestMySQLKernel/two_replicas_one_global_slot
+=== RUN   TestMySQLKernel/revocation_visible_to_other_replica
+=== RUN   TestMySQLKernel/token_rejection_rolls_back_every_dimension
+=== RUN   TestMySQLKernel/unknown_usage_duplicate_event_late_close_does_not_refund
+=== RUN   TestMySQLKernel/known_usage_uses_frozen_price_and_rounds_once
+=== RUN   TestMySQLKernel/no_send_only_from_bound_proof
+=== RUN   TestMySQLKernel/pause_delete_and_stale_epoch
+=== RUN   TestMySQLKernel/publish_close_cannot_overtake_admission_commit
+=== RUN   TestMySQLKernel/restart_fences_owner_and_preserves_unknown_hold
+=== RUN   TestMySQLKernel/rate_epoch_and_missing_or_expired_dependencies_fail_closed
+=== RUN   TestMySQLKernel/late_proof_cannot_release_reallocated_slot
+=== RUN   TestMySQLKernel/real_commit_ack_loss_never_reauthorizes
+=== RUN   TestMySQLKernel/budget_bound_breach_records_actual_and_blocks
+--- PASS: TestMySQLKernel (16.43s)
+    --- PASS: TestMySQLKernel/atomic_three_dimensions_and_duplicate_ticket (1.31s)
+    --- PASS: TestMySQLKernel/two_replicas_one_global_slot (1.20s)
+    --- PASS: TestMySQLKernel/revocation_visible_to_other_replica (1.23s)
+    --- PASS: TestMySQLKernel/token_rejection_rolls_back_every_dimension (1.19s)
+    --- PASS: TestMySQLKernel/unknown_usage_duplicate_event_late_close_does_not_refund (1.01s)
+    --- PASS: TestMySQLKernel/known_usage_uses_frozen_price_and_rounds_once (1.02s)
+    --- PASS: TestMySQLKernel/no_send_only_from_bound_proof (1.13s)
+    --- PASS: TestMySQLKernel/pause_delete_and_stale_epoch (1.09s)
+    --- PASS: TestMySQLKernel/publish_close_cannot_overtake_admission_commit (1.28s)
+    --- PASS: TestMySQLKernel/restart_fences_owner_and_preserves_unknown_hold (1.59s)
+    --- PASS: TestMySQLKernel/rate_epoch_and_missing_or_expired_dependencies_fail_closed (1.19s)
+    --- PASS: TestMySQLKernel/late_proof_cannot_release_reallocated_slot (1.07s)
+    --- PASS: TestMySQLKernel/real_commit_ack_loss_never_reauthorizes (1.08s)
+    --- PASS: TestMySQLKernel/budget_bound_breach_records_actual_and_blocks (1.04s)
+=== RUN   TestMySQLPublisherCannotWriteRealLedger
+--- PASS: TestMySQLPublisherCannotWriteRealLedger (1.26s)
+=== RUN   TestQABudgetRace
+    qa_acceptance_test.go:84: sample=1 preadmission + 10 simultaneous attempts, two Store replicas; batch_success=1
+--- PASS: TestQABudgetRace (1.12s)
+=== RUN   TestQAConcurrentFinalAndSlotReuse
+    qa_acceptance_test.go:129: original_request_id=91f9848b-3088-453e-b7c3-a620f5248fe3 next_request_id=71f58001-cf54-426f-ac8b-5fa644565f11
+--- PASS: TestQAConcurrentFinalAndSlotReuse (1.14s)
+=== RUN   TestQATamperedBindingHasNoWrites
+=== RUN   TestQATamperedBindingHasNoWrites/source
+=== RUN   TestQATamperedBindingHasNoWrites/publication
+=== RUN   TestQATamperedBindingHasNoWrites/reservation
+--- PASS: TestQATamperedBindingHasNoWrites (3.15s)
+    --- PASS: TestQATamperedBindingHasNoWrites/source (0.99s)
+    --- PASS: TestQATamperedBindingHasNoWrites/publication (1.07s)
+    --- PASS: TestQATamperedBindingHasNoWrites/reservation (1.09s)
+=== RUN   TestQAUsageBeforeTransportLoss
+=== RUN   TestQAUsageBeforeTransportLoss/eof
+    qa_acceptance_test.go:185: QA-001: actual backend read entry missing/invalid: MAAS_QA_DIAGNOSTIC_READ_SQL; NOT ACCEPTED
+    qa_acceptance_test.go:186: QA-001: actual backend read entry missing/invalid: MAAS_QA_SNAPSHOT_HASH_SQL; NOT ACCEPTED
+    qa_acceptance_test.go:186: QA-001: frozen admission hash must have exactly one durable row
+    qa_acceptance_test.go:186: QA-001: durable receipt count=0 want=1
+    qa_acceptance_test.go:219: QA-001: terminal authority classification=map[input_cached_tokens:<nil> input_tokens:<nil> missing_reason:interrupted_before_usage output_tokens:<nil> reasoning_tokens:<nil> source:unavailable total_tokens:<nil>]
+    qa_acceptance_test.go:252: QA-001: actual backend read entry missing/invalid: MAAS_QA_DIAGNOSTIC_READ_SQL; NOT ACCEPTED
+    qa_acceptance_test.go:252: QA-001: actual backend read entry missing/invalid: MAAS_QA_SNAPSHOT_HASH_SQL; NOT ACCEPTED
+    qa_acceptance_test.go:252: QA-001: frozen admission hash must have exactly one durable row
+    qa_acceptance_test.go:252: QA-001: durable receipt count=0 want=1
+    qa_acceptance_test.go:252: missing/out-of-order durable termination
+    qa_acceptance_test.go:278: v2 request_id=c09d5c85-d757-42e5-a3be-70115e48bf64 terminal_actual=null token_held=140 money_held=520000
+=== RUN   TestQAUsageBeforeTransportLoss/client_write_failure
+    qa_acceptance_test.go:185: QA-001: actual backend read entry missing/invalid: MAAS_QA_DIAGNOSTIC_READ_SQL; NOT ACCEPTED
+    qa_acceptance_test.go:186: QA-001: actual backend read entry missing/invalid: MAAS_QA_SNAPSHOT_HASH_SQL; NOT ACCEPTED
+    qa_acceptance_test.go:186: QA-001: frozen admission hash must have exactly one durable row
+    qa_acceptance_test.go:186: QA-001: durable receipt count=0 want=1
+    qa_acceptance_test.go:219: QA-001: terminal authority classification=map[input_cached_tokens:<nil> input_tokens:<nil> missing_reason:cancelled_before_usage output_tokens:<nil> reasoning_tokens:<nil> source:unavailable total_tokens:<nil>]
+    qa_acceptance_test.go:252: QA-001: actual backend read entry missing/invalid: MAAS_QA_DIAGNOSTIC_READ_SQL; NOT ACCEPTED
+    qa_acceptance_test.go:252: QA-001: actual backend read entry missing/invalid: MAAS_QA_SNAPSHOT_HASH_SQL; NOT ACCEPTED
+    qa_acceptance_test.go:252: QA-001: frozen admission hash must have exactly one durable row
+    qa_acceptance_test.go:252: QA-001: durable receipt count=0 want=1
+    qa_acceptance_test.go:252: missing/out-of-order durable termination
+    qa_acceptance_test.go:278: v2 request_id=7005ac7b-0e07-4f5c-8bc0-e4b9a8ce8d0f terminal_actual=null token_held=140 money_held=520000
+--- FAIL: TestQAUsageBeforeTransportLoss (2.52s)
+    --- FAIL: TestQAUsageBeforeTransportLoss/eof (1.23s)
+    --- FAIL: TestQAUsageBeforeTransportLoss/client_write_failure (1.29s)
+=== RUN   TestQADeadlineAfterHeaders
+    qa_acceptance_test.go:310: request_id=0973bde8-26ac-4416-8e00-cd8f3c35d469 terminal=timed_out
+--- PASS: TestQADeadlineAfterHeaders (1.81s)
+=== RUN   TestQATerminationCauseOrder
+=== RUN   TestQATerminationCauseOrder/transport_deadline_before_later_client_cancel
+    qa_acceptance_test.go:491: QA-002: first transport cause=deadline, later parent cancel got=cancelled
+=== RUN   TestQATerminationCauseOrder/client_cancel_before_transport_deadline
+=== RUN   TestQATerminationCauseOrder/earlier_parent_deadline
+=== RUN   TestQATerminationCauseOrder/eof_without_context_termination
+--- FAIL: TestQATerminationCauseOrder (0.00s)
+    --- FAIL: TestQATerminationCauseOrder/transport_deadline_before_later_client_cancel (0.00s)
+    --- PASS: TestQATerminationCauseOrder/client_cancel_before_transport_deadline (0.00s)
+    --- PASS: TestQATerminationCauseOrder/earlier_parent_deadline (0.00s)
+    --- PASS: TestQATerminationCauseOrder/eof_without_context_termination (0.00s)
+=== RUN   TestMySQLManagedACKRecovery
+--- PASS: TestMySQLManagedACKRecovery (1.20s)
+=== RUN   TestMySQLRedisActualRestart
+--- PASS: TestMySQLRedisActualRestart (1.71s)
+=== RUN   TestOwnerCrashChild
+    recovery_process_test.go:126: internal subprocess entry
+--- SKIP: TestOwnerCrashChild (0.00s)
+=== RUN   TestMySQLOwnerProcessRecovery
+--- PASS: TestMySQLOwnerProcessRecovery (3.24s)
+=== RUN   TestMySQLRelayHardDeadline
+=== RUN   TestMySQLRelayHardDeadline/stream
+=== RUN   TestMySQLRelayHardDeadline/nonstream
+--- PASS: TestMySQLRelayHardDeadline (4.56s)
+    --- PASS: TestMySQLRelayHardDeadline/stream (2.27s)
+    --- PASS: TestMySQLRelayHardDeadline/nonstream (2.29s)
+=== RUN   TestMySQLControlledRelay
+=== RUN   TestMySQLControlledRelay/nonstream
+=== RUN   TestMySQLControlledRelay/stream
+=== RUN   TestMySQLControlledRelay/cumulative
+=== RUN   TestMySQLControlledRelay/decreasing
+=== RUN   TestMySQLControlledRelay/cancel
+=== RUN   TestMySQLControlledRelay/missing_usage
+=== RUN   TestMySQLControlledRelay/interrupted
+=== RUN   TestMySQLControlledRelay/accounting_failure
+--- PASS: TestMySQLControlledRelay (10.63s)
+    --- PASS: TestMySQLControlledRelay/nonstream (1.33s)
+    --- PASS: TestMySQLControlledRelay/stream (1.32s)
+    --- PASS: TestMySQLControlledRelay/cumulative (1.38s)
+    --- PASS: TestMySQLControlledRelay/decreasing (1.31s)
+    --- PASS: TestMySQLControlledRelay/cancel (1.34s)
+    --- PASS: TestMySQLControlledRelay/missing_usage (1.41s)
+    --- PASS: TestMySQLControlledRelay/interrupted (1.33s)
+    --- PASS: TestMySQLControlledRelay/accounting_failure (1.22s)
+=== RUN   TestMySQLRealRedisWitness
+--- PASS: TestMySQLRealRedisWitness (1.21s)
+FAIL
+FAIL	github.com/jianzi123/maas/internal/kernel	57.002s
+=== RUN   TestMySQLSessionAPI
+--- PASS: TestMySQLSessionAPI (0.93s)
+PASS
+ok  	github.com/jianzi123/maas/internal/controlapi	1.037s
+FAIL

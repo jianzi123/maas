@@ -1,0 +1,487 @@
+{
+  "backend_sha": "2319eb62d84f278d1dd6d444ce52e532e202766e",
+  "date": "2026-11-05 UTC",
+  "environment": {
+    "system": "WSL Ubuntu-22.04 linux/amd64",
+    "go": "1.26.0",
+    "mysql": "8.4.7",
+    "redis": "6.0.16"
+  },
+  "existing_regression": [
+    {
+      "test": "TestMySQLRelease/idempotent_observe_restart_and_monotonic_epoch",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLRelease/activation_CAS_exact_replay_and_closed_publication",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLRelease/fail_closed_missing_expired_mismatched_or_unready_evidence",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLRelease/tombstone_alias_reservation_and_UID_isolation",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLRelease/inventory_pending_UID_recovery_and_safe_slot_cleanup",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLRelease/shared_admission_transaction_blocks_close_until_settlement_boundary",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLRelease/parallel_generations_do_not_lower_fence_or_epoch",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLRelease/migration_checksum_conflict",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLRelease/concurrent_activation_has_one_winner",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLRelease/migration_resume_and_unversioned_tables_are_not_adopted",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLRelease/least_privilege_cannot_write_core_or_run_DDL",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLRelease/counter_exhaustion_never_wraps",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLRelease/committed_ACK_loss_does_not_duplicate_publication_or_activation",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLQueriesAndCAS",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLDurableProofAndCandidateValidation",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLLastBudgetTwoReplicas",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLRedisCompleteRebuild",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLLateExpiryAndCluster",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLDurableUsageRelay/eof",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLDurableUsageRelay/writer",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLDurableUsageRelay/deadline_after_usage",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLDurableUsageRelay/cancel_after_usage",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLDurableUsageRelay/write_failure",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLDurableUsageRelay/limit",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLDurableUsageRelay/parse_invalid",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLDurableUsageRelay/before_usage_eof",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLDurableUsageRelay/parent_deadline_before_headers",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLDiagnosticReplayFenceAndACK",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLKernel/atomic_three_dimensions_and_duplicate_ticket",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLKernel/two_replicas_one_global_slot",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLKernel/revocation_visible_to_other_replica",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLKernel/token_rejection_rolls_back_every_dimension",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLKernel/unknown_usage_duplicate_event_late_close_does_not_refund",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLKernel/known_usage_uses_frozen_price_and_rounds_once",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLKernel/no_send_only_from_bound_proof",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLKernel/pause_delete_and_stale_epoch",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLKernel/publish_close_cannot_overtake_admission_commit",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLKernel/restart_fences_owner_and_preserves_unknown_hold",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLKernel/rate_epoch_and_missing_or_expired_dependencies_fail_closed",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLKernel/late_proof_cannot_release_reallocated_slot",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLKernel/real_commit_ack_loss_never_reauthorizes",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLKernel/budget_bound_breach_records_actual_and_blocks",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLPublisherCannotWriteRealLedger",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLManagedACKRecovery",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLRedisActualRestart",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLOwnerProcessRecovery",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLRelayHardDeadline/stream",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLRelayHardDeadline/nonstream",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLControlledRelay/nonstream",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLControlledRelay/stream",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLControlledRelay/cumulative",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLControlledRelay/decreasing",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLControlledRelay/cancel",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLControlledRelay/missing_usage",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLControlledRelay/interrupted",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLControlledRelay/accounting_failure",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLRealRedisWitness",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLSessionAPI",
+      "result": "PASS"
+    }
+  ],
+  "qa_unique_cases": [
+    {
+      "test": "TestQABudgetRace",
+      "result": "PASS"
+    },
+    {
+      "test": "TestQAConcurrentFinalAndSlotReuse",
+      "result": "PASS"
+    },
+    {
+      "test": "TestQATamperedBindingHasNoWrites/source",
+      "result": "PASS"
+    },
+    {
+      "test": "TestQATamperedBindingHasNoWrites/publication",
+      "result": "PASS"
+    },
+    {
+      "test": "TestQATamperedBindingHasNoWrites/reservation",
+      "result": "PASS"
+    },
+    {
+      "test": "TestQAUsageBeforeTransportLoss/eof",
+      "result": "PASS"
+    },
+    {
+      "test": "TestQAUsageBeforeTransportLoss/client_write_failure",
+      "result": "PASS"
+    },
+    {
+      "test": "TestQADeadlineAfterHeaders",
+      "result": "PASS"
+    },
+    {
+      "test": "TestQATerminationCauseOrder/transport_deadline_before_later_client_cancel",
+      "result": "PASS"
+    },
+    {
+      "test": "TestQATerminationCauseOrder/client_cancel_before_transport_deadline",
+      "result": "PASS"
+    },
+    {
+      "test": "TestQATerminationCauseOrder/earlier_parent_deadline",
+      "result": "PASS"
+    },
+    {
+      "test": "TestQATerminationCauseOrder/eof_without_context_termination",
+      "result": "PASS"
+    },
+    {
+      "test": "TestQATerminationMatrix/before_send/hard_deadline",
+      "result": "PASS"
+    },
+    {
+      "test": "TestQATerminationMatrix/before_send/earlier_parent_deadline",
+      "result": "PASS"
+    },
+    {
+      "test": "TestQATerminationMatrix/before_send/explicit_cancel",
+      "result": "PASS"
+    },
+    {
+      "test": "TestQATerminationMatrix/before_headers/hard_deadline",
+      "result": "PASS"
+    },
+    {
+      "test": "TestQATerminationMatrix/before_headers/earlier_parent_deadline",
+      "result": "PASS"
+    },
+    {
+      "test": "TestQATerminationMatrix/before_headers/explicit_cancel",
+      "result": "PASS"
+    },
+    {
+      "test": "TestQATerminationMatrix/before_headers/transport_eof",
+      "result": "FAIL"
+    },
+    {
+      "test": "TestQATerminationMatrix/headers_received/hard_deadline",
+      "result": "PASS"
+    },
+    {
+      "test": "TestQATerminationMatrix/headers_received/earlier_parent_deadline",
+      "result": "PASS"
+    },
+    {
+      "test": "TestQATerminationMatrix/headers_received/explicit_cancel",
+      "result": "PASS"
+    },
+    {
+      "test": "TestQATerminationMatrix/headers_received/transport_eof",
+      "result": "PASS"
+    },
+    {
+      "test": "TestQATerminationMatrix/first_chunk/hard_deadline",
+      "result": "PASS"
+    },
+    {
+      "test": "TestQATerminationMatrix/first_chunk/earlier_parent_deadline",
+      "result": "PASS"
+    },
+    {
+      "test": "TestQATerminationMatrix/first_chunk/explicit_cancel",
+      "result": "PASS"
+    },
+    {
+      "test": "TestQATerminationMatrix/first_chunk/transport_eof",
+      "result": "PASS"
+    },
+    {
+      "test": "TestQATerminationMatrix/usage_received/hard_deadline",
+      "result": "PASS"
+    },
+    {
+      "test": "TestQATerminationMatrix/usage_received/earlier_parent_deadline",
+      "result": "PASS"
+    },
+    {
+      "test": "TestQATerminationMatrix/usage_received/explicit_cancel",
+      "result": "PASS"
+    },
+    {
+      "test": "TestQATerminationMatrix/usage_received/transport_eof",
+      "result": "PASS"
+    },
+    {
+      "test": "TestQADiagnosticFailuresAndPartial/receipt_write_failure",
+      "result": "PASS"
+    },
+    {
+      "test": "TestQADiagnosticFailuresAndPartial/termination_write_failure",
+      "result": "PASS"
+    },
+    {
+      "test": "TestQADiagnosticFailuresAndPartial/record_limit",
+      "result": "PASS"
+    },
+    {
+      "test": "TestQADiagnosticFailuresAndPartial/invalid_usage",
+      "result": "PASS"
+    },
+    {
+      "test": "TestQADiagnosticFailuresAndPartial/conflicting_snapshot",
+      "result": "PASS"
+    },
+    {
+      "test": "TestQADiagnosticFailuresAndPartial/partial_usage",
+      "result": "PASS"
+    },
+    {
+      "test": "TestQARealDiagnosticACKReplayAndBinding",
+      "result": "PASS"
+    },
+    {
+      "test": "TestQADiagnosticRecoveryFence",
+      "result": "PASS"
+    },
+    {
+      "test": "TestQADiagnosticReaderLeastPrivilege",
+      "result": "PASS"
+    },
+    {
+      "test": "TestQADiagnosticFailuresAndPartial/byte_limit",
+      "result": "PASS"
+    },
+    {
+      "test": "TestQADiagnosticFailuresAndPartial/missing_policy",
+      "result": "PASS"
+    }
+  ],
+  "qa_runs": {
+    "initial": 40,
+    "affected_fault_group": 8,
+    "duplicated_fault_cases": 6,
+    "unique": 42,
+    "pass": 41,
+    "fail": 1
+  },
+  "remaining_failure_retest": [
+    {
+      "test": "TestQATerminationMatrix/before_headers/transport_eof",
+      "result": "FAIL"
+    }
+  ],
+  "go_default_test_events": {
+    "pass": 54,
+    "skip": 47
+  },
+  "vet": "PASS",
+  "build": "PASS",
+  "qa001": "CORE_RECEIPT_CASES_PASS_REMAIN_OPEN_FOR_PREHEADER_EOF_TERMINATION",
+  "qa002": "CONTROLLED_RETEST_PASS_RECOMMEND_CLOSURE",
+  "full_A01_A34": "NOT_ACCEPTED",
+  "full_FE_R02_R03": "NOT_ACCEPTED",
+  "old_migrations_and_protocols": "BYTE_UNCHANGED",
+  "internal_diagnostic_schema": "BYTE_IDENTICAL_TO_V2",
+  "static": {
+    "checks": 35,
+    "schema_examples_in_checks": 21,
+    "passed": 35
+  },
+  "cleanup": {
+    "owned_datadir_count": 5,
+    "owned_datadirs_removed": true,
+    "owned_dependency_processes": []
+  },
+  "raw_files": [
+    {
+      "file": "qa-2319-independent40.txt",
+      "bytes": 9885,
+      "sha256": "11a584e4b02cca65138319329ecbd8b3bf6771d70fe053ce47ca32dd863e2380"
+    },
+    {
+      "file": "qa-2319-fault8.txt",
+      "bytes": 2024,
+      "sha256": "a6be3c498c8f21de3399336f8d742432a30a52949aca165bd929ed55b7a7fbbe"
+    },
+    {
+      "file": "qa-2319-existing58.txt",
+      "bytes": 7933,
+      "sha256": "08a9f91a9f05016bbe89ece9acb02106c36624d34eed6dcf0c4970373948de59"
+    },
+    {
+      "file": "qa-2319-eof-retest.txt",
+      "bytes": 744,
+      "sha256": "08774475b1e37ff7e2e9a994a95221e4767d787011364b1041ad0b977834b880"
+    },
+    {
+      "file": "qa-2319-go-default.json",
+      "bytes": 100288,
+      "sha256": "d165f7605d0194b7708f6b20f3b8b2557693fedc76f4d83815b1febc9965e326"
+    },
+    {
+      "file": "qa-2319-static.json",
+      "bytes": 3907,
+      "sha256": "576d0410a12ec48a0b7a8edc7a4234830308ebddf81482f2aded6c1180c78e5e"
+    },
+    {
+      "file": "qa-2319-cleanup.json",
+      "bytes": 101,
+      "sha256": "5435f90658800df1963bd22d75585de033982d735b96088593d7291cc5d0e0a2"
+    }
+  ]
+}
