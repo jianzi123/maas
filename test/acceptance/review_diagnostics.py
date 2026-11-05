@@ -31,7 +31,7 @@ for row in examples:
     check('diagnostic shape '+row['name'],v.is_valid(row['value'])==row['expected_valid'])
 report={'kind':'independent_v2_static_only','passed':sum(x['passed'] for x in checks),'failed':sum(not x['passed'] for x in checks),
         'diagnostic_examples':len(examples),'checks':checks,
-        'limits':['No diagnostic producer/storage/permissions executed','No backend repair SHA provided','Prior 53/80 checks and 35 database cases not rerun by this checker']}
+        'limits':['No diagnostic producer/storage/permissions executed','No durable diagnostic producer exercised by this static checker','Prior 53/80 checks and 35 database cases not rerun by this checker']}
 a.output.parent.mkdir(parents=True,exist_ok=True)
 a.output.write_bytes((json.dumps(report,ensure_ascii=False,indent=2)+chr(10)).encode('utf-8'))
 print(json.dumps({k:report[k] for k in ['kind','passed','failed','diagnostic_examples']}))

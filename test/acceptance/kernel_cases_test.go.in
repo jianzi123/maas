@@ -477,37 +477,47 @@ func (w *qaBeforeWrite) Flush() {
 }
 
 func TestQATerminationCauseOrder(t *testing.T) {
-	t.Run("transport_deadline_before_later_client_cancel",func(t *testing.T) {
-		client,cancelClient:=context.WithCancel(context.Background())
+	t.Run("transport_deadline_before_later_client_cancel", func(t *testing.T) {
+		client, cancelClient := context.WithCancel(context.Background())
 		defer cancelClient()
-		transport,cancelTransport:=context.WithDeadline(client,time.Now().Add(-time.Second))
+		transport, cancelTransport := context.WithDeadline(client, time.Now().Add(-time.Second))
 		defer cancelTransport()
-		if !errors.Is(transport.Err(),context.DeadlineExceeded) {t.Fatal("deadline fixture not established")}
+		if !errors.Is(transport.Err(), context.DeadlineExceeded) {
+			t.Fatal("deadline fixture not established")
+		}
 		cancelClient() // later client cancellation must not replace first transport cause
-		result,_:=relayFailure(client,transport,context.DeadlineExceeded,"interrupted")
-		if result!="timed_out" {t.Errorf("QA-002: first transport cause=deadline, later parent cancel got=%s",result)}
+		result, _ := relayFailure(client, transport, context.DeadlineExceeded, "interrupted")
+		if result != "timed_out" {
+			t.Errorf("QA-002: first transport cause=deadline, later parent cancel got=%s", result)
+		}
 	})
-	t.Run("client_cancel_before_transport_deadline",func(t *testing.T) {
-		client,cancelClient:=context.WithCancel(context.Background())
+	t.Run("client_cancel_before_transport_deadline", func(t *testing.T) {
+		client, cancelClient := context.WithCancel(context.Background())
 		cancelClient()
-		transport,cancelTransport:=context.WithDeadline(client,time.Now().Add(-time.Second))
+		transport, cancelTransport := context.WithDeadline(client, time.Now().Add(-time.Second))
 		defer cancelTransport()
-		result,_:=relayFailure(client,transport,context.Canceled,"interrupted")
-		if result!="cancelled" {t.Errorf("QA-002: explicit cancel got=%s",result)}
+		result, _ := relayFailure(client, transport, context.Canceled, "interrupted")
+		if result != "cancelled" {
+			t.Errorf("QA-002: explicit cancel got=%s", result)
+		}
 	})
-	t.Run("earlier_parent_deadline",func(t *testing.T) {
-		client,cancelClient:=context.WithDeadline(context.Background(),time.Now().Add(-time.Second))
+	t.Run("earlier_parent_deadline", func(t *testing.T) {
+		client, cancelClient := context.WithDeadline(context.Background(), time.Now().Add(-time.Second))
 		defer cancelClient()
-		transport,cancelTransport:=context.WithTimeout(client,time.Hour)
+		transport, cancelTransport := context.WithTimeout(client, time.Hour)
 		defer cancelTransport()
-		result,_:=relayFailure(client,transport,context.DeadlineExceeded,"interrupted")
-		if result!="timed_out" {t.Errorf("QA-002: parent deadline got=%s",result)}
+		result, _ := relayFailure(client, transport, context.DeadlineExceeded, "interrupted")
+		if result != "timed_out" {
+			t.Errorf("QA-002: parent deadline got=%s", result)
+		}
 	})
-	t.Run("eof_without_context_termination",func(t *testing.T) {
-		client:=context.Background()
-		transport,cancelTransport:=context.WithTimeout(client,time.Hour)
+	t.Run("eof_without_context_termination", func(t *testing.T) {
+		client := context.Background()
+		transport, cancelTransport := context.WithTimeout(client, time.Hour)
 		defer cancelTransport()
-		result,_:=relayFailure(client,transport,io.EOF,"interrupted")
-		if result!="interrupted" {t.Errorf("QA-002: plain EOF got=%s",result)}
+		result, _ := relayFailure(client, transport, io.EOF, "interrupted")
+		if result != "interrupted" {
+			t.Errorf("QA-002: plain EOF got=%s", result)
+		}
 	})
 }

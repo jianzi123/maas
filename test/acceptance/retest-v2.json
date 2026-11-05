@@ -2,7 +2,7 @@
   "basis_comment": "01a1aba0-d123-7001-b0bf-91fae22e68bf",
   "basis_attachment": "01a1ab9a-d947-7c65-9398-6875fab20d5c",
   "backend_repair_sha": null,
-  "observed_pr2_head": "4f3eb9358f26ebab637a549b795651171d3b924f",
+  "observed_pr2_head": "6dc39149a9d44b1bcca57cec59a0920f535ac1eb",
   "terminal": "3.0",
   "observation": "1.0",
   "diagnostics": [
@@ -11,21 +11,24 @@
       "scenario": "usage后 EOF",
       "entry": "TestQAUsageBeforeTransportLoss/eof",
       "dependency": "真实读入口与修订SHA",
-      "status": "NOT_EXECUTED_ON_REPAIRED_BACKEND"
+      "status": "OVERALL_FAIL_DIAGNOSTIC_READER_NOT_IMPLEMENTED",
+      "runtime_flow_executed_at_sha": "6dc39149a9d44b1bcca57cec59a0920f535ac1eb"
     },
     {
       "id": "Q02",
       "scenario": "usage后 writer失败，receipt必须先于首帧转发",
       "entry": "TestQAUsageBeforeTransportLoss/client_write_failure",
       "dependency": "真实读入口与修订SHA",
-      "status": "NOT_EXECUTED_ON_REPAIRED_BACKEND"
+      "status": "OVERALL_FAIL_DIAGNOSTIC_READER_NOT_IMPLEMENTED",
+      "runtime_flow_executed_at_sha": "6dc39149a9d44b1bcca57cec59a0920f535ac1eb"
     },
     {
       "id": "Q03",
       "scenario": "诊断提交后重建Store，新SQL连接重读",
       "entry": "TestQAUsageBeforeTransportLoss",
       "dependency": "读入口、原始冻结摘要；不外推OS崩溃",
-      "status": "NOT_EXECUTED_ON_REPAIRED_BACKEND"
+      "status": "OVERALL_FAIL_DIAGNOSTIC_READER_NOT_IMPLEMENTED",
+      "runtime_flow_executed_at_sha": "6dc39149a9d44b1bcca57cec59a0920f535ac1eb"
     },
     {
       "id": "Q04",
@@ -74,7 +77,8 @@
       "scenario": "关闭证明只释放原allocation，旧证明不伤新slot/held",
       "entry": "TestQAUsageBeforeTransportLoss",
       "dependency": "受控H2只证明fixture，真实生成停止另验",
-      "status": "NOT_EXECUTED_ON_REPAIRED_BACKEND"
+      "status": "OVERALL_FAIL_DIAGNOSTIC_READER_NOT_IMPLEMENTED",
+      "runtime_flow_executed_at_sha": "6dc39149a9d44b1bcca57cec59a0920f535ac1eb"
     },
     {
       "id": "Q11",
@@ -293,5 +297,22 @@
       "required_evidence": "后端/前端/QA返回部署版本、SHA及解码回归；禁止靠探测性写入判断支持",
       "status": "NOT_EXECUTED_NO_RUNNING_API"
     }
-  ]
+  ],
+  "backend_candidate_sha": "6dc39149a9d44b1bcca57cec59a0920f535ac1eb",
+  "qa001_persistence_revision_sha": null,
+  "qa002_status": "PARTIAL_REPAIR_ORIGINAL_CASE_PASS_ORDERING_COUNTEREXAMPLE_FAIL",
+  "timing_partial_evidence": {
+    "first_chunk_hard_deadline": "PASS_REAL_CONTROLLED_TRANSPORT",
+    "transport_deadline_then_later_parent_cancel": "FAIL_DETERMINISTIC_FUNCTION_TEST",
+    "client_cancel_first": "PASS_FUNCTION_TEST_ONLY",
+    "earlier_parent_deadline": "PASS_FUNCTION_TEST_ONLY",
+    "plain_eof": "PASS_FUNCTION_TEST_ONLY",
+    "limits": "19格完整传输矩阵仍未逐格执行；函数级结果不代替全链路"
+  },
+  "fe_runtime_subset": {
+    "test": "TestMySQLSessionAPI",
+    "result": "PASS",
+    "scope": "真实短寿命HTTP+临时MySQL；部分认证/CAS/精确读取及缺历史503",
+    "limits": "独立probe、完整11项FE关项和浏览器未执行"
+  }
 }

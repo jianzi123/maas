@@ -1,3 +1,5 @@
+最新：已按v2修订oracle并复验实际后端6dc3914；已有48项通过，独立QA12项9通过/3失败，两个问题均未关闭。
+
 本轮依据 Mika 评论 `01a1aba0-d123-7001-b0bf-91fae22e68bf` 及 MAAS-2 原清单 v2 修订独立 oracle。QA-001/002 均保持开放；终态 3.0、ObservationEnvelope 1.0 不变，D1 3.1 未切换。
 
 ## 变更依据与原记录
@@ -16,7 +18,7 @@
 - Token held=140、金额 held=原 plan.Money（此夹具520000），请求计次1、request/terminal/summary各一次，生成尝试一次，无正常 DONE。
 - 无 H2 关闭证明先 QUARANTINED；受控关闭证明只释放原 allocation，不改终态/held；新请求复用 slot 后重放旧关闭证明不释放新 allocation。
 
-真实后端修订 SHA、迁移/窄权限和读取入口尚未交回。当前 PR #2 head 读回仍为 `4f3eb9358f26ebab637a549b795651171d3b924f`。不自行创建 `request_usage_diagnostics` 表、不安装诊断替身、不猜字段名。
+初读PR #2为4f3eb93；本轮期间发现实际新提交6dc39149a9d44b1bcca57cec59a0920f535ac1eb并接入QA分支复验。其relay部分修复截止分类，但未新增usage耐久诊断；QA-001迁移/读取接点仍未交付。不自行创建 `request_usage_diagnostics` 表、不安装诊断替身、不猜字段名。
 
 为适配实际交回的持久层，本次 QA 只读适配器要求两个环境变量：
 
@@ -41,7 +43,7 @@ python test/acceptance/review_diagnostics.py --closure-dir ../inputs/closure-v2/
 
 在旧产品 SHA 上对**修改后的测试入口做反向验证**：EOF/writer 两例均继续失败、0 skip；已确认实际 null、Token held140、金额 held520000，并执行原终态/汇总唯一、无DONE/无重发、slot关闭及复用边界。失败在实际诊断/冻结摘要读入口缺失及旧 before_usage 分类。未获得修复 SHA，因此本轮不称“修复复测”，不关闭任何问题；缺少读入口也不能证明某个已建产品表丢数据。
 
-原35个数据库场景、50个通过Go事件、性能41项和草案80项均为历史结果，本轮未重跑。QA-002 的原首片后硬截止用例保留，本轮未新增其运行通过结论。
+旧35个数据库场景作为新48项的一部分已重新执行，不能相加。历史全仓50个Go通过事件、性能41项和草案80项本轮未重跑。QA-002原首片后截止现通过，但先deadline后父cancel的补充函数反例失败，仍保持开放。
 
 ## 后续完整运行门槛
 
@@ -65,3 +67,22 @@ FE-R02/03 保留原草案字段与现有只读 probe；下表为完整关项范�
 | R03-4 容量与账务 | 原slot_id/allocation_fence/request_id三元组；released只取原释放日志。slot复用读新allocation不能覆盖旧状态；released后原终态和财务held不变 | 后端/QA；旧证明迟到、slot复用、日志缺失/故障、未知held样例 |
 | R03-5 停止与ID | 保留收到的可信原生成ID；后续GET的X-Request-ID不覆盖它。无原ID显示未知。停止/传输关闭、终态、引擎停止、容量、usage分开呈现，不重发生成 | 原前端/QA；浏览器abort在headers前/后、迟到终态、轮询503、无ID；纯writer夹具不算浏览器通过 |
 | 兼容门槛 | 以固定草案生成/配置实际消费者，覆盖普通页、精确页、401/403/404/409/503；旧服务器普通页不能当精确命中；旧严格decoder不能因union变化崩溃 | 后端/前端/QA返回部署版本、SHA及解码回归；禁止靠探测性写入判断支持 |
+
+## 实际新提交复验：6dc3914
+
+远端PR #2实际新head已核对代码差异及两份controlled-api文档，作为依赖合入QA分支；本角色未修改产品实现。
+
+| 分组 | 本轮结果 |
+|---|---|
+| 已有受控组 | 48/48通过，含原35（不累加）；临时MySQL/Redis、真实role/管理HTTP、Redis重启、Go owner子进程恢复 |
+| QA独立12项 | 9通过、3失败；原8项现6通过/2失败，新增判因函数4项为3通过/1失败 |
+| QA-001 | 两例仍失败：真实诊断与冻结摘要读入口未接合，旧before_usage分类仍在；实际null、Token held140、金额held520000 |
+| QA-002原例 | 首片后原硬截止请求现为timed_out，通过；无正常DONE，保守held/slot保持 |
+| QA-002补充顺序例 | 子context已DeadlineExceeded后再取消父context，子context保留最初截止原因，但relayFailure先检查父Canceled，返回cancelled，期望timed_out |
+| v2静态 | 独立35项通过（含21个Schema样例），三份协议快照未变 |
+
+新复验request ID：EOF=c09d5c85-d757-42e5-a3be-70115e48bf64；writer=7005ac7b-0e07-4f5c-8bc0-e4b9a8ce8d0f；首片后截止=0973bde8-26ac-4416-8e00-cd8f3c35d469。判因函数反例不生成请求，不伪造request ID。
+
+QA-002补充定位为internal/kernel/relay.go的relayFailure：父context后到的取消覆盖原sendCtx先发生的截止。应保留原sendCtx的首个终止原因，再做事件映射。此为确定顺序的实际函数调用，未冒充浏览器/真实网关并发验证；修复仍由原后端负责。
+
+本轮原始记录qa-v2-6dc3914.txt，默认Go原有子进程入口的一次skip不计通过场景；其子进程行为由恢复场景实际执行。48项是独立复跑已有场景，不能代替真实Higress/生产证明链，保留修订仍默认503。独立probe、浏览器、完整FE关项、19格全传输矩阵、真实模型/GPU/Helm及A01–A34完整验收未完成。QA-001/002保持开放。

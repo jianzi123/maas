@@ -1,4 +1,4 @@
-当前采用 MAAS-2 清单 v2 / Mika 2026-11-05 决定。先读 oracle-v2.md 与 retest-v2.json；原 report.md/results.json 是历史记录，不能当本轮修复结论。实际后端 SHA、诊断读取 SQL 未交回时，新 oracle 明确失败，不跳过场景。
+当前采用 MAAS-2 清单 v2 / Mika 2026-11-05 决定。先读 oracle-v2.md 与 retest-v2.json；原 report.md/results.json 是历史记录，不能当本轮修复结论。已复验后端6dc3914；QA-001诊断读取SQL仍缺失，新oracle明确失败，不跳过场景。QA-002原例通过，补充顺序反例仍失败。
 
 MAAS-7 独立复验入口；基线 PR #2 `4f3eb9358f26ebab637a549b795651171d3b924f`（含 PR #1 `6302256`）。只新增本目录，不修改实现或其他角色目录。
 

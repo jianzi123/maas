@@ -1,0 +1,260 @@
+{
+  "backend_sha": "6dc39149a9d44b1bcca57cec59a0920f535ac1eb",
+  "author_existing_cases": [
+    {
+      "test": "TestMySQLRelease/idempotent_observe_restart_and_monotonic_epoch",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLRelease/activation_CAS_exact_replay_and_closed_publication",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLRelease/fail_closed_missing_expired_mismatched_or_unready_evidence",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLRelease/tombstone_alias_reservation_and_UID_isolation",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLRelease/inventory_pending_UID_recovery_and_safe_slot_cleanup",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLRelease/shared_admission_transaction_blocks_close_until_settlement_boundary",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLRelease/parallel_generations_do_not_lower_fence_or_epoch",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLRelease/migration_checksum_conflict",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLRelease/concurrent_activation_has_one_winner",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLRelease/migration_resume_and_unversioned_tables_are_not_adopted",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLRelease/least_privilege_cannot_write_core_or_run_DDL",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLRelease/counter_exhaustion_never_wraps",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLRelease/committed_ACK_loss_does_not_duplicate_publication_or_activation",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLQueriesAndCAS",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLDurableProofAndCandidateValidation",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLLastBudgetTwoReplicas",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLRedisCompleteRebuild",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLLateExpiryAndCluster",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLKernel/atomic_three_dimensions_and_duplicate_ticket",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLKernel/two_replicas_one_global_slot",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLKernel/revocation_visible_to_other_replica",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLKernel/token_rejection_rolls_back_every_dimension",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLKernel/unknown_usage_duplicate_event_late_close_does_not_refund",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLKernel/known_usage_uses_frozen_price_and_rounds_once",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLKernel/no_send_only_from_bound_proof",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLKernel/pause_delete_and_stale_epoch",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLKernel/publish_close_cannot_overtake_admission_commit",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLKernel/restart_fences_owner_and_preserves_unknown_hold",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLKernel/rate_epoch_and_missing_or_expired_dependencies_fail_closed",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLKernel/late_proof_cannot_release_reallocated_slot",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLKernel/real_commit_ack_loss_never_reauthorizes",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLKernel/budget_bound_breach_records_actual_and_blocks",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLPublisherCannotWriteRealLedger",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLManagedACKRecovery",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLRedisActualRestart",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLOwnerProcessRecovery",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLRelayHardDeadline/stream",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLRelayHardDeadline/nonstream",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLControlledRelay/nonstream",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLControlledRelay/stream",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLControlledRelay/cumulative",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLControlledRelay/decreasing",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLControlledRelay/cancel",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLControlledRelay/missing_usage",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLControlledRelay/interrupted",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLControlledRelay/accounting_failure",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLRealRedisWitness",
+      "result": "PASS"
+    },
+    {
+      "test": "TestMySQLSessionAPI",
+      "result": "PASS"
+    }
+  ],
+  "independent_qa_cases": [
+    {
+      "test": "TestQABudgetRace",
+      "result": "PASS"
+    },
+    {
+      "test": "TestQAConcurrentFinalAndSlotReuse",
+      "result": "PASS"
+    },
+    {
+      "test": "TestQATamperedBindingHasNoWrites/source",
+      "result": "PASS"
+    },
+    {
+      "test": "TestQATamperedBindingHasNoWrites/publication",
+      "result": "PASS"
+    },
+    {
+      "test": "TestQATamperedBindingHasNoWrites/reservation",
+      "result": "PASS"
+    },
+    {
+      "test": "TestQAUsageBeforeTransportLoss/eof",
+      "result": "FAIL"
+    },
+    {
+      "test": "TestQAUsageBeforeTransportLoss/client_write_failure",
+      "result": "FAIL"
+    },
+    {
+      "test": "TestQADeadlineAfterHeaders",
+      "result": "PASS"
+    },
+    {
+      "test": "TestQATerminationCauseOrder/transport_deadline_before_later_client_cancel",
+      "result": "FAIL"
+    },
+    {
+      "test": "TestQATerminationCauseOrder/client_cancel_before_transport_deadline",
+      "result": "PASS"
+    },
+    {
+      "test": "TestQATerminationCauseOrder/earlier_parent_deadline",
+      "result": "PASS"
+    },
+    {
+      "test": "TestQATerminationCauseOrder/eof_without_context_termination",
+      "result": "PASS"
+    }
+  ],
+  "author_existing_passed": 48,
+  "qa_passed": 9,
+  "qa_failed": 3,
+  "static_passed": 35,
+  "static_schema_examples": 21,
+  "qa001": "OPEN_MISSING_DURABLE_DIAGNOSTIC_READER",
+  "qa002": "OPEN_ORDERING_COUNTEREXAMPLE",
+  "full_transport_matrix": "NOT_COMPLETED",
+  "full_FE_runtime": "NOT_COMPLETED",
+  "A01_A34": "NOT_ACCEPTED",
+  "v1_failure_sha256": "52987bd354101131e63df067b6703a8d3b8ed0f670c78f2db7ac77136a96975e",
+  "closure_zip_sha256": "cd9f19b24ab9d048abba837b58db17dd8ec09df2f55dc3fe40ab31a9f096e4e8",
+  "raw_runtime_sha256": "0b985ebab4c670bf9c616170afafde873fb51ea04acb1f88c473ff37083b1c2f"
+}
