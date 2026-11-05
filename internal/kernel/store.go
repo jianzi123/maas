@@ -84,7 +84,7 @@ func sanitize(e error) error {
 	if e == nil {
 		return nil
 	}
-	for _, known := range []error{ErrNotFound, ErrUnavailable, ErrBusy, ErrConflict, ErrKey, ErrBudget, ErrTokens, ErrMoney, ErrCapacity, ErrBound, ErrPrice, ErrPolicy, ErrCommitUnknown, release.ErrDependencyMissing, release.ErrConflict} {
+	for _, known := range []error{ErrDiagnosticLimit, ErrNotFound, ErrUnavailable, ErrBusy, ErrConflict, ErrKey, ErrBudget, ErrTokens, ErrMoney, ErrCapacity, ErrBound, ErrPrice, ErrPolicy, ErrCommitUnknown, release.ErrDependencyMissing, release.ErrConflict} {
 		if errors.Is(e, known) {
 			return known
 		}

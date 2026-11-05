@@ -133,6 +133,9 @@ func setup(t *testing.T, slots int64) *fixture {
 	if e = f.core.Configure(ctx, RatePolicy{Revision: "test-rate-v1", Epoch: 1, WindowMS: 3600000, GlobalLimit: 1000, KeyLimit: 1000}, slots); e != nil {
 		t.Fatal(e)
 	}
+	if e = f.core.ConfigureDiagnostics(ctx, DiagnosticPolicy{64, 262144, "controlled-test-keep-with-request"}); e != nil {
+		t.Fatal(e)
+	}
 	if e = f.core.ReadyRate(ctx, 1); e != nil {
 		t.Fatal(e)
 	} // fixture initialized its own epoch, not production recovery evidence.

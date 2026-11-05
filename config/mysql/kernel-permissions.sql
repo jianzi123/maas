@@ -16,6 +16,9 @@ GRANT SELECT ON __MAAS_DATABASE__.rate_rebuilds TO maas_kernel_runtime;
 GRANT SELECT ON __MAAS_DATABASE__.publication_proofs TO maas_kernel_runtime;
 GRANT SELECT,INSERT ON __MAAS_DATABASE__.validation_intents TO maas_kernel_runtime;
 GRANT SELECT,INSERT ON __MAAS_DATABASE__.validation_receipts TO maas_kernel_runtime;
+GRANT SELECT,INSERT ON __MAAS_DATABASE__.request_snapshot_digests TO maas_kernel_runtime;
+GRANT SELECT ON __MAAS_DATABASE__.diagnostic_policy TO maas_kernel_runtime;
+GRANT SELECT,INSERT ON __MAAS_DATABASE__.request_usage_diagnostics TO maas_kernel_runtime;
 -- Add the existing maas_release_reader role for LockActive's release reads.
 -- Configure/slot creation and all migrations use a separate installation role.
 
@@ -45,3 +48,9 @@ GRANT SELECT,UPDATE ON __MAAS_DATABASE__.concurrency_slots TO maas_slot_worker;
 GRANT SELECT,INSERT ON __MAAS_DATABASE__.slot_release_log TO maas_slot_worker;
 -- Install the evidence adapter's narrow read grants after its separate review.
 -- No Key, budget, terminal or summary INSERT/UPDATE/DELETE is granted to worker.
+
+CREATE ROLE IF NOT EXISTS maas_diagnostics_reader;
+GRANT SELECT ON __MAAS_DATABASE__.request_usage_diagnostics TO maas_diagnostics_reader;
+-- Diagnostics are append-only. Publisher/operator get neither reads nor writes;
+-- no runtime DELETE/UPDATE, no default retention TTL, and no accounting access
+-- through this reader. Policy initialization is an explicit installation step.
