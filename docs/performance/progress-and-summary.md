@@ -59,3 +59,9 @@ J02固定200条、S/M/L=60/30/10及hash，补E1–E3的固定顺序、同资源/
 独立评审发现旧GEMM正确性循环接受NaN。本轮抽出CUDA和宿主共用finite校验及成功continuation，candidate/cuBLAS/reference任一NaN或无穷即拒绝，错误容差/溢出也拒绝。失败不会进入预热、计时或成功报告；GPU计划、协议和既有实验输入不变。
 
 [修复与复验记录](gemm-finite-fix-v0.5.1.md)包含21个纯宿主场景和fast-math拒绝编译，实际退出码/计数见本轮证据JSON。旧反例独立拷贝仍用于重现旧缺陷，新共用函数用相同输入验证拒绝。完整测试和归档核验以本轮日志为准，不将宿主编译外推为CUDA/GPU验证。
+
+## 入门/进阶与目标重构（2026-11-05）
+
+本轮按成员要求重做学习入口、入门B01–B06、进阶A01–A04、自测答案和目标卡模板。优化目标细分为Attention/KV、GEMM/Grouped、RMSNorm、混合调度、KV/prefix、Graph、通信及端到端传播八卡；按K/R/E层分别登记baseline、指标、约束、证据与淘汰条件。
+
+修正完整课程Python要求为3.11+（NumPy2.3.5元数据），入门checkout改为当前operator-runtime-lab分支。只改文档，不打开实验计划或改变运行实现。83项旧回归仍按原阶段记录，本轮验课/链接/阅读版验证单独交证据，详见[重构说明](learning-change-log.md)。
