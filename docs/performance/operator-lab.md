@@ -65,3 +65,11 @@ sm_89只对应当前已查到设备的候选编译目标，不作为其他GPU默
     python tools/perf/runtime/source_audit.py --source-root <downloaded-fixed-sha-root> --output <run>/source-audit.json
 
 GPU结果同时给logical_dense_flops_estimate和logical_io_bytes_estimate，GEMM约2MNK、dense Attention约4B×Hq×Sq×Sk×D，尚不包含softmax/分页/通信。用估算工作量除设备事件时长只能得逻辑TFLOP/s或IO GB/s，不能冒充实际DRAM带宽或完整roofline。真正缓存命中、DRAM字节和指令需由对应GPU的计数器采集。
+
+## CUDA GEMM finite 门禁（本轮修复）
+
+旧NaN误放行已改为CUDA/宿主共用gemm_validation.h与validate_then_execute：candidate、cuBLAS、reference必须全部finite，数值失败在任何预热/计时/成功报告前退出1。独立宿主回归无需CUDA：
+
+    python tools/perf/operators/check_gemm_host.py --output tools/perf/reports/gemm-host.json
+
+21个运行场景（17拒绝、4正常）及fast-math拒绝编译由[有限值修复记录](gemm-finite-fix-v0.5.1.md)说明。需要现有GCC/Clang兼容C++编译器；完整Python回归将包含这一宿主组，缺编译器明确skip，不得算成宿主验证通过。本轮只编译宿主header/driver，仍未编译CUDA translation unit或执行GPU算子。

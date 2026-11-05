@@ -3,6 +3,7 @@
 // Run only after approval: ./gemm --approved-gpu-run 37 53 29
 #include <cuda_runtime.h>
 #include <cublas_v2.h>
+#include "gemm_validation.h"
 #include <algorithm>
 #include <cmath>
 #include <cstdio>
@@ -50,20 +51,26 @@ int main(int argc,char** argv) {
   candidate();baseline();CU(cudaDeviceSynchronize());
   CU(cudaMemcpy(out.data(),gc,out.size()*sizeof(float),cudaMemcpyDeviceToHost));
   CU(cudaMemcpy(base.data(),gd,base.size()*sizeof(float),cudaMemcpyDeviceToHost));
-  double maxerr=0;
+  std::vector<double> reference(out.size());
   for(int r=0;r<m;r++)for(int c=0;c<n;c++){
     double expected=0;for(int j=0;j<k;j++)expected+=double(a[r*k+j])*double(b[j*n+c]);
-    maxerr=std::max(maxerr,std::abs(double(out[r*n+c])-expected));
-    double tol=1e-4+2e-4*std::abs(expected);
-    if(std::abs(out[r*n+c]-expected)>tol||std::abs(base[r*n+c]-expected)>tol)return 1;
+    reference[r*n+c]=expected;
   }
-  for(int i=0;i<10;i++){baseline();candidate();}CU(cudaDeviceSynchronize());
-  cudaEvent_t start,end;CU(cudaEventCreate(&start));CU(cudaEventCreate(&end));
-  auto measure=[&](auto fn){CU(cudaEventRecord(start));for(int i=0;i<50;i++)fn();
-    CU(cudaEventRecord(end));CU(cudaEventSynchronize(end));float ms;CU(cudaEventElapsedTime(&ms,start,end));return ms/50;};
-  float baseline_ms=measure(baseline),candidate_ms=measure(candidate);
-  std::printf("{\"evidence\":\"approved_synthetic_cuda_operator\",\"max_abs\":%.9g,\"cublas_ms\":%.9g,\"tile_ms\":%.9g,\"end_to_end_claim\":false}\n",maxerr,baseline_ms,candidate_ms);
-  CU(cudaEventDestroy(start));CU(cudaEventDestroy(end));BL(cublasDestroy(handle));
+  const int status=maas_perf::validate_then_execute(
+      out.data(),base.data(),reference.data(),out.size(),
+      [&](const maas_perf::GemmValidation& validation) {
+        // No warmup, timing event or success report exists before this gate.
+        for(int i=0;i<10;i++){baseline();candidate();}CU(cudaDeviceSynchronize());
+        cudaEvent_t start,end;CU(cudaEventCreate(&start));CU(cudaEventCreate(&end));
+        auto measure=[&](auto fn){CU(cudaEventRecord(start));for(int i=0;i<50;i++)fn();
+          CU(cudaEventRecord(end));CU(cudaEventSynchronize(end));float ms;CU(cudaEventElapsedTime(&ms,start,end));return ms/50;};
+        float baseline_ms=measure(baseline),candidate_ms=measure(candidate);
+        std::printf("{\"evidence\":\"approved_synthetic_cuda_operator\",\"validation\":\"passed\",\"max_abs\":%.9g,\"baseline_max_abs\":%.9g,\"cublas_ms\":%.9g,\"tile_ms\":%.9g,\"end_to_end_claim\":false}\n",validation.candidate_max_abs,validation.baseline_max_abs,baseline_ms,candidate_ms);
+        CU(cudaEventDestroy(start));CU(cudaEventDestroy(end));
+        return 0;
+      });
+  if(status!=0)std::fprintf(stderr,"GEMM numerical validation failed before warmup/timing\n");
+  BL(cublasDestroy(handle));
   CU(cudaFree(ga));CU(cudaFree(gb));CU(cudaFree(gc));CU(cudaFree(gd));
-  return 0;
+  return status;
 }
