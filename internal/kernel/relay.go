@@ -41,6 +41,34 @@ type RelayCall struct {
 }
 
 func unavailableUsage(reason string) Usage { return Usage{Source: "unavailable", Missing: ptr(reason)} }
+
+// Inspect the request contexts before locally cancelling the transport. A
+// parent deadline is a timeout too; only an explicit parent cancel is cancelled.
+func relayFailure(ctx, sendCtx context.Context, fallback string) (string, string) {
+	result := fallback
+	// sendCtx preserves its first termination cause even if the parent changes later.
+	if errors.Is(sendCtx.Err(), context.DeadlineExceeded) {
+		result = "timed_out"
+	} else if errors.Is(sendCtx.Err(), context.Canceled) {
+		result = "cancelled"
+	}
+	reason := "interrupted_before_usage"
+	if result == "cancelled" {
+		reason = "cancelled_before_usage"
+	}
+	return result, reason
+}
+
+func relayTermination(ctx context.Context, fallback string) string {
+	if errors.Is(ctx.Err(), context.DeadlineExceeded) {
+		return "deadline_exceeded"
+	}
+	if errors.Is(ctx.Err(), context.Canceled) {
+		return "explicit_cancel"
+	}
+	return fallback
+}
+
 func parseUsage(body []byte) (Usage, bool, error) {
 	var envelope map[string]json.RawMessage
 	if json.Unmarshal(body, &envelope) != nil {
@@ -122,8 +150,22 @@ func (r *Relay) Forward(ctx context.Context, w http.ResponseWriter, call RelayCa
 	req.Header.Set("X-Maas-Admission-Ticket", call.Ticket)
 	req.Header.Set("X-Maas-Reservation-Plan", call.PlanHeader)
 	resp, sendErr := r.client.Do(req)
-	// A cancelled caller must not cancel the durable terminal transaction.
-	finish := func(result string, usage Usage, first *int64) error {
+	diagnostics := &relayDiagnostics{store: r.core, input: call.Input}
+	// Diagnosis and the unique terminal each have an independent bounded context.
+	finish := func(result string, usage Usage, first *int64, cause string) error {
+		var diagnosticErr error
+		if cause != "" {
+			diagnosticErr = diagnostics.append("termination", nil, cause)
+		}
+		if diagnosticErr != nil {
+			usage = unavailableUsage("not_provided")
+			if result == "succeeded" {
+				result = "failed"
+			}
+		}
+		if diagnostics.seen && usage.Source == "unavailable" {
+			usage = unavailableUsage("not_provided")
+		}
 		terminalCtx, done := context.WithTimeout(context.Background(), 5*time.Second)
 		defer done()
 		snap, state, e := r.core.ReadRequest(terminalCtx, call.Input.RequestID)
@@ -142,43 +184,58 @@ func (r *Relay) Forward(ctx context.Context, w http.ResponseWriter, call RelayCa
 		if result == "succeeded" && state != "succeeded" {
 			return ErrUnavailable
 		}
-		return nil
+		return diagnosticErr
 	}
 	if sendErr != nil {
-		result, reason := "interrupted", "interrupted_before_usage"
-		if errors.Is(ctx.Err(), context.Canceled) {
-			result, reason = "cancelled", "cancelled_before_usage"
-		} else if errors.Is(sendCtx.Err(), context.DeadlineExceeded) {
-			result = "timed_out"
-		}
-		_ = finish(result, unavailableUsage(reason), nil)
+		result, reason := relayFailure(ctx, sendCtx, "interrupted")
+		_ = finish(result, unavailableUsage(reason), nil, relayTermination(sendCtx, ""))
 		return ErrUnavailable
 	}
 	defer resp.Body.Close()
 	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
-		_ = finish("failed", unavailableUsage("not_provided"), nil)
+		_ = finish("failed", unavailableUsage("not_provided"), nil, "")
 		return ErrUnavailable
 	}
 	if !call.Stream {
 		body, e := io.ReadAll(io.LimitReader(resp.Body, r.maxBytes+1))
-		if e != nil || int64(len(body)) > r.maxBytes {
-			_ = finish("failed", unavailableUsage("interrupted_before_usage"), nil)
+		if e != nil {
+			result, reason := relayFailure(ctx, sendCtx, "failed")
+			_ = finish(result, unavailableUsage(reason), nil, relayTermination(sendCtx, "eof"))
+			return ErrUnavailable
+		}
+		if int64(len(body)) > r.maxBytes {
+			_ = finish("failed", unavailableUsage("interrupted_before_usage"), nil, "parse_invalid")
 			return ErrUnavailable
 		}
 		usage, ok, e := parseUsage(body)
 		if e != nil {
-			_ = finish("failed", unavailableUsage("not_provided"), nil)
+			_ = finish("failed", unavailableUsage("not_provided"), nil, "parse_invalid")
 			return ErrUnavailable
 		}
 		if !ok {
 			usage = unavailableUsage("not_provided")
 		}
-		if e = finish("succeeded", usage, nil); e != nil {
+		if ok {
+			if e = diagnostics.append("receipt", &usage, ""); e != nil {
+				cancel()
+				_ = finish("failed", unavailableUsage("not_provided"), nil, "")
+				return e
+			}
+		}
+		if sendCtx.Err() != nil {
+			result, reason := relayFailure(ctx, sendCtx, "interrupted")
+			_ = finish(result, unavailableUsage(reason), nil, relayTermination(sendCtx, "eof"))
+			return ErrUnavailable
+		}
+		if e = finish("succeeded", usage, nil, "normal_completion"); e != nil {
 			return e
 		}
 		w.Header().Set("Content-Type", "application/json")
 		w.Header().Set("X-Request-ID", call.Input.RequestID)
 		_, e = w.Write(body)
+		if e != nil {
+			_ = diagnostics.append("termination", nil, "client_write_error")
+		}
 		return e
 	}
 	w.Header().Set("Content-Type", "text/event-stream")
@@ -189,20 +246,26 @@ func (r *Relay) Forward(ctx context.Context, w http.ResponseWriter, call RelayCa
 	var first *int64
 	var total int64
 	for scanner.Scan() {
+		if sendCtx.Err() != nil {
+			break
+		}
 		line := scanner.Text()
 		total += int64(len(line) + 1)
 		if total > r.maxBytes {
 			cancel()
-			_ = finish("failed", unavailableUsage("interrupted_before_usage"), first)
+			_ = finish("failed", unavailableUsage("interrupted_before_usage"), first, "parse_invalid")
 			return ErrUnavailable
 		}
 		if strings.HasPrefix(line, "data:") {
 			data := strings.TrimSpace(strings.TrimPrefix(line, "data:"))
 			if data == "[DONE]" {
-				if e = finish("succeeded", usage, first); e != nil {
+				if e = finish("succeeded", usage, first, "normal_completion"); e != nil {
 					return e
 				}
 				_, e = io.WriteString(w, "data: [DONE]\n\n")
+				if e != nil {
+					_ = diagnostics.append("termination", nil, "client_write_error")
+				}
 				if flush, ok := w.(http.Flusher); ok {
 					flush.Flush()
 				}
@@ -212,14 +275,25 @@ func (r *Relay) Forward(ctx context.Context, w http.ResponseWriter, call RelayCa
 				u, ok, parseErr := parseUsage([]byte(data))
 				if parseErr != nil {
 					cancel()
-					_ = finish("failed", unavailableUsage("not_provided"), first)
+					_ = finish("failed", unavailableUsage("not_provided"), first, "parse_invalid")
 					return ErrUnavailable
 				}
 				if ok {
 					if usage.Source == "upstream" && hash(usage) != hash(u) {
 						cancel()
-						_ = finish("failed", unavailableUsage("not_provided"), first)
+						_ = finish("failed", unavailableUsage("not_provided"), first, "usage_conflict")
 						return ErrUnavailable
+					}
+					if usage.Source != "upstream" {
+						if e = diagnostics.append("receipt", &u, ""); e != nil {
+							cancel()
+							cause := ""
+							if errors.Is(e, ErrDiagnosticLimit) {
+								cause = "diagnostic_limit"
+							}
+							_ = finish("failed", unavailableUsage("not_provided"), first, cause)
+							return e
+						}
 					}
 					usage = u
 				}
@@ -229,19 +303,22 @@ func (r *Relay) Forward(ctx context.Context, w http.ResponseWriter, call RelayCa
 			ms := time.Since(call.Input.Received).Milliseconds()
 			first = &ms
 		}
+		if sendCtx.Err() != nil {
+			result, reason := relayFailure(ctx, sendCtx, "interrupted")
+			_ = finish(result, unavailableUsage(reason), first, relayTermination(sendCtx, "eof"))
+			return ErrUnavailable
+		}
 		if _, e = io.WriteString(w, line+"\n"); e != nil {
+			result, reason := relayFailure(ctx, sendCtx, "cancelled")
 			cancel()
-			_ = finish("cancelled", unavailableUsage("cancelled_before_usage"), first)
+			_ = finish(result, unavailableUsage(reason), first, "client_write_error")
 			return ErrUnavailable
 		}
 		if flush, ok := w.(http.Flusher); ok {
 			flush.Flush()
 		}
 	}
-	result, reason := "interrupted", "interrupted_before_usage"
-	if ctx.Err() != nil {
-		result, reason = "cancelled", "cancelled_before_usage"
-	}
-	_ = finish(result, unavailableUsage(reason), first)
+	result, reason := relayFailure(ctx, sendCtx, "interrupted")
+	_ = finish(result, unavailableUsage(reason), first, relayTermination(sendCtx, "eof"))
 	return ErrUnavailable
 }

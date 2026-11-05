@@ -48,7 +48,7 @@ func Migrate(ctx context.Context, db *sql.DB) error {
 			return ErrConflict
 		}
 		if state == "Applied" {
-			return nil
+			return migrateDiagnostics(ctx, c)
 		}
 	} else if errors.Is(e, sql.ErrNoRows) {
 		var n int
@@ -72,9 +72,15 @@ func Migrate(ctx context.Context, db *sql.DB) error {
 		}
 	}
 	_, e = c.ExecContext(ctx, "UPDATE kernel_schema_migrations SET state='Applied' WHERE version=1 AND sha256=?", want)
-	return sanitize(e)
+	if e != nil {
+		return sanitize(e)
+	}
+	return migrateDiagnostics(ctx, c)
 }
 func sanitize(e error) error {
+	if errors.Is(e, ErrDiagnosticLimit) {
+		return ErrDiagnosticLimit
+	}
 	if e == nil {
 		return nil
 	}

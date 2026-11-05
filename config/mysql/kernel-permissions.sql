@@ -11,6 +11,11 @@ GRANT SELECT,UPDATE ON __MAAS_DATABASE__.concurrency_slots TO maas_kernel_runtim
 GRANT SELECT,INSERT ON __MAAS_DATABASE__.usage_events TO maas_kernel_runtime;
 GRANT SELECT,INSERT,UPDATE ON __MAAS_DATABASE__.usage_daily TO maas_kernel_runtime;
 GRANT SELECT,INSERT ON __MAAS_DATABASE__.slot_release_log TO maas_kernel_runtime;
+GRANT SELECT,INSERT ON __MAAS_DATABASE__.request_snapshot_digests TO maas_kernel_runtime;
+GRANT SELECT,INSERT ON __MAAS_DATABASE__.request_usage_diagnostics TO maas_kernel_runtime;
+CREATE ROLE IF NOT EXISTS maas_diagnostic_reader;
+GRANT SELECT ON __MAAS_DATABASE__.request_usage_diagnostics TO maas_diagnostic_reader;
+-- No diagnostic UPDATE/DELETE, Publisher, Operator or slot worker grant.
 -- Add the existing maas_release_reader role for LockActive's release reads.
 -- Configure/slot creation and all migrations use a separate installation role.
 

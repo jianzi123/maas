@@ -220,6 +220,9 @@ func (s *Store) Admit(ctx context.Context, gate ActiveGate, in Input) (Snapshot,
 		}
 		out = Snapshot{Input: in, Policy: policy, Rate: permit, WindowStart: start, WindowEnd: end, Admitted: t, SlotID: slot, AllocationFence: fence + 1, OwnerFence: 1}
 		b, _ := json.Marshal(out)
+		if _, e = tx.ExecContext(ctx, "INSERT INTO request_snapshot_digests(request_id,snapshot_sha256) VALUES(?,?)", in.RequestID, bytesSHA(b)); e != nil {
+			return e
+		}
 		if _, e = tx.ExecContext(ctx, `INSERT INTO generation_requests(request_id,key_id,publication_id,owner_id,owner_fence,hard_deadline,snapshot_json,result) VALUES(?,?,?,?,1,?,?,'in_progress')`, in.RequestID, in.KeyID, binding.PublicationID, in.Owner, in.Deadline, b); e != nil {
 			return e
 		}
