@@ -1,3 +1,5 @@
+> 当前统一主线为原 MAAS-3 / PR #2 的 2319eb62d84f278d1dd6d444ce52e532e202766e。本分支的产品实现已停止并行合入，仅作比较记录；不能把下文候选 SQL/迁移视为当前主线接口。主线使用 record_bytes 和 NewDiagnosticReader。
+
 # QA-001 / QA-002：受控修复与复测说明
 
 依据 MAAS-2 原清单 v2（2026-11-05；MAAS-7 触发线程）。当前已合入原 PR #2 的 `6dc39149a9d44b1bcca57cec59a0920f535ac1eb`（含既有控制 API/P1/恢复增量），继承原 MAAS-3 内核 `4f3eb9358f26ebab637a549b795651171d3b924f` 和发布提交 `630225697b8fcdd5e4d2f3ccd2a232e4d6b5259a`。终态 3.0、票据 v3、ObservationEnvelope 1.0 保持不变，D1 3.1 未切换。本文是实现/开发自测交付，独立 QA 与 A01–A34 验收尚待完成。
