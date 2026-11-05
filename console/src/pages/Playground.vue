@@ -19,31 +19,47 @@ const models = ref<S["AdminModel"][]>([]),
   lookup = shallowRef<D["RequestLookupPage"] | null>(null),
   looking = ref(false);
 let controller: AbortController | undefined,
-  alive = true;
+  alive = true,
+  requestEpoch = 0,
+  lookupEpoch = 0;
 const selected = computed(() => models.value.find((m) => m.id === model.value));
 async function loadModels() {
   try {
-    models.value = (
+    const result = (
       await api.json<S["AdminModelList"]>(ADMIN + "/models", "AdminModelList")
     ).data;
+    if (alive) models.value = result;
   } catch (e) {
-    message.value = explain(e);
+    if (alive) message.value = explain(e);
   }
 }
 async function recover() {
   if (!id.value || looking.value) return;
+  const requestId = id.value,
+    generation = requestEpoch,
+    mine = ++lookupEpoch;
+  const current = () =>
+    alive &&
+    generation === requestEpoch &&
+    mine === lookupEpoch &&
+    id.value === requestId;
   looking.value = true;
   try {
-    const page = await lookupRequest(api, id.value);
-    if (alive) lookup.value = page;
+    const page = await lookupRequest(api, requestId);
+    if (current()) lookup.value = page;
   } catch (e) {
-    if (alive) message.value = "回查未完成：" + explain(e);
+    if (current()) message.value = "回查未完成：" + explain(e);
   } finally {
-    if (alive) looking.value = false;
+    if (current()) looking.value = false;
   }
 }
 async function send() {
-  if (state.value === "streaming" || !selected.value?.callable) return;
+  if (!alive || state.value === "streaming" || !selected.value?.callable)
+    return;
+  const generation = ++requestEpoch;
+  const active = () => alive && generation === requestEpoch;
+  lookupEpoch++;
+  looking.value = false;
   controller = new AbortController();
   state.value = "streaming";
   output.value = "";
@@ -65,26 +81,26 @@ async function send() {
       current.signal,
       {
         id: (v) => {
-          if (alive) id.value = v;
+          if (active()) id.value = v;
         },
         chunk: (v) => {
-          if (alive) output.value += v;
+          if (active()) output.value += v;
         },
         usage: (v) => {
-          if (alive) usage.value = v;
+          if (active()) usage.value = v;
         },
       },
     );
-    if (alive) state.value = "completed";
+    if (active()) state.value = "completed";
   } catch (e) {
-    if (alive) {
+    if (active()) {
       state.value = current.signal.aborted ? "stopped" : "interrupted";
       message.value = current.signal.aborted
         ? "已停止浏览器传输；上游生成和费用状态待核验。"
         : explain(e);
     }
   } finally {
-    if (alive) {
+    if (active()) {
       controller = undefined;
       if (id.value) await recover();
       else if (state.value !== "completed")
@@ -98,6 +114,8 @@ function stop() {
 onMounted(loadModels);
 onBeforeUnmount(() => {
   alive = false;
+  requestEpoch++;
+  lookupEpoch++;
   controller?.abort();
   key.value = "";
   prompt.value = "";

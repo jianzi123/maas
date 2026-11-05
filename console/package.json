@@ -10,7 +10,8 @@
     "test:browser": "node scripts/browser-check.mjs",
     "types": "node scripts/generate-types.mjs",
     "format:check": "prettier --check src scripts index.html package.json tsconfig.json vite.config.ts",
-    "dev:fixtures": "vite --host 127.0.0.1 --mode fixtures"
+    "dev:fixtures": "vite --host 127.0.0.1 --mode fixtures",
+    "test:review-browser": "node scripts/review-browser.mjs"
   },
   "dependencies": {
     "ajv": "^8.20.0",

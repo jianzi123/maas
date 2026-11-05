@@ -55,3 +55,5 @@ npm run test:browser
 测试覆盖契约正反样例、38 位/零/null、秘密一次展示、未知写入不重试、乱序读取、精确查询旧服务/串 ID/503、回滚 UID/版本、SSE 分字节 UTF-8/CRLF、取消/EOF/error/DONE、会话 401、预算重置提示和带版本暂停。浏览器覆盖桌面/390px、空态、登录退出、Key、取消回查、发布和用量。
 
 MAAS-3/11 需提供同一真实 API 的管理、查询与发布装配；FE-R02/03 草案字段仍待 MAAS-2/3/7 收敛及真实 HTTP 样例复验。需获准模型、Secret 安全渠道、预算/价表、Higress 证据与环境后，才能验证真实 streaming、撤销、取消/迟到终态与容量恢复。当前没有真实模型调用、目标部署或 A01–A34 整体验收证据。
+
+本轮三方评审修复、针对性回归及受控 Go/MySQL HTTP 子集范围见 [docs/review-fixes.md](docs/review-fixes.md)。npm run test:review-browser 复跑 QA 的竞态安全断言；这属于开发者复跑，不代替独立验收。

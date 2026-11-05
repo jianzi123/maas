@@ -24,6 +24,7 @@ const form = reactive({
   unknown = ref(false),
   edit = ref<S["Key"] | null>(null),
   revoke = ref<string | null>(null);
+let alive = true;
 function editKey(k: S["Key"]) {
   edit.value = k;
   form.name = k.name;
@@ -45,7 +46,7 @@ function clear() {
   });
 }
 async function save() {
-  if (writing.value || unknown.value) return;
+  if (!alive || writing.value || unknown.value) return;
   writing.value = true;
   message.value = "";
   secret.value = "";
@@ -59,6 +60,7 @@ async function save() {
           limits: policy.limits,
         }),
       });
+      if (!alive) return;
       message.value = "预算已更新。";
     } else {
       const result = await api.json<S["KeyCreated"]>(
@@ -69,20 +71,22 @@ async function save() {
           body: JSON.stringify({ name: form.name, budget_policy: policy }),
         },
       );
+      if (!alive) return;
       secret.value = result.secret;
       message.value = "Key 已创建。原值只展示本次，请妥善保存。";
     }
     clear();
     await refresh();
   } catch (e) {
+    if (!alive) return;
     message.value = explain(e);
     unknown.value = uncertain(e);
   } finally {
-    writing.value = false;
+    if (alive) writing.value = false;
   }
 }
 async function confirmRevoke() {
-  if (!revoke.value || writing.value || unknown.value) return;
+  if (!alive || !revoke.value || writing.value || unknown.value) return;
   writing.value = true;
   try {
     await api.json<S["Key"]>(
@@ -90,18 +94,21 @@ async function confirmRevoke() {
       "Key",
       { method: "POST" },
     );
+    if (!alive) return;
     revoke.value = null;
     await refresh();
-    message.value = "Key 已撤销。";
+    if (alive) message.value = "Key 已撤销。";
   } catch (e) {
+    if (!alive) return;
     message.value = explain(e);
     unknown.value = uncertain(e);
   } finally {
-    writing.value = false;
+    if (alive) writing.value = false;
   }
 }
 onMounted(() => refresh());
 onBeforeUnmount(() => {
+  alive = false;
   secret.value = "";
 });
 const dimensions = [

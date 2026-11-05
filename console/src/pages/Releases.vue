@@ -2,7 +2,12 @@
 import { onMounted, onBeforeUnmount, ref, shallowRef } from "vue";
 import { api, ADMIN } from "../api/client";
 import { validate, type S, type D } from "../api/contracts";
-import { revisions, releasePath, canRollback } from "../api/recovery";
+import {
+  revisions,
+  releasePath,
+  canRollback,
+  assertReleaseAccepted,
+} from "../api/recovery";
 import { callableLabel } from "../domain";
 import { usePage, explain, uncertain } from "../ui";
 const { rows, busy, error, cursor, refresh } = usePage((cursor) =>
@@ -13,6 +18,7 @@ const { rows, busy, error, cursor, refresh } = usePage((cursor) =>
     "ReleaseList",
   ),
 );
+const editBaseline = shallowRef<S["ReleaseModelRelease"] | null>(null);
 const selected = shallowRef<S["ReleaseModelRelease"] | null>(null),
   history = shallowRef<D["ReleaseRevisionPage"] | null>(null),
   operation = shallowRef<S["ReleaseOperation"] | null>(null),
@@ -22,12 +28,32 @@ const selected = shallowRef<S["ReleaseModelRelease"] | null>(null),
   writing = ref(false),
   unknown = ref(false),
   reading = ref(false),
-  confirmDelete = ref(false);
-let selectionEpoch = 0;
+  confirmDelete = ref(false),
+  operationReading = ref(false),
+  needsRead = ref(false);
+let selectionEpoch = 0,
+  operationEpoch = 0,
+  alive = true;
+function invalidateOperationRead() {
+  operationEpoch++;
+  operationReading.value = false;
+}
+function beginEditing() {
+  if (!selected.value || writing.value || unknown.value || needsRead.value)
+    return;
+  editBaseline.value = selected.value;
+  editor.value = JSON.stringify(inputOf(selected.value), null, 2);
+  editing.value = true;
+}
 const profile = () => ({ name: "", revision: "" });
 function template(source: "ExternalAPI" | "SelfHosted") {
+  invalidateOperationRead();
+  operation.value = null;
+  editBaseline.value = null;
+  needsRead.value = false;
   selected.value = null;
   history.value = null;
+  reading.value = false;
   editing.value = true;
   selectionEpoch++;
   const sourceSpec =
@@ -99,7 +125,10 @@ function inputOf(r: S["ReleaseModelRelease"]): S["ReleaseReleaseInput"] {
   };
 }
 async function select(r: S["ReleaseModelRelease"]) {
+  invalidateOperationRead();
   const mine = ++selectionEpoch;
+  editBaseline.value = null;
+  editor.value = "";
   reading.value = true;
   message.value = "";
   history.value = null;
@@ -115,6 +144,8 @@ async function select(r: S["ReleaseModelRelease"]) {
     if (r.metadata.uid && current.metadata.uid !== r.metadata.uid)
       throw new Error("同名 CR 已被替换，请重新加载列表。");
     selected.value = current;
+    needsRead.value = false;
+    editBaseline.value = current;
     editor.value = JSON.stringify(inputOf(current), null, 2);
   } catch (e) {
     if (mine === selectionEpoch) {
@@ -154,18 +185,36 @@ async function mutate(
   action: "save" | "pause" | "resume" | "delete" | "rollback",
   revision?: D["ReleaseRetainedRevision"],
 ) {
-  if (writing.value || unknown.value) return;
+  if (!alive || writing.value || unknown.value) return;
+  invalidateOperationRead();
+  const mine = operationEpoch;
   writing.value = true;
   message.value = "";
-  operation.value = null;
   const r = selected.value;
   try {
+    if (needsRead.value)
+      throw new Error("请先重读当前 CR，核对最新配置和版本。");
+    if (
+      action === "save" &&
+      r &&
+      (!editBaseline.value ||
+        editBaseline.value.metadata.uid !== r.metadata.uid ||
+        editBaseline.value.metadata.resourceVersion !==
+          r.metadata.resourceVersion)
+    )
+      throw new Error("编辑基线已变化，请重读当前 CR 后重新编辑。");
+    let expected: {
+      namespace: string;
+      name: string;
+      uid?: string;
+      action: S["ReleaseOperation"]["action"];
+    };
     let path = ADMIN + "/model-releases",
       method = "POST",
       body: unknown,
       headers: Record<string, string> = {};
     if (r) {
-      if (!r.metadata.resourceVersion)
+      if (!r.metadata.resourceVersion || !r.metadata.uid)
         throw new Error("缺少服务端 resourceVersion，请刷新。");
       path = releasePath(r);
       headers["If-Match"] = '"' + r.metadata.resourceVersion + '"';
@@ -208,6 +257,21 @@ async function mutate(
       validate("ReleaseReleaseInput", input);
       body = input;
     }
+    const target = r?.metadata ?? (body as S["ReleaseReleaseInput"]).metadata;
+    expected = {
+      namespace: target.namespace,
+      name: target.name,
+      ...(r ? { uid: r.metadata.uid } : {}),
+      action:
+        action === "delete"
+          ? "Delete"
+          : action === "rollback"
+            ? "Rollback"
+            : r
+              ? "Update"
+              : "Create",
+    };
+    operation.value = null;
     const accepted = await api.json<S["ReleaseAccepted"]>(
       path,
       "ReleaseAccepted",
@@ -217,39 +281,65 @@ async function mutate(
         ...(body === undefined ? {} : { body: JSON.stringify(body) }),
       },
     );
+    if (!alive || mine !== operationEpoch) return;
+    assertReleaseAccepted(accepted, expected);
     operation.value = accepted.operation;
     message.value = "配置已提交（202）；等待原操作与活动发布确认。";
     editing.value = false;
     confirmDelete.value = false;
+    selectionEpoch++;
+    reading.value = false;
+    history.value = null;
+    needsRead.value = !accepted.resource;
+    editBaseline.value = accepted.resource ?? null;
+    editor.value = accepted.resource
+      ? JSON.stringify(inputOf(accepted.resource), null, 2)
+      : "";
     if (accepted.resource) selected.value = accepted.resource;
     await refresh();
   } catch (e) {
+    if (!alive || mine !== operationEpoch) return;
     message.value = explain(e);
     unknown.value = uncertain(e);
   } finally {
-    writing.value = false;
+    if (alive && mine === operationEpoch) writing.value = false;
   }
 }
 async function recoverOperation() {
-  if (!operation.value || reading.value) return;
-  reading.value = true;
+  if (!alive || !operation.value || operationReading.value || writing.value)
+    return;
+  const original = operation.value,
+    mine = ++operationEpoch;
+  const current = () =>
+    alive && mine === operationEpoch && operation.value?.id === original.id;
+  operationReading.value = true;
   try {
-    const id = operation.value.id;
     const op = await api.json<S["ReleaseOperation"]>(
-      ADMIN + "/release-operations/" + id,
+      ADMIN + "/release-operations/" + original.id,
       "ReleaseOperation",
     );
-    if (op.id !== id) throw new Error("操作 ID 不一致。");
+    if (!current()) return;
+    if (
+      op.id !== original.id ||
+      op.namespace !== original.namespace ||
+      op.name !== original.name ||
+      op.cr_uid !== original.cr_uid ||
+      op.action !== original.action
+    )
+      throw new Error("操作归属不一致，保留原操作供核对。");
     operation.value = op;
   } catch (e) {
-    message.value = explain(e);
+    if (current()) message.value = explain(e);
   } finally {
-    reading.value = false;
+    if (current()) operationReading.value = false;
   }
 }
 onMounted(() => refresh());
 onBeforeUnmount(() => {
+  alive = false;
   selectionEpoch++;
+  operationEpoch++;
+  editBaseline.value = null;
   editor.value = "";
 });
 </script>
@@ -337,7 +427,7 @@ onBeforeUnmount(() => {
       尚无状态观测；配置存在不代表已生效。
     </p>
     <div class="actions">
-      <button :disabled="writing || unknown" @click="editing = true">
+      <button :disabled="writing || unknown" @click="beginEditing">
         编辑配置</button
       ><button
         :disabled="writing || unknown"
@@ -429,8 +519,13 @@ onBeforeUnmount(() => {
       {{ operation.action }} · {{ operation.state }} · {{ operation.reason }} ·
       {{ operation.message }}
     </p>
-    <button :disabled="reading" @click="recoverOperation">查询原操作</button>
+    <button :disabled="operationReading || writing" @click="recoverOperation">
+      查询原操作
+    </button>
   </section>
+  <p v-if="needsRead" class="notice">
+    当前 ACK 未包含配置快照，请重读当前 CR 后再编辑或提交。
+  </p>
   <p v-if="unknown" class="error">
     写入结果未知。当前 CR 仅供人工核对，不能证明原操作成功；如已取得原
     operation.id 可继续查询，禁止自动重放。

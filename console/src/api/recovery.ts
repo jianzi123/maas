@@ -1,4 +1,4 @@
-import { ADMIN, Api } from "./client";
+import { ADMIN, Api, ApiError } from "./client";
 import type { S, D } from "./contracts";
 export const uuid =
   /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
@@ -59,4 +59,33 @@ export function canRollback(
     row.rollback_eligibility.evaluated_resource_version ===
       page.resource_version
   );
+}
+
+// A valid response shape does not establish ownership of a write acknowledgement.
+export function assertReleaseAccepted(
+  accepted: S["ReleaseAccepted"],
+  expected: {
+    namespace: string;
+    name: string;
+    uid?: string;
+    action: S["ReleaseOperation"]["action"];
+  },
+) {
+  const op = accepted.operation,
+    r = accepted.resource;
+  if (
+    op.namespace !== expected.namespace ||
+    op.name !== expected.name ||
+    op.action !== expected.action ||
+    (expected.uid !== undefined && op.cr_uid !== expected.uid) ||
+    (r &&
+      (r.metadata.namespace !== expected.namespace ||
+        r.metadata.name !== expected.name ||
+        (expected.uid !== undefined && r.metadata.uid !== expected.uid) ||
+        !r.metadata.uid ||
+        op.cr_uid !== r.metadata.uid ||
+        (op.requested_generation !== null &&
+          op.requested_generation !== r.metadata.generation)))
+  )
+    throw new ApiError("protocol_error", 202, true);
 }
