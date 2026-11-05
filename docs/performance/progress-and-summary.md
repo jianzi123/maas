@@ -43,3 +43,13 @@
 | 协作 | 共享总结与入口维护 | 每项主负责人用模板更新事实/决定/建议/未验项 | 引用提交/日志/hash，结论与证据级别一致 |
 
 3次配对只是探索，5次/8000请求及+10%等收益政策仍待评审；没有批准SLO或必要证据时不判C02–C08运行通过。真实模型/GPU/付费调用、权重下载和目标环境写入本轮未执行。
+
+## 本轮算子/运行时增量（2026-11-05）
+
+主线转到算子与推理框架。固定SGLang v0.5.6/7ae368e源码样本，记录8个文件的原始hash和AST定位；这不是部署版本推荐或已测热点。CPU执行8组float64正确性参考，新增20个针对性回归覆盖suffix mask/GQA/全遮罩/非连续布局/GEMM/RMSNorm、GPU默认拒绝、Profiler dry-run、未恢复样本与大整数占用积分。完整测试结果见本轮实际日志，不将测试数量外推为GPU数值或性能通过。
+
+交付CUDA GEMM/cuBLAS基线、Triton RMSNorm与PyTorch微基准骨架，提供Nsight/PyTorch Profiler默认dry-run命令；没有编译/执行CUDA/Triton或运行GPU算子。本机只读检测到RTX4070 Laptop 8GB，但PyTorch是2.9.1+cpu且导入OpenMP冲突，Triton/Nsight Systems未就绪；计划execution_enabled=false。
+
+J02固定200条、S/M/L=60/30/10及hash，补E1–E3的固定顺序、同资源/精度/业务限制、client/Go/Worker测点和未恢复分母。CPU/诊断工具不改变准入、预算、终态或slot策略，也不公开内部创新/专利材料。
+
+工程状态已更新理解：MAAS-3 4f3eb93已有真实耐久内核代码及局部MySQL/Redis/relay受控验证，不能继续写成全套夹具；实际Higress装配/证据生产者、模型/GPU及完整端到端仍未验证。本轮没有重跑其Go/数据库测试。此前2400次loopback实验仅作为历史受控传输证据复用，不是本轮新增模型结果。

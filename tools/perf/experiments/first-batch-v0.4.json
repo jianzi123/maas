@@ -311,5 +311,45 @@
       "shared_fraction": 0.75,
       "note": "prewarmed fixed prefix; actual shared token count/hash required"
     }
-  ]
+  ],
+  "runtime_extension": {
+    "revision": "0.5",
+    "execution_enabled": false,
+    "J02": {
+      "sequence_ref": "../runtime/J02-mixed-sequence.json",
+      "sha256": "2cbb999d15a41f87afed659f68aeec9388c3be8ed5e6d4f2843024ffe8ebda77",
+      "concurrency_candidates": [
+        1,
+        4
+      ],
+      "fixed_AB_request_order": true,
+      "actual_tokenizer_template_refs": null,
+      "same_resources_precision_and_business_limits": true
+    },
+    "measurement_boundaries": {
+      "client": [
+        "visible TTFT",
+        "E2E",
+        "all-sent denominator",
+        "censored/pending"
+      ],
+      "go": [
+        "first_chunk_ms",
+        "guard/NOWAIT/commit/pool cost"
+      ],
+      "worker": [
+        "enqueue/prefill/decode",
+        "native token times",
+        "KV/graph/kernel/communication"
+      ]
+    },
+    "comparison_requirements": [
+      "mature current baseline, not only naive ablation",
+      "same authoritative evidence and per-dimension known/held policy",
+      "independent stop/safe/evidence/release/successor observation clock and cutoff",
+      "report unrecovered count/coverage/censor horizon, never drop them from denominator",
+      "admission p95/guard hold/NOWAIT/cpu/receipt bytes/write amplification included"
+    ],
+    "runtime_results": null
+  }
 }

@@ -26,3 +26,8 @@
 - real_model：获准真实模型/GPU或供应商端点；仍要固定资源、版本、预算及质量门槛。
 
 现在可以运行前两类。后两类仍需唯一调用内核、网关适配和相应环境/额度输入。周总结是人工文档模板，本次没有创建自动任务或长期服务。
+
+本轮算子/推理框架工作：
+- [固定SHA源码与候选路径](sglang-source-analysis-v0.5.md)。
+- [算子参考、CUDA/Triton/PyTorch与Profiler入口](operator-lab.md)。
+- [J02、合理基线、未恢复样本与热路径开销](runtime-experiments-v0.5.md)。
