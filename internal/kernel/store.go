@@ -27,6 +27,15 @@ var migration string
 // Migrate is an explicit administrator action. The operator never calls it.
 // An Applying record permits restart after independently committed MySQL DDL.
 func Migrate(ctx context.Context, db *sql.DB) error {
+	if e := migrateBase(ctx, db); e != nil {
+		return e
+	}
+	if e := migrateControl(ctx, db); e != nil {
+		return e
+	}
+	return migrateDiagnostics(ctx, db)
+}
+func migrateBase(ctx context.Context, db *sql.DB) error {
 	c, e := db.Conn(ctx)
 	if e != nil {
 		return ErrUnavailable
@@ -48,7 +57,7 @@ func Migrate(ctx context.Context, db *sql.DB) error {
 			return ErrConflict
 		}
 		if state == "Applied" {
-			return migrateDiagnostics(ctx, c)
+			return nil
 		}
 	} else if errors.Is(e, sql.ErrNoRows) {
 		var n int
@@ -72,10 +81,7 @@ func Migrate(ctx context.Context, db *sql.DB) error {
 		}
 	}
 	_, e = c.ExecContext(ctx, "UPDATE kernel_schema_migrations SET state='Applied' WHERE version=1 AND sha256=?", want)
-	if e != nil {
-		return sanitize(e)
-	}
-	return migrateDiagnostics(ctx, c)
+	return sanitize(e)
 }
 func sanitize(e error) error {
 	if errors.Is(e, ErrDiagnosticLimit) {
@@ -84,7 +90,7 @@ func sanitize(e error) error {
 	if e == nil {
 		return nil
 	}
-	for _, known := range []error{ErrUnavailable, ErrBusy, ErrConflict, ErrKey, ErrBudget, ErrTokens, ErrMoney, ErrCapacity, ErrBound, ErrPrice, ErrPolicy, ErrCommitUnknown, release.ErrDependencyMissing, release.ErrConflict} {
+	for _, known := range []error{ErrNotFound, ErrUnavailable, ErrBusy, ErrConflict, ErrKey, ErrBudget, ErrTokens, ErrMoney, ErrCapacity, ErrBound, ErrPrice, ErrPolicy, ErrCommitUnknown, release.ErrDependencyMissing, release.ErrConflict} {
 		if errors.Is(e, known) {
 			return known
 		}
@@ -252,7 +258,10 @@ func (s *Store) verifier(raw string) string {
 	h.Write([]byte(raw))
 	return hex.EncodeToString(h.Sum(nil))
 }
-func (s *Store) CreateKey(ctx context.Context, p Policy) (id, raw string, err error) {
+func (s *Store) CreateKey(ctx context.Context, p Policy) (string, string, error) {
+	return s.createKey(ctx, "platform-key", p, "serving")
+}
+func (s *Store) createKey(ctx context.Context, name string, p Policy, purpose string) (id, raw string, err error) {
 	if err = validatePolicy(p); err != nil {
 		return
 	}
@@ -272,6 +281,10 @@ func (s *Store) CreateKey(ctx context.Context, p Policy) (id, raw string, err er
 			currency = &p.Limits.Money.Currency
 		}
 		_, e := tx.ExecContext(ctx, "INSERT INTO platform_keys(key_id,verifier,key_epoch,policy_json,retained_currency) VALUES(?,?,1,?,?)", id, s.verifier(raw), data, currency)
+		if e != nil {
+			return e
+		}
+		_, e = tx.ExecContext(ctx, "INSERT INTO key_metadata(key_id,name,key_prefix,created_at,purpose) VALUES(?,?,?,UTC_TIMESTAMP(6),?)", id, name, raw[:13], purpose)
 		return e
 	})
 	if err != nil {
@@ -306,6 +319,9 @@ func (s *Store) Revoke(ctx context.Context, id string) error {
 		var epoch int64
 		var revoked bool
 		if e := tx.QueryRowContext(ctx, "SELECT key_epoch,revoked FROM platform_keys WHERE key_id=? FOR UPDATE NOWAIT", id).Scan(&epoch, &revoked); e != nil {
+			if errors.Is(e, sql.ErrNoRows) {
+				return ErrNotFound
+			}
 			return e
 		}
 		if revoked {
@@ -315,6 +331,10 @@ func (s *Store) Revoke(ctx context.Context, id string) error {
 			return ErrConflict
 		}
 		_, e := tx.ExecContext(ctx, "UPDATE platform_keys SET revoked=TRUE,key_epoch=key_epoch+1 WHERE key_id=?", id)
+		if e != nil {
+			return e
+		}
+		_, e = tx.ExecContext(ctx, "UPDATE key_metadata SET revoked_at=UTC_TIMESTAMP(6) WHERE key_id=?", id)
 		return e
 	})
 }
@@ -352,6 +372,9 @@ func (s *Store) key(ctx context.Context, tx *sql.Tx, id string) (Policy, int64, 
 	var revoked, blocked bool
 	var b []byte
 	e := tx.QueryRowContext(ctx, "SELECT policy_json,key_epoch,revoked,blocked FROM platform_keys WHERE key_id=? FOR UPDATE NOWAIT", id).Scan(&b, &epoch, &revoked, &blocked)
+	if errors.Is(e, sql.ErrNoRows) {
+		return p, 0, ErrNotFound
+	}
 	if e != nil {
 		return p, 0, e
 	}

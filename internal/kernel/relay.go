@@ -4,10 +4,12 @@ import (
 	"bufio"
 	"bytes"
 	"context"
+	"crypto/tls"
 	"encoding/json"
 	"errors"
 	"github.com/google/uuid"
 	"io"
+	"net"
 	"net/http"
 	"net/url"
 	"strings"
@@ -30,7 +32,15 @@ func NewRelay(core *Store, endpoint string, transport *http.Transport, maxBytes 
 	if core == nil || e != nil || u.Scheme != "https" || u.Host == "" || u.User != nil || u.RawQuery != "" || u.Fragment != "" || (u.Path != "" && u.Path != "/") || transport == nil || transport.TLSClientConfig == nil || transport.TLSClientConfig.InsecureSkipVerify || len(transport.TLSClientConfig.Certificates) == 0 || maxBytes < 1 || maxBytes > 16<<20 || maxLine < 1 || maxLine > 1<<20 {
 		return nil, ErrUnavailable
 	}
-	return &Relay{core: core, endpoint: strings.TrimSuffix(endpoint, "/"), client: &http.Client{Transport: transport, CheckRedirect: func(*http.Request, []*http.Request) error { return http.ErrUseLastResponse }}, maxBytes: maxBytes, maxLine: maxLine}, nil
+	pinned := transport.Clone()
+	pinned.TLSClientConfig = transport.TLSClientConfig.Clone()
+	if pinned.TLSClientConfig.MinVersion < tls.VersionTLS12 {
+		pinned.TLSClientConfig.MinVersion = tls.VersionTLS12
+	}
+	if pinned.TLSClientConfig.RootCAs != nil {
+		pinned.TLSClientConfig.RootCAs = pinned.TLSClientConfig.RootCAs.Clone()
+	}
+	return &Relay{core: core, endpoint: strings.TrimSuffix(endpoint, "/"), client: &http.Client{Transport: pinned, CheckRedirect: func(*http.Request, []*http.Request) error { return http.ErrUseLastResponse }}, maxBytes: maxBytes, maxLine: maxLine}, nil
 }
 
 type RelayCall struct {
@@ -44,13 +54,18 @@ func unavailableUsage(reason string) Usage { return Usage{Source: "unavailable",
 
 // Inspect the request contexts before locally cancelling the transport. A
 // parent deadline is a timeout too; only an explicit parent cancel is cancelled.
-func relayFailure(ctx, sendCtx context.Context, fallback string) (string, string) {
+func relayFailure(ctx, sendCtx context.Context, err error, fallback string) (string, string) {
 	result := fallback
+	var networkError net.Error
 	// sendCtx preserves its first termination cause even if the parent changes later.
 	if errors.Is(sendCtx.Err(), context.DeadlineExceeded) {
 		result = "timed_out"
 	} else if errors.Is(sendCtx.Err(), context.Canceled) {
 		result = "cancelled"
+	} else if errors.Is(ctx.Err(), context.Canceled) {
+		result = "cancelled"
+	} else if errors.Is(ctx.Err(), context.DeadlineExceeded) || (errors.As(err, &networkError) && networkError.Timeout()) {
+		result = "timed_out"
 	}
 	reason := "interrupted_before_usage"
 	if result == "cancelled" {
@@ -187,7 +202,7 @@ func (r *Relay) Forward(ctx context.Context, w http.ResponseWriter, call RelayCa
 		return diagnosticErr
 	}
 	if sendErr != nil {
-		result, reason := relayFailure(ctx, sendCtx, "interrupted")
+		result, reason := relayFailure(ctx, sendCtx, sendErr, "interrupted")
 		_ = finish(result, unavailableUsage(reason), nil, relayTermination(sendCtx, ""))
 		return ErrUnavailable
 	}
@@ -199,7 +214,7 @@ func (r *Relay) Forward(ctx context.Context, w http.ResponseWriter, call RelayCa
 	if !call.Stream {
 		body, e := io.ReadAll(io.LimitReader(resp.Body, r.maxBytes+1))
 		if e != nil {
-			result, reason := relayFailure(ctx, sendCtx, "failed")
+			result, reason := relayFailure(ctx, sendCtx, e, "failed")
 			_ = finish(result, unavailableUsage(reason), nil, relayTermination(sendCtx, "eof"))
 			return ErrUnavailable
 		}
@@ -223,7 +238,7 @@ func (r *Relay) Forward(ctx context.Context, w http.ResponseWriter, call RelayCa
 			}
 		}
 		if sendCtx.Err() != nil {
-			result, reason := relayFailure(ctx, sendCtx, "interrupted")
+			result, reason := relayFailure(ctx, sendCtx, sendCtx.Err(), "interrupted")
 			_ = finish(result, unavailableUsage(reason), nil, relayTermination(sendCtx, "eof"))
 			return ErrUnavailable
 		}
@@ -279,12 +294,12 @@ func (r *Relay) Forward(ctx context.Context, w http.ResponseWriter, call RelayCa
 					return ErrUnavailable
 				}
 				if ok {
-					if usage.Source == "upstream" && hash(usage) != hash(u) {
+					if usage.Source == "upstream" && !monotonicUsage(usage, u) {
 						cancel()
 						_ = finish("failed", unavailableUsage("not_provided"), first, "usage_conflict")
 						return ErrUnavailable
 					}
-					if usage.Source != "upstream" {
+					if usage.Source != "upstream" || hash(usage) != hash(u) {
 						if e = diagnostics.append("receipt", &u, ""); e != nil {
 							cancel()
 							cause := ""
@@ -304,12 +319,12 @@ func (r *Relay) Forward(ctx context.Context, w http.ResponseWriter, call RelayCa
 			first = &ms
 		}
 		if sendCtx.Err() != nil {
-			result, reason := relayFailure(ctx, sendCtx, "interrupted")
+			result, reason := relayFailure(ctx, sendCtx, sendCtx.Err(), "interrupted")
 			_ = finish(result, unavailableUsage(reason), first, relayTermination(sendCtx, "eof"))
 			return ErrUnavailable
 		}
 		if _, e = io.WriteString(w, line+"\n"); e != nil {
-			result, reason := relayFailure(ctx, sendCtx, "cancelled")
+			result, reason := relayFailure(ctx, sendCtx, e, "cancelled")
 			cancel()
 			_ = finish(result, unavailableUsage(reason), first, "client_write_error")
 			return ErrUnavailable
@@ -318,7 +333,17 @@ func (r *Relay) Forward(ctx context.Context, w http.ResponseWriter, call RelayCa
 			flush.Flush()
 		}
 	}
-	result, reason := relayFailure(ctx, sendCtx, "interrupted")
+	result, reason := relayFailure(ctx, sendCtx, scanner.Err(), "interrupted")
 	_ = finish(result, unavailableUsage(reason), first, relayTermination(sendCtx, "eof"))
 	return ErrUnavailable
+}
+
+// Cumulative snapshots replace prior snapshots and are never added.
+func monotonicUsage(old, next Usage) bool {
+	for _, p := range [][2]*int64{{old.Input, next.Input}, {old.Output, next.Output}, {old.Total, next.Total}, {old.Cached, next.Cached}, {old.Reasoning, next.Reasoning}} {
+		if p[0] != nil && p[1] != nil && *p[1] < *p[0] {
+			return false
+		}
+	}
+	return true
 }

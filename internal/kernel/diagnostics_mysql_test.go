@@ -96,6 +96,16 @@ func TestMySQLUsageDiagnosticStorage(t *testing.T) {
 		if err := f.core.Recover(ctx, in.RequestID, uuid.NewString()); err != nil {
 			t.Fatal(err)
 		}
+		var recovered []byte
+		if err := f.db.QueryRow("SELECT event_json FROM usage_events WHERE request_id=?", in.RequestID).Scan(&recovered); err != nil {
+			t.Fatal(err)
+		}
+		var event struct {
+			Usage Usage `json:"usage"`
+		}
+		if json.Unmarshal(recovered, &event) != nil || event.Usage.Missing == nil || *event.Usage.Missing != "not_provided" {
+			t.Fatal("recovery lost received-usage fact", string(recovered))
+		}
 		d.Sequence = 2
 		d.ID = uuid.NewString()
 		if err := f.core.AppendUsageDiagnostic(ctx, d); !errors.Is(err, ErrConflict) {
@@ -183,7 +193,7 @@ func TestMySQLUsageDiagnosticStorage(t *testing.T) {
 		if _, err := f.core.NewUsageDiagnostic(ctx, in); err == nil {
 			t.Fatal("invented legacy digest")
 		}
-		if _, err := f.db.Exec("UPDATE kernel_schema_migrations SET state='Applying' WHERE version=2"); err != nil {
+		if _, err := f.db.Exec("UPDATE kernel_schema_migrations SET state='Applying' WHERE version=3"); err != nil {
 			t.Fatal(err)
 		}
 		if _, err := f.db.Exec("DROP TABLE request_usage_diagnostics"); err != nil {
@@ -192,7 +202,7 @@ func TestMySQLUsageDiagnosticStorage(t *testing.T) {
 		if err := Migrate(ctx, f.db); err != nil {
 			t.Fatal("resume", err)
 		}
-		if _, err := f.db.Exec("UPDATE kernel_schema_migrations SET sha256=REPEAT('f',64) WHERE version=2"); err != nil {
+		if _, err := f.db.Exec("UPDATE kernel_schema_migrations SET sha256=REPEAT('f',64) WHERE version=3"); err != nil {
 			t.Fatal(err)
 		}
 		if err := Migrate(ctx, f.db); !errors.Is(err, ErrConflict) {

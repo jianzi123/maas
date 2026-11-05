@@ -14,7 +14,7 @@ import (
 	"time"
 )
 
-//go:embed schema/0002_usage_diagnostics.sql
+//go:embed schema/0003_usage_diagnostics.sql
 var diagnosticMigration string
 
 //go:embed schema/usage-diagnostic.schema.json
@@ -54,12 +54,23 @@ type UsageDiagnostic struct {
 func bytesSHA(b []byte) string { v := sha256.Sum256(b); return hex.EncodeToString(v[:]) }
 func invocationBinding(s Snapshot) map[string]any {
 	p, plan := s.Input.Profile, s.Input.Plan
-	return map[string]any{"model_release_uid": p.CRUID, "model_release_namespace": p.Namespace, "model_release_name": p.Name, "model_release_generation": p.Binding.Generation, "release_revision": p.Binding.Revision, "publication_id": p.Binding.PublicationID, "activation_epoch": p.Binding.Epoch, "route_binding_sha256": p.RouteDigest, "admission_purpose": "serving", "price_snapshot_id": plan.PriceID, "price_version": plan.PriceVersion}
+	purpose := purposeOf(s.Input)
+	return map[string]any{"model_release_uid": p.CRUID, "model_release_namespace": p.Namespace, "model_release_name": p.Name, "model_release_generation": p.Binding.Generation, "release_revision": p.Binding.Revision, "publication_id": p.Binding.PublicationID, "activation_epoch": p.Binding.Epoch, "route_binding_sha256": p.RouteDigest, "admission_purpose": purpose, "price_snapshot_id": plan.PriceID, "price_version": plan.PriceVersion}
 }
-func migrateDiagnostics(ctx context.Context, c *sql.Conn) error {
+func migrateDiagnostics(ctx context.Context, db *sql.DB) error {
+	c, err := db.Conn(ctx)
+	if err != nil {
+		return sanitize(err)
+	}
+	defer c.Close()
+	var locked int
+	if err = c.QueryRowContext(ctx, "SELECT GET_LOCK(CONCAT('maas-kernel:',DATABASE()),0)").Scan(&locked); err != nil || locked != 1 {
+		return ErrBusy
+	}
+	defer c.ExecContext(context.Background(), "SELECT RELEASE_LOCK(CONCAT('maas-kernel:',DATABASE()))")
 	want := bytesSHA([]byte(diagnosticMigration))
 	var digest, state string
-	err := c.QueryRowContext(ctx, "SELECT sha256,state FROM kernel_schema_migrations WHERE version=2").Scan(&digest, &state)
+	err = c.QueryRowContext(ctx, "SELECT sha256,state FROM kernel_schema_migrations WHERE version=3").Scan(&digest, &state)
 	if err == nil {
 		if digest != want {
 			return ErrConflict
@@ -75,7 +86,7 @@ func migrateDiagnostics(ctx context.Context, c *sql.Conn) error {
 		if n != 0 {
 			return ErrConflict
 		}
-		if _, err = c.ExecContext(ctx, "INSERT INTO kernel_schema_migrations VALUES(2,?,'Applying')", want); err != nil {
+		if _, err = c.ExecContext(ctx, "INSERT INTO kernel_schema_migrations VALUES(3,?,'Applying')", want); err != nil {
 			return sanitize(err)
 		}
 	} else {
@@ -88,7 +99,7 @@ func migrateDiagnostics(ctx context.Context, c *sql.Conn) error {
 			}
 		}
 	}
-	_, err = c.ExecContext(ctx, "UPDATE kernel_schema_migrations SET state='Applied' WHERE version=2 AND sha256=?", want)
+	_, err = c.ExecContext(ctx, "UPDATE kernel_schema_migrations SET state='Applied' WHERE version=3 AND sha256=?", want)
 	return sanitize(err)
 }
 

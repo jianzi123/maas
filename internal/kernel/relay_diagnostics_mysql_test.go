@@ -54,7 +54,7 @@ func TestMySQLRelayUsageDiagnostics(t *testing.T) {
 					return
 				}
 				if mode == "conflict" {
-					io.WriteString(w, "data: {\"usage\":{\"prompt_tokens\":12,\"completion_tokens\":8,\"total_tokens\":20}}\n\n")
+					io.WriteString(w, "data: {\"usage\":{\"prompt_tokens\":11,\"completion_tokens\":7,\"total_tokens\":18}}\n\n")
 					return
 				}
 				if mode == "invalid" {
@@ -219,7 +219,7 @@ func TestRelayFirstContextTermination(t *testing.T) {
 	child, done := context.WithDeadline(parent, time.Now().Add(-time.Second))
 	defer done()
 	cancelParent()
-	result, _ := relayFailure(parent, child, "interrupted")
+	result, _ := relayFailure(parent, child, child.Err(), "interrupted")
 	if result != "timed_out" {
 		t.Fatal("overwrote earlier deadline", result)
 	}
