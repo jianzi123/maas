@@ -14,7 +14,7 @@ import (
 )
 
 func TestMySQLControlledRelay(t *testing.T) {
-	for _, mode := range []string{"nonstream", "stream", "cancel", "missing_usage", "interrupted", "accounting_failure"} {
+	for _, mode := range []string{"nonstream", "stream", "cumulative", "decreasing", "cancel", "missing_usage", "interrupted", "accounting_failure"} {
 		t.Run(mode, func(t *testing.T) {
 			f := setup(t, 1)
 			in := f.input(t)
@@ -49,6 +49,12 @@ func TestMySQLControlledRelay(t *testing.T) {
 					return
 				}
 				if mode != "missing_usage" {
+					if mode == "cumulative" {
+						io.WriteString(w, "data: {\"usage\":{\"prompt_tokens\":10,\"completion_tokens\":5,\"total_tokens\":15,\"prompt_tokens_details\":{\"cached_tokens\":0}}}\n\n")
+					}
+					if mode == "decreasing" {
+						io.WriteString(w, "data: {\"usage\":{\"prompt_tokens\":15,\"completion_tokens\":8,\"total_tokens\":23,\"prompt_tokens_details\":{\"cached_tokens\":0}}}\n\n")
+					}
 					io.WriteString(w, "data: {\"usage\":{\"prompt_tokens\":12,\"completion_tokens\":7,\"total_tokens\":19,\"prompt_tokens_details\":{\"cached_tokens\":4},\"completion_tokens_details\":{\"reasoning_tokens\":3}}}\n\n")
 				}
 				if mode == "accounting_failure" {
@@ -67,7 +73,7 @@ func TestMySQLControlledRelay(t *testing.T) {
 			if called != 1 {
 				t.Fatal("must have one gateway dispatch", called)
 			}
-			success := mode == "stream" || mode == "nonstream"
+			success := mode == "stream" || mode == "nonstream" || mode == "cumulative"
 			if success && e != nil {
 				t.Fatal(e)
 			}
@@ -87,6 +93,11 @@ func TestMySQLControlledRelay(t *testing.T) {
 			}
 			if success && state != "succeeded" {
 				t.Fatal("state", state)
+			}
+			if mode == "cumulative" {
+				if c := readCounter(t, f, "tokens"); c.Known != "19" {
+					t.Fatal("cumulative usage summed", c)
+				}
 			}
 			if mode == "cancel" && state != "cancelled" {
 				t.Fatal(state)

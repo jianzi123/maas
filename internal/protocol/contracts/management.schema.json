@@ -1,0 +1,2409 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "SummaryPage": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "data": {
+          "type": "array",
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/$defs/SummaryRow"
+          }
+        },
+        "next_cursor": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 2048
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "generated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "data_complete": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "data",
+        "next_cursor",
+        "generated_at",
+        "data_complete"
+      ]
+    },
+    "SummaryRow": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "quota_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "key_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "model_alias": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+        },
+        "source_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "source_type": {
+          "type": "string",
+          "enum": [
+            "internal",
+            "external"
+          ]
+        },
+        "admitted_total": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "in_progress": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "succeeded": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "failed": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "cancelled": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "timed_out": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "interrupted": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "quota_used": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "submitted_known": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "submission_unknown": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "not_submitted": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "input_tokens_known": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "output_tokens_known": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "total_tokens_known": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "missing_input_requests": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "missing_output_requests": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "missing_total_requests": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "missing_token_requests": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "currency": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[A-Z]{3}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "price_version": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._/-]*$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "cost_known_atomic": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]{0,37})$",
+              "maxLength": 38
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "money_uncertainty_held_atomic": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]{0,37})$",
+              "maxLength": 38
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "token_uncertainty_held": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]{0,37})$",
+          "maxLength": 38
+        },
+        "missing_cost_requests": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "quota_date",
+        "key_id",
+        "model_alias",
+        "source_id",
+        "source_type",
+        "admitted_total",
+        "in_progress",
+        "succeeded",
+        "failed",
+        "cancelled",
+        "timed_out",
+        "interrupted",
+        "quota_used",
+        "submitted_known",
+        "submission_unknown",
+        "not_submitted",
+        "input_tokens_known",
+        "output_tokens_known",
+        "total_tokens_known",
+        "missing_input_requests",
+        "missing_output_requests",
+        "missing_total_requests",
+        "missing_token_requests",
+        "currency",
+        "price_version",
+        "cost_known_atomic",
+        "money_uncertainty_held_atomic",
+        "token_uncertainty_held",
+        "missing_cost_requests"
+      ]
+    },
+    "RequestLookupPage": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "data": {
+          "type": "array",
+          "maxItems": 1,
+          "items": {
+            "$ref": "#/$defs/RequestRecord"
+          }
+        },
+        "next_cursor": {
+          "type": "null"
+        },
+        "generated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "data_complete": {
+          "type": "boolean"
+        },
+        "lookup": {
+          "$ref": "#/$defs/RequestLookupEvidence"
+        }
+      },
+      "required": [
+        "data",
+        "next_cursor",
+        "generated_at",
+        "data_complete",
+        "lookup"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "lookup": {
+                "properties": {
+                  "resolution": {
+                    "const": "recorded"
+                  }
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "minItems": 1
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "data": {
+                "maxItems": 0
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "lookup": {
+                "properties": {
+                  "resolution": {
+                    "const": "unknown"
+                  }
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data_complete": {
+                "const": false
+              }
+            }
+          }
+        }
+      ],
+      "description": "Exact mode only; every returned row ID MUST equal lookup.request_id and the query ID (cross-field equality is a semantic check). data_complete is completeness of this query observation, not finished generation, available usage or free capacity. Row and original allocation should be read in one primary consistent snapshot; otherwise checked_at timestamps must disclose separate observations."
+    },
+    "RequestLookupEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "request_id": {
+          "type": "string",
+          "format": "uuid",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+        },
+        "resolution": {
+          "type": "string",
+          "enum": [
+            "recorded",
+            "not_admitted",
+            "expired",
+            "unknown"
+          ]
+        },
+        "evidence_source": {
+          "type": "string",
+          "enum": [
+            "generation_request",
+            "admission_rejection",
+            "retention_marker",
+            "none"
+          ]
+        },
+        "checked_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "reason": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "verified_admission_rejection",
+                "verified_retention_expired",
+                "no_authoritative_record"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "rejection_code": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "invalid_request",
+                "model_not_found",
+                "unsupported_field",
+                "retention_window_exceeded",
+                "payload_too_large",
+                "invalid_api_key",
+                "unauthenticated",
+                "csrf_failed",
+                "forbidden",
+                "source_disabled",
+                "not_found",
+                "key_revoked",
+                "state_conflict",
+                "concurrency_exceeded",
+                "login_rate_limited",
+                "upstream_error",
+                "upstream_protocol_error",
+                "upstream_rate_limited",
+                "upstream_timeout",
+                "dependency_unavailable",
+                "admission_busy",
+                "route_not_ready",
+                "accounting_unavailable",
+                "shutting_down",
+                "internal_error",
+                "client_write_timeout",
+                "client_cancelled",
+                "owner_lost",
+                "request_budget_exceeded",
+                "token_budget_exceeded",
+                "money_budget_exceeded",
+                "rate_limited",
+                "budget_bound_unavailable",
+                "pricing_unavailable",
+                "rate_limiter_unavailable",
+                "policy_changed",
+                "currency_mismatch",
+                "budget_bound_breached"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "capacity": {
+          "$ref": "#/$defs/RequestCapacityProjection"
+        }
+      },
+      "required": [
+        "request_id",
+        "resolution",
+        "evidence_source",
+        "checked_at",
+        "reason",
+        "rejection_code",
+        "capacity"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "resolution": {
+                "const": "recorded"
+              }
+            },
+            "required": [
+              "resolution"
+            ]
+          },
+          "then": {
+            "properties": {
+              "evidence_source": {
+                "const": "generation_request"
+              },
+              "reason": {
+                "const": null
+              },
+              "rejection_code": {
+                "type": "null"
+              },
+              "capacity": {
+                "properties": {
+                  "state": {
+                    "enum": [
+                      "held",
+                      "quarantined",
+                      "released",
+                      "unknown"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "resolution": {
+                "const": "not_admitted"
+              }
+            },
+            "required": [
+              "resolution"
+            ]
+          },
+          "then": {
+            "properties": {
+              "evidence_source": {
+                "const": "admission_rejection"
+              },
+              "reason": {
+                "const": "verified_admission_rejection"
+              },
+              "rejection_code": {
+                "type": "string"
+              },
+              "capacity": {
+                "properties": {
+                  "state": {
+                    "const": "not_allocated"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "resolution": {
+                "const": "expired"
+              }
+            },
+            "required": [
+              "resolution"
+            ]
+          },
+          "then": {
+            "properties": {
+              "evidence_source": {
+                "const": "retention_marker"
+              },
+              "reason": {
+                "const": "verified_retention_expired"
+              },
+              "rejection_code": {
+                "type": "null"
+              },
+              "capacity": {
+                "properties": {
+                  "state": {
+                    "const": "unknown"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "resolution": {
+                "const": "unknown"
+              }
+            },
+            "required": [
+              "resolution"
+            ]
+          },
+          "then": {
+            "properties": {
+              "evidence_source": {
+                "const": "none"
+              },
+              "reason": {
+                "const": "no_authoritative_record"
+              },
+              "rejection_code": {
+                "type": "null"
+              },
+              "capacity": {
+                "properties": {
+                  "state": {
+                    "const": "unknown"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "description": "Not-admitted and expired require independently verifiable FINAL pre-admission rejection / retention marker for this exact ID within session visibility. They are optional evidence-backed capabilities, not requirements to create a second ledger. A missing row, UUID timestamp, current CR or 5xx is not proof. If only request rows exist, emit recorded or unknown."
+    },
+    "RequestCapacityProjection": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "state": {
+          "type": "string",
+          "enum": [
+            "held",
+            "quarantined",
+            "released",
+            "not_allocated",
+            "unknown"
+          ]
+        },
+        "checked_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "data_source": {
+          "type": "string",
+          "enum": [
+            "current_allocation",
+            "release_log",
+            "admission_rejection",
+            "none"
+          ]
+        },
+        "release_reason": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "state",
+        "checked_at",
+        "data_source",
+        "release_reason"
+      ],
+      "description": "Readonly projection for original (slot_id, allocation_fence, request_id). Released requires matching release_log; held/quarantined require matching current allocation. A reused slot is not evidence. Reasons are sanitized existing release reason identifiers, not raw evidence. Release never implies refund, stopped engine or changed terminal/accounting.",
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "state": {
+                "const": "released"
+              }
+            },
+            "required": [
+              "state"
+            ]
+          },
+          "then": {
+            "properties": {
+              "data_source": {
+                "const": "release_log"
+              },
+              "release_reason": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "state": {
+                "const": "held"
+              }
+            },
+            "required": [
+              "state"
+            ]
+          },
+          "then": {
+            "properties": {
+              "data_source": {
+                "const": "current_allocation"
+              },
+              "release_reason": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "state": {
+                "const": "quarantined"
+              }
+            },
+            "required": [
+              "state"
+            ]
+          },
+          "then": {
+            "properties": {
+              "data_source": {
+                "const": "current_allocation"
+              },
+              "release_reason": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "state": {
+                "const": "not_allocated"
+              }
+            },
+            "required": [
+              "state"
+            ]
+          },
+          "then": {
+            "properties": {
+              "data_source": {
+                "const": "admission_rejection"
+              },
+              "release_reason": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "state": {
+                "const": "unknown"
+              }
+            },
+            "required": [
+              "state"
+            ]
+          },
+          "then": {
+            "properties": {
+              "data_source": {
+                "const": "none"
+              },
+              "release_reason": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "RequestRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "request_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "key_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "model_alias": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+        },
+        "upstream_model": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "source_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "source_type": {
+          "type": "string",
+          "enum": [
+            "internal",
+            "external"
+          ]
+        },
+        "config_revision": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "received_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "admitted_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "finished_at": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "quota_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "in_progress",
+            "succeeded",
+            "failed",
+            "cancelled",
+            "timed_out",
+            "interrupted"
+          ]
+        },
+        "submission_state": {
+          "type": "string",
+          "enum": [
+            "submitted",
+            "not_submitted",
+            "unknown"
+          ]
+        },
+        "quota_consumed": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "error_code": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "invalid_request",
+                "model_not_found",
+                "unsupported_field",
+                "retention_window_exceeded",
+                "payload_too_large",
+                "invalid_api_key",
+                "unauthenticated",
+                "csrf_failed",
+                "forbidden",
+                "source_disabled",
+                "not_found",
+                "key_revoked",
+                "state_conflict",
+                "concurrency_exceeded",
+                "login_rate_limited",
+                "upstream_error",
+                "upstream_protocol_error",
+                "upstream_rate_limited",
+                "upstream_timeout",
+                "dependency_unavailable",
+                "admission_busy",
+                "route_not_ready",
+                "accounting_unavailable",
+                "shutting_down",
+                "internal_error",
+                "client_write_timeout",
+                "client_cancelled",
+                "owner_lost",
+                "request_budget_exceeded",
+                "token_budget_exceeded",
+                "money_budget_exceeded",
+                "rate_limited",
+                "budget_bound_unavailable",
+                "pricing_unavailable",
+                "rate_limiter_unavailable",
+                "policy_changed",
+                "currency_mismatch",
+                "budget_bound_breached"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "duration_ms": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "first_chunk_ms": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "usage": {
+          "$ref": "#/$defs/Usage"
+        },
+        "metering_state": {
+          "type": "string",
+          "enum": [
+            "complete",
+            "incomplete"
+          ]
+        },
+        "reservation_plan": {
+          "$ref": "#/$defs/ReservationPlan"
+        },
+        "budget_accounting": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BudgetAccounting"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "rate_witness": {
+          "$ref": "#/$defs/RateWitness"
+        },
+        "invocation_binding": {
+          "$ref": "#/$defs/ReleaseInvocationBinding"
+        }
+      },
+      "required": [
+        "request_id",
+        "key_id",
+        "model_alias",
+        "upstream_model",
+        "source_id",
+        "source_type",
+        "config_revision",
+        "received_at",
+        "admitted_at",
+        "finished_at",
+        "quota_date",
+        "status",
+        "submission_state",
+        "quota_consumed",
+        "error_code",
+        "duration_ms",
+        "first_chunk_ms",
+        "usage",
+        "metering_state",
+        "reservation_plan",
+        "budget_accounting",
+        "rate_witness",
+        "invocation_binding"
+      ]
+    },
+    "ReleaseInvocationBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "model_release_uid": {
+          "type": "string",
+          "format": "uuid",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+        },
+        "model_release_namespace": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 63,
+          "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+        },
+        "model_release_name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 63,
+          "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+        },
+        "model_release_generation": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "release_revision": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "publication_id": {
+          "type": "string",
+          "format": "uuid",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+        },
+        "activation_epoch": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "route_binding_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "admission_purpose": {
+          "type": "string",
+          "enum": [
+            "serving",
+            "validation"
+          ]
+        },
+        "price_snapshot_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "price_version": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._/-]*$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "model_release_uid",
+        "model_release_namespace",
+        "model_release_name",
+        "model_release_generation",
+        "release_revision",
+        "publication_id",
+        "activation_epoch",
+        "route_binding_sha256",
+        "admission_purpose",
+        "price_snapshot_id",
+        "price_version"
+      ]
+    },
+    "RateWitness": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "permit_id": {
+          "type": "string",
+          "format": "uuid",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+        },
+        "rate_epoch": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]{0,37})$",
+          "maxLength": 38
+        },
+        "policy_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._/-]*$"
+        },
+        "policy_revision": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._/-]*$"
+        },
+        "windows": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 2,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "scope_id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128,
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._/-]*$"
+              },
+              "window_start": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "window_end": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "limit": {
+                "type": "string",
+                "pattern": "^(0|[1-9][0-9]{0,37})$",
+                "maxLength": 38
+              }
+            },
+            "required": [
+              "scope_id",
+              "window_start",
+              "window_end",
+              "limit"
+            ]
+          }
+        }
+      },
+      "required": [
+        "permit_id",
+        "rate_epoch",
+        "policy_id",
+        "policy_revision",
+        "windows"
+      ]
+    },
+    "BudgetAccounting": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "policy_revision": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._/-]*$"
+        },
+        "window_kind": {
+          "type": "string",
+          "enum": [
+            "utc_day",
+            "utc_month"
+          ]
+        },
+        "window_start": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "window_end": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "request": {
+          "$ref": "#/$defs/DimensionSettlement"
+        },
+        "token": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/DimensionSettlement"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "money": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/DimensionSettlement"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "token_actual": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]{0,37})$",
+              "maxLength": 38
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "token_basis": {
+          "type": "string",
+          "enum": [
+            "upstream_total",
+            "component_sum",
+            "not_submitted",
+            "unavailable"
+          ]
+        },
+        "cost_actual_atomic": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]{0,37})$",
+              "maxLength": 38
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "cost_state": {
+          "type": "string",
+          "enum": [
+            "known",
+            "unavailable",
+            "upper_bound",
+            "anomalous"
+          ]
+        },
+        "currency": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[A-Z]{3}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "price_snapshot_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "price_version": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._/-]*$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "missing_reason": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "not_provided",
+                "partial_usage",
+                "partial_price_categories",
+                "not_priced",
+                "owner_lost",
+                "bound_breached"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "policy_revision",
+        "window_kind",
+        "window_start",
+        "window_end",
+        "request",
+        "token",
+        "money",
+        "token_actual",
+        "token_basis",
+        "cost_actual_atomic",
+        "cost_state",
+        "currency",
+        "price_snapshot_id",
+        "price_version",
+        "missing_reason"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "token_basis": {
+                "const": "unavailable"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "token_actual": {
+                "type": "null"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "token_actual": {
+                "type": "string",
+                "pattern": "^(0|[1-9][0-9]{0,37})$",
+                "maxLength": 38
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "cost_state": {
+                "enum": [
+                  "known",
+                  "anomalous"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "cost_actual_atomic": {
+                "type": "string",
+                "pattern": "^(0|[1-9][0-9]{0,37})$",
+                "maxLength": 38
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "cost_actual_atomic": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "DimensionSettlement": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "reserved": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]{0,37})$",
+          "maxLength": 38
+        },
+        "known_used": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]{0,37})$",
+          "maxLength": 38
+        },
+        "unknown_held": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]{0,37})$",
+          "maxLength": 38
+        },
+        "released": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]{0,37})$",
+          "maxLength": 38
+        },
+        "overrun": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]{0,37})$",
+          "maxLength": 38
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "known",
+            "held",
+            "released",
+            "anomalous"
+          ]
+        }
+      },
+      "required": [
+        "reserved",
+        "known_used",
+        "unknown_held",
+        "released",
+        "overrun",
+        "state"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "state": {
+                "const": "held"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "known_used": {
+                "const": "0"
+              },
+              "released": {
+                "const": "0"
+              },
+              "overrun": {
+                "const": "0"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "state": {
+                "const": "known"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "unknown_held": {
+                "const": "0"
+              },
+              "overrun": {
+                "const": "0"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "state": {
+                "const": "released"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "known_used": {
+                "const": "0"
+              },
+              "unknown_held": {
+                "const": "0"
+              },
+              "overrun": {
+                "const": "0"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "state": {
+                "const": "anomalous"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "unknown_held": {
+                "const": "0"
+              },
+              "released": {
+                "const": "0"
+              },
+              "overrun": {
+                "type": "string",
+                "pattern": "^[1-9][0-9]{0,37}$"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "ReservationPlan": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": "1.0"
+        },
+        "model_alias": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._/-]*$"
+        },
+        "source_id": {
+          "type": "string",
+          "format": "uuid",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+        },
+        "config_revision": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._/-]*$"
+        },
+        "capability_revision": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._/-]*$"
+        },
+        "budget_policy_revision": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._/-]*$"
+        },
+        "window_kind": {
+          "type": "string",
+          "enum": [
+            "utc_day",
+            "utc_month"
+          ]
+        },
+        "token_metric": {
+          "const": "prompt_plus_completion"
+        },
+        "request_reserved": {
+          "const": "1"
+        },
+        "input_upper_tokens": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]{0,37})$",
+              "maxLength": 38
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "output_upper_tokens": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]{0,37})$",
+              "maxLength": 38
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "total_upper_tokens": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]{0,37})$",
+              "maxLength": 38
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "token_reserved": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]{0,37})$",
+              "maxLength": 38
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "money_reserved_atomic": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]{0,37})$",
+              "maxLength": 38
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "currency": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[A-Z]{3}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "price_snapshot_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "price_snapshot_sha256": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "price_version": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._/-]*$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "rate_policy_revision": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._/-]*$"
+        }
+      },
+      "required": [
+        "schema_version",
+        "model_alias",
+        "source_id",
+        "config_revision",
+        "capability_revision",
+        "budget_policy_revision",
+        "window_kind",
+        "token_metric",
+        "request_reserved",
+        "input_upper_tokens",
+        "output_upper_tokens",
+        "total_upper_tokens",
+        "token_reserved",
+        "money_reserved_atomic",
+        "currency",
+        "price_snapshot_id",
+        "price_snapshot_sha256",
+        "price_version",
+        "rate_policy_revision"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "token_reserved": {
+                "type": "string"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "input_upper_tokens": {
+                "type": "string",
+                "pattern": "^(0|[1-9][0-9]{0,37})$",
+                "maxLength": 38
+              },
+              "output_upper_tokens": {
+                "type": "string",
+                "pattern": "^(0|[1-9][0-9]{0,37})$",
+                "maxLength": 38
+              },
+              "total_upper_tokens": {
+                "type": "string",
+                "pattern": "^(0|[1-9][0-9]{0,37})$",
+                "maxLength": 38
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "money_reserved_atomic": {
+                "type": "string"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "currency": {
+                "type": "string",
+                "pattern": "^[A-Z]{3}$"
+              },
+              "price_snapshot_id": {
+                "type": "string",
+                "format": "uuid",
+                "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+              },
+              "price_snapshot_sha256": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              },
+              "price_version": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128,
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._/-]*$"
+              },
+              "input_upper_tokens": {
+                "type": "string",
+                "pattern": "^(0|[1-9][0-9]{0,37})$",
+                "maxLength": 38
+              },
+              "output_upper_tokens": {
+                "type": "string",
+                "pattern": "^(0|[1-9][0-9]{0,37})$",
+                "maxLength": 38
+              },
+              "total_upper_tokens": {
+                "type": "string",
+                "pattern": "^(0|[1-9][0-9]{0,37})$",
+                "maxLength": 38
+              }
+            }
+          }
+        }
+      ]
+    },
+    "Usage": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "input_tokens": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "output_tokens": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "total_tokens": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "source": {
+          "type": "string",
+          "enum": [
+            "upstream",
+            "unavailable"
+          ]
+        },
+        "missing_reason": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "not_provided",
+                "partial",
+                "cancelled_before_usage",
+                "interrupted_before_usage"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "input_cached_tokens": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "reasoning_tokens": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "input_tokens",
+        "output_tokens",
+        "total_tokens",
+        "source",
+        "missing_reason",
+        "input_cached_tokens",
+        "reasoning_tokens"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "source": {
+                "const": "unavailable"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "input_tokens": {
+                "type": "null"
+              },
+              "output_tokens": {
+                "type": "null"
+              },
+              "total_tokens": {
+                "type": "null"
+              },
+              "missing_reason": {
+                "type": "string",
+                "enum": [
+                  "not_provided",
+                  "cancelled_before_usage",
+                  "interrupted_before_usage"
+                ]
+              },
+              "input_cached_tokens": {
+                "type": "null"
+              },
+              "reasoning_tokens": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "source": {
+                "const": "upstream"
+              }
+            }
+          },
+          "then": {
+            "anyOf": [
+              {
+                "properties": {
+                  "input_tokens": {
+                    "type": "integer"
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "output_tokens": {
+                    "type": "integer"
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "total_tokens": {
+                    "type": "integer"
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "input_cached_tokens": {
+                    "type": "integer"
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "reasoning_tokens": {
+                    "type": "integer"
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "input_tokens": {
+                "type": "integer"
+              },
+              "output_tokens": {
+                "type": "integer"
+              },
+              "total_tokens": {
+                "type": "integer"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "missing_reason": {
+                "type": "null"
+              }
+            }
+          },
+          "else": {
+            "if": {
+              "properties": {
+                "source": {
+                  "const": "upstream"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "missing_reason": {
+                  "const": "partial"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "RequestPage": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "data": {
+          "type": "array",
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/$defs/RequestRecord"
+          }
+        },
+        "next_cursor": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 2048
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "generated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "data_complete": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "data",
+        "next_cursor",
+        "generated_at",
+        "data_complete"
+      ]
+    },
+    "KeyPage": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "data": {
+          "type": "array",
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/$defs/Key"
+          }
+        },
+        "next_cursor": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 2048
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "generated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "data_complete": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "data",
+        "next_cursor",
+        "generated_at",
+        "data_complete"
+      ]
+    },
+    "Key": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "key_prefix": {
+          "type": "string",
+          "maxLength": 64
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "active",
+            "revoked"
+          ]
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "revoked_at": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "budget_policy": {
+          "$ref": "#/$defs/BudgetPolicy"
+        },
+        "budget_state": {
+          "$ref": "#/$defs/BudgetState"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "key_prefix",
+        "state",
+        "created_at",
+        "revoked_at",
+        "budget_policy",
+        "budget_state"
+      ]
+    },
+    "BudgetState": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "window_kind": {
+          "type": "string",
+          "enum": [
+            "utc_day",
+            "utc_month"
+          ]
+        },
+        "window_start": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "window_end": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "admission_blocked": {
+          "type": "boolean"
+        },
+        "block_reason": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "budget_bound_breached"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "currency": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[A-Z]{3}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "known_used": {
+          "$ref": "#/$defs/BudgetCounterVector"
+        },
+        "inflight_reserved": {
+          "$ref": "#/$defs/BudgetCounterVector"
+        },
+        "uncertainty_held": {
+          "$ref": "#/$defs/BudgetCounterVector"
+        },
+        "available": {
+          "$ref": "#/$defs/BudgetAvailableVector"
+        }
+      },
+      "required": [
+        "window_kind",
+        "window_start",
+        "window_end",
+        "admission_blocked",
+        "block_reason",
+        "currency",
+        "known_used",
+        "inflight_reserved",
+        "uncertainty_held",
+        "available"
+      ]
+    },
+    "BudgetAvailableVector": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "requests": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]{0,37})$",
+              "maxLength": 38
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "tokens": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]{0,37})$",
+              "maxLength": 38
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "money_atomic": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]{0,37})$",
+              "maxLength": 38
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "requests",
+        "tokens",
+        "money_atomic"
+      ]
+    },
+    "BudgetCounterVector": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "requests": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]{0,37})$",
+          "maxLength": 38
+        },
+        "tokens": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]{0,37})$",
+          "maxLength": 38
+        },
+        "money_atomic": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]{0,37})$",
+              "maxLength": 38
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "requests",
+        "tokens",
+        "money_atomic"
+      ]
+    },
+    "BudgetPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "window_kind": {
+          "type": "string",
+          "enum": [
+            "utc_day",
+            "utc_month"
+          ]
+        },
+        "limits": {
+          "$ref": "#/$defs/BudgetLimits"
+        },
+        "revision": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._/-]*$"
+        }
+      },
+      "required": [
+        "window_kind",
+        "limits",
+        "revision"
+      ]
+    },
+    "BudgetLimits": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "requests": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]{0,37})$",
+              "maxLength": 38
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "tokens": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]{0,37})$",
+              "maxLength": 38
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "money": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/MoneyLimit"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "requests",
+        "tokens",
+        "money"
+      ]
+    },
+    "MoneyLimit": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "currency": {
+          "type": "string",
+          "pattern": "^[A-Z]{3}$"
+        },
+        "limit_atomic": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]{0,37})$",
+          "maxLength": 38
+        }
+      },
+      "required": [
+        "currency",
+        "limit_atomic"
+      ]
+    },
+    "KeyCreated": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "key": {
+          "$ref": "#/$defs/Key"
+        },
+        "secret": {
+          "type": "string",
+          "minLength": 32,
+          "maxLength": 256,
+          "description": "Only returned once. Never retry creation automatically."
+        }
+      },
+      "required": [
+        "key",
+        "secret"
+      ]
+    },
+    "KeyPatch": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "expected_revision": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._/-]*$"
+        },
+        "limits": {
+          "$ref": "#/$defs/BudgetLimits"
+        }
+      },
+      "required": [
+        "expected_revision",
+        "limits"
+      ]
+    },
+    "KeyCreate": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "budget_policy": {
+          "$ref": "#/$defs/BudgetPolicyInput"
+        }
+      },
+      "required": [
+        "name",
+        "budget_policy"
+      ]
+    },
+    "BudgetPolicyInput": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "window_kind": {
+          "type": "string",
+          "enum": [
+            "utc_day",
+            "utc_month"
+          ]
+        },
+        "limits": {
+          "$ref": "#/$defs/BudgetLimits"
+        }
+      },
+      "required": [
+        "window_kind",
+        "limits"
+      ]
+    }
+  }
+}

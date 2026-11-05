@@ -19,6 +19,7 @@ type AdmissionKernel interface {
 // No binary registers this handler. An installation needs a private mTLS listener
 // and a revocable signer registry adapter before exposing it.
 type Authorizer struct {
+	ValidationIntentID         string
 	Core                       AdmissionKernel
 	Gate                       kernel.ActiveGate
 	Key                        []byte
@@ -62,7 +63,11 @@ func (a *Authorizer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	c := ticket.Claims
 	str := func(k string) string { v, _ := c[k].(string); return v }
 	integer := func(k string) int64 { v, _ := c[k].(json.Number); n, _ := v.Int64(); return n }
-	if ticket.Header["kid"] != a.Kid || str("owner_instance_id") != a.SignerOwner || str("request_id") != r.Header.Get("X-Request-ID") || str("admission_purpose") != "serving" {
+	expectedPurpose := "serving"
+	if a.ValidationIntentID != "" {
+		expectedPurpose = "validation"
+	}
+	if ticket.Header["kid"] != a.Kid || str("owner_instance_id") != a.SignerOwner || str("request_id") != r.Header.Get("X-Request-ID") || str("admission_purpose") != expectedPurpose {
 		deny(403, "forbidden")
 		return
 	}
@@ -80,7 +85,7 @@ func (a *Authorizer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		deny(403, "forbidden")
 		return
 	}
-	in := kernel.Input{RequestID: str("request_id"), KeyID: str("key_id"), KeyEpoch: integer("key_epoch"), Owner: str("owner_instance_id"), TicketHash: ticket.Digest, Profile: profile, Plan: plan, Received: time.UnixMilli(integer("received_at_ms")), Issued: time.UnixMilli(integer("issued_at_ms")), Expires: time.UnixMilli(integer("expires_at_ms")), Deadline: time.UnixMilli(integer("hard_deadline_ms"))}
+	in := kernel.Input{Purpose: str("admission_purpose"), ValidationIntentID: a.ValidationIntentID, RequestID: str("request_id"), KeyID: str("key_id"), KeyEpoch: integer("key_epoch"), Owner: str("owner_instance_id"), TicketHash: ticket.Digest, Profile: profile, Plan: plan, Received: time.UnixMilli(integer("received_at_ms")), Issued: time.UnixMilli(integer("issued_at_ms")), Expires: time.UnixMilli(integer("expires_at_ms")), Deadline: time.UnixMilli(integer("hard_deadline_ms"))}
 	if _, e = a.Core.Admit(r.Context(), a.Gate, in); e != nil {
 		status, code := 503, "dependency_unavailable"
 		for _, v := range []struct {

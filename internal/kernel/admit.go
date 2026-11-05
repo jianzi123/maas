@@ -85,10 +85,8 @@ func (s *Store) Admit(ctx context.Context, gate ActiveGate, in Input) (Snapshot,
 	if gate == nil || s.rate == nil || !validUUID(in.RequestID) || !validUUID(in.KeyID) || !validUUID(in.Owner) || len(in.TicketHash) != 64 {
 		return out, ErrUnavailable
 	}
-	var p RatePolicy
-	var cluster string
-	e := s.db.QueryRowContext(ctx, "SELECT cluster_id,rate_revision,rate_epoch,rate_ready,window_ms,global_limit,key_limit FROM kernel_guard WHERE id=1").Scan(&cluster, &p.Revision, &p.Epoch, &p.Ready, &p.WindowMS, &p.GlobalLimit, &p.KeyLimit)
-	if e != nil || cluster != s.cluster || !p.Ready {
+	p, e := s.readRate(ctx)
+	if e != nil || !p.Ready {
 		return out, ErrUnavailable
 	}
 	permit, e := s.rate.Acquire(ctx, in.RequestID, in.KeyID, p)
@@ -100,10 +98,14 @@ func (s *Store) Admit(ctx context.Context, gate ActiveGate, in Input) (Snapshot,
 		if e != nil {
 			return e
 		}
+		current, e = s.rateMetadata(ctx, tx, current)
+		if e != nil {
+			return e
+		}
 		if current != p {
 			return ErrPolicy
 		}
-		binding, e := gate.LockActive(ctx, tx, in.Profile.CRUID)
+		binding, e := s.gate(ctx, tx, gate, in)
 		if e != nil {
 			return e
 		}
@@ -245,12 +247,31 @@ func (s *Store) Admit(ctx context.Context, gate ActiveGate, in Input) (Snapshot,
 				return ErrBusy
 			}
 		}
-		binding2, e := gate.LockActive(ctx, tx, profile.CRUID)
+		binding2, e := s.gate(ctx, tx, gate, in)
 		if e != nil {
 			return e
 		}
 		if binding2 != binding {
 			return ErrPolicy
+		}
+		// The final gate/evidence SELECT can itself take time. Sample the DB clock
+		// AFTER it as well, so a post-write expiry cannot use the earlier sample.
+		t, e = now(ctx, tx)
+		if e != nil {
+			return e
+		}
+		if e = checkTime(in, t); e != nil {
+			return e
+		}
+		lastWindow, _ := window(t, policy.Window)
+		if !lastWindow.Equal(start) {
+			return ErrBusy
+		}
+		for _, w := range permit.Windows {
+			until, _ := time.Parse(time.RFC3339Nano, w.End)
+			if !t.Before(until) {
+				return ErrBusy
+			}
 		}
 		return nil
 	})

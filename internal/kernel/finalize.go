@@ -306,6 +306,11 @@ func (s *Store) Finalize(ctx context.Context, f Final) error {
 		if _, e = tx.ExecContext(ctx, `INSERT INTO usage_events(event_id,request_id,event_type,input_sha256,event_json) VALUES(?,?,'request.finalized',?,?)`, f.EventID, f.RequestID, hash(f), data); e != nil {
 			return e
 		}
+		if snap.Input.Purpose == "validation" && event["result"] == "succeeded" {
+			if _, e = tx.ExecContext(ctx, `INSERT INTO validation_receipts(intent_id,request_id,event_id,publication_id,profile_sha256,finished_at) SELECT intent_id,request_id,?,publication_id,profile_sha256,? FROM validation_intents WHERE intent_id=? AND request_id=? AND publication_id=? AND key_id=? AND profile_sha256=? AND revoked=FALSE AND expires_at>?`, f.EventID, observed, snap.Input.ValidationIntentID, f.RequestID, snap.Input.Profile.Binding.PublicationID, snap.Input.KeyID, hash(snap.Input.Profile), observed); e != nil {
+				return e
+			}
+		}
 		if _, e = tx.ExecContext(ctx, "UPDATE generation_requests SET result=?,terminal_event_id=? WHERE request_id=?", event["result"], f.EventID, f.RequestID); e != nil {
 			return e
 		}
@@ -409,7 +414,7 @@ func buildEvent(s Snapshot, f Final, t time.Time, noSend bool, token, cost *stri
 		"slot_binding": map[string]any{"slot_id": s.SlotID, "allocation_fence": s.AllocationFence}, "reservation_plan": plan,
 		"budget_accounting":  map[string]any{"policy_revision": s.Policy.Revision, "window_kind": s.Policy.Window, "window_start": s.WindowStart.Format(time.RFC3339Nano), "window_end": s.WindowEnd.Format(time.RFC3339Nano), "request": req, "token": tok, "money": mon, "token_actual": token, "token_basis": basis, "cost_actual_atomic": cost, "cost_state": costState, "currency": plan.Currency, "price_snapshot_id": plan.PriceID, "price_version": plan.PriceVersion, "missing_reason": missing},
 		"rate_witness":       map[string]any{"permit_id": s.Rate.ID, "rate_epoch": decimal(s.Rate.Epoch), "policy_id": s.Rate.PolicyID, "policy_revision": s.Rate.Revision, "windows": s.Rate.Windows},
-		"invocation_binding": map[string]any{"model_release_uid": p.CRUID, "model_release_namespace": p.Namespace, "model_release_name": p.Name, "model_release_generation": p.Binding.Generation, "release_revision": p.Binding.Revision, "publication_id": p.Binding.PublicationID, "activation_epoch": p.Binding.Epoch, "route_binding_sha256": p.RouteDigest, "admission_purpose": "serving", "price_snapshot_id": plan.PriceID, "price_version": plan.PriceVersion},
+		"invocation_binding": map[string]any{"model_release_uid": p.CRUID, "model_release_namespace": p.Namespace, "model_release_name": p.Name, "model_release_generation": p.Binding.Generation, "release_revision": p.Binding.Revision, "publication_id": p.Binding.PublicationID, "activation_epoch": p.Binding.Epoch, "route_binding_sha256": p.RouteDigest, "admission_purpose": purposeOf(s.Input), "price_snapshot_id": plan.PriceID, "price_version": plan.PriceVersion},
 	}
 }
 
