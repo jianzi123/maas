@@ -7,6 +7,8 @@ MaaS ModelRelease 受控控制器实现（MAAS-11）
 
 API group `serving.maas.example` 是保留占位域名，安装前必须经项目确认并统一替换 Go/schema/CRD/webhook/RBAC/客户端，不能只改一处。
 
+后续 MySQL 受控增量见 [发布屏障、迁移和权限边界](docs/mysql-release.md) 与 [数据库验证报告](docs/mysql-verification.md)。存储库代码已实现，Operator 仍未装配真实内核/网关证据，不据此成为可调用服务。
+
 开发与验证
 ----------
 

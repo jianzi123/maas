@@ -91,7 +91,8 @@ type Entry struct {
 
 // Inventory writes intent BEFORE object creation, binds actual UID exactly once,
 // and CASes retiring with reference count zero + transport/slot safety. It never
-// writes budgets or finalizes requests. Production implementation is absent.
+// writes budgets or finalizes requests. The mysqlstore adapter requires the
+// existing core's transaction proofs and is not wired by the Operator binary.
 type Inventory interface {
 	Intent(context.Context, Entry) error
 	Bind(context.Context, Entry) error

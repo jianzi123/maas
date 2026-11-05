@@ -57,6 +57,8 @@ exit $LASTEXITCODE
 
 ## 下一阶段交接
 
+本次受控 MySQL 增量沿用本 PR：新增发布侧迁移、MySQL Control/Inventory、同事务核心接点和最小权限模板，详见 [MySQL 实现边界](mysql-release.md) 与 [本轮验证](mysql-verification.md)。原集成时的测试记录保持为历史；本轮数据库证据单独列明，未将真实存储测试等同于真实内核/网关验收。
+
 MAAS-11 完整发布功能保持 `in_progress`。原后端负责人在上述集成分支
 继续受控实现 MySQL 发布屏障和耐久 inventory 适配；先核对架构契约中的
 CAS、epoch、tombstone、UID 和 slot 安全结束证明，并与最小调用内核
