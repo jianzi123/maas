@@ -1,3 +1,5 @@
+当前采用 MAAS-2 清单 v2 / Mika 2026-11-05 决定。先读 oracle-v2.md 与 retest-v2.json；原 report.md/results.json 是历史记录，不能当本轮修复结论。实际后端 SHA、诊断读取 SQL 未交回时，新 oracle 明确失败，不跳过场景。
+
 MAAS-7 独立复验入口；基线 PR #2 `4f3eb9358f26ebab637a549b795651171d3b924f`（含 PR #1 `6302256`）。只新增本目录，不修改实现或其他角色目录。
 
 - `kernel_cases_test.go.in` 通过 Go overlay 编译为 `internal/kernel/qa_acceptance_test.go`，复用作者已审阅的 SQL 初始化夹具，断言由 QA 独立编写。H1–H4/批准 profile、绝大部分 rate gate、受控 HTTP 网关仍是替身；现有独立 Redis 场景使用真实 Redis。

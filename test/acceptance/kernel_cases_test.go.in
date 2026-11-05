@@ -5,18 +5,25 @@ package kernel
 // assertions here are independent. H1-H4 and the HTTP gateway remain fixtures.
 import (
 	"context"
+	"database/sql"
+	"encoding/hex"
 	"encoding/json"
 	"errors"
 	"fmt"
 	"io"
 	"net/http"
 	"net/http/httptest"
+	"os"
+	"reflect"
+	"strings"
 	"sync"
 	"sync/atomic"
 	"testing"
 	"time"
 
 	"github.com/google/uuid"
+	"github.com/jianzi123/maas/internal/protocol"
+	"github.com/santhosh-tekuri/jsonschema/v5"
 )
 
 func TestQABudgetRace(t *testing.T) {
@@ -145,12 +152,17 @@ func TestQATamperedBindingHasNoWrites(t *testing.T) {
 	}
 }
 
+// v2 oracle: MAAS-2 closure-v2 sections QA-001/002, Mika 2026-11-05.
+// No inferred table names or fake diagnostic producer. The backend must supply
+// its actual persisted-record and frozen-snapshot read queries after a real SHA.
 func TestQAUsageBeforeTransportLoss(t *testing.T) {
 	for _, mode := range []string{"eof", "client_write_failure"} {
 		t.Run(mode, func(t *testing.T) {
 			f := setup(t, 1)
 			in := f.input(t)
+			var attempts atomic.Int64
 			gateway := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+				attempts.Add(1)
 				if _, err := f.core.Admit(r.Context(), f.gate, in); err != nil {
 					t.Error(err)
 					w.WriteHeader(503)
@@ -162,13 +174,29 @@ func TestQAUsageBeforeTransportLoss(t *testing.T) {
 			}))
 			defer gateway.Close()
 			relay := &Relay{core: f.core, endpoint: gateway.URL, client: gateway.Client(), maxBytes: 1 << 20, maxLine: 65536}
-			var writer http.ResponseWriter = httptest.NewRecorder()
+			recorder := httptest.NewRecorder()
+			var underlying http.ResponseWriter = recorder
 			if mode == "client_write_failure" {
-				writer = &cancelWriter{header: http.Header{}}
+				underlying = &cancelWriter{header: http.Header{}}
 			}
+			// Read from a NEW SQL connection before any response body is exposed.
+			// This tests receipt persistence ordering, not just eventual logging.
+			writer := &qaBeforeWrite{ResponseWriter: underlying, check: func() {
+				rows := qaReadDiagnostics(t, f, in.RequestID)
+				qaCheckReceipt(t, f, in, rows, false, "")
+			}}
 			err := relay.Forward(context.Background(), writer, RelayCall{Input: in, Body: []byte(`{"model":"synthetic","messages":[{"role":"user","content":"test"}]}`), Ticket: "qa-fixture", PlanHeader: "qa-fixture", Stream: true})
 			if err == nil {
-				t.Fatal("incomplete transport reported success")
+				t.Error("incomplete transport reported success")
+			}
+			if !writer.called {
+				t.Error("QA-001: no first-write persistence observation")
+			}
+			if attempts.Load() != 1 {
+				t.Errorf("generation attempts=%d want=1", attempts.Load())
+			}
+			if strings.Contains(string(writer.attempted), "[DONE]") || strings.Contains(recorder.Body.String(), "[DONE]") {
+				t.Error("normal DONE escaped an aborted stream")
 			}
 			var raw []byte
 			if err := f.db.QueryRow("SELECT event_json FROM usage_events WHERE request_id=?", in.RequestID).Scan(&raw); err != nil {
@@ -178,15 +206,76 @@ func TestQAUsageBeforeTransportLoss(t *testing.T) {
 			if err := json.Unmarshal(raw, &event); err != nil {
 				t.Fatal(err)
 			}
-			t.Logf("request_id=%s terminal_usage=%s", in.RequestID, rawUsage(event))
-			usage := event["usage"].(map[string]any)
-			if usage["total_tokens"] != float64(19) {
-				t.Errorf("QA-001: received validated usage discarded: got=%v want=19", usage["total_tokens"])
+			if err := protocol.Validate("Terminal", event); err != nil {
+				t.Fatal(err)
 			}
-			// A complete usage frame alone is NOT refund authority.
-			// QA-001 asks architecture to preserve/classify observed usage;
-			// it does not require financial held to be released.
-			t.Logf("financial_counter=%+v (final authority pending)", readCounter(t, f, "tokens"))
+			usage := event["usage"].(map[string]any)
+			for _, field := range []string{"input_tokens", "output_tokens", "total_tokens", "input_cached_tokens", "reasoning_tokens"} {
+				if usage[field] != nil {
+					t.Errorf("diagnostic-only frame became terminal actual %s=%v", field, usage[field])
+				}
+			}
+			if usage["source"] != "unavailable" || usage["missing_reason"] != "not_provided" {
+				t.Errorf("QA-001: terminal authority classification=%v", usage)
+			}
+			accounting := event["budget_accounting"].(map[string]any)
+			if accounting["token_actual"] != nil || accounting["cost_actual_atomic"] != nil {
+				t.Error("diagnostic counters became authoritative financial actuals")
+			}
+			tok, mon := readCounter(t, f, "tokens"), readCounter(t, f, "money")
+			if tok != (Counter{Known: "0", Reserved: "0", Held: "140"}) {
+				t.Error("token hold changed", tok)
+			}
+			if mon != (Counter{Known: "0", Reserved: "0", Held: reserved(in.Plan.Money)}) {
+				t.Error("money hold changed", mon)
+			}
+			assertSQL(t, f.db, "SELECT COUNT(*) FROM generation_requests", 1)
+			assertSQL(t, f.db, "SELECT COUNT(*) FROM usage_events", 1)
+			assertSQL(t, f.db, "SELECT SUM(finalized_total) FROM usage_daily", 1)
+			assertSQL(t, f.db, "SELECT COUNT(*) FROM concurrency_slots WHERE state='QUARANTINED'", 1)
+			reqCounter := readCounter(t, f, "requests")
+			if reqCounter != (Counter{Known: "1", Reserved: "0", Held: "0"}) {
+				t.Error(reqCounter)
+			}
+			// Store reconstruction plus an independent DB read is not an OS crash.
+			rebuilt, err := New(f.db, "controlled-test", f.core.pepper, f.rate, f.proofs)
+			if err != nil {
+				t.Fatal(err)
+			}
+			if _, _, err := rebuilt.ReadRequest(context.Background(), in.RequestID); err != nil {
+				t.Fatal(err)
+			}
+			cause := "eof"
+			if mode == "client_write_failure" {
+				cause = "client_write_error"
+			}
+			qaCheckReceipt(t, f, in, qaReadDiagnostics(t, f, in.RequestID), true, cause)
+			// Controlled H2 proof can release ONLY the original allocation, never
+			// rewrite a terminal event or release financial uncertainty_held.
+			if err := rebuilt.Release(context.Background(), in.RequestID, uuid.NewString(), uuid.NewString()); err != nil {
+				t.Fatal(err)
+			}
+			assertSQL(t, f.db, "SELECT COUNT(*) FROM slot_release_log", 1)
+			if readCounter(t, f, "tokens") != tok || readCounter(t, f, "money") != mon {
+				t.Error("slot release changed finance")
+			}
+			var after []byte
+			if err := f.db.QueryRow("SELECT event_json FROM usage_events WHERE request_id=?", in.RequestID).Scan(&after); err != nil {
+				t.Fatal(err)
+			}
+			if string(raw) != string(after) {
+				t.Error("slot release rewrote terminal")
+			}
+			next := mustAdmit(t, f, f.input(t))
+			if err := rebuilt.Release(context.Background(), in.RequestID, uuid.NewString(), uuid.NewString()); err != nil {
+				t.Fatal(err)
+			}
+			assertSQL(t, f.db, "SELECT COUNT(*) FROM concurrency_slots WHERE request_id=? AND state='HELD'", 1, next.Input.RequestID)
+			assertSQL(t, f.db, "SELECT COUNT(*) FROM usage_events", 1)
+			if readCounter(t, f, "tokens").Held != tok.Held || readCounter(t, f, "money").Held != mon.Held {
+				t.Error("old proof refunded held")
+			}
+			t.Logf("v2 request_id=%s terminal_actual=null token_held=%s money_held=%s", in.RequestID, tok.Held, mon.Held)
 		})
 	}
 }
@@ -222,4 +311,203 @@ func TestQADeadlineAfterHeaders(t *testing.T) {
 	if state != "timed_out" {
 		t.Errorf("QA-002: deadline after headers got=%s want=timed_out", state)
 	}
+}
+
+// These are QA read adapters, not product APIs or invented production DDL.
+// Each supplied query must SELECT one column with exactly one ? bind for the
+// original request_id. It runs in a read-only transaction on a fresh connection.
+func qaReadColumn(t *testing.T, f *fixture, env, id string) [][]byte {
+	t.Helper()
+	query := os.Getenv(env)
+	if !strings.HasPrefix(strings.ToUpper(strings.TrimSpace(query)), "SELECT ") || strings.Count(query, "?") != 1 || strings.Contains(query, ";") {
+		t.Errorf("QA-001: actual backend read entry missing/invalid: %s; NOT ACCEPTED", env)
+		return nil
+	}
+	db, err := sql.Open("mysql", f.config.FormatDSN())
+	if err != nil {
+		t.Error(err)
+		return nil
+	}
+	defer db.Close()
+	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+	defer cancel()
+	tx, err := db.BeginTx(ctx, &sql.TxOptions{ReadOnly: true})
+	if err != nil {
+		t.Error(err)
+		return nil
+	}
+	defer tx.Rollback()
+	rows, err := tx.QueryContext(ctx, query, id)
+	if err != nil {
+		t.Error("diagnostic read unavailable", err)
+		return nil
+	}
+	defer rows.Close()
+	var out [][]byte
+	for rows.Next() {
+		var raw []byte
+		if err := rows.Scan(&raw); err != nil {
+			t.Error(err)
+			return nil
+		}
+		out = append(out, append([]byte(nil), raw...))
+	}
+	if err := rows.Err(); err != nil {
+		t.Error(err)
+	}
+	return out
+}
+func qaReadDiagnostics(t *testing.T, f *fixture, id string) []map[string]any {
+	t.Helper()
+	var out []map[string]any
+	for _, raw := range qaReadColumn(t, f, "MAAS_QA_DIAGNOSTIC_READ_SQL", id) {
+		canonical, err := protocol.Canonical(raw)
+		if err != nil {
+			t.Error("invalid raw diagnostic JSON", err)
+			continue
+		}
+		var row map[string]any
+		if err := json.Unmarshal(canonical, &row); err != nil {
+			t.Error(err)
+			continue
+		}
+		out = append(out, row)
+	}
+	return out
+}
+func qaCheckReceipt(t *testing.T, f *fixture, in Input, rows []map[string]any, terminated bool, cause string) {
+	t.Helper()
+	c := jsonschema.NewCompiler()
+	c.AssertFormat = true
+	schema, err := c.Compile("../../test/acceptance/contracts/MAAS-2-usage-receipt-diagnostic-0.1-draft.1.schema.json")
+	if err != nil {
+		t.Fatal(err)
+	}
+	anchors := qaReadColumn(t, f, "MAAS_QA_SNAPSHOT_HASH_SQL", in.RequestID)
+	anchor := ""
+	if len(anchors) != 1 {
+		t.Error("QA-001: frozen admission hash must have exactly one durable row")
+	} else {
+		anchor = string(anchors[0])
+		b, err := hex.DecodeString(anchor)
+		if err != nil || len(b) != 32 {
+			t.Error("invalid frozen admission hash")
+		}
+	}
+	binding := map[string]any{
+		"model_release_uid": in.Profile.CRUID, "model_release_namespace": in.Profile.Namespace,
+		"model_release_name": in.Profile.Name, "model_release_generation": in.Profile.Binding.Generation,
+		"release_revision": in.Profile.Binding.Revision, "publication_id": in.Profile.Binding.PublicationID,
+		"activation_epoch": in.Profile.Binding.Epoch, "route_binding_sha256": in.Profile.RouteDigest,
+		"admission_purpose": "serving", "price_snapshot_id": in.Plan.PriceID, "price_version": in.Plan.PriceVersion,
+	}
+	b, _ := json.Marshal(binding)
+	var normalized map[string]any
+	json.Unmarshal(b, &normalized)
+	receipts, ends := 0, 0
+	var lastReceipt, termination float64
+	seen := map[float64]bool{}
+	for _, row := range rows {
+		if err := schema.Validate(row); err != nil {
+			t.Error("diagnostic schema mismatch", err)
+		}
+		if row["schema_version"] != "0.1-draft.1" || row["authority"] != "diagnostic_only" ||
+			row["request_id"] != in.RequestID || row["owner_instance_id"] != in.Owner || row["owner_fence"] != float64(1) ||
+			row["snapshot_sha256"] != anchor || !reflect.DeepEqual(row["invocation_binding"], normalized) {
+			t.Error("diagnostic identity/fence/snapshot/binding mismatch")
+		}
+		seq, ok := row["sequence"].(float64)
+		if !ok || seq < 1 || seen[seq] {
+			t.Error("invalid/duplicate diagnostic sequence")
+		}
+		seen[seq] = true
+		if _, err := time.Parse(time.RFC3339Nano, fmt.Sprint(row["observed_at"])); err != nil {
+			t.Error("invalid observation timestamp")
+		}
+		switch row["record_type"] {
+		case "receipt":
+			receipts++
+			if seq > lastReceipt {
+				lastReceipt = seq
+			}
+			expected := map[string]any{"input_tokens": float64(12), "output_tokens": float64(7), "total_tokens": float64(19), "input_cached_tokens": float64(4), "reasoning_tokens": float64(3)}
+			if !reflect.DeepEqual(row["usage"], expected) || row["cause"] != nil {
+				t.Error("QA-001: five observed counters/cause not preserved")
+			}
+		case "termination":
+			ends++
+			termination = seq
+			if row["usage"] != nil || row["cause"] != cause {
+				t.Errorf("wrong termination cause: %v want=%s", row["cause"], cause)
+			}
+		default:
+			t.Error("unknown diagnostic record_type")
+		}
+	}
+	if receipts != 1 {
+		t.Errorf("QA-001: durable receipt count=%d want=1", receipts)
+	}
+	if terminated && (ends != 1 || termination <= lastReceipt) {
+		t.Error("missing/out-of-order durable termination")
+	}
+	if !terminated && ends != 0 {
+		t.Error("termination precedes first forwarded frame")
+	}
+}
+
+type qaBeforeWrite struct {
+	http.ResponseWriter
+	check     func()
+	called    bool
+	attempted []byte
+}
+
+func (w *qaBeforeWrite) Write(p []byte) (int, error) {
+	w.attempted = append(w.attempted, p...)
+	if !w.called {
+		w.called = true
+		w.check()
+	}
+	return w.ResponseWriter.Write(p)
+}
+func (w *qaBeforeWrite) Flush() {
+	if f, ok := w.ResponseWriter.(http.Flusher); ok {
+		f.Flush()
+	}
+}
+
+func TestQATerminationCauseOrder(t *testing.T) {
+	t.Run("transport_deadline_before_later_client_cancel",func(t *testing.T) {
+		client,cancelClient:=context.WithCancel(context.Background())
+		defer cancelClient()
+		transport,cancelTransport:=context.WithDeadline(client,time.Now().Add(-time.Second))
+		defer cancelTransport()
+		if !errors.Is(transport.Err(),context.DeadlineExceeded) {t.Fatal("deadline fixture not established")}
+		cancelClient() // later client cancellation must not replace first transport cause
+		result,_:=relayFailure(client,transport,context.DeadlineExceeded,"interrupted")
+		if result!="timed_out" {t.Errorf("QA-002: first transport cause=deadline, later parent cancel got=%s",result)}
+	})
+	t.Run("client_cancel_before_transport_deadline",func(t *testing.T) {
+		client,cancelClient:=context.WithCancel(context.Background())
+		cancelClient()
+		transport,cancelTransport:=context.WithDeadline(client,time.Now().Add(-time.Second))
+		defer cancelTransport()
+		result,_:=relayFailure(client,transport,context.Canceled,"interrupted")
+		if result!="cancelled" {t.Errorf("QA-002: explicit cancel got=%s",result)}
+	})
+	t.Run("earlier_parent_deadline",func(t *testing.T) {
+		client,cancelClient:=context.WithDeadline(context.Background(),time.Now().Add(-time.Second))
+		defer cancelClient()
+		transport,cancelTransport:=context.WithTimeout(client,time.Hour)
+		defer cancelTransport()
+		result,_:=relayFailure(client,transport,context.DeadlineExceeded,"interrupted")
+		if result!="timed_out" {t.Errorf("QA-002: parent deadline got=%s",result)}
+	})
+	t.Run("eof_without_context_termination",func(t *testing.T) {
+		client:=context.Background()
+		transport,cancelTransport:=context.WithTimeout(client,time.Hour)
+		defer cancelTransport()
+		result,_:=relayFailure(client,transport,io.EOF,"interrupted")
+		if result!="interrupted" {t.Errorf("QA-002: plain EOF got=%s",result)}
+	})
 }

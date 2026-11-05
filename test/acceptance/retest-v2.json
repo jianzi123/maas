@@ -1,0 +1,297 @@
+{
+  "basis_comment": "01a1aba0-d123-7001-b0bf-91fae22e68bf",
+  "basis_attachment": "01a1ab9a-d947-7c65-9398-6875fab20d5c",
+  "backend_repair_sha": null,
+  "observed_pr2_head": "4f3eb9358f26ebab637a549b795651171d3b924f",
+  "terminal": "3.0",
+  "observation": "1.0",
+  "diagnostics": [
+    {
+      "id": "Q01",
+      "scenario": "usage后 EOF",
+      "entry": "TestQAUsageBeforeTransportLoss/eof",
+      "dependency": "真实读入口与修订SHA",
+      "status": "NOT_EXECUTED_ON_REPAIRED_BACKEND"
+    },
+    {
+      "id": "Q02",
+      "scenario": "usage后 writer失败，receipt必须先于首帧转发",
+      "entry": "TestQAUsageBeforeTransportLoss/client_write_failure",
+      "dependency": "真实读入口与修订SHA",
+      "status": "NOT_EXECUTED_ON_REPAIRED_BACKEND"
+    },
+    {
+      "id": "Q03",
+      "scenario": "诊断提交后重建Store，新SQL连接重读",
+      "entry": "TestQAUsageBeforeTransportLoss",
+      "dependency": "读入口、原始冻结摘要；不外推OS崩溃",
+      "status": "NOT_EXECUTED_ON_REPAIRED_BACKEND"
+    },
+    {
+      "id": "Q04",
+      "scenario": "诊断写失败/超限：首帧不正常转发、无DONE、保守结算",
+      "entry": "待装配故障注入",
+      "dependency": "实际写入口、限额/保留策略、异常回执",
+      "status": "NOT_EXECUTED_ON_REPAIRED_BACKEND"
+    },
+    {
+      "id": "Q05",
+      "scenario": "同request/fence/sequence同内容幂等，无重复结算",
+      "entry": "待装配写入回放",
+      "dependency": "实际追加API/唯一约束",
+      "status": "NOT_EXECUTED_ON_REPAIRED_BACKEND"
+    },
+    {
+      "id": "Q06",
+      "scenario": "同key异内容冲突拒绝，保留旧快照",
+      "entry": "待装配写入回放",
+      "dependency": "实际追加API/内容hash规范",
+      "status": "NOT_EXECUTED_ON_REPAIRED_BACKEND"
+    },
+    {
+      "id": "Q07",
+      "scenario": "恢复后旧owner/fence迟到写拒绝，旧落盘诊断仍可读",
+      "entry": "待装配恢复组合",
+      "dependency": "实际恢复与诊断写入边界",
+      "status": "NOT_EXECUTED_ON_REPAIRED_BACKEND"
+    },
+    {
+      "id": "Q08",
+      "scenario": "receipt COMMIT后ACK未知，查原唯一键，不换ID重发",
+      "entry": "待装配driver故障",
+      "dependency": "实际提交边界和原始receipt标识",
+      "status": "NOT_EXECUTED_ON_REPAIRED_BACKEND"
+    },
+    {
+      "id": "Q09",
+      "scenario": "终态COMMIT后ACK未知，诊断/终态/汇总仅一次",
+      "entry": "待装配driver故障",
+      "dependency": "实际诊断+Finalize联合修订",
+      "status": "NOT_EXECUTED_ON_REPAIRED_BACKEND"
+    },
+    {
+      "id": "Q10",
+      "scenario": "关闭证明只释放原allocation，旧证明不伤新slot/held",
+      "entry": "TestQAUsageBeforeTransportLoss",
+      "dependency": "受控H2只证明fixture，真实生成停止另验",
+      "status": "NOT_EXECUTED_ON_REPAIRED_BACKEND"
+    },
+    {
+      "id": "Q11",
+      "scenario": "usage前EOF/取消保留before_usage语义，诊断不得编造计数",
+      "entry": "待装配传输矩阵",
+      "dependency": "后端修订SHA",
+      "status": "NOT_EXECUTED_ON_REPAIRED_BACKEND"
+    },
+    {
+      "id": "Q12",
+      "scenario": "冲突/非法/部分usage保存原已接受信息、不补零/不累计",
+      "entry": "待装配传输矩阵",
+      "dependency": "后端解析与诊断写入口",
+      "status": "NOT_EXECUTED_ON_REPAIRED_BACKEND"
+    }
+  ],
+  "timing": [
+    {
+      "phase": "before_send",
+      "reason": "hard_deadline",
+      "expected": "timed_out/upstream_timeout",
+      "status": "NOT_EXECUTED_ON_REPAIRED_BACKEND",
+      "note": "清理cancel前读取原context；未准入时核验零建档/扣量，不伪造终态"
+    },
+    {
+      "phase": "before_send",
+      "reason": "earlier_parent_deadline",
+      "expected": "timed_out/upstream_timeout",
+      "status": "NOT_EXECUTED_ON_REPAIRED_BACKEND",
+      "note": "清理cancel前读取原context；未准入时核验零建档/扣量，不伪造终态"
+    },
+    {
+      "phase": "before_send",
+      "reason": "explicit_cancel",
+      "expected": "cancelled/client_cancelled",
+      "status": "NOT_EXECUTED_ON_REPAIRED_BACKEND",
+      "note": "清理cancel前读取原context；未准入时核验零建档/扣量，不伪造终态"
+    },
+    {
+      "phase": "before_headers",
+      "reason": "hard_deadline",
+      "expected": "timed_out/upstream_timeout",
+      "status": "NOT_EXECUTED_ON_REPAIRED_BACKEND",
+      "note": "清理cancel前读取原context；未准入时核验零建档/扣量，不伪造终态"
+    },
+    {
+      "phase": "before_headers",
+      "reason": "earlier_parent_deadline",
+      "expected": "timed_out/upstream_timeout",
+      "status": "NOT_EXECUTED_ON_REPAIRED_BACKEND",
+      "note": "清理cancel前读取原context；未准入时核验零建档/扣量，不伪造终态"
+    },
+    {
+      "phase": "before_headers",
+      "reason": "explicit_cancel",
+      "expected": "cancelled/client_cancelled",
+      "status": "NOT_EXECUTED_ON_REPAIRED_BACKEND",
+      "note": "清理cancel前读取原context；未准入时核验零建档/扣量，不伪造终态"
+    },
+    {
+      "phase": "before_headers",
+      "reason": "transport_eof",
+      "expected": "interrupted; cause=eof",
+      "status": "NOT_EXECUTED_ON_REPAIRED_BACKEND",
+      "note": "清理cancel前读取原context；未准入时核验零建档/扣量，不伪造终态"
+    },
+    {
+      "phase": "headers_received",
+      "reason": "hard_deadline",
+      "expected": "timed_out/upstream_timeout",
+      "status": "NOT_EXECUTED_ON_REPAIRED_BACKEND",
+      "note": "清理cancel前读取原context；未准入时核验零建档/扣量，不伪造终态"
+    },
+    {
+      "phase": "headers_received",
+      "reason": "earlier_parent_deadline",
+      "expected": "timed_out/upstream_timeout",
+      "status": "NOT_EXECUTED_ON_REPAIRED_BACKEND",
+      "note": "清理cancel前读取原context；未准入时核验零建档/扣量，不伪造终态"
+    },
+    {
+      "phase": "headers_received",
+      "reason": "explicit_cancel",
+      "expected": "cancelled/client_cancelled",
+      "status": "NOT_EXECUTED_ON_REPAIRED_BACKEND",
+      "note": "清理cancel前读取原context；未准入时核验零建档/扣量，不伪造终态"
+    },
+    {
+      "phase": "headers_received",
+      "reason": "transport_eof",
+      "expected": "interrupted; cause=eof",
+      "status": "NOT_EXECUTED_ON_REPAIRED_BACKEND",
+      "note": "清理cancel前读取原context；未准入时核验零建档/扣量，不伪造终态"
+    },
+    {
+      "phase": "first_chunk",
+      "reason": "hard_deadline",
+      "expected": "timed_out/upstream_timeout",
+      "status": "NOT_EXECUTED_ON_REPAIRED_BACKEND",
+      "note": "清理cancel前读取原context；未准入时核验零建档/扣量，不伪造终态"
+    },
+    {
+      "phase": "first_chunk",
+      "reason": "earlier_parent_deadline",
+      "expected": "timed_out/upstream_timeout",
+      "status": "NOT_EXECUTED_ON_REPAIRED_BACKEND",
+      "note": "清理cancel前读取原context；未准入时核验零建档/扣量，不伪造终态"
+    },
+    {
+      "phase": "first_chunk",
+      "reason": "explicit_cancel",
+      "expected": "cancelled/client_cancelled",
+      "status": "NOT_EXECUTED_ON_REPAIRED_BACKEND",
+      "note": "清理cancel前读取原context；未准入时核验零建档/扣量，不伪造终态"
+    },
+    {
+      "phase": "first_chunk",
+      "reason": "transport_eof",
+      "expected": "interrupted; cause=eof",
+      "status": "NOT_EXECUTED_ON_REPAIRED_BACKEND",
+      "note": "清理cancel前读取原context；未准入时核验零建档/扣量，不伪造终态"
+    },
+    {
+      "phase": "usage_received",
+      "reason": "hard_deadline",
+      "expected": "timed_out/upstream_timeout",
+      "status": "NOT_EXECUTED_ON_REPAIRED_BACKEND",
+      "note": "清理cancel前读取原context；未准入时核验零建档/扣量，不伪造终态"
+    },
+    {
+      "phase": "usage_received",
+      "reason": "earlier_parent_deadline",
+      "expected": "timed_out/upstream_timeout",
+      "status": "NOT_EXECUTED_ON_REPAIRED_BACKEND",
+      "note": "清理cancel前读取原context；未准入时核验零建档/扣量，不伪造终态"
+    },
+    {
+      "phase": "usage_received",
+      "reason": "explicit_cancel",
+      "expected": "cancelled/client_cancelled",
+      "status": "NOT_EXECUTED_ON_REPAIRED_BACKEND",
+      "note": "清理cancel前读取原context；未准入时核验零建档/扣量，不伪造终态"
+    },
+    {
+      "phase": "usage_received",
+      "reason": "transport_eof",
+      "expected": "interrupted; cause=eof",
+      "status": "NOT_EXECUTED_ON_REPAIRED_BACKEND",
+      "note": "清理cancel前读取原context；未准入时核验零建档/扣量，不伪造终态"
+    }
+  ],
+  "fe_r02_r03": [
+    {
+      "id": "R02-1",
+      "assertions": "保留修订有耐久来源，按namespace/name/原CR UID限定；包含已删除/同名替换历史。批准引用、snapshot缺失/清理和当前K8s未知分别给blocked/unknown；不标eligible",
+      "required_evidence": "MAAS-11持久层＋MAAS-3管理路由；QA原/新UID、重启、空历史404与底层故障503",
+      "status": "NOT_EXECUTED_NO_RUNNING_API"
+    },
+    {
+      "id": "R02-2",
+      "assertions": "cursor绑定原namespace/name/UID及稳定(created_at,revision)顺序；不同UID/查询上下文的cursor拒绝，不能跨UID泄漏；并发插入不重复/跳过既有序列，资格值注明读取时刻",
+      "required_evidence": "后端/QA；多页、同时间戳、并发插入和坏cursor证据；不承诺跨页冻结资格",
+      "status": "NOT_EXECUTED_NO_RUNNING_API"
+    },
+    {
+      "id": "R02-3",
+      "assertions": "新流程发送expected_cr_uid及If-Match；服务端从当前UID历史加载目标并重验批准引用。重建/更新竞争409，依赖不可用503，无隐式移除UID或force重放",
+      "required_evidence": "原后端/前端；受控写入夹具验证错UID、旧版本、失效引用。旧服务忽略未知字段也不能被当作支持",
+      "status": "NOT_EXECUTED_NO_RUNNING_API"
+    },
+    {
+      "id": "R02-4",
+      "assertions": "可信operation.id仅查原operation；404/503/Unknown及无ID都不推定原写失败/成功；当前CR只供核对，禁止自动重放写入/validation",
+      "required_evidence": "后端/前端/QA；响应丢失、原ID迟到、删除后查operation，核对写入/validation次数",
+      "status": "NOT_EXECUTED_NO_RUNNING_API"
+    },
+    {
+      "id": "R02-5",
+      "assertions": "批准模板/精确修订由服务端核验；失效/撤销拒绝。返回摘要不含Secret、credential handle、完整目标URL或Pod模板",
+      "required_evidence": "原后端/前端/QA；401/403/404、脱敏、无网络/生成副作用",
+      "status": "NOT_EXECUTED_NO_RUNNING_API"
+    },
+    {
+      "id": "R03-1",
+      "assertions": "request、terminal及原slot日志来自同一主库一致读，或显式注明各checked_at的差异；只用原快照/原价格。未装配容量返回unknown",
+      "required_evidence": "MAAS-3/6；读端SQL/权限和事务边界；迟到终态/并发slot释放下不自相矛盾",
+      "status": "NOT_EXECUTED_NO_RUNNING_API"
+    },
+    {
+      "id": "R03-2",
+      "assertions": "request_id单独进入精确模式，不带普通列表默认参数；忽略隐式今日窗。recorded恰1行、lookup与行ID相同、next_cursor=null；unknown零行且data_complete=false",
+      "required_evidence": "后端/前端/QA；原ID跨UTC日、in_progress到终态、错ID、显式筛选冲突400、普通列表回归",
+      "status": "NOT_EXECUTED_NO_RUNNING_API"
+    },
+    {
+      "id": "R03-3",
+      "assertions": "not_admitted只用原ID最终拒绝，expired只用保留期标记；没记录为unknown。互相矛盾或主库不可用503，不能200空页；不可见ID按原规则404",
+      "required_evidence": "后端/QA；分别注入存在/不存在/不可用/矛盾证据及401/403/404，不以UUID日期猜过期",
+      "status": "NOT_EXECUTED_NO_RUNNING_API"
+    },
+    {
+      "id": "R03-4",
+      "assertions": "原slot_id/allocation_fence/request_id三元组；released只取原释放日志。slot复用读新allocation不能覆盖旧状态；released后原终态和财务held不变",
+      "required_evidence": "后端/QA；旧证明迟到、slot复用、日志缺失/故障、未知held样例",
+      "status": "NOT_EXECUTED_NO_RUNNING_API"
+    },
+    {
+      "id": "R03-5",
+      "assertions": "保留收到的可信原生成ID；后续GET的X-Request-ID不覆盖它。无原ID显示未知。停止/传输关闭、终态、引擎停止、容量、usage分开呈现，不重发生成",
+      "required_evidence": "原前端/QA；浏览器abort在headers前/后、迟到终态、轮询503、无ID；纯writer夹具不算浏览器通过",
+      "status": "NOT_EXECUTED_NO_RUNNING_API"
+    },
+    {
+      "id": "兼容门槛",
+      "assertions": "以固定草案生成/配置实际消费者，覆盖普通页、精确页、401/403/404/409/503；旧服务器普通页不能当精确命中；旧严格decoder不能因union变化崩溃",
+      "required_evidence": "后端/前端/QA返回部署版本、SHA及解码回归；禁止靠探测性写入判断支持",
+      "status": "NOT_EXECUTED_NO_RUNNING_API"
+    }
+  ]
+}

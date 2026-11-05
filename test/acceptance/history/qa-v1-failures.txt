@@ -1,0 +1,36 @@
+testing: warning: no tests to run
+PASS
+ok  	github.com/jianzi123/maas/internal/release/mysqlstore	0.055s [no tests to run]
+=== RUN   TestQABudgetRace
+    qa_acceptance_test.go:77: sample=1 preadmission + 10 simultaneous attempts, two Store replicas; batch_success=1
+--- PASS: TestQABudgetRace (0.99s)
+=== RUN   TestQAConcurrentFinalAndSlotReuse
+    qa_acceptance_test.go:122: original_request_id=3a5b5a44-ffd9-43ae-8126-8ae0b8face39 next_request_id=03e6c7b4-6c48-4796-8608-f384e4edb115
+--- PASS: TestQAConcurrentFinalAndSlotReuse (0.94s)
+=== RUN   TestQATamperedBindingHasNoWrites
+=== RUN   TestQATamperedBindingHasNoWrites/source
+=== RUN   TestQATamperedBindingHasNoWrites/publication
+=== RUN   TestQATamperedBindingHasNoWrites/reservation
+--- PASS: TestQATamperedBindingHasNoWrites (2.36s)
+    --- PASS: TestQATamperedBindingHasNoWrites/source (0.82s)
+    --- PASS: TestQATamperedBindingHasNoWrites/publication (0.77s)
+    --- PASS: TestQATamperedBindingHasNoWrites/reservation (0.77s)
+=== RUN   TestQAUsageBeforeTransportLoss
+=== RUN   TestQAUsageBeforeTransportLoss/eof
+    qa_acceptance_test.go:181: request_id=f1ff31ce-9062-4d82-ab23-a3126002bbef terminal_usage={"input_cached_tokens":null,"input_tokens":null,"missing_reason":"interrupted_before_usage","output_tokens":null,"reasoning_tokens":null,"source":"unavailable","total_tokens":null}
+    qa_acceptance_test.go:184: QA-001: received validated usage discarded: got=<nil> want=19
+    qa_acceptance_test.go:189: financial_counter={Known:0 Reserved:0 Held:140} (final authority pending)
+=== RUN   TestQAUsageBeforeTransportLoss/client_write_failure
+    qa_acceptance_test.go:181: request_id=376d6765-54ed-40a1-abc4-68a5393d3ae0 terminal_usage={"input_cached_tokens":null,"input_tokens":null,"missing_reason":"cancelled_before_usage","output_tokens":null,"reasoning_tokens":null,"source":"unavailable","total_tokens":null}
+    qa_acceptance_test.go:184: QA-001: received validated usage discarded: got=<nil> want=19
+    qa_acceptance_test.go:189: financial_counter={Known:0 Reserved:0 Held:140} (final authority pending)
+--- FAIL: TestQAUsageBeforeTransportLoss (1.48s)
+    --- FAIL: TestQAUsageBeforeTransportLoss/eof (0.72s)
+    --- FAIL: TestQAUsageBeforeTransportLoss/client_write_failure (0.76s)
+=== RUN   TestQADeadlineAfterHeaders
+    qa_acceptance_test.go:221: request_id=2288a1fa-3774-4d7f-9a9f-0a1c86578aa0 terminal=interrupted
+    qa_acceptance_test.go:223: QA-002: deadline after headers got=interrupted want=timed_out
+--- FAIL: TestQADeadlineAfterHeaders (1.21s)
+FAIL
+FAIL	github.com/jianzi123/maas/internal/kernel	7.057s
+FAIL
