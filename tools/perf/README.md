@@ -80,3 +80,15 @@ docs/method-v0.2.md 更新方法与 v0.4 兼容；docs/experiment-plan-v0.2.json
 限制只适用于共同吞吐窗的客户端记录。go/higress/operator/engine观测可使用自身scope并保留本地测量时长；engine_token_times_ms只在其engine_clock_scope内算差值，允许与客户端完全不同的时间原点。它们不进入客户端scope一致性集合，也不与客户端时间戳相减。
 
 新增回归覆盖统一重命名单scope、混合scope（成功/拒绝/pending）、request与client observation错配、server独立scope、平移后的engine独立scope、非法scope，以及CLI退出2/无新报告/不改旧报告/不回显合成敏感哨兵。原41项未覆盖共同时间窗；新测试也只证明这些明确输入分支，不能代表真实采集同步或性能验收。
+
+## 团队入口与本地受控实验
+
+团队文档从[性能工作台](../../docs/performance/README.md)进入，包含入门、架构/指标、优化手册、阶段总结及实验/周总结模板。
+
+analyze.py仍是纯文件离线分析器。独立入口controlled_transport.py只运行本机HTTP/SSE fixture，不可指定任意端点，自动限量/限时并在返回前清理线程：
+
+    python tools/perf/controlled_transport.py --output-dir tools/perf/reports/local-first --requests 20 --concurrency 1 4 --repeats 1 --max-seconds 20
+
+其报告证据级别为measured_loopback_fixture_transport，platform_path_exercised=false；只测本地连接与采样机制。它不代表完整MaaS链路、模型/GPU、Token、质量或预算验收，也不输出平台收益通过结论。原始fixture中的业务终态和本地传输成功不能混成同一份账本。
+
+[首批E1–E3计划](experiments/first-batch-v0.4.json)保留execution_enabled=false及空审批值，不提供模型调用器。[实验手册](../../docs/performance/optimization-playbook.md)说明真实平台/引擎实验各自的进入条件和单因素比较。
