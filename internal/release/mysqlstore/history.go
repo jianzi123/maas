@@ -72,7 +72,7 @@ func validateCapture(d release.Desired) error {
 		return nil
 	}
 	h := d.History
-	if h.AuthorizationDomain == "" || len(h.AuthorizationDomain) > 128 || h.ResourceVersion == "" || len(h.ResourceVersion) > 128 || d.Paused || d.Deleting || api.Validate(h.Spec, nil) != nil || h.Spec.ModelAlias != d.Alias || h.Spec.GatewayRef != d.Gateway || release.Revision(h.Spec, h.Resolution) != d.Revision {
+	if h.AuthorizationDomain != h.Resolution.Versions["authorization_domain"] || h.AuthorizationDomain == "" || len(h.AuthorizationDomain) > 128 || h.ResourceVersion == "" || len(h.ResourceVersion) > 128 || d.Paused || d.Deleting || api.Validate(h.Spec, nil) != nil || h.Spec.ModelAlias != d.Alias || h.Spec.GatewayRef != d.Gateway || release.Revision(h.Spec, h.Resolution) != d.Revision {
 		return release.ErrConflict
 	}
 	b, _ := json.Marshal(h.Spec)
