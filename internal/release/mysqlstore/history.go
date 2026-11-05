@@ -45,7 +45,7 @@ func migrateHistory(ctx context.Context, db *sql.DB) error {
 			return nil
 		}
 	} else if errors.Is(e, sql.ErrNoRows) {
-		if e = c.QueryRowContext(ctx, "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema=DATABASE() AND table_name='retained_release_snapshots'").Scan(&n); e != nil {
+		if e = c.QueryRowContext(ctx, "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema=DATABASE() AND table_name IN ('retained_release_snapshots','release_history_owners','release_history_retention','release_history_legacy_audit')").Scan(&n); e != nil {
 			return publicError(e)
 		}
 		if n != 0 {
@@ -72,7 +72,7 @@ func validateCapture(d release.Desired) error {
 		return nil
 	}
 	h := d.History
-	if h.ResourceVersion == "" || len(h.ResourceVersion) > 128 || d.Paused || d.Deleting || api.Validate(h.Spec, nil) != nil || h.Spec.ModelAlias != d.Alias || h.Spec.GatewayRef != d.Gateway || release.Revision(h.Spec, h.Resolution) != d.Revision {
+	if h.AuthorizationDomain == "" || len(h.AuthorizationDomain) > 128 || h.ResourceVersion == "" || len(h.ResourceVersion) > 128 || d.Paused || d.Deleting || api.Validate(h.Spec, nil) != nil || h.Spec.ModelAlias != d.Alias || h.Spec.GatewayRef != d.Gateway || release.Revision(h.Spec, h.Resolution) != d.Revision {
 		return release.ErrConflict
 	}
 	b, _ := json.Marshal(h.Spec)
@@ -102,11 +102,49 @@ func (s *Store) capture(ctx context.Context, tx *sql.Tx, d release.Desired, newR
 	if !newRevision {
 		return nil
 	}
+	if _, e = tx.ExecContext(ctx, "INSERT IGNORE INTO release_history_owners(cluster_id,cr_uid,namespace,name,authorization_domain,source_kind) VALUES(?,?,?,?,?,'authoritative_cr')", s.cluster, d.CRUID, d.Namespace, d.Name, d.History.AuthorizationDomain); e != nil {
+		return e
+	}
+	var domain, ns, name string
+	var seq int64
+	if e = tx.QueryRowContext(ctx, "SELECT namespace,name,authorization_domain,history_seq FROM release_history_owners WHERE cluster_id=? AND cr_uid=? FOR UPDATE NOWAIT", s.cluster, d.CRUID).Scan(&ns, &name, &domain, &seq); e != nil {
+		return e
+	}
+	if ns != d.Namespace || name != d.Name || domain != d.History.AuthorizationDomain || seq >= maxCounter {
+		return release.ErrConflict
+	}
+	seq++
 	t, e := dbNow(ctx, tx)
 	if e != nil {
 		return e
 	}
 	sum := sha256.Sum256(b)
-	_, e = tx.ExecContext(ctx, `INSERT INTO retained_release_snapshots(cluster_id,cr_uid,revision,namespace,name,generation,model_alias,source_type,spec_bytes,spec_sha256,source_resource_version,created_at) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)`, s.cluster, d.CRUID, d.Revision, d.Namespace, d.Name, d.Generation, d.Alias, d.History.Spec.Source.Type, b, hex.EncodeToString(sum[:]), d.History.ResourceVersion, t)
+	payload, _ := json.Marshal(struct {
+		Spec       api.Spec
+		Resolution release.Resolution
+	}{d.History.Spec, d.History.Resolution})
+	if len(payload) > 65535 || release.Hash(struct {
+		Spec       api.Spec
+		Resolution release.Resolution
+	}{d.History.Spec, d.History.Resolution}) != d.Revision {
+		return release.ErrConflict
+	}
+	var upstream, runtime any
+	if x := d.History.Spec.Source.ExternalAPI; x != nil {
+		upstream = x.UpstreamModel
+	}
+	if x := d.History.Spec.Source.SelfHosted; x != nil {
+		runtime = x.RuntimeProfileRef
+	}
+	summary, _ := json.Marshal(map[string]any{"upstream_model": upstream, "runtime_profile_ref": runtime, "capability_ref": d.History.Spec.BusinessRefs.CapabilityProfileRef, "price_ref": d.History.Spec.BusinessRefs.PricePolicyRef})
+	ss := sha256.Sum256(summary)
+	_, e = tx.ExecContext(ctx, `INSERT INTO retained_release_snapshots(cluster_id,cr_uid,revision,namespace,name,generation,model_alias,source_type,spec_bytes,spec_sha256,revision_input_bytes,algorithm,summary_bytes,summary_sha256,history_seq,source_resource_version,created_at) VALUES(?,?,?,?,?,?,?,?,?,?,?,'go-json-spec-resolution-sha256-v1',?,?,?,?,?)`, s.cluster, d.CRUID, d.Revision, d.Namespace, d.Name, d.Generation, d.Alias, d.History.Spec.Source.Type, b, hex.EncodeToString(sum[:]), payload, summary, hex.EncodeToString(ss[:]), seq, d.History.ResourceVersion, t)
+	if e != nil {
+		return e
+	}
+	if _, e = tx.ExecContext(ctx, "INSERT INTO release_history_retention(cluster_id,cr_uid,revision) VALUES(?,?,?)", s.cluster, d.CRUID, d.Revision); e != nil {
+		return e
+	}
+	_, e = tx.ExecContext(ctx, "UPDATE release_history_owners SET history_seq=? WHERE cluster_id=? AND cr_uid=?", seq, s.cluster, d.CRUID)
 	return e
 }

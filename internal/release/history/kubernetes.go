@@ -13,9 +13,11 @@ import (
 
 type NamespaceAccess struct {
 	Namespaces map[string]bool
+	Domains    map[string]bool
 	ScopeID    string
 }
 
+func (a NamespaceAccess) Domain(_ context.Context, d string) bool { return a.Domains[d] }
 func (a NamespaceAccess) Scope(_ context.Context, ns, name, uid string) (string, error) {
 	if a.ScopeID == "" || !a.Namespaces[ns] {
 		return "", ErrForbidden
@@ -52,11 +54,18 @@ func (e ReferenceFailure) Error() string { return e.Reason }
 
 // ResolverEvaluator reuses the approved reference resolver, never a model call.
 // An installation must supply the actual registry-backed implementation.
-type ResolverEvaluator struct{ Resolver release.Resolver }
+type ResolverEvaluator struct {
+	Resolver release.Resolver
+	Loader   *Reader
+}
 
-func (e ResolverEvaluator) Evaluate(ctx context.Context, spec api.Spec, live LiveState) (Evaluation, error) {
-	if e.Resolver == nil {
+func (e ResolverEvaluator) Evaluate(ctx context.Context, uid, revision string, live LiveState) (Evaluation, error) {
+	if e.Resolver == nil || e.Loader == nil {
 		return Evaluation{}, ErrUnavailable
+	}
+	spec, loadErr := e.Loader.LoadSpec(ctx, live.Namespace, live.Name, uid, revision)
+	if loadErr != nil {
+		return Evaluation{}, loadErr
 	}
 	m := &api.ModelRelease{ObjectMeta: metav1.ObjectMeta{Namespace: live.Namespace, Name: live.Name, UID: types.UID(live.UID), ResourceVersion: live.Version}, Spec: spec}
 	_, err := e.Resolver.Resolve(ctx, m)
@@ -107,7 +116,7 @@ func (r RollbackService) Rollback(ctx context.Context, ns, name, expectedUID, re
 	if r.History.Evaluator == nil {
 		return "", ErrUnavailable
 	}
-	evaluation, e := r.History.Evaluator.Evaluate(ctx, spec, live)
+	evaluation, e := r.History.Evaluator.Evaluate(ctx, uid, revision, live)
 	if e != nil || !validEvaluation(evaluation, live) || evaluation.State != "eligible" {
 		return "", ErrUnavailable
 	}

@@ -36,7 +36,7 @@ func historyDesired(t *testing.T) release.Desired {
 		t.Fatal("sample")
 	}
 	r := release.Resolution{Versions: map[string]string{"approved-registry": "1", "secretUID": "synthetic-uid", "secretRV": "1"}, GatewayNamespace: "higress", HostSuffix: "private.test", IngressClass: "higress", EndpointDNS: "approved.test", EndpointPort: 443, CredentialHandle: "never-export-handle", PluginDigest: "test-only"}
-	return release.Desired{CRUID: uuid.NewString(), Namespace: m.Namespace, Name: m.Name, Alias: m.Spec.ModelAlias, Gateway: m.Spec.GatewayRef, Generation: 1, Revision: release.Revision(m.Spec, r), History: &release.HistoryCapture{Spec: m.Spec, Resolution: r, ResourceVersion: "1"}}
+	return release.Desired{CRUID: uuid.NewString(), Namespace: m.Namespace, Name: m.Name, Alias: m.Spec.ModelAlias, Gateway: m.Spec.GatewayRef, Generation: 1, Revision: release.Revision(m.Spec, r), History: &release.HistoryCapture{Spec: m.Spec, Resolution: r, ResourceVersion: "1", AuthorizationDomain: "test-domain"}}
 }
 
 type historyLive struct {
@@ -53,11 +53,11 @@ type historyEval struct {
 	reasons []string
 }
 
-func (e *historyEval) Evaluate(context.Context, api.Spec, history.LiveState) (history.Evaluation, error) {
+func (e *historyEval) Evaluate(context.Context, string, string, history.LiveState) (history.Evaluation, error) {
 	return history.Evaluation{State: e.state, Reasons: e.reasons}, nil
 }
 func historyReader(f *testDB, d release.Desired, l *historyLive) *history.Reader {
-	return &history.Reader{DB: f.db, Cluster: "test-cluster", Access: history.NamespaceAccess{Namespaces: map[string]bool{d.Namespace: true}, ScopeID: "controlled-admin"}, Live: l, Evaluator: &historyEval{state: "eligible", reasons: []string{}}}
+	return &history.Reader{DB: f.db, PayloadDB: f.db, CursorKey: []byte(strings.Repeat("k", 32)), Cluster: "test-cluster", Access: history.NamespaceAccess{Namespaces: map[string]bool{d.Namespace: true}, ScopeID: "controlled-admin", Domains: map[string]bool{"test-domain": true}}, Live: l, Evaluator: &historyEval{state: "eligible", reasons: []string{}}}
 }
 func TestMySQLRetainedHistory(t *testing.T) {
 	ctx := context.Background()
@@ -150,7 +150,7 @@ func TestMySQLRetainedHistory(t *testing.T) {
 		if _, e := r.ReadRevisions(ctx, d.Namespace, d.Name, url.Values{"cr_uid": {d.CRUID}}); e != history.ErrForbidden {
 			t.Fatal(e)
 		}
-		r.Access = history.NamespaceAccess{Namespaces: map[string]bool{d.Namespace: true}, ScopeID: "admin"}
+		r.Access = history.NamespaceAccess{Namespaces: map[string]bool{d.Namespace: true}, ScopeID: "admin", Domains: map[string]bool{"test-domain": true}}
 		if _, e := r.ReadRevisions(ctx, d.Namespace, "other", url.Values{"cr_uid": {d.CRUID}}); e != history.ErrNotFound {
 			t.Fatal(e)
 		}
@@ -160,7 +160,7 @@ func TestMySQLRetainedHistory(t *testing.T) {
 		if e != nil || p["data"].([]any)[0].(map[string]any)["rollback_eligibility"].(map[string]any)["state"] != "blocked" {
 			t.Fatal(p, e)
 		}
-		_, _ = f.db.Exec("UPDATE retained_release_snapshots SET snapshot_state='pruning'")
+		_, _ = f.db.Exec("UPDATE release_history_retention SET snapshot_state='pruning'")
 		if _, e := r.LoadSpec(ctx, d.Namespace, d.Name, d.CRUID, d.Revision); e != history.ErrUnavailable {
 			t.Fatal("pruned rollback", e)
 		}
@@ -197,6 +197,18 @@ func TestMySQLRetainedHistory(t *testing.T) {
 			}
 			q.Set("cursor", cursor)
 			if i == 0 {
+				tampered := cursor[:len(cursor)-1] + "A"
+				if tampered == cursor {
+					tampered = cursor[:len(cursor)-1] + "B"
+				}
+				if _, err := r.ReadRevisions(ctx, d.Namespace, d.Name, url.Values{"cr_uid": {uid}, "page_size": {"1"}, "cursor": {tampered}}); err != history.ErrInvalid {
+					t.Fatal("cursor integrity", err)
+				}
+				d.Generation++
+				d.History.Resolution.Versions["approval"] = "late"
+				d.Revision = release.Revision(d.History.Spec, d.History.Resolution)
+				observe(t, s, d)
+				_, _ = f.db.Exec("UPDATE retained_release_snapshots SET created_at='2000-01-01 00:00:00' WHERE revision=?", d.Revision)
 				wrong := url.Values{"cr_uid": {uuid.NewString()}, "cursor": {cursor}}
 				if _, e = r.ReadRevisions(ctx, d.Namespace, d.Name, wrong); e != history.ErrInvalid {
 					t.Fatal("UID cursor", e)
