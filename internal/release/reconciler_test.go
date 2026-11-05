@@ -35,7 +35,7 @@ func (r *resolver) Resolve(context.Context, *api.ModelRelease) (Resolution, erro
 	if r.fail {
 		return Resolution{}, ErrDependencyMissing
 	}
-	return Resolution{Versions: map[string]string{"approved-registry": "1", "secretUID": "secret-uid", "secretResourceVersion": r.version}, GatewayNamespace: "higress-test", IngressClass: "private", HostSuffix: "infer.test", EndpointDNS: "provider.test", EndpointPort: 443, CredentialHandle: "opaque-test-handle", PluginDigest: "sha256:test-only"}, nil
+	return Resolution{Versions: map[string]string{"approved-registry": "1", "authorization_domain": "test-domain", "secretUID": "secret-uid", "secretResourceVersion": r.version}, GatewayNamespace: "higress-test", IngressClass: "private", HostSuffix: "infer.test", EndpointDNS: "provider.test", EndpointPort: 443, CredentialHandle: "opaque-test-handle", PluginDigest: "sha256:test-only"}, nil
 }
 
 type plugin struct{}

@@ -26,3 +26,11 @@ GRANT SELECT ON __MAAS_DATABASE__.active_model_bindings TO maas_release_reader;
 -- No Key/budget/request/usage/terminal/slot UPDATE or INSERT is authorized by
 -- this template. Migration uses a separate, temporary DDL identity.
 GRANT SELECT,INSERT ON __MAAS_DATABASE__.retained_release_snapshots TO maas_release_publisher;
+GRANT SELECT,INSERT,UPDATE(history_seq) ON __MAAS_DATABASE__.release_history_owners TO maas_release_publisher;
+GRANT SELECT,INSERT ON __MAAS_DATABASE__.release_history_retention TO maas_release_publisher;
+CREATE ROLE IF NOT EXISTS maas_release_history_reader;
+GRANT SELECT ON __MAAS_DATABASE__.release_history_directory TO maas_release_history_reader;
+GRANT SELECT ON __MAAS_DATABASE__.release_history_projection TO maas_release_history_reader;
+GRANT SELECT ON __MAAS_DATABASE__.release_history_completeness TO maas_release_history_reader;
+GRANT SELECT ON __MAAS_DATABASE__.release_links TO maas_release_history_reader;
+GRANT SELECT ON __MAAS_DATABASE__.publications TO maas_release_history_reader;

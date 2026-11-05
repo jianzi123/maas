@@ -49,9 +49,10 @@ type State struct {
 	Draining                                                        []Binding
 }
 type HistoryCapture struct {
-	Spec            api.Spec
-	Resolution      Resolution
-	ResourceVersion string
+	Spec                api.Spec
+	Resolution          Resolution
+	ResourceVersion     string
+	AuthorizationDomain string
 }
 type Desired struct {
 	History                       *HistoryCapture `json:"-"`

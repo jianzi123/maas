@@ -3,6 +3,7 @@ package history
 
 import (
 	"context"
+	"crypto/hmac"
 	"crypto/sha256"
 	"database/sql"
 	"encoding/base64"
@@ -10,7 +11,8 @@ import (
 	"encoding/json"
 	"errors"
 	"github.com/google/uuid"
-	api "github.com/jianzi123/maas/api/v1alpha1"
+	"strings"
+
 	"net/url"
 	"strconv"
 	"time"
@@ -26,6 +28,7 @@ var ErrConflict = errors.New("resource_version_conflict")
 // the live object is deleted or replaced. Scope is part of every cursor.
 type Access interface {
 	Scope(context.Context, string, string, string) (string, error)
+	Domain(context.Context, string) bool
 }
 type LiveState struct {
 	UID, Version, SourceType, Namespace, Name string
@@ -39,10 +42,12 @@ type Evaluation struct {
 	Reasons []string
 }
 type Evaluator interface {
-	Evaluate(context.Context, api.Spec, LiveState) (Evaluation, error)
+	Evaluate(context.Context, string, string, LiveState) (Evaluation, error)
 }
 type Reader struct {
 	DB        *sql.DB
+	PayloadDB *sql.DB
+	CursorKey []byte
 	Cluster   string
 	Access    Access
 	Live      Live
@@ -52,13 +57,17 @@ type row struct {
 	Revision, UID, Namespace, Name, Alias, Source, State string
 	Generation                                           int64
 	Created                                              time.Time
-	Spec                                                 api.Spec
+	Summary                                              map[string]any
 }
-type cursor struct{ Scope, Namespace, Name, UID, Revision, Time string }
+type cursor struct {
+	Scope, Namespace, Name, UID, Revision, Time string
+	PageSize                                    int
+	Catalog, Watermark                          int64
+}
 
 func digest(b []byte) string { s := sha256.Sum256(b); return hex.EncodeToString(s[:]) }
 func (r *Reader) ReadRevisions(ctx context.Context, ns, name string, q url.Values) (map[string]any, error) {
-	if r.DB == nil || r.Access == nil || r.Cluster == "" {
+	if r.DB == nil || r.Access == nil || r.Cluster == "" || len(r.CursorKey) < 32 {
 		return nil, ErrUnavailable
 	}
 	for k, v := range q {
@@ -96,8 +105,18 @@ func (r *Reader) ReadRevisions(ctx context.Context, ns, name string, q url.Value
 		if len(raw) > 2048 {
 			return nil, ErrInvalid
 		}
-		b, e := base64.RawURLEncoding.Strict().DecodeString(raw)
-		if e != nil || json.Unmarshal(b, &c) != nil || c.Scope != scope || c.UID != uid || c.Namespace != ns || c.Name != name || len(c.Revision) != 64 {
+		parts := strings.Split(raw, ".")
+		if len(parts) != 2 {
+			return nil, ErrInvalid
+		}
+		b, e := base64.RawURLEncoding.Strict().DecodeString(parts[0])
+		signature, signatureErr := base64.RawURLEncoding.Strict().DecodeString(parts[1])
+		mac := hmac.New(sha256.New, r.CursorKey)
+		mac.Write(b)
+		if signatureErr != nil || !hmac.Equal(mac.Sum(nil), signature) {
+			return nil, ErrInvalid
+		}
+		if e != nil || json.Unmarshal(b, &c) != nil || c.Scope != scope || c.UID != uid || c.Namespace != ns || c.Name != name || len(c.Revision) != 64 || c.PageSize != size {
 			return nil, ErrInvalid
 		}
 		if _, e = time.Parse(time.RFC3339Nano, c.Time); e != nil {
@@ -136,8 +155,10 @@ func (r *Reader) ReadRevisions(ctx context.Context, ns, name string, q url.Value
 		return nil, ErrUnavailable
 	}
 	var actualNS, actualName string
+	var domain sql.NullString
+	var watermark, catalog sql.NullInt64
 	var active sql.NullString
-	e = tx.QueryRowContext(ctx, `SELECT l.namespace,l.name,p.revision FROM release_links l LEFT JOIN publications p ON p.cluster_id=l.cluster_id AND p.publication_id=l.active_id WHERE l.cluster_id=? AND l.cr_uid=?`, r.Cluster, uid).Scan(&actualNS, &actualName, &active)
+	e = tx.QueryRowContext(ctx, `SELECT d.namespace,d.name,d.authorization_domain,d.history_seq,d.catalog_version,p.revision FROM release_history_directory d LEFT JOIN release_links l ON l.cluster_id=d.cluster_id AND l.cr_uid=d.cr_uid LEFT JOIN publications p ON p.cluster_id=l.cluster_id AND p.publication_id=l.active_id WHERE d.cluster_id=? AND d.cr_uid=?`, r.Cluster, uid).Scan(&actualNS, &actualName, &domain, &watermark, &catalog, &active)
 	if errors.Is(e, sql.ErrNoRows) {
 		return nil, ErrNotFound
 	}
@@ -147,15 +168,29 @@ func (r *Reader) ReadRevisions(ctx context.Context, ns, name string, q url.Value
 	if actualNS != ns || actualName != name {
 		return nil, ErrNotFound
 	}
+	if !domain.Valid || !watermark.Valid || !catalog.Valid {
+		return nil, ErrUnavailable
+	}
+	if !r.Access.Domain(ctx, domain.String) {
+		return nil, ErrNotFound
+	}
+	if c.Revision != "" {
+		if c.Catalog != catalog.Int64 || c.Watermark > watermark.Int64 {
+			return nil, ErrInvalid
+		}
+	} else {
+		c.Catalog = catalog.Int64
+		c.Watermark = watermark.Int64
+	}
 	var missing int
-	if e = tx.QueryRowContext(ctx, `SELECT COUNT(*) FROM release_revisions v LEFT JOIN retained_release_snapshots h ON h.cluster_id=v.cluster_id AND h.cr_uid=v.cr_uid AND h.revision=v.revision WHERE v.cluster_id=? AND v.cr_uid=? AND h.revision IS NULL`, r.Cluster, uid).Scan(&missing); e != nil {
+	if e = tx.QueryRowContext(ctx, `SELECT COUNT(*) FROM release_history_completeness WHERE cluster_id=? AND cr_uid=?`, r.Cluster, uid).Scan(&missing); e != nil {
 		return nil, ErrUnavailable
 	}
 	if missing > 0 {
 		return nil, ErrUnavailable
 	}
-	query := `SELECT revision,cr_uid,namespace,name,generation,model_alias,source_type,spec_bytes,spec_sha256,created_at,snapshot_state FROM retained_release_snapshots WHERE cluster_id=? AND cr_uid=?`
-	args := []any{r.Cluster, uid}
+	query := `SELECT revision,cr_uid,namespace,name,generation,model_alias,source_type,summary_bytes,summary_sha256,created_at,snapshot_state FROM release_history_projection WHERE cluster_id=? AND cr_uid=? AND history_seq<=?`
+	args := []any{r.Cluster, uid, c.Watermark}
 	if c.Revision != "" {
 		stamp, _ := time.Parse(time.RFC3339Nano, c.Time)
 		query += " AND (created_at<? OR (created_at=? AND revision<?))"
@@ -176,7 +211,7 @@ func (r *Reader) ReadRevisions(ctx context.Context, ns, name string, q url.Value
 			records.Close()
 			return nil, ErrUnavailable
 		}
-		if v.Namespace != ns || v.Name != name || digest(b) != hash || json.Unmarshal(b, &v.Spec) != nil || v.Spec.Source.Type != v.Source || v.Spec.ModelAlias != v.Alias {
+		if v.Namespace != ns || v.Name != name || digest(b) != hash || json.Unmarshal(b, &v.Summary) != nil {
 			records.Close()
 			return nil, ErrUnavailable
 		}
@@ -195,8 +230,29 @@ func (r *Reader) ReadRevisions(ctx context.Context, ns, name string, q url.Value
 	if len(rows) > size {
 		rows = rows[:size]
 		last := rows[len(rows)-1]
-		b, _ := json.Marshal(cursor{scope, ns, name, uid, last.Revision, last.Created.Format(time.RFC3339Nano)})
-		next = base64.RawURLEncoding.EncodeToString(b)
+		b, _ := json.Marshal(cursor{Scope: scope, Namespace: ns, Name: name, UID: uid, Revision: last.Revision, Time: last.Created.Format(time.RFC3339Nano), PageSize: size, Catalog: c.Catalog, Watermark: c.Watermark})
+		mac := hmac.New(sha256.New, r.CursorKey)
+		mac.Write(b)
+		next = base64.RawURLEncoding.EncodeToString(b) + "." + base64.RawURLEncoding.EncodeToString(mac.Sum(nil))
+	}
+	// A bounded authoritative reread prevents mixing another UID/RV's eligibility.
+	if r.Live != nil && (live.State == "present" || live.State == "deleting") {
+		latest, err := r.Live.Current(ctx, ns, name)
+		if err != nil {
+			live = LiveState{State: "unknown"}
+		} else if latest.UID != live.UID || latest.Version != live.Version || latest.State != live.State {
+			again, secondErr := r.Live.Current(ctx, ns, name)
+			if secondErr != nil || again.UID != latest.UID || again.Version != latest.Version || again.State != latest.State {
+				live = LiveState{State: "unknown"}
+			} else {
+				live = again
+				if live.UID != uid && (live.State == "present" || live.State == "deleting") {
+					live.State = "replaced"
+				}
+			}
+		}
+		live.Namespace = ns
+		live.Name = name
 	}
 	data := []any{}
 	for _, v := range rows {
@@ -215,19 +271,12 @@ func (r *Reader) ReadRevisions(ctx context.Context, ns, name string, q url.Value
 		case live.State == "present" && live.SourceType != v.Source:
 			evaluation = Evaluation{"blocked", []string{"source_incompatible"}}
 		case live.State == "present" && r.Evaluator != nil:
-			if value, err := r.Evaluator.Evaluate(ctx, v.Spec, live); err == nil {
+			if value, err := r.Evaluator.Evaluate(ctx, uid, v.Revision, live); err == nil {
 				evaluation = value
 			}
 		}
 		if !validEvaluation(evaluation, live) {
 			return nil, ErrUnavailable
-		}
-		var upstream, runtime any
-		if x := v.Spec.Source.ExternalAPI; x != nil {
-			upstream = x.UpstreamModel
-		}
-		if x := v.Spec.Source.SelfHosted; x != nil {
-			runtime = x.RuntimeProfileRef
 		}
 		var rv any
 		live.Namespace = ns
@@ -242,7 +291,7 @@ func (r *Reader) ReadRevisions(ctx context.Context, ns, name string, q url.Value
 		if live.State == "deleted" || live.State == "replaced" {
 			isActive = false
 		}
-		data = append(data, map[string]any{"revision": v.Revision, "cr_uid": uid, "created_at": v.Created.Format(time.RFC3339Nano), "generation": v.Generation, "source_type": v.Source, "model_alias": v.Alias, "is_active": isActive, "snapshot_state": v.State, "summary": map[string]any{"upstream_model": upstream, "runtime_profile_ref": runtime, "capability_ref": v.Spec.BusinessRefs.CapabilityProfileRef, "price_ref": v.Spec.BusinessRefs.PricePolicyRef}, "rollback_eligibility": map[string]any{"state": evaluation.State, "reason_codes": evaluation.Reasons, "checked_at": time.Now().UTC().Format(time.RFC3339Nano), "evaluated_resource_version": rv}})
+		data = append(data, map[string]any{"revision": v.Revision, "cr_uid": uid, "created_at": v.Created.Format(time.RFC3339Nano), "generation": v.Generation, "source_type": v.Source, "model_alias": v.Alias, "is_active": isActive, "snapshot_state": v.State, "summary": v.Summary, "rollback_eligibility": map[string]any{"state": evaluation.State, "reason_codes": evaluation.Reasons, "checked_at": time.Now().UTC().Format(time.RFC3339Nano), "evaluated_resource_version": rv}})
 	}
 	var rv any
 	live.Namespace = ns
