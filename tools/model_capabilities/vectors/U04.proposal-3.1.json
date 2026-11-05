@@ -1,0 +1,125 @@
+{
+  "schema_version": "3.1",
+  "event_type": "request.finalized",
+  "event_id": "00000000-0000-4000-8000-000000000604",
+  "request_id": "00000000-0000-4000-8000-000000000103",
+  "key_id": "00000000-0000-4000-8000-000000000002",
+  "quota_date": "2026-11-04",
+  "model_alias": "model-a",
+  "upstream_model": "provider-model-example",
+  "source_id": "00000000-0000-4000-8000-000000000004",
+  "source_type": "external",
+  "config_revision": "rev-example-17",
+  "received_at": "2026-11-04T08:00:00Z",
+  "admitted_at": "2026-11-04T08:00:00.500Z",
+  "observed_at": "2026-11-04T08:00:01Z",
+  "result": "failed",
+  "submission_state": "submitted",
+  "quota_consumed": 1,
+  "error_code": "upstream_protocol_error",
+  "duration_ms": 1000,
+  "first_chunk_ms": 200,
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "total_tokens": null,
+    "input_cached_tokens": null,
+    "reasoning_tokens": null,
+    "source": "unavailable",
+    "missing_reason": "invalid_upstream_usage"
+  },
+  "metering_state": "incomplete",
+  "owner_instance_id": "00000000-0000-4000-8000-000000000003",
+  "owner_fence": 1,
+  "not_submitted_evidence_ref": null,
+  "slot_binding": {
+    "slot_id": 1,
+    "allocation_fence": 7
+  },
+  "reservation_plan": {
+    "schema_version": "1.0",
+    "model_alias": "model-a",
+    "source_id": "00000000-0000-4000-8000-000000000004",
+    "config_revision": "rev-example-17",
+    "capability_revision": "cap-example-verified-fixture-only",
+    "budget_policy_revision": "budget-example-v3",
+    "window_kind": "utc_day",
+    "token_metric": "prompt_plus_completion",
+    "request_reserved": "1",
+    "input_upper_tokens": "100",
+    "output_upper_tokens": "40",
+    "total_upper_tokens": "140",
+    "token_reserved": "140",
+    "money_reserved_atomic": "520000",
+    "currency": "TST",
+    "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+    "price_snapshot_sha256": "866cb1f5f808b8403dba1e733974f8e1caf9c2a9c7c1d1897d678849c948103f",
+    "price_version": "synthetic-price-v1",
+    "rate_policy_revision": "rate-example-v1"
+  },
+  "budget_accounting": {
+    "policy_revision": "budget-example-v3",
+    "window_kind": "utc_day",
+    "window_start": "2026-11-04T00:00:00Z",
+    "window_end": "2026-11-05T00:00:00Z",
+    "request": {
+      "reserved": "1",
+      "known_used": "1",
+      "unknown_held": "0",
+      "released": "0",
+      "overrun": "0",
+      "state": "known"
+    },
+    "token": {
+      "reserved": "140",
+      "known_used": "0",
+      "unknown_held": "140",
+      "released": "0",
+      "overrun": "0",
+      "state": "held"
+    },
+    "money": {
+      "reserved": "520000",
+      "known_used": "0",
+      "unknown_held": "520000",
+      "released": "0",
+      "overrun": "0",
+      "state": "held"
+    },
+    "token_actual": null,
+    "token_basis": "unavailable",
+    "cost_actual_atomic": null,
+    "cost_state": "unavailable",
+    "currency": "TST",
+    "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+    "price_version": "synthetic-price-v1",
+    "missing_reason": "invalid_upstream_usage"
+  },
+  "rate_witness": {
+    "permit_id": "00000000-0000-4000-8000-000000000008",
+    "rate_epoch": "1",
+    "policy_id": "rate-policy-example",
+    "policy_revision": "rate-example-v1",
+    "windows": [
+      {
+        "scope_id": "global",
+        "window_start": "2026-11-04T08:00:00Z",
+        "window_end": "2026-11-04T08:00:01Z",
+        "limit": "5"
+      }
+    ]
+  },
+  "invocation_binding": {
+    "model_release_uid": "00000000-0000-4000-8000-000000000010",
+    "model_release_namespace": "maas-models-example",
+    "model_release_name": "external-model-example",
+    "model_release_generation": 1,
+    "release_revision": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "publication_id": "00000000-0000-4000-8000-000000000011",
+    "activation_epoch": 1,
+    "route_binding_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+    "admission_purpose": "serving",
+    "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+    "price_version": "synthetic-price-v1"
+  }
+}

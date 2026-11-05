@@ -1,0 +1,19 @@
+{
+  "perf_commit": "b4461d57765d3b3c5472cf64c423640d37718ac0",
+  "perf_path": "tools/perf/experiments/first-batch-v0.4.json",
+  "perf_plan_sha256": "a9af7495c3f5dfa69462700ea877389b4cda0405233349b17b658a66545f8ae2",
+  "metrics_entry": "tools/perf/analyze.py",
+  "qa_issue": "MAAS-7",
+  "qa_matrix": "MAAS-1/2 A01-A34, independent execution pending",
+  "current_protocols": {
+    "ticket": 3,
+    "terminal": "3.0",
+    "observation": "1.0"
+  },
+  "d1_proposal": {
+    "document": "0.4.1",
+    "terminal": "3.1",
+    "state": "consumer_migration_pending"
+  },
+  "draft_query_contract": "0.4.2-draft.1 remains draft; no public request expansion"
+}

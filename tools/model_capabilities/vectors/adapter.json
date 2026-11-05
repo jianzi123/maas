@@ -1,0 +1,95 @@
+{
+  "synthetic": true,
+  "authority": "none",
+  "cases": [
+    {
+      "id": "sglang-known",
+      "adapter": "sglang-v0.5.18",
+      "raw": {
+        "prompt_tokens": 12,
+        "completion_tokens": 7,
+        "total_tokens": 19,
+        "prompt_tokens_details": {
+          "cached_tokens": 4
+        },
+        "reasoning_tokens": 3
+      },
+      "expected": {
+        "input_tokens": 12,
+        "output_tokens": 7,
+        "total_tokens": 19,
+        "input_cached_tokens": 4,
+        "reasoning_tokens": 3
+      }
+    },
+    {
+      "id": "deepseek-known",
+      "adapter": "deepseek-documentation-candidate",
+      "raw": {
+        "prompt_tokens": 12,
+        "completion_tokens": 7,
+        "total_tokens": 19,
+        "prompt_cache_hit_tokens": 4,
+        "completion_tokens_details": {
+          "reasoning_tokens": 3
+        }
+      },
+      "expected": {
+        "input_tokens": 12,
+        "output_tokens": 7,
+        "total_tokens": 19,
+        "input_cached_tokens": 4,
+        "reasoning_tokens": 3
+      }
+    },
+    {
+      "id": "cache-detail-omitted",
+      "adapter": "sglang-v0.5.18",
+      "raw": {
+        "prompt_tokens": 12,
+        "completion_tokens": 7,
+        "total_tokens": 19,
+        "reasoning_tokens": 0
+      },
+      "expected": {
+        "input_tokens": 12,
+        "output_tokens": 7,
+        "total_tokens": 19,
+        "input_cached_tokens": null,
+        "reasoning_tokens": 0
+      }
+    },
+    {
+      "id": "all-missing",
+      "adapter": "sglang-v0.5.18",
+      "raw": {},
+      "expected": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "total_tokens": null,
+        "input_cached_tokens": null,
+        "reasoning_tokens": null
+      }
+    },
+    {
+      "id": "real-zero-synthetic-vector",
+      "adapter": "sglang-v0.5.18",
+      "raw": {
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "total_tokens": 0,
+        "reasoning_tokens": 0,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "expected": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_cached_tokens": 0,
+        "reasoning_tokens": 0
+      }
+    }
+  ]
+}
