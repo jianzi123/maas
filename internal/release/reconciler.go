@@ -157,6 +157,7 @@ func (r *Reconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Resu
 			return finish("Degraded", "DependencyMissing", err)
 		}
 		desired.Revision = Revision(m.Spec, resolution)
+		desired.History = &HistoryCapture{Spec: m.DeepCopy().Spec, Resolution: resolution, ResourceVersion: m.ResourceVersion}
 		m.Status.DesiredRevision = &desired.Revision
 	}
 	if err := r.fresh(ctx, m); err != nil {

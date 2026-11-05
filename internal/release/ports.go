@@ -48,7 +48,13 @@ type State struct {
 	EvidenceRefs                                                    []string
 	Draining                                                        []Binding
 }
+type HistoryCapture struct {
+	Spec            api.Spec
+	Resolution      Resolution
+	ResourceVersion string
+}
 type Desired struct {
+	History                       *HistoryCapture `json:"-"`
 	CRUID, Namespace, Name, Alias string
 	Gateway                       api.Ref
 	Generation                    int64

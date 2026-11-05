@@ -25,3 +25,4 @@ GRANT SELECT ON __MAAS_DATABASE__.active_model_bindings TO maas_release_reader;
 -- would additionally require UPDATE/DELETE/LOCK TABLES privileges in MySQL.
 -- No Key/budget/request/usage/terminal/slot UPDATE or INSERT is authorized by
 -- this template. Migration uses a separate, temporary DDL identity.
+GRANT SELECT,INSERT ON __MAAS_DATABASE__.retained_release_snapshots TO maas_release_publisher;

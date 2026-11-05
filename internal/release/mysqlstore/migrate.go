@@ -21,6 +21,12 @@ var migration string
 // migration resumes the SAME checksummed IF-NOT-EXISTS statements. This is not a
 // promise of multi-statement transactional DDL or a destructive down migration.
 func Migrate(ctx context.Context, db *sql.DB) error {
+	if e := migrateBase(ctx, db); e != nil {
+		return e
+	}
+	return migrateHistory(ctx, db)
+}
+func migrateBase(ctx context.Context, db *sql.DB) error {
 	if db == nil {
 		return release.ErrDependencyMissing
 	}
