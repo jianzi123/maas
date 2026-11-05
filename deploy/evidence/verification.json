@@ -1,0 +1,466 @@
+{
+  "generated_at": "2026-11-05T11:40:57.703379+00:00",
+  "scope": "local-static-and-synthetic-render-only",
+  "helm": "v4.3.1+gc0d08d0",
+  "python": "3.13.9",
+  "packages": {
+    "PyYAML": "6.0.3",
+    "jsonschema": "4.25.0"
+  },
+  "checks_passed": 102,
+  "checks": [
+    {
+      "check": "default schema",
+      "passed": true
+    },
+    {
+      "check": "disabled default renders no workloads",
+      "passed": true
+    },
+    {
+      "check": "internal fixture schema",
+      "passed": true
+    },
+    {
+      "check": "schema rejects missing digest",
+      "passed": true
+    },
+    {
+      "check": "schema rejects mutable tag",
+      "passed": true
+    },
+    {
+      "check": "schema rejects inline key",
+      "passed": true
+    },
+    {
+      "check": "schema rejects missing command",
+      "passed": true
+    },
+    {
+      "check": "schema rejects missing credentials",
+      "passed": true
+    },
+    {
+      "check": "schema rejects missing webhook CA",
+      "passed": true
+    },
+    {
+      "check": "schema rejects cluster scope not acknowledged",
+      "passed": true
+    },
+    {
+      "check": "schema rejects missing API group",
+      "passed": true
+    },
+    {
+      "check": "schema rejects install dependency bypass",
+      "passed": true
+    },
+    {
+      "check": "schema rejects unrestricted peer",
+      "passed": true
+    },
+    {
+      "check": "schema rejects implicit port allow",
+      "passed": true
+    },
+    {
+      "check": "schema rejects invalid readiness",
+      "passed": true
+    },
+    {
+      "check": "schema rejects missing TLS",
+      "passed": true
+    },
+    {
+      "check": "template rejects placeholder group unacknowledged",
+      "passed": true
+    },
+    {
+      "check": "template rejects hybrid missing gateway egress",
+      "passed": true
+    },
+    {
+      "check": "template rejects ingress without core",
+      "passed": true
+    },
+    {
+      "check": "template rejects core readiness aliases liveness",
+      "passed": true
+    },
+    {
+      "check": "internal schema",
+      "passed": true
+    },
+    {
+      "check": "internal network semantics",
+      "passed": true
+    },
+    {
+      "check": "internal: no Secret/CRD/database/PVC/workload-model creation",
+      "passed": true
+    },
+    {
+      "check": "internal: expected deployments",
+      "passed": true
+    },
+    {
+      "check": "internal: explicit policies",
+      "passed": true
+    },
+    {
+      "check": "internal: operator image pinned",
+      "passed": true
+    },
+    {
+      "check": "internal: operator nonroot+readonly",
+      "passed": true
+    },
+    {
+      "check": "internal: operator exec readiness",
+      "passed": true
+    },
+    {
+      "check": "internal: operator token isolation",
+      "passed": true
+    },
+    {
+      "check": "internal: operator no env literals",
+      "passed": true
+    },
+    {
+      "check": "internal: core image pinned",
+      "passed": true
+    },
+    {
+      "check": "internal: core nonroot+readonly",
+      "passed": true
+    },
+    {
+      "check": "internal: core exec readiness",
+      "passed": true
+    },
+    {
+      "check": "internal: core token isolation",
+      "passed": true
+    },
+    {
+      "check": "internal: core no env literals",
+      "passed": true
+    },
+    {
+      "check": "internal: console image pinned",
+      "passed": true
+    },
+    {
+      "check": "internal: console nonroot+readonly",
+      "passed": true
+    },
+    {
+      "check": "internal: console exec readiness",
+      "passed": true
+    },
+    {
+      "check": "internal: console token isolation",
+      "passed": true
+    },
+    {
+      "check": "internal: console no env literals",
+      "passed": true
+    },
+    {
+      "check": "internal: operator no business credentials",
+      "passed": true
+    },
+    {
+      "check": "internal: deny default review-maas-operator",
+      "passed": true
+    },
+    {
+      "check": "internal: deny default review-maas-core",
+      "passed": true
+    },
+    {
+      "check": "internal: deny default review-maas-console",
+      "passed": true
+    },
+    {
+      "check": "internal: RBAC narrow modelreleases",
+      "passed": true
+    },
+    {
+      "check": "internal: cluster read only",
+      "passed": true
+    },
+    {
+      "check": "internal: RBAC narrow modelreleases,modelreleases/status,modelreleases/finalizers",
+      "passed": true
+    },
+    {
+      "check": "internal: RBAC narrow leases",
+      "passed": true
+    },
+    {
+      "check": "internal: private service review-maas-operator",
+      "passed": true
+    },
+    {
+      "check": "internal: private service review-maas-core",
+      "passed": true
+    },
+    {
+      "check": "internal: private service review-maas-console",
+      "passed": true
+    },
+    {
+      "check": "internal: TLS and Go entry",
+      "passed": true
+    },
+    {
+      "check": "internal: webhook fail closed",
+      "passed": true
+    },
+    {
+      "check": "internal: selector review-maas-operator",
+      "passed": true
+    },
+    {
+      "check": "internal: selector review-maas-core",
+      "passed": true
+    },
+    {
+      "check": "internal: selector review-maas-console",
+      "passed": true
+    },
+    {
+      "check": "internal: selector review-maas-operator",
+      "passed": true
+    },
+    {
+      "check": "internal: selector review-maas-core",
+      "passed": true
+    },
+    {
+      "check": "internal: selector review-maas-console",
+      "passed": true
+    },
+    {
+      "check": "hybrid schema",
+      "passed": true
+    },
+    {
+      "check": "hybrid network semantics",
+      "passed": true
+    },
+    {
+      "check": "hybrid: no Secret/CRD/database/PVC/workload-model creation",
+      "passed": true
+    },
+    {
+      "check": "hybrid: expected deployments",
+      "passed": true
+    },
+    {
+      "check": "hybrid: explicit policies",
+      "passed": true
+    },
+    {
+      "check": "hybrid: operator image pinned",
+      "passed": true
+    },
+    {
+      "check": "hybrid: operator nonroot+readonly",
+      "passed": true
+    },
+    {
+      "check": "hybrid: operator exec readiness",
+      "passed": true
+    },
+    {
+      "check": "hybrid: operator token isolation",
+      "passed": true
+    },
+    {
+      "check": "hybrid: operator no env literals",
+      "passed": true
+    },
+    {
+      "check": "hybrid: core image pinned",
+      "passed": true
+    },
+    {
+      "check": "hybrid: core nonroot+readonly",
+      "passed": true
+    },
+    {
+      "check": "hybrid: core exec readiness",
+      "passed": true
+    },
+    {
+      "check": "hybrid: core token isolation",
+      "passed": true
+    },
+    {
+      "check": "hybrid: core no env literals",
+      "passed": true
+    },
+    {
+      "check": "hybrid: console image pinned",
+      "passed": true
+    },
+    {
+      "check": "hybrid: console nonroot+readonly",
+      "passed": true
+    },
+    {
+      "check": "hybrid: console exec readiness",
+      "passed": true
+    },
+    {
+      "check": "hybrid: console token isolation",
+      "passed": true
+    },
+    {
+      "check": "hybrid: console no env literals",
+      "passed": true
+    },
+    {
+      "check": "hybrid: operator no business credentials",
+      "passed": true
+    },
+    {
+      "check": "hybrid: deny default review-maas-operator",
+      "passed": true
+    },
+    {
+      "check": "hybrid: deny default review-maas-core",
+      "passed": true
+    },
+    {
+      "check": "hybrid: deny default review-maas-console",
+      "passed": true
+    },
+    {
+      "check": "hybrid: RBAC narrow modelreleases",
+      "passed": true
+    },
+    {
+      "check": "hybrid: cluster read only",
+      "passed": true
+    },
+    {
+      "check": "hybrid: RBAC narrow modelreleases,modelreleases/status,modelreleases/finalizers",
+      "passed": true
+    },
+    {
+      "check": "hybrid: RBAC narrow leases",
+      "passed": true
+    },
+    {
+      "check": "hybrid: private service review-maas-operator",
+      "passed": true
+    },
+    {
+      "check": "hybrid: private service review-maas-core",
+      "passed": true
+    },
+    {
+      "check": "hybrid: private service review-maas-console",
+      "passed": true
+    },
+    {
+      "check": "hybrid: TLS and Go entry",
+      "passed": true
+    },
+    {
+      "check": "hybrid: webhook fail closed",
+      "passed": true
+    },
+    {
+      "check": "hybrid: selector review-maas-operator",
+      "passed": true
+    },
+    {
+      "check": "hybrid: selector review-maas-core",
+      "passed": true
+    },
+    {
+      "check": "hybrid: selector review-maas-console",
+      "passed": true
+    },
+    {
+      "check": "hybrid: selector review-maas-operator",
+      "passed": true
+    },
+    {
+      "check": "hybrid: selector review-maas-core",
+      "passed": true
+    },
+    {
+      "check": "hybrid: selector review-maas-console",
+      "passed": true
+    },
+    {
+      "check": "network rejects 0.0.0.0/0",
+      "passed": true
+    },
+    {
+      "check": "network rejects ::/0",
+      "passed": true
+    },
+    {
+      "check": "network rejects 8.8.8.8/32",
+      "passed": true
+    },
+    {
+      "check": "network rejects not-a-cidr",
+      "passed": true
+    }
+  ],
+  "rendered_documents": {
+    "internal": 18,
+    "hybrid": 18
+  },
+  "files_sha256": {
+    ".gitattributes": "a79691a93b46e49ce460c26ef22afcc03d6eca1e63bf2edbc20e96159510f6c9",
+    ".gitignore": "b03ab30ac646ab4bdab424be43b1d1c707eb62736b452fc9f27d3658455e8b22",
+    "charts/maas-platform/.helmignore": "c626dca267e7906244d76ac8af4a379b47cbdd3b5052503a510b667872bea327",
+    "charts/maas-platform/Chart.yaml": "d7fd960269d2a81ce7722f7f03bf69eaf97e0b1e1552832b4c9b1e352a36784b",
+    "charts/maas-platform/templates/_helpers.tpl": "0ffce991983a155143e6ce07a22f107b7deff0e29ae0f3755e6bf7a3d5985243",
+    "charts/maas-platform/templates/ingress.yaml": "b5a3b1fc27a2db4f9795ec31501ca4ff702689c6bf5ef24cbcc7a05684ba1d78",
+    "charts/maas-platform/templates/networkpolicy.yaml": "b1e53ce8392a933705204ae0e46e722b52e8a2542832f0daead79b45c9aa6190",
+    "charts/maas-platform/templates/NOTES.txt": "0ec93409560c8c67bbaf31a1cd556542bea9a2fc98c8a094e30f4a853033c70e",
+    "charts/maas-platform/templates/rbac.yaml": "47f74ee28360a50ea448ef1909580c67f3f4f619b74e273f84435b68e2fb435c",
+    "charts/maas-platform/templates/services.yaml": "9875ed7845663b44b6ddf79da958c60b3d6b6f9f447c385ff99741077190fd68",
+    "charts/maas-platform/templates/validate.yaml": "600a2abdc3777a84d4361f02f554323b3d111380e5b22e8293c95acf38cb37e6",
+    "charts/maas-platform/templates/workloads.yaml": "2d77597ca69cd81a46c90cc726d7ea422303d415bfebb0f3dee6f247f766bbc9",
+    "charts/maas-platform/values-hybrid.yaml": "7e3cbd162b70fb2c2a9438e7075374341732568bb505e7ae84608f5ee9e92fe5",
+    "charts/maas-platform/values-internal.yaml": "6cbe8e2108b8c2ecf345922780fc20ca2b49b05f68773462c4953aec3e5d1487",
+    "charts/maas-platform/values.schema.json": "1fb6c31e012511bd9585dbdcf0a57cb18ea591ef7380d51d237379ee82415419",
+    "charts/maas-platform/values.yaml": "c62bc1802a0661dbdf54e9b1f26e240a7c741f68a5be15ab73270ebebc087cef",
+    "checks/preflight.py": "bc4169e220220f558910e30a6a0a15269a7b6e317824eb157a2480999d78ad3b",
+    "checks/requirements.txt": "bfe5c2fbd8864d152c8113c9b86103c3cf62bbce3419eaf9b35f96733c06bc03",
+    "checks/test_preflight.py": "83da343d577edb73d89ee7c1026197d83a55155d826246546251dd2ee03f3171",
+    "checks/verify.py": "07f847c0db94e6fe632a61c18097958a45070dc86edc62b189de401382e3fb1f",
+    "dependencies.lock.json": "7dca04047bcec4b4471bf65ebe9007aefe4a09c62a8ce8fe74ceda39bf00cea6",
+    "docs/log-fields.json": "bcb9dc20f6014a6fb0d1be6b93ad27c3b53994bc368fbede9e7bf13a6d2c6cae",
+    "docs/readiness.md": "fc698ad57da22b3f2a4cae27e896bd0cab71c9122f66ec6a00e4c66e4c9cba9e",
+    "docs/runbook.md": "662bb958faa67354a797c58960558e4b00e98c6cbba2dd5d15aba092d8c9c787",
+    "docs/signals.csv": "224970d562bb3be9e9eda17167bd59767f40687b07fb8429d6c542b336d5cd7f",
+    "images/Dockerfile.operator": "d8cf4eaa09614d3ea9bfd071b6a1c09a70f1bfbad96fb1dace329a4440a981f4",
+    "probe/main.go": "210ab94cd9ed69bf93bf4c816bead4d71f897211e04190909aaf91e0bcf8c199",
+    "probe/main_test.go": "42c71942a322988ae57b0b1a8357a4d82a68c94cbb77866f7b3009f446432df8",
+    "README.md": "a9e172f097f2b3cd59a5c66912c513a2e41d104ba06ff4c78a3a2bda5b1360db",
+    "tests/fixtures/hybrid.yaml": "a7ef04f796c2dcedd57d23f1e5c56ce5882ebf6f256ff3648889e7c0116c4f2a",
+    "tests/fixtures/internal.yaml": "85cbd7edde832a89133c2063c68c7e27f2e33e09f13a7975f6efa95d486ec0e0"
+  },
+  "not_executed": [
+    "cluster-install-upgrade-rollback",
+    "server-dry-run-CEL-webhook",
+    "real-RBAC-Secret-H1-H4",
+    "model-GPU-paid-API",
+    "backup-restore-HA",
+    "A01-A34-runtime"
+  ]
+}

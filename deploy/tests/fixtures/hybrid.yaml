@@ -1,0 +1,167 @@
+# SYNTHETIC ONLY: gateway egress reference does not create or verify a policy.
+{
+  "api": {
+    "group": "serving.maas.example",
+    "reviewPlaceholderAcknowledged": true
+  },
+  "operator": {
+    "enabled": true,
+    "acknowledgeClusterWatch": true,
+    "image": {
+      "repository": "registry.example.invalid/maas/operator",
+      "digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+    },
+    "webhookTLSSecret": "synthetic-webhook-tls",
+    "webhookCABundle": "U1lOVEhFVElD"
+  },
+  "core": {
+    "enabled": true,
+    "image": {
+      "repository": "registry.example.invalid/maas/core",
+      "digest": "sha256:2222222222222222222222222222222222222222222222222222222222222222"
+    },
+    "command": [
+      "/synthetic-core"
+    ],
+    "existingConfigMap": "synthetic-core-config",
+    "existingSecret": "synthetic-core-credentials"
+  },
+  "console": {
+    "enabled": true,
+    "image": {
+      "repository": "registry.example.invalid/maas/console",
+      "digest": "sha256:3333333333333333333333333333333333333333333333333333333333333333"
+    },
+    "command": [
+      "/synthetic-console"
+    ],
+    "existingConfigMap": "synthetic-console-config"
+  },
+  "higress": {
+    "namespace": "higress-system",
+    "gatewayService": "higress-gateway",
+    "externalEgressPolicyRef": "synthetic-approved-proxy-policy"
+  },
+  "network": {
+    "operator": {
+      "ingress": [
+        {
+          "from": [
+            {
+              "ipBlock": {
+                "cidr": "192.0.2.1/32"
+              }
+            }
+          ],
+          "ports": [
+            {
+              "protocol": "TCP",
+              "port": 9443
+            }
+          ]
+        }
+      ],
+      "egress": [
+        {
+          "to": [
+            {
+              "ipBlock": {
+                "cidr": "192.0.2.1/32"
+              }
+            }
+          ],
+          "ports": [
+            {
+              "protocol": "TCP",
+              "port": 6443
+            }
+          ]
+        }
+      ]
+    },
+    "core": {
+      "ingress": [
+        {
+          "from": [
+            {
+              "namespaceSelector": {
+                "matchLabels": {
+                  "kubernetes.io/metadata.name": "ingress-system"
+                }
+              },
+              "podSelector": {
+                "matchLabels": {
+                  "app.kubernetes.io/name": "ingress"
+                }
+              }
+            }
+          ],
+          "ports": [
+            {
+              "protocol": "TCP",
+              "port": 8080
+            }
+          ]
+        }
+      ],
+      "egress": [
+        {
+          "to": [
+            {
+              "namespaceSelector": {
+                "matchLabels": {
+                  "kubernetes.io/metadata.name": "higress-system"
+                }
+              },
+              "podSelector": {
+                "matchLabels": {
+                  "app": "higress-gateway"
+                }
+              }
+            }
+          ],
+          "ports": [
+            {
+              "protocol": "TCP",
+              "port": 8080
+            }
+          ]
+        }
+      ]
+    },
+    "console": {
+      "ingress": [
+        {
+          "from": [
+            {
+              "namespaceSelector": {
+                "matchLabels": {
+                  "kubernetes.io/metadata.name": "ingress-system"
+                }
+              },
+              "podSelector": {
+                "matchLabels": {
+                  "app.kubernetes.io/name": "ingress"
+                }
+              }
+            }
+          ],
+          "ports": [
+            {
+              "protocol": "TCP",
+              "port": 8080
+            }
+          ]
+        }
+      ],
+      "egress": []
+    }
+  },
+  "ingress": {
+    "enabled": true,
+    "className": "synthetic-private",
+    "host": "maas.example.invalid",
+    "existingTLSSecret": "synthetic-platform-tls"
+  },
+  "mode": "hybrid"
+}
