@@ -6,6 +6,8 @@
 
 按章节做作业见[统一练习索引](../exercises/README.md)；与既有代码、角色及分支接线见[整合地图](../integration-map.md)。
 
+进一步实现与深挖见[工程实现卷](../engineering/README.md)：GPU地址/GEMM、在线Attention、RoPE/量化、KV页池/调度、Graph、分布式/投机、耐久恢复与统计。
+
 ## 阅读顺序与实际产出
 
 | 章节 | 你将弄清楚什么 | 读完应交出什么 |

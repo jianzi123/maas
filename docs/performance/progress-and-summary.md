@@ -1,5 +1,10 @@
 # 阶段总结：2026-11-05
 
+## 当前工程实现增量
+
+新增[工程实现卷十二章](engineering/README.md)及[八类可运行代码](../../tools/perf/engineering/README.md)，将公式、数据结构、不变量、独立oracle和故障注入连接起来。CPU/本地SQLite进程恢复与固定源码审计单独交证据；真实GPU、多卡/模型质量、MySQL/K8s/网关发布与收益未验。当前回归数量按本轮实际日志记录，历史数字不累加成整体验收。
+
+
 ## 当前整合交付
 
 入口现统一为[六章教材](foundations/README.md)→[逐章练习](exercises/README.md)→[目标卡](optimization-goals.md)→[实验规程](optimization-playbook.md)。[教材与研发整合地图](integration-map.md)说明两条框架主线、已有码接点、19项埋点/导出缺口、阶段与课题映射，以及现有分支的合入顺序。

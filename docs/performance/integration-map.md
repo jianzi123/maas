@@ -19,6 +19,12 @@
 
 四类编号要分清：R0–R3、D0–D3是“建设到哪一步”；K01–K03、R01–R04、E01是“优化什么”；E1–E3是“怎样做实验”；OBS01–OBS19是“采哪些观测”。它们的对应关系见下面各表，不合并成一套混用的编号。
 
+## 实现卷进入同一研发路径
+
+[工程实现卷](engineering/README.md)补充了可运行online Attention、布局/GEMM、RoPE/W8、页池、容量调度、TP/MoE、统计和真实子进程/SQLite恢复。它沿用现有整合边界：CPU状态/算法参考支撑R0/R1与D0/D1；真实Worker、MySQL/K8s与网关证据仍由原负责人和授权环境接入。
+
+CPU报告独立于ObservationEnvelope/终态，不作为生产导出；原协议和19项埋点映射保持。新增代码限tools/perf/engineering，教材限docs/performance，不接管共享契约或业务内核。
+
 ## 两条研发主线在同一调用链汇合
 
 ![两条建设主线与一个诊断出口](foundations/figures/integration.svg)
