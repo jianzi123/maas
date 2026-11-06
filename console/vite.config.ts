@@ -1,6 +1,10 @@
 import { defineConfig } from "vitest/config";
 import vue from "@vitejs/plugin-vue";
-export default defineConfig({
-  plugins: [vue()],
-  test: { environment: "jsdom", include: ["src/**/*.test.ts"] },
+import { localControlFromEnv } from "./scripts/local-control.mjs";
+export default defineConfig(({ command }) => {
+  const local = command === "serve" ? localControlFromEnv() : undefined;
+  return {
+    plugins: [vue(), ...(local ? [local] : [])],
+    test: { environment: "jsdom", include: ["src/**/*.test.ts"] },
+  };
 });

@@ -120,7 +120,7 @@ main {
   min-width: 0;
   max-width: 1650px;
   width: 100%;
-  margin: auto;
+  margin: 0 auto;
 }
 header {
   display: flex;

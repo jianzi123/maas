@@ -187,7 +187,7 @@ describe("independent backend review: expected safety properties", () => {
     expect(w.text()).toContain("写入结果未知");
   });
 
-  it("I2: current SSE consumer accepts a chunk ID different from the response header (contract question)", async () => {
+  it("I2: clarified public response contract rejects a chunk from another request", async () => {
     await expect(
       streamChat(
         new Api(async () => sse(rid, secondId)),
@@ -200,11 +200,11 @@ describe("independent backend review: expected safety properties", () => {
         new AbortController().signal,
         { id: vi.fn(), chunk: vi.fn(), usage: vi.fn() },
       ),
-    ).resolves.toBeUndefined();
+    ).rejects.toMatchObject({ code: "protocol_error" });
   });
 
-  it("I1: current Go relay upstream usage format is rejected by the stable public chunk consumer", async () => {
-    // relay.go forwards upstream lines unchanged; prompt_tokens etc. are its input wire format.
+  it("I1: raw provider usage requires Go normalization before public consumption", async () => {
+    // Direct provider prompt_tokens/completion_tokens are not the public Usage contract.
     const upstreamUsage = {
       prompt_tokens: 12,
       completion_tokens: 7,

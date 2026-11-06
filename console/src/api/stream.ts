@@ -31,7 +31,8 @@ export async function streamChat(
     throw e;
   }
   const id = res.headers.get("X-Request-ID");
-  if (id && uuid.test(id)) hooks.id(id);
+  if (!id || !uuid.test(id)) throw new ApiError("protocol_error", 200);
+  hooks.id(id);
   if (
     !res.headers
       .get("Content-Type")
@@ -58,6 +59,7 @@ export async function streamChat(
     if (event === "error") {
       event = "";
       const e = validate<S["Error"]>("Error", JSON.parse(payload));
+      if (e.error.request_id !== id) throw new ApiError("protocol_error", 200);
       throw new ApiError(e.error.code, 200);
     }
     event = "";
@@ -67,7 +69,8 @@ export async function streamChat(
       return;
     }
     const chunk = validate<S["ChatChunk"]>("ChatChunk", JSON.parse(payload));
-    if (chunk.model !== input.model) throw new ApiError("protocol_error", 200);
+    if (chunk.id !== "chatcmpl-" + id || chunk.model !== input.model)
+      throw new ApiError("protocol_error", 200);
     for (const choice of chunk.choices) {
       if (choice.delta.content) hooks.chunk(choice.delta.content);
       if (choice.finish_reason) finished = true;

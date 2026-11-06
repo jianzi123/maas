@@ -57,3 +57,5 @@ npm run test:browser
 MAAS-3/11 需提供同一真实 API 的管理、查询与发布装配；FE-R02/03 草案字段仍待 MAAS-2/3/7 收敛及真实 HTTP 样例复验。需获准模型、Secret 安全渠道、预算/价表、Higress 证据与环境后，才能验证真实 streaming、撤销、取消/迟到终态与容量恢复。当前没有真实模型调用、目标部署或 A01–A34 整体验收证据。
 
 本轮三方评审修复、针对性回归及受控 Go/MySQL HTTP 子集范围见 [docs/review-fixes.md](docs/review-fixes.md)。npm run test:review-browser 复跑 QA 的竞态安全断言；这属于开发者复跑，不代替独立验收。
+
+本地 Go 页面入口、可操作子集及启动方式见 [docs/go-workbench.md](docs/go-workbench.md)。本轮支持直接操作 Key/三维预算和查询用量；模型试用与完整发布管理仍需相应后端入口。
