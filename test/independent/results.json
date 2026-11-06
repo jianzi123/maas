@@ -1,0 +1,492 @@
+{
+  "observed_at_utc": "2026-11-06T07:41:38.542296+00:00",
+  "product_sha": "821269bd32164918443e63e66c6a7cbce45d440b",
+  "dependency_sha": "4d45c6f5a033783a8c1a8886f2b6e65eff7a3cf4",
+  "frontend_consumer_sha": "428d44e0b4f64ec628e6a945fd4b63a0e45c260b",
+  "shared_database_controlled": [
+    {
+      "result": "PASS",
+      "name": "TestMySQLHistoryProjectionRole"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLRetainedHistory/capture_restart_immutable_and_ack"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLRetainedHistory/legacy_hash_not_adopted"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLRetainedHistory/uid_visibility_live_and_references"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLRetainedHistory/pagination_ties_scope_and_new_insert"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLRetainedHistory/rollback_CAS_UID_and_commit_unknown"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLRetainedHistory/migration_v2_checksum_and_permission"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLRelease/idempotent_observe_restart_and_monotonic_epoch"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLRelease/activation_CAS_exact_replay_and_closed_publication"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLRelease/fail_closed_missing_expired_mismatched_or_unready_evidence"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLRelease/tombstone_alias_reservation_and_UID_isolation"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLRelease/inventory_pending_UID_recovery_and_safe_slot_cleanup"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLRelease/shared_admission_transaction_blocks_close_until_settlement_boundary"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLRelease/parallel_generations_do_not_lower_fence_or_epoch"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLRelease/migration_checksum_conflict"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLRelease/concurrent_activation_has_one_winner"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLRelease/migration_resume_and_unversioned_tables_are_not_adopted"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLRelease/least_privilege_cannot_write_core_or_run_DDL"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLRelease/counter_exhaustion_never_wraps"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLRelease/committed_ACK_loss_does_not_duplicate_publication_or_activation"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLQueriesAndCAS"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLDurableProofAndCandidateValidation"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLLastBudgetTwoReplicas"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLRedisCompleteRebuild"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLLateExpiryAndCluster"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLDurableUsageRelay/eof"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLDurableUsageRelay/writer"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLDurableUsageRelay/deadline_after_usage"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLDurableUsageRelay/cancel_after_usage"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLDurableUsageRelay/write_failure"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLDurableUsageRelay/limit"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLDurableUsageRelay/parse_invalid"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLDurableUsageRelay/before_usage_eof"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLDurableUsageRelay/parent_deadline_before_headers"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLDiagnosticReplayFenceAndACK"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLKernel/atomic_three_dimensions_and_duplicate_ticket"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLKernel/two_replicas_one_global_slot"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLKernel/revocation_visible_to_other_replica"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLKernel/token_rejection_rolls_back_every_dimension"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLKernel/unknown_usage_duplicate_event_late_close_does_not_refund"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLKernel/known_usage_uses_frozen_price_and_rounds_once"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLKernel/no_send_only_from_bound_proof"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLKernel/pause_delete_and_stale_epoch"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLKernel/publish_close_cannot_overtake_admission_commit"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLKernel/restart_fences_owner_and_preserves_unknown_hold"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLKernel/rate_epoch_and_missing_or_expired_dependencies_fail_closed"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLKernel/late_proof_cannot_release_reallocated_slot"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLKernel/real_commit_ack_loss_never_reauthorizes"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLKernel/budget_bound_breach_records_actual_and_blocks"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLPublisherCannotWriteRealLedger"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLPublicStreamContract/success"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLPublicStreamContract/missing_finish"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLPublicStreamContract/duplicate_done"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLPublicStreamContract/data_after_done"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLPublicStreamContract/wrong_model"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLPublicStreamContract/multiline"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLManagedACKRecovery"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLRedisActualRestart"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLOwnerProcessRecovery"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLRelayHardDeadline/stream"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLRelayHardDeadline/nonstream"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLControlledRelay/nonstream"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLControlledRelay/stream"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLControlledRelay/cumulative"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLControlledRelay/decreasing"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLControlledRelay/cancel"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLControlledRelay/missing_usage"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLControlledRelay/interrupted"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLControlledRelay/accounting_failure"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLRealRedisWitness"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLHistoryHTTP"
+    },
+    {
+      "result": "PASS",
+      "name": "TestMySQLSessionAPI"
+    }
+  ],
+  "shared_function_only": [
+    {
+      "result": "PASS",
+      "name": "TestInputAndErrorBoundary"
+    },
+    {
+      "result": "PASS",
+      "name": "TestInventoryIdentityAndAllowlist"
+    },
+    {
+      "result": "PASS",
+      "name": "TestPriceAndReservation"
+    },
+    {
+      "result": "PASS",
+      "name": "TestUsageIndependentDimensions"
+    },
+    {
+      "result": "PASS",
+      "name": "TestPublicResponseProjection"
+    },
+    {
+      "result": "PASS",
+      "name": "TestCompleteSSEEvents"
+    },
+    {
+      "result": "PASS",
+      "name": "TestRelayFirstContextReason"
+    }
+  ],
+  "shared_helper_skip": [
+    {
+      "result": "SKIP",
+      "name": "TestOwnerCrashChild"
+    }
+  ],
+  "baseline_management": [
+    {
+      "result": "PASS",
+      "name": "TestManagementHTTPLifecycle/create-list-detail-and-exact-operation"
+    },
+    {
+      "result": "PASS",
+      "name": "TestManagementHTTPLifecycle/catalogue-from-same-immutable-kernel-profile"
+    },
+    {
+      "result": "PASS",
+      "name": "TestManagementHTTPLifecycle/namespace-bound-pagination-and-invalid-cursors"
+    },
+    {
+      "result": "PASS",
+      "name": "TestManagementHTTPLifecycle/stale-version-and-uid-conflicts"
+    },
+    {
+      "result": "PASS",
+      "name": "TestManagementHTTPLifecycle/unapproved-reference-and-unknown-fields-rejected"
+    },
+    {
+      "result": "PASS",
+      "name": "TestManagementHTTPLifecycle/api-server-CAS-race-is-not-retried"
+    },
+    {
+      "result": "PASS",
+      "name": "TestManagementHTTPLifecycle/pause-during-registry-outage"
+    },
+    {
+      "result": "PASS",
+      "name": "TestManagementHTTPLifecycle/resume-and-update"
+    },
+    {
+      "result": "PASS",
+      "name": "TestManagementHTTPLifecycle/rollback-reuses-retained-source"
+    },
+    {
+      "result": "PASS",
+      "name": "TestManagementHTTPLifecycle/lost-ack-query-never-replays"
+    },
+    {
+      "result": "PASS",
+      "name": "TestManagementHTTPLifecycle/delete-and-query-after-removal"
+    },
+    {
+      "result": "PASS",
+      "name": "TestManagementHTTPLifecycle/scope-and-query-validation"
+    },
+    {
+      "result": "PASS",
+      "name": "TestManagementHTTPLifecycle/write-authentication-and-csrf-before-mutation"
+    },
+    {
+      "result": "PASS",
+      "name": "TestManagementHTTPLifecycle/operation-reader-privilege-boundary"
+    },
+    {
+      "result": "PASS",
+      "name": "TestManagementHTTPLifecycle/administration-never-generates-or-settles"
+    }
+  ],
+  "additional_independent_management": [
+    {
+      "result": "PASS",
+      "name": "TestQAIndependentManagement/qa-origin-mismatch-no-mutation"
+    },
+    {
+      "result": "PASS",
+      "name": "TestQAIndependentManagement/qa-cross-scope-cursor-and-operation-isolation"
+    },
+    {
+      "result": "FAIL",
+      "name": "TestQAIndependentManagement/qa-rollback-without-private-payload-fails-closed"
+    },
+    {
+      "result": "PASS",
+      "name": "TestQAIndependentManagement/qa-operation-query-503-does-not-change-unknown"
+    },
+    {
+      "result": "PASS",
+      "name": "TestQAIndependentManagement/qa-same-name-new-uid-preserves-original-operations"
+    },
+    {
+      "result": "PASS",
+      "name": "TestQAIndependentManagement/qa-paused-to-paused-save-action-is-update"
+    }
+  ],
+  "repeated_inherited_management": [
+    {
+      "result": "PASS",
+      "name": "TestQAIndependentManagement/create-list-detail-and-exact-operation"
+    },
+    {
+      "result": "PASS",
+      "name": "TestQAIndependentManagement/catalogue-from-same-immutable-kernel-profile"
+    },
+    {
+      "result": "PASS",
+      "name": "TestQAIndependentManagement/namespace-bound-pagination-and-invalid-cursors"
+    },
+    {
+      "result": "PASS",
+      "name": "TestQAIndependentManagement/stale-version-and-uid-conflicts"
+    },
+    {
+      "result": "PASS",
+      "name": "TestQAIndependentManagement/unapproved-reference-and-unknown-fields-rejected"
+    },
+    {
+      "result": "PASS",
+      "name": "TestQAIndependentManagement/api-server-CAS-race-is-not-retried"
+    },
+    {
+      "result": "PASS",
+      "name": "TestQAIndependentManagement/pause-during-registry-outage"
+    },
+    {
+      "result": "PASS",
+      "name": "TestQAIndependentManagement/resume-and-update"
+    },
+    {
+      "result": "PASS",
+      "name": "TestQAIndependentManagement/rollback-reuses-retained-source"
+    },
+    {
+      "result": "PASS",
+      "name": "TestQAIndependentManagement/lost-ack-query-never-replays"
+    },
+    {
+      "result": "PASS",
+      "name": "TestQAIndependentManagement/delete-and-query-after-removal"
+    },
+    {
+      "result": "PASS",
+      "name": "TestQAIndependentManagement/scope-and-query-validation"
+    },
+    {
+      "result": "PASS",
+      "name": "TestQAIndependentManagement/write-authentication-and-csrf-before-mutation"
+    },
+    {
+      "result": "PASS",
+      "name": "TestQAIndependentManagement/operation-reader-privilege-boundary"
+    },
+    {
+      "result": "PASS",
+      "name": "TestQAIndependentManagement/administration-never-generates-or-settles"
+    }
+  ],
+  "targeted_original_eof": [
+    {
+      "result": "PASS",
+      "name": "TestQATerminationMatrix/before_headers/transport_eof"
+    }
+  ],
+  "acceptance_A01_A34": "NOT_ACCEPTED",
+  "browser": "NOT_EXECUTED",
+  "production_callable": false,
+  "product_modified": false
+}
