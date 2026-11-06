@@ -29,7 +29,7 @@
       "current_run_shared_cases": [
         "TestMySQLKernel/revocation_visible_to_other_replica"
       ],
-      "current_run_note": "本轮已验发布管理会话/平台Key拒绝/CSRF/Origin/scope；未覆盖完整登录和浏览器。"
+      "current_run_note": "本轮已验发布管理会话/平台Key拒绝/CSRF/Origin/scope；未覆盖完整登录和浏览器。 实际页面aef53ee管理子集已在Edge桌面/390px独立通过；不等于整项验收。"
     },
     {
       "id": "A03",
@@ -384,7 +384,7 @@
       ],
       "historical_coverage": "PARTIAL",
       "current_run_shared_cases": [],
-      "current_run_note": "真实API-server管理CRUD、UID/RV冲突与未批准引用拒绝子集；完整CR负例/webhook与目标部署未验。"
+      "current_run_note": "真实API-server管理CRUD、UID/RV冲突与未批准引用拒绝子集；完整CR负例/webhook与目标部署未验。 实际页面aef53ee管理子集已在Edge桌面/390px独立通过；不等于整项验收。"
     },
     {
       "id": "A26",
@@ -413,7 +413,7 @@
       ],
       "historical_coverage": "PARTIAL",
       "current_run_shared_cases": [],
-      "current_run_note": "ExternalAPI管理生命周期在真实API-server/MySQL/HTTP中运行；registry和网关producer为明确测试适配。"
+      "current_run_note": "ExternalAPI管理生命周期在真实API-server/MySQL/HTTP中运行；registry和网关producer为明确测试适配。 实际页面aef53ee管理子集已在Edge桌面/390px独立通过；不等于整项验收。"
     },
     {
       "id": "A28",
@@ -428,7 +428,7 @@
       ],
       "historical_coverage": "PARTIAL",
       "current_run_shared_cases": [],
-      "current_run_note": "管理202/Running不能当生效，profile无真实证明保持callable=false；真实receipt/validation未验。"
+      "current_run_note": "管理202/Running不能当生效，profile无真实证明保持callable=false；真实receipt/validation未验。 实际页面aef53ee管理子集已在Edge桌面/390px独立通过；不等于整项验收。"
     },
     {
       "id": "A29",
@@ -445,7 +445,7 @@
       "current_run_shared_cases": [
         "TestMySQLRelease/idempotent_observe_restart_and_monotonic_epoch"
       ],
-      "current_run_note": "真实CAS竞争及写后ACK丢失、适配器重建/删除后原ID保持Unknown；非OS/DB崩溃或HA验收。"
+      "current_run_note": "真实CAS竞争及写后ACK丢失、适配器重建/删除后原ID保持Unknown；非OS/DB崩溃或HA验收。 实际页面aef53ee管理子集已在Edge桌面/390px独立通过；不等于整项验收。"
     },
     {
       "id": "A30",
@@ -461,7 +461,7 @@
       "current_run_shared_cases": [
         "TestMySQLRelease/activation_CAS_exact_replay_and_closed_publication"
       ],
-      "current_run_note": "受控历史回滚/CAS子集已验；缺私有历史连接状态语义QA-003待修复；真实带流切换和资源不足未验。"
+      "current_run_note": "受控历史回滚/CAS子集已验；缺私有历史连接状态语义QA-003待修复；真实带流切换和资源不足未验。 实际页面aef53ee管理子集已在Edge桌面/390px独立通过；不等于整项验收。"
     },
     {
       "id": "A31",
@@ -479,7 +479,7 @@
       "current_run_shared_cases": [
         "TestMySQLKernel/pause_delete_and_stale_epoch"
       ],
-      "current_run_note": "临时API-server暂停/删除和操作持久查询子集；真实流排空、Secret/PVC/共享资源清理未验。"
+      "current_run_note": "临时API-server暂停/删除和操作持久查询子集；真实流排空、Secret/PVC/共享资源清理未验。 实际页面aef53ee管理子集已在Edge桌面/390px独立通过；不等于整项验收。"
     },
     {
       "id": "A32",
@@ -496,7 +496,7 @@
       "current_run_shared_cases": [
         "TestMySQLPublisherCannotWriteRealLedger"
       ],
-      "current_run_note": "真实管理scope/namespace游标、原UID操作、DB窄权限子集；真实ServiceAccount/Secret轮换未验。"
+      "current_run_note": "真实管理scope/namespace游标、原UID操作、DB窄权限子集；真实ServiceAccount/Secret轮换未验。 实际页面aef53ee管理子集已在Edge桌面/390px独立通过；不等于整项验收。"
     },
     {
       "id": "A33",
@@ -528,5 +528,6 @@
   "prior_matrix_baseline": "4f3eb9358f26ebab637a549b795651171d3b924f",
   "baseline": "821269bd32164918443e63e66c6a7cbce45d440b",
   "publication_dependency": "4d45c6f5a033783a8c1a8886f2b6e65eff7a3cf4",
-  "scope_note": "继承原完整34项需求映射；historical cases/coverage仅为历史；本轮执行以current_run_*及原始日志为准，所有A项整体验收均未通过。"
+  "scope_note": "继承原完整34项需求映射；historical cases/coverage仅为历史；本轮执行以current_run_*及原始日志为准，所有A项整体验收均未通过。",
+  "browser_page_sha": "aef53eeb7eac16bd7a956294fefab750a3de31f8"
 }

@@ -14,3 +14,5 @@ schema.py 读取本次真实HTTP响应，并从固定前端Git对象提取原始
 
 metadata registry、受控上游及网关producer仍是测试适配；真实API-server/MySQL/HTTP不等于真实Higress、供应商模型或GPU。不得把202、Running、Ready或Schema通过当生产Callable。QA-002原2319eb6受控通过范围沿用；本轮不重新宣布完整19格矩阵或A01–A34通过。
 当前QA-003未修复时run.sh预期以非零状态结束；原始失败必须保留。Schema脚本不改变该功能失败结论。
+
+实际页面追加固定aef53eeb7eac16bd7a956294fefab750a3de31f8：运行browser.sh可复现21项（原18＋QA3），真实API-server/MySQL/HTTP/Edge，非夹具页面。请先在该console安装锁文件依赖，并提供MAAS_FE_NODE、MAAS_FE_CONSOLE_DIR、MAAS_FE_CONSOLE_NODE_DIR。结果与截图位于该console的artifacts/release-browser。

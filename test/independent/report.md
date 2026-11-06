@@ -1,5 +1,7 @@
 固定后端 821269bd32164918443e63e66c6a7cbce45d440b、发布依赖 4d45c6f5a033783a8c1a8886f2b6e65eff7a3cf4、前端严格消费者 428d44e0b4f64ec628e6a945fd4b63a0e45c260b 完成本轮独立API复验。发布依赖祖先关系已用git merge-base核实。产品api/cmd/internal/scripts/config/go.mod/go.sum与指定SHA一致；只新增独立测试和报告，没有产品修复或新PR。
 
+严格消费者仍固定428d44e；本轮期间新到达的实际页面aef53eeb7eac16bd7a956294fefab750a3de31f8另行完成独立浏览器复验，未混用旧夹具。
+
 **结论与计数（各范围分开，不按轮次相加）。**
 
 |范围|唯一用例/样本|本轮结果|证据|
@@ -11,6 +13,7 @@
 |原实际HTTP响应严格Schema|37|37通过|qa-baseline-http.json、qa-baseline-http-schema.json|
 |新增独立管理场景|6|5通过、1失败（QA-003）|qa-independent-management.txt|
 |扩展管理装配中的原场景复跑|15|15通过；重复原15，不累计|同上|
+|实际新页面浏览器|21|21通过，pageerror=0；原18＋独立新增3|qa-browser-go.txt、qa-browser-results.json及3张截图|
 |原QA-001剩余EOF定向用例|1|通过；两次结果一致，不计为2项|qa-eof-first.txt、qa-eof.txt|
 |扩展装配响应Schema|47|47通过；其中包含该装配重复的原响应，不与37相加|qa-independent-http.json、qa-independent-http-schema.json|
 
@@ -40,8 +43,18 @@
 
 首次工具装配误用了尚未完整复制的Go目录，发生标准库缺失；日志保留qa-toolchain-setup-failure.log，属于环境装配失败，不计为业务用例失败/通过。之后使用完整的已批准Go1.26工具链，在自有WSL临时缓存重新执行。没有把本轮普通Go全仓58事件/vet/build报告成复跑结果；本轮仅执行上述有证据的范围。
 
-qa-cleanup.json确认4个记录的自有MySQL临时数据目录全部消失，未见本次测试的MySQL/Redis/API-server/etcd/Go测试进程；原编排已清理DB/账号/socket，专属临时工具缓存也随前台进程退出清理。依赖二进制缓存保留，未留下长期服务。
+qa-cleanup.json确认5个记录的自有MySQL临时数据目录全部消失，未见本次测试的MySQL/Redis/API-server/etcd/Go测试进程；原编排已清理DB/账号/socket，专属临时工具缓存也随前台进程退出清理。依赖二进制缓存保留，未留下长期服务。
 
 **剩余范围。**
 
-A01–A34完整34行矩阵在matrix.json/matrix.md，全部维持NOT_ACCEPTED；历史用例映射与本轮current_run证据分开。当前先交API结论，浏览器/新页面实际SHA、桌面/移动端及完整页面生命周期尚未独立验收。真实Higress/H1–H4、Secret/validation、可信旧行导入、模型/GPU/目标部署、Helm安装升级回滚及性能整体验收未执行，生产继续不可调用。MAAS-3/7保持in_progress。
+A01–A34完整34行矩阵在matrix.json/matrix.md，全部维持NOT_ACCEPTED；历史用例映射与本轮current_run证据分开。实际页面aef53ee的本地受控管理生命周期、桌面1440px及移动390px已独立通过；不扩展为真实模型或完整平台验收。真实Higress/H1–H4、Secret/validation、可信旧行导入、模型/GPU/目标部署、Helm安装升级回滚及性能整体验收未执行，生产继续不可调用。MAAS-3/7保持in_progress。
+
+**实际新页面独立浏览器接续。**
+
+在API结果已完成后，读到前端新交付aef53eeb7eac16bd7a956294fefab750a3de31f8，随后接续实测。54个前端产品文件与该SHA逐字一致；console/contracts与原严格消费者428d44e没有差异。Windows Node22.23.4、Edge156.0.4314.58，真实临时API-server/etcd/MySQL/Go HTTP，运行原18项页面检查并补3项独立边界，共21/21、pageerror=0。
+
+原18覆盖真实空目录/列表，创建及原operation.id、同UID历史，暂停/恢复、JSON保存动作分类、回滚/删除resource=null及原ID查询、确认配置后编辑，API-server CAS409和实际写后ACK丢失、390px、HttpOnly/零存储及退出。另加：Unknown时重读当前CR仍锁定编辑；关闭操作DB连接所得真实503、换scope所得真实404，均保留原ID和Unknown，恢复后仍只查原ID且PUT计数不增加。故障只在隔离测试wrapper中注入；没有拦截/伪造页面HTTP成功体。父harness在结束前断言generation_requests、usage_events、budget_windows均为0。
+
+原浏览器脚本与Go harness来自该前端SHA，独立扩展保存在frontend_browser_test.go.in与release-browser.mjs；复现入口browser.sh，需显式双路径视图及便携测试依赖。页面源码未修改。普通前端100项/11门控skip和原14项Key/预算浏览器不是本轮重跑结果，本轮不引用为独立通过。
+
+release-created.png、ack-unknown.png、release-mobile.png均已独立查看：桌面与移动界面明确不可调用；Unknown操作保留原ID，依赖错误不会变成发布成功。浏览器/Vite在finally中关闭，Go/临时API-server/etcd及schema随前台harness退出清理。模型/GPU/目标部署等仍未执行，QA-003不因页面通过而关闭。

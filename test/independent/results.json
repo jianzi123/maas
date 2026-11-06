@@ -486,7 +486,31 @@
     }
   ],
   "acceptance_A01_A34": "NOT_ACCEPTED",
-  "browser": "NOT_EXECUTED",
+  "browser": "21/21 PASS; inherited18 plus independent3; pageerror=0",
   "production_callable": false,
-  "product_modified": false
+  "product_modified": false,
+  "browser_page_sha": "aef53eeb7eac16bd7a956294fefab750a3de31f8",
+  "browser_checks": [
+    "actual same-kernel empty model catalogue",
+    "actual empty release list, no fixture fallback",
+    "browser creates approved synthetic CR with real API-server UID and 202 Running",
+    "202 and exact original operation do not imply Callable",
+    "real retained history is scoped to original UID",
+    "PUT Pause ACK and persisted terminal operation",
+    "editing after pause saves Paused with correct version and Update action",
+    "PUT Resume ACK accepted by strict page association",
+    "JSON Save classifies actual desiredState transitions as Pause and Resume",
+    "approved spec update uses original RV and creates a retained revision",
+    "null-resource rollback retains and queries only original operation ID",
+    "edit after rollback uses confirmed rolled-back spec",
+    "null-resource delete keeps durable operation lookup after CR removal",
+    "actual API-server CAS race is visible 409 and never retried",
+    "real API-server post-write ACK loss stays Unknown and locks replay across exact queries",
+    "QA: rereading current CR keeps original Unknown and edit lock",
+    "QA: original operation query 503 never replays or replaces Unknown",
+    "QA: original operation query 404 never replays or replaces Unknown",
+    "390px release/unknown workflow without page overflow",
+    "HttpOnly management session and no credential persistence",
+    "local temporary session logout"
+  ]
 }
