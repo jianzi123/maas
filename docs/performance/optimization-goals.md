@@ -149,3 +149,22 @@
 R01/R02共用固定J02和U/H对照，R03需要launch/命中证据，R04需要多卡与ADR。E01只在真实链路可用时核验传播收益。当前本机的工具/授权缺口见[工作台](operator-lab.md)，不在课程里打开execution_enabled。
 
 每轮最多选择少量有证据的单因素；有交互再登记小型因子实验。统一使用[目标卡模板](templates/optimization-goal.md)与[实验记录](templates/experiment-record.md)，按[执行手册](optimization-playbook.md)交付。完成准备文档、写出假设或跑过CPU回归，不等于该优化目标已验证。
+
+## 6. 从目标卡走到具体工程改动
+
+先用[工程主教材](foundations/README.md)推导数据结构与失败模式，再在真实 profile 出现相应触发时选题。下表给每张卡一个可落到代码和证据的方向，仍不声称已确定瓶颈。
+
+| 目标卡 | 先解释一个具体问题 | 实现前必须写清 | 什么结果会推翻假设 |
+|---|---|---|---|
+| K01 | Q长2/KV长5的suffix mask与GQA，分页地址怎样读 | position/length、head映射、页表/stride、有效输出语义；对照[算子章](foundations/03-kernels-and-profiling.md) | 数值虽finite但mask错；少搬运却多转置/临时张量；R层无净收益 |
+| K02 | M=37/N=53/K=29的尾部，以及真实small-M分布 | tile索引、cuBLAS布局、准备范围；Grouped GEMM登记每组shape和重排成本 | 只能战胜教学tile，或忽略prepare/通信才有收益 |
+| K03 | residual+RMSNorm需要r/y两个输出 | 融合前后读写/launch与归约精度，全部输出的消费者 | 漏掉r、精度不符或register压力吞掉节约 |
+| R01 | 六步调度中prefill与decode怎样竞争 | budget不等于GPU成本；计划/提交/完成分离；公平性与长请求上界 | J02长格饥饿、失败/pending上升，或者依赖更高slot才快 |
+| R02 | P5 refs=0但inflight=1为何不能复用 | 完整页共享、半页COW、分配代次、完成/隔离证据与每rank预算 | 迟到写污染、跨安全域命中、冷态退化或质量改变 |
+| R03 | Graph多占384MiB会怎样挤压KV | shape签名、命中/fallback、padding、输入地址生命周期和总显存 | 虚构案例KV上界68降55说明容量代价；实际G/长尾更差即否证 |
+| R04 | 行/列并行的矩阵分片与归约位于哪里 | 真实rank映射、逐rankbuffer、消息和依赖；见[框架接口](foundations/05-framework-design.md) | collective总量下降而暴露时间不降，或靠省同步/漏token“加速” |
+| E01 | K/R变化怎样传至同一受保护请求 | 原R/trace与活动修订、client/Go/Worker测点、唯一账本和真实路由 | 只有fixture、跨时钟拼窗、削弱准入或缺账本/取消证明 |
+
+这里的资源和shape是教学算例。真实优化建议固定两份结果：一份是局部机制是否成立，另一份是同资源/精度/业务约束下的整体收益与副作用。若前者成立、后者失败，应保留负结果，不能更换分母或删掉困难样本。
+
+框架建设按[R0–R3与D0–D3](foundations/06-build-and-review.md)分阶段评审：先做数学/状态参考与可恢复接口，再接真实适配器，最后做负载、质量和生命周期验收。工具准备不等于开启真实实验。

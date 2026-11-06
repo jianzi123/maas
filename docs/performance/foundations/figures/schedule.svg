@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="465" viewBox="0 0 1120 465" role="img">
+<title>两个请求的连续批处理轨迹</title>
+<rect width="1120" height="465" fill="#f7f9fc"/>
+<text x="24" y="39" font-family="Microsoft YaHei,Arial,sans-serif" font-size="24" fill="#18334b">
+<tspan x="24" dy="0">两个请求的连续批处理轨迹</tspan>
+</text>
+<text x="24" y="72" font-family="Microsoft YaHei,Arial,sans-serif" font-size="17" fill="#18334b">
+<tspan x="24" dy="0">教学逻辑步：不是毫秒；每步预算2，只展示调度/记账</tspan>
+</text>
+<text x="210" y="117" font-family="Microsoft YaHei,Arial,sans-serif" font-size="17" fill="#18334b">
+<tspan x="210" dy="0">step 0</tspan>
+</text>
+<rect x="180" y="145" width="132" height="80" rx="10" fill="#e7f2ff" stroke="#b8c9d9" stroke-width="2"/>
+<text x="192" y="171" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="192" dy="0">Prefill+2</tspan>
+</text>
+<rect x="180" y="250" width="132" height="80" rx="10" fill="#e5f6ef" stroke="#b8c9d9" stroke-width="2"/>
+<text x="192" y="276" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="192" dy="0">未到达</tspan>
+</text>
+<text x="230" y="383" font-family="Microsoft YaHei,Arial,sans-serif" font-size="18" fill="#18334b">
+<tspan x="230" dy="0">1</tspan>
+</text>
+<text x="358" y="117" font-family="Microsoft YaHei,Arial,sans-serif" font-size="17" fill="#18334b">
+<tspan x="358" dy="0">step 1</tspan>
+</text>
+<rect x="328" y="145" width="132" height="80" rx="10" fill="#e7f2ff" stroke="#b8c9d9" stroke-width="2"/>
+<text x="340" y="171" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="340" dy="0">Prefill+2</tspan>
+</text>
+<rect x="328" y="250" width="132" height="80" rx="10" fill="#e5f6ef" stroke="#b8c9d9" stroke-width="2"/>
+<text x="340" y="276" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="340" dy="0">等待</tspan>
+</text>
+<text x="378" y="383" font-family="Microsoft YaHei,Arial,sans-serif" font-size="18" fill="#18334b">
+<tspan x="378" dy="0">2</tspan>
+</text>
+<text x="506" y="117" font-family="Microsoft YaHei,Arial,sans-serif" font-size="17" fill="#18334b">
+<tspan x="506" dy="0">step 2</tspan>
+</text>
+<rect x="476" y="145" width="132" height="80" rx="10" fill="#e7f2ff" stroke="#b8c9d9" stroke-width="2"/>
+<text x="488" y="171" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="488" dy="0">Decode 1</tspan>
+</text>
+<rect x="476" y="250" width="132" height="80" rx="10" fill="#e5f6ef" stroke="#b8c9d9" stroke-width="2"/>
+<text x="488" y="276" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="488" dy="0">Prefill+1</tspan>
+</text>
+<text x="526" y="383" font-family="Microsoft YaHei,Arial,sans-serif" font-size="18" fill="#18334b">
+<tspan x="526" dy="0">4</tspan>
+</text>
+<text x="654" y="117" font-family="Microsoft YaHei,Arial,sans-serif" font-size="17" fill="#18334b">
+<tspan x="654" dy="0">step 3</tspan>
+</text>
+<rect x="624" y="145" width="132" height="80" rx="10" fill="#e7f2ff" stroke="#b8c9d9" stroke-width="2"/>
+<text x="636" y="171" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="636" dy="0">Decode 2</tspan>
+<tspan x="636" dy="23">完成</tspan>
+</text>
+<rect x="624" y="250" width="132" height="80" rx="10" fill="#e5f6ef" stroke="#b8c9d9" stroke-width="2"/>
+<text x="636" y="276" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="636" dy="0">Prefill+1</tspan>
+</text>
+<text x="674" y="383" font-family="Microsoft YaHei,Arial,sans-serif" font-size="18" fill="#18334b">
+<tspan x="674" dy="0">1</tspan>
+</text>
+<text x="802" y="117" font-family="Microsoft YaHei,Arial,sans-serif" font-size="17" fill="#18334b">
+<tspan x="802" dy="0">step 4</tspan>
+</text>
+<rect x="772" y="145" width="132" height="80" rx="10" fill="#e7f2ff" stroke="#b8c9d9" stroke-width="2"/>
+<text x="784" y="171" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="784" dy="0">—</tspan>
+</text>
+<rect x="772" y="250" width="132" height="80" rx="10" fill="#e5f6ef" stroke="#b8c9d9" stroke-width="2"/>
+<text x="784" y="276" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="784" dy="0">Decode 1</tspan>
+</text>
+<text x="822" y="383" font-family="Microsoft YaHei,Arial,sans-serif" font-size="18" fill="#18334b">
+<tspan x="822" dy="0">2</tspan>
+</text>
+<text x="950" y="117" font-family="Microsoft YaHei,Arial,sans-serif" font-size="17" fill="#18334b">
+<tspan x="950" dy="0">step 5</tspan>
+</text>
+<rect x="920" y="145" width="132" height="80" rx="10" fill="#e7f2ff" stroke="#b8c9d9" stroke-width="2"/>
+<text x="932" y="171" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="932" dy="0">—</tspan>
+</text>
+<rect x="920" y="250" width="132" height="80" rx="10" fill="#e5f6ef" stroke="#b8c9d9" stroke-width="2"/>
+<text x="932" y="276" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="932" dy="0">Decode 2</tspan>
+<tspan x="932" dy="23">完成</tspan>
+</text>
+<text x="970" y="383" font-family="Microsoft YaHei,Arial,sans-serif" font-size="18" fill="#18334b">
+<tspan x="970" dy="0">0</tspan>
+</text>
+<text x="30" y="186" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="30" dy="0">请求A：I=4/O=3</tspan>
+</text>
+<text x="30" y="293" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="30" dy="0">请求B：I=2/O=3</tspan>
+</text>
+<text x="30" y="381" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="30" dy="0">轮末KV页数</tspan>
+</text>
+<text x="25" y="435" font-family="Microsoft YaHei,Arial,sans-serif" font-size="15" fill="#18334b">
+<tspan x="25" dy="0">真实系统必须另建成本模型、资源约束与异步完成证据；不能用步数计算TTFT/RPS。</tspan>
+</text>
+</svg>

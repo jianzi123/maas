@@ -1,5 +1,7 @@
 # 进阶教程：从profile到可判定的优化
 
+准备开发推理运行时或推理部署框架，请先读[工程主教材六章](foundations/README.md)。本页保留原练习路线，配合主教材使用。
+
 前置：完成[入门B01–B06](onboarding.md)，能解释shape/dtype/layout、共同时间窗和finite门禁。本章不要求本机已有GPU；先完成源码定位、手算与实验设计，GPU阶段按批准计划执行。
 
 学习产物是一张可评审[目标卡](templates/optimization-goal.md)，不是一组调参命令。对任何候选都要讲清：优化哪段工作、为什么可能影响主指标、用什么成熟baseline、什么证据会否定它。

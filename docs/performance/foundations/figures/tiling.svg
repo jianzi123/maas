@@ -1,0 +1,138 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="470" viewBox="0 0 1120 470" role="img">
+<title>从shape到GPU：为什么尾部、布局和同步会出错</title>
+<rect width="1120" height="470" fill="#f7f9fc"/>
+<text x="24" y="39" font-family="Microsoft YaHei,Arial,sans-serif" font-size="24" fill="#18334b">
+<tspan x="24" dy="0">从shape到GPU：为什么尾部、布局和同步会出错</tspan>
+</text>
+<text x="24" y="72" font-family="Microsoft YaHei,Arial,sans-serif" font-size="17" fill="#18334b">
+<tspan x="24" dy="0">教学shape：A[37,29] × B[29,53] → C[37,53]；一格示意16×16，尾部不按比例</tspan>
+</text>
+<text x="70" y="109" font-family="Microsoft YaHei,Arial,sans-serif" font-size="18" fill="#18334b">
+<tspan x="70" dy="0">A：37×29</tspan>
+</text>
+<rect x="70" y="125" width="54" height="54" rx="10" fill="#e7f2ff" stroke="#b8c9d9" stroke-width="2"/>
+<text x="82" y="151" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="82" dy="0">16</tspan>
+</text>
+<rect x="130" y="125" width="54" height="54" rx="10" fill="#ffedd7" stroke="#b8c9d9" stroke-width="2"/>
+<text x="142" y="151" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="142" dy="0">tail</tspan>
+</text>
+<rect x="70" y="185" width="54" height="54" rx="10" fill="#e7f2ff" stroke="#b8c9d9" stroke-width="2"/>
+<text x="82" y="211" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="82" dy="0">16</tspan>
+</text>
+<rect x="130" y="185" width="54" height="54" rx="10" fill="#ffedd7" stroke="#b8c9d9" stroke-width="2"/>
+<text x="142" y="211" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="142" dy="0">tail</tspan>
+</text>
+<rect x="70" y="245" width="54" height="54" rx="10" fill="#ffedd7" stroke="#b8c9d9" stroke-width="2"/>
+<text x="82" y="271" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="82" dy="0">tail</tspan>
+</text>
+<rect x="130" y="245" width="54" height="54" rx="10" fill="#ffedd7" stroke="#b8c9d9" stroke-width="2"/>
+<text x="142" y="271" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="142" dy="0">tail</tspan>
+</text>
+<text x="360" y="109" font-family="Microsoft YaHei,Arial,sans-serif" font-size="18" fill="#18334b">
+<tspan x="360" dy="0">B：29×53</tspan>
+</text>
+<rect x="360" y="125" width="54" height="54" rx="10" fill="#e7f2ff" stroke="#b8c9d9" stroke-width="2"/>
+<text x="372" y="151" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="372" dy="0">16</tspan>
+</text>
+<rect x="420" y="125" width="54" height="54" rx="10" fill="#e7f2ff" stroke="#b8c9d9" stroke-width="2"/>
+<text x="432" y="151" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="432" dy="0">16</tspan>
+</text>
+<rect x="480" y="125" width="54" height="54" rx="10" fill="#e7f2ff" stroke="#b8c9d9" stroke-width="2"/>
+<text x="492" y="151" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="492" dy="0">16</tspan>
+</text>
+<rect x="540" y="125" width="54" height="54" rx="10" fill="#ffedd7" stroke="#b8c9d9" stroke-width="2"/>
+<text x="552" y="151" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="552" dy="0">tail</tspan>
+</text>
+<rect x="360" y="185" width="54" height="54" rx="10" fill="#ffedd7" stroke="#b8c9d9" stroke-width="2"/>
+<text x="372" y="211" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="372" dy="0">tail</tspan>
+</text>
+<rect x="420" y="185" width="54" height="54" rx="10" fill="#ffedd7" stroke="#b8c9d9" stroke-width="2"/>
+<text x="432" y="211" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="432" dy="0">tail</tspan>
+</text>
+<rect x="480" y="185" width="54" height="54" rx="10" fill="#ffedd7" stroke="#b8c9d9" stroke-width="2"/>
+<text x="492" y="211" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="492" dy="0">tail</tspan>
+</text>
+<rect x="540" y="185" width="54" height="54" rx="10" fill="#ffedd7" stroke="#b8c9d9" stroke-width="2"/>
+<text x="552" y="211" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="552" dy="0">tail</tspan>
+</text>
+<text x="760" y="109" font-family="Microsoft YaHei,Arial,sans-serif" font-size="18" fill="#18334b">
+<tspan x="760" dy="0">C：37×53</tspan>
+</text>
+<rect x="760" y="125" width="54" height="54" rx="10" fill="#e7f2ff" stroke="#b8c9d9" stroke-width="2"/>
+<text x="772" y="151" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="772" dy="0">16</tspan>
+</text>
+<rect x="820" y="125" width="54" height="54" rx="10" fill="#e7f2ff" stroke="#b8c9d9" stroke-width="2"/>
+<text x="832" y="151" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="832" dy="0">16</tspan>
+</text>
+<rect x="880" y="125" width="54" height="54" rx="10" fill="#e7f2ff" stroke="#b8c9d9" stroke-width="2"/>
+<text x="892" y="151" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="892" dy="0">16</tspan>
+</text>
+<rect x="940" y="125" width="54" height="54" rx="10" fill="#ffedd7" stroke="#b8c9d9" stroke-width="2"/>
+<text x="952" y="151" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="952" dy="0">tail</tspan>
+</text>
+<rect x="760" y="185" width="54" height="54" rx="10" fill="#e7f2ff" stroke="#b8c9d9" stroke-width="2"/>
+<text x="772" y="211" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="772" dy="0">16</tspan>
+</text>
+<rect x="820" y="185" width="54" height="54" rx="10" fill="#e7f2ff" stroke="#b8c9d9" stroke-width="2"/>
+<text x="832" y="211" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="832" dy="0">16</tspan>
+</text>
+<rect x="880" y="185" width="54" height="54" rx="10" fill="#e7f2ff" stroke="#b8c9d9" stroke-width="2"/>
+<text x="892" y="211" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="892" dy="0">16</tspan>
+</text>
+<rect x="940" y="185" width="54" height="54" rx="10" fill="#ffedd7" stroke="#b8c9d9" stroke-width="2"/>
+<text x="952" y="211" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="952" dy="0">tail</tspan>
+</text>
+<rect x="760" y="245" width="54" height="54" rx="10" fill="#ffedd7" stroke="#b8c9d9" stroke-width="2"/>
+<text x="772" y="271" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="772" dy="0">tail</tspan>
+</text>
+<rect x="820" y="245" width="54" height="54" rx="10" fill="#ffedd7" stroke="#b8c9d9" stroke-width="2"/>
+<text x="832" y="271" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="832" dy="0">tail</tspan>
+</text>
+<rect x="880" y="245" width="54" height="54" rx="10" fill="#ffedd7" stroke="#b8c9d9" stroke-width="2"/>
+<text x="892" y="271" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="892" dy="0">tail</tspan>
+</text>
+<rect x="940" y="245" width="54" height="54" rx="10" fill="#ffedd7" stroke="#b8c9d9" stroke-width="2"/>
+<text x="952" y="271" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="952" dy="0">tail</tspan>
+</text>
+<text x="270" y="213" font-family="Microsoft YaHei,Arial,sans-serif" font-size="30" fill="#18334b">
+<tspan x="270" dy="0">×</tspan>
+</text>
+<text x="656" y="213" font-family="Microsoft YaHei,Arial,sans-serif" font-size="30" fill="#18334b">
+<tspan x="656" dy="0">=</tspan>
+</text>
+<text x="24" y="362" font-family="Microsoft YaHei,Arial,sans-serif" font-size="17" fill="#18334b">
+<tspan x="24" dy="0">输出Grid=3×4=12 blocks；K方向2轮；末行/末列各5，K尾13。</tspan>
+</text>
+<text x="24" y="402" font-family="Microsoft YaHei,Arial,sans-serif" font-size="17" fill="#18334b">
+<tspan x="24" dy="0">每block共享A/B tile共2048B；所有线程参与barrier，越界lane加载0。</tspan>
+</text>
+<text x="24" y="440" font-family="Microsoft YaHei,Arial,sans-serif" font-size="15" fill="#18334b">
+<tspan x="24" dy="0">有效FLOP=113738。教学tile不是cuBLAS的性能替代；实际occupancy需寄存器/SM等证据。</tspan>
+</text>
+</svg>
