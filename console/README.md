@@ -59,3 +59,5 @@ MAAS-3/11 需提供同一真实 API 的管理、查询与发布装配；FE-R02/0
 本轮三方评审修复、针对性回归及受控 Go/MySQL HTTP 子集范围见 [docs/review-fixes.md](docs/review-fixes.md)。npm run test:review-browser 复跑 QA 的竞态安全断言；这属于开发者复跑，不代替独立验收。
 
 本地 Go 页面入口、可操作子集及启动方式见 [docs/go-workbench.md](docs/go-workbench.md)。本轮支持直接操作 Key/三维预算和查询用量；模型试用与完整发布管理仍需相应后端入口。
+
+发布管理已接续原 Go 管理入口：模型目录、创建/编辑、暂停/恢复、同 UID 历史回滚、下线与原 operation.id 查询。精确范围、真实临时控制平面浏览器证据和复跑见 [docs/release-management.md](docs/release-management.md)。推理试用与生产验收边界保留。

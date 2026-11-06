@@ -133,16 +133,14 @@ try {
   assert.equal(history.status(), 503);
   checks.push("unconfigured authoritative history remains 503");
   await page.getByRole("button", { name: "模型发布", exact: true }).click();
-  await page
-    .getByText("当前 Go 管理入口尚未提供此功能。", { exact: false })
-    .waitFor();
+  await page.getByText("服务依赖暂不可用。", { exact: false }).waitFor();
   await page.mouse.move(1400, 5);
   await page.screenshot({
     path: output + "/available-subset.png",
     fullPage: true,
   });
   checks.push(
-    "unavailable model and release workflows are labelled, never mocked",
+    "unconfigured release adapter returns actual 503 without fixture fallback",
   );
   assert.equal(
     await page.evaluate(() => localStorage.length + sessionStorage.length),

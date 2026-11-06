@@ -48,9 +48,13 @@ scripts/go-browser-harness.go.txt 复用后端真实内核和受控会话，创�
 
 脚本启动自己的短寿命 Go/MySQL/Vite/浏览器，执行后全部关闭。Go 浏览器结果和截图位于 artifacts/go-browser/。HTTP 组件结果位于 artifacts/http-continuation.json。没有配置真实临时 API 的普通 npm test 明确跳过 11 项 HTTP 专用检查。
 
+## 发布管理接续
+
+指定后端 `821269bd32164918443e63e66c6a7cbce45d440b` 已提供目录、发布管理、权威历史和持久操作查询。Go 模式直接接这些页面，依赖缺失显示真实错误，不回退夹具。完整接口与后端安装参数见该提交的 `docs/release-management-http.md`；本轮前端实际验证范围与复跑见 [release-management.md](release-management.md)。
+
 ## 当前限制
 
-- 当前 Go 管理进程没有完整登录、模型目录、公开推理或发布 operation 管理入口。Go 模式的模型/试用/发布页直接说明限制；这些交互可在明确标注的 fixtures 模式查看。
-- 后端已经实现保留修订 Reader。本轮临时安装未提供获准 CR、live/引用资格和历史可见性输入，因此实际历史查询保持 503，不能据此宣称 Reader 未实现或猜出可回滚目标。
+- 生产登录和真实推理入口尚未交付。目录/发布功能取决于安装方明确配置的适配器、授权域、registry 和历史输入；Go 模式继续限制推理试用。
+- 权威历史 Reader 复用原实现。发布 envtest 提供同 UID 测试历史/批准引用；旧行无可信来源或安装未配置时按实际错误处理，不猜历史与资格。
 - 当前未发出模型请求，用量页的空列表是真实查询结果；不证明非空 RequestRecord/Usage、生成停止或容量恢复。
 - 五项竞态修复已在原 PR 的 223d88c 保留；本轮继续在同一 PR 上补 Go 页面入口及 header/chunk/error 的原请求 ID 校验。三方复现继续作为回归用例，不代替独立 QA 验收。

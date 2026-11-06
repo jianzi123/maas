@@ -13,7 +13,8 @@
     "dev:fixtures": "vite --host 127.0.0.1 --mode fixtures",
     "test:review-browser": "node scripts/review-browser.mjs",
     "dev:go": "vite --host 127.0.0.1",
-    "test:go-browser": "node scripts/go-browser.mjs"
+    "test:go-browser": "node scripts/go-browser.mjs",
+    "test:release-browser": "node scripts/release-browser.mjs"
   },
   "dependencies": {
     "ajv": "^8.20.0",

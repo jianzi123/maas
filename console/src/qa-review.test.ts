@@ -147,7 +147,7 @@ describe("independent QA race and error probes", () => {
     let writes = 0;
     const operation = (id: string) => ({
       id,
-      action: "Update",
+      action: "Pause",
       state: "Accepted",
       namespace: releaseSample.metadata.namespace,
       name: releaseSample.metadata.name,
@@ -176,6 +176,7 @@ describe("independent QA race and error probes", () => {
           {
             operation: {
               ...operation(writes === 1 ? rid : otherId),
+              action: writes === 1 ? "Pause" : "Resume",
               requested_generation: 2 + writes,
             },
             resource,

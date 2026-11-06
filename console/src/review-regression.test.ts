@@ -161,6 +161,7 @@ for (const outcome of ["error", "result"] as const)
         ack.resource.spec.lifecycle.desiredState = JSON.parse(
           String(i.body),
         ).spec.lifecycle.desiredState;
+        ack.operation.action = puts === 1 ? "Pause" : "Resume";
         if (puts === 1) first = ack.operation;
         else second = ack.operation;
         return Response.json(ack, { status: 202 });

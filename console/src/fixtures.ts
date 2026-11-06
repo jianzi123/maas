@@ -2,6 +2,7 @@
 import fixture from "./fixture-data.json";
 import { validate, type S, type D } from "./api/contracts";
 import stable from "../contracts/openapi-v0.4.json";
+import { releaseUpdateAction } from "./api/recovery";
 export const now = "2026-11-05T09:50:00Z",
   rid = "00000000-0000-4000-8000-000000000001",
   keyId = "00000000-0000-4000-8000-000000000002";
@@ -311,7 +312,7 @@ export const fixtureFetch: typeof fetch = async (input, init = {}) => {
             ? "Rollback"
             : method === "POST"
               ? "Create"
-              : "Update",
+              : releaseUpdateAction(r, body),
       state: "Accepted",
       namespace: r.metadata.namespace,
       name: r.metadata.name,

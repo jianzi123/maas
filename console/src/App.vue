@@ -134,7 +134,7 @@ const nav = [
       </div>
       <div v-if="local" class="notice">
         本地临时管理会话 · Key / 预算 / 用量连接真实 Go /
-        MySQL。模型试用与发布管理接口尚未开放。
+        MySQL。模型目录与发布操作取决于已配置的管理适配；推理试用尚未开放。
       </div>
       <p v-if="error" role="alert" class="error">{{ error }}</p>
       <section v-if="!authenticated" class="login panel">
@@ -164,14 +164,11 @@ const nav = [
         </form>
       </section>
       <template v-else
-        ><section
-          v-if="local && !['keys', 'usage'].includes(tab)"
-          class="panel"
-        >
+        ><section v-if="local && tab === 'play'" class="panel">
           <h1>{{ nav.find((x) => x[0] === tab)?.[1] }}</h1>
           <p>
-            当前 Go 管理入口尚未提供此功能。平台
-            Key、预算和用量可直接操作；模型试用、发布与回滚等待相应接口接通。
+            当前 Go 管理入口尚未提供推理试用。模型目录、发布、Key、预算和用量
+            使用同一管理接口；缺少依赖时按实际响应显示。
           </p>
         </section>
         <Models v-else-if="tab === 'models'" /><Keys

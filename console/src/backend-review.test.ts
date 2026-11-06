@@ -58,10 +58,13 @@ function sse(headerId: string, chunkId = headerId, usage?: unknown) {
     },
   );
 }
-function op(id: string): S["ReleaseOperation"] {
+function op(
+  id: string,
+  action: S["ReleaseOperation"]["action"] = "Pause",
+): S["ReleaseOperation"] {
   return {
     id,
-    action: "Update",
+    action,
     state: "Accepted",
     namespace: releaseSample.metadata.namespace,
     name: releaseSample.metadata.name,
@@ -132,7 +135,10 @@ describe("independent backend review: expected safety properties", () => {
         return Response.json(
           {
             operation: {
-              ...op(puts === 1 ? opAId : opBId),
+              ...op(
+                puts === 1 ? opAId : opBId,
+                puts === 1 ? "Pause" : "Resume",
+              ),
               requested_generation: 2 + puts,
             },
             resource,

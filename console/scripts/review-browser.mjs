@@ -174,6 +174,7 @@ try {
         data.resource.spec.lifecycle.desiredState = JSON.parse(
           i.body,
         ).spec.lifecycle.desiredState;
+        data.operation.action = writes === 1 ? "Pause" : "Resume";
         if (writes === 1) first = structuredClone(data.operation);
         return Response.json(data, { status: 202 });
       }
@@ -182,7 +183,7 @@ try {
   });
   await page.locator(".release-card").click();
   await page.getByRole("button", { name: "暂停发布", exact: true }).click();
-  await page.getByText("Update · Accepted", { exact: false }).waitFor();
+  await page.getByText("Pause · Accepted", { exact: false }).waitFor();
   await page.getByRole("button", { name: "查询原操作", exact: true }).click();
   await page.waitForFunction(
     () => typeof window.releaseOperationA === "function",

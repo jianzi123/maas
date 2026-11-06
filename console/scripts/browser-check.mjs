@@ -78,7 +78,7 @@ try {
   );
   await page.getByRole("button", { name: "暂停发布", exact: true }).click();
   await page.getByText("配置已提交（202）", { exact: false }).waitFor();
-  await page.getByText("Update · Accepted", { exact: false }).waitFor();
+  await page.getByText("Pause · Accepted", { exact: false }).waitFor();
   check("202 remains Accepted, not Callable success");
   await page.getByRole("button", { name: "请求与用量", exact: true }).click();
   await page.getByText("Token 输入 未知", { exact: false }).waitFor();

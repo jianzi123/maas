@@ -24,6 +24,14 @@ export async function lookupRequest(
 export function releasePath(r: S["ReleaseModelRelease"]) {
   return `${ADMIN}/model-releases/${encodeURIComponent(r.metadata.namespace)}/${encodeURIComponent(r.metadata.name)}`;
 }
+export function releaseUpdateAction(
+  current: S["ReleaseModelRelease"],
+  input: S["ReleaseReleaseInput"],
+): S["ReleaseOperation"]["action"] {
+  if (current.spec.lifecycle.desiredState === input.spec.lifecycle.desiredState)
+    return "Update";
+  return input.spec.lifecycle.desiredState === "Paused" ? "Pause" : "Resume";
+}
 export async function revisions(
   client: Api,
   r: S["ReleaseModelRelease"],

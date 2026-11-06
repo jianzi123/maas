@@ -7,6 +7,7 @@ import {
   releasePath,
   canRollback,
   assertReleaseAccepted,
+  releaseUpdateAction,
 } from "../api/recovery";
 import { callableLabel } from "../domain";
 import { usePage, explain, uncertain } from "../ui";
@@ -268,7 +269,7 @@ async function mutate(
           : action === "rollback"
             ? "Rollback"
             : r
-              ? "Update"
+              ? releaseUpdateAction(r, body as S["ReleaseReleaseInput"])
               : "Create",
     };
     operation.value = null;
@@ -284,18 +285,20 @@ async function mutate(
     if (!alive || mine !== operationEpoch) return;
     assertReleaseAccepted(accepted, expected);
     operation.value = accepted.operation;
-    message.value = "配置已提交（202）；等待原操作与活动发布确认。";
+    unknown.value = accepted.operation.state === "Unknown";
+    message.value = unknown.value
+      ? "原操作写入结果未知（202）；仅查询原操作 ID，禁止重放。"
+      : "配置已提交（202）；等待原操作与活动发布确认。";
     editing.value = false;
     confirmDelete.value = false;
     selectionEpoch++;
     reading.value = false;
     history.value = null;
-    needsRead.value = !accepted.resource;
-    editBaseline.value = accepted.resource ?? null;
-    editor.value = accepted.resource
-      ? JSON.stringify(inputOf(accepted.resource), null, 2)
-      : "";
-    if (accepted.resource) selected.value = accepted.resource;
+    const snapshot = unknown.value ? null : accepted.resource;
+    needsRead.value = !snapshot;
+    editBaseline.value = snapshot ?? null;
+    editor.value = snapshot ? JSON.stringify(inputOf(snapshot), null, 2) : "";
+    if (snapshot) selected.value = snapshot;
     await refresh();
   } catch (e) {
     if (!alive || mine !== operationEpoch) return;
