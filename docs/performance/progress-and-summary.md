@@ -1,5 +1,13 @@
 # 阶段总结：2026-11-05
 
+## 当前整合交付
+
+入口现统一为[六章教材](foundations/README.md)→[逐章练习](exercises/README.md)→[目标卡](optimization-goals.md)→[实验规程](optimization-playbook.md)。[教材与研发整合地图](integration-map.md)说明两条框架主线、已有码接点、19项埋点/导出缺口、阶段与课题映射，以及现有分支的合入顺序。
+
+本轮只读核对PR #2的0f07c5d、PR #4的428d44e与发布aba38f5；三组两路静态merge-tree均无文本冲突，实际三路合并和运行验证尚未执行。未接管原后端/前端/架构工作，真实模型/GPU和实验计划继续按原门槛。
+
+
+
 ## 当前教材交付
 
 新主线为[推理运行时与部署框架工程基础](foundations/README.md)：六章、五张图、三个标准库教学脚本、十四道工程题及R0–R3/D0–D3实现路线。前三章用请求shape、六轮调度、KV容量、GEMM尾部和Attention mask解释机制；后半部给出并发/背压/完成接口、TP矩阵分片、幂等协调、发布屏障、UID清理和故障恢复。

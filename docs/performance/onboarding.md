@@ -1,6 +1,6 @@
-# 入门教程：从一次请求到可信结果
+# 基础练习 B01–B06
 
-准备开发推理运行时或推理部署框架，请先读[工程主教材六章](foundations/README.md)。本页保留原练习路线，配合主教材使用。
+本页提供练习详解与检查项。按[统一练习索引](exercises/README.md)选择对应章节，知识推导从[主教材六章](foundations/README.md)阅读。
 
 适合有基本Python/命令行能力、尚未熟悉LLM推理和GPU性能的新成员。学习目标不是记住一批参数名，而是能回答：数据从哪里来、计算是否正确、时钟/分母是否一致、结论能用于哪一层。
 
@@ -43,6 +43,8 @@ prefill处理已有输入，建立后续生成所需状态。decode基于已有�
 
 例如一个序列输入256 token、上限128输出，不代表一定生成128；EOS可以提前结束。改变长度、精度或GPU后，得到的是新条件，不能直接算原条件优化。
 
+<a id="exercise-b01"></a>
+
 ### B01：为什么decode mask容易写错？
 
 考虑q长度1、KV长度3，且q/k全0、v为[0,2,4]。这是“最后一个query看全部既有KV”，三个score相等，权重均为1/3，结果应为2。若错误地按左上三角只看第一个key，会得到0。
@@ -73,6 +75,8 @@ print(attention_dense(q, k, v).ravel().tolist())
 
 server/engine可在自身scope里算时长；两个不同客户端monotonic原点未经映射不能共享T。同一个标签也不能独立证明实际同步。
 
+<a id="exercise-b02"></a>
+
 ### B02：把报告算明白
 
 ~~~text
@@ -95,6 +99,8 @@ print(r["rows"][0]["client_visible_ttft_ms"], r["rows"][0]["server_first_chunk_m
 
 通过条件：分别得到9/8/4、41、420、100/60。解释：为何不能把41+420写成实际消费？为何不能把100−60直接叫“网络p95”？
 
+<a id="exercise-b03"></a>
+
 ### B03：让一个错误输入被拒绝
 
 ~~~text
@@ -109,6 +115,8 @@ python tools/perf/fixtures/clock_scope_reproducer.py .
 
 误差需要同时考虑绝对与相对尺度：abs(error)<=atol+rtol*abs(reference)，并先检查candidate、成熟baseline、reference和相关算术finite。阈值要按dtype和业务目标预登记，不能出结果后放宽。
 
+<a id="exercise-b04"></a>
+
 ### B04：跑一个不碰GPU的算子参考
 
 ~~~text
@@ -116,6 +124,8 @@ python tools/perf/operators/bench.py --output tools/perf/reports/course/operator
 ~~~
 
 预期8组float64 CPU参考全部通过，gpu_executed=false，GPU timings=null。它覆盖小shape/边界/GQA等指定行为；不能据此宣布FP16、CUDA、FlashInfer或模型质量通过。
+
+<a id="exercise-b05"></a>
 
 ### B05：用真正编译的宿主程序检查门禁
 
@@ -128,6 +138,8 @@ python tools/perf/operators/check_gemm_host.py --output tools/perf/reports/cours
 无编译器时本步标未执行；不能将Python测试的skip当作这项通过。宿主GCC版本也不等于可用于CUDA的host工具链认证。
 
 ## 4. 最后一课：观察到了什么，结论能走多远？
+
+<a id="exercise-b06"></a>
 
 ### B06：读一次本地传输练习
 
@@ -149,4 +161,4 @@ python tools/perf/controlled_transport.py --output-dir tools/perf/reports/course
 5. NaN为什么不能只靠误差大于tol判断？
 6. CPU参考、宿主C++、loopback结果分别能支持什么？
 
-入门通过标准：交一页练习结果，标明环境、输出/hash、跳过项和结论边界，并正确解释上述六题。不要求GPU，不按“跑了多少测试”毕业。随后进入[进阶教程](advanced.md)。
+入门通过标准：交一页练习结果，标明环境、输出/hash、跳过项和结论边界，并正确解释上述六题。不要求GPU，不按“跑了多少测试”毕业。下一项练习按[统一索引](exercises/README.md)选择，完成框架方向作业后按[整合地图](integration-map.md)交接。

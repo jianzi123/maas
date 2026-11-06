@@ -1,47 +1,47 @@
-# MaaS 性能学习与工作手册
+# MaaS 性能与框架工程手册
 
-主教材是[推理运行时与部署框架工程基础](foundations/README.md)：从一条请求、六轮批处理和显存手算出发，讲到 GPU 算子、并发接口、发布协调与恢复。它面向后续参与推理框架、推理部署框架开发的成员，入门读者能跟着推演，高级工程师能据此评审状态、所有权和故障边界。
+本手册为推理运行时、推理部署框架和性能工作提供统一入口。按“理解机制 → 做对应练习 → 定义课题 → 接入项目 → 留下验证与总结”的顺序使用。教材、练习和工作资料各维护一份，章节与具体命令通过索引连接。
 
-原入门/进阶实验路线继续保留，作为练习工具和实验规程参考；第一次阅读建议先走主教材六章。
+## 先按工作选择路线
 
-性能工具沿用5020d5c；主教材增补以35fd85a学习版为起点，并对齐架构师最新2319eb6内核增量。算子、运行时是性能角色主线；Go/Higress/存储用于解释端到端影响，由相应负责人协作。源码样本v0.5.6不是部署推荐，当前手册不宣称已有GPU/模型收益。
-
-## 按你的任务选择路线
-
-| 读者/任务 | 起点 | 完成标志 |
+| 你现在要做什么 | 阅读与操作顺序 | 交付 |
 |---|---|---|
-| 准备开发运行时/部署框架 | [工程主教材六章](foundations/README.md) | 手算与确定轨迹、接口/所有权图、R0–R3/D0–D3实现路线 |
-| 有Python基础，尚不熟LLM/CUDA的新成员 | [入门教程](onboarding.md) | 完成B01–B06，能解释正确结果与不能得出的结论 |
-| 能运行脚本，希望承担性能实验 | [进阶教程](advanced.md) | 完成A01–A04，能写出合理基线、采样方式和否证条件 |
-| 负责选题/评审/协作 | [优化目标与八张目标卡](optimization-goals.md) | 每张目标卡有测量点、约束、证据、门槛状态和停止/淘汰条件 |
-| 需要做一次具体实验 | [执行手册](optimization-playbook.md)＋[目标卡模板](templates/optimization-goal.md) | 实验前冻结条件，实验后按证据判断 |
-| 要核对练习 | [自测答案](exercises/answer-key.md) | 用推导说明原因，不只抄输出 |
-| 要了解当前进度 | [阶段总结](progress-and-summary.md) | 区分作者结果、独立复核、未执行和依赖 |
+| 新成员入门 | 主教材第1–3章 → 标准库教学模型 → 对应B/A练习 | shape/指标/显存手算、确定轨迹与结论边界 |
+| 开发推理运行时 | 第1/2/3/5章 → 第6章R0–R3 → K/R目标卡 | Scheduler/KV/Worker接口、异步所有权、正确性与框架负载 |
+| 开发推理部署框架 | 第1/4/5章 → 第6章D0–D3 → 项目接点 | 发布状态机、耐久意图、真实证据、排空和UID清理 |
+| 承担性能实验 | 目标卡 → 成熟baseline与源码/采样 → 执行规程 | 同条件A/B、负结果、质量/业务约束和原始证据 |
+| 做团队整合与评审 | 整合地图 → 现有代码/分支 → 阶段完成条件 | 单一真源、职责边界、接线缺口和合入/验证顺序 |
 
-## 从学习进入工作
+## 固定使用这五个入口
 
-入门：请求和token → prefill/decode → 指标与时钟 → 数值门禁 → 证据分级。
+1. [六章工程教材](foundations/README.md)：请求与张量、调度/KV、算子/剖析、发布协调、高级接口、分阶段实现。
+2. [逐章练习索引](exercises/README.md)：对应B01–B06、A01–A04、教学脚本和十四道工程题；资源条件与预期结果集中说明。
+3. [教材与研发整合地图](integration-map.md)：资料如何归并、两条框架主线如何汇合、真实代码/19项观测接点及分支顺序。
+4. [八张优化课题卡](optimization-goals.md)＋[实验执行规程](optimization-playbook.md)：定义问题、冻结条件、停止/淘汰与证据判断。
+5. [当前进度与归档](progress-and-summary.md)＋[修订记录](learning-change-log.md)：当前事实置顶，历史结果按原基线保留。
 
-进阶：目标拆解 → timeline与roofline → Attention/GEMM/KV/Graph/通信 → 同条件A/B → 正确性/质量/业务约束 → 复核。
+基础练习和进阶页分别是[B组详解](onboarding.md)、[A组详解与核验](advanced.md)。第一次学习按主教材章节走，需要命令或检查项时从索引跳转；团队评审先看整合地图。
 
-入门无需GPU、模型或平台Key。GPU阶段另需具体批准和兼容环境；不要为完成课程打开任何execution_enabled。
-
-## 参考资料分层
+## 工具与参考按需要查
 
 | 资料 | 用途 |
 |---|---|
-| [链路、术语和指标](architecture-and-metrics.md) | 查测量点、账本及身份边界 |
-| [算子工作台](operator-lab.md) | 查CPU参考、宿主校验、GPU骨架与采样命令 |
-| [固定SHA源码分析](sglang-source-analysis-v0.5.md) | 沿调用路径定位候选，不把代码存在当热点 |
-| [运行时实验与J02](runtime-experiments-v0.5.md) | 查混合负载、合理基线、未恢复样本和热路径成本 |
-| [GEMM有限值修复](gemm-finite-fix-v0.5.1.md) | 学习NaN比较为何会误放行，以及共用门禁如何验证 |
-| [现有验收契约](../../tools/perf/docs/acceptance-v0.3.md) | 查C01–C08及未批准收益建议 |
-| [实验记录](templates/experiment-record.md)／[周总结](templates/weekly-summary.md) | 保存事实、决定、建议、未验项 |
+| [链路、术语和指标](architecture-and-metrics.md) | 测量点、时钟、账本与身份边界 |
+| [算子工作台](operator-lab.md) | CPU参考、宿主门禁、GPU骨架和Profiler命令 |
+| [固定SHA源码分析](sglang-source-analysis-v0.5.md) | 从真实路径提出候选；样本v0.5.6不作为当前部署推荐 |
+| [J02及运行时实验](runtime-experiments-v0.5.md) | 混合负载、合理baseline、未恢复样本和热路径开销 |
+| [GEMM有限值修复](gemm-finite-fix-v0.5.1.md) | NaN反例与计时前门禁 |
+| [离线分析器](../../tools/perf/README.md) | 现有受限导入格式、报告和固定合成夹具 |
+| [19项观测映射](../../tools/perf/docs/observability-handoff-v0.2.csv) | request/trace、活动修订、分层耗时与安全边界 |
+| [C01–C08验收契约](../../tools/perf/docs/acceptance-v0.3.md) | 完整证据条件与尚未通过的真实验收 |
+| [目标卡](templates/optimization-goal.md)／[实验记录](templates/experiment-record.md)／[周总结](templates/weekly-summary.md) | 固定记录问题、事实、决定和限制 |
 
-## 先判断证据能支持什么
+## 使用边界与当前基线
 
-synthetic_fixture：人工记录，可验证计算；controlled_local_http：临时回环传输，可验证客户端机制；controlled_platform：真实受保护平台链路＋受控上游；real_model：获准模型/引擎环境。宿主C++校验只证明同一host gate的行为，不证明CUDA translation unit编译、GPU数值或模型质量。
+教学脚本用Python标准库；完整CPU练习与宿主C++按[资源表](exercises/README.md)准备。synthetic/teaching、controlled_local_http、controlled_platform、real_model各自标识，成果只报告实际验证到的层级。
 
-工具现有输入为票据v3元数据、终态3.0、ObservationEnvelope1.0。项目协议升级以架构师确认的共享契约为准；课程不修改协议或业务政策。机器可读的[目标登记表](optimization-goals.json)是文档建议，所有执行和业务SLO门槛保持待批准。
+性能工具沿用5020d5c，教材版起点为b67a805。本轮整合只改docs/performance的组织与导航。最新项目代码按整合地图中的固定提交核对，已有耐久内核/历史Reader与受控验证不再表述为不存在。
 
-任务附件提供含五张图的工程主教材 HTML 阅读版与教材源码/验证包，六章可离线阅读。原工具/历史契约仍可在项目仓库核对。
+票据v3、终态3.0、ObservationEnvelope1.0保持原样。Go/MySQL为唯一业务准入与耐久结算真源，Higress实际选路；未知用量、slot、停止与财务held分开处理。真实导出适配和H1–H4装配列为明确接线工作。
+
+机器可读[目标登记表](optimization-goals.json)与真实实验计划均保持execution_enabled=false。模型/权重/GPU、目标环境、SLO、调用额度与预算按具体任务的授权推进。课程和静态合并预演不自动启动框架实现、模型实验或部署。

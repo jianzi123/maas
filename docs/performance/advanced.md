@@ -1,8 +1,8 @@
-# 进阶教程：从profile到可判定的优化
+# 进阶练习与性能核验 A01–A04
 
-准备开发推理运行时或推理部署框架，请先读[工程主教材六章](foundations/README.md)。本页保留原练习路线，配合主教材使用。
+本页提供练习详解与检查项。按[统一练习索引](exercises/README.md)选择对应章节，知识推导从[主教材六章](foundations/README.md)阅读。
 
-前置：完成[入门B01–B06](onboarding.md)，能解释shape/dtype/layout、共同时间窗和finite门禁。本章不要求本机已有GPU；先完成源码定位、手算与实验设计，GPU阶段按批准计划执行。
+前置：读过主教材第1–3章，能解释shape/dtype/layout、共同时间窗和finite门禁。B01–B06按资源条件补做，具体见[统一索引](exercises/README.md)。本章不要求本机已有GPU；先完成源码定位、手算与实验设计，GPU阶段按批准计划执行。
 
 学习产物是一张可评审[目标卡](templates/optimization-goal.md)，不是一组调参命令。对任何候选都要讲清：优化哪段工作、为什么可能影响主指标、用什么成熟baseline、什么证据会否定它。
 
@@ -15,6 +15,8 @@
 | E 端到端 | 改善是否传到受保护的平台调用和用户体验？ | client共同窗、Go/网关/账本边界及质量/取消/预算 | fixture或Worker均值不能替代客户端SLO内有效吞吐 |
 
 默认主线K→R→E，E1平台归因与后端/网关协作，不重复接管其内核。八张目标卡及当前优先级见[优化目标](optimization-goals.md)。
+
+<a id="exercise-a01"></a>
 
 ### A01：先算收益上界，避免优化错地方
 
@@ -75,6 +77,8 @@ Q[B,Hq,Sq,D]、K/V[B,Hkv,Sk,D]；GQA要求头映射正确。prefill与decode的S
 
 dense参考能发现mask/GQA等数学错误，但不包含paged KV访问、索引生成、cache逐出、prefix合并或框架调度成本。优化方向可为减少多余contiguous/搬运、改进访问/融合或选择成熟backend；都需trace支持。
 
+<a id="exercise-a02"></a>
+
 ### A02：roofline应该用什么字节？
 
 算术强度I=F/B，性能上界近似min(P_compute, Bandwidth×I)。P_compute、带宽必须匹配GPU、dtype/执行模式及测量条件。B若只是(A+B+C)逻辑字节，它给出的“有效GB/s”是代理，不能当实际DRAM流量；cache复用、重复读取、临时张量会改变硬件流量。
@@ -111,11 +115,15 @@ dense参考能发现mask/GQA等数学错误，但不包含paged KV访问、索�
 
 ## 8. 把实验设计得能够推翻自己
 
+<a id="exercise-a03"></a>
+
 ### A03：保留失败和未恢复样本
 
 所有sent都留在分母，按成功/错误/拒绝/取消/pending分层。恢复实验记录独立观察的cancel/stop/safe/evidence/release/successor时刻，以及未恢复数量和观察截止。只对恢复者报p95不能说明整体恢复更快。
 
 缺usage和held不当actual；占用积分按维度/币种与缺观测时段记录。诊断函数不替代生产证明，也不执行退款或slot释放。
+
+<a id="exercise-a04"></a>
 
 ### A04：写一张可以评审的目标卡
 
