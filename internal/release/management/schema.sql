@@ -1,0 +1,22 @@
+CREATE TABLE IF NOT EXISTS release_management_operations (
+ cluster_id VARCHAR(128) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
+ operation_id CHAR(36) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
+ scope_id VARCHAR(128) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
+ namespace VARCHAR(63) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
+ name VARCHAR(63) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
+ action ENUM('Create','Update','Pause','Resume','Rollback','Delete') NOT NULL,
+ desired_state ENUM('Published','Paused') NOT NULL,
+ state ENUM('Accepted','Running','Succeeded','Failed','Unknown') NOT NULL,
+ cr_uid CHAR(36) CHARACTER SET ascii COLLATE ascii_bin NULL,
+ expected_rv VARCHAR(128) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
+ spec_sha256 CHAR(64) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
+ acknowledged BOOLEAN NOT NULL DEFAULT FALSE,
+ requested_generation BIGINT NULL,
+ publication_id CHAR(36) CHARACTER SET ascii COLLATE ascii_bin NULL,
+ reason VARCHAR(128) CHARACTER SET ascii COLLATE ascii_bin NULL,
+ created_at DATETIME(6) NOT NULL DEFAULT (UTC_TIMESTAMP(6)),
+ updated_at DATETIME(6) NOT NULL DEFAULT (UTC_TIMESTAMP(6)),
+ PRIMARY KEY(cluster_id,operation_id),
+ KEY resource_operations(cluster_id,namespace,name,created_at),
+ CHECK(requested_generation IS NULL OR requested_generation BETWEEN 1 AND 9007199254740991)
+) ENGINE=InnoDB;

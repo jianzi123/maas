@@ -1,0 +1,54 @@
+# Synthetic placeholders; no resources created.
+apiVersion: serving.maas.example/v1alpha1
+kind: ModelRelease
+metadata:
+  namespace: maas-models-example
+  name: private-model-example
+spec:
+  modelAlias: private-model-example
+  source:
+    type: SelfHosted
+    selfHosted:
+      engine: SGLang
+      workload: LeaderWorkerSet
+      weights:
+        pvcName: approved-weights-example
+        path: models/example
+        sha256: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+        modelRevision: approved-model-revision-example
+      runtimeProfileRef:
+        name: sglang-lws-bf16-example
+        revision: example-v1
+      placementProfileRef:
+        name: single-node-example
+        revision: example-v1
+      image: registry.example.invalid/sglang@sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+      groups: 1
+      podsPerGroup: 1
+      gpusPerPod: 1
+      gpuResourceName: nvidia.com/gpu
+      cpuPerPod: '4'
+      memoryPerPod: 32Gi
+      tensorParallelSize: 1
+      pipelineParallelSize: 1
+      startupTimeoutSeconds: 1800
+  gatewayRef:
+    name: private-inference-example
+    revision: example-v1
+  businessRefs:
+    capabilityProfileRef:
+      name: private-text-example
+      revision: example-v1
+    pricePolicyRef:
+      name: approved-price-example
+      revision: example-v1
+    intakePolicyRef:
+      name: approved-intake-example
+      revision: example-v1
+  lifecycle:
+    desiredState: Published
+    strategy: BlueGreen
+    drainTimeoutSeconds: 150
+    progressDeadlineSeconds: 3600
+    retainedRevisions: 2
+    retainUserData: true
