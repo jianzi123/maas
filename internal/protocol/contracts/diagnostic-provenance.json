@@ -1,0 +1,8 @@
+{
+  "source_attachment": "01a1ab9a-d947-7c65-9398-6875fab20d5c",
+  "schema_version": "0.1-draft.1",
+  "authority": "diagnostic_only",
+  "sha256": "d35c305ab02acae560c7a8423e672b4d1b50f837c7fc314a75b20628fcb88a4a",
+  "public_terminal": "3.0",
+  "observation_envelope": "1.0"
+}
