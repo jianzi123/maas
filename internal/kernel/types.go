@@ -61,6 +61,7 @@ type Price struct {
 // Profile is an immutable, installation-approved metadata snapshot. It contains
 // no endpoint URL, Secret value, or claim that the gateway actually applied it.
 type Profile struct {
+	Catalog                                                                 *CatalogMetadata `json:",omitempty"`
 	CRUID, Namespace, Name, Alias                                           string
 	Binding                                                                 release.Binding
 	SourceID, SourceType, UpstreamModel, ConfigRevision, CapabilityRevision string
@@ -71,6 +72,11 @@ type Profile struct {
 	BoundVerified                                                           bool
 	InputUpper, OutputUpper                                                 int64
 	Price                                                                   *Price
+}
+
+type CatalogMetadata struct {
+	DisplayName  string         `json:"display_name"`
+	Capabilities map[string]any `json:"capabilities"`
 }
 type Plan struct {
 	Version            string  `json:"schema_version"`

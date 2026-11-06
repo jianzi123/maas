@@ -40,7 +40,10 @@ func compile() map[string]*jsonschema.Schema {
 	if e := c.AddResource("https://maas.local/terminal.json", bytes.NewReader(terminalBytes)); e != nil {
 		panic(e)
 	}
-	if e := c.AddResource("https://maas.local/management.json", bytes.NewReader(managementBytes)); e != nil {
+	// Same RE2-compatible path normalization as api.ValidateJSON; the embedded
+	// architect-authored schema stays unchanged. Spec semantic checks run before IO.
+	normalized := bytes.ReplaceAll(managementBytes, []byte(`^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))[A-Za-z0-9_./-]+$`), []byte(`^[A-Za-z0-9_./-]+$`))
+	if e := c.AddResource("https://maas.local/management.json", bytes.NewReader(normalized)); e != nil {
 		panic(e)
 	}
 	if e := c.AddResource("https://maas.local/diagnostic.json", bytes.NewReader(diagnosticBytes)); e != nil {
@@ -48,7 +51,7 @@ func compile() map[string]*jsonschema.Schema {
 	}
 	out := map[string]*jsonschema.Schema{}
 	out["Diagnostic"] = c.MustCompile("https://maas.local/diagnostic.json")
-	for _, n := range []string{"KeyCreate", "KeyPatch", "Key", "KeyCreated", "KeyPage", "RequestPage", "RequestLookupPage", "SummaryPage", "ReleaseRevisionPage", "ChatChunk", "ChatResponse", "Error"} {
+	for _, n := range []string{"KeyCreate", "KeyPatch", "Key", "KeyCreated", "KeyPage", "RequestPage", "RequestLookupPage", "SummaryPage", "ReleaseRevisionPage", "ChatChunk", "ChatResponse", "Error", "AdminModelList", "ReleaseReleaseInput", "ReleaseModelRelease", "ReleaseList", "ReleaseAccepted", "ReleaseOperation", "ReleaseRollbackInput"} {
 		out[n] = c.MustCompile("https://maas.local/management.json#/$defs/" + n)
 	}
 	for _, name := range []string{"AdmissionHeader", "AdmissionClaims", "ReservationPlan"} {

@@ -9,9 +9,11 @@ import (
 	"encoding/json"
 	"errors"
 	"github.com/google/uuid"
+	api "github.com/jianzi123/maas/api/v1alpha1"
 	"github.com/jianzi123/maas/internal/kernel"
 	"github.com/jianzi123/maas/internal/protocol"
 	"github.com/jianzi123/maas/internal/release/history"
+	"github.com/jianzi123/maas/internal/release/management"
 	"io"
 	"net/http"
 	"net/url"
@@ -72,6 +74,12 @@ type Handler struct {
 	Core      *kernel.Store
 	Sessions  SessionVerifier
 	Revisions RevisionReader
+	Releases  *management.Service
+	Models    interface {
+		AdminModels(context.Context, kernel.ActiveGate, map[string]bool) (map[string]any, error)
+	}
+	ModelGate       kernel.ActiveGate
+	ModelNamespaces map[string]bool
 }
 
 func (h Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
@@ -220,6 +228,87 @@ func (h Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			out, e = h.Revisions.ReadRevisions(r.Context(), p[1], p[2], q)
 			schema = "ReleaseRevisionPage"
 		}
+	case path == "models" && r.Method == "GET":
+		if len(q) != 0 {
+			e = history.ErrInvalid
+		} else if h.Models == nil {
+			e = history.ErrUnavailable
+		} else {
+			out, e = h.Models.AdminModels(r.Context(), h.ModelGate, h.ModelNamespaces)
+		}
+		schema = "AdminModelList"
+	case strings.HasPrefix(path, "release-operations/") && r.Method == "GET":
+		if len(q) != 0 || strings.Count(path, "/") != 1 {
+			e = history.ErrInvalid
+		} else if h.Releases == nil || h.Releases.Operations == nil {
+			e = history.ErrUnavailable
+		} else {
+			out, e = h.Releases.Operations.Read(r.Context(), strings.TrimPrefix(path, "release-operations/"))
+		}
+		schema = "ReleaseOperation"
+	case path == "model-releases" || strings.HasPrefix(path, "model-releases/"):
+		if h.Releases == nil {
+			e = history.ErrUnavailable
+			break
+		}
+		parts := strings.Split(path, "/")
+		if r.Method == "GET" {
+			if len(parts) == 1 {
+				out, e = h.Releases.List(r.Context(), q)
+				schema = "ReleaseList"
+			} else if len(parts) == 3 && len(q) == 0 {
+				var rv string
+				out, rv, e = h.Releases.Get(r.Context(), parts[1], parts[2])
+				schema = "ReleaseModelRelease"
+				if e == nil {
+					w.Header().Set("ETag", `"`+rv+`"`)
+				}
+			} else {
+				e = history.ErrInvalid
+			}
+			break
+		}
+		if len(q) != 0 {
+			e = history.ErrInvalid
+			break
+		}
+		var input *api.ModelRelease
+		ns, name, rv, uid, revision := "", "", "", "", ""
+		if len(parts) == 3 || len(parts) == 4 {
+			ns, name = parts[1], parts[2]
+		} else if !(len(parts) == 1 && r.Method == "POST") {
+			e = history.ErrInvalid
+			break
+		}
+		if len(parts) > 1 {
+			values := r.Header.Values("If-Match")
+			if len(values) != 1 || len(values[0]) < 3 || len(values[0]) > 130 || values[0][0] != '"' || values[0][len(values[0])-1] != '"' || strings.ContainsAny(values[0][1:len(values[0])-1], "\"\\\r\n") {
+				e = history.ErrInvalid
+				break
+			}
+			rv = values[0][1 : len(values[0])-1]
+		}
+		if len(parts) == 4 && parts[3] == "rollback" && r.Method == "POST" {
+			var v struct {
+				Revision string `json:"target_revision"`
+				UID      string `json:"expected_cr_uid"`
+			}
+			e = body("ReleaseRollbackInput", &v)
+			revision, uid = v.Revision, v.UID
+		} else if (len(parts) == 1 && r.Method == "POST") || (len(parts) == 3 && r.Method == "PUT") {
+			input = new(api.ModelRelease)
+			e = body("ReleaseReleaseInput", input)
+			if len(parts) == 1 {
+				ns, name = input.Namespace, input.Name
+			}
+		} else if !(len(parts) == 3 && r.Method == "DELETE") {
+			e = history.ErrInvalid
+		}
+		if e == nil {
+			out, e = h.Releases.Submit(r.Context(), r.Method, ns, name, rv, uid, revision, input)
+		}
+		status = 202
+		schema = "ReleaseAccepted"
 	default:
 		failure(404, "not_found")
 		return
@@ -231,6 +320,8 @@ func (h Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			code, s = "forbidden", 403
 		case errors.Is(e, history.ErrInvalid):
 			code, s = "invalid_request", 400
+		case errors.Is(e, history.ErrConflict):
+			code, s = "resource_version_conflict", 409
 		case errors.Is(e, kernel.ErrNotFound), errors.Is(e, history.ErrNotFound):
 			code, s = "not_found", 404
 		case errors.Is(e, kernel.ErrConflict):

@@ -62,4 +62,9 @@ if [[ -n "${MAAS_TEST_REDIS_BASEDIR:-}" ]]; then
     export MAAS_REDIS_TEST_SOCKET="$temporary_dir/redis.sock"
 fi
 mkdir -p "$task_root/artifacts"
-"$GOROOT/bin/go" test ./internal/release/mysqlstore ./internal/kernel ./internal/controlapi -count=1 -v -timeout=120s -run "${MAAS_TEST_PATTERN:-.}" | tee "$task_root/artifacts/mysql-tests.txt"
+test_log="${MAAS_TEST_LOG_NAME:-mysql-tests.txt}"
+[[ "$test_log" =~ ^[a-zA-Z0-9._-]+$ ]] || { echo 'Invalid test log name' >&2; exit 1; }
+"$GOROOT/bin/go" test ./internal/release/mysqlstore ./internal/release/management ./internal/kernel ./internal/controlapi -count=1 -v -timeout=120s -run "${MAAS_TEST_PATTERN:-.}" | tee "$task_root/artifacts/$test_log"
+if [[ "${MAAS_TEST_ENVTEST:-}" == 1 ]]; then
+    "$GOROOT/bin/go" test -tags envtest ./test/integration -count=1 -v -timeout=150s -run '^TestManagement' | tee "$task_root/artifacts/release-management-envtest.txt"
+fi

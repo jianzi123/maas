@@ -3,14 +3,19 @@
 package main
 
 import (
+	"bytes"
 	"context"
 	"database/sql"
+	"encoding/json"
 	"fmt"
 	_ "github.com/go-sql-driver/mysql"
 	api "github.com/jianzi123/maas/api/v1alpha1"
 	"github.com/jianzi123/maas/internal/controlapi"
 	"github.com/jianzi123/maas/internal/kernel"
+	"github.com/jianzi123/maas/internal/protocol"
 	"github.com/jianzi123/maas/internal/release/history"
+	"github.com/jianzi123/maas/internal/release/management"
+	"github.com/jianzi123/maas/internal/release/mysqlstore"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/client-go/tools/clientcmd"
 	"net"
@@ -67,6 +72,8 @@ func run() error {
 			owned[n] = true
 		}
 		hr := &history.Reader{DB: db, Cluster: os.Getenv("MAAS_CLUSTER_ID"), Access: history.NamespaceAccess{Namespaces: allowed, Domains: owned, ScopeID: scope}, CursorKey: key}
+		access := history.NamespaceAccess{Namespaces: allowed, Domains: owned, ScopeID: scope}
+		var kube client.Client
 		if configPath := os.Getenv("MAAS_HISTORY_KUBECONFIG"); configPath != "" {
 			cfg, err := clientcmd.BuildConfigFromFlags("", configPath)
 			if err != nil {
@@ -79,6 +86,52 @@ func run() error {
 				return fmt.Errorf("history API reader unavailable")
 			}
 			hr.Live = history.KubeLive{Reader: reader}
+			kube = reader
+		}
+		if os.Getenv("MAAS_RELEASE_MANAGEMENT") == "1" {
+			if kube == nil {
+				return fmt.Errorf("explicit management KUBECONFIG required")
+			}
+			registry := &management.Registry{Access: access}
+			if path := os.Getenv("MAAS_RELEASE_REGISTRY_FILE"); path != "" {
+				b, err := os.ReadFile(path)
+				if err != nil || len(b) > 1048576 {
+					return fmt.Errorf("approved release registry unavailable")
+				}
+				b, err = protocol.Canonical(b)
+				if err != nil {
+					return fmt.Errorf("invalid approved release registry")
+				}
+				decoder := json.NewDecoder(bytes.NewReader(b))
+				decoder.DisallowUnknownFields()
+				if decoder.Decode(registry) != nil || len(registry.Entries) == 0 || len(registry.Entries) > 256 {
+					return fmt.Errorf("invalid approved release registry")
+				}
+				registry.Access = access
+				for _, entry := range registry.Entries {
+					if api.Validate(entry.Spec, nil) != nil || !allowed[entry.Namespace] || !owned[entry.Resolution.Versions["authorization_domain"]] {
+						return fmt.Errorf("unapproved release registry scope")
+					}
+				}
+			}
+			if dsn := os.Getenv("MAAS_HISTORY_PAYLOAD_DSN"); dsn != "" {
+				payload, err := sql.Open("mysql", dsn)
+				if err != nil {
+					return fmt.Errorf("history payload reader unavailable")
+				}
+				defer payload.Close()
+				hr.PayloadDB = payload
+				hr.Evaluator = history.ResolverEvaluator{Resolver: registry, Loader: hr}
+			}
+			op := &management.Operations{DB: db, Cluster: os.Getenv("MAAS_CLUSTER_ID"), Access: access}
+			h.Releases = &management.Service{Client: kube, Reader: kube, Operations: op, History: hr, Resolver: registry, Access: access, CursorKey: key}
+			publisher, err := mysqlstore.New(db, os.Getenv("MAAS_CLUSTER_ID"), core)
+			if err != nil {
+				return err
+			}
+			h.Models = core
+			h.ModelGate = publisher
+			h.ModelNamespaces = allowed
 		}
 		// No approved reference registry is implicitly manufactured: eligibility stays
 		// unknown until an installation supplies ResolverEvaluator through the port.

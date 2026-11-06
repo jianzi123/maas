@@ -3227,6 +3227,1050 @@
         "generated_at",
         "data_complete"
       ]
+    },
+    "AdminModelList": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "object": {
+          "const": "list"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/AdminModel"
+          }
+        }
+      },
+      "required": [
+        "object",
+        "data"
+      ]
+    },
+    "AdminModel": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+        },
+        "object": {
+          "const": "model"
+        },
+        "owned_by": {
+          "const": "maas"
+        },
+        "source_type": {
+          "type": "string",
+          "enum": [
+            "internal",
+            "external"
+          ]
+        },
+        "capabilities": {
+          "$ref": "#/$defs/Capabilities"
+        },
+        "source_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "display_name": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "check_state": {
+          "type": "string",
+          "enum": [
+            "unknown",
+            "available",
+            "unavailable"
+          ]
+        },
+        "checked_at": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "config_revision": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "release_binding": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ReleaseInvocationBinding"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "callable": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "object",
+        "owned_by",
+        "source_type",
+        "capabilities",
+        "source_id",
+        "display_name",
+        "check_state",
+        "checked_at",
+        "config_revision",
+        "release_binding",
+        "callable"
+      ]
+    },
+    "Capabilities": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "streaming": {
+          "type": "boolean"
+        },
+        "verified_max_output_tokens": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4096
+        },
+        "temperature_supported": {
+          "type": "boolean"
+        },
+        "usage_available": {
+          "type": "string",
+          "enum": [
+            "verified",
+            "unavailable",
+            "unknown"
+          ]
+        },
+        "capability_revision": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._/-]*$"
+        },
+        "hard_budget_status": {
+          "type": "string",
+          "enum": [
+            "verified",
+            "unverified",
+            "unsupported"
+          ]
+        },
+        "budget_unavailable_reason": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 256
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "protocols": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "chat_completions",
+              "responses"
+            ]
+          }
+        }
+      },
+      "required": [
+        "streaming",
+        "verified_max_output_tokens",
+        "temperature_supported",
+        "usage_available",
+        "capability_revision",
+        "hard_budget_status",
+        "budget_unavailable_reason",
+        "protocols"
+      ]
+    },
+    "ReleaseReleaseInput": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "apiVersion": {
+          "const": "serving.maas.example/v1alpha1"
+        },
+        "kind": {
+          "const": "ModelRelease"
+        },
+        "metadata": {
+          "$ref": "#/$defs/ReleaseCreateMetadata"
+        },
+        "spec": {
+          "$ref": "#/$defs/ReleaseSpec"
+        }
+      },
+      "required": [
+        "apiVersion",
+        "kind",
+        "metadata",
+        "spec"
+      ]
+    },
+    "ReleaseCreateMetadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 63,
+          "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+        },
+        "namespace": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 63,
+          "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+        }
+      },
+      "required": [
+        "name",
+        "namespace"
+      ]
+    },
+    "ReleaseSpec": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "modelAlias": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+        },
+        "source": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": [
+                "SelfHosted",
+                "ExternalAPI"
+              ]
+            },
+            "selfHosted": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "engine": {
+                  "const": "SGLang"
+                },
+                "workload": {
+                  "const": "LeaderWorkerSet"
+                },
+                "weights": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "pvcName": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 63,
+                      "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+                    },
+                    "path": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 256,
+                      "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))[A-Za-z0-9_./-]+$"
+                    },
+                    "sha256": {
+                      "type": "string",
+                      "pattern": "^[0-9a-f]{64}$"
+                    },
+                    "modelRevision": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 128,
+                      "pattern": "^[A-Za-z0-9][A-Za-z0-9._/-]*$"
+                    }
+                  },
+                  "required": [
+                    "pvcName",
+                    "path",
+                    "sha256",
+                    "modelRevision"
+                  ]
+                },
+                "runtimeProfileRef": {
+                  "$ref": "#/$defs/ReleaseProfileRef"
+                },
+                "placementProfileRef": {
+                  "$ref": "#/$defs/ReleaseProfileRef"
+                },
+                "image": {
+                  "type": "string",
+                  "maxLength": 512,
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9./:_-]*@sha256:[0-9a-f]{64}$"
+                },
+                "groups": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 16
+                },
+                "podsPerGroup": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 64
+                },
+                "gpusPerPod": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 8
+                },
+                "gpuResourceName": {
+                  "const": "nvidia.com/gpu"
+                },
+                "cpuPerPod": {
+                  "type": "string",
+                  "pattern": "^[1-9][0-9]*(m)?$"
+                },
+                "memoryPerPod": {
+                  "type": "string",
+                  "pattern": "^[1-9][0-9]*(Mi|Gi)$"
+                },
+                "tensorParallelSize": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 512
+                },
+                "pipelineParallelSize": {
+                  "const": 1
+                },
+                "startupTimeoutSeconds": {
+                  "type": "integer",
+                  "minimum": 30,
+                  "maximum": 7200
+                }
+              },
+              "required": [
+                "engine",
+                "workload",
+                "weights",
+                "runtimeProfileRef",
+                "placementProfileRef",
+                "image",
+                "groups",
+                "podsPerGroup",
+                "gpusPerPod",
+                "gpuResourceName",
+                "cpuPerPod",
+                "memoryPerPod",
+                "tensorParallelSize",
+                "pipelineParallelSize",
+                "startupTimeoutSeconds"
+              ]
+            },
+            "externalAPI": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "provider": {
+                  "type": "string",
+                  "enum": [
+                    "DeepSeek",
+                    "OpenAICompatible"
+                  ]
+                },
+                "endpointRef": {
+                  "$ref": "#/$defs/ReleaseProfileRef"
+                },
+                "upstreamModel": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 256
+                },
+                "protocol": {
+                  "const": "OpenAIChatCompletions"
+                },
+                "credentialSecretRef": {
+                  "$ref": "#/$defs/ReleaseSecretKeyRef"
+                }
+              },
+              "required": [
+                "provider",
+                "endpointRef",
+                "upstreamModel",
+                "protocol",
+                "credentialSecretRef"
+              ]
+            }
+          },
+          "required": [
+            "type"
+          ],
+          "oneOf": [
+            {
+              "properties": {
+                "type": {
+                  "const": "SelfHosted"
+                }
+              },
+              "required": [
+                "selfHosted"
+              ],
+              "not": {
+                "required": [
+                  "externalAPI"
+                ]
+              }
+            },
+            {
+              "properties": {
+                "type": {
+                  "const": "ExternalAPI"
+                }
+              },
+              "required": [
+                "externalAPI"
+              ],
+              "not": {
+                "required": [
+                  "selfHosted"
+                ]
+              }
+            }
+          ]
+        },
+        "gatewayRef": {
+          "$ref": "#/$defs/ReleaseProfileRef"
+        },
+        "businessRefs": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "capabilityProfileRef": {
+              "$ref": "#/$defs/ReleaseProfileRef"
+            },
+            "pricePolicyRef": {
+              "$ref": "#/$defs/ReleaseProfileRef"
+            },
+            "intakePolicyRef": {
+              "$ref": "#/$defs/ReleaseProfileRef"
+            }
+          },
+          "required": [
+            "capabilityProfileRef",
+            "pricePolicyRef",
+            "intakePolicyRef"
+          ]
+        },
+        "lifecycle": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "desiredState": {
+              "type": "string",
+              "enum": [
+                "Published",
+                "Paused"
+              ]
+            },
+            "strategy": {
+              "type": "string",
+              "enum": [
+                "BlueGreen",
+                "Recreate"
+              ]
+            },
+            "drainTimeoutSeconds": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 3600
+            },
+            "progressDeadlineSeconds": {
+              "type": "integer",
+              "minimum": 60,
+              "maximum": 14400
+            },
+            "retainedRevisions": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 10
+            },
+            "retainUserData": {
+              "const": true
+            }
+          },
+          "required": [
+            "desiredState",
+            "strategy",
+            "drainTimeoutSeconds",
+            "progressDeadlineSeconds",
+            "retainedRevisions",
+            "retainUserData"
+          ]
+        }
+      },
+      "required": [
+        "modelAlias",
+        "source",
+        "gatewayRef",
+        "businessRefs",
+        "lifecycle"
+      ]
+    },
+    "ReleaseSecretKeyRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 63,
+          "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+        },
+        "key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 253,
+          "pattern": "^[A-Za-z0-9._-]+$"
+        }
+      },
+      "required": [
+        "name",
+        "key"
+      ]
+    },
+    "ReleaseModelRelease": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "apiVersion": {
+          "const": "serving.maas.example/v1alpha1"
+        },
+        "kind": {
+          "const": "ModelRelease"
+        },
+        "metadata": {
+          "$ref": "#/$defs/ReleaseMetadata"
+        },
+        "spec": {
+          "$ref": "#/$defs/ReleaseSpec"
+        },
+        "status": {
+          "$ref": "#/$defs/ReleaseStatus"
+        }
+      },
+      "required": [
+        "apiVersion",
+        "kind",
+        "metadata",
+        "spec"
+      ]
+    },
+    "ReleaseMetadata": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 63,
+          "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+        },
+        "namespace": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 63,
+          "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+        },
+        "uid": {
+          "type": "string",
+          "format": "uuid",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+        },
+        "resourceVersion": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "generation": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "deletionTimestamp": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "finalizers": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 253
+          }
+        }
+      },
+      "required": [
+        "name",
+        "namespace"
+      ]
+    },
+    "ReleaseStatus": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "observedGeneration": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "phase": {
+          "type": "string",
+          "enum": [
+            "Pending",
+            "Preparing",
+            "Validating",
+            "Ready",
+            "Updating",
+            "Paused",
+            "Draining",
+            "Deleting",
+            "Degraded",
+            "Failed"
+          ]
+        },
+        "desiredRevision": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "activeRevision": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "activeGeneration": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "publication_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "activation_epoch": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "availableGroups": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 16
+        },
+        "conditions": {
+          "type": "array",
+          "maxItems": 12,
+          "items": {
+            "$ref": "#/$defs/ReleaseCondition"
+          }
+        },
+        "resources": {
+          "type": "array",
+          "maxItems": 128,
+          "items": {
+            "$ref": "#/$defs/ReleaseResourceRef"
+          }
+        },
+        "operation": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ReleaseOperation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "observedGeneration",
+        "phase",
+        "desiredRevision",
+        "activeRevision",
+        "activeGeneration",
+        "publication_id",
+        "activation_epoch",
+        "availableGroups",
+        "conditions",
+        "resources",
+        "operation"
+      ]
+    },
+    "ReleaseCondition": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Accepted",
+            "DependenciesReady",
+            "RuntimeReady",
+            "GatewayApplied",
+            "AccountingReady",
+            "ValidationPassed",
+            "Callable",
+            "Progressing",
+            "Degraded",
+            "AdmissionClosed",
+            "Drained",
+            "CleanupComplete"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "True",
+            "False",
+            "Unknown"
+          ]
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "message": {
+          "type": "string",
+          "maxLength": 1024
+        },
+        "observedGeneration": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "lastTransitionTime": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "type",
+        "status",
+        "reason",
+        "message",
+        "observedGeneration",
+        "lastTransitionTime"
+      ]
+    },
+    "ReleaseResourceRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "apiVersion": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "namespace": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 63,
+          "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 63,
+          "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+        },
+        "uid": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "ownership": {
+          "type": "string",
+          "enum": [
+            "exclusive",
+            "shared-entry",
+            "user-reference",
+            "installation"
+          ]
+        },
+        "publication_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "apiVersion",
+        "kind",
+        "namespace",
+        "name",
+        "uid",
+        "ownership",
+        "publication_id"
+      ]
+    },
+    "ReleaseOperation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+        },
+        "action": {
+          "type": "string",
+          "enum": [
+            "Create",
+            "Update",
+            "Pause",
+            "Resume",
+            "Rollback",
+            "Delete"
+          ]
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "Accepted",
+            "Running",
+            "Succeeded",
+            "Failed",
+            "Unknown"
+          ]
+        },
+        "namespace": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 63,
+          "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 63,
+          "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+        },
+        "cr_uid": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "requested_generation": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "publication_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "reason": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 128
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "message": {
+          "type": "string",
+          "maxLength": 1024
+        }
+      },
+      "required": [
+        "id",
+        "action",
+        "state",
+        "namespace",
+        "name",
+        "cr_uid",
+        "requested_generation",
+        "publication_id",
+        "created_at",
+        "updated_at",
+        "reason",
+        "message"
+      ]
+    },
+    "ReleaseList": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "data": {
+          "type": "array",
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/$defs/ReleaseModelRelease"
+          }
+        },
+        "next_cursor": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 2048
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "generated_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "data",
+        "next_cursor",
+        "generated_at"
+      ]
+    },
+    "ReleaseAccepted": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "operation": {
+          "$ref": "#/$defs/ReleaseOperation"
+        },
+        "resource": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ReleaseModelRelease"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "operation",
+        "resource"
+      ]
+    },
+    "ReleaseRollbackInput": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "target_revision": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "expected_cr_uid": {
+          "type": "string",
+          "format": "uuid",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+        }
+      },
+      "required": [
+        "target_revision"
+      ]
     }
   }
 }

@@ -3,7 +3,7 @@
   "minimal_addendum": "01a1abe7-babf-7740-8912-661a32e5f30e",
   "contract_version": "0.4.2-draft.1",
   "original_sha256": "4c8f0a01572eb09531bdc09fd62e0ae3cac75e368b3db2b9cf31b3a7c8f5abe3",
-  "derived_sha256": "2bc02fd170ae605337fd1c943ef716acfb70a647eb49cad5e91f8f6a793dec43",
+  "derived_sha256": "e36a46511f0fbcf24220970f0e16bdd8dc55aaabd391d5c0a15d1eb747045dc6",
   "unchanged_definitions": {
     "Error": true,
     "ChatResponse": true,
@@ -37,6 +37,22 @@
     "RequestLookupEvidence": true,
     "RequestLookupPage": true,
     "SummaryRow": true,
-    "SummaryPage": true
+    "SummaryPage": true,
+    "AdminModelList": true,
+    "AdminModel": true,
+    "Capabilities": true,
+    "ReleaseReleaseInput": true,
+    "ReleaseCreateMetadata": true,
+    "ReleaseSpec": true,
+    "ReleaseSecretKeyRef": true,
+    "ReleaseModelRelease": true,
+    "ReleaseMetadata": true,
+    "ReleaseStatus": true,
+    "ReleaseCondition": true,
+    "ReleaseResourceRef": true,
+    "ReleaseOperation": true,
+    "ReleaseList": true,
+    "ReleaseAccepted": true,
+    "ReleaseRollbackInput": true
   }
 }
