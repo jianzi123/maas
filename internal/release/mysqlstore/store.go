@@ -13,6 +13,7 @@ import (
 	"github.com/go-sql-driver/mysql"
 	"github.com/google/uuid"
 	"github.com/jianzi123/maas/internal/release"
+	"github.com/jianzi123/maas/internal/release/management"
 )
 
 var ErrUnavailable = errors.New("release storage unavailable")
@@ -57,9 +58,18 @@ type Publication struct {
 	Activated             bool
 }
 type Store struct {
-	db      *sql.DB
-	cluster string
-	kernel  Kernel
+	db                   *sql.DB
+	cluster              string
+	kernel               Kernel
+	managementOperations bool
+}
+
+// WithManagementOperations opts this publisher into atomic operation completion.
+// Its role additionally needs the documented narrow operation projection grants.
+func (s *Store) WithManagementOperations() *Store {
+	out := *s
+	out.managementOperations = true
+	return &out
 }
 
 func New(db *sql.DB, cluster string, k Kernel) (*Store, error) {
@@ -125,6 +135,9 @@ func (s *Store) lock(ctx context.Context, tx *sql.Tx, uid, lockMode string) (lin
 }
 func (s *Store) save(ctx context.Context, tx *sql.Tx, l link) error {
 	_, err := tx.ExecContext(ctx, `UPDATE release_links SET gateway=?,revision=?,desired_mode=?,intent_sha256=?,last_observed_generation=?,reconcile_epoch=?,activation_epoch=?,candidate_id=?,active_id=?,admission_closed=?,tombstone=?,cleanup_complete=? WHERE cluster_id=? AND cr_uid=?`, l.gateway, l.revision, l.mode, l.intent, l.generation, l.fence, l.epoch, l.candidate, l.active, l.closed, l.tombstone, l.cleaned, s.cluster, l.uid)
+	if err == nil && s.managementOperations {
+		return management.CompleteInTransaction(ctx, tx, s.cluster, l.uid)
+	}
 	return err
 }
 func (s *Store) publication(ctx context.Context, tx *sql.Tx, id string) (Publication, error) {

@@ -11,6 +11,7 @@ import (
 	"time"
 
 	"github.com/jianzi123/maas/internal/release"
+	"github.com/jianzi123/maas/internal/release/management"
 )
 
 //go:embed schema/0001_release.sql
@@ -24,7 +25,10 @@ func Migrate(ctx context.Context, db *sql.DB) error {
 	if e := migrateBase(ctx, db); e != nil {
 		return e
 	}
-	return migrateHistory(ctx, db)
+	if e := migrateHistory(ctx, db); e != nil {
+		return e
+	}
+	return management.Migrate(ctx, db)
 }
 func migrateBase(ctx context.Context, db *sql.DB) error {
 	if db == nil {
