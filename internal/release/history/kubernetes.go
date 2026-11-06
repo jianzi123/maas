@@ -94,48 +94,58 @@ type RollbackService struct {
 // existing durable operation workflow; this method never retries or infers the
 // result of a lost K8s ACK from a later GET of the current CR.
 func (r RollbackService) Rollback(ctx context.Context, ns, name, expectedUID, revision, resourceVersion string) (string, error) {
-	if r.History == nil || r.Client == nil || r.Reader == nil || resourceVersion == "" {
-		return "", ErrUnavailable
-	}
-	current := new(api.ModelRelease)
-	if e := r.Reader.Get(ctx, types.NamespacedName{Namespace: ns, Name: name}, current); e != nil {
-		return "", ErrUnavailable
-	}
-	uid := string(current.UID)
-	if (expectedUID != "" && expectedUID != uid) || current.ResourceVersion != resourceVersion || current.DeletionTimestamp != nil {
-		return "", ErrConflict
-	}
-	spec, e := r.History.LoadSpec(ctx, ns, name, uid, revision)
+	m, e := r.RollbackObject(ctx, ns, name, expectedUID, revision, resourceVersion)
 	if e != nil {
 		return "", e
 	}
+	return m.ResourceVersion, nil
+}
+
+// RollbackObject returns only the API-server's original mutation ACK. It never
+// estimates the resulting generation or issues a second write for bookkeeping.
+func (r RollbackService) RollbackObject(ctx context.Context, ns, name, expectedUID, revision, resourceVersion string) (*api.ModelRelease, error) {
+	if r.History == nil || r.Client == nil || r.Reader == nil || resourceVersion == "" {
+		return nil, ErrUnavailable
+	}
+	current := new(api.ModelRelease)
+	if e := r.Reader.Get(ctx, types.NamespacedName{Namespace: ns, Name: name}, current); e != nil {
+		return nil, ErrUnavailable
+	}
+	uid := string(current.UID)
+	if (expectedUID != "" && expectedUID != uid) || current.ResourceVersion != resourceVersion || current.DeletionTimestamp != nil {
+		return nil, ErrConflict
+	}
+	spec, e := r.History.LoadSpec(ctx, ns, name, uid, revision)
+	if e != nil {
+		return nil, e
+	}
 	if api.Validate(spec, &current.Spec) != nil {
-		return "", ErrConflict
+		return nil, ErrConflict
 	}
 	live := LiveState{UID: uid, Version: resourceVersion, SourceType: current.Spec.Source.Type, Namespace: ns, Name: name, State: "present"}
 	if r.History.Evaluator == nil {
-		return "", ErrUnavailable
+		return nil, ErrUnavailable
 	}
 	evaluation, e := r.History.Evaluator.Evaluate(ctx, uid, revision, live)
 	if e != nil || !validEvaluation(evaluation, live) || evaluation.State != "eligible" {
-		return "", ErrUnavailable
+		return nil, ErrUnavailable
 	}
 	fresh := new(api.ModelRelease)
 	if r.Reader.Get(ctx, client.ObjectKeyFromObject(current), fresh) != nil {
-		return "", ErrUnavailable
+		return nil, ErrUnavailable
 	}
 	if fresh.UID != current.UID || fresh.ResourceVersion != resourceVersion || fresh.DeletionTimestamp != nil {
-		return "", ErrConflict
+		return nil, ErrConflict
 	}
 	fresh.Spec = spec
 	if e = r.Client.Update(ctx, fresh); e != nil {
 		if apierrors.IsConflict(e) || apierrors.IsInvalid(e) {
-			return "", ErrConflict
+			return nil, ErrConflict
 		}
 		if apierrors.IsForbidden(e) {
-			return "", ErrForbidden
+			return nil, ErrForbidden
 		}
-		return "", ErrWriteOutcomeUnknown
+		return nil, ErrWriteOutcomeUnknown
 	}
-	return fresh.ResourceVersion, nil
+	return fresh, nil
 }
