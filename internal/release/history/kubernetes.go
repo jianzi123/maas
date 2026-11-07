@@ -52,6 +52,19 @@ type ReferenceFailure struct{ Reason string }
 
 func (e ReferenceFailure) Error() string { return e.Reason }
 
+// Typed, whitelisted causes preserve the existing 403/409/503 contract. Unknown
+// resolver failures remain unavailable; arbitrary error strings are not public.
+func (e ReferenceFailure) Unwrap() error {
+	switch e.Reason {
+	case "reference_unapproved", "profile_unapproved", "reference_expired":
+		return ErrForbidden
+	case "policy_changed":
+		return release.ErrPolicyChanged
+	default:
+		return ErrUnavailable
+	}
+}
+
 // ResolverEvaluator reuses the approved reference resolver, never a model call.
 // An installation must supply the actual registry-backed implementation.
 type ResolverEvaluator struct {
@@ -74,7 +87,11 @@ func (e ResolverEvaluator) Evaluate(ctx context.Context, uid, revision string, l
 	}
 	var denied ReferenceFailure
 	if errors.As(err, &denied) {
-		v := Evaluation{"blocked", []string{denied.Reason}}
+		reason := denied.Reason
+		if reason == "profile_unapproved" {
+			reason = "reference_unapproved"
+		}
+		v := Evaluation{"blocked", []string{reason}}
 		if validEvaluation(v, live) {
 			return v, nil
 		}

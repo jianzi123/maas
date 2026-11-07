@@ -268,6 +268,12 @@ func (s *Service) Submit(ctx context.Context, method, ns, name, rv, expectedUID,
 			probe.ResourceVersion = current.ResourceVersion
 		}
 		if _, e = s.Resolver.Resolve(ctx, probe); e != nil {
+			if errors.Is(e, history.ErrForbidden) {
+				return nil, history.ErrForbidden
+			}
+			if errors.Is(e, release.ErrPolicyChanged) {
+				return nil, release.ErrPolicyChanged
+			}
 			return nil, history.ErrUnavailable
 		}
 	}
