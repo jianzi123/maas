@@ -6,16 +6,37 @@ import (
 	"encoding/json"
 	"errors"
 	api "github.com/jianzi123/maas/api/v1alpha1"
+	"k8s.io/apimachinery/pkg/util/validation"
+	"regexp"
 )
+
+var revisionPattern = regexp.MustCompile(`^[0-9a-f]{64}$`)
 
 func (r *Reader) LoadSpec(ctx context.Context, ns, name, uid, revision string) (api.Spec, error) {
 	var spec api.Spec
-	if r.PayloadDB == nil || r.Access == nil || !validUID(uid) || len(revision) != 64 {
+	// Malformed identifiers remain input errors even when dependencies are absent.
+	// Configuration/connection failures must never be reported as bad user input.
+	if !validUID(uid) || !revisionPattern.MatchString(revision) || len(validation.IsDNS1123Label(ns)) != 0 || len(validation.IsDNS1123Label(name)) != 0 {
 		return spec, ErrInvalid
 	}
+	if r == nil || r.Access == nil || r.Cluster == "" {
+		return spec, ErrUnavailable
+	}
 	scope, e := r.Access.Scope(ctx, ns, name, uid)
-	if e != nil || scope == "" {
+	if e != nil {
+		if errors.Is(e, ErrForbidden) {
+			return spec, ErrForbidden
+		}
+		if errors.Is(e, ErrNotFound) {
+			return spec, ErrNotFound
+		}
+		return spec, ErrUnavailable
+	}
+	if scope == "" {
 		return spec, ErrForbidden
+	}
+	if r.PayloadDB == nil {
+		return spec, ErrUnavailable
 	}
 	var domain sql.NullString
 	if e = r.PayloadDB.QueryRowContext(ctx, "SELECT authorization_domain FROM release_history_directory WHERE cluster_id=? AND cr_uid=? AND namespace=? AND name=?", r.Cluster, uid, ns, name).Scan(&domain); e != nil || !domain.Valid {

@@ -12,6 +12,7 @@ import (
 	api "github.com/jianzi123/maas/api/v1alpha1"
 	"github.com/jianzi123/maas/internal/kernel"
 	"github.com/jianzi123/maas/internal/protocol"
+	"github.com/jianzi123/maas/internal/release"
 	"github.com/jianzi123/maas/internal/release/history"
 	"github.com/jianzi123/maas/internal/release/management"
 	"io"
@@ -322,6 +323,8 @@ func (h Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			code, s = "invalid_request", 400
 		case errors.Is(e, history.ErrConflict):
 			code, s = "resource_version_conflict", 409
+		case errors.Is(e, release.ErrPolicyChanged):
+			code, s = "policy_changed", 409
 		case errors.Is(e, kernel.ErrNotFound), errors.Is(e, history.ErrNotFound):
 			code, s = "not_found", 404
 		case errors.Is(e, kernel.ErrConflict):

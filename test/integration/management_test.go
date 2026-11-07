@@ -288,12 +288,55 @@ func TestManagementHTTPLifecycle(t *testing.T) {
 		m := live()
 		m.Spec.Source.ExternalAPI.EndpointRef.Revision = "not-approved"
 		before := mutation.writes
-		call("PUT", path, m.ResourceVersion, input(m), 503, "Error")
+		out := call("PUT", path, m.ResourceVersion, input(m), 403, "Error")
+		if out["error"].(map[string]any)["code"] != "forbidden" {
+			t.Fatal(out)
+		}
 		bad := input(m)
 		bad["status"] = map[string]any{"phase": "Ready"}
 		call("PUT", path, m.ResourceVersion, bad, 400, "Error")
 		if mutation.writes != before {
 			t.Fatal("unapproved or unvalidated mutation")
+		}
+	})
+	t.Run("reference-failure-classification", func(t *testing.T) {
+		m := live()
+		before := mutation.writes
+		var operationCount int
+		if err := db.QueryRow("SELECT COUNT(*) FROM release_management_operations").Scan(&operationCount); err != nil {
+			t.Fatal(err)
+		}
+		originalResolver := service.Resolver
+		defer func() { service.Resolver = originalResolver }()
+		for _, tc := range []struct {
+			name     string
+			resolver release.Resolver
+			status   int
+			code     string
+		}{
+			{"expired_reference", failingReferenceResolver{err: history.ReferenceFailure{Reason: "reference_expired"}}, 403, "forbidden"},
+			{"changed_policy", failingReferenceResolver{err: errors.Join(errors.New("not-for-public"), release.ErrPolicyChanged)}, 409, "policy_changed"},
+			{"registry_outage", failingReferenceResolver{err: errors.New("not-for-public")}, 503, "dependency_unavailable"},
+			{"missing_registry_configuration", &management.Registry{Access: access}, 503, "dependency_unavailable"},
+		} {
+			t.Run(tc.name, func(t *testing.T) {
+				service.Resolver = tc.resolver
+				out := call("PUT", path, m.ResourceVersion, input(m), tc.status, "Error")
+				if out["error"].(map[string]any)["code"] != tc.code {
+					t.Fatal(out)
+				}
+				b, _ := json.Marshal(out)
+				if strings.Contains(string(b), "not-for-public") {
+					t.Fatal("resolver detail leaked")
+				}
+			})
+		}
+		var after int
+		if err := db.QueryRow("SELECT COUNT(*) FROM release_management_operations").Scan(&after); err != nil {
+			t.Fatal(err)
+		}
+		if mutation.writes != before || after != operationCount || live().ResourceVersion != m.ResourceVersion {
+			t.Fatal("reference failure caused a write")
 		}
 	})
 	t.Run("api-server-CAS-race-is-not-retried", func(t *testing.T) {
@@ -339,6 +382,52 @@ func TestManagementHTTPLifecycle(t *testing.T) {
 		call("POST", path+"/rollback", m.ResourceVersion, map[string]any{"target_revision": revision, "expected_cr_uid": string(m.UID)}, 202, "ReleaseAccepted")
 		if live().Spec.Source.ExternalAPI.UpstreamModel != original.Spec.Source.ExternalAPI.UpstreamModel {
 			t.Fatal("wrong rollback spec")
+		}
+		reconcile()
+	})
+	t.Run("QA-003-rollback-dependency-classification", func(t *testing.T) {
+		m := live()
+		before := mutation.writes
+		var operationCount int
+		if err := db.QueryRow("SELECT COUNT(*) FROM release_management_operations").Scan(&operationCount); err != nil {
+			t.Fatal(err)
+		}
+		payload, access := hr.PayloadDB, hr.Access
+		defer func() { hr.PayloadDB = payload; hr.Access = access }()
+		validBody := map[string]any{"target_revision": revision, "expected_cr_uid": string(m.UID)}
+		check := func(body any, want int, code string) {
+			out := call("POST", path+"/rollback", m.ResourceVersion, body, want, "Error")
+			if out["error"].(map[string]any)["code"] != code {
+				t.Fatal(out)
+			}
+		}
+		hr.PayloadDB = nil
+		check(validBody, 503, "dependency_unavailable")
+		check(map[string]any{"target_revision": "bad", "expected_cr_uid": string(m.UID)}, 400, "invalid_request")
+		check(map[string]any{"target_revision": revision, "expected_cr_uid": "bad"}, 400, "invalid_request")
+		check(map[string]any{"target_revision": revision, "expected_cr_uid": uuid.NewString()}, 409, "resource_version_conflict")
+		hr.PayloadDB = payload
+		hr.Access = nil
+		check(validBody, 503, "dependency_unavailable")
+		hr.Access = access
+		closed, err := sql.Open("mysql", cfg.FormatDSN())
+		if err != nil {
+			t.Fatal(err)
+		}
+		closed.Close()
+		hr.PayloadDB = closed
+		check(validBody, 503, "dependency_unavailable")
+		hr.PayloadDB = payload
+		var after int
+		if err := db.QueryRow("SELECT COUNT(*) FROM release_management_operations").Scan(&after); err != nil {
+			t.Fatal(err)
+		}
+		if mutation.writes != before || after != operationCount || live().ResourceVersion != m.ResourceVersion {
+			t.Fatal("failed rollback caused a mutation or operation")
+		}
+		call("POST", path+"/rollback", m.ResourceVersion, validBody, 202, "ReleaseAccepted")
+		if mutation.writes != before+1 {
+			t.Fatal("restored rollback must write exactly once")
 		}
 		reconcile()
 	})
@@ -526,6 +615,12 @@ func (c *ackLossClient) Delete(ctx context.Context, obj client.Object, opts ...c
 }
 
 type noGatewayProducer struct{}
+
+type failingReferenceResolver struct{ err error }
+
+func (r failingReferenceResolver) Resolve(context.Context, *api.ModelRelease) (release.Resolution, error) {
+	return release.Resolution{}, r.err
+}
 
 func (noGatewayProducer) Compile(context.Context, *api.ModelRelease, release.Resolution, release.Binding, string) (*unstructured.Unstructured, error) {
 	return nil, release.ErrDependencyMissing
