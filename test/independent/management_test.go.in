@@ -440,6 +440,81 @@ func TestQAIndependentManagement(t *testing.T) {
 		reconcile()
 	})
 
+	t.Run("qa-approved-reference-error-mapping", func(t *testing.T) {
+		for _, tc := range []struct {
+			name string
+			err  error
+			want int
+			code string
+		}{
+			{"unapproved", history.ReferenceFailure{Reason: "reference_unapproved"}, 403, "forbidden"},
+			{"legacy_unapproved", history.ReferenceFailure{Reason: "profile_unapproved"}, 403, "forbidden"},
+			{"expired", history.ReferenceFailure{Reason: "reference_expired"}, 403, "forbidden"},
+			{"policy_changed", release.ErrPolicyChanged, 409, "policy_changed"},
+			{"missing_registry_port", nil, 503, "dependency_unavailable"},
+			{"empty_registry", nil, 503, "dependency_unavailable"},
+			{"unknown_typed", history.ReferenceFailure{Reason: "qa-private-cause"}, 503, "dependency_unavailable"},
+			{"untyped", errors.New("qa-private-cause"), 503, "dependency_unavailable"},
+		} {
+			t.Run(tc.name, func(t *testing.T) {
+				m := live()
+				before := mutation.writes
+				var count int
+				db.QueryRow("SELECT COUNT(*) FROM release_management_operations").Scan(&count)
+				prior := service.Resolver
+				defer func() { service.Resolver = prior }()
+				service.Resolver = qaErrorResolver{tc.err}
+				if tc.name == "missing_registry_port" {
+					service.Resolver = nil
+				}
+				if tc.name == "empty_registry" {
+					service.Resolver = &management.Registry{Access: access}
+				}
+				b, _ := json.Marshal(input(m))
+				r, _ := http.NewRequest("PUT", server.URL+path, bytes.NewReader(b))
+				r.AddCookie(&http.Cookie{Name: "maas_session", Value: session})
+				r.Header.Set("Origin", "http://127.0.0.1")
+				r.Header.Set("X-CSRF-Token", csrf)
+				r.Header.Set("Content-Type", "application/json")
+				r.Header.Set("If-Match", "\""+m.ResourceVersion+"\"")
+				resp, err := server.Client().Do(r)
+				if err != nil {
+					t.Fatal(err)
+				}
+				defer resp.Body.Close()
+				raw, err := io.ReadAll(resp.Body)
+				if err != nil {
+					t.Fatal(err)
+				}
+				var body map[string]any
+				if json.Unmarshal(raw, &body) != nil || protocol.Validate("Error", body) != nil {
+					t.Fatal("strict error response")
+				}
+				errbody := body["error"].(map[string]any)
+				if resp.StatusCode != tc.want || errbody["code"] != tc.code {
+					t.Errorf("reference classification status=%d code=%v want=%d/%s", resp.StatusCode, errbody["code"], tc.want, tc.code)
+				}
+				if bytes.Contains(raw, []byte("qa-private-cause")) {
+					t.Error("private resolver cause leaked")
+				}
+				var after int
+				if err := db.QueryRow("SELECT COUNT(*) FROM release_management_operations").Scan(&after); err != nil {
+					t.Fatal(err)
+				}
+				if after != count || mutation.writes != before {
+					t.Error("rejected reference dispatched mutation")
+				}
+				for _, table := range []string{"generation_requests", "usage_events", "budget_windows"} {
+					var n int
+					if err := db.QueryRow("SELECT COUNT(*) FROM " + table).Scan(&n); err != nil || n != 0 {
+						t.Errorf("ledger side effect %s", table)
+					}
+				}
+				evidence = append(evidence, map[string]any{"qa_case": "reference/" + tc.name, "method": "PUT", "path": path, "http_status": resp.StatusCode, "body": body})
+				t.Logf("reference case=%s status=%d request_id=%s", tc.name, resp.StatusCode, resp.Header.Get("X-Request-ID"))
+			})
+		}
+	})
 	t.Run("stale-version-and-uid-conflicts", func(t *testing.T) {
 		m := live()
 		call("PUT", path, "stale", input(m), 409, "Error")
@@ -450,7 +525,7 @@ func TestQAIndependentManagement(t *testing.T) {
 		m := live()
 		m.Spec.Source.ExternalAPI.EndpointRef.Revision = "not-approved"
 		before := mutation.writes
-		call("PUT", path, m.ResourceVersion, input(m), 503, "Error")
+		call("PUT", path, m.ResourceVersion, input(m), 403, "Error")
 		bad := input(m)
 		bad["status"] = map[string]any{"phase": "Ready"}
 		call("PUT", path, m.ResourceVersion, bad, 400, "Error")
@@ -750,3 +825,9 @@ func (noGatewayBundle) Ensure(context.Context, string, release.Binding, release.
 	return release.ErrDependencyMissing
 }
 func (noGatewayBundle) Remove(context.Context, string, string) error { return nil }
+
+type qaErrorResolver struct{ err error }
+
+func (r qaErrorResolver) Resolve(context.Context, *api.ModelRelease) (release.Resolution, error) {
+	return release.Resolution{}, r.err
+}

@@ -491,7 +491,7 @@
         "TestMySQLRelease/activation_CAS_exact_replay_and_closed_publication"
       ],
       "current_run_note": "受控历史回滚/CAS子集已验；缺私有历史连接状态语义QA-003待修复；真实带流切换和资源不足未验。 实际页面aef53ee管理子集已在Edge桌面/390px独立通过；不等于整项验收。",
-      "resume_20261107": "QA-003依赖分类11格9过2失，恢复依赖后原合法回滚202且单次派发；真实带流回滚未验。"
+      "resume_20261107": "QA-003在bfc1f7d依赖分类11格全过，引用映射8格全过；原合法回滚202且单次派发；真实带流回滚未验。"
     },
     {
       "id": "A31",
@@ -564,6 +564,7 @@
   "publication_dependency": "4d45c6f5a033783a8c1a8886f2b6e65eff7a3cf4",
   "scope_note": "继承原完整34项需求映射；historical cases/coverage仅为历史；本轮执行以current_run_*及原始日志为准，所有A项整体验收均未通过。",
   "browser_page_sha": "aef53eeb7eac16bd7a956294fefab750a3de31f8",
-  "resume_backend": "821269bd32164918443e63e66c6a7cbce45d440b",
-  "resume_frontend": "aef53eeb7eac16bd7a956294fefab750a3de31f8"
+  "resume_backend": "bfc1f7d577e0529362e26346e49e7ff6dadf9852",
+  "resume_frontend": "aef53eeb7eac16bd7a956294fefab750a3de31f8",
+  "key_browser_backend": "821269bd32164918443e63e66c6a7cbce45d440b"
 }

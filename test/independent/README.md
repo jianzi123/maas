@@ -17,4 +17,4 @@ metadata registry、受控上游及网关producer仍是测试适配；真实API-
 
 实际页面追加固定aef53eeb7eac16bd7a956294fefab750a3de31f8：运行browser.sh可复现21项（原18＋QA3），真实API-server/MySQL/HTTP/Edge，非夹具页面。请先在该console安装锁文件依赖，并提供MAAS_FE_NODE、MAAS_FE_CONSOLE_DIR、MAAS_FE_CONSOLE_NODE_DIR。结果与截图位于该console的artifacts/release-browser。
 
-2026-11-07恢复接续见resume-20261107.md、resume-20261107-results.json及本轮34行矩阵；旧report/results保持077b341历史范围。QA-003已扩展为11格关闭矩阵，当前固定821269b仍预期2格失败。新增平台Key/空用量独立复跑入口为key-browser.sh，显式提供原缓存及固定aef53ee前端双路径；该14项不等于真实模型/非空Token验收。
+2026-11-07恢复接续见resume-20261107.md、resume-20261107-results.json及本轮34行矩阵；旧report/results保持077b341历史范围。QA-003已按bfc1f7d独立复验关闭矩阵11/11；最终受影响管理39/39、引用错误8/8均通过。修复前821269b失败记录保留。新增平台Key/空用量独立复跑入口为key-browser.sh，显式提供原缓存及固定aef53ee前端双路径；该14项不等于真实模型/非空Token验收。
