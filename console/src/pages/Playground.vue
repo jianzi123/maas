@@ -6,8 +6,13 @@ import { streamChat } from "../api/stream";
 import { lookupRequest } from "../api/recovery";
 import { display } from "../domain";
 import { explain } from "../ui";
+const props = withDefaults(
+  defineProps<{ initialModel?: string; inferenceAvailable?: boolean }>(),
+  { inferenceAvailable: true },
+);
+const emit = defineEmits<{ navigate: [tab: string] }>();
 const models = ref<S["AdminModel"][]>([]),
-  model = ref(""),
+  model = ref(props.initialModel ?? ""),
   key = ref(""),
   prompt = ref(""),
   maxTokens = ref<number | undefined>(),
@@ -54,6 +59,7 @@ async function recover() {
   }
 }
 async function send() {
+  if (props.inferenceAvailable === false) return;
   if (!alive || state.value === "streaming" || !selected.value?.callable)
     return;
   const generation = ++requestEpoch;
@@ -131,6 +137,14 @@ onBeforeUnmount(() => {
     </div>
     <span class="badge">{{ state }}</span>
   </div>
+  <div v-if="props.inferenceAvailable === false" class="notice">
+    当前 Go 服务尚未开放推理入口。可先查看模型、创建 Key
+    或管理发布；模型满足网关及验证条件后再进行实际试用。<button
+      @click="emit('navigate', 'releases')"
+    >
+      查看模型发布
+    </button>
+  </div>
   <div class="split">
     <form class="panel" @submit.prevent="send">
       <label
@@ -185,7 +199,10 @@ onBeforeUnmount(() => {
         <button
           class="primary"
           :disabled="
-            state === 'streaming' || !prompt.trim() || !selected?.callable
+            props.inferenceAvailable === false ||
+            state === 'streaming' ||
+            !prompt.trim() ||
+            !selected?.callable
           "
         >
           发送请求</button

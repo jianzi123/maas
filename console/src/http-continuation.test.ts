@@ -118,10 +118,11 @@ describe.skipIf(!url)(
       api.fetcher = fetcher;
       api.csrf = client.csrf;
       const w = mount(Keys);
+      await w.find('[data-testid="create-key"]').trigger("click");
       try {
         await flushPromises();
         await w.find("form input").setValue("FE component HTTP");
-        await w.find("select").setValue("utc_day");
+        await w.find("form select").setValue("utc_day");
         await w.find("form").trigger("submit");
         const s = (w.vm as any).$.setupState;
         await expect.poll(() => s.secret.length > 0).toBe(true);

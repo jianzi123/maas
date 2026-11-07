@@ -33,6 +33,7 @@ try {
   await page.screenshot({ path: dir + "/catalog-desktop.png", fullPage: true });
   check("desktop catalog, fixture banner and two sources");
   await page.getByRole("button", { name: "平台 Key", exact: true }).click();
+  await page.getByTestId("create-key").click();
   await page.getByLabel("名称", { exact: true }).fill("浏览器验证 Key");
   await page.getByLabel("UTC 周期").selectOption("utc_day");
   await page.getByLabel("请求数限额", { exact: true }).fill("0");
@@ -46,7 +47,10 @@ try {
   await page.getByRole("button", { name: "我已保存，关闭原值" }).click();
   assert.equal(await page.getByTestId("one-time-secret").count(), 0);
   await page.screenshot({ path: dir + "/keys-desktop.png", fullPage: true });
-  await page.getByRole("button", { name: "在线试用", exact: true }).click();
+  await page
+    .getByRole("navigation", { name: "主导航" })
+    .getByRole("button", { name: "在线试用", exact: true })
+    .click();
   await page.getByLabel("模型").selectOption("model-a");
   await page
     .getByLabel("消费 Key", { exact: true })

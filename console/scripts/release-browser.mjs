@@ -87,7 +87,7 @@ try {
     return result.body;
   };
   await page.goto(url);
-  await page.getByRole("heading", { name: "平台 Key", exact: true }).waitFor();
+  await page.getByRole("heading", { name: "模型目录", exact: true }).waitFor();
   await button("模型目录").click();
   await page
     .getByText("尚无模型。请先提交获准发布配置。", { exact: true })

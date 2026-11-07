@@ -63,7 +63,7 @@ describe("independent QA race and error probes", () => {
     };
     const w = open(Playground);
     await flushPromises();
-    await w.find("select").setValue("model-a");
+    await w.find("form select").setValue("model-a");
     await w.find('input[type="password"]').setValue("qa_fixture_only_key");
     await w.find("textarea").setValue("first synthetic request");
     await w.find("form").trigger("submit");
@@ -104,9 +104,10 @@ describe("independent QA race and error probes", () => {
       return fixtureFetch(path, init);
     };
     const w = open(Keys);
+    await w.find('[data-testid="create-key"]').trigger("click");
     await flushPromises();
     await w.find("form input").setValue("QA synthetic key");
-    await w.find("select").setValue("utc_day");
+    await w.find("form select").setValue("utc_day");
     await w.find("form").trigger("submit");
     const internal = (w.vm as any).$.setupState;
     w.unmount();
@@ -254,7 +255,7 @@ describe("independent QA race and error probes", () => {
     };
     const w = open(Playground);
     await flushPromises();
-    await w.find("select").setValue("model-a");
+    await w.find("form select").setValue("model-a");
     await w.find('input[type="password"]').setValue("qa_fixture_only_key");
     await w.find("textarea").setValue("QA synthetic prompt");
     await w.find("form").trigger("submit");

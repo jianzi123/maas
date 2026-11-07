@@ -30,7 +30,11 @@ try {
     await page
       .getByRole("heading", { name: "模型目录", exact: true })
       .waitFor();
-    if (tab) await page.getByRole("button", { name: tab, exact: true }).click();
+    if (tab)
+      await page
+        .getByRole("navigation", { name: "主导航" })
+        .getByRole("button", { name: tab, exact: true })
+        .click();
   };
   const fillPlay = async (text) => {
     await page.getByLabel("模型").selectOption("model-a");
@@ -42,11 +46,17 @@ try {
   const state = (expr) => page.evaluate(expr);
 
   await fresh("平台 Key");
+  await page.getByTestId("create-key").click();
   await page.evaluate(async () => {
     const { api } = await import("/src/api/client.ts");
     const { fixtureFetch } = await import("/src/fixtures.ts");
-    window.qaKeys =
-      document.querySelector("main form").__vueParentComponent.setupState;
+    let component = document.querySelector("main form").__vueParentComponent;
+    while (
+      component &&
+      !Object.prototype.hasOwnProperty.call(component.setupState, "secret")
+    )
+      component = component.parent;
+    window.qaKeys = component.setupState;
     api.fetcher = async (p, i) => {
       if (String(p).endsWith("/keys") && i?.method === "POST") {
         const response = await fixtureFetch(p, i);
@@ -63,7 +73,12 @@ try {
   await page.getByLabel("UTC 周期").selectOption("utc_day");
   await page.getByRole("button", { name: "创建 Key", exact: true }).click();
   await page.waitForFunction(() => typeof window.releaseKey === "function");
-  await page.getByRole("button", { name: "模型目录", exact: true }).click();
+  // Force app navigation while the native modal blocks pointer clicks; preserve the unmount race assertion.
+  await page.evaluate(() =>
+    Array.from(document.querySelectorAll("nav button"))
+      .find((b) => b.textContent.includes("模型目录"))
+      .click(),
+  );
   assert.equal(await state(() => window.qaKeys.secret === ""), true);
   await state(() => window.releaseKey());
   await page.waitForFunction(() => window.qaKeyDelivered === true);
@@ -323,7 +338,10 @@ try {
     ),
     true,
   );
-  await page.getByRole("button", { name: "在线试用", exact: true }).click();
+  await page
+    .getByRole("navigation", { name: "主导航" })
+    .getByRole("button", { name: "在线试用", exact: true })
+    .click();
   await page
     .getByLabel("消费 Key", { exact: true })
     .fill("qa_fixture_only_key");
@@ -351,7 +369,10 @@ try {
     "模型发布",
     "请求与用量",
   ]) {
-    await page.getByRole("button", { name: tab, exact: true }).click();
+    await page
+      .getByRole("navigation", { name: "主导航" })
+      .getByRole("button", { name: tab, exact: true })
+      .click();
     await page.getByRole("heading", { name: tab, exact: true }).waitFor();
     assert.equal(
       await state(() => document.documentElement.scrollWidth > innerWidth),

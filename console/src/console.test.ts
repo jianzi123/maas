@@ -296,11 +296,12 @@ describe("component interaction", () => {
   it("creates one Key, shows secret once, then clears it without storage", async () => {
     api.fetcher = fixtureFetch;
     const w = mount(Keys);
+    await w.find('[data-testid="create-key"]').trigger("click");
     await flushPromises();
     const inputs = w.findAll("form input");
     expect((inputs[1]!.element as HTMLInputElement).value).toBe("");
     await inputs[0]!.setValue("new fixture");
-    await w.find("select").setValue("utc_day");
+    await w.find("form select").setValue("utc_day");
     await inputs[1]!.setValue("0");
     await w.find("form").trigger("submit");
     await flushPromises();
@@ -321,9 +322,10 @@ describe("component interaction", () => {
     });
     api.fetcher = f;
     const w = mount(Keys);
+    await w.find('[data-testid="create-key"]').trigger("click");
     await flushPromises();
     await w.find("form input").setValue("unknown");
-    await w.find("select").setValue("utc_day");
+    await w.find("form select").setValue("utc_day");
     await w.find("form").trigger("submit");
     await flushPromises();
     expect(w.text()).toContain("结果未知");

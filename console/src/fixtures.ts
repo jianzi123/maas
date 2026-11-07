@@ -2,7 +2,6 @@
 import fixture from "./fixture-data.json";
 import { validate, type S, type D } from "./api/contracts";
 import stable from "../contracts/openapi-v0.4.json";
-import { releaseUpdateAction } from "./api/recovery";
 export const now = "2026-11-05T09:50:00Z",
   rid = "00000000-0000-4000-8000-000000000001",
   keyId = "00000000-0000-4000-8000-000000000002";
@@ -302,7 +301,16 @@ export const fixtureFetch: typeof fetch = async (input, init = {}) => {
     return r ? json(r) : fixtureError("not_found", 404);
   }
   if (p.includes("/model-releases") && method !== "GET") {
-    const r = releases[0] ?? releaseSample;
+    const r = structuredClone(releases[0] ?? releaseSample);
+    const previousDesired = r.spec.lifecycle.desiredState;
+    if (method === "PUT" && body) {
+      r.spec = body.spec;
+      r.metadata.generation = (r.metadata.generation ?? 1) + 1;
+      r.metadata.resourceVersion = String(
+        Number(r.metadata.resourceVersion ?? 0) + 1,
+      );
+      releases[0] = r;
+    }
     operation = {
       id: "00000000-0000-4000-8000-000000000080",
       action:
@@ -312,7 +320,11 @@ export const fixtureFetch: typeof fetch = async (input, init = {}) => {
             ? "Rollback"
             : method === "POST"
               ? "Create"
-              : releaseUpdateAction(r, body),
+              : r.spec.lifecycle.desiredState !== previousDesired
+                ? r.spec.lifecycle.desiredState === "Paused"
+                  ? "Pause"
+                  : "Resume"
+                : "Update",
       state: "Accepted",
       namespace: r.metadata.namespace,
       name: r.metadata.name,

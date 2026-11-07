@@ -1,6 +1,6 @@
 # MaaS 管理控制台
 
-Vue + TypeScript 独立前端。覆盖管理员会话、模型/来源、Key 创建/撤销与预算、流式试用/停止、请求/用量、ModelRelease 创建/更新/暂停/恢复/回滚/下线和原操作查询。当前交付为 MAAS-5 **受控实现阶段**；真实后端/网关/模型联调待完成。
+Vue + TypeScript 控制台，包含模型目录、平台 Key、在线试用、模型发布、请求与用量。Go 模式接入真实管理接口；完整推理仍需获准入口与可调用模型，开发模式可预览流式和停止流程。
 
 ## 本地使用
 
@@ -61,3 +61,5 @@ MAAS-3/11 需提供同一真实 API 的管理、查询与发布装配；FE-R02/0
 本地 Go 页面入口、可操作子集及启动方式见 [docs/go-workbench.md](docs/go-workbench.md)。本轮支持直接操作 Key/三维预算和查询用量；模型试用与完整发布管理仍需相应后端入口。
 
 发布管理已接续原 Go 管理入口：模型目录、创建/编辑、暂停/恢复、同 UID 历史回滚、下线与原 operation.id 查询。精确范围、真实临时控制平面浏览器证据和复跑见 [docs/release-management.md](docs/release-management.md)。推理试用与生产验收边界保留。
+
+Key 列表、弹窗和页面联动改版参考见 [docs/ui-reference.md](docs/ui-reference.md)。新工作台的真实 Go 与开发演示启动方式见 [docs/go-workbench.md](docs/go-workbench.md)。

@@ -43,13 +43,16 @@ try {
       });
   });
   await page.goto(url);
+  await page.getByRole("heading", { name: "模型目录", exact: true }).waitFor();
+  await page.getByRole("button", { name: "平台 Key", exact: true }).click();
   await page.getByRole("heading", { name: "平台 Key", exact: true }).waitFor();
-  await page.getByText("尚无平台 Key。", { exact: true }).waitFor();
+  await page.getByText("尚无平台 Key。", { exact: false }).waitFor();
   await page.getByText("本地临时管理会话", { exact: false }).waitFor();
   checks.push("page uses actual Go key listing under temporary session");
   const cookies = await context.cookies(url);
   assert(cookies.find((c) => c.name === "maas_session")?.httpOnly);
   checks.push("management cookie is HttpOnly");
+  await page.getByTestId("create-key").click();
   await page.getByLabel("名称", { exact: true }).fill("本地 Go 功能验证");
   await page.getByLabel("UTC 周期").selectOption("utc_day");
   await page.getByLabel("请求数限额", { exact: true }).fill("9");
@@ -70,9 +73,7 @@ try {
   await page.getByRole("button", { name: "我已保存，关闭原值" }).click();
   assert.equal(await page.getByTestId("one-time-secret").count(), 0);
   await page.getByRole("button", { name: "刷新列表", exact: true }).click();
-  await page
-    .getByRole("heading", { name: "本地 Go 功能验证", exact: false })
-    .waitFor();
+  await page.getByText("本地 Go 功能验证", { exact: true }).waitFor();
   assert.equal(await page.getByTestId("one-time-secret").count(), 0);
   checks.push("secret closed and absent after actual metadata reload");
   await page.mouse.move(1400, 5);
@@ -133,14 +134,14 @@ try {
   assert.equal(history.status(), 503);
   checks.push("unconfigured authoritative history remains 503");
   await page.getByRole("button", { name: "模型发布", exact: true }).click();
-  await page.getByText("服务依赖暂不可用。", { exact: false }).waitFor();
+  await page.getByRole("alert").waitFor();
   await page.mouse.move(1400, 5);
   await page.screenshot({
     path: output + "/available-subset.png",
     fullPage: true,
   });
   checks.push(
-    "unconfigured release adapter returns actual 503 without fixture fallback",
+    "unconfigured release API remains an explicit error, never mocked",
   );
   assert.equal(
     await page.evaluate(() => localStorage.length + sessionStorage.length),

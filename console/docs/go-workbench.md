@@ -1,60 +1,52 @@
-# 本地 Go 工作台
+# 控制台与本地 Go 联调
 
-已具备的页面：平台 Key 创建、原值一次展示、元数据查看、三维预算修改、撤销；请求明细和用量汇总查询。业务操作直接连接当前 Go controlapi.Handler / MySQL，浏览器仍按共享 Schema 严格校验。
+控制台包含模型目录、平台 Key、在线试用、模型发布、请求与用量五个入口。Key 页采用列表、按需创建/编辑弹窗、预算详情和用量跳转；参考来源见 [ui-reference.md](ui-reference.md)。
 
-## 本次实际操作
+## 快速预览
 
-已使用后端 0f07c5d 的真实 Handler 与临时 MySQL 8.4.7 完成：
-
-| 页面操作                              | 实际结果                                       |
-| ------------------------------------- | ---------------------------------------------- |
-| 创建 Key，显式设置请求/Token/金额预算 | HTTP 201；关闭原值后，刷新只返回元数据         |
-| 将请求数预算从 9 改为 0               | HTTP 200；旧预算版本再次写入返回 409           |
-| 撤销 Key                              | HTTP 200；页面显示已撤销                       |
-| 查询请求与用量汇总                    | HTTP 200，当前数据库没有生成请求，显示真实空态 |
-| 精确查询不存在的原请求 ID             | unknown；不推测未准入或过期                    |
-| 未配置原 CR/可见性输入的历史查询      | HTTP 503；不返回假历史                         |
-
-实际 Go 浏览器检查 **14 项通过，页面异常 0**；真实 HTTP/组件检查 **11 项通过、0 跳过**。前端回归 **91 项通过**（普通运行另有 11 项 HTTP 专用检查按条件跳过），类型/构建/格式通过，开发夹具浏览器 **10＋11 组通过**。夹具的模型试用/停止、发布/暂停/回滚交互没有冒充真实模型或发布运行结果。
-
-四张 Go 页面截图在 artifacts/go-browser/。测试结束后，浏览器、Vite、Go 服务、临时 MySQL 进程与测试数据均已清理。
-
-## 启动
-
-查看完整开发界面和试用/发布交互：
+在 console/ 下执行：
 
 ```sh
 npm ci
 npm run dev:fixtures
 ```
 
-连接已有的获准本地 Go 管理 API：由临时环境启动器通过进程环境注入 MAAS_LOCAL_API（仅 http://127.0.0.1:端口）、MAAS_LOCAL_SESSION、MAAS_LOCAL_CSRF、MAAS_LOCAL_EXPIRES（未来 30 分钟内）和 MAAS_LOCAL_PORT。会话由原 Go BootstrapSession 安装适配发放，原值不放在 VITE_ 变量、源码、命令参数或日志。然后执行：
+此模式明确标记开发夹具，可查看模型选择、流式输出/停止、发布状态和非空请求/Token/金额样例。
+
+## 连接本地 Go
+
+本轮接线基于后端 PR #2 的 821269b。按后端 docs/release-management-http.md 安装已授权临时环境，并通过进程环境注入 MAAS_LOCAL_API（仅 loopback HTTP）、MAAS_LOCAL_SESSION、MAAS_LOCAL_CSRF、MAAS_LOCAL_EXPIRES（未来30分钟内）及 MAAS_LOCAL_PORT，再运行：
 
 ```sh
 npm run dev:go
 ```
 
-页面自动进入“平台 Key”，顶部持续标明 Go/MySQL 模式。dev:go 不创建数据库或后台服务；没有上述配置时使用普通同源接口模式。真实部署仍需完整登录和 HTTPS，不能使用此本地安装会话代替生产鉴权。
+会话安装桥接先由 Go 校验短期会话，再设置 HttpOnly / SameSite=Strict cookie；CSRF 仅保留在内存。所有业务 /api 请求原样发送到 Go，严格校验共享契约，不回退夹具。生产构建不启用本地安装入口，完整生产登录仍由相应服务提供。
 
-临时 Vite 桥接仅发放本机短时 HttpOnly / SameSite=Strict 管理 cookie 与内存 CSRF，首次连接先由 Go 校验会话。只接受匹配当前本地 Origin 的 POST；退出清理该浏览器 cookie。其余 /api 请求原样代理到 Go，不模拟业务响应、不放宽字段、不回退夹具。退出不声称已撤销 Go 中尚未到期的安装会话；临时环境结束会关闭 Go 进程。生产构建不启用这个入口。
+| 页面       | 当前 Go 管理接口范围                                                                       |
+| ---------- | ------------------------------------------------------------------------------------------ |
+| 模型目录   | 读取同一内核 profile 目录，展示来源、绑定修订与是否可调用，并进入试用或发布                |
+| 平台 Key   | 创建/原值一次展示、预算修改、撤销、筛选和预算明细，查看用量带入原 Key ID                   |
+| 在线试用   | 页面完整；本轮 Go 进程没有推理入口，禁用发送并说明原因。开发夹具模式支持流式/停止          |
+| 模型发布   | 创建、详情、更新、PUT暂停/恢复、保留修订/回滚、下线与原 operation.id 查询；202不代表可调用 |
+| 请求与用量 | 真实查询与筛选；本次未生成模型请求，因此本地数据库呈现真实空态                             |
 
-## 浏览器复跑
+发布管理使用当前 UID/resourceVersion，JSON编辑器也按 desiredState 差异校验 Pause/Resume/Update。回滚或删除 ACK 的 resource 可以为空，继续查询原 operation.id 并重读；未知写入不重放。目录的绑定修订不直接称为活动版本。缺真实 Higress / validation 时 Callable 保持 false。
 
-scripts/go-browser-harness.go.txt 复用后端真实内核和受控会话，创建单独测试 schema，调用 scripts/go-browser.mjs 后清理。它与 scripts/http-harness.go.txt 一样只用于指定后端提交的独立临时副本，不修改后端产品代码。
+## 必要检查与截图
 
-1. 在后端独立副本中，将两个 .go.txt 文件复制到 internal/controlapi/，后缀改为 _test.go。
-2. 配置原后端 scripts/test-mysql.sh 的便携 MySQL/Go 缓存，以及 MAAS_FE_NODE、MAAS_FE_CONSOLE_DIR、MAAS_FE_CONSOLE_NODE_DIR（见 review-fixes.md）。
-3. 设置 MAAS_TEST_PATTERN='TestFrontendHTTP|TestFrontendBrowser'，前台运行原 scripts/test-mysql.sh。
+```sh
+npm test
+npm run build
+npm run format:check
+npm run test:browser
+npm run test:review-browser
+```
 
-脚本启动自己的短寿命 Go/MySQL/Vite/浏览器，执行后全部关闭。Go 浏览器结果和截图位于 artifacts/go-browser/。HTTP 组件结果位于 artifacts/http-continuation.json。没有配置真实临时 API 的普通 npm test 明确跳过 11 项 HTTP 专用检查。
+普通测试按条件跳过11项真实HTTP专用场景。真实 Go 页面复跑使用 scripts/test-management-browser.sh：先提供独立后端源码 MAAS_GO_SOURCE、获准便携 MySQL/Go/envtest 路径和 Node 路径（变量见脚本头部）；WSL 调用 Windows Node 时另传 MAAS_FE_CONSOLE_NODE_DIR 的 Windows 路径。脚本只建立自己的短寿命 MySQL、API-server/etcd、Go/Vite 和浏览器，前台完成后清理进程、数据及注入的测试文件。
 
-## 发布管理接续
+实际管理页面截图与结果位于 artifacts/management-browser/；旧 Key/HTTP 兼容验证位于 artifacts/go-browser/、artifacts/http-continuation.json。这些运行复用真实 Go 管理实现、临时 MySQL 与 API-server；批准引用和缺失网关为测试适配，未调用供应商、推理模型或部署目标集群。开发者复跑不代替原QA独立验收。
 
-指定后端 `821269bd32164918443e63e66c6a7cbce45d440b` 已提供目录、发布管理、权威历史和持久操作查询。Go 模式直接接这些页面，依赖缺失显示真实错误，不回退夹具。完整接口与后端安装参数见该提交的 `docs/release-management-http.md`；本轮前端实际验证范围与复跑见 [release-management.md](release-management.md)。
+## 本轮页面验证
 
-## 当前限制
-
-- 生产登录和真实推理入口尚未交付。目录/发布功能取决于安装方明确配置的适配器、授权域、registry 和历史输入；Go 模式继续限制推理试用。
-- 权威历史 Reader 复用原实现。发布 envtest 提供同 UID 测试历史/批准引用；旧行无可信来源或安装未配置时按实际错误处理，不猜历史与资格。
-- 当前未发出模型请求，用量页的空列表是真实查询结果；不证明非空 RequestRecord/Usage、生成停止或容量恢复。
-- 五项竞态修复已在原 PR 的 223d88c 保留；本轮继续在同一 PR 上补 Go 页面入口及 header/chunk/error 的原请求 ID 校验。三方复现继续作为回归用例，不代替独立 QA 验收。
+在保留原 PR 发布实现后，104 项前端回归通过；类型、构建、格式通过。真实临时 Go/MySQL 检查包含 Key 浏览器14组、HTTP专用11项，真实 API-server 发布浏览器18组及本次页面联动/移动端13组，均通过且页面异常0。夹具浏览器10＋11组通过。批准元数据、缺失网关和安装会话为受控测试适配，真实推理及完整生产验收仍未执行。全部临时服务和数据在脚本结束清理。

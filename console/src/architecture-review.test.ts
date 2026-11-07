@@ -141,7 +141,7 @@ it("R3: old operation lookup must not replace a new write operation", async () =
     await flushPromises();
     await button(w, "查询原操作").trigger("click");
     await flushPromises();
-    await button(w, "暂停发布").trigger("click");
+    await button(w, "恢复发布").trigger("click");
     await flushPromises();
     expect(state(w).operation.id).toBe(newId);
     releaseOld(Response.json(oldOp));

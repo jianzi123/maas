@@ -4,12 +4,13 @@ import { api, ADMIN } from "../api/client";
 import type { S } from "../api/contracts";
 import { display } from "../domain";
 import { explain } from "../ui";
+const props = defineProps<{ keyFilter?: string }>();
 const filter = reactive({
     date_from: "",
     date_to: "",
     model_alias: "",
     source_id: "",
-    key_id: "",
+    key_id: props.keyFilter ?? "",
     status: "",
   }),
   kind = ref("requests"),

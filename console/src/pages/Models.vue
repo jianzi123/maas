@@ -3,6 +3,9 @@ import { onMounted } from "vue";
 import { api, ADMIN } from "../api/client";
 import type { S } from "../api/contracts";
 import { usePage } from "../ui";
+const emit = defineEmits<{
+  navigate: [tab: string, filter?: { model_alias: string }];
+}>();
 const { rows, busy, error, refresh } = usePage(() =>
   api.json<S["AdminModelList"]>(ADMIN + "/models", "AdminModelList"),
 );
@@ -53,11 +56,16 @@ onMounted(() => refresh());
               : "未知 / 不可获取"
           }}
         </dd>
-        <dt>活动修订</dt>
+        <dt>目录绑定修订</dt>
         <dd class="mono">
           {{ m.release_binding?.release_revision ?? "尚无活动绑定" }}
         </dd>
       </dl>
+      <div class="actions">
+        <button @click="emit('navigate', 'play', { model_alias: m.id })">
+          在线试用</button
+        ><button @click="emit('navigate', 'releases')">查看发布</button>
+      </div>
     </article>
   </div>
 </template>

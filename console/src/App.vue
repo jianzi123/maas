@@ -13,6 +13,16 @@ const tab = ref("models"),
   error = ref(""),
   username = ref(""),
   password = ref("");
+const usageKey = ref(""),
+  playModel = ref("");
+function navigate(
+  id: string,
+  filter?: { key_id?: string; model_alias?: string },
+) {
+  usageKey.value = filter?.key_id ?? "";
+  playModel.value = filter?.model_alias ?? "";
+  tab.value = id;
+}
 const local =
   import.meta.env.DEV && import.meta.env.VITE_LOCAL_CONTROL === "true";
 const demo =
@@ -26,7 +36,7 @@ async function boot() {
     if (local) {
       const { enterLocalControl } = await import("./api/local-control");
       await enterLocalControl();
-      tab.value = "keys";
+      tab.value = "models";
     } else await api.session();
     authenticated.value = true;
   } catch (e) {
@@ -42,7 +52,7 @@ async function login() {
     if (local) {
       const { enterLocalControl } = await import("./api/local-control");
       await enterLocalControl();
-      tab.value = "keys";
+      tab.value = "models";
     } else
       await api.login({ username: username.value, password: password.value });
     authenticated.value = true;
@@ -107,7 +117,7 @@ const nav = [
           :key="id"
           :class="{ active: tab === id }"
           :disabled="!authenticated"
-          @click="tab = id"
+          @click="navigate(id)"
         >
           <span>{{ label }}</span
           ><span aria-hidden="true">↗</span>
@@ -133,8 +143,7 @@ const nav = [
         开发测试夹具 · 所有模型、Key、发布与用量均为模拟数据，未连接真实模型。
       </div>
       <div v-if="local" class="notice">
-        本地临时管理会话 · Key / 预算 / 用量连接真实 Go /
-        MySQL。模型目录与发布操作取决于已配置的管理适配；推理试用尚未开放。
+        本地临时管理会话 · 当前页面连接 Go 服务。模型推理入口待接通。
       </div>
       <p v-if="error" role="alert" class="error">{{ error }}</p>
       <section v-if="!authenticated" class="login panel">
@@ -164,17 +173,14 @@ const nav = [
         </form>
       </section>
       <template v-else
-        ><section v-if="local && tab === 'play'" class="panel">
-          <h1>{{ nav.find((x) => x[0] === tab)?.[1] }}</h1>
-          <p>
-            当前 Go 管理入口尚未提供推理试用。模型目录、发布、Key、预算和用量
-            使用同一管理接口；缺少依赖时按实际响应显示。
-          </p>
-        </section>
-        <Models v-else-if="tab === 'models'" /><Keys
-          v-else-if="tab === 'keys'" /><Playground
-          v-else-if="tab === 'play'" /><Releases
-          v-else-if="tab === 'releases'" /><Usage v-else
+        ><Models v-if="tab === 'models'" @navigate="navigate" /><Keys
+          v-else-if="tab === 'keys'"
+          @navigate="navigate" /><Playground
+          v-else-if="tab === 'play'"
+          :initial-model="playModel"
+          :inference-available="!local"
+          @navigate="navigate" /><Releases
+          v-else-if="tab === 'releases'" /><Usage v-else :key-filter="usageKey"
       /></template>
       <footer>管理会话与消费 Key 分离 · 用量以服务端耐久记录为准</footer>
     </main>
