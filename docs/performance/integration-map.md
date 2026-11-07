@@ -25,6 +25,10 @@
 
 CPU报告独立于ObservationEnvelope/终态，不作为生产导出；原协议和19项埋点映射保持。新增代码限tools/perf/engineering，教材限docs/performance，不接管共享契约或业务内核。
 
+## R1受控接线进展
+
+[异步运行时闭环](engineering/13-runtime-loop.md)已连接保守调度、KV页池、Manual/CPU线程Worker与有界输出队列。它验证内部资源与事件顺序，不读写Go/MySQL、Higress、目标集群或业务slot。真实GPU/KV向量和受保护调用接线仍由对应阶段与原负责人完成。
+
 ## 两条研发主线在同一调用链汇合
 
 ![两条建设主线与一个诊断出口](foundations/figures/integration.svg)

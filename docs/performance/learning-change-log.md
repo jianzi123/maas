@@ -1,5 +1,10 @@
 # 学习手册修订记录
 
+## 受控运行时接续 v0.10
+
+以72d64f9为基线，原八类CPU算法实验保留。新增runtime_core/runtime_worker/runtime_lab及38项回归；Scheduler增加非突变preview与排除busy请求的兼容参数。文档补第13章与现有入口，报告单独版本化，不修改共享契约、业务内核或真实实验禁用计划。
+
+
 ## 工程实现卷 v0.9
 
 以b42d3ad为起点，补十二章实现推导与八类CPU实验。新增online softmax/GQA/分页、tiled GEMM/地址模型、RoPE/RMSNorm/W8、KV代次/COW/pin、保守容量调度、TP/MoE/投机概率、run配对/KM、真实进程退出和SQLite恢复。重新审计8份固定SGLang源码，保留实际回归、输入与恢复截点证据。只改性能自身目录，GPU/模型计划及共享契约保持原样。

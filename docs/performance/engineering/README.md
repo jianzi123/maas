@@ -2,6 +2,8 @@
 
 本卷补充可运行实现、算法推导、状态不变量、源码追踪和故障实验，面向准备承担推理运行时、GPU算子或部署框架开发的成员。前置是[六章基础教材](../foundations/README.md)，但每章都指向具体代码、输入、预期与评审问题。
 
+最新接续见[第13章：受控异步运行时](13-runtime-loop.md)，已将Scheduler、PagePool和Worker接成可运行CPU闭环，补七个故障/背压场景与38项回归；原八类算法实验接口保留。
+
 ## 章节与实现对应
 
 | 章节 | 主要内容 | 可核查实现 |
@@ -18,6 +20,7 @@
 | [10 测量统计](10-measurement-and-statistics.md) | run级配对、estimand、bootstrap、风险集与右删失 | statistics_lab |
 | [11 源码追踪](11-sglang-source.md) | 固定SHA调度/Graph/KV/backend调用链与阅读作业 | 8份hash/AST审计 |
 | [12 工程作业](12-engineering-projects.md) | 实现任务、反例、证据与评审矩阵 | 跨模块练习与阶段交付 |
+| [13 异步运行时](13-runtime-loop.md) | 计划/提交/完成、输出信用、取消/代次隔离、真实CPU线程 | runtime_core/runtime_worker/runtime_lab |
 
 ## 直接运行
 

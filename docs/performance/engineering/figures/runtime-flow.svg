@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="525" viewBox="0 0 1120 525" role="img">
+<title>单写者运行时：正常完成与保守回收</title>
+<rect width="1120" height="525" fill="#f7f9fc"/>
+<text x="24" y="39" font-family="Microsoft YaHei,Arial,sans-serif" font-size="24" fill="#18334b">
+<tspan x="24" dy="0">单写者运行时：正常完成与保守回收</tspan>
+</text>
+<text x="24" y="72" font-family="Microsoft YaHei,Arial,sans-serif" font-size="17" fill="#18334b">
+<tspan x="24" dy="0">上层状态只由Runtime actor推进；Worker线程只计算不可变副本并发布回包</tspan>
+</text>
+<rect x="24" y="105" width="170" height="95" rx="10" fill="#e7f2ff" stroke="#b8c9d9" stroke-width="2"/>
+<text x="36" y="131" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="36" dy="0">Scheduler.preview</tspan>
+<tspan x="36" dy="23">不推进真实进度</tspan>
+</text>
+<rect x="245" y="105" width="190" height="95" rx="10" fill="#fff1d9" stroke="#b8c9d9" stroke-width="2"/>
+<text x="257" y="131" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="257" dy="0">准备与pin</tspan>
+<tspan x="257" dy="23">KV容量 / 输出信用</tspan>
+</text>
+<rect x="465" y="105" width="190" height="95" rx="10" fill="#e5f6ef" stroke="#b8c9d9" stroke-width="2"/>
+<text x="477" y="131" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="477" dy="0">Worker提交</tspan>
+<tspan x="477" dy="23">incarnation / plan</tspan>
+</text>
+<rect x="685" y="105" width="190" height="95" rx="10" fill="#ecebff" stroke="#b8c9d9" stroke-width="2"/>
+<text x="697" y="131" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="697" dy="0">完成校验</tspan>
+<tspan x="697" dy="23">原计划 / 绑定 / 值</tspan>
+</text>
+<rect x="905" y="105" width="190" height="95" rx="10" fill="#e7f2ff" stroke="#b8c9d9" stroke-width="2"/>
+<text x="917" y="131" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="917" dy="0">有界输出队列</tspan>
+<tspan x="917" dy="23">drain后归还信用</tspan>
+</text>
+<line x1="194" y1="152" x2="245" y2="152" stroke="#5b7590" stroke-width="3"/>
+<polygon points="245.0,152.0 236.0,156.3 236.0,147.7" fill="#5b7590"/>
+<line x1="435" y1="152" x2="465" y2="152" stroke="#5b7590" stroke-width="3"/>
+<polygon points="465.0,152.0 456.0,156.3 456.0,147.7" fill="#5b7590"/>
+<line x1="655" y1="152" x2="685" y2="152" stroke="#5b7590" stroke-width="3"/>
+<polygon points="685.0,152.0 676.0,156.3 676.0,147.7" fill="#5b7590"/>
+<line x1="875" y1="152" x2="905" y2="152" stroke="#5b7590" stroke-width="3"/>
+<polygon points="905.0,152.0 896.0,156.3 896.0,147.7" fill="#5b7590"/>
+<text x="400" y="267" font-family="Microsoft YaHei,Arial,sans-serif" font-size="17" fill="#18334b">
+<tspan x="400" dy="0">取消或旧代次：解除owner引用，保留在途pin、KV预留和输出信用</tspan>
+</text>
+<rect x="245" y="300" width="190" height="105" rx="10" fill="#fff1d9" stroke="#b8c9d9" stroke-width="2"/>
+<text x="257" y="326" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="257" dy="0">引用为0</tspan>
+<tspan x="257" dy="23">inflight仍大于0</tspan>
+<tspan x="257" dy="23">页不可复用</tspan>
+</text>
+<rect x="535" y="300" width="250" height="105" rx="10" fill="#ecebff" stroke="#b8c9d9" stroke-width="2"/>
+<text x="547" y="326" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="547" dy="0">合法完成或独立停止</tspan>
+<tspan x="547" dy="23">CPU Future与回调已结束</tspan>
+<tspan x="547" dy="23">手动Worker为定序fixture</tspan>
+</text>
+<rect x="875" y="300" width="220" height="105" rx="10" fill="#e5f6ef" stroke="#b8c9d9" stroke-width="2"/>
+<text x="887" y="326" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="887" dy="0">解除原pin / 预留</tspan>
+<tspan x="887" dy="23">后继分配使用新generation</tspan>
+<tspan x="887" dy="23">旧回包不释放新页</tspan>
+</text>
+<line x1="340" y1="200" x2="340" y2="300" stroke="#5b7590" stroke-width="3"/>
+<polygon points="340.0,300.0 335.7,291.0 344.3,291.0" fill="#5b7590"/>
+<line x1="435" y1="352" x2="535" y2="352" stroke="#5b7590" stroke-width="3"/>
+<polygon points="535.0,352.0 526.0,356.3 526.0,347.7" fill="#5b7590"/>
+<line x1="785" y1="352" x2="875" y2="352" stroke="#5b7590" stroke-width="3"/>
+<polygon points="875.0,352.0 866.0,356.3 866.0,347.7" fill="#5b7590"/>
+<text x="24" y="487" font-family="Microsoft YaHei,Arial,sans-serif" font-size="17" fill="#18334b">
+<tspan x="24" dy="0">CPU整数递推与host页池模型；没有模型、GPU地址、业务slot或结算写入。</tspan>
+</text>
+</svg>

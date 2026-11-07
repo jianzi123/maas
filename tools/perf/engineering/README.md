@@ -2,6 +2,17 @@
 
 八类有界实验与[工程实现卷](../../../docs/performance/engineering/README.md)逐项对应。实现用于学习数值、地址、资源不变量、调度、恢复和统计；没有GPU/模型/集群执行路径。
 
+## 异步运行时接续
+
+原八类算法报告保持原入口。新增闭环独立运行，仅依赖Python标准库：
+
+~~~text
+python tools/perf/engineering/runtime_lab.py --output tools/perf/reports/my-runtime.json
+python -m unittest discover -s tools/perf/engineering -p "test_runtime.py" -v
+~~~
+
+实现为runtime_core.py、runtime_worker.py，复用Scheduler.preview和PagePool；固定七个场景由runtime_lab.py执行。新报告cpu-runtime-integration-1.0有明确synthetic/CPU范围，不能直接输入analyze.py或作为业务终态。原理、停止与资源边界见[第13章](../../../docs/performance/engineering/13-runtime-loop.md)。
+
 ## 运行
 
 需要已有Python3.11+、NumPy2.3.5，沿用[依赖锁定文件](../operators/requirements-cpu.txt)。从仓库根目录：

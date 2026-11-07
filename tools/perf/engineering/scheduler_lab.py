@@ -1,6 +1,7 @@
 """A running CPU length-state scheduler; no model forward or time/throughput model."""
 
 from dataclasses import dataclass
+import copy
 import math
 
 
@@ -67,11 +68,20 @@ class Scheduler:
         if not r.finished:
             r.cancelled = True
 
-    def step(self, now):
+    def preview(self, now, excluded=()):
+        shadow = copy.deepcopy(self)
+        row = shadow.step(now, excluded=excluded)
+        return tuple(tuple(w) for w in row["work"]), shadow.cursor
+
+    def step(self, now, excluded=()):
+        excluded = frozenset(excluded)
         eligible = [
             r
             for r in self.requests
-            if r.arrival <= now and not r.finished and not r.cancelled
+            if r.arrival <= now
+            and not r.finished
+            and not r.cancelled
+            and r.id not in excluded
         ]
         pending = sorted(
             [r for r in eligible if r.pref < r.input_tokens],
