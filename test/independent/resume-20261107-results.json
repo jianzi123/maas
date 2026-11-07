@@ -1,0 +1,254 @@
+{
+  "resume_batch": "2026-11-07 / 01a1b6ab-5754-7a7d-ab7f-736cc8fa27de",
+  "at_utc": "2026-11-07T16:16:36.595545+00:00",
+  "resumed_qa_sha": "077b3418bbfd55e19dd97d586ed213001aff51a0",
+  "backend_sha": "821269bd32164918443e63e66c6a7cbce45d440b",
+  "backend_repair_sha": null,
+  "frontend_sha": "aef53eeb7eac16bd7a956294fefab750a3de31f8",
+  "frontend_strict_consumer_sha": "428d44e0b4f64ec628e6a945fd4b63a0e45c260b",
+  "management_leaf_results": [
+    {
+      "name": "TestQAIndependentManagement/create-list-detail-and-exact-operation",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/catalogue-from-same-immutable-kernel-profile",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/namespace-bound-pagination-and-invalid-cursors",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/qa-origin-mismatch-no-mutation",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/qa-cross-scope-cursor-and-operation-isolation",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/qa-rollback-dependency-classification-closure/missing_payload",
+      "result": "FAIL"
+    },
+    {
+      "name": "TestQAIndependentManagement/qa-rollback-dependency-classification-closure/missing_history_port",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/qa-rollback-dependency-classification-closure/missing_history_access",
+      "result": "FAIL"
+    },
+    {
+      "name": "TestQAIndependentManagement/qa-rollback-dependency-classification-closure/closed_payload",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/qa-rollback-dependency-classification-closure/invalid_revision",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/qa-rollback-dependency-classification-closure/invalid_uid",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/qa-rollback-dependency-classification-closure/different_uid",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/qa-rollback-dependency-classification-closure/stale_rv",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/qa-rollback-dependency-classification-closure/missing_session",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/qa-rollback-dependency-classification-closure/wrong_origin",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/qa-rollback-dependency-classification-closure/restored_dependency",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/stale-version-and-uid-conflicts",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/unapproved-reference-and-unknown-fields-rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/api-server-CAS-race-is-not-retried",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/pause-during-registry-outage",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/resume-and-update",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/rollback-reuses-retained-source",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/lost-ack-query-never-replays",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/qa-operation-query-503-does-not-change-unknown",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/delete-and-query-after-removal",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/qa-same-name-new-uid-preserves-original-operations",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/qa-paused-to-paused-save-action-is-update",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/scope-and-query-validation",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/write-authentication-and-csrf-before-mutation",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/operation-reader-privilege-boundary",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/administration-never-generates-or-settles",
+      "result": "PASS"
+    }
+  ],
+  "qa003_closure_matrix": [
+    {
+      "case": "missing_payload",
+      "expected_status": 503,
+      "actual_status": 400,
+      "request_id": "d2b8b6c1-0f4a-4a18-bf53-00d3a82f5dff",
+      "passed": false,
+      "side_effect_assertions": "all_passed"
+    },
+    {
+      "case": "missing_history_port",
+      "expected_status": 503,
+      "actual_status": 503,
+      "request_id": "67cec37f-ca44-4b86-b2c8-b31a84d396ca",
+      "passed": true,
+      "side_effect_assertions": "all_passed"
+    },
+    {
+      "case": "missing_history_access",
+      "expected_status": 503,
+      "actual_status": 400,
+      "request_id": "eb055c89-2701-46f3-bead-349c8e4d14c9",
+      "passed": false,
+      "side_effect_assertions": "all_passed"
+    },
+    {
+      "case": "closed_payload",
+      "expected_status": 503,
+      "actual_status": 503,
+      "request_id": "2c388058-f8ec-4803-b4ec-abf63e873afd",
+      "passed": true,
+      "side_effect_assertions": "all_passed"
+    },
+    {
+      "case": "invalid_revision",
+      "expected_status": 400,
+      "actual_status": 400,
+      "request_id": "013d076c-360e-417b-af6f-15ff57eb8138",
+      "passed": true,
+      "side_effect_assertions": "all_passed"
+    },
+    {
+      "case": "invalid_uid",
+      "expected_status": 400,
+      "actual_status": 400,
+      "request_id": "20c358c1-56b5-451d-9ea8-2c1f29851c10",
+      "passed": true,
+      "side_effect_assertions": "all_passed"
+    },
+    {
+      "case": "different_uid",
+      "expected_status": 409,
+      "actual_status": 409,
+      "request_id": "4ba7c6e7-93ac-4d16-b150-7177c8560a51",
+      "passed": true,
+      "side_effect_assertions": "all_passed"
+    },
+    {
+      "case": "stale_rv",
+      "expected_status": 409,
+      "actual_status": 409,
+      "request_id": "5f574d4d-1c54-4071-8383-91badf5ded3f",
+      "passed": true,
+      "side_effect_assertions": "all_passed"
+    },
+    {
+      "case": "missing_session",
+      "expected_status": 401,
+      "actual_status": 401,
+      "request_id": "ea356db6-5424-45bb-b13b-6ca29c8182cf",
+      "passed": true,
+      "side_effect_assertions": "all_passed"
+    },
+    {
+      "case": "wrong_origin",
+      "expected_status": 403,
+      "actual_status": 403,
+      "request_id": "00c57a2b-82b3-446a-a194-faaa1623e0d4",
+      "passed": true,
+      "side_effect_assertions": "all_passed"
+    },
+    {
+      "case": "restored_dependency",
+      "expected_status": 202,
+      "actual_status": 202,
+      "request_id": "b0625d0e-f61d-44b1-b018-bd59cd7cb898",
+      "passed": true,
+      "side_effect_assertions": "all_passed"
+    }
+  ],
+  "counts": {
+    "management_total": 31,
+    "management_pass": 29,
+    "management_fail": 2,
+    "closure_total": 11,
+    "closure_pass": 9,
+    "closure_fail": 2,
+    "actual_http_schema": 57,
+    "schema_pass": 57,
+    "key_usage_browser": 14,
+    "browser_pageerrors": 0,
+    "frontend_component_pass": 100,
+    "frontend_component_skip": 11,
+    "frontend_component_fail": 0
+  },
+  "frontend_product_files_byte_equal": 54,
+  "frontend_build": "PASS",
+  "qa001_targeted_eof": "PASS_THIS_RUN",
+  "qa002": "PRIOR_CONTROLLED_PASS_PRESERVED_NOT_RERUN",
+  "qa003": "OPEN_NO_NEW_PRODUCT_REPAIR_SHA",
+  "release_browser_21": "PRIOR_077_EVIDENCE_PRESERVED_NOT_RERUN",
+  "shared_72": "PRIOR_077_EVIDENCE_PRESERVED_NOT_RERUN",
+  "A01_A34": "NOT_ACCEPTED",
+  "cleanup": {
+    "mysql_dirs_removed": true,
+    "mysql_dir_count": 2,
+    "owned_dependency_processes": [],
+    "browser_harness_exit": 0
+  }
+}

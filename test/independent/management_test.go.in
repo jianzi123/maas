@@ -312,39 +312,132 @@ func TestQAIndependentManagement(t *testing.T) {
 			t.Fatal("read isolation triggered mutation")
 		}
 	})
-	t.Run("qa-rollback-without-private-payload-fails-closed", func(t *testing.T) {
-		m := live()
-		before := mutation.writes
-		prior := hr.PayloadDB
-		hr.PayloadDB = nil
-		defer func() { hr.PayloadDB = prior }()
-		payload, _ := json.Marshal(map[string]any{"target_revision": revision, "expected_cr_uid": string(m.UID)})
-		r, _ := http.NewRequest("POST", server.URL+path+"/rollback", bytes.NewReader(payload))
-		r.AddCookie(&http.Cookie{Name: "maas_session", Value: session})
-		r.Header.Set("Origin", "http://127.0.0.1")
-		r.Header.Set("X-CSRF-Token", csrf)
-		r.Header.Set("Content-Type", "application/json")
-		r.Header.Set("If-Match", `"`+m.ResourceVersion+`"`)
-		response, err := server.Client().Do(r)
-		if err != nil {
-			t.Fatal(err)
+	t.Run("qa-rollback-dependency-classification-closure", func(t *testing.T) {
+		for _, tc := range []struct {
+			name string
+			want int
+			code string
+		}{
+			{"missing_payload", 503, "dependency_unavailable"},
+			{"missing_history_port", 503, "dependency_unavailable"},
+			{"missing_history_access", 503, "dependency_unavailable"},
+			{"closed_payload", 503, "dependency_unavailable"},
+			{"invalid_revision", 400, "invalid_request"},
+			{"invalid_uid", 400, "invalid_request"},
+			{"different_uid", 409, "resource_version_conflict"},
+			{"stale_rv", 409, "resource_version_conflict"},
+			{"missing_session", 401, "unauthenticated"},
+			{"wrong_origin", 403, "csrf_failed"},
+			{"restored_dependency", 202, ""},
+		} {
+			t.Run(tc.name, func(t *testing.T) {
+				m := live()
+				before := mutation.writes
+				var priorOps int
+				if err := db.QueryRow("SELECT COUNT(*) FROM release_management_operations").Scan(&priorOps); err != nil {
+					t.Fatal(err)
+				}
+				privateDB, accessPort, historyPort := hr.PayloadDB, hr.Access, service.History
+				defer func() { hr.PayloadDB, hr.Access, service.History = privateDB, accessPort, historyPort }()
+				target, uid, rv := revision, string(m.UID), m.ResourceVersion
+				switch tc.name {
+				case "missing_payload":
+					hr.PayloadDB = nil
+				case "missing_history_port":
+					service.History = nil
+				case "missing_history_access":
+					hr.Access = nil
+				case "closed_payload":
+					closed, err := sql.Open("mysql", cfg.FormatDSN())
+					if err != nil {
+						t.Fatal(err)
+					}
+					closed.Close()
+					hr.PayloadDB = closed
+				case "invalid_revision":
+					hr.PayloadDB = nil
+					target = strings.Repeat("a", 63)
+				case "invalid_uid":
+					hr.PayloadDB = nil
+					uid = "not-a-uuid"
+				case "different_uid":
+					hr.PayloadDB = nil
+					uid = uuid.NewString()
+				case "stale_rv":
+					hr.PayloadDB = nil
+					rv = "stale"
+				}
+				payload, _ := json.Marshal(map[string]any{"target_revision": target, "expected_cr_uid": uid})
+				r, _ := http.NewRequest("POST", server.URL+path+"/rollback", bytes.NewReader(payload))
+				if tc.name != "missing_session" {
+					r.AddCookie(&http.Cookie{Name: "maas_session", Value: session})
+				}
+				origin := "http://127.0.0.1"
+				if tc.name == "wrong_origin" {
+					origin = "http://other.invalid"
+				}
+				r.Header.Set("Origin", origin)
+				r.Header.Set("X-CSRF-Token", csrf)
+				r.Header.Set("Content-Type", "application/json")
+				r.Header.Set("If-Match", "\""+rv+"\"")
+				resp, err := server.Client().Do(r)
+				if err != nil {
+					t.Fatal(err)
+				}
+				defer resp.Body.Close()
+				raw, err := io.ReadAll(resp.Body)
+				if err != nil {
+					t.Fatal(err)
+				}
+				var body map[string]any
+				if json.Unmarshal(raw, &body) != nil {
+					t.Fatal("invalid JSON error")
+				}
+				schema := "Error"
+				if tc.want == 202 {
+					schema = "ReleaseAccepted"
+				}
+				if protocol.Validate(schema, body) != nil {
+					t.Error("strict response contract mismatch", tc.name)
+				}
+				evidence = append(evidence, map[string]any{"qa_case": "QA-003/" + tc.name, "method": "POST", "path": path + "/rollback", "http_status": resp.StatusCode, "body": body, "etag": resp.Header.Get("ETag")})
+				t.Logf("QA-003 case=%s status=%d request_id=%s", tc.name, resp.StatusCode, resp.Header.Get("X-Request-ID"))
+				if resp.StatusCode != tc.want {
+					t.Errorf("QA-003: %s status=%d want=%d", tc.name, resp.StatusCode, tc.want)
+				}
+				var afterOps int
+				if err := db.QueryRow("SELECT COUNT(*) FROM release_management_operations").Scan(&afterOps); err != nil {
+					t.Fatal(err)
+				}
+				if tc.want != 202 {
+					if errBody, ok := body["error"].(map[string]any); ok && errBody["code"] != tc.code {
+						t.Errorf("error code=%v want=%s", errBody["code"], tc.code)
+					}
+					if mutation.writes != before || afterOps != priorOps {
+						t.Error("pre-dispatch rejection wrote Kubernetes/operation")
+					}
+					after := live()
+					if after.UID != m.UID || after.ResourceVersion != m.ResourceVersion {
+						t.Error("failed rollback changed CR identity/version")
+					}
+				} else {
+					op, ok := body["operation"].(map[string]any)
+					if !ok || op["action"] != "Rollback" || op["cr_uid"] != string(m.UID) {
+						t.Error("rollback ACK association mismatch")
+					}
+					if mutation.writes != before+1 || afterOps != priorOps+1 {
+						t.Error("restored rollback not dispatched exactly once")
+					}
+				}
+				for _, table := range []string{"generation_requests", "usage_events", "budget_windows"} {
+					var n int
+					if err := db.QueryRow("SELECT COUNT(*) FROM " + table).Scan(&n); err != nil || n != 0 {
+						t.Errorf("management affected business ledger %s n=%d err=%v", table, n, err)
+					}
+				}
+			})
 		}
-		defer response.Body.Close()
-		raw, err := io.ReadAll(response.Body)
-		if err != nil {
-			t.Fatal(err)
-		}
-		var body map[string]any
-		if json.Unmarshal(raw, &body) != nil {
-			t.Fatal("invalid error body")
-		}
-		evidence = append(evidence, map[string]any{"method": "POST", "path": path + "/rollback", "http_status": response.StatusCode, "body": body, "etag": response.Header.Get("ETag")})
-		if response.StatusCode != 503 {
-			t.Errorf("QA-003: missing private history connection status=%d want=503 body=%s", response.StatusCode, raw)
-		}
-		if mutation.writes != before {
-			t.Fatal("rollback wrote without authoritative private history")
-		}
+		reconcile()
 	})
 
 	t.Run("stale-version-and-uid-conflicts", func(t *testing.T) {
