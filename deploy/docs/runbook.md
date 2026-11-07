@@ -1,6 +1,6 @@
 # 安装、观测、升级与恢复
 
-适用范围为 MAAS-2 OPS01–OPS08，接口检查截点 MAAS-3 4f3eb93；本手册是待授权执行流程。没有已安装目标和运行结果。CPU/内存、60秒终止宽限期及探针周期是 Chart 初始配置建议，不能当作模型容量、排空完成期限或已批准 SLO。
+适用范围为 MAAS-2 OPS01–OPS08，接口检查截点 MAAS-3 821269bd / 前端aef53ee；新接口、迁移矩阵与受控启动步骤见 current-assembly.md；本手册是待授权执行流程。没有已安装目标和运行结果。CPU/内存、60秒终止宽限期及探针周期是 Chart 初始配置建议，不能当作模型容量、排空完成期限或已批准 SLO。
 
 ## 所有权与装配
 
@@ -11,7 +11,7 @@
 | Higress、McpBridge、共享 listener、H1–H4 插件 | 网关安装负责人或唯一 bundle writer；单模型不安装/升级基础设施、不替换共享整对象 |
 | LWS controller/CRD、GPU/CNI/CSI | 集群安装负责人；独立锁版/升级，不从单模型 CR 管理 |
 | core DDL | MAAS-3 的 kernel.Migrate；独立迁移身份，发布前显式执行 |
-| 发布 DDL | MAAS-11 mysqlstore.Migrate；七张发布表和迁移版本/校验沿原实现，不另建 |
+| 发布 DDL | MAAS-11 mysqlstore.Migrate；版本1基础七表、版本2权威历史、版本3管理操作，沿原迁移/校验，不另建 |
 | 用户 Secret/PVC/权重/账本/tombstone/held | 归用户/数据负责人保留；不创建 Helm ownerReference、不由卸载或模型 GC 删除 |
 
 Higress **复用**：核已有 Chart/app/Envoy/CRD/Wasm、release namespace/owner、服务拓扑、已有人工配置、插件链及真实回执。Chart 仅接受 reuse；安装策略由独立步骤负责，不能用 values 假装安装成功。**新安装**：安装负责人在目标授权后获取批准 Chart及全量依赖，私库映射、安装 CRD/controller/网关扩展并验证 H1–H4，再把 namespace/service 交给本 Chart。未提供对应工件时停在前置条件，不自动下载最新版。
@@ -20,7 +20,7 @@ Chart 不渲染 McpBridge、模型路由或模型 CR，以防与唯一 bundle wr
 
 ## 镜像、配置与 Secret
 
-每组件填实际 repository 和 sha256 digest；私库映射是把 repository 换为批准私库并校验导入后的 manifest digest、架构及签名，不能假设重打包后 digest 不变。imagePullSecrets 只传现有对象名。所有镜像须包含静态 /maas-probe；Operator 为 /operator，构建配方见 images/Dockerfile.operator。该 Dockerfile 需要完整后端源码树（本目录 PR 独立基于当前默认分支）；本轮没有构建/拉取镜像。core/console 的 command、args、configMap、健康端口由原负责人提供，无虚构默认入口。
+每组件填实际 repository 和 sha256 digest；私库映射是把 repository 换为批准私库并校验导入后的 manifest digest、架构及签名，不能假设重打包后 digest 不变。imagePullSecrets 只传现有对象名。所有镜像须包含静态 /maas-probe；Operator 为 /operator，构建配方见 images/Dockerfile.operator。该 Dockerfile 需要完整后端源码树（本目录 PR 独立基于当前默认分支）；本轮没有构建/拉取镜像。core生产command、args、配置消费及健康端口仍由原后端提供；现有control-api仅loopback受控入口。console现提供/maas-console静态服务和Dockerfile.console，不注入Vite开发会话。
 
 core 的非秘密 ConfigMap 挂 /etc/maas/config，运行凭证 Secret 挂 /etc/maas/credentials。引用应使用版本化不可变对象；修改已有ConfigMap/Secret不会自动产生Chart checksum滚动，须确认程序受控reload或显式更新引用，并重验publication证据。此为文件挂载约定，实际程序必须确认消费方式后启用，不设不存在的环境变量。核心、publisher、slot worker、迁移各用独立最小数据库身份；不能把迁移密码注入 core。Operator 只挂 webhook TLS 证书，无 MySQL/上游 Key、无 Secrets RBAC；其投射 volume 由 kubelet 读取，不等于 SA 获得 get Secret 权限。publisher 不写预算/Key/request/slot/终态，slot worker 不退款，原 SQL 模板保留为唯一来源。
 
@@ -79,7 +79,7 @@ Helm不自动完成CRD schema迁移，Chart rollback不恢复数据库或插件�
 
 恢复顺序：关闭新准入 → 确认唯一主写与fencing → 核核心/发布迁移和持久性 → 原ID恢复P/A/S未知提交 → 核外部实例UID/启动代际/配置/Secret版本 → 协调Redis重建 → 重验receipt与validation → 才允许新准入。旧CR.status不能重建授权，未知结果不自动重放。恢复旧快照可能丢失已发生调用，必须在批准灾难恢复计划中处理幂等/外部事实，不把它当日常回滚。
 
-Redis仅速率门禁，不是真账本。重启/丢桶/角色变化/marker或epoch异常 → 同guard短事务blocked并增epoch → 锁外从MySQL当前窗已提交见证读重建下界 → 核epoch/窗口/Redis身份不变 → 才ready。禁止持MySQL锁做Redis IO，不能空桶ready。现有BlockRate/InitializeEpoch/ReadyRate原语不等于完整协调器已交付；缺协调器继续拒绝。已准入请求按原快照唯一结算，不从Redis AOF/RDB重写业务预算。
+Redis仅速率门禁，不是真账本。重启/丢桶/角色变化/marker或epoch异常 → 同guard短事务blocked并增epoch → 锁外从MySQL当前窗已提交见证读重建下界 → 核epoch/窗口/Redis身份不变 → 才ready。禁止持MySQL锁做Redis IO，不能空桶ready。最新Store.RebuildRate已接合原语与耐久见证下界，受控重启场景已有作者证据；生产调用入口/身份及目标HA仍待验证，缺可用依赖继续拒绝。已准入请求按原快照唯一结算，不从Redis AOF/RDB重写业务预算。
 
 | 症状 | 查证与最小安全动作 |
 |---|---|

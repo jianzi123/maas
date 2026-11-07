@@ -1,3 +1,4 @@
+{{- $interface := .Files.Get "runtime-interface.json" | fromJson }}
 {{- if .Values.operator.enabled }}
 {{- if not .Values.operator.acknowledgeClusterWatch }}{{ fail "operator currently watches all namespaces: acknowledgeClusterWatch required" }}{{ end }}
 {{- if not .Values.api.group }}{{ fail "api.group must be explicit" }}{{ end }}
@@ -6,3 +7,8 @@
 {{- if and .Values.ingress.enabled (not (and .Values.core.enabled .Values.console.enabled)) }}{{ fail "ingress requires core and console" }}{{ end }}
 {{- if and (eq .Values.mode "hybrid") (not .Values.higress.externalEgressPolicyRef) }}{{ fail "hybrid requires gateway-owned externalEgressPolicyRef" }}{{ end }}
 {{- if and .Values.core.enabled (eq .Values.core.probes.livePath .Values.core.probes.readyPath) }}{{ fail "core readiness must use a separate dependency-aware endpoint" }}{{ end }}
+
+{{- if and (or .Values.operator.enabled .Values.core.enabled) (ne .Values.api.group $interface.backend.apiGroup) }}{{ fail "api.group differs from reviewed compiled binary; update binary/CRD/interface together" }}{{ end }}
+{{- if .Values.core.enabled }}
+{{- if regexMatch "(^|/)control-api$" (index .Values.core.command 0) }}{{ fail "control-api is loopback bootstrap only; no production listener or readiness" }}{{ end }}
+{{- end }}

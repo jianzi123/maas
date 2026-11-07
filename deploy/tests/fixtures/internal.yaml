@@ -33,7 +33,7 @@
       "digest": "sha256:3333333333333333333333333333333333333333333333333333333333333333"
     },
     "command": [
-      "/synthetic-console"
+      "/maas-console"
     ],
     "existingConfigMap": "synthetic-console-config"
   },

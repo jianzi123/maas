@@ -1,18 +1,21 @@
 {
-  "generated_at": "2026-11-05T11:39:52.643268+00:00",
-  "scope": "local-only",
+  "generated_at": "2026-11-07T16:14:50.960288+00:00",
+  "scope": "local-static-synthetic-only",
   "probe": {
-    "command": "GO111MODULE=off go test ./deploy/probe",
-    "toolchain": "go version go1.23.1 windows/amd64",
-    "test_functions_passed": 4,
+    "command": "GO111MODULE=off go test -count=1 ./deploy/probe",
+    "top_level_tests_passed": 4,
+    "status": "passed"
+  },
+  "console_server": {
+    "command": "GO111MODULE=off go test -count=1 ./deploy/console-server",
+    "top_level_tests_passed": 3,
     "status": "passed",
-    "fixtures": "loopback httptest only; servers closed synchronously"
+    "cases": "SPA reload, asset404, API/dev-session404, normalized API path404, absent index503, write405, no-store, traversal rejected; no long-lived service"
   },
   "input_gate": {
     "command": "python -m unittest discover -s deploy/checks -p 'test_*.py' -v",
-    "tests_passed": 5,
-    "status": "passed",
-    "fixtures": "synthetic input completeness; no authorization or runtime proof"
+    "tests_passed": 12,
+    "status": "passed"
   },
   "pending_environment_preflight": {
     "internal": {
@@ -25,9 +28,18 @@
         "target.apiGroup",
         "target.authorizationRef",
         "target.namespace",
+        "target.rpo",
+        "target.rto",
+        "target.retention",
         "target.modelSources",
         "api.group.pending",
         "api.group.mismatch",
+        "interface.compiledGroupMismatch",
+        "interface.core.productionAdapterMissing",
+        "interface.operator.productionAdaptersMissing",
+        "interface.console.productionSessionMissing",
+        "migrationState.kernel",
+        "migrationState.release",
         "operator.disabled",
         "core.disabled",
         "console.disabled",
@@ -73,6 +85,10 @@
         "artifact.build-runtime-images",
         "dependency.monitor-backup-tooling",
         "artifact.monitor-backup-tooling",
+        "gatewayComponent.H1-H4-wasm",
+        "gatewayComponent.H2-envoy-reporter",
+        "gatewayComponent.H3-instance-agent",
+        "gatewayComponent.secret-agent-local-channel",
         "runtimeGate.core-entrypoint-health-metrics",
         "runtimeGate.release-adapters-H1-H4",
         "runtimeGate.secret-agent-instance-channel",
@@ -94,9 +110,18 @@
         "target.apiGroup",
         "target.authorizationRef",
         "target.namespace",
+        "target.rpo",
+        "target.rto",
+        "target.retention",
         "target.modelSources",
         "api.group.pending",
         "api.group.mismatch",
+        "interface.compiledGroupMismatch",
+        "interface.core.productionAdapterMissing",
+        "interface.operator.productionAdaptersMissing",
+        "interface.console.productionSessionMissing",
+        "migrationState.kernel",
+        "migrationState.release",
         "operator.disabled",
         "core.disabled",
         "console.disabled",
@@ -143,6 +168,10 @@
         "artifact.build-runtime-images",
         "dependency.monitor-backup-tooling",
         "artifact.monitor-backup-tooling",
+        "gatewayComponent.H1-H4-wasm",
+        "gatewayComponent.H2-envoy-reporter",
+        "gatewayComponent.H3-instance-agent",
+        "gatewayComponent.secret-agent-local-channel",
         "runtimeGate.core-entrypoint-health-metrics",
         "runtimeGate.release-adapters-H1-H4",
         "runtimeGate.secret-agent-instance-channel",
@@ -157,11 +186,12 @@
   },
   "not_executed": [
     "image-build",
-    "live-operator-probe",
+    "Vue-build-replay",
+    "live-operator-start",
     "cluster-write",
-    "real-H1-H4",
-    "GPU-or-model",
-    "paid-API",
-    "backup-restore-HA"
+    "backend-database-regression",
+    "H1-H4-model-GPU-paid-API",
+    "backup-restore-HA",
+    "A01-A34-runtime"
   ]
 }

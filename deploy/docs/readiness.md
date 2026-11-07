@@ -6,11 +6,11 @@
 |---|---|---|
 | Chart/schema/渲染 | 本地 lint、合成 values、权限/引用检查 | 见 evidence/verification.json |
 | 探针程序 | loopback 合成 200/503/重定向/拒绝连接 | Go 单测，不能证明真实 Operator 就绪 |
-| 二进制/镜像 | 当前 Operator 的接口已读源码 | 未构建镜像；core/console 的实际启动接口待交付 |
+| 二进制/镜像 | 当前 Operator 的接口已读源码 | 未构建镜像；core只有loopback控制入口，console新增静态入口；生产会话/适配待交付 |
 | K8s/Helm | 服务端 dry-run、RBAC、CEL、证书和升级/回滚 | 未执行 |
 | 业务发布 | 真实 H1–H4、全实例 receipt、固定绑定及受保护 validation | 未装配，保持不可调用 |
 | SelfHosted | 确切模型/许可、GPU、完整 LWS 组/显存、质量和性能 | 未提供目标，未执行 |
-| 备份/恢复 | 同恢复点账本/发布域、fencing、Redis见证重建 | 未演练 |
+| 备份/恢复 | 同恢复点账本/发布域、fencing、Redis见证重建 | 未演练；RebuildRate已有实现及作者受控证据 |
 
 先补 `dependencies.lock.json` 的目标/批准版本/来源、镜像或工件 digest 与私库映射、运行门槛证据。锁清单是审核记录，不是运行真源。目标显式列 modelSources；ExternalAPI 单独装配不要求 GPU/LWS/权重，SelfHosted 保留全部条件。字段填 verified 不能替代实时门禁；运行仍由 Go/MySQL 及真实证据判定。当前预检应失败：
 
@@ -32,3 +32,4 @@ API group 确认后原后端须统一修改 Go/schema/CRD/webhook/客户端，�
 6. SelfHosted 另具模型许可/权重引用、GPU/互联和质量/性能方案。ExternalAPI 不创建 GPU 资源；该阶段推进不删除完整 A26/A34 验收。
 
 独立测试依 A01–A34 收集安装/复用、缺依赖拒绝、跨来源/跨模型权限拒绝、证书轮换与实例扩缩容、排空/UID迟到清理、迁移/恢复等证据；不把 Chart 成功或 Pod Ready 记为 Callable。
+最新来源与六项迁移摘要见Chart内runtime-interface.json。预检要求RPO/RTO/保留期、源码/group、kernel/release各1/2/3 Applied+原摘要以及插件/agent分项锁定。静态预检即使输入齐备也不构成目标部署授权；当前受控接口事实会继续拒绝生产ready。当前装配和恢复操作见current-assembly.md。

@@ -138,6 +138,8 @@ def verify(helm):
             "placeholder group unacknowledged": {"api": {"reviewPlaceholderAcknowledged": False}},
             "hybrid missing gateway egress": {"mode": "hybrid", "higress": {"externalEgressPolicyRef": ""}},
             "ingress without core": {"core": {"enabled": False}},
+            "wrong compiled API group": {"api": {"group": "other.internal.test"}},
+            "controlled API mistaken for service": {"core": {"command": ["/control-api"]}},
             "core readiness aliases liveness": {"core": {"probes": {"readyPath": "/healthz"}}},
         }.items():
             path = Path(temp) / "guard.yaml"

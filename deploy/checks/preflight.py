@@ -6,7 +6,9 @@ from pathlib import Path
 from jsonschema import Draft7Validator
 from verify import CHART, ROOT, load_values, validate_network
 
-def blockers(values, lock):
+def blockers(values, lock, interface=None):
+    if interface is None:
+        interface = json.loads((CHART / "runtime-interface.json").read_text(encoding="utf-8"))
     result = []
     schema = json.loads((CHART / "values.schema.json").read_text())
     if not Draft7Validator(schema).is_valid(values):
@@ -18,7 +20,7 @@ def blockers(values, lock):
         result.append("network.constraints")
     if not lock.get("deploymentApproved"):
         result.append("deploymentApproved")
-    for key in ("cluster", "kubernetesVersion", "apiGroup", "authorizationRef", "namespace"):
+    for key in ("cluster", "kubernetesVersion", "apiGroup", "authorizationRef", "namespace", "rpo", "rto", "retention"):
         if not lock.get("target", {}).get(key):
             result.append("target." + key)
     sources = lock.get("target", {}).get("modelSources")
@@ -34,6 +36,23 @@ def blockers(values, lock):
         result.append("api.group.pending")
     if values["api"]["group"] != lock.get("target", {}).get("apiGroup"):
         result.append("api.group.mismatch")
+    if lock.get("sourceBaseline", {}).get("backendInspected") != interface["backend"]["sourceCommit"]:
+        result.append("interface.backendSourceMismatch")
+    if lock.get("sourceBaseline", {}).get("consoleInspected") != interface["console"]["sourceCommit"]:
+        result.append("interface.consoleSourceMismatch")
+    if values["api"]["group"] != interface["backend"]["apiGroup"]:
+        result.append("interface.compiledGroupMismatch")
+    if not interface["backend"]["core"]["deploymentReady"]:
+        result.append("interface.core.productionAdapterMissing")
+    if not interface["backend"]["operator"]["deploymentReady"]:
+        result.append("interface.operator.productionAdaptersMissing")
+    if not interface["console"]["productionSessionReady"]:
+        result.append("interface.console.productionSessionMissing")
+    for domain in ("kernel", "release"):
+        expected_rows = [{"version":m["version"], "sha256":m["sha256"], "state":"Applied"} for m in interface["migrations"] if m["domain"] == domain]
+        actual = lock.get("migrationState", {}).get(domain, [])
+        if actual != expected_rows:
+            result.append("migrationState." + domain)
     for name in ("operator", "core", "console"):
         w = values[name]
         if not w["enabled"]:
@@ -49,6 +68,11 @@ def blockers(values, lock):
     for name in ("operator", "core", "console"):
         w = values[name]
         item = by_id.get(name, {})
+        expected_source = interface["console" if name == "console" else "backend"]["sourceCommit"]
+        if w["enabled"] and item.get("sourceCommit") != expected_source:
+            result.append(name + ".imageSourceMismatch")
+        if name != "console" and w["enabled"] and item.get("compiledAPIGroup") != interface["backend"]["apiGroup"]:
+            result.append(name + ".imageGroupMismatch")
         if w["enabled"] and (item.get("digest") != w["image"]["digest"] or item.get("mirror") != w["image"]["repository"]):
             result.append(name + ".imageLockMismatch")
     for item in lock.get("dependencies", []):
@@ -58,6 +82,12 @@ def blockers(values, lock):
             result.append("dependency." + item["id"])
         if item.get("artifact") and (not item.get("digest") or not item.get("mirror")):
             result.append("artifact." + item["id"])
+    components = lock.get("gatewayComponents", [])
+    if {c.get("id") for c in components} != {"H1-H4-wasm", "H2-envoy-reporter", "H3-instance-agent", "secret-agent-local-channel"}:
+        result.append("gatewayComponents.inventory")
+    for component in components:
+        if component.get("status") != "approved" or not all(component.get(k) for k in ("sourceCommit", "digest", "mirror", "abi", "identityRef", "evidenceRef")):
+            result.append("gatewayComponent." + str(component.get("id")))
     for key, state in lock.get("runtimeGates", {}).items():
         if key == "LWS-SGLang-GPU" and "SelfHosted" not in sources:
             continue
