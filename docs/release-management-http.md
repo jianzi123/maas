@@ -18,7 +18,7 @@
 | GET `/release-operations/{operation.id}` | 原ReleaseOperation；精确查询，无其他筛选参数，资源删除后保留操作结果，越scope不泄露 |
 | GET `/model-releases/{ns}/{name}/revisions?cr_uid=UUID` | 原FE-R02 Reader不变，ReleaseRevisionPage |
 
-写入409的code为 `resource_version_conflict`，刷新后由用户明确决策，不force、不自动重试。缺批准引用、历史载荷或其他依赖503，缺权限403，不可见/不存在404。未知写入返回202、原operation.state=Unknown、resource=null；知道原operation.id后只能查询，查404/503也不能推定原写失败。
+UID/RV写入冲突409的code为 `resource_version_conflict`，刷新后由用户明确决策，不force、不自动重试。明确未批准/过期引用与缺权限403，批准/价格版本变化409 `policy_changed`；缺registry配置、历史载荷连接或其他依赖503。不可见/不存在404；只有非法输入400，即使依赖也缺失仍保持400。未知写入返回202、原operation.state=Unknown、resource=null；知道原operation.id后只能查询，查404/503也不能推定原写失败。
 
 前端暂停/恢复继续PUT，不新增动作端点。发布JSON编辑器如果通过“保存”直接改了desiredState，也应按实际状态差异校验返回action，不能始终预期Update。回滚与删除的resource可为null；以原operation.id关联并明确重读当前CR。202/Running和资源status均不充当调用准入证据。
 
