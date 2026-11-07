@@ -13,3 +13,4 @@ The last command deliberately exits 2 and leaves existing output untouched while
 Requires existing Python 3.10+ and jsonschema==4.25.0, shared with tools/perf/requirements.txt; no new package installation is performed. check.py validates the tool-owned closed top-level profile schema plus source-kind/parallelism predicates. project_usage is a bounded synthetic oracle, not a production adapter. Outputs contain no text bodies or credentials.
 
 See docs/model-capabilities/README.md for fixed revisions, metadata conflicts, per-role handoff, approval inputs, and protocol/quality entrypoints. Current ticket/terminal/observation versions are 3/3.0/1.0. D1 terminal 3.1 snapshots are proposal-only, rejected by the current reader. Historical v0.1/v0.2 artifacts remain on MAAS-9.
+v0.4 KV/page与Prefill/Decode输入、职责自查、运行命令见 docs/model-capabilities/kv-pd-inputs-v0.4.md。比较基线v0.5.6/7ae368e，原v0.5.18仍为部署候选，不混比。
