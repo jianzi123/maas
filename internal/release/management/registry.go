@@ -24,6 +24,9 @@ type Registry struct {
 }
 
 func (r Registry) Resolve(_ context.Context, m *api.ModelRelease) (release.Resolution, error) {
+	if len(r.Entries) == 0 {
+		return release.Resolution{}, history.ErrUnavailable
+	}
 	for _, entry := range r.Entries {
 		want, got := entry.Spec, m.Spec
 		want.Lifecycle = api.Lifecycle{}
@@ -36,5 +39,5 @@ func (r Registry) Resolve(_ context.Context, m *api.ModelRelease) (release.Resol
 			return result, nil
 		}
 	}
-	return release.Resolution{}, history.ReferenceFailure{Reason: "profile_unapproved"}
+	return release.Resolution{}, history.ReferenceFailure{Reason: "reference_unapproved"}
 }

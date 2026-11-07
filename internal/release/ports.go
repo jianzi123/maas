@@ -13,6 +13,10 @@ var ErrDependencyMissing = errors.New("DependencyMissing")
 var ErrConflict = errors.New("RevisionConflict")
 var ErrOwnership = errors.New("OwnershipConflict")
 
+// ErrPolicyChanged preserves approved-reference/price drift at management
+// boundaries without changing Key or accounting policy errors.
+var ErrPolicyChanged = errors.New("release policy changed")
+
 // Resolution comes from an installation-approved registry, never arbitrary CR URLs.
 // Versions includes ALL profile, price, endpoint, capability, plugin and Secret
 // UID/resourceVersion metadata. It MUST NOT include Secret data or its hash.
