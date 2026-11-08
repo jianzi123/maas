@@ -4,12 +4,12 @@
   "deploymentApproved": false,
   "sourceBaseline": {
     "chartBase": "86f5408e100de6c276a2af543051098c3d4d5669",
-    "backendInspected": "821269bd32164918443e63e66c6a7cbce45d440b",
+    "backendInspected": "322bb92de05e111073c2572720e47a95efa7878d",
     "contracts": "MAAS-2 v0.4 + retained v0.3 + query/recovery addenda + MAAS-1 role review",
     "terminal": "3.0",
     "ticket": "3",
     "proposedTerminal": "3.1 (not enabled)",
-    "consoleInspected": "aef53eeb7eac16bd7a956294fefab750a3de31f8"
+    "consoleInspected": "322bb92de05e111073c2572720e47a95efa7878d"
   },
   "target": {
     "cluster": null,
@@ -82,7 +82,7 @@
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "821269bd32164918443e63e66c6a7cbce45d440b",
+      "sourceCommit": "322bb92de05e111073c2572720e47a95efa7878d",
       "compiledAPIGroup": "serving.maas.example"
     },
     {
@@ -99,7 +99,7 @@
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "821269bd32164918443e63e66c6a7cbce45d440b",
+      "sourceCommit": "322bb92de05e111073c2572720e47a95efa7878d",
       "compiledAPIGroup": "serving.maas.example"
     },
     {
@@ -116,7 +116,7 @@
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "aef53eeb7eac16bd7a956294fefab750a3de31f8"
+      "sourceCommit": "322bb92de05e111073c2572720e47a95efa7878d"
     },
     {
       "id": "mysql",

@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-11-07T16:07:06.189208+00:00",
+  "generated_at": "2026-11-08T06:28:15.867787+00:00",
   "scope": "source-byte-comparison-only",
-  "checks_passed": 28,
-  "checks_total": 28,
+  "checks_passed": 29,
+  "checks_total": 29,
   "checks": [
     {
       "component": "backend",
@@ -56,8 +56,8 @@
     {
       "component": "backend",
       "path": "internal/controlapi/http.go",
-      "expected_sha256": "99269f390ce1c6583a3538d50968b10aa3181cc29278aa3616894b9cdb8dd83c",
-      "actual_sha256": "99269f390ce1c6583a3538d50968b10aa3181cc29278aa3616894b9cdb8dd83c",
+      "expected_sha256": "f5f034f116c823c0ff81e6ac2df83dd4e28abc380f242f81600e123a0babb5cd",
+      "actual_sha256": "f5f034f116c823c0ff81e6ac2df83dd4e28abc380f242f81600e123a0babb5cd",
       "passed": true
     },
     {
@@ -98,8 +98,8 @@
     {
       "component": "backend",
       "path": "docs/release-management-http.md",
-      "expected_sha256": "f499ed46dfd32d22364bdc084911c5cdbe9a8fa158da6df4254826c8d5a017fa",
-      "actual_sha256": "f499ed46dfd32d22364bdc084911c5cdbe9a8fa158da6df4254826c8d5a017fa",
+      "expected_sha256": "5112b13fa9ef19bb89eb37fe974e061ffaca14eef256e96660e36a6ea986020a",
+      "actual_sha256": "5112b13fa9ef19bb89eb37fe974e061ffaca14eef256e96660e36a6ea986020a",
       "passed": true
     },
     {
@@ -166,10 +166,17 @@
       "passed": true
     },
     {
+      "component": "backend",
+      "path": "internal/webconsole/handler.go",
+      "expected_sha256": "a7e8d5f1d18bca568dbf4c3bc76495c5fc412aa19f8be694131f0d073f2b3764",
+      "actual_sha256": "a7e8d5f1d18bca568dbf4c3bc76495c5fc412aa19f8be694131f0d073f2b3764",
+      "passed": true
+    },
+    {
       "component": "console",
       "path": "console/package.json",
-      "expected_sha256": "3ee5e986dbaa503b6572260f4154ee739b9e0418c2e15661d8ea697f2197d613",
-      "actual_sha256": "3ee5e986dbaa503b6572260f4154ee739b9e0418c2e15661d8ea697f2197d613",
+      "expected_sha256": "85e453c24cc521497cc987fd6b4985cc1ccf9d21e9160b711d5a00ced3f5a34b",
+      "actual_sha256": "85e453c24cc521497cc987fd6b4985cc1ccf9d21e9160b711d5a00ced3f5a34b",
       "passed": true
     },
     {

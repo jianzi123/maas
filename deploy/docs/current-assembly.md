@@ -1,4 +1,14 @@
-# 当前装配接口与差异修复（2026-11-07）
+# 当前装配接口与差异修复
+
+## 统一代码树更新（2026-11-08）
+
+四个PR已经以正常merge合到同一项目。部署源码接口现固定到统一实现提交 `322bb92de05e111073c2572720e47a95efa7878d`，backend/console摘要均从该树重算，六份旧迁移摘要保持原值。专家原PR与固定SHA另见根目录 `config/integration-sources.json`。
+
+根目录 `npm run dev` 自动构建显式workbench模式，启动私有MySQL、独立API-server/etcd、同源Go管理与Vue；不再需要按旧步骤分别导出前后端工作目录或手工注入本地会话。启动、Key/预算、发布/更新/暂停/恢复/回滚/下线、原operation查询及停止清理已实际浏览器验证，见 `docs/project-integration.md`。本地入口不使用已有KUBECONFIG，不提供真实模型推理。
+
+`deploy/console-server`与工作台共享 `internal/webconsole`；控制台Dockerfile构建上下文现在包括根go.mod/go.sum及该共享目录。生产静态构建、8080、探针和API不回退SPA的语义保持原样。这里没有将本地启动器装进生产Chart，core/operator/生产会话的deploymentReady仍为false；Helm静态通过不表示目标部署完成。
+
+## 原专家装配记录（2026-11-07）
 
 本轮沿 PR #3 增量更新，不合并或改写其他负责人模块。读取 MAAS-1 本人的职责/重构评审后核对实际代码：发布 PR #1 `4d45c6f5a033783a8c1a8886f2b6e65eff7a3cf4`、后端 PR #2 `821269bd32164918443e63e66c6a7cbce45d440b`、前端 PR #4 `aef53eeb7eac16bd7a956294fefab750a3de31f8`。这些是本次固定检查截点，后续提交须重验，不能由分支名推定兼容。
 
