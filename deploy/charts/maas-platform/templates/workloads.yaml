@@ -1,0 +1,116 @@
+{{- range $component := list "operator" "core" "console" }}
+{{- $w := index $.Values $component }}
+{{- if $w.enabled }}
+{{- $ctx := dict "root" $ "component" $component }}
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ include "maas.name" $ }}-{{ $component }}
+  namespace: {{ $.Release.Namespace }}
+  labels:
+    {{- include "maas.labels" $ | nindent 4 }}
+automountServiceAccountToken: false
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "maas.name" $ }}-{{ $component }}
+  namespace: {{ $.Release.Namespace }}
+  labels:
+    {{- include "maas.labels" $ | nindent 4 }}
+spec:
+  replicas: {{ $w.replicas }}
+  revisionHistoryLimit: 3
+  # No implied zero-downtime guarantee or automatic drain hook.
+  strategy: {type: Recreate}
+  selector:
+    matchLabels:
+      {{- include "maas.selector" $ctx | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "maas.selector" $ctx | nindent 8 }}
+        app.kubernetes.io/part-of: maas
+    spec:
+      serviceAccountName: {{ include "maas.name" $ }}-{{ $component }}
+      automountServiceAccountToken: {{ eq $component "operator" }}
+      terminationGracePeriodSeconds: 60
+      {{- with $.Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext: {runAsNonRoot: true, runAsUser: 65532, runAsGroup: 65532, fsGroup: 65532, seccompProfile: {type: RuntimeDefault}}
+      containers:
+        - name: {{ $component }}
+          image: {{ printf "%s@%s" $w.image.repository $w.image.digest | quote }}
+          imagePullPolicy: IfNotPresent
+          {{- if eq $component "operator" }}
+          command: ["/operator"]
+          {{- else }}
+          command: {{ $w.command | toJson }}
+          args: {{ $w.args | toJson }}
+          ports:
+            - {name: http, containerPort: {{ $w.port }}}
+          {{- end }}
+          securityContext: {allowPrivilegeEscalation: false, readOnlyRootFilesystem: true, capabilities: {drop: ["ALL"]}}
+          resources:
+            {{- toYaml $w.resources | nindent 12 }}
+          {{- if eq $component "operator" }}
+          # Kubelet HTTP probes cannot reach a process listening only on Pod loopback.
+          startupProbe:
+            exec: {command: ["/maas-probe", "http://127.0.0.1:8081/healthz"]}
+            periodSeconds: 5
+            timeoutSeconds: 3
+            failureThreshold: 24
+          livenessProbe:
+            exec: {command: ["/maas-probe", "http://127.0.0.1:8081/healthz"]}
+            periodSeconds: 10
+            timeoutSeconds: 3
+            failureThreshold: 3
+          readinessProbe:
+            exec: {command: ["/maas-probe", "http://127.0.0.1:8081/readyz"]}
+            periodSeconds: 5
+            timeoutSeconds: 3
+            failureThreshold: 1
+          {{- else }}
+          startupProbe:
+            exec: {command: ["/maas-probe", {{ printf "http://127.0.0.1:%v%s" $w.probes.port $w.probes.livePath | quote }}]}
+            periodSeconds: 5
+            timeoutSeconds: 3
+            failureThreshold: 24
+          livenessProbe:
+            exec: {command: ["/maas-probe", {{ printf "http://127.0.0.1:%v%s" $w.probes.port $w.probes.livePath | quote }}]}
+            periodSeconds: 10
+            timeoutSeconds: 3
+          readinessProbe:
+            exec: {command: ["/maas-probe", {{ printf "http://127.0.0.1:%v%s" $w.probes.port $w.probes.readyPath | quote }}]}
+            periodSeconds: 5
+            timeoutSeconds: 3
+            failureThreshold: 1
+          {{- end }}
+          volumeMounts:
+            - {name: tmp, mountPath: /tmp}
+            {{- if eq $component "operator" }}
+            - {name: webhook-tls, mountPath: /tmp/k8s-webhook-server/serving-certs, readOnly: true}
+            {{- else }}
+            - {name: config, mountPath: /etc/maas/config, readOnly: true}
+            {{- if eq $component "core" }}
+            - {name: credentials, mountPath: /etc/maas/credentials, readOnly: true}
+            {{- end }}
+            {{- end }}
+      volumes:
+        - {name: tmp, emptyDir: {sizeLimit: 64Mi}}
+        {{- if eq $component "operator" }}
+        - name: webhook-tls
+          secret: {secretName: {{ $w.webhookTLSSecret | quote }}, defaultMode: 288}
+        {{- else }}
+        - name: config
+          configMap: {name: {{ $w.existingConfigMap | quote }}}
+        {{- if eq $component "core" }}
+        - name: credentials
+          secret: {secretName: {{ $w.existingSecret | quote }}, defaultMode: 288}
+        {{- end }}
+        {{- end }}
+{{- end }}
+{{- end }}

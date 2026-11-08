@@ -1,0 +1,40 @@
+# Synthetic placeholders; no resources created.
+apiVersion: serving.maas.example/v1alpha1
+kind: ModelRelease
+metadata:
+  namespace: maas-models-example
+  name: external-model-example
+spec:
+  modelAlias: model-a
+  source:
+    type: ExternalAPI
+    externalAPI:
+      provider: DeepSeek
+      endpointRef:
+        name: approved-deepseek-example
+        revision: example-v1
+      upstreamModel: provider-model-example
+      protocol: OpenAIChatCompletions
+      credentialSecretRef:
+        name: approved-provider-secret-example
+        key: api-key
+  gatewayRef:
+    name: private-inference-example
+    revision: example-v1
+  businessRefs:
+    capabilityProfileRef:
+      name: external-text-example
+      revision: example-v1
+    pricePolicyRef:
+      name: approved-price-example
+      revision: example-v1
+    intakePolicyRef:
+      name: approved-intake-example
+      revision: example-v1
+  lifecycle:
+    desiredState: Published
+    strategy: BlueGreen
+    drainTimeoutSeconds: 150
+    progressDeadlineSeconds: 3600
+    retainedRevisions: 2
+    retainUserData: true
