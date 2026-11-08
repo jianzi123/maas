@@ -1,0 +1,12 @@
+[
+  {
+    "op": "test",
+    "path": "/paths/~1api~1admin~1v1~1keys/post/responses/201/description",
+    "value": "Create key; one-time secret, no automatic retry. daily_limit default 100 pending member confirmation."
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~1admin~1v1~1keys/post/responses/201/description",
+    "value": "Created with the explicitly supplied budget_policy and request/token/money limits. No implicit quota default. The secret is returned once; do not automatically retry creation."
+  }
+]
