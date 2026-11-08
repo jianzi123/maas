@@ -1,0 +1,15 @@
+{
+  "name": "maas-workspace",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "build": "npm --prefix console run build",
+    "test:console": "npm --prefix console test",
+    "test": "npm run test:console && node scripts/check-go.mjs",
+    "test:workbench": "node scripts/workbench-smoke.mjs"
+  }
+}

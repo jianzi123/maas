@@ -10,6 +10,7 @@ import {
   releaseUpdateAction,
 } from "../api/recovery";
 import { callableLabel } from "../domain";
+const workbenchMode = import.meta.env.MODE === "workbench";
 import { usePage, explain, uncertain } from "../ui";
 const { rows, busy, error, cursor, refresh } = usePage((cursor) =>
   api.json<S["ReleaseList"]>(
@@ -116,6 +117,22 @@ function template(source: "ExternalAPI" | "SelfHosted") {
     null,
     2,
   );
+}
+async function localExample() {
+  try {
+    const response = await api.response("/__maas/workbench");
+    const value = await response.json();
+    const input = validate<S["ReleaseReleaseInput"]>(
+      "ReleaseReleaseInput",
+      value.example_release,
+    );
+    template("ExternalAPI");
+    input.metadata.name = "my-local-model";
+    input.spec.modelAlias = "my-local-model";
+    editor.value = JSON.stringify(input, null, 2);
+  } catch (e) {
+    message.value = explain(e);
+  }
 }
 function inputOf(r: S["ReleaseModelRelease"]): S["ReleaseReleaseInput"] {
   return {
@@ -366,6 +383,13 @@ onBeforeUnmount(() => {
       新建私有推理 CR
     </button>
   </div>
+  <button
+    v-if="workbenchMode"
+    :disabled="writing || unknown"
+    @click="localExample"
+  >
+    载入本地示例
+  </button>
   <p v-if="busy" role="status">正在读取发布…</p>
   <p v-if="!busy && !rows.length && !error" class="empty">暂无模型发布。</p>
   <div class="card-grid">

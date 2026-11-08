@@ -24,7 +24,8 @@ function navigate(
   tab.value = id;
 }
 const local =
-  import.meta.env.DEV && import.meta.env.VITE_LOCAL_CONTROL === "true";
+  (import.meta.env.DEV || import.meta.env.MODE === "workbench") &&
+  import.meta.env.VITE_LOCAL_CONTROL === "true";
 const demo =
   import.meta.env.DEV && import.meta.env.VITE_CONSOLE_FIXTURES === "true";
 async function boot() {
@@ -143,7 +144,7 @@ const nav = [
         开发测试夹具 · 所有模型、Key、发布与用量均为模拟数据，未连接真实模型。
       </div>
       <div v-if="local" class="notice">
-        本地临时管理会话 · 当前页面连接 Go 服务。模型推理入口待接通。
+        本地工作台 · 停止服务后清理本次临时数据；模型推理尚未接入。
       </div>
       <p v-if="error" role="alert" class="error">{{ error }}</p>
       <section v-if="!authenticated" class="login panel">

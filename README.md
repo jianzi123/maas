@@ -1,5 +1,56 @@
-MaaS ModelRelease 受控控制器实现（MAAS-11）
-============================================
+MaaS 平台 · 集成工作台
+====================
+
+前端、Go 管理/调用内核、ModelRelease 发布库、Helm 部署包和性能分析工具已在同一代码树整合。
+
+## 一条命令启动
+
+准备 Node.js 22（22.12以上）。Windows 使用已安装的 Ubuntu-22.04 WSL2；Linux 使用 amd64。首次启动需能下载 npm、Go、MySQL 和临时 API-server 依赖；所有缓存只写入本仓库 `.cache/`，不安装系统服务、不使用现有 kubeconfig。
+
+```sh
+npm run dev
+```
+
+打开 **http://127.0.0.1:4179**。端口占用时可用 `npm run dev -- --port 4180`。启动器自动安装锁定的前端依赖、构建 Vue、启动私有 MySQL 和临时 API-server/etcd，并装配同源 Go 服务与连续发布协调。无需手工传入 session、CSRF、数据库或 KUBECONFIG。
+
+**这是本地工作台：停止进程会清理本次临时数据。** 使用 Ctrl+C 停止。会话到期可在页面重新连接。它不连接真实模型或目标集群，在线试用保持不可调用。
+
+可以直接操作：
+
+- 模型目录：查看来自同一内核的本地示例及不可调用原因。
+- 平台 Key：创建、关闭一次性原值、修改请求/Token/金额预算、撤销。
+- 模型发布：选择已有示例，或点“载入本地示例”创建新的CR；编辑 `upstreamModel` 为 `local-example-v2` 可测试更新，再读取原UID保留修订、回滚、暂停/恢复、下线和查询原操作。
+- 请求与用量：查询真实账本。没有生成调用时显示真实空态。
+
+本地批准范围只有打包的示例引用，网关生产者明确缺失；不能用本工作台声明真实Higress、模型/GPU或生产发布通过。真实环境继续沿 [部署说明](deploy/README.md) 与原准入门槛接续。
+
+## 专家成果入口
+
+| 模块 | 位置 | 整合来源 |
+| --- | --- | --- |
+| 发布状态机、权威历史与回滚 | `internal/release/` | PR #1，`8ccf6c0` |
+| Key、三维预算、请求/用量与管理API | `internal/kernel/`、`internal/controlapi/` | PR #2，`bfc1f7d` |
+| Vue控制台 | `console/` | PR #4，`819c35e` |
+| Helm、静态控制台镜像、探针和预检 | `deploy/` | PR #3，`4327989` |
+| 离线性能分析 | `tools/perf/` | 原默认分支基线，`86f5408` |
+| 本地统一装配 | `cmd/workbench/`、`scripts/dev.mjs` | 本次整合 |
+
+原提交均以正常merge保留。完整来源见 [config/integration-sources.json](config/integration-sources.json)。Go/MySQL仍是唯一预算/计量真源；本地装配复用原Handler、Store、Reconciler、History和operation工作流。
+
+## 验证与构建
+
+```sh
+npm run test:workbench   # 实际启动 + 浏览器管理全流程 + 停止清理
+npm run test:console    # 前端单元回归
+npm run build           # 正常生产模式静态构建，不包含本地安装入口
+go test ./...
+python -m unittest discover -s tools/perf -p 'test_*.py'
+```
+
+`test:workbench` 默认使用本机 Edge；Linux 可通过 `EDGE_PATH` 指向已有 Chromium。真实MySQL/envtest管理故障矩阵继续使用 `scripts/test-release-management.sh`。`npm run dev` 的工作台静态产物使用显式 `workbench` mode，与普通生产构建分开。
+
+<details>
+<summary>历史 MAAS-11 受控控制器实现说明（旧阶段记录）</summary>
 
 本仓库同时包含 [MAAS-10 离线性能观测分析器](tools/perf/README.md) 与下述 MAAS-11 控制器。两者均为受控开发产物，真实模型发布与性能验收仍待完成。集成基线、历史保留方式、统一验证命令和后续交接见 [集成说明](docs/integration.md)。
 
@@ -72,3 +123,5 @@ Windows 没有可用二进制时，可在已有 Ubuntu WSL 使用 `scripts/test-
 需求附件：`01a1a610-35a1-79e8-aaa9-a30c0ea007d9`。架构契约包：`01a1a637-5727-730d-9662-60ec324daa42`；正文：`01a1a637-46e4-7513-adfa-a0630c1efc96`。`docs/contracts` 保留 v0.3 预算正文及 v0.4 架构，采用其状态和安全不变量，未把正文中的历史未启动文字覆盖本任务最新交接。
 
 依赖依据：[controller-runtime v0.24.1 go.mod](https://github.com/kubernetes-sigs/controller-runtime/blob/v0.24.1/go.mod)、[Go 发布记录](https://go.dev/doc/devel/release)。
+
+</details>

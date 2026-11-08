@@ -11,9 +11,11 @@ RUN npm run build
 FROM ${GO_IMAGE} AS binaries
 WORKDIR /src
 COPY deploy/ deploy/
+COPY go.mod go.sum ./
+COPY internal/webconsole/ internal/webconsole/
 ARG TARGETOS=linux
 ARG TARGETARCH=amd64
-RUN CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -trimpath -o /out/maas-console ./deploy/console-server/main.go
+RUN CGO_ENABLED=0 GOTOOLCHAIN=local GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -trimpath -o /out/maas-console ./deploy/console-server
 RUN CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -trimpath -o /out/maas-probe ./deploy/probe/main.go
 FROM ${RUNTIME_IMAGE}
 COPY --from=web /src/console/dist /app/dist
