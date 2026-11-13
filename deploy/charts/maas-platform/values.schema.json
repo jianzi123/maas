@@ -160,6 +160,82 @@
         },
         "probes": {
           "$ref": "#/definitions/probes"
+        },
+        "databaseSecrets": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "core",
+            "historyReader",
+            "operationReader",
+            "payloadReader"
+          ],
+          "properties": {
+            "core": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "name",
+                "key"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "key": {
+                  "type": "string"
+                }
+              }
+            },
+            "historyReader": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "name",
+                "key"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "key": {
+                  "type": "string"
+                }
+              }
+            },
+            "operationReader": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "name",
+                "key"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "key": {
+                  "type": "string"
+                }
+              }
+            },
+            "payloadReader": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "name",
+                "key"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "key": {
+                  "type": "string"
+                }
+              }
+            }
+          }
         }
       },
       "required": [
@@ -172,7 +248,8 @@
         "existingConfigMap",
         "existingSecret",
         "port",
-        "probes"
+        "probes",
+        "databaseSecrets"
       ],
       "allOf": [
         {
@@ -205,6 +282,98 @@
                 "type": "string",
                 "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$",
                 "maxLength": 253
+              },
+              "databaseSecrets": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "core",
+                  "historyReader",
+                  "operationReader",
+                  "payloadReader"
+                ],
+                "properties": {
+                  "core": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "name",
+                      "key"
+                    ],
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$",
+                        "maxLength": 253
+                      },
+                      "key": {
+                        "type": "string",
+                        "pattern": "^[A-Za-z0-9._-]+$",
+                        "maxLength": 253
+                      }
+                    }
+                  },
+                  "historyReader": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "name",
+                      "key"
+                    ],
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$",
+                        "maxLength": 253
+                      },
+                      "key": {
+                        "type": "string",
+                        "pattern": "^[A-Za-z0-9._-]+$",
+                        "maxLength": 253
+                      }
+                    }
+                  },
+                  "operationReader": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "name",
+                      "key"
+                    ],
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$",
+                        "maxLength": 253
+                      },
+                      "key": {
+                        "type": "string",
+                        "pattern": "^[A-Za-z0-9._-]+$",
+                        "maxLength": 253
+                      }
+                    }
+                  },
+                  "payloadReader": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "name",
+                      "key"
+                    ],
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$",
+                        "maxLength": 253
+                      },
+                      "key": {
+                        "type": "string",
+                        "pattern": "^[A-Za-z0-9._-]+$",
+                        "maxLength": 253
+                      }
+                    }
+                  }
+                }
               }
             }
           }

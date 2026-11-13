@@ -5,15 +5,21 @@ import json
 from pathlib import Path
 from jsonschema import Draft7Validator
 from verify import CHART, ROOT, load_values, validate_network
+from identities import identity_blockers, binding_blockers
 
 def blockers(values, lock, interface=None):
     if interface is None:
         interface = json.loads((CHART / "runtime-interface.json").read_text(encoding="utf-8"))
-    result = []
+    result = identity_blockers(lock.get("databaseIdentities", {}), lock.get("target", {}).get("namespace"))
     schema = json.loads((CHART / "values.schema.json").read_text())
     if not Draft7Validator(schema).is_valid(values):
         result.append("values.schema")
         return result
+    result.extend(binding_blockers(values, lock.get("databaseIdentities", {}), interface))
+    if lock.get("databaseIdentities", {}).get("sourceCommit") != interface["backend"]["sourceCommit"]:
+        result.append("identities.sourceMismatch")
+    if lock.get("sourceBaseline", {}).get("candidateState") != "merged":
+        result.append("source.candidateNotMerged")
     try:
         validate_network(values)
     except ValueError:

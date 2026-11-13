@@ -56,6 +56,18 @@ spec:
           securityContext: {allowPrivilegeEscalation: false, readOnlyRootFilesystem: true, capabilities: {drop: ["ALL"]}}
           resources:
             {{- toYaml $w.resources | nindent 12 }}
+          {{- if eq $component "core" }}
+          # Fixed candidate contract; production consumer/readiness remains gated.
+          env:
+            {{- range $identity, $variable := dict "core" "MAAS_MYSQL_DSN" "historyReader" "MAAS_HISTORY_READER_DSN" "operationReader" "MAAS_OPERATIONS_DSN" "payloadReader" "MAAS_HISTORY_PAYLOAD_DSN" }}
+            - name: {{ $variable }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ (index $w.databaseSecrets $identity).name | quote }}
+                  key: {{ (index $w.databaseSecrets $identity).key | quote }}
+                  optional: false
+            {{- end }}
+          {{- end }}
           {{- if eq $component "operator" }}
           # Kubelet HTTP probes cannot reach a process listening only on Pod loopback.
           startupProbe:

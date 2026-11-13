@@ -3,13 +3,18 @@
   "status": "pending-environment-inputs",
   "deploymentApproved": false,
   "sourceBaseline": {
-    "chartBase": "86f5408e100de6c276a2af543051098c3d4d5669",
-    "backendInspected": "322bb92de05e111073c2572720e47a95efa7878d",
+    "chartBase": "36806456333f5c8c6ee0651bb3088776cf354728",
+    "backendInspected": "d2d7869fe16b8968d6ca5b00a63560c322b84dc1",
     "contracts": "MAAS-2 v0.4 + retained v0.3 + query/recovery addenda + MAAS-1 role review",
     "terminal": "3.0",
     "ticket": "3",
     "proposedTerminal": "3.1 (not enabled)",
-    "consoleInspected": "322bb92de05e111073c2572720e47a95efa7878d"
+    "consoleInspected": "925d8c55be9ce823d100bf90a5c78cf19ea66d58",
+    "defaultBranch": "925d8c55be9ce823d100bf90a5c78cf19ea66d58",
+    "candidatePR": "https://github.com/jianzi123/maas/pull/6",
+    "candidateState": "draft-unmerged",
+    "deploymentPR": "https://github.com/jianzi123/maas/pull/5",
+    "deploymentCommit": "see git commit containing this lock; avoids self-referential digest"
   },
   "target": {
     "cluster": null,
@@ -58,7 +63,7 @@
       "owner": "ops",
       "artifact": true,
       "status": "pending",
-      "version": "0.2.0",
+      "version": "0.2.1",
       "digest": null,
       "mirror": null,
       "evidenceRef": null,
@@ -77,12 +82,12 @@
       "digest": null,
       "mirror": null,
       "evidenceRef": null,
-      "note": "Reviewed backend 821269bd32164918443e63e66c6a7cbce45d440b; nil adapters/readiness rejected; metrics disabled",
+      "note": "Candidate PR #6 source only; real adapters missing, readyz closed; image not built.",
       "requiredFor": [
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "322bb92de05e111073c2572720e47a95efa7878d",
+      "sourceCommit": "d2d7869fe16b8968d6ca5b00a63560c322b84dc1",
       "compiledAPIGroup": "serving.maas.example"
     },
     {
@@ -99,7 +104,7 @@
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "322bb92de05e111073c2572720e47a95efa7878d",
+      "sourceCommit": "d2d7869fe16b8968d6ca5b00a63560c322b84dc1",
       "compiledAPIGroup": "serving.maas.example"
     },
     {
@@ -116,7 +121,7 @@
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "322bb92de05e111073c2572720e47a95efa7878d"
+      "sourceCommit": "925d8c55be9ce823d100bf90a5c78cf19ea66d58"
     },
     {
       "id": "mysql",
@@ -411,5 +416,103 @@
       "identityRef": null,
       "evidenceRef": null
     }
-  ]
+  ],
+  "databaseIdentities": {
+    "schemaVersion": "1.0",
+    "scope": "installation-input-only-no-secret-values",
+    "sourceCommit": "d2d7869fe16b8968d6ca5b00a63560c322b84dc1",
+    "productionWiringVerified": false,
+    "connections": {
+      "core": {
+        "roles": [
+          "maas_kernel_runtime",
+          "maas_release_reader"
+        ],
+        "forbiddenRoles": [
+          "maas_release_publisher",
+          "migration"
+        ],
+        "bindingStatus": "pending",
+        "secretRef": {
+          "namespace": null,
+          "name": null,
+          "key": null
+        },
+        "principalRef": null,
+        "grantEvidenceRef": null
+      },
+      "publisher": {
+        "roles": [
+          "maas_release_publisher"
+        ],
+        "forbiddenRoles": [
+          "maas_kernel_runtime",
+          "migration"
+        ],
+        "bindingStatus": "pending",
+        "secretRef": {
+          "namespace": null,
+          "name": null,
+          "key": null
+        },
+        "principalRef": null,
+        "grantEvidenceRef": null
+      },
+      "historyReader": {
+        "roles": [
+          "maas_release_history_reader"
+        ],
+        "forbiddenRoles": [
+          "maas_kernel_runtime",
+          "maas_release_publisher",
+          "migration"
+        ],
+        "bindingStatus": "pending",
+        "secretRef": {
+          "namespace": null,
+          "name": null,
+          "key": null
+        },
+        "principalRef": null,
+        "grantEvidenceRef": null
+      },
+      "payloadReader": {
+        "roles": [
+          "maas_release_history_payload_reader"
+        ],
+        "forbiddenRoles": [
+          "maas_kernel_runtime",
+          "maas_release_publisher",
+          "migration"
+        ],
+        "bindingStatus": "pending",
+        "secretRef": {
+          "namespace": null,
+          "name": null,
+          "key": null
+        },
+        "principalRef": null,
+        "grantEvidenceRef": null
+      },
+      "operationReader": {
+        "roles": [
+          "maas_release_operations_runtime"
+        ],
+        "forbiddenRoles": [
+          "maas_kernel_runtime",
+          "maas_release_publisher",
+          "migration"
+        ],
+        "bindingStatus": "pending",
+        "secretRef": {
+          "namespace": null,
+          "name": null,
+          "key": null
+        },
+        "principalRef": null,
+        "grantEvidenceRef": null
+      }
+    },
+    "note": "Candidate templates and controlled DSN consumers exist; production/default-role privileges and separate publisher wiring remain unverified."
+  }
 }

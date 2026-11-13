@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "scope": "observed-source-interface-not-production-readiness",
   "backend": {
-    "sourceCommit": "322bb92de05e111073c2572720e47a95efa7878d",
+    "sourceCommit": "d2d7869fe16b8968d6ca5b00a63560c322b84dc1",
     "apiGroup": "serving.maas.example",
     "operator": {
       "command": [
@@ -23,10 +23,8 @@
       "healthEndpoint": null,
       "inferenceListener": false,
       "environmentNames": [
-        "MAAS_ADMIN_CSRF_SHA256",
         "MAAS_ADMIN_EXPIRES",
         "MAAS_ADMIN_ORIGIN",
-        "MAAS_ADMIN_SESSION_SHA256",
         "MAAS_CLUSTER_ID",
         "MAAS_CONTROL_LISTEN",
         "MAAS_HISTORY_CURSOR_KEY",
@@ -34,19 +32,22 @@
         "MAAS_HISTORY_KUBECONFIG",
         "MAAS_HISTORY_NAMESPACES",
         "MAAS_HISTORY_PAYLOAD_DSN",
+        "MAAS_HISTORY_READER_DSN",
         "MAAS_HISTORY_SCOPE",
         "MAAS_KEY_PEPPER",
         "MAAS_MYSQL_DSN",
+        "MAAS_OPERATIONS_DSN",
         "MAAS_RELEASE_MANAGEMENT",
         "MAAS_RELEASE_REGISTRY_FILE"
-      ]
+      ],
+      "publisherDSNConsumed": false
     },
     "redis": {
       "entrypoint": "(*Store).RebuildRate",
       "status": "implemented-controlled-evidence-production-invocation-pending"
     },
     "files": {
-      "cmd/control-api/main.go": "41663ca2b5190861bda224b773244fa5e18de962da887c0f5b310641ee7c0275",
+      "cmd/control-api/main.go": "38cac312ea6fd081b0f6449a4ab034966a992cf92fa5ef348ecc589d83d6d6d5",
       "cmd/operator/main.go": "539a006cbcfb20076d5f5e4186c8ccb4a3917478ee193349ad768ecb3e71001c",
       "api/v1alpha1/types.go": "839bfd01f621fc02c2d93db093ca0ac6b87b4dc59005af89f39c1fc140549a06",
       "internal/kernel/store.go": "3261d43deaf131dbd7048a9ddad060e3767b9e4d0504284222d4943c06df9166",
@@ -69,11 +70,20 @@
       "internal/release/mysqlstore/schema/0001_release.sql": "91ea4dc8699fafa8ae8e9433c637828fce60f43878fe71c4ae1b688fffed69d5",
       "internal/release/mysqlstore/schema/0002_history.sql": "9294d4f9ca23354014607540fc52a472915c3e40f59dada293db74ae2f5b9193",
       "internal/release/management/schema.sql": "e02acd8ce3ea6b9b92f77e384cc363dfd85d11f8254a63f8981b682cdcb0ad84",
-      "internal/webconsole/handler.go": "a7e8d5f1d18bca568dbf4c3bc76495c5fc412aa19f8be694131f0d073f2b3764"
-    }
+      "internal/webconsole/handler.go": "a7e8d5f1d18bca568dbf4c3bc76495c5fc412aa19f8be694131f0d073f2b3764",
+      "cmd/control-api/readers.go": "b071c6c301d9f6abb8aea571acbf69eaaf15f62d2c8acfffe9e236edc4079f99",
+      "cmd/control-api/readers_test.go": "d4dd24227cb49761b26e4aa02a411625771ca32a960b182e487ef6333414f554",
+      "config/mysql/controlapi-projections.sql": "7ce580e6e0cf32d7ec77a6bf0334831fd321cc97158ffd3cd60b4050f39f018d",
+      "internal/release/history/reader.go": "d3d70c47e2a474b02040ffde328eebf21e913704e8d3192bd239fdb87b126435",
+      "docs/usage-authority-continuation.md": "a86665fc787f573f169025fc977ea8af19d1ade7a4dfa3e83c1a208ddc1ea578",
+      "go.mod": "3fc1c612237e81b1a61efdf59eb3e108980b170fd85b8b2c855db0f08240457b",
+      "go.sum": "34ef9b8203162cccd56bdd7aa590ca1df2683c9a794ba118d3db0ff242609fb1"
+    },
+    "candidateState": "draft-unmerged",
+    "defaultBranchCommit": "925d8c55be9ce823d100bf90a5c78cf19ea66d58"
   },
   "console": {
-    "sourceCommit": "322bb92de05e111073c2572720e47a95efa7878d",
+    "sourceCommit": "925d8c55be9ce823d100bf90a5c78cf19ea66d58",
     "build": "npm ci && npm run build",
     "output": "console/dist",
     "localBridge": "development-and-explicit-workbench-mode-only",

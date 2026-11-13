@@ -1,0 +1,30 @@
+{
+  "scope": "static-candidate-source-not-process-startup-or-effective-privileges",
+  "checks": {
+    "history_env_consumed": true,
+    "operations_env_consumed": true,
+    "history_handle_injected": true,
+    "operations_handle_injected": true,
+    "payload_separate_handle": true,
+    "missing_projection_no_core_fallback": true,
+    "management_requires_operations": true,
+    "primary_not_in_public_readers": true,
+    "payload_role_provided": true,
+    "operations_runtime_role_provided": true,
+    "operations_writes_explicit": true,
+    "no_user_provisioning": true
+  },
+  "passed": true,
+  "files_sha256": {
+    "cmd/control-api/main.go": "38cac312ea6fd081b0f6449a4ab034966a992cf92fa5ef348ecc589d83d6d6d5",
+    "cmd/control-api/readers.go": "b071c6c301d9f6abb8aea571acbf69eaaf15f62d2c8acfffe9e236edc4079f99",
+    "config/mysql/controlapi-projections.sql": "7ce580e6e0cf32d7ec77a6bf0334831fd321cc97158ffd3cd60b4050f39f018d"
+  },
+  "gaps": [
+    "No publisher DSN consumer; mysqlstore.New still receives the primary handle (its ModelGate use must be distinguished from a publisher writer).",
+    "Explicit DSNs do not prevent an installer from configuring the same account; offline plan rejects shared principals/keys.",
+    "Empty history DSN yields nil Reader DB and request-time failure; empty operations is fatal only with management enabled.",
+    "Payload is optional at startup; missing rollback payload must remain unavailable.",
+    "Controlled loopback API has no production health/inference listener; full process startup and effective roles not tested here."
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "schemaVersion": "1.0",
+  "scope": "installation-input-only-no-secret-values",
+  "sourceCommit": "d2d7869fe16b8968d6ca5b00a63560c322b84dc1",
+  "productionWiringVerified": false,
+  "connections": {
+    "core": {
+      "roles": [
+        "maas_kernel_runtime",
+        "maas_release_reader"
+      ],
+      "forbiddenRoles": [
+        "maas_release_publisher",
+        "migration"
+      ],
+      "bindingStatus": "pending",
+      "secretRef": {
+        "namespace": null,
+        "name": null,
+        "key": null
+      },
+      "principalRef": null,
+      "grantEvidenceRef": null
+    },
+    "publisher": {
+      "roles": [
+        "maas_release_publisher"
+      ],
+      "forbiddenRoles": [
+        "maas_kernel_runtime",
+        "migration"
+      ],
+      "bindingStatus": "pending",
+      "secretRef": {
+        "namespace": null,
+        "name": null,
+        "key": null
+      },
+      "principalRef": null,
+      "grantEvidenceRef": null
+    },
+    "historyReader": {
+      "roles": [
+        "maas_release_history_reader"
+      ],
+      "forbiddenRoles": [
+        "maas_kernel_runtime",
+        "maas_release_publisher",
+        "migration"
+      ],
+      "bindingStatus": "pending",
+      "secretRef": {
+        "namespace": null,
+        "name": null,
+        "key": null
+      },
+      "principalRef": null,
+      "grantEvidenceRef": null
+    },
+    "payloadReader": {
+      "roles": [
+        "maas_release_history_payload_reader"
+      ],
+      "forbiddenRoles": [
+        "maas_kernel_runtime",
+        "maas_release_publisher",
+        "migration"
+      ],
+      "bindingStatus": "pending",
+      "secretRef": {
+        "namespace": null,
+        "name": null,
+        "key": null
+      },
+      "principalRef": null,
+      "grantEvidenceRef": null
+    },
+    "operationReader": {
+      "roles": [
+        "maas_release_operations_runtime"
+      ],
+      "forbiddenRoles": [
+        "maas_kernel_runtime",
+        "maas_release_publisher",
+        "migration"
+      ],
+      "bindingStatus": "pending",
+      "secretRef": {
+        "namespace": null,
+        "name": null,
+        "key": null
+      },
+      "principalRef": null,
+      "grantEvidenceRef": null
+    }
+  },
+  "note": "Candidate templates and controlled DSN consumers exist; production/default-role privileges and separate publisher wiring remain unverified."
+}

@@ -1,4 +1,4 @@
-# SYNTHETIC ONLY: gateway egress reference does not create or verify a policy.
+# SYNTHETIC ONLY: no valid images, credentials or environment.
 {
   "api": {
     "group": "serving.maas.example",
@@ -24,7 +24,25 @@
       "/synthetic-core"
     ],
     "existingConfigMap": "synthetic-core-config",
-    "existingSecret": "synthetic-core-credentials"
+    "existingSecret": "synthetic-core-credentials",
+    "databaseSecrets": {
+      "core": {
+        "name": "synthetic-database",
+        "key": "core"
+      },
+      "historyReader": {
+        "name": "synthetic-database",
+        "key": "historyReader"
+      },
+      "operationReader": {
+        "name": "synthetic-database",
+        "key": "operationReader"
+      },
+      "payloadReader": {
+        "name": "synthetic-database",
+        "key": "payloadReader"
+      }
+    }
   },
   "console": {
     "enabled": true,
