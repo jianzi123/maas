@@ -1,0 +1,425 @@
+package kernel
+
+import (
+	"context"
+	"database/sql"
+	"database/sql/driver"
+	"encoding/json"
+	"github.com/go-sql-driver/mysql"
+	"github.com/google/uuid"
+	"github.com/jianzi123/maas/internal/protocol"
+	"io"
+	"net/http"
+	"net/http/httptest"
+	"os"
+	"strings"
+	"sync"
+	"sync/atomic"
+	"testing"
+	"time"
+)
+
+// QA delays ONLY the real diagnostic INSERT path, not timestamp generation.
+type qaDiagnosticConnector struct {
+	driver.Connector
+	delay time.Duration
+}
+
+func (c qaDiagnosticConnector) Connect(ctx context.Context) (driver.Conn, error) {
+	v, e := c.Connector.Connect(ctx)
+	if e != nil {
+		return nil, e
+	}
+	return &qaDiagnosticConn{Conn: v, delay: c.delay}, nil
+}
+
+type qaDiagnosticConn struct {
+	driver.Conn
+	delay time.Duration
+}
+
+func (c *qaDiagnosticConn) BeginTx(ctx context.Context, o driver.TxOptions) (driver.Tx, error) {
+	return c.Conn.(driver.ConnBeginTx).BeginTx(ctx, o)
+}
+func (c *qaDiagnosticConn) QueryContext(ctx context.Context, q string, a []driver.NamedValue) (driver.Rows, error) {
+	return c.Conn.(driver.QueryerContext).QueryContext(ctx, q, a)
+}
+func (c *qaDiagnosticConn) ExecContext(ctx context.Context, q string, a []driver.NamedValue) (driver.Result, error) {
+	if strings.Contains(q, "INSERT INTO request_usage_diagnostics") {
+		time.Sleep(c.delay)
+	}
+	return c.Conn.(driver.ExecerContext).ExecContext(ctx, q, a)
+}
+
+type qaRelayWriter struct {
+	rec           *httptest.ResponseRecorder
+	role          chan struct{}
+	once          sync.Once
+	delay         time.Duration
+	fail          bool
+	contentWrites int
+	flushCalls    int
+	attempted     strings.Builder
+}
+
+func (w *qaRelayWriter) Header() http.Header { return w.rec.Header() }
+func (w *qaRelayWriter) WriteHeader(n int)   { w.rec.WriteHeader(n) }
+func (w *qaRelayWriter) Write(b []byte) (int, error) {
+	w.attempted.Write(b)
+	if strings.Contains(string(b), `"role":"assistant"`) {
+		w.once.Do(func() { close(w.role) })
+	}
+	if strings.Contains(string(b), `"content":"QA_VISIBLE"`) {
+		w.contentWrites++
+		time.Sleep(w.delay)
+		if w.fail {
+			return 0, io.ErrClosedPipe
+		}
+	}
+	return w.rec.Write(b)
+}
+
+type qaRelayFlusher struct{ *qaRelayWriter }
+
+func (w *qaRelayFlusher) Flush() { w.flushCalls++; w.rec.Flush() }
+
+func TestQARelayErrorAndSampling(t *testing.T) {
+	role := "data: {\"choices\":[{\"delta\":{\"role\":\"assistant\"}}]}\n\n"
+	content := "data: {\"choices\":[{\"delta\":{\"content\":\"QA_VISIBLE\"}}]}\n\n"
+	end := "data: {\"choices\":[{\"index\":0,\"delta\":{},\"finish_reason\":\"stop\"}]}\n\ndata: [DONE]\n\n"
+	privateError := "data: {\"error\":{\"message\":\"QA_PRIVATE_PROVIDER_ERROR\",\"api_key\":\"QA_PRIVATE_KEY_MARKER\"}}\n\n"
+	combined := "data: {\"choices\":[{\"delta\":{\"content\":\"QA_VISIBLE\"}}],\"usage\":{\"prompt_tokens\":12,\"completion_tokens\":7,\"total_tokens\":19,\"prompt_tokens_details\":{\"cached_tokens\":4},\"completion_tokens_details\":{\"reasoning_tokens\":3}}}\n\n"
+	evidence := []map[string]any{}
+	cases := []string{"timing_before_diagnostic_write", "empty_completion", "usage_only_completion", "error_immediate", "error_after_role", "error_after_content", "error_with_usage", "error_null", "error_with_content", "nonstream_error", "eof_before_content", "eof_after_content", "cancel_before_content", "timeout_after_content", "content_write_failure", "content_without_flusher", "full_queue_success", "sampling_disabled", "nonstream_success"}
+	for _, name := range cases {
+		t.Run(name, func(t *testing.T) {
+			f := setup(t, 1)
+			in := f.input(t)
+			ctx, cancel := context.WithCancel(context.Background())
+			defer cancel()
+			if name == "timeout_after_content" {
+				var done context.CancelFunc
+				ctx, done = context.WithTimeout(ctx, 3*time.Second)
+				defer done()
+			}
+			if name == "timing_before_diagnostic_write" {
+				connector, e := mysql.NewConnector(f.config)
+				if e != nil {
+					t.Fatal(e)
+				}
+				db := sql.OpenDB(qaDiagnosticConnector{Connector: connector, delay: 90 * time.Millisecond})
+				defer db.Close()
+				f.core.db = db
+			}
+			sampler := NewRelaySampler("qa-controlled-relay", uuid.NewString(), "c7e863b-qa-controlled", 1)
+			if name == "sampling_disabled" {
+				sampler = nil
+			}
+			if name == "full_queue_success" {
+				sampler.offer(RelaySample{RequestID: "occupied-test-slot"})
+			}
+			rec := httptest.NewRecorder()
+			w := &qaRelayWriter{rec: rec, role: make(chan struct{}), fail: name == "content_write_failure"}
+			if name == "timing_before_diagnostic_write" {
+				w.delay = 70 * time.Millisecond
+			}
+			var writer http.ResponseWriter = &qaRelayFlusher{w}
+			if name == "content_without_flusher" {
+				writer = w
+			}
+			var calls atomic.Int64
+			nonstream := strings.HasPrefix(name, "nonstream_")
+			server := httptest.NewServer(http.HandlerFunc(func(out http.ResponseWriter, r *http.Request) {
+				calls.Add(1)
+				io.Copy(io.Discard, r.Body)
+				if _, e := f.core.Admit(r.Context(), f.gate, in); e != nil {
+					t.Error(e)
+					out.WriteHeader(503)
+					return
+				}
+				if nonstream {
+					if name == "nonstream_error" {
+						io.WriteString(out, `{"error":{"message":"QA_PRIVATE_PROVIDER_ERROR"},"usage":{"prompt_tokens":12,"completion_tokens":7,"total_tokens":19}}`)
+					} else {
+						io.WriteString(out, `{"choices":[{"index":0,"message":{"role":"assistant","content":"ok"},"finish_reason":"stop"}],"usage":{"prompt_tokens":12,"completion_tokens":7,"total_tokens":19,"prompt_tokens_details":{"cached_tokens":4},"completion_tokens_details":{"reasoning_tokens":3}}}`)
+					}
+					return
+				}
+				out.Header().Set("Content-Type", "text/event-stream")
+				if name == "error_immediate" {
+					io.WriteString(out, privateError+diagnosticFrame+end)
+					return
+				}
+				io.WriteString(out, ": heartbeat\n\n"+role)
+				out.(http.Flusher).Flush()
+				select {
+				case <-w.role:
+				case <-r.Context().Done():
+					return
+				case <-time.After(5 * time.Second):
+					t.Error("role barrier not reached")
+					return
+				}
+				if name == "cancel_before_content" {
+					cancel()
+					<-r.Context().Done()
+					return
+				}
+				if name == "eof_before_content" {
+					return
+				}
+				io.WriteString(out, "data: {\"choices\":[{\"delta\":{\"content\":\"\"}}]}\n\n")
+				if name == "timing_before_diagnostic_write" {
+					time.Sleep(45 * time.Millisecond)
+					io.WriteString(out, combined+content+end)
+					return
+				}
+				switch name {
+				case "empty_completion":
+					io.WriteString(out, "data: {\"choices\":[]}\n\n"+diagnosticFrame+end)
+				case "usage_only_completion":
+					io.WriteString(out, diagnosticFrame+end)
+				case "error_after_role":
+					io.WriteString(out, privateError+content+diagnosticFrame+end)
+				case "error_after_content":
+					io.WriteString(out, content+privateError+content+diagnosticFrame+end)
+				case "error_with_usage":
+					io.WriteString(out, "data: {\"error\":{\"message\":\"QA_PRIVATE_PROVIDER_ERROR\"},\"usage\":{\"prompt_tokens\":12,\"completion_tokens\":7,\"total_tokens\":19}}\n\n"+end)
+				case "error_null":
+					io.WriteString(out, "data: {\"error\":null}\n\n"+diagnosticFrame+end)
+				case "error_with_content":
+					io.WriteString(out, "data: {\"error\":{\"message\":\"QA_PRIVATE_PROVIDER_ERROR\"},\"choices\":[{\"delta\":{\"content\":\"QA_MUST_NOT_LEAK\"}}]}\n\n"+end)
+				case "eof_after_content":
+					io.WriteString(out, content)
+				case "timeout_after_content":
+					io.WriteString(out, content)
+					out.(http.Flusher).Flush()
+					<-r.Context().Done()
+				default:
+					io.WriteString(out, content+diagnosticFrame+end)
+				}
+			}))
+			defer server.Close()
+			relay := &Relay{core: f.core, endpoint: server.URL, client: server.Client(), maxBytes: 65536, maxLine: 65536, Sampler: sampler}
+			before := time.Now()
+			err := relay.Forward(ctx, writer, RelayCall{Input: in, Body: []byte(`{"model":"synthetic"}`), Stream: !nonstream})
+			after := time.Now()
+			failed := strings.HasPrefix(name, "error_") || name == "nonstream_error" || strings.HasPrefix(name, "eof_") || name == "cancel_before_content" || name == "timeout_after_content" || name == "content_write_failure"
+			if (err != nil) != failed {
+				t.Errorf("err=%v expected failed=%v", err, failed)
+			}
+			if calls.Load() != 1 {
+				t.Errorf("upstream attempts %d", calls.Load())
+			}
+			for _, secret := range []string{"QA_PRIVATE_PROVIDER_ERROR", "QA_PRIVATE_KEY_MARKER", "QA_MUST_NOT_LEAK"} {
+				if strings.Contains(w.attempted.String(), secret) {
+					t.Error("provider error or rejected content leaked", secret)
+				}
+			}
+			if failed && strings.Contains(w.attempted.String(), "[DONE]") {
+				t.Error("error recovered normal DONE")
+			}
+			if !failed && !nonstream && strings.Count(w.attempted.String(), "[DONE]") != 1 {
+				t.Error("success DONE not unique")
+			}
+			if name == "error_after_content" && strings.Count(w.attempted.String(), `"content":"QA_VISIBLE"`) != 1 {
+				t.Error("content after error escaped")
+			}
+			var raw []byte
+			if e := f.db.QueryRow("SELECT event_json FROM usage_events WHERE request_id=?", in.RequestID).Scan(&raw); e != nil {
+				t.Fatal(e)
+			}
+			var terminal map[string]any
+			if json.Unmarshal(raw, &terminal) != nil {
+				t.Fatal("bad terminal")
+			}
+			if e := protocol.Validate("Terminal", terminal); e != nil {
+				t.Fatal(e)
+			}
+			result := terminal["result"].(string)
+			if failed && result == "succeeded" {
+				t.Error("abnormal success")
+			}
+			if !failed && result != "succeeded" {
+				t.Error("success failed", result)
+			}
+			if strings.HasPrefix(name, "error_") || name == "nonstream_error" {
+				if result != "failed" || terminal["error_code"] != "upstream_protocol_error" {
+					t.Error("error latch classification", result, terminal["error_code"])
+				}
+			}
+			if name == "cancel_before_content" && result != "cancelled" {
+				t.Error("cancel not retained")
+			}
+			if name == "timeout_after_content" && result != "timed_out" {
+				t.Error("timeout not retained")
+			}
+			hasContent := name == "timing_before_diagnostic_write" || name == "error_after_content" || name == "eof_after_content" || name == "timeout_after_content" || name == "content_write_failure" || name == "content_without_flusher" || name == "full_queue_success" || name == "sampling_disabled"
+			if (terminal["first_chunk_ms"] != nil) != hasContent {
+				t.Error("first_chunk content/null mismatch")
+			}
+			assertSQL(t, f.db, "SELECT COUNT(*) FROM generation_requests", 1)
+			assertSQL(t, f.db, "SELECT COUNT(*) FROM usage_events", 1)
+			assertSQL(t, f.db, "SELECT SUM(finalized_total) FROM usage_daily", 1)
+			assertSQL(t, f.db, "SELECT COUNT(*) FROM concurrency_slots WHERE state='QUARANTINED'", 1)
+			tok, mon := readCounter(t, f, "tokens"), readCounter(t, f, "money")
+			if failed {
+				usage := terminal["usage"].(map[string]any)
+				for _, key := range []string{"input_tokens", "output_tokens", "total_tokens", "input_cached_tokens", "reasoning_tokens"} {
+					if usage[key] != nil {
+						t.Error("unknown actual not null", key)
+					}
+				}
+				if tok != (Counter{Known: "0", Reserved: "0", Held: "140"}) || mon != (Counter{Known: "0", Reserved: "0", Held: "520000"}) {
+					t.Error("abnormal finance changed", tok, mon)
+				}
+			} else {
+				if tok.Known != "19" || tok.Held != "0" {
+					t.Error("success not booked once", tok)
+				}
+			}
+			rows, e := f.core.ReadDiagnostics(context.Background(), in.RequestID)
+			if e != nil {
+				t.Fatal(e)
+			}
+			if len(rows) == 0 || rows[len(rows)-1].Type != "termination" {
+				t.Error("durable termination missing")
+			}
+			var observed *RelaySample
+			if sampler != nil {
+				select {
+				case s := <-sampler.Records():
+					if name == "full_queue_success" {
+						if s.RequestID != "occupied-test-slot" || sampler.Dropped() != 1 {
+							t.Error("drop replaced queued record or count")
+						}
+					} else {
+						observed = &s
+						if s.RequestID != in.RequestID || s.PublicationID != in.Profile.Binding.PublicationID || s.ReleaseRevision != in.Profile.Binding.Revision || s.Result != result || s.ReturnError != failed || s.Schema != "maas-go-relay-source-1.0" {
+							t.Error("summary identity or terminal mismatch")
+						}
+						if s.ClockScope != s.InstanceID+"/"+s.BootID+"/"+in.RequestID || s.SourceRevision != "c7e863b-qa-controlled" {
+							t.Error("clock/source identity")
+						}
+						if (s.ContentMS != nil) != hasContent {
+							t.Error("content sample/null mismatch")
+						}
+						if nonstream && (s.ProtocolMS != nil || s.ContentMS != nil || s.WriteMS != nil || s.FlushMS != nil) {
+							t.Error("fabricated nonstream token instants")
+						}
+						if name == "error_immediate" && s.ProtocolMS != nil {
+							t.Error("error counted as legal protocol")
+						}
+						if !nonstream && name != "error_immediate" && s.ProtocolMS == nil {
+							t.Error("legal role not recorded")
+						}
+						if !hasContent && (s.WriteMS != nil || s.FlushMS != nil) {
+							t.Error("noncontent manufactured write/flush content marker")
+						}
+						if name == "content_write_failure" && s.WriteMS != nil {
+							t.Error("failed write marked successful")
+						}
+						if name == "content_without_flusher" && (s.WriteMS == nil || s.FlushMS != nil || w.flushCalls != 0) {
+							t.Error("flusher fabricated")
+						}
+						if hasContent && name != "content_write_failure" && (s.WriteMS == nil || *s.WriteMS < *s.ContentMS) {
+							t.Error("write ordering")
+						}
+						if s.FlushMS != nil && s.WriteMS != nil && *s.FlushMS < *s.WriteMS {
+							t.Error("flush before complete write")
+						}
+						for _, instant := range []*float64{s.ProtocolMS, s.ContentMS, s.WriteMS, s.FlushMS} {
+							if instant != nil && (*instant < 0 || *instant > s.EndMS) {
+								t.Error("invalid local instant")
+							}
+						}
+						if hasContent {
+							offset := terminal["first_chunk_ms"].(float64) - *s.ContentMS
+							if offset < float64(before.Sub(in.Received).Milliseconds())-2 || offset > float64(after.Sub(in.Received).Milliseconds())+2 {
+								t.Error("mixed request and Forward time origin")
+							}
+						}
+						if name == "timing_before_diagnostic_write" {
+							if *s.ContentMS-*s.ProtocolMS < 35 || *s.WriteMS-*s.ContentMS < 150 {
+								t.Error("content measurement included/excluded wrong injection boundary", s)
+							}
+						}
+						if sampler.Dropped() != 0 {
+							t.Error("unexpected sample drop")
+						}
+					}
+				default:
+					t.Error("missing summary")
+				}
+				select {
+				case <-sampler.Records():
+					t.Error("more than one summary per Forward")
+				default:
+				}
+			}
+			if e := f.core.Release(context.Background(), in.RequestID, uuid.NewString(), uuid.NewString()); e != nil {
+				t.Fatal(e)
+			}
+			if readCounter(t, f, "tokens") != tok || readCounter(t, f, "money") != mon {
+				t.Error("slot release changed finance")
+			}
+			var afterEvent []byte
+			f.db.QueryRow("SELECT event_json FROM usage_events WHERE request_id=?", in.RequestID).Scan(&afterEvent)
+			if string(afterEvent) != string(raw) {
+				t.Error("release rewrote terminal")
+			}
+			evidence = append(evidence, map[string]any{"case": name, "request_id": in.RequestID, "terminal": terminal, "sample": observed, "dropped": func() uint64 {
+				if sampler == nil {
+					return 0
+				}
+				return sampler.Dropped()
+			}(), "forward_attempts": calls.Load(), "diagnostics": rows, "token": tok, "money": mon, "content_write_attempts": w.contentWrites, "flush_calls": w.flushCalls, "passed": !t.Failed()})
+			t.Logf("case=%s request_id=%s result=%s sampled=%v drop=%v held=%s", name, in.RequestID, result, observed != nil, evidence[len(evidence)-1]["dropped"], tok.Held)
+		})
+	}
+	if path := os.Getenv("MAAS_QA_RELAY_EVIDENCE"); path != "" {
+		data, _ := json.MarshalIndent(map[string]any{"product_sha": "c7e863b11fb34ee2828c947393444e1e5a9baf08", "cases": evidence, "timing_injections_ms": map[string]int{"before_content": 45, "diagnostic_insert": 90, "content_write": 70}}, "", "  ")
+		if e := os.WriteFile(path, data, 0600); e != nil {
+			t.Fatal(e)
+		}
+	} else {
+		t.Fatal("explicit evidence path required")
+	}
+}
+
+func TestQASamplerLimits(t *testing.T) {
+	id := uuid.NewString()
+	for _, tc := range []struct {
+		name, run, instance, revision string
+		cap                           int
+	}{{"zero_capacity", "r", id, "v", 0}, {"over_capacity", "r", id, "v", 4097}, {"empty_run", "", id, "v", 1}, {"long_run", strings.Repeat("r", 129), id, "v", 1}, {"invalid_instance", "r", "bad", "v", 1}, {"empty_revision", "r", id, "", 1}, {"long_revision", "r", id, strings.Repeat("v", 129), 1}} {
+		t.Run(tc.name, func(t *testing.T) {
+			if NewRelaySampler(tc.run, tc.instance, tc.revision, tc.cap) != nil {
+				t.Error("invalid sampler accepted")
+			}
+		})
+	}
+	t.Run("bounded_concurrent_offer", func(t *testing.T) {
+		s := NewRelaySampler("qa", id, "qa-controlled", 4)
+		var wg sync.WaitGroup
+		for i := 0; i < 40; i++ {
+			wg.Add(1)
+			go func() {
+				defer wg.Done()
+				for n := 0; n < 10; n++ {
+					s.offer(RelaySample{})
+				}
+			}()
+		}
+		wg.Wait()
+		if len(s.records) != 4 || s.Dropped() != 396 {
+			t.Error("capacity/drop denominator", len(s.records), s.Dropped())
+		}
+	})
+	t.Run("boots_are_independent", func(t *testing.T) {
+		a, b := NewRelaySampler("qa", id, "v", 1), NewRelaySampler("qa", id, "v", 1)
+		if a.boot == b.boot {
+			t.Error("sampler boot reused")
+		}
+	})
+}
