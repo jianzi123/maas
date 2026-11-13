@@ -1,5 +1,15 @@
 # 阶段总结：2026-11-05
 
+## 当前GPU批次：SGLang Decode/KV
+
+沿afe2596复用WSL的SGLang0.5.2/b0d25e7、torch2.8.0+cu128和RTX4070 Laptop，六份后端/核源码与官方逐字节一致。直接运行原metadata、RadixAttention/forward_decode、KV池和MHA/GQA Triton核；状态由无权重harness构造，没有初始化ModelRunner/Engine或执行serving。
+
+三进程split对照保留cap1长序列明显退化；基于实际两次KV索引写kernel，另做同输入K/V融合，ATen主机编译/注册、NVRTC设备核和当前stream调用实际通过。batch8局部backend三进程约118.6–124.3us→55.1–55.4us，但long第一进程退化约21%，不通用启用。原始分布、CUPTI和范围见[第16章](engineering/16-sglang-decode-kv.md)与[摘要](../../tools/perf/operators/local_gpu/evidence/decode-v0.16/summary.json)。
+
+独立图检查验证被毒化输出和变化KV会更新；异步越界保护由独立子进程实际退出42。没有Compute Sanitizer结果；nvcc SDK因截断/连接中断未就绪，本轮是g++/ATen+NVRTC路线。模型权重下载仍未确认，未下载；Engine/模型质量及平台收益尚未验证。
+
+## 之前阶段的记录
+
 ## 当前优先级纠偏 2026-11-13
 
 本任务重心回到GPU算子与真实SGLang推理性能，首项为Decode Attention/KV路径。已有CPU公式/调度器、Go采样和工具回归保留为支持资产，不以CPU测试数或通用报告数量作为推理优化交付。K1不等待平台D1/E1；GPU条件具备即可独立做设备基线，R/E分别按模型/平台条件推进。

@@ -1,6 +1,8 @@
 # 推理框架工程实现卷
 
-最新本地GPU实操见[第15章：CUDA闭环与SGLang接续](15-local-gpu-cuda.md)，包含真实编译、FP32/FP16正确性、计时/CUPTI、成熟核对照与缺权重门禁。
+最新接续见[第16章：SGLang Decode/KV实际GPU实验](16-sglang-decode-kv.md)：原生Triton后端、请求/KV索引、split对照、ATen/NVRTC融合写、CUPTI、图重放与负结果。
+
+上一批本地GPU实操见[第15章：CUDA闭环与SGLang接续](15-local-gpu-cuda.md)，包含真实编译、FP32/FP16正确性、计时/CUPTI、成熟核对照与缺权重门禁。
 
 本卷补充可运行实现、算法推导、状态不变量、源码追踪和故障实验，面向准备承担推理运行时、GPU算子或部署框架开发的成员。前置是[六章基础教材](../foundations/README.md)，但每章都指向具体代码、输入、预期与评审问题。
 
@@ -26,6 +28,8 @@
 | [12 工程作业](12-engineering-projects.md) | 实现任务、反例、证据与评审矩阵 | 跨模块练习与阶段交付 |
 | [13 异步运行时](13-runtime-loop.md) | 计划/提交/完成、输出信用、取消/代次隔离、真实CPU线程 | runtime_core/runtime_worker/runtime_lab |
 | [14 页预算调度](14-page-budget-scheduling.md) | 接纳/切块/饥饿边界、实际页预算、对照与负结果 | tools/perf/scheduling |
+| [15 本地CUDA工程](15-local-gpu-cuda.md) | RMSNorm编译/注册/数值/测量及成熟核负结果 | local_gpu |
+| [16 SGLang Decode/KV](16-sglang-decode-kv.md) | 实际后端/索引/两阶段核、split与KV融合GPU对照 | local_gpu/decode_path与run_kv_fusion |
 
 ## 直接运行
 

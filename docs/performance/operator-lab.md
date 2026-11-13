@@ -1,8 +1,10 @@
 # 算子正确性、微基准与Profiler工作台
 
+当前已执行的GPU路径固定为SGLang0.5.2 / b0d25e7、WSL torch2.8.0+cu128，见[第16章实测](engineering/16-sglang-decode-kv.md)。本页以下保留前期Windows工具核查、dense control与v0.5.6源码准备；不把旧CPU构建/禁用模板当作当前WSL GPU状态，不混用版本参数。
+
 本任务主线是GPU算子和真实推理运行时。工具在[operators目录](../../tools/perf/operators)，计划默认execution_enabled=false；CPU公式只做独立数值oracle，不计为GPU/模型性能交付。
 
-## 当前首项：Decode Attention与KV读取
+## 前期准备项：Decode Attention与KV读取
 
 研究入口复用SGLang固定v0.5.6 / 7ae368e的flashinfer_backend.forward_decode路径（详见[固定源码分析](sglang-source-analysis-v0.5.md)），将KV索引/写入/布局准备、paged wrapper执行与实际GPU kernel分开。该版本只是可复核源码样本；目标引擎版本、模型及backend未确认，不认定它是已上线环境。
 
@@ -24,7 +26,7 @@ python tools/perf/operators/profile_operator.py --tool ncu --case decode-llm --o
 
 真正执行仍需批准计划、干净兼容的CUDA运行库与资源上限；设备计时与profiler采样分开。源码分析与命令准备不等于已完成GPU实验。
 
-## 本机只读核查与具体缺口
+## 前期Windows只读核查（非当前WSL环境）
 
 - nvidia-smi报告RTX4070 Laptop、8188MiB、驱动581.29；nvcc报告CUDA13.0.88。
 - 2026-11-13只读复核：PATH有Nsight Compute2025.3.1的bat入口，实际exe位于其target/windows-desktop-win7-x64/ncu.exe；执行器要求真实exe位于获准进程PATH，不修改全局环境。Nsight Systems在当前PATH未发现；Triton安装状态沿历史记录，本轮未重查。

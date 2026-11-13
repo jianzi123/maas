@@ -15,26 +15,26 @@
   "experiments": [
     {
       "id": "K1",
-      "state": "awaiting_inputs",
-      "scope": "GPU Decode Attention/KV baseline first; actual paged engine backend after shape/profile capture",
-      "single_factor": "one evidenced backend/layout/copy change; current torch same-backend path is control only",
+      "state": "exploratory_local_SGLang_Decode_KV_GPU_batch_delivered",
+      "scope": "actual SGLang0.5.2 Triton backend tensor path; not full Engine",
+      "single_factor": "split cap study, separately KV write fusion study; no combined factors",
       "baseline": "target version mature cuBLAS/native SDPA/RMSNorm",
       "commands": [
-        "python tools/perf/operators/profile_operator.py --tool torch --case decode-llm --output-dir tools/perf/reports/decode-profile-torch",
-        "python tools/perf/operators/profile_operator.py --tool nsys --case decode-llm --output-dir tools/perf/reports/decode-profile-nsys",
-        "python tools/perf/operators/profile_operator.py --tool ncu --case decode-llm --output-dir tools/perf/reports/decode-profile-ncu"
+        "python tools/perf/operators/local_gpu/run_decode.py --source-lock tools/perf/operators/local_gpu/decode-source-lock.json --output tools/perf/reports/new-decode --profile",
+        "python tools/perf/operators/local_gpu/run_kv_fusion.py --source-lock tools/perf/operators/local_gpu/decode-source-lock.json --output tools/perf/reports/new-fusion --profile"
       ],
       "requires": [
-        "explicit GPU use approval, device/VRAM/time/sample caps and clean CUDA-enabled framework",
-        "fixed Q/K/V shape/dtype/layout/mask; representative dense control is not target model profile",
-        "numerical finite gate before timing, mature actual backend baseline, profile separate from timing",
-        "Nsight/PyTorch profiler runtime and required counter access verified; no global runtime bypass"
+        "use pinned approved local WSL GPU environment from engineering/16",
+        "respect recorded caps and fresh output; no weights required",
+        "nvcc/Compute Sanitizer route remains incomplete; ATen-host/NVRTC route verified"
       ],
-      "success": "GPU raw timing/correctness/profile at K only; actual engine R metrics separately, no inference claim from CPU tests"
+      "success": "GPU source/numerical/trace/local A/B recorded including long-context regression; not Engine/serving gain",
+      "local_gpu_authorized": true,
+      "evidence_ref": "tools/perf/operators/local_gpu/evidence/decode-v0.16/summary.json"
     },
     {
       "id": "R1",
-      "state": "awaiting_inputs",
+      "state": "awaiting_approved_complete_weights_and_actual_Engine_baseline",
       "scope": "full engine chunk/queue/KV",
       "single_factor": "one prefill chunk from frozen mature baseline",
       "baseline": "target engine existing tuned static and enabled dynamic predictor",
@@ -108,5 +108,6 @@
     "E1"
   ],
   "cpu_evidence_role": "numerical correctness and fault regression only; not inference performance",
-  "layer_dependency_policy": "K1 needs approved GPU/toolchain, not D1/E1 completion; R needs actual model/engine; E needs protected platform"
+  "layer_dependency_policy": "K1 needs approved GPU/toolchain, not D1/E1 completion; R needs actual model/engine; E needs protected platform",
+  "execution_scope_note": "top-level false keeps unapproved real platform/model plans disabled; explicit local GPU research is already authorized and executed separately"
 }
