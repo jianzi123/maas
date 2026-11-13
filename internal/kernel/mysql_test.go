@@ -77,6 +77,9 @@ type fixture struct {
 }
 
 func setup(t *testing.T, slots int64) *fixture {
+	return setupUsagePolicy(t, slots, &UsagePolicy{AdapterRevision: "controlled-test-v1", Mode: "cumulative_until_finish"})
+}
+func setupUsagePolicy(t *testing.T, slots int64, usagePolicy *UsagePolicy) *fixture {
 	t.Helper()
 	socket := os.Getenv("MAAS_MYSQL_TEST_SOCKET")
 	if socket == "" {
@@ -150,6 +153,7 @@ func setup(t *testing.T, slots int64) *fixture {
 	}
 	f.profile = Profile{CRUID: f.desired.CRUID, Namespace: "controlled", Name: "synthetic", Alias: "synthetic", Binding: *st.Candidate, SourceID: uuid.NewString(), SourceType: "external", UpstreamModel: "controlled-upstream", ConfigRevision: "test-config-v1", CapabilityRevision: "test-cap-v1", RouteDigest: strings.Repeat("b", 64), RouteName: "test-route", GatewayBinding: "test-gateway-binding", GatewayInstance: uuid.NewString(), GatewayEpoch: 1, Host: "synthetic.internal", SafetyProfile: "test-unverified", ApprovalRef: "controlled-test-only", BoundVerified: true, InputUpper: 100, OutputUpper: 40}
 	f.profile.Price = &Price{ID: uuid.NewString(), Version: "test-price-v1", Source: f.profile.SourceID, Model: f.profile.UpstreamModel, Currency: "TST", Scale: 9, Unit: 1000000, Effective: "2026-01-01T00:00:00Z", Input: "2000000000", Cached: "200000000", Output: "8000000000", Reasoning: "8000000000"}
+	f.profile.UsagePolicy = usagePolicy
 	if e = f.core.RegisterProfile(ctx, f.profile); e != nil {
 		t.Fatal("profile", e)
 	}

@@ -55,6 +55,24 @@ func run() error {
 	if e != nil {
 		return e
 	}
+	// Projection readers never implicitly inherit the core runtime identity.
+	openReader := func(variable string) (*sql.DB, error) {
+		return openProjectionDB(os.Getenv(variable))
+	}
+	historyDB, e := openReader("MAAS_HISTORY_READER_DSN")
+	if e != nil {
+		return e
+	}
+	if historyDB != nil {
+		defer historyDB.Close()
+	}
+	operationsDB, e := openReader("MAAS_OPERATIONS_DSN")
+	if e != nil {
+		return e
+	}
+	if operationsDB != nil {
+		defer operationsDB.Close()
+	}
 	h := controlapi.Handler{Core: core, Sessions: controlapi.BootstrapSession{SessionSHA256: os.Getenv("MAAS_ADMIN_SESSION_SHA256"), CSRFSHA256: os.Getenv("MAAS_ADMIN_CSRF_SHA256"), Origin: os.Getenv("MAAS_ADMIN_ORIGIN"), Expires: expires}}
 	if namespaces := os.Getenv("MAAS_HISTORY_NAMESPACES"); namespaces != "" {
 		scope := os.Getenv("MAAS_HISTORY_SCOPE")
@@ -71,7 +89,7 @@ func run() error {
 		for _, n := range strings.Split(domains, ",") {
 			owned[n] = true
 		}
-		hr := &history.Reader{DB: db, Cluster: os.Getenv("MAAS_CLUSTER_ID"), Access: history.NamespaceAccess{Namespaces: allowed, Domains: owned, ScopeID: scope}, CursorKey: key}
+		hr := &history.Reader{DB: historyDB, Cluster: os.Getenv("MAAS_CLUSTER_ID"), Access: history.NamespaceAccess{Namespaces: allowed, Domains: owned, ScopeID: scope}, CursorKey: key}
 		access := history.NamespaceAccess{Namespaces: allowed, Domains: owned, ScopeID: scope}
 		var kube client.Client
 		if configPath := os.Getenv("MAAS_HISTORY_KUBECONFIG"); configPath != "" {
@@ -89,6 +107,9 @@ func run() error {
 			kube = reader
 		}
 		if os.Getenv("MAAS_RELEASE_MANAGEMENT") == "1" {
+			if operationsDB == nil {
+				return fmt.Errorf("explicit management operation connection required")
+			}
 			if kube == nil {
 				return fmt.Errorf("explicit management KUBECONFIG required")
 			}
@@ -123,7 +144,7 @@ func run() error {
 				hr.PayloadDB = payload
 				hr.Evaluator = history.ResolverEvaluator{Resolver: registry, Loader: hr}
 			}
-			op := &management.Operations{DB: db, Cluster: os.Getenv("MAAS_CLUSTER_ID"), Access: access}
+			op := &management.Operations{DB: operationsDB, Cluster: os.Getenv("MAAS_CLUSTER_ID"), Access: access}
 			h.Releases = &management.Service{Client: kube, Reader: kube, Operations: op, History: hr, Resolver: registry, Access: access, CursorKey: key}
 			publisher, err := mysqlstore.New(db, os.Getenv("MAAS_CLUSTER_ID"), core)
 			if err != nil {
