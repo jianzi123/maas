@@ -1,0 +1,12 @@
+{
+  "url": "https://api-docs.deepseek.com/api/create-chat-completion/",
+  "retrieved_at_utc": "2026-11-05T11:38:11.598110+00:00",
+  "html_sha256": "b43ca950bd04ae7f6f537b42e6cb729f543d942dcd848ec43ad4e9bfe059fe1f",
+  "bytes": 129498,
+  "evidence_level": "documentation_only",
+  "provider_runtime_version": null,
+  "account_model_access": null,
+  "model_context_verified_tokens": null,
+  "total_output_bound_verified_tokens": null,
+  "price": null
+}

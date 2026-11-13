@@ -1,0 +1,89 @@
+{
+  "profile_version": "0.3",
+  "scope": "candidate_pending_approval",
+  "execution_enabled": false,
+  "approval": {
+    "state": "pending",
+    "reference": null
+  },
+  "contracts": {
+    "ticket": 3,
+    "terminal": "3.0",
+    "observation": "1.0",
+    "d1_terminal_proposal": "3.1"
+  },
+  "hard_budget": {
+    "status": "unverified",
+    "input_upper_tokens": null,
+    "output_upper_tokens": null,
+    "evidence_ref": null
+  },
+  "context": {
+    "metadata_limits": [],
+    "proposed_service_tokens": null,
+    "verified_service_tokens": null,
+    "verified_total_generated_tokens": null
+  },
+  "usage": {
+    "status": "documentation_only",
+    "prompt_path": "prompt_tokens",
+    "completion_path": "completion_tokens",
+    "total_path": "total_tokens",
+    "cache_path": "prompt_cache_hit_tokens",
+    "reasoning_path": "completion_tokens_details.reasoning_tokens",
+    "missing_is_zero": false,
+    "subsets_are_additive": false
+  },
+  "cancellation": {
+    "status": "unverified",
+    "action_deadline_ms": 2000,
+    "action_evidence_ref": null,
+    "engine_exit_evidence_ref": null,
+    "capacity_recovery_evidence_ref": null,
+    "transport_proof_ref": null,
+    "observation_is_authority": false
+  },
+  "locks": {
+    "endpoint_ref": null,
+    "image_digest": null,
+    "weights_manifest_sha256": null,
+    "tokenizer_assets_sha256": null,
+    "effective_template_sha256": null,
+    "gpu_model": null,
+    "gpu_count": null,
+    "gpu_memory_bytes_each": null,
+    "intra_node_links": null,
+    "inter_node_network": null,
+    "driver_version": null,
+    "cuda_pytorch_nccl_manifest": null,
+    "k8s_higress_lws_manifest": null,
+    "price_policy_ref": null,
+    "key_budget_slot_ref": null,
+    "quality_slo_policy_ref": null,
+    "real_chain_evidence_ref": null
+  },
+  "id": "deepseek-external-candidate",
+  "source_kind": "ExternalAPI",
+  "model": {
+    "provider": "DeepSeek",
+    "model_id": null,
+    "immutable_revision": null,
+    "architecture": null,
+    "metadata_ref": "evidence/deepseek-documentation.json"
+  },
+  "engine": null,
+  "configuration": {
+    "adapter_profile_ref": null,
+    "proposed_fixed_mode": {
+      "thinking": {
+        "type": "disabled"
+      }
+    },
+    "upstream_usage_only_in_trusted_adapter": true,
+    "profile_approved": false
+  },
+  "conflicts": [
+    "ACCOUNT_MODEL_AND_MODE_UNSELECTED",
+    "PROVIDER_VERSION_NOT_IMMUTABLY_PINNABLE"
+  ]
+}

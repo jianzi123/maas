@@ -1,0 +1,266 @@
+{
+  "engine_tag": "v0.5.6",
+  "engine_commit": "7ae368efde14f0b2abe769a5fbb99b8154b2a9b7",
+  "files": [
+    {
+      "path": "python/sglang/srt/managers/scheduler.py",
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/7ae368efde14f0b2abe769a5fbb99b8154b2a9b7/python/sglang/srt/managers/scheduler.py",
+      "sha256": "7edb20e66d976cd42a696aa00abc26d7e531b8f183939c0f98ac46737909c1fe",
+      "bytes": 110877,
+      "matches_perf_evidence": true,
+      "status": "captured",
+      "symbols": [
+        {
+          "name": "event_loop_overlap",
+          "line": 992,
+          "end_line": 1050
+        },
+        {
+          "name": "abort_request",
+          "line": 2344,
+          "end_line": 2424
+        }
+      ]
+    },
+    {
+      "path": "python/sglang/srt/managers/schedule_batch.py",
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/7ae368efde14f0b2abe769a5fbb99b8154b2a9b7/python/sglang/srt/managers/schedule_batch.py",
+      "sha256": "b7e01020f934cfe4682c84f41e0bca546917f8357f349d2afcaab0c079c8c1cb",
+      "bytes": 80228,
+      "matches_perf_evidence": true,
+      "status": "captured",
+      "symbols": []
+    },
+    {
+      "path": "python/sglang/srt/model_executor/cuda_graph_runner.py",
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/7ae368efde14f0b2abe769a5fbb99b8154b2a9b7/python/sglang/srt/model_executor/cuda_graph_runner.py",
+      "sha256": "6afc41518513dfe8a9fe5212b2d29c4ad6c6adee37eb3e0649173db6400e6978",
+      "bytes": 35153,
+      "matches_perf_evidence": true,
+      "status": "captured",
+      "symbols": []
+    },
+    {
+      "path": "python/sglang/srt/mem_cache/radix_cache.py",
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/7ae368efde14f0b2abe769a5fbb99b8154b2a9b7/python/sglang/srt/mem_cache/radix_cache.py",
+      "sha256": "7b6aa9c4e9736f3cf94df0eb37e17c48500151e7e7dbc54f389d56f8c99c2fa9",
+      "bytes": 30629,
+      "matches_perf_evidence": true,
+      "status": "captured",
+      "symbols": [
+        {
+          "name": "_page_align_keys",
+          "line": 423,
+          "end_line": 427
+        },
+        {
+          "name": "cache_finished_req",
+          "line": 429,
+          "end_line": 473
+        },
+        {
+          "name": "cache_unfinished_req",
+          "line": 475,
+          "end_line": 535
+        },
+        {
+          "name": "inc_lock_ref",
+          "line": 571,
+          "end_line": 583
+        },
+        {
+          "name": "dec_lock_ref",
+          "line": 585,
+          "end_line": 601
+        },
+        {
+          "name": "_collect_leaves",
+          "line": 751,
+          "end_line": 763
+        }
+      ]
+    },
+    {
+      "path": "python/sglang/srt/mem_cache/memory_pool.py",
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/7ae368efde14f0b2abe769a5fbb99b8154b2a9b7/python/sglang/srt/mem_cache/memory_pool.py",
+      "sha256": "461f35f299e799daaec9aedad2fda24d55f927ddf7ea7254b0078160194cb684",
+      "bytes": 78590,
+      "matches_perf_evidence": true,
+      "status": "captured",
+      "symbols": []
+    },
+    {
+      "path": "python/sglang/srt/layers/attention/flashinfer_backend.py",
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/7ae368efde14f0b2abe769a5fbb99b8154b2a9b7/python/sglang/srt/layers/attention/flashinfer_backend.py",
+      "sha256": "8ebd947a9f15ace3ca023076b5e374f552ee7a667f7f0c76d834084a030add2a",
+      "bytes": 64384,
+      "matches_perf_evidence": true,
+      "status": "captured",
+      "symbols": []
+    },
+    {
+      "path": "python/sglang/srt/layers/linear.py",
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/7ae368efde14f0b2abe769a5fbb99b8154b2a9b7/python/sglang/srt/layers/linear.py",
+      "sha256": "d14be0ba7631c0bd03eb919d4089cdefc5c60c79e3d4beed1c94a77353373bd1",
+      "bytes": 56367,
+      "matches_perf_evidence": true,
+      "status": "captured",
+      "symbols": []
+    },
+    {
+      "path": "python/sglang/srt/managers/schedule_policy.py",
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/7ae368efde14f0b2abe769a5fbb99b8154b2a9b7/python/sglang/srt/managers/schedule_policy.py",
+      "sha256": "c96540ead5285cbd59faf74d7c5f3f1bb10022cb6add27dd838627598d4c8bf2",
+      "bytes": 29599,
+      "matches_perf_evidence": null,
+      "status": "captured",
+      "symbols": [
+        {
+          "name": "rem_total_tokens",
+          "line": 382,
+          "end_line": 401
+        },
+        {
+          "name": "ceil_paged_tokens",
+          "line": 425,
+          "end_line": 426
+        },
+        {
+          "name": "_update_prefill_budget",
+          "line": 439,
+          "end_line": 452
+        },
+        {
+          "name": "_lock_node",
+          "line": 474,
+          "end_line": 486
+        },
+        {
+          "name": "add_one_req",
+          "line": 570,
+          "end_line": 662
+        }
+      ]
+    },
+    {
+      "path": "python/sglang/srt/managers/scheduler_output_processor_mixin.py",
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/7ae368efde14f0b2abe769a5fbb99b8154b2a9b7/python/sglang/srt/managers/scheduler_output_processor_mixin.py",
+      "sha256": "309e290e9c91be5b0b5c41b27cc7632e7af9809b221fd426024f4436842f21b4",
+      "bytes": 45181,
+      "matches_perf_evidence": null,
+      "status": "captured",
+      "symbols": [
+        {
+          "name": "process_batch_result_prefill",
+          "line": 64,
+          "end_line": 258
+        },
+        {
+          "name": "process_batch_result_decode",
+          "line": 314,
+          "end_line": 425
+        }
+      ]
+    },
+    {
+      "path": "python/sglang/srt/mem_cache/allocator.py",
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/7ae368efde14f0b2abe769a5fbb99b8154b2a9b7/python/sglang/srt/mem_cache/allocator.py",
+      "sha256": "4c40242b7dafc98cfbc28c396e964b96bcdbdca1d55edc3d8752ad19683a908a",
+      "bytes": 18246,
+      "matches_perf_evidence": null,
+      "status": "captured",
+      "symbols": [
+        {
+          "name": "alloc_extend_kernel",
+          "line": 296,
+          "end_line": 372
+        },
+        {
+          "name": "alloc_decode_kernel",
+          "line": 376,
+          "end_line": 408
+        },
+        {
+          "name": "alloc_extend",
+          "line": 99,
+          "end_line": 100
+        },
+        {
+          "name": "alloc_decode",
+          "line": 102,
+          "end_line": 103
+        },
+        {
+          "name": "alloc_extend",
+          "line": 459,
+          "end_line": 510
+        },
+        {
+          "name": "alloc_decode",
+          "line": 512,
+          "end_line": 549
+        }
+      ]
+    },
+    {
+      "path": "python/sglang/srt/mem_cache/base_prefix_cache.py",
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/7ae368efde14f0b2abe769a5fbb99b8154b2a9b7/python/sglang/srt/mem_cache/base_prefix_cache.py",
+      "sha256": "f09808d0ad143e68c3b91e0be77deb75f884558590038fa73d1b5b0e206a2fdf",
+      "bytes": 4180,
+      "matches_perf_evidence": null,
+      "status": "captured",
+      "symbols": []
+    },
+    {
+      "path": "python/sglang/srt/server_args.py",
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/7ae368efde14f0b2abe769a5fbb99b8154b2a9b7/python/sglang/srt/server_args.py",
+      "sha256": "90ed704ebe01b813446cceb83f3d0da4790a4172e736067f732cc0a369613ebb",
+      "bytes": 193744,
+      "matches_perf_evidence": null,
+      "status": "captured",
+      "symbols": []
+    },
+    {
+      "path": "python/sglang/srt/managers/tokenizer_manager.py",
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/7ae368efde14f0b2abe769a5fbb99b8154b2a9b7/python/sglang/srt/managers/tokenizer_manager.py",
+      "sha256": "12c0fa292bb638132d622791f7baa098ad85769b7a8ed781a893403a378fbde3",
+      "bytes": 105555,
+      "matches_perf_evidence": null,
+      "status": "captured",
+      "symbols": []
+    },
+    {
+      "path": "python/sglang/srt/model_executor/model_runner.py",
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/7ae368efde14f0b2abe769a5fbb99b8154b2a9b7/python/sglang/srt/model_executor/model_runner.py",
+      "sha256": "010d9ac02b0801f964bc7f6c9a0c01c6ad8468d500e4d20acc4bd26899472449",
+      "bytes": 117225,
+      "status": "captured",
+      "matches_perf_evidence": true,
+      "symbols": []
+    },
+    {
+      "path": "python/sglang/srt/mem_cache/common.py",
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/7ae368efde14f0b2abe769a5fbb99b8154b2a9b7/python/sglang/srt/mem_cache/common.py",
+      "sha256": "e82da07bf1a0ac8006fa9b368e51d3723121ba06ff1ffc2c7bf58933d9e71fa3",
+      "bytes": 17176,
+      "status": "captured",
+      "symbols": [
+        {
+          "name": "release_kv_cache",
+          "line": 466,
+          "end_line": 488
+        }
+      ]
+    }
+  ],
+  "scope": "source and AST only; no engine import, CUDA or model run",
+  "captured_at_utc": "2026-11-07T16:06:27.825343+00:00",
+  "performance_reference": {
+    "commit": "72d64f9fd38b2b732c204543ed32f70816cbd207",
+    "attachment": "01a1afc7-c5bd-706e-84ad-e235c8acdbfe"
+  },
+  "deployment_candidate_kept_separate": {
+    "tag": "v0.5.18",
+    "commit": "71de97b264b04dcd514cf904003028aefe9775c8"
+  }
+}
