@@ -1,0 +1,225 @@
+package main
+
+import (
+	"context"
+	"crypto/sha256"
+	"database/sql"
+	"encoding/hex"
+	"encoding/json"
+	"errors"
+	"github.com/go-sql-driver/mysql"
+	"github.com/google/uuid"
+	api "github.com/jianzi123/maas/api/v1alpha1"
+	"github.com/jianzi123/maas/internal/controlapi"
+	"github.com/jianzi123/maas/internal/kernel"
+	"github.com/jianzi123/maas/internal/release"
+	"github.com/jianzi123/maas/internal/release/history"
+	"github.com/jianzi123/maas/internal/release/management"
+	"github.com/jianzi123/maas/internal/release/mysqlstore"
+	"net/http"
+	"net/http/httptest"
+	"net/url"
+	"os"
+	"sigs.k8s.io/yaml"
+	"strings"
+	"testing"
+	"time"
+)
+
+func TestQAProjectionIdentity(t *testing.T) {
+	ctx := context.Background()
+	socket := os.Getenv("MAAS_MYSQL_TEST_SOCKET")
+	if os.Getenv("MAAS_DISPOSABLE_MYSQL") != "1" || !strings.HasPrefix(socket, "/tmp/maas11-mysql.") {
+		t.Fatal("owned MySQL required")
+	}
+	cfg := mysql.NewConfig()
+	cfg.User = "root"
+	cfg.Net = "unix"
+	cfg.Addr = socket
+	cfg.ParseTime = true
+	cfg.Loc = time.UTC
+	admin, e := sql.Open("mysql", cfg.FormatDSN())
+	if e != nil {
+		t.Fatal(e)
+	}
+	defer admin.Close()
+	nonce := strings.ReplaceAll(uuid.NewString(), "-", "")[:16]
+	schema := "qa_reader_" + nonce
+	account := "qa_user_" + nonce
+	role := "qa_role_" + nonce
+	must := func(q string) {
+		t.Helper()
+		if _, e := admin.Exec(q); e != nil {
+			t.Fatal(e)
+		}
+	}
+	must("CREATE DATABASE " + schema)
+	defer admin.Exec("DROP DATABASE " + schema)
+	cfg.DBName = schema
+	db, e := sql.Open("mysql", cfg.FormatDSN())
+	if e != nil {
+		t.Fatal(e)
+	}
+	defer db.Close()
+	if e := kernel.Migrate(ctx, db); e != nil {
+		t.Fatal(e)
+	}
+	if e := mysqlstore.Migrate(ctx, db); e != nil {
+		t.Fatal(e)
+	}
+	sample, e := os.ReadFile("../../config/samples/MAAS-2-modelrelease-externalapi-v0.4.example.yaml")
+	if e != nil {
+		t.Fatal(e)
+	}
+	var model api.ModelRelease
+	if e := yaml.Unmarshal(sample, &model); e != nil {
+		t.Fatal(e)
+	}
+	resolution := release.Resolution{Versions: map[string]string{"authorization_domain": "qa-domain"}, GatewayNamespace: model.Namespace, IngressClass: "higress", HostSuffix: "private.invalid", EndpointDNS: "private.invalid", EndpointPort: 443, CredentialHandle: "qa-private-handle", PluginDigest: "qa-test"}
+	d := release.Desired{CRUID: uuid.NewString(), Namespace: model.Namespace, Name: model.Name, Alias: model.Spec.ModelAlias, Gateway: model.Spec.GatewayRef, Generation: 1, Revision: release.Revision(model.Spec, resolution), History: &release.HistoryCapture{Spec: model.Spec, Resolution: resolution, ResourceVersion: "1", AuthorizationDomain: "qa-domain"}}
+	publisher, e := mysqlstore.New(db, "qa-reader", nil)
+	if e != nil {
+		t.Fatal(e)
+	}
+	if _, e := publisher.Observe(ctx, d); e != nil {
+		t.Fatal(e)
+	}
+	must("CREATE ROLE '" + role + "'")
+	defer admin.Exec("DROP ROLE '" + role + "'")
+	must("CREATE USER '" + account + "'@'localhost'")
+	defer admin.Exec("DROP USER '" + account + "'@'localhost'")
+	raw, e := os.ReadFile("../../config/mysql/release-permissions.sql")
+	if e != nil {
+		t.Fatal(e)
+	}
+	s := string(raw)
+	s = s[strings.Index(s, "CREATE ROLE IF NOT EXISTS maas_release_history_reader;"):]
+	s = strings.ReplaceAll(strings.ReplaceAll(s, "__MAAS_DATABASE__", schema), "maas_release_history_reader", "'"+role+"'")
+	for _, q := range strings.Split(s, ";") {
+		if strings.TrimSpace(q) != "" {
+			must(q)
+		}
+	}
+	must("GRANT '" + role + "' TO '" + account + "'@'localhost'")
+	must("SET DEFAULT ROLE '" + role + "' TO '" + account + "'@'localhost'")
+	cfg.User = account
+	projection, e := openProjectionDB(cfg.FormatDSN())
+	if e != nil {
+		t.Fatal(e)
+	}
+	defer projection.Close()
+	access := history.NamespaceAccess{Namespaces: map[string]bool{d.Namespace: true}, Domains: map[string]bool{"qa-domain": true}, ScopeID: "qa-scope"}
+	reader := &history.Reader{DB: projection, Cluster: "qa-reader", CursorKey: []byte(strings.Repeat("q", 32)), Access: access}
+	evidence := []map[string]any{}
+	t.Run("actual_identity_and_default_role", func(t *testing.T) {
+		var user, currentRole string
+		if e := projection.QueryRow("SELECT CURRENT_USER(),CURRENT_ROLE()").Scan(&user, &currentRole); e != nil {
+			t.Fatal(e)
+		}
+		if !strings.HasPrefix(user, account+"@") || !strings.Contains(currentRole, role) {
+			t.Fatal("wrong connection identity/default role")
+		}
+		t.Log("distinct SELECT-only identity with explicit default role confirmed")
+	})
+	t.Run("nonempty_history_projection_is_readable", func(t *testing.T) {
+		page, e := reader.ReadRevisions(ctx, d.Namespace, d.Name, url.Values{"cr_uid": {d.CRUID}})
+		if e != nil {
+			t.Fatal(e)
+		}
+		rows := page["data"].([]any)
+		if len(rows) != 1 || page["requested_cr_uid"] != d.CRUID || rows[0].(map[string]any)["revision"] != d.Revision {
+			t.Fatal(page)
+		}
+		b, _ := json.Marshal(page)
+		if strings.Contains(string(b), "qa-private-handle") || strings.Contains(string(b), "private.invalid") || strings.Contains(string(b), "spec_bytes") {
+			t.Fatal("payload leaked")
+		}
+		evidence = append(evidence, map[string]any{"case": t.Name(), "rows": len(rows), "cr_uid": d.CRUID})
+	})
+	for _, tc := range []struct{ name, q string }{
+		{"raw_spec_denied", "SELECT spec_bytes FROM retained_release_snapshots"},
+		{"keys_denied", "SELECT * FROM platform_keys"},
+		{"ledger_denied", "SELECT * FROM usage_events"},
+		{"release_write_denied", "UPDATE release_links SET admission_closed=FALSE"},
+		{"operation_write_denied", "INSERT INTO release_management_operations(cluster_id) VALUES('bad')"},
+		{"ddl_denied", "CREATE TABLE qa_denied(id INT)"},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			rows, e := projection.Query(tc.q)
+			if rows != nil {
+				rows.Close()
+			}
+			var me *mysql.MySQLError
+			if e == nil || !errors.As(e, &me) || (me.Number != 1142 && me.Number != 1143 && me.Number != 1227) {
+				t.Fatalf("must be permission refusal, got %T %v", e, e)
+			}
+			evidence = append(evidence, map[string]any{"case": t.Name(), "mysql_permission_code": me.Number})
+		})
+	}
+	t.Run("missing_connection_has_no_core_fallback", func(t *testing.T) {
+		p, e := openProjectionDB("")
+		if p != nil || e != nil {
+			t.Fatal("fallback")
+		}
+		copy := *reader
+		copy.DB = p
+		digest := func(s string) string { x := sha256.Sum256([]byte(s)); return hex.EncodeToString(x[:]) }
+		core, e := kernel.New(db, "qa-reader", []byte(strings.Repeat("x", 32)), nil, nil)
+		if e != nil {
+			t.Fatal(e)
+		}
+		handler := controlapi.Handler{Core: core, Sessions: controlapi.BootstrapSession{SessionSHA256: digest(strings.Repeat("q", 64)), CSRFSHA256: digest(strings.Repeat("c", 64)), Expires: time.Now().Add(time.Minute), Origin: "http://127.0.0.1"}, Revisions: &copy}
+		req := httptest.NewRequest("GET", "http://127.0.0.1/api/admin/v1/model-releases/"+d.Namespace+"/"+d.Name+"/revisions?cr_uid="+d.CRUID, nil)
+		req.AddCookie(&http.Cookie{Name: "maas_session", Value: strings.Repeat("q", 64)})
+		rec := httptest.NewRecorder()
+		handler.ServeHTTP(rec, req)
+		if rec.Code != 503 {
+			t.Fatalf("missing DB HTTP=%d", rec.Code)
+		}
+	})
+	t.Run("missing_operations_refuses_startup", func(t *testing.T) {
+		t.Setenv("MAAS_CONTROL_LISTEN", "127.0.0.1:0")
+		t.Setenv("MAAS_ADMIN_EXPIRES", time.Now().Add(time.Minute).UTC().Format(time.RFC3339))
+		t.Setenv("MAAS_ADMIN_SESSION_SHA256", strings.Repeat("a", 64))
+		t.Setenv("MAAS_ADMIN_CSRF_SHA256", strings.Repeat("b", 64))
+		t.Setenv("MAAS_ADMIN_ORIGIN", "http://127.0.0.1")
+		rootCfg := cfg
+		rootCfg.User = "root"
+		t.Setenv("MAAS_MYSQL_DSN", rootCfg.FormatDSN())
+		t.Setenv("MAAS_CLUSTER_ID", "qa-reader")
+		t.Setenv("MAAS_KEY_PEPPER", strings.Repeat("x", 32))
+		t.Setenv("MAAS_HISTORY_READER_DSN", cfg.FormatDSN())
+		t.Setenv("MAAS_OPERATIONS_DSN", "")
+		t.Setenv("MAAS_HISTORY_NAMESPACES", d.Namespace)
+		t.Setenv("MAAS_HISTORY_SCOPE", "qa-scope")
+		t.Setenv("MAAS_HISTORY_DOMAINS", "qa-domain")
+		t.Setenv("MAAS_HISTORY_CURSOR_KEY", strings.Repeat("q", 32))
+		t.Setenv("MAAS_HISTORY_KUBECONFIG", "")
+		t.Setenv("MAAS_RELEASE_MANAGEMENT", "1")
+		if e := run(); e == nil || e.Error() != "explicit management operation connection required" {
+			t.Fatalf("startup error=%v", e)
+		}
+	})
+	t.Run("unreachable_connection_error_is_sanitized", func(t *testing.T) {
+		bad := cfg
+		bad.User = "qa-private-name"
+		bad.Net = "unix"
+		bad.Addr = "/tmp/qa-private-nonexistent.sock"
+		p, e := openProjectionDB(bad.FormatDSN())
+		if e == nil || p != nil || strings.Contains(e.Error(), "qa-private") {
+			t.Fatal("unsanitized failure")
+		}
+	})
+	t.Run("operation_identity_is_distinct_and_readonly", func(t *testing.T) {
+		op := management.Operations{DB: projection, Cluster: "qa-reader", Access: access}
+		if _, e := op.Read(ctx, uuid.NewString()); e != history.ErrUnavailable {
+			t.Fatalf("history identity must not read operations %v", e)
+		}
+	})
+	if path := os.Getenv("MAAS_QA_READER_EVIDENCE"); path != "" {
+		raw, _ := json.MarshalIndent(evidence, "", "  ")
+		if e := os.WriteFile(path, raw, 0600); e != nil {
+			t.Fatal(e)
+		}
+	}
+}
