@@ -1,0 +1,18 @@
+# Build from approved MAAS-3/11 source tree plus deploy/ overlay.
+# Both image arguments MUST use approved registry/repository@sha256:<digest>.
+ARG GO_IMAGE
+ARG RUNTIME_IMAGE
+FROM ${GO_IMAGE} AS build
+WORKDIR /src
+COPY go.mod go.sum ./
+RUN go mod download
+COPY . .
+ARG TARGETOS=linux
+ARG TARGETARCH=amd64
+RUN CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -trimpath -buildvcs=false -o /out/operator ./cmd/operator
+RUN CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -trimpath -buildvcs=false -o /out/maas-probe ./deploy/probe
+FROM ${RUNTIME_IMAGE}
+COPY --from=build /out/operator /operator
+COPY --from=build /out/maas-probe /maas-probe
+USER 65532:65532
+ENTRYPOINT ["/operator"]

@@ -1,0 +1,71 @@
+{{- if .Values.operator.enabled }}
+# Current manager watches CRs cluster-wide; no Secret or workload write grants.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ include "maas.name" . }}-{{ .Release.Namespace }}-watch
+  labels:
+    {{- include "maas.labels" . | nindent 4 }}
+rules:
+  - apiGroups: [{{ .Values.api.group | quote }}]
+    resources: [modelreleases]
+    verbs: [get, list, watch]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: {{ include "maas.name" . }}-{{ .Release.Namespace }}-watch
+roleRef: {apiGroup: rbac.authorization.k8s.io, kind: ClusterRole, name: {{ include "maas.name" . }}-{{ .Release.Namespace }}-watch}
+subjects:
+  - {kind: ServiceAccount, name: {{ include "maas.name" . }}-operator, namespace: {{ .Release.Namespace }}}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: {{ include "maas.name" . }}-operator
+  namespace: {{ .Release.Namespace }}
+rules:
+  - apiGroups: [{{ .Values.api.group | quote }}]
+    resources: [modelreleases, modelreleases/status, modelreleases/finalizers]
+    verbs: [get, update, patch]
+  - apiGroups: [coordination.k8s.io]
+    resources: [leases]
+    verbs: [get, list, watch, create, update, patch]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: {{ include "maas.name" . }}-operator
+  namespace: {{ .Release.Namespace }}
+roleRef: {apiGroup: rbac.authorization.k8s.io, kind: Role, name: {{ include "maas.name" . }}-operator}
+subjects:
+  - {kind: ServiceAccount, name: {{ include "maas.name" . }}-operator, namespace: {{ .Release.Namespace }}}
+---
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingWebhookConfiguration
+metadata:
+  name: {{ include "maas.name" . }}-{{ .Release.Namespace }}
+webhooks:
+  - name: modelrelease.{{ .Values.api.group }}
+    admissionReviewVersions: [v1]
+    sideEffects: None
+    failurePolicy: Fail
+    matchPolicy: Equivalent
+    timeoutSeconds: 5
+    namespaceSelector:
+      matchLabels:
+        kubernetes.io/metadata.name: {{ .Release.Namespace }}
+    clientConfig:
+      service:
+        name: {{ include "maas.name" . }}-operator
+        namespace: {{ .Release.Namespace }}
+        port: 443
+        path: /validate-modelrelease
+      caBundle: {{ required "operator.webhookCABundle is required" .Values.operator.webhookCABundle | quote }}
+    rules:
+      - operations: [CREATE, UPDATE]
+        apiGroups: [{{ .Values.api.group | quote }}]
+        apiVersions: [{{ .Values.api.version | quote }}]
+        resources: [modelreleases]
+        scope: Namespaced
+{{- end }}

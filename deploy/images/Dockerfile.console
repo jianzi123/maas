@@ -1,0 +1,26 @@
+# Context: reviewed console source tree plus this deploy/ overlay. All bases need digests.
+ARG NODE_IMAGE
+ARG GO_IMAGE
+ARG RUNTIME_IMAGE
+FROM ${NODE_IMAGE} AS web
+WORKDIR /src/console
+COPY console/package.json console/package-lock.json ./
+RUN npm ci
+COPY console/ ./
+RUN npm run build
+FROM ${GO_IMAGE} AS binaries
+WORKDIR /src
+COPY deploy/ deploy/
+COPY go.mod go.sum ./
+COPY internal/webconsole/ internal/webconsole/
+ARG TARGETOS=linux
+ARG TARGETARCH=amd64
+RUN CGO_ENABLED=0 GOTOOLCHAIN=local GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -trimpath -o /out/maas-console ./deploy/console-server
+RUN CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -trimpath -o /out/maas-probe ./deploy/probe/main.go
+FROM ${RUNTIME_IMAGE}
+COPY --from=web /src/console/dist /app/dist
+COPY --from=binaries /out/maas-console /maas-console
+COPY --from=binaries /out/maas-probe /maas-probe
+USER 65532:65532
+EXPOSE 8080
+ENTRYPOINT ["/maas-console"]
