@@ -209,6 +209,7 @@ func (r *Relay) Forward(ctx context.Context, w http.ResponseWriter, call RelayCa
 		if _, err = normalizeResponse(body, call.Input, usage); err != nil {
 			return abort("parse_invalid", "failed", "not_provided", "upstream_protocol_error", nil)
 		}
+		usage = approvedResponseUsage(call.Input.Profile.UsagePolicy, usage)
 		if err = end("normal_completion", "succeeded", usage, nil); err != nil {
 			errorOutput("accounting_unavailable")
 			return err
@@ -233,7 +234,7 @@ func (r *Relay) Forward(ctx context.Context, w http.ResponseWriter, call RelayCa
 		return err
 	}
 	reader := newPublicEventReader(resp.Body, r.maxLine, r.maxBytes)
-	usage := unavailableUsage("not_provided")
+	authority := usageAuthority{policy: call.Input.Profile.UsagePolicy}
 	var first *int64
 	seenFinish, seenDone := false, false
 	for {
@@ -269,14 +270,13 @@ func (r *Relay) Forward(ctx context.Context, w http.ResponseWriter, call RelayCa
 			return abort("parse_invalid", "failed", "not_provided", "upstream_protocol_error", first)
 		}
 		if ok {
-			if usage.Source == "upstream" && !monotonicUsage(usage, u) {
-				cancel()
-				return abort("usage_conflict", "failed", "not_provided", "upstream_protocol_error", first)
-			}
 			if err = diagnostic.append("receipt", &u, ""); err != nil {
 				return receiptFailure(err, first)
 			}
-			usage = u
+			if authority.observe(u) != nil {
+				cancel()
+				return abort("usage_conflict", "failed", "not_provided", "upstream_protocol_error", first)
+			}
 		}
 		out, finished, err := normalizeChunk(data, call.Input)
 		if err != nil {
@@ -284,6 +284,9 @@ func (r *Relay) Forward(ctx context.Context, w http.ResponseWriter, call RelayCa
 			return abort("parse_invalid", "failed", "not_provided", "upstream_protocol_error", first)
 		}
 		seenFinish = seenFinish || finished
+		if finished {
+			authority.finish()
+		}
 		if sendCtx.Err() != nil {
 			result, reason := relayFailure(ctx, sendCtx, sendCtx.Err(), "interrupted")
 			cause, code := "deadline_exceeded", "upstream_timeout"
@@ -302,7 +305,7 @@ func (r *Relay) Forward(ctx context.Context, w http.ResponseWriter, call RelayCa
 			return abort("client_write_error", result, reason, "client_cancelled", first)
 		}
 	}
-	if e = end("normal_completion", "succeeded", usage, first); e != nil {
+	if e = end("normal_completion", "succeeded", authority.result(), first); e != nil {
 		errorOutput("accounting_unavailable")
 		return e
 	}
