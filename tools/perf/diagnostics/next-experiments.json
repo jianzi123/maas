@@ -1,0 +1,95 @@
+{
+  "schema_version": "performance-next-batch-1.0",
+  "execution_enabled": false,
+  "primary_metric": "goodput under confirmed client latency and model quality constraints",
+  "confirmed_slo": null,
+  "quality_policy_ref": null,
+  "gain_threshold": null,
+  "independent_reviewer": "MAAS-7",
+  "invariants": [
+    "unique Go/MySQL admission and settlement",
+    "fixed source/attempt/revision",
+    "unknown actual remains null",
+    "held and slot/stop are separate"
+  ],
+  "experiments": [
+    {
+      "id": "D1",
+      "state": "controlled_fixture_ready",
+      "scope": "diagnostic import and sampler agreement",
+      "single_factor": "collector/export mapping correction",
+      "baseline": "existing metric fixture and pinned original sampler",
+      "commands": [
+        "python tools/perf/diagnostics/run.py --metrics-input tools/perf/fixtures/synthetic.json --timeline-input tools/perf/diagnostics/fixtures/timeline.synthetic.json --output-dir tools/perf/reports/diagnostic-demo",
+        "python -m unittest discover -s tools/perf/diagnostics -p test_diagnostics.py -v"
+      ],
+      "requires": [
+        "existing jsonschema 4.25.0"
+      ],
+      "success": "hand-worked union/chain, full denominators, unknown/mismatch paths verified; no model claim"
+    },
+    {
+      "id": "E1",
+      "state": "awaiting_inputs",
+      "scope": "protected platform plus controlled upstream",
+      "single_factor": "one approved transport/flush/export change",
+      "baseline": "same fixed Go/Higress/core revision and business policy",
+      "commands": [],
+      "requires": [
+        "MAAS-3/11 real export port and sampler semantics",
+        "MAAS-8 authorized local environment and actual gateway/Secret/validation",
+        "approved Key/price/budget/rate/slot/caps",
+        "client full sent roster, server R and clock calibration",
+        "MAAS-2 shared additions if needed"
+      ],
+      "success": "same protected source/accounting; client TTFT/TPOT/E2E, errors/pending/recovery and costs with coverage"
+    },
+    {
+      "id": "K1",
+      "state": "awaiting_inputs",
+      "scope": "operator microbenchmark",
+      "single_factor": "one backend/layout parameter after profile evidence",
+      "baseline": "target version mature cuBLAS/native SDPA/RMSNorm",
+      "commands": [
+        "python tools/perf/operators/profile_operator.py --tool nsys --case gemm-tail --output-dir tools/perf/reports/profile-plan"
+      ],
+      "requires": [
+        "approved GPU/limits and compatible toolchain",
+        "fixed shape/dtype/strides and precision",
+        "finite/numerical gate and quality tolerance",
+        "separate normal timing and sampled runs"
+      ],
+      "success": "local correctness and cost; no runtime/platform extrapolation"
+    },
+    {
+      "id": "R1",
+      "state": "awaiting_inputs",
+      "scope": "full engine chunk/queue/KV",
+      "single_factor": "one prefill chunk from frozen mature baseline",
+      "baseline": "target engine existing tuned static and enabled dynamic predictor",
+      "commands": [],
+      "requires": [
+        "MAAS-9 approved model/weights/tokenizer/template and quality",
+        "MAAS-8 GPU topology/versions/limits/profiler",
+        "same J02 manifest, resource/precision/SLO and caps",
+        "production engine trace export and rank/batch association"
+      ],
+      "success": "client SLO goodput plus long/short tails, memory/errors/recompute; current CPU age_fair parameters remain rejected"
+    },
+    {
+      "id": "R2",
+      "state": "awaiting_inputs",
+      "scope": "Graph or communication",
+      "single_factor": "one capture set or one overlap organization only when timeline supports",
+      "baseline": "current graph/collective implementation with mature overlap retained",
+      "commands": [],
+      "requires": [
+        "R1 real profile",
+        "same total GPU/rank/topology",
+        "capture/padding/KV memory accounting",
+        "all-rank numerical and failure checks"
+      ],
+      "success": "reduce exposed critical work with no quality/latency/memory/business regression"
+    }
+  ]
+}

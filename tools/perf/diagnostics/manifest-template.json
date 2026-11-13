@@ -1,0 +1,47 @@
+{
+  "schema_version": "diagnostic-manifest-1.0",
+  "phase": "steady",
+  "source_type": "unknown",
+  "execution_enabled": false,
+  "model": {
+    "model_alias": null,
+    "weights_sha256": null,
+    "tokenizer_sha256": null,
+    "template_sha256": null,
+    "dtype": null,
+    "quantization": null
+  },
+  "runtime": {
+    "framework_commit": null,
+    "image_digest": null,
+    "driver": null,
+    "cuda": null,
+    "libraries": null,
+    "config_sha256": null
+  },
+  "hardware": {
+    "gpu_model": null,
+    "gpu_count": null,
+    "gpu_memory_bytes": null,
+    "interconnect": null,
+    "rank_map_ref": null,
+    "cpu": null,
+    "network": null,
+    "resource_limits": null
+  },
+  "workload": {
+    "sequence_sha256": null,
+    "arrival_plan": null,
+    "concurrency": null,
+    "prefix_state": null,
+    "seed": null,
+    "deadline_rule": null
+  },
+  "policy": {
+    "confirmed_slo": null,
+    "quality_policy_ref": null,
+    "budget_price_ref": null,
+    "resource_caps": null,
+    "approval_ref": null
+  }
+}

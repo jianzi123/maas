@@ -8,6 +8,10 @@
 
 本恢复批次新增[页预算调度与负结果](engineering/14-page-budget-scheduling.md)：复用MAAS-13源码输入，执行固定J02对照，保留失败/未恢复样本，定位first_chunk_ms无内容事件采样。
 
+## 端到端诊断入口
+
+当前体系工作从[诊断交付与缺口盘点](diagnostics.md)进入，使用[tools/perf/diagnostics](../../tools/perf/diagnostics/README.md)把原指标、受控sidecar、区间/显式依赖、恢复与证据索引连成JSON/HTML报告。真实测量不足时只报缺口，不命名模型瓶颈。后续单因素实验与输入门槛在同一交付页，教材作为实现/排障参考。
+
 ## 先按工作选择路线
 
 | 你现在要做什么 | 阅读与操作顺序 | 交付 |
