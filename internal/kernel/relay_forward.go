@@ -3,6 +3,7 @@ package kernel
 import (
 	"bytes"
 	"context"
+	"database/sql"
 	"encoding/json"
 	"errors"
 	"github.com/google/uuid"
@@ -88,6 +89,17 @@ func (r *Relay) Forward(ctx context.Context, w http.ResponseWriter, call RelayCa
 	diagnostic := &relayDiagnostics{core: r.core, call: call}
 	wrote := false
 	finalCode := ""
+	completionStopped := errors.New("completion stopped before commit")
+	stopped := func() bool {
+		return sendCtx.Err() != nil || ctx.Err() != nil || !time.Now().Before(call.Input.Deadline)
+	}
+	stopResult := func() (string, string) {
+		result, _ := relayFailure(ctx, sendCtx, sendCtx.Err(), "timed_out")
+		if result == "cancelled" {
+			return result, "client_cancelled"
+		}
+		return "timed_out", "upstream_timeout"
+	}
 	finish := func(result string, usage Usage, first *int64) error {
 		terminalCtx, done := context.WithTimeout(context.Background(), 5*time.Second)
 		defer done()
@@ -96,7 +108,40 @@ func (r *Relay) Forward(ctx context.Context, w http.ResponseWriter, call RelayCa
 			return ErrUnavailable
 		}
 		f := Final{ErrorCode: finalCode, EventID: uuid.NewSHA1(uuid.NameSpaceOID, []byte(call.Input.RequestID+"/owner-terminal")).String(), RequestID: call.Input.RequestID, Owner: call.Input.Owner, OwnerFence: 1, Result: result, Usage: usage, FirstChunkMS: first, Submitted: result == "succeeded"}
-		if e = r.core.Finalize(terminalCtx, f); e != nil {
+		if result == "succeeded" {
+			e = r.core.finalizeChecked(terminalCtx, f, func(tx *sql.Tx) error {
+				if stopped() {
+					return completionStopped
+				}
+				t, err := now(terminalCtx, tx)
+				if err != nil {
+					return err
+				}
+				if !t.Before(snap.Input.Deadline) || stopped() {
+					return completionStopped
+				}
+				return nil
+			})
+			if errors.Is(e, completionStopped) {
+				f.Result, finalCode = stopResult()
+				f.ErrorCode = finalCode
+				f.Usage = unavailableUsage("not_provided")
+				f.Submitted = false
+				cause := "deadline_exceeded"
+				if f.Result == "cancelled" {
+					cause = "explicit_cancel"
+				}
+				_ = diagnostic.append("termination", nil, cause)
+				if err := r.core.Finalize(terminalCtx, f); err != nil {
+					return err
+				}
+				sample.Result = f.Result
+				return completionStopped
+			}
+		} else {
+			e = r.core.Finalize(terminalCtx, f)
+		}
+		if e != nil {
 			return e
 		}
 		_, state, e = r.core.ReadRequest(terminalCtx, call.Input.RequestID)
@@ -116,6 +161,14 @@ func (r *Relay) Forward(ctx context.Context, w http.ResponseWriter, call RelayCa
 		return unavailableUsage(reason)
 	}
 	end := func(cause, result string, usage Usage, first *int64) error {
+		if result == "succeeded" && stopped() {
+			result, finalCode = stopResult()
+			usage = unavailableUsage("not_provided")
+			cause = "deadline_exceeded"
+			if result == "cancelled" {
+				cause = "explicit_cancel"
+			}
+		}
 		diagErr := diagnostic.append("termination", nil, cause)
 		if diagErr != nil {
 			if result == "succeeded" {
@@ -124,6 +177,11 @@ func (r *Relay) Forward(ctx context.Context, w http.ResponseWriter, call RelayCa
 			usage = unavailableUsage("not_provided")
 		}
 		err := finish(result, usage, first)
+		if finalCode == "client_cancelled" || finalCode == "upstream_timeout" {
+			if err == nil {
+				return completionStopped
+			}
+		}
 		if diagErr != nil {
 			return ErrUnavailable
 		}
@@ -229,7 +287,11 @@ func (r *Relay) Forward(ctx context.Context, w http.ResponseWriter, call RelayCa
 		}
 		usage = approvedResponseUsage(call.Input.Profile.UsagePolicy, usage)
 		if err = end("normal_completion", "succeeded", usage, nil); err != nil {
-			errorOutput("accounting_unavailable")
+			code := "accounting_unavailable"
+			if errors.Is(err, completionStopped) {
+				code = finalCode
+			}
+			errorOutput(code)
 			return err
 		}
 		terminalCtx, done := context.WithTimeout(context.Background(), 5*time.Second)
@@ -260,6 +322,14 @@ func (r *Relay) Forward(ctx context.Context, w http.ResponseWriter, call RelayCa
 		receivedAt := time.Now() // before receipt DB work or downstream Write/Flush
 		if err != nil {
 			if err == io.EOF && seenDone && seenFinish {
+				if stopped() {
+					result, reason := relayFailure(ctx, sendCtx, sendCtx.Err(), "timed_out")
+					cause, code := "deadline_exceeded", "upstream_timeout"
+					if result == "cancelled" {
+						cause, code = "explicit_cancel", "client_cancelled"
+					}
+					return abort(cause, result, reason, code, first)
+				}
 				break
 			}
 			result, reason := relayFailure(ctx, sendCtx, err, "interrupted")
@@ -302,6 +372,12 @@ func (r *Relay) Forward(ctx context.Context, w http.ResponseWriter, call RelayCa
 			cancel()
 			return abort("parse_invalid", "failed", "not_provided", "upstream_protocol_error", first)
 		}
+		if seenFinish {
+			choices, _ := out["choices"].([]any)
+			if len(choices) > 0 {
+				return abort("parse_invalid", "failed", "not_provided", "upstream_protocol_error", first)
+			}
+		}
 		if r.Sampler != nil && sample.ProtocolMS == nil {
 			sample.ProtocolMS = elapsedMS(start, receivedAt)
 		}
@@ -333,7 +409,11 @@ func (r *Relay) Forward(ctx context.Context, w http.ResponseWriter, call RelayCa
 		}
 	}
 	if e = end("normal_completion", "succeeded", authority.result(), first); e != nil {
-		errorOutput("accounting_unavailable")
+		code := "accounting_unavailable"
+		if errors.Is(e, completionStopped) {
+			code = finalCode
+		}
+		errorOutput(code)
 		return e
 	}
 	terminalCtx, done := context.WithTimeout(context.Background(), 5*time.Second)
@@ -352,6 +432,13 @@ func (r *Relay) Forward(ctx context.Context, w http.ResponseWriter, call RelayCa
 	if e = writeChunk(out); e != nil {
 		_ = diagnostic.append("termination", nil, "client_write_error")
 		return e
+	}
+	// The original terminal is already committed here. Late cancellation affects
+	// transport only; never reopen accounting or issue a second terminal.
+	if stopped() {
+		_, code := stopResult()
+		errorOutput(code)
+		return completionStopped
 	}
 	_, e = io.WriteString(w, "data: [DONE]\n\n")
 	if e != nil {

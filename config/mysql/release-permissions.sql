@@ -28,6 +28,10 @@ GRANT SELECT ON __MAAS_DATABASE__.active_model_bindings TO maas_release_reader;
 GRANT SELECT,INSERT ON __MAAS_DATABASE__.retained_release_snapshots TO maas_release_publisher;
 GRANT SELECT,INSERT,UPDATE(history_seq) ON __MAAS_DATABASE__.release_history_owners TO maas_release_publisher;
 GRANT SELECT,INSERT ON __MAAS_DATABASE__.release_history_retention TO maas_release_publisher;
+-- Same-transaction management completion projection; no operation creation or
+-- edits of action/spec/expected_rv, and no inherited management/core writer role.
+GRANT SELECT(cluster_id,operation_id,cr_uid,namespace,name,requested_generation,state,acknowledged,desired_state,action,spec_sha256) ON __MAAS_DATABASE__.release_management_operations TO maas_release_publisher;
+GRANT UPDATE(state,reason,publication_id,updated_at) ON __MAAS_DATABASE__.release_management_operations TO maas_release_publisher;
 CREATE ROLE IF NOT EXISTS maas_release_history_reader;
 GRANT SELECT ON __MAAS_DATABASE__.release_history_directory TO maas_release_history_reader;
 GRANT SELECT ON __MAAS_DATABASE__.release_history_projection TO maas_release_history_reader;
