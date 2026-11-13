@@ -29,6 +29,10 @@ CPU报告独立于ObservationEnvelope/终态，不作为生产导出；原协议
 
 [异步运行时闭环](engineering/13-runtime-loop.md)已连接保守调度、KV页池、Manual/CPU线程Worker与有界输出队列。它验证内部资源与事件顺序，不读写Go/MySQL、Higress、目标集群或业务slot。真实GPU/KV向量和受保护调用接线仍由对应阶段与原负责人完成。
 
+## 页预算调度与采样交接
+
+[第14章](engineering/14-page-budget-scheduling.md)记录MAAS-13 S1的可执行CPU输入与对照。候选age策略在相同截止完成更少，保留淘汰结论；实际SGLang/模型profile仍待授权。后端e1bd502的first_chunk_ms无content判断已由源码与离线事件复现定位，具体修补与公共测点含义由原后端/架构师收口，性能代码不修改业务协议。
+
 ## 两条研发主线在同一调用链汇合
 
 ![两条建设主线与一个诊断出口](foundations/figures/integration.svg)

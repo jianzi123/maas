@@ -4,6 +4,8 @@
 
 最新接续见[第13章：受控异步运行时](13-runtime-loop.md)，已将Scheduler、PagePool和Worker接成可运行CPU闭环，补七个故障/背压场景与38项回归；原八类算法实验接口保留。
 
+最新调度工作见[第14章：页预算与Prefill/Decode](14-page-budget-scheduling.md)，包含完整同步算法、J02配对对照、固定源码预算探针和首片采样交接。当前年龄公平参数的净收益被负结果否定。
+
 ## 章节与实现对应
 
 | 章节 | 主要内容 | 可核查实现 |
@@ -21,6 +23,7 @@
 | [11 源码追踪](11-sglang-source.md) | 固定SHA调度/Graph/KV/backend调用链与阅读作业 | 8份hash/AST审计 |
 | [12 工程作业](12-engineering-projects.md) | 实现任务、反例、证据与评审矩阵 | 跨模块练习与阶段交付 |
 | [13 异步运行时](13-runtime-loop.md) | 计划/提交/完成、输出信用、取消/代次隔离、真实CPU线程 | runtime_core/runtime_worker/runtime_lab |
+| [14 页预算调度](14-page-budget-scheduling.md) | 接纳/切块/饥饿边界、实际页预算、对照与负结果 | tools/perf/scheduling |
 
 ## 直接运行
 

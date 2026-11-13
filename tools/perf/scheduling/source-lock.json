@@ -1,0 +1,57 @@
+{
+  "schema_version": "pd-source-lock-1.0",
+  "files": [
+    {
+      "commit": "7ae368efde14f0b2abe769a5fbb99b8154b2a9b7",
+      "path": "python/sglang/srt/managers/schedule_policy.py",
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/7ae368efde14f0b2abe769a5fbb99b8154b2a9b7/python/sglang/srt/managers/schedule_policy.py",
+      "sha256": "c96540ead5285cbd59faf74d7c5f3f1bb10022cb6add27dd838627598d4c8bf2",
+      "bytes": 29599,
+      "verified_against": "MAAS-13 source-lock or MAAS-12 v1.4 code_sources",
+      "evidence": "official bytes/AST, not engine execution"
+    },
+    {
+      "commit": "7ae368efde14f0b2abe769a5fbb99b8154b2a9b7",
+      "path": "python/sglang/srt/managers/scheduler.py",
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/7ae368efde14f0b2abe769a5fbb99b8154b2a9b7/python/sglang/srt/managers/scheduler.py",
+      "sha256": "7edb20e66d976cd42a696aa00abc26d7e531b8f183939c0f98ac46737909c1fe",
+      "bytes": 110877,
+      "verified_against": "MAAS-13 source-lock or MAAS-12 v1.4 code_sources",
+      "evidence": "official bytes/AST, not engine execution"
+    },
+    {
+      "commit": "7ae368efde14f0b2abe769a5fbb99b8154b2a9b7",
+      "path": "python/sglang/srt/mem_cache/allocator.py",
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/7ae368efde14f0b2abe769a5fbb99b8154b2a9b7/python/sglang/srt/mem_cache/allocator.py",
+      "sha256": "4c40242b7dafc98cfbc28c396e964b96bcdbdca1d55edc3d8752ad19683a908a",
+      "bytes": 18246,
+      "verified_against": "MAAS-13 source-lock or MAAS-12 v1.4 code_sources",
+      "evidence": "official bytes/AST, not engine execution"
+    },
+    {
+      "commit": "71de97b264b04dcd514cf904003028aefe9775c8",
+      "path": "python/sglang/srt/managers/schedule_policy.py",
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/71de97b264b04dcd514cf904003028aefe9775c8/python/sglang/srt/managers/schedule_policy.py",
+      "sha256": "7fa154986e574cabdbc341875401a59a7a388f94c548f11bf3d2bd7badc131d4",
+      "bytes": 62823,
+      "verified_against": "MAAS-13 source-lock or MAAS-12 v1.4 code_sources",
+      "evidence": "official bytes/AST, not engine execution"
+    },
+    {
+      "commit": "71de97b264b04dcd514cf904003028aefe9775c8",
+      "path": "python/sglang/srt/mem_cache/allocator/base.py",
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/71de97b264b04dcd514cf904003028aefe9775c8/python/sglang/srt/mem_cache/allocator/base.py",
+      "sha256": "bef214db92cd02170caa825fe2880c59a441d9b606868e60fc38ead2b140ab5e",
+      "bytes": 4967,
+      "verified_against": "MAAS-13 source-lock or MAAS-12 v1.4 code_sources",
+      "evidence": "official bytes/AST, not engine execution"
+    },
+    {
+      "commit": "71de97b264b04dcd514cf904003028aefe9775c8",
+      "path": "python/sglang/srt/managers/scheduler.py",
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/71de97b264b04dcd514cf904003028aefe9775c8/python/sglang/srt/managers/scheduler.py",
+      "sha256": "968a507c1919cb5293cc72a7dc033f2415cb27430c79cb00f0a3893a3b8e011c",
+      "bytes": 219367
+    }
+  ]
+}
