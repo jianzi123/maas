@@ -1,0 +1,230 @@
+{
+  "version": "0.5.2",
+  "tag": "v0.5.2",
+  "commit": "b0d25e72c401f37b55d689ddbf05b8c583afe854",
+  "evidence": "installed_source_and_upstream_comparison",
+  "model_execution": false,
+  "all_match": true,
+  "files": [
+    {
+      "path": "srt/entrypoints/engine.py",
+      "wheel_sha256": "771803c06d7888dd3c480626f6707fde7c7777da061dcfc1c318fbad94ff064a",
+      "bytes": 33834,
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/b0d25e72c401f37b55d689ddbf05b8c583afe854/python/sglang/srt/entrypoints/engine.py",
+      "upstream_sha256": "771803c06d7888dd3c480626f6707fde7c7777da061dcfc1c318fbad94ff064a",
+      "matches_upstream": true,
+      "symbols": [
+        {
+          "name": "Engine.generate",
+          "line": 141,
+          "end_line": 220
+        }
+      ]
+    },
+    {
+      "path": "srt/managers/tokenizer_manager.py",
+      "wheel_sha256": "a2e4c119fcdf2801dbb78a737f9e2c534a1a83c1827087396f66d3c54b76de50",
+      "bytes": 70235,
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/b0d25e72c401f37b55d689ddbf05b8c583afe854/python/sglang/srt/managers/tokenizer_manager.py",
+      "upstream_sha256": "a2e4c119fcdf2801dbb78a737f9e2c534a1a83c1827087396f66d3c54b76de50",
+      "matches_upstream": true,
+      "symbols": [
+        {
+          "name": "TokenizerManager.generate_request",
+          "line": 330,
+          "end_line": 371
+        },
+        {
+          "name": "TokenizerManager._tokenize_one_request",
+          "line": 373,
+          "end_line": 432
+        }
+      ]
+    },
+    {
+      "path": "srt/managers/scheduler.py",
+      "wheel_sha256": "39b30915249bebdef26d4b7365ee6dfa52e8c0a668141afbfba195868fa23ac7",
+      "bytes": 108517,
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/b0d25e72c401f37b55d689ddbf05b8c583afe854/python/sglang/srt/managers/scheduler.py",
+      "upstream_sha256": "39b30915249bebdef26d4b7365ee6dfa52e8c0a668141afbfba195868fa23ac7",
+      "matches_upstream": true,
+      "symbols": [
+        {
+          "name": "Scheduler.event_loop_normal",
+          "line": 808,
+          "end_line": 824
+        },
+        {
+          "name": "Scheduler.get_next_batch_to_run",
+          "line": 1534,
+          "end_line": 1598
+        },
+        {
+          "name": "Scheduler.get_new_batch_prefill",
+          "line": 1606,
+          "end_line": 1756
+        },
+        {
+          "name": "Scheduler.run_batch",
+          "line": 1798,
+          "end_line": 1873
+        },
+        {
+          "name": "Scheduler.process_batch_result",
+          "line": 1875,
+          "end_line": 1892
+        }
+      ]
+    },
+    {
+      "path": "srt/managers/schedule_batch.py",
+      "wheel_sha256": "5c5c3c8dc1e57f45fdac7f0eecd223a6dcba544dcf9669c8be0df1fb48c4b9d1",
+      "bytes": 76557,
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/b0d25e72c401f37b55d689ddbf05b8c583afe854/python/sglang/srt/managers/schedule_batch.py",
+      "upstream_sha256": "5c5c3c8dc1e57f45fdac7f0eecd223a6dcba544dcf9669c8be0df1fb48c4b9d1",
+      "matches_upstream": true,
+      "symbols": [
+        {
+          "name": "ScheduleBatch.prepare_for_extend",
+          "line": 1139,
+          "end_line": 1341
+        },
+        {
+          "name": "ScheduleBatch.prepare_for_decode",
+          "line": 1522,
+          "end_line": 1594
+        }
+      ]
+    },
+    {
+      "path": "srt/model_executor/model_runner.py",
+      "wheel_sha256": "0f870608d86b0755977421103ecdbf9c6521d7b7b62b295d2f75e4e1b1de3eb2",
+      "bytes": 85356,
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/b0d25e72c401f37b55d689ddbf05b8c583afe854/python/sglang/srt/model_executor/model_runner.py",
+      "upstream_sha256": "0f870608d86b0755977421103ecdbf9c6521d7b7b62b295d2f75e4e1b1de3eb2",
+      "matches_upstream": true,
+      "symbols": [
+        {
+          "name": "ModelRunner.forward_decode",
+          "line": 1811,
+          "end_line": 1828
+        },
+        {
+          "name": "ModelRunner.forward_extend",
+          "line": 1830,
+          "end_line": 1851
+        },
+        {
+          "name": "ModelRunner.forward",
+          "line": 1887,
+          "end_line": 1912
+        },
+        {
+          "name": "ModelRunner._forward_raw",
+          "line": 1914,
+          "end_line": 1974
+        }
+      ]
+    },
+    {
+      "path": "srt/mem_cache/radix_cache.py",
+      "wheel_sha256": "5abcc349f51dc9cb6c85743584ddcb2a91fe0c2636f9d67cc7399cd88cba8de1",
+      "bytes": 19027,
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/b0d25e72c401f37b55d689ddbf05b8c583afe854/python/sglang/srt/mem_cache/radix_cache.py",
+      "upstream_sha256": "5abcc349f51dc9cb6c85743584ddcb2a91fe0c2636f9d67cc7399cd88cba8de1",
+      "matches_upstream": true,
+      "symbols": [
+        {
+          "name": "RadixCache.match_prefix",
+          "line": 158,
+          "end_line": 193
+        },
+        {
+          "name": "RadixCache.cache_finished_req",
+          "line": 203,
+          "end_line": 238
+        }
+      ]
+    },
+    {
+      "path": "srt/layers/attention/triton_backend.py",
+      "wheel_sha256": "7ef7092da25a33c244f50f4d9269f47737589e7625c042c2a31406328a92f469",
+      "bytes": 41858,
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/b0d25e72c401f37b55d689ddbf05b8c583afe854/python/sglang/srt/layers/attention/triton_backend.py",
+      "upstream_sha256": "7ef7092da25a33c244f50f4d9269f47737589e7625c042c2a31406328a92f469",
+      "matches_upstream": true,
+      "symbols": [
+        {
+          "name": "TritonAttnBackend.forward_extend",
+          "line": 708,
+          "end_line": 769
+        },
+        {
+          "name": "TritonAttnBackend.forward_decode",
+          "line": 771,
+          "end_line": 821
+        }
+      ]
+    },
+    {
+      "path": "srt/layers/layernorm.py",
+      "wheel_sha256": "90f58408e29df2789bdc98db5cd2166827ab25dbe76ebcf7788a6c86be4a96b6",
+      "bytes": 11210,
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/b0d25e72c401f37b55d689ddbf05b8c583afe854/python/sglang/srt/layers/layernorm.py",
+      "upstream_sha256": "90f58408e29df2789bdc98db5cd2166827ab25dbe76ebcf7788a6c86be4a96b6",
+      "matches_upstream": true,
+      "symbols": [
+        {
+          "name": "RMSNorm.forward_cuda",
+          "line": 84,
+          "end_line": 95
+        },
+        {
+          "name": "GemmaRMSNorm.forward_cuda",
+          "line": 276,
+          "end_line": 287
+        },
+        {
+          "name": "Gemma3RMSNorm.forward_cuda",
+          "line": 319,
+          "end_line": 320
+        }
+      ]
+    },
+    {
+      "path": "srt/models/llama.py",
+      "wheel_sha256": "b5dc94a27ea2730ceaa385d3024171540d9ff3683cd001abf597b32b5b979a43",
+      "bytes": 28126,
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/b0d25e72c401f37b55d689ddbf05b8c583afe854/python/sglang/srt/models/llama.py",
+      "upstream_sha256": "b5dc94a27ea2730ceaa385d3024171540d9ff3683cd001abf597b32b5b979a43",
+      "matches_upstream": true,
+      "symbols": [
+        {
+          "name": "LlamaMLP.forward",
+          "line": 94,
+          "end_line": 106
+        },
+        {
+          "name": "LlamaAttention.forward",
+          "line": 188,
+          "end_line": 199
+        },
+        {
+          "name": "LlamaDecoderLayer.forward",
+          "line": 253,
+          "end_line": 275
+        },
+        {
+          "name": "LlamaModel.forward",
+          "line": 316,
+          "end_line": 362
+        },
+        {
+          "name": "LlamaForCausalLM.forward",
+          "line": 456,
+          "end_line": 489
+        }
+      ]
+    }
+  ]
+}

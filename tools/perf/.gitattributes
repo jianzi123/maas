@@ -1,2 +1,3 @@
 * text eol=lf
 contracts/*.json -text whitespace=cr-at-eol
+operators/local_gpu/evidence/** -text whitespace=cr-at-eol

@@ -1,5 +1,7 @@
 # 推理框架工程实现卷
 
+最新本地GPU实操见[第15章：CUDA闭环与SGLang接续](15-local-gpu-cuda.md)，包含真实编译、FP32/FP16正确性、计时/CUPTI、成熟核对照与缺权重门禁。
+
 本卷补充可运行实现、算法推导、状态不变量、源码追踪和故障实验，面向准备承担推理运行时、GPU算子或部署框架开发的成员。前置是[六章基础教材](../foundations/README.md)，但每章都指向具体代码、输入、预期与评审问题。
 
 最新接续见[第13章：受控异步运行时](13-runtime-loop.md)，已将Scheduler、PagePool和Worker接成可运行CPU闭环，补七个故障/背压场景与38项回归；原八类算法实验接口保留。
@@ -40,6 +42,6 @@ python -m unittest discover -s tools/perf/engineering -p "test_*.py" -v
 
 ## 本卷结论的范围
 
-CPU实验验证数学、地址模型、状态与具体本地恢复路径；GPU sector、性能、真实停止、跨rank通信和模型质量依然要在目标环境验证。已有GPU/模型计划保持关闭。Go/MySQL唯一业务真源、Higress固定来源、unknown/held和slot分离继续沿原契约。
+CPU实验验证数学、地址模型、状态与具体本地恢复路径；GPU sector、性能、真实停止、跨rank通信和模型质量依然要在目标环境验证。本地GPU授权与实跑范围以第15章为准；历史关闭计划保留原范围。Go/MySQL唯一业务真源、Higress固定来源、unknown/held和slot分离继续沿原契约。
 
 真实系统优先复用成熟执行后端和已交付内核，按[整合地图](../integration-map.md)接线。新kernel、PD/EP策略或部署范围变更交ADR与原负责人评审。本卷的实验数据库与教学状态接口不作为生产替代品。
