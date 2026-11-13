@@ -158,12 +158,16 @@ export function resetFixtures() {
   releases = [structuredClone(releaseSample)];
   operation = null;
 }
-function json(value: unknown, status = 200) {
+function json(
+  value: unknown,
+  status = 200,
+  requestId = "00000000-0000-4000-8000-000000000099",
+) {
   return Response.json(value, {
     status,
     headers: {
       "Cache-Control": "no-store",
-      "X-Request-ID": "00000000-0000-4000-8000-000000000099",
+      "X-Request-ID": requestId,
     },
   });
 }
@@ -183,6 +187,7 @@ export function fixtureError(code: S["Error"]["error"]["code"], status = 503) {
       },
     },
     status,
+    rid,
   );
 }
 export const fixtureFetch: typeof fetch = async (input, init = {}) => {

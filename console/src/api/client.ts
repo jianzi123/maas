@@ -75,17 +75,29 @@ export class Api {
         typeof window !== "undefined"
       )
         window.dispatchEvent(new Event("maas-session-expired"));
+      const rawId = response.headers.get("X-Request-ID");
+      const requestId =
+        /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(
+          rawId ?? "",
+        )
+          ? rawId
+          : null;
+      if (!body || !requestId || body.error.request_id !== requestId)
+        throw new ApiError(
+          "protocol_error",
+          response.status,
+          write && response.status >= 500,
+          null,
+          null,
+          requestId,
+        );
       throw new ApiError(
-        body?.error.code ?? "dependency_unavailable",
+        body.error.code ?? "dependency_unavailable",
         response.status,
         write && response.status >= 500,
         body?.error.reset_at,
         body?.error.retry_after_seconds,
-        /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(
-          response.headers.get("X-Request-ID") ?? "",
-        )
-          ? response.headers.get("X-Request-ID")
-          : null,
+        requestId,
       );
     }
     return response;
