@@ -1,25 +1,43 @@
-# 数据库身份与 Reader 装配核对（2026-11-13）
+# 数据库身份与候选装配（2026-11-13 UTC）
 
-实际基线为已合并默认分支925d8c55be9ce823d100bf90a5c78cf19ea66d58；旧PR #3已合并，增量需单独PR。原部署接口快照固定322bb92是被检查源码截点，不将最新提交号覆盖成未复核的镜像来源。原工作目录无未提交产品文件，构建缓存保留。
+本轮沿 PR #5 的 `36806456333f5c8c6ee0651bb3088776cf354728` 接续，只改部署目录。默认分支仍为 `925d8c55be9ce823d100bf90a5c78cf19ea66d58`；后端候选为草稿 PR #6 的 `d2d7869fe16b8968d6ca5b00a63560c322b84dc1`，尚未合入。runtime-interface 和依赖清单记录候选 SHA、默认 SHA 与逐文件摘要；它们不证明镜像已构建或生产装配成功。
 
-## 已核对事实
+| 连接/环境名 | 候选实际消费 | 安装角色模板与边界 |
+|---|---|---|
+| core / MAAS_MYSQL_DSN | kernel.New；管理目录 ModelGate 的 mysqlstore.New 仍接同一 db | maas_kernel_runtime + maas_release_reader；不因此授予 publisher 写角色 |
+| historyReader / MAAS_HISTORY_READER_DSN | openProjectionDB → history.Reader.DB | maas_release_history_reader；5 个 metadata 表/视图 SELECT，不读原 spec |
+| operationReader / MAAS_OPERATIONS_DSN | openProjectionDB → management.Operations.DB | maas_release_operations_runtime；SELECT、operation INSERT 及指定列 UPDATE |
+| payloadReader / MAAS_HISTORY_PAYLOAD_DSN | 独立 sql.Open → history.Reader.PayloadDB | maas_release_history_payload_reader；私有服务读取原载荷及保留证据 |
+| publisher | 此管理入口无独立 publisher DSN 配置项 | maas_release_publisher；真实发布进程接线/证据仍缺，不注入无人消费的变量 |
 
-- history.Reader 的 metadata 查询需要release_history_directory/projection/completeness、release_links、publications。原maas_release_history_reader已给这些对象SELECT，部署检查器permissions.py将源码FROM/JOIN和原GRANT逐项比对，不复制另一套DDL。
-- PayloadDB载荷查询还需directory、retained_release_snapshots、release_history_retention以及legacy release_revisions计数；现有SQL模板没有独立payload角色。不要为使回滚可用将publisher或迁移身份交给公共Reader，缺依赖继续503。
-- management.Operations.Read可能调用completion投影更新，不是纯SELECT。原test/integration/management_test.go的operation-reader-privilege-boundary显式允许UPDATE(state,reason,publication_id,updated_at)及相关窄读。本轮只读该测试，未复跑真实数据库，不能声称只读角色已满足操作恢复。
-- cmd/control-api仍将同一个db交给kernel.New、history.Reader、management.Operations及mysqlstore.New；可选MAAS_HISTORY_PAYLOAD_DSN只分出私有payload连接。缺生产配置/窄身份接线不能靠Chart多挂几个Secret补齐。
-- cmd/workbench是localworkbench build tag、root连接自有临时MySQL的本地工具。根npm run dev已统一管理临时依赖；这不是可部署core。Chart现在同时拒绝control-api与workbench直接作为core命令，保留默认关闭、真实ready失败。
+metadata Reader 的原模板在 `config/mysql/release-permissions.sql`；payload/Operations 新模板在候选 `config/mysql/controlapi-projections.sql`。Operations 的完整 UPDATE 列为 `state,reason,acknowledged,cr_uid,requested_generation,publication_id,updated_at`，还有新建 operation 的 INSERT。它是管理运行角色，不能称为 SELECT-only 或仅查询完成投影角色。action/spec/expected_rv 不在 UPDATE 列内；有效权限仍需核查继承角色和 default role。模板没有 CREATE USER，服务启动不执行 GRANT/迁移。
 
-## 可审核输入与后端接续
+## Secret 与预检
 
-identities.json为安装输入样例，dependencies.lock.json中的databaseIdentities由preflight实际消费。所有secretRef仅namespace/name/key，principalRef为非秘密账户引用，grantEvidenceRef指向正反权限取证；不存DSN、密码或其hash。core、publisher、metadata history reader、payload reader、operation projection五条连接必须分别标识账户及Secret键；现有Secret同对象不同键可接受，但同键或同账户复用拒绝。Operator没有数据库身份。
+Chart 0.2.1 的 `core.databaseSecrets` 为四条固定 env 提供独立 `secretKeyRef`，`optional:false`；不使用 envFrom、内联 DSN 或核心键回退。以下仅示例引用，实际 Secret 由安装方通过批准渠道提供：
 
-后端沿原MAAS-3生产装配拆开上述DB handles/配置消费，给出各自批准角色、连接注入及依赖探针；运维再按实际配置入口挂载Secret，不能提前注入无人消费的环境变量。payload/operation标签为待后端审定的安装角色，并非已经存在的GRANT。涉及角色/SQL修改由原后端维护，不在此目录擅改共享授权脚本。
+```yaml
+core:
+  enabled: false
+  databaseSecrets:
+    core: {name: approved-db-connections, key: core-dsn}
+    historyReader: {name: approved-db-connections, key: history-dsn}
+    operationReader: {name: approved-db-connections, key: operations-dsn}
+    payloadReader: {name: approved-db-connections, key: payload-dsn}
+```
 
-目标核验需以实际runtime/default role和继承权限执行：metadata可读历史目录但不可读spec_bytes；payload仅获批准scope的原载荷读取；operation只能执行受控完成投影，不能改action/spec/expected_rv或新建操作；publisher不能写Key/预算/request/slot/终态；core不获得DDL或publisher写角色。需要单独迁移身份，不放到长期Pod。
+启用工作负载时四条引用都必须非空；同 Secret 不同键可用，同键拒绝。锁清单 `databaseIdentities.connections` 同时记录 namespace/name/key、非秘密 principalRef、精确角色和权限证据引用，预检逐条比对实际 env 引用与已检查环境名，拒绝同账户、跨 namespace、Reader 写角色、未消费变量、旧源码身份记录、缺证据及未合入候选。预检只验证输入，不解析 Secret 内容，无法证明两个不同引用背后不是同一账户。五条身份计划中 publisher 仍待生产接线，`productionWiringVerified` 保持 false。
 
-身份预检正反测试采用合成输入，证明拒绝同账户/同Secret键、跨namespace、Reader挂写角色、内联DSN、缺接线/权限证据。静态GRANT比对不证明MySQL有效权限；未创建账号、执行GRANT、读取Secret、启动数据库或写目标集群。两种环境预检因真实缺口继续拒绝。
+受控 control-api 只有 loopback bootstrap，没有生产健康/推理监听；Chart 继续拒绝 `/control-api` 和 `/workbench` 作为生产 core。四条 env 的渲染证明配置合同可表达，不证明未来 `/core` 自动消费它们；实际生产镜像须由后端交付并重新核验。
 
-## 当前入口与服务
+## 缺配置、故障和恢复
 
-集成后的internal/webconsole已供workbench和deploy/console-server共享，镜像配方包括go.mod/go.sum和该目录；不恢复旧独立副本。/api与/v1继续指向Go，静态服务不吞API错误；本地会话路径仅显式workbench模式。生产session、H1–H4/Secret/validation和实际健康/指标依赖仍未齐备，生产就绪不因工作台可操作而开放。版本/资源/离线、CRD/插件及DDL责任和排空/held保留规则沿现有手册。
+候选源码中空历史 DSN 返回 nil DB，对应历史请求失败关闭；并非无条件启动失败。管理开启时缺 Operations 连接才拒绝启动。配置的 Reader/Operations 连接不可达会拒绝启动，错误不输出 DSN。payload 在启动时可省略，不完整回滚依赖继续不可用；不能借核心连接补齐。显式提供相同账户的 DSN 没有运行时去重，安装预检拒绝共享身份，但生产仍需同实际工厂的权限正反证据。
+
+恢复时先以批准安装工具核对原六份迁移 Applied/checksum，再核对每条连接的 CURRENT_USER/default role/继承权限；迁移身份不进长期 Pod。Reader 正例为允许目录查询，反例为 spec、账本/发布/operation 写和 DDL；payload 只允许批准原载荷范围；Operations 正例包含受理/确认及完成投影，拒绝改 action/spec/expected_rv、账本/发布/DDL；publisher/core 按原写集隔离。修复缺连接或权限后用原 operation ID 查询，不重放写入或模型请求；原 UID、ledger/tombstone/held/slot、ACK 未知语义与保留策略沿 runbook。
+
+## 本轮证据与后端缺口
+
+`candidate-wiring.json` 是 12 项源码核对，`source-inspection.json` 是精确候选/默认源码摘要比对；`permissions.json` 比对 metadata Reader 的 5 项 SELECT。候选原 Go 测试 `TestProjectionMissingDoesNotFallback` 实际执行了空连接工厂。Chart/预检使用合成输入；本轮未启动数据库、读取真实 Secret 或验证 MySQL/default role/继承权限，未验证完整生产进程启动。
+
+原后端后续需交付真实生产入口、独立发布进程身份和受控生产装配/就绪证据，明确 ModelGate 的只读连接与 publisher 写连接的角色边界；payload/Operations 模板已存在，不再沿用“缺模板”的旧结论。目标部署、真实 Higress/Secret/validation、模型/GPU、镜像发布、HA 与 A01–A34 未执行，生产继续不可调用。

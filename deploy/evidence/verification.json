@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-13T08:42:59.722290+00:00",
+  "generated_at": "2026-11-13T09:12:43.606541+00:00",
   "scope": "local-static-and-synthetic-render-only",
   "helm": "v4.3.1+gc0d08d0",
   "python": "3.13.9",
@@ -7,7 +7,7 @@
     "PyYAML": "6.0.3",
     "jsonschema": "4.25.0"
   },
-  "checks_passed": 105,
+  "checks_passed": 117,
   "checks": [
     {
       "check": "default schema",
@@ -39,6 +39,18 @@
     },
     {
       "check": "schema rejects missing credentials",
+      "passed": true
+    },
+    {
+      "check": "schema rejects missing reader key",
+      "passed": true
+    },
+    {
+      "check": "schema rejects unknown DSN variable",
+      "passed": true
+    },
+    {
+      "check": "schema rejects inline reader DSN",
       "passed": true
     },
     {
@@ -98,6 +110,10 @@
       "passed": true
     },
     {
+      "check": "template rejects shared reader and core Secret key",
+      "passed": true
+    },
+    {
       "check": "template rejects core readiness aliases liveness",
       "passed": true
     },
@@ -142,6 +158,10 @@
       "passed": true
     },
     {
+      "check": "internal: operator no database env",
+      "passed": true
+    },
+    {
       "check": "internal: core image pinned",
       "passed": true
     },
@@ -162,6 +182,14 @@
       "passed": true
     },
     {
+      "check": "internal: four explicit DSNs without fallback",
+      "passed": true
+    },
+    {
+      "check": "internal: each DSN uses its own reviewed reference",
+      "passed": true
+    },
+    {
       "check": "internal: console image pinned",
       "passed": true
     },
@@ -179,6 +207,10 @@
     },
     {
       "check": "internal: console no env literals",
+      "passed": true
+    },
+    {
+      "check": "internal: console no database env",
       "passed": true
     },
     {
@@ -298,6 +330,10 @@
       "passed": true
     },
     {
+      "check": "hybrid: operator no database env",
+      "passed": true
+    },
+    {
       "check": "hybrid: core image pinned",
       "passed": true
     },
@@ -318,6 +354,14 @@
       "passed": true
     },
     {
+      "check": "hybrid: four explicit DSNs without fallback",
+      "passed": true
+    },
+    {
+      "check": "hybrid: each DSN uses its own reviewed reference",
+      "passed": true
+    },
+    {
       "check": "hybrid: console image pinned",
       "passed": true
     },
@@ -335,6 +379,10 @@
     },
     {
       "check": "hybrid: console no env literals",
+      "passed": true
+    },
+    {
+      "check": "hybrid: console no database env",
       "passed": true
     },
     {
@@ -438,45 +486,46 @@
     ".gitattributes": "a79691a93b46e49ce460c26ef22afcc03d6eca1e63bf2edbc20e96159510f6c9",
     ".gitignore": "b03ab30ac646ab4bdab424be43b1d1c707eb62736b452fc9f27d3658455e8b22",
     "charts/maas-platform/.helmignore": "c626dca267e7906244d76ac8af4a379b47cbdd3b5052503a510b667872bea327",
-    "charts/maas-platform/Chart.yaml": "5cfa66d18a3700d0d99e6aafef31f5a350ee695ececb9ecc05f6331a2aa7eeb0",
-    "charts/maas-platform/runtime-interface.json": "cd198fd94c9e4441d17ec72409367b083e852451a9b84c5ebb1d61f9843b9343",
+    "charts/maas-platform/Chart.yaml": "1a53cf675dcf2b9a051612a2857934158d708851699dd98b5807fbad193d3bae",
+    "charts/maas-platform/runtime-interface.json": "ab12569675e49c826aa6001b4cd789d9ee4a46a7aa7257972f525ed09ef167a6",
     "charts/maas-platform/templates/_helpers.tpl": "0ffce991983a155143e6ce07a22f107b7deff0e29ae0f3755e6bf7a3d5985243",
     "charts/maas-platform/templates/ingress.yaml": "b5a3b1fc27a2db4f9795ec31501ca4ff702689c6bf5ef24cbcc7a05684ba1d78",
     "charts/maas-platform/templates/networkpolicy.yaml": "b1e53ce8392a933705204ae0e46e722b52e8a2542832f0daead79b45c9aa6190",
     "charts/maas-platform/templates/NOTES.txt": "0ec93409560c8c67bbaf31a1cd556542bea9a2fc98c8a094e30f4a853033c70e",
     "charts/maas-platform/templates/rbac.yaml": "47f74ee28360a50ea448ef1909580c67f3f4f619b74e273f84435b68e2fb435c",
     "charts/maas-platform/templates/services.yaml": "9875ed7845663b44b6ddf79da958c60b3d6b6f9f447c385ff99741077190fd68",
-    "charts/maas-platform/templates/validate.yaml": "a98fb9f3a166e579e75ac8a4b4378f98938a7d5e3ebdf5853e48233d91d24e57",
-    "charts/maas-platform/templates/workloads.yaml": "2d77597ca69cd81a46c90cc726d7ea422303d415bfebb0f3dee6f247f766bbc9",
+    "charts/maas-platform/templates/validate.yaml": "1a4825fe12952b3b6703ff2de6c6b4e532ece1465f88f929cda7db794c4d8726",
+    "charts/maas-platform/templates/workloads.yaml": "9ea3589da84232107e97ca5ae4d6577ab10d7ad114606ecaa90c03c12d116418",
     "charts/maas-platform/values-hybrid.yaml": "7e3cbd162b70fb2c2a9438e7075374341732568bb505e7ae84608f5ee9e92fe5",
     "charts/maas-platform/values-internal.yaml": "6cbe8e2108b8c2ecf345922780fc20ca2b49b05f68773462c4953aec3e5d1487",
-    "charts/maas-platform/values.schema.json": "1fb6c31e012511bd9585dbdcf0a57cb18ea591ef7380d51d237379ee82415419",
-    "charts/maas-platform/values.yaml": "657baa27ef2b1fd808ea9dfed4a4f9773b46ed14f33dd961b889e39ddef1744b",
-    "checks/identities.py": "40f9f9273e44eb292a8e547c3b9ee45f6723af54fef389440f9329025eca153a",
+    "charts/maas-platform/values.schema.json": "84af36c4ea2445c8967aa6ebc6f8c67363c7031b83a8731c1c93e24bf93a0ed9",
+    "charts/maas-platform/values.yaml": "dda60dcff22e3206e2877ca159065985e17d7db2e3f26037888fd9644b52677c",
+    "checks/candidate_wiring.py": "aea4e53d731a8e9e165a79ea11f2a51301fa41693b457ff8e47767c817fc516e",
+    "checks/identities.py": "a88e5bb13a8769cf354cbb7283eff9403a4645799744717e55ec3124e9701880",
     "checks/inspect_sources.py": "d413d20e46a386f12920a8fb7a952ed79bca2a46a6379f070c9132e2e9de3075",
-    "checks/permissions.py": "3d855c656ad386d69c7d373e6d2c21dae0330e865306e36d006d724eab56edd4",
-    "checks/preflight.py": "49b17de0a325634561d2ae0f7e3301b841c657458fad0404fe1f4c21b8c26598",
+    "checks/permissions.py": "a8820f605ede0d2c64ac0f1c06357e892b639a7ec583fd440b9900dbe971bfb4",
+    "checks/preflight.py": "aa64aa196fb5cd3f5bb7bfb2471b5909caef0330964cd11254821a42a24b2af7",
     "checks/requirements.txt": "bfe5c2fbd8864d152c8113c9b86103c3cf62bbce3419eaf9b35f96733c06bc03",
     "checks/test_identities.py": "174eb0c778d1c2d7e4058ac1358d1317a9fc3bd1faa7d23bbfbe9e15a25d7acb",
-    "checks/test_preflight.py": "79f4d3865c2d9996ca1a8727e6df81354451eb40424dde168da5d52c28e3e699",
-    "checks/verify.py": "3be9352b7e0f72c112243f2bfa9ad9f8273cabca0327c95f4ddca689d095353b",
+    "checks/test_preflight.py": "a9dfea351c86cf647de5f172cadd890502b0d3e4cae66cda4728b4f65a5c78c9",
+    "checks/verify.py": "8b86ee0bf3864f2efa5132b1420be797d04320ee77c924918c0f287db008fe91",
     "console-server/main.go": "85be94768bfbd31b8f1157c9aa2764770a075e9dc7be17ac100e604944d8193d",
     "console-server/main_test.go": "7620a3fd50f99aba64841f0794bf293569536ddddb27b5ca9fca4048a7b79e89",
-    "dependencies.lock.json": "20f16d2c2cba63eedcd2d5b11975e0198ebb8f26ac76b6e7bdd8361562f7f642",
-    "docs/current-assembly.md": "c07092432469cb1ad6e7d567b067b077ac1c4b185f3e102937748a94b6dce335",
-    "docs/database-identities.md": "2bcd37b681121323c29eea067c489854c31c795c3e0c1d6d6a3f3a46e2834db5",
+    "dependencies.lock.json": "a8c43c887bb1bbddae8a2dd941777805ad8f17f3df5135e5eae5719df48f70cc",
+    "docs/current-assembly.md": "87ce91621e9a9de8184ecc00547ea0378fe4dfced070cfd31c9016445feeeab8",
+    "docs/database-identities.md": "a623f906b313b8640eb716879837ea15d5cafdc67e9cf19ec2c31e00f874da1e",
     "docs/log-fields.json": "bcb9dc20f6014a6fb0d1be6b93ad27c3b53994bc368fbede9e7bf13a6d2c6cae",
     "docs/readiness.md": "8560be48ea5795240fa3eac642cb4929fe6f8534ea3565a619c1a524d2f83bb6",
     "docs/runbook.md": "1e0e0fa07b5912df64ae4459c5dda811db59c977779e38f6a29337743dbbed6b",
     "docs/signals.csv": "224970d562bb3be9e9eda17167bd59767f40687b07fb8429d6c542b336d5cd7f",
-    "identities.json": "d4f37f0afefc1e9464d308e58ab6293becfc1d5e7ceb6beab4c742d5aa9fe4e6",
+    "identities.json": "5847a9cae1fbef02a8b15d2d0198e5ee3ccd75edca9178148abd84a5fe7b75f0",
     "images/Dockerfile.console": "83417e01bc3bd11a9d207596892e8c7345f3a1343d8b8ebbda307b5b05c9a351",
     "images/Dockerfile.operator": "d8cf4eaa09614d3ea9bfd071b6a1c09a70f1bfbad96fb1dace329a4440a981f4",
     "probe/main.go": "210ab94cd9ed69bf93bf4c816bead4d71f897211e04190909aaf91e0bcf8c199",
     "probe/main_test.go": "42c71942a322988ae57b0b1a8357a4d82a68c94cbb77866f7b3009f446432df8",
-    "README.md": "07c4eccd2b93fa162d1631c71d7eaf1178af52d32b3a9eac46acfcd54d7d17f1",
-    "tests/fixtures/hybrid.yaml": "22aa3e11dc18bc14426acec5d9e23eb07a0040a42ead036549f943f8878ed4ae",
-    "tests/fixtures/internal.yaml": "f0593c4afe82d27856d889b8a4e32531b53feb3711f18b8bb5a8b9d1908039db"
+    "README.md": "b35bb51173fbd39804d1cf49fc6dcce1ef836a1887a5cb8a9d4bcc7c1c45e19d",
+    "tests/fixtures/hybrid.yaml": "fc97c9a90229547d964245ff54063a2429e1aec46e46e197a9fd2477fee00054",
+    "tests/fixtures/internal.yaml": "312018eb0a67803ec3f70cd4a321c4ced47ebc63f631d7d68c24573d7dea78ef"
   },
   "not_executed": [
     "cluster-install-upgrade-rollback",
@@ -485,6 +534,5 @@
     "model-GPU-paid-API",
     "backup-restore-HA",
     "A01-A34-runtime"
-  ],
-  "byte_normalization": "LF before git staging; semantic content unchanged"
+  ]
 }

@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "scope": "installation-input-only-no-secret-values",
-  "sourceCommit": "925d8c55be9ce823d100bf90a5c78cf19ea66d58",
+  "sourceCommit": "d2d7869fe16b8968d6ca5b00a63560c322b84dc1",
   "productionWiringVerified": false,
   "connections": {
     "core": {
@@ -59,7 +59,7 @@
     },
     "payloadReader": {
       "roles": [
-        "installation-reviewed-payload-reader"
+        "maas_release_history_payload_reader"
       ],
       "forbiddenRoles": [
         "maas_kernel_runtime",
@@ -77,7 +77,7 @@
     },
     "operationReader": {
       "roles": [
-        "installation-reviewed-operation-projection"
+        "maas_release_operations_runtime"
       ],
       "forbiddenRoles": [
         "maas_kernel_runtime",
@@ -94,5 +94,5 @@
       "grantEvidenceRef": null
     }
   },
-  "note": "No new grants or secret objects applied. Runtime binaries do not yet consume all these distinct connections."
+  "note": "Candidate templates and controlled DSN consumers exist; production/default-role privileges and separate publisher wiring remain unverified."
 }

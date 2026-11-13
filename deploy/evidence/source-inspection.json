@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-08T06:28:15.867787+00:00",
+  "generated_at": "2026-11-13T09:08:47.685954+00:00",
   "scope": "source-byte-comparison-only",
-  "checks_passed": 29,
-  "checks_total": 29,
+  "checks_passed": 36,
+  "checks_total": 36,
   "checks": [
     {
       "component": "backend",
       "path": "cmd/control-api/main.go",
-      "expected_sha256": "41663ca2b5190861bda224b773244fa5e18de962da887c0f5b310641ee7c0275",
-      "actual_sha256": "41663ca2b5190861bda224b773244fa5e18de962da887c0f5b310641ee7c0275",
+      "expected_sha256": "38cac312ea6fd081b0f6449a4ab034966a992cf92fa5ef348ecc589d83d6d6d5",
+      "actual_sha256": "38cac312ea6fd081b0f6449a4ab034966a992cf92fa5ef348ecc589d83d6d6d5",
       "passed": true
     },
     {
@@ -170,6 +170,55 @@
       "path": "internal/webconsole/handler.go",
       "expected_sha256": "a7e8d5f1d18bca568dbf4c3bc76495c5fc412aa19f8be694131f0d073f2b3764",
       "actual_sha256": "a7e8d5f1d18bca568dbf4c3bc76495c5fc412aa19f8be694131f0d073f2b3764",
+      "passed": true
+    },
+    {
+      "component": "backend",
+      "path": "cmd/control-api/readers.go",
+      "expected_sha256": "b071c6c301d9f6abb8aea571acbf69eaaf15f62d2c8acfffe9e236edc4079f99",
+      "actual_sha256": "b071c6c301d9f6abb8aea571acbf69eaaf15f62d2c8acfffe9e236edc4079f99",
+      "passed": true
+    },
+    {
+      "component": "backend",
+      "path": "cmd/control-api/readers_test.go",
+      "expected_sha256": "d4dd24227cb49761b26e4aa02a411625771ca32a960b182e487ef6333414f554",
+      "actual_sha256": "d4dd24227cb49761b26e4aa02a411625771ca32a960b182e487ef6333414f554",
+      "passed": true
+    },
+    {
+      "component": "backend",
+      "path": "config/mysql/controlapi-projections.sql",
+      "expected_sha256": "7ce580e6e0cf32d7ec77a6bf0334831fd321cc97158ffd3cd60b4050f39f018d",
+      "actual_sha256": "7ce580e6e0cf32d7ec77a6bf0334831fd321cc97158ffd3cd60b4050f39f018d",
+      "passed": true
+    },
+    {
+      "component": "backend",
+      "path": "internal/release/history/reader.go",
+      "expected_sha256": "d3d70c47e2a474b02040ffde328eebf21e913704e8d3192bd239fdb87b126435",
+      "actual_sha256": "d3d70c47e2a474b02040ffde328eebf21e913704e8d3192bd239fdb87b126435",
+      "passed": true
+    },
+    {
+      "component": "backend",
+      "path": "docs/usage-authority-continuation.md",
+      "expected_sha256": "a86665fc787f573f169025fc977ea8af19d1ade7a4dfa3e83c1a208ddc1ea578",
+      "actual_sha256": "a86665fc787f573f169025fc977ea8af19d1ade7a4dfa3e83c1a208ddc1ea578",
+      "passed": true
+    },
+    {
+      "component": "backend",
+      "path": "go.mod",
+      "expected_sha256": "3fc1c612237e81b1a61efdf59eb3e108980b170fd85b8b2c855db0f08240457b",
+      "actual_sha256": "3fc1c612237e81b1a61efdf59eb3e108980b170fd85b8b2c855db0f08240457b",
+      "passed": true
+    },
+    {
+      "component": "backend",
+      "path": "go.sum",
+      "expected_sha256": "34ef9b8203162cccd56bdd7aa590ca1df2683c9a794ba118d3db0ff242609fb1",
+      "actual_sha256": "34ef9b8203162cccd56bdd7aa590ca1df2683c9a794ba118d3db0ff242609fb1",
       "passed": true
     },
     {

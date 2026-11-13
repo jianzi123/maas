@@ -40,9 +40,43 @@ class InputGateTest(unittest.TestCase):
             c.update(status="approved",sourceCommit="1"*40,digest="sha256:"+"1234567890abcdef"*4,mirror="synthetic",abi="synthetic",identityRef="synthetic",evidenceRef="synthetic")
         identities=lock["databaseIdentities"]
         identities["productionWiringVerified"]=True
+        lock["sourceBaseline"]["candidateState"]="merged"  # synthetic gate input only
         for name,c in identities["connections"].items():
             c.update(bindingStatus="verified", principalRef="synthetic-"+name, grantEvidenceRef="synthetic-"+name, secretRef={"namespace":"test","name":"synthetic-"+name.lower(),"key":"dsn"})
+        for name in v["core"]["databaseSecrets"]:
+            v["core"]["databaseSecrets"][name]={k:identities["connections"][name]["secretRef"][k] for k in ("name","key")}
         return v, lock
+
+    def test_secret_binding_mismatch_rejected(self):
+        v, lock = self.complete(["ExternalAPI"])
+        v["core"]["databaseSecrets"]["historyReader"]=copy.deepcopy(v["core"]["databaseSecrets"]["core"])
+        self.assertIn("identities.historyReader.envBinding", self.check(v, lock))
+
+    def test_unconsumed_reader_variable_rejected(self):
+        v, lock = self.complete(["ExternalAPI"])
+        self.interface["backend"]["core"]["environmentNames"].remove("MAAS_HISTORY_READER_DSN")
+        self.assertIn("identities.historyReader.unconsumedVariable", self.check(v, lock))
+
+    def test_candidate_unmerged_rejected(self):
+        v, lock = self.complete(["ExternalAPI"])
+        lock["sourceBaseline"]["candidateState"]="draft-unmerged"
+        self.assertIn("source.candidateNotMerged", self.check(v, lock))
+
+    def test_old_identity_source_rejected(self):
+        v, lock = self.complete(["ExternalAPI"])
+        lock["databaseIdentities"]["sourceCommit"]="0"*40
+        self.assertIn("identities.sourceMismatch", self.check(v, lock))
+
+    def test_missing_operation_payload_connections_rejected(self):
+        for name in ("operationReader", "payloadReader"):
+            v, lock = self.complete(["ExternalAPI"])
+            v["core"]["databaseSecrets"][name]["key"]=""
+            self.assertIn("values.schema", self.check(v, lock))
+
+    def test_reader_cannot_use_operations_write_role(self):
+        v, lock = self.complete(["ExternalAPI"])
+        lock["databaseIdentities"]["connections"]["historyReader"]["roles"]=["maas_release_operations_runtime"]
+        self.assertIn("identities.historyReader.roles", self.check(v, lock))
 
     def test_pending_inputs_reject(self):
         self.assertIn("deploymentApproved", self.check(self.values, self.lock))

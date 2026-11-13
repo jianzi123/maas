@@ -24,6 +24,12 @@ core:
   args: []
   existingConfigMap: ""
   existingSecret: ""
+  # Existing Secret references only; no DSNs. All four are required when enabled.
+  databaseSecrets:
+    core: {name: "", key: ""}
+    historyReader: {name: "", key: ""}
+    operationReader: {name: "", key: ""}
+    payloadReader: {name: "", key: ""}
   port: 8080
   probes: {port: 8081, livePath: /healthz, readyPath: /readyz}
   resources:

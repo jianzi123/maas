@@ -3,9 +3,30 @@ EXPECTED = {
     "core": {"maas_kernel_runtime", "maas_release_reader"},
     "publisher": {"maas_release_publisher"},
     "historyReader": {"maas_release_history_reader"},
-    "payloadReader": {"installation-reviewed-payload-reader"},
-    "operationReader": {"installation-reviewed-operation-projection"},
+    "payloadReader": {"maas_release_history_payload_reader"},
+    "operationReader": {"maas_release_operations_runtime"},
 }
+
+# Names are fixed by the reviewed candidate, never supplied as arbitrary env.
+DATABASE_ENV = {
+    "core": "MAAS_MYSQL_DSN",
+    "historyReader": "MAAS_HISTORY_READER_DSN",
+    "operationReader": "MAAS_OPERATIONS_DSN",
+    "payloadReader": "MAAS_HISTORY_PAYLOAD_DSN",
+}
+
+def binding_blockers(values, plan, interface):
+    problems = []
+    refs = values.get("core", {}).get("databaseSecrets", {})
+    consumed = interface.get("backend", {}).get("core", {}).get("environmentNames", [])
+    for name, variable in DATABASE_ENV.items():
+        actual = refs.get(name, {})
+        expected = plan.get("connections", {}).get(name, {}).get("secretRef", {})
+        if not all(actual.get(k) for k in ("name", "key")) or actual != {k: expected.get(k) for k in ("name", "key")}:
+            problems.append("identities." + name + ".envBinding")
+        if variable not in consumed:
+            problems.append("identities." + name + ".unconsumedVariable")
+    return problems
 
 def identity_blockers(plan, namespace):
     problems = []
