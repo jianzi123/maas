@@ -58,9 +58,19 @@ func (d *relayDiagnostics) append(kind string, u *Usage, cause string) error {
 // Forward emits only the stable public schema. Raw provider usage is diagnostic
 // until the one successful terminal is confirmed; it is never a public midstream
 // accounting claim. No redirect, retry, fallback or direct supplier path exists.
-func (r *Relay) Forward(ctx context.Context, w http.ResponseWriter, call RelayCall) error {
+func (r *Relay) Forward(ctx context.Context, w http.ResponseWriter, call RelayCall) (returnErr error) {
 	if r == nil || r.core == nil || r.client == nil || r.endpoint == "" || len(call.Body) == 0 || int64(len(call.Body)) > r.maxBytes || !validUUID(call.Input.RequestID) {
 		return ErrUnavailable
+	}
+	start := time.Now()
+	sample := RelaySample{Result: "unknown"}
+	if sampler := r.Sampler; sampler != nil {
+		sample = RelaySample{Schema: "maas-go-relay-source-1.0", RunID: sampler.run, RequestID: call.Input.RequestID, InstanceID: sampler.instance, BootID: sampler.boot, ClockScope: sampler.instance + "/" + sampler.boot + "/" + call.Input.RequestID, SourceRevision: sampler.revision, PublicationID: call.Input.Profile.Binding.PublicationID, ReleaseRevision: call.Input.Profile.Binding.Revision, Result: "unknown"}
+		defer func() {
+			sample.EndMS = *elapsedMS(start, time.Now())
+			sample.ReturnError = returnErr != nil
+			sampler.offer(sample)
+		}()
 	}
 	sendCtx, cancel := context.WithDeadline(ctx, call.Input.Deadline)
 	defer cancel()
@@ -93,6 +103,7 @@ func (r *Relay) Forward(ctx context.Context, w http.ResponseWriter, call RelayCa
 		if e != nil {
 			return e
 		}
+		sample.Result = state
 		if result == "succeeded" && state != "succeeded" {
 			return ErrUnavailable
 		}
@@ -159,10 +170,17 @@ func (r *Relay) Forward(ctx context.Context, w http.ResponseWriter, call RelayCa
 		b, _ := json.Marshal(value)
 		w.Header().Set("Content-Type", "text/event-stream")
 		n, err := io.WriteString(w, "data: "+string(b)+"\n\n")
+		content := hasVisibleContent(value)
+		if r.Sampler != nil && content && sample.WriteMS == nil && err == nil && n == len(b)+8 {
+			sample.WriteMS = elapsedMS(start, time.Now())
+		}
 		if n > 0 {
 			wrote = true
 		}
 		if flush, ok := w.(http.Flusher); ok {
+			if r.Sampler != nil && content && sample.FlushMS == nil {
+				sample.FlushMS = elapsedMS(start, time.Now())
+			}
 			flush.Flush()
 		}
 		return err
@@ -239,6 +257,7 @@ func (r *Relay) Forward(ctx context.Context, w http.ResponseWriter, call RelayCa
 	seenFinish, seenDone := false, false
 	for {
 		data, err := reader.Next()
+		receivedAt := time.Now() // before receipt DB work or downstream Write/Flush
 		if err != nil {
 			if err == io.EOF && seenDone && seenFinish {
 				break
@@ -283,6 +302,18 @@ func (r *Relay) Forward(ctx context.Context, w http.ResponseWriter, call RelayCa
 			cancel()
 			return abort("parse_invalid", "failed", "not_provided", "upstream_protocol_error", first)
 		}
+		if r.Sampler != nil && sample.ProtocolMS == nil {
+			sample.ProtocolMS = elapsedMS(start, receivedAt)
+		}
+		if first == nil && hasVisibleContent(out) {
+			ms := receivedAt.Sub(call.Input.Received).Milliseconds()
+			if ms >= 0 {
+				first = &ms
+			}
+			if r.Sampler != nil {
+				sample.ContentMS = elapsedMS(start, receivedAt)
+			}
+		}
 		seenFinish = seenFinish || finished
 		if finished {
 			authority.finish()
@@ -294,10 +325,6 @@ func (r *Relay) Forward(ctx context.Context, w http.ResponseWriter, call RelayCa
 				cause, code = "explicit_cancel", "client_cancelled"
 			}
 			return abort(cause, result, reason, code, first)
-		}
-		if first == nil {
-			ms := time.Since(call.Input.Received).Milliseconds()
-			first = &ms
 		}
 		if err = writeChunk(out); err != nil {
 			result, reason := relayFailure(ctx, sendCtx, err, "cancelled")
