@@ -1,0 +1,25 @@
+# 数据库身份与 Reader 装配核对（2026-11-13）
+
+实际基线为已合并默认分支925d8c55be9ce823d100bf90a5c78cf19ea66d58；旧PR #3已合并，增量需单独PR。原部署接口快照固定322bb92是被检查源码截点，不将最新提交号覆盖成未复核的镜像来源。原工作目录无未提交产品文件，构建缓存保留。
+
+## 已核对事实
+
+- history.Reader 的 metadata 查询需要release_history_directory/projection/completeness、release_links、publications。原maas_release_history_reader已给这些对象SELECT，部署检查器permissions.py将源码FROM/JOIN和原GRANT逐项比对，不复制另一套DDL。
+- PayloadDB载荷查询还需directory、retained_release_snapshots、release_history_retention以及legacy release_revisions计数；现有SQL模板没有独立payload角色。不要为使回滚可用将publisher或迁移身份交给公共Reader，缺依赖继续503。
+- management.Operations.Read可能调用completion投影更新，不是纯SELECT。原test/integration/management_test.go的operation-reader-privilege-boundary显式允许UPDATE(state,reason,publication_id,updated_at)及相关窄读。本轮只读该测试，未复跑真实数据库，不能声称只读角色已满足操作恢复。
+- cmd/control-api仍将同一个db交给kernel.New、history.Reader、management.Operations及mysqlstore.New；可选MAAS_HISTORY_PAYLOAD_DSN只分出私有payload连接。缺生产配置/窄身份接线不能靠Chart多挂几个Secret补齐。
+- cmd/workbench是localworkbench build tag、root连接自有临时MySQL的本地工具。根npm run dev已统一管理临时依赖；这不是可部署core。Chart现在同时拒绝control-api与workbench直接作为core命令，保留默认关闭、真实ready失败。
+
+## 可审核输入与后端接续
+
+identities.json为安装输入样例，dependencies.lock.json中的databaseIdentities由preflight实际消费。所有secretRef仅namespace/name/key，principalRef为非秘密账户引用，grantEvidenceRef指向正反权限取证；不存DSN、密码或其hash。core、publisher、metadata history reader、payload reader、operation projection五条连接必须分别标识账户及Secret键；现有Secret同对象不同键可接受，但同键或同账户复用拒绝。Operator没有数据库身份。
+
+后端沿原MAAS-3生产装配拆开上述DB handles/配置消费，给出各自批准角色、连接注入及依赖探针；运维再按实际配置入口挂载Secret，不能提前注入无人消费的环境变量。payload/operation标签为待后端审定的安装角色，并非已经存在的GRANT。涉及角色/SQL修改由原后端维护，不在此目录擅改共享授权脚本。
+
+目标核验需以实际runtime/default role和继承权限执行：metadata可读历史目录但不可读spec_bytes；payload仅获批准scope的原载荷读取；operation只能执行受控完成投影，不能改action/spec/expected_rv或新建操作；publisher不能写Key/预算/request/slot/终态；core不获得DDL或publisher写角色。需要单独迁移身份，不放到长期Pod。
+
+身份预检正反测试采用合成输入，证明拒绝同账户/同Secret键、跨namespace、Reader挂写角色、内联DSN、缺接线/权限证据。静态GRANT比对不证明MySQL有效权限；未创建账号、执行GRANT、读取Secret、启动数据库或写目标集群。两种环境预检因真实缺口继续拒绝。
+
+## 当前入口与服务
+
+集成后的internal/webconsole已供workbench和deploy/console-server共享，镜像配方包括go.mod/go.sum和该目录；不恢复旧独立副本。/api与/v1继续指向Go，静态服务不吞API错误；本地会话路径仅显式workbench模式。生产session、H1–H4/Secret/validation和实际健康/指标依赖仍未齐备，生产就绪不因工作台可操作而开放。版本/资源/离线、CRD/插件及DDL责任和排空/held保留规则沿现有手册。

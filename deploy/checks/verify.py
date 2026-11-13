@@ -139,6 +139,7 @@ def verify(helm):
             "hybrid missing gateway egress": {"mode": "hybrid", "higress": {"externalEgressPolicyRef": ""}},
             "ingress without core": {"core": {"enabled": False}},
             "wrong compiled API group": {"api": {"group": "other.internal.test"}},
+            "local workbench mistaken for service": {"core": {"command": ["/workbench"]}},
             "controlled API mistaken for service": {"core": {"command": ["/control-api"]}},
             "core readiness aliases liveness": {"core": {"probes": {"readyPath": "/healthz"}}},
         }.items():

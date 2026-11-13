@@ -21,3 +21,4 @@ Windows可用 `--helm-command "wsl -d Ubuntu-22.04 -- helm"`。静态结果见ev
 `images/Dockerfile.console` 打包实际console/dist与非root静态服务器；API及开发会话路径不回SPA。构建上下文须包含固定前端源码与本deploy目录，所有base image显式给digest；镜像本轮未构建。正式Go生产适配/会话仍待原后端交付，不以静态页面就绪替代Callable。
 
 见[环境门槛](docs/readiness.md)、[运维手册](docs/runbook.md)、[依赖锁定清单](dependencies.lock.json)。目标集群/模型/付费调用与公开发布继续按原授权门槛。
+2026-11-13：从已合并默认分支925d8c5续接；Reader/凭证分离说明见docs/database-identities.md，执行python deploy/checks/permissions.py核源码与原授权模板。预检已消费锁清单databaseIdentities；当前接线仍待原后端，生产预检继续拒绝。

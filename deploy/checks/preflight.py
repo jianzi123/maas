@@ -5,11 +5,12 @@ import json
 from pathlib import Path
 from jsonschema import Draft7Validator
 from verify import CHART, ROOT, load_values, validate_network
+from identities import identity_blockers
 
 def blockers(values, lock, interface=None):
     if interface is None:
         interface = json.loads((CHART / "runtime-interface.json").read_text(encoding="utf-8"))
-    result = []
+    result = identity_blockers(lock.get("databaseIdentities", {}), lock.get("target", {}).get("namespace"))
     schema = json.loads((CHART / "values.schema.json").read_text())
     if not Draft7Validator(schema).is_valid(values):
         result.append("values.schema")

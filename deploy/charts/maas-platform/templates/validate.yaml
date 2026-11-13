@@ -10,5 +10,5 @@
 
 {{- if and (or .Values.operator.enabled .Values.core.enabled) (ne .Values.api.group $interface.backend.apiGroup) }}{{ fail "api.group differs from reviewed compiled binary; update binary/CRD/interface together" }}{{ end }}
 {{- if .Values.core.enabled }}
-{{- if regexMatch "(^|/)control-api$" (index .Values.core.command 0) }}{{ fail "control-api is loopback bootstrap only; no production listener or readiness" }}{{ end }}
+{{- if regexMatch "(^|/)(control-api|workbench)$" (index .Values.core.command 0) }}{{ fail "control-api/workbench is loopback bootstrap only; no production listener or readiness" }}{{ end }}
 {{- end }}

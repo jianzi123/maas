@@ -1,0 +1,98 @@
+{
+  "schemaVersion": "1.0",
+  "scope": "installation-input-only-no-secret-values",
+  "sourceCommit": "925d8c55be9ce823d100bf90a5c78cf19ea66d58",
+  "productionWiringVerified": false,
+  "connections": {
+    "core": {
+      "roles": [
+        "maas_kernel_runtime",
+        "maas_release_reader"
+      ],
+      "forbiddenRoles": [
+        "maas_release_publisher",
+        "migration"
+      ],
+      "bindingStatus": "pending",
+      "secretRef": {
+        "namespace": null,
+        "name": null,
+        "key": null
+      },
+      "principalRef": null,
+      "grantEvidenceRef": null
+    },
+    "publisher": {
+      "roles": [
+        "maas_release_publisher"
+      ],
+      "forbiddenRoles": [
+        "maas_kernel_runtime",
+        "migration"
+      ],
+      "bindingStatus": "pending",
+      "secretRef": {
+        "namespace": null,
+        "name": null,
+        "key": null
+      },
+      "principalRef": null,
+      "grantEvidenceRef": null
+    },
+    "historyReader": {
+      "roles": [
+        "maas_release_history_reader"
+      ],
+      "forbiddenRoles": [
+        "maas_kernel_runtime",
+        "maas_release_publisher",
+        "migration"
+      ],
+      "bindingStatus": "pending",
+      "secretRef": {
+        "namespace": null,
+        "name": null,
+        "key": null
+      },
+      "principalRef": null,
+      "grantEvidenceRef": null
+    },
+    "payloadReader": {
+      "roles": [
+        "installation-reviewed-payload-reader"
+      ],
+      "forbiddenRoles": [
+        "maas_kernel_runtime",
+        "maas_release_publisher",
+        "migration"
+      ],
+      "bindingStatus": "pending",
+      "secretRef": {
+        "namespace": null,
+        "name": null,
+        "key": null
+      },
+      "principalRef": null,
+      "grantEvidenceRef": null
+    },
+    "operationReader": {
+      "roles": [
+        "installation-reviewed-operation-projection"
+      ],
+      "forbiddenRoles": [
+        "maas_kernel_runtime",
+        "maas_release_publisher",
+        "migration"
+      ],
+      "bindingStatus": "pending",
+      "secretRef": {
+        "namespace": null,
+        "name": null,
+        "key": null
+      },
+      "principalRef": null,
+      "grantEvidenceRef": null
+    }
+  },
+  "note": "No new grants or secret objects applied. Runtime binaries do not yet consume all these distinct connections."
+}

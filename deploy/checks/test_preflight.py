@@ -38,6 +38,10 @@ class InputGateTest(unittest.TestCase):
         lock["migrationState"]={domain:[{"version":m["version"],"sha256":m["sha256"],"state":"Applied"} for m in self.interface["migrations"] if m["domain"]==domain] for domain in ("kernel","release")}
         for c in lock["gatewayComponents"]:
             c.update(status="approved",sourceCommit="1"*40,digest="sha256:"+"1234567890abcdef"*4,mirror="synthetic",abi="synthetic",identityRef="synthetic",evidenceRef="synthetic")
+        identities=lock["databaseIdentities"]
+        identities["productionWiringVerified"]=True
+        for name,c in identities["connections"].items():
+            c.update(bindingStatus="verified", principalRef="synthetic-"+name, grantEvidenceRef="synthetic-"+name, secretRef={"namespace":"test","name":"synthetic-"+name.lower(),"key":"dsn"})
         return v, lock
 
     def test_pending_inputs_reject(self):
