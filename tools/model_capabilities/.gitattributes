@@ -1,3 +1,6 @@
 evidence/*.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 vectors/*.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 experiments/*.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+
+finality/*.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+finality/source-samples/* -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

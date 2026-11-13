@@ -1,0 +1,34 @@
+{
+  "version": "0.5",
+  "scope": "only identity/hash disposition oracle, no SQL/ledger writes",
+  "synthetic": true,
+  "cases": [
+    {
+      "id": "T01_same_terminal",
+      "request_id": "R",
+      "stored_event_id": "E1",
+      "stored_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "incoming_event_id": "E1",
+      "incoming_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "expected": "idempotent_ack_no_mutation"
+    },
+    {
+      "id": "T02_conflicting_payload",
+      "request_id": "R",
+      "stored_event_id": "E1",
+      "stored_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "incoming_event_id": "E1",
+      "incoming_hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "expected": "conflict_409_no_mutation"
+    },
+    {
+      "id": "T03_second_event_same_request",
+      "request_id": "R",
+      "stored_event_id": "E1",
+      "stored_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "incoming_event_id": "E2",
+      "incoming_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "expected": "conflict_409_no_mutation"
+    }
+  ]
+}

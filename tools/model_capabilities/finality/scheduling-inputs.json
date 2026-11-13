@@ -1,0 +1,152 @@
+{
+  "version": "0.5",
+  "synthetic": true,
+  "execution_enabled": false,
+  "comparison_engine": {
+    "tag": "v0.5.6",
+    "commit": "7ae368efde14f0b2abe769a5fbb99b8154b2a9b7"
+  },
+  "deployment_candidate": {
+    "tag": "v0.5.18",
+    "commit": "71de97b264b04dcd514cf904003028aefe9775c8"
+  },
+  "model_reference": "experiments/kv-pd-v0.4.json",
+  "model_revision": "916b56a44061fd5cd7d6a8fb632557ed4f724f60",
+  "metadata_context_conflicts_unresolved": true,
+  "real_effective_context": null,
+  "actual_model_scores": null,
+  "closest_implemented_methods": [
+    {
+      "name": "SGLang PrefillAdder",
+      "source": "python/sglang/srt/managers/schedule_policy.py",
+      "mechanisms": [
+        "page aligned input budget",
+        "available plus evictable minus offset",
+        "lock and recheck prefix",
+        "chunked request continuation",
+        "future output estimate"
+      ],
+      "runtime_measured": false
+    },
+    {
+      "name": "SGLang existing decode retraction",
+      "source": "python/sglang/srt/managers/schedule_batch.py",
+      "runtime_measured": false
+    },
+    {
+      "name": "MAAS-10 controlled CPU runtime v0.10",
+      "commit": "6e8b90e5b67da79015b09dc2af16a254660ad8dc",
+      "attachment_id": "01a1b6d7-14f1-7956-a3d6-a644cd34e533",
+      "role": "existing conservative host scheduler/PagePool/Worker reference, not SGLang performance baseline",
+      "files": [
+        {
+          "path": "tools/perf/engineering/runtime_core.py",
+          "sha256": "b402003f7227884203804cb6132af9b2c6663563ca0ef869cfa60574694d817d",
+          "bytes": 25608
+        },
+        {
+          "path": "tools/perf/engineering/runtime_worker.py",
+          "sha256": "5230a39ee987a26b8d08b3a90b518a1e8acc531144ed760d0d359df780cf909a",
+          "bytes": 12459
+        },
+        {
+          "path": "tools/perf/engineering/scheduler_lab.py",
+          "sha256": "49cef0129d25487e986fd8f3e10bd2996939826aebc36af1322ad492c92b3af3",
+          "bytes": 5336
+        },
+        {
+          "path": "tools/perf/engineering/kv_lab.py",
+          "sha256": "8d8374ece50769a57ecf5f9adc8080e246c338ee930583cc73f19e63309ab9db",
+          "bytes": 6665
+        }
+      ]
+    }
+  ],
+  "cases": [
+    {
+      "id": "S01_tail_and_decode_first",
+      "page": 16,
+      "free_pages": 2,
+      "inflight_reserved_pages": 0,
+      "protected_pages": 10,
+      "decode_lengths": [
+        16,
+        17
+      ],
+      "prefill_before": 15,
+      "batch_token_budget": 18,
+      "candidates": [
+        1,
+        16,
+        32
+      ],
+      "expected_feasible": [
+        1,
+        16
+      ]
+    },
+    {
+      "id": "S02_no_feasible_chunk",
+      "page": 16,
+      "free_pages": 1,
+      "inflight_reserved_pages": 0,
+      "protected_pages": 100,
+      "decode_lengths": [
+        16
+      ],
+      "prefill_before": 16,
+      "batch_token_budget": 32,
+      "candidates": [
+        1,
+        16
+      ],
+      "expected_feasible": []
+    },
+    {
+      "id": "S03_inflight_reservation_not_free",
+      "page": 16,
+      "free_pages": 2,
+      "inflight_reserved_pages": 1,
+      "protected_pages": 0,
+      "decode_lengths": [
+        16
+      ],
+      "prefill_before": 16,
+      "batch_token_budget": 32,
+      "candidates": [
+        1,
+        16
+      ],
+      "expected_feasible": []
+    },
+    {
+      "id": "S04_tail_already_allocated",
+      "page": 16,
+      "free_pages": 0,
+      "inflight_reserved_pages": 0,
+      "protected_pages": 0,
+      "decode_lengths": [
+        17
+      ],
+      "prefill_before": 17,
+      "batch_token_budget": 3,
+      "candidates": [
+        1,
+        2,
+        16
+      ],
+      "expected_feasible": [
+        1,
+        2
+      ]
+    }
+  ],
+  "limitations": [
+    "pure integer feasibility precheck, not batch admission or fairness algorithm",
+    "no evictable capacity assumed without actual unlocked unique-page evidence",
+    "prefix pages are not reclaimed or duplicated by this probe",
+    "workspace/activation/Graph and measured batch-time constraints absent; feasible does not mean runnable",
+    "continuous overload or long-request starvation not solved",
+    "all shapes and counts synthetic; J02 original 200-request offered load unchanged"
+  ]
+}

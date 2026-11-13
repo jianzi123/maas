@@ -14,3 +14,5 @@ Requires existing Python 3.10+ and jsonschema==4.25.0, shared with tools/perf/re
 
 See docs/model-capabilities/README.md for fixed revisions, metadata conflicts, per-role handoff, approval inputs, and protocol/quality entrypoints. Current ticket/terminal/observation versions are 3/3.0/1.0. D1 terminal 3.1 snapshots are proposal-only, rejected by the current reader. Historical v0.1/v0.2 artifacts remain on MAAS-9.
 v0.4 KV/page与Prefill/Decode输入、职责自查、运行命令见 docs/model-capabilities/kv-pd-inputs-v0.4.md。比较基线v0.5.6/7ae368e，原v0.5.18仍为部署候选，不混比。
+
+v0.5 source-backed Usage progress/final/boundary vectors and bounded scheduling inputs: docs/model-capabilities/usage-finality-v0.5.md. Run python tools/model_capabilities/usage_finality.py; output candidates are diagnostic only, never production authority.
