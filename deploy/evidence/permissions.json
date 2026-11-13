@@ -1,7 +1,7 @@
 {
   "scope": "static-source-grant-comparison-not-effective-database-privileges",
   "source_sha256": "d3d70c47e2a474b02040ffde328eebf21e913704e8d3192bd239fdb87b126435",
-  "grant_sha256": "c31d385606c0da082b2954463616c20efaf7e187de9d547e9d3dda5ab3b4c4e2",
+  "grant_sha256": "50306ce5ab11484daf31d143ca49f14da4dd60c6d0c998e0610cb08dce507056",
   "role": "maas_release_history_reader",
   "required": [
     "publications",
@@ -19,11 +19,40 @@
   ],
   "missing": [],
   "non_select_grants": [],
+  "publisher_completion": {
+    "scope": "SQL-template-policy-only-not-effective-database-privileges",
+    "checks": {
+      "completion_columns_exact": true,
+      "publisher_tables_only": true,
+      "no_broad_or_inherited_grants": true
+    },
+    "passed": true,
+    "completion_select": [
+      "acknowledged",
+      "action",
+      "cluster_id",
+      "cr_uid",
+      "desired_state",
+      "name",
+      "namespace",
+      "operation_id",
+      "requested_generation",
+      "spec_sha256",
+      "state"
+    ],
+    "completion_update": [
+      "publication_id",
+      "reason",
+      "state",
+      "updated_at"
+    ]
+  },
   "passed": true,
   "remaining": [
     "candidate controlapi-projections.sql provides separate payload/operations templates; effective privileges remain unverified",
     "operations runtime includes INSERT and acknowledgement/completion UPDATE; not a SELECT-only reader",
     "control-api separates history/operations/payload but still constructs mysqlstore with the primary DB; no publisher DSN consumer",
-    "default roles, inherited grants and positive/negative SQL checks need an authorized temporary MySQL test"
+    "R3 effective default-role positives/1142/1143 negatives were independently tested at ac94 by QA50354a7; not rerun in this deployment turn",
+    "production default roles/inherited grants and publisher process wiring remain unverified"
   ]
 }

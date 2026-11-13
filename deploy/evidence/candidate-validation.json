@@ -1,778 +1,304 @@
 {
-  "generated_at": "2026-11-13T09:13:48.559960+00:00",
-  "scope": "local-deployment-candidate-validation-only",
-  "backend_candidate": "d2d7869fe16b8968d6ca5b00a63560c322b84dc1",
-  "default_branch": "925d8c55be9ce823d100bf90a5c78cf19ea66d58",
-  "deployment_base": "36806456333f5c8c6ee0651bb3088776cf354728",
-  "deployment_commit": "git commit containing this report; recorded in PR #5 and issue handoff",
-  "helm": {
-    "generated_at": "2026-11-13T09:12:43.606541+00:00",
-    "scope": "local-static-and-synthetic-render-only",
-    "helm": "v4.3.1+gc0d08d0",
-    "python": "3.13.9",
-    "packages": {
-      "PyYAML": "6.0.3",
-      "jsonschema": "4.25.0"
+  "generated_at": "2026-11-13T17:40:29.256661+00:00",
+  "scope": "deployment-source-role-policy-and-readonly-local-health-only",
+  "backendCommit": "0559fa46b4a728d6f542daf19532e794f8549b31",
+  "frontendCommit": "30cfce951df8a858810a035efe51846a75a4ade6",
+  "qaTargetCommit": "ac94a373ec0a61c5fd4dc5380a7985a4fb47840f",
+  "qaEvidenceCommit": "50354a705c03383d0102d0d437119afd7ffed8b3",
+  "defaultCommit": "925d8c55be9ce823d100bf90a5c78cf19ea66d58",
+  "deploymentBase": "43308837df5a2710f2027d320cdb93a4392285de",
+  "deploymentCommit": "recorded exactly in PR #5, issue comment and artifact build-sources manifest",
+  "checks": {
+    "python": {
+      "command": "python -m unittest discover -s deploy/checks -p test_*.py -v",
+      "passed": 42,
+      "scope": "synthetic identity, SQL-template policy and source input guards"
     },
-    "checks_passed": 117,
-    "checks": [
-      {
-        "check": "default schema",
-        "passed": true
-      },
-      {
-        "check": "disabled default renders no workloads",
-        "passed": true
-      },
-      {
-        "check": "internal fixture schema",
-        "passed": true
-      },
-      {
-        "check": "schema rejects missing digest",
-        "passed": true
-      },
-      {
-        "check": "schema rejects mutable tag",
-        "passed": true
-      },
-      {
-        "check": "schema rejects inline key",
-        "passed": true
-      },
-      {
-        "check": "schema rejects missing command",
-        "passed": true
-      },
-      {
-        "check": "schema rejects missing credentials",
-        "passed": true
-      },
-      {
-        "check": "schema rejects missing reader key",
-        "passed": true
-      },
-      {
-        "check": "schema rejects unknown DSN variable",
-        "passed": true
-      },
-      {
-        "check": "schema rejects inline reader DSN",
-        "passed": true
-      },
-      {
-        "check": "schema rejects missing webhook CA",
-        "passed": true
-      },
-      {
-        "check": "schema rejects cluster scope not acknowledged",
-        "passed": true
-      },
-      {
-        "check": "schema rejects missing API group",
-        "passed": true
-      },
-      {
-        "check": "schema rejects install dependency bypass",
-        "passed": true
-      },
-      {
-        "check": "schema rejects unrestricted peer",
-        "passed": true
-      },
-      {
-        "check": "schema rejects implicit port allow",
-        "passed": true
-      },
-      {
-        "check": "schema rejects invalid readiness",
-        "passed": true
-      },
-      {
-        "check": "schema rejects missing TLS",
-        "passed": true
-      },
-      {
-        "check": "template rejects placeholder group unacknowledged",
-        "passed": true
-      },
-      {
-        "check": "template rejects hybrid missing gateway egress",
-        "passed": true
-      },
-      {
-        "check": "template rejects ingress without core",
-        "passed": true
-      },
-      {
-        "check": "template rejects wrong compiled API group",
-        "passed": true
-      },
-      {
-        "check": "template rejects local workbench mistaken for service",
-        "passed": true
-      },
-      {
-        "check": "template rejects controlled API mistaken for service",
-        "passed": true
-      },
-      {
-        "check": "template rejects shared reader and core Secret key",
-        "passed": true
-      },
-      {
-        "check": "template rejects core readiness aliases liveness",
-        "passed": true
-      },
-      {
-        "check": "internal schema",
-        "passed": true
-      },
-      {
-        "check": "internal network semantics",
-        "passed": true
-      },
-      {
-        "check": "internal: no Secret/CRD/database/PVC/workload-model creation",
-        "passed": true
-      },
-      {
-        "check": "internal: expected deployments",
-        "passed": true
-      },
-      {
-        "check": "internal: explicit policies",
-        "passed": true
-      },
-      {
-        "check": "internal: operator image pinned",
-        "passed": true
-      },
-      {
-        "check": "internal: operator nonroot+readonly",
-        "passed": true
-      },
-      {
-        "check": "internal: operator exec readiness",
-        "passed": true
-      },
-      {
-        "check": "internal: operator token isolation",
-        "passed": true
-      },
-      {
-        "check": "internal: operator no env literals",
-        "passed": true
-      },
-      {
-        "check": "internal: operator no database env",
-        "passed": true
-      },
-      {
-        "check": "internal: core image pinned",
-        "passed": true
-      },
-      {
-        "check": "internal: core nonroot+readonly",
-        "passed": true
-      },
-      {
-        "check": "internal: core exec readiness",
-        "passed": true
-      },
-      {
-        "check": "internal: core token isolation",
-        "passed": true
-      },
-      {
-        "check": "internal: core no env literals",
-        "passed": true
-      },
-      {
-        "check": "internal: four explicit DSNs without fallback",
-        "passed": true
-      },
-      {
-        "check": "internal: each DSN uses its own reviewed reference",
-        "passed": true
-      },
-      {
-        "check": "internal: console image pinned",
-        "passed": true
-      },
-      {
-        "check": "internal: console nonroot+readonly",
-        "passed": true
-      },
-      {
-        "check": "internal: console exec readiness",
-        "passed": true
-      },
-      {
-        "check": "internal: console token isolation",
-        "passed": true
-      },
-      {
-        "check": "internal: console no env literals",
-        "passed": true
-      },
-      {
-        "check": "internal: console no database env",
-        "passed": true
-      },
-      {
-        "check": "internal: operator no business credentials",
-        "passed": true
-      },
-      {
-        "check": "internal: deny default review-maas-operator",
-        "passed": true
-      },
-      {
-        "check": "internal: deny default review-maas-core",
-        "passed": true
-      },
-      {
-        "check": "internal: deny default review-maas-console",
-        "passed": true
-      },
-      {
-        "check": "internal: RBAC narrow modelreleases",
-        "passed": true
-      },
-      {
-        "check": "internal: cluster read only",
-        "passed": true
-      },
-      {
-        "check": "internal: RBAC narrow modelreleases,modelreleases/status,modelreleases/finalizers",
-        "passed": true
-      },
-      {
-        "check": "internal: RBAC narrow leases",
-        "passed": true
-      },
-      {
-        "check": "internal: private service review-maas-operator",
-        "passed": true
-      },
-      {
-        "check": "internal: private service review-maas-core",
-        "passed": true
-      },
-      {
-        "check": "internal: private service review-maas-console",
-        "passed": true
-      },
-      {
-        "check": "internal: TLS and Go entry",
-        "passed": true
-      },
-      {
-        "check": "internal: webhook fail closed",
-        "passed": true
-      },
-      {
-        "check": "internal: selector review-maas-operator",
-        "passed": true
-      },
-      {
-        "check": "internal: selector review-maas-core",
-        "passed": true
-      },
-      {
-        "check": "internal: selector review-maas-console",
-        "passed": true
-      },
-      {
-        "check": "internal: selector review-maas-operator",
-        "passed": true
-      },
-      {
-        "check": "internal: selector review-maas-core",
-        "passed": true
-      },
-      {
-        "check": "internal: selector review-maas-console",
-        "passed": true
-      },
-      {
-        "check": "hybrid schema",
-        "passed": true
-      },
-      {
-        "check": "hybrid network semantics",
-        "passed": true
-      },
-      {
-        "check": "hybrid: no Secret/CRD/database/PVC/workload-model creation",
-        "passed": true
-      },
-      {
-        "check": "hybrid: expected deployments",
-        "passed": true
-      },
-      {
-        "check": "hybrid: explicit policies",
-        "passed": true
-      },
-      {
-        "check": "hybrid: operator image pinned",
-        "passed": true
-      },
-      {
-        "check": "hybrid: operator nonroot+readonly",
-        "passed": true
-      },
-      {
-        "check": "hybrid: operator exec readiness",
-        "passed": true
-      },
-      {
-        "check": "hybrid: operator token isolation",
-        "passed": true
-      },
-      {
-        "check": "hybrid: operator no env literals",
-        "passed": true
-      },
-      {
-        "check": "hybrid: operator no database env",
-        "passed": true
-      },
-      {
-        "check": "hybrid: core image pinned",
-        "passed": true
-      },
-      {
-        "check": "hybrid: core nonroot+readonly",
-        "passed": true
-      },
-      {
-        "check": "hybrid: core exec readiness",
-        "passed": true
-      },
-      {
-        "check": "hybrid: core token isolation",
-        "passed": true
-      },
-      {
-        "check": "hybrid: core no env literals",
-        "passed": true
-      },
-      {
-        "check": "hybrid: four explicit DSNs without fallback",
-        "passed": true
-      },
-      {
-        "check": "hybrid: each DSN uses its own reviewed reference",
-        "passed": true
-      },
-      {
-        "check": "hybrid: console image pinned",
-        "passed": true
-      },
-      {
-        "check": "hybrid: console nonroot+readonly",
-        "passed": true
-      },
-      {
-        "check": "hybrid: console exec readiness",
-        "passed": true
-      },
-      {
-        "check": "hybrid: console token isolation",
-        "passed": true
-      },
-      {
-        "check": "hybrid: console no env literals",
-        "passed": true
-      },
-      {
-        "check": "hybrid: console no database env",
-        "passed": true
-      },
-      {
-        "check": "hybrid: operator no business credentials",
-        "passed": true
-      },
-      {
-        "check": "hybrid: deny default review-maas-operator",
-        "passed": true
-      },
-      {
-        "check": "hybrid: deny default review-maas-core",
-        "passed": true
-      },
-      {
-        "check": "hybrid: deny default review-maas-console",
-        "passed": true
-      },
-      {
-        "check": "hybrid: RBAC narrow modelreleases",
-        "passed": true
-      },
-      {
-        "check": "hybrid: cluster read only",
-        "passed": true
-      },
-      {
-        "check": "hybrid: RBAC narrow modelreleases,modelreleases/status,modelreleases/finalizers",
-        "passed": true
-      },
-      {
-        "check": "hybrid: RBAC narrow leases",
-        "passed": true
-      },
-      {
-        "check": "hybrid: private service review-maas-operator",
-        "passed": true
-      },
-      {
-        "check": "hybrid: private service review-maas-core",
-        "passed": true
-      },
-      {
-        "check": "hybrid: private service review-maas-console",
-        "passed": true
-      },
-      {
-        "check": "hybrid: TLS and Go entry",
-        "passed": true
-      },
-      {
-        "check": "hybrid: webhook fail closed",
-        "passed": true
-      },
-      {
-        "check": "hybrid: selector review-maas-operator",
-        "passed": true
-      },
-      {
-        "check": "hybrid: selector review-maas-core",
-        "passed": true
-      },
-      {
-        "check": "hybrid: selector review-maas-console",
-        "passed": true
-      },
-      {
-        "check": "hybrid: selector review-maas-operator",
-        "passed": true
-      },
-      {
-        "check": "hybrid: selector review-maas-core",
-        "passed": true
-      },
-      {
-        "check": "hybrid: selector review-maas-console",
-        "passed": true
-      },
-      {
-        "check": "network rejects 0.0.0.0/0",
-        "passed": true
-      },
-      {
-        "check": "network rejects ::/0",
-        "passed": true
-      },
-      {
-        "check": "network rejects 8.8.8.8/32",
-        "passed": true
-      },
-      {
-        "check": "network rejects not-a-cidr",
-        "passed": true
+    "helm": {
+      "passed": 117,
+      "rendered": {
+        "internal": 18,
+        "hybrid": 18
+      },
+      "scope": "local-static-and-synthetic-render-only"
+    },
+    "selectedSourceFiles": 111,
+    "completeUpstreamFiles": 237,
+    "deploymentOverlayFiles": 48,
+    "sourceNegative": {
+      "scope": "actual-backend-tree-does-not-contain-frontend-candidate",
+      "result": {
+        "component": "console",
+        "expected": 64,
+        "matched": 56,
+        "missing": [
+          "console/docs/consumer-binding-fixes.md",
+          "console/scripts/consumer-binding-browser.mjs",
+          "console/src/consumer-binding.test.ts"
+        ],
+        "unexpected": [
+          "console/.env.workbench"
+        ],
+        "changed": [
+          "console/src/App.vue",
+          "console/src/api/client.ts",
+          "console/src/api/stream.ts",
+          "console/src/fixtures.ts",
+          "console/src/pages/Releases.vue"
+        ],
+        "passed": false
       }
-    ],
-    "rendered_documents": {
-      "internal": 18,
-      "hybrid": 18
     },
-    "files_sha256": {
-      ".gitattributes": "a79691a93b46e49ce460c26ef22afcc03d6eca1e63bf2edbc20e96159510f6c9",
-      ".gitignore": "b03ab30ac646ab4bdab424be43b1d1c707eb62736b452fc9f27d3658455e8b22",
-      "charts/maas-platform/.helmignore": "c626dca267e7906244d76ac8af4a379b47cbdd3b5052503a510b667872bea327",
-      "charts/maas-platform/Chart.yaml": "1a53cf675dcf2b9a051612a2857934158d708851699dd98b5807fbad193d3bae",
-      "charts/maas-platform/runtime-interface.json": "ab12569675e49c826aa6001b4cd789d9ee4a46a7aa7257972f525ed09ef167a6",
-      "charts/maas-platform/templates/_helpers.tpl": "0ffce991983a155143e6ce07a22f107b7deff0e29ae0f3755e6bf7a3d5985243",
-      "charts/maas-platform/templates/ingress.yaml": "b5a3b1fc27a2db4f9795ec31501ca4ff702689c6bf5ef24cbcc7a05684ba1d78",
-      "charts/maas-platform/templates/networkpolicy.yaml": "b1e53ce8392a933705204ae0e46e722b52e8a2542832f0daead79b45c9aa6190",
-      "charts/maas-platform/templates/NOTES.txt": "0ec93409560c8c67bbaf31a1cd556542bea9a2fc98c8a094e30f4a853033c70e",
-      "charts/maas-platform/templates/rbac.yaml": "47f74ee28360a50ea448ef1909580c67f3f4f619b74e273f84435b68e2fb435c",
-      "charts/maas-platform/templates/services.yaml": "9875ed7845663b44b6ddf79da958c60b3d6b6f9f447c385ff99741077190fd68",
-      "charts/maas-platform/templates/validate.yaml": "1a4825fe12952b3b6703ff2de6c6b4e532ece1465f88f929cda7db794c4d8726",
-      "charts/maas-platform/templates/workloads.yaml": "9ea3589da84232107e97ca5ae4d6577ab10d7ad114606ecaa90c03c12d116418",
-      "charts/maas-platform/values-hybrid.yaml": "7e3cbd162b70fb2c2a9438e7075374341732568bb505e7ae84608f5ee9e92fe5",
-      "charts/maas-platform/values-internal.yaml": "6cbe8e2108b8c2ecf345922780fc20ca2b49b05f68773462c4953aec3e5d1487",
-      "charts/maas-platform/values.schema.json": "84af36c4ea2445c8967aa6ebc6f8c67363c7031b83a8731c1c93e24bf93a0ed9",
-      "charts/maas-platform/values.yaml": "dda60dcff22e3206e2877ca159065985e17d7db2e3f26037888fd9644b52677c",
-      "checks/candidate_wiring.py": "aea4e53d731a8e9e165a79ea11f2a51301fa41693b457ff8e47767c817fc516e",
-      "checks/identities.py": "a88e5bb13a8769cf354cbb7283eff9403a4645799744717e55ec3124e9701880",
-      "checks/inspect_sources.py": "d413d20e46a386f12920a8fb7a952ed79bca2a46a6379f070c9132e2e9de3075",
-      "checks/permissions.py": "a8820f605ede0d2c64ac0f1c06357e892b639a7ec583fd440b9900dbe971bfb4",
-      "checks/preflight.py": "aa64aa196fb5cd3f5bb7bfb2471b5909caef0330964cd11254821a42a24b2af7",
-      "checks/requirements.txt": "bfe5c2fbd8864d152c8113c9b86103c3cf62bbce3419eaf9b35f96733c06bc03",
-      "checks/test_identities.py": "174eb0c778d1c2d7e4058ac1358d1317a9fc3bd1faa7d23bbfbe9e15a25d7acb",
-      "checks/test_preflight.py": "a9dfea351c86cf647de5f172cadd890502b0d3e4cae66cda4728b4f65a5c78c9",
-      "checks/verify.py": "8b86ee0bf3864f2efa5132b1420be797d04320ee77c924918c0f287db008fe91",
-      "console-server/main.go": "85be94768bfbd31b8f1157c9aa2764770a075e9dc7be17ac100e604944d8193d",
-      "console-server/main_test.go": "7620a3fd50f99aba64841f0794bf293569536ddddb27b5ca9fca4048a7b79e89",
-      "dependencies.lock.json": "a8c43c887bb1bbddae8a2dd941777805ad8f17f3df5135e5eae5719df48f70cc",
-      "docs/current-assembly.md": "87ce91621e9a9de8184ecc00547ea0378fe4dfced070cfd31c9016445feeeab8",
-      "docs/database-identities.md": "a623f906b313b8640eb716879837ea15d5cafdc67e9cf19ec2c31e00f874da1e",
-      "docs/log-fields.json": "bcb9dc20f6014a6fb0d1be6b93ad27c3b53994bc368fbede9e7bf13a6d2c6cae",
-      "docs/readiness.md": "8560be48ea5795240fa3eac642cb4929fe6f8534ea3565a619c1a524d2f83bb6",
-      "docs/runbook.md": "1e0e0fa07b5912df64ae4459c5dda811db59c977779e38f6a29337743dbbed6b",
-      "docs/signals.csv": "224970d562bb3be9e9eda17167bd59767f40687b07fb8429d6c542b336d5cd7f",
-      "identities.json": "5847a9cae1fbef02a8b15d2d0198e5ee3ccd75edca9178148abd84a5fe7b75f0",
-      "images/Dockerfile.console": "83417e01bc3bd11a9d207596892e8c7345f3a1343d8b8ebbda307b5b05c9a351",
-      "images/Dockerfile.operator": "d8cf4eaa09614d3ea9bfd071b6a1c09a70f1bfbad96fb1dace329a4440a981f4",
-      "probe/main.go": "210ab94cd9ed69bf93bf4c816bead4d71f897211e04190909aaf91e0bcf8c199",
-      "probe/main_test.go": "42c71942a322988ae57b0b1a8357a4d82a68c94cbb77866f7b3009f446432df8",
-      "README.md": "b35bb51173fbd39804d1cf49fc6dcce1ef836a1887a5cb8a9d4bcc7c1c45e19d",
-      "tests/fixtures/hybrid.yaml": "fc97c9a90229547d964245ff54063a2429e1aec46e46e197a9fd2477fee00054",
-      "tests/fixtures/internal.yaml": "312018eb0a67803ec3f70cd4a321c4ced47ebc63f631d7d68c24573d7dea78ef"
+    "preflight": {
+      "internal": {
+        "ready": false,
+        "blockers": [
+          "identities.productionWiring",
+          "identities.core.evidence",
+          "identities.core.principal",
+          "identities.core.secretRef",
+          "identities.publisher.evidence",
+          "identities.publisher.principal",
+          "identities.publisher.secretRef",
+          "identities.historyReader.evidence",
+          "identities.historyReader.principal",
+          "identities.historyReader.secretRef",
+          "identities.payloadReader.evidence",
+          "identities.payloadReader.principal",
+          "identities.payloadReader.secretRef",
+          "identities.operationReader.evidence",
+          "identities.operationReader.principal",
+          "identities.operationReader.secretRef",
+          "identities.core.envBinding",
+          "identities.historyReader.envBinding",
+          "identities.operationReader.envBinding",
+          "identities.payloadReader.envBinding",
+          "source.candidateNotMerged",
+          "deploymentApproved",
+          "target.cluster",
+          "target.kubernetesVersion",
+          "target.apiGroup",
+          "target.authorizationRef",
+          "target.namespace",
+          "target.rpo",
+          "target.rto",
+          "target.retention",
+          "target.modelSources",
+          "api.group.pending",
+          "api.group.mismatch",
+          "interface.compiledGroupMismatch",
+          "interface.core.productionAdapterMissing",
+          "interface.operator.productionAdaptersMissing",
+          "interface.console.productionSessionMissing",
+          "migrationState.kernel",
+          "migrationState.release",
+          "operator.disabled",
+          "core.disabled",
+          "console.disabled",
+          "higress.namespace",
+          "higress.gatewayService",
+          "dependency.kubernetes",
+          "dependency.helm",
+          "artifact.helm",
+          "dependency.platform-chart",
+          "artifact.platform-chart",
+          "dependency.operator",
+          "artifact.operator",
+          "dependency.core",
+          "artifact.core",
+          "dependency.console",
+          "artifact.console",
+          "dependency.mysql",
+          "artifact.mysql",
+          "dependency.redis",
+          "artifact.redis",
+          "dependency.higress-chart",
+          "artifact.higress-chart",
+          "dependency.higress-images-envoy",
+          "artifact.higress-images-envoy",
+          "dependency.higress-crds",
+          "artifact.higress-crds",
+          "dependency.higress-H1-H4-wasm",
+          "artifact.higress-H1-H4-wasm",
+          "dependency.modelrelease-crd",
+          "artifact.modelrelease-crd",
+          "dependency.lws-chart-controller-crd",
+          "artifact.lws-chart-controller-crd",
+          "dependency.sglang",
+          "artifact.sglang",
+          "dependency.gpu-driver-device-plugin",
+          "artifact.gpu-driver-device-plugin",
+          "dependency.weights-tokenizer",
+          "artifact.weights-tokenizer",
+          "dependency.dns-cni-csi",
+          "artifact.dns-cni-csi",
+          "dependency.tls-mtls-ca",
+          "dependency.build-runtime-images",
+          "artifact.build-runtime-images",
+          "dependency.monitor-backup-tooling",
+          "artifact.monitor-backup-tooling",
+          "gatewayComponent.H1-H4-wasm",
+          "gatewayComponent.H2-envoy-reporter",
+          "gatewayComponent.H3-instance-agent",
+          "gatewayComponent.secret-agent-local-channel",
+          "runtimeGate.core-entrypoint-health-metrics",
+          "runtimeGate.release-adapters-H1-H4",
+          "runtimeGate.secret-agent-instance-channel",
+          "runtimeGate.protected-validation-key-budget",
+          "runtimeGate.mysql-migrations-roles",
+          "runtimeGate.redis-rebuild-epoch",
+          "runtimeGate.network-cni-egress",
+          "runtimeGate.backup-restore-fencing",
+          "runtimeGate.LWS-SGLang-GPU"
+        ],
+        "scope": "offline-input-completeness-only"
+      },
+      "hybrid": {
+        "ready": false,
+        "blockers": [
+          "identities.productionWiring",
+          "identities.core.evidence",
+          "identities.core.principal",
+          "identities.core.secretRef",
+          "identities.publisher.evidence",
+          "identities.publisher.principal",
+          "identities.publisher.secretRef",
+          "identities.historyReader.evidence",
+          "identities.historyReader.principal",
+          "identities.historyReader.secretRef",
+          "identities.payloadReader.evidence",
+          "identities.payloadReader.principal",
+          "identities.payloadReader.secretRef",
+          "identities.operationReader.evidence",
+          "identities.operationReader.principal",
+          "identities.operationReader.secretRef",
+          "identities.core.envBinding",
+          "identities.historyReader.envBinding",
+          "identities.operationReader.envBinding",
+          "identities.payloadReader.envBinding",
+          "source.candidateNotMerged",
+          "deploymentApproved",
+          "target.cluster",
+          "target.kubernetesVersion",
+          "target.apiGroup",
+          "target.authorizationRef",
+          "target.namespace",
+          "target.rpo",
+          "target.rto",
+          "target.retention",
+          "target.modelSources",
+          "api.group.pending",
+          "api.group.mismatch",
+          "interface.compiledGroupMismatch",
+          "interface.core.productionAdapterMissing",
+          "interface.operator.productionAdaptersMissing",
+          "interface.console.productionSessionMissing",
+          "migrationState.kernel",
+          "migrationState.release",
+          "operator.disabled",
+          "core.disabled",
+          "console.disabled",
+          "higress.namespace",
+          "higress.gatewayService",
+          "higress.externalEgressPolicyRef",
+          "dependency.kubernetes",
+          "dependency.helm",
+          "artifact.helm",
+          "dependency.platform-chart",
+          "artifact.platform-chart",
+          "dependency.operator",
+          "artifact.operator",
+          "dependency.core",
+          "artifact.core",
+          "dependency.console",
+          "artifact.console",
+          "dependency.mysql",
+          "artifact.mysql",
+          "dependency.redis",
+          "artifact.redis",
+          "dependency.higress-chart",
+          "artifact.higress-chart",
+          "dependency.higress-images-envoy",
+          "artifact.higress-images-envoy",
+          "dependency.higress-crds",
+          "artifact.higress-crds",
+          "dependency.higress-H1-H4-wasm",
+          "artifact.higress-H1-H4-wasm",
+          "dependency.modelrelease-crd",
+          "artifact.modelrelease-crd",
+          "dependency.lws-chart-controller-crd",
+          "artifact.lws-chart-controller-crd",
+          "dependency.sglang",
+          "artifact.sglang",
+          "dependency.gpu-driver-device-plugin",
+          "artifact.gpu-driver-device-plugin",
+          "dependency.weights-tokenizer",
+          "artifact.weights-tokenizer",
+          "dependency.dns-cni-csi",
+          "artifact.dns-cni-csi",
+          "dependency.tls-mtls-ca",
+          "dependency.build-runtime-images",
+          "artifact.build-runtime-images",
+          "dependency.monitor-backup-tooling",
+          "artifact.monitor-backup-tooling",
+          "gatewayComponent.H1-H4-wasm",
+          "gatewayComponent.H2-envoy-reporter",
+          "gatewayComponent.H3-instance-agent",
+          "gatewayComponent.secret-agent-local-channel",
+          "runtimeGate.core-entrypoint-health-metrics",
+          "runtimeGate.release-adapters-H1-H4",
+          "runtimeGate.secret-agent-instance-channel",
+          "runtimeGate.protected-validation-key-budget",
+          "runtimeGate.mysql-migrations-roles",
+          "runtimeGate.redis-rebuild-epoch",
+          "runtimeGate.network-cni-egress",
+          "runtimeGate.backup-restore-fencing",
+          "runtimeGate.LWS-SGLang-GPU"
+        ],
+        "scope": "offline-input-completeness-only"
+      }
     },
-    "not_executed": [
-      "cluster-install-upgrade-rollback",
-      "server-dry-run-CEL-webhook",
-      "real-RBAC-Secret-H1-H4",
-      "model-GPU-paid-API",
-      "backup-restore-HA",
-      "A01-A34-runtime"
+    "localWorkbenchGetOnly": [
+      {
+        "path": "/",
+        "status": 200
+      },
+      {
+        "path": "/healthz",
+        "status": 204
+      },
+      {
+        "path": "/readyz",
+        "status": 204
+      }
     ]
   },
-  "python_tests": {
-    "command": "python -m unittest discover -s deploy/checks -p test_*.py -v",
-    "passed": 25,
-    "failed": 0,
-    "note": "19 existing plus 6 candidate binding/source/role tests; synthetic inputs"
+  "referencedIndependentEvidence": {
+    "evidenceCommit": "50354a705c03383d0102d0d437119afd7ffed8b3",
+    "targetCommit": "ac94a373ec0a61c5fd4dc5380a7985a4fb47840f",
+    "scope": "R1-R3 controlled independent tests only; original5 and additional10; not all later commits or production",
+    "reportPath": "test/qa-r123/report.md",
+    "reportSha256": "67cfbcc7c659e6306662393d373f72c1a0c07ca35c0d7bd1d484bf1340a22851",
+    "postQaChanges": [
+      "README.md",
+      "docs/local-service.md",
+      "scripts/workbench-service.mjs"
+    ],
+    "postQaChangesAreLocalServiceAndDocsOnly": true,
+    "publisherTemplateSha256": "50306ce5ab11484daf31d143ca49f14da4dd60c6d0c998e0610cb08dce507056"
   },
-  "factory_test": {
-    "command": "go test ./cmd/control-api -run ^TestProjectionMissingDoesNotFallback$ -count=1 -v",
-    "cwd": "exact candidate export",
-    "go_version": "go1.26.0 windows/amd64",
-    "passed": 1,
-    "note": "actual empty-DSN factory unit test; no MySQL test executed"
-  },
-  "preflight": {
-    "internal": {
-      "ready": false,
-      "blockers": [
-        "identities.productionWiring",
-        "identities.core.evidence",
-        "identities.core.principal",
-        "identities.core.secretRef",
-        "identities.publisher.evidence",
-        "identities.publisher.principal",
-        "identities.publisher.secretRef",
-        "identities.historyReader.evidence",
-        "identities.historyReader.principal",
-        "identities.historyReader.secretRef",
-        "identities.payloadReader.evidence",
-        "identities.payloadReader.principal",
-        "identities.payloadReader.secretRef",
-        "identities.operationReader.evidence",
-        "identities.operationReader.principal",
-        "identities.operationReader.secretRef",
-        "identities.core.envBinding",
-        "identities.historyReader.envBinding",
-        "identities.operationReader.envBinding",
-        "identities.payloadReader.envBinding",
-        "source.candidateNotMerged",
-        "deploymentApproved",
-        "target.cluster",
-        "target.kubernetesVersion",
-        "target.apiGroup",
-        "target.authorizationRef",
-        "target.namespace",
-        "target.rpo",
-        "target.rto",
-        "target.retention",
-        "target.modelSources",
-        "api.group.pending",
-        "api.group.mismatch",
-        "interface.compiledGroupMismatch",
-        "interface.core.productionAdapterMissing",
-        "interface.operator.productionAdaptersMissing",
-        "interface.console.productionSessionMissing",
-        "migrationState.kernel",
-        "migrationState.release",
-        "operator.disabled",
-        "core.disabled",
-        "console.disabled",
-        "higress.namespace",
-        "higress.gatewayService",
-        "dependency.kubernetes",
-        "dependency.helm",
-        "artifact.helm",
-        "dependency.platform-chart",
-        "artifact.platform-chart",
-        "dependency.operator",
-        "artifact.operator",
-        "dependency.core",
-        "artifact.core",
-        "dependency.console",
-        "artifact.console",
-        "dependency.mysql",
-        "artifact.mysql",
-        "dependency.redis",
-        "artifact.redis",
-        "dependency.higress-chart",
-        "artifact.higress-chart",
-        "dependency.higress-images-envoy",
-        "artifact.higress-images-envoy",
-        "dependency.higress-crds",
-        "artifact.higress-crds",
-        "dependency.higress-H1-H4-wasm",
-        "artifact.higress-H1-H4-wasm",
-        "dependency.modelrelease-crd",
-        "artifact.modelrelease-crd",
-        "dependency.lws-chart-controller-crd",
-        "artifact.lws-chart-controller-crd",
-        "dependency.sglang",
-        "artifact.sglang",
-        "dependency.gpu-driver-device-plugin",
-        "artifact.gpu-driver-device-plugin",
-        "dependency.weights-tokenizer",
-        "artifact.weights-tokenizer",
-        "dependency.dns-cni-csi",
-        "artifact.dns-cni-csi",
-        "dependency.tls-mtls-ca",
-        "dependency.build-runtime-images",
-        "artifact.build-runtime-images",
-        "dependency.monitor-backup-tooling",
-        "artifact.monitor-backup-tooling",
-        "gatewayComponent.H1-H4-wasm",
-        "gatewayComponent.H2-envoy-reporter",
-        "gatewayComponent.H3-instance-agent",
-        "gatewayComponent.secret-agent-local-channel",
-        "runtimeGate.core-entrypoint-health-metrics",
-        "runtimeGate.release-adapters-H1-H4",
-        "runtimeGate.secret-agent-instance-channel",
-        "runtimeGate.protected-validation-key-budget",
-        "runtimeGate.mysql-migrations-roles",
-        "runtimeGate.redis-rebuild-epoch",
-        "runtimeGate.network-cni-egress",
-        "runtimeGate.backup-restore-fencing",
-        "runtimeGate.LWS-SGLang-GPU"
-      ],
-      "scope": "offline-input-completeness-only"
-    },
-    "hybrid": {
-      "ready": false,
-      "blockers": [
-        "identities.productionWiring",
-        "identities.core.evidence",
-        "identities.core.principal",
-        "identities.core.secretRef",
-        "identities.publisher.evidence",
-        "identities.publisher.principal",
-        "identities.publisher.secretRef",
-        "identities.historyReader.evidence",
-        "identities.historyReader.principal",
-        "identities.historyReader.secretRef",
-        "identities.payloadReader.evidence",
-        "identities.payloadReader.principal",
-        "identities.payloadReader.secretRef",
-        "identities.operationReader.evidence",
-        "identities.operationReader.principal",
-        "identities.operationReader.secretRef",
-        "identities.core.envBinding",
-        "identities.historyReader.envBinding",
-        "identities.operationReader.envBinding",
-        "identities.payloadReader.envBinding",
-        "source.candidateNotMerged",
-        "deploymentApproved",
-        "target.cluster",
-        "target.kubernetesVersion",
-        "target.apiGroup",
-        "target.authorizationRef",
-        "target.namespace",
-        "target.rpo",
-        "target.rto",
-        "target.retention",
-        "target.modelSources",
-        "api.group.pending",
-        "api.group.mismatch",
-        "interface.compiledGroupMismatch",
-        "interface.core.productionAdapterMissing",
-        "interface.operator.productionAdaptersMissing",
-        "interface.console.productionSessionMissing",
-        "migrationState.kernel",
-        "migrationState.release",
-        "operator.disabled",
-        "core.disabled",
-        "console.disabled",
-        "higress.namespace",
-        "higress.gatewayService",
-        "higress.externalEgressPolicyRef",
-        "dependency.kubernetes",
-        "dependency.helm",
-        "artifact.helm",
-        "dependency.platform-chart",
-        "artifact.platform-chart",
-        "dependency.operator",
-        "artifact.operator",
-        "dependency.core",
-        "artifact.core",
-        "dependency.console",
-        "artifact.console",
-        "dependency.mysql",
-        "artifact.mysql",
-        "dependency.redis",
-        "artifact.redis",
-        "dependency.higress-chart",
-        "artifact.higress-chart",
-        "dependency.higress-images-envoy",
-        "artifact.higress-images-envoy",
-        "dependency.higress-crds",
-        "artifact.higress-crds",
-        "dependency.higress-H1-H4-wasm",
-        "artifact.higress-H1-H4-wasm",
-        "dependency.modelrelease-crd",
-        "artifact.modelrelease-crd",
-        "dependency.lws-chart-controller-crd",
-        "artifact.lws-chart-controller-crd",
-        "dependency.sglang",
-        "artifact.sglang",
-        "dependency.gpu-driver-device-plugin",
-        "artifact.gpu-driver-device-plugin",
-        "dependency.weights-tokenizer",
-        "artifact.weights-tokenizer",
-        "dependency.dns-cni-csi",
-        "artifact.dns-cni-csi",
-        "dependency.tls-mtls-ca",
-        "dependency.build-runtime-images",
-        "artifact.build-runtime-images",
-        "dependency.monitor-backup-tooling",
-        "artifact.monitor-backup-tooling",
-        "gatewayComponent.H1-H4-wasm",
-        "gatewayComponent.H2-envoy-reporter",
-        "gatewayComponent.H3-instance-agent",
-        "gatewayComponent.secret-agent-local-channel",
-        "runtimeGate.core-entrypoint-health-metrics",
-        "runtimeGate.release-adapters-H1-H4",
-        "runtimeGate.secret-agent-instance-channel",
-        "runtimeGate.protected-validation-key-budget",
-        "runtimeGate.mysql-migrations-roles",
-        "runtimeGate.redis-rebuild-epoch",
-        "runtimeGate.network-cni-egress",
-        "runtimeGate.backup-restore-fencing",
-        "runtimeGate.LWS-SGLang-GPU"
-      ],
-      "scope": "offline-input-completeness-only"
-    }
-  },
+  "qaTestsRerun": false,
+  "businessTestsRerun": false,
+  "serviceStartedStoppedOrReplaced": false,
   "not_executed": [
-    "effective-mysql-default-role-inheritance",
+    "new-effective-MySQL-default-role-tests",
+    "production-identity-wiring",
     "full-production-process-startup",
-    "real-Secret-access",
-    "image-build-publish",
-    "target-install-upgrade-rollback",
+    "Secret-access-or-target-account-grants",
+    "image-build-push",
+    "target-cluster-install-upgrade-rollback",
+    "model-GPU-paid-calls",
     "real-Higress-validation",
-    "model-GPU-paid-resources",
     "backup-restore-HA",
     "A01-A34-runtime"
   ]

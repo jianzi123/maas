@@ -1,6 +1,6 @@
 # 数据库身份与候选装配（2026-11-13 UTC）
 
-本轮沿 PR #5 的 `36806456333f5c8c6ee0651bb3088776cf354728` 接续，只改部署目录。默认分支仍为 `925d8c55be9ce823d100bf90a5c78cf19ea66d58`；后端候选为草稿 PR #6 的 `d2d7869fe16b8968d6ca5b00a63560c322b84dc1`，尚未合入。runtime-interface 和依赖清单记录候选 SHA、默认 SHA 与逐文件摘要；它们不证明镜像已构建或生产装配成功。
+本轮沿 PR #5 的 `43308837df5a2710f2027d320cdb93a4392285de` 接续，只改部署目录。默认分支仍为 `925d8c55be9ce823d100bf90a5c78cf19ea66d58`；后端候选为草稿 PR #6 的 `0559fa46b4a728d6f542daf19532e794f8549b31`，业务核心 QA 范围为 `ac94a373ec0a61c5fd4dc5380a7985a4fb47840f`。前端候选为 `30cfce951df8a858810a035efe51846a75a4ade6`，必须整目录覆盖，不能取后端树中的旧 client.ts。runtime-interface、build-sources.lock.json 和依赖清单分开记录候选、QA 核心、前端和默认 SHA；不证明镜像已构建或生产装配成功。
 
 | 连接/环境名 | 候选实际消费 | 安装角色模板与边界 |
 |---|---|---|
@@ -12,9 +12,13 @@
 
 metadata Reader 的原模板在 `config/mysql/release-permissions.sql`；payload/Operations 新模板在候选 `config/mysql/controlapi-projections.sql`。Operations 的完整 UPDATE 列为 `state,reason,acknowledged,cr_uid,requested_generation,publication_id,updated_at`，还有新建 operation 的 INSERT。它是管理运行角色，不能称为 SELECT-only 或仅查询完成投影角色。action/spec/expected_rv 不在 UPDATE 列内；有效权限仍需核查继承角色和 default role。模板没有 CREATE USER，服务启动不执行 GRANT/迁移。
 
+R3 已为 publisher 的同事务完成 hook 补齐窄权限：operation 元数据 SELECT 为 `cluster_id,operation_id,cr_uid,namespace,name,requested_generation,state,acknowledged,desired_state,action,spec_sha256`；UPDATE 仅 `state,reason,publication_id,updated_at`。publisher 无 operation INSERT、action/spec/expected_rv 更新或整个 Operations/core 角色继承。部署检查按精确列集和模板摘要核对；不复制或执行 SQL。
+
+原 QA `50354a705c03383d0102d0d437119afd7ffed8b3` 在 ac94 的真实 default role/启用 hook 流程验证 Activate/原 Update、关闭/Paused cleanup/原 Pause、撤销 state 列后无半提交，以及真实 COMMIT 丢 ACK/同 CommandID 恢复；三项受保护列写返回1143，Key/预算/usage/DDL四项返回1142。原5项和独立10项按原范围引用，本轮未重跑；0559 相比 ac94 只增加 README、本地服务文档和宿主脚本，不能扩张原独立结论到整个后续 PR 或生产。
+
 ## Secret 与预检
 
-Chart 0.2.1 的 `core.databaseSecrets` 为四条固定 env 提供独立 `secretKeyRef`，`optional:false`；不使用 envFrom、内联 DSN 或核心键回退。以下仅示例引用，实际 Secret 由安装方通过批准渠道提供：
+Chart 0.2.2 的 `core.databaseSecrets` 为四条固定 env 提供独立 `secretKeyRef`，`optional:false`；不使用 envFrom、内联 DSN 或核心键回退。以下仅示例引用，实际 Secret 由安装方通过批准渠道提供：
 
 ```yaml
 core:
@@ -38,6 +42,6 @@ core:
 
 ## 本轮证据与后端缺口
 
-`candidate-wiring.json` 是 12 项源码核对，`source-inspection.json` 是精确候选/默认源码摘要比对；`permissions.json` 比对 metadata Reader 的 5 项 SELECT。候选原 Go 测试 `TestProjectionMissingDoesNotFallback` 实际执行了空连接工厂。Chart/预检使用合成输入；本轮未启动数据库、读取真实 Secret 或验证 MySQL/default role/继承权限，未验证完整生产进程启动。
+`candidate-wiring.json` 是源码核对，`source-inspection.json` 核对后端/前端固定字节，`assembly-inspection.json` 核对完整237份上游输入及组装结果；`permissions.json` 比对 metadata Reader 的5项 SELECT与publisher完成列策略。历史4330883的证据移入 evidence/history，工厂单测结论保持原截点。本轮 Chart/预检与角色策略测试使用合成输入，未启动数据库、读取真实 Secret 或重新验证 MySQL/default role/继承权限、生产进程启动；有效角色证据引用上述独立QA。
 
 原后端后续需交付真实生产入口、独立发布进程身份和受控生产装配/就绪证据，明确 ModelGate 的只读连接与 publisher 写连接的角色边界；payload/Operations 模板已存在，不再沿用“缺模板”的旧结论。目标部署、真实 Higress/Secret/validation、模型/GPU、镜像发布、HA 与 A01–A34 未执行，生产继续不可调用。

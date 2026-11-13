@@ -3,18 +3,22 @@
   "status": "pending-environment-inputs",
   "deploymentApproved": false,
   "sourceBaseline": {
-    "chartBase": "36806456333f5c8c6ee0651bb3088776cf354728",
-    "backendInspected": "d2d7869fe16b8968d6ca5b00a63560c322b84dc1",
+    "chartBase": "43308837df5a2710f2027d320cdb93a4392285de",
+    "backendInspected": "0559fa46b4a728d6f542daf19532e794f8549b31",
     "contracts": "MAAS-2 v0.4 + retained v0.3 + query/recovery addenda + MAAS-1 role review",
     "terminal": "3.0",
     "ticket": "3",
     "proposedTerminal": "3.1 (not enabled)",
-    "consoleInspected": "925d8c55be9ce823d100bf90a5c78cf19ea66d58",
+    "consoleInspected": "30cfce951df8a858810a035efe51846a75a4ade6",
     "defaultBranch": "925d8c55be9ce823d100bf90a5c78cf19ea66d58",
     "candidatePR": "https://github.com/jianzi123/maas/pull/6",
     "candidateState": "draft-unmerged",
     "deploymentPR": "https://github.com/jianzi123/maas/pull/5",
-    "deploymentCommit": "see git commit containing this lock; avoids self-referential digest"
+    "deploymentCommit": "see git commit containing this lock; avoids self-referential digest",
+    "qaCore": "ac94a373ec0a61c5fd4dc5380a7985a4fb47840f",
+    "qaEvidence": "50354a705c03383d0102d0d437119afd7ffed8b3",
+    "sourceInventory": "deploy/build-sources.lock.json",
+    "sourceInventorySha256": "732ab1a5d5cac4b5cbeb6783a669570cd664625cefec72f0c6a5506428a63880"
   },
   "target": {
     "cluster": null,
@@ -63,7 +67,7 @@
       "owner": "ops",
       "artifact": true,
       "status": "pending",
-      "version": "0.2.1",
+      "version": "0.2.2",
       "digest": null,
       "mirror": null,
       "evidenceRef": null,
@@ -82,12 +86,12 @@
       "digest": null,
       "mirror": null,
       "evidenceRef": null,
-      "note": "Candidate PR #6 source only; real adapters missing, readyz closed; image not built.",
+      "note": "Candidate0559 source; business core QA scoped to ac94; production adapters missing; image not built.",
       "requiredFor": [
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "d2d7869fe16b8968d6ca5b00a63560c322b84dc1",
+      "sourceCommit": "0559fa46b4a728d6f542daf19532e794f8549b31",
       "compiledAPIGroup": "serving.maas.example"
     },
     {
@@ -104,7 +108,7 @@
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "d2d7869fe16b8968d6ca5b00a63560c322b84dc1",
+      "sourceCommit": "0559fa46b4a728d6f542daf19532e794f8549b31",
       "compiledAPIGroup": "serving.maas.example"
     },
     {
@@ -121,7 +125,7 @@
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "925d8c55be9ce823d100bf90a5c78cf19ea66d58"
+      "sourceCommit": "30cfce951df8a858810a035efe51846a75a4ade6"
     },
     {
       "id": "mysql",
@@ -420,7 +424,7 @@
   "databaseIdentities": {
     "schemaVersion": "1.0",
     "scope": "installation-input-only-no-secret-values",
-    "sourceCommit": "d2d7869fe16b8968d6ca5b00a63560c322b84dc1",
+    "sourceCommit": "0559fa46b4a728d6f542daf19532e794f8549b31",
     "productionWiringVerified": false,
     "connections": {
       "core": {
@@ -513,6 +517,44 @@
         "grantEvidenceRef": null
       }
     },
-    "note": "Candidate templates and controlled DSN consumers exist; production/default-role privileges and separate publisher wiring remain unverified."
+    "note": "Candidate templates and controlled DSN consumers exist; production/default-role privileges and separate publisher wiring remain unverified.",
+    "publisherCompletionContract": {
+      "templatePath": "config/mysql/release-permissions.sql",
+      "templateSha256": "50306ce5ab11484daf31d143ca49f14da4dd60c6d0c998e0610cb08dce507056",
+      "selectColumns": [
+        "cluster_id",
+        "operation_id",
+        "cr_uid",
+        "namespace",
+        "name",
+        "requested_generation",
+        "state",
+        "acknowledged",
+        "desired_state",
+        "action",
+        "spec_sha256"
+      ],
+      "updateColumns": [
+        "state",
+        "reason",
+        "publication_id",
+        "updated_at"
+      ],
+      "evidence": {
+        "evidenceCommit": "50354a705c03383d0102d0d437119afd7ffed8b3",
+        "targetCommit": "ac94a373ec0a61c5fd4dc5380a7985a4fb47840f",
+        "scope": "R1-R3 controlled independent tests only; original5 and additional10; not all later commits or production",
+        "reportPath": "test/qa-r123/report.md",
+        "reportSha256": "67cfbcc7c659e6306662393d373f72c1a0c07ca35c0d7bd1d484bf1340a22851",
+        "postQaChanges": [
+          "README.md",
+          "docs/local-service.md",
+          "scripts/workbench-service.mjs"
+        ],
+        "postQaChangesAreLocalServiceAndDocsOnly": true,
+        "publisherTemplateSha256": "50306ce5ab11484daf31d143ca49f14da4dd60c6d0c998e0610cb08dce507056"
+      },
+      "productionBindingVerified": false
+    }
   }
 }

@@ -41,6 +41,8 @@ class InputGateTest(unittest.TestCase):
         identities=lock["databaseIdentities"]
         identities["productionWiringVerified"]=True
         lock["sourceBaseline"]["candidateState"]="merged"  # synthetic gate input only
+        self.interface["backend"]["candidateState"]="merged"  # synthetic gate input only
+        self.interface["console"]["candidateState"]="merged"  # synthetic gate input only
         for name,c in identities["connections"].items():
             c.update(bindingStatus="verified", principalRef="synthetic-"+name, grantEvidenceRef="synthetic-"+name, secretRef={"namespace":"test","name":"synthetic-"+name.lower(),"key":"dsn"})
         for name in v["core"]["databaseSecrets"]:
@@ -66,6 +68,27 @@ class InputGateTest(unittest.TestCase):
         v, lock = self.complete(["ExternalAPI"])
         lock["databaseIdentities"]["sourceCommit"]="0"*40
         self.assertIn("identities.sourceMismatch", self.check(v, lock))
+
+    def test_source_inventory_digest_rejected(self):
+        v, lock = self.complete(["ExternalAPI"])
+        lock["sourceBaseline"]["sourceInventorySha256"]="0"*64
+        self.assertIn("source.inventoryChecksum", self.check(v, lock))
+
+    def test_publisher_template_source_rejected(self):
+        v, lock = self.complete(["ExternalAPI"])
+        lock["databaseIdentities"]["publisherCompletionContract"]["templateSha256"]="0"*64
+        self.assertIn("identities.publisher.templateSource", self.check(v, lock))
+
+    def test_qa_revision_mismatch_rejected(self):
+        for name in ("qaCore", "qaEvidence"):
+            v, lock = self.complete(["ExternalAPI"])
+            lock["sourceBaseline"][name]="0"*40
+            self.assertIn("source.inventoryRevision", self.check(v, lock))
+
+    def test_manual_merge_claim_cannot_override_snapshot(self):
+        v, lock = self.complete(["ExternalAPI"])
+        self.interface["backend"]["candidateState"]="draft-unmerged"
+        self.assertIn("source.candidateNotMerged", self.check(v, lock))
 
     def test_missing_operation_payload_connections_rejected(self):
         for name in ("operationReader", "payloadReader"):

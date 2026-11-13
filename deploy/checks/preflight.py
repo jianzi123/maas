@@ -2,6 +2,7 @@
 """Read-only input gate. Success is input completeness, never deployment authorization."""
 import argparse
 import json
+import hashlib
 from pathlib import Path
 from jsonschema import Draft7Validator
 from verify import CHART, ROOT, load_values, validate_network
@@ -18,8 +19,19 @@ def blockers(values, lock, interface=None):
     result.extend(binding_blockers(values, lock.get("databaseIdentities", {}), interface))
     if lock.get("databaseIdentities", {}).get("sourceCommit") != interface["backend"]["sourceCommit"]:
         result.append("identities.sourceMismatch")
-    if lock.get("sourceBaseline", {}).get("candidateState") != "merged":
+    if lock.get("sourceBaseline", {}).get("candidateState") != "merged" or interface["backend"].get("candidateState") != "merged" or interface["console"].get("candidateState") != "merged":
         result.append("source.candidateNotMerged")
+    try:
+        inventory_bytes = (ROOT / "build-sources.lock.json").read_bytes()
+        inventory = json.loads(inventory_bytes)
+        if lock.get("sourceBaseline", {}).get("sourceInventorySha256") != hashlib.sha256(inventory_bytes).hexdigest():
+            result.append("source.inventoryChecksum")
+        if any(inventory[c]["sourceCommit"] != interface[c]["sourceCommit"] for c in ("backend", "console")) or inventory["qa"]["targetCommit"] != interface["backend"].get("qaCoreCommit") or inventory["qa"]["targetCommit"] != lock.get("sourceBaseline", {}).get("qaCore") or inventory["qa"]["evidenceCommit"] != lock.get("sourceBaseline", {}).get("qaEvidence"):
+            result.append("source.inventoryRevision")
+    except (OSError, ValueError, KeyError):
+        result.append("source.inventoryMissingOrInvalid")
+    if lock.get("databaseIdentities", {}).get("publisherCompletionContract", {}).get("templateSha256") != interface["backend"]["files"].get("config/mysql/release-permissions.sql"):
+        result.append("identities.publisher.templateSource")
     try:
         validate_network(values)
     except ValueError:
