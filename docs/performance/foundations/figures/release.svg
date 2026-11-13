@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="475" viewBox="0 0 1120 475" role="img">
+<title>从准备候选到安全切流与清理</title>
+<rect width="1120" height="475" fill="#f7f9fc"/>
+<text x="24" y="39" font-family="Microsoft YaHei,Arial,sans-serif" font-size="24" fill="#18334b">
+<tspan x="24" dy="0">从准备候选到安全切流与清理</tspan>
+</text>
+<text x="24" y="72" font-family="Microsoft YaHei,Arial,sans-serif" font-size="17" fill="#18334b">
+<tspan x="24" dy="0">教学顺序；真实状态/字段以共享契约为准，所有证据须匹配原身份与修订</tspan>
+</text>
+<rect x="24" y="105" width="165" height="90" rx="10" fill="#ecebff" stroke="#b8c9d9" stroke-width="2"/>
+<text x="36" y="131" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="36" dy="0">1 校验意图</tspan>
+<tspan x="36" dy="23">UID / 来源</tspan>
+<tspan x="36" dy="23">批准引用</tspan>
+</text>
+<rect x="205" y="105" width="165" height="90" rx="10" fill="#ecebff" stroke="#b8c9d9" stroke-width="2"/>
+<text x="217" y="131" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="217" dy="0">2 准备候选</tspan>
+<tspan x="217" dy="23">持久命令</tspan>
+<tspan x="217" dy="23">inventory归属</tspan>
+</text>
+<rect x="386" y="105" width="165" height="90" rx="10" fill="#e5f6ef" stroke="#b8c9d9" stroke-width="2"/>
+<text x="398" y="131" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="398" dy="0">3 工作负载就绪</tspan>
+<tspan x="398" dy="23">模型就绪</tspan>
+<tspan x="398" dy="23">runtime修订</tspan>
+</text>
+<rect x="567" y="105" width="165" height="90" rx="10" fill="#e5f6ef" stroke="#b8c9d9" stroke-width="2"/>
+<text x="579" y="131" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="579" dy="0">4 网关实际应用</tspan>
+<tspan x="579" dy="23">仍接流实例</tspan>
+<tspan x="579" dy="23">全部覆盖</tspan>
+</text>
+<rect x="748" y="105" width="165" height="90" rx="10" fill="#fff1d9" stroke="#b8c9d9" stroke-width="2"/>
+<text x="760" y="131" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="760" dy="0">5 验证与计量</tspan>
+<tspan x="760" dy="23">真实可信证据</tspan>
+</text>
+<rect x="929" y="105" width="165" height="90" rx="10" fill="#fff1d9" stroke="#b8c9d9" stroke-width="2"/>
+<text x="941" y="131" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="941" dy="0">6 活动CAS</tspan>
+<tspan x="941" dy="23">新publication</tspan>
+<tspan x="941" dy="23">新epoch</tspan>
+</text>
+<line x1="189" y1="150" x2="205" y2="150" stroke="#5b7590" stroke-width="3"/>
+<polygon points="205.0,150.0 196.0,154.3 196.0,145.7" fill="#5b7590"/>
+<line x1="370" y1="150" x2="386" y2="150" stroke="#5b7590" stroke-width="3"/>
+<polygon points="386.0,150.0 377.0,154.3 377.0,145.7" fill="#5b7590"/>
+<line x1="551" y1="150" x2="567" y2="150" stroke="#5b7590" stroke-width="3"/>
+<polygon points="567.0,150.0 558.0,154.3 558.0,145.7" fill="#5b7590"/>
+<line x1="732" y1="150" x2="748" y2="150" stroke="#5b7590" stroke-width="3"/>
+<polygon points="748.0,150.0 739.0,154.3 739.0,145.7" fill="#5b7590"/>
+<line x1="913" y1="150" x2="929" y2="150" stroke="#5b7590" stroke-width="3"/>
+<polygon points="929.0,150.0 920.0,154.3 920.0,145.7" fill="#5b7590"/>
+<rect x="160" y="275" width="240" height="95" rx="10" fill="#e7f2ff" stroke="#b8c9d9" stroke-width="2"/>
+<text x="172" y="301" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="172" dy="0">旧在途保留原修订 / 价格</tspan>
+<tspan x="172" dy="23">关闭旧准入，安全排空</tspan>
+</text>
+<rect x="470" y="275" width="250" height="95" rx="10" fill="#e7f2ff" stroke="#b8c9d9" stroke-width="2"/>
+<text x="482" y="301" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="482" dy="0">按实际UID清理专属资源</tspan>
+<tspan x="482" dy="23">共享对象只移除本模型条目</tspan>
+</text>
+<rect x="790" y="275" width="290" height="95" rx="10" fill="#fff1d9" stroke="#b8c9d9" stroke-width="2"/>
+<text x="802" y="301" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="802" dy="0">历史 / Key / 账本 / 财务held保留</tspan>
+<tspan x="802" dy="23">完成后再移除finalizer</tspan>
+</text>
+<line x1="995" y1="195" x2="995" y2="235" stroke="#5b7590" stroke-width="3"/>
+<polygon points="995.0,235.0 990.7,226.0 999.3,226.0" fill="#5b7590"/>
+<line x1="995" y1="235" x2="280" y2="235" stroke="#5b7590" stroke-width="3"/>
+<polygon points="280.0,235.0 289.0,230.7 289.0,239.3" fill="#5b7590"/>
+<line x1="280" y1="235" x2="280" y2="275" stroke="#5b7590" stroke-width="3"/>
+<polygon points="280.0,275.0 275.7,266.0 284.3,266.0" fill="#5b7590"/>
+<line x1="400" y1="322" x2="470" y2="322" stroke="#5b7590" stroke-width="3"/>
+<polygon points="470.0,322.0 461.0,326.3 461.0,317.7" fill="#5b7590"/>
+<line x1="720" y1="322" x2="790" y2="322" stroke="#5b7590" stroke-width="3"/>
+<polygon points="790.0,322.0 781.0,326.3 781.0,317.7" fill="#5b7590"/>
+<text x="24" y="437" font-family="Microsoft YaHei,Arial,sans-serif" font-size="17" fill="#18334b">
+<tspan x="24" dy="0">缺证据不放行；ACK未知按原命令读回；回滚不复用旧epoch，也不退款。</tspan>
+</text>
+</svg>

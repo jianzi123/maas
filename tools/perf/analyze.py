@@ -262,6 +262,9 @@ def analyze(dataset):
             fail(all(binding[k] == snapshot[k] for k in ("price_snapshot_id", "price_version")),
                  "price snapshot mismatch")
     rows, counts, stages = [], Counter(), defaultdict(list)
+    # The batch window has one client monotonic coordinate system. Matching
+    # each request to its own observation alone does not establish this.
+    client_clock_scope = None
     for rid, request in reqs.items():
         keys(request, "request_id scheduled_ms sent_ms end_ms stream transport_result "
              "quality_pass visible_tokens tokenizer_sha256 engine_token_times_ms "
@@ -284,6 +287,10 @@ def analyze(dataset):
         client = clients[0]
         fail(client["sampling_fraction"] == 1 and
              client["clock_scope"] == request["clock_scope"], "client coverage/clock mismatch")
+        if client_clock_scope is None:
+            client_clock_scope = request["clock_scope"]
+        fail(request["clock_scope"] == client_clock_scope,
+             "mixed client clock scopes for common measurement window")
         disposition, binding = client["disposition"], client["invocation_binding"]
         terminal = terminal_by_req.get(rid)
         fail(disposition in ("admitted", "not_admitted"), "unknown admission disposition")

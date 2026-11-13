@@ -196,3 +196,15 @@ request_id、trace_id、Key ID、CR UID、权重digest等高基数字段放受�
 窗口为[start_ms,end_ms]的预先声明发送/观察批次；所有请求必须位于窗口，end_ms=null的请求截至窗口末仍pending并显式计删失。吞吐分母使用整个声明窗口，不能删掉失败/拒绝/尾部；完整批次或固定drain截止的选择在运行前冻结。相同ID同内容重投只计一次，冲突或一请求多终态ID拒绝。缺完整client清单不能外推吞吐；字段缺失用null/覆盖率表示。不同invocation_binding单列revision_groups供追溯，跨修订汇总仅描述整个输入批次，不能拿它做同配置A/B。
 
 有效吞吐以成功、可见TTFT/E2E、质量有结论且TPOT可判定为前提；N=1时TPOT不适用，N=0/计数缺失不能伪造判定。批准SLO缺失则count/rps=null。真实0计入known样本，全部未知时known_sum与Token吞吐为null，known子集合计同时报missing_admitted；held仅诊断列出，金额按币种/冻结价表分组不混加。嵌套stage只保留各段inclusive分布，不输出相加的“总开销”或p95相减残差。样本少于200的分位数标descriptive_only。
+
+## 11. C01 有界修订与验收引用（2026-11-04）
+
+完整判定以[验收契约v0.3](acceptance-v0.3.md)为准（来源附件01a1a67f-36a7-70d6-9529-76594d820a66）。本次只修复共同客户端时间窗C01；保留v0.2指标公式和v3/3.0/1.0协议，不修改共享ObservationEnvelope、预算/slot/结算或真实采集。
+
+输入的window.start_ms/end_ms只有在完整发送清单全部使用同一可解释client clock_scope时才可计算批次吞吐。工具保留request↔自身client observation匹配校验，并新增跨request的scope一致性检查，覆盖成功、失败、拒绝及pending；混杂即拒绝整个输入，CLI退出2，无新报告，已有报告不覆盖。工具不执行时钟归一化，也不声称相同标签证明实际同步。
+
+server/engine各自scope不加入上述客户端集合：服务端首片/分段duration保留各自口径，引擎token时刻只在自身scope内算差值。改变引擎时间原点不能改变TPOT；不同scope不得与客户端直接相减。多发生器共同run clock、映射/不确定度/有效区间须另行审定。
+
+验证要求：Mika原反例由接受变为拒绝；单一客户端scope及服务端/引擎独立scope保持合法；混合scope的CLI退出2且不输出共同RPS、不泄漏输入。具体新回归及实际结果见c01-regression.md。旧41项测试通过只保留为既有用例事实，不能追溯地证明C01已通过；本次离线回归也不代表C02–C08真实运行验收。
+
+C04探索与确认区分：原3次配对作为探索；确认收益至少5次配对、首批4格×2变体×5×200=8000测量请求、1280万输入/179.2万输出cap及C07收益阈值仍属待评审建议。批准SLO/资源/额度未具备时不执行、不判收益通过，计划execution_enabled=false保持不变。

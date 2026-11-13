@@ -1,0 +1,226 @@
+{
+  "plan_version": "operator-lab-1.0",
+  "execution_enabled": false,
+  "approval_ref": null,
+  "target_environment": null,
+  "gpu_limits": {
+    "warmup": null,
+    "samples": null,
+    "max_estimated_data_bytes": null
+  },
+  "cases": [
+    {
+      "id": "gemm-tail",
+      "op": "gemm",
+      "shape": {
+        "m": 37,
+        "n": 53,
+        "k": 29
+      },
+      "layout": "contiguous",
+      "causal": true,
+      "cpu_reference": true,
+      "dtype": "float32",
+      "seed": 20261105
+    },
+    {
+      "id": "gemm-strided",
+      "op": "gemm",
+      "shape": {
+        "m": 7,
+        "n": 13,
+        "k": 17
+      },
+      "layout": "strided",
+      "causal": true,
+      "cpu_reference": true,
+      "dtype": "float32",
+      "seed": 20261105
+    },
+    {
+      "id": "prefill-gqa",
+      "op": "attention-prefill",
+      "shape": {
+        "b": 1,
+        "hq": 4,
+        "hkv": 2,
+        "sq": 7,
+        "sk": 7,
+        "d": 8
+      },
+      "layout": "contiguous",
+      "causal": true,
+      "cpu_reference": true,
+      "dtype": "float32",
+      "seed": 20261105
+    },
+    {
+      "id": "decode-gqa",
+      "op": "attention-decode",
+      "shape": {
+        "b": 2,
+        "hq": 4,
+        "hkv": 1,
+        "sq": 1,
+        "sk": 13,
+        "d": 8
+      },
+      "layout": "contiguous",
+      "causal": true,
+      "cpu_reference": true,
+      "dtype": "float32",
+      "seed": 20261105
+    },
+    {
+      "id": "attention-cross",
+      "op": "attention-prefill",
+      "shape": {
+        "b": 1,
+        "hq": 2,
+        "hkv": 2,
+        "sq": 3,
+        "sk": 5,
+        "d": 8
+      },
+      "layout": "contiguous",
+      "causal": false,
+      "cpu_reference": true,
+      "dtype": "float32",
+      "seed": 20261105
+    },
+    {
+      "id": "attention-strided",
+      "op": "attention-decode",
+      "shape": {
+        "b": 1,
+        "hq": 4,
+        "hkv": 2,
+        "sq": 3,
+        "sk": 7,
+        "d": 8
+      },
+      "layout": "strided",
+      "causal": true,
+      "cpu_reference": true,
+      "dtype": "float32",
+      "seed": 20261105
+    },
+    {
+      "id": "norm-tail",
+      "op": "rmsnorm",
+      "shape": {
+        "rows": 3,
+        "d": 7
+      },
+      "layout": "contiguous",
+      "causal": true,
+      "cpu_reference": true,
+      "dtype": "float32",
+      "seed": 20261105
+    },
+    {
+      "id": "norm-strided",
+      "op": "rmsnorm",
+      "shape": {
+        "rows": 5,
+        "d": 17
+      },
+      "layout": "strided",
+      "causal": true,
+      "cpu_reference": true,
+      "dtype": "float32",
+      "seed": 20261105
+    },
+    {
+      "id": "gemm-decode-llm",
+      "op": "gemm",
+      "shape": {
+        "m": 1,
+        "n": 4096,
+        "k": 4096
+      },
+      "layout": "contiguous",
+      "causal": true,
+      "cpu_reference": false,
+      "dtype": "float16",
+      "seed": 20261105
+    },
+    {
+      "id": "gemm-prefill-llm",
+      "op": "gemm",
+      "shape": {
+        "m": 128,
+        "n": 4096,
+        "k": 4096
+      },
+      "layout": "contiguous",
+      "causal": true,
+      "cpu_reference": false,
+      "dtype": "float16",
+      "seed": 20261105
+    },
+    {
+      "id": "prefill-llm",
+      "op": "attention-prefill",
+      "shape": {
+        "b": 1,
+        "hq": 16,
+        "hkv": 4,
+        "sq": 128,
+        "sk": 2048,
+        "d": 128
+      },
+      "layout": "contiguous",
+      "causal": true,
+      "cpu_reference": false,
+      "dtype": "bfloat16",
+      "seed": 20261105
+    },
+    {
+      "id": "decode-llm",
+      "op": "attention-decode",
+      "shape": {
+        "b": 4,
+        "hq": 16,
+        "hkv": 4,
+        "sq": 1,
+        "sk": 2048,
+        "d": 128
+      },
+      "layout": "contiguous",
+      "causal": true,
+      "cpu_reference": false,
+      "dtype": "float16",
+      "seed": 20261105
+    }
+  ],
+  "tolerances": {
+    "float32": [
+      1e-05,
+      0.0001
+    ],
+    "float16": [
+      0.005,
+      0.005
+    ],
+    "bfloat16": [
+      0.03,
+      0.03
+    ]
+  },
+  "tolerance_status": "provisional operator checks, not model quality approval",
+  "gaps": [
+    "CUDA PyTorch build and clean OpenMP runtime",
+    "Triton optional candidate dependency",
+    "GPU experiment approval/device limits/frequency/power policy",
+    "Nsight Systems tool",
+    "target model/profile/weights/SLO and real platform chain for E1-E3"
+  ],
+  "baseline_policy": {
+    "gemm": "torch.mm or native cuBLAS pedantic FP32",
+    "attention": "torch SDPA auto, explicit suffix mask, dropout=0",
+    "rmsnorm": "torch native functional.rms_norm",
+    "torch_candidate": "same-backend harness control; no novel speedup",
+    "cuda_candidate": "bounded untuned tiled starter; no performance guarantee"
+  }
+}

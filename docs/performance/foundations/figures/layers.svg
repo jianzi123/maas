@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="490" viewBox="0 0 1120 490" role="img">
+<title>推理执行框架与模型部署框架：两条主线</title>
+<rect width="1120" height="490" fill="#f7f9fc"/>
+<text x="24" y="39" font-family="Microsoft YaHei,Arial,sans-serif" font-size="24" fill="#18334b">
+<tspan x="24" dy="0">推理执行框架与模型部署框架：两条主线</tspan>
+</text>
+<text x="24" y="72" font-family="Microsoft YaHei,Arial,sans-serif" font-size="17" fill="#18334b">
+<tspan x="24" dy="0">调用热路径：处理每一个请求</tspan>
+</text>
+<rect x="24" y="95" width="170" height="85" rx="10" fill="#e7f2ff" stroke="#b8c9d9" stroke-width="2"/>
+<text x="36" y="121" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="36" dy="0">客户端</tspan>
+<tspan x="36" dy="23">请求 / 流式输出</tspan>
+</text>
+<rect x="238" y="95" width="170" height="85" rx="10" fill="#e7f2ff" stroke="#b8c9d9" stroke-width="2"/>
+<text x="250" y="121" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="250" dy="0">Go入口</tspan>
+<tspan x="250" dy="23">身份 / 原请求上下文</tspan>
+</text>
+<rect x="452" y="95" width="170" height="85" rx="10" fill="#e7f2ff" stroke="#b8c9d9" stroke-width="2"/>
+<text x="464" y="121" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="464" dy="0">Higress</tspan>
+<tspan x="464" dy="23">实际选路 / 适配</tspan>
+</text>
+<rect x="666" y="95" width="170" height="85" rx="10" fill="#e5f6ef" stroke="#b8c9d9" stroke-width="2"/>
+<text x="678" y="121" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="678" dy="0">Runtime</tspan>
+<tspan x="678" dy="23">排队 / Batch / KV</tspan>
+</text>
+<rect x="880" y="95" width="215" height="85" rx="10" fill="#e5f6ef" stroke="#b8c9d9" stroke-width="2"/>
+<text x="892" y="121" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="892" dy="0">GPU执行器</tspan>
+<tspan x="892" dy="23">算子 / Graph / 通信</tspan>
+</text>
+<line x1="194" y1="138" x2="238" y2="138" stroke="#5b7590" stroke-width="3"/>
+<polygon points="238.0,138.0 229.0,142.3 229.0,133.7" fill="#5b7590"/>
+<line x1="408" y1="138" x2="452" y2="138" stroke="#5b7590" stroke-width="3"/>
+<polygon points="452.0,138.0 443.0,142.3 443.0,133.7" fill="#5b7590"/>
+<line x1="622" y1="138" x2="666" y2="138" stroke="#5b7590" stroke-width="3"/>
+<polygon points="666.0,138.0 657.0,142.3 657.0,133.7" fill="#5b7590"/>
+<line x1="836" y1="138" x2="880" y2="138" stroke="#5b7590" stroke-width="3"/>
+<polygon points="880.0,138.0 871.0,142.3 871.0,133.7" fill="#5b7590"/>
+<rect x="430" y="210" width="235" height="85" rx="10" fill="#fff1d9" stroke="#b8c9d9" stroke-width="2"/>
+<text x="442" y="236" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="442" dy="0">Go最终授权 + Redis</tspan>
+<tspan x="442" dy="23">MySQL唯一预算 / slot</tspan>
+</text>
+<line x1="535" y1="180" x2="535" y2="210" stroke="#5b7590" stroke-width="3"/>
+<polygon points="535.0,210.0 530.7,201.0 539.3,201.0" fill="#5b7590"/>
+<text x="24" y="332" font-family="Microsoft YaHei,Arial,sans-serif" font-size="17" fill="#18334b">
+<tspan x="24" dy="0">发布控制面：声明期望 → 协调实际资源 → 验证 → 开放准入</tspan>
+</text>
+<rect x="24" y="355" width="170" height="80" rx="10" fill="#ecebff" stroke="#b8c9d9" stroke-width="2"/>
+<text x="36" y="381" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="36" dy="0">ModelRelease CR</tspan>
+<tspan x="36" dy="23">spec / generation</tspan>
+</text>
+<rect x="238" y="355" width="170" height="80" rx="10" fill="#ecebff" stroke="#b8c9d9" stroke-width="2"/>
+<text x="250" y="381" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="250" dy="0">Go Operator</tspan>
+<tspan x="250" dy="23">幂等协调 / 恢复</tspan>
+</text>
+<rect x="452" y="355" width="170" height="80" rx="10" fill="#ecebff" stroke="#b8c9d9" stroke-width="2"/>
+<text x="464" y="381" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="464" dy="0">LWS / Service</tspan>
+<tspan x="464" dy="23">工作负载与发现</tspan>
+</text>
+<rect x="666" y="355" width="170" height="80" rx="10" fill="#ecebff" stroke="#b8c9d9" stroke-width="2"/>
+<text x="678" y="381" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="678" dy="0">网关实际回执</tspan>
+<tspan x="678" dy="23">精确修订 / 实例</tspan>
+</text>
+<rect x="880" y="355" width="215" height="80" rx="10" fill="#fff1d9" stroke="#b8c9d9" stroke-width="2"/>
+<text x="892" y="381" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="892" dy="0">MySQL活动屏障</tspan>
+<tspan x="892" dy="23">原请求仍绑定旧修订</tspan>
+</text>
+<line x1="194" y1="395" x2="238" y2="395" stroke="#5b7590" stroke-width="3"/>
+<polygon points="238.0,395.0 229.0,399.3 229.0,390.7" fill="#5b7590"/>
+<line x1="408" y1="395" x2="452" y2="395" stroke="#5b7590" stroke-width="3"/>
+<polygon points="452.0,395.0 443.0,399.3 443.0,390.7" fill="#5b7590"/>
+<line x1="622" y1="395" x2="666" y2="395" stroke="#5b7590" stroke-width="3"/>
+<polygon points="666.0,395.0 657.0,399.3 657.0,390.7" fill="#5b7590"/>
+<line x1="836" y1="395" x2="880" y2="395" stroke="#5b7590" stroke-width="3"/>
+<polygon points="880.0,395.0 871.0,399.3 871.0,390.7" fill="#5b7590"/>
+</svg>

@@ -1,0 +1,110 @@
+{
+  "schema_version": "performance-assets-1.0",
+  "baseline": "b4e7e2739de7cbca87ec4b724822a52097d0978c",
+  "assets": [
+    {
+      "id": "A01",
+      "path": "tools/perf/analyze.py",
+      "capability": "原离线指标/完整sent/usage/修订校验",
+      "evidence": "固定人工夹具与既有回归；本轮直接复用",
+      "gap": "无生产通用导出器；原stages只有inclusive duration",
+      "state": "cpu_fixture_verified"
+    },
+    {
+      "id": "A02",
+      "path": "tools/perf/runtime_metrics.py",
+      "capability": "恢复右删失、未知held积分",
+      "evidence": "既有纯诊断函数；本轮恢复报告直接调用",
+      "gap": "需要独立观察者与原allocation证据，不能作释放授权",
+      "state": "cpu_fixture_verified"
+    },
+    {
+      "id": "A03",
+      "path": "tools/perf/controlled_transport.py",
+      "capability": "有界loopback/SSE客户端传输练习",
+      "evidence": "历史回环证据，不是MaaS模型结果",
+      "gap": "无真实Go/Higress/模型全链路",
+      "state": "historical_controlled_local"
+    },
+    {
+      "id": "A04",
+      "path": "tools/perf/operators/gemm.cu",
+      "capability": "CUDA GEMM/cuBLAS骨架",
+      "evidence": "共用宿主finite门禁已验证；CUDA未执行",
+      "gap": "兼容CUDA/库、批准GPU/精度/shape及真实计时",
+      "state": "gpu_unexecuted"
+    },
+    {
+      "id": "A05",
+      "path": "tools/perf/operators/bench.py",
+      "capability": "CPU数学参考、GPU默认拒绝",
+      "evidence": "CPU参考/门禁；未验证低精度模型质量",
+      "gap": "目标模型shape、GPU数值/成熟baseline",
+      "state": "cpu_reference_only"
+    },
+    {
+      "id": "A06",
+      "path": "tools/perf/operators/profile_operator.py",
+      "capability": "三类Profiler默认dry-run",
+      "evidence": "命令/审批门禁，不是profile数据",
+      "gap": "真实Nsight/Torch栈与授权",
+      "state": "dry_run_only"
+    },
+    {
+      "id": "A07",
+      "path": "tools/perf/runtime/sglang-source-map-v0.5.json",
+      "capability": "8份固定SHA源码路径",
+      "evidence": "历史原文hash/AST验证",
+      "gap": "不证明现部署版本、模型热点或性能",
+      "state": "source_only"
+    },
+    {
+      "id": "A08",
+      "path": "tools/perf/engineering/runtime_lab.py",
+      "capability": "R1 CPU异步闭环、背压/取消/代次",
+      "evidence": "合成递推+真实CPU线程；先前165项阶段",
+      "gap": "真实GPU Worker/页内容和设备停止证据",
+      "state": "cpu_synthetic_runtime"
+    },
+    {
+      "id": "A09",
+      "path": "tools/perf/scheduling/compare.py",
+      "capability": "J02页预算接纳/切块/公平规则对照",
+      "evidence": "b4e7e27：静态194/200，age_fair161/200；保留负结果",
+      "gap": "activation占位；无完整引擎/GPU对照",
+      "state": "negative_cpu_result"
+    },
+    {
+      "id": "A10",
+      "path": "tools/perf/scheduling/sampling_probe.py",
+      "capability": "first_chunk无内容事件源码条件复现",
+      "evidence": "e1bd502历史定位；本轮另核当前默认/PR6源码",
+      "gap": "产品修补及真实HTTP回归由原后端负责",
+      "state": "source_predicate_only"
+    },
+    {
+      "id": "A11",
+      "path": "tools/perf/experiments/first-batch-v0.4.json",
+      "capability": "E1–E3/J02真实实验门槛",
+      "evidence": "execution_enabled=false，未批准SLO/预算为空",
+      "gap": "真实装配、模型/GPU/版本、SLO/质量及限额授权",
+      "state": "disabled_real_plan"
+    },
+    {
+      "id": "A12",
+      "path": "tools/perf/docs/observability-handoff-v0.2.csv",
+      "capability": "OBS01–19契约映射",
+      "evidence": "已交采样/脱敏/关联设计，不是生产exporter",
+      "gap": "真实采集端口、保留期、丢样与校准证据",
+      "state": "contract_mapping_proposal"
+    },
+    {
+      "id": "A13",
+      "path": "tools/perf/diagnostics/run.py",
+      "capability": "原指标→关联/区间/观察依赖链→JSON/HTML",
+      "evidence": "本轮合成区间+回归，不加载模型",
+      "gap": "真实sidecar/校准/活动归属与独立复验",
+      "state": "new_controlled_report"
+    }
+  ]
+}

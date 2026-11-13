@@ -1,0 +1,256 @@
+{
+  "schema_version": "diagnostic-collection-map-1.0",
+  "authority": "tool_sidecar_proposal_not_shared_protocol",
+  "stages": [
+    {
+      "id": "client.request",
+      "layer": "client",
+      "applies": "all_sent",
+      "boundary": "client sent to complete/error/cancel; unfinished end=null",
+      "source": "client full request roster",
+      "owner": "MAAS-5/10",
+      "obs": "OBS01/06",
+      "raw_production_collector": "not_implemented_in_this_tool"
+    },
+    {
+      "id": "client.protocol",
+      "layer": "client",
+      "applies": "all_sent",
+      "boundary": "客户端首个完整SSE data事件；含role/usage等协议事件",
+      "source": "client/SSE parser",
+      "owner": "MAAS-5/10",
+      "obs": "OBS01/06",
+      "raw_production_collector": "not_implemented_in_this_tool"
+    },
+    {
+      "id": "client.content",
+      "layer": "client",
+      "applies": "all_sent",
+      "boundary": "sent到首个非空content；非SSE chunk/token换算",
+      "source": "client/SSE parser",
+      "owner": "MAAS-5/10",
+      "obs": "OBS01/06",
+      "raw_production_collector": "not_implemented_in_this_tool"
+    },
+    {
+      "id": "go.request",
+      "layer": "go",
+      "applies": "admitted",
+      "boundary": "Go request handler lifetime; inclusive, not admission-only",
+      "source": "Go request span",
+      "owner": "MAAS-3",
+      "obs": "OBS06/11",
+      "raw_production_collector": "not_implemented_in_this_tool"
+    },
+    {
+      "id": "go.admission",
+      "layer": "go",
+      "applies": "admitted",
+      "boundary": "准入调用本地开始/结束",
+      "source": "Go trace adapter",
+      "owner": "MAAS-3/4",
+      "obs": "OBS06",
+      "raw_production_collector": "not_implemented_in_this_tool"
+    },
+    {
+      "id": "redis.permit",
+      "layer": "redis",
+      "applies": "admitted",
+      "boundary": "pool/permit操作；Redis不是预算账本",
+      "source": "Go Redis client span",
+      "owner": "MAAS-3/8",
+      "obs": "OBS07",
+      "raw_production_collector": "not_implemented_in_this_tool"
+    },
+    {
+      "id": "mysql.admission",
+      "layer": "mysql",
+      "applies": "admitted",
+      "boundary": "锁/事务/提交ACK；不与子span重复相加",
+      "source": "MySQL client trace",
+      "owner": "MAAS-3/4",
+      "obs": "OBS08",
+      "raw_production_collector": "not_implemented_in_this_tool"
+    },
+    {
+      "id": "mysql.finalization",
+      "layer": "mysql",
+      "applies": "admitted",
+      "boundary": "唯一终态事务与ACK",
+      "source": "Go MySQL trace",
+      "owner": "MAAS-3/6",
+      "obs": "OBS08/11",
+      "raw_production_collector": "not_implemented_in_this_tool"
+    },
+    {
+      "id": "go.flush",
+      "layer": "go",
+      "applies": "admitted",
+      "boundary": "非空content写/flush；不等于客户端收到",
+      "source": "Go response writer",
+      "owner": "MAAS-3",
+      "obs": "OBS06",
+      "raw_production_collector": "not_implemented_in_this_tool"
+    },
+    {
+      "id": "go.cancel",
+      "layer": "go",
+      "applies": "admitted",
+      "boundary": "取消发现到内部通知；停止和slot另测",
+      "source": "Go cancellation trace",
+      "owner": "MAAS-3",
+      "obs": "OBS12/13",
+      "raw_production_collector": "not_implemented_in_this_tool"
+    },
+    {
+      "id": "higress.route",
+      "layer": "gateway",
+      "applies": "admitted",
+      "boundary": "实际路由适配与ext-auth",
+      "source": "Higress trusted trace",
+      "owner": "MAAS-3/8",
+      "obs": "OBS03/10",
+      "raw_production_collector": "not_implemented_in_this_tool"
+    },
+    {
+      "id": "network.upstream",
+      "layer": "network",
+      "applies": "admitted",
+      "boundary": "DNS/connect/TLS/首字节；缺值不填残差",
+      "source": "gateway transport trace",
+      "owner": "MAAS-3/8",
+      "obs": "OBS10/18",
+      "raw_production_collector": "not_implemented_in_this_tool"
+    },
+    {
+      "id": "engine.queue",
+      "layer": "worker",
+      "applies": "private",
+      "boundary": "Worker enqueue到被选批",
+      "source": "engine trace",
+      "owner": "MAAS-9/10/8",
+      "obs": "OBS16",
+      "raw_production_collector": "not_implemented_in_this_tool"
+    },
+    {
+      "id": "engine.tokenize",
+      "layer": "worker",
+      "applies": "private",
+      "boundary": "tokenizer处理；冻结tokenizer/template",
+      "source": "engine tokenizer trace",
+      "owner": "MAAS-9/10",
+      "obs": "OBS04/16",
+      "raw_production_collector": "not_implemented_in_this_tool"
+    },
+    {
+      "id": "engine.prefill",
+      "layer": "worker",
+      "applies": "private",
+      "boundary": "prefill迭代区间及batch/长度",
+      "source": "engine trace",
+      "owner": "MAAS-9/10",
+      "obs": "OBS16",
+      "raw_production_collector": "not_implemented_in_this_tool"
+    },
+    {
+      "id": "engine.decode",
+      "layer": "worker",
+      "applies": "private",
+      "boundary": "decode迭代及原生token时间",
+      "source": "engine trace",
+      "owner": "MAAS-9/10",
+      "obs": "OBS16",
+      "raw_production_collector": "not_implemented_in_this_tool"
+    },
+    {
+      "id": "engine.detokenize",
+      "layer": "worker",
+      "applies": "private",
+      "boundary": "token到内容与输出队列",
+      "source": "engine output trace",
+      "owner": "MAAS-9/10",
+      "obs": "OBS16",
+      "raw_production_collector": "not_implemented_in_this_tool"
+    },
+    {
+      "id": "kv.manage",
+      "layer": "worker",
+      "applies": "private",
+      "boundary": "分配/逐出/重算/命中；含前缀安全上下文",
+      "source": "engine allocator metrics",
+      "owner": "MAAS-9/10/8",
+      "obs": "OBS17",
+      "raw_production_collector": "not_implemented_in_this_tool"
+    },
+    {
+      "id": "host.launch",
+      "layer": "worker",
+      "applies": "private",
+      "boundary": "CPU shape/提交；CUDA异步不等于完成",
+      "source": "Nsight Systems/NVTX",
+      "owner": "MAAS-10/8",
+      "obs": "OBS16/18",
+      "raw_production_collector": "not_implemented_in_this_tool"
+    },
+    {
+      "id": "gpu.kernel",
+      "layer": "gpu",
+      "applies": "private",
+      "boundary": "设备kernel区间；共享batch不得当逐请求独占",
+      "source": "Nsight/torch trace adapter",
+      "owner": "MAAS-10/8",
+      "obs": "OBS16/17",
+      "raw_production_collector": "not_implemented_in_this_tool"
+    },
+    {
+      "id": "gpu.copy",
+      "layer": "gpu",
+      "applies": "private",
+      "boundary": "H2D/D2H/设备copy与事件依赖",
+      "source": "Nsight Systems adapter",
+      "owner": "MAAS-10/8",
+      "obs": "OBS17",
+      "raw_production_collector": "not_implemented_in_this_tool"
+    },
+    {
+      "id": "comm.collective",
+      "layer": "gpu",
+      "applies": "private",
+      "boundary": "rank/组/消息与暴露依赖；不直接加NCCL总时长",
+      "source": "NCCL/Nsight adapter",
+      "owner": "MAAS-10/8",
+      "obs": "OBS05/16",
+      "raw_production_collector": "not_implemented_in_this_tool"
+    },
+    {
+      "id": "release.startup",
+      "layer": "release",
+      "applies": "cold_only",
+      "boundary": "拉取/加载/初始化/图捕获；冷与稳态分开",
+      "source": "Operator/engine lifecycle",
+      "owner": "MAAS-11/8",
+      "obs": "OBS14",
+      "raw_production_collector": "not_implemented_in_this_tool"
+    },
+    {
+      "id": "release.activation",
+      "layer": "release",
+      "applies": "cold_only",
+      "boundary": "真实回执/验证/活动屏障阶段",
+      "source": "publish service trace",
+      "owner": "MAAS-11/8",
+      "obs": "OBS14/15",
+      "raw_production_collector": "not_implemented_in_this_tool"
+    },
+    {
+      "id": "provider.internal",
+      "layer": "provider",
+      "applies": "external",
+      "boundary": "供应商内部queue/kernel不可见则未知",
+      "source": "approved upstream metadata only",
+      "owner": "MAAS-3/9",
+      "obs": "OBS10/16",
+      "raw_production_collector": "not_implemented_in_this_tool"
+    }
+  ]
+}

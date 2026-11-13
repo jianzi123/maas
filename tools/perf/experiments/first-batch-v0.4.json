@@ -1,0 +1,355 @@
+{
+  "plan_version": "0.4",
+  "execution_enabled": false,
+  "scope": "E1-E3 actual platform/model experiments; local fixture lab is separate",
+  "protocols": {
+    "ticket": 3,
+    "terminal": "3.0",
+    "observation": "1.0"
+  },
+  "approvals": {
+    "record": null,
+    "environment_ref": null,
+    "model_weights_license": null,
+    "runtime_and_versions_manifest": null,
+    "invocation_binding": null,
+    "slo_quality_policy": null,
+    "budget_rate_slot_price": null,
+    "request_token_money_gpu_wall_caps": null,
+    "stop_and_drain_thresholds": null
+  },
+  "core_cells": [
+    {
+      "id": "S-C1-U",
+      "shape": "S",
+      "concurrency": 1,
+      "prefix": "U",
+      "stream": true
+    },
+    {
+      "id": "S-C1-H",
+      "shape": "S",
+      "concurrency": 1,
+      "prefix": "H",
+      "stream": true
+    },
+    {
+      "id": "S-C2-U",
+      "shape": "S",
+      "concurrency": 2,
+      "prefix": "U",
+      "stream": true
+    },
+    {
+      "id": "S-C2-H",
+      "shape": "S",
+      "concurrency": 2,
+      "prefix": "H",
+      "stream": true
+    },
+    {
+      "id": "S-C4-U",
+      "shape": "S",
+      "concurrency": 4,
+      "prefix": "U",
+      "stream": true
+    },
+    {
+      "id": "S-C4-H",
+      "shape": "S",
+      "concurrency": 4,
+      "prefix": "H",
+      "stream": true
+    },
+    {
+      "id": "S-C8-U",
+      "shape": "S",
+      "concurrency": 8,
+      "prefix": "U",
+      "stream": true
+    },
+    {
+      "id": "S-C8-H",
+      "shape": "S",
+      "concurrency": 8,
+      "prefix": "H",
+      "stream": true
+    },
+    {
+      "id": "M-C1-U",
+      "shape": "M",
+      "concurrency": 1,
+      "prefix": "U",
+      "stream": true
+    },
+    {
+      "id": "M-C1-H",
+      "shape": "M",
+      "concurrency": 1,
+      "prefix": "H",
+      "stream": true
+    },
+    {
+      "id": "M-C2-U",
+      "shape": "M",
+      "concurrency": 2,
+      "prefix": "U",
+      "stream": true
+    },
+    {
+      "id": "M-C2-H",
+      "shape": "M",
+      "concurrency": 2,
+      "prefix": "H",
+      "stream": true
+    },
+    {
+      "id": "M-C4-U",
+      "shape": "M",
+      "concurrency": 4,
+      "prefix": "U",
+      "stream": true
+    },
+    {
+      "id": "M-C4-H",
+      "shape": "M",
+      "concurrency": 4,
+      "prefix": "H",
+      "stream": true
+    },
+    {
+      "id": "M-C8-U",
+      "shape": "M",
+      "concurrency": 8,
+      "prefix": "U",
+      "stream": true
+    },
+    {
+      "id": "M-C8-H",
+      "shape": "M",
+      "concurrency": 8,
+      "prefix": "H",
+      "stream": true
+    },
+    {
+      "id": "L-C1-U",
+      "shape": "L",
+      "concurrency": 1,
+      "prefix": "U",
+      "stream": true
+    },
+    {
+      "id": "L-C1-H",
+      "shape": "L",
+      "concurrency": 1,
+      "prefix": "H",
+      "stream": true
+    },
+    {
+      "id": "L-C2-U",
+      "shape": "L",
+      "concurrency": 2,
+      "prefix": "U",
+      "stream": true
+    },
+    {
+      "id": "L-C2-H",
+      "shape": "L",
+      "concurrency": 2,
+      "prefix": "H",
+      "stream": true
+    },
+    {
+      "id": "L-C4-U",
+      "shape": "L",
+      "concurrency": 4,
+      "prefix": "U",
+      "stream": true
+    },
+    {
+      "id": "L-C4-H",
+      "shape": "L",
+      "concurrency": 4,
+      "prefix": "H",
+      "stream": true
+    },
+    {
+      "id": "L-C8-U",
+      "shape": "L",
+      "concurrency": 8,
+      "prefix": "U",
+      "stream": true
+    },
+    {
+      "id": "L-C8-H",
+      "shape": "L",
+      "concurrency": 8,
+      "prefix": "H",
+      "stream": true
+    }
+  ],
+  "first_cells": [
+    "S-C1-U",
+    "M-C1-U",
+    "M-C4-U",
+    "M-C4-H"
+  ],
+  "measurement": {
+    "target_sent_per_case_variant_repeat": 200,
+    "exploration_paired_repeats": 3,
+    "confirmation_proposed_paired_repeats": 5,
+    "confirmation_first_batch_target_sent": 8000,
+    "confirmation_input_upper_tokens": 12800000,
+    "confirmation_output_cap_tokens": 1792000,
+    "warmup_cancel_errors_profile_extra": true,
+    "benefit_policy_approved": false
+  },
+  "experiments": [
+    {
+      "id": "E1",
+      "status": "blocked_by_real_call_kernel_and_gateway",
+      "hypothesis": "connection/flush and admission costs may dominate platform overhead",
+      "source": "controlled upstream behind the real Go and Higress path",
+      "factors_tested_separately": [
+        "connection policy",
+        "SSE buffering/flush",
+        "admission pool or SQL overhead"
+      ],
+      "fixed": [
+        "body/response timing",
+        "Key/budgets/slot/rate",
+        "publication/route/price",
+        "concurrency"
+      ],
+      "required_evidence": [
+        "Go/Redis/MySQL/Higress spans",
+        "lock/NOWAIT/commit",
+        "full requests and terminal/ledger",
+        "cancel/drain"
+      ]
+    },
+    {
+      "id": "E2",
+      "status": "blocked_by_approved_model_gpu_versions",
+      "cells": [
+        "M-C4-U"
+      ],
+      "factor": "chunked-prefill-size",
+      "candidate_values": [
+        1024,
+        2048,
+        4096
+      ],
+      "baseline": "capture approved effective current value, never assume engine default",
+      "required_evidence": [
+        "actual version help/compatibility",
+        "queue/prefill/decode",
+        "TTFT/TPOT tail and goodput",
+        "GPU/KV/OOM",
+        "quality/accounting"
+      ]
+    },
+    {
+      "id": "E3",
+      "status": "blocked_by_approved_model_gpu_versions",
+      "cells": [
+        "M-C4-H",
+        "M-C4-U"
+      ],
+      "factor": "radix cache enabled",
+      "candidate_values": [
+        true,
+        false
+      ],
+      "comparison": "on/off within identical H; U on/off is negative control, not U-versus-H speedup",
+      "required_evidence": [
+        "weights/tokenizer/template and actual shared-prefix hashes",
+        "hit/evict/recompute",
+        "quality/accounting",
+        "equal warmup"
+      ]
+    }
+  ],
+  "guards": [
+    "no arbitrary model endpoint runner provided",
+    "no business rule relaxation",
+    "no generation retries or cross-source fallback",
+    "unknown usage is null, held is not actual",
+    "client common clock required",
+    "no real result or benefit claimed"
+  ],
+  "results": {
+    "platform_baseline": null,
+    "sglang_baseline": null,
+    "optimization_delta": null
+  },
+  "shapes": [
+    {
+      "id": "S",
+      "input_tokens": 256,
+      "output_cap_tokens": 128
+    },
+    {
+      "id": "M",
+      "input_tokens": 2048,
+      "output_cap_tokens": 256
+    },
+    {
+      "id": "L",
+      "input_tokens": 8192,
+      "output_cap_tokens": 512
+    }
+  ],
+  "prefixes": [
+    {
+      "id": "U",
+      "shared_fraction": 0,
+      "note": "unique beyond fixed template"
+    },
+    {
+      "id": "H",
+      "shared_fraction": 0.75,
+      "note": "prewarmed fixed prefix; actual shared token count/hash required"
+    }
+  ],
+  "runtime_extension": {
+    "revision": "0.5",
+    "execution_enabled": false,
+    "J02": {
+      "sequence_ref": "../runtime/J02-mixed-sequence.json",
+      "sha256": "2cbb999d15a41f87afed659f68aeec9388c3be8ed5e6d4f2843024ffe8ebda77",
+      "concurrency_candidates": [
+        1,
+        4
+      ],
+      "fixed_AB_request_order": true,
+      "actual_tokenizer_template_refs": null,
+      "same_resources_precision_and_business_limits": true
+    },
+    "measurement_boundaries": {
+      "client": [
+        "visible TTFT",
+        "E2E",
+        "all-sent denominator",
+        "censored/pending"
+      ],
+      "go": [
+        "first_chunk_ms",
+        "guard/NOWAIT/commit/pool cost"
+      ],
+      "worker": [
+        "enqueue/prefill/decode",
+        "native token times",
+        "KV/graph/kernel/communication"
+      ]
+    },
+    "comparison_requirements": [
+      "mature current baseline, not only naive ablation",
+      "same authoritative evidence and per-dimension known/held policy",
+      "independent stop/safe/evidence/release/successor observation clock and cutoff",
+      "report unrecovered count/coverage/censor horizon, never drop them from denominator",
+      "admission p95/guard hold/NOWAIT/cpu/receipt bytes/write amplification included"
+    ],
+    "runtime_results": null
+  }
+}

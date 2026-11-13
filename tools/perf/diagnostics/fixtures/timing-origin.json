@@ -1,0 +1,5 @@
+{
+  "evidence_kind": "synthetic_manual_intervals",
+  "no_runtime_executed": true,
+  "purpose": "hand-computable nested/overlap/causal/missing interval validation"
+}

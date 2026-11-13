@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="485" viewBox="0 0 1120 485" role="img">
+<title>在线Softmax：两块统计量怎样得到同一结果</title>
+<rect width="1120" height="485" fill="#f7f9fc"/>
+<text x="24" y="39" font-family="Microsoft YaHei,Arial,sans-serif" font-size="24" fill="#18334b">
+<tspan x="24" dy="0">在线Softmax：两块统计量怎样得到同一结果</tspan>
+</text>
+<rect x="30" y="110" width="320" height="105" rx="10" fill="#e7f2ff" stroke="#b8c9d9" stroke-width="2"/>
+<text x="42" y="136" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="42" dy="0">块A：scores=[0, ln2]</tspan>
+<tspan x="42" dy="23">m=ln2，l=3/2</tspan>
+<tspan x="42" dy="23">a=[1/2, 1]</tspan>
+</text>
+<rect x="30" y="285" width="320" height="105" rx="10" fill="#e5f6ef" stroke="#b8c9d9" stroke-width="2"/>
+<text x="42" y="311" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="42" dy="0">块B：score=[ln3]</tspan>
+<tspan x="42" dy="23">m=ln3，l=1</tspan>
+<tspan x="42" dy="23">a=[1, 1]</tspan>
+</text>
+<rect x="440" y="180" width="290" height="140" rx="10" fill="#fff1d9" stroke="#b8c9d9" stroke-width="2"/>
+<text x="452" y="206" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="452" dy="0">按共同最大值缩放</tspan>
+<tspan x="452" dy="23">m=ln3</tspan>
+<tspan x="452" dy="23">alpha=2/3，beta=1</tspan>
+<tspan x="452" dy="23">合并l与未归一化a</tspan>
+</text>
+<rect x="800" y="180" width="290" height="140" rx="10" fill="#ecebff" stroke="#b8c9d9" stroke-width="2"/>
+<text x="812" y="206" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="812" dy="0">合并后</tspan>
+<tspan x="812" dy="23">l=2，a=[4/3,5/3]</tspan>
+<tspan x="812" dy="23">输出=a/l</tspan>
+<tspan x="812" dy="23">[2/3,5/6]</tspan>
+</text>
+<line x1="350" y1="162" x2="440" y2="220" stroke="#5b7590" stroke-width="3"/>
+<polygon points="440.0,220.0 430.1,218.8 434.8,211.5" fill="#5b7590"/>
+<line x1="350" y1="337" x2="440" y2="280" stroke="#5b7590" stroke-width="3"/>
+<polygon points="440.0,280.0 434.7,288.5 430.1,281.1" fill="#5b7590"/>
+<line x1="730" y1="250" x2="800" y2="250" stroke="#5b7590" stroke-width="3"/>
+<polygon points="800.0,250.0 791.0,254.3 791.0,245.7" fill="#5b7590"/>
+<text x="30" y="446" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="30" dy="0">空块l=0单独处理；不计算负无穷减负无穷。数值为CPU数学算例，不是GPU性能。</tspan>
+</text>
+</svg>

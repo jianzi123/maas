@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="515" viewBox="0 0 1120 515" role="img">
+<title>页地址相同，分配代次与在途引用仍必须匹配</title>
+<rect width="1120" height="515" fill="#f7f9fc"/>
+<text x="24" y="39" font-family="Microsoft YaHei,Arial,sans-serif" font-size="24" fill="#18334b">
+<tspan x="24" dy="0">页地址相同，分配代次与在途引用仍必须匹配</tspan>
+</text>
+<text x="24" y="77" font-family="Microsoft YaHei,Arial,sans-serif" font-size="17" fill="#18334b">
+<tspan x="24" dy="0">host状态模型：完成事件由实验注入，真实设备仍需可信完成或隔离证明</tspan>
+</text>
+<text x="28" y="128" font-family="Microsoft YaHei,Arial,sans-serif" font-size="18" fill="#18334b">
+<tspan x="28" dy="0">事件</tspan>
+</text>
+<text x="430" y="128" font-family="Microsoft YaHei,Arial,sans-serif" font-size="18" fill="#18334b">
+<tspan x="430" dy="0">generation</tspan>
+</text>
+<text x="595" y="128" font-family="Microsoft YaHei,Arial,sans-serif" font-size="18" fill="#18334b">
+<tspan x="595" dy="0">owners</tspan>
+</text>
+<text x="765" y="128" font-family="Microsoft YaHei,Arial,sans-serif" font-size="18" fill="#18334b">
+<tspan x="765" dy="0">inflight</tspan>
+</text>
+<text x="960" y="128" font-family="Microsoft YaHei,Arial,sans-serif" font-size="18" fill="#18334b">
+<tspan x="960" dy="0">可复用</tspan>
+</text>
+<text x="28" y="177" font-family="Microsoft YaHei,Arial,sans-serif" font-size="17" fill="#18334b">
+<tspan x="28" dy="0">分配给A</tspan>
+</text>
+<text x="430" y="177" font-family="Microsoft YaHei,Arial,sans-serif" font-size="17" fill="#18334b">
+<tspan x="430" dy="0">1</tspan>
+</text>
+<text x="595" y="177" font-family="Microsoft YaHei,Arial,sans-serif" font-size="17" fill="#18334b">
+<tspan x="595" dy="0">A</tspan>
+</text>
+<text x="765" y="177" font-family="Microsoft YaHei,Arial,sans-serif" font-size="17" fill="#18334b">
+<tspan x="765" dy="0">空</tspan>
+</text>
+<text x="960" y="177" font-family="Microsoft YaHei,Arial,sans-serif" font-size="17" fill="#18334b">
+<tspan x="960" dy="0">否</tspan>
+</text>
+<text x="28" y="221" font-family="Microsoft YaHei,Arial,sans-serif" font-size="17" fill="#18334b">
+<tspan x="28" dy="0">提交batch7</tspan>
+</text>
+<text x="430" y="221" font-family="Microsoft YaHei,Arial,sans-serif" font-size="17" fill="#18334b">
+<tspan x="430" dy="0">1</tspan>
+</text>
+<text x="595" y="221" font-family="Microsoft YaHei,Arial,sans-serif" font-size="17" fill="#18334b">
+<tspan x="595" dy="0">A</tspan>
+</text>
+<text x="765" y="221" font-family="Microsoft YaHei,Arial,sans-serif" font-size="17" fill="#18334b">
+<tspan x="765" dy="0">batch7</tspan>
+</text>
+<text x="960" y="221" font-family="Microsoft YaHei,Arial,sans-serif" font-size="17" fill="#18334b">
+<tspan x="960" dy="0">否</tspan>
+</text>
+<text x="28" y="265" font-family="Microsoft YaHei,Arial,sans-serif" font-size="17" fill="#18334b">
+<tspan x="28" dy="0">解除A引用</tspan>
+</text>
+<text x="430" y="265" font-family="Microsoft YaHei,Arial,sans-serif" font-size="17" fill="#18334b">
+<tspan x="430" dy="0">1</tspan>
+</text>
+<text x="595" y="265" font-family="Microsoft YaHei,Arial,sans-serif" font-size="17" fill="#18334b">
+<tspan x="595" dy="0">空</tspan>
+</text>
+<text x="765" y="265" font-family="Microsoft YaHei,Arial,sans-serif" font-size="17" fill="#18334b">
+<tspan x="765" dy="0">batch7</tspan>
+</text>
+<text x="960" y="265" font-family="Microsoft YaHei,Arial,sans-serif" font-size="17" fill="#18334b">
+<tspan x="960" dy="0">否</tspan>
+</text>
+<text x="28" y="309" font-family="Microsoft YaHei,Arial,sans-serif" font-size="17" fill="#18334b">
+<tspan x="28" dy="0">完成batch7</tspan>
+</text>
+<text x="430" y="309" font-family="Microsoft YaHei,Arial,sans-serif" font-size="17" fill="#18334b">
+<tspan x="430" dy="0">1</tspan>
+</text>
+<text x="595" y="309" font-family="Microsoft YaHei,Arial,sans-serif" font-size="17" fill="#18334b">
+<tspan x="595" dy="0">空</tspan>
+</text>
+<text x="765" y="309" font-family="Microsoft YaHei,Arial,sans-serif" font-size="17" fill="#18334b">
+<tspan x="765" dy="0">空</tspan>
+</text>
+<text x="960" y="309" font-family="Microsoft YaHei,Arial,sans-serif" font-size="17" fill="#18334b">
+<tspan x="960" dy="0">是</tspan>
+</text>
+<text x="28" y="353" font-family="Microsoft YaHei,Arial,sans-serif" font-size="17" fill="#18334b">
+<tspan x="28" dy="0">再分配给C</tspan>
+</text>
+<text x="430" y="353" font-family="Microsoft YaHei,Arial,sans-serif" font-size="17" fill="#18334b">
+<tspan x="430" dy="0">2</tspan>
+</text>
+<text x="595" y="353" font-family="Microsoft YaHei,Arial,sans-serif" font-size="17" fill="#18334b">
+<tspan x="595" dy="0">C</tspan>
+</text>
+<text x="765" y="353" font-family="Microsoft YaHei,Arial,sans-serif" font-size="17" fill="#18334b">
+<tspan x="765" dy="0">空</tspan>
+</text>
+<text x="960" y="353" font-family="Microsoft YaHei,Arial,sans-serif" font-size="17" fill="#18334b">
+<tspan x="960" dy="0">否</tspan>
+</text>
+<text x="28" y="397" font-family="Microsoft YaHei,Arial,sans-serif" font-size="17" fill="#18334b">
+<tspan x="28" dy="0">重复旧完成</tspan>
+</text>
+<text x="430" y="397" font-family="Microsoft YaHei,Arial,sans-serif" font-size="17" fill="#18334b">
+<tspan x="430" dy="0">2</tspan>
+</text>
+<text x="595" y="397" font-family="Microsoft YaHei,Arial,sans-serif" font-size="17" fill="#18334b">
+<tspan x="595" dy="0">C</tspan>
+</text>
+<text x="765" y="397" font-family="Microsoft YaHei,Arial,sans-serif" font-size="17" fill="#18334b">
+<tspan x="765" dy="0">空</tspan>
+</text>
+<text x="960" y="397" font-family="Microsoft YaHei,Arial,sans-serif" font-size="17" fill="#18334b">
+<tspan x="960" dy="0">仍为否</tspan>
+</text>
+<text x="28" y="477" font-family="Microsoft YaHei,Arial,sans-serif" font-size="17" fill="#18334b">
+<tspan x="28" dy="0">旧Lease(0,1)访问现在的页0 → StaleLease；重复旧batch完成不解除C的分配。</tspan>
+</text>
+</svg>
