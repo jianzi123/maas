@@ -1,5 +1,14 @@
 # 阶段总结：2026-11-05
 
+## 当前优先级纠偏 2026-11-13
+
+本任务重心回到GPU算子与真实SGLang推理性能，首项为Decode Attention/KV路径。已有CPU公式/调度器、Go采样和工具回归保留为支持资产，不以CPU测试数或通用报告数量作为推理优化交付。K1不等待平台D1/E1；GPU条件具备即可独立做设备基线，R/E分别按模型/平台条件推进。
+
+本轮只读复核有RTX4070 Laptop 8188MiB、驱动581.29、CUDA编译器13.0.88和Nsight Compute实际exe；当前PyTorch版本文件为2.9.1+cpu、cuda=None，导入因OpenMP Error15失败，PATH未发现nsys。没有执行GPU实验，也未安装/替换栈或绕过运行库冲突；设备/资源使用批准、干净CUDA框架和Profiler条件仍需具备。具体shape、源码路径与命令见[算子主线](operator-lab.md)。
+
+D1已交消费df8d40e及其独立QA沿原SHA继续，源c7e863b已由原QA通过受控核验；本次优先级调整不重复派发源端或重做原验收。
+
+
 ## 当前D1消费端增量
 
 沿8420aaf接入原后端c7e863b实际Go/临时MySQL/受控HTTP的9条摘要，另有1次满队列执行无摘要。逐文件hash和源码交付commit核对，保留working-tree-d1采样原标签；首协议/非空内容/Write成功/flush尝试与局部Forward时钟分列。客户端sent/RPS/TTFT、完整binding、trace/实验关联、ledger/held及独立恢复仍未知，D1整体与E1尚未完成。实际报告和复现命令见[D1接线](d1-wiring.md)。

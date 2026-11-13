@@ -1,17 +1,39 @@
 # 算子正确性、微基准与Profiler工作台
 
-这是本轮算子/运行时主线入口。工具在[operators目录](../../tools/perf/operators)，计划默认execution_enabled=false。CPU参考可以独立运行；CUDA/Triton/PyTorch GPU部分是待获准环境复验的骨架。
+本任务主线是GPU算子和真实推理运行时。工具在[operators目录](../../tools/perf/operators)，计划默认execution_enabled=false；CPU公式只做独立数值oracle，不计为GPU/模型性能交付。
+
+## 当前首项：Decode Attention与KV读取
+
+研究入口复用SGLang固定v0.5.6 / 7ae368e的flashinfer_backend.forward_decode路径（详见[固定源码分析](sglang-source-analysis-v0.5.md)），将KV索引/写入/布局准备、paged wrapper执行与实际GPU kernel分开。该版本只是可复核源码样本；目标引擎版本、模型及backend未确认，不认定它是已上线环境。
+
+现有decode-llm用B=4、Hq=16、Hkv=4、Sq=1、Sk=2048、D=128、FP16，是代表性合成shape，不冒充从目标模型采集的分布。连续K+V载荷约16MiB，只是张量容量，不是实际DRAM流量或整卡显存上限。先复用它验证设备计时、后缀causal/GQA数值及实际选中backend；torch模式candidate=baseline是计时control，不能报告优化收益。
+
+GPU条件满足后分两步：先给出该dense control的原始CUDA Events、独立采样trace、误差和显存；再按实际SGLang profile的shape/page/layout与原生paged backend作同条件对照。dense SDPA不代替paged KV或完整引擎。没有原生paged采样时登记缺口，不继续写CPU分页模拟器作为替代。
+
+只有timeline/计数器支持时才选一项等价改动：例如确实暴露的Q contiguous拷贝、KV布局准备或backend参数。若没有该开销，淘汰该假设。后续GEMM、CUDA Graph、TP/EP通信同样先确认热点；不通过去掉collective、改变精度或降低输出语义制造收益。
+
+K1不以Go/Higress接通为前置；R层需要获准模型、真实引擎/权重/质量约束；E层另验证受保护平台。产出按设备时延/实际计数器→引擎TTFT/TPOT/有效吞吐→客户端收益分层，不再用CPU测试数作为主进度。
+
+下面三条只生成已有GPU采样命令，不执行GPU：
+
+~~~text
+python tools/perf/operators/profile_operator.py --tool torch --case decode-llm --output-dir tools/perf/reports/decode-profile-torch
+python tools/perf/operators/profile_operator.py --tool nsys --case decode-llm --output-dir tools/perf/reports/decode-profile-nsys
+python tools/perf/operators/profile_operator.py --tool ncu --case decode-llm --output-dir tools/perf/reports/decode-profile-ncu
+~~~
+
+真正执行仍需批准计划、干净兼容的CUDA运行库与资源上限；设备计时与profiler采样分开。源码分析与命令准备不等于已完成GPU实验。
 
 ## 本机只读核查与具体缺口
 
 - nvidia-smi报告RTX4070 Laptop、8188MiB、驱动581.29；nvcc报告CUDA13.0.88。
-- PATH见Nsight Compute2025.3.1入口，没有发现Nsight Systems；Triton未安装。
+- 2026-11-13只读复核：PATH有Nsight Compute2025.3.1的bat入口，实际exe位于其target/windows-desktop-win7-x64/ncu.exe；执行器要求真实exe位于获准进程PATH，不修改全局环境。Nsight Systems在当前PATH未发现；Triton安装状态沿历史记录，本轮未重查。
 - 安装元数据为PyTorch2.9.1，version.py明确2.9.1+cpu、cuda=None；导入时实际遇到重复libiomp5md OpenMP错误。没有设置KMP_DUPLICATE_LIB_OK绕过。
 - NumPy2.3.5、Python3.13.9 CPU参考可运行。没有分配GPU张量、编译/执行CUDA或Triton，CUDA host编译器与实际Profiler计数权限也未验证。
 
 “有显卡”不等于本次GPU实验授权或完整工具链。后续需兼容CUDA PyTorch、干净运行库、可选Triton、明确approval_ref/target_environment、数据内存估算/预热/样本上限、设备频率功耗策略。真实框架实验还需模型/权重/profile和批准SLO/业务限制。
 
-## 先跑CPU参考
+## 数值oracle（支持工作，不是性能基线）
 
     python tools/perf/operators/bench.py --output tools/perf/reports/operator-cpu.json
     python -m unittest discover -s tools/perf -p "test_operator_runtime.py" -v
