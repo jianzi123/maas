@@ -1,5 +1,12 @@
 # 阶段总结：2026-11-05
 
+## 当前D1消费端增量
+
+沿8420aaf接入原后端c7e863b实际Go/临时MySQL/受控HTTP的9条摘要，另有1次满队列执行无摘要。逐文件hash和源码交付commit核对，保留working-tree-d1采样原标签；首协议/非空内容/Write成功/flush尝试与局部Forward时钟分列。客户端sent/RPS/TTFT、完整binding、trace/实验关联、ledger/held及独立恢复仍未知，D1整体与E1尚未完成。实际报告和复现命令见[D1接线](d1-wiring.md)。
+
+同时保留QA faf1b64旧20条终态适配，原oracle失败、修正复跑、partial/null/0、原reserved与当前Reserved保留，不按case与新源拼接。作者CPU全量276项通过（原234+新增42），不替代原QA的同SHA复验、真实模型或GPU性能证据。本轮没有重跑Go或真实平台，不宣布瓶颈/收益。
+
+
 ## 当前端到端诊断闭环
 
 沿b4e7e27新增tools/perf/diagnostics，复用原analyze指标/分母/usage与恢复右删失，补13项资产台账、25项请求到算子/通信采集地图、独立sidecar身份/版本/时钟校验和JSON/HTML报告。synthetic手算活动链165ms、跨度185ms与间隙20ms仅验证数学；真实模型瓶颈/全链路关键路径仍未知。当前默认925d8c5和PR6候选d2d7869的first赋值模式只读复核，产品补丁仍由原负责人收口。

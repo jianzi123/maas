@@ -1,5 +1,10 @@
 # 学习手册修订记录
 
+## D1局部源端接线 v0.13
+
+以8420aaf为基线新增relay_import/consume_relay，消费c7e863b实际Go D1导出，验证原件/manifest/六文件hash、关联与每请求局部时钟。四个首事件、失败/丢样、完整分母缺失及独立恢复未知分列；不伪造Observation/sidecar，不将working-tree标签改写成采样commit证明。同步保留source_import/consume旧QA耐久归档适配和源Schema只读快照。复用原HTML/publish，新增42项、完整276项作者CPU回归通过；源码/后端/共享契约与真实禁用门槛保持。
+
+
 ## 诊断报告体系 v0.12
 
 以b4e7e27为起点，仅新增诊断工具与实际接线文档，不重做教材或CPU调度对照。原协议/报告Schema保留；sidecar为工具侧独立格式，输入hash、run/request/trace/活动工件、boot/rank/batch闭合检查。区间并集与显式活动依赖不重复加inclusive/重叠耗时，缺测与未验证真实校准保持未知；原usage/held和恢复逻辑直接复用。最新测试数量以本轮原始日志为准，历史证据分栏。

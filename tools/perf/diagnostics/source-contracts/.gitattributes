@@ -1,0 +1,2 @@
+# Preserve the hash-pinned upstream schema bytes exactly.
+*.json -text
