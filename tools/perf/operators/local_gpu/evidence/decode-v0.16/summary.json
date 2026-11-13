@@ -411,7 +411,8 @@
     "original_backend_per_call": 4,
     "fused_backend_per_call": 3,
     "original_30_call_graph": 120,
-    "fused_30_call_graph": 90
+    "fused_30_call_graph": 90,
+    "study": "initial prototype vs double-write study"
   },
   "sampling_scope": "CUPTI on batch8 only; durations profiled separately, NOT used in A/B",
   "hardware_counters": null,
@@ -423,11 +424,12 @@
     "cap1 consistently regresses long/mixed; retain original dynamic mechanism",
     "cap4 raw batch8 improvement does not reliably transfer to backend scope",
     "KV fusion repeats benefit on short/batch8 local backend; long run1 regresses; NOT globally adopted",
-    "no stable Engine/serving/quality result; next tests need Engine-specific capture branch and fixed workload"
+    "no stable Engine/serving/quality result; next tests need Engine-specific capture branch and fixed workload",
+    "mature kernel already implements fusion; prototype-vs-double-write benefit does NOT establish superiority over mature baseline"
   ],
   "next_priorities": [
     "verify empty stage1 CTAs: batch8 actual splits6 but max cap8; cap6 is UNTESTED hypothesis",
-    "profile/control launch and metadata costs; validate fusion under actual Engine CUDA graph/stream/index lifecycle",
+    "prefer existing mature store/RoPE+KV mechanisms; verify actual caller/capture/lifecycle; prototype has no adoption claim",
     "get permitted complete weights, run actual Engine baseline/profile; no target GPU bottleneck ranking before evidence"
   ],
   "local_authorization": "MAAS-15 member comment 01a1d499-9bf0-7c0f-8014-fb6e89915acd plus MAAS-10 current handoff",
@@ -439,5 +441,196 @@
     "max_sequence": 4097,
     "max_total_tokens": 20000,
     "process_timeout_s": 600
+  },
+  "successful_GPU_processes": 9,
+  "study_count": 3,
+  "mature_control": [
+    {
+      "case": "short",
+      "values": {
+        "write_original": [
+          11.707733074824015,
+          11.673600474993387,
+          11.673600474993387
+        ],
+        "backend_original": [
+          24.166399240493774,
+          24.23466642697652,
+          39.970131715138756
+        ],
+        "write_mature": [
+          4.0618665516376495,
+          4.0618665516376495,
+          4.0618665516376495
+        ],
+        "backend_mature": [
+          16.657066345214844,
+          16.657066345214844,
+          16.657066345214844
+        ],
+        "write_prototype": [
+          4.198400179545085,
+          4.232533276081085,
+          4.198400179545085
+        ],
+        "backend_prototype": [
+          16.82773431142171,
+          16.79360071818034,
+          16.79360071818034
+        ]
+      },
+      "prototype_over_mature_backend": [
+        1.0102459798544234,
+        1.0081967838835388,
+        1.0081967838835388
+      ]
+    },
+    {
+      "case": "long",
+      "values": {
+        "write_original": [
+          11.707733074824015,
+          11.707733074824015,
+          11.74186666806539
+        ],
+        "backend_original": [
+          127.76106993357341,
+          128.4778674443563,
+          116.42879645029704
+        ],
+        "write_mature": [
+          4.027733455101649,
+          4.027733455101649,
+          4.027733455101649
+        ],
+        "backend_mature": [
+          124.51840241750081,
+          92.53546396891277,
+          109.02187029520671
+        ],
+        "write_prototype": [
+          4.232533276081085,
+          4.232533276081085,
+          4.232533276081085
+        ],
+        "backend_prototype": [
+          124.55253601074219,
+          76.62933667500813,
+          90.8629337946574
+        ]
+      },
+      "prototype_over_mature_backend": [
+        1.0002741248890017,
+        0.8281077695871467,
+        0.8334376721718404
+      ]
+    },
+    {
+      "case": "mixed",
+      "values": {
+        "write_original": [
+          45.56800127029419,
+          31.60746693611145,
+          17.30560064315796
+        ],
+        "backend_original": [
+          104.75520292917888,
+          103.69706948598225,
+          104.92586294809978
+        ],
+        "write_mature": [
+          4.232533276081085,
+          4.198400179545085,
+          4.198400179545085
+        ],
+        "backend_mature": [
+          57.105068365732826,
+          57.139201958974205,
+          57.34399954477946
+        ],
+        "write_prototype": [
+          4.232533276081085,
+          4.232533276081085,
+          4.266666869322459
+        ],
+        "backend_prototype": [
+          91.27253691355388,
+          57.17333157857259,
+          89.01973565419515
+        ]
+      },
+      "prototype_over_mature_backend": [
+        1.5983263749724186,
+        1.0005973065501141,
+        1.552381005177017
+      ]
+    },
+    {
+      "case": "batch8",
+      "values": {
+        "write_original": [
+          17.749333381652832,
+          49.42506551742554,
+          17.715199788411457
+        ],
+        "backend_original": [
+          86.83520158131917,
+          103.01439762115479,
+          96.76799774169922
+        ],
+        "write_mature": [
+          4.437333345413208,
+          4.437333345413208,
+          4.437333345413208
+        ],
+        "backend_mature": [
+          55.43253421783447,
+          71.88479900360107,
+          55.2618662516276
+        ],
+        "write_prototype": [
+          4.232533276081085,
+          4.232533276081085,
+          4.232533276081085
+        ],
+        "backend_prototype": [
+          55.19359906514486,
+          55.05706469217936,
+          55.09119828542074
+        ]
+      },
+      "prototype_over_mature_backend": [
+        0.9956896224200996,
+        0.7659069157224919,
+        0.9969116503335275
+      ]
+    }
+  ],
+  "mature_package": "0.3.9.post2",
+  "mature_direct_api": "torch.ops.sgl_kernel.store_kv_cache; no fallback",
+  "mature_supported_correctness_per_process": 5,
+  "mature_unsupported_per_process": [
+    {
+      "dtype": "torch.float16",
+      "dim": 80,
+      "error": "The last dimension size bytes of k and v must be divisible by 128 at least, got: 480",
+      "fallback_used": false,
+      "performance_result": null
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "dim": 80,
+      "error": "The last dimension size bytes of k and v must be divisible by 128 at least, got: 480",
+      "fallback_used": false,
+      "performance_result": null
+    }
+  ],
+  "final_choice": "prefer packaged mature store_kv_cache for a future verified Engine hook; teaching prototype not adopted",
+  "final_choice_reason": "no stable cross-shape superiority over mature op; alignment compatibility and Engine lifecycle still require review",
+  "mature_trace_counts": {
+    "write_per_call": 1,
+    "backend_per_call": 3,
+    "profiled_graph_node_count": null,
+    "captured_output_correctness_checked": true
   }
 }

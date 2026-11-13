@@ -17,18 +17,19 @@
       "id": "K1",
       "state": "exploratory_local_SGLang_Decode_KV_GPU_batch_delivered",
       "scope": "actual SGLang0.5.2 Triton backend tensor path; not full Engine",
-      "single_factor": "split cap study, separately KV write fusion study; no combined factors",
+      "single_factor": "separate split-cap, prototype-write and mature-library control studies; no combined factors",
       "baseline": "target version mature cuBLAS/native SDPA/RMSNorm",
       "commands": [
         "python tools/perf/operators/local_gpu/run_decode.py --source-lock tools/perf/operators/local_gpu/decode-source-lock.json --output tools/perf/reports/new-decode --profile",
-        "python tools/perf/operators/local_gpu/run_kv_fusion.py --source-lock tools/perf/operators/local_gpu/decode-source-lock.json --output tools/perf/reports/new-fusion --profile"
+        "python tools/perf/operators/local_gpu/run_kv_fusion.py --source-lock tools/perf/operators/local_gpu/decode-source-lock.json --output tools/perf/reports/new-fusion --profile",
+        "python tools/perf/operators/local_gpu/run_mature_kv.py --source-lock tools/perf/operators/local_gpu/decode-source-lock.json --seed 20261113 --output tools/perf/reports/new-mature --profile"
       ],
       "requires": [
         "use pinned approved local WSL GPU environment from engineering/16",
         "respect recorded caps and fresh output; no weights required",
         "nvcc/Compute Sanitizer route remains incomplete; ATen-host/NVRTC route verified"
       ],
-      "success": "GPU source/numerical/trace/local A/B recorded including long-context regression; not Engine/serving gain",
+      "success": "three GPU studies recorded; mature fusion preferred, prototype not adopted; D80 alignment unsupported explicit; no Engine claim",
       "local_gpu_authorized": true,
       "evidence_ref": "tools/perf/operators/local_gpu/evidence/decode-v0.16/summary.json"
     },

@@ -1,5 +1,7 @@
 # 学习手册修订记录
 
+最新补测：追加sgl-kernel0.3.9.post2的成熟store_kv_cache直接调用基线，主shape无fallback实际通过；D80/480字节行明确unsupported。原型未建立稳定跨shape优势，最终优先复用成熟库，不采用教学原型替换。三项研究各三个GPU进程，初期六进程结果保留。
+
 ## SGLang Decode/KV实际GPU批次 v0.16
 
 沿afe2596复用原GPU环境，不重做RMSNorm/CPU/平台导出。新增原生Triton backend张量harness、两阶段decode/split原始对照、独立FP64 GPU参考、KV融合CUDA/ATen原型与真实图/异步错误检查。六进程原始报告与退化保留，图中KV写入2→1、backend每调用4→3个核有CUPTI计数；完整Engine与serving未执行。SDK/CRT头/序列化/编排失败逐项记录，nvcc路线不冒充已完成。

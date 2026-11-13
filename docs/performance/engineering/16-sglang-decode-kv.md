@@ -1,6 +1,6 @@
 # 16｜SGLang Decode/KV：从真实后端到CUDA核
 
-本批直接运行固定SGLang 0.5.2 / b0d25e72c401f37b55d689ddbf05b8c583afe854的Triton decode、请求索引和KV池代码，随后只替换KV写入做一次融合对照。六份安装源码与官方固定提交逐字节一致，见[源码锁与定位](../../../tools/perf/operators/local_gpu/decode-source-lock.json)。
+本批直接运行固定SGLang 0.5.2 / b0d25e72c401f37b55d689ddbf05b8c583afe854的Triton decode、请求索引和KV池代码，随后只替换KV写入做融合对照，并补齐已安装sgl-kernel成熟融合核的最终基线。六份安装源码与官方固定提交逐字节一致，见[源码锁与定位](../../../tools/perf/operators/local_gpu/decode-source-lock.json)。
 
 这是**实际GPU上的后端张量实验**：没有权重、ModelRunner初始化、完整Engine、scheduler或serving。后端对象用__new__建立有界状态，再调用原始metadata/forward方法；Triton由实验显式选择，没有证明Engine的自动backend选择。不要把“实际调用了SGLang代码”扩大成“已运行完整SGLang推理”。
 
@@ -15,7 +15,9 @@
 
 ![六进程原始报告生成的局部GPU对照](../assets/decode-kv-gpu-study.svg)
 
-每个点为一个进程的中位数；进程内7轮交错、每次图重放含30次调用。三个进程/种子分别配对，不把轮次当独立实验，不提供小样本显著性或置信区间声明。两项研究的对象/内存工作集不同，不能将它们之间的绝对时间变化称为优化收益。
+每个点为一个进程的中位数；进程内7轮交错、每次图重放含30次调用。三个进程/种子分别配对，不把轮次当独立实验，不提供小样本显著性或置信区间声明。三项研究分别运行，各批对象/内存工作集及图输出保留方式有差异；不能跨批比较绝对时间。最终选型以补齐成熟核的同一次对照为准。
+
+**最终取舍：优先复用成熟库，不采用教学原型替换。** 补查发现sgl-kernel0.3.9.post2已有store_kv_cache；只战胜双写路径不足以建立原型价值。追加三个独立进程的原生双写/成熟核/原型同条件对照后，原型没有稳定跨shape优势；部分backend点更快、mixed两进程更慢，且纯写与backend表现不一致。没有证据承担额外自定义核/ABI/索引生命周期维护成本。
 
 ## 1. 请求逻辑顺序怎样变成物理KV地址
 
@@ -103,6 +105,23 @@ M     = max_s LSE_s
 
 本批只是把当前池对象的写方法替换为试验hook，原SGLang文件未修改。实际调用继续经过原RadixAttention/AttentionBackend/forward_decode。它是backend张量路径集成，不是Engine集成。
 
+### 补齐成熟基线：函数名不能代替实际kernel
+
+已安装sgl-kernel0.3.9.post2导出set_kv_buffer_kernel，其Python包装会捕获RuntimeError并退回两次ATen索引写。直接调用它可能“数值通过”却根本没跑融合核。因此本批追加[run_mature_kv.py](../../../tools/perf/operators/local_gpu/run_mature_kv.py)，调用torch.ops.sgl_kernel.store_kv_cache，遇不支持形状明确记录，绝不静默fallback；CUPTI确认eager写入每次单核、backend每次3核；该成熟对照图另做输出验证，没有另采图内90节点。前述120→90来自阶段一原型trace。成熟wheel版本与RECORD/binary hash单独保存，不冒充SGLang b0d25e7源码证明。
+
+| case | 原backend（三进程us） | 成熟融合（三进程us） | 教学原型（三进程us） |
+|---|---|---|---|
+| short | 24.17/24.23/39.97 | 16.66/16.66/16.66 | 16.83/16.79/16.79 |
+| long | 127.76/128.48/116.43 | 124.52/92.54/109.02 | 124.55/76.63/90.86 |
+| mixed | 104.76/103.70/104.93 | 57.11/57.14/57.34 | 91.27/57.17/89.02 |
+| batch8 | 86.84/103.01/96.77 | 55.43/71.88/55.26 | 55.19/55.06/55.09 |
+
+成熟核明确要求每token的K/V行字节数满足128字节对齐。本例Hkv=3：D64的384字节行可用，D80的480字节行在FP16/BF16均被拒绝。首次补测因该支持边界退出1，没有性能成功报告；后续将它作为明确unsupported记录，只在支持的D64主负载中对比。教学核覆盖D80不意味着在同一支持契约下胜过成熟核。
+
+三进程short的成熟写核约4.062us，原型约4.198–4.233us；batch8原型纯写略快但backend差异不稳定。不能因一格或某次backend较快，就把整个自定义路线判优。保留所有原始点，选择先验证现有成熟API如何接入当前caller。
+
+源码中的LlamaAttention.forward先做QKV/RoPE再调RadixAttention，未显式传入库现有的FusedSetKVBufferArg。库还提供RoPE+KV融合选项；“API存在”和“该模型/引擎实际命中”是两回事，完整Engine仍需权重和trace核对。下一批优先复用这些已有机制，不把常见融合手法当新算法。
+
 ### 工程路线
 
 - [kv_fused.cu](../../../tools/perf/operators/local_gpu/kv_fused.cu)：NVRTC编译CUDA C++，每线程复制一个16-bit元素的K和V，处理count尾部；FP16/BF16原位比特拷贝，无降精度。
@@ -130,7 +149,7 @@ C++入口检查shape/dtype/alias/grad等；低层位置越界在写入前触发�
 | CUPTI trace | 独立采样的实际kernel名称、数量和时间线 | 仅batch8；采样时长不进A/B，不能作硬件计数器 |
 | nvidia-smi快照 | 频率/温度/显存/功耗/整体利用率 | 非锁频或隔离证据，原时间字符串不跨进程对齐 |
 
-三进程每项7轮交错、每图30次，预热/JIT/捕获与稳态分开。未锁频的共享桌面GPU，进程间波动明显；没有确认模型SLO或质量阈值，不判goodput或生产收益。PyTorch allocator最大约84.3MiB，不是整个进程/整卡占用；调用前检查至少1GiB空闲，allocator fraction0.20也不覆盖全部context或外部库分配。
+每项研究三个独立进程、每进程7轮交错、每图30次，预热/JIT/捕获与稳态分开。未锁频的共享桌面GPU，进程间波动明显；没有确认模型SLO或质量阈值，不判goodput或生产收益。PyTorch allocator最大约84.3MiB，不是整个进程/整卡占用；调用前检查至少1GiB空闲，allocator fraction0.20也不覆盖全部context或外部库分配。
 
 CUPTI首次cap8采样有显著膨胀，不拿其顺序采样时长与后续cap直接比较。Trace只用于本批路径/kernel计数交叉核对；后续需要采样on/off的隔离对照，不能把未解释时间一概归给GPU。
 
@@ -160,6 +179,10 @@ timeout --kill-after=10s 600s "$GPU_PY" tools/perf/operators/local_gpu/run_kv_fu
   --source-lock "$LOCK" --seed 20261113 --profile \
   --output tools/perf/reports/kv-fusion-seed1
 
+timeout --kill-after=10s 600s "$GPU_PY" tools/perf/operators/local_gpu/run_mature_kv.py \
+  --source-lock "$LOCK" --seed 20261113 --profile \
+  --output tools/perf/reports/kv-mature-seed1
+
 # 换seed=20261114、20261115及全新目录，分别得到另外两个独立进程。
 timeout --kill-after=10s 240s "$GPU_PY" tools/perf/operators/local_gpu/check_decode_graph.py \
   --output tools/perf/reports/decode-graph-check
@@ -178,7 +201,7 @@ run_decode校验安装源与固定hash；两项研究输出report.json、逐轮s
 本地后端下一验证优先级（**不是整模型瓶颈排序**）：
 
 1. 对固定batch8验证cap6空CTA假设；同时核查现有graph metadata/buffer复用和采样开销，保留原成熟动态基线。
-2. 给KV融合补实际Engine捕获分支、动态locations/生命周期与原生多stream语义；长序列退化未解释前不通用启用。补完整nvcc SDK与Compute Sanitizer是独立工程缺口。
+2. 优先给成熟KV融合接线补实际Engine捕获分支、动态locations/生命周期与原生多stream语义；长序列退化未解释前不通用启用。补完整nvcc SDK与Compute Sanitizer是独立工程缺口。
 3. 完整获准模型目录到位后跑真实model runner/Engine/serving基线与profile，再按实际占比选择优化；135M结果不外推大模型。已有权重下载确认仍待原成员决定，不重复发起购买/下载。
 
 自测与答案：

@@ -40,7 +40,7 @@
       "cost": "保留临时张量/拷贝、峰值显存、prefill/decode尾延迟及质量影响",
       "evidence": "逐shape原始时延、stride/dtype、数值误差、kernel/DRAM/copy时间线、占比及基线来源",
       "abandon": "成熟baseline已优；目标占比太小；减少局部时间却增加搬运/显存或模型误差",
-      "now": "已运行SGLang0.5.2原生Triton Decode/KV与融合写局部A/B；下一批验证cap6空CTA及真实Engine捕获语义，保留long退化",
+      "now": "补齐已安装sgl-kernel成熟store_kv_cache基线，原型不采用；后续验证现有成熟API接线与cap6假设，Engine/serving未测",
       "state": "exploratory",
       "actual_profile_ref": "tools/perf/operators/local_gpu/evidence/decode-v0.16/summary.json",
       "approval_ref": null,
@@ -49,7 +49,7 @@
         "level": "actual GPU backend tensor harness",
         "Engine": false,
         "source_files_verified": 6,
-        "summary": "batch8 fusion improves local backend; long run1 regresses; no universal adoption or Engine claim"
+        "summary": "three GPU studies, three processes each; existing mature fusion preferred; prototype has no stable cross-shape superiority"
       }
     },
     {

@@ -1,5 +1,7 @@
 # 阶段总结：2026-11-05
 
+最新补测：追加sgl-kernel0.3.9.post2的成熟store_kv_cache直接调用基线，主shape无fallback实际通过；D80/480字节行明确unsupported。原型未建立稳定跨shape优势，最终优先复用成熟库，不采用教学原型替换。三项研究各三个GPU进程，初期六进程结果保留。
+
 ## 当前GPU批次：SGLang Decode/KV
 
 沿afe2596复用WSL的SGLang0.5.2/b0d25e7、torch2.8.0+cu128和RTX4070 Laptop，六份后端/核源码与官方逐字节一致。直接运行原metadata、RadixAttention/forward_decode、KV池和MHA/GQA Triton核；状态由无权重harness构造，没有初始化ModelRunner/Engine或执行serving。
