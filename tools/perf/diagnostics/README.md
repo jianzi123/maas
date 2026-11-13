@@ -2,6 +2,18 @@
 
 新增入口复用 analyze.py 的指标/协议/用量/分母校验，以及 runtime_metrics.py 的恢复右删失计算。诊断sidecar只补区间、实例/boot/rank/batch关联和显式依赖，不修改票据v3、终态3.0、Observation1.0或原report.schema。
 
+## 实际受控源端消费
+
+[消费接线说明](../../../docs/performance/d1-wiring.md)提供固定原件/manifest/hash、采集命令和消费命令：
+
+- consume_relay.py：版本化Go D1源端export适配，消费c7e863b实际Go/临时MySQL/受控HTTP的9条摘要，报告manifest声明的9/10场景摘要覆盖、失败与缺项；不把每请求Forward局部坐标混成公共窗口，不以flush当客户端接收。
+- consume.py：保留原QA faf1b64、产品d2d7869的20条耐久终态/诊断归档适配，校验usage/账本等，原oracle失败与复跑保留；不能按case名与新源request拼接。
+- 两者仅生成d1-import-report-1.0局部降级报告，不补造完整diagnostic sidecar或Observation身份。原run.py严校验保持；CLI错误退出2且无报告，旧报告不覆盖。
+- source_import.py / relay_import.py：封闭字段、hash、实际request/修订/boot/时钟映射与缺失规则。源码读取只允许六个固定路径；不执行manifest命令或采集。
+- test_source_import.py / test_relay_import.py：42项新增合成回归；实际逐请求证据单独交付，不塞入合成fixture。
+
+client完整sent、trace/完整binding/工件、实验身份、实际Higress/Worker/GPU、可信跨时钟校准与采样on/off开销仍缺。D1整体/E1未完成，执行计划禁用。source_revision=working-tree-d1原样保留，交付commit不是采样时commit证明。
+
 ## 最小运行
 
 已有Python3.10+与jsonschema4.25.0，沿用tools/perf/requirements.txt；本轮不安装依赖：

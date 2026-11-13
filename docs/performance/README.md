@@ -12,6 +12,8 @@
 
 当前体系工作从[诊断交付与缺口盘点](diagnostics.md)进入，使用[tools/perf/diagnostics](../../tools/perf/diagnostics/README.md)把原指标、受控sidecar、区间/显式依赖、恢复与证据索引连成JSON/HTML报告。真实测量不足时只报缺口，不命名模型瓶颈。后续单因素实验与输入门槛在同一交付页，教材作为实现/排障参考。
 
+当前[D1消费接线](d1-wiring.md)已接入c7e863b实际Go/临时MySQL/受控HTTP导出：9条摘要及1个额外满队列场景，首协议/内容/Write/flush分列；完整client分母与平台路径仍缺，D1整体/E1未完成。
+
 ## 先按工作选择路线
 
 | 你现在要做什么 | 阅读与操作顺序 | 交付 |

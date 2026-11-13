@@ -50,14 +50,27 @@ def render(report):
                 f'<polygon points="{x+208},62 {x+203},58 {x+203},66" fill="#6b879b"/>'
             )
     diagram += '<text x="20" y="145" font-size="16">CR活动修订 / 工件 × 原request / run × 实例boot / batch / rank</text><text x="20" y="180" font-size="15">受控导出 → 关联与时钟校验 → 原指标 + 观察区间/依赖链 + 缺口</text><text x="20" y="207" font-size="13">采集责任地图；不是已执行链路、因果推断或模型瓶颈结论。</text></svg>'
-    counts = report["metric_report"]["counts"]
+    relay = report.get("source_import", {}).get("format") == "maas-go-relay-export-1.0"
+    counts = (
+        report["metric_report"]["counts"]
+        if report["metric_report"] is not None
+        else report["source_counts"]
+    )
     requests = table(
         [
             "request",
             "result",
             "protocol data ms",
             "client content TTFT ms",
-            "Go first_chunk ms",
+            (
+                "Go first_chunk ms"
+                if report["metric_report"] is not None
+                else (
+                    "Go Forward content receive ms"
+                    if relay
+                    else "Go legacy first_chunk (semantics pending)"
+                )
+            ),
             "Worker native ms",
             "intervals",
         ],
@@ -67,7 +80,11 @@ def render(report):
                 r["result"],
                 r["client_protocol_data_wait_ms"],
                 r["client_visible_ttft_ms"],
-                r["go_server_first_chunk_ms"],
+                (
+                    r.get("go_forward_first_content_received_ms")
+                    if relay
+                    else r["go_server_first_chunk_ms"]
+                ),
                 r["worker_native_ttft_ms"],
                 r["interval_count"],
             ]
@@ -153,15 +170,26 @@ def render(report):
         + "</pre>"
     )
     body = (
-        '<h1>MaaS 请求到内核诊断报告</h1><div class="banner"><strong>'
+        (
+            "<h1>MaaS 请求到内核诊断报告</h1>"
+            if report["metric_report"] is not None
+            else "<h1>D1 部分源端产物导入报告</h1>"
+        )
+        + '<div class="banner"><strong>'
         + esc(report["evidence_kind"])
         + "</strong> · synthetic="
         + esc(report["synthetic"])
         + ".<br>时钟映射与活动独占性来自导出声明；没有真实模型瓶颈、完整端到端关键路径或性能提升结论。</div>"
     )
     body += (
-        "<p>数据 hash：<code>"
-        + esc(report["dataset_sha256"])
+        (
+            "<p>数据 hash：<code>"
+            if report["metric_report"] is not None
+            else "<p>导入清单 hash：<code>"
+        )
+        + esc(
+            report["dataset_sha256"] or report["source_import"]["input_manifest_sha256"]
+        )
         + "</code><br>sidecar hash：<code>"
         + esc(report["sidecar_sha256"])
         + "</code></p>"
@@ -171,8 +199,77 @@ def render(report):
         + assets
         + "<p>历史证据不计作本轮复跑，生产collector缺口仍保留。</p>"
     )
-    body += '<h2 id="counts">原指标与完整分母</h2>' + detail(counts)
-    body += "<p>原报告 goodput/usage 保留原计算。未知 actual、held 与缺失覆盖率保持；其synthetic值不表示真实SLO通过。</p>"
+    body += (
+        '<h2 id="counts">原指标与完整分母</h2>'
+        if report["metric_report"] is not None
+        else '<h2 id="counts">已导入产物分母，完整client sent未知</h2>'
+    ) + detail(counts)
+    if report["metric_report"] is not None:
+        body += "<p>原报告 goodput/usage 保留原计算。未知 actual、held 与缺失覆盖率保持；其synthetic值不表示真实SLO通过。</p>"
+    else:
+        body += (
+            "<p>D1整体未完成。消费已交实际Go/临时MySQL/受控HTTP产物，本轮未重跑Go。"
+            "导入条数不等于完整sent；客户端TTFT、RPS、用量与恢复缺证据时保持未知。</p>"
+        )
+        if relay:
+            body += (
+                "<p>Go时间均以每请求Forward入口为0，不能跨请求形成共同窗口。"
+                "首协议片包含role/空内容/usage，首内容只取非空content；Write成功和flush尝试不等于客户端接收。"
+                "legacy first_chunk使用Received起点，未以本页值替填。working-tree-d1是采样原标签，不改写成提交证明。</p>"
+            )
+        else:
+            body += "<p>历史QA终态导入：旧first_chunk语义未由该归档确认。source test oracle与业务结果分列。</p>"
+        body += '<h2 id="source">来源与实际经过组件</h2>' + detail(
+            report["source_import"]
+        )
+        if relay:
+            body += table(
+                [
+                    "case",
+                    "Go observed result",
+                    "protocol receive ms",
+                    "content receive ms",
+                    "Write ok ms",
+                    "flush attempt ms",
+                    "Forward end ms",
+                    "content-to-Write ms",
+                ],
+                [
+                    [
+                        r["source_case"],
+                        r["observed_result"],
+                        r["first_protocol_ms"],
+                        r["first_content_received_ms"],
+                        r["first_content_write_ok_ms"],
+                        r["first_content_flush_attempt_ms"],
+                        r["end_ms"],
+                        r["content_received_to_write_ok_ms"],
+                    ]
+                    for r in report["source_rows"]
+                ],
+            )
+        else:
+            body += table(
+                [
+                    "case",
+                    "terminal result",
+                    "source oracle",
+                    "actual usage",
+                    "current token ledger",
+                    "original token reservation",
+                ],
+                [
+                    [
+                        r["source_case"],
+                        r["terminal_result"],
+                        r["test_oracle_passed"],
+                        r["actual_usage"],
+                        r["current_token_ledger"],
+                        r["terminal_original_token_reserved"],
+                    ]
+                    for r in report["source_rows"]
+                ],
+            )
     body += '<h2 id="requests">首事件与各层测点</h2>' + requests
     body += '<h2 id="coverage">采集覆盖与责任</h2>' + diagram + coverage
     body += (

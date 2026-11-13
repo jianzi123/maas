@@ -13,7 +13,7 @@ else:
     from html_report import render
 
 
-def publish(directory, report):
+def publish(directory, report, extra_files=None):
     directory = Path(directory)
     # Validate/serialize/render before creating any published output.
     encoded = json.dumps(report, ensure_ascii=False, indent=2, allow_nan=False) + "\n"
@@ -22,7 +22,12 @@ def publish(directory, report):
     staging = directory.with_name(directory.name + ".pending-" + uuid.uuid4().hex)
     staging.mkdir()
     try:
-        for name, body in [("report.json", encoded), ("report.html", page)]:
+        files = {"report.json": encoded, "report.html": page}
+        for name, body in (extra_files or {}).items():
+            if name in files or name not in ("consumer-import-overhead.json",):
+                raise ValueError("extra output name")
+            files[name] = body
+        for name, body in files.items():
             with (staging / name).open("x", encoding="utf-8", newline="\n") as stream:
                 stream.write(body)
                 stream.flush()
@@ -33,7 +38,7 @@ def publish(directory, report):
         os.rename(staging, directory)
     finally:
         if staging.exists():
-            for name in ("report.json", "report.html"):
+            for name in ("report.json", "report.html", "consumer-import-overhead.json"):
                 (staging / name).unlink(missing_ok=True)
             staging.rmdir()
 
