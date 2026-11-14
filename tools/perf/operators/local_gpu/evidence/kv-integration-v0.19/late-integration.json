@@ -1,0 +1,69 @@
+{
+  "variant": "late",
+  "status": "passed",
+  "source_commit": "b0d25e72c401f37b55d689ddbf05b8c583afe854",
+  "binding_installation": [
+    {
+      "captures": [
+        1,
+        2,
+        4,
+        8
+      ],
+      "binding_at_capture": "native"
+    }
+  ],
+  "trace_regions": [
+    {
+      "region": "framework/bs3/step0/graph",
+      "total_kernels": 378,
+      "index_writes": 60,
+      "mature_stores": 0,
+      "streams": [
+        7,
+        144
+      ]
+    },
+    {
+      "region": "framework/bs3/step0/eager_reference",
+      "total_kernels": 369,
+      "index_writes": 0,
+      "mature_stores": 30,
+      "streams": [
+        7
+      ]
+    },
+    {
+      "region": "framework/bs3/step1/graph",
+      "total_kernels": 378,
+      "index_writes": 60,
+      "mature_stores": 0,
+      "streams": [
+        7,
+        144
+      ]
+    },
+    {
+      "region": "framework/bs3/step1/eager_reference",
+      "total_kernels": 369,
+      "index_writes": 0,
+      "mature_stores": 30,
+      "streams": [
+        7
+      ]
+    }
+  ],
+  "expected_graph_fusion": false,
+  "late_binding_negative_control": true,
+  "ModelRunner": true,
+  "Engine": false,
+  "weights": "artificial_random",
+  "semantic_quality_or_pretrained_performance_claim": false,
+  "snapshot_count": 12,
+  "native_report": "framework.json",
+  "code_sha256": {
+    "run_native_kv_integration.py": "e6833ad7ff18b32ed8cf74eff92bc6f917c98900d96c6d0408e2d46f3c377388",
+    "native_kv_binding.py": "8d03d465e964a70c7dedcf358097628a47779902b0f4635633e5f2c783d00149",
+    "run_framework_dummy.py": "f32583d4f8c9c4e13f6873ed2ff8197b528a383e0785163ddcd2de82d324833d"
+  }
+}

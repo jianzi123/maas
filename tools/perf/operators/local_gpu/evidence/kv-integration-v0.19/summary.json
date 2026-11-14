@@ -1,0 +1,435 @@
+{
+  "baseline_commit": "b5e705d2f0ce61d4aeda81ee7a852eb01df7cb5f",
+  "scope": "native ModelRunner artificial-weight mature KV runtime integration, research only",
+  "source_commit": "b0d25e72c401f37b55d689ddbf05b8c583afe854",
+  "variant_regions": {
+    "native": [
+      {
+        "region": "framework/bs3/step0/graph",
+        "total_kernels": 378,
+        "index_writes": 60,
+        "mature_stores": 0,
+        "streams": [
+          7,
+          144
+        ]
+      },
+      {
+        "region": "framework/bs3/step0/eager_reference",
+        "total_kernels": 399,
+        "index_writes": 60,
+        "mature_stores": 0,
+        "streams": [
+          7
+        ]
+      },
+      {
+        "region": "framework/bs3/step1/graph",
+        "total_kernels": 378,
+        "index_writes": 60,
+        "mature_stores": 0,
+        "streams": [
+          7,
+          144
+        ]
+      },
+      {
+        "region": "framework/bs3/step1/eager_reference",
+        "total_kernels": 399,
+        "index_writes": 60,
+        "mature_stores": 0,
+        "streams": [
+          7
+        ]
+      }
+    ],
+    "mature": [
+      {
+        "region": "framework/bs3/step0/graph",
+        "total_kernels": 348,
+        "index_writes": 0,
+        "mature_stores": 30,
+        "streams": [
+          7
+        ]
+      },
+      {
+        "region": "framework/bs3/step0/eager_reference",
+        "total_kernels": 369,
+        "index_writes": 0,
+        "mature_stores": 30,
+        "streams": [
+          7
+        ]
+      },
+      {
+        "region": "framework/bs3/step1/graph",
+        "total_kernels": 348,
+        "index_writes": 0,
+        "mature_stores": 30,
+        "streams": [
+          7
+        ]
+      },
+      {
+        "region": "framework/bs3/step1/eager_reference",
+        "total_kernels": 369,
+        "index_writes": 0,
+        "mature_stores": 30,
+        "streams": [
+          7
+        ]
+      }
+    ],
+    "late": [
+      {
+        "region": "framework/bs3/step0/graph",
+        "total_kernels": 378,
+        "index_writes": 60,
+        "mature_stores": 0,
+        "streams": [
+          7,
+          144
+        ]
+      },
+      {
+        "region": "framework/bs3/step0/eager_reference",
+        "total_kernels": 369,
+        "index_writes": 0,
+        "mature_stores": 30,
+        "streams": [
+          7
+        ]
+      },
+      {
+        "region": "framework/bs3/step1/graph",
+        "total_kernels": 378,
+        "index_writes": 60,
+        "mature_stores": 0,
+        "streams": [
+          7,
+          144
+        ]
+      },
+      {
+        "region": "framework/bs3/step1/eager_reference",
+        "total_kernels": 369,
+        "index_writes": 0,
+        "mature_stores": 30,
+        "streams": [
+          7
+        ]
+      }
+    ]
+  },
+  "cross_variant": {
+    "cross_variant_logits": [
+      {
+        "variant": "mature",
+        "case": "decode00",
+        "max_abs": 0.0,
+        "bitwise_equal": true
+      },
+      {
+        "variant": "mature",
+        "case": "decode01",
+        "max_abs": 0.0,
+        "bitwise_equal": true
+      },
+      {
+        "variant": "mature",
+        "case": "decode02",
+        "max_abs": 0.0,
+        "bitwise_equal": true
+      },
+      {
+        "variant": "mature",
+        "case": "decode03",
+        "max_abs": 0.0,
+        "bitwise_equal": true
+      },
+      {
+        "variant": "mature",
+        "case": "decode04",
+        "max_abs": 0.0,
+        "bitwise_equal": true
+      },
+      {
+        "variant": "mature",
+        "case": "decode05",
+        "max_abs": 0.0,
+        "bitwise_equal": true
+      },
+      {
+        "variant": "mature",
+        "case": "decode06",
+        "max_abs": 0.0,
+        "bitwise_equal": true
+      },
+      {
+        "variant": "mature",
+        "case": "decode07",
+        "max_abs": 0.0,
+        "bitwise_equal": true
+      },
+      {
+        "variant": "mature",
+        "case": "decode08",
+        "max_abs": 0.0,
+        "bitwise_equal": true
+      },
+      {
+        "variant": "mature",
+        "case": "decode09",
+        "max_abs": 0.0,
+        "bitwise_equal": true
+      },
+      {
+        "variant": "mature",
+        "case": "decode10",
+        "max_abs": 0.0,
+        "bitwise_equal": true
+      },
+      {
+        "variant": "mature",
+        "case": "decode11",
+        "max_abs": 0.0,
+        "bitwise_equal": true
+      },
+      {
+        "variant": "late",
+        "case": "decode00",
+        "max_abs": 0.0,
+        "bitwise_equal": true
+      },
+      {
+        "variant": "late",
+        "case": "decode01",
+        "max_abs": 0.0,
+        "bitwise_equal": true
+      },
+      {
+        "variant": "late",
+        "case": "decode02",
+        "max_abs": 0.0,
+        "bitwise_equal": true
+      },
+      {
+        "variant": "late",
+        "case": "decode03",
+        "max_abs": 0.0,
+        "bitwise_equal": true
+      },
+      {
+        "variant": "late",
+        "case": "decode04",
+        "max_abs": 0.0,
+        "bitwise_equal": true
+      },
+      {
+        "variant": "late",
+        "case": "decode05",
+        "max_abs": 0.0,
+        "bitwise_equal": true
+      },
+      {
+        "variant": "late",
+        "case": "decode06",
+        "max_abs": 0.0,
+        "bitwise_equal": true
+      },
+      {
+        "variant": "late",
+        "case": "decode07",
+        "max_abs": 0.0,
+        "bitwise_equal": true
+      },
+      {
+        "variant": "late",
+        "case": "decode08",
+        "max_abs": 0.0,
+        "bitwise_equal": true
+      },
+      {
+        "variant": "late",
+        "case": "decode09",
+        "max_abs": 0.0,
+        "bitwise_equal": true
+      },
+      {
+        "variant": "late",
+        "case": "decode10",
+        "max_abs": 0.0,
+        "bitwise_equal": true
+      },
+      {
+        "variant": "late",
+        "case": "decode11",
+        "max_abs": 0.0,
+        "bitwise_equal": true
+      }
+    ],
+    "all_bitwise_equal": true,
+    "max_abs": 0.0,
+    "semantic_quality_claim": false,
+    "same_artificial_weights": true
+  },
+  "structure_cases_per_variant": 12,
+  "pool_reconciliations_per_variant": 5,
+  "nondefault_stream": true,
+  "actual_view_stride": [
+    960,
+    64,
+    1
+  ],
+  "late_negative_control": "eager mature store30, graph remains index writes60; no graph fusion",
+  "before_capture_result": "graph actual mature store30, index writes0, single stream",
+  "clean_cost_pairs": 3,
+  "cost_rounds": 9,
+  "calls_per_round": 10,
+  "process_order": [
+    [
+      "native",
+      "mature"
+    ],
+    [
+      "mature",
+      "native"
+    ],
+    [
+      "native",
+      "mature"
+    ]
+  ],
+  "cost_table": [
+    {
+      "batch": 3,
+      "captured_batch": 4,
+      "wall_us": {
+        "native": [
+          6655.635499999999,
+          14907.589499999998,
+          14223.800899999998
+        ],
+        "mature": [
+          6299.1037,
+          6787.0127999999995,
+          13684.9581
+        ]
+      },
+      "event_us": {
+        "native": [
+          6514.585876464844,
+          14765.263366699219,
+          14098.226928710938
+        ],
+        "mature": [
+          6192.9473876953125,
+          6632.447814941406,
+          13560.21728515625
+        ]
+      },
+      "mature_over_native_wall": [
+        0.9464315916939863,
+        0.45527231615815555,
+        0.9621168206875
+      ]
+    },
+    {
+      "batch": 5,
+      "captured_batch": 8,
+      "wall_us": {
+        "native": [
+          6649.9466,
+          14503.762400000001,
+          14342.8954
+        ],
+        "mature": [
+          6468.629800000001,
+          6579.566000000001,
+          13573.6926
+        ]
+      },
+      "event_us": {
+        "native": [
+          6530.662536621094,
+          14322.079467773438,
+          14142.976379394531
+        ],
+        "mature": [
+          6342.348861694336,
+          6476.185607910156,
+          13429.452514648438
+        ]
+      },
+      "mature_over_native_wall": [
+        0.9727340968422213,
+        0.45364546236637193,
+        0.9463704657568653
+      ]
+    },
+    {
+      "batch": 8,
+      "captured_batch": 8,
+      "wall_us": {
+        "native": [
+          6651.8899,
+          14203.0536,
+          14308.541099999999
+        ],
+        "mature": [
+          6341.122,
+          6281.6572,
+          13617.057
+        ]
+      },
+      "event_us": {
+        "native": [
+          6508.748626708984,
+          14038.038635253906,
+          14140.211486816406
+        ],
+        "mature": [
+          6222.540664672852,
+          6179.73747253418,
+          13473.178100585938
+        ]
+      },
+      "mature_over_native_wall": [
+        0.9532812622169228,
+        0.4422751175141661,
+        0.9516733330695749
+      ]
+    }
+  ],
+  "clean_weight_samples_match": true,
+  "clean_initial_logits_match": true,
+  "cost_decision": "cross-process 6-7ms versus13-15ms state drift; retain every sample, no stable aggregate speedup claim",
+  "profiler_or_reference_in_timing": false,
+  "parameter_binding_hot_path_host_sync_added": false,
+  "ModelRunner": true,
+  "Engine": false,
+  "pretrained_weights": false,
+  "semantic_quality_claim": false,
+  "production_adoption": false,
+  "resources": {
+    "allocator_fraction": 0.2,
+    "planner_fraction": 0.2,
+    "max_batch": 8,
+    "KV_tokens": 512,
+    "context": 128,
+    "per_process_timeout": 600
+  },
+  "implementation_limits": [
+    "FP16/BF16 same-dtype nonquantized MHA cache, no scales or conversions",
+    "runtime class binding in own process before capture; installed upstream source untouched",
+    "no fallback wrapper or contiguous copy; native dynamic locations incl padded slot0 tested",
+    "same-framework artificial-weight equality, not independent model quality"
+  ],
+  "next": [
+    "full graph stream/event and dynamic-location regression before adoption",
+    "test existing RoPE+KV fusion caller while preserving alias/ordering contracts",
+    "stabilize unprofiled call-cost measurement without suppressing observed drift",
+    "approved pretrained weights before Engine/serving quality/performance baseline"
+  ]
+}

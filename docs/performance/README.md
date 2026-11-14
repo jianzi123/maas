@@ -1,5 +1,7 @@
 # MaaS 性能与框架工程手册
 
+当前接线进展：[第19章成熟KV原生图接线](engineering/19-native-kv-integration.md)。capture前安装已由实际图确认，晚接入负控只改变eager；24份跨变体完整logits逐位相同。干净调用成本有显著状态漂移，未建立稳定收益。
+
 本轮新证据：[第18章原生ModelRunner结构验证](engineering/18-native-modelrunner-graphs.md)已用原生dummy loader实际构造完整架构，完成捕获/重放、padding、缩批回收和成熟caller检查。人工权重，不作预训练语义或性能结论。
 
 当前GPU接续：[cap6固定切片验证](engineering/17-cap6-empty-cta.md)已完成。B8/L1024保持相同分段，grid由192减为144 CTA，三进程局部改善；512保留退化，未改Engine默认。
