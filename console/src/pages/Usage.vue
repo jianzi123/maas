@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, reactive, ref, shallowRef } from "vue";
+import { onMounted, onBeforeUnmount, reactive, ref, shallowRef } from "vue";
 import { api, ADMIN } from "../api/client";
 import type { S } from "../api/contracts";
 import { display } from "../domain";
@@ -20,13 +20,23 @@ const filter = reactive({
   busy = ref(false),
   error = ref(""),
   at = ref(""),
-  complete = ref(true);
+  complete = ref(false);
 let applied = "",
   epoch = 0;
+function clearResults() {
+  rows.value = [];
+  summary.value = [];
+  cursor.value = null;
+  at.value = "";
+  complete.value = false;
+  applied = "";
+}
 async function load(more = false) {
   const mine = ++epoch;
   busy.value = true;
   error.value = "";
+  if (!more) clearResults();
+  complete.value = false;
   try {
     const q = new URLSearchParams();
     if (more) {
@@ -67,7 +77,10 @@ async function load(more = false) {
     q.delete("cursor");
     applied = q.toString();
   } catch (e) {
-    if (mine === epoch) error.value = explain(e);
+    if (mine === epoch) {
+      clearResults();
+      error.value = explain(e);
+    }
   } finally {
     if (mine === epoch) busy.value = false;
   }
@@ -80,6 +93,9 @@ function changeKind() {
   void load();
 }
 onMounted(() => load());
+onBeforeUnmount(() => {
+  epoch++;
+});
 </script>
 <template>
   <div class="title-row">
