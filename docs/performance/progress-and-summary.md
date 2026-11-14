@@ -1,5 +1,9 @@
 # 阶段总结：2026-11-05
 
+## 当前GPU接续：cap6切片
+
+已从清理后的临时环境恢复固定核心版本，三个新GPU进程完成cap6/8配对。B8/L1024分段保持6×192，CUPTI grid[8,3,8]→[8,3,6]；raw局部快约10.4%–11.4%、backend张量范围约8.7%–12.3%。L512有退化，2048/ragged改变分段，不改全局默认。见[第17章](engineering/17-cap6-empty-cta.md)。上一批e6de90e已由QA729f740独立受控通过；本次新增结果仍为作者探索。Engine/serving/质量未测，权重未下载。
+
 最新补测：追加sgl-kernel0.3.9.post2的成熟store_kv_cache直接调用基线，主shape无fallback实际通过；D80/480字节行明确unsupported。原型未建立稳定跨shape优势，最终优先复用成熟库，不采用教学原型替换。三项研究各三个GPU进程，初期六进程结果保留。
 
 ## 当前GPU批次：SGLang Decode/KV

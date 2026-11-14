@@ -1,5 +1,7 @@
 # 16｜SGLang Decode/KV：从真实后端到CUDA核
 
+后续cap6假设已有[第17章GPU实测](17-cap6-empty-cta.md)；本章保留前一批原始假设与取舍，不能据历史未测文字覆盖新结果。
+
 本批直接运行固定SGLang 0.5.2 / b0d25e72c401f37b55d689ddbf05b8c583afe854的Triton decode、请求索引和KV池代码，随后只替换KV写入做融合对照，并补齐已安装sgl-kernel成熟融合核的最终基线。六份安装源码与官方固定提交逐字节一致，见[源码锁与定位](../../../tools/perf/operators/local_gpu/decode-source-lock.json)。
 
 这是**实际GPU上的后端张量实验**：没有权重、ModelRunner初始化、完整Engine、scheduler或serving。后端对象用__new__建立有界状态，再调用原始metadata/forward方法；Triton由实验显式选择，没有证明Engine的自动backend选择。不要把“实际调用了SGLang代码”扩大成“已运行完整SGLang推理”。

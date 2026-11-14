@@ -1,5 +1,7 @@
 # MaaS 性能与框架工程手册
 
+当前GPU接续：[cap6固定切片验证](engineering/17-cap6-empty-cta.md)已完成。B8/L1024保持相同分段，grid由192减为144 CTA，三进程局部改善；512保留退化，未改Engine默认。
+
 最新补测：追加sgl-kernel0.3.9.post2的成熟store_kv_cache直接调用基线，主shape无fallback实际通过；D80/480字节行明确unsupported。原型未建立稳定跨shape优势，最终优先复用成熟库，不采用教学原型替换。三项研究各三个GPU进程，初期六进程结果保留。
 
 当前实作：[SGLang Decode/KV GPU批次](engineering/16-sglang-decode-kv.md)已跑通原始Triton后端、真实KV池/索引与两阶段核，完成split负结果、KV融合局部对照、ATen/NVRTC注册和图/异步错误验证。完整Engine/模型生成/serving尚未执行，长序列退化保留，不把局部收益写成引擎收益。

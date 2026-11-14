@@ -1,5 +1,7 @@
 # 本地GPU实验
 
+最新：run_split_cap6.py与[第17章](../../../../docs/performance/engineering/17-cap6-empty-cta.md)。环境恢复在任务/var/tmp隔离目录；只验证后端张量切片，未改Engine默认。
+
 当前批次见[工程16：SGLang Decode/KV](../../../../docs/performance/engineering/16-sglang-decode-kv.md)，上一批RMSNorm闭环见[工程15](../../../../docs/performance/engineering/15-local-gpu-cuda.md)。
 
 - decode_path.py / run_decode.py：原生SGLang0.5.2 Triton metadata、KV池与decode核，合成请求状态，固定6份官方源码hash。
