@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "scope": "observed-source-interface-not-production-readiness",
   "backend": {
-    "sourceCommit": "14ecc37b98e5612b9dd3940c0e1855de4a20e1a9",
+    "sourceCommit": "f182ee2380424f70fc004657c0d9ed4a165c4132",
     "apiGroup": "serving.maas.example",
     "operator": {
       "command": [
@@ -581,7 +581,7 @@
     }
   },
   "console": {
-    "sourceCommit": "14ecc37b98e5612b9dd3940c0e1855de4a20e1a9",
+    "sourceCommit": "f182ee2380424f70fc004657c0d9ed4a165c4132",
     "build": "npm ci && npm run build",
     "output": "console/dist",
     "localBridge": "development-and-explicit-workbench-mode-only",
@@ -628,7 +628,7 @@
       "console/scripts/local-control.mjs": "956b3a8c018312c5600e8808cbf51d517e3b937956a2d7c0ec27855c16e7f9fb",
       "console/scripts/management-browser.mjs": "98d26034d4813cd0e896bf604468b445bba29e839bb9ecd20ffa66b4bfdac327",
       "console/scripts/management-harness.go.txt": "996941b97da5f885bbcb4331425767a7bdc413bb603725c8710711844002ef99",
-      "console/scripts/redesign-browser.mjs": "0ab980a2c69fa7224a2944872f9d8a3f5855695b923bbc755d9bfd29ee0f7b93",
+      "console/scripts/redesign-browser.mjs": "b801c4ba2fe934d93d22334ca0bfb22859c106b003a06c5b6ecef90a742e79fa",
       "console/scripts/reference-pages.mjs": "99a91ba9286a1161e4cd1f8da1edb4a93a264dcfe24535ee90dce0374ff5caa3",
       "console/scripts/release-browser-harness.go.txt": "5f1e6bf5562b0b896d3d842644fd03cbb2a35e36bfb9e7d02e1eda305bfed3b6",
       "console/scripts/release-browser.mjs": "451bceb1500ba2e4c10c3050958e6ba8a24dbf1f395e6c261506916dedaa7a3a",
@@ -648,7 +648,7 @@
       "console/src/main.ts": "a9a77d229d3df173585188d0cfcdeb479cf61b5a0028b67353b4f5998c9e3ad9",
       "console/src/protocol-errors.test.ts": "548e0ae24e33dead0490cbaead6991a23918f5b9467862e37daa57fe293d0dab",
       "console/src/qa-review.test.ts": "9f708612f6bd2e29a203a2c1825eb0e40d5b148bd94fab774d983b3db4939348",
-      "console/src/redesign.test.ts": "ae19f4e4bc9bbde678a3863186092366bcdd8e52876dd793c3bb19466afe4c74",
+      "console/src/redesign.test.ts": "2b19acc59bbc8efb6c790a88b3e68348a42b7e55acd7c665b0010ea130859ab6",
       "console/src/release-compat.test.ts": "c4c83ca80365f815a616b32b749bdc557be0bc3775657b877516792df6b4eb2c",
       "console/src/review-recovery.test.ts": "39d263c44e6f60ecd699a7ec6686664e61c7100a0e1ffad052eb5ac344a4f8a4",
       "console/src/review-regression.test.ts": "a09935974c732c8ba623da07b5cfd67c506cf8c39c963cb3112d7ff67185dad8",
@@ -667,7 +667,7 @@
       "console/src/pages/Keys.vue": "3ee1926f87f0146fec9b88d9a497f60a8de507138bc3d044f57f13999436b30b",
       "console/src/pages/Models.vue": "cbc9b26ce0a0e7d76fd956a83e9c0b4d8dc05873ee7840522ec15a7df0d71f01",
       "console/src/pages/Playground.vue": "89c68a771273120820e2aff74380e74d28554eb207b075e9c4687fed0df5068c",
-      "console/src/pages/Releases.vue": "01e532d9c0ee885776809b86198e94bb720f4be154f9f3e4f0edccd166cf5646",
+      "console/src/pages/Releases.vue": "265c93990397dbff1f8b0b3bb316d2c0d6cf9be50b45dcedca85ff9dcb5e33db",
       "console/src/pages/Usage.vue": "9af37c7ab6a2eaf96d65085587cc1ddf81c3249391eefc070076fe8ffae74e87"
     },
     "candidateState": "integrated-unmerged"
