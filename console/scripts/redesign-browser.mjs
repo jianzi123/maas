@@ -68,6 +68,18 @@ try {
         status: r.status(),
       });
   });
+  if (real)
+    await until(
+      async () => {
+        try {
+          return (await page.request.get(app.url)).status();
+        } catch {
+          return 0;
+        }
+      },
+      (s) => s === 200,
+      "temporary localhost readiness",
+    );
   await page.goto(app.url);
   if (!real)
     await page.evaluate(async () => {

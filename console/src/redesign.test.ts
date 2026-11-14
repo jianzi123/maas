@@ -162,3 +162,25 @@ it("a failed exact lookup cannot fabricate an empty successful record", async ()
   expect(w.find("dialog").exists()).toBe(false);
   expect(w.find("[role=alert]").text()).toContain("依赖");
 });
+
+it("new generation never inherits old target progress while active callable stays independent", async () => {
+  api.fetcher = async (p, i) => {
+    const response = await fixtureFetch(p, i);
+    if (!i?.method && String(p).endsWith("/" + releaseSample.metadata.name)) {
+      const resource = await response.json();
+      resource.metadata.generation = 99;
+      return Response.json(resource);
+    }
+    return response;
+  };
+  const w = open(Releases);
+  await flushPromises();
+  await w.get(".release-card").trigger("click");
+  await flushPromises();
+  expect(w.get(".info-strip").text()).toContain("等待观测新配置");
+  expect(
+    w
+      .findAll(".release-progress li.done")
+      .every((c) => c.text().includes("可调用")),
+  ).toBe(true);
+});

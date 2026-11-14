@@ -531,13 +531,21 @@ onBeforeUnmount(() => {
         :key="stage.type"
         :class="{
           done: selected.status?.conditions.some(
-            (c) => c.type === stage.type && c.status === 'True',
+            (c) =>
+              c.type === stage.type &&
+              c.status === 'True' &&
+              (stage.type === 'Callable' ||
+                c.observedGeneration === selected?.metadata.generation),
           ),
         }"
       >
         <span>{{
           selected.status?.conditions.some(
-            (c) => c.type === stage.type && c.status === "True",
+            (c) =>
+              c.type === stage.type &&
+              c.status === "True" &&
+              (stage.type === "Callable" ||
+                c.observedGeneration === selected?.metadata.generation),
           )
             ? "✓"
             : "○"
@@ -547,7 +555,9 @@ onBeforeUnmount(() => {
     </ol>
     <div class="info-strip">
       当前活动：{{ callableLabel(selected) }} · 目标：{{
-        statusLabel(selected.status?.phase ?? "unknown")
+        selected.status?.observedGeneration !== selected.metadata.generation
+          ? "等待观测新配置"
+          : statusLabel(selected.status?.phase ?? "unknown")
       }}
     </div>
     <div v-if="blocked.length" class="blocked-list">
