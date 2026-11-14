@@ -24,7 +24,7 @@ npm run dev
 ```sh
 python scripts/lock-unified-source.py
 # 检查四份deploy锁后单独提交，再导出HEAD
-python deploy/checks/inspect_sources.py --backend-root . --console-root .
+python deploy/checks/inspect_sources.py --backend-root . --console-root . --output artifacts/unified/source-inspection.json
 ```
 
 本地会话、Key、管理/历史/operation均复用同一Go内核。publisher使用显式窄权限连接和原同事务完成hook；core/history/payload/operations分开。安装账户只在localworkbench自有临时MySQL使用，生产工厂及实际有效权限另行验收。

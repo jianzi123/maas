@@ -10,6 +10,6 @@
 
 后续改代码后必须先提交新代码再更新锁；包括deploy中的运行代码。不能只改摘要、冒称旧QA覆盖新版本，或删除默认工作台代码来对齐旧清单。独立QA目标和证据提交保留其原范围；当前合并候选没有因此获得整体QA或生产批准。
 
-`inspect_sources.py`比较当前代码的完整清单。旧source_context.py仍可复现历史组件导出，但不是当前推荐组装入口。此前0559/f445与30cf/e564的证据保留为历史，不宣称其覆盖当前交付树。
+`inspect_sources.py`比较当前代码的完整清单；使用`--output artifacts/unified/source-inspection.json`可避免改写已提交的历史证据。旧source_context.py仍可复现历史组件导出，但不是当前推荐组装入口。此前0559/f445与30cf/e564的证据保留为历史，不宣称其覆盖当前交付树。
 
 候选状态保持integrated-unmerged，deploymentApproved、productionWiringVerified及生产ready标志保持false。生产预检应继续拒绝缺实际合并、镜像、身份、Secret、网关和环境输入。此变更只统一代码和构建来源，不写目标账户、不构建/发布镜像或部署。
