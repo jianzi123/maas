@@ -1,0 +1,1071 @@
+package kernel
+
+// QA-owned tests compiled into internal/kernel through Go's -overlay option.
+// setup supplies the author's disposable SQL fixture and synthetic approvals;
+// assertions here are independent. H1-H4 and the HTTP gateway remain fixtures.
+import (
+	"context"
+	"crypto/sha256"
+	"database/sql"
+	"encoding/hex"
+	"encoding/json"
+	"errors"
+	"fmt"
+	"io"
+	"net/http"
+	"net/http/httptest"
+	"reflect"
+	"strings"
+	"sync"
+	"sync/atomic"
+	"testing"
+	"time"
+
+	"github.com/go-sql-driver/mysql"
+	"github.com/google/uuid"
+	"github.com/jianzi123/maas/internal/protocol"
+	"github.com/santhosh-tekuri/jsonschema/v5"
+)
+
+func TestQABudgetRace(t *testing.T) {
+	f := setup(t, 12)
+	ctx := context.Background()
+	p := Policy{Window: "utc_day", Revision: "qa-two-requests", Limits: Limits{Requests: ptr("2"), Tokens: ptr("14000"), Money: &MoneyLimit{Currency: "TST", Limit: "52000000"}}}
+	if err := f.core.UpdatePolicy(ctx, f.key, p); err != nil {
+		t.Fatal(err)
+	}
+	makeInput := func() Input {
+		in := f.input(t)
+		var err error
+		in.Plan, err = BuildPlan(f.profile, p, "test-rate-v1")
+		if err != nil {
+			t.Fatal(err)
+		}
+		return in
+	}
+	mustAdmit(t, f, makeInput())
+	other, err := New(f.db, "controlled-test", f.core.pepper, f.rate, f.proofs)
+	if err != nil {
+		t.Fatal(err)
+	}
+	inputs := make([]Input, 10)
+	for i := range inputs {
+		inputs[i] = makeInput()
+	}
+	var admitted atomic.Int64
+	var wg sync.WaitGroup
+	start := make(chan struct{})
+	for i, in := range inputs {
+		wg.Add(1)
+		go func(i int, in Input) {
+			defer wg.Done()
+			<-start
+			core := []*Store{f.core, other}[i%2]
+			_, err := core.Admit(ctx, f.gate, in)
+			if err == nil {
+				admitted.Add(1)
+			} else if !errors.Is(err, ErrBusy) && !errors.Is(err, ErrBudget) {
+				t.Error(err)
+			}
+		}(i, in)
+	}
+	close(start)
+	wg.Wait()
+	if admitted.Load() > 1 {
+		t.Fatalf("cross-replica over-admission: %d", admitted.Load())
+	}
+	// NOWAIT may reject every contender; check the still-available unit serially.
+	if admitted.Load() == 0 {
+		mustAdmit(t, f, makeInput())
+	}
+	if _, err := other.Admit(ctx, f.gate, makeInput()); !errors.Is(err, ErrBudget) {
+		t.Fatalf("exhausted budget: %v", err)
+	}
+	assertSQL(t, f.db, "SELECT COUNT(*) FROM generation_requests", 2)
+	t.Logf("sample=1 preadmission + 10 simultaneous attempts, two Store replicas; batch_success=%d", admitted.Load())
+}
+
+func TestQAConcurrentFinalAndSlotReuse(t *testing.T) {
+	f := setup(t, 1)
+	ctx := context.Background()
+	s := mustAdmit(t, f, f.input(t))
+	fin := finalFor(s)
+	var wg sync.WaitGroup
+	for i := 0; i < 10; i++ {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			for attempt := 0; attempt < 100; attempt++ {
+				err := f.core.Finalize(ctx, fin)
+				if errors.Is(err, ErrBusy) {
+					time.Sleep(time.Millisecond)
+					continue
+				}
+				if err != nil {
+					t.Error(err)
+				}
+				return
+			}
+			t.Error("terminal retry bound exhausted")
+		}()
+	}
+	wg.Wait()
+	before := readCounter(t, f, "tokens")
+	if before.Held != "140" || before.Reserved != "0" {
+		t.Fatal(before)
+	}
+	if err := f.core.Release(ctx, s.Input.RequestID, uuid.NewString(), uuid.NewString()); err != nil {
+		t.Fatal(err)
+	}
+	next := mustAdmit(t, f, f.input(t))
+	if err := f.core.Release(ctx, s.Input.RequestID, uuid.NewString(), uuid.NewString()); err != nil {
+		t.Fatal(err)
+	}
+	assertSQL(t, f.db, "SELECT COUNT(*) FROM usage_events", 1)
+	assertSQL(t, f.db, "SELECT SUM(finalized_total) FROM usage_daily", 1)
+	assertSQL(t, f.db, "SELECT COUNT(*) FROM concurrency_slots WHERE request_id=? AND state='HELD'", 1, next.Input.RequestID)
+	if got := readCounter(t, f, "tokens"); got.Held != before.Held {
+		t.Fatal("late release refunded held", got)
+	}
+	t.Logf("original_request_id=%s next_request_id=%s", s.Input.RequestID, next.Input.RequestID)
+}
+
+func TestQATamperedBindingHasNoWrites(t *testing.T) {
+	for _, field := range []string{"source", "publication", "reservation"} {
+		t.Run(field, func(t *testing.T) {
+			f := setup(t, 1)
+			in := f.input(t)
+			switch field {
+			case "source":
+				in.Profile.SourceID = uuid.NewString()
+			case "publication":
+				in.Profile.Binding.PublicationID = uuid.NewString()
+			case "reservation":
+				in.Plan.Tokens = ptr("0")
+			}
+			if _, err := f.core.Admit(context.Background(), f.gate, in); err == nil {
+				t.Fatal("tampered binding admitted")
+			}
+			assertSQL(t, f.db, "SELECT COUNT(*) FROM generation_requests", 0)
+			assertSQL(t, f.db, "SELECT COUNT(*) FROM budget_windows", 0)
+			assertSQL(t, f.db, "SELECT COUNT(*) FROM rate_window_grants", 0)
+		})
+	}
+}
+
+// v2 oracle: MAAS-2 closure-v2 sections QA-001/002, Mika 2026-11-05.
+// Actual backend SHA 2319eb6: production SELECT-only DiagnosticReader plus
+// an independent read of the real frozen admission digest; no fake producer.
+func TestQAUsageBeforeTransportLoss(t *testing.T) {
+	for _, mode := range []string{"eof", "client_write_failure"} {
+		t.Run(mode, func(t *testing.T) {
+			f := setup(t, 1)
+			in := f.input(t)
+			var attempts atomic.Int64
+			gateway := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+				attempts.Add(1)
+				if _, err := f.core.Admit(r.Context(), f.gate, in); err != nil {
+					t.Error(err)
+					w.WriteHeader(503)
+					return
+				}
+				w.Header().Set("Content-Type", "text/event-stream")
+				io.WriteString(w, "data: {\"usage\":{\"prompt_tokens\":12,\"completion_tokens\":7,\"total_tokens\":19,\"prompt_tokens_details\":{\"cached_tokens\":4},\"completion_tokens_details\":{\"reasoning_tokens\":3}}}\n\n")
+				w.(http.Flusher).Flush()
+			}))
+			defer gateway.Close()
+			relay := &Relay{core: f.core, endpoint: gateway.URL, client: gateway.Client(), maxBytes: 1 << 20, maxLine: 65536}
+			recorder := httptest.NewRecorder()
+			var underlying http.ResponseWriter = recorder
+			if mode == "client_write_failure" {
+				underlying = &cancelWriter{header: http.Header{}}
+			}
+			// Read from a NEW SQL connection before any response body is exposed.
+			// This tests receipt persistence ordering, not just eventual logging.
+			writer := &qaBeforeWrite{ResponseWriter: underlying, check: func() {
+				rows := qaReadDiagnostics(t, f, in.RequestID)
+				qaCheckReceipt(t, f, in, rows, false, "")
+			}}
+			err := relay.Forward(context.Background(), writer, RelayCall{Input: in, Body: []byte(`{"model":"synthetic","messages":[{"role":"user","content":"test"}]}`), Ticket: "qa-fixture", PlanHeader: "qa-fixture", Stream: true})
+			if err == nil {
+				t.Error("incomplete transport reported success")
+			}
+			if !writer.called {
+				t.Error("QA-001: no first-write persistence observation")
+			}
+			if attempts.Load() != 1 {
+				t.Errorf("generation attempts=%d want=1", attempts.Load())
+			}
+			if strings.Contains(string(writer.attempted), "[DONE]") || strings.Contains(recorder.Body.String(), "[DONE]") {
+				t.Error("normal DONE escaped an aborted stream")
+			}
+			var raw []byte
+			if err := f.db.QueryRow("SELECT event_json FROM usage_events WHERE request_id=?", in.RequestID).Scan(&raw); err != nil {
+				t.Fatal(err)
+			}
+			var event map[string]any
+			if err := json.Unmarshal(raw, &event); err != nil {
+				t.Fatal(err)
+			}
+			if err := protocol.Validate("Terminal", event); err != nil {
+				t.Fatal(err)
+			}
+			usage := event["usage"].(map[string]any)
+			for _, field := range []string{"input_tokens", "output_tokens", "total_tokens", "input_cached_tokens", "reasoning_tokens"} {
+				if usage[field] != nil {
+					t.Errorf("diagnostic-only frame became terminal actual %s=%v", field, usage[field])
+				}
+			}
+			if usage["source"] != "unavailable" || usage["missing_reason"] != "not_provided" {
+				t.Errorf("QA-001: terminal authority classification=%v", usage)
+			}
+			accounting := event["budget_accounting"].(map[string]any)
+			if accounting["token_actual"] != nil || accounting["cost_actual_atomic"] != nil {
+				t.Error("diagnostic counters became authoritative financial actuals")
+			}
+			tok, mon := readCounter(t, f, "tokens"), readCounter(t, f, "money")
+			if tok != (Counter{Known: "0", Reserved: "0", Held: "140"}) {
+				t.Error("token hold changed", tok)
+			}
+			if mon != (Counter{Known: "0", Reserved: "0", Held: reserved(in.Plan.Money)}) {
+				t.Error("money hold changed", mon)
+			}
+			assertSQL(t, f.db, "SELECT COUNT(*) FROM generation_requests", 1)
+			assertSQL(t, f.db, "SELECT COUNT(*) FROM usage_events", 1)
+			assertSQL(t, f.db, "SELECT SUM(finalized_total) FROM usage_daily", 1)
+			assertSQL(t, f.db, "SELECT COUNT(*) FROM concurrency_slots WHERE state='QUARANTINED'", 1)
+			reqCounter := readCounter(t, f, "requests")
+			if reqCounter != (Counter{Known: "1", Reserved: "0", Held: "0"}) {
+				t.Error(reqCounter)
+			}
+			// Store reconstruction plus an independent DB read is not an OS crash.
+			rebuilt, err := New(f.db, "controlled-test", f.core.pepper, f.rate, f.proofs)
+			if err != nil {
+				t.Fatal(err)
+			}
+			if _, _, err := rebuilt.ReadRequest(context.Background(), in.RequestID); err != nil {
+				t.Fatal(err)
+			}
+			cause := "eof"
+			if mode == "client_write_failure" {
+				cause = "client_write_error"
+			}
+			qaCheckReceipt(t, f, in, qaReadDiagnostics(t, f, in.RequestID), true, cause)
+			// Controlled H2 proof can release ONLY the original allocation, never
+			// rewrite a terminal event or release financial uncertainty_held.
+			if err := rebuilt.Release(context.Background(), in.RequestID, uuid.NewString(), uuid.NewString()); err != nil {
+				t.Fatal(err)
+			}
+			assertSQL(t, f.db, "SELECT COUNT(*) FROM slot_release_log", 1)
+			if readCounter(t, f, "tokens") != tok || readCounter(t, f, "money") != mon {
+				t.Error("slot release changed finance")
+			}
+			var after []byte
+			if err := f.db.QueryRow("SELECT event_json FROM usage_events WHERE request_id=?", in.RequestID).Scan(&after); err != nil {
+				t.Fatal(err)
+			}
+			if string(raw) != string(after) {
+				t.Error("slot release rewrote terminal")
+			}
+			next := mustAdmit(t, f, f.input(t))
+			if err := rebuilt.Release(context.Background(), in.RequestID, uuid.NewString(), uuid.NewString()); err != nil {
+				t.Fatal(err)
+			}
+			assertSQL(t, f.db, "SELECT COUNT(*) FROM concurrency_slots WHERE request_id=? AND state='HELD'", 1, next.Input.RequestID)
+			assertSQL(t, f.db, "SELECT COUNT(*) FROM usage_events", 1)
+			if readCounter(t, f, "tokens").Held != tok.Held || readCounter(t, f, "money").Held != mon.Held {
+				t.Error("old proof refunded held")
+			}
+			t.Logf("v2 request_id=%s terminal_actual=null token_held=%s money_held=%s", in.RequestID, tok.Held, mon.Held)
+		})
+	}
+}
+
+func rawUsage(event map[string]any) string { b, _ := json.Marshal(event["usage"]); return string(b) }
+
+func TestQADeadlineAfterHeaders(t *testing.T) {
+	f := setup(t, 1)
+	in := f.input(t)
+	in.Expires = time.Now().UTC().Add(250 * time.Millisecond)
+	in.Deadline = time.Now().UTC().Add(500 * time.Millisecond)
+	gateway := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if _, err := f.core.Admit(r.Context(), f.gate, in); err != nil {
+			t.Error(err)
+			w.WriteHeader(503)
+			return
+		}
+		fmt.Fprint(w, "data: {\"choices\":[{\"delta\":{\"content\":\"test\"}}]}\n\n")
+		w.(http.Flusher).Flush()
+		<-r.Context().Done()
+	}))
+	defer gateway.Close()
+	relay := &Relay{core: f.core, endpoint: gateway.URL, client: gateway.Client(), maxBytes: 1 << 20, maxLine: 65536}
+	recorder := httptest.NewRecorder()
+	if err := relay.Forward(context.Background(), recorder, RelayCall{Input: in, Body: []byte(`{"model":"synthetic"}`), Stream: true}); err == nil {
+		t.Fatal("deadline reported success")
+	}
+	_, state, err := f.core.ReadRequest(context.Background(), in.RequestID)
+	if err != nil {
+		t.Fatal(err)
+	}
+	t.Logf("request_id=%s terminal=%s", in.RequestID, state)
+	if state != "timed_out" {
+		t.Errorf("QA-002: deadline after headers got=%s want=timed_out", state)
+	}
+}
+
+// The real production reader runs on a new connection with ONLY diagnostic
+// table SELECT. Frozen admission SHA is independently read from the core table.
+func qaDiagnosticDB(t *testing.T, f *fixture) *sql.DB {
+	t.Helper()
+	user := "qa_diag_" + strings.ReplaceAll(uuid.NewString(), "-", "")[:20]
+	password := uuid.NewString()
+	if _, err := f.db.Exec("CREATE USER '" + user + "'@'localhost' IDENTIFIED BY '" + password + "'"); err != nil {
+		t.Fatal(err)
+	}
+	t.Cleanup(func() {
+		if _, err := f.db.Exec("DROP USER '" + user + "'@'localhost'"); err != nil {
+			t.Error(err)
+		}
+	})
+	if _, err := f.db.Exec("GRANT SELECT ON " + f.config.DBName + ".request_usage_diagnostics TO '" + user + "'@'localhost'"); err != nil {
+		t.Fatal(err)
+	}
+	cfg := f.config.Clone()
+	cfg.User = user
+	cfg.Passwd = password
+	db, err := sql.Open("mysql", cfg.FormatDSN())
+	if err != nil {
+		t.Fatal(err)
+	}
+	return db
+}
+func qaReadDiagnostics(t *testing.T, f *fixture, id string) []map[string]any {
+	t.Helper()
+	db := qaDiagnosticDB(t, f)
+	defer db.Close()
+	reader, err := NewDiagnosticReader(db)
+	if err != nil {
+		t.Fatal(err)
+	}
+	records, err := reader.Read(context.Background(), id)
+	if err != nil {
+		t.Fatal("independent SELECT-only diagnostic reader", err)
+	}
+	out := make([]map[string]any, 0, len(records))
+	for _, record := range records {
+		raw, err := json.Marshal(record)
+		if err != nil {
+			t.Fatal(err)
+		}
+		var row map[string]any
+		if err = json.Unmarshal(raw, &row); err != nil {
+			t.Fatal(err)
+		}
+		out = append(out, row)
+	}
+	return out
+}
+func qaCheckReceipt(t *testing.T, f *fixture, in Input, rows []map[string]any, terminated bool, cause string) {
+	t.Helper()
+	c := jsonschema.NewCompiler()
+	c.AssertFormat = true
+	schema, err := c.Compile("../../test/acceptance/contracts/MAAS-2-usage-receipt-diagnostic-0.1-draft.1.schema.json")
+	if err != nil {
+		t.Fatal(err)
+	}
+	anchor := ""
+	if err := f.db.QueryRow("SELECT snapshot_sha256 FROM request_snapshot_digests WHERE request_id=?", in.RequestID).Scan(&anchor); err != nil {
+		t.Fatal("frozen admission hash", err)
+	}
+	bytes, err := hex.DecodeString(anchor)
+	if err != nil || len(bytes) != 32 {
+		t.Fatal("invalid frozen admission hash")
+	}
+	binding := map[string]any{
+		"model_release_uid": in.Profile.CRUID, "model_release_namespace": in.Profile.Namespace,
+		"model_release_name": in.Profile.Name, "model_release_generation": in.Profile.Binding.Generation,
+		"release_revision": in.Profile.Binding.Revision, "publication_id": in.Profile.Binding.PublicationID,
+		"activation_epoch": in.Profile.Binding.Epoch, "route_binding_sha256": in.Profile.RouteDigest,
+		"admission_purpose": "serving", "price_snapshot_id": in.Plan.PriceID, "price_version": in.Plan.PriceVersion,
+	}
+	b, _ := json.Marshal(binding)
+	var normalized map[string]any
+	json.Unmarshal(b, &normalized)
+	receipts, ends := 0, 0
+	var lastReceipt, termination float64
+	seen := map[float64]bool{}
+	for _, row := range rows {
+		if err := schema.Validate(row); err != nil {
+			t.Error("diagnostic schema mismatch", err)
+		}
+		if row["schema_version"] != "0.1-draft.1" || row["authority"] != "diagnostic_only" ||
+			row["request_id"] != in.RequestID || row["owner_instance_id"] != in.Owner || row["owner_fence"] != float64(1) ||
+			row["snapshot_sha256"] != anchor || !reflect.DeepEqual(row["invocation_binding"], normalized) {
+			t.Error("diagnostic identity/fence/snapshot/binding mismatch")
+		}
+		seq, ok := row["sequence"].(float64)
+		if !ok || seq < 1 || seen[seq] {
+			t.Error("invalid/duplicate diagnostic sequence")
+		}
+		seen[seq] = true
+		if _, err := time.Parse(time.RFC3339Nano, fmt.Sprint(row["observed_at"])); err != nil {
+			t.Error("invalid observation timestamp")
+		}
+		switch row["record_type"] {
+		case "receipt":
+			receipts++
+			if seq > lastReceipt {
+				lastReceipt = seq
+			}
+			expected := map[string]any{"input_tokens": float64(12), "output_tokens": float64(7), "total_tokens": float64(19), "input_cached_tokens": float64(4), "reasoning_tokens": float64(3)}
+			if !reflect.DeepEqual(row["usage"], expected) || row["cause"] != nil {
+				t.Error("QA-001: five observed counters/cause not preserved")
+			}
+		case "termination":
+			ends++
+			termination = seq
+			if row["usage"] != nil || row["cause"] != cause {
+				t.Errorf("wrong termination cause: %v want=%s", row["cause"], cause)
+			}
+		default:
+			t.Error("unknown diagnostic record_type")
+		}
+	}
+	if receipts != 1 {
+		t.Errorf("QA-001: durable receipt count=%d want=1", receipts)
+	}
+	if terminated && (ends != 1 || termination <= lastReceipt) {
+		t.Error("missing/out-of-order durable termination")
+	}
+	if !terminated && ends != 0 {
+		t.Error("termination precedes first forwarded frame")
+	}
+}
+
+type qaBeforeWrite struct {
+	http.ResponseWriter
+	check     func()
+	called    bool
+	attempted []byte
+}
+
+func (w *qaBeforeWrite) Write(p []byte) (int, error) {
+	w.attempted = append(w.attempted, p...)
+	if !w.called {
+		w.called = true
+		w.check()
+	}
+	return w.ResponseWriter.Write(p)
+}
+func (w *qaBeforeWrite) Flush() {
+	if f, ok := w.ResponseWriter.(http.Flusher); ok {
+		f.Flush()
+	}
+}
+
+func TestQATerminationCauseOrder(t *testing.T) {
+	t.Run("transport_deadline_before_later_client_cancel", func(t *testing.T) {
+		client, cancelClient := context.WithCancel(context.Background())
+		defer cancelClient()
+		transport, cancelTransport := context.WithDeadline(client, time.Now().Add(-time.Second))
+		defer cancelTransport()
+		if !errors.Is(transport.Err(), context.DeadlineExceeded) {
+			t.Fatal("deadline fixture not established")
+		}
+		cancelClient() // later client cancellation must not replace first transport cause
+		result, _ := relayFailure(client, transport, context.DeadlineExceeded, "interrupted")
+		if result != "timed_out" {
+			t.Errorf("QA-002: first transport cause=deadline, later parent cancel got=%s", result)
+		}
+	})
+	t.Run("client_cancel_before_transport_deadline", func(t *testing.T) {
+		client, cancelClient := context.WithCancel(context.Background())
+		cancelClient()
+		transport, cancelTransport := context.WithDeadline(client, time.Now().Add(-time.Second))
+		defer cancelTransport()
+		result, _ := relayFailure(client, transport, context.Canceled, "interrupted")
+		if result != "cancelled" {
+			t.Errorf("QA-002: explicit cancel got=%s", result)
+		}
+	})
+	t.Run("earlier_parent_deadline", func(t *testing.T) {
+		client, cancelClient := context.WithDeadline(context.Background(), time.Now().Add(-time.Second))
+		defer cancelClient()
+		transport, cancelTransport := context.WithTimeout(client, time.Hour)
+		defer cancelTransport()
+		result, _ := relayFailure(client, transport, context.DeadlineExceeded, "interrupted")
+		if result != "timed_out" {
+			t.Errorf("QA-002: parent deadline got=%s", result)
+		}
+	})
+	t.Run("eof_without_context_termination", func(t *testing.T) {
+		client := context.Background()
+		transport, cancelTransport := context.WithTimeout(client, time.Hour)
+		defer cancelTransport()
+		result, _ := relayFailure(client, transport, io.EOF, "interrupted")
+		if result != "interrupted" {
+			t.Errorf("QA-002: plain EOF got=%s", result)
+		}
+	})
+}
+
+// Independent controlled transport matrix. before_send never invents an
+// admitted request; all other stages bind a real MySQL admission first.
+type qaStageTransport struct {
+	base  http.RoundTripper
+	ready chan struct{}
+	once  *sync.Once
+}
+
+func (t qaStageTransport) RoundTrip(r *http.Request) (*http.Response, error) {
+	resp, err := t.base.RoundTrip(r)
+	if err == nil {
+		t.once.Do(func() { close(t.ready) })
+	}
+	return resp, err
+}
+
+type qaStageWriter struct {
+	http.ResponseWriter
+	ready   chan struct{}
+	once    *sync.Once
+	marker  string
+	written []byte
+	hook    func()
+}
+
+func (w *qaStageWriter) Write(p []byte) (int, error) {
+	w.written = append(w.written, p...)
+	n, err := w.ResponseWriter.Write(p)
+	if strings.Contains(string(p), w.marker) {
+		w.once.Do(func() {
+			if w.hook != nil {
+				w.hook()
+			}
+			if w.ready != nil {
+				close(w.ready)
+			}
+		})
+	}
+	return n, err
+}
+func (w *qaStageWriter) Flush() {
+	if f, ok := w.ResponseWriter.(http.Flusher); ok {
+		f.Flush()
+	}
+}
+func qaCheckUnknownTerminal(t *testing.T, f *fixture, id string) map[string]any {
+	t.Helper()
+	var raw []byte
+	if err := f.db.QueryRow("SELECT event_json FROM usage_events WHERE request_id=?", id).Scan(&raw); err != nil {
+		t.Fatal(err)
+	}
+	var ev map[string]any
+	if err := json.Unmarshal(raw, &ev); err != nil {
+		t.Fatal(err)
+	}
+	if err := protocol.Validate("Terminal", ev); err != nil {
+		t.Fatal(err)
+	}
+	u := ev["usage"].(map[string]any)
+	for _, key := range []string{"input_tokens", "output_tokens", "total_tokens", "input_cached_tokens", "reasoning_tokens"} {
+		if u[key] != nil {
+			t.Errorf("diagnostic leaked into financial usage %s", key)
+		}
+	}
+	a := ev["budget_accounting"].(map[string]any)
+	if a["token_actual"] != nil || a["cost_actual_atomic"] != nil {
+		t.Error("unknown financial actual became known")
+	}
+	if c := readCounter(t, f, "tokens"); c != (Counter{Known: "0", Reserved: "0", Held: "140"}) {
+		t.Error(c)
+	}
+	if c := readCounter(t, f, "money"); c != (Counter{Known: "0", Reserved: "0", Held: "520000"}) {
+		t.Error(c)
+	}
+	assertSQL(t, f.db, "SELECT COUNT(*) FROM generation_requests", 1)
+	assertSQL(t, f.db, "SELECT COUNT(*) FROM usage_events", 1)
+	assertSQL(t, f.db, "SELECT SUM(finalized_total) FROM usage_daily", 1)
+	assertSQL(t, f.db, "SELECT COUNT(*) FROM concurrency_slots WHERE state='QUARANTINED'", 1)
+	return ev
+}
+func TestQATerminationMatrix(t *testing.T) {
+	for _, phase := range []string{"before_send", "before_headers", "headers_received", "first_chunk", "usage_received"} {
+		for _, reason := range []string{"hard_deadline", "earlier_parent_deadline", "explicit_cancel", "transport_eof"} {
+			if phase == "before_send" && reason == "transport_eof" {
+				continue
+			}
+			t.Run(phase+"/"+reason, func(t *testing.T) {
+				f := setup(t, 1)
+				in := f.input(t)
+				in.Expires = time.Now().UTC().Add(2500 * time.Millisecond)
+				in.Deadline = time.Now().UTC().Add(3 * time.Second)
+				parent, cancelParent := context.WithCancel(context.Background())
+				defer cancelParent()
+				ctx := parent
+				if reason == "hard_deadline" {
+					in.Expires = time.Now().UTC().Add(200 * time.Millisecond)
+					in.Deadline = time.Now().UTC().Add(550 * time.Millisecond)
+				}
+				if reason == "earlier_parent_deadline" {
+					var done context.CancelFunc
+					ctx, done = context.WithTimeout(parent, 500*time.Millisecond)
+					defer done()
+				}
+				if phase == "before_send" {
+					switch reason {
+					case "hard_deadline":
+						in.Deadline = time.Now().UTC().Add(-time.Second)
+					case "earlier_parent_deadline":
+						var done context.CancelFunc
+						ctx, done = context.WithDeadline(parent, time.Now().UTC().Add(-time.Second))
+						defer done()
+					case "explicit_cancel":
+						cancelParent()
+					}
+				}
+				ready := make(chan struct{})
+				var once sync.Once
+				var calls atomic.Int64
+				server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+					calls.Add(1)
+					io.Copy(io.Discard, r.Body)
+					if _, err := f.core.Admit(r.Context(), f.gate, in); err != nil {
+						t.Error(err)
+						w.WriteHeader(503)
+						return
+					}
+					if phase == "before_headers" {
+						if reason == "transport_eof" {
+							conn, _, err := w.(http.Hijacker).Hijack()
+							if err != nil {
+								t.Error(err)
+								return
+							}
+							conn.Close()
+							return
+						}
+						once.Do(func() { close(ready) })
+					} else {
+						w.Header().Set("Content-Type", "text/event-stream")
+						w.WriteHeader(200)
+						switch phase {
+						case "first_chunk":
+							io.WriteString(w, "data: {\"choices\":[{\"delta\":{\"content\":\"fixture\"}}]}\n\n")
+						case "usage_received":
+							io.WriteString(w, diagnosticFrame)
+						}
+						w.(http.Flusher).Flush()
+					}
+					if reason == "transport_eof" {
+						return
+					}
+					select {
+					case <-r.Context().Done():
+					case <-time.After(4 * time.Second):
+						t.Error("cancellation did not reach controlled gateway")
+					}
+				}))
+				defer server.Close()
+				client := server.Client()
+				base := client.Transport
+				if base == nil {
+					base = http.DefaultTransport
+				}
+				if phase == "headers_received" {
+					client.Transport = qaStageTransport{base, ready, &once}
+				}
+				rec := httptest.NewRecorder()
+				writer := &qaStageWriter{ResponseWriter: rec, ready: ready, once: &once, marker: "data:"}
+				if phase == "usage_received" {
+					writer.marker = "\"usage\""
+				}
+				if reason == "explicit_cancel" && phase != "before_send" {
+					stop := make(chan struct{})
+					done := make(chan struct{})
+					go func() {
+						defer close(done)
+						select {
+						case <-ready:
+							cancelParent()
+						case <-stop:
+						}
+					}()
+					defer func() { close(stop); <-done }()
+				}
+				relay := &Relay{core: f.core, endpoint: server.URL, client: client, maxBytes: 65536, maxLine: 65536}
+				err := relay.Forward(ctx, writer, RelayCall{Input: in, Body: []byte("{\"model\":\"synthetic\"}"), Stream: true})
+				if err == nil {
+					t.Error("aborted transport reported success")
+				}
+				if strings.Contains(string(writer.written), "[DONE]") {
+					t.Error("normal DONE attempted")
+				}
+				if phase == "before_send" {
+					if calls.Load() != 0 {
+						t.Error("already terminated request dispatched")
+					}
+					assertSQL(t, f.db, "SELECT COUNT(*) FROM generation_requests", 0)
+					assertSQL(t, f.db, "SELECT COUNT(*) FROM usage_events", 0)
+					assertSQL(t, f.db, "SELECT COUNT(*) FROM budget_windows", 0)
+					return
+				}
+				if calls.Load() != 1 {
+					t.Errorf("dispatch count=%d", calls.Load())
+				}
+				ev := qaCheckUnknownTerminal(t, f, in.RequestID)
+				result, cause := "interrupted", "eof"
+				if strings.Contains(reason, "deadline") {
+					result, cause = "timed_out", "deadline_exceeded"
+				}
+				if reason == "explicit_cancel" {
+					result, cause = "cancelled", "explicit_cancel"
+				}
+				if ev["result"] != result {
+					t.Errorf("classification=%v want=%s", ev["result"], result)
+				}
+				rows := qaReadDiagnostics(t, f, in.RequestID)
+				receipts, ends := 0, 0
+				for _, row := range rows {
+					if row["record_type"] == "receipt" {
+						receipts++
+					}
+					if row["record_type"] == "termination" {
+						ends++
+						if row["cause"] != cause {
+							t.Errorf("cause=%v want=%s", row["cause"], cause)
+						}
+					}
+				}
+				wantReceipt := 0
+				if phase == "usage_received" {
+					wantReceipt = 1
+				}
+				if receipts != wantReceipt || ends != 1 {
+					t.Errorf("diagnostic boundary receipts=%d/%d terminations=%d/1", receipts, wantReceipt, ends)
+				}
+				if wantReceipt == 1 {
+					qaCheckReceipt(t, f, in, rows, true, cause)
+				}
+				if phase == "before_headers" && reason == "transport_eof" {
+					tok, mon := readCounter(t, f, "tokens"), readCounter(t, f, "money")
+					before, _ := json.Marshal(ev)
+					if err := f.core.Release(context.Background(), in.RequestID, uuid.NewString(), uuid.NewString()); err != nil {
+						t.Fatal(err)
+					}
+					assertSQL(t, f.db, "SELECT COUNT(*) FROM slot_release_log", 1)
+					if readCounter(t, f, "tokens") != tok || readCounter(t, f, "money") != mon {
+						t.Fatal("EOF slot release refunded held")
+					}
+					next := mustAdmit(t, f, f.input(t))
+					if err := f.core.Release(context.Background(), in.RequestID, uuid.NewString(), uuid.NewString()); err != nil {
+						t.Fatal(err)
+					}
+					assertSQL(t, f.db, "SELECT COUNT(*) FROM concurrency_slots WHERE request_id=? AND state='HELD'", 1, next.Input.RequestID)
+					var raw []byte
+					if err := f.db.QueryRow("SELECT event_json FROM usage_events WHERE request_id=?", in.RequestID).Scan(&raw); err != nil {
+						t.Fatal(err)
+					}
+					var after map[string]any
+					if err := json.Unmarshal(raw, &after); err != nil {
+						t.Fatal(err)
+					}
+					normalized, _ := json.Marshal(after)
+					if string(normalized) != string(before) {
+						t.Fatal("EOF release rewrote original terminal")
+					}
+					if readCounter(t, f, "tokens").Held != tok.Held || readCounter(t, f, "money").Held != mon.Held {
+						t.Fatal("late original allocation release refunded held")
+					}
+					t.Logf("EOF durable receipt=%d termination=%d cause=eof actual=null held_tokens=%s held_money=%s original_allocation_only=true", receipts, ends, tok.Held, mon.Held)
+				}
+				t.Logf("matrix request_id=%s phase=%s reason=%s result=%v", in.RequestID, phase, reason, ev["result"])
+			})
+		}
+	}
+}
+func TestQADiagnosticFailuresAndPartial(t *testing.T) {
+	for _, mode := range []string{"receipt_write_failure", "termination_write_failure", "record_limit", "byte_limit", "missing_policy", "invalid_usage", "conflicting_snapshot", "partial_usage"} {
+		t.Run(mode, func(t *testing.T) {
+			f := setup(t, 1)
+			in := f.input(t)
+			var calls atomic.Int64
+			server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+				calls.Add(1)
+				io.Copy(io.Discard, r.Body)
+				if _, err := f.core.Admit(r.Context(), f.gate, in); err != nil {
+					t.Error(err)
+					w.WriteHeader(503)
+					return
+				}
+				if mode == "receipt_write_failure" {
+					if _, err := f.db.Exec("RENAME TABLE request_usage_diagnostics TO qa_offline_diag"); err != nil {
+						t.Error(err)
+					}
+				}
+				if mode == "missing_policy" {
+					if _, err := f.db.Exec("DELETE FROM diagnostic_policy"); err != nil {
+						t.Error(err)
+					}
+				}
+				if mode == "byte_limit" {
+					if _, err := f.db.Exec("UPDATE diagnostic_policy SET max_bytes=16384 WHERE id=1"); err != nil {
+						t.Error(err)
+					}
+				}
+				if mode == "record_limit" {
+					if _, err := f.db.Exec("UPDATE diagnostic_policy SET max_records=2 WHERE id=1"); err != nil {
+						t.Error(err)
+					}
+				}
+				frame := diagnosticFrame
+				if mode == "partial_usage" {
+					frame = "data: {\"usage\":{\"total_tokens\":19}}\n\n"
+				}
+				io.WriteString(w, frame)
+				w.(http.Flusher).Flush()
+				switch mode {
+				case "byte_limit":
+					for n := 0; n < 20; n++ {
+						io.WriteString(w, diagnosticFrame)
+					}
+					io.WriteString(w, "data: [DONE]\n\n")
+				case "record_limit":
+					io.WriteString(w, diagnosticFrame+"data: [DONE]\n\n")
+				case "invalid_usage":
+					io.WriteString(w, "data: {\"usage\":{\"total_tokens\":-1}}\n\n")
+				case "conflicting_snapshot":
+					io.WriteString(w, "data: {\"usage\":{\"prompt_tokens\":11,\"completion_tokens\":7,\"total_tokens\":18}}\n\n")
+				}
+			}))
+			defer server.Close()
+			rec := httptest.NewRecorder()
+			var once sync.Once
+			writer := &qaStageWriter{ResponseWriter: rec, once: &once, marker: "\"usage\""}
+			if mode == "termination_write_failure" {
+				writer.hook = func() {
+					if _, err := f.db.Exec("RENAME TABLE request_usage_diagnostics TO qa_offline_diag"); err != nil {
+						t.Error(err)
+					}
+				}
+			}
+			relay := &Relay{core: f.core, endpoint: server.URL, client: server.Client(), maxBytes: 65536, maxLine: 65536}
+			err := relay.Forward(context.Background(), writer, RelayCall{Input: in, Body: []byte("{\"model\":\"synthetic\"}"), Stream: true})
+			if mode == "receipt_write_failure" || mode == "termination_write_failure" {
+				if _, err := f.db.Exec("RENAME TABLE qa_offline_diag TO request_usage_diagnostics"); err != nil {
+					t.Fatal(err)
+				}
+			}
+			if err == nil || strings.Contains(string(writer.written), "[DONE]") {
+				t.Error("failed diagnostic path returned normal success")
+			}
+			if calls.Load() != 1 {
+				t.Error("generation replayed")
+			}
+			ev := qaCheckUnknownTerminal(t, f, in.RequestID)
+			rows := qaReadDiagnostics(t, f, in.RequestID)
+			if mode == "receipt_write_failure" || mode == "missing_policy" {
+				if len(rows) != 0 || strings.Contains(string(writer.written), "\"usage\"") {
+					t.Error("failed receipt was forwarded/persisted")
+				}
+				return
+			}
+			if mode == "termination_write_failure" {
+				if len(rows) != 1 || rows[0]["record_type"] != "receipt" {
+					t.Error("accepted receipt lost on later write failure")
+				}
+				if ev["result"] == "succeeded" {
+					t.Error("termination storage failure succeeded")
+				}
+				return
+			}
+			if mode == "byte_limit" {
+				if len(rows) < 2 || rows[len(rows)-1]["cause"] != "diagnostic_limit" {
+					t.Fatal("byte limit did not reserve termination", rows)
+				}
+				var size int64
+				if err := f.db.QueryRow("SELECT SUM(OCTET_LENGTH(record_bytes)) FROM request_usage_diagnostics WHERE request_id=?", in.RequestID).Scan(&size); err != nil {
+					t.Fatal(err)
+				}
+				if size > 16384 {
+					t.Fatal("diagnostic byte budget exceeded", size)
+				}
+				for _, row := range rows[:len(rows)-1] {
+					u := row["usage"].(map[string]any)
+					if u["total_tokens"] != float64(19) || row["authority"] != "diagnostic_only" {
+						t.Fatal("cumulative diagnostics changed accounting authority")
+					}
+				}
+				t.Logf("byte cap request_id=%s persisted_records=%d bytes=%d", in.RequestID, len(rows), size)
+				return
+			}
+			cause := map[string]string{"record_limit": "diagnostic_limit", "invalid_usage": "parse_invalid", "conflicting_snapshot": "usage_conflict", "partial_usage": "eof"}[mode]
+			if len(rows) != 2 || rows[1]["cause"] != cause {
+				t.Fatalf("unexpected diagnostic lifecycle rows=%v", rows)
+			}
+			if mode == "partial_usage" {
+				usage := rows[0]["usage"].(map[string]any)
+				if usage["total_tokens"] != float64(19) || usage["input_tokens"] != nil || usage["output_tokens"] != nil || usage["input_cached_tokens"] != nil || usage["reasoning_tokens"] != nil {
+					t.Error("partial diagnostic invented values")
+				}
+			} else {
+				qaCheckReceipt(t, f, in, rows, true, cause)
+			}
+			t.Logf("fault request_id=%s mode=%s", in.RequestID, mode)
+		})
+	}
+}
+func qaRecord(t *testing.T, f *fixture, in Input, seq int64) Diagnostic {
+	t.Helper()
+	snap, digest, err := f.core.DiagnosticBinding(context.Background(), in.RequestID, in.Owner)
+	if err != nil {
+		t.Fatal(err)
+	}
+	i, o, total, cached, reason := int64(12), int64(7), int64(19), int64(4), int64(3)
+	return Diagnostic{Version: "0.1-draft.1", Type: "receipt", ID: uuid.NewString(), RequestID: in.RequestID, Owner: in.Owner, Fence: snap.OwnerFence, Sequence: seq, Observed: time.Now().UTC(), SnapshotHash: digest, Binding: requestProjection(snap, "in_progress", nil)["invocation_binding"], Authority: "diagnostic_only", Usage: &DiagnosticCounts{&i, &o, &total, &cached, &reason}}
+}
+func TestQARealDiagnosticACKReplayAndBinding(t *testing.T) {
+	f := setup(t, 1)
+	ctx := context.Background()
+	in := f.input(t)
+	snap := mustAdmit(t, f, in)
+	d := qaRecord(t, f, in, 1)
+	original, _ := json.Marshal(snap)
+	digest := sha256.Sum256(original)
+	if d.SnapshotHash != fmt.Sprintf("%x", digest) {
+		t.Fatal("frozen digest is not the original admitted snapshot bytes")
+	}
+	connector, err := mysql.NewConnector(f.config)
+	if err != nil {
+		t.Fatal(err)
+	}
+	fault := &ackConnector{Connector: connector}
+	db := sql.OpenDB(fault)
+	defer db.Close()
+	core, err := New(db, "controlled-test", f.core.pepper, f.rate, f.proofs)
+	if err != nil {
+		t.Fatal(err)
+	}
+	fault.lose.Store(true)
+	if err := core.AppendDiagnostic(ctx, d); err != nil {
+		t.Fatal("receipt ACK recovery", err)
+	}
+	if err := core.AppendDiagnostic(ctx, d); err != nil {
+		t.Fatal("exact same record retry", err)
+	}
+	for _, kind := range []string{"payload", "snapshot", "binding", "fence"} {
+		bad := d
+		switch kind {
+		case "payload":
+			bad.ID = uuid.NewString()
+		case "snapshot":
+			bad.SnapshotHash = strings.Repeat("f", 64)
+		case "binding":
+			b, _ := json.Marshal(d.Binding)
+			var binding map[string]any
+			json.Unmarshal(b, &binding)
+			binding["publication_id"] = uuid.NewString()
+			bad.Binding = binding
+		case "fence":
+			bad.Fence++
+		}
+		if err := core.AppendDiagnostic(ctx, bad); err == nil {
+			t.Error("conflicting diagnostic accepted", kind)
+		}
+	}
+	assertSQL(t, f.db, "SELECT COUNT(*) FROM request_usage_diagnostics", 1)
+	fin := finalFor(snap)
+	fin.Usage = unavailableUsage("not_provided")
+	fault.lose.Store(true)
+	if err := core.Finalize(ctx, fin); !errors.Is(err, ErrCommitUnknown) {
+		t.Fatal("expected terminal ACK uncertainty", err)
+	}
+	if err := core.Finalize(ctx, fin); err != nil {
+		t.Fatal(err)
+	}
+	before := qaCheckUnknownTerminal(t, f, in.RequestID)
+	late := qaRecord(t, f, in, 2)
+	if err := core.AppendDiagnostic(ctx, late); err != nil {
+		t.Fatal("late diagnostic", err)
+	}
+	after := qaCheckUnknownTerminal(t, f, in.RequestID)
+	if !reflect.DeepEqual(before, after) {
+		t.Error("late diagnostic rewrote financial terminal")
+	}
+	if got := qaReadDiagnostics(t, f, in.RequestID); len(got) != 2 {
+		t.Fatal("ACK/late observation count", len(got))
+	}
+	t.Logf("ACK request_id=%s original_digest=%s", in.RequestID, d.SnapshotHash)
+}
+func TestQADiagnosticRecoveryFence(t *testing.T) {
+	f := setup(t, 1)
+	ctx := context.Background()
+	in := f.input(t)
+	in.Expires = time.Now().UTC().Add(150 * time.Millisecond)
+	in.Deadline = time.Now().UTC().Add(350 * time.Millisecond)
+	mustAdmit(t, f, in)
+	d := qaRecord(t, f, in, 1)
+	if err := f.core.AppendDiagnostic(ctx, d); err != nil {
+		t.Fatal(err)
+	}
+	time.Sleep(time.Until(in.Deadline) + 10*time.Millisecond)
+	rebuilt, err := New(f.db, "controlled-test", f.core.pepper, f.rate, f.proofs)
+	if err != nil {
+		t.Fatal(err)
+	}
+	newOwner := uuid.NewString()
+	if err := rebuilt.Recover(ctx, in.RequestID, newOwner); err != nil {
+		t.Fatal(err)
+	}
+	old := d
+	old.ID = uuid.NewString()
+	old.Sequence = 2
+	old.Observed = time.Now().UTC()
+	if err := rebuilt.AppendDiagnostic(ctx, old); !errors.Is(err, ErrConflict) {
+		t.Fatal("old owner/fence late append", err)
+	}
+	rows := qaReadDiagnostics(t, f, in.RequestID)
+	if len(rows) != 1 || rows[0]["snapshot_sha256"] != d.SnapshotHash {
+		t.Fatal("recovery lost original persisted receipt")
+	}
+	ev := qaCheckUnknownTerminal(t, f, in.RequestID)
+	if ev["usage"].(map[string]any)["missing_reason"] != "not_provided" {
+		t.Error("recovery mislabeled received usage")
+	}
+	t.Logf("recover request_id=%s original_fence=1 recovered_owner=%s", in.RequestID, newOwner)
+}
+func TestQADiagnosticReaderLeastPrivilege(t *testing.T) {
+	f := setup(t, 1)
+	in := f.input(t)
+	mustAdmit(t, f, in)
+	d := qaRecord(t, f, in, 1)
+	if err := f.core.AppendDiagnostic(context.Background(), d); err != nil {
+		t.Fatal(err)
+	}
+	db := qaDiagnosticDB(t, f)
+	defer db.Close()
+	reader, err := NewDiagnosticReader(db)
+	if err != nil {
+		t.Fatal(err)
+	}
+	rows, err := reader.Read(context.Background(), in.RequestID)
+	if err != nil || len(rows) != 1 {
+		t.Fatal("SELECT-only reader", err)
+	}
+	for _, query := range []string{
+		"SELECT COUNT(*) FROM platform_keys",
+		"SELECT COUNT(*) FROM request_snapshot_digests",
+		"UPDATE request_usage_diagnostics SET sequence=sequence",
+		"DELETE FROM request_usage_diagnostics WHERE 1=0",
+		"INSERT INTO request_usage_diagnostics SELECT * FROM request_usage_diagnostics WHERE 1=0",
+		"ALTER TABLE request_usage_diagnostics ADD COLUMN qa_forbidden INT",
+	} {
+		_, err := db.Exec(query)
+		var denied *mysql.MySQLError
+		if !errors.As(err, &denied) || (denied.Number != 1142 && denied.Number != 1143) {
+			t.Errorf("missing permission denial: %s err=%v", strings.Fields(query)[0], err)
+		}
+	}
+	assertSQL(t, f.db, "SELECT COUNT(*) FROM request_usage_diagnostics", 1)
+}
