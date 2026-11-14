@@ -1,0 +1,118 @@
+import { it, expect, afterEach } from "vitest";
+import { mount, flushPromises } from "@vue/test-utils";
+import { api } from "./api/client";
+import { validate } from "./api/contracts";
+import { fixtureFetch, fixtureError, resetFixtures, releaseSample } from "./fixtures";
+import samples from "./fixture-data.json";
+import Releases from "./pages/Releases.vue";
+import ReleaseForm from "./components/ReleaseForm.vue";
+import Usage from "./pages/Usage.vue";
+const mounted: ReturnType<typeof mount>[] = [];
+const prior = api.fetcher;
+const open = (component:any, options:any={}) => {const w=mount(component, options); mounted.push(w); return w;};
+const button=(w:any, text:string)=>{const b=w.findAll("button").find((x:any)=>x.text()===text); if(!b) throw Error("Missing button: "+text); return b;};
+afterEach(()=>{mounted.splice(0).forEach(w=>w.unmount());api.fetcher=prior;resetFixtures();});
+function leaves(o:any,p=""):string[]{return Object.entries(o).flatMap(([k,v])=>v && typeof v==="object"?leaves(v,p?p+"."+k:k):[p?p+"."+k:k]);}
+it.each(["external","privateCR"] as const)("QA UI16 full %s source and references survive structured/JSON roundtrip",async(kind)=>{
+ const original=structuredClone(samples[kind]) as any;
+ validate("ReleaseReleaseInput",original);
+ let w:any;
+ w=open(ReleaseForm,{props:{modelValue:JSON.stringify(original),"onUpdate:modelValue":(v:string)=>w.setProps({modelValue:v})}});
+ const expected=leaves(original).filter(p=>p!=="apiVersion"&&p!=="kind"&&!p.endsWith("desiredState")&&!p.endsWith("strategy"));
+ const observed=new Set<string>();
+ for(const step of ["1 基本信息","2 模型来源","3 批准引用","4 生命周期"]){await button(w,step).trigger("click");w.findAll("[data-field]").forEach((e:any)=>observed.add(e.attributes("data-field")));}
+ for(const p of expected.filter(p=>!p.endsWith("retainUserData")))expect(observed.has(p),p).toBe(true);
+ await button(w,"1 基本信息").trigger("click");
+ await w.get('[data-field="spec.modelAlias"]').setValue("qa-roundtrip");
+ let value=JSON.parse(w.get("textarea").element.value); const wanted=structuredClone(original);wanted.spec.modelAlias="qa-roundtrip";
+ expect(value).toEqual(wanted);validate("ReleaseReleaseInput",value);
+ value.spec.businessRefs.pricePolicyRef.revision="qa-price-rev";
+ await w.get("textarea").setValue(JSON.stringify(value));
+ await button(w,"3 批准引用").trigger("click");
+ expect(w.get('[data-field="spec.businessRefs.pricePolicyRef.revision"]').element.value).toBe("qa-price-rev");
+ expect(JSON.parse(w.get("textarea").element.value)).toEqual(value);
+});
+it.each(["missing-reference","mixed-source","bad-json"])("QA UI16 invalid %s cannot submit release",async(mode)=>{
+ api.fetcher=fixtureFetch;let writes=0;const old=api.fetcher;api.fetcher=async(p,i)=>{if(i?.method)writes++;return old(p,i);};
+ const w=open(Releases);await flushPromises();await button(w,"新建外部 API CR").trigger("click");
+ const input=structuredClone(samples.external) as any;
+ if(mode==="missing-reference")input.spec.gatewayRef.revision="";
+ if(mode==="mixed-source")input.spec.source.selfHosted=structuredClone((samples.privateCR as any).spec.source.selfHosted);
+ await w.get('textarea[spellcheck=false]').setValue(mode==="bad-json"?"{ invalid":JSON.stringify(input));
+ const form=w.findComponent(ReleaseForm);await button(form,"5 确认提交").trigger("click");
+ expect(button(form,"校验并提交配置").attributes("disabled")).toBeDefined();expect(writes).toBe(0);
+});
+it.each(["Succeeded","Unknown","Failed","wrong-uid","wrong-action","lookup-503"])("QA Delete recovery %s preserves original operation and does not replay",async(outcome)=>{
+ let original:any;const calls:{path:string,method:string}[]=[];
+ api.fetcher=async(p,i={})=>{
+  const path=String(p),method=i.method??"GET";calls.push({path,method});
+  if(path.includes("/release-operations/")){
+   if(outcome==="lookup-503")return fixtureError("dependency_unavailable",503);
+   const op={...original,state:["Unknown","Failed"].includes(outcome)?outcome:"Succeeded"};
+   if(outcome==="wrong-uid")op.cr_uid="00000000-0000-4000-8000-000000000099";
+   if(outcome==="wrong-action")op.action="Pause";
+   return Response.json(op);
+  }
+  const response=await fixtureFetch(p,i);
+  if(method==="DELETE"){const body=await response.json();body.resource=null;body.operation.state="Unknown";original=body.operation;return Response.json(body,{status:202});}
+  return response;
+ };
+ const w=open(Releases);await flushPromises();await w.get(".release-card").trigger("click");await flushPromises();
+ await button(w,"下线并清理").trigger("click");await button(w,"确认下线").trigger("click");await flushPromises();
+ expect(button(w,"新建外部 API CR").attributes("disabled")).toBeDefined();
+ const mark=calls.length;await button(w,"查询原操作").trigger("click");await flushPromises();
+ const later=calls.slice(mark);expect(later.some(x=>x.method!=="GET")).toBe(false);
+ expect(later.filter(x=>x.path.includes("/release-operations/"))).toEqual([{path:"/api/admin/v1/release-operations/"+original.id,method:"GET"}]);
+ expect(calls.filter(x=>x.method==="DELETE")).toHaveLength(1);expect(w.text()).toContain(original.id);
+ if(outcome==="Succeeded"){
+  expect(button(w,"新建外部 API CR").attributes("disabled")).toBeUndefined();
+  expect(w.text()).toContain("原删除操作已确认完成");
+  expect(later.some(x=>x.path.endsWith("/"+original.name))).toBe(false);
+  await button(w,"新建外部 API CR").trigger("click");
+  expect(w.findComponent(ReleaseForm).exists()).toBe(true);
+ }else{
+  expect(button(w,"新建外部 API CR").attributes("disabled")).toBeDefined();
+  expect(w.text()).not.toContain("原删除操作已确认完成");
+ }
+});
+it.each([[403,"forbidden","权限"],[409,"resource_version_conflict","刷新"],[503,"dependency_unavailable","依赖"]])("QA UI16 failed usage query %s remains error, not a zero/empty result",async(status,code,hint)=>{
+ api.fetcher=async(p,i)=>String(p).includes("/usage/requests")?fixtureError(String(code),Number(status)):fixtureFetch(p,i);
+ const w=open(Usage);await flushPromises();expect(w.get("[role=alert]").text()).toContain(String(hint));
+ expect(w.find(".empty").exists()).toBe(false);expect(w.findAll('[data-testid="request-row"]')).toHaveLength(0);
+});
+it("QA UI16 pending new generation does not inherit old target progress or overwrite active Callable",async()=>{
+ api.fetcher=async(p,i)=>{const r=await fixtureFetch(p,i);if(!i?.method&&String(p).endsWith("/"+releaseSample.metadata.name)){const v=await r.json();v.metadata.generation=99;return Response.json(v);}return r;};
+ const w=open(Releases);await flushPromises();await w.get(".release-card").trigger("click");await flushPromises();
+ expect(w.get(".info-strip").text()).toContain("等待观测新配置");
+ expect(w.get(".info-strip").text()).not.toContain("当前活动：不可调用");
+ expect(w.findAll(".release-progress li.done").filter(c=>!c.text().includes("可调用"))).toHaveLength(0);
+});import Playground from "./pages/Playground.vue";
+import { lookupSample, rid } from "./fixtures";
+it("QA UI16 paging retains applied filter and reports incomplete coverage",async()=>{
+ const calls:string[]=[];
+ api.fetcher=async(p,i)=>{const response=await fixtureFetch(p,i);if(String(p).includes("/usage/requests")){calls.push(String(p));const body=await response.json();body.data_complete=false;body.next_cursor=String(p).includes("cursor=")?null:"qa-next-cursor";if(String(p).includes("cursor="))body.data[0].request_id="00000000-0000-4000-8000-000000000099";return Response.json(body);}return response;};
+ const w=open(Usage,{props:{modelFilter:"model-a"}});await flushPromises();
+ expect(w.text()).toContain("本次查询数据不完整");await w.get('input[placeholder="全部模型"]').setValue("unapplied-model");
+ await button(w,"加载更多").trigger("click");await flushPromises();
+ const last=new URL(calls.at(-1)!,"http://localhost");expect(last.searchParams.get("model_alias")).toBe("model-a");expect(last.searchParams.get("cursor")).toBe("qa-next-cursor");
+ expect(w.findAll('[data-testid="request-row"]')).toHaveLength(2);expect(w.text()).toContain("本次查询数据不完整");
+});
+it("QA UI16 mixed currencies and large known/held strings remain distinct",async()=>{
+ api.fetcher=async(p,i)=>{const response=await fixtureFetch(p,i);if(String(p).includes("/usage/summary")){const body=await response.json();const a=body.data[0];a.currency="USD";a.cost_known_atomic="900719925474099312345";a.money_uncertainty_held_atomic="900719925474099312346";const b=structuredClone(a);b.currency="EUR";b.cost_known_atomic=null;body.data=[a,b];return Response.json(body);}return response;};
+ const w=open(Usage);await flushPromises();await button(w,"用量汇总").trigger("click");await flushPromises();
+ const rows=w.findAll(".summary-grid article");expect(rows).toHaveLength(2);expect(rows[0].text()).toContain("USD");expect(rows[1].text()).toContain("EUR");
+ expect(rows[0].text()).toContain("900719925474099312345");expect(rows[0].text()).toContain("900719925474099312346");expect(rows[1].text()).toContain("未知");
+});
+it("QA UI16 late A lookup cannot overwrite B original request or replay generation",async()=>{
+ const bId="00000000-0000-4000-8000-000000000099";let posts=0;let resolveA:(r:Response)=>void=()=>{};
+ api.fetcher=async(p,i={})=>{
+  const path=String(p);if(path==="/v1/chat/completions"){const id=++posts===1?rid:bId;const chunk={id:"chatcmpl-"+id,object:"chat.completion.chunk",created:1,model:"model-a",choices:[{index:0,delta:{content:id===rid?"answer-A":"answer-B"},finish_reason:"stop"}]};return new Response("data: "+JSON.stringify(chunk)+"\n\ndata: [DONE]\n\n",{headers:{"Content-Type":"text/event-stream","X-Request-ID":id}});}
+  if(path.includes("request_id="+rid))return await new Promise<Response>(r=>{resolveA=r;});
+  return fixtureFetch(p,i);
+ };
+ const w=open(Playground);await flushPromises();await w.get("select").setValue("model-a");await w.get('input[type=password]').setValue("synthetic-independent-key");await w.get("textarea").setValue("A");await w.get("form").trigger("submit");await flushPromises();
+ await w.get("textarea").setValue("B");await w.get("form").trigger("submit");await flushPromises();
+ expect(w.text()).toContain("answer-B");expect(w.text()).toContain(bId);
+ resolveA(Response.json(structuredClone(lookupSample)));await flushPromises();
+ expect(w.text()).toContain(bId);expect(w.text()).not.toContain("answer-A");expect(w.text()).not.toContain(rid);expect(posts).toBe(2);
+});

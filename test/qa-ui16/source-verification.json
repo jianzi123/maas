@@ -1,0 +1,28 @@
+{
+  "candidate": "b73d96be97e3666d3470106d5b6d13fd91c5c9f7",
+  "code_commit": "f182ee2380424f70fc004657c0d9ed4a165c4132",
+  "inventory_counts": {
+    "backend": 514,
+    "console": 72
+  },
+  "checks": [
+    {
+      "component": "backend",
+      "expected": 514,
+      "matched": 514,
+      "missing": [],
+      "unexpected": [],
+      "changed": [],
+      "passed": true
+    },
+    {
+      "component": "console",
+      "expected": 72,
+      "matched": 72,
+      "missing": [],
+      "unexpected": [],
+      "changed": [],
+      "passed": true
+    }
+  ]
+}

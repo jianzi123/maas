@@ -1,0 +1,72 @@
+[
+  {
+    "id": "UI16-01",
+    "result": "PASS_CONTROLLED_UI",
+    "candidate": "b73d96be97e3666d3470106d5b6d13fd91c5c9f7",
+    "details": "report.md"
+  },
+  {
+    "id": "UI16-02",
+    "result": "PASS_CONTROLLED_UI",
+    "candidate": "b73d96be97e3666d3470106d5b6d13fd91c5c9f7",
+    "details": "report.md"
+  },
+  {
+    "id": "UI16-03",
+    "result": "PASS_CONTROLLED_UI",
+    "candidate": "b73d96be97e3666d3470106d5b6d13fd91c5c9f7",
+    "details": "report.md"
+  },
+  {
+    "id": "UI16-04",
+    "result": "PASS_CONTROLLED_UI",
+    "candidate": "b73d96be97e3666d3470106d5b6d13fd91c5c9f7",
+    "details": "report.md"
+  },
+  {
+    "id": "UI16-05",
+    "result": "PASS_CONTROLLED_UI",
+    "candidate": "b73d96be97e3666d3470106d5b6d13fd91c5c9f7",
+    "details": "report.md"
+  },
+  {
+    "id": "UI16-06",
+    "result": "PASS_CONTROLLED_UI",
+    "candidate": "b73d96be97e3666d3470106d5b6d13fd91c5c9f7",
+    "details": "report.md"
+  },
+  {
+    "id": "UI16-07",
+    "result": "PASS_CONTROLLED_UI",
+    "candidate": "b73d96be97e3666d3470106d5b6d13fd91c5c9f7",
+    "details": "report.md"
+  },
+  {
+    "id": "UI16-08",
+    "result": "PASS_CONTROLLED_UI",
+    "candidate": "b73d96be97e3666d3470106d5b6d13fd91c5c9f7",
+    "details": "report.md"
+  },
+  {
+    "id": "UI16-09",
+    "result": "PASS_CONTROLLED_UI",
+    "candidate": "b73d96be97e3666d3470106d5b6d13fd91c5c9f7",
+    "details": "report.md"
+  },
+  {
+    "id": "UI16-10",
+    "result": "NOT_EXECUTED_PENDING_TRUSTED_DATA"
+  },
+  {
+    "id": "Delete-P2",
+    "result": "CLOSED_IN_CONTROLLED_SCOPE",
+    "operation_id": "b3a3be90-8f46-43df-8dba-6e9cc8208f67",
+    "delete_count": 1,
+    "synthetic_recovery_cases": 6
+  },
+  {
+    "id": "A01-A34",
+    "result": "NOT_ACCEPTED",
+    "historical_closures": "PRESERVED_AT_ORIGINAL_SHA"
+  }
+]
