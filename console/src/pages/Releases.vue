@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, onBeforeUnmount, ref, shallowRef } from "vue";
+import { computed, onMounted, onBeforeUnmount, ref, shallowRef } from "vue";
 import { api, ADMIN } from "../api/client";
 import { validate, type S, type D } from "../api/contracts";
 import {
@@ -33,6 +33,11 @@ const selected = shallowRef<S["ReleaseModelRelease"] | null>(null),
   confirmDelete = ref(false),
   operationReading = ref(false),
   needsRead = ref(false);
+const operationResolved = computed(
+  () =>
+    operation.value?.state === "Succeeded" ||
+    operation.value?.state === "Failed",
+);
 let selectionEpoch = 0,
   operationEpoch = 0,
   alive = true;
@@ -162,6 +167,19 @@ async function select(r: S["ReleaseModelRelease"]) {
     if (r.metadata.uid && current.metadata.uid !== r.metadata.uid)
       throw new Error("同名 CR 已被替换，请重新加载列表。");
     selected.value = current;
+    const op = operation.value;
+    if (
+      unknown.value &&
+      op &&
+      (op.state === "Succeeded" || op.state === "Failed") &&
+      op.namespace === current.metadata.namespace &&
+      op.name === current.metadata.name &&
+      op.cr_uid === current.metadata.uid &&
+      current.metadata.resourceVersion
+    ) {
+      unknown.value = false;
+      message.value = `原操作已确认 ${op.state}，当前 CR 已重读；后续动作需手动提交。`;
+    }
     needsRead.value = false;
     editBaseline.value = current;
     editor.value = JSON.stringify(inputOf(current), null, 2);
@@ -348,6 +366,22 @@ async function recoverOperation() {
     )
       throw new Error("操作归属不一致，保留原操作供核对。");
     operation.value = op;
+    if (unknown.value) {
+      if (op.state === "Succeeded" || op.state === "Failed") {
+        // A terminal operation resolves the write, but an older CR is no edit baseline.
+        selectionEpoch++;
+        reading.value = false;
+        needsRead.value = true;
+        editBaseline.value = null;
+        editor.value = "";
+        editing.value = false;
+        confirmDelete.value = false;
+        history.value = null;
+        message.value = `原操作已确认 ${op.state}；请重读同一 CR 后再进行新的手动操作。`;
+      } else {
+        message.value = "原操作尚未确认终态；仅查询原操作 ID，禁止重放。";
+      }
+    }
   } catch (e) {
     if (current()) message.value = explain(e);
   } finally {
@@ -551,9 +585,12 @@ onBeforeUnmount(() => {
     </button>
   </section>
   <p v-if="needsRead" class="notice">
-    当前 ACK 未包含配置快照，请重读当前 CR 后再编辑或提交。
+    当前配置尚未核对，请重读当前 CR 和版本后再编辑或提交。
   </p>
-  <p v-if="unknown" class="error">
+  <p v-if="unknown && operationResolved" class="notice">
+    原操作结果已确认；请重读同一 CR 和版本，再进行新的手动操作。
+  </p>
+  <p v-else-if="unknown" class="error">
     写入结果未知。当前 CR 仅供人工核对，不能证明原操作成功；如已取得原
     operation.id 可继续查询，禁止自动重放。
   </p>
