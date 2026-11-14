@@ -1,0 +1,636 @@
+{
+  "phase": "actual_SGLang_Decode_KV_GPU_batch",
+  "baseline_commit": "afe2596873b6e4e05a71caa9e6982c9dd93f3ceb",
+  "sglang": "0.5.2",
+  "upstream_commit": "b0d25e72c401f37b55d689ddbf05b8c583afe854",
+  "torch": "2.8.0+cu128",
+  "triton": "3.4.0",
+  "cuda": "12.8",
+  "GPU": "NVIDIA GeForce RTX 4070 Laptop GPU",
+  "SM_count": 36,
+  "independent_processes_per_study": 3,
+  "within_process_rounds": 7,
+  "calls_per_graph": 30,
+  "scope": "original backend methods + original Triton kernels, synthetic tensor/request state; explicit Triton selection",
+  "backend_constructor_bypassed": true,
+  "Engine_initialized": false,
+  "model_forward_executed": false,
+  "model_weights_downloaded": false,
+  "serving_executed": false,
+  "engine_speedup_claim": false,
+  "source_files_official_byte_matches": 6,
+  "correctness_per_split_process": 17,
+  "correctness_per_fusion_process": 7,
+  "graph_output_checks": 20,
+  "isolated_async_device_fault_expected_exit": 42,
+  "torch_peak_MiB_max": 84.2841796875,
+  "split_study": [
+    {
+      "case": "short",
+      "lengths": [
+        33
+      ],
+      "variants": {
+        "8": {
+          "raw_us_per_process": [
+            28.945066531499226,
+            27.409066756566364,
+            27.613866329193115
+          ],
+          "backend_us_per_process": [
+            75.16160011291504,
+            71.74826463063557,
+            73.45493634541829
+          ],
+          "actual_splits": [
+            7
+          ]
+        },
+        "1": {
+          "raw_us_per_process": [
+            34.9183996518453,
+            28.296534220377605,
+            31.09546701113383
+          ],
+          "backend_us_per_process": [
+            77.51680215199788,
+            73.0453332265218,
+            72.4992036819458
+          ],
+          "actual_splits": [
+            1
+          ]
+        },
+        "4": {
+          "raw_us_per_process": [
+            28.569600979487102,
+            28.26240062713623,
+            28.808534145355225
+          ],
+          "backend_us_per_process": [
+            75.29813448588054,
+            61.337598164876304,
+            71.57759666442871
+          ],
+          "actual_splits": [
+            4
+          ]
+        }
+      }
+    },
+    {
+      "case": "long",
+      "lengths": [
+        4097
+      ],
+      "variants": {
+        "8": {
+          "raw_us_per_process": [
+            172.06613222757974,
+            223.98293813069662,
+            218.58986218770346
+          ],
+          "backend_us_per_process": [
+            256.1365286509196,
+            265.8645311991374,
+            261.32480303446454
+          ],
+          "actual_splits": [
+            8
+          ]
+        },
+        "1": {
+          "raw_us_per_process": [
+            1529.0026346842449,
+            1477.0516713460286,
+            1488.6229197184246
+          ],
+          "backend_us_per_process": [
+            1597.4058787027996,
+            1536.7851257324219,
+            1528.2517751057942
+          ],
+          "actual_splits": [
+            1
+          ]
+        },
+        "4": {
+          "raw_us_per_process": [
+            413.2863998413086,
+            396.97065353393555,
+            404.4458707173665
+          ],
+          "backend_us_per_process": [
+            440.5589421590169,
+            435.916805267334,
+            434.07360712687176
+          ],
+          "actual_splits": [
+            4
+          ]
+        }
+      }
+    },
+    {
+      "case": "mixed",
+      "lengths": [
+        17,
+        257,
+        1023,
+        2049
+      ],
+      "variants": {
+        "8": {
+          "raw_us_per_process": [
+            171.79306348164877,
+            148.82133801778158,
+            171.55413627624512
+          ],
+          "backend_us_per_process": [
+            224.49493408203125,
+            220.05759874979654,
+            224.4266668955485
+          ],
+          "actual_splits": [
+            1,
+            1,
+            4,
+            8
+          ]
+        },
+        "1": {
+          "raw_us_per_process": [
+            769.9797312418619,
+            737.2117360432943,
+            646.7925389607748
+          ],
+          "backend_us_per_process": [
+            818.9269383748373,
+            782.1311950683594,
+            793.6682383219401
+          ],
+          "actual_splits": [
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "4": {
+          "raw_us_per_process": [
+            230.6389331817627,
+            222.24213282267252,
+            237.56799697875977
+          ],
+          "backend_us_per_process": [
+            301.36321385701496,
+            289.65546290079754,
+            292.96639760335285
+          ],
+          "actual_splits": [
+            1,
+            1,
+            2,
+            4
+          ]
+        }
+      }
+    },
+    {
+      "case": "batch8",
+      "lengths": [
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024
+      ],
+      "variants": {
+        "8": {
+          "raw_us_per_process": [
+            174.59200223286948,
+            176.40105883280435,
+            169.09653345743814
+          ],
+          "backend_us_per_process": [
+            236.54400507609049,
+            233.50613911946616,
+            232.03840255737305
+          ],
+          "actual_splits": [
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6
+          ]
+        },
+        "1": {
+          "raw_us_per_process": [
+            406.2207857767741,
+            387.24266688028973,
+            383.3173433939616
+          ],
+          "backend_us_per_process": [
+            469.3674723307292,
+            441.753609975179,
+            438.2378578186035
+          ],
+          "actual_splits": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "4": {
+          "raw_us_per_process": [
+            158.03732872009277,
+            152.91733741760254,
+            155.10187149047852
+          ],
+          "backend_us_per_process": [
+            236.03199323018393,
+            224.2560068766276,
+            222.54932721455893
+          ],
+          "actual_splits": [
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4
+          ]
+        }
+      }
+    }
+  ],
+  "fusion_study": [
+    {
+      "case": "short",
+      "values": {
+        "write_original": [
+          27.306665976842243,
+          11.74186666806539,
+          11.639466881752014
+        ],
+        "write_fused": [
+          4.198400179545085,
+          4.232533276081085,
+          4.2314668496449785
+        ],
+        "backend_original": [
+          24.268800020217896,
+          40.31146764755249,
+          24.132267634073894
+        ],
+        "backend_fused": [
+          16.79360071818034,
+          16.93013310432434,
+          16.79360071818034
+        ]
+      },
+      "backend_candidate_over_baseline": [
+        0.6919831513791327,
+        0.41998304929868396,
+        0.6958981631079036
+      ],
+      "any_backend_regression": false
+    },
+    {
+      "case": "long",
+      "values": {
+        "write_original": [
+          27.613866329193115,
+          11.707733074824015,
+          11.673600474993387
+        ],
+        "write_fused": [
+          4.232533276081085,
+          4.198400179545085,
+          4.198400179545085
+        ],
+        "backend_original": [
+          154.24853960673013,
+          133.22239716847739,
+          130.01386324564615
+        ],
+        "backend_fused": [
+          186.67519887288412,
+          126.2933333714803,
+          76.56106948852539
+        ]
+      },
+      "backend_candidate_over_baseline": [
+        1.2102234442467237,
+        0.9479887470555393,
+        0.5888685066135764
+      ],
+      "any_backend_regression": true
+    },
+    {
+      "case": "mixed",
+      "values": {
+        "write_original": [
+          17.30560064315796,
+          49.152000745137535,
+          17.30560064315796
+        ],
+        "write_fused": [
+          4.266666869322459,
+          4.266666869322459,
+          4.232533276081085
+        ],
+        "backend_original": [
+          118.81813208262126,
+          168.92587343851724,
+          116.63359800974528
+        ],
+        "backend_fused": [
+          57.139201958974205,
+          161.41653060913086,
+          56.968533992767334
+        ]
+      },
+      "backend_candidate_over_baseline": [
+        0.4808963157175535,
+        0.955546520633386,
+        0.48844016616899144
+      ],
+      "any_backend_regression": false
+    },
+    {
+      "case": "batch8",
+      "values": {
+        "write_original": [
+          33.45066706339518,
+          46.387199560801186,
+          17.783466974894207
+        ],
+        "write_fused": [
+          4.266666869322459,
+          4.232533276081085,
+          4.232533276081085
+        ],
+        "backend_original": [
+          120.797864596049,
+          124.31360085805257,
+          118.64746411641438
+        ],
+        "backend_fused": [
+          55.09119828542074,
+          55.29599984486898,
+          55.36426703135172
+        ]
+      },
+      "backend_candidate_over_baseline": [
+        0.4560610278140847,
+        0.44481053933920467,
+        0.46662832150402705
+      ],
+      "any_backend_regression": false
+    }
+  ],
+  "trace_kernel_counts": {
+    "decode_per_call": 2,
+    "original_KV_write": 2,
+    "fused_KV_write": 1,
+    "original_backend_per_call": 4,
+    "fused_backend_per_call": 3,
+    "original_30_call_graph": 120,
+    "fused_30_call_graph": 90,
+    "study": "initial prototype vs double-write study"
+  },
+  "sampling_scope": "CUPTI on batch8 only; durations profiled separately, NOT used in A/B",
+  "hardware_counters": null,
+  "frequency_policy": "shared unlocked desktop, snapshots only",
+  "nvcc_route": "not executed: WSL nvcc missing; official SDK first response truncated, second disconnected",
+  "host_extension_route": "g++ ATen dispatcher + CUDA Driver API, Python supplies current stream on EVERY call",
+  "device_compilation_route": "NVRTC 12.8 through CuPy13.6",
+  "provisional_results": [
+    "cap1 consistently regresses long/mixed; retain original dynamic mechanism",
+    "cap4 raw batch8 improvement does not reliably transfer to backend scope",
+    "KV fusion repeats benefit on short/batch8 local backend; long run1 regresses; NOT globally adopted",
+    "no stable Engine/serving/quality result; next tests need Engine-specific capture branch and fixed workload",
+    "mature kernel already implements fusion; prototype-vs-double-write benefit does NOT establish superiority over mature baseline"
+  ],
+  "next_priorities": [
+    "verify empty stage1 CTAs: batch8 actual splits6 but max cap8; cap6 is UNTESTED hypothesis",
+    "prefer existing mature store/RoPE+KV mechanisms; verify actual caller/capture/lifecycle; prototype has no adoption claim",
+    "get permitted complete weights, run actual Engine baseline/profile; no target GPU bottleneck ranking before evidence"
+  ],
+  "local_authorization": "MAAS-15 member comment 01a1d499-9bf0-7c0f-8014-fb6e89915acd plus MAAS-10 current handoff",
+  "resource_caps": {
+    "device": 0,
+    "torch_allocator_fraction": 0.2,
+    "min_free_bytes": 1073741824,
+    "max_batch": 8,
+    "max_sequence": 4097,
+    "max_total_tokens": 20000,
+    "process_timeout_s": 600
+  },
+  "successful_GPU_processes": 9,
+  "study_count": 3,
+  "mature_control": [
+    {
+      "case": "short",
+      "values": {
+        "write_original": [
+          11.707733074824015,
+          11.673600474993387,
+          11.673600474993387
+        ],
+        "backend_original": [
+          24.166399240493774,
+          24.23466642697652,
+          39.970131715138756
+        ],
+        "write_mature": [
+          4.0618665516376495,
+          4.0618665516376495,
+          4.0618665516376495
+        ],
+        "backend_mature": [
+          16.657066345214844,
+          16.657066345214844,
+          16.657066345214844
+        ],
+        "write_prototype": [
+          4.198400179545085,
+          4.232533276081085,
+          4.198400179545085
+        ],
+        "backend_prototype": [
+          16.82773431142171,
+          16.79360071818034,
+          16.79360071818034
+        ]
+      },
+      "prototype_over_mature_backend": [
+        1.0102459798544234,
+        1.0081967838835388,
+        1.0081967838835388
+      ]
+    },
+    {
+      "case": "long",
+      "values": {
+        "write_original": [
+          11.707733074824015,
+          11.707733074824015,
+          11.74186666806539
+        ],
+        "backend_original": [
+          127.76106993357341,
+          128.4778674443563,
+          116.42879645029704
+        ],
+        "write_mature": [
+          4.027733455101649,
+          4.027733455101649,
+          4.027733455101649
+        ],
+        "backend_mature": [
+          124.51840241750081,
+          92.53546396891277,
+          109.02187029520671
+        ],
+        "write_prototype": [
+          4.232533276081085,
+          4.232533276081085,
+          4.232533276081085
+        ],
+        "backend_prototype": [
+          124.55253601074219,
+          76.62933667500813,
+          90.8629337946574
+        ]
+      },
+      "prototype_over_mature_backend": [
+        1.0002741248890017,
+        0.8281077695871467,
+        0.8334376721718404
+      ]
+    },
+    {
+      "case": "mixed",
+      "values": {
+        "write_original": [
+          45.56800127029419,
+          31.60746693611145,
+          17.30560064315796
+        ],
+        "backend_original": [
+          104.75520292917888,
+          103.69706948598225,
+          104.92586294809978
+        ],
+        "write_mature": [
+          4.232533276081085,
+          4.198400179545085,
+          4.198400179545085
+        ],
+        "backend_mature": [
+          57.105068365732826,
+          57.139201958974205,
+          57.34399954477946
+        ],
+        "write_prototype": [
+          4.232533276081085,
+          4.232533276081085,
+          4.266666869322459
+        ],
+        "backend_prototype": [
+          91.27253691355388,
+          57.17333157857259,
+          89.01973565419515
+        ]
+      },
+      "prototype_over_mature_backend": [
+        1.5983263749724186,
+        1.0005973065501141,
+        1.552381005177017
+      ]
+    },
+    {
+      "case": "batch8",
+      "values": {
+        "write_original": [
+          17.749333381652832,
+          49.42506551742554,
+          17.715199788411457
+        ],
+        "backend_original": [
+          86.83520158131917,
+          103.01439762115479,
+          96.76799774169922
+        ],
+        "write_mature": [
+          4.437333345413208,
+          4.437333345413208,
+          4.437333345413208
+        ],
+        "backend_mature": [
+          55.43253421783447,
+          71.88479900360107,
+          55.2618662516276
+        ],
+        "write_prototype": [
+          4.232533276081085,
+          4.232533276081085,
+          4.232533276081085
+        ],
+        "backend_prototype": [
+          55.19359906514486,
+          55.05706469217936,
+          55.09119828542074
+        ]
+      },
+      "prototype_over_mature_backend": [
+        0.9956896224200996,
+        0.7659069157224919,
+        0.9969116503335275
+      ]
+    }
+  ],
+  "mature_package": "0.3.9.post2",
+  "mature_direct_api": "torch.ops.sgl_kernel.store_kv_cache; no fallback",
+  "mature_supported_correctness_per_process": 5,
+  "mature_unsupported_per_process": [
+    {
+      "dtype": "torch.float16",
+      "dim": 80,
+      "error": "The last dimension size bytes of k and v must be divisible by 128 at least, got: 480",
+      "fallback_used": false,
+      "performance_result": null
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "dim": 80,
+      "error": "The last dimension size bytes of k and v must be divisible by 128 at least, got: 480",
+      "fallback_used": false,
+      "performance_result": null
+    }
+  ],
+  "final_choice": "prefer packaged mature store_kv_cache for a future verified Engine hook; teaching prototype not adopted",
+  "final_choice_reason": "no stable cross-shape superiority over mature op; alignment compatibility and Engine lifecycle still require review",
+  "mature_trace_counts": {
+    "write_per_call": 1,
+    "backend_per_call": 3,
+    "profiled_graph_node_count": null,
+    "captured_output_correctness_checked": true
+  }
+}

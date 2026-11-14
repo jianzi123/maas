@@ -14,6 +14,56 @@
   ],
   "experiments": [
     {
+      "id": "K1",
+      "state": "exploratory_local_SGLang_Decode_KV_GPU_batch_delivered",
+      "scope": "actual SGLang0.5.2 Triton backend tensor path; not full Engine",
+      "single_factor": "separate split-cap, prototype-write and mature-library control studies; no combined factors",
+      "baseline": "target version mature cuBLAS/native SDPA/RMSNorm",
+      "commands": [
+        "python tools/perf/operators/local_gpu/run_decode.py --source-lock tools/perf/operators/local_gpu/decode-source-lock.json --output tools/perf/reports/new-decode --profile",
+        "python tools/perf/operators/local_gpu/run_kv_fusion.py --source-lock tools/perf/operators/local_gpu/decode-source-lock.json --output tools/perf/reports/new-fusion --profile",
+        "python tools/perf/operators/local_gpu/run_mature_kv.py --source-lock tools/perf/operators/local_gpu/decode-source-lock.json --seed 20261113 --output tools/perf/reports/new-mature --profile"
+      ],
+      "requires": [
+        "use pinned approved local WSL GPU environment from engineering/16",
+        "respect recorded caps and fresh output; no weights required",
+        "nvcc/Compute Sanitizer route remains incomplete; ATen-host/NVRTC route verified"
+      ],
+      "success": "three GPU studies recorded; mature fusion preferred, prototype not adopted; D80 alignment unsupported explicit; no Engine claim",
+      "local_gpu_authorized": true,
+      "evidence_ref": "tools/perf/operators/local_gpu/evidence/decode-v0.16/summary.json"
+    },
+    {
+      "id": "R1",
+      "state": "awaiting_approved_complete_weights_and_actual_Engine_baseline",
+      "scope": "full engine chunk/queue/KV",
+      "single_factor": "one prefill chunk from frozen mature baseline",
+      "baseline": "target engine existing tuned static and enabled dynamic predictor",
+      "commands": [],
+      "requires": [
+        "MAAS-9 approved model/weights/tokenizer/template and quality",
+        "MAAS-8 GPU topology/versions/limits/profiler",
+        "same J02 manifest, resource/precision/SLO and caps",
+        "production engine trace export and rank/batch association"
+      ],
+      "success": "client SLO goodput plus long/short tails, memory/errors/recompute; current CPU age_fair parameters remain rejected"
+    },
+    {
+      "id": "R2",
+      "state": "awaiting_inputs",
+      "scope": "Graph or communication",
+      "single_factor": "one capture set or one overlap organization only when timeline supports",
+      "baseline": "current graph/collective implementation with mature overlap retained",
+      "commands": [],
+      "requires": [
+        "R1 real profile",
+        "same total GPU/rank/topology",
+        "capture/padding/KV memory accounting",
+        "all-rank numerical and failure checks"
+      ],
+      "success": "reduce exposed critical work with no quality/latency/memory/business regression"
+    },
+    {
       "id": "D1",
       "state": "partial_actual_Go_D1_export_connected_full_identity_client_roster_overhead_pending",
       "scope": "diagnostic import and sampler agreement",
@@ -47,53 +97,18 @@
         "MAAS-2 shared additions if needed"
       ],
       "success": "same protected source/accounting; client TTFT/TPOT/E2E, errors/pending/recovery and costs with coverage"
-    },
-    {
-      "id": "K1",
-      "state": "awaiting_inputs",
-      "scope": "operator microbenchmark",
-      "single_factor": "one backend/layout parameter after profile evidence",
-      "baseline": "target version mature cuBLAS/native SDPA/RMSNorm",
-      "commands": [
-        "python tools/perf/operators/profile_operator.py --tool nsys --case gemm-tail --output-dir tools/perf/reports/profile-plan"
-      ],
-      "requires": [
-        "approved GPU/limits and compatible toolchain",
-        "fixed shape/dtype/strides and precision",
-        "finite/numerical gate and quality tolerance",
-        "separate normal timing and sampled runs"
-      ],
-      "success": "local correctness and cost; no runtime/platform extrapolation"
-    },
-    {
-      "id": "R1",
-      "state": "awaiting_inputs",
-      "scope": "full engine chunk/queue/KV",
-      "single_factor": "one prefill chunk from frozen mature baseline",
-      "baseline": "target engine existing tuned static and enabled dynamic predictor",
-      "commands": [],
-      "requires": [
-        "MAAS-9 approved model/weights/tokenizer/template and quality",
-        "MAAS-8 GPU topology/versions/limits/profiler",
-        "same J02 manifest, resource/precision/SLO and caps",
-        "production engine trace export and rank/batch association"
-      ],
-      "success": "client SLO goodput plus long/short tails, memory/errors/recompute; current CPU age_fair parameters remain rejected"
-    },
-    {
-      "id": "R2",
-      "state": "awaiting_inputs",
-      "scope": "Graph or communication",
-      "single_factor": "one capture set or one overlap organization only when timeline supports",
-      "baseline": "current graph/collective implementation with mature overlap retained",
-      "commands": [],
-      "requires": [
-        "R1 real profile",
-        "same total GPU/rank/topology",
-        "capture/padding/KV memory accounting",
-        "all-rank numerical and failure checks"
-      ],
-      "success": "reduce exposed critical work with no quality/latency/memory/business regression"
     }
-  ]
+  ],
+  "work_priority": [
+    "K1",
+    "R1",
+    "R2"
+  ],
+  "support_work": [
+    "D1",
+    "E1"
+  ],
+  "cpu_evidence_role": "numerical correctness and fault regression only; not inference performance",
+  "layer_dependency_policy": "K1 needs approved GPU/toolchain, not D1/E1 completion; R needs actual model/engine; E needs protected platform",
+  "execution_scope_note": "top-level false keeps unapproved real platform/model plans disabled; explicit local GPU research is already authorized and executed separately"
 }

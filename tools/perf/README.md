@@ -1,4 +1,6 @@
-# MaaS 离线性能观测分析器
+# MaaS 性能研发工具
+
+本地GPU主线：[CUDA工程闭环与SGLang接续](../../docs/performance/engineering/15-local-gpu-cuda.md)，实现位于operators/local_gpu；已运行FP32/FP16算子对照，SGLang生成待完整权重。下方严格离线边界适用于原观测分析器。
 
 此工具**严格离线**，只读本地脱敏 JSON/SSE 夹具并写诊断报告。没有 HTTP 客户端、模型入口、长期服务、GPU、集群写入、授权/结算/退款或关闭证明能力。
 

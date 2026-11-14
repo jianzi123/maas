@@ -40,12 +40,17 @@
       "cost": "保留临时张量/拷贝、峰值显存、prefill/decode尾延迟及质量影响",
       "evidence": "逐shape原始时延、stride/dtype、数值误差、kernel/DRAM/copy时间线、占比及基线来源",
       "abandon": "成熟baseline已优；目标占比太小；减少局部时间却增加搬运/显存或模型误差",
-      "now": "复核已有CPU mask/GQA练习和固定SHA入口，登记目标shape；不从dense CPU结果推断分页GPU性能",
-      "state": "draft",
-      "actual_profile_ref": null,
+      "now": "cap6/8新GPU切片已测：B8/L1024同分段局部改善，L512退化保留；下一步实际Engine capture/动态batch等价性",
+      "state": "exploratory",
+      "actual_profile_ref": "tools/perf/operators/local_gpu/evidence/cap6-v0.17/summary.json",
       "approval_ref": null,
       "desired_gain_pct": null,
-      "measured_result": null
+      "measured_result": {
+        "level": "actual GPU backend tensor harness",
+        "Engine": false,
+        "source_files_verified": 6,
+        "summary": "three GPU studies, three processes each; existing mature fusion preferred; prototype has no stable cross-shape superiority"
+      }
     },
     {
       "id": "K02",
@@ -62,7 +67,7 @@
       "cost": "准备/重排/额外launch、workspace、峰值显存、TP all-reduce与精度变化",
       "evidence": "成熟baseline版本、组清单、原始时延/误差、分配/准备范围、计时与通信边界",
       "abandon": "只能战胜naive循环；小矩阵launch损失未解；去掉collective或降精度才有收益",
-      "now": "运行现有宿主21场景并读cuBLAS行列主序映射，拟定small-M与prefill-M实验表",
+      "now": "由真实prefill/decode profile选GEMM shape与成熟库对照；已有host有限值门禁仅作正确性支持，不作为优化成果",
       "state": "draft",
       "actual_profile_ref": null,
       "approval_ref": null,

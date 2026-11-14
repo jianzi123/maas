@@ -1,0 +1,14 @@
+{
+  "max_abs": 0.0001220703125,
+  "rtol_atol": 0.003,
+  "mapping_and_new_KV_write": "passed",
+  "finite": true,
+  "build_and_check_s": 48.15179046598496,
+  "opcheck": {
+    "test_schema": "SUCCESS",
+    "test_faketensor": "SUCCESS"
+  },
+  "host_route": "g++ ATen dispatcher",
+  "device_route": "NVRTC; nvcc NOT executed",
+  "library": "/tmp/maas-10-gpu-9bf1ab626448/aten-kv-build/maas_decode_kv_aten.so"
+}

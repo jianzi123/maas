@@ -1,5 +1,30 @@
 # 阶段总结：2026-11-05
 
+## 当前GPU接续：cap6切片
+
+已从清理后的临时环境恢复固定核心版本，三个新GPU进程完成cap6/8配对。B8/L1024分段保持6×192，CUPTI grid[8,3,8]→[8,3,6]；raw局部快约10.4%–11.4%、backend张量范围约8.7%–12.3%。L512有退化，2048/ragged改变分段，不改全局默认。见[第17章](engineering/17-cap6-empty-cta.md)。上一批e6de90e已由QA729f740独立受控通过；本次新增结果仍为作者探索。Engine/serving/质量未测，权重未下载。
+
+最新补测：追加sgl-kernel0.3.9.post2的成熟store_kv_cache直接调用基线，主shape无fallback实际通过；D80/480字节行明确unsupported。原型未建立稳定跨shape优势，最终优先复用成熟库，不采用教学原型替换。三项研究各三个GPU进程，初期六进程结果保留。
+
+## 当前GPU批次：SGLang Decode/KV
+
+沿afe2596复用WSL的SGLang0.5.2/b0d25e7、torch2.8.0+cu128和RTX4070 Laptop，六份后端/核源码与官方逐字节一致。直接运行原metadata、RadixAttention/forward_decode、KV池和MHA/GQA Triton核；状态由无权重harness构造，没有初始化ModelRunner/Engine或执行serving。
+
+三进程split对照保留cap1长序列明显退化；基于实际两次KV索引写kernel，另做同输入K/V融合，ATen主机编译/注册、NVRTC设备核和当前stream调用实际通过。batch8局部backend三进程约118.6–124.3us→55.1–55.4us，但long第一进程退化约21%，不通用启用。原始分布、CUPTI和范围见[第16章](engineering/16-sglang-decode-kv.md)与[摘要](../../tools/perf/operators/local_gpu/evidence/decode-v0.16/summary.json)。
+
+独立图检查验证被毒化输出和变化KV会更新；异步越界保护由独立子进程实际退出42。没有Compute Sanitizer结果；nvcc SDK因截断/连接中断未就绪，本轮是g++/ATen+NVRTC路线。模型权重下载仍未确认，未下载；Engine/模型质量及平台收益尚未验证。
+
+## 之前阶段的记录
+
+## 当前优先级纠偏 2026-11-13
+
+本任务重心回到GPU算子与真实SGLang推理性能，首项为Decode Attention/KV路径。已有CPU公式/调度器、Go采样和工具回归保留为支持资产，不以CPU测试数或通用报告数量作为推理优化交付。K1不等待平台D1/E1；GPU条件具备即可独立做设备基线，R/E分别按模型/平台条件推进。
+
+本轮只读复核有RTX4070 Laptop 8188MiB、驱动581.29、CUDA编译器13.0.88和Nsight Compute实际exe；当前PyTorch版本文件为2.9.1+cpu、cuda=None，导入因OpenMP Error15失败，PATH未发现nsys。没有执行GPU实验，也未安装/替换栈或绕过运行库冲突；设备/资源使用批准、干净CUDA框架和Profiler条件仍需具备。具体shape、源码路径与命令见[算子主线](operator-lab.md)。
+
+D1已交消费df8d40e及其独立QA沿原SHA继续，源c7e863b已由原QA通过受控核验；本次优先级调整不重复派发源端或重做原验收。
+
+
 ## 当前D1消费端增量
 
 沿8420aaf接入原后端c7e863b实际Go/临时MySQL/受控HTTP的9条摘要，另有1次满队列执行无摘要。逐文件hash和源码交付commit核对，保留working-tree-d1采样原标签；首协议/非空内容/Write成功/flush尝试与局部Forward时钟分列。客户端sent/RPS/TTFT、完整binding、trace/实验关联、ledger/held及独立恢复仍未知，D1整体与E1尚未完成。实际报告和复现命令见[D1接线](d1-wiring.md)。

@@ -1,12 +1,20 @@
 # MaaS 性能与框架工程手册
 
-本手册为推理运行时、推理部署框架和性能工作提供统一入口。按“理解机制 → 做对应练习 → 定义课题 → 接入项目 → 留下验证与总结”的顺序使用。教材、练习和工作资料各维护一份，章节与具体命令通过索引连接。
+当前GPU接续：[cap6固定切片验证](engineering/17-cap6-empty-cta.md)已完成。B8/L1024保持相同分段，grid由192减为144 CTA，三进程局部改善；512保留退化，未改Engine默认。
 
-高级主线新增[推理框架工程实现卷](engineering/README.md)：十四章推导和源码阅读，含原八类算法实验、真实进程恢复与新增异步CPU闭环。建议读完基础第1–3章后，按方向进入实现卷；每章都有代码和反例，不另建平行的概念清单。
+最新补测：追加sgl-kernel0.3.9.post2的成熟store_kv_cache直接调用基线，主shape无fallback实际通过；D80/480字节行明确unsupported。原型未建立稳定跨shape优势，最终优先复用成熟库，不采用教学原型替换。三项研究各三个GPU进程，初期六进程结果保留。
 
-当前实现进展：[异步运行时闭环](engineering/13-runtime-loop.md)连接调度、KV页池和Worker，提供七个固定场景与真实CPU线程验证。
+当前实作：[SGLang Decode/KV GPU批次](engineering/16-sglang-decode-kv.md)已跑通原始Triton后端、真实KV池/索引与两阶段核，完成split负结果、KV融合局部对照、ATen/NVRTC注册和图/异步错误验证。完整Engine/模型生成/serving尚未执行，长序列退化保留，不把局部收益写成引擎收益。
 
-本恢复批次新增[页预算调度与负结果](engineering/14-page-budget-scheduling.md)：复用MAAS-13源码输入，执行固定J02对照，保留失败/未恢复样本，定位first_chunk_ms无内容事件采样。
+当前研发主线是 **SGLang真实推理执行路径与GPU性能**：先做Decode Attention/KV的设备基线和实际backend采样，再依据profile选择GEMM/融合、Graph或通信改动，最后验证引擎TTFT/TPOT/有效吞吐。工作入口是[GPU算子与采样](operator-lab.md)、[历史v0.5.6源码研究](sglang-source-analysis-v0.5.md)（当前GPU实测固定0.5.2，见第16章）及[K/R优化目标](optimization-goals.md)。
+
+已有CPU公式、模拟调度器和教材用于正确性参考、故障反例与入门；测试数量不代表推理优化成果，不再扩展为本任务主线。CPU launch/调度只有在真实引擎时间线证明它让GPU等待时才成为性能课题。
+
+K1算子实验可在GPU资源和运行库条件满足后独立推进，不等待Go/Higress平台E1。真实引擎R层另需目标模型/权重/框架版本；平台E层再验证业务链路，三层证据分别交付。GPU尚未执行时记录具体缺口，不用CPU模拟结果替代。
+
+## 已有学习资料
+
+本手册也为后续推理运行时、推理部署框架开发提供资料：[工程实现卷](engineering/README.md)、[异步运行时教学闭环](engineering/13-runtime-loop.md)、[页预算调度与负结果](engineering/14-page-budget-scheduling.md)。保留既有结果，不重做已交教材或CPU调度对照。
 
 ## 端到端诊断入口
 
