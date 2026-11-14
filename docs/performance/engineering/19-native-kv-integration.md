@@ -50,6 +50,10 @@ native/mature/late各复用12次真实decode：B1/3/2/5/8各两次，另8→3→
 
 完整logits.npz三变体文件SHA也相同，证据包可无损去重保存一份并按manifest重建相同副本。完整原生模型依然是134515008个人工随机参数，不能据此推定预训练语义质量或独立模型正确性。
 
+随机权重logits幅值很小，只看最终输出可能漏掉缓存错误。因此另用[check_native_kv_state.py](../../../tools/perf/operators/local_gpu/check_native_kv_state.py)在真实图重放后读取实际新写入位置，排除padding槽0，逐次保存全部30层的K/V。native/mature的12次重放共24份FP16数组全部finite且按uint16逐位相同；检查范围是本次实际写槽，不是整个未使用KV池。
+
+[compare_native_kv_state.py](../../../tools/perf/operators/local_gpu/compare_native_kv_state.py)使用相同校验函数处理候选与离线故障变体：24份置零和10份前一步陈旧状态均拒绝。这些是实际GPU快照的离线负控，没有冒称向GPU内核注入错误。比较器校验完整key集合、30层/动态batch/head/dim和finite；失败不写成功JSON。此状态采集增加同步，完全独立于上述成本入口。
+
 总体接线成功的标记是integration.json和CLI退出0；framework.json仅是复用的结构子测试。若raw trace未命中新核，子测试通过也不是融合成功。
 
 ## 4. 去除观测后的成本A/B
@@ -81,6 +85,11 @@ LOCK=tools/perf/operators/local_gpu/evidence/framework-v0.18/framework-source-lo
 # 三种结构路径各用独立新目录；capture前/后由脚本显式控制。
 timeout --kill-after=10s 600s "$GPU_PY" tools/perf/operators/local_gpu/run_native_kv_integration.py   --variant mature --source-lock "$LOCK" --output tools/perf/reports/native-kv-before
 # native、late分别换variant和目录。late应明确保留旧图，而不是算作融合成功。
+
+# 独立采集真实写槽状态，不进入计时。
+timeout --kill-after=10s 600s "$GPU_PY" tools/perf/operators/local_gpu/check_native_kv_state.py --variant native --source-lock "$LOCK" --output tools/perf/reports/kv-state-native
+timeout --kill-after=10s 600s "$GPU_PY" tools/perf/operators/local_gpu/check_native_kv_state.py --variant mature --source-lock "$LOCK" --output tools/perf/reports/kv-state-mature
+"$GPU_PY" tools/perf/operators/local_gpu/compare_native_kv_state.py --reference tools/perf/reports/kv-state-native/kv-states.npz --candidate tools/perf/reports/kv-state-mature/kv-states.npz --output tools/perf/reports/kv-state-comparison.json
 
 # 所有结构/跨变体校验先通过后，再运行独立无观测成本入口。
 timeout --kill-after=10s 600s "$GPU_PY" tools/perf/operators/local_gpu/bench_native_kv.py   --variant native --pair 1 --output tools/perf/reports/kv-cost-pair1-native

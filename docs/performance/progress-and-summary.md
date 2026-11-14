@@ -4,6 +4,8 @@
 
 基于已独立通过的b5e705d，在capture前接入现成store_kv_cache，原生图KV由60次索引写变为30次store；晚接入负控图不变。三变体各12次动态结构检查通过，native对mature/late24份完整logits逐位一致。另六进程三对去观测调用成本保留全部漂移，未给稳定加速结论；见[第19章](engineering/19-native-kv-integration.md)。依然是人工权重ModelRunner研究，未作Engine/serving或模型质量/生产验收。
 
+另补直接图状态检查：30层、12次实际写槽K/V共24份FP16数组finite且逐位相同；24置零/10陈旧快照离线负控拒绝。状态采集与成本计时隔离，未扩展为预训练质量或稳定性能证明。
+
 ## 当前：原生人工权重ModelRunner
 
 沿6517a15，QA553980d的cap6范围保留。本批原生DummyModelLoader实际加载134515008个人工随机参数，ModelRunner/CudaGraphRunner完成1/2/4/8捕获和12次动态decode。Graph/eager logits本例最大差0，五组池回收到8 request/512 KV，非默认stream通过；Torch峰值308.875MiB。实际RoPE原地处理非连续QKV视图；默认KV双写，另人工直接成熟store op对真实视图逐位通过且单核。详见[第18章](engineering/18-native-modelrunner-graphs.md)。这是结构验证，完整Engine/serving及预训练质量/性能仍未验，没有修改默认cap8或下载权重。

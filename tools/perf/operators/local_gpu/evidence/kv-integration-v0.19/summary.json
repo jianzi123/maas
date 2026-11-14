@@ -431,5 +431,16 @@
     "test existing RoPE+KV fusion caller while preserving alias/ordering contracts",
     "stabilize unprofiled call-cost measurement without suppressing observed drift",
     "approved pretrained weights before Engine/serving quality/performance baseline"
-  ]
+  ],
+  "direct_graph_KV_state": {
+    "layers": 30,
+    "graph_states": 12,
+    "arrays": 24,
+    "finite_and_bitwise_equal": true,
+    "zero_controls_rejected": 24,
+    "stale_controls_rejected": 10,
+    "negative_controls_scope": "offline mutations of actual GPU snapshots; no GPU-kernel fault injection",
+    "coverage": "actual newly written nonpadding locations, not entire unused KV pool",
+    "comparison": "kv-state-comparison.json"
+  }
 }

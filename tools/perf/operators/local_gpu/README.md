@@ -20,3 +20,5 @@
 默认使用任务原WSL环境与构建目录；迁移环境须固定torch/CUDA/ABI并使用自己的任务目录。输出必须全新；不自动安装SDK、下载权重或修改全局驱动。
 
 Engine只做过导入，模型生成、scheduler/serving及质量未验证。手动torch graph不是SGLang CudaGraphRunner；当前KV分支未开启Engine的alt-stream捕获flag。不要通用替换原实现。
+
+本轮另有 check_native_kv_state.py / compare_native_kv_state.py：直接读取原生图实际写槽的30层K/V，24份FP16数组逐位核对；24置零/10陈旧快照负控全部拒绝。采集与成本计时分开，复现命令见第19章。
