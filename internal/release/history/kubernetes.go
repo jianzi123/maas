@@ -121,11 +121,34 @@ func (r RollbackService) Rollback(ctx context.Context, ns, name, expectedUID, re
 // RollbackObject returns only the API-server's original mutation ACK. It never
 // estimates the resulting generation or issues a second write for bookkeeping.
 func (r RollbackService) RollbackObject(ctx context.Context, ns, name, expectedUID, revision, resourceVersion string) (*api.ModelRelease, error) {
+	fresh, e := r.Prepare(ctx, ns, name, expectedUID, revision, resourceVersion)
+	if e != nil {
+		return nil, e
+	}
+	if e = r.Client.Update(ctx, fresh); e != nil {
+		if apierrors.IsConflict(e) || apierrors.IsInvalid(e) {
+			return nil, ErrConflict
+		}
+		if apierrors.IsForbidden(e) {
+			return nil, ErrForbidden
+		}
+		return nil, ErrWriteOutcomeUnknown
+	}
+	return fresh, nil
+}
+
+// Prepare performs only reads. Management must finish these checks before
+// creating an operation. The returned UID/resourceVersion still guard the one
+// subsequent API-server update; no later GET is used to infer a lost write ACK.
+func (r RollbackService) Prepare(ctx context.Context, ns, name, expectedUID, revision, resourceVersion string) (*api.ModelRelease, error) {
 	if r.History == nil || r.Client == nil || r.Reader == nil || resourceVersion == "" {
 		return nil, ErrUnavailable
 	}
 	current := new(api.ModelRelease)
 	if e := r.Reader.Get(ctx, types.NamespacedName{Namespace: ns, Name: name}, current); e != nil {
+		if apierrors.IsNotFound(e) {
+			return nil, ErrNotFound
+		}
 		return nil, ErrUnavailable
 	}
 	uid := string(current.UID)
@@ -144,8 +167,19 @@ func (r RollbackService) RollbackObject(ctx context.Context, ns, name, expectedU
 		return nil, ErrUnavailable
 	}
 	evaluation, e := r.History.Evaluator.Evaluate(ctx, uid, revision, live)
-	if e != nil || !validEvaluation(evaluation, live) || evaluation.State != "eligible" {
+	if e != nil {
+		return nil, e
+	}
+	if !validEvaluation(evaluation, live) || evaluation.State == "unknown" {
 		return nil, ErrUnavailable
+	}
+	if evaluation.State == "blocked" {
+		for _, reason := range evaluation.Reasons {
+			if reason == "state_unavailable" || reason == "pricing_unavailable" {
+				return nil, ErrUnavailable
+			}
+		}
+		return nil, ErrConflict
 	}
 	fresh := new(api.ModelRelease)
 	if r.Reader.Get(ctx, client.ObjectKeyFromObject(current), fresh) != nil {
@@ -155,14 +189,5 @@ func (r RollbackService) RollbackObject(ctx context.Context, ns, name, expectedU
 		return nil, ErrConflict
 	}
 	fresh.Spec = spec
-	if e = r.Client.Update(ctx, fresh); e != nil {
-		if apierrors.IsConflict(e) || apierrors.IsInvalid(e) {
-			return nil, ErrConflict
-		}
-		if apierrors.IsForbidden(e) {
-			return nil, ErrForbidden
-		}
-		return nil, ErrWriteOutcomeUnknown
-	}
 	return fresh, nil
 }
