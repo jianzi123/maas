@@ -385,6 +385,138 @@ func TestManagementHTTPLifecycle(t *testing.T) {
 		}
 		reconcile()
 	})
+	t.Run("R5-history-rejections", func(t *testing.T) {
+		m := live()
+		body := map[string]any{"target_revision": revision, "expected_cr_uid": string(m.UID)}
+		exec := func(q string, args ...any) {
+			t.Helper()
+			if _, err := db.Exec(q, args...); err != nil {
+				t.Fatal(err)
+			}
+		}
+		exec("CREATE TABLE r5_snapshot_backup AS SELECT * FROM retained_release_snapshots")
+		exec("CREATE TABLE r5_retention_backup AS SELECT * FROM release_history_retention")
+		count := func(table string) int {
+			t.Helper()
+			var n int
+			if err := db.QueryRow("SELECT COUNT(*) FROM " + table).Scan(&n); err != nil {
+				t.Fatal(err)
+			}
+			return n
+		}
+		before, operations := mutation.writes, count("release_management_operations")
+		check := func(want int) {
+			t.Helper()
+			out := call("POST", path+"/rollback", m.ResourceVersion, body, want, "Error")
+			codes := map[int]string{400: "invalid_request", 404: "not_found", 409: "resource_version_conflict", 503: "dependency_unavailable"}
+			if out["error"].(map[string]any)["code"] != codes[want] {
+				t.Fatal(out)
+			}
+			if mutation.writes != before || count("release_management_operations") != operations || live().ResourceVersion != m.ResourceVersion {
+				t.Fatal("rejection wrote CR or operation")
+			}
+			for _, table := range []string{"generation_requests", "usage_events", "budget_windows"} {
+				if count(table) != 0 {
+					t.Fatal("rejection wrote ledger", table)
+				}
+			}
+			t.Logf("HTTP %d; CR/operation/ledger unchanged", want)
+		}
+		for _, state := range []string{"pruning", "unavailable"} {
+			t.Run(state, func(t *testing.T) {
+				exec("UPDATE release_history_retention SET snapshot_state=?", state)
+				defer exec("UPDATE release_history_retention SET snapshot_state='retained'")
+				check(409)
+			})
+		}
+		t.Run("known-legacy-without-snapshot", func(t *testing.T) {
+			exec("DELETE FROM retained_release_snapshots")
+			defer exec("INSERT INTO retained_release_snapshots SELECT * FROM r5_snapshot_backup")
+			check(409)
+		})
+		t.Run("missing-retention-is-integrity-failure", func(t *testing.T) {
+			exec("DELETE FROM release_history_retention")
+			defer exec("INSERT INTO release_history_retention SELECT * FROM r5_retention_backup")
+			check(503)
+		})
+		t.Run("corrupt-snapshot", func(t *testing.T) {
+			exec("UPDATE retained_release_snapshots SET spec_sha256=REPEAT('0',64)")
+			defer exec("UPDATE retained_release_snapshots h JOIN r5_snapshot_backup b USING(cluster_id,cr_uid,revision) SET h.spec_sha256=b.spec_sha256")
+			check(503)
+		})
+		t.Run("invisible-domain", func(t *testing.T) {
+			original := hr.Access
+			hr.Access = history.NamespaceAccess{Namespaces: access.Namespaces, Domains: map[string]bool{}, ScopeID: access.ScopeID}
+			defer func() { hr.Access = original }()
+			check(404)
+		})
+		t.Run("unknown-revision", func(t *testing.T) {
+			body["target_revision"] = strings.Repeat("f", 64)
+			defer func() { body["target_revision"] = revision }()
+			check(404)
+		})
+		t.Run("missing-payload-connection", func(t *testing.T) {
+			original := hr.PayloadDB
+			hr.PayloadDB = nil
+			defer func() { hr.PayloadDB = original }()
+			check(503)
+		})
+		t.Run("closed-payload-connection", func(t *testing.T) {
+			closed, err := sql.Open("mysql", cfg.FormatDSN())
+			if err != nil {
+				t.Fatal(err)
+			}
+			closed.Close()
+			original := hr.PayloadDB
+			hr.PayloadDB = closed
+			defer func() { hr.PayloadDB = original }()
+			check(503)
+		})
+		t.Run("missing-registry", func(t *testing.T) {
+			original := service.Resolver
+			service.Resolver = nil
+			defer func() { service.Resolver = original }()
+			check(503)
+		})
+		for _, tc := range []struct {
+			name      string
+			evaluator history.Evaluator
+			status    int
+		}{
+			{"missing-evaluator", nil, 503},
+			{"confirmed-blocked", r5Evaluator{value: history.Evaluation{State: "blocked", Reasons: []string{"snapshot_pruning"}}}, 409},
+			{"unknown-evaluation", r5Evaluator{value: history.Evaluation{State: "unknown", Reasons: []string{"state_unavailable"}}}, 503},
+			{"blocked-but-pricing-unknown", r5Evaluator{value: history.Evaluation{State: "blocked", Reasons: []string{"pricing_unavailable"}}}, 503},
+			{"blocked-but-state-unknown", r5Evaluator{value: history.Evaluation{State: "blocked", Reasons: []string{"snapshot_pruning", "state_unavailable"}}}, 503},
+			{"malformed-evaluation", r5Evaluator{value: history.Evaluation{State: "blocked", Reasons: []string{"untrusted"}}}, 503},
+			{"evaluation-outage", r5Evaluator{err: errors.New("private dependency detail")}, 503},
+		} {
+			t.Run(tc.name, func(t *testing.T) {
+				original := hr.Evaluator
+				hr.Evaluator = tc.evaluator
+				defer func() { hr.Evaluator = original }()
+				check(tc.status)
+			})
+		}
+		t.Run("invalid-revision", func(t *testing.T) {
+			body["target_revision"] = "bad"
+			defer func() { body["target_revision"] = revision }()
+			check(400)
+		})
+		t.Run("restored-once-202-query-never-replays", func(t *testing.T) {
+			out := call("POST", path+"/rollback", m.ResourceVersion, body, 202, "ReleaseAccepted")
+			if mutation.writes != before+1 || count("release_management_operations") != operations+1 {
+				t.Fatal("restored rollback must dispatch once")
+			}
+			for i := 0; i < 2; i++ {
+				call("GET", operationPath(out), "", nil, 200, "ReleaseOperation")
+			}
+			if mutation.writes != before+1 {
+				t.Fatal("operation query replayed rollback")
+			}
+			t.Log("HTTP 202; exactly one original update/operation; two queries did not replay")
+		})
+	})
 	t.Run("QA-003-rollback-dependency-classification", func(t *testing.T) {
 		m := live()
 		before := mutation.writes
@@ -617,6 +749,15 @@ func (c *ackLossClient) Delete(ctx context.Context, obj client.Object, opts ...c
 type noGatewayProducer struct{}
 
 type failingReferenceResolver struct{ err error }
+
+type r5Evaluator struct {
+	value history.Evaluation
+	err   error
+}
+
+func (e r5Evaluator) Evaluate(context.Context, string, string, history.LiveState) (history.Evaluation, error) {
+	return e.value, e.err
+}
 
 func (r failingReferenceResolver) Resolve(context.Context, *api.ModelRelease) (release.Resolution, error) {
 	return release.Resolution{}, r.err

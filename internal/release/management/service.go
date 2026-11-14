@@ -247,6 +247,9 @@ func (s *Service) Submit(ctx context.Context, method, ns, name, rv, expectedUID,
 		old = &current.Spec
 	}
 	if api.Validate(desired, old) != nil {
+		if action == "Rollback" {
+			return nil, history.ErrConflict
+		}
 		return nil, history.ErrInvalid
 	}
 	if action == "Update" && desired.Lifecycle.DesiredState != current.Spec.Lifecycle.DesiredState {
@@ -281,6 +284,13 @@ func (s *Service) Submit(ctx context.Context, method, ns, name, rv, expectedUID,
 	if current != nil {
 		uid = string(current.UID)
 	}
+	var rollback *api.ModelRelease
+	if action == "Rollback" {
+		rollback, e = (history.RollbackService{History: s.History, Client: s.Client, Reader: s.Reader}).Prepare(ctx, ns, name, uid, revision, rv)
+		if e != nil {
+			return nil, e
+		}
+	}
 	op, dispatch, e := s.Operations.begin(ctx, action, scope, ns, name, uid, rv, desired)
 	if e != nil {
 		return nil, e
@@ -290,7 +300,14 @@ func (s *Service) Submit(ctx context.Context, method, ns, name, rv, expectedUID,
 	}
 	var result *api.ModelRelease
 	if action == "Rollback" {
-		result, e = (history.RollbackService{History: s.History, Client: s.Client, Reader: s.Reader}).RollbackObject(ctx, ns, name, uid, revision, rv)
+		result = rollback
+		e = s.Client.Update(ctx, result)
+		if e != nil {
+			result = nil // Only the original successful API-server ACK is a result.
+			if apierrors.IsInvalid(e) {
+				e = history.ErrConflict
+			}
+		}
 	} else if action == "Delete" {
 		// Keep the acknowledged original UID/generation; deletion has explicit UID/RV
 		// preconditions, and completion is reported after finalizer cleanup.

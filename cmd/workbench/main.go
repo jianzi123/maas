@@ -128,11 +128,21 @@ func run() (runErr error) {
 	if e = core.Configure(ctx, kernel.RatePolicy{Revision: "local-disabled-inference", Epoch: 1, WindowMS: 1000, GlobalLimit: 1, KeyLimit: 1}, 1); e != nil {
 		return e
 	}
-	publisher, e := mysqlstore.New(db, "local-workbench", core)
+	connections, e := installLocalConnections(ctx, db, cfg, *root)
 	if e != nil {
 		return e
 	}
-	publisher = publisher.WithManagementOperations()
+	defer connections.Close()
+	core, e = kernel.New(connections.Core, "local-workbench", pepper, nil, nil)
+	if e != nil {
+		return e
+	}
+	publisherRuntime, e := mysqlstore.OpenPublisher(ctx, connections.PublisherDSN, "local-workbench", core)
+	if e != nil {
+		return e
+	}
+	defer publisherRuntime.Close()
+	publisher := publisherRuntime.Store
 	useExisting := false
 	environment := &envtest.Environment{UseExistingCluster: &useExisting, CRDDirectoryPaths: []string{filepath.Join(*root, "config", "crd")}, ErrorIfCRDPathMissing: true}
 	defer func() {
@@ -175,9 +185,9 @@ func run() (runErr error) {
 	access := history.NamespaceAccess{Namespaces: map[string]bool{ns: true}, Domains: map[string]bool{"local-workbench": true}, ScopeID: "local-administrator"}
 	resolution := release.Resolution{Versions: map[string]string{"authorization_domain": "local-workbench"}, GatewayNamespace: ns, IngressClass: "higress", HostSuffix: "local.invalid", EndpointDNS: "no-model.local.invalid", EndpointPort: 443, CredentialHandle: "metadata-only-unavailable", PluginDigest: strings.Repeat("0", 64)}
 	registry := localMetadataRegistry{management.Registry{Access: access, Entries: []management.RegistryEntry{{Namespace: ns, Spec: example.Spec, Resolution: resolution}, {Namespace: ns, Spec: second.Spec, Resolution: resolution}}}}
-	hr := &history.Reader{DB: db, PayloadDB: db, Cluster: "local-workbench", Access: access, CursorKey: cursor, Live: history.KubeLive{Reader: kube}}
+	hr := &history.Reader{DB: connections.History, PayloadDB: connections.Payload, Cluster: "local-workbench", Access: access, CursorKey: cursor, Live: history.KubeLive{Reader: kube}}
 	hr.Evaluator = history.ResolverEvaluator{Resolver: registry, Loader: hr}
-	operations := &management.Operations{DB: db, Cluster: "local-workbench", Access: access}
+	operations := &management.Operations{DB: connections.Operations, Cluster: "local-workbench", Access: access}
 	service := &management.Service{Client: kube, Reader: kube, Operations: operations, History: hr, Resolver: registry, Access: access, CursorKey: cursor}
 	if _, e = service.Submit(ctx, "POST", ns, example.Name, "", "", "", example); e != nil {
 		return e
