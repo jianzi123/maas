@@ -5,7 +5,7 @@ MaaS 平台 · 集成工作台
 
 ## 一条命令启动
 
-当前前端30cf与后端增量的统一组合入口见 [统一工作台](docs/unified-workbench.md)：先执行 `python scripts/assemble-workbench.py --output .cache/workbench-unified`，进入输出目录后按下述命令启动。组装保留运维原来源及完整清单，拒绝覆盖旧目录。
+当前代码统一在同一集成分支：前端、Go、部署、算法/性能和独立QA材料均使用同一仓库快照。直接在当前检出运行下述命令；需要独立构建目录时，按 [统一工作台](docs/unified-workbench.md) 导出当前HEAD。组装器不会再取回旧前端或拼接其他分支。
 
 准备 Node.js 22（22.12以上）。Windows 使用已安装的 Ubuntu-22.04 WSL2；Linux 使用 amd64。首次启动需能下载 npm、Go、MySQL 和临时 API-server 依赖；所有缓存只写入本仓库 `.cache/`，不安装系统服务、不使用现有 kubeconfig。
 
@@ -32,14 +32,15 @@ Windows 下需在终端关闭后继续使用时，按 [本地服务交接](docs/
 
 | 模块 | 位置 | 整合来源 |
 | --- | --- | --- |
-| 发布状态机、权威历史与回滚 | `internal/release/` | PR #1，`8ccf6c0` |
-| Key、三维预算、请求/用量与管理API | `internal/kernel/`、`internal/controlapi/` | PR #2，`bfc1f7d` |
-| Vue控制台 | `console/` | PR #4，`819c35e` |
-| Helm、静态控制台镜像、探针和预检 | `deploy/` | PR #3，`4327989` |
-| 离线性能分析 | `tools/perf/` | 原默认分支基线，`86f5408` |
-| 本地统一装配 | `cmd/workbench/`、`scripts/dev.mjs` | 本次整合 |
+| Go内核、管理/发布/历史和本地身份 | `internal/`、`cmd/` | 原#6 `ba606128`及已合入历史 |
+| Vue控制台和恢复修复 | `console/` | `48da8109`，保留默认工作台代码 |
+| Helm、来源/角色预检 | `deploy/` | 原#5 `16890f66`及本次统一来源锁 |
+| 算法来源/禁执行profiles | `tools/model_capabilities/` | `a7b65646` |
+| 性能工具与GPU/SGLang工程 | `tools/perf/`、`docs/performance/` | 原#7 `b5e705d2`，执行与收益范围分开 |
+| 独立QA源与历史证据 | `test/independent/`、`test/qa-*/` | 固定QA提交导入；每份保留原SHA范围 |
+| 当前快照组装和来源锁 | `scripts/assemble-workbench.py`、`scripts/lock-unified-source.py` | 本次整合，无旧分支覆盖 |
 
-原提交均以正常merge保留。完整来源见 [config/integration-sources.json](config/integration-sources.json)。Go/MySQL仍是唯一预算/计量真源；本地装配复用原Handler、Store、Reconciler、History和operation工作流。
+产品提交以正常merge保留；一个消费者QA测试提交按仅测试差异cherry-pick并保留原提交注记。完整来源见 [config/integration-sources.json](config/integration-sources.json)。已知未闭合项见 [当前集成边界](docs/unified-status.md)。Go/MySQL仍是唯一预算/计量真源。
 
 ## 验证与构建
 
@@ -47,11 +48,14 @@ Windows 下需在终端关闭后继续使用时，按 [本地服务交接](docs/
 npm run test:workbench   # 实际启动 + 浏览器管理全流程 + 停止清理
 npm run test:console    # 前端单元回归
 npm run build           # 正常生产模式静态构建，不包含本地安装入口
+python -m unittest discover -s scripts/tests -p 'test_*.py'
 go test ./...
 python -m unittest discover -s tools/perf -p 'test_*.py'
 ```
 
 `test:workbench` 默认使用本机 Edge；Linux 可通过 `EDGE_PATH` 指向已有 Chromium。真实MySQL/envtest管理故障矩阵继续使用 `scripts/test-release-management.sh`。`npm run dev` 的工作台静态产物使用显式 `workbench` mode，与普通生产构建分开。
+
+后续修改以统一分支为基准，先提交代码，再运行 `python scripts/lock-unified-source.py` 并单独提交生成的四份部署锁。代码提交与随后仅含锁的元数据提交属于同一条历史；导出清单记录当前仓库提交、代码锁提交和完整字节摘要。锁更新不会把生产批准或候选合并状态改为通过。
 
 <details>
 <summary>历史 MAAS-11 受控控制器实现说明（旧阶段记录）</summary>

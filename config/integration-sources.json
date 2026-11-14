@@ -1,13 +1,106 @@
 {
   "repository": "https://github.com/jianzi123/maas",
-  "integration_issue": "MAAS-3",
-  "base": "86f5408e100de6c276a2af543051098c3d4d5669",
-  "sources": [
-    {"pr": 1, "role": "release", "sha": "8ccf6c0d78a66ba1226a8eaa2c7ea97e2c09b539", "paths": ["api/", "internal/release/"]},
-    {"pr": 2, "role": "backend", "sha": "bfc1f7d577e0529362e26346e49e7ff6dadf9852", "paths": ["internal/kernel/", "internal/controlapi/"]},
-    {"pr": 3, "role": "operations", "sha": "4327989dca838331d4e8e29a25b2243373de20a0", "paths": ["deploy/"]},
-    {"pr": 4, "role": "frontend", "sha": "819c35ef9771cca8b8559de4c4e70bcc47436b80", "paths": ["console/"]}
+  "integration_issue": "MAAS-17",
+  "integration_branch": "integrate/MAAS-17-unified-20261114",
+  "captured_at_utc": "2026-11-14T08:37:39.0652463Z",
+  "base": "925d8c55be9ce823d100bf90a5c78cf19ea66d58",
+  "historical_baseline_sources": [
+    {
+      "pr": 1,
+      "role": "release",
+      "sha": "8ccf6c0d78a66ba1226a8eaa2c7ea97e2c09b539",
+      "paths": [
+        "api/",
+        "internal/release/"
+      ]
+    },
+    {
+      "pr": 2,
+      "role": "backend",
+      "sha": "bfc1f7d577e0529362e26346e49e7ff6dadf9852",
+      "paths": [
+        "internal/kernel/",
+        "internal/controlapi/"
+      ]
+    },
+    {
+      "pr": 3,
+      "role": "operations",
+      "sha": "4327989dca838331d4e8e29a25b2243373de20a0",
+      "paths": [
+        "deploy/"
+      ]
+    },
+    {
+      "pr": 4,
+      "role": "frontend",
+      "sha": "819c35ef9771cca8b8559de4c4e70bcc47436b80",
+      "paths": [
+        "console/"
+      ]
+    }
   ],
-  "strategy": "preserve source commits through normal merges; integration changes add one local runtime and shared static serving",
-  "local_mode": {"entry": "npm run dev", "listen": "127.0.0.1:4179", "storage": "owned disposable MySQL", "kubernetes": "owned envtest API-server/etcd", "inference_available": false}
+  "sources": [
+    {
+      "role": "backend",
+      "sha": "ba6061287a75bc9f17385abba6d6c7339e572015",
+      "pr": 6
+    },
+    {
+      "role": "frontend",
+      "sha": "48da8109a797dc7d7ae77c4adbabd0ae7db6ee57"
+    },
+    {
+      "role": "operations",
+      "sha": "16890f66c215e824a4dd8a2e8e996efd558dabce",
+      "pr": 5
+    },
+    {
+      "role": "algorithm",
+      "sha": "a7b65646c0cf15878faf850c8b69dafa7cd1bb77"
+    },
+    {
+      "role": "performance",
+      "sha": "b5e705d2f0ce61d4aeda81ee7a852eb01df7cb5f",
+      "pr": 7
+    }
+  ],
+  "qa_sources": [
+    {
+      "method": "normal merge",
+      "path": "test/independent",
+      "sha": "7089cebbfda9ef53d98ea695a1dcf69a256baba0"
+    },
+    {
+      "method": "normal merge",
+      "path": "test/qa-r123",
+      "sha": "50354a705c03383d0102d0d437119afd7ffed8b3"
+    },
+    {
+      "method": "normal merge",
+      "path": "test/qa-usage",
+      "sha": "faf1b64d87a442d5696cab84a2c002a5cc0a4819"
+    },
+    {
+      "method": "normal merge",
+      "path": "test/qa-*",
+      "sha": "ecff7881980670837e1b3d9cbc7d4716ce4d71b7"
+    },
+    {
+      "method": "test-only cherry-pick -x",
+      "path": "test/independent/consumer-*",
+      "sha": "f40212259ec0f1802d211e1ae21d74ee73a9b5ae",
+      "integrated_as": "6870f54"
+    }
+  ],
+  "strategy": "one committed repository snapshot; source lock generated after code commit; no split-branch overlays",
+  "local_mode": {
+    "entry": "npm run dev",
+    "listen": "127.0.0.1:4179",
+    "storage": "owned disposable MySQL",
+    "kubernetes": "owned envtest API-server/etcd",
+    "inference_available": false
+  },
+  "production_accepted": false,
+  "private_innovation_materials_included": false
 }

@@ -1,27 +1,36 @@
-# 统一工作台与 publisher 本地装配
+# 同一代码快照的统一工作台
 
-在原 PR #6 分支仓库执行（Python 3.12+、PyYAML、Node 22.12+；Windows 使用已有 Ubuntu-22.04 WSL2）：
+在统一集成分支的仓库根目录直接执行：
 
 ```sh
+npm run dev
+```
+
+Node22.12+；Windows使用已有Ubuntu-22.04 WSL2，Linux使用amd64。程序构建当前console，编译当前Go，并启动自有临时MySQL/API-server/etcd。停止时清理本次数据；真实推理仍不可调用。端口可用 `npm run dev -- --port 4180` 指定。
+
+需要独立的构建目录时：
+
+```sh
+python -m pip install -r deploy/checks/requirements.txt
 python scripts/assemble-workbench.py --output .cache/workbench-unified
 cd .cache/workbench-unified
 npm run dev
 ```
 
-打开 http://127.0.0.1:4179。首次安装和构建需要数分钟。输出目录必须不存在；已有目录改用新名字，避免覆盖旧工作。前台 Ctrl+C 清理临时数据；需保留本地服务时，在此输出目录按 `docs/local-service.md` 启动隐藏宿主，最长8小时。
+组装只对一个本地Git提交做一次archive；默认HEAD，也可用 `--ref <交付提交>`。前端、Go、部署、算法/性能和QA文件都取自这个快照，不fetch旧分支、不替换成30cf前端。拒绝未提交的已跟踪修改、存在的输出目录、被篡改的完整输入或锁定后新增的运行代码；未跟踪文件、凭证和缓存不进入输出。
 
-组装复用运维 e5647a2 的原 `source_context.py`，先核对完整0559后端与30cf前端源输入，再覆盖当前提交的后端增量；console始终完整来自30cf，不继承旧 `.env.workbench`。`workbench-sources.json` 记录后端完整SHA、前端30cf、运维e564与逐文件SHA256。运维旧锁仍描述0559，不能把新的本地组合声称为已更新的部署批准。
+`workbench-sources.json`记录当前仓库commit/tree、全部输入摘要、各组件相同的仓库commit及单独的代码锁commit。代码先提交，再生成四份部署锁并单独提交，可避免摘要引用自身；两次提交属于同一历史，锁提交之后只允许四份锁元数据变化。新代码必须重新锁定。
 
-本地构建显式传入 `NODE_ENV=development`、`VITE_LOCAL_CONTROL=true`、`VITE_CONSOLE_FIXTURES=false`，沿前端候选现有DEV入口连接同源Go临时会话。它仅作用于本地构建；正常生产 `npm run build` 不提供本地会话安装页面。
+```sh
+python scripts/lock-unified-source.py
+# 检查四份deploy锁后单独提交，再导出HEAD
+python deploy/checks/inspect_sources.py --backend-root . --console-root .
+```
 
-Key页可创建、修改显式预算并撤销；发布页可查看已有示例，编辑 `upstreamModel` 为 `local-example-v2` 进行更新，再暂停/恢复、读取保留修订、回滚、下线与查询原操作。创建新发布时点“新建外部 API CR”，把输出目录的 `workbench-example.json` 内容粘贴到编辑框提交；重复创建先换metadata.name和spec.modelAlias。该样例只含本地惰性引用，不是供应商配置。请求/用量页读取实际账本空态。
+本地会话、Key、管理/历史/operation均复用同一Go内核。publisher使用显式窄权限连接和原同事务完成hook；core/history/payload/operations分开。安装账户只在localworkbench自有临时MySQL使用，生产工厂及实际有效权限另行验收。
 
-本次实际启动路径 `cmd/workbench` 在自有临时MySQL中，用安装连接执行原迁移和仓内角色模板，然后分别使用core、publisher、history、payload、operations五个身份。安装连接不传给业务handler。publisher经 `mysqlstore.OpenPublisher(ctx, explicitDSN, cluster, evidencePort)` 创建；缺DSN、root、未启用原default role或缺证据端口均拒绝，不回退core/operations身份。工厂始终开启原同事务operation完成hook，不创建用户、不迁移、不GRANT；临时账户安装只在localworkbench入口内。运行错误不回显DSN。
+已有批准便携工具时可设置 `MAAS_WORKBENCH_TOOL_CACHE` 指向含go-linux、mysql-test、envtest的只读缓存；可设置 `MAAS_WORKBENCH_GO_CACHE` 为本任务可写的Go模块/编译缓存目录。Windows支持绝对Windows或WSL路径，Linux用绝对路径。工具缓存不提供产品源码；使用它不会替换当前提交，也不修改或安装系统驱动。
 
-真实角色完整有效权限仍由安装审核，工厂的default role检查不替代审计。运行中的缺权限错误沿原事务回滚，不忽略hook；ACK未知仍沿原CommandID恢复，不重放生成。原R3 Activate/ACK独立证据保留ac94范围；本轮新增factory装配/关闭/cleanup/原Pause完成及拒绝SQL验证独立记录。
+Key与发布操作说明见根README。页面可载入本地示例，生成的workbench-example.json只包含本地惰性引用，不是供应商批准。运行前后用 `npm run test:workbench`可启动专属临时实例并验证浏览器管理闭环；不影响其他目录的服务。
 
-管理装配不提供真实Higress/Secret/validation、adapter批准或目标集群生产身份。`cmd/operator`仍缺获准生产适配器，不能从本地管理metadata制造Callable。真实推理保持503；GPU研究和局部D1均不代替真实调用链验收。
-
-验证入口：`node scripts/workbench-smoke.mjs --url http://127.0.0.1:4179` 对已启动同一实例操作并保留服务；不带 `--url` 则自建临时实例并清理。浏览器脚本会创建一个已撤销Key，创建/清理local-created CR，记录原operation查询，不触发模型调用。前端消费者异常测试使用明确标注的合成HTTP/SSE，与真实管理HTTP结果分别记录。
-
-实际临时安装发现旧payload角色名maas_release_history_payload_reader有35字符，MySQL8.4返回1470拒绝CREATE ROLE。本轮模板及本地消费者统一缩短为maas_history_payload_reader，原SELECT列权限保持。仅修改仓内模板和自有临时身份，未改目标账户；运维来源/角色锁须跟随此名称和新后端SHA更新。TestLocalRuntimeIdentities复用原迁移与全部三份模板，验证五个独立身份及真实default role。
+需要终端关闭后继续使用时，按docs/local-service.md显式启动宿主；本次代码统一本身不替换现有实例。已知Delete恢复边界及生产未验项见docs/unified-status.md。

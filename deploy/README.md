@@ -1,3 +1,5 @@
+> 当前构建统一使用同一仓库快照，见 [统一来源](docs/source-assembly.md)；下面的旧候选说明保留历史范围，生产门槛不变。
+
 # MaaS 部署包（MAAS-8）
 
 沿PR #5更新Chart0.2.3。默认925d8c5、固定后端f445362、QA核心ac94a373、前端30cfce9及原组装器e564分别锁定，后续PR head不自动纳入。完整输入见[来源组装](docs/source-assembly.md)，新publisher显式工厂/本地五身份与payload角色名见[工厂说明](docs/publisher-factory.md)。目标安装、真实H1–H4/Secret/validation、SelfHosted/GPU和A01–A34尚未运行验收。
