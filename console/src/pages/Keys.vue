@@ -37,7 +37,7 @@ const filtered = computed(() =>
   rows.value.filter(
     (k) =>
       (stateFilter.value === "all" || k.state === stateFilter.value) &&
-      (k.name + " " + k.key_prefix)
+      (k.name + " " + k.key_prefix + " " + k.id)
         .toLowerCase()
         .includes(search.value.trim().toLowerCase()),
   ),

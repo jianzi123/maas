@@ -13,13 +13,15 @@ const tab = ref("models"),
   error = ref(""),
   username = ref(""),
   password = ref("");
-const usageKey = ref(""),
+const usageModel = ref(""),
+  usageKey = ref(""),
   playModel = ref("");
 function navigate(
   id: string,
   filter?: { key_id?: string; model_alias?: string },
 ) {
   usageKey.value = filter?.key_id ?? "";
+  usageModel.value = filter?.model_alias ?? "";
   playModel.value = filter?.model_alias ?? "";
   tab.value = id;
 }
@@ -111,21 +113,42 @@ const nav = [
       <div class="brand">
         <span class="brand-mark">M</span>MaaS <small>工作台</small>
       </div>
-      <p class="eyebrow">MODEL OPERATIONS</p>
+      <p class="workspace-label">
+        内部试点工作区<small>单管理员 · 模型服务平台</small>
+      </p>
       <nav aria-label="主导航">
-        <button
-          v-for="[id, label] in nav"
-          :key="id"
-          :class="{ active: tab === id }"
-          :disabled="!authenticated"
-          @click="navigate(id)"
+        <template
+          v-for="group in [
+            {
+              label: 'BUILD / 开发',
+              items: nav.filter((x) => ['models', 'play'].includes(x[0]!)),
+            },
+            {
+              label: 'OPERATE / 运营',
+              items: nav.filter((x) => !['models', 'play'].includes(x[0]!)),
+            },
+          ]"
+          :key="group.label"
         >
-          <span>{{ label }}</span
-          ><span aria-hidden="true">↗</span>
-        </button>
+          <span class="nav-group">{{ group.label }}</span>
+          <button
+            v-for="[id, label] in group.items"
+            :key="id"
+            :class="{ active: tab === id }"
+            :disabled="!authenticated"
+            @click="navigate(id)"
+          >
+            <span>{{ label }}</span
+            ><span aria-hidden="true">↗</span>
+          </button></template
+        >
       </nav>
       <div class="sidebar-foot">
-        <span class="dot"></span> 私有模型 · 统一入口<small>Go / Higress</small>
+        <span class="dot"></span> 单管理员工作台
+        <details>
+          <summary>连接与数据说明</summary>
+          <small>Go / Higress · 用量以服务端记录为准</small>
+        </details>
       </div>
     </aside>
     <main>
@@ -181,7 +204,12 @@ const nav = [
           :initial-model="playModel"
           :inference-available="!local"
           @navigate="navigate" /><Releases
-          v-else-if="tab === 'releases'" /><Usage v-else :key-filter="usageKey"
+          v-else-if="tab === 'releases'"
+          :initial-model="playModel" /><Usage
+          v-else
+          :key-filter="usageKey"
+          :model-filter="usageModel"
+          @navigate="navigate"
       /></template>
       <footer>管理会话与消费 Key 分离 · 用量以服务端耐久记录为准</footer>
     </main>
