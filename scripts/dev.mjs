@@ -143,7 +143,7 @@ export async function startWorkbench({
     process.off("SIGINT", interrupt);
     process.off("SIGTERM", interrupt);
   });
-  const info = await started;
+  let info; try { info = await started; } catch (error) { error.cleaned = (await exited).cleaned; throw error; }
   return { ...info, stop, exited };
 }
 

@@ -23,3 +23,5 @@ Key页可创建、修改显式预算并撤销；发布页可查看已有示例�
 管理装配不提供真实Higress/Secret/validation、adapter批准或目标集群生产身份。`cmd/operator`仍缺获准生产适配器，不能从本地管理metadata制造Callable。真实推理保持503；GPU研究和局部D1均不代替真实调用链验收。
 
 验证入口：`node scripts/workbench-smoke.mjs --url http://127.0.0.1:4179` 对已启动同一实例操作并保留服务；不带 `--url` 则自建临时实例并清理。浏览器脚本会创建一个已撤销Key，创建/清理local-created CR，记录原operation查询，不触发模型调用。前端消费者异常测试使用明确标注的合成HTTP/SSE，与真实管理HTTP结果分别记录。
+
+实际临时安装发现旧payload角色名maas_release_history_payload_reader有35字符，MySQL8.4返回1470拒绝CREATE ROLE。本轮模板及本地消费者统一缩短为maas_history_payload_reader，原SELECT列权限保持。仅修改仓内模板和自有临时身份，未改目标账户；运维来源/角色锁须跟随此名称和新后端SHA更新。TestLocalRuntimeIdentities复用原迁移与全部三份模板，验证五个独立身份及真实default role。

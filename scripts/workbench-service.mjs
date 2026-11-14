@@ -42,7 +42,7 @@ if (command === "status") {
     status.state = result.code ? "failed" : "stopped"; status.cleaned = result.cleaned;
     status.exit_code = result.code;
   } catch (error) {
-    status.state = "failed"; status.error = error.message;
+    status.state = "failed"; status.error = error.message; status.cleaned = error.cleaned === true;
     if (app) { const result = await app.stop(); status.cleaned = result.cleaned; }
     console.error(error.message); process.exitCode = 1;
   } finally {
