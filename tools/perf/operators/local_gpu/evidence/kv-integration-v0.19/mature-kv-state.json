@@ -1,0 +1,13 @@
+{
+  "variant": "mature",
+  "graph_states": 12,
+  "layers": 30,
+  "arrays": 24,
+  "scope": "actual graph-written raw token locations, all30 layers; not full unused pool",
+  "code_sha256": {
+    "check_native_kv_state.py": "9f7b7d51c3bfbf2e6701e0d65882b300dc431659a2240ca93788cd8b2aa05975",
+    "native_kv_binding.py": "8d03d465e964a70c7dedcf358097628a47779902b0f4635633e5f2c783d00149",
+    "run_framework_dummy.py": "f32583d4f8c9c4e13f6873ed2ff8197b528a383e0785163ddcd2de82d324833d"
+  },
+  "timing_or_model_quality_claim": false
+}
