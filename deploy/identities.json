@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "scope": "installation-input-only-no-secret-values",
-  "sourceCommit": "f182ee2380424f70fc004657c0d9ed4a165c4132",
+  "sourceCommit": "ba8a6c629739014aa884772514a8b386ccab5e39",
   "productionWiringVerified": false,
   "connections": {
     "core": {
@@ -369,6 +369,17 @@
         "test/qa-relay/results.json",
         "test/qa-relay/run.sh",
         "test/qa-relay/summarize.py",
+        "test/qa-ui16/browser.mjs",
+        "test/qa-ui16/edge-focus.mjs",
+        "test/qa-ui16/independent-results-extra.json",
+        "test/qa-ui16/independent-results-first.json",
+        "test/qa-ui16/independent.test.ts.in",
+        "test/qa-ui16/matrix.json",
+        "test/qa-ui16/report.md",
+        "test/qa-ui16/source-verification.json",
+        "test/qa-ui16/summarize.py",
+        "test/qa-ui16/summary.json",
+        "test/qa-ui16/verify-source.py",
         "test/qa-usage/README.md",
         "test/qa-usage/kernel_test.go.in",
         "test/qa-usage/matrix.json",

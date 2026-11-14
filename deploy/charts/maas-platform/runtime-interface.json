@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "scope": "observed-source-interface-not-production-readiness",
   "backend": {
-    "sourceCommit": "f182ee2380424f70fc004657c0d9ed4a165c4132",
+    "sourceCommit": "ba8a6c629739014aa884772514a8b386ccab5e39",
     "apiGroup": "serving.maas.example",
     "operator": {
       "command": [
@@ -374,6 +374,17 @@
       "test/qa-relay/results.json": "535f9ebcb294d4406d2077c8a2d7c68ae430360ba6a8c38fd29578bbc5aecebc",
       "test/qa-relay/run.sh": "ca9c677362782e0c5b4b6d510d609756afb1b8ca5b4a05d0d9d365fc7c2c1e4f",
       "test/qa-relay/summarize.py": "37ae9f56d7f2b3d6265c8b3503cbf050179d4b5b36803f42d4ab9676c088a3ae",
+      "test/qa-ui16/browser.mjs": "dfe4a77cee58f477b087ac9d2d060879e90fa7d5b7861e4113d5130274bd52d5",
+      "test/qa-ui16/edge-focus.mjs": "693304f896463f8881b63d4f8d62cfa531e258784ca1e0631c719ac825bf09fd",
+      "test/qa-ui16/independent-results-extra.json": "65cad221290d95f49e5466245926a80b08bfd03a26d588588316c8f608ecf178",
+      "test/qa-ui16/independent-results-first.json": "0e11739036cdb73ed85d5a813d98475d04d345c13b05dd9b3794dcf99b932e90",
+      "test/qa-ui16/independent.test.ts.in": "5391b6d492c733914b17a0e64315eb85536ee0f86304b766dffe8dfef511fa4b",
+      "test/qa-ui16/matrix.json": "e22772c6a958e887423228615b739dbb43e726816764f59cc505fd5f5012a18d",
+      "test/qa-ui16/report.md": "7a8d048bb24fcb255f63ec8d12e3399797a850960b99e777053737d6acfa227c",
+      "test/qa-ui16/source-verification.json": "cd1d296707ed537194bb0dd5756221526059977c50d9272347cb7de242ead052",
+      "test/qa-ui16/summarize.py": "17fefe04ce82b90791550948595d5fe7aea5e70eca6759d549644bafd292dc1b",
+      "test/qa-ui16/summary.json": "fc49233752254f3b18b4bae4ff7fbdfa15aeff0cf89a7d7b7e847cf1c8457da7",
+      "test/qa-ui16/verify-source.py": "0008ba2658e892040abade78776d0f17a83216599701dd4768893a3addbf2fdb",
       "test/qa-usage/kernel_test.go.in": "63c9bc33d5eb8c9555b069fc3d450928b77e95da2ac3aadf1b4b8bf07f6128bf",
       "test/qa-usage/matrix.json": "f548ee3583eca91695dabf43d06afbe814e20de732c4bc3c2a4f27cadf9d7156",
       "test/qa-usage/reader_test.go.in": "7f86aae28a3c5477dd4ec52f634689140a5559eaeea1f0db3996fcbfe76099f0",
@@ -581,7 +592,7 @@
     }
   },
   "console": {
-    "sourceCommit": "f182ee2380424f70fc004657c0d9ed4a165c4132",
+    "sourceCommit": "ba8a6c629739014aa884772514a8b386ccab5e39",
     "build": "npm ci && npm run build",
     "output": "console/dist",
     "localBridge": "development-and-explicit-workbench-mode-only",
