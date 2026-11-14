@@ -1,5 +1,9 @@
 # 阶段总结：2026-11-05
 
+## 当前：原生人工权重ModelRunner
+
+沿6517a15，QA553980d的cap6范围保留。本批原生DummyModelLoader实际加载134515008个人工随机参数，ModelRunner/CudaGraphRunner完成1/2/4/8捕获和12次动态decode。Graph/eager logits本例最大差0，五组池回收到8 request/512 KV，非默认stream通过；Torch峰值308.875MiB。实际RoPE原地处理非连续QKV视图；默认KV双写，另人工直接成熟store op对真实视图逐位通过且单核。详见[第18章](engineering/18-native-modelrunner-graphs.md)。这是结构验证，完整Engine/serving及预训练质量/性能仍未验，没有修改默认cap8或下载权重。
+
 ## 当前GPU接续：cap6切片
 
 已从清理后的临时环境恢复固定核心版本，三个新GPU进程完成cap6/8配对。B8/L1024分段保持6×192，CUPTI grid[8,3,8]→[8,3,6]；raw局部快约10.4%–11.4%、backend张量范围约8.7%–12.3%。L512有退化，2048/ragged改变分段，不改全局默认。见[第17章](engineering/17-cap6-empty-cta.md)。上一批e6de90e已由QA729f740独立受控通过；本次新增结果仍为作者探索。Engine/serving/质量未测，权重未下载。

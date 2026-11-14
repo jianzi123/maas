@@ -1,5 +1,7 @@
 # 本地GPU实验
 
+最新：run_framework_dummy.py使用原生DummyModelLoader和bench batch入口实际构造ModelRunner，执行1/2/4/8原生图和动态batch；见[第18章](../../../../docs/performance/engineering/18-native-modelrunner-graphs.md)。预训练权重门禁不变；原run_sglang.py不作为本次人工权重入口。
+
 最新：run_split_cap6.py与[第17章](../../../../docs/performance/engineering/17-cap6-empty-cta.md)。环境恢复在任务/var/tmp隔离目录；只验证后端张量切片，未改Engine默认。
 
 当前批次见[工程16：SGLang Decode/KV](../../../../docs/performance/engineering/16-sglang-decode-kv.md)，上一批RMSNorm闭环见[工程15](../../../../docs/performance/engineering/15-local-gpu-cuda.md)。

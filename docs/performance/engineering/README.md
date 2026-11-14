@@ -1,5 +1,7 @@
 # 推理框架工程实现卷
 
+最新接续：[第18章原生ModelRunner与图重放](18-native-modelrunner-graphs.md)，使用人工权重、真实原生Req/ScheduleBatch/ForwardBatch和CudaGraphRunner，记录padding/stream/回收与成熟op实际命中。
+
 本轮接续见[第17章：cap6空CTA假设的GPU验证](17-cap6-empty-cta.md)：同分段切片、实际grid、配对结果与不能全局推广的边界。
 
 最新接续见[第16章：SGLang Decode/KV实际GPU实验](16-sglang-decode-kv.md)：原生Triton后端、请求/KV索引、split对照、ATen/NVRTC融合写、CUPTI、图重放与负结果。
@@ -33,6 +35,7 @@
 | [15 本地CUDA工程](15-local-gpu-cuda.md) | RMSNorm编译/注册/数值/测量及成熟核负结果 | local_gpu |
 | [16 SGLang Decode/KV](16-sglang-decode-kv.md) | 实际后端/索引/两阶段核、split与KV融合GPU对照 | local_gpu/decode_path与run_kv_fusion |
 | [17 cap6切片验证](17-cap6-empty-cta.md) | 同分段/负对照、实际CTA grid、配对GPU数据 | local_gpu/run_split_cap6 |
+| [18 原生ModelRunner](18-native-modelrunner-graphs.md) | dummy人工权重、真实捕获/重放、padding/成熟caller | local_gpu/run_framework_dummy |
 
 ## 直接运行
 

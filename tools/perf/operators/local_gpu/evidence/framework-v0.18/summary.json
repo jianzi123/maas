@@ -1,0 +1,243 @@
+{
+  "baseline_commit": "6517a152d67f21ce3fcb11bddf76cf79b3e6c42c",
+  "scope": "actual native ModelRunner, DummyModelLoader, original ScheduleBatch/ForwardBatch and CudaGraphRunner",
+  "upstream": "b0d25e72c401f37b55d689ddbf05b8c583afe854",
+  "sglang": "0.5.2",
+  "torch": "2.8.0+cu128",
+  "native_dummy_loader_called": true,
+  "artificial_parameters": 134515008,
+  "ModelRunner": true,
+  "Engine": false,
+  "serving": false,
+  "semantic_quality_claim": false,
+  "performance_gain_claim": false,
+  "capture_sizes": [
+    1,
+    2,
+    4,
+    8
+  ],
+  "replay_cases": 12,
+  "actual_padding": [
+    [
+      1,
+      1
+    ],
+    [
+      1,
+      1
+    ],
+    [
+      3,
+      4
+    ],
+    [
+      3,
+      4
+    ],
+    [
+      2,
+      2
+    ],
+    [
+      2,
+      2
+    ],
+    [
+      5,
+      8
+    ],
+    [
+      5,
+      8
+    ],
+    [
+      8,
+      8
+    ],
+    [
+      8,
+      8
+    ],
+    [
+      3,
+      4
+    ],
+    [
+      1,
+      1
+    ]
+  ],
+  "max_graph_eager_abs": 0.0,
+  "native_nondefault_stream": true,
+  "pool_reconciliation_cases": 5,
+  "output_aliases_graph_buffer": true,
+  "graph_input_buffers_stable": true,
+  "peak_torch_MiB": 308.875,
+  "caps": {
+    "allocator_fraction": 0.2,
+    "planner_mem_fraction_static": 0.2,
+    "max_total_tokens": 512,
+    "context_length": 128,
+    "max_batch": 8,
+    "capture_bs": [
+      1,
+      2,
+      4,
+      8
+    ],
+    "outer_timeout_s": 600
+  },
+  "default_mature_op_counts_profiled": {
+    "sgl_kernel::rmsnorm": 3,
+    "sgl_kernel::apply_rope_pos_ids_cos_sin_cache": 90,
+    "sgl_kernel::fused_add_rmsnorm": 180,
+    "sgl_kernel::silu_and_mul": 90
+  },
+  "manual_actual_view_mature_probe": {
+    "scope": "manual direct op on actual layer0 prefill view; NOT default caller",
+    "k_shape": [
+      12,
+      3,
+      64
+    ],
+    "k_stride": [
+      960,
+      64,
+      1
+    ],
+    "input_contiguous": false,
+    "fallback_used": false,
+    "status": "supported_bitwise_equal",
+    "kernel_names": [
+      "void (anonymous namespace)::store_kv_cache_128x2<long>(unsigned long*, unsigned long*, long const*, unsigned long, unsigned long const*, unsigned long const*, unsigned long, unsigned long, unsigned long)"
+    ],
+    "kernel_count": 1,
+    "op_counts": {
+      "sgl_kernel::store_kv_cache": 1,
+      "aten::view": 4,
+      "Activity Buffer Request": 1,
+      "cudaLaunchKernel": 1,
+      "Runtime Triggered Module Loading": 2,
+      "Lazy Function Loading": 1,
+      "cudaDeviceSynchronize": 2,
+      "void (anonymous namespace)::store_kv_cache_128x2<long>(unsigned long*, unsigned long*, long const*, unsigned long, unsigned long const*, unsigned long const*, unsigned long, unsigned long, unsigned long)": 1
+    }
+  },
+  "actual_rope_view": {
+    "class": "RotaryEmbedding",
+    "q_shape": [
+      12,
+      576
+    ],
+    "q_stride": [
+      960,
+      1
+    ],
+    "k_shape": [
+      12,
+      192
+    ],
+    "k_stride": [
+      960,
+      1
+    ],
+    "dtype": "torch.float16",
+    "q_output_alias": true,
+    "k_output_alias": true,
+    "scope": "eager native module caller; hooks installed AFTER graph capture"
+  },
+  "actual_KV_view": {
+    "layer": 0,
+    "tokens": 12,
+    "k_shape": [
+      12,
+      3,
+      64
+    ],
+    "k_stride": [
+      960,
+      64,
+      1
+    ],
+    "dtype": "torch.float16",
+    "scope": "eager actual MHATokenToKVPool caller"
+  },
+  "graph_metadata_lifecycle": "replay updates cuda_graph_* fixed buffers; forward_metadata may still describe prefill/eager state",
+  "padded_split_example": {
+    "B3_graph": [
+      7,
+      7,
+      7,
+      1
+    ],
+    "B3_eager": [
+      4,
+      4,
+      4
+    ]
+  },
+  "official_source_files_matched": 9,
+  "kernel_trace_events": 2042,
+  "caveats": [
+    "same implementation graph/eager structural comparison; no independent full-model oracle",
+    "dummy weights logits tiny; observed exact equality and changed input hashes, not semantic quality",
+    "extra eager reference/poison/sync/hooks make all trace timings unsuitable as model performance baseline",
+    "native bench and batch operations used, no full online scheduler/Engine/serving",
+    "manual direct mature op probe is NOT default model caller hit",
+    "pool accounting is controlled synchronous lifecycle, not production cancellation/ACK-unknown proof"
+  ],
+  "actual_trace_regions": [
+    {
+      "region": "framework/bs3/step0/graph",
+      "kernels": 378,
+      "by_stream": {
+        "7": {
+          "count": 348,
+          "index_write_count": 30
+        },
+        "144": {
+          "count": 30,
+          "index_write_count": 30
+        }
+      }
+    },
+    {
+      "region": "framework/bs3/step0/eager_reference",
+      "kernels": 399,
+      "by_stream": {
+        "7": {
+          "count": 399,
+          "index_write_count": 60
+        }
+      }
+    },
+    {
+      "region": "framework/bs3/step1/graph",
+      "kernels": 378,
+      "by_stream": {
+        "7": {
+          "count": 348,
+          "index_write_count": 30
+        },
+        "144": {
+          "count": 30,
+          "index_write_count": 30
+        }
+      }
+    },
+    {
+      "region": "framework/bs3/step1/eager_reference",
+      "kernels": 399,
+      "by_stream": {
+        "7": {
+          "count": 399,
+          "index_write_count": 60
+        }
+      }
+    }
+  ],
+  "actual_rope_kernel_names": [
+    "void flashinfer::BatchQKApplyRotaryPosIdsCosSinCacheHeadParallelismKernel<false, 64u, 8u, 8u, __half, long>(__half*, __half*, __half*, __half*, float*, long*, unsigned int, unsigned int, unsigned int, unsigned int, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long)"
+  ]
+}
