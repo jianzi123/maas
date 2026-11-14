@@ -1,0 +1,13 @@
+{
+  "candidate": "19e63a1999c1c9b54e532f7d8afd6473bf2836bc",
+  "QA_base": "8dbf99ef59c847da775b83d0eeb7dc8f8bf48a9a",
+  "native_mature_late_structure": "passed",
+  "full_logits_pairs": 24,
+  "KV_arrays": 24,
+  "offline_controls": 39,
+  "event_phases": 2,
+  "unsupported_rejections": 5,
+  "stable_cost_gain": false,
+  "Engine_quality": false,
+  "A01_A34_overall": "NOT_ACCEPTED"
+}
