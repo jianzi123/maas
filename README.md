@@ -11,6 +11,8 @@ MaaS 平台 · 集成工作台
 npm run dev
 ```
 
+Windows 下需在终端关闭后继续使用时，按 [本地服务交接](docs/local-service.md) 启动独立宿主，查看状态并停止清理。
+
 打开 **http://127.0.0.1:4179**。端口占用时可用 `npm run dev -- --port 4180`。启动器自动安装锁定的前端依赖、构建 Vue、启动私有 MySQL 和临时 API-server/etcd，并装配同源 Go 服务与连续发布协调。无需手工传入 session、CSRF、数据库或 KUBECONFIG。
 
 **这是本地工作台：停止进程会清理本次临时数据。** 使用 Ctrl+C 停止。会话到期可在页面重新连接。它不连接真实模型或目标集群，在线试用保持不可调用。

@@ -106,6 +106,9 @@ func now(ctx context.Context, tx *sql.Tx) (time.Time, error) {
 	return t, e
 }
 func (s *Store) tx(ctx context.Context, fn func(*sql.Tx) error) error {
+	return s.txBeforeCommit(ctx, fn, nil)
+}
+func (s *Store) txBeforeCommit(ctx context.Context, fn func(*sql.Tx) error, check func(*sql.Tx) error) error {
 	tx, e := s.db.BeginTx(ctx, &sql.TxOptions{Isolation: sql.LevelReadCommitted})
 	if e != nil {
 		return sanitize(e)
@@ -113,6 +116,11 @@ func (s *Store) tx(ctx context.Context, fn func(*sql.Tx) error) error {
 	defer tx.Rollback()
 	if e = fn(tx); e != nil {
 		return sanitize(e)
+	}
+	if check != nil {
+		if e = check(tx); e != nil {
+			return e
+		}
 	}
 	if e = tx.Commit(); e != nil {
 		return ErrCommitUnknown
