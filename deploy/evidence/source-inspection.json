@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-11-13T17:38:49.186722+00:00",
+  "generated_at": "2026-11-14T07:25:40.165790+00:00",
   "scope": "source-byte-comparison-only",
-  "checks_passed": 111,
-  "checks_total": 111,
+  "checks_passed": 120,
+  "checks_total": 120,
   "checks": [
     {
       "component": "backend",
@@ -41,16 +41,30 @@
     },
     {
       "component": "backend",
+      "path": "cmd/workbench/identities.go",
+      "expected_sha256": "e9de64739b385f10cabc6a3ab09a8fe84be8c83a00c765f8c259a39877338e66",
+      "actual_sha256": "e9de64739b385f10cabc6a3ab09a8fe84be8c83a00c765f8c259a39877338e66",
+      "passed": true
+    },
+    {
+      "component": "backend",
+      "path": "cmd/workbench/identities_test.go",
+      "expected_sha256": "9b58740ebe44a720fa94948fd4a1efa9500c70ececcdee1866375004436f925f",
+      "actual_sha256": "9b58740ebe44a720fa94948fd4a1efa9500c70ececcdee1866375004436f925f",
+      "passed": true
+    },
+    {
+      "component": "backend",
       "path": "cmd/workbench/main.go",
-      "expected_sha256": "8f01626966a6dfb52ae69deb2cecfaf80d81bff6ca586615465ba627492d9c08",
-      "actual_sha256": "8f01626966a6dfb52ae69deb2cecfaf80d81bff6ca586615465ba627492d9c08",
+      "expected_sha256": "a172832f9bf102336fd26262e2ac1f8e26ef00cb16fbf20898ab7bba4052b061",
+      "actual_sha256": "a172832f9bf102336fd26262e2ac1f8e26ef00cb16fbf20898ab7bba4052b061",
       "passed": true
     },
     {
       "component": "backend",
       "path": "config/mysql/controlapi-projections.sql",
-      "expected_sha256": "7ce580e6e0cf32d7ec77a6bf0334831fd321cc97158ffd3cd60b4050f39f018d",
-      "actual_sha256": "7ce580e6e0cf32d7ec77a6bf0334831fd321cc97158ffd3cd60b4050f39f018d",
+      "expected_sha256": "d35292ff6229b8c5ea858b1cba864ee093ffd61acb846805010a6b00ebc22a0c",
+      "actual_sha256": "d35292ff6229b8c5ea858b1cba864ee093ffd61acb846805010a6b00ebc22a0c",
       "passed": true
     },
     {
@@ -100,6 +114,13 @@
       "path": "docs/release-management.md",
       "expected_sha256": "9fe469cd8ada7c48c513e69f00c6eab32d72f3a9b52aa7dbdb68fe3aceaa68ca",
       "actual_sha256": "9fe469cd8ada7c48c513e69f00c6eab32d72f3a9b52aa7dbdb68fe3aceaa68ca",
+      "passed": true
+    },
+    {
+      "component": "backend",
+      "path": "docs/unified-workbench.md",
+      "expected_sha256": "64af6657a42cffc4479196c0bb462bdeaa1e363c58db90b4790e95edc6cffdb1",
+      "actual_sha256": "64af6657a42cffc4479196c0bb462bdeaa1e363c58db90b4790e95edc6cffdb1",
       "passed": true
     },
     {
@@ -170,6 +191,13 @@
       "path": "internal/kernel/public_response.go",
       "expected_sha256": "84cabd8b8a6198dc429e6ebb437ee74048d58e4ddbe82598e0909c936d71644f",
       "actual_sha256": "84cabd8b8a6198dc429e6ebb437ee74048d58e4ddbe82598e0909c936d71644f",
+      "passed": true
+    },
+    {
+      "component": "backend",
+      "path": "internal/kernel/publisher_runtime_test.go",
+      "expected_sha256": "d1e457c3ffc0da21859624a442f8e4e85be32fda9e8d57049ae5dda981188e1c",
+      "actual_sha256": "d1e457c3ffc0da21859624a442f8e4e85be32fda9e8d57049ae5dda981188e1c",
       "passed": true
     },
     {
@@ -286,6 +314,13 @@
     },
     {
       "component": "backend",
+      "path": "internal/release/mysqlstore/runtime.go",
+      "expected_sha256": "1e75972d2d588ebff3e7839974eb2f5e0e075ea95d8ddb22245b2ff2e606d47c",
+      "actual_sha256": "1e75972d2d588ebff3e7839974eb2f5e0e075ea95d8ddb22245b2ff2e606d47c",
+      "passed": true
+    },
+    {
+      "component": "backend",
       "path": "internal/release/mysqlstore/schema/0001_release.sql",
       "expected_sha256": "91ea4dc8699fafa8ae8e9433c637828fce60f43878fe71c4ae1b688fffed69d5",
       "actual_sha256": "91ea4dc8699fafa8ae8e9433c637828fce60f43878fe71c4ae1b688fffed69d5",
@@ -314,9 +349,23 @@
     },
     {
       "component": "backend",
+      "path": "scripts/assemble-workbench.py",
+      "expected_sha256": "7ae660b8adcb9cd3036a86d34a3d3d8cd3a867b156778a727ad00430c99a4061",
+      "actual_sha256": "7ae660b8adcb9cd3036a86d34a3d3d8cd3a867b156778a727ad00430c99a4061",
+      "passed": true
+    },
+    {
+      "component": "backend",
       "path": "scripts/collect-relay-d1.sh",
       "expected_sha256": "a40e2fead2a6d4e66f8067832a7e91ea63acfdfd5384dedc9eaf2684aafb35c0",
       "actual_sha256": "a40e2fead2a6d4e66f8067832a7e91ea63acfdfd5384dedc9eaf2684aafb35c0",
+      "passed": true
+    },
+    {
+      "component": "backend",
+      "path": "scripts/dev.mjs",
+      "expected_sha256": "50d4fd7a2b7e80a2c1d637a5573190fcd0552a5ecd6d7db789bb32833731babc",
+      "actual_sha256": "50d4fd7a2b7e80a2c1d637a5573190fcd0552a5ecd6d7db789bb32833731babc",
       "passed": true
     },
     {
@@ -328,9 +377,23 @@
     },
     {
       "component": "backend",
+      "path": "scripts/test-mysql.sh",
+      "expected_sha256": "e8a6085754b684335223bf9cad546033b88be097180689321b9be7c17a99012c",
+      "actual_sha256": "e8a6085754b684335223bf9cad546033b88be097180689321b9be7c17a99012c",
+      "passed": true
+    },
+    {
+      "component": "backend",
       "path": "scripts/workbench-service.mjs",
-      "expected_sha256": "a74e48ba6dd30f1dffaaafa4d7bf3624da98d5aa246d0ac9842590905c6dc2cc",
-      "actual_sha256": "a74e48ba6dd30f1dffaaafa4d7bf3624da98d5aa246d0ac9842590905c6dc2cc",
+      "expected_sha256": "d2f77f0d81783adb38c2d98ae52e1c83e939bb4e1810512f333c43a51653c6fc",
+      "actual_sha256": "d2f77f0d81783adb38c2d98ae52e1c83e939bb4e1810512f333c43a51653c6fc",
+      "passed": true
+    },
+    {
+      "component": "backend",
+      "path": "scripts/workbench-smoke.mjs",
+      "expected_sha256": "e9245d105de8a3be0de7cc65d33f6b43ef00dd7bb0dc80f44541f290b7d9ddc0",
+      "actual_sha256": "e9245d105de8a3be0de7cc65d33f6b43ef00dd7bb0dc80f44541f290b7d9ddc0",
       "passed": true
     },
     {

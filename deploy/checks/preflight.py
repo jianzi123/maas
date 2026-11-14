@@ -32,6 +32,12 @@ def blockers(values, lock, interface=None):
         result.append("source.inventoryMissingOrInvalid")
     if lock.get("databaseIdentities", {}).get("publisherCompletionContract", {}).get("templateSha256") != interface["backend"]["files"].get("config/mysql/release-permissions.sql"):
         result.append("identities.publisher.templateSource")
+    identities = lock.get("databaseIdentities", {})
+    factory = identities.get("publisherFactory", {})
+    if factory != interface["backend"].get("publisherFactory") or factory.get("sourceSha256") != interface["backend"]["files"].get("internal/release/mysqlstore/runtime.go") or factory.get("localConsumerSha256") != interface["backend"]["files"].get("cmd/workbench/main.go") or factory.get("dsnMode") != "explicit-function-argument" or factory.get("environmentName") is not None:
+        result.append("identities.publisher.factorySourceOrContract")
+    if identities.get("payloadTemplateSha256") != interface["backend"]["files"].get("config/mysql/controlapi-projections.sql"):
+        result.append("identities.payload.templateSource")
     try:
         validate_network(values)
     except ValueError:

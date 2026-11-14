@@ -1,9 +1,10 @@
 """Offline identity plan validation; never reads Secret bodies or contacts MySQL."""
+PAYLOAD_ROLE = "maas_history_payload_reader"
 EXPECTED = {
     "core": {"maas_kernel_runtime", "maas_release_reader"},
     "publisher": {"maas_release_publisher"},
     "historyReader": {"maas_release_history_reader"},
-    "payloadReader": {"maas_release_history_payload_reader"},
+    "payloadReader": {PAYLOAD_ROLE},
     "operationReader": {"maas_release_operations_runtime"},
 }
 

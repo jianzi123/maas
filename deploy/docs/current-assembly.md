@@ -1,5 +1,9 @@
 # 当前装配接口与差异修复
 
+## f445工厂/统一工作台接续（2026-11-14 UTC）
+
+当前固定后端为f445362，前端30cf、原部署组装器e564、QA核心ac94/50354a7分别保留。新增显式publisher工厂及本地五身份已经存在，payload角色已改为maas_history_payload_reader；生产适配器仍待证据。见[工厂说明](publisher-factory.md)与[来源组装](source-assembly.md)。下面“缺工厂”等旧截点仅为历史，不能覆盖新事实；作者本地运行证据与原独立QA范围分开。
+
 ## R1–R3 独立验收后来源更新（2026-11-13 UTC）
 
 当前来源为后端0559fa4、QA核心ac94a373、前端30cfce9与默认925d8c5；Chart0.2.2沿原#5接续4330883。完整237份上游输入和整目录替换见[固定来源组装](source-assembly.md)，publisher完成hook最窄列集及独立QA范围见[身份说明](database-identities.md)。此前选定摘要未覆盖全部Relay，且后端树的client.ts不含前端候选，旧“36/36”不代表本轮完整装配。下方旧截点和证据按历史保留。

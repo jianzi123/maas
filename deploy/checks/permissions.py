@@ -57,7 +57,7 @@ def inspect(repo=None):
             "passed":bool(required) and not missing and not writes and publisher['passed'],
             "remaining":["candidate controlapi-projections.sql provides separate payload/operations templates; effective privileges remain unverified",
                          "operations runtime includes INSERT and acknowledgement/completion UPDATE; not a SELECT-only reader",
-                         "control-api separates history/operations/payload but still constructs mysqlstore with the primary DB; no publisher DSN consumer",
+                         "OpenPublisher now consumes an explicit DSN in local workbench; control-api read gate still uses its primary DB and production publisher/operator wiring remains unverified",
                          "R3 effective default-role positives/1142/1143 negatives were independently tested at ac94 by QA50354a7; not rerun in this deployment turn",
                          "production default roles/inherited grants and publisher process wiring remain unverified"]}
 if __name__=="__main__":
