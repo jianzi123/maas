@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "scope": "installation-input-only-no-secret-values",
-  "sourceCommit": "95677f00a871a6b09d9474f6f66f9ee85a11b282",
+  "sourceCommit": "fe09d60b4932f78ed07dd27da36878b2a375d0fd",
   "productionWiringVerified": false,
   "connections": {
     "core": {
@@ -152,6 +152,7 @@
         "deploy/charts/maas-platform/values.yaml",
         "deploy/checks/candidate_wiring.py",
         "deploy/checks/identities.py",
+        "deploy/checks/inspect_sources.py",
         "deploy/checks/permissions.py",
         "deploy/checks/preflight.py",
         "deploy/checks/source_context.py",

@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "scope": "observed-source-interface-not-production-readiness",
   "backend": {
-    "sourceCommit": "95677f00a871a6b09d9474f6f66f9ee85a11b282",
+    "sourceCommit": "fe09d60b4932f78ed07dd27da36878b2a375d0fd",
     "apiGroup": "serving.maas.example",
     "operator": {
       "command": [
@@ -77,7 +77,7 @@
       "docs/release-management.md": "9fe469cd8ada7c48c513e69f00c6eab32d72f3a9b52aa7dbdb68fe3aceaa68ca",
       "docs/retained-history.md": "f72786711fc01d01c4202d0ab248c918f3d178e4cc6e621601e3bb226bf1e891",
       "docs/unified-status.md": "a9d692ae621c00ac6084139301fee71ab65ee986c0c1766888ab23a6ebc19554",
-      "docs/unified-workbench.md": "21ded92ec2ecf31bad1b1f0900e2791af8d7c0eefb3ea36931aaecba93e5eb33",
+      "docs/unified-workbench.md": "5f41647d36d5c79c4dc389df50e77a8f55f061b72bfa1dd8d9254d27ba50156c",
       "docs/usage-authority-continuation.md": "a86665fc787f573f169025fc977ea8af19d1ade7a4dfa3e83c1a208ddc1ea578",
       "docs/usage-diagnostics-v2.md": "436ad870400a49506b105d6f4d5db58e63129cbe2f106ccfe9834afdb8d2c0be",
       "docs/verification.md": "663c0952067d4e4c2ef7f6ef2108a387022a9ae4e16ebe57a79e68def2cd13b7",
@@ -581,7 +581,7 @@
     }
   },
   "console": {
-    "sourceCommit": "95677f00a871a6b09d9474f6f66f9ee85a11b282",
+    "sourceCommit": "fe09d60b4932f78ed07dd27da36878b2a375d0fd",
     "build": "npm ci && npm run build",
     "output": "console/dist",
     "localBridge": "development-and-explicit-workbench-mode-only",
