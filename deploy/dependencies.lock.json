@@ -3,8 +3,8 @@
   "status": "pending-environment-inputs",
   "deploymentApproved": false,
   "sourceBaseline": {
-    "chartBase": "43308837df5a2710f2027d320cdb93a4392285de",
-    "backendInspected": "0559fa46b4a728d6f542daf19532e794f8549b31",
+    "chartBase": "e5647a2f2b44f53d39a80041be94b619f07c29d6",
+    "backendInspected": "f445362a94c18807d0059608a0c4c47968916983",
     "contracts": "MAAS-2 v0.4 + retained v0.3 + query/recovery addenda + MAAS-1 role review",
     "terminal": "3.0",
     "ticket": "3",
@@ -18,7 +18,9 @@
     "qaCore": "ac94a373ec0a61c5fd4dc5380a7985a4fb47840f",
     "qaEvidence": "50354a705c03383d0102d0d437119afd7ffed8b3",
     "sourceInventory": "deploy/build-sources.lock.json",
-    "sourceInventorySha256": "732ab1a5d5cac4b5cbeb6783a669570cd664625cefec72f0c6a5506428a63880"
+    "sourceInventorySha256": "5fead3321eb6a581163cc96b6a4b058f4c6d1064bc098ff08e999e1a75e8dbc4",
+    "upstreamWorkbenchDeployment": "e5647a2f2b44f53d39a80041be94b619f07c29d6",
+    "backendBase": "0559fa46b4a728d6f542daf19532e794f8549b31"
   },
   "target": {
     "cluster": null,
@@ -67,7 +69,7 @@
       "owner": "ops",
       "artifact": true,
       "status": "pending",
-      "version": "0.2.2",
+      "version": "0.2.3",
       "digest": null,
       "mirror": null,
       "evidenceRef": null,
@@ -86,12 +88,12 @@
       "digest": null,
       "mirror": null,
       "evidenceRef": null,
-      "note": "Candidate0559 source; business core QA scoped to ac94; production adapters missing; image not built.",
+      "note": "Pinned f445 source, independent R1-R3 QA remains ac94; local publisher factory is not an approved production Operator adapter; no image built.",
       "requiredFor": [
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "0559fa46b4a728d6f542daf19532e794f8549b31",
+      "sourceCommit": "f445362a94c18807d0059608a0c4c47968916983",
       "compiledAPIGroup": "serving.maas.example"
     },
     {
@@ -108,7 +110,7 @@
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "0559fa46b4a728d6f542daf19532e794f8549b31",
+      "sourceCommit": "f445362a94c18807d0059608a0c4c47968916983",
       "compiledAPIGroup": "serving.maas.example"
     },
     {
@@ -424,7 +426,7 @@
   "databaseIdentities": {
     "schemaVersion": "1.0",
     "scope": "installation-input-only-no-secret-values",
-    "sourceCommit": "0559fa46b4a728d6f542daf19532e794f8549b31",
+    "sourceCommit": "f445362a94c18807d0059608a0c4c47968916983",
     "productionWiringVerified": false,
     "connections": {
       "core": {
@@ -482,7 +484,7 @@
       },
       "payloadReader": {
         "roles": [
-          "maas_release_history_payload_reader"
+          "maas_history_payload_reader"
         ],
         "forbiddenRoles": [
           "maas_kernel_runtime",
@@ -517,7 +519,7 @@
         "grantEvidenceRef": null
       }
     },
-    "note": "Candidate templates and controlled DSN consumers exist; production/default-role privileges and separate publisher wiring remain unverified.",
+    "note": "Five identities are wired in author local workbench. Production role bindings and publisher/operator adapter remain unverified; publisher uses an explicit function argument, not a new env variable.",
     "publisherCompletionContract": {
       "templatePath": "config/mysql/release-permissions.sql",
       "templateSha256": "50306ce5ab11484daf31d143ca49f14da4dd60c6d0c998e0610cb08dce507056",
@@ -543,18 +545,50 @@
       "evidence": {
         "evidenceCommit": "50354a705c03383d0102d0d437119afd7ffed8b3",
         "targetCommit": "ac94a373ec0a61c5fd4dc5380a7985a4fb47840f",
-        "scope": "R1-R3 controlled independent tests only; original5 and additional10; not all later commits or production",
+        "scope": "R1-R3 at ac94 only; f445 factory/local runtime/browser evidence is author-owned, not new independent QA",
         "reportPath": "test/qa-r123/report.md",
         "reportSha256": "67cfbcc7c659e6306662393d373f72c1a0c07ca35c0d7bd1d484bf1340a22851",
         "postQaChanges": [
           "README.md",
+          "cmd/workbench/identities.go",
+          "cmd/workbench/identities_test.go",
+          "cmd/workbench/main.go",
+          "config/mysql/controlapi-projections.sql",
           "docs/local-service.md",
-          "scripts/workbench-service.mjs"
+          "docs/unified-workbench.md",
+          "internal/kernel/publisher_runtime_test.go",
+          "internal/release/mysqlstore/runtime.go",
+          "scripts/assemble-workbench.py",
+          "scripts/dev.mjs",
+          "scripts/test-mysql.sh",
+          "scripts/workbench-service.mjs",
+          "scripts/workbench-smoke.mjs"
         ],
-        "postQaChangesAreLocalServiceAndDocsOnly": true,
+        "postQaChangesAreLocalServiceAndDocsOnly": false,
         "publisherTemplateSha256": "50306ce5ab11484daf31d143ca49f14da4dd60c6d0c998e0610cb08dce507056"
       },
       "productionBindingVerified": false
+    },
+    "publisherFactory": {
+      "entrypoint": "internal/release/mysqlstore.OpenPublisher",
+      "sourcePath": "internal/release/mysqlstore/runtime.go",
+      "sourceSha256": "1e75972d2d588ebff3e7839974eb2f5e0e075ea95d8ddb22245b2ff2e606d47c",
+      "dsnMode": "explicit-function-argument",
+      "environmentName": null,
+      "localConsumer": "cmd/workbench/main.go",
+      "localConsumerSha256": "a172832f9bf102336fd26262e2ac1f8e26ef00cb16fbf20898ab7bba4052b061",
+      "productionWiringVerified": false
+    },
+    "payloadTemplateSha256": "d35292ff6229b8c5ea858b1cba864ee093ffd61acb846805010a6b00ebc22a0c",
+    "localAuthorEvidence": {
+      "attachmentId": "01a1d8eb-5ce5-7d72-9249-0909c7f64ca3",
+      "attachmentSha256": "92656b68b7446baa33ef492f291a83675d73977faa2a976b5b8f4f75f80d08ba",
+      "backendCommit": "f445362a94c18807d0059608a0c4c47968916983",
+      "upstreamDeploymentCommit": "e5647a2f2b44f53d39a80041be94b619f07c29d6",
+      "scope": "author-artifact-source-byte-recheck-only-no-runtime-or-independent-QA",
+      "sourceChecksPassed": 292,
+      "sourceChecksTotal": 292,
+      "independentQA": false
     }
   }
 }

@@ -79,6 +79,17 @@ class InputGateTest(unittest.TestCase):
         lock["databaseIdentities"]["publisherCompletionContract"]["templateSha256"]="0"*64
         self.assertIn("identities.publisher.templateSource", self.check(v, lock))
 
+    def test_publisher_factory_plan_rejected(self):
+        for field, value in (("sourceSha256", "0"*64), ("localConsumerSha256", "0"*64), ("dsnMode", "environment"), ("environmentName", "MAAS_PUBLISHER_DSN")):
+            v, lock = self.complete(["ExternalAPI"])
+            lock["databaseIdentities"]["publisherFactory"][field]=value
+            self.assertIn("identities.publisher.factorySourceOrContract", self.check(v, lock))
+
+    def test_payload_template_source_rejected(self):
+        v, lock = self.complete(["ExternalAPI"])
+        lock["databaseIdentities"]["payloadTemplateSha256"]="0"*64
+        self.assertIn("identities.payload.templateSource", self.check(v, lock))
+
     def test_qa_revision_mismatch_rejected(self):
         for name in ("qaCore", "qaEvidence"):
             v, lock = self.complete(["ExternalAPI"])

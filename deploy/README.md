@@ -1,8 +1,8 @@
 # MaaS 部署包（MAAS-8）
 
-沿 PR #5 更新的平台 Chart 0.2.2、配置门槛、静态控制台打包和运维手册。默认925d8c5、后端候选0559fa4、QA核心ac94a373和前端候选30cfce9分别锁定。完整构建输入/整目录覆盖步骤见[固定来源组装](docs/source-assembly.md)。当前为可评审装配包；目标安装、真实H1–H4/Secret/validation、SelfHosted/GPU与A01–A34尚未运行验收。
+沿PR #5更新Chart0.2.3。默认925d8c5、固定后端f445362、QA核心ac94a373、前端30cfce9及原组装器e564分别锁定，后续PR head不自动纳入。完整输入见[来源组装](docs/source-assembly.md)，新publisher显式工厂/本地五身份与payload角色名见[工厂说明](docs/publisher-factory.md)。目标安装、真实H1–H4/Secret/validation、SelfHosted/GPU和A01–A34尚未运行验收。
 
-cmd/control-api已消费独立Reader/Operations/payload连接，新角色模板由原后端提供；publisher/生产入口仍待实际装配。管理入口仅loopback bootstrap，不提供生产健康/推理监听。Operator仍缺真实adapter，readyz失败、metrics关闭。详见[当前装配差异](docs/current-assembly.md)及[身份/故障恢复](docs/database-identities.md)。
+cmd/control-api已有独立Reader/Operations/payload连接；新OpenPublisher工厂已在统一工作台消费独立参数DSN，payload角色为maas_history_payload_reader。生产publisher/operator仍缺获准适配器，不把本地五身份当生产通过，也不虚构publisher环境变量。Operator仍缺真实adapter，readyz失败、metrics关闭。详见[当前装配差异](docs/current-assembly.md)及[身份/故障恢复](docs/database-identities.md)。
 
 默认关闭工作负载；示例输入和tests/fixtures为合成渲染，不能用于安装。Chart读取runtime-interface.json验证编译group，并拒绝把control-api用作生产core；预检另校验源码、六项迁移摘要、恢复输入及生产适配事实。文件/状态字段不能替代真实运行门禁。API group尚未批准，CRD/共享Higress/LWS/数据库/Secret/权重仍由各原安装方独立管理。
 

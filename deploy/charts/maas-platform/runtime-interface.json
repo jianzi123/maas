@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "scope": "observed-source-interface-not-production-readiness",
   "backend": {
-    "sourceCommit": "0559fa46b4a728d6f542daf19532e794f8549b31",
+    "sourceCommit": "f445362a94c18807d0059608a0c4c47968916983",
     "apiGroup": "serving.maas.example",
     "operator": {
       "command": [
@@ -54,8 +54,10 @@
       "cmd/control-api/readers.go": "b071c6c301d9f6abb8aea571acbf69eaaf15f62d2c8acfffe9e236edc4079f99",
       "cmd/control-api/readers_test.go": "d4dd24227cb49761b26e4aa02a411625771ca32a960b182e487ef6333414f554",
       "cmd/operator/main.go": "539a006cbcfb20076d5f5e4186c8ccb4a3917478ee193349ad768ecb3e71001c",
-      "cmd/workbench/main.go": "8f01626966a6dfb52ae69deb2cecfaf80d81bff6ca586615465ba627492d9c08",
-      "config/mysql/controlapi-projections.sql": "7ce580e6e0cf32d7ec77a6bf0334831fd321cc97158ffd3cd60b4050f39f018d",
+      "cmd/workbench/identities.go": "e9de64739b385f10cabc6a3ab09a8fe84be8c83a00c765f8c259a39877338e66",
+      "cmd/workbench/identities_test.go": "9b58740ebe44a720fa94948fd4a1efa9500c70ececcdee1866375004436f925f",
+      "cmd/workbench/main.go": "a172832f9bf102336fd26262e2ac1f8e26ef00cb16fbf20898ab7bba4052b061",
+      "config/mysql/controlapi-projections.sql": "d35292ff6229b8c5ea858b1cba864ee093ffd61acb846805010a6b00ebc22a0c",
       "config/mysql/kernel-permissions.sql": "90cd69cdb26b7746c2c56cedf82332ed73669989317c1590d8a935e5e8cf96e3",
       "config/mysql/release-permissions.sql": "50306ce5ab11484daf31d143ca49f14da4dd60c6d0c998e0610cb08dce507056",
       "docs/controlled-api-verification.md": "ccd6ad5cd1b959bf3c38364b48c60ec26b69e24fe1834ccf141b806297982eaf",
@@ -63,6 +65,7 @@
       "docs/local-service.md": "a4980e00e07376b0db7419ea75f143e757a368a5c9ae5191498f758db601b01c",
       "docs/release-management-http.md": "5112b13fa9ef19bb89eb37fe974e061ffaca14eef256e96660e36a6ea986020a",
       "docs/release-management.md": "9fe469cd8ada7c48c513e69f00c6eab32d72f3a9b52aa7dbdb68fe3aceaa68ca",
+      "docs/unified-workbench.md": "64af6657a42cffc4479196c0bb462bdeaa1e363c58db90b4790e95edc6cffdb1",
       "docs/usage-authority-continuation.md": "a86665fc787f573f169025fc977ea8af19d1ade7a4dfa3e83c1a208ddc1ea578",
       "go.mod": "3fc1c612237e81b1a61efdf59eb3e108980b170fd85b8b2c855db0f08240457b",
       "go.sum": "34ef9b8203162cccd56bdd7aa590ca1df2683c9a794ba118d3db0ff242609fb1",
@@ -73,6 +76,7 @@
       "internal/kernel/maas17_review_test.go": "4dac0037a305c2ab8bdc14491962e9ae2ec1fb7bb56994f0276489023132b0cc",
       "internal/kernel/migrate_control.go": "9d24c45955d7aad596dbed875cb86d3069fb70f5d684f214c1ba754e20df8f59",
       "internal/kernel/public_response.go": "84cabd8b8a6198dc429e6ebb437ee74048d58e4ddbe82598e0909c936d71644f",
+      "internal/kernel/publisher_runtime_test.go": "d1e457c3ffc0da21859624a442f8e4e85be32fda9e8d57049ae5dda981188e1c",
       "internal/kernel/r1_r3_boundaries_test.go": "93e151df7e7028e890c65b162b6e73949d83237b0d83167bb09ef503a1663b82",
       "internal/kernel/rebuild.go": "ac65163fca54cdf8f665d490e5c215e8cb3f1ae6a00343197aa42171f02f47fd",
       "internal/kernel/relay.go": "50a6ed55b989123a7c7597b31ee7ddef6c7f7addbf4a493c41c35e6076fa2fd1",
@@ -89,18 +93,34 @@
       "internal/release/management/schema.sql": "e02acd8ce3ea6b9b92f77e384cc363dfd85d11f8254a63f8981b682cdcb0ad84",
       "internal/release/mysqlstore/history.go": "a7d7d551f0daa70b74b5fc3db888350e2c5173c211a5e90bb5847c08627b268f",
       "internal/release/mysqlstore/migrate.go": "115e6bfed5c4489eaa2c2d84b0a74cf3b91d501bfa3cf145dd42ff4e504eaa07",
+      "internal/release/mysqlstore/runtime.go": "1e75972d2d588ebff3e7839974eb2f5e0e075ea95d8ddb22245b2ff2e606d47c",
       "internal/release/mysqlstore/schema/0001_release.sql": "91ea4dc8699fafa8ae8e9433c637828fce60f43878fe71c4ae1b688fffed69d5",
       "internal/release/mysqlstore/schema/0002_history.sql": "9294d4f9ca23354014607540fc52a472915c3e40f59dada293db74ae2f5b9193",
       "internal/release/mysqlstore/store.go": "a7d9d236d9e9b1dcc2b32f9323ec0abd18dfcc7f5e1a5a9d1ab912bba704f7b1",
       "internal/webconsole/handler.go": "a7e8d5f1d18bca568dbf4c3bc76495c5fc412aa19f8be694131f0d073f2b3764",
+      "scripts/assemble-workbench.py": "7ae660b8adcb9cd3036a86d34a3d3d8cd3a867b156778a727ad00430c99a4061",
       "scripts/collect-relay-d1.sh": "a40e2fead2a6d4e66f8067832a7e91ea63acfdfd5384dedc9eaf2684aafb35c0",
+      "scripts/dev.mjs": "50d4fd7a2b7e80a2c1d637a5573190fcd0552a5ecd6d7db789bb32833731babc",
       "scripts/relay-d1-manifest.py": "ccb01850bc5fb8160867c186e0b290e265ce55233105af8f0ad8bb05089518c8",
-      "scripts/workbench-service.mjs": "a74e48ba6dd30f1dffaaafa4d7bf3624da98d5aa246d0ac9842590905c6dc2cc"
+      "scripts/test-mysql.sh": "e8a6085754b684335223bf9cad546033b88be097180689321b9be7c17a99012c",
+      "scripts/workbench-service.mjs": "d2f77f0d81783adb38c2d98ae52e1c83e939bb4e1810512f333c43a51653c6fc",
+      "scripts/workbench-smoke.mjs": "e9245d105de8a3be0de7cc65d33f6b43ef00dd7bb0dc80f44541f290b7d9ddc0"
     },
     "candidateState": "draft-unmerged",
     "defaultBranchCommit": "925d8c55be9ce823d100bf90a5c78cf19ea66d58",
     "qaCoreCommit": "ac94a373ec0a61c5fd4dc5380a7985a4fb47840f",
-    "qaEvidenceCommit": "50354a705c03383d0102d0d437119afd7ffed8b3"
+    "qaEvidenceCommit": "50354a705c03383d0102d0d437119afd7ffed8b3",
+    "observedPrHead": "ba6061287a75bc9f17385abba6d6c7339e572015",
+    "publisherFactory": {
+      "entrypoint": "internal/release/mysqlstore.OpenPublisher",
+      "sourcePath": "internal/release/mysqlstore/runtime.go",
+      "sourceSha256": "1e75972d2d588ebff3e7839974eb2f5e0e075ea95d8ddb22245b2ff2e606d47c",
+      "dsnMode": "explicit-function-argument",
+      "environmentName": null,
+      "localConsumer": "cmd/workbench/main.go",
+      "localConsumerSha256": "a172832f9bf102336fd26262e2ac1f8e26ef00cb16fbf20898ab7bba4052b061",
+      "productionWiringVerified": false
+    }
   },
   "console": {
     "sourceCommit": "30cfce951df8a858810a035efe51846a75a4ade6",
@@ -236,7 +256,7 @@
   },
   "localWorkbench": {
     "entrypoint": "npm run dev",
-    "command": "cmd/workbench (localworkbench build tag)",
+    "command": "npm run dev (inside assembled output)",
     "listen": "127.0.0.1:4179",
     "temporaryDependencies": [
       "MySQL",
@@ -247,6 +267,13 @@
     "serviceEntrypoint": "node scripts/workbench-service.mjs start|status|stop",
     "serviceDocumentation": "docs/local-service.md",
     "profile": "local metadata management only; backend-owned active instance not modified",
-    "productionDeploymentReady": false
+    "productionDeploymentReady": false,
+    "sourceCommit": "f445362a94c18807d0059608a0c4c47968916983",
+    "assemblyEntrypoint": "python scripts/assemble-workbench.py --output <new-directory> (from pinned backend Git checkout)",
+    "serviceCommandDirectory": "actual assembled output; never this deployment checkout",
+    "identityCount": 5,
+    "publisherDSNMode": "explicit in-memory argument; no publisher environment variable",
+    "payloadRole": "maas_history_payload_reader",
+    "upstreamDeploymentCommit": "e5647a2f2b44f53d39a80041be94b619f07c29d6"
   }
 }

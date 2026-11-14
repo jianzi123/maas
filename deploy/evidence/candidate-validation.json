@@ -1,18 +1,17 @@
 {
-  "generated_at": "2026-11-13T17:40:29.256661+00:00",
-  "scope": "deployment-source-role-policy-and-readonly-local-health-only",
-  "backendCommit": "0559fa46b4a728d6f542daf19532e794f8549b31",
+  "generated_at": "2026-11-14T07:28:02.672456+00:00",
+  "scope": "deployment-source-role-and-factory-contract-checks-plus-readonly-health",
+  "backendCommit": "f445362a94c18807d0059608a0c4c47968916983",
+  "observedPrHeadNotAutomaticallyIncluded": "ba6061287a75bc9f17385abba6d6c7339e572015",
   "frontendCommit": "30cfce951df8a858810a035efe51846a75a4ade6",
-  "qaTargetCommit": "ac94a373ec0a61c5fd4dc5380a7985a4fb47840f",
-  "qaEvidenceCommit": "50354a705c03383d0102d0d437119afd7ffed8b3",
-  "defaultCommit": "925d8c55be9ce823d100bf90a5c78cf19ea66d58",
-  "deploymentBase": "43308837df5a2710f2027d320cdb93a4392285de",
-  "deploymentCommit": "recorded exactly in PR #5, issue comment and artifact build-sources manifest",
+  "upstreamWorkbenchDeployment": "e5647a2f2b44f53d39a80041be94b619f07c29d6",
+  "deploymentBase": "e5647a2f2b44f53d39a80041be94b619f07c29d6",
+  "deploymentCommit": "exact SHA in PR #5, issue handoff and attached build-source manifest",
   "checks": {
     "python": {
       "command": "python -m unittest discover -s deploy/checks -p test_*.py -v",
-      "passed": 42,
-      "scope": "synthetic identity, SQL-template policy and source input guards"
+      "passed": 45,
+      "scope": "offline identity/factory/source/SQL-template policy; no effective MySQL test"
     },
     "helm": {
       "passed": 117,
@@ -22,33 +21,43 @@
       },
       "scope": "local-static-and-synthetic-render-only"
     },
-    "selectedSourceFiles": 111,
-    "completeUpstreamFiles": 237,
-    "deploymentOverlayFiles": 48,
-    "sourceNegative": {
-      "scope": "actual-backend-tree-does-not-contain-frontend-candidate",
-      "result": {
-        "component": "console",
-        "expected": 64,
-        "matched": 56,
-        "missing": [
-          "console/docs/consumer-binding-fixes.md",
-          "console/scripts/consumer-binding-browser.mjs",
-          "console/src/consumer-binding.test.ts"
-        ],
-        "unexpected": [
-          "console/.env.workbench"
-        ],
-        "changed": [
-          "console/src/App.vue",
-          "console/src/api/client.ts",
-          "console/src/api/stream.ts",
-          "console/src/fixtures.ts",
-          "console/src/pages/Releases.vue"
-        ],
-        "passed": false
-      }
+    "selectedSourceFiles": 120,
+    "upstreamSourceFiles": 243,
+    "deploymentOverlayFiles": 49,
+    "candidateSourceChecks": 23,
+    "sourceMutationNegatives": {
+      "scope": "in-memory-source-mutation-only-not-executed-Go-or-database",
+      "checks": [
+        {
+          "case": "missing-dsn-guard",
+          "guard": "publisher_explicit_dsn_and_evidence_required",
+          "source_policy_rejected": true
+        },
+        {
+          "case": "missing-current-role-check",
+          "guard": "publisher_role_checked",
+          "source_policy_rejected": true
+        },
+        {
+          "case": "missing-completion-hook",
+          "guard": "publisher_completion_hook_enabled",
+          "source_policy_rejected": true
+        },
+        {
+          "case": "borrowed-core-connection",
+          "guard": "local_publisher_factory_consumed",
+          "source_policy_rejected": true
+        }
+      ],
+      "checks_passed": 4
     },
+    "authorSourceByteRecheck": {
+      "passed": 292,
+      "total": 292,
+      "scope": "author-artifact-source-byte-recheck-only-no-runtime-or-independent-QA",
+      "attachmentSha256": "92656b68b7446baa33ef492f291a83675d73977faa2a976b5b8f4f75f80d08ba"
+    },
+    "payloadRenameOnlySelectUnchanged": true,
     "preflight": {
       "internal": {
         "ready": false,
@@ -273,31 +282,52 @@
       }
     ]
   },
-  "referencedIndependentEvidence": {
+  "independentQA": {
     "evidenceCommit": "50354a705c03383d0102d0d437119afd7ffed8b3",
     "targetCommit": "ac94a373ec0a61c5fd4dc5380a7985a4fb47840f",
-    "scope": "R1-R3 controlled independent tests only; original5 and additional10; not all later commits or production",
+    "scope": "R1-R3 at ac94 only; f445 factory/local runtime/browser evidence is author-owned, not new independent QA",
     "reportPath": "test/qa-r123/report.md",
     "reportSha256": "67cfbcc7c659e6306662393d373f72c1a0c07ca35c0d7bd1d484bf1340a22851",
     "postQaChanges": [
       "README.md",
+      "cmd/workbench/identities.go",
+      "cmd/workbench/identities_test.go",
+      "cmd/workbench/main.go",
+      "config/mysql/controlapi-projections.sql",
       "docs/local-service.md",
-      "scripts/workbench-service.mjs"
+      "docs/unified-workbench.md",
+      "internal/kernel/publisher_runtime_test.go",
+      "internal/release/mysqlstore/runtime.go",
+      "scripts/assemble-workbench.py",
+      "scripts/dev.mjs",
+      "scripts/test-mysql.sh",
+      "scripts/workbench-service.mjs",
+      "scripts/workbench-smoke.mjs"
     ],
-    "postQaChangesAreLocalServiceAndDocsOnly": true,
+    "postQaChangesAreLocalServiceAndDocsOnly": false,
     "publisherTemplateSha256": "50306ce5ab11484daf31d143ca49f14da4dd60c6d0c998e0610cb08dce507056"
   },
-  "qaTestsRerun": false,
-  "businessTestsRerun": false,
-  "serviceStartedStoppedOrReplaced": false,
+  "authorRuntimeEvidence": {
+    "attachmentId": "01a1d8eb-5ce5-7d72-9249-0909c7f64ca3",
+    "attachmentSha256": "92656b68b7446baa33ef492f291a83675d73977faa2a976b5b8f4f75f80d08ba",
+    "backendCommit": "f445362a94c18807d0059608a0c4c47968916983",
+    "upstreamDeploymentCommit": "e5647a2f2b44f53d39a80041be94b619f07c29d6",
+    "scope": "author-artifact-source-byte-recheck-only-no-runtime-or-independent-QA",
+    "sourceChecksPassed": 292,
+    "sourceChecksTotal": 292,
+    "independentQA": false
+  },
+  "newIndependentQA": false,
+  "businessOrBrowserTestsRerun": false,
+  "serviceLifecycleOperationPerformed": false,
   "not_executed": [
-    "new-effective-MySQL-default-role-tests",
-    "production-identity-wiring",
+    "new-MySQL-default-role-or-effective-grant-tests",
+    "production-publisher-operator-assembly",
     "full-production-process-startup",
-    "Secret-access-or-target-account-grants",
+    "target-accounts-or-Secrets",
     "image-build-push",
     "target-cluster-install-upgrade-rollback",
-    "model-GPU-paid-calls",
+    "real-model-GPU-paid-calls",
     "real-Higress-validation",
     "backup-restore-HA",
     "A01-A34-runtime"

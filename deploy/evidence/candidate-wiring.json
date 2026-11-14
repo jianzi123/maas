@@ -12,16 +12,30 @@
     "payload_role_provided": true,
     "operations_runtime_role_provided": true,
     "operations_writes_explicit": true,
-    "no_user_provisioning": true
+    "no_user_provisioning": true,
+    "publisher_explicit_dsn_and_evidence_required": true,
+    "publisher_dsn_options_checked": true,
+    "publisher_role_checked": true,
+    "publisher_completion_hook_enabled": true,
+    "publisher_no_env_or_core_fallback": true,
+    "local_publisher_factory_consumed": true,
+    "local_core_handle_separated": true,
+    "local_reader_payload_handles_separated": true,
+    "local_operations_handle_separated": true,
+    "installer_owned_temp_guard": true,
+    "installer_payload_role_current": true
   },
   "passed": true,
   "files_sha256": {
     "cmd/control-api/main.go": "38cac312ea6fd081b0f6449a4ab034966a992cf92fa5ef348ecc589d83d6d6d5",
     "cmd/control-api/readers.go": "b071c6c301d9f6abb8aea571acbf69eaaf15f62d2c8acfffe9e236edc4079f99",
-    "config/mysql/controlapi-projections.sql": "7ce580e6e0cf32d7ec77a6bf0334831fd321cc97158ffd3cd60b4050f39f018d"
+    "config/mysql/controlapi-projections.sql": "d35292ff6229b8c5ea858b1cba864ee093ffd61acb846805010a6b00ebc22a0c",
+    "internal/release/mysqlstore/runtime.go": "1e75972d2d588ebff3e7839974eb2f5e0e075ea95d8ddb22245b2ff2e606d47c",
+    "cmd/workbench/main.go": "a172832f9bf102336fd26262e2ac1f8e26ef00cb16fbf20898ab7bba4052b061",
+    "cmd/workbench/identities.go": "e9de64739b385f10cabc6a3ab09a8fe84be8c83a00c765f8c259a39877338e66"
   },
   "gaps": [
-    "No publisher DSN consumer; mysqlstore.New still receives the primary handle (its ModelGate use must be distinguished from a publisher writer).",
+    "OpenPublisher consumes an explicit argument in local workbench; no production publisher/operator adapter or new environment variable is supplied. control-api still constructs a read gate on its primary DB.",
     "Explicit DSNs do not prevent an installer from configuring the same account; offline plan rejects shared principals/keys.",
     "Empty history DSN yields nil Reader DB and request-time failure; empty operations is fatal only with management enabled.",
     "Payload is optional at startup; missing rollback payload must remain unavailable.",

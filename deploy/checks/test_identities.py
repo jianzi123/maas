@@ -32,6 +32,11 @@ class IdentityTest(unittest.TestCase):
         p["connections"]["historyReader"]["roles"].append("maas_release_publisher")
         self.assertIn("identities.historyReader.roles",identity_blockers(p,"test"))
 
+    def test_legacy_payload_role_denied(self):
+        p=self.plan()
+        p["connections"]["payloadReader"]["roles"]=["maas_release_history_payload_reader"]
+        self.assertIn("identities.payloadReader.roles",identity_blockers(p,"test"))
+
     def test_missing_wiring_or_evidence_denied(self):
         p=self.plan()
         p["productionWiringVerified"]=False
