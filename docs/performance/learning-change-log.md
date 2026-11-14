@@ -1,5 +1,9 @@
 # 学习手册修订记录
 
+## 原生框架结构路径 v0.18
+
+沿6517a15新增原生dummy ModelRunner runner、9份源码锁、真实动态batch/graph/eager/回收及成熟caller记录。保留两次观测器错误与修正；实际图参数在固定cuda_graph_*缓冲，不能误读prefill metadata。默认路径与人工成熟op探针分列，不作模型质量或性能收益结论。
+
 最新补测：追加sgl-kernel0.3.9.post2的成熟store_kv_cache直接调用基线，主shape无fallback实际通过；D80/480字节行明确unsupported。原型未建立稳定跨shape优势，最终优先复用成熟库，不采用教学原型替换。三项研究各三个GPU进程，初期六进程结果保留。
 
 ## SGLang Decode/KV实际GPU批次 v0.16
