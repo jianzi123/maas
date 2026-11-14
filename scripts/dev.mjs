@@ -6,7 +6,7 @@ import path from "node:path";
 import { createRequire } from "node:module";
 
 export const root = fileURLToPath(new URL("../", import.meta.url));
-function npm(args) {
+function npm(args, environment = {}) {
   return new Promise((resolve, reject) => {
     const child = spawn(
       process.platform === "win32" ? "npm.cmd" : "npm",
@@ -17,6 +17,7 @@ function npm(args) {
         shell: process.platform === "win32",
         env: {
           ...process.env,
+          ...environment,
           npm_config_cache: path.join(root, ".cache", "npm"),
         },
       },
@@ -59,7 +60,11 @@ export async function startWorkbench({
       "--no-fund",
     ]);
   }
-  if (build) await npm(["run", "build", "--", "--mode", "workbench"]);
+  if (build) await npm(["run", "build", "--", "--mode", "workbench"], {
+    NODE_ENV: "development",
+    VITE_LOCAL_CONTROL: "true",
+    VITE_CONSOLE_FIXTURES: "false",
+  });
   const win = process.platform === "win32";
   const command = win ? "wsl.exe" : "bash";
   const args = win

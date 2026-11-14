@@ -9,6 +9,8 @@ const output = path.join(root, "artifacts", "workbench");
 await mkdir(output, { recursive: true });
 const checks = [],
   errors = [];
+const urlIndex = process.argv.indexOf("--url");
+const existingURL = urlIndex < 0 ? null : process.argv[urlIndex + 1];
 let app, browser, failure;
 const until = async (read, test, label) => {
   const deadline = Date.now() + 20000;
@@ -20,7 +22,7 @@ const until = async (read, test, label) => {
   throw Error("Timed out: " + label);
 };
 try {
-  app = await startWorkbench({
+  app = existingURL ? {url: existingURL} : await startWorkbench({
     port: 0,
     build: !process.argv.includes("--skip-build"),
   });
@@ -111,9 +113,19 @@ try {
     fullPage: true,
   });
   await nav("模型发布");
-  await page.getByRole("button", { name: "载入本地示例", exact: true }).click();
+  const legacyExample = page.getByRole("button", { name: "载入本地示例", exact: true });
+  if (await legacyExample.count()) await legacyExample.click();
+  else await page.getByRole("button", { name: "新建外部 API CR", exact: true }).click();
   const editor = page.getByLabel("ModelRelease JSON");
   await editor.waitFor();
+  if (!(await legacyExample.count())) {
+    const response = await page.request.get(app.url + "/__maas/workbench");
+    assert.equal(response.status(), 200);
+    const local = (await response.json()).example_release;
+    local.metadata.name = "local-created";
+    local.spec.modelAlias = "local-created";
+    await editor.fill(JSON.stringify(local, null, 2));
+  }
   const input = JSON.parse(await editor.inputValue());
   const name = input.metadata.name,
     namespace = input.metadata.namespace;
@@ -129,9 +141,13 @@ try {
     assert.equal(response.status(), 202);
     return response.json();
   };
-  await mutation(() =>
+  const createAccepted = await mutation(() =>
     page.getByRole("button", { name: "校验并提交配置", exact: true }).click(),
   );
+  const originalQuery = page.waitForResponse(r => r.request().method() === "GET" && new URL(r.url()).pathname.endsWith("/release-operations/" + createAccepted.operation.id));
+  await page.getByRole("button", {name: "查询原操作", exact: true}).click();
+  assert.equal((await (await originalQuery).json()).id, createAccepted.operation.id);
+  checks.push("page queries the exact original create operation ID without replay");
   const observed = () =>
     until(
       () => get(releasePath),
@@ -239,7 +255,7 @@ try {
   throw error;
 } finally {
   if (browser) await browser.close();
-  if (app) {
+  if (app?.stop) {
     const result = await app.stop();
     assert.equal(result.code, 0, "workbench exits cleanly");
     assert.equal(result.cleaned, true, "owned temporary data cleaned");
@@ -255,6 +271,7 @@ try {
         errors,
         failure: failure ?? null,
         scope: "compiled-Vue-real-Go-MySQL-envtest-local-integration",
+        serviceRetained: Boolean(existingURL),
       },
       null,
       2,

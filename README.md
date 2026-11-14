@@ -5,6 +5,8 @@ MaaS 平台 · 集成工作台
 
 ## 一条命令启动
 
+当前前端30cf与后端增量的统一组合入口见 [统一工作台](docs/unified-workbench.md)：先执行 `python scripts/assemble-workbench.py --output .cache/workbench-unified`，进入输出目录后按下述命令启动。组装保留运维原来源及完整清单，拒绝覆盖旧目录。
+
 准备 Node.js 22（22.12以上）。Windows 使用已安装的 Ubuntu-22.04 WSL2；Linux 使用 amd64。首次启动需能下载 npm、Go、MySQL 和临时 API-server 依赖；所有缓存只写入本仓库 `.cache/`，不安装系统服务、不使用现有 kubeconfig。
 
 ```sh
