@@ -1,4 +1,6 @@
-# MaaS 离线性能观测分析器
+# MaaS 性能研发工具
+
+本地GPU主线：[CUDA工程闭环与SGLang接续](../../docs/performance/engineering/15-local-gpu-cuda.md)，实现位于operators/local_gpu；已运行FP32/FP16算子对照，SGLang生成待完整权重。下方严格离线边界适用于原观测分析器。
 
 此工具**严格离线**，只读本地脱敏 JSON/SSE 夹具并写诊断报告。没有 HTTP 客户端、模型入口、长期服务、GPU、集群写入、授权/结算/退款或关闭证明能力。
 
@@ -30,7 +32,7 @@ build_fixture.py 只读同目录的 source-template.json（从架构合成算例
 输入顶层为 schema_version=1.0、synthetic 布尔值、protocols、window、registry、requests、observations、terminals、runtime_metadata、gateway_observations、slo。synthetic 必须显式提供；false 仅标记 offline_import_unverified，不构成真实运行证明。示例是完整格式参考。
 
 - registry: experiment_ref、run_id、cell_id、replicate；由受控导入流程关联。run/cell/replicate 不塞入共享观测或业务账本。
-- window: start_ms/end_ms；预先冻结的完整批次或 drain 截止的单调时钟逻辑窗，所有发送/终止必须在窗内。end_ms=null 的请求仍 pending，不能删除尾部换吞吐。工具无法证明源记录没有漏请求。
+- window: start_ms/end_ms；预先冻结的完整批次或 drain 截止的单调时钟逻辑窗。窗口采用完整 requests 清单中唯一的客户端 clock_scope；所有请求（含拒绝/pending）及各自 client observation 必须同scope，所有发送/终止必须在窗内。不同、未经归一化的客户端scope混入即拒绝整个输入，退出2且不生成新报告或覆盖旧报告，不输出共同窗口RPS。end_ms=null 的请求仍 pending，不能删除尾部换吞吐。工具无法证明源记录没有漏请求。
 - requests: 完整发送清单。每项的 scheduled_ms/sent_ms/end_ms、stream、transport_result、quality_pass、clock_scope、frames、visible_tokens、tokenizer_sha256、engine_token_times_ms/engine_clock_scope、rejection_code 是**工具导入 sidecar 字段**，不是 MAAS-2 新增 API。
 - frames: at_ms + wire，wire 是 LF/CRLF SSE 原文片段，可在事件中间分包。事件时间使用完整事件收齐时刻；角色、心跳、usage-only、空 delta 不算可见内容。只处理平台单完成文本流；非流式记录 frames=[]。
 - 每个请求需要一个 sampling_fraction=1 的 client request.observation，以保证本工具的固定分母与客户端时钟口径。稀疏服务器 trace 可额外提供，但不能凭 1% trace 反推全量吞吐。未准入拒绝必须无 invocation_binding 和终态，仍有 request_id。
@@ -70,3 +72,31 @@ docs/method-v0.2.md 更新方法与 v0.4 兼容；docs/experiment-plan-v0.2.json
 代码仅在 tools/perf，独立于 MAAS-11 的控制器、api、共享契约和根 Go 模块。工具不读集群/数据库/Secret、不释放slot，不建立新预算真源。真实指标采集、GPU/模型质量与基线、一次优化对照、Higress/MySQL并发恢复及A01–A34运行验收尚未执行。
 
 真实运行仍需最小Key/三维预算/全局slot/request/唯一结算内核，以及模型/权重许可、GPU/互联、获准环境版本、SLO、调用额度、预算/价表及停止阈值；由Mika后续明确交接。
+
+## C01 共同客户端时钟修订
+
+验收依据：[MAAS-10验收契约v0.3](docs/acceptance-v0.3.md)（Multica附件01a1a67f-36a7-70d6-9529-76594d820a66），本轮有界修复仅为C01；协议仍为v3/3.0/1.0，数据/报告格式和固定合成夹具不变。完整C01–C08包含真实运行/证据/收益判定，不因本地测试通过就判全部验收通过。负载3次配对只作探索；契约中确认收益的5次配对、8000请求及收益阈值均是待评审建议，execution_enabled仍为false。
+
+校验分两层：每项request与自己的client observation匹配，以及全部request共享同一个client clock_scope。单一scope标签本身不证明实际同步，导入者仍须保证同一可解释坐标/来源。当前没有多发生器归一化、offset/误差/有效区间映射功能；NTP墙钟接近不能替代monotonic坐标映射，工具不会自动修正或挑一个时钟继续计算。
+
+限制只适用于共同吞吐窗的客户端记录。go/higress/operator/engine观测可使用自身scope并保留本地测量时长；engine_token_times_ms只在其engine_clock_scope内算差值，允许与客户端完全不同的时间原点。它们不进入客户端scope一致性集合，也不与客户端时间戳相减。
+
+新增回归覆盖统一重命名单scope、混合scope（成功/拒绝/pending）、request与client observation错配、server独立scope、平移后的engine独立scope、非法scope，以及CLI退出2/无新报告/不改旧报告/不回显合成敏感哨兵。原41项未覆盖共同时间窗；新测试也只证明这些明确输入分支，不能代表真实采集同步或性能验收。
+
+## 团队入口与本地受控实验
+
+团队文档从[性能工作台](../../docs/performance/README.md)进入，包含入门、架构/指标、优化手册、阶段总结及实验/周总结模板。
+
+analyze.py仍是纯文件离线分析器。独立入口controlled_transport.py只运行本机HTTP/SSE fixture，不可指定任意端点，自动限量/限时并在返回前清理线程：
+
+    python tools/perf/controlled_transport.py --output-dir tools/perf/reports/local-first --requests 20 --concurrency 1 4 --repeats 1 --max-seconds 20
+
+其报告证据级别为measured_loopback_fixture_transport，platform_path_exercised=false；只测本地连接与采样机制。它不代表完整MaaS链路、模型/GPU、Token、质量或预算验收，也不输出平台收益通过结论。原始fixture中的业务终态和本地传输成功不能混成同一份账本。
+
+[首批E1–E3计划](experiments/first-batch-v0.4.json)保留execution_enabled=false及空审批值，不提供模型调用器。[实验手册](../../docs/performance/optimization-playbook.md)说明真实平台/引擎实验各自的进入条件和单因素比较。
+
+## 算子与推理运行时增量
+
+[算子/Profiler指南](../../docs/performance/operator-lab.md)提供默认CPU参考、禁用GPU计划及CUDA/Triton/PyTorch骨架；[固定源码分析](../../docs/performance/sglang-source-analysis-v0.5.md)记录SGLang不可变SHA；[运行实验方法](../../docs/performance/runtime-experiments-v0.5.md)补J02与合理基线/未恢复分母/热路径开销。
+
+原analyze.py仍只需要原依赖；完整测试新增NumPy2.3.5，见operators/requirements-cpu.txt。CPU参考不导入Torch或Triton。GPU和Profiler执行必须先有批准的完整计划，默认拒绝；本轮未编译/执行GPU内核。

@@ -6,7 +6,20 @@ import path from "node:path";
 import { createRequire } from "node:module";
 
 export const root = fileURLToPath(new URL("../", import.meta.url));
-function npm(args) {
+export function cacheEnvironment() {
+  const result = {};
+  for (const name of ["MAAS_WORKBENCH_TOOL_CACHE", "MAAS_WORKBENCH_GO_CACHE"]) {
+    let value = process.env[name];
+    if (!value) continue;
+    value = value.replaceAll("\\", "/");
+    if (/^[A-Za-z]:\//.test(value))
+      value = "/mnt/" + value[0].toLowerCase() + value.slice(2);
+    if (!value.startsWith("/")) throw Error(name + " must be an absolute path");
+    result[name] = value;
+  }
+  return result;
+}
+function npm(args, environment = {}) {
   return new Promise((resolve, reject) => {
     const child = spawn(
       process.platform === "win32" ? "npm.cmd" : "npm",
@@ -17,6 +30,7 @@ function npm(args) {
         shell: process.platform === "win32",
         env: {
           ...process.env,
+          ...environment,
           npm_config_cache: path.join(root, ".cache", "npm"),
         },
       },
@@ -59,8 +73,13 @@ export async function startWorkbench({
       "--no-fund",
     ]);
   }
-  if (build) await npm(["run", "build", "--", "--mode", "workbench"]);
+  if (build) await npm(["run", "build", "--", "--mode", "workbench"], {
+    NODE_ENV: "development",
+    VITE_LOCAL_CONTROL: "true",
+    VITE_CONSOLE_FIXTURES: "false",
+  });
   const win = process.platform === "win32";
+  const cache = cacheEnvironment();
   const command = win ? "wsl.exe" : "bash";
   const args = win
     ? [
@@ -69,6 +88,7 @@ export async function startWorkbench({
         "--exec",
         "env",
         `MAAS_WORKBENCH_PORT=${port}`,
+        ...Object.entries(cache).map(([name, value]) => `${name}=${value}`),
         "bash",
         "scripts/workbench.sh",
       ]
@@ -76,7 +96,7 @@ export async function startWorkbench({
   const child = spawn(command, args, {
     cwd: root,
     stdio: ["pipe", "pipe", "pipe"],
-    env: { ...process.env, MAAS_WORKBENCH_PORT: String(port) },
+    env: { ...process.env, ...cache, MAAS_WORKBENCH_PORT: String(port) },
   });
   let readyResolve,
     readyReject,
@@ -138,7 +158,7 @@ export async function startWorkbench({
     process.off("SIGINT", interrupt);
     process.off("SIGTERM", interrupt);
   });
-  const info = await started;
+  let info; try { info = await started; } catch (error) { error.cleaned = (await exited).cleaned; throw error; }
   return { ...info, stop, exited };
 }
 

@@ -3,10 +3,13 @@ set -euo pipefail
 repo="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 cd -- "$repo"
 bash scripts/setup-workbench.sh
-export GOROOT="$repo/.cache/go-linux/go" GOMODCACHE="$repo/.cache/mod" GOCACHE="$repo/.cache/build-linux" GOPATH="$repo/.cache/gopath-linux" GOTOOLCHAIN=local GOENV=off
-export KUBEBUILDER_ASSETS="$repo/.cache/envtest/controller-tools/envtest"
-mysql_base="$repo/.cache/mysql-test/mysql-8.4.7-linux-glibc2.28-x86_64-minimal"
-export LD_LIBRARY_PATH="$repo/.cache/mysql-test/lib/usr/lib/x86_64-linux-gnu${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+tools="${MAAS_WORKBENCH_TOOL_CACHE:-$repo/.cache}"
+cache="${MAAS_WORKBENCH_GO_CACHE:-$repo/.cache}"
+export GOROOT="$tools/go-linux/go" GOMODCACHE="$cache/mod" GOCACHE="$cache/build-linux" GOPATH="$cache/gopath-linux" GOTOOLCHAIN=local GOENV=off GOTELEMETRY=off
+export KUBEBUILDER_ASSETS="$tools/envtest/controller-tools/envtest"
+export GOFLAGS="${GOFLAGS:--p=4 -buildvcs=false}" GOMAXPROCS="${GOMAXPROCS:-4}"
+mysql_base="$tools/mysql-test/mysql-8.4.7-linux-glibc2.28-x86_64-minimal"
+export LD_LIBRARY_PATH="$tools/mysql-test/lib/usr/lib/x86_64-linux-gnu${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
 mkdir -p .cache/bin artifacts/workbench
 echo 'Building the integrated Go workbench…' >&2
 "$GOROOT/bin/go" build -tags localworkbench -o .cache/bin/maas-workbench ./cmd/workbench

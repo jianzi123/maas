@@ -1,0 +1,7 @@
+{
+  "expected_child_exit": 42,
+  "actual_child_exit": 42,
+  "isolated_child_context": true,
+  "compute_sanitizer_executed": false,
+  "performance_or_engine_result": false
+}

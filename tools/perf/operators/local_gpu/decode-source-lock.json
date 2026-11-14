@@ -1,0 +1,892 @@
+{
+  "version": "0.5.2",
+  "commit": "b0d25e72c401f37b55d689ddbf05b8c583afe854",
+  "files": [
+    {
+      "path": "srt/layers/attention/triton_backend.py",
+      "sha256": "7ef7092da25a33c244f50f4d9269f47737589e7625c042c2a31406328a92f469",
+      "upstream_sha256": "7ef7092da25a33c244f50f4d9269f47737589e7625c042c2a31406328a92f469",
+      "matches_upstream": true,
+      "bytes": 41858,
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/b0d25e72c401f37b55d689ddbf05b8c583afe854/python/sglang/srt/layers/attention/triton_backend.py",
+      "symbols": [
+        {
+          "name": "logit_capping_mod",
+          "line": 23,
+          "end_line": 28
+        },
+        {
+          "name": "ForwardMetadata",
+          "line": 32,
+          "end_line": 46
+        },
+        {
+          "name": "TritonAttnBackend",
+          "line": 49,
+          "end_line": 821
+        },
+        {
+          "name": "TritonMultiStepDraftBackend",
+          "line": 824,
+          "end_line": 961
+        },
+        {
+          "name": "get_num_kv_splits_triton",
+          "line": 965,
+          "end_line": 1013
+        },
+        {
+          "name": "update_sliding_window_buffer",
+          "line": 1016,
+          "end_line": 1053
+        },
+        {
+          "name": "update_sliding_window_buffer_cuda_graph",
+          "line": 1056,
+          "end_line": 1090
+        },
+        {
+          "name": "__init__",
+          "line": 50,
+          "end_line": 129
+        },
+        {
+          "name": "get_num_kv_splits",
+          "line": 131,
+          "end_line": 165
+        },
+        {
+          "name": "init_forward_metadata",
+          "line": 167,
+          "end_line": 367
+        },
+        {
+          "name": "init_cuda_graph_state",
+          "line": 369,
+          "end_line": 425
+        },
+        {
+          "name": "init_forward_metadata_capture_cuda_graph",
+          "line": 427,
+          "end_line": 581
+        },
+        {
+          "name": "init_forward_metadata_replay_cuda_graph",
+          "line": 583,
+          "end_line": 703
+        },
+        {
+          "name": "get_cuda_graph_seq_len_fill_value",
+          "line": 705,
+          "end_line": 706
+        },
+        {
+          "name": "forward_extend",
+          "line": 708,
+          "end_line": 769
+        },
+        {
+          "name": "forward_decode",
+          "line": 771,
+          "end_line": 821
+        },
+        {
+          "name": "__init__",
+          "line": 830,
+          "end_line": 866
+        },
+        {
+          "name": "common_template",
+          "line": 868,
+          "end_line": 898
+        },
+        {
+          "name": "init_forward_metadata",
+          "line": 900,
+          "end_line": 919
+        },
+        {
+          "name": "init_cuda_graph_state",
+          "line": 921,
+          "end_line": 930
+        },
+        {
+          "name": "init_forward_metadata_capture_cuda_graph",
+          "line": 932,
+          "end_line": 944
+        },
+        {
+          "name": "init_forward_metadata_replay_cuda_graph",
+          "line": 946,
+          "end_line": 961
+        },
+        {
+          "name": "call_fn",
+          "line": 910,
+          "end_line": 917
+        },
+        {
+          "name": "call_fn",
+          "line": 933,
+          "end_line": 942
+        },
+        {
+          "name": "call_fn",
+          "line": 949,
+          "end_line": 959
+        }
+      ]
+    },
+    {
+      "path": "srt/layers/attention/triton_ops/decode_attention.py",
+      "sha256": "2673adaad3d71209ff4f44788060913b1d6cce5021bbf1bf38334a09acf3d251",
+      "upstream_sha256": "2673adaad3d71209ff4f44788060913b1d6cce5021bbf1bf38334a09acf3d251",
+      "matches_upstream": true,
+      "bytes": 20554,
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/b0d25e72c401f37b55d689ddbf05b8c583afe854/python/sglang/srt/layers/attention/triton_ops/decode_attention.py",
+      "symbols": [
+        {
+          "name": "tanh",
+          "line": 39,
+          "end_line": 41
+        },
+        {
+          "name": "_fwd_kernel_stage1",
+          "line": 45,
+          "end_line": 179
+        },
+        {
+          "name": "_decode_att_m_fwd",
+          "line": 182,
+          "end_line": 249
+        },
+        {
+          "name": "_fwd_grouped_kernel_stage1",
+          "line": 253,
+          "end_line": 423
+        },
+        {
+          "name": "_decode_grouped_att_m_fwd",
+          "line": 426,
+          "end_line": 512
+        },
+        {
+          "name": "_fwd_kernel_stage2",
+          "line": 516,
+          "end_line": 582
+        },
+        {
+          "name": "_decode_softmax_reducev_fwd",
+          "line": 585,
+          "end_line": 630
+        },
+        {
+          "name": "decode_attention_fwd_normal",
+          "line": 633,
+          "end_line": 673
+        },
+        {
+          "name": "decode_attention_fwd_grouped",
+          "line": 676,
+          "end_line": 716
+        },
+        {
+          "name": "decode_attention_fwd",
+          "line": 719,
+          "end_line": 776
+        }
+      ]
+    },
+    {
+      "path": "srt/layers/attention/utils.py",
+      "sha256": "971fe3370d95c2505ed959c36f579745174df5602bc3dadd5874c7aa77541059",
+      "upstream_sha256": "971fe3370d95c2505ed959c36f579745174df5602bc3dadd5874c7aa77541059",
+      "matches_upstream": true,
+      "bytes": 3174,
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/b0d25e72c401f37b55d689ddbf05b8c583afe854/python/sglang/srt/layers/attention/utils.py",
+      "symbols": [
+        {
+          "name": "create_flashinfer_kv_indices_triton",
+          "line": 11,
+          "end_line": 46
+        },
+        {
+          "name": "create_flashmla_kv_indices_triton",
+          "line": 50,
+          "end_line": 99
+        }
+      ]
+    },
+    {
+      "path": "srt/mem_cache/memory_pool.py",
+      "sha256": "0914922deb9e75024e211e9339a28a4a0bebefdfdc7f7ca9571d7fa2f3357cb0",
+      "upstream_sha256": "0914922deb9e75024e211e9339a28a4a0bebefdfdc7f7ca9571d7fa2f3357cb0",
+      "matches_upstream": true,
+      "bytes": 49716,
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/b0d25e72c401f37b55d689ddbf05b8c583afe854/python/sglang/srt/mem_cache/memory_pool.py",
+      "symbols": [
+        {
+          "name": "ReqToTokenPool",
+          "line": 55,
+          "end_line": 102
+        },
+        {
+          "name": "MambaPool",
+          "line": 105,
+          "end_line": 204
+        },
+        {
+          "name": "HybridReqToTokenPool",
+          "line": 207,
+          "end_line": 303
+        },
+        {
+          "name": "KVCache",
+          "line": 306,
+          "end_line": 391
+        },
+        {
+          "name": "MHATokenToKVPool",
+          "line": 394,
+          "end_line": 642
+        },
+        {
+          "name": "HybridLinearKVPool",
+          "line": 645,
+          "end_line": 724
+        },
+        {
+          "name": "SWAKVPool",
+          "line": 727,
+          "end_line": 846
+        },
+        {
+          "name": "AscendTokenToKVPool",
+          "line": 849,
+          "end_line": 931
+        },
+        {
+          "name": "set_mla_kv_buffer_kernel",
+          "line": 935,
+          "end_line": 970
+        },
+        {
+          "name": "set_mla_kv_buffer_triton",
+          "line": 973,
+          "end_line": 997
+        },
+        {
+          "name": "MLATokenToKVPool",
+          "line": 1000,
+          "end_line": 1166
+        },
+        {
+          "name": "AscendMLAPagedTokenToKVPool",
+          "line": 1169,
+          "end_line": 1306
+        },
+        {
+          "name": "DoubleSparseTokenToKVPool",
+          "line": 1309,
+          "end_line": 1385
+        },
+        {
+          "name": "copy_all_layer_kv_cache",
+          "line": 1389,
+          "end_line": 1423
+        },
+        {
+          "name": "__init__",
+          "line": 58,
+          "end_line": 78
+        },
+        {
+          "name": "write",
+          "line": 80,
+          "end_line": 81
+        },
+        {
+          "name": "available_size",
+          "line": 83,
+          "end_line": 84
+        },
+        {
+          "name": "alloc",
+          "line": 86,
+          "end_line": 93
+        },
+        {
+          "name": "free",
+          "line": 95,
+          "end_line": 99
+        },
+        {
+          "name": "clear",
+          "line": 101,
+          "end_line": 102
+        },
+        {
+          "name": "__init__",
+          "line": 106,
+          "end_line": 170
+        },
+        {
+          "name": "get_mamba_params_all_layers",
+          "line": 172,
+          "end_line": 173
+        },
+        {
+          "name": "get_mamba_params",
+          "line": 175,
+          "end_line": 176
+        },
+        {
+          "name": "get_mamba_size",
+          "line": 178,
+          "end_line": 182
+        },
+        {
+          "name": "available_size",
+          "line": 184,
+          "end_line": 185
+        },
+        {
+          "name": "alloc",
+          "line": 187,
+          "end_line": 194
+        },
+        {
+          "name": "free",
+          "line": 196,
+          "end_line": 201
+        },
+        {
+          "name": "clear",
+          "line": 203,
+          "end_line": 204
+        },
+        {
+          "name": "__init__",
+          "line": 210,
+          "end_line": 248
+        },
+        {
+          "name": "alloc",
+          "line": 252,
+          "end_line": 275
+        },
+        {
+          "name": "get_mamba_indices",
+          "line": 277,
+          "end_line": 278
+        },
+        {
+          "name": "get_mamba_params",
+          "line": 280,
+          "end_line": 282
+        },
+        {
+          "name": "get_mamba_params_all_layers",
+          "line": 284,
+          "end_line": 285
+        },
+        {
+          "name": "free",
+          "line": 288,
+          "end_line": 299
+        },
+        {
+          "name": "clear",
+          "line": 301,
+          "end_line": 303
+        },
+        {
+          "name": "__init__",
+          "line": 308,
+          "end_line": 340
+        },
+        {
+          "name": "_finalize_allocation_log",
+          "line": 342,
+          "end_line": 360
+        },
+        {
+          "name": "get_key_buffer",
+          "line": 363,
+          "end_line": 364
+        },
+        {
+          "name": "get_value_buffer",
+          "line": 367,
+          "end_line": 368
+        },
+        {
+          "name": "get_kv_buffer",
+          "line": 371,
+          "end_line": 372
+        },
+        {
+          "name": "set_kv_buffer",
+          "line": 375,
+          "end_line": 382
+        },
+        {
+          "name": "register_layer_transfer_counter",
+          "line": 384,
+          "end_line": 385
+        },
+        {
+          "name": "get_cpu_copy",
+          "line": 387,
+          "end_line": 388
+        },
+        {
+          "name": "load_cpu_copy",
+          "line": 390,
+          "end_line": 391
+        },
+        {
+          "name": "__init__",
+          "line": 396,
+          "end_line": 439
+        },
+        {
+          "name": "_create_buffers",
+          "line": 441,
+          "end_line": 484
+        },
+        {
+          "name": "_clear_buffers",
+          "line": 486,
+          "end_line": 488
+        },
+        {
+          "name": "get_kv_size_bytes",
+          "line": 490,
+          "end_line": 499
+        },
+        {
+          "name": "get_contiguous_buf_infos",
+          "line": 502,
+          "end_line": 526
+        },
+        {
+          "name": "maybe_get_custom_mem_pool",
+          "line": 528,
+          "end_line": 529
+        },
+        {
+          "name": "get_cpu_copy",
+          "line": 531,
+          "end_line": 547
+        },
+        {
+          "name": "load_cpu_copy",
+          "line": 549,
+          "end_line": 564
+        },
+        {
+          "name": "_get_key_buffer",
+          "line": 566,
+          "end_line": 570
+        },
+        {
+          "name": "get_key_buffer",
+          "line": 572,
+          "end_line": 578
+        },
+        {
+          "name": "_get_value_buffer",
+          "line": 580,
+          "end_line": 584
+        },
+        {
+          "name": "get_value_buffer",
+          "line": 586,
+          "end_line": 589
+        },
+        {
+          "name": "get_kv_buffer",
+          "line": 591,
+          "end_line": 592
+        },
+        {
+          "name": "set_kv_buffer",
+          "line": 594,
+          "end_line": 632
+        },
+        {
+          "name": "move_kv_cache",
+          "line": 634,
+          "end_line": 642
+        },
+        {
+          "name": "__init__",
+          "line": 648,
+          "end_line": 679
+        },
+        {
+          "name": "get_kv_size_bytes",
+          "line": 681,
+          "end_line": 682
+        },
+        {
+          "name": "get_contiguous_buf_infos",
+          "line": 684,
+          "end_line": 685
+        },
+        {
+          "name": "_transfer_full_attention_id",
+          "line": 687,
+          "end_line": 692
+        },
+        {
+          "name": "get_key_buffer",
+          "line": 694,
+          "end_line": 696
+        },
+        {
+          "name": "get_value_buffer",
+          "line": 698,
+          "end_line": 700
+        },
+        {
+          "name": "get_kv_buffer",
+          "line": 702,
+          "end_line": 704
+        },
+        {
+          "name": "set_kv_buffer",
+          "line": 706,
+          "end_line": 724
+        },
+        {
+          "name": "__init__",
+          "line": 730,
+          "end_line": 767
+        },
+        {
+          "name": "get_kv_size_bytes",
+          "line": 769,
+          "end_line": 772
+        },
+        {
+          "name": "get_contiguous_buf_infos",
+          "line": 774,
+          "end_line": 786
+        },
+        {
+          "name": "get_key_buffer",
+          "line": 788,
+          "end_line": 793
+        },
+        {
+          "name": "get_value_buffer",
+          "line": 795,
+          "end_line": 800
+        },
+        {
+          "name": "get_kv_buffer",
+          "line": 802,
+          "end_line": 807
+        },
+        {
+          "name": "translate_loc_from_full_to_swa",
+          "line": 809,
+          "end_line": 811
+        },
+        {
+          "name": "set_kv_buffer",
+          "line": 813,
+          "end_line": 846
+        },
+        {
+          "name": "_create_buffers",
+          "line": 851,
+          "end_line": 870
+        },
+        {
+          "name": "get_contiguous_buf_infos",
+          "line": 873,
+          "end_line": 897
+        },
+        {
+          "name": "set_kv_buffer",
+          "line": 899,
+          "end_line": 931
+        },
+        {
+          "name": "__init__",
+          "line": 1001,
+          "end_line": 1062
+        },
+        {
+          "name": "get_kv_size_bytes",
+          "line": 1064,
+          "end_line": 1069
+        },
+        {
+          "name": "get_contiguous_buf_infos",
+          "line": 1072,
+          "end_line": 1079
+        },
+        {
+          "name": "maybe_get_custom_mem_pool",
+          "line": 1081,
+          "end_line": 1082
+        },
+        {
+          "name": "get_key_buffer",
+          "line": 1084,
+          "end_line": 1090
+        },
+        {
+          "name": "get_value_buffer",
+          "line": 1092,
+          "end_line": 1100
+        },
+        {
+          "name": "get_kv_buffer",
+          "line": 1102,
+          "end_line": 1103
+        },
+        {
+          "name": "set_kv_buffer",
+          "line": 1105,
+          "end_line": 1120
+        },
+        {
+          "name": "set_mla_kv_buffer",
+          "line": 1122,
+          "end_line": 1139
+        },
+        {
+          "name": "get_cpu_copy",
+          "line": 1141,
+          "end_line": 1154
+        },
+        {
+          "name": "load_cpu_copy",
+          "line": 1156,
+          "end_line": 1166
+        },
+        {
+          "name": "__init__",
+          "line": 1170,
+          "end_line": 1224
+        },
+        {
+          "name": "get_kv_size_bytes",
+          "line": 1226,
+          "end_line": 1234
+        },
+        {
+          "name": "get_kv_buffer",
+          "line": 1236,
+          "end_line": 1242
+        },
+        {
+          "name": "get_key_buffer",
+          "line": 1244,
+          "end_line": 1250
+        },
+        {
+          "name": "get_value_buffer",
+          "line": 1252,
+          "end_line": 1258
+        },
+        {
+          "name": "get_contiguous_buf_infos",
+          "line": 1261,
+          "end_line": 1272
+        },
+        {
+          "name": "set_kv_buffer",
+          "line": 1274,
+          "end_line": 1306
+        },
+        {
+          "name": "__init__",
+          "line": 1310,
+          "end_line": 1356
+        },
+        {
+          "name": "get_key_buffer",
+          "line": 1358,
+          "end_line": 1359
+        },
+        {
+          "name": "get_value_buffer",
+          "line": 1361,
+          "end_line": 1362
+        },
+        {
+          "name": "get_label_buffer",
+          "line": 1364,
+          "end_line": 1365
+        },
+        {
+          "name": "get_kv_buffer",
+          "line": 1367,
+          "end_line": 1371
+        },
+        {
+          "name": "set_kv_buffer",
+          "line": 1373,
+          "end_line": 1385
+        }
+      ]
+    },
+    {
+      "path": "srt/layers/radix_attention.py",
+      "sha256": "329ba0c1aaa2636ccf4de83b1555b8d4e96396309799856f1d9d8cbe7785e8f2",
+      "upstream_sha256": "329ba0c1aaa2636ccf4de83b1555b8d4e96396309799856f1d9d8cbe7785e8f2",
+      "matches_upstream": true,
+      "bytes": 3745,
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/b0d25e72c401f37b55d689ddbf05b8c583afe854/python/sglang/srt/layers/radix_attention.py",
+      "symbols": [
+        {
+          "name": "AttentionType",
+          "line": 27,
+          "end_line": 36
+        },
+        {
+          "name": "RadixAttention",
+          "line": 39,
+          "end_line": 116
+        },
+        {
+          "name": "__init__",
+          "line": 44,
+          "end_line": 88
+        },
+        {
+          "name": "forward",
+          "line": 90,
+          "end_line": 116
+        }
+      ]
+    },
+    {
+      "path": "srt/model_executor/cuda_graph_runner.py",
+      "sha256": "68e0b8b0a663d70a800154cb9dc46794eb04d67ba3045ff3f06694733783b7e2",
+      "upstream_sha256": "68e0b8b0a663d70a800154cb9dc46794eb04d67ba3045ff3f06694733783b7e2",
+      "matches_upstream": true,
+      "bytes": 34143,
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/b0d25e72c401f37b55d689ddbf05b8c583afe854/python/sglang/srt/model_executor/cuda_graph_runner.py",
+      "symbols": [
+        {
+          "name": "get_is_capture_mode",
+          "line": 73,
+          "end_line": 74
+        },
+        {
+          "name": "model_capture_mode",
+          "line": 78,
+          "end_line": 84
+        },
+        {
+          "name": "freeze_gc",
+          "line": 88,
+          "end_line": 102
+        },
+        {
+          "name": "_to_torch",
+          "line": 105,
+          "end_line": 113
+        },
+        {
+          "name": "patch_model",
+          "line": 117,
+          "end_line": 146
+        },
+        {
+          "name": "set_torch_compile_config",
+          "line": 149,
+          "end_line": 162
+        },
+        {
+          "name": "get_batch_sizes_to_capture",
+          "line": 165,
+          "end_line": 221
+        },
+        {
+          "name": "get_global_graph_memory_pool",
+          "line": 228,
+          "end_line": 229
+        },
+        {
+          "name": "set_global_graph_memory_pool",
+          "line": 232,
+          "end_line": 234
+        },
+        {
+          "name": "CudaGraphRunner",
+          "line": 237,
+          "end_line": 858
+        },
+        {
+          "name": "__init__",
+          "line": 240,
+          "end_line": 393
+        },
+        {
+          "name": "_cache_loc_dtype",
+          "line": 395,
+          "end_line": 396
+        },
+        {
+          "name": "can_run",
+          "line": 398,
+          "end_line": 448
+        },
+        {
+          "name": "capture",
+          "line": 450,
+          "end_line": 515
+        },
+        {
+          "name": "_capture_graph",
+          "line": 517,
+          "end_line": 520
+        },
+        {
+          "name": "_create_device_graph",
+          "line": 522,
+          "end_line": 523
+        },
+        {
+          "name": "capture_one_batch_size",
+          "line": 525,
+          "end_line": 678
+        },
+        {
+          "name": "recapture_if_needed",
+          "line": 680,
+          "end_line": 709
+        },
+        {
+          "name": "replay_prepare",
+          "line": 711,
+          "end_line": 799
+        },
+        {
+          "name": "replay",
+          "line": 801,
+          "end_line": 829
+        },
+        {
+          "name": "get_spec_info",
+          "line": 831,
+          "end_line": 858
+        },
+        {
+          "name": "run_once",
+          "line": 643,
+          "end_line": 663
+        }
+      ]
+    }
+  ],
+  "all_match": true
+}

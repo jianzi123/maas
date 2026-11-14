@@ -1,0 +1,6 @@
+{
+  "source_commit": "d2d7869fe16b8968d6ca5b00a63560c322b84dc1",
+  "path": "internal/protocol/contracts/diagnostic.schema.json",
+  "sha256": "d35c305ab02acae560c7a8423e672b4d1b50f837c7fc314a75b20628fcb88a4a",
+  "scope": "immutable read-only source contract snapshot; no shared protocol extension"
+}

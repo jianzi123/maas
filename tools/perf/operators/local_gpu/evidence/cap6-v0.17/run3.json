@@ -1,0 +1,1658 @@
+{
+  "scope": "original SGLang GPU backend tensor path; no Engine/model/serving",
+  "seed": 20261116,
+  "torch": "2.8.0+cu128",
+  "triton": "3.4.0",
+  "sglang": "0.5.2",
+  "cuda": "12.8",
+  "SM_count": 36,
+  "device": "NVIDIA GeForce RTX 4070 Laptop GPU",
+  "sources": [
+    {
+      "path": "srt/layers/attention/triton_backend.py",
+      "sha256": "7ef7092da25a33c244f50f4d9269f47737589e7625c042c2a31406328a92f469"
+    },
+    {
+      "path": "srt/layers/attention/triton_ops/decode_attention.py",
+      "sha256": "2673adaad3d71209ff4f44788060913b1d6cce5021bbf1bf38334a09acf3d251"
+    },
+    {
+      "path": "srt/layers/attention/utils.py",
+      "sha256": "971fe3370d95c2505ed959c36f579745174df5602bc3dadd5874c7aa77541059"
+    },
+    {
+      "path": "srt/mem_cache/memory_pool.py",
+      "sha256": "0914922deb9e75024e211e9339a28a4a0bebefdfdc7f7ca9571d7fa2f3357cb0"
+    },
+    {
+      "path": "srt/layers/radix_attention.py",
+      "sha256": "329ba0c1aaa2636ccf4de83b1555b8d4e96396309799856f1d9d8cbe7785e8f2"
+    },
+    {
+      "path": "srt/model_executor/cuda_graph_runner.py",
+      "sha256": "68e0b8b0a663d70a800154cb9dc46794eb04d67ba3045ff3f06694733783b7e2"
+    }
+  ],
+  "harness_sources": {
+    "run_split_cap6.py": "aba55f100f0f594f4d64ead31846a8d40632642e60552fd450b64643202449f6",
+    "decode_path.py": "0ec39daec3debde3594c969559d8b9f46371f18f1b0d8741dc2c1c18f4b51561",
+    "run_decode.py": "b747254afc705de607e31071c7388948ca6c9fbbdd0f723d326ac880064fe7dd"
+  },
+  "Engine": false,
+  "weights_used": false,
+  "rounds": 9,
+  "iterations": 40,
+  "telemetry_before": {
+    "returncode": 0,
+    "csv": "2026/11/13 22:20:12.348, P0, 6168, 1781, 1980, 60, 19.93, 60",
+    "fields": [
+      "timestamp",
+      "pstate",
+      "free_MiB",
+      "used_MiB",
+      "SM_MHz",
+      "temp_C",
+      "power_W",
+      "util_pct"
+    ]
+  },
+  "hot_path_GPU_to_CPU_sync_added": false,
+  "correctness": {
+    "cases": [
+      {
+        "case": "b8_l512",
+        "dtype": "torch.float16",
+        "cap": 8,
+        "check": {
+          "max_abs": 1.52587890625e-05,
+          "rtol_atol": 0.003,
+          "mapping_and_new_KV_write": "passed",
+          "finite": true
+        }
+      },
+      {
+        "case": "b8_l512",
+        "dtype": "torch.float16",
+        "cap": 6,
+        "check": {
+          "max_abs": 1.52587890625e-05,
+          "rtol_atol": 0.003,
+          "mapping_and_new_KV_write": "passed",
+          "finite": true
+        }
+      },
+      {
+        "case": "b8_l1024",
+        "dtype": "torch.float16",
+        "cap": 8,
+        "check": {
+          "max_abs": 7.62939453125e-06,
+          "rtol_atol": 0.003,
+          "mapping_and_new_KV_write": "passed",
+          "finite": true
+        }
+      },
+      {
+        "case": "b8_l1024",
+        "dtype": "torch.float16",
+        "cap": 6,
+        "check": {
+          "max_abs": 7.62939453125e-06,
+          "rtol_atol": 0.003,
+          "mapping_and_new_KV_write": "passed",
+          "finite": true
+        }
+      },
+      {
+        "case": "b8_l2048",
+        "dtype": "torch.float16",
+        "cap": 8,
+        "check": {
+          "max_abs": 7.62939453125e-06,
+          "rtol_atol": 0.003,
+          "mapping_and_new_KV_write": "passed",
+          "finite": true
+        }
+      },
+      {
+        "case": "b8_l2048",
+        "dtype": "torch.float16",
+        "cap": 6,
+        "check": {
+          "max_abs": 7.62939453125e-06,
+          "rtol_atol": 0.003,
+          "mapping_and_new_KV_write": "passed",
+          "finite": true
+        }
+      },
+      {
+        "case": "b8_ragged",
+        "dtype": "torch.float16",
+        "cap": 8,
+        "check": {
+          "max_abs": 6.103515625e-05,
+          "rtol_atol": 0.003,
+          "mapping_and_new_KV_write": "passed",
+          "finite": true
+        }
+      },
+      {
+        "case": "b8_ragged",
+        "dtype": "torch.float16",
+        "cap": 6,
+        "check": {
+          "max_abs": 6.103515625e-05,
+          "rtol_atol": 0.003,
+          "mapping_and_new_KV_write": "passed",
+          "finite": true
+        }
+      },
+      {
+        "case": "b8_l512",
+        "dtype": "torch.bfloat16",
+        "cap": 8,
+        "check": {
+          "max_abs": 0.000244140625,
+          "rtol_atol": 0.02,
+          "mapping_and_new_KV_write": "passed",
+          "finite": true
+        }
+      },
+      {
+        "case": "b8_l512",
+        "dtype": "torch.bfloat16",
+        "cap": 6,
+        "check": {
+          "max_abs": 0.000244140625,
+          "rtol_atol": 0.02,
+          "mapping_and_new_KV_write": "passed",
+          "finite": true
+        }
+      },
+      {
+        "case": "b8_l1024",
+        "dtype": "torch.bfloat16",
+        "cap": 8,
+        "check": {
+          "max_abs": 6.103515625e-05,
+          "rtol_atol": 0.02,
+          "mapping_and_new_KV_write": "passed",
+          "finite": true
+        }
+      },
+      {
+        "case": "b8_l1024",
+        "dtype": "torch.bfloat16",
+        "cap": 6,
+        "check": {
+          "max_abs": 6.103515625e-05,
+          "rtol_atol": 0.02,
+          "mapping_and_new_KV_write": "passed",
+          "finite": true
+        }
+      },
+      {
+        "case": "b8_l2048",
+        "dtype": "torch.bfloat16",
+        "cap": 8,
+        "check": {
+          "max_abs": 0.0001220703125,
+          "rtol_atol": 0.02,
+          "mapping_and_new_KV_write": "passed",
+          "finite": true
+        }
+      },
+      {
+        "case": "b8_l2048",
+        "dtype": "torch.bfloat16",
+        "cap": 6,
+        "check": {
+          "max_abs": 0.0001220703125,
+          "rtol_atol": 0.02,
+          "mapping_and_new_KV_write": "passed",
+          "finite": true
+        }
+      },
+      {
+        "case": "b8_ragged",
+        "dtype": "torch.bfloat16",
+        "cap": 8,
+        "check": {
+          "max_abs": 0.00048828125,
+          "rtol_atol": 0.02,
+          "mapping_and_new_KV_write": "passed",
+          "finite": true
+        }
+      },
+      {
+        "case": "b8_ragged",
+        "dtype": "torch.bfloat16",
+        "cap": 6,
+        "check": {
+          "max_abs": 0.00048828125,
+          "rtol_atol": 0.02,
+          "mapping_and_new_KV_write": "passed",
+          "finite": true
+        }
+      }
+    ],
+    "nondefault_stream": {
+      "max_abs": 7.62939453125e-06,
+      "rtol_atol": 0.003,
+      "mapping_and_new_KV_write": "passed",
+      "finite": true
+    }
+  },
+  "measurements": [
+    {
+      "case": "b8_l512",
+      "lengths": [
+        512,
+        512,
+        512,
+        512,
+        512,
+        512,
+        512,
+        512
+      ],
+      "partition": {
+        "8": {
+          "splits": [
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5
+          ],
+          "chunk_lengths": [
+            128,
+            128,
+            128,
+            128,
+            128,
+            128,
+            128,
+            128
+          ],
+          "active_splits": [
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4
+          ],
+          "stage1_grid": [
+            8,
+            3,
+            8
+          ],
+          "launched_CTAs": 192,
+          "nonempty_CTAs": 96,
+          "scratch_bytes": 149760
+        },
+        "6": {
+          "splits": [
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5
+          ],
+          "chunk_lengths": [
+            128,
+            128,
+            128,
+            128,
+            128,
+            128,
+            128,
+            128
+          ],
+          "active_splits": [
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4
+          ],
+          "stage1_grid": [
+            8,
+            3,
+            6
+          ],
+          "launched_CTAs": 144,
+          "nonempty_CTAs": 96,
+          "scratch_bytes": 112320
+        }
+      },
+      "same_partition": true,
+      "input_hashes": {
+        "q": "0c9ecbfbba34fc07c1e9a7b6fa654ff71053b842d652f16391331571472484b7",
+        "logical_k": "8a04fcb439a8aa28f0f4f3bd5a01a980b927f5c8bfa3f6181b20853c4f4c69a7",
+        "logical_v": "90977c52dcaba10402c55809077bef5e408737ff6afe7f2de76df11f37c68ec3",
+        "physical": "ef1663afe667beb2e94d11c49bce30703a2f970ae47b36ed4f9fdd903ff628f3"
+      },
+      "round_order": [
+        [
+          6,
+          8
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          8,
+          6
+        ],
+        [
+          8,
+          6
+        ],
+        [
+          8,
+          6
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          8,
+          6
+        ]
+      ],
+      "samples": {
+        "8": {
+          "raw": [
+            {
+              "event_us_per_call": 107.54560232162476,
+              "synchronized_replay_wall_us_per_call": 118.09324999999998
+            },
+            {
+              "event_us_per_call": 91.92960262298584,
+              "synchronized_replay_wall_us_per_call": 103.13097499999999
+            },
+            {
+              "event_us_per_call": 101.76000595092773,
+              "synchronized_replay_wall_us_per_call": 109.69052500000001
+            },
+            {
+              "event_us_per_call": 91.80160164833069,
+              "synchronized_replay_wall_us_per_call": 103.971675
+            },
+            {
+              "event_us_per_call": 98.9952027797699,
+              "synchronized_replay_wall_us_per_call": 114.425175
+            },
+            {
+              "event_us_per_call": 103.24480533599854,
+              "synchronized_replay_wall_us_per_call": 115.704375
+            },
+            {
+              "event_us_per_call": 90.9056007862091,
+              "synchronized_replay_wall_us_per_call": 102.67117499999999
+            },
+            {
+              "event_us_per_call": 99.86559748649597,
+              "synchronized_replay_wall_us_per_call": 113.38695
+            },
+            {
+              "event_us_per_call": 92.9535984992981,
+              "synchronized_replay_wall_us_per_call": 102.75257500000001
+            }
+          ],
+          "backend": [
+            {
+              "event_us_per_call": 162.94399499893188,
+              "synchronized_replay_wall_us_per_call": 173.188975
+            },
+            {
+              "event_us_per_call": 152.55039930343628,
+              "synchronized_replay_wall_us_per_call": 172.1068
+            },
+            {
+              "event_us_per_call": 147.07200527191162,
+              "synchronized_replay_wall_us_per_call": 157.7831
+            },
+            {
+              "event_us_per_call": 161.0751986503601,
+              "synchronized_replay_wall_us_per_call": 182.028325
+            },
+            {
+              "event_us_per_call": 170.8799958229065,
+              "synchronized_replay_wall_us_per_call": 183.064775
+            },
+            {
+              "event_us_per_call": 177.56160497665405,
+              "synchronized_replay_wall_us_per_call": 189.483825
+            },
+            {
+              "event_us_per_call": 165.0431990623474,
+              "synchronized_replay_wall_us_per_call": 174.8548
+            },
+            {
+              "event_us_per_call": 171.92959785461426,
+              "synchronized_replay_wall_us_per_call": 185.1719
+            },
+            {
+              "event_us_per_call": 158.74559879302979,
+              "synchronized_replay_wall_us_per_call": 170.80175
+            }
+          ]
+        },
+        "6": {
+          "raw": [
+            {
+              "event_us_per_call": 764.1600131988525,
+              "synchronized_replay_wall_us_per_call": 784.93965
+            },
+            {
+              "event_us_per_call": 51.17440223693848,
+              "synchronized_replay_wall_us_per_call": 62.866775
+            },
+            {
+              "event_us_per_call": 93.10719966888428,
+              "synchronized_replay_wall_us_per_call": 102.94135000000001
+            },
+            {
+              "event_us_per_call": 91.54559969902039,
+              "synchronized_replay_wall_us_per_call": 106.60164999999999
+            },
+            {
+              "event_us_per_call": 98.61119985580444,
+              "synchronized_replay_wall_us_per_call": 107.98657499999999
+            },
+            {
+              "event_us_per_call": 104.85759973526001,
+              "synchronized_replay_wall_us_per_call": 113.63465000000001
+            },
+            {
+              "event_us_per_call": 95.4367995262146,
+              "synchronized_replay_wall_us_per_call": 111.23035
+            },
+            {
+              "event_us_per_call": 89.60000276565552,
+              "synchronized_replay_wall_us_per_call": 101.0947
+            },
+            {
+              "event_us_per_call": 92.03199744224548,
+              "synchronized_replay_wall_us_per_call": 102.69822500000001
+            }
+          ],
+          "backend": [
+            {
+              "event_us_per_call": 348.54400157928467,
+              "synchronized_replay_wall_us_per_call": 374.68897499999997
+            },
+            {
+              "event_us_per_call": 170.1632022857666,
+              "synchronized_replay_wall_us_per_call": 181.09275
+            },
+            {
+              "event_us_per_call": 154.75200414657593,
+              "synchronized_replay_wall_us_per_call": 171.21912500000002
+            },
+            {
+              "event_us_per_call": 146.91840410232544,
+              "synchronized_replay_wall_us_per_call": 158.2183
+            },
+            {
+              "event_us_per_call": 158.3359956741333,
+              "synchronized_replay_wall_us_per_call": 168.6912
+            },
+            {
+              "event_us_per_call": 158.23359489440918,
+              "synchronized_replay_wall_us_per_call": 167.300825
+            },
+            {
+              "event_us_per_call": 160.0767970085144,
+              "synchronized_replay_wall_us_per_call": 171.8556
+            },
+            {
+              "event_us_per_call": 158.74559879302979,
+              "synchronized_replay_wall_us_per_call": 168.801775
+            },
+            {
+              "event_us_per_call": 157.23520517349243,
+              "synchronized_replay_wall_us_per_call": 169.391275
+            }
+          ]
+        }
+      },
+      "median_us": {
+        "8": {
+          "raw": {
+            "median": 98.9952027797699,
+            "min": 90.9056007862091,
+            "max": 107.54560232162476,
+            "q25": 91.92960262298584,
+            "q75": 101.76000595092773
+          },
+          "backend": {
+            "median": 162.94399499893188,
+            "min": 147.07200527191162,
+            "max": 177.56160497665405,
+            "q25": 158.74559879302979,
+            "q75": 170.8799958229065
+          }
+        },
+        "6": {
+          "raw": {
+            "median": 93.10719966888428,
+            "min": 51.17440223693848,
+            "max": 764.1600131988525,
+            "q25": 91.54559969902039,
+            "q75": 98.61119985580444
+          },
+          "backend": {
+            "median": 158.3359956741333,
+            "min": 146.91840410232544,
+            "max": 348.54400157928467,
+            "q25": 157.23520517349243,
+            "q75": 160.0767970085144
+          }
+        }
+      },
+      "post_graph_finite_close": true,
+      "telemetry_after": {
+        "returncode": 0,
+        "csv": "2026/11/13 22:20:19.518, P0, 6034, 1915, 1980, 61, 19.65, 96",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      }
+    },
+    {
+      "case": "b8_l1024",
+      "lengths": [
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024
+      ],
+      "partition": {
+        "8": {
+          "splits": [
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6
+          ],
+          "chunk_lengths": [
+            192,
+            192,
+            192,
+            192,
+            192,
+            192,
+            192,
+            192
+          ],
+          "active_splits": [
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6
+          ],
+          "stage1_grid": [
+            8,
+            3,
+            8
+          ],
+          "launched_CTAs": 192,
+          "nonempty_CTAs": 144,
+          "scratch_bytes": 149760
+        },
+        "6": {
+          "splits": [
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6
+          ],
+          "chunk_lengths": [
+            192,
+            192,
+            192,
+            192,
+            192,
+            192,
+            192,
+            192
+          ],
+          "active_splits": [
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6
+          ],
+          "stage1_grid": [
+            8,
+            3,
+            6
+          ],
+          "launched_CTAs": 144,
+          "nonempty_CTAs": 144,
+          "scratch_bytes": 112320
+        }
+      },
+      "same_partition": true,
+      "input_hashes": {
+        "q": "d9db3b14e9a266606b8621ed07c4fd550473ea2555087ab47c3ef65ff6d4a30c",
+        "logical_k": "4f044ad2ecdfe48252e00298166f42d50b2b52ed70ebc4838bd812b541e955f3",
+        "logical_v": "6430e0ba3098220b973a54b52d25ce7e4c2e88359176ab373fc527f09bd13035",
+        "physical": "c52c9ced7e1e5a3eec72989b1b8c0bf73d16962756068f912bcdc429b532dc5f"
+      },
+      "round_order": [
+        [
+          6,
+          8
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          8,
+          6
+        ],
+        [
+          8,
+          6
+        ],
+        [
+          8,
+          6
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          8,
+          6
+        ]
+      ],
+      "samples": {
+        "8": {
+          "raw": [
+            {
+              "event_us_per_call": 171.85280323028564,
+              "synchronized_replay_wall_us_per_call": 184.040625
+            },
+            {
+              "event_us_per_call": 175.6160020828247,
+              "synchronized_replay_wall_us_per_call": 191.535375
+            },
+            {
+              "event_us_per_call": 170.70080041885376,
+              "synchronized_replay_wall_us_per_call": 181.3743
+            },
+            {
+              "event_us_per_call": 170.1632022857666,
+              "synchronized_replay_wall_us_per_call": 179.753975
+            },
+            {
+              "event_us_per_call": 165.81120491027832,
+              "synchronized_replay_wall_us_per_call": 176.9469
+            },
+            {
+              "event_us_per_call": 170.47040462493896,
+              "synchronized_replay_wall_us_per_call": 182.208525
+            },
+            {
+              "event_us_per_call": 165.47839641571045,
+              "synchronized_replay_wall_us_per_call": 178.35082500000001
+            },
+            {
+              "event_us_per_call": 173.03040027618408,
+              "synchronized_replay_wall_us_per_call": 183.3571
+            },
+            {
+              "event_us_per_call": 186.13760471343994,
+              "synchronized_replay_wall_us_per_call": 200.76845
+            }
+          ],
+          "backend": [
+            {
+              "event_us_per_call": 239.94879722595215,
+              "synchronized_replay_wall_us_per_call": 255.37600000000003
+            },
+            {
+              "event_us_per_call": 212.0448112487793,
+              "synchronized_replay_wall_us_per_call": 224.908575
+            },
+            {
+              "event_us_per_call": 270.2080011367798,
+              "synchronized_replay_wall_us_per_call": 286.65747500000003
+            },
+            {
+              "event_us_per_call": 248.21760654449463,
+              "synchronized_replay_wall_us_per_call": 258.37375000000003
+            },
+            {
+              "event_us_per_call": 227.63519287109375,
+              "synchronized_replay_wall_us_per_call": 237.71065
+            },
+            {
+              "event_us_per_call": 244.6079969406128,
+              "synchronized_replay_wall_us_per_call": 254.81570000000002
+            },
+            {
+              "event_us_per_call": 250.70080757141113,
+              "synchronized_replay_wall_us_per_call": 261.61635
+            },
+            {
+              "event_us_per_call": 261.58080101013184,
+              "synchronized_replay_wall_us_per_call": 272.19935
+            },
+            {
+              "event_us_per_call": 248.0384111404419,
+              "synchronized_replay_wall_us_per_call": 263.577875
+            }
+          ]
+        },
+        "6": {
+          "raw": [
+            {
+              "event_us_per_call": 152.44799852371216,
+              "synchronized_replay_wall_us_per_call": 169.55607500000002
+            },
+            {
+              "event_us_per_call": 152.8831958770752,
+              "synchronized_replay_wall_us_per_call": 163.9969
+            },
+            {
+              "event_us_per_call": 164.07040357589722,
+              "synchronized_replay_wall_us_per_call": 178.135925
+            },
+            {
+              "event_us_per_call": 155.34080266952515,
+              "synchronized_replay_wall_us_per_call": 166.34675
+            },
+            {
+              "event_us_per_call": 147.1743941307068,
+              "synchronized_replay_wall_us_per_call": 156.1153
+            },
+            {
+              "event_us_per_call": 146.56000137329102,
+              "synchronized_replay_wall_us_per_call": 156.715675
+            },
+            {
+              "event_us_per_call": 148.58239889144897,
+              "synchronized_replay_wall_us_per_call": 161.50254999999999
+            },
+            {
+              "event_us_per_call": 153.6512017250061,
+              "synchronized_replay_wall_us_per_call": 169.21947500000002
+            },
+            {
+              "event_us_per_call": 158.1055998802185,
+              "synchronized_replay_wall_us_per_call": 169.24372499999998
+            }
+          ],
+          "backend": [
+            {
+              "event_us_per_call": 221.4911937713623,
+              "synchronized_replay_wall_us_per_call": 234.34414999999998
+            },
+            {
+              "event_us_per_call": 211.6607904434204,
+              "synchronized_replay_wall_us_per_call": 234.862225
+            },
+            {
+              "event_us_per_call": 235.92960834503174,
+              "synchronized_replay_wall_us_per_call": 247.32072499999998
+            },
+            {
+              "event_us_per_call": 234.18879508972168,
+              "synchronized_replay_wall_us_per_call": 244.88690000000003
+            },
+            {
+              "event_us_per_call": 227.81438827514648,
+              "synchronized_replay_wall_us_per_call": 239.055725
+            },
+            {
+              "event_us_per_call": 240.56320190429688,
+              "synchronized_replay_wall_us_per_call": 250.5045
+            },
+            {
+              "event_us_per_call": 217.90719032287598,
+              "synchronized_replay_wall_us_per_call": 229.124975
+            },
+            {
+              "event_us_per_call": 209.25440788269043,
+              "synchronized_replay_wall_us_per_call": 220.253975
+            },
+            {
+              "event_us_per_call": 223.79519939422607,
+              "synchronized_replay_wall_us_per_call": 237.59182500000003
+            }
+          ]
+        }
+      },
+      "median_us": {
+        "8": {
+          "raw": {
+            "median": 170.70080041885376,
+            "min": 165.47839641571045,
+            "max": 186.13760471343994,
+            "q25": 170.1632022857666,
+            "q75": 173.03040027618408
+          },
+          "backend": {
+            "median": 248.0384111404419,
+            "min": 212.0448112487793,
+            "max": 270.2080011367798,
+            "q25": 239.94879722595215,
+            "q75": 250.70080757141113
+          }
+        },
+        "6": {
+          "raw": {
+            "median": 152.8831958770752,
+            "min": 146.56000137329102,
+            "max": 164.07040357589722,
+            "q25": 148.58239889144897,
+            "q75": 155.34080266952515
+          },
+          "backend": {
+            "median": 223.79519939422607,
+            "min": 209.25440788269043,
+            "max": 240.56320190429688,
+            "q25": 217.90719032287598,
+            "q75": 234.18879508972168
+          }
+        }
+      },
+      "post_graph_finite_close": true,
+      "telemetry_after": {
+        "returncode": 0,
+        "csv": "2026/11/13 22:20:21.050, P0, 6008, 1941, 1980, 61, 20.84, 97",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      }
+    },
+    {
+      "case": "b8_l2048",
+      "lengths": [
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048
+      ],
+      "partition": {
+        "8": {
+          "splits": [
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8
+          ],
+          "chunk_lengths": [
+            256,
+            256,
+            256,
+            256,
+            256,
+            256,
+            256,
+            256
+          ],
+          "active_splits": [
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8
+          ],
+          "stage1_grid": [
+            8,
+            3,
+            8
+          ],
+          "launched_CTAs": 192,
+          "nonempty_CTAs": 192,
+          "scratch_bytes": 149760
+        },
+        "6": {
+          "splits": [
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6
+          ],
+          "chunk_lengths": [
+            352,
+            352,
+            352,
+            352,
+            352,
+            352,
+            352,
+            352
+          ],
+          "active_splits": [
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6
+          ],
+          "stage1_grid": [
+            8,
+            3,
+            6
+          ],
+          "launched_CTAs": 144,
+          "nonempty_CTAs": 144,
+          "scratch_bytes": 112320
+        }
+      },
+      "same_partition": false,
+      "input_hashes": {
+        "q": "2d19e93ebb25c135be1ce34b4be35793eabf6ea3b90d4a101d5ff02fef969b97",
+        "logical_k": "0a16f39539eeb8f2b963fc9eb294ae6a7f05222a5a3b129d3803479ca7043e25",
+        "logical_v": "bceec99d5ee85ed20e832037e01e39ed2c50885f07c3c9c37bdb7314e2c5de0b",
+        "physical": "0f16514e54492fc2a6e0d634a744acafee23688972e8df4ee45e4ad40933ff32"
+      },
+      "round_order": [
+        [
+          6,
+          8
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          8,
+          6
+        ],
+        [
+          8,
+          6
+        ],
+        [
+          8,
+          6
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          8,
+          6
+        ]
+      ],
+      "samples": {
+        "8": {
+          "raw": [
+            {
+              "event_us_per_call": 275.1231908798218,
+              "synchronized_replay_wall_us_per_call": 285.98485
+            },
+            {
+              "event_us_per_call": 286.5920066833496,
+              "synchronized_replay_wall_us_per_call": 299.6449
+            },
+            {
+              "event_us_per_call": 271.43681049346924,
+              "synchronized_replay_wall_us_per_call": 284.09317500000003
+            },
+            {
+              "event_us_per_call": 289.5616054534912,
+              "synchronized_replay_wall_us_per_call": 300.975225
+            },
+            {
+              "event_us_per_call": 265.9327983856201,
+              "synchronized_replay_wall_us_per_call": 281.622125
+            },
+            {
+              "event_us_per_call": 285.90080738067627,
+              "synchronized_replay_wall_us_per_call": 304.1809
+            },
+            {
+              "event_us_per_call": 276.37760639190674,
+              "synchronized_replay_wall_us_per_call": 288.593275
+            },
+            {
+              "event_us_per_call": 261.5551948547363,
+              "synchronized_replay_wall_us_per_call": 272.1439
+            },
+            {
+              "event_us_per_call": 286.20800971984863,
+              "synchronized_replay_wall_us_per_call": 301.313175
+            }
+          ],
+          "backend": [
+            {
+              "event_us_per_call": 350.6943941116333,
+              "synchronized_replay_wall_us_per_call": 367.663725
+            },
+            {
+              "event_us_per_call": 375.7312059402466,
+              "synchronized_replay_wall_us_per_call": 388.793675
+            },
+            {
+              "event_us_per_call": 368.3583974838257,
+              "synchronized_replay_wall_us_per_call": 384.019575
+            },
+            {
+              "event_us_per_call": 388.6336088180542,
+              "synchronized_replay_wall_us_per_call": 408.0182
+            },
+            {
+              "event_us_per_call": 392.4992084503174,
+              "synchronized_replay_wall_us_per_call": 403.043375
+            },
+            {
+              "event_us_per_call": 317.44000911712646,
+              "synchronized_replay_wall_us_per_call": 327.626625
+            },
+            {
+              "event_us_per_call": 361.83040142059326,
+              "synchronized_replay_wall_us_per_call": 382.372425
+            },
+            {
+              "event_us_per_call": 368.5375928878784,
+              "synchronized_replay_wall_us_per_call": 385.69
+            },
+            {
+              "event_us_per_call": 369.66400146484375,
+              "synchronized_replay_wall_us_per_call": 381.098525
+            }
+          ]
+        },
+        "6": {
+          "raw": [
+            {
+              "event_us_per_call": 272.8192090988159,
+              "synchronized_replay_wall_us_per_call": 284.098375
+            },
+            {
+              "event_us_per_call": 259.4048023223877,
+              "synchronized_replay_wall_us_per_call": 269.84389999999996
+            },
+            {
+              "event_us_per_call": 273.7920045852661,
+              "synchronized_replay_wall_us_per_call": 285.209
+            },
+            {
+              "event_us_per_call": 276.35200023651123,
+              "synchronized_replay_wall_us_per_call": 289.18937500000004
+            },
+            {
+              "event_us_per_call": 249.70240592956543,
+              "synchronized_replay_wall_us_per_call": 264.37064999999996
+            },
+            {
+              "event_us_per_call": 270.2080011367798,
+              "synchronized_replay_wall_us_per_call": 288.398775
+            },
+            {
+              "event_us_per_call": 258.9951992034912,
+              "synchronized_replay_wall_us_per_call": 269.76095
+            },
+            {
+              "event_us_per_call": 256.1023950576782,
+              "synchronized_replay_wall_us_per_call": 275.602225
+            },
+            {
+              "event_us_per_call": 241.76640510559082,
+              "synchronized_replay_wall_us_per_call": 253.411
+            }
+          ],
+          "backend": [
+            {
+              "event_us_per_call": 321.89440727233887,
+              "synchronized_replay_wall_us_per_call": 335.38325
+            },
+            {
+              "event_us_per_call": 338.99519443511963,
+              "synchronized_replay_wall_us_per_call": 350.583475
+            },
+            {
+              "event_us_per_call": 337.7919912338257,
+              "synchronized_replay_wall_us_per_call": 348.9808
+            },
+            {
+              "event_us_per_call": 335.20638942718506,
+              "synchronized_replay_wall_us_per_call": 352.712575
+            },
+            {
+              "event_us_per_call": 341.17119312286377,
+              "synchronized_replay_wall_us_per_call": 355.104225
+            },
+            {
+              "event_us_per_call": 321.996808052063,
+              "synchronized_replay_wall_us_per_call": 337.1163
+            },
+            {
+              "event_us_per_call": 337.7919912338257,
+              "synchronized_replay_wall_us_per_call": 355.422975
+            },
+            {
+              "event_us_per_call": 326.6047954559326,
+              "synchronized_replay_wall_us_per_call": 338.622525
+            },
+            {
+              "event_us_per_call": 333.59360694885254,
+              "synchronized_replay_wall_us_per_call": 344.62620000000004
+            }
+          ]
+        }
+      },
+      "median_us": {
+        "8": {
+          "raw": {
+            "median": 276.37760639190674,
+            "min": 261.5551948547363,
+            "max": 289.5616054534912,
+            "q25": 271.43681049346924,
+            "q75": 286.20800971984863
+          },
+          "backend": {
+            "median": 368.5375928878784,
+            "min": 317.44000911712646,
+            "max": 392.4992084503174,
+            "q25": 361.83040142059326,
+            "q75": 375.7312059402466
+          }
+        },
+        "6": {
+          "raw": {
+            "median": 259.4048023223877,
+            "min": 241.76640510559082,
+            "max": 276.35200023651123,
+            "q25": 256.1023950576782,
+            "q75": 272.8192090988159
+          },
+          "backend": {
+            "median": 335.20638942718506,
+            "min": 321.89440727233887,
+            "max": 341.17119312286377,
+            "q25": 326.6047954559326,
+            "q75": 337.7919912338257
+          }
+        }
+      },
+      "post_graph_finite_close": true,
+      "telemetry_after": {
+        "returncode": 0,
+        "csv": "2026/11/13 22:20:22.910, P0, 5918, 2031, 1980, 61, 22.00, 97",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      }
+    },
+    {
+      "case": "b8_ragged",
+      "lengths": [
+        17,
+        33,
+        129,
+        257,
+        511,
+        1023,
+        2048,
+        2049
+      ],
+      "partition": {
+        "8": {
+          "splits": [
+            1,
+            1,
+            1,
+            1,
+            2,
+            4,
+            8,
+            8
+          ],
+          "chunk_lengths": [
+            32,
+            64,
+            160,
+            288,
+            256,
+            256,
+            256,
+            288
+          ],
+          "active_splits": [
+            1,
+            1,
+            1,
+            1,
+            2,
+            4,
+            8,
+            8
+          ],
+          "stage1_grid": [
+            8,
+            3,
+            8
+          ],
+          "launched_CTAs": 192,
+          "nonempty_CTAs": 78,
+          "scratch_bytes": 149760
+        },
+        "6": {
+          "splits": [
+            1,
+            1,
+            1,
+            1,
+            2,
+            3,
+            6,
+            6
+          ],
+          "chunk_lengths": [
+            32,
+            64,
+            160,
+            288,
+            256,
+            352,
+            352,
+            352
+          ],
+          "active_splits": [
+            1,
+            1,
+            1,
+            1,
+            2,
+            3,
+            6,
+            6
+          ],
+          "stage1_grid": [
+            8,
+            3,
+            6
+          ],
+          "launched_CTAs": 144,
+          "nonempty_CTAs": 63,
+          "scratch_bytes": 112320
+        }
+      },
+      "same_partition": false,
+      "input_hashes": {
+        "q": "b59f0b4cb949998707b39cc8d82e8982044df16fc4f103947284c80c0a85959f",
+        "logical_k": "01b995fb51e2ab003b46635b7edabd781aaa38ec49323b716046b364f172a66e",
+        "logical_v": "ea2497a1285a3a32401a79b0a6c04c753cdd6c5f40295e4ac705deefe50ab8ef",
+        "physical": "77accc9c384dccd26aa37d645cd58ea0e1832193240d1ba952dfeb5ff59c6b45"
+      },
+      "round_order": [
+        [
+          6,
+          8
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          8,
+          6
+        ],
+        [
+          8,
+          6
+        ],
+        [
+          8,
+          6
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          8,
+          6
+        ]
+      ],
+      "samples": {
+        "8": {
+          "raw": [
+            {
+              "event_us_per_call": 223.9743947982788,
+              "synchronized_replay_wall_us_per_call": 237.31967500000002
+            },
+            {
+              "event_us_per_call": 240.1792049407959,
+              "synchronized_replay_wall_us_per_call": 254.8457
+            },
+            {
+              "event_us_per_call": 232.19199180603027,
+              "synchronized_replay_wall_us_per_call": 246.827225
+            },
+            {
+              "event_us_per_call": 242.79038906097412,
+              "synchronized_replay_wall_us_per_call": 258.953175
+            },
+            {
+              "event_us_per_call": 234.52160358428955,
+              "synchronized_replay_wall_us_per_call": 245.398525
+            },
+            {
+              "event_us_per_call": 223.56479167938232,
+              "synchronized_replay_wall_us_per_call": 234.44744999999998
+            },
+            {
+              "event_us_per_call": 232.90879726409912,
+              "synchronized_replay_wall_us_per_call": 243.342875
+            },
+            {
+              "event_us_per_call": 244.86401081085205,
+              "synchronized_replay_wall_us_per_call": 255.707875
+            },
+            {
+              "event_us_per_call": 233.47198963165283,
+              "synchronized_replay_wall_us_per_call": 251.17975
+            }
+          ],
+          "backend": [
+            {
+              "event_us_per_call": 283.85279178619385,
+              "synchronized_replay_wall_us_per_call": 299.940475
+            },
+            {
+              "event_us_per_call": 292.73600578308105,
+              "synchronized_replay_wall_us_per_call": 308.126825
+            },
+            {
+              "event_us_per_call": 285.5679988861084,
+              "synchronized_replay_wall_us_per_call": 302.12942499999997
+            },
+            {
+              "event_us_per_call": 292.71039962768555,
+              "synchronized_replay_wall_us_per_call": 307.551725
+            },
+            {
+              "event_us_per_call": 273.2032060623169,
+              "synchronized_replay_wall_us_per_call": 286.37055
+            },
+            {
+              "event_us_per_call": 292.9408073425293,
+              "synchronized_replay_wall_us_per_call": 306.063625
+            },
+            {
+              "event_us_per_call": 287.5391960144043,
+              "synchronized_replay_wall_us_per_call": 303.483225
+            },
+            {
+              "event_us_per_call": 293.65758895874023,
+              "synchronized_replay_wall_us_per_call": 312.288225
+            },
+            {
+              "event_us_per_call": 303.6672115325928,
+              "synchronized_replay_wall_us_per_call": 314.77265
+            }
+          ]
+        },
+        "6": {
+          "raw": [
+            {
+              "event_us_per_call": 219.90399360656738,
+              "synchronized_replay_wall_us_per_call": 236.77212500000002
+            },
+            {
+              "event_us_per_call": 223.25758934020996,
+              "synchronized_replay_wall_us_per_call": 233.41525000000001
+            },
+            {
+              "event_us_per_call": 200.1919984817505,
+              "synchronized_replay_wall_us_per_call": 217.38515
+            },
+            {
+              "event_us_per_call": 199.42400455474854,
+              "synchronized_replay_wall_us_per_call": 212.26702500000002
+            },
+            {
+              "event_us_per_call": 209.48479175567627,
+              "synchronized_replay_wall_us_per_call": 225.8263
+            },
+            {
+              "event_us_per_call": 213.17119598388672,
+              "synchronized_replay_wall_us_per_call": 228.337075
+            },
+            {
+              "event_us_per_call": 200.7807970046997,
+              "synchronized_replay_wall_us_per_call": 211.06865
+            },
+            {
+              "event_us_per_call": 205.90078830718994,
+              "synchronized_replay_wall_us_per_call": 217.88337499999997
+            },
+            {
+              "event_us_per_call": 212.22400665283203,
+              "synchronized_replay_wall_us_per_call": 222.86872499999998
+            }
+          ],
+          "backend": [
+            {
+              "event_us_per_call": 266.2400007247925,
+              "synchronized_replay_wall_us_per_call": 278.55185
+            },
+            {
+              "event_us_per_call": 258.8671922683716,
+              "synchronized_replay_wall_us_per_call": 288.27982499999996
+            },
+            {
+              "event_us_per_call": 268.8256025314331,
+              "synchronized_replay_wall_us_per_call": 284.84965
+            },
+            {
+              "event_us_per_call": 271.05278968811035,
+              "synchronized_replay_wall_us_per_call": 282.313
+            },
+            {
+              "event_us_per_call": 274.8415946960449,
+              "synchronized_replay_wall_us_per_call": 285.5684
+            },
+            {
+              "event_us_per_call": 273.2800006866455,
+              "synchronized_replay_wall_us_per_call": 289.391075
+            },
+            {
+              "event_us_per_call": 276.45440101623535,
+              "synchronized_replay_wall_us_per_call": 286.786625
+            },
+            {
+              "event_us_per_call": 268.46721172332764,
+              "synchronized_replay_wall_us_per_call": 280.095525
+            },
+            {
+              "event_us_per_call": 257.63840675354004,
+              "synchronized_replay_wall_us_per_call": 268.30010000000004
+            }
+          ]
+        }
+      },
+      "median_us": {
+        "8": {
+          "raw": {
+            "median": 233.47198963165283,
+            "min": 223.56479167938232,
+            "max": 244.86401081085205,
+            "q25": 232.19199180603027,
+            "q75": 240.1792049407959
+          },
+          "backend": {
+            "median": 292.71039962768555,
+            "min": 273.2032060623169,
+            "max": 303.6672115325928,
+            "q25": 285.5679988861084,
+            "q75": 292.9408073425293
+          }
+        },
+        "6": {
+          "raw": {
+            "median": 209.48479175567627,
+            "min": 199.42400455474854,
+            "max": 223.25758934020996,
+            "q25": 200.7807970046997,
+            "q75": 213.17119598388672
+          },
+          "backend": {
+            "median": 268.8256025314331,
+            "min": 257.63840675354004,
+            "max": 276.45440101623535,
+            "q25": 266.2400007247925,
+            "q75": 273.2800006866455
+          }
+        }
+      },
+      "post_graph_finite_close": true,
+      "telemetry_after": {
+        "returncode": 0,
+        "csv": "2026/11/13 22:20:24.583, P0, 5888, 2061, 1980, 61, 20.47, 97",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      }
+    }
+  ],
+  "correctness_status": "passed",
+  "telemetry_after": {
+    "returncode": 0,
+    "csv": "2026/11/13 22:20:24.639, P0, 5888, 2061, 1980, 61, 20.47, 97",
+    "fields": [
+      "timestamp",
+      "pstate",
+      "free_MiB",
+      "used_MiB",
+      "SM_MHz",
+      "temp_C",
+      "power_W",
+      "util_pct"
+    ]
+  },
+  "peak_allocated_bytes": 165065216,
+  "caveats": [
+    "shared unlocked desktop GPU; no significance or Engine gain claim",
+    "cap change also changes scratch layout/reduction bound, not isolated empty-CTA causal proof",
+    "only same_partition cells test the empty-CTA hypothesis without repartitioning",
+    "profile timings excluded; CUPTI grid is measured, nonempty CTA counts are derived"
+  ]
+}

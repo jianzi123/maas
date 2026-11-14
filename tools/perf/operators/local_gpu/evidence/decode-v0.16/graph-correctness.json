@@ -1,0 +1,135 @@
+{
+  "checks": [
+    {
+      "cell": "short",
+      "cap": 8,
+      "scope": "raw_decode",
+      "poisoned_output_updated": true
+    },
+    {
+      "cell": "short",
+      "cap": 1,
+      "scope": "raw_decode",
+      "poisoned_output_updated": true
+    },
+    {
+      "cell": "short",
+      "cap": 4,
+      "scope": "raw_decode",
+      "poisoned_output_updated": true
+    },
+    {
+      "cell": "short",
+      "cap": 8,
+      "scope": "backend_original",
+      "changed_live_inputs_verified": true,
+      "poisoned_output_and_KV_rewritten": true
+    },
+    {
+      "cell": "short",
+      "cap": 8,
+      "scope": "backend_fused",
+      "changed_live_inputs_verified": true,
+      "poisoned_output_and_KV_rewritten": true
+    },
+    {
+      "cell": "long",
+      "cap": 8,
+      "scope": "raw_decode",
+      "poisoned_output_updated": true
+    },
+    {
+      "cell": "long",
+      "cap": 1,
+      "scope": "raw_decode",
+      "poisoned_output_updated": true
+    },
+    {
+      "cell": "long",
+      "cap": 4,
+      "scope": "raw_decode",
+      "poisoned_output_updated": true
+    },
+    {
+      "cell": "long",
+      "cap": 8,
+      "scope": "backend_original",
+      "changed_live_inputs_verified": true,
+      "poisoned_output_and_KV_rewritten": true
+    },
+    {
+      "cell": "long",
+      "cap": 8,
+      "scope": "backend_fused",
+      "changed_live_inputs_verified": true,
+      "poisoned_output_and_KV_rewritten": true
+    },
+    {
+      "cell": "mixed",
+      "cap": 8,
+      "scope": "raw_decode",
+      "poisoned_output_updated": true
+    },
+    {
+      "cell": "mixed",
+      "cap": 1,
+      "scope": "raw_decode",
+      "poisoned_output_updated": true
+    },
+    {
+      "cell": "mixed",
+      "cap": 4,
+      "scope": "raw_decode",
+      "poisoned_output_updated": true
+    },
+    {
+      "cell": "mixed",
+      "cap": 8,
+      "scope": "backend_original",
+      "changed_live_inputs_verified": true,
+      "poisoned_output_and_KV_rewritten": true
+    },
+    {
+      "cell": "mixed",
+      "cap": 8,
+      "scope": "backend_fused",
+      "changed_live_inputs_verified": true,
+      "poisoned_output_and_KV_rewritten": true
+    },
+    {
+      "cell": "batch8",
+      "cap": 8,
+      "scope": "raw_decode",
+      "poisoned_output_updated": true
+    },
+    {
+      "cell": "batch8",
+      "cap": 1,
+      "scope": "raw_decode",
+      "poisoned_output_updated": true
+    },
+    {
+      "cell": "batch8",
+      "cap": 4,
+      "scope": "raw_decode",
+      "poisoned_output_updated": true
+    },
+    {
+      "cell": "batch8",
+      "cap": 8,
+      "scope": "backend_original",
+      "changed_live_inputs_verified": true,
+      "poisoned_output_and_KV_rewritten": true
+    },
+    {
+      "cell": "batch8",
+      "cap": 8,
+      "scope": "backend_fused",
+      "changed_live_inputs_verified": true,
+      "poisoned_output_and_KV_rewritten": true
+    }
+  ],
+  "passed": true,
+  "scope": "independent captured-output correctness; no new performance claim",
+  "iterations_per_graph": 30
+}

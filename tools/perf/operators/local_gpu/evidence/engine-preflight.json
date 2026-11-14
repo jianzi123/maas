@@ -1,0 +1,16 @@
+{
+  "sglang": "0.5.2",
+  "model_path": "/root/.cache/huggingface/hub/models--HuggingFaceTB--SmolLM-135M-Instruct/snapshots/fcc320f490e08fdb4b99d935b2c58d40bf35b0d0",
+  "offline": true,
+  "run_requested": false,
+  "generation_executed": false,
+  "weights_present": false,
+  "requests": [],
+  "engine_import": "passed",
+  "torch": "2.8.0+cu128",
+  "free_total_bytes": [
+    7396655104,
+    8585216000
+  ],
+  "status": "blocked_missing_model_weights"
+}

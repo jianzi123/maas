@@ -1,0 +1,395 @@
+{
+  "python": "3.10.12 (main, Aug 31 2026, 10:18:17) [GCC 11.4.0]",
+  "prefix": "/tmp/maas-10-gpu-9bf1ab626448",
+  "packages": {
+    "sglang": {
+      "version": "0.5.2",
+      "location": "/tmp/maas-10-gpu-9bf1ab626448/lib/python3.10/site-packages"
+    },
+    "sgl-kernel": {
+      "version": "0.3.9.post2",
+      "location": "/tmp/maas-10-gpu-9bf1ab626448/lib/python3.10/site-packages"
+    },
+    "torch": {
+      "version": "2.8.0",
+      "location": "/usr/local/lib/python3.10/dist-packages"
+    },
+    "triton": {
+      "version": "3.4.0",
+      "location": "/usr/local/lib/python3.10/dist-packages"
+    },
+    "transformers": {
+      "version": "4.56.1",
+      "location": "/tmp/maas-10-gpu-9bf1ab626448/lib/python3.10/site-packages"
+    },
+    "flashinfer-python": null,
+    "outlines": {
+      "version": "0.1.11",
+      "location": "/tmp/maas-10-gpu-9bf1ab626448/lib/python3.10/site-packages"
+    },
+    "xgrammar": {
+      "version": "0.1.24",
+      "location": "/tmp/maas-10-gpu-9bf1ab626448/lib/python3.10/site-packages"
+    },
+    "torchao": {
+      "version": "0.9.0",
+      "location": "/tmp/maas-10-gpu-9bf1ab626448/lib/python3.10/site-packages"
+    },
+    "numpy": {
+      "version": "2.2.6",
+      "location": "/usr/local/lib/python3.10/dist-packages"
+    },
+    "compressed-tensors": {
+      "version": "0.11.0",
+      "location": "/usr/local/lib/python3.10/dist-packages"
+    }
+  },
+  "dependencies": [
+    {
+      "requirement": "aiohttp",
+      "installed": "3.13.2",
+      "satisfies": true
+    },
+    {
+      "requirement": "requests",
+      "installed": "2.34.2",
+      "satisfies": true
+    },
+    {
+      "requirement": "tqdm",
+      "installed": "4.67.1",
+      "satisfies": true
+    },
+    {
+      "requirement": "numpy",
+      "installed": "2.2.6",
+      "satisfies": true
+    },
+    {
+      "requirement": "IPython",
+      "installed": "8.39.0",
+      "satisfies": true
+    },
+    {
+      "requirement": "setproctitle",
+      "installed": "1.3.7",
+      "satisfies": true
+    },
+    {
+      "requirement": "blobfile==3.0.0; extra == \"runtime-common\"",
+      "installed": "3.0.0",
+      "satisfies": true
+    },
+    {
+      "requirement": "build; extra == \"runtime-common\"",
+      "installed": "1.6.1",
+      "satisfies": true
+    },
+    {
+      "requirement": "compressed-tensors; extra == \"runtime-common\"",
+      "installed": "0.11.0",
+      "satisfies": true
+    },
+    {
+      "requirement": "datasets; extra == \"runtime-common\"",
+      "installed": "5.0.1",
+      "satisfies": true
+    },
+    {
+      "requirement": "einops; extra == \"runtime-common\"",
+      "installed": "0.8.1",
+      "satisfies": true
+    },
+    {
+      "requirement": "fastapi; extra == \"runtime-common\"",
+      "installed": "0.121.1",
+      "satisfies": true
+    },
+    {
+      "requirement": "hf_transfer; extra == \"runtime-common\"",
+      "installed": "0.1.9",
+      "satisfies": true
+    },
+    {
+      "requirement": "huggingface_hub; extra == \"runtime-common\"",
+      "installed": "0.36.0",
+      "satisfies": true
+    },
+    {
+      "requirement": "interegular; extra == \"runtime-common\"",
+      "installed": "0.3.3",
+      "satisfies": true
+    },
+    {
+      "requirement": "llguidance<0.8.0,>=0.7.11; extra == \"runtime-common\"",
+      "installed": "0.7.30",
+      "satisfies": true
+    },
+    {
+      "requirement": "modelscope; extra == \"runtime-common\"",
+      "installed": "1.40.3",
+      "satisfies": true
+    },
+    {
+      "requirement": "msgspec; extra == \"runtime-common\"",
+      "installed": "0.19.0",
+      "satisfies": true
+    },
+    {
+      "requirement": "ninja; extra == \"runtime-common\"",
+      "installed": "1.13.0",
+      "satisfies": true
+    },
+    {
+      "requirement": "openai==1.99.1; extra == \"runtime-common\"",
+      "installed": "1.99.1",
+      "satisfies": true
+    },
+    {
+      "requirement": "openai-harmony==0.0.4; extra == \"runtime-common\"",
+      "installed": "0.0.4",
+      "satisfies": true
+    },
+    {
+      "requirement": "orjson; extra == \"runtime-common\"",
+      "installed": "3.12.0",
+      "satisfies": true
+    },
+    {
+      "requirement": "outlines==0.1.11; extra == \"runtime-common\"",
+      "installed": "0.1.11",
+      "satisfies": true
+    },
+    {
+      "requirement": "packaging; extra == \"runtime-common\"",
+      "installed": "25.0",
+      "satisfies": true
+    },
+    {
+      "requirement": "partial_json_parser; extra == \"runtime-common\"",
+      "installed": "0.2.1.1.post6",
+      "satisfies": true
+    },
+    {
+      "requirement": "pillow; extra == \"runtime-common\"",
+      "installed": "12.0.0",
+      "satisfies": true
+    },
+    {
+      "requirement": "prometheus-client>=0.20.0; extra == \"runtime-common\"",
+      "installed": "0.23.1",
+      "satisfies": true
+    },
+    {
+      "requirement": "psutil; extra == \"runtime-common\"",
+      "installed": "7.1.3",
+      "satisfies": true
+    },
+    {
+      "requirement": "pybase64; extra == \"runtime-common\"",
+      "installed": "1.4.2",
+      "satisfies": true
+    },
+    {
+      "requirement": "pydantic; extra == \"runtime-common\"",
+      "installed": "2.12.4",
+      "satisfies": true
+    },
+    {
+      "requirement": "pynvml; extra == \"runtime-common\"",
+      "installed": "13.0.1",
+      "satisfies": true
+    },
+    {
+      "requirement": "python-multipart; extra == \"runtime-common\"",
+      "installed": "0.0.20",
+      "satisfies": true
+    },
+    {
+      "requirement": "pyzmq>=25.1.2; extra == \"runtime-common\"",
+      "installed": "27.1.0",
+      "satisfies": true
+    },
+    {
+      "requirement": "sentencepiece; extra == \"runtime-common\"",
+      "installed": "0.2.1",
+      "satisfies": true
+    },
+    {
+      "requirement": "soundfile==0.13.1; extra == \"runtime-common\"",
+      "installed": "0.13.1",
+      "satisfies": true
+    },
+    {
+      "requirement": "scipy; extra == \"runtime-common\"",
+      "installed": "1.15.3",
+      "satisfies": true
+    },
+    {
+      "requirement": "timm==1.0.16; extra == \"runtime-common\"",
+      "installed": "1.0.16",
+      "satisfies": true
+    },
+    {
+      "requirement": "tiktoken; extra == \"runtime-common\"",
+      "installed": "0.12.0",
+      "satisfies": true
+    },
+    {
+      "requirement": "torchao==0.9.0; extra == \"runtime-common\"",
+      "installed": "0.9.0",
+      "satisfies": true
+    },
+    {
+      "requirement": "transformers==4.56.1; extra == \"runtime-common\"",
+      "installed": "4.56.1",
+      "satisfies": true
+    },
+    {
+      "requirement": "uvicorn; extra == \"runtime-common\"",
+      "installed": "0.38.0",
+      "satisfies": true
+    },
+    {
+      "requirement": "uvloop; extra == \"runtime-common\"",
+      "installed": "0.22.1",
+      "satisfies": true
+    },
+    {
+      "requirement": "xgrammar==0.1.24; extra == \"runtime-common\"",
+      "installed": "0.1.24",
+      "satisfies": true
+    },
+    {
+      "requirement": "sglang[runtime_common]; extra == \"srt\"",
+      "installed": "0.5.2",
+      "satisfies": true
+    },
+    {
+      "requirement": "sgl-kernel==0.3.9.post2; extra == \"srt\"",
+      "installed": "0.3.9.post2",
+      "satisfies": true
+    },
+    {
+      "requirement": "torch==2.8.0; extra == \"srt\"",
+      "installed": "2.8.0",
+      "satisfies": true
+    },
+    {
+      "requirement": "torchaudio==2.8.0; extra == \"srt\"",
+      "installed": "2.8.0",
+      "satisfies": true
+    },
+    {
+      "requirement": "torchvision; extra == \"srt\"",
+      "installed": "0.23.0",
+      "satisfies": true
+    },
+    {
+      "requirement": "cuda-python; extra == \"srt\"",
+      "installed": "12.8.0",
+      "satisfies": true
+    },
+    {
+      "requirement": "flashinfer_python==0.3.1; extra == \"srt\"",
+      "installed": null,
+      "satisfies": false
+    }
+  ],
+  "existing_snapshots": [
+    {
+      "path": "/root/.cache/huggingface/hub/models--HuggingFaceTB--SmolLM-135M-Instruct/snapshots/fcc320f490e08fdb4b99d935b2c58d40bf35b0d0",
+      "revision": "fcc320f490e08fdb4b99d935b2c58d40bf35b0d0",
+      "weight_files_present": false,
+      "dangling_links": [],
+      "config": {
+        "architectures": [
+          "LlamaForCausalLM"
+        ],
+        "model_type": "llama",
+        "hidden_size": 576,
+        "intermediate_size": 1536,
+        "num_hidden_layers": 30,
+        "num_attention_heads": 9,
+        "num_key_value_heads": 3,
+        "max_position_embeddings": 2048,
+        "torch_dtype": "bfloat16"
+      },
+      "files": [
+        {
+          "name": "generation_config.json",
+          "bytes": 156,
+          "sha256": "42d3ca95148e3caf72ca9765f96319a92ee080596274d4d14a313e443cd69fcc"
+        },
+        {
+          "name": "merges.txt",
+          "bytes": 466391,
+          "sha256": "0b54e8aa4e53d5383e2e4bc635a56b43f9647f7b13832d5d9ecd8f82dac4f510"
+        },
+        {
+          "name": "vocab.json",
+          "bytes": 800662,
+          "sha256": "82b84012e3add4d01d12ba14442026e49b8cbbaead1f79ecf3d919784f82dc79"
+        },
+        {
+          "name": "tokenizer_config.json",
+          "bytes": 3590,
+          "sha256": "75668bda11eb0d5ece137b4eb3fb2ad679f847fd19846b726369a26d92f9f28e"
+        },
+        {
+          "name": "special_tokens_map.json",
+          "bytes": 565,
+          "sha256": "33725cb94317e674e9dad3007c35cedecf5928a4d3c9533598d9d3add76838a8"
+        },
+        {
+          "name": "tokenizer.json",
+          "bytes": 2104556,
+          "sha256": "9ca9acddb6525a194ec8ac7a87f24fbba7232a9a15ffa1af0c1224fcd888e47c"
+        },
+        {
+          "name": "config.json",
+          "bytes": 723,
+          "sha256": "d89dd5a56c63ac3d2f6cea098ad8aebd94e5fc4e4060fb61cd7e0e8bd0b678bb"
+        }
+      ]
+    }
+  ],
+  "source_files": [
+    {
+      "path": "srt/entrypoints/engine.py",
+      "sha256": "771803c06d7888dd3c480626f6707fde7c7777da061dcfc1c318fbad94ff064a"
+    },
+    {
+      "path": "srt/managers/scheduler.py",
+      "sha256": "39b30915249bebdef26d4b7365ee6dfa52e8c0a668141afbfba195868fa23ac7"
+    },
+    {
+      "path": "srt/managers/tokenizer_manager.py",
+      "sha256": "a2e4c119fcdf2801dbb78a737f9e2c534a1a83c1827087396f66d3c54b76de50"
+    },
+    {
+      "path": "srt/managers/schedule_batch.py",
+      "sha256": "5c5c3c8dc1e57f45fdac7f0eecd223a6dcba544dcf9669c8be0df1fb48c4b9d1"
+    },
+    {
+      "path": "srt/model_executor/model_runner.py",
+      "sha256": "0f870608d86b0755977421103ecdbf9c6521d7b7b62b295d2f75e4e1b1de3eb2"
+    },
+    {
+      "path": "srt/mem_cache/radix_cache.py",
+      "sha256": "5abcc349f51dc9cb6c85743584ddcb2a91fe0c2636f9d67cc7399cd88cba8de1"
+    },
+    {
+      "path": "srt/layers/attention/triton_backend.py",
+      "sha256": "7ef7092da25a33c244f50f4d9269f47737589e7625c042c2a31406328a92f469"
+    },
+    {
+      "path": "srt/layers/layernorm.py",
+      "sha256": "90f58408e29df2789bdc98db5cd2166827ab25dbe76ebcf7788a6c86be4a96b6"
+    },
+    {
+      "path": "srt/models/llama.py",
+      "sha256": "b5dc94a27ea2730ceaa385d3024171540d9ff3683cd001abf597b32b5b979a43"
+    }
+  ]
+}

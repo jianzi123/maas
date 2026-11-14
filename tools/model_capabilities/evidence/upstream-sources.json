@@ -1,0 +1,189 @@
+{
+  "artifact_version": "0.3",
+  "claim_scope": "fixed source and small metadata only; code not imported, engine not run",
+  "files": [
+    {
+      "id": "sglang-server-args.py",
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/71de97b264b04dcd514cf904003028aefe9775c8/python/sglang/srt/server_args.py",
+      "revision": "71de97b264b04dcd514cf904003028aefe9775c8",
+      "file": "sglang-server-args.py",
+      "sha256": "5ed5badef8dca0ee3dd2b34a1c9c417e172ff1a947d9fe802f7983fb4a2be950",
+      "bytes": 444424,
+      "status": "captured",
+      "anchors": [],
+      "evidence_level": "source_inspected",
+      "captured_at_utc": "2026-11-05T11:32:20.885755+00:00"
+    },
+    {
+      "id": "sglang-chat.py",
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/71de97b264b04dcd514cf904003028aefe9775c8/python/sglang/srt/entrypoints/openai/serving_chat.py",
+      "revision": "71de97b264b04dcd514cf904003028aefe9775c8",
+      "file": "sglang-chat.py",
+      "sha256": "ac0bbdf37a86b49c9df0d513ba44b0c06feb23a28ffcde0b730500e560604ab1",
+      "bytes": 110493,
+      "status": "captured",
+      "anchors": [
+        {
+          "start": 875,
+          "end": 885,
+          "claim": "output cap guard reads max_completion_tokens or max_tokens and explicit context length"
+        },
+        {
+          "start": 1691,
+          "end": 1728,
+          "claim": "optional additional usage chunk and error/DONE path need platform normalization"
+        }
+      ],
+      "evidence_level": "source_inspected",
+      "captured_at_utc": "2026-11-05T11:32:20.885792+00:00"
+    },
+    {
+      "id": "sglang-tokenizer-manager.py",
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/71de97b264b04dcd514cf904003028aefe9775c8/python/sglang/srt/managers/tokenizer_manager.py",
+      "revision": "71de97b264b04dcd514cf904003028aefe9775c8",
+      "file": "sglang-tokenizer-manager.py",
+      "sha256": "8102242c5094f8d444ac47232d3ae6113a70133a016791d9157864dada2fdad5",
+      "bytes": 158528,
+      "status": "captured",
+      "anchors": [
+        {
+          "start": 1745,
+          "end": 1760,
+          "claim": "disconnect polling has conditional abort path"
+        },
+        {
+          "start": 2160,
+          "end": 2172,
+          "claim": "background abort task waits two seconds before dispatch"
+        }
+      ],
+      "evidence_level": "source_inspected",
+      "captured_at_utc": "2026-11-05T11:32:20.885798+00:00"
+    },
+    {
+      "id": "sglang-sampling.py",
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/71de97b264b04dcd514cf904003028aefe9775c8/python/sglang/srt/sampling/sampling_params.py",
+      "revision": "71de97b264b04dcd514cf904003028aefe9775c8",
+      "file": "sglang-sampling.py",
+      "sha256": "9437125033cd7abe001689cef162ba558454fb455f577e7b36b4eaa4d3f95c24",
+      "bytes": 13031,
+      "status": "captured",
+      "anchors": [],
+      "evidence_level": "source_inspected",
+      "captured_at_utc": "2026-11-05T11:32:20.885801+00:00"
+    },
+    {
+      "id": "sglang-protocol.py",
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/71de97b264b04dcd514cf904003028aefe9775c8/python/sglang/srt/entrypoints/openai/protocol.py",
+      "revision": "71de97b264b04dcd514cf904003028aefe9775c8",
+      "file": "sglang-protocol.py",
+      "sha256": "c9aa0b5551bf5761c6e283391d70aebadb6708b69ba998cf21e00f05d2e3299f",
+      "bytes": 70651,
+      "status": "captured",
+      "anchors": [
+        {
+          "start": 202,
+          "end": 215,
+          "claim": "UsageInfo uses top-level reasoning_tokens and optional prompt_tokens_details"
+        },
+        {
+          "start": 1033,
+          "end": 1038,
+          "claim": "Chat output cap maps to max_new_tokens"
+        }
+      ],
+      "evidence_level": "source_inspected",
+      "captured_at_utc": "2026-11-05T11:32:20.885804+00:00"
+    },
+    {
+      "id": "lws-api.go",
+      "url": "https://raw.githubusercontent.com/kubernetes-sigs/lws/588881cada4fcc145e83eced00b88af920892ec6/api/leaderworkerset/v1/leaderworkerset_types.go",
+      "revision": "588881cada4fcc145e83eced00b88af920892ec6",
+      "file": "lws-api.go",
+      "sha256": "65b8bf2e760b71f5c4b9412f4e81d41aa164d618eba946d46350d797cc109474",
+      "bytes": 36277,
+      "status": "captured",
+      "anchors": [
+        {
+          "start": 1,
+          "end": 200,
+          "claim": "LWS v1 API group size/rank environment metadata; see exact symbol names"
+        }
+      ],
+      "evidence_level": "source_inspected",
+      "captured_at_utc": "2026-11-05T11:32:20.885807+00:00"
+    },
+    {
+      "id": "model-config.json",
+      "url": "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-7B/resolve/916b56a44061fd5cd7d6a8fb632557ed4f724f60/config.json",
+      "revision": "916b56a44061fd5cd7d6a8fb632557ed4f724f60",
+      "file": "model-config.json",
+      "sha256": "8290d3c1e385e2616572eb6926f7e2745f901d1c13da95970326a8a73f6c379c",
+      "bytes": 680,
+      "status": "captured",
+      "anchors": [],
+      "evidence_level": "metadata_inspected",
+      "captured_at_utc": "2026-11-05T11:32:20.885809+00:00"
+    },
+    {
+      "id": "model-tokenizer-config.json",
+      "url": "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-7B/resolve/916b56a44061fd5cd7d6a8fb632557ed4f724f60/tokenizer_config.json",
+      "revision": "916b56a44061fd5cd7d6a8fb632557ed4f724f60",
+      "file": "model-tokenizer-config.json",
+      "sha256": "8ac8c85fb242563c2260baec0909debd69d718af6a0b3d90e6cab62b4d341cd5",
+      "bytes": 3071,
+      "status": "captured",
+      "anchors": [],
+      "evidence_level": "metadata_inspected",
+      "captured_at_utc": "2026-11-05T11:32:20.885812+00:00"
+    },
+    {
+      "id": "model-generation-config.json",
+      "url": "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-7B/resolve/916b56a44061fd5cd7d6a8fb632557ed4f724f60/generation_config.json",
+      "revision": "916b56a44061fd5cd7d6a8fb632557ed4f724f60",
+      "file": "model-generation-config.json",
+      "sha256": "72cbec1015da9ed03ad025483005cbf6481403abf947adfd54e504d1a66a2126",
+      "bytes": 181,
+      "status": "captured",
+      "anchors": [],
+      "evidence_level": "metadata_inspected",
+      "captured_at_utc": "2026-11-05T11:32:20.885815+00:00"
+    },
+    {
+      "id": "sglang-usage-processor.py",
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/71de97b264b04dcd514cf904003028aefe9775c8/python/sglang/srt/entrypoints/openai/usage_processor.py",
+      "revision": "71de97b264b04dcd514cf904003028aefe9775c8",
+      "file": "sglang-usage-processor.py",
+      "sha256": "883c4c3ba95eb52fa57d5bf732d128063bac0b032f484776331220f61b7498a5",
+      "bytes": 4652,
+      "status": "captured",
+      "anchors": [
+        {
+          "start": 108,
+          "end": 138,
+          "claim": "total is prompt+completion, details omitted when not supplied"
+        }
+      ],
+      "evidence_level": "source_inspected",
+      "captured_at_utc": "2026-11-05T11:32:20.885818+00:00"
+    },
+    {
+      "id": "sglang-qwen2.py",
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/71de97b264b04dcd514cf904003028aefe9775c8/python/sglang/srt/models/qwen2.py",
+      "revision": "71de97b264b04dcd514cf904003028aefe9775c8",
+      "file": "sglang-qwen2.py",
+      "sha256": "41741eb780a3f75bc3ae4f43cc09d538b15752b1d5da34b5a96d8bca36970fdc",
+      "bytes": 28482,
+      "status": "captured",
+      "anchors": [
+        {
+          "start": 472,
+          "end": 476,
+          "claim": "Qwen2 implementation class exists; not GPU validation"
+        }
+      ],
+      "evidence_level": "source_inspected",
+      "captured_at_utc": "2026-11-05T11:32:20.885821+00:00"
+    }
+  ]
+}

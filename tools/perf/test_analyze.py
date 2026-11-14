@@ -323,6 +323,101 @@ class OfflineMetricsTests(unittest.TestCase):
                 with self.assertRaises(analyze.InputError):
                     analyze.analyze(data)
 
+    def test_single_client_clock_scope_accepts_uniform_relabel(self):
+        for request in self.data["requests"]:
+            request["clock_scope"] = "one-imported-client-clock"
+        for observation in self.data["observations"]:
+            observation["clock_scope"] = "one-imported-client-clock"
+        report = self.report()
+        self.assertEqual(report["counts"]["sent"], 9)
+        self.assertEqual(report["rates"]["success_rps"], 4)
+        self.assertEqual(self.row(1, report)["client_visible_ttft_ms"], 100)
+
+    def test_mixed_client_clock_scopes_rejected_for_all_sent_states(self):
+        # Include a success, a rejection and an unfinished request in the guard.
+        for index in (0, 2, 8):
+            with self.subTest(index=index):
+                data = copy.deepcopy(self.data)
+                request = data["requests"][index]
+                request["clock_scope"] = "other-client-monotonic"
+                client = next(o for o in data["observations"]
+                              if o["producer"] == "client" and
+                              o["request_id"] == request["request_id"])
+                client["clock_scope"] = request["clock_scope"]
+                with self.assertRaisesRegex(analyze.InputError, "mixed client clock scopes"):
+                    analyze.analyze(data)
+
+    def test_request_client_observation_clock_mismatch_rejected(self):
+        for change_request in (True, False):
+            with self.subTest(change_request=change_request):
+                data = copy.deepcopy(self.data)
+                record = data["requests"][0] if change_request else data["observations"][0]
+                record["clock_scope"] = "mismatched-client-clock"
+                with self.assertRaisesRegex(analyze.InputError, "client coverage/clock mismatch"):
+                    analyze.analyze(data)
+
+    def test_server_clock_scope_keeps_own_duration_legal(self):
+        server = copy.deepcopy(self.data["observations"][0])
+        server.update(observation_id=builder.uid(901), producer="go",
+                      clock_scope="independent-go-monotonic", span_id="d" * 16,
+                      stages=[{"name": "go.key_validate", "duration_ms": 7,
+                               "provenance": "measured"}])
+        self.data["observations"].append(server)
+        report = self.report()
+        self.assertEqual(report["stages_inclusive_only"]["go.key_validate"]["p50"], 7)
+        self.assertEqual(self.row(1, report)["server_first_chunk_ms"], 60)
+        self.assertEqual(self.row(1, report)["client_visible_ttft_ms"], 100)
+        self.assertEqual(report["rates"]["success_rps"], 4)
+
+    def test_engine_clock_scope_uses_own_origin_for_tpot(self):
+        request = self.data["requests"][0]
+        request["engine_clock_scope"] = "independent-engine-monotonic"
+        request["engine_token_times_ms"] = [
+            timestamp + 1000000 for timestamp in request["engine_token_times_ms"]]
+        engine = copy.deepcopy(self.data["observations"][0])
+        engine.update(observation_id=builder.uid(902), producer="engine",
+                      clock_scope=request["engine_clock_scope"], span_id="e" * 16,
+                      stages=[{"name": "engine.decode", "duration_ms": 180,
+                               "provenance": "measured"}])
+        self.data["observations"].append(engine)
+        report = self.report()
+        self.assertEqual(self.row(1, report)["engine_generated_tpot_ms"], 30)
+        self.assertEqual(self.row(1, report)["client_visible_ttft_ms"], 100)
+        self.assertEqual(report["stages_inclusive_only"]["engine.decode"]["p50"], 180)
+        self.assertEqual(report["rates"]["success_rps"], 4)
+
+    def test_invalid_client_clock_scopes_rejected(self):
+        for value in ("", None):
+            with self.subTest(scope=value):
+                data = copy.deepcopy(self.data)
+                data["requests"][0]["clock_scope"] = value
+                data["observations"][0]["clock_scope"] = value
+                with self.assertRaises(analyze.InputError):
+                    analyze.analyze(data)
+
+    def test_cli_mixed_clock_scopes_exit_two_without_new_or_changed_report(self):
+        data = copy.deepcopy(self.data)
+        data["requests"][0]["clock_scope"] = "SYNTHETIC_SCOPE_SENTINEL"
+        data["observations"][0]["clock_scope"] = "SYNTHETIC_SCOPE_SENTINEL"
+        with tempfile.TemporaryDirectory(dir=HERE) as directory:
+            source = Path(directory) / "mixed.json"
+            source.write_text(json.dumps(data), encoding="utf-8")
+            output = Path(directory) / "report.json"
+            for existing in (False, True):
+                with self.subTest(existing_report=existing):
+                    if existing:
+                        output.write_bytes(b"unchanged-existing-report")
+                    proc = subprocess.run([sys.executable, str(HERE / "analyze.py"),
+                        "--input", str(source), "--output", str(output)],
+                        capture_output=True, text=True)
+                    self.assertEqual(proc.returncode, 2)
+                    self.assertEqual(proc.stdout, "")
+                    self.assertNotIn("SYNTHETIC_SCOPE_SENTINEL", proc.stdout + proc.stderr)
+                    if existing:
+                        self.assertEqual(output.read_bytes(), b"unchanged-existing-report")
+                    else:
+                        self.assertFalse(output.exists())
+
     def test_cli_reports_synthetic_and_redacts_invalid_payload(self):
         with tempfile.TemporaryDirectory(dir=HERE) as directory:
             output = Path(directory) / "report.json"

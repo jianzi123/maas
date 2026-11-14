@@ -1,0 +1,144 @@
+# 阶段总结：2026-11-05
+
+## 当前：原生人工权重ModelRunner
+
+沿6517a15，QA553980d的cap6范围保留。本批原生DummyModelLoader实际加载134515008个人工随机参数，ModelRunner/CudaGraphRunner完成1/2/4/8捕获和12次动态decode。Graph/eager logits本例最大差0，五组池回收到8 request/512 KV，非默认stream通过；Torch峰值308.875MiB。实际RoPE原地处理非连续QKV视图；默认KV双写，另人工直接成熟store op对真实视图逐位通过且单核。详见[第18章](engineering/18-native-modelrunner-graphs.md)。这是结构验证，完整Engine/serving及预训练质量/性能仍未验，没有修改默认cap8或下载权重。
+
+## 当前GPU接续：cap6切片
+
+已从清理后的临时环境恢复固定核心版本，三个新GPU进程完成cap6/8配对。B8/L1024分段保持6×192，CUPTI grid[8,3,8]→[8,3,6]；raw局部快约10.4%–11.4%、backend张量范围约8.7%–12.3%。L512有退化，2048/ragged改变分段，不改全局默认。见[第17章](engineering/17-cap6-empty-cta.md)。上一批e6de90e已由QA729f740独立受控通过；本次新增结果仍为作者探索。Engine/serving/质量未测，权重未下载。
+
+最新补测：追加sgl-kernel0.3.9.post2的成熟store_kv_cache直接调用基线，主shape无fallback实际通过；D80/480字节行明确unsupported。原型未建立稳定跨shape优势，最终优先复用成熟库，不采用教学原型替换。三项研究各三个GPU进程，初期六进程结果保留。
+
+## 当前GPU批次：SGLang Decode/KV
+
+沿afe2596复用WSL的SGLang0.5.2/b0d25e7、torch2.8.0+cu128和RTX4070 Laptop，六份后端/核源码与官方逐字节一致。直接运行原metadata、RadixAttention/forward_decode、KV池和MHA/GQA Triton核；状态由无权重harness构造，没有初始化ModelRunner/Engine或执行serving。
+
+三进程split对照保留cap1长序列明显退化；基于实际两次KV索引写kernel，另做同输入K/V融合，ATen主机编译/注册、NVRTC设备核和当前stream调用实际通过。batch8局部backend三进程约118.6–124.3us→55.1–55.4us，但long第一进程退化约21%，不通用启用。原始分布、CUPTI和范围见[第16章](engineering/16-sglang-decode-kv.md)与[摘要](../../tools/perf/operators/local_gpu/evidence/decode-v0.16/summary.json)。
+
+独立图检查验证被毒化输出和变化KV会更新；异步越界保护由独立子进程实际退出42。没有Compute Sanitizer结果；nvcc SDK因截断/连接中断未就绪，本轮是g++/ATen+NVRTC路线。模型权重下载仍未确认，未下载；Engine/模型质量及平台收益尚未验证。
+
+## 之前阶段的记录
+
+## 当前优先级纠偏 2026-11-13
+
+本任务重心回到GPU算子与真实SGLang推理性能，首项为Decode Attention/KV路径。已有CPU公式/调度器、Go采样和工具回归保留为支持资产，不以CPU测试数或通用报告数量作为推理优化交付。K1不等待平台D1/E1；GPU条件具备即可独立做设备基线，R/E分别按模型/平台条件推进。
+
+本轮只读复核有RTX4070 Laptop 8188MiB、驱动581.29、CUDA编译器13.0.88和Nsight Compute实际exe；当前PyTorch版本文件为2.9.1+cpu、cuda=None，导入因OpenMP Error15失败，PATH未发现nsys。没有执行GPU实验，也未安装/替换栈或绕过运行库冲突；设备/资源使用批准、干净CUDA框架和Profiler条件仍需具备。具体shape、源码路径与命令见[算子主线](operator-lab.md)。
+
+D1已交消费df8d40e及其独立QA沿原SHA继续，源c7e863b已由原QA通过受控核验；本次优先级调整不重复派发源端或重做原验收。
+
+
+## 当前D1消费端增量
+
+沿8420aaf接入原后端c7e863b实际Go/临时MySQL/受控HTTP的9条摘要，另有1次满队列执行无摘要。逐文件hash和源码交付commit核对，保留working-tree-d1采样原标签；首协议/非空内容/Write成功/flush尝试与局部Forward时钟分列。客户端sent/RPS/TTFT、完整binding、trace/实验关联、ledger/held及独立恢复仍未知，D1整体与E1尚未完成。实际报告和复现命令见[D1接线](d1-wiring.md)。
+
+同时保留QA faf1b64旧20条终态适配，原oracle失败、修正复跑、partial/null/0、原reserved与当前Reserved保留，不按case与新源拼接。作者CPU全量276项通过（原234+新增42），不替代原QA的同SHA复验、真实模型或GPU性能证据。本轮没有重跑Go或真实平台，不宣布瓶颈/收益。
+
+
+## 当前端到端诊断闭环
+
+沿b4e7e27新增tools/perf/diagnostics，复用原analyze指标/分母/usage与恢复右删失，补13项资产台账、25项请求到算子/通信采集地图、独立sidecar身份/版本/时钟校验和JSON/HTML报告。synthetic手算活动链165ms、跨度185ms与间隙20ms仅验证数学；真实模型瓶颈/全链路关键路径仍未知。当前默认925d8c5和PR6候选d2d7869的first赋值模式只读复核，产品补丁仍由原负责人收口。
+
+
+## 当前页预算调度阶段 2026-11-13
+
+沿6e8b90e恢复，新增[完整同步调度算法与对照](engineering/14-page-budget-scheduling.md)。按字节预算得到2048个主机逻辑页，明确共享33位置前缀/COW、最坏输出预留、activation代理、age接纳屏障和最小batch轮换。三次配对的候选完成率低于静态256，当前净收益主张淘汰；真实引擎/GPU结论仍未执行。首片采样反例固定后端e1bd502行295，产品补丁交原负责人。新增28项、完整193项CPU回归通过，具体本轮日志与报告附任务评论。
+
+
+## 当前运行时闭环阶段
+
+按最新方案接续工程作业二，复用Scheduler.preview与PagePool，新增单写者Runtime和不可变Worker消息，覆盖计划/提交/完成分离、输出信用、取消/ACK未知、代次隔离和独立停止。固定七场景及真实CPU线程可本地运行；测试/输出以本轮原始日志为准，未产生GPU/模型或平台性能结论。
+
+
+## 当前工程实现增量
+
+新增[工程实现卷十二章](engineering/README.md)及[八类可运行代码](../../tools/perf/engineering/README.md)，将公式、数据结构、不变量、独立oracle和故障注入连接起来。CPU/本地SQLite进程恢复与固定源码审计单独交证据；真实GPU、多卡/模型质量、MySQL/K8s/网关发布与收益未验。当前回归数量按本轮实际日志记录，历史数字不累加成整体验收。
+
+
+## 当前整合交付
+
+入口现统一为[六章教材](foundations/README.md)→[逐章练习](exercises/README.md)→[目标卡](optimization-goals.md)→[实验规程](optimization-playbook.md)。[教材与研发整合地图](integration-map.md)说明两条框架主线、已有码接点、19项埋点/导出缺口、阶段与课题映射，以及现有分支的合入顺序。
+
+本轮只读核对PR #2的0f07c5d、PR #4的428d44e与发布aba38f5；三组两路静态merge-tree均无文本冲突，实际三路合并和运行验证尚未执行。未接管原后端/前端/架构工作，真实模型/GPU和实验计划继续按原门槛。
+
+
+
+## 当前教材交付
+
+新主线为[推理运行时与部署框架工程基础](foundations/README.md)：六章、五张图、三个标准库教学脚本、十四道工程题及R0–R3/D0–D3实现路线。前三章用请求shape、六轮调度、KV容量、GEMM尾部和Attention mask解释机制；后半部给出并发/背压/完成接口、TP矩阵分片、幂等协调、发布屏障、UID清理和故障恢复。
+
+性能工具基线保持5020d5c，原学习版35fd85a为本轮起点；共享语义结合架构师2319eb6增量理解。MAAS-3已有耐久内核及其报告的受控证据，本轮只读引用，没有重新运行其Go/数据库/网关验收。教材定义的Python模型是确定性教学，不是实际推理框架或部署控制器。
+
+本轮只核验新增教学脚本、手算/状态反例、文档链接、SVG与离线阅读材料；历史83项等结果不计作本轮新测试。真实GPU/模型、C02–C08、生产发布与性能收益仍未验收，execution_enabled保持false。
+
+## 之前阶段的归档记录
+
+以下按当时基线保留，供追溯；其中“调用内核未完成”等早期判断已被后续MAAS-3交付覆盖，不能作为当前现状。当前是否可执行真实实验仍须核验实际装配、环境和授权。
+
+
+范围：落实优化方向中的受控工具准备、本地传输验证和团队文档。真实性能结论仍待后续平台/模型实验。事实截至本次读取的集成基线6302256；后端正在同一PR继续工作，后续状态以对应提交/任务为准。
+
+## 已完成与证据级别
+
+| 交付/事实 | 证据 | 可以得出的结论 |
+|---|---|---|
+| C01共同客户端时钟修复 | c56d608；独立复核48项；本分支带入e97f1ee | 指定离线输入中的混合client scope拒绝，server/engine本地时长保留；不证明真实同步 |
+| 发布控制器与存储 | 后端6302256及docs/mysql-verification.md报告 | 有受控控制器、真实MySQL发布屏障/inventory专项；生产装配/调用内核/网关仍待完成 |
+| E0本地传输实验 | 本次12个case、2400次实际loopback请求，全部成功；JSON/CSV随交付 | 连接复用与SSE客户端采样机制已运行；不是MaaS或SGLang性能 |
+| 团队文档与E1–E3计划 | 本目录及tools/perf/experiments | 新人有本地练习、口径、技术项、记录与总结入口；真实实验计划仍禁用 |
+
+后端报告中的MySQL13场景、Go41项及其他验证是其已报告证据，本轮没有重复执行或替它扩大结论。完整调用Key/三维预算/slot/request/唯一终态内核、H1–H4/Secret agent/validation与真实端到端仍未完成。
+
+## 本次E0观测
+
+首内容人为等待10ms、下一内容间隔5ms。一个client进程的同一monotonic坐标，AB/BA/AB探索，C1/C4、fresh/reuse、每case200请求，各3次；没有预热，冷建连与复用连接另外分组。所有fixture服务器与handler在结果返回前停止/join。
+
+| 条件 | 每case观察到的TCP accepts：fresh / reuse | 结果 |
+|---|---|---|
+| C1，每case200请求、各3次重复 | 200 / 1 | 各case200成功，0失败 |
+| C4，每case200请求、各3次重复 | 200 / 4 | 各case200成功，0失败 |
+
+这些连接数是实测fixture机制，不能称“平台提速百分比”。报告包含TTFT/E2E、失败分母与窗口；没有冻结tokenizer或模型，TPOT/token usage为null，不伪造usage、业务admitted/终态或质量。原始报告SHA256：91dfe2ae2e35762b387f312cddcd2b1332238543779c2c5fd1445cc87ef66f78。
+
+本轮实际执行Python完整回归56项通过（原48项+新增8项），退出0；日志与验证JSON随交付。新增8项专门检查连接计数、首内容、不伪造token、截止、错误清理、硬上限、证据标签和无任意端点模式。
+
+## 经验与边界
+
+- 先写可复算的反例和输入边界，再给测试总数；41项曾遗漏共同客户端时间窗，不能靠更多测试的数字代替覆盖说明。
+- 连接复用在本地机制上减少建连；业务链路中收益还取决于TLS/上游/DB/flush，不能跨证据级别外推。
+- 锁/队列/KV/graph分别取证；一次只改一个因素，保留失败/拒绝/缺失与清理。
+- unknown held不算actual，slot清理不退款；“可发布对象存在”不是“模型可调用”。
+
+## 下一步与负责人
+
+| 优先级 | 下一动作 | 主责/进入门槛 | 可复核完成条件 |
+|---|---|---|---|
+| P0 | E1真实平台+受控上游 | 原后端/网关先联合提供唯一耐久内核和Higress链路，Mika交接；性能负责采集 | 同Key/预算/slot/rate及修订下的冷/热连接、分层耗时、真账/取消证据 |
+| P1 | E2 prefill切块 | 算法/运维给获准模型/GPU/版本、SLO与额度 | 同M/C4/U单因素对照、尾延迟/资源/质量和预算复验 |
+| P1 | E3缓存开关 | 冻结权重/tokenizer/template与U/H样本 | 同H开/关并补U负对照，命中/重算与有效吞吐 |
+| 协作 | 共享总结与入口维护 | 每项主负责人用模板更新事实/决定/建议/未验项 | 引用提交/日志/hash，结论与证据级别一致 |
+
+3次配对只是探索，5次/8000请求及+10%等收益政策仍待评审；没有批准SLO或必要证据时不判C02–C08运行通过。真实模型/GPU/付费调用、权重下载和目标环境写入本轮未执行。
+
+## 本轮算子/运行时增量（2026-11-05）
+
+主线转到算子与推理框架。固定SGLang v0.5.6/7ae368e源码样本，记录8个文件的原始hash和AST定位；这不是部署版本推荐或已测热点。CPU执行8组float64正确性参考，新增20个针对性回归覆盖suffix mask/GQA/全遮罩/非连续布局/GEMM/RMSNorm、GPU默认拒绝、Profiler dry-run、未恢复样本与大整数占用积分。完整测试结果见本轮实际日志，不将测试数量外推为GPU数值或性能通过。
+
+交付CUDA GEMM/cuBLAS基线、Triton RMSNorm与PyTorch微基准骨架，提供Nsight/PyTorch Profiler默认dry-run命令；没有编译/执行CUDA/Triton或运行GPU算子。本机只读检测到RTX4070 Laptop 8GB，但PyTorch是2.9.1+cpu且导入OpenMP冲突，Triton/Nsight Systems未就绪；计划execution_enabled=false。
+
+J02固定200条、S/M/L=60/30/10及hash，补E1–E3的固定顺序、同资源/精度/业务限制、client/Go/Worker测点和未恢复分母。CPU/诊断工具不改变准入、预算、终态或slot策略，也不公开内部创新/专利材料。
+
+工程状态已更新理解：MAAS-3 4f3eb93已有真实耐久内核代码及局部MySQL/Redis/relay受控验证，不能继续写成全套夹具；实际Higress装配/证据生产者、模型/GPU及完整端到端仍未验证。本轮没有重跑其Go/数据库测试。此前2400次loopback实验仅作为历史受控传输证据复用，不是本轮新增模型结果。
+
+## CUDA有限值门禁有界修复（2026-11-05）
+
+独立评审发现旧GEMM正确性循环接受NaN。本轮抽出CUDA和宿主共用finite校验及成功continuation，candidate/cuBLAS/reference任一NaN或无穷即拒绝，错误容差/溢出也拒绝。失败不会进入预热、计时或成功报告；GPU计划、协议和既有实验输入不变。
+
+[修复与复验记录](gemm-finite-fix-v0.5.1.md)包含21个纯宿主场景和fast-math拒绝编译，实际退出码/计数见本轮证据JSON。旧反例独立拷贝仍用于重现旧缺陷，新共用函数用相同输入验证拒绝。完整测试和归档核验以本轮日志为准，不将宿主编译外推为CUDA/GPU验证。
+
+## 入门/进阶与目标重构（2026-11-05）
+
+本轮按成员要求重做学习入口、入门B01–B06、进阶A01–A04、自测答案和目标卡模板。优化目标细分为Attention/KV、GEMM/Grouped、RMSNorm、混合调度、KV/prefix、Graph、通信及端到端传播八卡；按K/R/E层分别登记baseline、指标、约束、证据与淘汰条件。
+
+修正完整课程Python要求为3.11+（NumPy2.3.5元数据），入门checkout改为当前operator-runtime-lab分支。只改文档，不打开实验计划或改变运行实现。83项旧回归仍按原阶段记录，本轮验课/链接/阅读版验证单独交证据，详见[重构说明](learning-change-log.md)。

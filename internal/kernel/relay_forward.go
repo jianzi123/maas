@@ -3,6 +3,7 @@ package kernel
 import (
 	"bytes"
 	"context"
+	"database/sql"
 	"encoding/json"
 	"errors"
 	"github.com/google/uuid"
@@ -58,9 +59,19 @@ func (d *relayDiagnostics) append(kind string, u *Usage, cause string) error {
 // Forward emits only the stable public schema. Raw provider usage is diagnostic
 // until the one successful terminal is confirmed; it is never a public midstream
 // accounting claim. No redirect, retry, fallback or direct supplier path exists.
-func (r *Relay) Forward(ctx context.Context, w http.ResponseWriter, call RelayCall) error {
+func (r *Relay) Forward(ctx context.Context, w http.ResponseWriter, call RelayCall) (returnErr error) {
 	if r == nil || r.core == nil || r.client == nil || r.endpoint == "" || len(call.Body) == 0 || int64(len(call.Body)) > r.maxBytes || !validUUID(call.Input.RequestID) {
 		return ErrUnavailable
+	}
+	start := time.Now()
+	sample := RelaySample{Result: "unknown"}
+	if sampler := r.Sampler; sampler != nil {
+		sample = RelaySample{Schema: "maas-go-relay-source-1.0", RunID: sampler.run, RequestID: call.Input.RequestID, InstanceID: sampler.instance, BootID: sampler.boot, ClockScope: sampler.instance + "/" + sampler.boot + "/" + call.Input.RequestID, SourceRevision: sampler.revision, PublicationID: call.Input.Profile.Binding.PublicationID, ReleaseRevision: call.Input.Profile.Binding.Revision, Result: "unknown"}
+		defer func() {
+			sample.EndMS = *elapsedMS(start, time.Now())
+			sample.ReturnError = returnErr != nil
+			sampler.offer(sample)
+		}()
 	}
 	sendCtx, cancel := context.WithDeadline(ctx, call.Input.Deadline)
 	defer cancel()
@@ -78,6 +89,17 @@ func (r *Relay) Forward(ctx context.Context, w http.ResponseWriter, call RelayCa
 	diagnostic := &relayDiagnostics{core: r.core, call: call}
 	wrote := false
 	finalCode := ""
+	completionStopped := errors.New("completion stopped before commit")
+	stopped := func() bool {
+		return sendCtx.Err() != nil || ctx.Err() != nil || !time.Now().Before(call.Input.Deadline)
+	}
+	stopResult := func() (string, string) {
+		result, _ := relayFailure(ctx, sendCtx, sendCtx.Err(), "timed_out")
+		if result == "cancelled" {
+			return result, "client_cancelled"
+		}
+		return "timed_out", "upstream_timeout"
+	}
 	finish := func(result string, usage Usage, first *int64) error {
 		terminalCtx, done := context.WithTimeout(context.Background(), 5*time.Second)
 		defer done()
@@ -86,13 +108,47 @@ func (r *Relay) Forward(ctx context.Context, w http.ResponseWriter, call RelayCa
 			return ErrUnavailable
 		}
 		f := Final{ErrorCode: finalCode, EventID: uuid.NewSHA1(uuid.NameSpaceOID, []byte(call.Input.RequestID+"/owner-terminal")).String(), RequestID: call.Input.RequestID, Owner: call.Input.Owner, OwnerFence: 1, Result: result, Usage: usage, FirstChunkMS: first, Submitted: result == "succeeded"}
-		if e = r.core.Finalize(terminalCtx, f); e != nil {
+		if result == "succeeded" {
+			e = r.core.finalizeChecked(terminalCtx, f, func(tx *sql.Tx) error {
+				if stopped() {
+					return completionStopped
+				}
+				t, err := now(terminalCtx, tx)
+				if err != nil {
+					return err
+				}
+				if !t.Before(snap.Input.Deadline) || stopped() {
+					return completionStopped
+				}
+				return nil
+			})
+			if errors.Is(e, completionStopped) {
+				f.Result, finalCode = stopResult()
+				f.ErrorCode = finalCode
+				f.Usage = unavailableUsage("not_provided")
+				f.Submitted = false
+				cause := "deadline_exceeded"
+				if f.Result == "cancelled" {
+					cause = "explicit_cancel"
+				}
+				_ = diagnostic.append("termination", nil, cause)
+				if err := r.core.Finalize(terminalCtx, f); err != nil {
+					return err
+				}
+				sample.Result = f.Result
+				return completionStopped
+			}
+		} else {
+			e = r.core.Finalize(terminalCtx, f)
+		}
+		if e != nil {
 			return e
 		}
 		_, state, e = r.core.ReadRequest(terminalCtx, call.Input.RequestID)
 		if e != nil {
 			return e
 		}
+		sample.Result = state
 		if result == "succeeded" && state != "succeeded" {
 			return ErrUnavailable
 		}
@@ -105,6 +161,14 @@ func (r *Relay) Forward(ctx context.Context, w http.ResponseWriter, call RelayCa
 		return unavailableUsage(reason)
 	}
 	end := func(cause, result string, usage Usage, first *int64) error {
+		if result == "succeeded" && stopped() {
+			result, finalCode = stopResult()
+			usage = unavailableUsage("not_provided")
+			cause = "deadline_exceeded"
+			if result == "cancelled" {
+				cause = "explicit_cancel"
+			}
+		}
 		diagErr := diagnostic.append("termination", nil, cause)
 		if diagErr != nil {
 			if result == "succeeded" {
@@ -113,6 +177,11 @@ func (r *Relay) Forward(ctx context.Context, w http.ResponseWriter, call RelayCa
 			usage = unavailableUsage("not_provided")
 		}
 		err := finish(result, usage, first)
+		if finalCode == "client_cancelled" || finalCode == "upstream_timeout" {
+			if err == nil {
+				return completionStopped
+			}
+		}
 		if diagErr != nil {
 			return ErrUnavailable
 		}
@@ -159,10 +228,17 @@ func (r *Relay) Forward(ctx context.Context, w http.ResponseWriter, call RelayCa
 		b, _ := json.Marshal(value)
 		w.Header().Set("Content-Type", "text/event-stream")
 		n, err := io.WriteString(w, "data: "+string(b)+"\n\n")
+		content := hasVisibleContent(value)
+		if r.Sampler != nil && content && sample.WriteMS == nil && err == nil && n == len(b)+8 {
+			sample.WriteMS = elapsedMS(start, time.Now())
+		}
 		if n > 0 {
 			wrote = true
 		}
 		if flush, ok := w.(http.Flusher); ok {
+			if r.Sampler != nil && content && sample.FlushMS == nil {
+				sample.FlushMS = elapsedMS(start, time.Now())
+			}
 			flush.Flush()
 		}
 		return err
@@ -209,8 +285,13 @@ func (r *Relay) Forward(ctx context.Context, w http.ResponseWriter, call RelayCa
 		if _, err = normalizeResponse(body, call.Input, usage); err != nil {
 			return abort("parse_invalid", "failed", "not_provided", "upstream_protocol_error", nil)
 		}
+		usage = approvedResponseUsage(call.Input.Profile.UsagePolicy, usage)
 		if err = end("normal_completion", "succeeded", usage, nil); err != nil {
-			errorOutput("accounting_unavailable")
+			code := "accounting_unavailable"
+			if errors.Is(err, completionStopped) {
+				code = finalCode
+			}
+			errorOutput(code)
 			return err
 		}
 		terminalCtx, done := context.WithTimeout(context.Background(), 5*time.Second)
@@ -233,13 +314,22 @@ func (r *Relay) Forward(ctx context.Context, w http.ResponseWriter, call RelayCa
 		return err
 	}
 	reader := newPublicEventReader(resp.Body, r.maxLine, r.maxBytes)
-	usage := unavailableUsage("not_provided")
+	authority := usageAuthority{policy: call.Input.Profile.UsagePolicy}
 	var first *int64
 	seenFinish, seenDone := false, false
 	for {
 		data, err := reader.Next()
+		receivedAt := time.Now() // before receipt DB work or downstream Write/Flush
 		if err != nil {
 			if err == io.EOF && seenDone && seenFinish {
+				if stopped() {
+					result, reason := relayFailure(ctx, sendCtx, sendCtx.Err(), "timed_out")
+					cause, code := "deadline_exceeded", "upstream_timeout"
+					if result == "cancelled" {
+						cause, code = "explicit_cancel", "client_cancelled"
+					}
+					return abort(cause, result, reason, code, first)
+				}
 				break
 			}
 			result, reason := relayFailure(ctx, sendCtx, err, "interrupted")
@@ -269,21 +359,41 @@ func (r *Relay) Forward(ctx context.Context, w http.ResponseWriter, call RelayCa
 			return abort("parse_invalid", "failed", "not_provided", "upstream_protocol_error", first)
 		}
 		if ok {
-			if usage.Source == "upstream" && !monotonicUsage(usage, u) {
-				cancel()
-				return abort("usage_conflict", "failed", "not_provided", "upstream_protocol_error", first)
-			}
 			if err = diagnostic.append("receipt", &u, ""); err != nil {
 				return receiptFailure(err, first)
 			}
-			usage = u
+			if authority.observe(u) != nil {
+				cancel()
+				return abort("usage_conflict", "failed", "not_provided", "upstream_protocol_error", first)
+			}
 		}
 		out, finished, err := normalizeChunk(data, call.Input)
 		if err != nil {
 			cancel()
 			return abort("parse_invalid", "failed", "not_provided", "upstream_protocol_error", first)
 		}
+		if seenFinish {
+			choices, _ := out["choices"].([]any)
+			if len(choices) > 0 {
+				return abort("parse_invalid", "failed", "not_provided", "upstream_protocol_error", first)
+			}
+		}
+		if r.Sampler != nil && sample.ProtocolMS == nil {
+			sample.ProtocolMS = elapsedMS(start, receivedAt)
+		}
+		if first == nil && hasVisibleContent(out) {
+			ms := receivedAt.Sub(call.Input.Received).Milliseconds()
+			if ms >= 0 {
+				first = &ms
+			}
+			if r.Sampler != nil {
+				sample.ContentMS = elapsedMS(start, receivedAt)
+			}
+		}
 		seenFinish = seenFinish || finished
+		if finished {
+			authority.finish()
+		}
 		if sendCtx.Err() != nil {
 			result, reason := relayFailure(ctx, sendCtx, sendCtx.Err(), "interrupted")
 			cause, code := "deadline_exceeded", "upstream_timeout"
@@ -292,18 +402,18 @@ func (r *Relay) Forward(ctx context.Context, w http.ResponseWriter, call RelayCa
 			}
 			return abort(cause, result, reason, code, first)
 		}
-		if first == nil {
-			ms := time.Since(call.Input.Received).Milliseconds()
-			first = &ms
-		}
 		if err = writeChunk(out); err != nil {
 			result, reason := relayFailure(ctx, sendCtx, err, "cancelled")
 			cancel()
 			return abort("client_write_error", result, reason, "client_cancelled", first)
 		}
 	}
-	if e = end("normal_completion", "succeeded", usage, first); e != nil {
-		errorOutput("accounting_unavailable")
+	if e = end("normal_completion", "succeeded", authority.result(), first); e != nil {
+		code := "accounting_unavailable"
+		if errors.Is(e, completionStopped) {
+			code = finalCode
+		}
+		errorOutput(code)
 		return e
 	}
 	terminalCtx, done := context.WithTimeout(context.Background(), 5*time.Second)
@@ -322,6 +432,13 @@ func (r *Relay) Forward(ctx context.Context, w http.ResponseWriter, call RelayCa
 	if e = writeChunk(out); e != nil {
 		_ = diagnostic.append("termination", nil, "client_write_error")
 		return e
+	}
+	// The original terminal is already committed here. Late cancellation affects
+	// transport only; never reopen accounting or issue a second terminal.
+	if stopped() {
+		_, code := stopResult()
+		errorOutput(code)
+		return completionStopped
 	}
 	_, e = io.WriteString(w, "data: [DONE]\n\n")
 	if e != nil {

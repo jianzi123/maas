@@ -1,0 +1,200 @@
+{
+  "tag": "v0.5.6",
+  "commit": "7ae368efde14f0b2abe769a5fbb99b8154b2a9b7",
+  "purpose": "source analysis specimen, not deployment recommendation",
+  "files": [
+    {
+      "path": "python/sglang/srt/managers/scheduler.py",
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/7ae368efde14f0b2abe769a5fbb99b8154b2a9b7/python/sglang/srt/managers/scheduler.py",
+      "sha256": "7edb20e66d976cd42a696aa00abc26d7e531b8f183939c0f98ac46737909c1fe",
+      "bytes": 110877,
+      "symbols": [
+        {
+          "name": "event_loop_normal",
+          "line": 967,
+          "end_line": 989
+        },
+        {
+          "name": "event_loop_overlap",
+          "line": 992,
+          "end_line": 1050
+        },
+        {
+          "name": "get_next_batch_to_run",
+          "line": 1633,
+          "end_line": 1704
+        },
+        {
+          "name": "run_batch",
+          "line": 1952,
+          "end_line": 2077
+        }
+      ]
+    },
+    {
+      "path": "python/sglang/srt/managers/schedule_batch.py",
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/7ae368efde14f0b2abe769a5fbb99b8154b2a9b7/python/sglang/srt/managers/schedule_batch.py",
+      "sha256": "b7e01020f934cfe4682c84f41e0bca546917f8357f349d2afcaab0c079c8c1cb",
+      "bytes": 80228,
+      "symbols": []
+    },
+    {
+      "path": "python/sglang/srt/model_executor/model_runner.py",
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/7ae368efde14f0b2abe769a5fbb99b8154b2a9b7/python/sglang/srt/model_executor/model_runner.py",
+      "sha256": "010d9ac02b0801f964bc7f6c9a0c01c6ad8468d500e4d20acc4bd26899472449",
+      "bytes": 117225,
+      "symbols": [
+        {
+          "name": "forward_decode",
+          "line": 2546,
+          "end_line": 2567
+        },
+        {
+          "name": "forward_extend",
+          "line": 2569,
+          "end_line": 2597
+        },
+        {
+          "name": "forward",
+          "line": 2633,
+          "end_line": 2658
+        },
+        {
+          "name": "_forward_raw",
+          "line": 2660,
+          "end_line": 2722
+        }
+      ]
+    },
+    {
+      "path": "python/sglang/srt/model_executor/cuda_graph_runner.py",
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/7ae368efde14f0b2abe769a5fbb99b8154b2a9b7/python/sglang/srt/model_executor/cuda_graph_runner.py",
+      "sha256": "6afc41518513dfe8a9fe5212b2d29c4ad6c6adee37eb3e0649173db6400e6978",
+      "bytes": 35153,
+      "symbols": [
+        {
+          "name": "capture",
+          "line": 449,
+          "end_line": 513
+        },
+        {
+          "name": "replay",
+          "line": 808,
+          "end_line": 841
+        },
+        {
+          "name": "capture",
+          "line": 902,
+          "end_line": 908
+        },
+        {
+          "name": "replay",
+          "line": 910,
+          "end_line": 914
+        }
+      ]
+    },
+    {
+      "path": "python/sglang/srt/mem_cache/radix_cache.py",
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/7ae368efde14f0b2abe769a5fbb99b8154b2a9b7/python/sglang/srt/mem_cache/radix_cache.py",
+      "sha256": "7b6aa9c4e9736f3cf94df0eb37e17c48500151e7e7dbc54f389d56f8c99c2fa9",
+      "bytes": 30629,
+      "symbols": [
+        {
+          "name": "match_prefix",
+          "line": 340,
+          "end_line": 410
+        },
+        {
+          "name": "evict",
+          "line": 544,
+          "end_line": 569
+        }
+      ]
+    },
+    {
+      "path": "python/sglang/srt/mem_cache/memory_pool.py",
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/7ae368efde14f0b2abe769a5fbb99b8154b2a9b7/python/sglang/srt/mem_cache/memory_pool.py",
+      "sha256": "461f35f299e799daaec9aedad2fda24d55f927ddf7ea7254b0078160194cb684",
+      "bytes": 78590,
+      "symbols": [
+        {
+          "name": "alloc",
+          "line": 106,
+          "end_line": 113
+        },
+        {
+          "name": "free",
+          "line": 115,
+          "end_line": 119
+        },
+        {
+          "name": "alloc",
+          "line": 264,
+          "end_line": 271
+        },
+        {
+          "name": "free",
+          "line": 273,
+          "end_line": 279
+        },
+        {
+          "name": "alloc",
+          "line": 379,
+          "end_line": 402
+        },
+        {
+          "name": "free",
+          "line": 415,
+          "end_line": 421
+        }
+      ]
+    },
+    {
+      "path": "python/sglang/srt/layers/attention/flashinfer_backend.py",
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/7ae368efde14f0b2abe769a5fbb99b8154b2a9b7/python/sglang/srt/layers/attention/flashinfer_backend.py",
+      "sha256": "8ebd947a9f15ace3ca023076b5e374f552ee7a667f7f0c76d834084a030add2a",
+      "bytes": 64384,
+      "symbols": [
+        {
+          "name": "forward_extend",
+          "line": 698,
+          "end_line": 803
+        },
+        {
+          "name": "forward_decode",
+          "line": 805,
+          "end_line": 841
+        }
+      ]
+    },
+    {
+      "path": "python/sglang/srt/layers/linear.py",
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/7ae368efde14f0b2abe769a5fbb99b8154b2a9b7/python/sglang/srt/layers/linear.py",
+      "sha256": "d14be0ba7631c0bd03eb919d4089cdefc5c60c79e3d4beed1c94a77353373bd1",
+      "bytes": 56367,
+      "symbols": [
+        {
+          "name": "forward",
+          "line": 171,
+          "end_line": 172
+        },
+        {
+          "name": "forward",
+          "line": 251,
+          "end_line": 256
+        },
+        {
+          "name": "forward",
+          "line": 424,
+          "end_line": 436
+        },
+        {
+          "name": "forward",
+          "line": 1365,
+          "end_line": 1391
+        }
+      ]
+    }
+  ]
+}

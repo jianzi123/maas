@@ -179,6 +179,9 @@ func (s *Store) releaseSlot(ctx context.Context, tx *sql.Tx, snap Snapshot, acto
 	return e
 }
 func (s *Store) Finalize(ctx context.Context, f Final) error {
+	return s.finalizeChecked(ctx, f, nil)
+}
+func (s *Store) finalizeChecked(ctx context.Context, f Final, beforeCommit func(*sql.Tx) error) error {
 	if !validUUID(f.EventID) || !validUUID(f.RequestID) || !validUUID(f.Owner) {
 		return ErrConflict
 	}
@@ -189,7 +192,7 @@ func (s *Store) Finalize(ctx context.Context, f Final) error {
 	if e != nil {
 		return e
 	}
-	return s.tx(ctx, func(tx *sql.Tx) error {
+	return s.txBeforeCommit(ctx, func(tx *sql.Tx) error {
 		if _, e := s.guard(ctx, tx, "FOR UPDATE NOWAIT"); e != nil {
 			return e
 		}
@@ -330,7 +333,7 @@ func (s *Store) Finalize(ctx context.Context, f Final) error {
 			return ErrConflict
 		}
 		return nil
-	})
+	}, beforeCommit)
 }
 func buildEvent(s Snapshot, f Final, t time.Time, noSend bool, token, cost *string, basis string, req settlement, tok, mon *settlement, breached bool) map[string]any {
 	p := s.Input.Profile

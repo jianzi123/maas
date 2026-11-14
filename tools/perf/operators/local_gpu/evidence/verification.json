@@ -1,0 +1,20 @@
+{
+  "source_snapshot_hashes": {
+    "inspect_sglang.py": "5272e93274b5d4d791947be3546a1053437707fb7de5b0dc6c798023dc4668ca",
+    "rmsnorm.cu": "2dc1099ba9b812d7796a7eeea7983949b5f19b2ed2b72353e162a29e745af8e4",
+    "rmsnorm.py": "957c726d7838edb485124f8e7da6fb0f5f36be07c8e1e4f318b325d0fd2408fc",
+    "run_rmsnorm.py": "cf0bfc447f5be27c19cab357a83c26fc1fef7218edd9c85bd1b9722e70e9dea9",
+    "run_sglang.py": "355be0ab9234e3c5668807033edad3662b31cc3ad035f862e9c8a2c8d50f70cb",
+    "source_map.py": "5c00abf54d71da5d74c4f9d5771ec5eace8684781d72ebd6abdd27fa9a5dbb75"
+  },
+  "upstream_files": 9,
+  "upstream_all_match": true,
+  "generated_model_executed": false,
+  "docs_local_links_checked": true,
+  "raw_report_kinds": [
+    "fp32-final",
+    "fp16-final"
+  ],
+  "invalid_graph_attempt": "serial",
+  "statistics": "five batches within one process, exploratory"
+}

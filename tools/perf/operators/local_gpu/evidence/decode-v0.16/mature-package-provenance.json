@@ -1,0 +1,55 @@
+{
+  "package": "sgl-kernel",
+  "version": "0.3.9.post2",
+  "files": [
+    {
+      "path": "_mscclpp.cpython-310-x86_64-linux-gnu.so",
+      "bytes": 3840312,
+      "sha256": "a9ab41e7eeae6067919b6543fbf2bccb464e104870db0c864fc2bd5bf4728e95",
+      "matches_installed_RECORD": true
+    },
+    {
+      "path": "deep_gemm/deep_gemm_cpp.abi3.so",
+      "bytes": 654168,
+      "sha256": "dca1dab102e5c97a04c4fec86e843f36332ea85ca35c37b5ac3c67ffffb26588",
+      "matches_installed_RECORD": true
+    },
+    {
+      "path": "lib/mscclpp.so",
+      "bytes": 3612528,
+      "sha256": "fe5cda8a12c87f988a0d1b6770985c8ddbe1e93d9f345d114aa719e37fe9f172",
+      "matches_installed_RECORD": true
+    },
+    {
+      "path": "lib/mscclpp_nccl.so",
+      "bytes": 5457112,
+      "sha256": "23385598b64ffcd41e0a89f3764b0a53633d7af86cc5e6d8e095b4f61ae519e1",
+      "matches_installed_RECORD": true
+    },
+    {
+      "path": "sgl_kernel/common_ops.abi3.so",
+      "bytes": 324070920,
+      "sha256": "3f78efffb766b7b74b1b93dd1d9632d4b970d1b090a873e4126fc07037ddbaef",
+      "matches_installed_RECORD": true
+    },
+    {
+      "path": "sgl_kernel/flash_ops.abi3.so",
+      "bytes": 874936456,
+      "sha256": "7d20e12920d7a2625ca7e40421f6e62ad81394ab6b8a499b5095b37f024b695f",
+      "matches_installed_RECORD": true
+    },
+    {
+      "path": "sgl_kernel/memory.py",
+      "bytes": 476,
+      "sha256": "168984ba15486715ccd9b7c08fde3736821246d06e18cbd5a4978fd0418f00d3",
+      "matches_installed_RECORD": true
+    },
+    {
+      "path": "sgl_kernel/spatial_ops.abi3.so",
+      "bytes": 118408,
+      "sha256": "7189238d1e7ac88fd9575426a7a3b85017982495bf3e06fa59b453f3394c25c7",
+      "matches_installed_RECORD": true
+    }
+  ],
+  "claim": "installed wheel RECORD comparison, not upstream commit proof"
+}

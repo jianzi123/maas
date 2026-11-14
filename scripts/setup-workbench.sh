@@ -3,6 +3,17 @@
 set -euo pipefail
 repo="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 [[ "$(uname -s)" == Linux && "$(uname -m)" == x86_64 ]] || { echo 'Local workbench needs Linux amd64 (Windows: Ubuntu WSL2).' >&2; exit 1; }
+if [[ -n "${MAAS_WORKBENCH_TOOL_CACHE:-}" ]]; then
+ tools="$MAAS_WORKBENCH_TOOL_CACHE"
+ for executable in go-linux/go/bin/go mysql-test/mysql-8.4.7-linux-glibc2.28-x86_64-minimal/bin/mysqld envtest/controller-tools/envtest/kube-apiserver envtest/controller-tools/envtest/etcd; do
+  test -x "$tools/$executable" || { echo 'Approved portable tool cache is incomplete.' >&2; exit 1; }
+ done
+ env GOROOT="$tools/go-linux/go" GOTOOLCHAIN=local GOENV=off GOTELEMETRY=off "$tools/go-linux/go/bin/go" version | grep -Fq 'go1.26.0 ' || { echo 'Expected Go 1.26.0.' >&2; exit 1; }
+ LD_LIBRARY_PATH="$tools/mysql-test/lib/usr/lib/x86_64-linux-gnu${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}" "$tools/mysql-test/mysql-8.4.7-linux-glibc2.28-x86_64-minimal/bin/mysqld" --version | grep -Fq '8.4.7' || { echo 'Expected MySQL 8.4.7.' >&2; exit 1; }
+ "$tools/envtest/controller-tools/envtest/kube-apiserver" --version | grep -Fq 'v1.36.0' || { echo 'Expected envtest Kubernetes 1.36.0.' >&2; exit 1; }
+ # Provided tools are read-only inputs: no download, extraction or chmod here.
+ exit 0
+fi
 mkdir -p "$repo/.cache/go-linux" "$repo/.cache/mysql-test" "$repo/.cache/envtest"
 download(){
  local url="$1" output="$2" algorithm="$3" digest="$4"

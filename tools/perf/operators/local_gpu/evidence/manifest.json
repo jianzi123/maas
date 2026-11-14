@@ -1,0 +1,39 @@
+{
+  "python": "3.10.12",
+  "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+  "packages": {
+    "torch": "2.8.0",
+    "triton": "3.4.0",
+    "cupy-cuda12x": "13.6.0",
+    "numpy": "2.2.6",
+    "vllm": "0.11.0",
+    "sglang": null,
+    "sgl-kernel": null
+  },
+  "torch": {
+    "version": "2.8.0+cu128",
+    "cuda": "12.8",
+    "available": true,
+    "name": "NVIDIA GeForce RTX 4070 Laptop GPU",
+    "capability": [
+      8,
+      9
+    ],
+    "memory_free_total": [
+      7392460800,
+      8585216000
+    ],
+    "smoke_sum": 496.0
+  },
+  "cupy": {
+    "version": "13.6.0",
+    "nvrtc": [
+      12,
+      8
+    ]
+  },
+  "default_hf_cache_models": [
+    "models--HuggingFaceTB--SmolLM-135M-Instruct"
+  ],
+  "nvidia_smi": "NVIDIA GeForce RTX 4070 Laptop GPU, 581.29, 8188 MiB, 6033 MiB, P0, [N/A]"
+}

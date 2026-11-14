@@ -1,0 +1,76 @@
+{
+  "profiles": [
+    {
+      "id": "sglang-v0.5.6",
+      "version": "0.5",
+      "source_kind": "SelfHosted",
+      "engine_commit": "7ae368efde14f0b2abe769a5fbb99b8154b2a9b7",
+      "approval_status": "pending",
+      "execution_enabled": false,
+      "usage_semantics": "cumulative",
+      "final_marker": "usage_only_after_finish",
+      "logical_boundary": "DONE_then_accepted_transport_end",
+      "allow_progress_usage": true,
+      "trusted_adapter_options": {
+        "stream_options": {
+          "include_usage": true,
+          "continuous_usage_stats": true
+        }
+      },
+      "cache_path": "prompt_tokens_details.cached_tokens",
+      "reasoning_path": null,
+      "supported_choices": 1,
+      "error_latches": true,
+      "public_override_allowed": false,
+      "authority": "none"
+    },
+    {
+      "id": "sglang-v0.5.18",
+      "version": "0.5",
+      "source_kind": "SelfHosted",
+      "engine_commit": "71de97b264b04dcd514cf904003028aefe9775c8",
+      "approval_status": "pending",
+      "execution_enabled": false,
+      "usage_semantics": "cumulative",
+      "final_marker": "usage_only_after_finish",
+      "logical_boundary": "DONE_then_accepted_transport_end",
+      "allow_progress_usage": true,
+      "trusted_adapter_options": {
+        "stream_options": {
+          "include_usage": true,
+          "continuous_usage_stats": true
+        }
+      },
+      "cache_path": "prompt_tokens_details.cached_tokens",
+      "reasoning_path": "reasoning_tokens",
+      "supported_choices": 1,
+      "error_latches": true,
+      "public_override_allowed": false,
+      "authority": "none"
+    },
+    {
+      "id": "deepseek-chat-document-snapshot",
+      "version": "0.5",
+      "source_kind": "ExternalAPI",
+      "engine_commit": null,
+      "approval_status": "pending",
+      "execution_enabled": false,
+      "usage_semantics": "cumulative",
+      "final_marker": "finish_with_usage",
+      "logical_boundary": "DONE_then_accepted_transport_end",
+      "allow_progress_usage": false,
+      "trusted_adapter_options": {
+        "stream_options": {
+          "include_usage": true
+        }
+      },
+      "cache_path": "prompt_cache_hit_tokens",
+      "reasoning_path": "completion_tokens_details.reasoning_tokens",
+      "supported_choices": 1,
+      "error_latches": true,
+      "public_override_allowed": false,
+      "authority": "none"
+    }
+  ],
+  "not_a_shared_contract": true
+}

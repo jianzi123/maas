@@ -1,0 +1,14 @@
+{
+  "status": "channel_undecided",
+  "execution_enabled": false,
+  "choices": [
+    "official_model_api",
+    "approved_compatible_proxy",
+    "Codex_CLI_client"
+  ],
+  "selected_channel": null,
+  "model_id": null,
+  "protocol_verified": false,
+  "budget_bound_verified": false,
+  "blocking_other_sources": false
+}

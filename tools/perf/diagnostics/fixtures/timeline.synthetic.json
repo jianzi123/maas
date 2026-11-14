@@ -1,0 +1,561 @@
+{
+  "schema_version": "diagnostic-sidecar-1.0",
+  "synthetic": true,
+  "evidence_kind": "synthetic_fixture",
+  "dataset_sha256": "b8581faa3bc97b87e744f36dfd1b3d817b82e04fa5634370b8b823c4aa63c6b8",
+  "registry": {
+    "experiment_ref": "00000000-0000-4000-8000-000000000060",
+    "run_id": "synthetic-run",
+    "cell_id": "fixture-boundaries",
+    "replicate": 1
+  },
+  "manifest": {
+    "schema_version": "diagnostic-manifest-1.0",
+    "phase": "steady",
+    "source_type": "self_hosted",
+    "execution_enabled": false,
+    "model": {
+      "model_alias": "model-a",
+      "weights_sha256": "8888888888888888888888888888888888888888888888888888888888888888",
+      "tokenizer_sha256": "9999999999999999999999999999999999999999999999999999999999999999",
+      "template_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "dtype": "synthetic-float64",
+      "quantization": "none"
+    },
+    "runtime": {
+      "framework_commit": "synthetic-engine-v1",
+      "image_digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "driver": null,
+      "cuda": null,
+      "libraries": null,
+      "config_sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+    },
+    "hardware": {
+      "gpu_model": null,
+      "gpu_count": null,
+      "gpu_memory_bytes": null,
+      "interconnect": null,
+      "rank_map_ref": null,
+      "cpu": null,
+      "network": null,
+      "resource_limits": null
+    },
+    "workload": {
+      "sequence_sha256": "b8581faa3bc97b87e744f36dfd1b3d817b82e04fa5634370b8b823c4aa63c6b8",
+      "arrival_plan": "fixed original fixture roster",
+      "concurrency": 1,
+      "prefix_state": "synthetic",
+      "seed": 20261113,
+      "deadline_rule": "fixed fixture end_ms/cutoff"
+    },
+    "policy": {
+      "confirmed_slo": null,
+      "quality_policy_ref": null,
+      "budget_price_ref": null,
+      "resource_caps": null,
+      "approval_ref": null
+    }
+  },
+  "clocks": [
+    {
+      "id": "fixture-client-monotonic",
+      "instance_id": "client-1",
+      "boot_id": "client-boot",
+      "kind": "monotonic"
+    },
+    {
+      "id": "synthetic-go-clock",
+      "instance_id": "go-1",
+      "boot_id": "go-boot",
+      "kind": "monotonic"
+    },
+    {
+      "id": "synthetic-gateway-clock",
+      "instance_id": "gateway-1",
+      "boot_id": "gw-boot",
+      "kind": "monotonic"
+    },
+    {
+      "id": "synthetic-worker-clock",
+      "instance_id": "00000000-0000-4000-8000-000000000091",
+      "boot_id": "worker-boot",
+      "kind": "monotonic"
+    },
+    {
+      "id": "synthetic-device-clock",
+      "instance_id": "gpu-0",
+      "boot_id": "gpu-context-boot",
+      "kind": "device_event"
+    },
+    {
+      "id": "synthetic-independent-observer",
+      "instance_id": "observer-1",
+      "boot_id": "observer-boot",
+      "kind": "monotonic"
+    }
+  ],
+  "mappings": [
+    {
+      "source": "synthetic-go-clock",
+      "target": "fixture-client-monotonic",
+      "scale": 1,
+      "offset_ms": -100,
+      "max_error_ms": 0,
+      "valid_from_ms": 100,
+      "valid_to_ms": 1100,
+      "evidence_ref": "synthetic-origin"
+    },
+    {
+      "source": "synthetic-worker-clock",
+      "target": "fixture-client-monotonic",
+      "scale": 1,
+      "offset_ms": -1000,
+      "max_error_ms": 0,
+      "valid_from_ms": 1000,
+      "valid_to_ms": 2000,
+      "evidence_ref": "synthetic-origin"
+    },
+    {
+      "source": "synthetic-device-clock",
+      "target": "fixture-client-monotonic",
+      "scale": 1,
+      "offset_ms": 40,
+      "max_error_ms": 0,
+      "valid_from_ms": 0,
+      "valid_to_ms": 1000,
+      "evidence_ref": "synthetic-origin"
+    }
+  ],
+  "instances": [
+    {
+      "id": "client-1",
+      "boot_id": "client-boot",
+      "role": "client",
+      "runtime_metadata_ref": null,
+      "runtime_instance_id": null,
+      "rank": null
+    },
+    {
+      "id": "go-1",
+      "boot_id": "go-boot",
+      "role": "go",
+      "runtime_metadata_ref": null,
+      "runtime_instance_id": null,
+      "rank": null
+    },
+    {
+      "id": "gateway-1",
+      "boot_id": "gw-boot",
+      "role": "gateway",
+      "runtime_metadata_ref": null,
+      "runtime_instance_id": null,
+      "rank": null
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000091",
+      "boot_id": "worker-boot",
+      "role": "worker",
+      "runtime_metadata_ref": "00000000-0000-4000-8000-000000000081",
+      "runtime_instance_id": "00000000-0000-4000-8000-000000000091",
+      "rank": 0
+    },
+    {
+      "id": "gpu-0",
+      "boot_id": "gpu-context-boot",
+      "role": "gpu",
+      "runtime_metadata_ref": "00000000-0000-4000-8000-000000000081",
+      "runtime_instance_id": "00000000-0000-4000-8000-000000000091",
+      "rank": 0
+    },
+    {
+      "id": "observer-1",
+      "boot_id": "observer-boot",
+      "role": "client",
+      "runtime_metadata_ref": null,
+      "runtime_instance_id": null,
+      "rank": null
+    }
+  ],
+  "batches": [
+    {
+      "id": "worker-batch0",
+      "instance_id": "00000000-0000-4000-8000-000000000091",
+      "boot_id": "worker-boot",
+      "rank": 0,
+      "binding_sha256": "c339af8643a5dcea5bae0f152878204005e35c53d56486b2a589dbafb6d3d1d9",
+      "request_ids": [
+        "00000000-0000-4000-8000-000000000301"
+      ]
+    },
+    {
+      "id": "gpu-batch0",
+      "instance_id": "gpu-0",
+      "boot_id": "gpu-context-boot",
+      "rank": 0,
+      "binding_sha256": "c339af8643a5dcea5bae0f152878204005e35c53d56486b2a589dbafb6d3d1d9",
+      "request_ids": [
+        "00000000-0000-4000-8000-000000000301"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "synthetic-origin",
+      "kind": "synthetic",
+      "artifact_ref": "fixtures/timing-origin.json",
+      "sha256": "4d302e65aed3610f5a09127b995db2e61d583319d2537694d9a11922d40c9314"
+    }
+  ],
+  "intervals": [
+    {
+      "id": "root",
+      "request_id": "00000000-0000-4000-8000-000000000301",
+      "trace_id": "00000000000000000000000000000001",
+      "binding_sha256": "c339af8643a5dcea5bae0f152878204005e35c53d56486b2a589dbafb6d3d1d9",
+      "runtime_metadata_ref": "00000000-0000-4000-8000-000000000081",
+      "stage": "client.request",
+      "instance_id": "client-1",
+      "boot_id": "client-boot",
+      "rank": null,
+      "batch_id": null,
+      "clock_scope": "fixture-client-monotonic",
+      "start_ms": 0,
+      "end_ms": 200,
+      "segment_kind": "inclusive",
+      "attribution": "request",
+      "parent_id": null,
+      "predecessors": [],
+      "evidence_ref": "synthetic-origin"
+    },
+    {
+      "id": "protocol",
+      "request_id": "00000000-0000-4000-8000-000000000301",
+      "trace_id": "00000000000000000000000000000001",
+      "binding_sha256": "c339af8643a5dcea5bae0f152878204005e35c53d56486b2a589dbafb6d3d1d9",
+      "runtime_metadata_ref": "00000000-0000-4000-8000-000000000081",
+      "stage": "client.protocol",
+      "instance_id": "client-1",
+      "boot_id": "client-boot",
+      "rank": null,
+      "batch_id": null,
+      "clock_scope": "fixture-client-monotonic",
+      "start_ms": 0,
+      "end_ms": 10,
+      "segment_kind": "inclusive",
+      "attribution": "request",
+      "parent_id": "root",
+      "predecessors": [],
+      "evidence_ref": "synthetic-origin"
+    },
+    {
+      "id": "content",
+      "request_id": "00000000-0000-4000-8000-000000000301",
+      "trace_id": "00000000000000000000000000000001",
+      "binding_sha256": "c339af8643a5dcea5bae0f152878204005e35c53d56486b2a589dbafb6d3d1d9",
+      "runtime_metadata_ref": "00000000-0000-4000-8000-000000000081",
+      "stage": "client.content",
+      "instance_id": "client-1",
+      "boot_id": "client-boot",
+      "rank": null,
+      "batch_id": null,
+      "clock_scope": "fixture-client-monotonic",
+      "start_ms": 0,
+      "end_ms": 100,
+      "segment_kind": "inclusive",
+      "attribution": "request",
+      "parent_id": "root",
+      "predecessors": [],
+      "evidence_ref": "synthetic-origin"
+    },
+    {
+      "id": "go-span",
+      "request_id": "00000000-0000-4000-8000-000000000301",
+      "trace_id": "00000000000000000000000000000001",
+      "binding_sha256": "c339af8643a5dcea5bae0f152878204005e35c53d56486b2a589dbafb6d3d1d9",
+      "runtime_metadata_ref": "00000000-0000-4000-8000-000000000081",
+      "stage": "go.request",
+      "instance_id": "go-1",
+      "boot_id": "go-boot",
+      "rank": null,
+      "batch_id": null,
+      "clock_scope": "synthetic-go-clock",
+      "start_ms": 110,
+      "end_ms": 295,
+      "segment_kind": "inclusive",
+      "attribution": "request",
+      "parent_id": "root",
+      "predecessors": [],
+      "evidence_ref": "synthetic-origin"
+    },
+    {
+      "id": "admit",
+      "request_id": "00000000-0000-4000-8000-000000000301",
+      "trace_id": "00000000000000000000000000000001",
+      "binding_sha256": "c339af8643a5dcea5bae0f152878204005e35c53d56486b2a589dbafb6d3d1d9",
+      "runtime_metadata_ref": "00000000-0000-4000-8000-000000000081",
+      "stage": "go.admission",
+      "instance_id": "go-1",
+      "boot_id": "go-boot",
+      "rank": null,
+      "batch_id": null,
+      "clock_scope": "synthetic-go-clock",
+      "start_ms": 110,
+      "end_ms": 120,
+      "segment_kind": "activity",
+      "attribution": "request",
+      "parent_id": "go-span",
+      "predecessors": [],
+      "evidence_ref": "synthetic-origin"
+    },
+    {
+      "id": "mysql",
+      "request_id": "00000000-0000-4000-8000-000000000301",
+      "trace_id": "00000000000000000000000000000001",
+      "binding_sha256": "c339af8643a5dcea5bae0f152878204005e35c53d56486b2a589dbafb6d3d1d9",
+      "runtime_metadata_ref": "00000000-0000-4000-8000-000000000081",
+      "stage": "mysql.admission",
+      "instance_id": "go-1",
+      "boot_id": "go-boot",
+      "rank": null,
+      "batch_id": null,
+      "clock_scope": "synthetic-go-clock",
+      "start_ms": 120,
+      "end_ms": 140,
+      "segment_kind": "activity",
+      "attribution": "request",
+      "parent_id": "go-span",
+      "predecessors": [
+        "admit"
+      ],
+      "evidence_ref": "synthetic-origin"
+    },
+    {
+      "id": "worker-span",
+      "request_id": "00000000-0000-4000-8000-000000000301",
+      "trace_id": "00000000000000000000000000000001",
+      "binding_sha256": "c339af8643a5dcea5bae0f152878204005e35c53d56486b2a589dbafb6d3d1d9",
+      "runtime_metadata_ref": "00000000-0000-4000-8000-000000000081",
+      "stage": "engine.prefill",
+      "instance_id": "00000000-0000-4000-8000-000000000091",
+      "boot_id": "worker-boot",
+      "rank": 0,
+      "batch_id": "worker-batch0",
+      "clock_scope": "synthetic-worker-clock",
+      "start_ms": 1040,
+      "end_ms": 1180,
+      "segment_kind": "inclusive",
+      "attribution": "request",
+      "parent_id": "go-span",
+      "predecessors": [],
+      "evidence_ref": "synthetic-origin"
+    },
+    {
+      "id": "prepare",
+      "request_id": "00000000-0000-4000-8000-000000000301",
+      "trace_id": "00000000000000000000000000000001",
+      "binding_sha256": "c339af8643a5dcea5bae0f152878204005e35c53d56486b2a589dbafb6d3d1d9",
+      "runtime_metadata_ref": "00000000-0000-4000-8000-000000000081",
+      "stage": "engine.tokenize",
+      "instance_id": "00000000-0000-4000-8000-000000000091",
+      "boot_id": "worker-boot",
+      "rank": 0,
+      "batch_id": "worker-batch0",
+      "clock_scope": "synthetic-worker-clock",
+      "start_ms": 1040,
+      "end_ms": 1060,
+      "segment_kind": "activity",
+      "attribution": "request",
+      "parent_id": "worker-span",
+      "predecessors": [
+        "mysql"
+      ],
+      "evidence_ref": "synthetic-origin"
+    },
+    {
+      "id": "kernel",
+      "request_id": "00000000-0000-4000-8000-000000000301",
+      "trace_id": "00000000000000000000000000000001",
+      "binding_sha256": "c339af8643a5dcea5bae0f152878204005e35c53d56486b2a589dbafb6d3d1d9",
+      "runtime_metadata_ref": "00000000-0000-4000-8000-000000000081",
+      "stage": "gpu.kernel",
+      "instance_id": "gpu-0",
+      "boot_id": "gpu-context-boot",
+      "rank": 0,
+      "batch_id": "gpu-batch0",
+      "clock_scope": "synthetic-device-clock",
+      "start_ms": 20,
+      "end_ms": 100,
+      "segment_kind": "activity",
+      "attribution": "request",
+      "parent_id": "worker-span",
+      "predecessors": [
+        "prepare"
+      ],
+      "evidence_ref": "synthetic-origin"
+    },
+    {
+      "id": "collective",
+      "request_id": "00000000-0000-4000-8000-000000000301",
+      "trace_id": "00000000000000000000000000000001",
+      "binding_sha256": "c339af8643a5dcea5bae0f152878204005e35c53d56486b2a589dbafb6d3d1d9",
+      "runtime_metadata_ref": "00000000-0000-4000-8000-000000000081",
+      "stage": "comm.collective",
+      "instance_id": "gpu-0",
+      "boot_id": "gpu-context-boot",
+      "rank": 0,
+      "batch_id": "gpu-batch0",
+      "clock_scope": "synthetic-device-clock",
+      "start_ms": 90,
+      "end_ms": 110,
+      "segment_kind": "activity",
+      "attribution": "request",
+      "parent_id": "worker-span",
+      "predecessors": [
+        "prepare"
+      ],
+      "evidence_ref": "synthetic-origin"
+    },
+    {
+      "id": "copy-shared",
+      "request_id": "00000000-0000-4000-8000-000000000301",
+      "trace_id": "00000000000000000000000000000001",
+      "binding_sha256": "c339af8643a5dcea5bae0f152878204005e35c53d56486b2a589dbafb6d3d1d9",
+      "runtime_metadata_ref": "00000000-0000-4000-8000-000000000081",
+      "stage": "gpu.copy",
+      "instance_id": "gpu-0",
+      "boot_id": "gpu-context-boot",
+      "rank": 0,
+      "batch_id": "gpu-batch0",
+      "clock_scope": "synthetic-device-clock",
+      "start_ms": 25,
+      "end_ms": 95,
+      "segment_kind": "inclusive",
+      "attribution": "shared_batch",
+      "parent_id": "worker-span",
+      "predecessors": [],
+      "evidence_ref": "synthetic-origin"
+    },
+    {
+      "id": "detokenize",
+      "request_id": "00000000-0000-4000-8000-000000000301",
+      "trace_id": "00000000000000000000000000000001",
+      "binding_sha256": "c339af8643a5dcea5bae0f152878204005e35c53d56486b2a589dbafb6d3d1d9",
+      "runtime_metadata_ref": "00000000-0000-4000-8000-000000000081",
+      "stage": "engine.detokenize",
+      "instance_id": "00000000-0000-4000-8000-000000000091",
+      "boot_id": "worker-boot",
+      "rank": 0,
+      "batch_id": "worker-batch0",
+      "clock_scope": "synthetic-worker-clock",
+      "start_ms": 1150,
+      "end_ms": 1160,
+      "segment_kind": "activity",
+      "attribution": "request",
+      "parent_id": "worker-span",
+      "predecessors": [
+        "kernel",
+        "collective"
+      ],
+      "evidence_ref": "synthetic-origin"
+    },
+    {
+      "id": "decode",
+      "request_id": "00000000-0000-4000-8000-000000000301",
+      "trace_id": "00000000000000000000000000000001",
+      "binding_sha256": "c339af8643a5dcea5bae0f152878204005e35c53d56486b2a589dbafb6d3d1d9",
+      "runtime_metadata_ref": "00000000-0000-4000-8000-000000000081",
+      "stage": "engine.decode",
+      "instance_id": "00000000-0000-4000-8000-000000000091",
+      "boot_id": "worker-boot",
+      "rank": 0,
+      "batch_id": "worker-batch0",
+      "clock_scope": "synthetic-worker-clock",
+      "start_ms": 1160,
+      "end_ms": 1180,
+      "segment_kind": "activity",
+      "attribution": "request",
+      "parent_id": "worker-span",
+      "predecessors": [
+        "detokenize"
+      ],
+      "evidence_ref": "synthetic-origin"
+    },
+    {
+      "id": "flush",
+      "request_id": "00000000-0000-4000-8000-000000000301",
+      "trace_id": "00000000000000000000000000000001",
+      "binding_sha256": "c339af8643a5dcea5bae0f152878204005e35c53d56486b2a589dbafb6d3d1d9",
+      "runtime_metadata_ref": "00000000-0000-4000-8000-000000000081",
+      "stage": "go.flush",
+      "instance_id": "go-1",
+      "boot_id": "go-boot",
+      "rank": null,
+      "batch_id": null,
+      "clock_scope": "synthetic-go-clock",
+      "start_ms": 290,
+      "end_ms": 295,
+      "segment_kind": "activity",
+      "attribution": "request",
+      "parent_id": "go-span",
+      "predecessors": [
+        "decode"
+      ],
+      "evidence_ref": "synthetic-origin"
+    },
+    {
+      "id": "gateway",
+      "request_id": "00000000-0000-4000-8000-000000000301",
+      "trace_id": "00000000000000000000000000000001",
+      "binding_sha256": "c339af8643a5dcea5bae0f152878204005e35c53d56486b2a589dbafb6d3d1d9",
+      "runtime_metadata_ref": "00000000-0000-4000-8000-000000000081",
+      "stage": "higress.route",
+      "instance_id": "gateway-1",
+      "boot_id": "gw-boot",
+      "rank": null,
+      "batch_id": null,
+      "clock_scope": "synthetic-gateway-clock",
+      "start_ms": 500,
+      "end_ms": 530,
+      "segment_kind": "inclusive",
+      "attribution": "request",
+      "parent_id": null,
+      "predecessors": [],
+      "evidence_ref": "synthetic-origin"
+    },
+    {
+      "id": "cancel-missing-end",
+      "request_id": "00000000-0000-4000-8000-000000000306",
+      "trace_id": "00000000000000000000000000000006",
+      "binding_sha256": "c339af8643a5dcea5bae0f152878204005e35c53d56486b2a589dbafb6d3d1d9",
+      "runtime_metadata_ref": "00000000-0000-4000-8000-000000000081",
+      "stage": "go.cancel",
+      "instance_id": "go-1",
+      "boot_id": "go-boot",
+      "rank": null,
+      "batch_id": null,
+      "clock_scope": "synthetic-go-clock",
+      "start_ms": 600,
+      "end_ms": null,
+      "segment_kind": "inclusive",
+      "attribution": "request",
+      "parent_id": null,
+      "predecessors": [],
+      "evidence_ref": "synthetic-origin"
+    }
+  ],
+  "recovery_observations": [
+    {
+      "request_id": "00000000-0000-4000-8000-000000000306",
+      "observer_scope": "synthetic-independent-observer",
+      "independent_observer": true,
+      "cancel_ms": 10,
+      "stop_ms": null,
+      "safe_ms": null,
+      "evidence_ms": null,
+      "release_ms": null,
+      "successor_ms": null,
+      "cutoff_ms": 100,
+      "evidence_ref": "synthetic-origin"
+    }
+  ]
+}

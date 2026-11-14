@@ -1,0 +1,38 @@
+{
+  "synthetic": true,
+  "actual_model_scores": null,
+  "gold": [
+    {
+      "id": "Q01",
+      "answer": "391"
+    },
+    {
+      "id": "Q02",
+      "answer": "{\"order_id\":\"A-17\",\"quantity\":3}"
+    },
+    {
+      "id": "Q03",
+      "answer": "青杉"
+    },
+    {
+      "id": "Q04",
+      "answer": "资料不足，未披露净利润。"
+    },
+    {
+      "id": "Q05",
+      "answer": "蓝色"
+    },
+    {
+      "id": "Q06",
+      "answer": "猫🙂GPU-7"
+    },
+    {
+      "id": "Q07",
+      "answer": "def double(x):\n    return 2*x\n"
+    },
+    {
+      "id": "Q08",
+      "answer": "42"
+    }
+  ]
+}

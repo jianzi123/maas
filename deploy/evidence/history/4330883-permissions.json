@@ -1,0 +1,29 @@
+{
+  "scope": "static-source-grant-comparison-not-effective-database-privileges",
+  "source_sha256": "d3d70c47e2a474b02040ffde328eebf21e913704e8d3192bd239fdb87b126435",
+  "grant_sha256": "c31d385606c0da082b2954463616c20efaf7e187de9d547e9d3dda5ab3b4c4e2",
+  "role": "maas_release_history_reader",
+  "required": [
+    "publications",
+    "release_history_completeness",
+    "release_history_directory",
+    "release_history_projection",
+    "release_links"
+  ],
+  "granted": [
+    "publications",
+    "release_history_completeness",
+    "release_history_directory",
+    "release_history_projection",
+    "release_links"
+  ],
+  "missing": [],
+  "non_select_grants": [],
+  "passed": true,
+  "remaining": [
+    "candidate controlapi-projections.sql provides separate payload/operations templates; effective privileges remain unverified",
+    "operations runtime includes INSERT and acknowledgement/completion UPDATE; not a SELECT-only reader",
+    "control-api separates history/operations/payload but still constructs mysqlstore with the primary DB; no publisher DSN consumer",
+    "default roles, inherited grants and positive/negative SQL checks need an authorized temporary MySQL test"
+  ]
+}

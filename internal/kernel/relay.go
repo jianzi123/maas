@@ -15,6 +15,7 @@ import (
 // a supplier URL from a caller/profile and has no fallback, redirect or retry.
 // No binary exposes it while the real H1-H4/registry chain is unavailable.
 type Relay struct {
+	Sampler  *RelaySampler
 	core     *Store
 	endpoint string
 	client   *http.Client

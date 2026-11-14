@@ -1,0 +1,575 @@
+{
+  "batch": "cap6 controlled followup",
+  "baseline_commit": "e6de90ef16c64e97d2fd645e78367709abf9e2b3",
+  "upstream_commit": "b0d25e72c401f37b55d689ddbf05b8c583afe854",
+  "sglang": "0.5.2",
+  "GPU": "NVIDIA GeForce RTX 4070 Laptop GPU",
+  "SMs": 36,
+  "torch": "2.8.0+cu128",
+  "triton": "3.4.0",
+  "independent_processes": 3,
+  "rounds_per_process": 9,
+  "calls_per_graph": 40,
+  "numerical_cases_per_process": 16,
+  "nondefault_stream_passed": true,
+  "profile_regions": 16,
+  "stage1_grids_measured_by_CUPTI": true,
+  "nonempty_CTA_counts": "derived from original source and actual split tensor, not hardware counters",
+  "cases": [
+    {
+      "case": "b8_l512",
+      "lengths": [
+        512,
+        512,
+        512,
+        512,
+        512,
+        512,
+        512,
+        512
+      ],
+      "same_partition": true,
+      "partition": {
+        "8": {
+          "splits": [
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5
+          ],
+          "chunk_lengths": [
+            128,
+            128,
+            128,
+            128,
+            128,
+            128,
+            128,
+            128
+          ],
+          "active_splits": [
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4
+          ],
+          "stage1_grid": [
+            8,
+            3,
+            8
+          ],
+          "launched_CTAs": 192,
+          "nonempty_CTAs": 96,
+          "scratch_bytes": 149760
+        },
+        "6": {
+          "splits": [
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5
+          ],
+          "chunk_lengths": [
+            128,
+            128,
+            128,
+            128,
+            128,
+            128,
+            128,
+            128
+          ],
+          "active_splits": [
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4
+          ],
+          "stage1_grid": [
+            8,
+            3,
+            6
+          ],
+          "launched_CTAs": 144,
+          "nonempty_CTAs": 96,
+          "scratch_bytes": 112320
+        }
+      },
+      "latency_us": {
+        "raw": {
+          "8": [
+            103.16799879074097,
+            101.58079862594604,
+            98.9952027797699
+          ],
+          "6": [
+            104.5248031616211,
+            100.07040500640869,
+            93.10719966888428
+          ]
+        },
+        "backend": {
+          "8": [
+            160.28159856796265,
+            150.98880529403687,
+            162.94399499893188
+          ],
+          "6": [
+            149.50400590896606,
+            158.82240533828735,
+            158.3359956741333
+          ]
+        }
+      },
+      "cap6_over_cap8": {
+        "raw": [
+          1.0131514072850456,
+          0.9851311109976688,
+          0.9405223390068265
+        ],
+        "backend": [
+          0.9327583905121419,
+          1.0518819923701976,
+          0.9717203489160261
+        ]
+      }
+    },
+    {
+      "case": "b8_l1024",
+      "lengths": [
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024
+      ],
+      "same_partition": true,
+      "partition": {
+        "8": {
+          "splits": [
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6
+          ],
+          "chunk_lengths": [
+            192,
+            192,
+            192,
+            192,
+            192,
+            192,
+            192,
+            192
+          ],
+          "active_splits": [
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6
+          ],
+          "stage1_grid": [
+            8,
+            3,
+            8
+          ],
+          "launched_CTAs": 192,
+          "nonempty_CTAs": 144,
+          "scratch_bytes": 149760
+        },
+        "6": {
+          "splits": [
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6
+          ],
+          "chunk_lengths": [
+            192,
+            192,
+            192,
+            192,
+            192,
+            192,
+            192,
+            192
+          ],
+          "active_splits": [
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6
+          ],
+          "stage1_grid": [
+            8,
+            3,
+            6
+          ],
+          "launched_CTAs": 144,
+          "nonempty_CTAs": 144,
+          "scratch_bytes": 112320
+        }
+      },
+      "latency_us": {
+        "raw": {
+          "8": [
+            174.8736023902893,
+            179.9936056137085,
+            170.70080041885376
+          ],
+          "6": [
+            154.95680570602417,
+            160.3327989578247,
+            152.8831958770752
+          ]
+        },
+        "backend": {
+          "8": [
+            245.88799476623535,
+            247.654390335083,
+            248.0384111404419
+          ],
+          "6": [
+            215.60320854187012,
+            226.04799270629883,
+            223.79519939422607
+          ]
+        }
+      },
+      "cap6_over_cap8": {
+        "raw": [
+          0.8861074718423533,
+          0.8907694160087074,
+          0.8956208494742909
+        ],
+        "backend": [
+          0.8768350351827593,
+          0.9127558465668622,
+          0.9022602522135611
+        ]
+      }
+    },
+    {
+      "case": "b8_l2048",
+      "lengths": [
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048
+      ],
+      "same_partition": false,
+      "partition": {
+        "8": {
+          "splits": [
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8
+          ],
+          "chunk_lengths": [
+            256,
+            256,
+            256,
+            256,
+            256,
+            256,
+            256,
+            256
+          ],
+          "active_splits": [
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8
+          ],
+          "stage1_grid": [
+            8,
+            3,
+            8
+          ],
+          "launched_CTAs": 192,
+          "nonempty_CTAs": 192,
+          "scratch_bytes": 149760
+        },
+        "6": {
+          "splits": [
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6
+          ],
+          "chunk_lengths": [
+            352,
+            352,
+            352,
+            352,
+            352,
+            352,
+            352,
+            352
+          ],
+          "active_splits": [
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6
+          ],
+          "stage1_grid": [
+            8,
+            3,
+            6
+          ],
+          "launched_CTAs": 144,
+          "nonempty_CTAs": 144,
+          "scratch_bytes": 112320
+        }
+      },
+      "latency_us": {
+        "raw": {
+          "8": [
+            292.0959949493408,
+            276.6335964202881,
+            276.37760639190674
+          ],
+          "6": [
+            266.6752099990845,
+            252.85120010375977,
+            259.4048023223877
+          ]
+        },
+        "backend": {
+          "8": [
+            371.58401012420654,
+            384.97281074523926,
+            368.5375928878784
+          ],
+          "6": [
+            336.8191957473755,
+            332.67199993133545,
+            335.20638942718506
+          ]
+        }
+      },
+      "cap6_over_cap8": {
+        "raw": [
+          0.9129711280202073,
+          0.9140292552160012,
+          0.9385883527573091
+        ],
+        "backend": [
+          0.9064415759838254,
+          0.8641441438093805,
+          0.9095581994783533
+        ]
+      }
+    },
+    {
+      "case": "b8_ragged",
+      "lengths": [
+        17,
+        33,
+        129,
+        257,
+        511,
+        1023,
+        2048,
+        2049
+      ],
+      "same_partition": false,
+      "partition": {
+        "8": {
+          "splits": [
+            1,
+            1,
+            1,
+            1,
+            2,
+            4,
+            8,
+            8
+          ],
+          "chunk_lengths": [
+            32,
+            64,
+            160,
+            288,
+            256,
+            256,
+            256,
+            288
+          ],
+          "active_splits": [
+            1,
+            1,
+            1,
+            1,
+            2,
+            4,
+            8,
+            8
+          ],
+          "stage1_grid": [
+            8,
+            3,
+            8
+          ],
+          "launched_CTAs": 192,
+          "nonempty_CTAs": 78,
+          "scratch_bytes": 149760
+        },
+        "6": {
+          "splits": [
+            1,
+            1,
+            1,
+            1,
+            2,
+            3,
+            6,
+            6
+          ],
+          "chunk_lengths": [
+            32,
+            64,
+            160,
+            288,
+            256,
+            352,
+            352,
+            352
+          ],
+          "active_splits": [
+            1,
+            1,
+            1,
+            1,
+            2,
+            3,
+            6,
+            6
+          ],
+          "stage1_grid": [
+            8,
+            3,
+            6
+          ],
+          "launched_CTAs": 144,
+          "nonempty_CTAs": 63,
+          "scratch_bytes": 112320
+        }
+      },
+      "latency_us": {
+        "raw": {
+          "8": [
+            230.50239086151123,
+            233.16481113433838,
+            233.47198963165283
+          ],
+          "6": [
+            215.78240394592285,
+            211.5328073501587,
+            209.48479175567627
+          ]
+        },
+        "backend": {
+          "8": [
+            284.44159030914307,
+            291.76321029663086,
+            292.71039962768555
+          ],
+          "6": [
+            276.582407951355,
+            268.03200244903564,
+            268.8256025314331
+          ]
+        }
+      },
+      "cap6_over_cap8": {
+        "raw": [
+          0.9361395477913618,
+          0.9072244062946687,
+          0.8972587764647014
+        ],
+        "backend": [
+          0.9723697847799037,
+          0.918662781974917,
+          0.9184012692182005
+        ]
+      }
+    }
+  ],
+  "peak_torch_allocated_bytes": 165065216,
+  "Engine": false,
+  "serving": false,
+  "model_weights_downloaded": false,
+  "Engine_default_changed": false,
+  "previous_QA_scope": "e6de90e independently verified in729f740; current followup author evidence only",
+  "decision": "cap6 promising for the measured B8/L1024 slice; do not change global default",
+  "caveats": [
+    "restored environment; never compare absolute timings against prior batches",
+    "shared unlocked desktop GPU; no SLO/quality or statistical significance claim",
+    "cap changes scratch layout and reduction bound too; no isolated causal attribution to empty CTA alone",
+    "2048/ragged change partitions; only512/1024 preserve them",
+    "no hardware counter proof of occupancy/DRAM bottleneck"
+  ],
+  "next": [
+    "actual Engine capture/replay and dynamic batch/padding equivalence",
+    "mature KV/RoPE caller integration, reusing packaged kernels",
+    "full approved weights before actual Engine/serving baseline"
+  ]
+}

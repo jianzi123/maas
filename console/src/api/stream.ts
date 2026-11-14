@@ -48,6 +48,7 @@ export async function streamChat(
     data: string[] = [],
     done = false,
     finished = false;
+  let created: number | undefined;
   function dispatch() {
     if (!data.length) {
       event = "";
@@ -70,6 +71,11 @@ export async function streamChat(
     }
     const chunk = validate<S["ChatChunk"]>("ChatChunk", JSON.parse(payload));
     if (chunk.id !== "chatcmpl-" + id || chunk.model !== input.model)
+      throw new ApiError("protocol_error", 200);
+    if (created !== undefined && chunk.created !== created)
+      throw new ApiError("protocol_error", 200);
+    created = chunk.created;
+    if (finished && chunk.choices.length)
       throw new ApiError("protocol_error", 200);
     for (const choice of chunk.choices) {
       if (choice.delta.content) hooks.chunk(choice.delta.content);

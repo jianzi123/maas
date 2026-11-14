@@ -1,0 +1,81 @@
+import { afterEach, expect, it } from "vitest";
+import { mount, flushPromises } from "@vue/test-utils";
+import Releases from "./pages/Releases.vue";
+import { api } from "./api/client";
+import { fixtureFetch, fixtureError, releaseSample, resetFixtures } from "./fixtures";
+
+const original = api.fetcher;
+const mounted: ReturnType<typeof mount>[] = [];
+afterEach(() => {
+  mounted.splice(0).forEach(w => w.unmount());
+  api.fetcher = original;
+  resetFixtures();
+});
+const state = (w: ReturnType<typeof mount>) => (w.vm as any).$.setupState;
+const button = (w: ReturnType<typeof mount>, name: string) =>
+  w.findAll("button").find(b => b.text() === name)!;
+
+// Synthetic protocol sequence, actual Releases component. A confirmed Delete
+// has no surviving original CR to supply a new edit baseline.
+for (const terminal of [true, false]) {
+  it(`FE-O1-D: Delete terminal=${terminal} and absent original CR has a safe manual recovery`, async () => {
+    let op: any;
+    let deleted = false;
+    let writes = 0;
+    const queries: string[] = [];
+    const missingReads: string[] = [];
+    api.fetcher = async (p, init) => {
+      const path = String(p);
+      const method = init?.method ?? "GET";
+      if (path.includes("/release-operations/")) {
+        queries.push(path);
+        return Response.json({ ...op, state: terminal ? "Succeeded" : "Unknown", reason: terminal ? null : op.reason });
+      }
+      if (deleted && method === "GET" && path.endsWith("/" + releaseSample.metadata.name)) {
+        missingReads.push(path);
+        return fixtureError("not_found", 404);
+      }
+      const response = await fixtureFetch(p, init);
+      if (method === "DELETE") {
+        writes++;
+        const accepted = await response.json();
+        accepted.operation.state = "Unknown";
+        accepted.resource = null;
+        op = structuredClone(accepted.operation);
+        deleted = true;
+        return Response.json(accepted, { status: 202 });
+      }
+      if (deleted && method === "GET" && path.endsWith("/model-releases")) {
+        const page = await response.json();
+        page.data = [];
+        return Response.json(page);
+      }
+      return response;
+    };
+    const w = mount(Releases);
+    mounted.push(w);
+    await flushPromises();
+    await w.find(".release-card").trigger("click");
+    await flushPromises();
+    await button(w, "下线并清理").trigger("click");
+    await button(w, "确认下线").trigger("click");
+    await flushPromises();
+    expect(op.action).toBe("Delete");
+    expect(op.cr_uid).toBe(releaseSample.metadata.uid);
+    expect(state(w).unknown).toBe(true);
+    await button(w, "查询原操作").trigger("click");
+    await flushPromises();
+    expect(state(w).operation.id).toBe(op.id);
+    expect(state(w).operation.state).toBe(terminal ? "Succeeded" : "Unknown");
+    await button(w, "重读当前 CR").trigger("click");
+    await flushPromises();
+    const createDisabled = button(w, "新建外部 API CR").attributes("disabled") !== undefined;
+    console.log("FE-O1-D observed", JSON.stringify({ terminal, operation: state(w).operation.state, unknown: state(w).unknown, needsRead: state(w).needsRead, selected: state(w).selected, createDisabled, writes, queries, missingReads }));
+    expect(writes).toBe(1);
+    expect(queries).toEqual(["/api/admin/v1/release-operations/" + op.id]);
+    expect(missingReads).toHaveLength(1);
+    // A mere 404 must never resolve Unknown; confirmed original Delete success
+    // should permit a new manual declaration without reusing an old baseline.
+    expect(createDisabled).toBe(!terminal);
+  });
+}

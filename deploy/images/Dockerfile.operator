@@ -4,6 +4,7 @@ ARG GO_IMAGE
 ARG RUNTIME_IMAGE
 FROM ${GO_IMAGE} AS build
 WORKDIR /src
+ENV GOTOOLCHAIN=local
 COPY go.mod go.sum ./
 RUN go mod download
 COPY . .

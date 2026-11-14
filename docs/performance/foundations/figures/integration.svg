@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="625" viewBox="0 0 1120 625" role="img">
+<title>两条建设主线与一个诊断出口</title>
+<rect width="1120" height="625" fill="#f7f9fc"/>
+<text x="24" y="39" font-family="Microsoft YaHei,Arial,sans-serif" font-size="24" fill="#18334b">
+<tspan x="24" dy="0">两条建设主线与一个诊断出口</tspan>
+</text>
+<text x="24" y="72" font-family="Microsoft YaHei,Arial,sans-serif" font-size="17" fill="#18334b">
+<tspan x="24" dy="0">发布主线：期望 → 协调资源 → 验证证据；Go核验活动屏障后准入</tspan>
+</text>
+<rect x="24" y="95" width="170" height="85" rx="10" fill="#ecebff" stroke="#b8c9d9" stroke-width="2"/>
+<text x="36" y="121" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="36" dy="0">ModelRelease CR</tspan>
+<tspan x="36" dy="23">原UID / 期望修订</tspan>
+</text>
+<rect x="245" y="95" width="190" height="85" rx="10" fill="#ecebff" stroke="#b8c9d9" stroke-width="2"/>
+<text x="257" y="121" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="257" dy="0">发布协调服务</tspan>
+<tspan x="257" dy="23">意图 / inventory</tspan>
+</text>
+<rect x="685" y="95" width="190" height="85" rx="10" fill="#e5f6ef" stroke="#b8c9d9" stroke-width="2"/>
+<text x="697" y="121" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="697" dy="0">运行实例</tspan>
+<tspan x="697" dy="23">模型 / 配置 / rank</tspan>
+</text>
+<rect x="905" y="95" width="190" height="85" rx="10" fill="#fff1d9" stroke="#b8c9d9" stroke-width="2"/>
+<text x="917" y="121" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="917" dy="0">活动发布屏障</tspan>
+<tspan x="917" dy="23">真实回执 / 验证</tspan>
+</text>
+<line x1="194" y1="135" x2="245" y2="135" stroke="#5b7590" stroke-width="3"/>
+<polygon points="245.0,135.0 236.0,139.3 236.0,130.7" fill="#5b7590"/>
+<line x1="435" y1="135" x2="685" y2="135" stroke="#5b7590" stroke-width="3"/>
+<polygon points="685.0,135.0 676.0,139.3 676.0,130.7" fill="#5b7590"/>
+<line x1="875" y1="135" x2="905" y2="135" stroke="#5b7590" stroke-width="3"/>
+<polygon points="905.0,135.0 896.0,139.3 896.0,130.7" fill="#5b7590"/>
+<text x="24" y="237" font-family="Microsoft YaHei,Arial,sans-serif" font-size="17" fill="#18334b">
+<tspan x="24" dy="0">调用主线：Go负责业务真源，Higress实际路由，运行时管理执行与内存</tspan>
+</text>
+<rect x="24" y="260" width="170" height="85" rx="10" fill="#e7f2ff" stroke="#b8c9d9" stroke-width="2"/>
+<text x="36" y="286" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="36" dy="0">客户端</tspan>
+<tspan x="36" dy="23">首内容 / 原请求R</tspan>
+</text>
+<rect x="245" y="260" width="190" height="85" rx="10" fill="#e7f2ff" stroke="#b8c9d9" stroke-width="2"/>
+<text x="257" y="286" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="257" dy="0">Go唯一准入</tspan>
+<tspan x="257" dy="23">预算 / slot / 终态</tspan>
+</text>
+<rect x="465" y="260" width="190" height="85" rx="10" fill="#e7f2ff" stroke="#b8c9d9" stroke-width="2"/>
+<text x="477" y="286" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="477" dy="0">Higress</tspan>
+<tspan x="477" dy="23">固定来源 / 传输</tspan>
+</text>
+<rect x="685" y="260" width="190" height="85" rx="10" fill="#e5f6ef" stroke="#b8c9d9" stroke-width="2"/>
+<text x="697" y="286" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="697" dy="0">运行时</tspan>
+<tspan x="697" dy="23">Scheduler / KV</tspan>
+</text>
+<rect x="905" y="260" width="190" height="85" rx="10" fill="#e5f6ef" stroke="#b8c9d9" stroke-width="2"/>
+<text x="917" y="286" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="917" dy="0">GPU执行</tspan>
+<tspan x="917" dy="23">算子 / Graph / TP</tspan>
+</text>
+<line x1="194" y1="302" x2="245" y2="302" stroke="#5b7590" stroke-width="3"/>
+<polygon points="245.0,302.0 236.0,306.3 236.0,297.7" fill="#5b7590"/>
+<line x1="435" y1="302" x2="465" y2="302" stroke="#5b7590" stroke-width="3"/>
+<polygon points="465.0,302.0 456.0,306.3 456.0,297.7" fill="#5b7590"/>
+<line x1="655" y1="302" x2="685" y2="302" stroke="#5b7590" stroke-width="3"/>
+<polygon points="685.0,302.0 676.0,306.3 676.0,297.7" fill="#5b7590"/>
+<line x1="875" y1="302" x2="905" y2="302" stroke="#5b7590" stroke-width="3"/>
+<polygon points="905.0,302.0 896.0,306.3 896.0,297.7" fill="#5b7590"/>
+<line x1="780" y1="180" x2="780" y2="260" stroke="#5b7590" stroke-width="3"/>
+<polygon points="780.0,260.0 775.7,251.0 784.3,251.0" fill="#5b7590"/>
+<rect x="245" y="435" width="190" height="90" rx="10" fill="#fff1d9" stroke="#b8c9d9" stroke-width="2"/>
+<text x="257" y="461" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="257" dy="0">MySQL耐久账本</tspan>
+<tspan x="257" dy="23">known / held分开</tspan>
+</text>
+<rect x="655" y="435" width="220" height="90" rx="10" fill="#ecebff" stroke="#b8c9d9" stroke-width="2"/>
+<text x="667" y="461" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="667" dy="0">受控导出 / 导入适配</tspan>
+<tspan x="667" dy="23">权限 / 脱敏 / 时钟</tspan>
+</text>
+<rect x="905" y="435" width="190" height="90" rx="10" fill="#e7f2ff" stroke="#b8c9d9" stroke-width="2"/>
+<text x="917" y="461" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="917" dy="0">离线分析与报告</tspan>
+<tspan x="917" dy="23">诊断 / 优化证据</tspan>
+</text>
+<line x1="340" y1="345" x2="340" y2="435" stroke="#5b7590" stroke-width="3"/>
+<polygon points="340.0,435.0 335.7,426.0 344.3,426.0" fill="#5b7590"/>
+<line x1="560" y1="345" x2="680" y2="435" stroke="#5b7590" stroke-width="3"/>
+<polygon points="680.0,435.0 670.2,433.1 675.4,426.1" fill="#5b7590"/>
+<line x1="780" y1="345" x2="780" y2="435" stroke="#5b7590" stroke-width="3"/>
+<polygon points="780.0,435.0 775.7,426.0 784.3,426.0" fill="#5b7590"/>
+<line x1="435" y1="480" x2="655" y2="480" stroke="#5b7590" stroke-width="3"/>
+<polygon points="655.0,480.0 646.0,484.3 646.0,475.7" fill="#5b7590"/>
+<line x1="875" y1="480" x2="905" y2="480" stroke="#5b7590" stroke-width="3"/>
+<polygon points="905.0,480.0 896.0,484.3 896.0,475.7" fill="#5b7590"/>
+<text x="24" y="591" font-family="Microsoft YaHei,Arial,sans-serif" font-size="16" fill="#18334b">
+<tspan x="24" dy="0">分析器读取允许导出的诊断数据；真实导出适配尚需设计和验证。观察记录不授予准入、退款或资源释放权限。</tspan>
+</text>
+</svg>

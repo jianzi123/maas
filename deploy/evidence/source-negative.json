@@ -1,0 +1,24 @@
+{
+  "scope": "fixed-f445-backend-tree-does-not-contain-frontend-candidate",
+  "result": {
+    "component": "console",
+    "expected": 64,
+    "matched": 56,
+    "missing": [
+      "console/docs/consumer-binding-fixes.md",
+      "console/scripts/consumer-binding-browser.mjs",
+      "console/src/consumer-binding.test.ts"
+    ],
+    "unexpected": [
+      "console/.env.workbench"
+    ],
+    "changed": [
+      "console/src/App.vue",
+      "console/src/api/client.ts",
+      "console/src/api/stream.ts",
+      "console/src/fixtures.ts",
+      "console/src/pages/Releases.vue"
+    ],
+    "passed": false
+  }
+}

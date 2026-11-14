@@ -38,7 +38,79 @@ class InputGateTest(unittest.TestCase):
         lock["migrationState"]={domain:[{"version":m["version"],"sha256":m["sha256"],"state":"Applied"} for m in self.interface["migrations"] if m["domain"]==domain] for domain in ("kernel","release")}
         for c in lock["gatewayComponents"]:
             c.update(status="approved",sourceCommit="1"*40,digest="sha256:"+"1234567890abcdef"*4,mirror="synthetic",abi="synthetic",identityRef="synthetic",evidenceRef="synthetic")
+        identities=lock["databaseIdentities"]
+        identities["productionWiringVerified"]=True
+        lock["sourceBaseline"]["candidateState"]="merged"  # synthetic gate input only
+        self.interface["backend"]["candidateState"]="merged"  # synthetic gate input only
+        self.interface["console"]["candidateState"]="merged"  # synthetic gate input only
+        for name,c in identities["connections"].items():
+            c.update(bindingStatus="verified", principalRef="synthetic-"+name, grantEvidenceRef="synthetic-"+name, secretRef={"namespace":"test","name":"synthetic-"+name.lower(),"key":"dsn"})
+        for name in v["core"]["databaseSecrets"]:
+            v["core"]["databaseSecrets"][name]={k:identities["connections"][name]["secretRef"][k] for k in ("name","key")}
         return v, lock
+
+    def test_secret_binding_mismatch_rejected(self):
+        v, lock = self.complete(["ExternalAPI"])
+        v["core"]["databaseSecrets"]["historyReader"]=copy.deepcopy(v["core"]["databaseSecrets"]["core"])
+        self.assertIn("identities.historyReader.envBinding", self.check(v, lock))
+
+    def test_unconsumed_reader_variable_rejected(self):
+        v, lock = self.complete(["ExternalAPI"])
+        self.interface["backend"]["core"]["environmentNames"].remove("MAAS_HISTORY_READER_DSN")
+        self.assertIn("identities.historyReader.unconsumedVariable", self.check(v, lock))
+
+    def test_candidate_unmerged_rejected(self):
+        v, lock = self.complete(["ExternalAPI"])
+        lock["sourceBaseline"]["candidateState"]="draft-unmerged"
+        self.assertIn("source.candidateNotMerged", self.check(v, lock))
+
+    def test_old_identity_source_rejected(self):
+        v, lock = self.complete(["ExternalAPI"])
+        lock["databaseIdentities"]["sourceCommit"]="0"*40
+        self.assertIn("identities.sourceMismatch", self.check(v, lock))
+
+    def test_source_inventory_digest_rejected(self):
+        v, lock = self.complete(["ExternalAPI"])
+        lock["sourceBaseline"]["sourceInventorySha256"]="0"*64
+        self.assertIn("source.inventoryChecksum", self.check(v, lock))
+
+    def test_publisher_template_source_rejected(self):
+        v, lock = self.complete(["ExternalAPI"])
+        lock["databaseIdentities"]["publisherCompletionContract"]["templateSha256"]="0"*64
+        self.assertIn("identities.publisher.templateSource", self.check(v, lock))
+
+    def test_publisher_factory_plan_rejected(self):
+        for field, value in (("sourceSha256", "0"*64), ("localConsumerSha256", "0"*64), ("dsnMode", "environment"), ("environmentName", "MAAS_PUBLISHER_DSN")):
+            v, lock = self.complete(["ExternalAPI"])
+            lock["databaseIdentities"]["publisherFactory"][field]=value
+            self.assertIn("identities.publisher.factorySourceOrContract", self.check(v, lock))
+
+    def test_payload_template_source_rejected(self):
+        v, lock = self.complete(["ExternalAPI"])
+        lock["databaseIdentities"]["payloadTemplateSha256"]="0"*64
+        self.assertIn("identities.payload.templateSource", self.check(v, lock))
+
+    def test_qa_revision_mismatch_rejected(self):
+        for name in ("qaCore", "qaEvidence"):
+            v, lock = self.complete(["ExternalAPI"])
+            lock["sourceBaseline"][name]="0"*40
+            self.assertIn("source.inventoryRevision", self.check(v, lock))
+
+    def test_manual_merge_claim_cannot_override_snapshot(self):
+        v, lock = self.complete(["ExternalAPI"])
+        self.interface["backend"]["candidateState"]="draft-unmerged"
+        self.assertIn("source.candidateNotMerged", self.check(v, lock))
+
+    def test_missing_operation_payload_connections_rejected(self):
+        for name in ("operationReader", "payloadReader"):
+            v, lock = self.complete(["ExternalAPI"])
+            v["core"]["databaseSecrets"][name]["key"]=""
+            self.assertIn("values.schema", self.check(v, lock))
+
+    def test_reader_cannot_use_operations_write_role(self):
+        v, lock = self.complete(["ExternalAPI"])
+        lock["databaseIdentities"]["connections"]["historyReader"]["roles"]=["maas_release_operations_runtime"]
+        self.assertIn("identities.historyReader.roles", self.check(v, lock))
 
     def test_pending_inputs_reject(self):
         self.assertIn("deploymentApproved", self.check(self.values, self.lock))

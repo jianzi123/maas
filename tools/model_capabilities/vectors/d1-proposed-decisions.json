@@ -1,0 +1,297 @@
+[
+  {
+    "id": "U04",
+    "synthetic": true,
+    "issues": [
+      "invalid_parent_counts"
+    ],
+    "normalized_usage": {
+      "input_tokens": null,
+      "output_tokens": null,
+      "total_tokens": null,
+      "input_cached_tokens": null,
+      "reasoning_tokens": null,
+      "source": "unavailable",
+      "missing_reason": "invalid_upstream_usage"
+    },
+    "token_actual": null,
+    "cost_actual_atomic": null,
+    "budget_accounting": {
+      "policy_revision": "budget-example-v3",
+      "window_kind": "utc_day",
+      "window_start": "2026-11-04T00:00:00Z",
+      "window_end": "2026-11-05T00:00:00Z",
+      "request": {
+        "reserved": "1",
+        "known_used": "1",
+        "unknown_held": "0",
+        "released": "0",
+        "overrun": "0",
+        "state": "known"
+      },
+      "token": {
+        "reserved": "140",
+        "known_used": "0",
+        "unknown_held": "140",
+        "released": "0",
+        "overrun": "0",
+        "state": "held"
+      },
+      "money": {
+        "reserved": "520000",
+        "known_used": "0",
+        "unknown_held": "520000",
+        "released": "0",
+        "overrun": "0",
+        "state": "held"
+      },
+      "token_actual": null,
+      "token_basis": "unavailable",
+      "cost_actual_atomic": null,
+      "cost_state": "unavailable",
+      "currency": "TST",
+      "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+      "price_version": "synthetic-price-v1",
+      "missing_reason": "invalid_upstream_usage"
+    },
+    "result": "failed",
+    "metering_state": "incomplete",
+    "runtime_execution": "not_run"
+  },
+  {
+    "id": "U08",
+    "synthetic": true,
+    "issues": [
+      "invalid_cache_subset"
+    ],
+    "normalized_usage": {
+      "input_tokens": 12,
+      "output_tokens": 7,
+      "total_tokens": 19,
+      "input_cached_tokens": null,
+      "reasoning_tokens": 3,
+      "source": "upstream",
+      "missing_reason": "invalid_upstream_usage"
+    },
+    "token_actual": 19,
+    "cost_actual_atomic": null,
+    "budget_accounting": {
+      "policy_revision": "budget-example-v3",
+      "window_kind": "utc_day",
+      "window_start": "2026-11-04T00:00:00Z",
+      "window_end": "2026-11-05T00:00:00Z",
+      "request": {
+        "reserved": "1",
+        "known_used": "1",
+        "unknown_held": "0",
+        "released": "0",
+        "overrun": "0",
+        "state": "known"
+      },
+      "token": {
+        "reserved": "140",
+        "known_used": "19",
+        "unknown_held": "0",
+        "released": "121",
+        "overrun": "0",
+        "state": "known"
+      },
+      "money": {
+        "reserved": "520000",
+        "known_used": "0",
+        "unknown_held": "520000",
+        "released": "0",
+        "overrun": "0",
+        "state": "held"
+      },
+      "token_actual": "19",
+      "token_basis": "upstream_total",
+      "cost_actual_atomic": null,
+      "cost_state": "unavailable",
+      "currency": "TST",
+      "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+      "price_version": "synthetic-price-v1",
+      "missing_reason": "invalid_upstream_usage"
+    },
+    "result": "failed",
+    "metering_state": "incomplete",
+    "runtime_execution": "not_run"
+  },
+  {
+    "id": "U09",
+    "synthetic": true,
+    "issues": [
+      "invalid_reasoning_subset"
+    ],
+    "normalized_usage": {
+      "input_tokens": 12,
+      "output_tokens": 7,
+      "total_tokens": 19,
+      "input_cached_tokens": 4,
+      "reasoning_tokens": null,
+      "source": "upstream",
+      "missing_reason": "invalid_upstream_usage"
+    },
+    "token_actual": 19,
+    "cost_actual_atomic": 72800,
+    "budget_accounting": {
+      "policy_revision": "budget-example-v3",
+      "window_kind": "utc_day",
+      "window_start": "2026-11-04T00:00:00Z",
+      "window_end": "2026-11-05T00:00:00Z",
+      "request": {
+        "reserved": "1",
+        "known_used": "1",
+        "unknown_held": "0",
+        "released": "0",
+        "overrun": "0",
+        "state": "known"
+      },
+      "token": {
+        "reserved": "140",
+        "known_used": "19",
+        "unknown_held": "0",
+        "released": "121",
+        "overrun": "0",
+        "state": "known"
+      },
+      "money": {
+        "reserved": "520000",
+        "known_used": "72800",
+        "unknown_held": "0",
+        "released": "447200",
+        "overrun": "0",
+        "state": "known"
+      },
+      "token_actual": "19",
+      "token_basis": "upstream_total",
+      "cost_actual_atomic": "72800",
+      "cost_state": "known",
+      "currency": "TST",
+      "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+      "price_version": "synthetic-price-v1",
+      "missing_reason": "invalid_upstream_usage"
+    },
+    "result": "failed",
+    "metering_state": "incomplete",
+    "runtime_execution": "not_run"
+  },
+  {
+    "id": "U11",
+    "synthetic": true,
+    "issues": [
+      "invalid_parent_counts"
+    ],
+    "normalized_usage": {
+      "input_tokens": null,
+      "output_tokens": null,
+      "total_tokens": null,
+      "input_cached_tokens": null,
+      "reasoning_tokens": null,
+      "source": "unavailable",
+      "missing_reason": "invalid_upstream_usage"
+    },
+    "token_actual": null,
+    "cost_actual_atomic": null,
+    "budget_accounting": {
+      "policy_revision": "budget-example-v3",
+      "window_kind": "utc_day",
+      "window_start": "2026-11-04T00:00:00Z",
+      "window_end": "2026-11-05T00:00:00Z",
+      "request": {
+        "reserved": "1",
+        "known_used": "1",
+        "unknown_held": "0",
+        "released": "0",
+        "overrun": "0",
+        "state": "known"
+      },
+      "token": {
+        "reserved": "140",
+        "known_used": "0",
+        "unknown_held": "140",
+        "released": "0",
+        "overrun": "0",
+        "state": "held"
+      },
+      "money": {
+        "reserved": "520000",
+        "known_used": "0",
+        "unknown_held": "520000",
+        "released": "0",
+        "overrun": "0",
+        "state": "held"
+      },
+      "token_actual": null,
+      "token_basis": "unavailable",
+      "cost_actual_atomic": null,
+      "cost_state": "unavailable",
+      "currency": "TST",
+      "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+      "price_version": "synthetic-price-v1",
+      "missing_reason": "invalid_upstream_usage"
+    },
+    "result": "failed",
+    "metering_state": "incomplete",
+    "runtime_execution": "not_run"
+  },
+  {
+    "id": "U12",
+    "synthetic": true,
+    "issues": [
+      "conflicting_final_snapshots"
+    ],
+    "normalized_usage": {
+      "input_tokens": null,
+      "output_tokens": null,
+      "total_tokens": null,
+      "input_cached_tokens": null,
+      "reasoning_tokens": null,
+      "source": "unavailable",
+      "missing_reason": "invalid_upstream_usage"
+    },
+    "token_actual": null,
+    "cost_actual_atomic": null,
+    "budget_accounting": {
+      "policy_revision": "budget-example-v3",
+      "window_kind": "utc_day",
+      "window_start": "2026-11-04T00:00:00Z",
+      "window_end": "2026-11-05T00:00:00Z",
+      "request": {
+        "reserved": "1",
+        "known_used": "1",
+        "unknown_held": "0",
+        "released": "0",
+        "overrun": "0",
+        "state": "known"
+      },
+      "token": {
+        "reserved": "140",
+        "known_used": "0",
+        "unknown_held": "140",
+        "released": "0",
+        "overrun": "0",
+        "state": "held"
+      },
+      "money": {
+        "reserved": "520000",
+        "known_used": "0",
+        "unknown_held": "520000",
+        "released": "0",
+        "overrun": "0",
+        "state": "held"
+      },
+      "token_actual": null,
+      "token_basis": "unavailable",
+      "cost_actual_atomic": null,
+      "cost_state": "unavailable",
+      "currency": "TST",
+      "price_snapshot_id": "00000000-0000-4000-8000-000000000007",
+      "price_version": "synthetic-price-v1",
+      "missing_reason": "invalid_upstream_usage"
+    },
+    "result": "failed",
+    "metering_state": "incomplete",
+    "runtime_execution": "not_run"
+  }
+]

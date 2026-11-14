@@ -21,11 +21,13 @@ def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--backend-root', required=True, type=Path)
     p.add_argument('--console-root', required=True, type=Path)
+    p.add_argument('--output', type=Path, help='Write verification outside tracked history, e.g. artifacts/unified/source-inspection.json')
     args = p.parse_args()
     rows = inspect(args.backend_root, args.console_root)
     result = {'generated_at': datetime.now(timezone.utc).isoformat(), 'scope': 'source-byte-comparison-only', 'checks_passed': sum(r['passed'] for r in rows), 'checks_total': len(rows), 'checks': rows}
-    (ROOT / 'evidence').mkdir(exist_ok=True)
-    (ROOT / 'evidence/source-inspection.json').write_text(json.dumps(result, indent=2)+'\n', encoding='utf-8', newline='\n')
+    output = args.output or ROOT / 'evidence/source-inspection.json'
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(json.dumps(result, indent=2)+'\n', encoding='utf-8', newline='\n')
     print(json.dumps({k:v for k,v in result.items() if k != 'checks'}))
     raise SystemExit(0 if all(r['passed'] for r in rows) else 1)
 

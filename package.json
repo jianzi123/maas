@@ -9,7 +9,9 @@
     "dev": "node scripts/dev.mjs",
     "build": "npm --prefix console run build",
     "test:console": "npm --prefix console test",
-    "test": "npm run test:console && node scripts/check-go.mjs",
+    "test:sources": "node scripts/check-source.mjs",
+    "test:known-boundaries": "node scripts/check-known-boundaries.mjs",
+    "test": "npm run test:sources && npm run test:console && node scripts/check-go.mjs",
     "test:workbench": "node scripts/workbench-smoke.mjs"
   }
 }

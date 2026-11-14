@@ -15,6 +15,7 @@ import sys
 from datetime import datetime, timezone
 import yaml
 from jsonschema import Draft7Validator
+from identities import DATABASE_ENV
 
 ROOT = Path(__file__).resolve().parents[1]
 CHART = ROOT / "charts" / "maas-platform"
@@ -74,7 +75,14 @@ def inspect_manifest(text, prefix):
         record(prefix + ": " + name + " nonroot+readonly", pod["securityContext"]["runAsNonRoot"] and c["securityContext"]["readOnlyRootFilesystem"] and not c["securityContext"]["allowPrivilegeEscalation"])
         record(prefix + ": " + name + " exec readiness", c["readinessProbe"]["exec"]["command"][0] == "/maas-probe" and c["readinessProbe"]["exec"]["command"][1].endswith("/readyz"))
         record(prefix + ": " + name + " token isolation", pod["automountServiceAccountToken"] == (name == "operator"))
-        record(prefix + ": " + name + " no env literals", not c.get("env") and not c.get("envFrom"))
+        record(prefix + ": " + name + " no env literals", not c.get("envFrom") and all(set(e) == {"name", "valueFrom"} and set(e["valueFrom"]) == {"secretKeyRef"} for e in c.get("env", [])))
+        if name == "core":
+            env = {e["name"]: e["valueFrom"]["secretKeyRef"] for e in c["env"]}
+            record(prefix + ": four explicit DSNs without fallback", set(env) == set(DATABASE_ENV.values()) and all(e.get("optional") is False for e in env.values()) and len({(e["name"], e["key"]) for e in env.values()}) == 4)
+            refs = load_values(ROOT / "tests/fixtures" / (prefix + ".yaml"))["core"]["databaseSecrets"]
+            record(prefix + ": each DSN uses its own reviewed reference", all(env[variable] == dict(refs[identity], optional=False) for identity, variable in DATABASE_ENV.items()))
+        else:
+            record(prefix + ": " + name + " no database env", not c.get("env"))
     op = deployments["operator"]["spec"]["template"]["spec"]
     record(prefix + ": operator no business credentials", {v["name"] for v in op["volumes"]} == {"tmp", "webhook-tls"})
     for d in docs:
@@ -118,6 +126,9 @@ def verify(helm):
         "inline key": {"core": {"apiKey": "SYNTHETIC-KEY"}},
         "missing command": {"core": {"command": []}},
         "missing credentials": {"core": {"existingSecret": ""}},
+        "missing reader key": {"core": {"databaseSecrets": {"historyReader": {"key": ""}}}},
+        "unknown DSN variable": {"core": {"databaseSecrets": {"publisher": {"name": "synthetic", "key": "dsn"}}}},
+        "inline reader DSN": {"core": {"databaseSecrets": {"historyReader": {"dsn": "SYNTHETIC"}}}},
         "missing webhook CA": {"operator": {"webhookCABundle": ""}},
         "cluster scope not acknowledged": {"operator": {"acknowledgeClusterWatch": False}},
         "missing API group": {"api": {"group": ""}},
@@ -139,7 +150,9 @@ def verify(helm):
             "hybrid missing gateway egress": {"mode": "hybrid", "higress": {"externalEgressPolicyRef": ""}},
             "ingress without core": {"core": {"enabled": False}},
             "wrong compiled API group": {"api": {"group": "other.internal.test"}},
+            "local workbench mistaken for service": {"core": {"command": ["/workbench"]}},
             "controlled API mistaken for service": {"core": {"command": ["/control-api"]}},
+            "shared reader and core Secret key": {"core": {"databaseSecrets": {"historyReader": fixture["core"]["databaseSecrets"]["core"]}}},
             "core readiness aliases liveness": {"core": {"probes": {"readyPath": "/healthz"}}},
         }.items():
             path = Path(temp) / "guard.yaml"

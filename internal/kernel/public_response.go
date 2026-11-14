@@ -91,6 +91,11 @@ func sourceEnvelope(b []byte, in Input) (map[string]json.RawMessage, error) {
 	if json.Unmarshal(canonical, &v) != nil || v == nil {
 		return nil, ErrConflict
 	}
+	// A provider error is terminal even in an ordinary SSE data event. Never
+	// normalize it into an empty success chunk that a later finish can overwrite.
+	if _, exists := v["error"]; exists {
+		return nil, ErrConflict
+	}
 	if model, ok := v["model"]; ok {
 		var s string
 		if json.Unmarshal(model, &s) != nil || s != in.Profile.UpstreamModel {
