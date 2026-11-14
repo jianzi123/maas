@@ -1,0 +1,398 @@
+{
+  "source_commit": "e6de90ef16c64e97d2fd645e78367709abf9e2b3",
+  "processes": [
+    {
+      "study": "split",
+      "process": 1,
+      "seed": 20261113,
+      "correctness": "passed",
+      "independent_process": true
+    },
+    {
+      "study": "split",
+      "process": 2,
+      "seed": 20261114,
+      "correctness": "passed",
+      "independent_process": true
+    },
+    {
+      "study": "split",
+      "process": 3,
+      "seed": 20261115,
+      "correctness": "passed",
+      "independent_process": true
+    },
+    {
+      "study": "fusion",
+      "process": 1,
+      "seed": 20261113,
+      "correctness": "passed",
+      "independent_process": true
+    },
+    {
+      "study": "fusion",
+      "process": 2,
+      "seed": 20261114,
+      "correctness": "passed",
+      "independent_process": true
+    },
+    {
+      "study": "fusion",
+      "process": 3,
+      "seed": 20261115,
+      "correctness": "passed",
+      "independent_process": true
+    },
+    {
+      "study": "mature",
+      "process": 1,
+      "seed": 20261113,
+      "correctness": "passed",
+      "independent_process": true
+    },
+    {
+      "study": "mature",
+      "process": 2,
+      "seed": 20261114,
+      "correctness": "passed",
+      "independent_process": true
+    },
+    {
+      "study": "mature",
+      "process": 3,
+      "seed": 20261115,
+      "correctness": "passed",
+      "independent_process": true
+    }
+  ],
+  "independent_oracle": {
+    "numerical_passed": 32,
+    "unsupported": 4,
+    "graph_passed": 6,
+    "Engine": false,
+    "Sanitizer": false
+  },
+  "original_graph_checks": 20,
+  "device_fault": {
+    "expected_child_exit": 42,
+    "actual_child_exit": 42,
+    "isolated_child_context": true,
+    "compute_sanitizer_executed": false,
+    "performance_or_engine_result": false
+  },
+  "CUPTI_independent_recount": [
+    {
+      "study": "split",
+      "region": "decode/cap8/metadata",
+      "kernel_count": 18,
+      "kernels": {
+        "void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#4}::operator()() const::{lambda(long)#1}, std::array<char*, 2ul>, 4, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1> >(int, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#4}::operator()() const::{lambda(long)#1}, std::array<char*, 2ul>, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1>)": 3,
+        "void at_cuda_detail::cub::DeviceScanInitKernel<at_cuda_detail::cub::ScanTileState<long, true> >(at_cuda_detail::cub::ScanTileState<long, true>, int)": 3,
+        "void at_cuda_detail::cub::DeviceScanKernel<at_cuda_detail::cub::DeviceScanPolicy<long, std::plus<long> >::Policy900, long const*, long*, at_cuda_detail::cub::ScanTileState<long, true>, std::plus<long>, at_cuda_detail::cub::NullType, unsigned int, long, false>(long const*, long*, at_cuda_detail::cub::ScanTileState<long, true>, int, std::plus<long>, at_cuda_detail::cub::NullType, unsigned int)": 3,
+        "void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#3}::operator()() const::{lambda(int)#1}, std::array<char*, 2ul>, 4, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1> >(int, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#3}::operator()() const::{lambda(int)#1}, std::array<char*, 2ul>, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1>)": 3,
+        "create_flashinfer_kv_indices_triton": 3,
+        "get_num_kv_splits_triton": 3
+      },
+      "trace_sha256": "496b1df499a8cb511f782a35b1dbe0936e96aecfe4da307c432c1e817475a75d",
+      "profile_duration_not_used_in_AB": true
+    },
+    {
+      "study": "split",
+      "region": "decode/cap8/kv_write",
+      "kernel_count": 6,
+      "kernels": {
+        "void at::native::index_elementwise_kernel<128, 4, at::native::gpu_index_kernel<at::native::index_put_kernel_impl<at::native::OpaqueType<2> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1}>(at::TensorIteratorBase&, c10::ArrayRef<long>, c10::ArrayRef<long>, at::native::index_put_kernel_impl<at::native::OpaqueType<2> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1} const&, bool)::{lambda(int)#1}>(long, at::native::gpu_index_kernel<at::native::index_put_kernel_impl<at::native::OpaqueType<2> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1}>(at::TensorIteratorBase&, c10::ArrayRef<long>, c10::ArrayRef<long>, at::native::index_put_kernel_impl<at::native::OpaqueType<2> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1} const&, bool)::{lambda(int)#1})": 6
+      },
+      "trace_sha256": "496b1df499a8cb511f782a35b1dbe0936e96aecfe4da307c432c1e817475a75d",
+      "profile_duration_not_used_in_AB": true
+    },
+    {
+      "study": "split",
+      "region": "decode/cap8/raw_decode",
+      "kernel_count": 6,
+      "kernels": {
+        "_fwd_grouped_kernel_stage1": 3,
+        "_fwd_kernel_stage2": 3
+      },
+      "trace_sha256": "496b1df499a8cb511f782a35b1dbe0936e96aecfe4da307c432c1e817475a75d",
+      "profile_duration_not_used_in_AB": true
+    },
+    {
+      "study": "split",
+      "region": "decode/cap8/backend_forward",
+      "kernel_count": 12,
+      "kernels": {
+        "void at::native::index_elementwise_kernel<128, 4, at::native::gpu_index_kernel<at::native::index_put_kernel_impl<at::native::OpaqueType<2> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1}>(at::TensorIteratorBase&, c10::ArrayRef<long>, c10::ArrayRef<long>, at::native::index_put_kernel_impl<at::native::OpaqueType<2> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1} const&, bool)::{lambda(int)#1}>(long, at::native::gpu_index_kernel<at::native::index_put_kernel_impl<at::native::OpaqueType<2> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1}>(at::TensorIteratorBase&, c10::ArrayRef<long>, c10::ArrayRef<long>, at::native::index_put_kernel_impl<at::native::OpaqueType<2> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1} const&, bool)::{lambda(int)#1})": 6,
+        "_fwd_grouped_kernel_stage1": 3,
+        "_fwd_kernel_stage2": 3
+      },
+      "trace_sha256": "496b1df499a8cb511f782a35b1dbe0936e96aecfe4da307c432c1e817475a75d",
+      "profile_duration_not_used_in_AB": true
+    },
+    {
+      "study": "split",
+      "region": "decode/cap8/graph_raw_30",
+      "kernel_count": 60,
+      "kernels": {
+        "_fwd_grouped_kernel_stage1": 30,
+        "_fwd_kernel_stage2": 30
+      },
+      "trace_sha256": "496b1df499a8cb511f782a35b1dbe0936e96aecfe4da307c432c1e817475a75d",
+      "profile_duration_not_used_in_AB": true
+    },
+    {
+      "study": "split",
+      "region": "decode/cap1/metadata",
+      "kernel_count": 18,
+      "kernels": {
+        "void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#4}::operator()() const::{lambda(long)#1}, std::array<char*, 2ul>, 4, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1> >(int, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#4}::operator()() const::{lambda(long)#1}, std::array<char*, 2ul>, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1>)": 3,
+        "void at_cuda_detail::cub::DeviceScanInitKernel<at_cuda_detail::cub::ScanTileState<long, true> >(at_cuda_detail::cub::ScanTileState<long, true>, int)": 3,
+        "void at_cuda_detail::cub::DeviceScanKernel<at_cuda_detail::cub::DeviceScanPolicy<long, std::plus<long> >::Policy900, long const*, long*, at_cuda_detail::cub::ScanTileState<long, true>, std::plus<long>, at_cuda_detail::cub::NullType, unsigned int, long, false>(long const*, long*, at_cuda_detail::cub::ScanTileState<long, true>, int, std::plus<long>, at_cuda_detail::cub::NullType, unsigned int)": 3,
+        "void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#3}::operator()() const::{lambda(int)#1}, std::array<char*, 2ul>, 4, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1> >(int, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#3}::operator()() const::{lambda(int)#1}, std::array<char*, 2ul>, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1>)": 3,
+        "create_flashinfer_kv_indices_triton": 3,
+        "get_num_kv_splits_triton": 3
+      },
+      "trace_sha256": "496b1df499a8cb511f782a35b1dbe0936e96aecfe4da307c432c1e817475a75d",
+      "profile_duration_not_used_in_AB": true
+    },
+    {
+      "study": "split",
+      "region": "decode/cap1/kv_write",
+      "kernel_count": 6,
+      "kernels": {
+        "void at::native::index_elementwise_kernel<128, 4, at::native::gpu_index_kernel<at::native::index_put_kernel_impl<at::native::OpaqueType<2> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1}>(at::TensorIteratorBase&, c10::ArrayRef<long>, c10::ArrayRef<long>, at::native::index_put_kernel_impl<at::native::OpaqueType<2> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1} const&, bool)::{lambda(int)#1}>(long, at::native::gpu_index_kernel<at::native::index_put_kernel_impl<at::native::OpaqueType<2> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1}>(at::TensorIteratorBase&, c10::ArrayRef<long>, c10::ArrayRef<long>, at::native::index_put_kernel_impl<at::native::OpaqueType<2> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1} const&, bool)::{lambda(int)#1})": 6
+      },
+      "trace_sha256": "496b1df499a8cb511f782a35b1dbe0936e96aecfe4da307c432c1e817475a75d",
+      "profile_duration_not_used_in_AB": true
+    },
+    {
+      "study": "split",
+      "region": "decode/cap1/raw_decode",
+      "kernel_count": 6,
+      "kernels": {
+        "_fwd_grouped_kernel_stage1": 3,
+        "_fwd_kernel_stage2": 3
+      },
+      "trace_sha256": "496b1df499a8cb511f782a35b1dbe0936e96aecfe4da307c432c1e817475a75d",
+      "profile_duration_not_used_in_AB": true
+    },
+    {
+      "study": "split",
+      "region": "decode/cap1/backend_forward",
+      "kernel_count": 12,
+      "kernels": {
+        "void at::native::index_elementwise_kernel<128, 4, at::native::gpu_index_kernel<at::native::index_put_kernel_impl<at::native::OpaqueType<2> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1}>(at::TensorIteratorBase&, c10::ArrayRef<long>, c10::ArrayRef<long>, at::native::index_put_kernel_impl<at::native::OpaqueType<2> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1} const&, bool)::{lambda(int)#1}>(long, at::native::gpu_index_kernel<at::native::index_put_kernel_impl<at::native::OpaqueType<2> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1}>(at::TensorIteratorBase&, c10::ArrayRef<long>, c10::ArrayRef<long>, at::native::index_put_kernel_impl<at::native::OpaqueType<2> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1} const&, bool)::{lambda(int)#1})": 6,
+        "_fwd_grouped_kernel_stage1": 3,
+        "_fwd_kernel_stage2": 3
+      },
+      "trace_sha256": "496b1df499a8cb511f782a35b1dbe0936e96aecfe4da307c432c1e817475a75d",
+      "profile_duration_not_used_in_AB": true
+    },
+    {
+      "study": "split",
+      "region": "decode/cap1/graph_raw_30",
+      "kernel_count": 60,
+      "kernels": {
+        "_fwd_grouped_kernel_stage1": 30,
+        "_fwd_kernel_stage2": 30
+      },
+      "trace_sha256": "496b1df499a8cb511f782a35b1dbe0936e96aecfe4da307c432c1e817475a75d",
+      "profile_duration_not_used_in_AB": true
+    },
+    {
+      "study": "split",
+      "region": "decode/cap4/metadata",
+      "kernel_count": 18,
+      "kernels": {
+        "void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#4}::operator()() const::{lambda(long)#1}, std::array<char*, 2ul>, 4, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1> >(int, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#4}::operator()() const::{lambda(long)#1}, std::array<char*, 2ul>, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1>)": 3,
+        "void at_cuda_detail::cub::DeviceScanInitKernel<at_cuda_detail::cub::ScanTileState<long, true> >(at_cuda_detail::cub::ScanTileState<long, true>, int)": 3,
+        "void at_cuda_detail::cub::DeviceScanKernel<at_cuda_detail::cub::DeviceScanPolicy<long, std::plus<long> >::Policy900, long const*, long*, at_cuda_detail::cub::ScanTileState<long, true>, std::plus<long>, at_cuda_detail::cub::NullType, unsigned int, long, false>(long const*, long*, at_cuda_detail::cub::ScanTileState<long, true>, int, std::plus<long>, at_cuda_detail::cub::NullType, unsigned int)": 3,
+        "void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#3}::operator()() const::{lambda(int)#1}, std::array<char*, 2ul>, 4, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1> >(int, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#3}::operator()() const::{lambda(int)#1}, std::array<char*, 2ul>, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1>)": 3,
+        "create_flashinfer_kv_indices_triton": 3,
+        "get_num_kv_splits_triton": 3
+      },
+      "trace_sha256": "496b1df499a8cb511f782a35b1dbe0936e96aecfe4da307c432c1e817475a75d",
+      "profile_duration_not_used_in_AB": true
+    },
+    {
+      "study": "split",
+      "region": "decode/cap4/kv_write",
+      "kernel_count": 6,
+      "kernels": {
+        "void at::native::index_elementwise_kernel<128, 4, at::native::gpu_index_kernel<at::native::index_put_kernel_impl<at::native::OpaqueType<2> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1}>(at::TensorIteratorBase&, c10::ArrayRef<long>, c10::ArrayRef<long>, at::native::index_put_kernel_impl<at::native::OpaqueType<2> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1} const&, bool)::{lambda(int)#1}>(long, at::native::gpu_index_kernel<at::native::index_put_kernel_impl<at::native::OpaqueType<2> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1}>(at::TensorIteratorBase&, c10::ArrayRef<long>, c10::ArrayRef<long>, at::native::index_put_kernel_impl<at::native::OpaqueType<2> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1} const&, bool)::{lambda(int)#1})": 6
+      },
+      "trace_sha256": "496b1df499a8cb511f782a35b1dbe0936e96aecfe4da307c432c1e817475a75d",
+      "profile_duration_not_used_in_AB": true
+    },
+    {
+      "study": "split",
+      "region": "decode/cap4/raw_decode",
+      "kernel_count": 6,
+      "kernels": {
+        "_fwd_grouped_kernel_stage1": 3,
+        "_fwd_kernel_stage2": 3
+      },
+      "trace_sha256": "496b1df499a8cb511f782a35b1dbe0936e96aecfe4da307c432c1e817475a75d",
+      "profile_duration_not_used_in_AB": true
+    },
+    {
+      "study": "split",
+      "region": "decode/cap4/backend_forward",
+      "kernel_count": 12,
+      "kernels": {
+        "void at::native::index_elementwise_kernel<128, 4, at::native::gpu_index_kernel<at::native::index_put_kernel_impl<at::native::OpaqueType<2> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1}>(at::TensorIteratorBase&, c10::ArrayRef<long>, c10::ArrayRef<long>, at::native::index_put_kernel_impl<at::native::OpaqueType<2> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1} const&, bool)::{lambda(int)#1}>(long, at::native::gpu_index_kernel<at::native::index_put_kernel_impl<at::native::OpaqueType<2> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1}>(at::TensorIteratorBase&, c10::ArrayRef<long>, c10::ArrayRef<long>, at::native::index_put_kernel_impl<at::native::OpaqueType<2> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1} const&, bool)::{lambda(int)#1})": 6,
+        "_fwd_grouped_kernel_stage1": 3,
+        "_fwd_kernel_stage2": 3
+      },
+      "trace_sha256": "496b1df499a8cb511f782a35b1dbe0936e96aecfe4da307c432c1e817475a75d",
+      "profile_duration_not_used_in_AB": true
+    },
+    {
+      "study": "split",
+      "region": "decode/cap4/graph_raw_30",
+      "kernel_count": 60,
+      "kernels": {
+        "_fwd_grouped_kernel_stage1": 30,
+        "_fwd_kernel_stage2": 30
+      },
+      "trace_sha256": "496b1df499a8cb511f782a35b1dbe0936e96aecfe4da307c432c1e817475a75d",
+      "profile_duration_not_used_in_AB": true
+    },
+    {
+      "study": "fusion",
+      "region": "write_original",
+      "kernel_count": 6,
+      "kernels": {
+        "void at::native::index_elementwise_kernel<128, 4, at::native::gpu_index_kernel<at::native::index_put_kernel_impl<at::native::OpaqueType<2> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1}>(at::TensorIteratorBase&, c10::ArrayRef<long>, c10::ArrayRef<long>, at::native::index_put_kernel_impl<at::native::OpaqueType<2> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1} const&, bool)::{lambda(int)#1}>(long, at::native::gpu_index_kernel<at::native::index_put_kernel_impl<at::native::OpaqueType<2> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1}>(at::TensorIteratorBase&, c10::ArrayRef<long>, c10::ArrayRef<long>, at::native::index_put_kernel_impl<at::native::OpaqueType<2> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1} const&, bool)::{lambda(int)#1})": 6
+      },
+      "trace_sha256": "15bdaefaead94693ce00954f75461bfb7ee6e3d3ae889f7fa7e9f668e9893c2f",
+      "profile_duration_not_used_in_AB": true
+    },
+    {
+      "study": "fusion",
+      "region": "write_fused",
+      "kernel_count": 3,
+      "kernels": {
+        "kv_fused_u16": 3
+      },
+      "trace_sha256": "15bdaefaead94693ce00954f75461bfb7ee6e3d3ae889f7fa7e9f668e9893c2f",
+      "profile_duration_not_used_in_AB": true
+    },
+    {
+      "study": "fusion",
+      "region": "backend_original",
+      "kernel_count": 12,
+      "kernels": {
+        "void at::native::index_elementwise_kernel<128, 4, at::native::gpu_index_kernel<at::native::index_put_kernel_impl<at::native::OpaqueType<2> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1}>(at::TensorIteratorBase&, c10::ArrayRef<long>, c10::ArrayRef<long>, at::native::index_put_kernel_impl<at::native::OpaqueType<2> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1} const&, bool)::{lambda(int)#1}>(long, at::native::gpu_index_kernel<at::native::index_put_kernel_impl<at::native::OpaqueType<2> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1}>(at::TensorIteratorBase&, c10::ArrayRef<long>, c10::ArrayRef<long>, at::native::index_put_kernel_impl<at::native::OpaqueType<2> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1} const&, bool)::{lambda(int)#1})": 6,
+        "_fwd_grouped_kernel_stage1": 3,
+        "_fwd_kernel_stage2": 3
+      },
+      "trace_sha256": "15bdaefaead94693ce00954f75461bfb7ee6e3d3ae889f7fa7e9f668e9893c2f",
+      "profile_duration_not_used_in_AB": true
+    },
+    {
+      "study": "fusion",
+      "region": "backend_fused",
+      "kernel_count": 9,
+      "kernels": {
+        "kv_fused_u16": 3,
+        "_fwd_grouped_kernel_stage1": 3,
+        "_fwd_kernel_stage2": 3
+      },
+      "trace_sha256": "15bdaefaead94693ce00954f75461bfb7ee6e3d3ae889f7fa7e9f668e9893c2f",
+      "profile_duration_not_used_in_AB": true
+    },
+    {
+      "study": "fusion",
+      "region": "graph_backend_original",
+      "kernel_count": 120,
+      "kernels": {
+        "void at::native::index_elementwise_kernel<128, 4, at::native::gpu_index_kernel<at::native::index_put_kernel_impl<at::native::OpaqueType<2> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1}>(at::TensorIteratorBase&, c10::ArrayRef<long>, c10::ArrayRef<long>, at::native::index_put_kernel_impl<at::native::OpaqueType<2> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1} const&, bool)::{lambda(int)#1}>(long, at::native::gpu_index_kernel<at::native::index_put_kernel_impl<at::native::OpaqueType<2> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1}>(at::TensorIteratorBase&, c10::ArrayRef<long>, c10::ArrayRef<long>, at::native::index_put_kernel_impl<at::native::OpaqueType<2> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1} const&, bool)::{lambda(int)#1})": 60,
+        "_fwd_grouped_kernel_stage1": 30,
+        "_fwd_kernel_stage2": 30
+      },
+      "trace_sha256": "15bdaefaead94693ce00954f75461bfb7ee6e3d3ae889f7fa7e9f668e9893c2f",
+      "profile_duration_not_used_in_AB": true
+    },
+    {
+      "study": "fusion",
+      "region": "graph_backend_fused",
+      "kernel_count": 90,
+      "kernels": {
+        "kv_fused_u16": 30,
+        "_fwd_grouped_kernel_stage1": 30,
+        "_fwd_kernel_stage2": 30
+      },
+      "trace_sha256": "15bdaefaead94693ce00954f75461bfb7ee6e3d3ae889f7fa7e9f668e9893c2f",
+      "profile_duration_not_used_in_AB": true
+    },
+    {
+      "study": "mature",
+      "region": "write_original",
+      "kernel_count": 6,
+      "kernels": {
+        "void at::native::index_elementwise_kernel<128, 4, at::native::gpu_index_kernel<at::native::index_put_kernel_impl<at::native::OpaqueType<2> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1}>(at::TensorIteratorBase&, c10::ArrayRef<long>, c10::ArrayRef<long>, at::native::index_put_kernel_impl<at::native::OpaqueType<2> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1} const&, bool)::{lambda(int)#1}>(long, at::native::gpu_index_kernel<at::native::index_put_kernel_impl<at::native::OpaqueType<2> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1}>(at::TensorIteratorBase&, c10::ArrayRef<long>, c10::ArrayRef<long>, at::native::index_put_kernel_impl<at::native::OpaqueType<2> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1} const&, bool)::{lambda(int)#1})": 6
+      },
+      "trace_sha256": "b3ed4d357fe176a1e0fa078a05b51e12b8246f0cb84a5ecd7fe741cd2876356e",
+      "profile_duration_not_used_in_AB": true
+    },
+    {
+      "study": "mature",
+      "region": "write_mature",
+      "kernel_count": 3,
+      "kernels": {
+        "void (anonymous namespace)::store_kv_cache_128x2<long>(unsigned long*, unsigned long*, long const*, unsigned long, unsigned long const*, unsigned long const*, unsigned long, unsigned long, unsigned long)": 3
+      },
+      "trace_sha256": "b3ed4d357fe176a1e0fa078a05b51e12b8246f0cb84a5ecd7fe741cd2876356e",
+      "profile_duration_not_used_in_AB": true
+    },
+    {
+      "study": "mature",
+      "region": "write_prototype",
+      "kernel_count": 3,
+      "kernels": {
+        "kv_fused_u16": 3
+      },
+      "trace_sha256": "b3ed4d357fe176a1e0fa078a05b51e12b8246f0cb84a5ecd7fe741cd2876356e",
+      "profile_duration_not_used_in_AB": true
+    },
+    {
+      "study": "mature",
+      "region": "backend_original",
+      "kernel_count": 12,
+      "kernels": {
+        "void at::native::index_elementwise_kernel<128, 4, at::native::gpu_index_kernel<at::native::index_put_kernel_impl<at::native::OpaqueType<2> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1}>(at::TensorIteratorBase&, c10::ArrayRef<long>, c10::ArrayRef<long>, at::native::index_put_kernel_impl<at::native::OpaqueType<2> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1} const&, bool)::{lambda(int)#1}>(long, at::native::gpu_index_kernel<at::native::index_put_kernel_impl<at::native::OpaqueType<2> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1}>(at::TensorIteratorBase&, c10::ArrayRef<long>, c10::ArrayRef<long>, at::native::index_put_kernel_impl<at::native::OpaqueType<2> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1} const&, bool)::{lambda(int)#1})": 6,
+        "_fwd_grouped_kernel_stage1": 3,
+        "_fwd_kernel_stage2": 3
+      },
+      "trace_sha256": "b3ed4d357fe176a1e0fa078a05b51e12b8246f0cb84a5ecd7fe741cd2876356e",
+      "profile_duration_not_used_in_AB": true
+    },
+    {
+      "study": "mature",
+      "region": "backend_mature",
+      "kernel_count": 9,
+      "kernels": {
+        "void (anonymous namespace)::store_kv_cache_128x2<long>(unsigned long*, unsigned long*, long const*, unsigned long, unsigned long const*, unsigned long const*, unsigned long, unsigned long, unsigned long)": 3,
+        "_fwd_grouped_kernel_stage1": 3,
+        "_fwd_kernel_stage2": 3
+      },
+      "trace_sha256": "b3ed4d357fe176a1e0fa078a05b51e12b8246f0cb84a5ecd7fe741cd2876356e",
+      "profile_duration_not_used_in_AB": true
+    },
+    {
+      "study": "mature",
+      "region": "backend_prototype",
+      "kernel_count": 9,
+      "kernels": {
+        "kv_fused_u16": 3,
+        "_fwd_grouped_kernel_stage1": 3,
+        "_fwd_kernel_stage2": 3
+      },
+      "trace_sha256": "b3ed4d357fe176a1e0fa078a05b51e12b8246f0cb84a5ecd7fe741cd2876356e",
+      "profile_duration_not_used_in_AB": true
+    }
+  ],
+  "Engine": false,
+  "Sanitizer": false
+}
