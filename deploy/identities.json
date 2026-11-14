@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "scope": "installation-input-only-no-secret-values",
-  "sourceCommit": "d2d7869fe16b8968d6ca5b00a63560c322b84dc1",
+  "sourceCommit": "0559fa46b4a728d6f542daf19532e794f8549b31",
   "productionWiringVerified": false,
   "connections": {
     "core": {
@@ -94,5 +94,43 @@
       "grantEvidenceRef": null
     }
   },
-  "note": "Candidate templates and controlled DSN consumers exist; production/default-role privileges and separate publisher wiring remain unverified."
+  "note": "Candidate templates and controlled DSN consumers exist; production/default-role privileges and separate publisher wiring remain unverified.",
+  "publisherCompletionContract": {
+    "templatePath": "config/mysql/release-permissions.sql",
+    "templateSha256": "50306ce5ab11484daf31d143ca49f14da4dd60c6d0c998e0610cb08dce507056",
+    "selectColumns": [
+      "cluster_id",
+      "operation_id",
+      "cr_uid",
+      "namespace",
+      "name",
+      "requested_generation",
+      "state",
+      "acknowledged",
+      "desired_state",
+      "action",
+      "spec_sha256"
+    ],
+    "updateColumns": [
+      "state",
+      "reason",
+      "publication_id",
+      "updated_at"
+    ],
+    "evidence": {
+      "evidenceCommit": "50354a705c03383d0102d0d437119afd7ffed8b3",
+      "targetCommit": "ac94a373ec0a61c5fd4dc5380a7985a4fb47840f",
+      "scope": "R1-R3 controlled independent tests only; original5 and additional10; not all later commits or production",
+      "reportPath": "test/qa-r123/report.md",
+      "reportSha256": "67cfbcc7c659e6306662393d373f72c1a0c07ca35c0d7bd1d484bf1340a22851",
+      "postQaChanges": [
+        "README.md",
+        "docs/local-service.md",
+        "scripts/workbench-service.mjs"
+      ],
+      "postQaChangesAreLocalServiceAndDocsOnly": true,
+      "publisherTemplateSha256": "50306ce5ab11484daf31d143ca49f14da4dd60c6d0c998e0610cb08dce507056"
+    },
+    "productionBindingVerified": false
+  }
 }

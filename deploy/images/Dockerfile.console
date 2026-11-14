@@ -10,6 +10,7 @@ COPY console/ ./
 RUN npm run build
 FROM ${GO_IMAGE} AS binaries
 WORKDIR /src
+ENV GOTOOLCHAIN=local
 COPY deploy/ deploy/
 COPY go.mod go.sum ./
 COPY internal/webconsole/ internal/webconsole/
