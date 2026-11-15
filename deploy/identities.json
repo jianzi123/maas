@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "scope": "installation-input-only-no-secret-values",
-  "sourceCommit": "fe09d60b4932f78ed07dd27da36878b2a375d0fd",
+  "sourceCommit": "4573583aae860e473c96f720bf90126ea51883df",
   "productionWiringVerified": false,
   "connections": {
     "core": {
@@ -365,6 +365,11 @@
         "test/qa-usage/results.json",
         "test/qa-usage/run.sh",
         "test/qa-usage/summarize.py",
+        "test/qa-window-b/audit.py",
+        "test/qa-window-b/matrix.json",
+        "test/qa-window-b/report.md",
+        "test/qa-window-b/results.json",
+        "test/qa-window-b/rope_semantics.py",
         "tools/model_capabilities/.gitattributes",
         "tools/model_capabilities/.gitignore",
         "tools/model_capabilities/README.md",

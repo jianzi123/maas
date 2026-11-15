@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "sourceMode": "single-repository-code-commit",
   "backend": {
-    "sourceCommit": "fe09d60b4932f78ed07dd27da36878b2a375d0fd",
+    "sourceCommit": "4573583aae860e473c96f720bf90126ea51883df",
     "files": {
       ".gitattributes": "5b93b86d7f7e94c3dafdd41b284afe95a95a985e8afc719914173db11890cd36",
       ".gitignore": "46cf94096a926a26bc1a913b6cc632adacab0a96ab42d72a7dcbf216bcbaaa77",
@@ -337,6 +337,11 @@
       "test/qa-usage/results.json": "8d968d8611e9f873f7eb09596bc9fc108058dbbafad8ce6c8225705ffeecbacb",
       "test/qa-usage/run.sh": "b9e3734622f1dee496e570b67d48e9ed49de9f48892b8f85e423e531624f8ee7",
       "test/qa-usage/summarize.py": "f910732f6fc6e6d43f212d9a9fb972507c9a593c05933686dfe557dd07b39382",
+      "test/qa-window-b/audit.py": "c5610aa91f2570f831728553fb0c304858d75b7481462715e17b4deaa66eb851",
+      "test/qa-window-b/matrix.json": "5c22189071b2e6122921f6ac45dd960c21e164de0da5fa980178c5e52c98dece",
+      "test/qa-window-b/report.md": "99a0f98049012eb82566f70bad3282fca1ed8086ed104124295bcf3544c0016f",
+      "test/qa-window-b/results.json": "5486ec02b44c96ee1f1225fd4094660155e3a9a16f7bbe0d7a5ce38b154e1679",
+      "test/qa-window-b/rope_semantics.py": "7b65c21239308d8a926c22d2e325f5592f06138fc223f3aa3f701507c3cb1ccd",
       "scripts/tests/test_unified_sources.py": "9baa0c1b26691e7068e030ab10386a1bfa406ef794aa067150c85d7566d95735",
       "internal/admission/handler.go": "ac61df7e4e1a995cba390e7bc9757e51368788c8d0dd3c9cf171299d7edfddc1",
       "internal/admission/handler_test.go": "2a1d8c9548af0cee333fbb67a08d7f4e9b0ff8bc073152cf84141aa049a7b70a",
@@ -521,7 +526,7 @@
     }
   },
   "console": {
-    "sourceCommit": "fe09d60b4932f78ed07dd27da36878b2a375d0fd",
+    "sourceCommit": "4573583aae860e473c96f720bf90126ea51883df",
     "files": {
       "console/.env.fixtures": "4d5e22f8eeb4bbf5a027a34c7a4bfef806876a470f89440f9611bd01a9d8c5f7",
       "console/.env.workbench": "930edf078e756f41d37fad0f7ce87332d8af59e65dac57b11797bcf0117a9216",
@@ -841,6 +846,11 @@
       "test/qa-usage/results.json",
       "test/qa-usage/run.sh",
       "test/qa-usage/summarize.py",
+      "test/qa-window-b/audit.py",
+      "test/qa-window-b/matrix.json",
+      "test/qa-window-b/report.md",
+      "test/qa-window-b/results.json",
+      "test/qa-window-b/rope_semantics.py",
       "tools/model_capabilities/.gitattributes",
       "tools/model_capabilities/.gitignore",
       "tools/model_capabilities/README.md",
