@@ -1,5 +1,7 @@
 # 本地GPU实验
 
+E-LIT-01新增真实三策略入口：cadence_protocol.py / bench_kv_cadence.py / analyze_kv_cadence.py，旧WindowB入口不变。见[第22章](../../../../docs/performance/engineering/22-cadence-policy-pilot.md)。
+
 窗口B入口：bench_kv_interleaved.py、analyze_kv_window_b.py、analyze_kv_trace.py；check_rope_kv_semantics.py仅为库级语义探针。完整方法见 [第20章](../../../../docs/performance/engineering/20-window-b-cost-drift.md)。
 
 最新：[第19章](../../../../docs/performance/engineering/19-native-kv-integration.md)。native_kv_binding.py仅做进程内研究绑定；run_native_kv_integration.py在capture前接入并含晚接入负控；bench_native_kv.py另做无观测调用成本，不与结构trace计时混用。总体成功须有integration.json与退出0。
