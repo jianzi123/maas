@@ -1,0 +1,8 @@
+# Input template. Complete approved image/Secret/API/network values separately.
+mode: internal
+higress:
+  strategy: reuse
+  namespace: ""
+  gatewayService: ""
+  externalEgressPolicyRef: ""
+# operator/core/console remain disabled; default-deny network lists remain empty.

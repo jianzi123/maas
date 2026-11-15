@@ -1,0 +1,1 @@
+UsageProcessor snapshots are unmodified SGLang source under Apache-2.0; URLs, exact commits and SHA256 are recorded in ../source-evidence.json. Used as offline AST function specimens only. No upstream module is imported or executed at top level.

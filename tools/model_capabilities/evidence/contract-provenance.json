@@ -1,0 +1,23 @@
+{
+  "note": "Immutable copies; 3.1 proposal is not an enabled write protocol",
+  "files": [
+    {
+      "file": "current-openapi.json",
+      "attachment_id": "01a1a637-5727-730d-9662-60ec324daa42",
+      "source_file": "deliverables/v0.4/MAAS-2-openapi-v0.4.json",
+      "sha256": "fab7f71e47af03de3f956437a09e50be47b511991ca87b35bb745ba0228040f5"
+    },
+    {
+      "file": "current-terminal-3.0.schema.json",
+      "attachment_id": "01a1a637-5727-730d-9662-60ec324daa42",
+      "source_file": "deliverables/v0.4/MAAS-2-usage-event-v0.4.schema.json",
+      "sha256": "3e9eac874ce12d294a91f81617f08cc982cd9f48fb8aade798db35416ab2a5a9"
+    },
+    {
+      "file": "proposed-terminal-3.1.schema.json",
+      "attachment_id": "01a1a677-b5fa-7768-8a10-de3e824e7195",
+      "source_file": "contracts/MAAS-2-usage-event-v0.4.1.schema.json",
+      "sha256": "d744978c291827a7e49715e9be6da79bc60c42e5dc15ca744466e050143e18a1"
+    }
+  ]
+}

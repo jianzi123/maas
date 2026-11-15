@@ -1,0 +1,195 @@
+{
+  "version": "0.5",
+  "files": [
+    {
+      "file": "v0.5.6/serving_chat.py",
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/7ae368efde14f0b2abe769a5fbb99b8154b2a9b7/python/sglang/srt/entrypoints/openai/serving_chat.py",
+      "revision": "7ae368efde14f0b2abe769a5fbb99b8154b2a9b7",
+      "sha256": "f3dcafc97a70173de884b6a610990e759cbd0442dfe81eb9c1f4135f6731dc64",
+      "bytes": 51993,
+      "status": "captured",
+      "retrieved_at_utc": "2026-11-13T08:37:56.263499+00:00",
+      "symbols": [
+        {
+          "name": "_handle_streaming_request",
+          "line": 474,
+          "end_line": 485
+        },
+        {
+          "name": "_generate_chat_stream",
+          "line": 487,
+          "end_line": 724
+        },
+        {
+          "name": "_process_reasoning_stream",
+          "line": 1013,
+          "end_line": 1033
+        }
+      ],
+      "evidence_kind": "fixed_source_only",
+      "runtime_verified": false
+    },
+    {
+      "file": "v0.5.6/protocol.py",
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/7ae368efde14f0b2abe769a5fbb99b8154b2a9b7/python/sglang/srt/entrypoints/openai/protocol.py",
+      "revision": "7ae368efde14f0b2abe769a5fbb99b8154b2a9b7",
+      "sha256": "43acad3d18f2301497a165de4bb05ee806f46f03d2ec9f15b50e4fac664f976d",
+      "bytes": 39734,
+      "status": "captured",
+      "retrieved_at_utc": "2026-11-13T08:37:55.118465+00:00",
+      "symbols": [
+        {
+          "name": "UsageInfo",
+          "line": 105,
+          "end_line": 111
+        },
+        {
+          "name": "StreamOptions",
+          "line": 114,
+          "end_line": 116
+        }
+      ],
+      "evidence_kind": "fixed_source_only",
+      "runtime_verified": false
+    },
+    {
+      "file": "v0.5.6/utils.py",
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/7ae368efde14f0b2abe769a5fbb99b8154b2a9b7/python/sglang/srt/entrypoints/openai/utils.py",
+      "revision": "7ae368efde14f0b2abe769a5fbb99b8154b2a9b7",
+      "sha256": "0d3f6ab96d05d435f53fd340b8cc6911181770d60a2ad9bbaddec9d66ec46834",
+      "bytes": 2112,
+      "status": "captured",
+      "retrieved_at_utc": "2026-11-13T08:37:58.943142+00:00",
+      "symbols": [],
+      "evidence_kind": "fixed_source_only",
+      "runtime_verified": false
+    },
+    {
+      "file": "v0.5.6/usage_processor.py",
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/7ae368efde14f0b2abe769a5fbb99b8154b2a9b7/python/sglang/srt/entrypoints/openai/usage_processor.py",
+      "revision": "7ae368efde14f0b2abe769a5fbb99b8154b2a9b7",
+      "sha256": "1dc16f6fecba3b38add30b704e3c090e193ea49afcd9e7a23a186e8cc7c83f9e",
+      "bytes": 2872,
+      "status": "captured",
+      "retrieved_at_utc": "2026-11-13T08:37:54.552667+00:00",
+      "symbols": [
+        {
+          "name": "calculate_streaming_usage",
+          "line": 45,
+          "end_line": 70
+        },
+        {
+          "name": "calculate_token_usage",
+          "line": 73,
+          "end_line": 84
+        }
+      ],
+      "evidence_kind": "fixed_source_only",
+      "runtime_verified": false
+    },
+    {
+      "file": "v0.5.18/serving_chat.py",
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/71de97b264b04dcd514cf904003028aefe9775c8/python/sglang/srt/entrypoints/openai/serving_chat.py",
+      "revision": "71de97b264b04dcd514cf904003028aefe9775c8",
+      "sha256": "ac0bbdf37a86b49c9df0d513ba44b0c06feb23a28ffcde0b730500e560604ab1",
+      "bytes": 110493,
+      "status": "captured",
+      "retrieved_at_utc": "2026-11-13T08:37:56.061005+00:00",
+      "symbols": [
+        {
+          "name": "_handle_streaming_request",
+          "line": 1464,
+          "end_line": 1490
+        },
+        {
+          "name": "_generate_chat_stream",
+          "line": 1492,
+          "end_line": 1729
+        },
+        {
+          "name": "_process_reasoning_stream",
+          "line": 2140,
+          "end_line": 2171
+        }
+      ],
+      "evidence_kind": "fixed_source_only",
+      "runtime_verified": false
+    },
+    {
+      "file": "v0.5.18/protocol.py",
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/71de97b264b04dcd514cf904003028aefe9775c8/python/sglang/srt/entrypoints/openai/protocol.py",
+      "revision": "71de97b264b04dcd514cf904003028aefe9775c8",
+      "sha256": "c9aa0b5551bf5761c6e283391d70aebadb6708b69ba998cf21e00f05d2e3299f",
+      "bytes": 70651,
+      "status": "captured",
+      "retrieved_at_utc": "2026-11-13T08:37:56.083566+00:00",
+      "symbols": [
+        {
+          "name": "UsageInfo",
+          "line": 204,
+          "end_line": 210
+        },
+        {
+          "name": "StreamOptions",
+          "line": 213,
+          "end_line": 215
+        }
+      ],
+      "evidence_kind": "fixed_source_only",
+      "runtime_verified": false
+    },
+    {
+      "file": "v0.5.18/utils.py",
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/71de97b264b04dcd514cf904003028aefe9775c8/python/sglang/srt/entrypoints/openai/utils.py",
+      "revision": "71de97b264b04dcd514cf904003028aefe9775c8",
+      "sha256": "6057816db2a0851dada70399266f4c678b0a56c576e145d3dfd442e2b2300624",
+      "bytes": 6276,
+      "status": "captured",
+      "retrieved_at_utc": "2026-11-13T08:37:57.463480+00:00",
+      "symbols": [
+        {
+          "name": "should_include_usage",
+          "line": 91,
+          "end_line": 105
+        }
+      ],
+      "evidence_kind": "fixed_source_only",
+      "runtime_verified": false
+    },
+    {
+      "file": "v0.5.18/usage_processor.py",
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/71de97b264b04dcd514cf904003028aefe9775c8/python/sglang/srt/entrypoints/openai/usage_processor.py",
+      "revision": "71de97b264b04dcd514cf904003028aefe9775c8",
+      "sha256": "883c4c3ba95eb52fa57d5bf732d128063bac0b032f484776331220f61b7498a5",
+      "bytes": 4652,
+      "status": "captured",
+      "retrieved_at_utc": "2026-11-13T08:37:56.668012+00:00",
+      "symbols": [
+        {
+          "name": "calculate_streaming_usage",
+          "line": 58,
+          "end_line": 92
+        },
+        {
+          "name": "calculate_token_usage",
+          "line": 95,
+          "end_line": 126
+        }
+      ],
+      "evidence_kind": "fixed_source_only",
+      "runtime_verified": false
+    },
+    {
+      "file": "deepseek-chat.html",
+      "url": "https://api-docs.deepseek.com/api/create-chat-completion/",
+      "revision": null,
+      "sha256": "9949282fb8e3adf656264632126f2ffdb01bfd83e1b14a9b06b65938bfb8ab80",
+      "bytes": 129498,
+      "status": "captured",
+      "retrieved_at_utc": "2026-11-13T08:37:56.903894+00:00",
+      "evidence_kind": "floating_official_document_snapshot_not_account_contract",
+      "runtime_verified": false
+    }
+  ],
+  "claim_scope": "source/documents, not provider observations; no models called"
+}

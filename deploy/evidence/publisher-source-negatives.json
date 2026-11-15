@@ -1,0 +1,26 @@
+{
+  "scope": "in-memory-source-mutation-only-not-executed-Go-or-database",
+  "checks": [
+    {
+      "case": "missing-dsn-guard",
+      "guard": "publisher_explicit_dsn_and_evidence_required",
+      "source_policy_rejected": true
+    },
+    {
+      "case": "missing-current-role-check",
+      "guard": "publisher_role_checked",
+      "source_policy_rejected": true
+    },
+    {
+      "case": "missing-completion-hook",
+      "guard": "publisher_completion_hook_enabled",
+      "source_policy_rejected": true
+    },
+    {
+      "case": "borrowed-core-connection",
+      "guard": "local_publisher_factory_consumed",
+      "source_policy_rejected": true
+    }
+  ],
+  "checks_passed": 4
+}

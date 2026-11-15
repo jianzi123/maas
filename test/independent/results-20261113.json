@@ -1,0 +1,8 @@
+{
+  "backend_sha": "e1bd5020887d092feb892992476bb810512a274e",
+  "frontend_sha": "819c35ef9771cca8b8559de4c4e70bcc47436b80",
+  "cases": [],
+  "kind": "synthetic_Response_consumer_only",
+  "reader_runtime": "NOT_EXECUTED",
+  "usage_authority_DB": "NOT_EXECUTED"
+}

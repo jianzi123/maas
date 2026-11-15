@@ -1,0 +1,313 @@
+{
+  "baseline": "c7e863b11fb34ee2828c947393444e1e5a9baf08",
+  "prior_evidence_commit": "faf1b64d87a442d5696cab84a2c002a5cc0a4819",
+  "note": "完整34项均NOT_ACCEPTED。原Usage20/Reader12及QA-001/002/003仅保留原受控结论，不当成本轮重跑。",
+  "rows": [
+    {
+      "id": "A01",
+      "source": "MAAS-1-requirements-v0.2.md",
+      "requirement": "经 Higress 配置获准外部 GPT 类真实模型并查询列表",
+      "expected": "别名及来源正确；网关路由与上游证据可关联同一请求 ID；保留运行版本及脱敏配置；Go 或前端不能绕过该路由",
+      "remaining": "真实 Higress/供应商路由及模型列表未运行",
+      "acceptance": "NOT_ACCEPTED",
+      "current_run_note": "本轮未执行此完整要求；沿用原证据/未执行项，不扩大关项范围。"
+    },
+    {
+      "id": "A02",
+      "source": "MAAS-1-requirements-v0.2.md",
+      "requirement": "未登录访问管理面；登录后创建 Key；退出再访问",
+      "expected": "未登录及退出后拒绝；创建时仅一次取得原值；列表、日志、持久化不含可还原原值；调用 Key 不能管理其他 Key",
+      "remaining": "完整登录/创建/列表及一次秘密返回的 HTTP/UI 待装配",
+      "acceptance": "NOT_ACCEPTED",
+      "current_run_note": "本轮未执行此完整要求；沿用原证据/未执行项，不扩大关项范围。"
+    },
+    {
+      "id": "A03",
+      "source": "MAAS-1-requirements-v0.2.md",
+      "requirement": "有效 Key 分别调用非流式和流式",
+      "expected": "均返回真实模型输出；流式满足分片用例和唯一终止信号；两次分别计量",
+      "remaining": "网关 HTTP 为替身，无真实模型",
+      "acceptance": "NOT_ACCEPTED",
+      "current_run_note": "受控流式/非流式error处理和成功路径；真实模型未验。"
+    },
+    {
+      "id": "A04",
+      "source": "MAAS-1-requirements-v0.2.md",
+      "requirement": "缺失、伪造、撤销 Key；提交未知模型或非法消息",
+      "expected": "前三者为鉴权错误，后两者为参数错误；不触发上游、不扣额度；撤销后新请求立即拒绝",
+      "remaining": "公开 HTTP 输入与真实网关零命中待验",
+      "acceptance": "NOT_ACCEPTED",
+      "current_run_note": "本轮未执行此完整要求；沿用原证据/未执行项，不扩大关项范围。"
+    },
+    {
+      "id": "A05",
+      "source": "MAAS-1-requirements-v0.2.md",
+      "requirement": "Go 服务至少两副本，每日限额设 2，先调用 1 次，再经 Higress 同时发 10 次",
+      "expected": "并发批次最多 1 次获准；总提交不超过 2；其余明确拒绝；额度剩余为 0",
+      "remaining": "双 Store、10 个并发尝试；进程/真实 Higress 副本待验",
+      "acceptance": "NOT_ACCEPTED",
+      "current_run_note": "本轮未执行此完整要求；沿用原证据/未执行项，不扩大关项范围。"
+    },
+    {
+      "id": "A06",
+      "source": "MAAS-1-requirements-v0.2.md",
+      "requirement": "用受控时钟跨 UTC 00:00；将额度改到小于已用量",
+      "expected": "新日额度正确重置，旧请求仍归旧日；调低额度不会出现负数或继续放行",
+      "remaining": "UTC 边界、调低预算及旧窗归属未运行",
+      "acceptance": "NOT_ACCEPTED",
+      "current_run_note": "本轮未执行此完整要求；沿用原证据/未执行项，不扩大关项范围。"
+    },
+    {
+      "id": "A07",
+      "source": "MAAS-1-requirements-v0.2.md",
+      "requirement": "首响应前注入上游失败/超时；首分片后断流",
+      "expected": "前者结构化错误；后者错误事件并关闭；均非成功；已提交各扣 1 次；已确认未提交的本地失败释放额度",
+      "remaining": "真实Go/Higress/上游故障全链路未验；本轮EOF受控子集不能代替整项。",
+      "acceptance": "NOT_ACCEPTED",
+      "current_run_note": "内容前/后顶层error、EOF、写失败和超时均按新SHA独立验证；不恢复正常DONE或泄漏供应商正文。"
+    },
+    {
+      "id": "A08",
+      "source": "MAAS-1-requirements-v0.2.md",
+      "requirement": "试用页停止及 API 客户端断开",
+      "expected": "2 秒内发出取消/关连接；记录取消和可获取 Token；结束后本地并发名额释放",
+      "remaining": "浏览器停止、实际生成停止及后继容量各需独立证据",
+      "acceptance": "NOT_ACCEPTED",
+      "current_run_note": "显式取消沿受控Go/HTTP路径分类，保留unknown actual/held与原slot边界；浏览器停止未重跑。"
+    },
+    {
+      "id": "A09",
+      "source": "MAAS-1-requirements-v0.2.md",
+      "requirement": "上游返回实际 Token；另一次不返回 Token",
+      "expected": "前者能对照上游值；后者显示不可获取；汇总标明缺失请求数，不将 null 算作零",
+      "remaining": "受控 usage；真实上游/页面与缺失汇总待验",
+      "acceptance": "NOT_ACCEPTED",
+      "current_run_note": "本轮正常Usage仅作sampling负例/正例的结算保障，原d2最终性20项不重跑。"
+    },
+    {
+      "id": "A10",
+      "source": "MAAS-1-requirements-v0.2.md",
+      "requirement": "请求结束后查询，并重复投递计量终态事件",
+      "expected": "5 秒内可见；分类数量相加等于总量；重复事件不增加请求量、Token 或额度扣减",
+      "remaining": "唯一 DB 结算可测；5 秒查询投影/页面待装配",
+      "acceptance": "NOT_ACCEPTED",
+      "current_run_note": "每次Forward请求/终态/汇总各一次，满队列丢样不制造额外业务事件。"
+    },
+    {
+      "id": "A11",
+      "source": "MAAS-1-requirements-v0.2.md",
+      "requirement": "挂起 5 个已提交请求，再发第 6 个，随后释放一个",
+      "expected": "第 6 个立即并发拒绝且不扣额度；释放后新请求成功；长流达到总时限会终止",
+      "remaining": "单 slot 夹具，不把历史 5 并发当已批准默认",
+      "acceptance": "NOT_ACCEPTED",
+      "current_run_note": "本轮未执行此完整要求；沿用原证据/未执行项，不扩大关项范围。"
+    },
+    {
+      "id": "A12",
+      "source": "MAAS-1-requirements-v0.2.md",
+      "requirement": "计量存储不可用；请求在途时模拟服务重启",
+      "expected": "新请求不放行；恢复后遗留记录按规定时限收敛为异常中断，原额度不丢失、并发不永久占用",
+      "remaining": "Store 重建非进程崩溃，HA/真实容量恢复未验",
+      "acceptance": "NOT_ACCEPTED",
+      "current_run_note": "本轮未执行此完整要求；沿用原证据/未执行项，不扩大关项范围。"
+    },
+    {
+      "id": "A13",
+      "source": "MAAS-1-requirements-v0.2.md",
+      "requirement": "从全新获准环境按文档启动并检查日志",
+      "expected": "占位配置可替换；就绪检查真实；请求 ID 可定位；无上游秘密、Key 原值或提示词正文泄漏；保留期清理不影响当日额度",
+      "remaining": "目标启动、日志/保留期和部署就绪未验",
+      "acceptance": "NOT_ACCEPTED",
+      "current_run_note": "本轮未执行此完整要求；沿用原证据/未执行项，不扩大关项范围。"
+    },
+    {
+      "id": "A14",
+      "source": "MAAS-1-requirements-v0.2.md",
+      "requirement": "Vue + TypeScript 控制台登录→模型列表→创建 Key→试用→用量→撤销→重试",
+      "expected": "全流程可复现；显示来源类型；空列表、等待、错误、超额、未知 Token 均有清楚界面反馈；后端业务服务使用 Go",
+      "remaining": "Vue 完整用户流程未验",
+      "acceptance": "NOT_ACCEPTED",
+      "current_run_note": "本轮未执行此完整要求；沿用原证据/未执行项，不扩大关项范围。"
+    },
+    {
+      "id": "A15",
+      "source": "MAAS-1-requirements-v0.2.md",
+      "requirement": "配置一个外部与一个受控内网端点，按不同别名调用；提交未注册别名或自定义 URL",
+      "expected": "均经 Higress 且只命中指定来源；非法目标在转发前拒绝；平台 Key 不作为供应商凭证转发；用量按来源区分且不重复",
+      "remaining": "源/发布/预留错配拒绝；真实双来源/凭证通道未验",
+      "acceptance": "NOT_ACCEPTED",
+      "current_run_note": "本轮未执行此完整要求；沿用原证据/未执行项，不扩大关项范围。"
+    },
+    {
+      "id": "A16",
+      "source": "MAAS-1-requirements-v0.2.md",
+      "requirement": "仅内网模式关闭外部来源并阻断公网出网，执行控制台与模型闭环；再在获准混合模式调用外部接口",
+      "expected": "内网模式正常工作且无公网请求，外部模型不可调用；无静默跨来源回退；混合模式外部真实接口单列证据；内网模拟与真实结果明确区分",
+      "remaining": "未验证内网出网阻断、混合真实调用",
+      "acceptance": "NOT_ACCEPTED",
+      "current_run_note": "本轮未执行此完整要求；沿用原证据/未执行项，不扩大关项范围。"
+    },
+    {
+      "id": "A17",
+      "source": "MAAS-1-requirements-v0.2.md",
+      "requirement": "在获准 K8s 测试集群按版本矩阵 Helm 安装、升级、回滚",
+      "expected": "组件就绪且 SSE 可用；Key/额度/用量保留；Secret 不出现在示例、日志或源码；CRD、迁移、备份与卸载保留策略有记录；无集群不能标为通过",
+      "remaining": "未部署 Helm/K8s，无安装/升级/回滚运行证据",
+      "acceptance": "NOT_ACCEPTED",
+      "current_run_note": "本轮未执行此完整要求；沿用原证据/未执行项，不扩大关项范围。"
+    },
+    {
+      "id": "A18",
+      "source": "MAAS-1-requirements-v0.2.md",
+      "requirement": "经多个服务副本撤销 Key、压满全局并发；流式期间滚动升级",
+      "expected": "各副本拒绝已撤销 Key 的新调用；全服务并发不被副本数放大；流完成或明确中断并结算一次，容量按排空规则恢复",
+      "remaining": "进程多副本及带流滚动升级未验",
+      "acceptance": "NOT_ACCEPTED",
+      "current_run_note": "本轮未执行此完整要求；沿用原证据/未执行项，不扩大关项范围。"
+    },
+    {
+      "id": "A19",
+      "source": "MAAS-1-requirements-delta-v0.3.md",
+      "requirement": "单独启用请求数、Token、金额限额及组合限额；跨副本并发仅允许可用预算覆盖的请求，未获准不命中上游；可解释各类余额及拒绝原因。",
+      "expected": "单独启用请求数、Token、金额限额及组合限额；跨副本并发仅允许可用预算覆盖的请求，未获准不命中上游；可解释各类余额及拒绝原因。",
+      "remaining": "组合预算局部；单维/完整余额 API 待验",
+      "acceptance": "NOT_ACCEPTED",
+      "current_run_note": "本轮未执行此完整要求；沿用原证据/未执行项，不扩大关项范围。"
+    },
+    {
+      "id": "A20",
+      "source": "MAAS-1-requirements-delta-v0.3.md",
+      "requirement": "流式最坏上界预留与实际结算；失败、取消、缺失/部分 usage、发送未知和重复终态不产生漏计、双扣或不安全退款；无可信上界时明确能力限制。",
+      "expected": "流式最坏上界预留与实际结算；失败、取消、缺失/部分 usage、发送未知和重复终态不产生漏计、双扣或不安全退款；无可信上界时明确能力限制。",
+      "remaining": "传输/证据为替身，失败反例保持开放",
+      "acceptance": "NOT_ACCEPTED",
+      "current_run_note": "失败actual=null、Token held140/金额held520000保留，原slot关闭不退款；不扩展为真实Higress停止证明。"
+    },
+    {
+      "id": "A21",
+      "source": "MAAS-1-requirements-delta-v0.3.md",
+      "requirement": "多 Higress/Go 副本 Redis 限流一致；Redis 不可用、重启、丢状态或主从切换时不静默扩大放行，不绕过 MySQL 业务额度。",
+      "expected": "多 Higress/Go 副本 Redis 限流一致；Redis 不可用、重启、丢状态或主从切换时不静默扩大放行，不绕过 MySQL 业务额度。",
+      "remaining": "真实局部 Redis/MySQL；完整重建/故障转移协调未验",
+      "acceptance": "NOT_ACCEPTED",
+      "current_run_note": "本轮未执行此完整要求；沿用原证据/未执行项，不扩大关项范围。"
+    },
+    {
+      "id": "A22",
+      "source": "MAAS-1-requirements-delta-v0.3.md",
+      "requirement": "MySQL 事务、撤销、跨日、全局并发及 Redis/MySQL 部分成功/断网/ACK未知/恢复；没有分布式原子承诺的空白窗口，唯一结算及 slot 回收仍正确。",
+      "expected": "MySQL 事务、撤销、跨日、全局并发及 Redis/MySQL 部分成功/断网/ACK未知/恢复；没有分布式原子承诺的空白窗口，唯一结算及 slot 回收仍正确。",
+      "remaining": "COMMIT 后 driver 错误非真实断网；跨日/HA 未验",
+      "acceptance": "NOT_ACCEPTED",
+      "current_run_note": "本轮未执行此完整要求；沿用原证据/未执行项，不扩大关项范围。"
+    },
+    {
+      "id": "A23",
+      "source": "MAAS-1-requirements-delta-v0.3.md",
+      "requirement": "多模型/价格类别、价表变更、币种/精度/舍入、金额不足与未知用量；请求用固定价格快照，汇总可追溯，不把未知成本当0。",
+      "expected": "多模型/价格类别、价表变更、币种/精度/舍入、金额不足与未知用量；请求用固定价格快照，汇总可追溯，不把未知成本当0。",
+      "remaining": "TST 合成币种价格，无真实价表",
+      "acceptance": "NOT_ACCEPTED",
+      "current_run_note": "本轮按合成冻结价格维持保守金额；真实价表/币种/版本变动未重跑。"
+    },
+    {
+      "id": "A24",
+      "source": "MAAS-1-requirements-delta-v0.3.md",
+      "requirement": "在获准 WSL 本地路径复现单管理员→Key→Higress→DeepSeek→用量/预算→撤销闭环；Codex 按确定的渠道单列兼容证据；本地受控验证与真实付费调用、Helm 验收分别记录。",
+      "expected": "在获准 WSL 本地路径复现单管理员→Key→Higress→DeepSeek→用量/预算→撤销闭环；Codex 按确定的渠道单列兼容证据；本地受控验证与真实付费调用、Helm 验收分别记录。",
+      "remaining": "无 DeepSeek/Codex 真实闭环",
+      "acceptance": "NOT_ACCEPTED",
+      "current_run_note": "本轮未执行此完整要求；沿用原证据/未执行项，不扩大关项范围。"
+    },
+    {
+      "id": "A25",
+      "source": "MAAS-1-requirements-delta-v0.4.md",
+      "requirement": "校验私有/外部两类 CR；来源互斥、非法参数/别名冲突/未经允许的目标或 Secret 引用被拒绝，错误可定位；示例及状态中无真实秘密。",
+      "expected": "校验私有/外部两类 CR；来源互斥、非法参数/别名冲突/未经允许的目标或 Secret 引用被拒绝，错误可定位；示例及状态中无真实秘密。",
+      "remaining": "管理子集之外的完整CR校验/webhook/目标部署及版本证据仍未完成。",
+      "acceptance": "NOT_ACCEPTED",
+      "current_run_note": "本轮未执行此完整要求；沿用原证据/未执行项，不扩大关项范围。"
+    },
+    {
+      "id": "A26",
+      "source": "MAAS-1-requirements-delta-v0.4.md",
+      "requirement": "提交一个私有 CR，自动协调选定 LWS/引擎、Service 和 Higress 资源；同一 CR 重复提交不产生重复组或路由，完成真实可调用验证后才 Ready。缺 GPU 时仅可记录静态或受控验证。",
+      "expected": "提交一个私有 CR，自动协调选定 LWS/引擎、Service 和 Higress 资源；同一 CR 重复提交不产生重复组或路由，完成真实可调用验证后才 Ready。缺 GPU 时仅可记录静态或受控验证。",
+      "remaining": "只编译计划；LWS/SGLang/GPU/真实 Ready 未验",
+      "acceptance": "NOT_ACCEPTED",
+      "current_run_note": "本轮未执行此完整要求；沿用原证据/未执行项，不扩大关项范围。"
+    },
+    {
+      "id": "A27",
+      "source": "MAAS-1-requirements-delta-v0.4.md",
+      "requirement": "提交一个外部 API CR，只建立外部来源与发布结构，不创建 LWS/推理 Pod/GPU；调用仍经过 Go 唯一准入、Redis 限流和 MySQL 三维预算/计量。",
+      "expected": "提交一个外部 API CR，只建立外部来源与发布结构，不创建 LWS/推理 Pod/GPU；调用仍经过 Go 唯一准入、Redis 限流和 MySQL 三维预算/计量。",
+      "remaining": "控制器 fake-client、运行证据接口替身，非完整生产装配",
+      "acceptance": "NOT_ACCEPTED",
+      "current_run_note": "本轮未执行此完整要求；沿用原证据/未执行项，不扩大关项范围。"
+    },
+    {
+      "id": "A28",
+      "source": "MAAS-1-requirements-delta-v0.4.md",
+      "requirement": "工作负载、依赖、网关配置或业务登记任一未就绪时，不对新修订放行；status 精确反映 observedGeneration、活动修订和失败原因；配置已写入不能冒充网关已应用。",
+      "expected": "工作负载、依赖、网关配置或业务登记任一未就绪时，不对新修订放行；status 精确反映 observedGeneration、活动修订和失败原因；配置已写入不能冒充网关已应用。",
+      "remaining": "真实 producer/receipt 及受保护 validation 待装配",
+      "acceptance": "NOT_ACCEPTED",
+      "current_run_note": "本轮未执行此完整要求；沿用原证据/未执行项，不扩大关项范围。"
+    },
+    {
+      "id": "A29",
+      "source": "MAAS-1-requirements-delta-v0.4.md",
+      "requirement": "控制器重启、重复/乱序协调、资源漂移及更新冲突后收敛；不重复部署、覆盖非本模型资源或使发布状态虚假成功；依赖/节点故障明确可观察。",
+      "expected": "控制器重启、重复/乱序协调、资源漂移及更新冲突后收敛；不重复部署、覆盖非本模型资源或使发布状态虚假成功；依赖/节点故障明确可观察。",
+      "remaining": "fake-client+局部 SQL，非真实集群重启",
+      "acceptance": "NOT_ACCEPTED",
+      "current_run_note": "本轮未执行此完整要求；沿用原证据/未执行项，不扩大关项范围。"
+    },
+    {
+      "id": "A30",
+      "source": "MAAS-1-requirements-delta-v0.4.md",
+      "requirement": "带在途流更新并回滚一个模型；新旧修订、可信路由、请求价格快照和计量绑定正确，无跨来源回退或重复上游尝试；资源不足时按约定明确可用性结果。",
+      "expected": "带在途流更新并回滚一个模型；新旧修订、可信路由、请求价格快照和计量绑定正确，无跨来源回退或重复上游尝试；资源不足时按约定明确可用性结果。",
+      "remaining": "带流更新/回滚、资源不足及真实绑定待验",
+      "acceptance": "NOT_ACCEPTED",
+      "current_run_note": "本轮未执行此完整要求；沿用原证据/未执行项，不扩大关项范围。"
+    },
+    {
+      "id": "A31",
+      "source": "MAAS-1-requirements-delta-v0.4.md",
+      "requirement": "暂停/删除一个 CR，按约定停新准入、排空、撤路由及清理专属资源；共享对象中其他模型的配置、用户 Secret/PVC/权重和历史账本均保留；中断后可恢复。",
+      "expected": "暂停/删除一个 CR，按约定停新准入、排空、撤路由及清理专属资源；共享对象中其他模型的配置、用户 Secret/PVC/权重和历史账本均保留；中断后可恢复。",
+      "remaining": "fake 清理+SQL 关门；真实排空/清理与恢复待验",
+      "acceptance": "NOT_ACCEPTED",
+      "current_run_note": "本轮未执行此完整要求；沿用原证据/未执行项，不扩大关项范围。"
+    },
+    {
+      "id": "A32",
+      "source": "MAAS-1-requirements-delta-v0.4.md",
+      "requirement": "两个模型并发发布/删除并轮换凭证，namespace/RBAC、共享配置合并与 Secret 注入边界正确；一个模型的改动不影响另一个，也不绕过预算。",
+      "expected": "两个模型并发发布/删除并轮换凭证，namespace/RBAC、共享配置合并与 Secret 注入边界正确；一个模型的改动不影响另一个，也不绕过预算。",
+      "remaining": "共享配置 fake 与 SQL 窄权限，非真实 SA/Secret 轮换",
+      "acceptance": "NOT_ACCEPTED",
+      "current_run_note": "本轮未执行此完整要求；沿用原证据/未执行项，不扩大关项范围。"
+    },
+    {
+      "id": "A33",
+      "source": "MAAS-1-requirements-delta-v0.4.md",
+      "requirement": "Helm 安装/升级/回滚检查 CRD、Operator、LWS、Higress、GPU/存储依赖及版本；缺依赖时模型 CR 明确失败而不擅自改集群基础设施；WSL受控与真实GPU结果分开。",
+      "expected": "Helm 安装/升级/回滚检查 CRD、Operator、LWS、Higress、GPU/存储依赖及版本；缺依赖时模型 CR 明确失败而不擅自改集群基础设施；WSL受控与真实GPU结果分开。",
+      "remaining": "Helm/CRD/Operator/LWS/引擎/GPU 目标版本矩阵与集群运行待验",
+      "acceptance": "NOT_ACCEPTED",
+      "current_run_note": "本轮未执行此完整要求；沿用原证据/未执行项，不扩大关项范围。"
+    },
+    {
+      "id": "A34",
+      "source": "MAAS-1-requirements-delta-v0.4.md",
+      "requirement": "SGLang 固定条件基线与一次经证据定位的优化对照可复现，质量/取消/三维预算/计量回归通过；无 GPU 或基线时只交方案与未执行项，不宣称性能提升。",
+      "expected": "SGLang 固定条件基线与一次经证据定位的优化对照可复现，质量/取消/三维预算/计量回归通过；无 GPU 或基线时只交方案与未执行项，不宣称性能提升。",
+      "remaining": "41 项离线回归；E1/E2/E3/GPU/收益均未验",
+      "acceptance": "NOT_ACCEPTED",
+      "current_run_note": "Go局部采样/丢样/测点语义独立通过；45/90/70ms为测试注入，完整E1/GPU及平台性能未验。"
+    }
+  ]
+}

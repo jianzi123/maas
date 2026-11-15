@@ -1,0 +1,52 @@
+import { it, expect, vi, afterAll } from "vitest";
+import { mount, flushPromises } from "@vue/test-utils";
+import { writeFileSync } from "node:fs";
+import Playground from "./pages/Playground.vue";
+import { api } from "./api/client";
+import { fixtureFetch, fixtureError, rid, resetFixtures } from "./fixtures";
+const other = "00000000-0000-4000-8000-000000000099";
+const traces: unknown[] = [];
+afterAll(() => writeFileSync("../test/independent/consumer-30cfce9-recovery-trace.json", JSON.stringify(traces, null, 2)));
+it.each([true, false])("QA original R recovery with trusted header=%s never resends generation", async (trusted) => {
+  resetFixtures();
+  const prior = api.fetcher;
+  const calls: {path: string; method: string}[] = [];
+  api.fetcher = vi.fn<typeof fetch>(async (input, init = {}) => {
+    const path = String(input), method = init.method ?? "GET";
+    calls.push({path, method});
+    if (path === "/v1/chat/completions") {
+      const body = await fixtureError("token_budget_exceeded", 503).json();
+      body.error.request_id = other;
+      return Response.json(body, {status:503, headers:trusted ? {"X-Request-ID":rid} : {}});
+    }
+    return fixtureFetch(input, init);
+  });
+  const w = mount(Playground);
+  try {
+    await flushPromises();
+    await w.get("select").setValue("model-a");
+    await w.get("input[type=password]").setValue("synthetic-independent-key");
+    await w.get("textarea").setValue("independent recovery probe");
+    await w.get("form").trigger("submit");
+    await flushPromises();
+    await vi.waitFor(() => expect(w.text()).toContain("interrupted"));
+    await flushPromises();
+    const generations = calls.filter(x => x.path === "/v1/chat/completions");
+    const lookups = calls.filter(x => x.path.includes("/usage/requests"));
+    expect(generations).toEqual([{path:"/v1/chat/completions",method:"POST"}]);
+    expect(w.text()).not.toContain("Token 预算不足");
+    if (trusted) {
+      expect(lookups).toEqual([{path:"/api/admin/v1/usage/requests?request_id="+rid,method:"GET"}]);
+      expect(w.text()).toContain(rid);
+      expect(w.text()).not.toContain(other);
+    } else {
+      expect(lookups).toEqual([]);
+      expect(w.text()).toContain("未收到可信原请求 ID，结果未知");
+      expect(w.text()).not.toContain(other);
+    }
+    traces.push({trusted_header:trusted,request_id:trusted?rid:null,generation_posts:generations.length,lookups,body_request_id_rejected:other,status:"passed"});
+  } finally {
+    w.unmount();
+    api.fetcher = prior;
+  }
+});

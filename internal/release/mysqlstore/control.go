@@ -72,6 +72,9 @@ func (s *Store) close(ctx context.Context, tx *sql.Tx, l *link, target *string) 
 	return nil
 }
 func (s *Store) Observe(ctx context.Context, d release.Desired) (release.State, error) {
+	if err := validateCapture(d); err != nil {
+		return release.State{}, err
+	}
 	if err := validateDesired(d); err != nil {
 		return release.State{}, err
 	}
@@ -133,7 +136,13 @@ func (s *Store) Observe(ctx context.Context, d release.Desired) (release.State, 
 				l.epoch++
 				l.revision = d.Revision
 				l.candidate = sql.NullString{String: uuid.NewString(), Valid: true}
-				if _, err = tx.ExecContext(ctx, `INSERT IGNORE INTO release_revisions(cluster_id,cr_uid,revision) VALUES(?,?,?)`, s.cluster, l.uid, l.revision); err != nil {
+				inserted, insertErr := tx.ExecContext(ctx, `INSERT IGNORE INTO release_revisions(cluster_id,cr_uid,revision) VALUES(?,?,?)`, s.cluster, l.uid, l.revision)
+				err = insertErr
+				if err != nil {
+					return err
+				}
+				count, _ := inserted.RowsAffected()
+				if err = s.capture(ctx, tx, d, count == 1); err != nil {
 					return err
 				}
 				if _, err = tx.ExecContext(ctx, `INSERT INTO publications(cluster_id,publication_id,cr_uid,generation,revision,activation_epoch,gateway,state) VALUES(?,?,?,?,?,?,?,'Candidate')`, s.cluster, l.candidate.String, l.uid, l.generation, l.revision, l.epoch, l.gateway); err != nil {

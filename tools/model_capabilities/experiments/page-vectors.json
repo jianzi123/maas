@@ -1,0 +1,57 @@
+{
+  "synthetic": true,
+  "new_page_cases": [
+    {
+      "before": 0,
+      "after": 17,
+      "page": 16,
+      "expected": 2
+    },
+    {
+      "before": 15,
+      "after": 16,
+      "page": 16,
+      "expected": 0
+    },
+    {
+      "before": 16,
+      "after": 17,
+      "page": 16,
+      "expected": 1
+    },
+    {
+      "before": 17,
+      "after": 18,
+      "page": 16,
+      "expected": 0
+    },
+    {
+      "before": 31,
+      "after": 33,
+      "page": 16,
+      "expected": 1
+    }
+  ],
+  "shared_prefix_cases": [
+    {
+      "prefix": 15,
+      "page": 16,
+      "reusable_tokens": 0,
+      "recompute_tail": 15
+    },
+    {
+      "prefix": 17,
+      "page": 16,
+      "reusable_tokens": 16,
+      "recompute_tail": 1
+    }
+  ],
+  "expected_full_envelope_pages_at_16": {
+    "S": 24,
+    "M": 144,
+    "L": 544
+  },
+  "two_M_shared_envelope_pages": 192,
+  "two_M_private_envelope_pages": 288,
+  "bytes_per_kv_token": 57344
+}

@@ -1,0 +1,260 @@
+{
+  "generated_at": "2026-11-13T09:08:47.685954+00:00",
+  "scope": "source-byte-comparison-only",
+  "checks_passed": 36,
+  "checks_total": 36,
+  "checks": [
+    {
+      "component": "backend",
+      "path": "cmd/control-api/main.go",
+      "expected_sha256": "38cac312ea6fd081b0f6449a4ab034966a992cf92fa5ef348ecc589d83d6d6d5",
+      "actual_sha256": "38cac312ea6fd081b0f6449a4ab034966a992cf92fa5ef348ecc589d83d6d6d5",
+      "passed": true
+    },
+    {
+      "component": "backend",
+      "path": "cmd/operator/main.go",
+      "expected_sha256": "539a006cbcfb20076d5f5e4186c8ccb4a3917478ee193349ad768ecb3e71001c",
+      "actual_sha256": "539a006cbcfb20076d5f5e4186c8ccb4a3917478ee193349ad768ecb3e71001c",
+      "passed": true
+    },
+    {
+      "component": "backend",
+      "path": "api/v1alpha1/types.go",
+      "expected_sha256": "839bfd01f621fc02c2d93db093ca0ac6b87b4dc59005af89f39c1fc140549a06",
+      "actual_sha256": "839bfd01f621fc02c2d93db093ca0ac6b87b4dc59005af89f39c1fc140549a06",
+      "passed": true
+    },
+    {
+      "component": "backend",
+      "path": "internal/kernel/store.go",
+      "expected_sha256": "3261d43deaf131dbd7048a9ddad060e3767b9e4d0504284222d4943c06df9166",
+      "actual_sha256": "3261d43deaf131dbd7048a9ddad060e3767b9e4d0504284222d4943c06df9166",
+      "passed": true
+    },
+    {
+      "component": "backend",
+      "path": "internal/kernel/migrate_control.go",
+      "expected_sha256": "9d24c45955d7aad596dbed875cb86d3069fb70f5d684f214c1ba754e20df8f59",
+      "actual_sha256": "9d24c45955d7aad596dbed875cb86d3069fb70f5d684f214c1ba754e20df8f59",
+      "passed": true
+    },
+    {
+      "component": "backend",
+      "path": "internal/kernel/rebuild.go",
+      "expected_sha256": "ac65163fca54cdf8f665d490e5c215e8cb3f1ae6a00343197aa42171f02f47fd",
+      "actual_sha256": "ac65163fca54cdf8f665d490e5c215e8cb3f1ae6a00343197aa42171f02f47fd",
+      "passed": true
+    },
+    {
+      "component": "backend",
+      "path": "internal/kernel/diagnostics.go",
+      "expected_sha256": "61f38b173084bbe8a9e2fea43de0ca2c6a1d1a528f5475bff42c136855a969be",
+      "actual_sha256": "61f38b173084bbe8a9e2fea43de0ca2c6a1d1a528f5475bff42c136855a969be",
+      "passed": true
+    },
+    {
+      "component": "backend",
+      "path": "internal/controlapi/http.go",
+      "expected_sha256": "f5f034f116c823c0ff81e6ac2df83dd4e28abc380f242f81600e123a0babb5cd",
+      "actual_sha256": "f5f034f116c823c0ff81e6ac2df83dd4e28abc380f242f81600e123a0babb5cd",
+      "passed": true
+    },
+    {
+      "component": "backend",
+      "path": "internal/release/mysqlstore/migrate.go",
+      "expected_sha256": "115e6bfed5c4489eaa2c2d84b0a74cf3b91d501bfa3cf145dd42ff4e504eaa07",
+      "actual_sha256": "115e6bfed5c4489eaa2c2d84b0a74cf3b91d501bfa3cf145dd42ff4e504eaa07",
+      "passed": true
+    },
+    {
+      "component": "backend",
+      "path": "internal/release/mysqlstore/history.go",
+      "expected_sha256": "a7d7d551f0daa70b74b5fc3db888350e2c5173c211a5e90bb5847c08627b268f",
+      "actual_sha256": "a7d7d551f0daa70b74b5fc3db888350e2c5173c211a5e90bb5847c08627b268f",
+      "passed": true
+    },
+    {
+      "component": "backend",
+      "path": "internal/release/management/operations.go",
+      "expected_sha256": "93c7b69fbd25ba093b42a90de0ab32b4ab2c6993e265bc7b91c71ca4074826b9",
+      "actual_sha256": "93c7b69fbd25ba093b42a90de0ab32b4ab2c6993e265bc7b91c71ca4074826b9",
+      "passed": true
+    },
+    {
+      "component": "backend",
+      "path": "config/mysql/kernel-permissions.sql",
+      "expected_sha256": "90cd69cdb26b7746c2c56cedf82332ed73669989317c1590d8a935e5e8cf96e3",
+      "actual_sha256": "90cd69cdb26b7746c2c56cedf82332ed73669989317c1590d8a935e5e8cf96e3",
+      "passed": true
+    },
+    {
+      "component": "backend",
+      "path": "config/mysql/release-permissions.sql",
+      "expected_sha256": "c31d385606c0da082b2954463616c20efaf7e187de9d547e9d3dda5ab3b4c4e2",
+      "actual_sha256": "c31d385606c0da082b2954463616c20efaf7e187de9d547e9d3dda5ab3b4c4e2",
+      "passed": true
+    },
+    {
+      "component": "backend",
+      "path": "docs/release-management-http.md",
+      "expected_sha256": "5112b13fa9ef19bb89eb37fe974e061ffaca14eef256e96660e36a6ea986020a",
+      "actual_sha256": "5112b13fa9ef19bb89eb37fe974e061ffaca14eef256e96660e36a6ea986020a",
+      "passed": true
+    },
+    {
+      "component": "backend",
+      "path": "docs/release-management.md",
+      "expected_sha256": "9fe469cd8ada7c48c513e69f00c6eab32d72f3a9b52aa7dbdb68fe3aceaa68ca",
+      "actual_sha256": "9fe469cd8ada7c48c513e69f00c6eab32d72f3a9b52aa7dbdb68fe3aceaa68ca",
+      "passed": true
+    },
+    {
+      "component": "backend",
+      "path": "docs/controlled-api-verification.md",
+      "expected_sha256": "ccd6ad5cd1b959bf3c38364b48c60ec26b69e24fe1834ccf141b806297982eaf",
+      "actual_sha256": "ccd6ad5cd1b959bf3c38364b48c60ec26b69e24fe1834ccf141b806297982eaf",
+      "passed": true
+    },
+    {
+      "component": "backend",
+      "path": "docs/higress-minimal-patch-scope.md",
+      "expected_sha256": "eb8472c5b0ec120019cc1c069fad752809040115fda637663f0a13ff8d2cff93",
+      "actual_sha256": "eb8472c5b0ec120019cc1c069fad752809040115fda637663f0a13ff8d2cff93",
+      "passed": true
+    },
+    {
+      "component": "backend",
+      "path": "internal/kernel/schema/0001_kernel.sql",
+      "expected_sha256": "56616e6b64a6eba2cb2ee5ee152d56563220a9b98efa7fcd3eba951598e5a61c",
+      "actual_sha256": "56616e6b64a6eba2cb2ee5ee152d56563220a9b98efa7fcd3eba951598e5a61c",
+      "passed": true
+    },
+    {
+      "component": "backend",
+      "path": "internal/kernel/schema/0002_control.sql",
+      "expected_sha256": "0141b9219f0dae0edab942c73559d4baf81663364b9109ea3ee63150f7b9ff07",
+      "actual_sha256": "0141b9219f0dae0edab942c73559d4baf81663364b9109ea3ee63150f7b9ff07",
+      "passed": true
+    },
+    {
+      "component": "backend",
+      "path": "internal/kernel/schema/0003_diagnostics.sql",
+      "expected_sha256": "bdba48449e0685435f9dc0fca30a2827d2a51e245b0ecf783ef52542725a6015",
+      "actual_sha256": "bdba48449e0685435f9dc0fca30a2827d2a51e245b0ecf783ef52542725a6015",
+      "passed": true
+    },
+    {
+      "component": "backend",
+      "path": "internal/release/mysqlstore/schema/0001_release.sql",
+      "expected_sha256": "91ea4dc8699fafa8ae8e9433c637828fce60f43878fe71c4ae1b688fffed69d5",
+      "actual_sha256": "91ea4dc8699fafa8ae8e9433c637828fce60f43878fe71c4ae1b688fffed69d5",
+      "passed": true
+    },
+    {
+      "component": "backend",
+      "path": "internal/release/mysqlstore/schema/0002_history.sql",
+      "expected_sha256": "9294d4f9ca23354014607540fc52a472915c3e40f59dada293db74ae2f5b9193",
+      "actual_sha256": "9294d4f9ca23354014607540fc52a472915c3e40f59dada293db74ae2f5b9193",
+      "passed": true
+    },
+    {
+      "component": "backend",
+      "path": "internal/release/management/schema.sql",
+      "expected_sha256": "e02acd8ce3ea6b9b92f77e384cc363dfd85d11f8254a63f8981b682cdcb0ad84",
+      "actual_sha256": "e02acd8ce3ea6b9b92f77e384cc363dfd85d11f8254a63f8981b682cdcb0ad84",
+      "passed": true
+    },
+    {
+      "component": "backend",
+      "path": "internal/webconsole/handler.go",
+      "expected_sha256": "a7e8d5f1d18bca568dbf4c3bc76495c5fc412aa19f8be694131f0d073f2b3764",
+      "actual_sha256": "a7e8d5f1d18bca568dbf4c3bc76495c5fc412aa19f8be694131f0d073f2b3764",
+      "passed": true
+    },
+    {
+      "component": "backend",
+      "path": "cmd/control-api/readers.go",
+      "expected_sha256": "b071c6c301d9f6abb8aea571acbf69eaaf15f62d2c8acfffe9e236edc4079f99",
+      "actual_sha256": "b071c6c301d9f6abb8aea571acbf69eaaf15f62d2c8acfffe9e236edc4079f99",
+      "passed": true
+    },
+    {
+      "component": "backend",
+      "path": "cmd/control-api/readers_test.go",
+      "expected_sha256": "d4dd24227cb49761b26e4aa02a411625771ca32a960b182e487ef6333414f554",
+      "actual_sha256": "d4dd24227cb49761b26e4aa02a411625771ca32a960b182e487ef6333414f554",
+      "passed": true
+    },
+    {
+      "component": "backend",
+      "path": "config/mysql/controlapi-projections.sql",
+      "expected_sha256": "7ce580e6e0cf32d7ec77a6bf0334831fd321cc97158ffd3cd60b4050f39f018d",
+      "actual_sha256": "7ce580e6e0cf32d7ec77a6bf0334831fd321cc97158ffd3cd60b4050f39f018d",
+      "passed": true
+    },
+    {
+      "component": "backend",
+      "path": "internal/release/history/reader.go",
+      "expected_sha256": "d3d70c47e2a474b02040ffde328eebf21e913704e8d3192bd239fdb87b126435",
+      "actual_sha256": "d3d70c47e2a474b02040ffde328eebf21e913704e8d3192bd239fdb87b126435",
+      "passed": true
+    },
+    {
+      "component": "backend",
+      "path": "docs/usage-authority-continuation.md",
+      "expected_sha256": "a86665fc787f573f169025fc977ea8af19d1ade7a4dfa3e83c1a208ddc1ea578",
+      "actual_sha256": "a86665fc787f573f169025fc977ea8af19d1ade7a4dfa3e83c1a208ddc1ea578",
+      "passed": true
+    },
+    {
+      "component": "backend",
+      "path": "go.mod",
+      "expected_sha256": "3fc1c612237e81b1a61efdf59eb3e108980b170fd85b8b2c855db0f08240457b",
+      "actual_sha256": "3fc1c612237e81b1a61efdf59eb3e108980b170fd85b8b2c855db0f08240457b",
+      "passed": true
+    },
+    {
+      "component": "backend",
+      "path": "go.sum",
+      "expected_sha256": "34ef9b8203162cccd56bdd7aa590ca1df2683c9a794ba118d3db0ff242609fb1",
+      "actual_sha256": "34ef9b8203162cccd56bdd7aa590ca1df2683c9a794ba118d3db0ff242609fb1",
+      "passed": true
+    },
+    {
+      "component": "console",
+      "path": "console/package.json",
+      "expected_sha256": "85e453c24cc521497cc987fd6b4985cc1ccf9d21e9160b711d5a00ced3f5a34b",
+      "actual_sha256": "85e453c24cc521497cc987fd6b4985cc1ccf9d21e9160b711d5a00ced3f5a34b",
+      "passed": true
+    },
+    {
+      "component": "console",
+      "path": "console/package-lock.json",
+      "expected_sha256": "bd1680ee8b9e56eff80bc9bee3f8b49738ba44dbe04da230318a9b2c3201215e",
+      "actual_sha256": "bd1680ee8b9e56eff80bc9bee3f8b49738ba44dbe04da230318a9b2c3201215e",
+      "passed": true
+    },
+    {
+      "component": "console",
+      "path": "console/vite.config.ts",
+      "expected_sha256": "a3c231bde00b5c59de853ed7e3f9804746a99a5076844b490c2ae4a414f0fdb6",
+      "actual_sha256": "a3c231bde00b5c59de853ed7e3f9804746a99a5076844b490c2ae4a414f0fdb6",
+      "passed": true
+    },
+    {
+      "component": "console",
+      "path": "console/scripts/local-control.mjs",
+      "expected_sha256": "956b3a8c018312c5600e8808cbf51d517e3b937956a2d7c0ec27855c16e7f9fb",
+      "actual_sha256": "956b3a8c018312c5600e8808cbf51d517e3b937956a2d7c0ec27855c16e7f9fb",
+      "passed": true
+    },
+    {
+      "component": "console",
+      "path": "console/src/api/client.ts",
+      "expected_sha256": "677d1781d3446a13fd60f40d068105202317624200127c6856a1654b43eaa0bd",
+      "actual_sha256": "677d1781d3446a13fd60f40d068105202317624200127c6856a1654b43eaa0bd",
+      "passed": true
+    }
+  ]
+}

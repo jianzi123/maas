@@ -1,0 +1,12 @@
+import {it,expect,vi} from "vitest";
+import {Api} from "./api/client";
+import {streamChat} from "./api/stream";
+import {fixtureError,rid} from "./fixtures";
+const request={model:"model-a",messages:[{role:"user" as const,content:"fixture"}],stream:true};
+const chunk=(created:number,extra={})=>({id:"chatcmpl-"+rid,object:"chat.completion.chunk",created,model:"model-a",choices:[{index:0,delta:{content:"fixture"},finish_reason:"stop"}],...extra});
+const run=(body:string,status=200)=>{const hooks={id:vi.fn(),chunk:vi.fn(),usage:vi.fn()};const result=streamChat(new Api(async()=>new Response(body,{status,headers:{"Content-Type":"text/event-stream","X-Request-ID":rid}})),"synthetic-key",request,new AbortController().signal,hooks);return {hooks,result};};
+it("QA stable created across chunks is accepted",async()=>{const r=run([chunk(1),chunk(1)].map(v=>"data: "+JSON.stringify(v)+"\n\n").join("")+"data: [DONE]\n\n");await expect(r.result).resolves.toBeUndefined();});
+it("QA changed created across valid chunks is rejected",async()=>{const r=run([chunk(1),chunk(2)].map(v=>"data: "+JSON.stringify(v)+"\n\n").join("")+"data: [DONE]\n\n");await expect(r.result).rejects.toMatchObject({code:"protocol_error"});});
+it("QA non2xx error from another request is rejected",async()=>{const e=await fixtureError("accounting_unavailable").json();e.error.request_id="00000000-0000-4000-8000-000000000099";const r=run(JSON.stringify(e),503);await expect(r.result).rejects.toMatchObject({code:"protocol_error"});expect(r.hooks.chunk).not.toHaveBeenCalled();});
+it("QA SSE error from another request is rejected",async()=>{const e=await fixtureError("accounting_unavailable").json();e.error.request_id="00000000-0000-4000-8000-000000000099";const r=run("event: error\ndata: "+JSON.stringify(e)+"\n\n");await expect(r.result).rejects.toMatchObject({code:"protocol_error"});});
+it("QA diagnostic authority cannot masquerade as public Usage source",async()=>{const r=run("data: "+JSON.stringify(chunk(1,{usage:{input_tokens:12,output_tokens:7,total_tokens:19,source:"diagnostic_only",missing_reason:null,input_cached_tokens:4,reasoning_tokens:3}}))+"\n\ndata: [DONE]\n\n");await expect(r.result).rejects.toBeDefined();expect(r.hooks.usage).not.toHaveBeenCalled();});

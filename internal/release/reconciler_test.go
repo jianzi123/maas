@@ -35,7 +35,7 @@ func (r *resolver) Resolve(context.Context, *api.ModelRelease) (Resolution, erro
 	if r.fail {
 		return Resolution{}, ErrDependencyMissing
 	}
-	return Resolution{Versions: map[string]string{"approved-registry": "1", "secretUID": "secret-uid", "secretResourceVersion": r.version}, GatewayNamespace: "higress-test", IngressClass: "private", HostSuffix: "infer.test", EndpointDNS: "provider.test", EndpointPort: 443, CredentialHandle: "opaque-test-handle", PluginDigest: "sha256:test-only"}, nil
+	return Resolution{Versions: map[string]string{"approved-registry": "1", "authorization_domain": "test-domain", "secretUID": "secret-uid", "secretResourceVersion": r.version}, GatewayNamespace: "higress-test", IngressClass: "private", HostSuffix: "infer.test", EndpointDNS: "provider.test", EndpointPort: 443, CredentialHandle: "opaque-test-handle", PluginDigest: "sha256:test-only"}, nil
 }
 
 type plugin struct{}
@@ -69,11 +69,14 @@ func (c *control) Observe(_ context.Context, d Desired) (State, error) {
 	if s.Tombstone && !d.Deleting {
 		return State{}, ErrConflict
 	}
+	// ResourceVersion is audit provenance, not desired-state identity.
+	identity := d
+	identity.History = nil
 	prior, exists := c.desired[d.CRUID]
 	if exists && d.Generation < prior.Generation {
 		return State{}, ErrConflict
 	}
-	if !exists || !reflect.DeepEqual(prior, d) {
+	if !exists || !reflect.DeepEqual(prior, identity) {
 		s.CRUID = d.CRUID
 		s.Generation = d.Generation
 		s.Fence++
@@ -96,7 +99,7 @@ func (c *control) Observe(_ context.Context, d Desired) (State, error) {
 		if s.Active == nil {
 			s.AdmissionClosed = true
 		}
-		c.desired[d.CRUID] = d
+		c.desired[d.CRUID] = identity
 		c.states[d.CRUID] = s
 	}
 	return s, nil

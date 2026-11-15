@@ -1,0 +1,48 @@
+{
+  "product_sha": "ac94a373ec0a61c5fd4dc5380a7985a4fb47840f",
+  "oracle_sha256": "4dac0037a305c2ab8bdc14491962e9ae2ec1fb7bb56994f0276489023132b0cc",
+  "groups": {
+    "original": {
+      "TestMAAS17StreamAudit/normal": "PASS",
+      "TestMAAS17StreamAudit/data_error_then_finish": "PASS",
+      "TestMAAS17StreamAudit/content_after_finish": "PASS",
+      "TestMAAS17StreamAudit/cancel_after_finish_write": "PASS",
+      "TestMAAS17PublisherOperationsGrant": "PASS"
+    },
+    "independent_stream": {
+      "TestQAR1R2/normal": "PASS",
+      "TestQAR1R2/cancel_finish": "PASS",
+      "TestQAR1R2/deadline_finish": "PASS",
+      "TestQAR1R2/cancel_committed": "PASS",
+      "TestQAR1R2/content_after_finish": "PASS",
+      "TestQAR1R2/contradictory_finish": "PASS",
+      "TestQAR1R2/independent_final": "PASS"
+    },
+    "independent_rollback": {
+      "TestQAR1TransactionRollback/cancel": "PASS",
+      "TestQAR1TransactionRollback/deadline": "PASS"
+    },
+    "independent_publisher": {
+      "TestQAR3PublisherProjection": "PASS"
+    }
+  },
+  "permission_denials": {
+    "1143": 3,
+    "1142": 4
+  },
+  "stream_requests": {
+    "normal": "e96ad610-52e7-478a-88ea-8a12dc58ec87",
+    "cancel_finish": "89546d44-f963-4824-8f22-53b3d69e0dc3",
+    "deadline_finish": "44250479-3a8f-44a5-a86d-4b3ad8aa832c",
+    "cancel_committed": "c4f7f970-eb91-4962-ad62-6887a9a97e09",
+    "content_after_finish": "ee9e3de8-ff3d-40f7-b2cb-f827f1046cc6",
+    "contradictory_finish": "edc27d07-42c1-4b43-8d33-318a715dcd9f",
+    "independent_final": "4854a9c5-ecd1-493f-881d-13d0594d33fd"
+  },
+  "R1": "CONTROLLED_PASS",
+  "R2": "CONTROLLED_PASS",
+  "R3": "CONTROLLED_PASS",
+  "old_scopes": "RETAINED_NOT_RERUN",
+  "full_A01_A34": "NOT_ACCEPTED",
+  "production_callable": false
+}

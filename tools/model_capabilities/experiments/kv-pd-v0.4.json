@@ -1,0 +1,120 @@
+{
+  "plan_version": "0.4",
+  "synthetic": true,
+  "execution_enabled": false,
+  "approval_status": "pending",
+  "scope": "model-specific validation inputs, not an allocator/scheduler implementation or an innovation claim",
+  "comparison_engine": {
+    "name": "SGLang",
+    "tag": "v0.5.6",
+    "commit": "7ae368efde14f0b2abe769a5fbb99b8154b2a9b7",
+    "purpose": "common source/comparison specimen aligned to MAAS-10; not deployment approval"
+  },
+  "deployment_candidate": {
+    "tag": "v0.5.18",
+    "commit": "71de97b264b04dcd514cf904003028aefe9775c8"
+  },
+  "model": {
+    "id": "deepseek-ai/DeepSeek-R1-Distill-Qwen-7B",
+    "revision": "916b56a44061fd5cd7d6a8fb632557ed4f724f60",
+    "architecture": "Qwen2ForCausalLM",
+    "kv_layout": "GQA",
+    "layers": 28,
+    "kv_heads": 4,
+    "head_dim": 128,
+    "kv_dtype": "bfloat16",
+    "bytes_per_element": 2,
+    "tp": 1,
+    "weights_sha256": null,
+    "tokenizer_assets_sha256": null,
+    "effective_template_sha256": null
+  },
+  "context": {
+    "model_positions_declared": 131072,
+    "tokenizer_limit_declared": 16384,
+    "previous_service_proposal": 4096,
+    "verified_service_tokens": null,
+    "template_overhead_measured_tokens": null,
+    "all_lengths": "synthetic rendered-token lengths; no tokenizer executed"
+  },
+  "feature_scope": {
+    "collocated_prefill_decode": true,
+    "speculative_decoding": false,
+    "PD_disaggregation": false,
+    "HiCache_offload": false,
+    "hybrid_SWA_MLA_MoE": false,
+    "prefix_sharing": "full page-aligned exact token prefix only; one group, TP1"
+  },
+  "page_sizes": [
+    1,
+    16
+  ],
+  "page_size_status": "1 is generic source fallback, backend overrides exist; 16 is an unapproved study parameter, not a compatibility claim",
+  "shapes": [
+    {
+      "id": "S",
+      "input_tokens": 256,
+      "output_cap_tokens": 128,
+      "shared_prefix_tokens": 192
+    },
+    {
+      "id": "M",
+      "input_tokens": 2048,
+      "output_cap_tokens": 256,
+      "shared_prefix_tokens": 1536
+    },
+    {
+      "id": "L",
+      "input_tokens": 8192,
+      "output_cap_tokens": 512,
+      "shared_prefix_tokens": 6144
+    }
+  ],
+  "mixed_sequence": {
+    "id": "J02-input-example-not-replacement",
+    "shapes": [
+      "S",
+      "L",
+      "S",
+      "M",
+      "L",
+      "S"
+    ],
+    "origin": "deterministic subset for arithmetic/quality inputs; use MAAS-10 frozen 200-request sequence for performance"
+  },
+  "prefill": {
+    "candidate_chunk_tokens": [
+      1024,
+      2048,
+      4096
+    ],
+    "record_effective_chunk": null,
+    "batch_input_token_budget": null,
+    "free_pages_observed": null,
+    "evictable_pages_observed": null,
+    "protected_pages_observed": null,
+    "graph_workspace_reserve_bytes": null,
+    "selection_note": "reuse PrefillAdder and allocator baseline; full-envelope arithmetic below is not its admission policy"
+  },
+  "required_cancel_observations": [
+    "original_engine_rid",
+    "runtime_boot_id",
+    "batch_id",
+    "original_allocation_identity",
+    "cancel_sent",
+    "engine_exit",
+    "last_referencing_device_work_complete",
+    "prefix_reference_state",
+    "same_group_successor_capacity"
+  ],
+  "blocks": [
+    "model_and_license_approval",
+    "weights_and_tokenizer_assets",
+    "context_BOS_template_resolution",
+    "engine_image_digest_backend_and_page_compatibility",
+    "GPU_memory_topology_and_runtime_stack",
+    "bounded_deadline_and_real_cancel_observers",
+    "same_group_capacity_and_full_trace",
+    "quality_SLO_budget_and_execution_authorization"
+  ]
+}

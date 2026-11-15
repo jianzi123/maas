@@ -1,0 +1,80 @@
+{
+  "stage": "offline_handoff_only",
+  "rows": [
+    {
+      "id": "P01",
+      "checks": [
+        "source_pin",
+        "metadata_conflicts",
+        "runtime_locks"
+      ],
+      "qa": [
+        "A25",
+        "A26",
+        "A33"
+      ],
+      "consumer": [
+        "MAAS-8"
+      ],
+      "entry": "check.py --source-root <captured-source-dir>"
+    },
+    {
+      "id": "P02",
+      "checks": [
+        "public_subset",
+        "usage_mapping",
+        "missing_vs_zero",
+        "subsets_not_added"
+      ],
+      "qa": [
+        "A03",
+        "A07",
+        "A09",
+        "A19",
+        "A20",
+        "A23"
+      ],
+      "consumer": [
+        "MAAS-3",
+        "MAAS-7"
+      ],
+      "entry": "test_capabilities.py"
+    },
+    {
+      "id": "P03",
+      "checks": [
+        "cancel_action",
+        "engine_exit",
+        "capacity_recovery",
+        "no_observation_authority"
+      ],
+      "qa": [
+        "A08",
+        "A18",
+        "A31"
+      ],
+      "consumer": [
+        "MAAS-3",
+        "MAAS-7",
+        "MAAS-8"
+      ],
+      "entry": "read cancellation fields; real execution pending"
+    },
+    {
+      "id": "P04",
+      "checks": [
+        "S_M_L_capacity",
+        "shared_prefix_identity",
+        "mixed_short_long_sequence"
+      ],
+      "qa": [
+        "A34"
+      ],
+      "consumer": [
+        "MAAS-10",
+        "MAAS-7"
+      ],
+      "entry": "evidence/perf-plan-v0.4.json + handoff docs; all experiments disabled"
+    }
+  ]
+}

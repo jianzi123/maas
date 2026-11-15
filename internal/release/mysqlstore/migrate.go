@@ -11,6 +11,7 @@ import (
 	"time"
 
 	"github.com/jianzi123/maas/internal/release"
+	"github.com/jianzi123/maas/internal/release/management"
 )
 
 //go:embed schema/0001_release.sql
@@ -21,6 +22,15 @@ var migration string
 // migration resumes the SAME checksummed IF-NOT-EXISTS statements. This is not a
 // promise of multi-statement transactional DDL or a destructive down migration.
 func Migrate(ctx context.Context, db *sql.DB) error {
+	if e := migrateBase(ctx, db); e != nil {
+		return e
+	}
+	if e := migrateHistory(ctx, db); e != nil {
+		return e
+	}
+	return management.Migrate(ctx, db)
+}
+func migrateBase(ctx context.Context, db *sql.DB) error {
 	if db == nil {
 		return release.ErrDependencyMissing
 	}

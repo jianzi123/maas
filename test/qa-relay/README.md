@@ -1,0 +1,11 @@
+本目录是MAAS-7针对c7e863b11fb34ee2828c947393444e1e5a9baf08的独立源端复验。产品基线为PR #6候选，原925d8c5默认基线与候选分开记录；没有重开旧PR或修改产品实现。
+
+通过Go overlay加入internal/kernel/qa_relay_test.go。复用原真实MySQL调用/账务fixture和受控loopback HTTP上游，19个调用场景独立检查顶层error锁存、正文脱敏、唯一终态/汇总、unknown actual/null/held与原slot释放，以及每Forward最多一个summary。另9项纯函数核采样器配置/容量、并发offer分母和独立boot。作者10个SQL采样场景和1个有界队列函数单列复跑，不和作者此前9条源/1丢样或20/12历史结果累加。
+
+所有时刻来自本次真实Go运行，禁止用request_id冒充trace。45ms内容前等待、90ms诊断INSERT等待、70ms下游Write等待均是明确QA测试注入，只验证测点分离；不作为性能提升/SLO。诊断等待在QA驱动wrapper中，实际INSERT、事务和账务仍走产品代码。role处理用通道屏障协调，避免仅凭sleep猜首协议是否已被处理。无内容null、不实现Flusher的writer不得制造Flush测点，Write失败不能标write_ok。Flush仅调用尝试，没有客户端ACK。
+
+error场景包括内容前/后、error与usage/内容同一事件、error:null及非流式顶层error；后续有效内容/finish/DONE均不能恢复成功。无真实provider批准/Higress/Worker/GPU。进度/最终性策略沿原明确合成批准fixture，QA-001/002/003和d2的Usage20/Reader12已过范围保留，不在本轮重跑。
+
+复跑bash test/qa-relay/run.sh，显式提供已批准的MAAS_TEST_GO_ROOT、MAAS_TEST_MYSQL_BASEDIR及自有模块/构建缓存；可选MAAS_TEST_REDIS_BASEDIR。MySQL/Redis必须位于当前任务.cache之内，沿原脚本守卫。编排前台结束清理自有schema/账号/socket/进程，脚本不会创建集群或调用模型。原rate/H1-H4为fixture，不把启动一个Redis实例当作真实网关限流验收。
+
+原作者附件JSON/manifest来源保留于证据包reference/，原始SHA256与6个Git源码字节独立比对；原9条summary、1丢样与本轮来源分开。完整sidecar导入、消费端D1、E1、跨时钟校准与平台性能结论不在本轮。summarize.py将真实Go生成的summary按原值导出，不补trace/binding/实验身份，不改变源revision；原始case与终态证据另存。

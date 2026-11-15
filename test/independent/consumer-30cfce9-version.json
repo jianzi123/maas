@@ -1,0 +1,42 @@
+{
+  "qa_parent": "7089cebbfda9ef53d98ea695a1dcf69a256baba0",
+  "frontend_sha": "30cfce951df8a858810a035efe51846a75a4ade6",
+  "old_frontend_sha": "819c35ef9771cca8b8559de4c4e70bcc47436b80",
+  "inherited_backend_sha": "e1bd5020887d092feb892992476bb810512a274e",
+  "qa_merge": "9c8303c54acd3b54216b6899ec5da10e3c631605",
+  "default_sha": "925d8c55be9ce823d100bf90a5c78cf19ea66d58",
+  "frontend_is_ancestor_of_default": false,
+  "original_test_sha256": "13e879f315bf1297ccdd0173915975427cffbe43a483eadb2fbec560265df1a2",
+  "copied_test_sha256": "13e879f315bf1297ccdd0173915975427cffbe43a483eadb2fbec560265df1a2",
+  "package_lock_sha256": "bd1680ee8b9e56eff80bc9bee3f8b49738ba44dbe04da230318a9b2c3201215e",
+  "node": "v22.23.4",
+  "dependency_versions": {
+    "vitest": "5.1.0",
+    "jsdom": "30.1.3",
+    "vite": "8.3.6",
+    "typescript": "5.9.3",
+    "vue": "3.5.45",
+    "ajv": "8.20.0"
+  },
+  "consumer_blob_ids": {
+    "console/src/api/client.ts": "1cfcd7bdb3041071b0f720d1d113b31138a98d37",
+    "console/src/api/stream.ts": "89e2ea8b8a710b53feb5c1112fcc82cebad8eead",
+    "console/src/api/contracts.ts": "b874285ada19be8b08c0b8d7edff33fb013c70cd",
+    "console/src/api/recovery.ts": "d96bef11c9b93f36dca5e80ace45762cc4282731",
+    "console/src/fixtures.ts": "abe74af79a371e89635d54353a9ccec0b17fe4db",
+    "console/src/pages/Playground.vue": "cab2f501f0884bc314d9e7821cea560ca478b2ad",
+    "console/package-lock.json": "bbf3fba5d71d72941992d672479b733402b64121"
+  },
+  "test_kind": "synthetic_Response_jsdom_not_browser_or_real_HTTP",
+  "original_cases_results_file": "consumer-30cfce9-results.json",
+  "generation_replay_policy": "one_POST_then_exact_original_R_or_unknown",
+  "pending": [
+    "Usage_DB_authority",
+    "Reader_actual_narrow_role",
+    "real_Higress",
+    "real_model",
+    "GPU",
+    "Helm",
+    "A01-A34_full_acceptance"
+  ]
+}

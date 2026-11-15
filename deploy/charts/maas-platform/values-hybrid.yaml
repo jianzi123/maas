@@ -1,0 +1,9 @@
+# Input template; EXPLICITLY_PENDING is rejected by the environment preflight.
+mode: hybrid
+higress:
+  strategy: reuse
+  namespace: ""
+  gatewayService: ""
+  externalEgressPolicyRef: EXPLICITLY_PENDING
+# Only Higress may reach approved external endpoints through the approved proxy.
+# Platform core never receives an upstream URL or bypasses Higress.

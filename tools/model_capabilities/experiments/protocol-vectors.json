@@ -1,0 +1,36 @@
+{
+  "synthetic": true,
+  "authority": "none",
+  "cases": [
+    {
+      "id": "normal",
+      "wire": "data: {\"id\": \"chatcmpl-00000000-0000-4000-8000-000000000100\", \"object\": \"chat.completion.chunk\", \"created\": 1793779200, \"model\": \"model-a\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \"391猫🙂GPU-7\"}, \"finish_reason\": null}]}\r\n\r\ndata: {\"id\": \"chatcmpl-00000000-0000-4000-8000-000000000100\", \"object\": \"chat.completion.chunk\", \"created\": 1793779200, \"model\": \"model-a\", \"choices\": [{\"index\": 0, \"delta\": {}, \"finish_reason\": \"stop\"}], \"usage\": {\"input_tokens\": 12, \"output_tokens\": 7, \"total_tokens\": 19, \"source\": \"upstream\", \"missing_reason\": null, \"input_cached_tokens\": 4, \"reasoning_tokens\": 3}}\r\n\r\ndata: [DONE]\r\n\r\n",
+      "expected": "completed_shape_only"
+    },
+    {
+      "id": "eof",
+      "wire": "data: {\"id\": \"chatcmpl-00000000-0000-4000-8000-000000000100\", \"object\": \"chat.completion.chunk\", \"created\": 1793779200, \"model\": \"model-a\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \"391猫🙂GPU-7\"}, \"finish_reason\": null}]}\r\n\r\ndata: {\"id\": \"chatcmpl-00000000-0000-4000-8000-000000000100\", \"object\": \"chat.completion.chunk\", \"created\": 1793779200, \"model\": \"model-a\", \"choices\": [{\"index\": 0, \"delta\": {}, \"finish_reason\": \"stop\"}], \"usage\": {\"input_tokens\": 12, \"output_tokens\": 7, \"total_tokens\": 19, \"source\": \"upstream\", \"missing_reason\": null, \"input_cached_tokens\": 4, \"reasoning_tokens\": 3}}\r\n\r\n",
+      "expected": "invalid"
+    },
+    {
+      "id": "error_no_done",
+      "wire": "data: {\"id\": \"chatcmpl-00000000-0000-4000-8000-000000000100\", \"object\": \"chat.completion.chunk\", \"created\": 1793779200, \"model\": \"model-a\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \"391猫🙂GPU-7\"}, \"finish_reason\": null}]}\r\n\r\nevent: error\ndata: {\"error\": {\"code\": \"upstream_protocol_error\", \"message\": \"Synthetic error\", \"request_id\": \"00000000-0000-4000-8000-000000000100\", \"retryable\": false, \"reset_at\": null, \"retry_after_seconds\": null, \"param\": null, \"budget_dimension\": null, \"policy_revision\": null}}\n\n",
+      "expected": "error_shape_only"
+    },
+    {
+      "id": "error_then_done",
+      "wire": "data: {\"id\": \"chatcmpl-00000000-0000-4000-8000-000000000100\", \"object\": \"chat.completion.chunk\", \"created\": 1793779200, \"model\": \"model-a\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \"391猫🙂GPU-7\"}, \"finish_reason\": null}]}\r\n\r\nevent: error\ndata: {\"error\": {\"code\": \"upstream_protocol_error\", \"message\": \"Synthetic error\", \"request_id\": \"00000000-0000-4000-8000-000000000100\", \"retryable\": false, \"reset_at\": null, \"retry_after_seconds\": null, \"param\": null, \"budget_dimension\": null, \"policy_revision\": null}}\n\ndata: [DONE]\n\n",
+      "expected": "invalid"
+    },
+    {
+      "id": "after_done",
+      "wire": "data: {\"id\": \"chatcmpl-00000000-0000-4000-8000-000000000100\", \"object\": \"chat.completion.chunk\", \"created\": 1793779200, \"model\": \"model-a\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \"391猫🙂GPU-7\"}, \"finish_reason\": null}]}\r\n\r\ndata: {\"id\": \"chatcmpl-00000000-0000-4000-8000-000000000100\", \"object\": \"chat.completion.chunk\", \"created\": 1793779200, \"model\": \"model-a\", \"choices\": [{\"index\": 0, \"delta\": {}, \"finish_reason\": \"stop\"}], \"usage\": {\"input_tokens\": 12, \"output_tokens\": 7, \"total_tokens\": 19, \"source\": \"upstream\", \"missing_reason\": null, \"input_cached_tokens\": 4, \"reasoning_tokens\": 3}}\r\n\r\ndata: [DONE]\r\n\r\ndata: {\"id\": \"chatcmpl-00000000-0000-4000-8000-000000000100\", \"object\": \"chat.completion.chunk\", \"created\": 1793779200, \"model\": \"model-a\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \"391猫🙂GPU-7\"}, \"finish_reason\": null}]}\r\n\r\n",
+      "expected": "invalid"
+    },
+    {
+      "id": "duplicate_done",
+      "wire": "data: {\"id\": \"chatcmpl-00000000-0000-4000-8000-000000000100\", \"object\": \"chat.completion.chunk\", \"created\": 1793779200, \"model\": \"model-a\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \"391猫🙂GPU-7\"}, \"finish_reason\": null}]}\r\n\r\ndata: {\"id\": \"chatcmpl-00000000-0000-4000-8000-000000000100\", \"object\": \"chat.completion.chunk\", \"created\": 1793779200, \"model\": \"model-a\", \"choices\": [{\"index\": 0, \"delta\": {}, \"finish_reason\": \"stop\"}], \"usage\": {\"input_tokens\": 12, \"output_tokens\": 7, \"total_tokens\": 19, \"source\": \"upstream\", \"missing_reason\": null, \"input_cached_tokens\": 4, \"reasoning_tokens\": 3}}\r\n\r\ndata: [DONE]\r\n\r\ndata: [DONE]\n\n",
+      "expected": "invalid"
+    }
+  ]
+}

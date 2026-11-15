@@ -1,0 +1,18 @@
+{
+  "source_attachment": "01a1a637-5727-730d-9662-60ec324daa42",
+  "versions": {
+    "terminal": "3.0",
+    "ticket": 3,
+    "observation": "1.0"
+  },
+  "files": [
+    {
+      "file": "terminal.schema.json",
+      "sha256": "3e9eac874ce12d294a91f81617f08cc982cd9f48fb8aade798db35416ab2a5a9"
+    },
+    {
+      "file": "private.schema.json",
+      "sha256": "d6cbf4a37763885f28f66af98366a324953fe162db550ac7a2ec637fad945886"
+    }
+  ]
+}

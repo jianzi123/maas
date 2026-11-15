@@ -1,0 +1,216 @@
+//go:build envtest
+
+package integration
+
+import (
+	"context"
+	"crypto/sha256"
+	"database/sql"
+	"encoding/hex"
+	"encoding/json"
+	"fmt"
+	"github.com/go-sql-driver/mysql"
+	"github.com/google/uuid"
+	api "github.com/jianzi123/maas/api/v1alpha1"
+	"github.com/jianzi123/maas/internal/controlapi"
+	"github.com/jianzi123/maas/internal/kernel"
+	"github.com/jianzi123/maas/internal/release"
+	"github.com/jianzi123/maas/internal/release/history"
+	"github.com/jianzi123/maas/internal/release/management"
+	"github.com/jianzi123/maas/internal/release/mysqlstore"
+	corev1 "k8s.io/api/core/v1"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"k8s.io/apimachinery/pkg/runtime"
+	"net"
+	"net/http"
+	"net/http/httptest"
+	"os"
+	"os/exec"
+	"path/filepath"
+	ctrl "sigs.k8s.io/controller-runtime"
+	"sigs.k8s.io/controller-runtime/pkg/client"
+	"sigs.k8s.io/controller-runtime/pkg/envtest"
+	"sigs.k8s.io/yaml"
+	"strings"
+	"testing"
+	"time"
+)
+
+func TestManagementFrontendBrowser(t *testing.T) {
+	socket := os.Getenv("MAAS_MYSQL_TEST_SOCKET")
+	if os.Getenv("MAAS_DISPOSABLE_MYSQL") != "1" || !strings.HasPrefix(socket, "/tmp/maas11-mysql.") || os.Getenv("KUBEBUILDER_ASSETS") == "" {
+		t.Fatal("explicit disposable MySQL and envtest assets required")
+	}
+	ctx := context.Background()
+	cfg := mysql.NewConfig()
+	cfg.User = "root"
+	cfg.Net = "unix"
+	cfg.Addr = socket
+	cfg.ParseTime = true
+	cfg.Loc = time.UTC
+	cfg.Timeout = 3 * time.Second
+	admin, e := sql.Open("mysql", cfg.FormatDSN())
+	if e != nil {
+		t.Fatal(e)
+	}
+	defer admin.Close()
+	database := "maas_operations_" + strings.ReplaceAll(uuid.NewString(), "-", "")
+	if _, e = admin.Exec("CREATE DATABASE `" + database + "`"); e != nil {
+		t.Fatal(e)
+	}
+	defer admin.Exec("DROP DATABASE `" + database + "`")
+	cfg.DBName = database
+	db, e := sql.Open("mysql", cfg.FormatDSN())
+	if e != nil {
+		t.Fatal(e)
+	}
+	defer db.Close()
+	if e = kernel.Migrate(ctx, db); e != nil {
+		t.Fatal(e)
+	}
+	if e = mysqlstore.Migrate(ctx, db); e != nil {
+		t.Fatal(e)
+	}
+	core, e := kernel.New(db, "management-envtest", []byte(strings.Repeat("p", 32)), nil, nil)
+	if e != nil {
+		t.Fatal(e)
+	}
+	if e = core.Configure(ctx, kernel.RatePolicy{Revision: "test-only", Epoch: 1, WindowMS: 1000, GlobalLimit: 100, KeyLimit: 100}, 2); e != nil {
+		t.Fatal(e)
+	}
+	publisher, e := mysqlstore.New(db, "management-envtest", core)
+	if e != nil {
+		t.Fatal(e)
+	}
+	publisher = publisher.WithManagementOperations()
+	existing := false
+	environment := &envtest.Environment{UseExistingCluster: &existing, CRDDirectoryPaths: []string{filepath.Join("..", "..", "config", "crd")}, ErrorIfCRDPathMissing: true}
+	kubeConfig, e := environment.Start()
+	if e != nil {
+		t.Fatal(e)
+	}
+	defer func() {
+		if e := environment.Stop(); e != nil {
+			t.Error(e)
+		}
+	}()
+	scheme := runtime.NewScheme()
+	_ = api.AddToScheme(scheme)
+	_ = corev1.AddToScheme(scheme)
+	kube, e := client.New(kubeConfig, client.Options{Scheme: scheme})
+	if e != nil {
+		t.Fatal(e)
+	}
+	ns := "maas-models-example"
+	if e = kube.Create(ctx, &corev1.Namespace{ObjectMeta: metav1.ObjectMeta{Name: ns}}); e != nil {
+		t.Fatal(e)
+	}
+	access := history.NamespaceAccess{Namespaces: map[string]bool{ns: true}, Domains: map[string]bool{"test-domain": true}, ScopeID: "test-session"}
+	b, e := os.ReadFile("../../config/samples/MAAS-2-modelrelease-externalapi-v0.4.example.yaml")
+	if e != nil {
+		t.Fatal(e)
+	}
+	original := new(api.ModelRelease)
+	if e = yaml.Unmarshal(b, original); e != nil {
+		t.Fatal(e)
+	}
+	original.Name = "managed-model"
+	resolution := release.Resolution{Versions: map[string]string{"authorization_domain": "test-domain"}, GatewayNamespace: ns, IngressClass: "higress", HostSuffix: "test.invalid", EndpointDNS: "fixture.invalid", EndpointPort: 443, CredentialHandle: "opaque-test-only", PluginDigest: strings.Repeat("1", 64)}
+	updated := original.DeepCopy()
+	updated.Spec.Source.ExternalAPI.UpstreamModel = "test-second-model"
+	registry := &management.Registry{Access: access, Entries: []management.RegistryEntry{{Namespace: ns, Spec: original.Spec, Resolution: resolution}, {Namespace: ns, Spec: updated.Spec, Resolution: resolution}}}
+	hr := &history.Reader{DB: db, PayloadDB: db, Cluster: "management-envtest", Access: access, CursorKey: []byte(strings.Repeat("c", 32)), Live: history.KubeLive{Reader: kube}}
+	hr.Evaluator = history.ResolverEvaluator{Resolver: registry, Loader: hr}
+	op := &management.Operations{DB: db, Cluster: "management-envtest", Access: access}
+	mutation := &ackLossClient{Client: kube}
+	service := &management.Service{Client: mutation, Reader: kube, Operations: op, History: hr, Resolver: registry, Access: access, CursorKey: hr.CursorKey}
+	// The following test metadata is synthetic and authorizes no model call.
+	publicInputs := map[string]any{}
+	for _, label := range []string{"managed-model", "unknown-browser-model", "conflict-browser-model"} {
+		m := original.DeepCopy()
+		m.Name = label
+		m.Spec.ModelAlias = label
+		publicInputs[label] = map[string]any{"apiVersion": api.GroupVersion.String(), "kind": "ModelRelease", "metadata": map[string]any{"namespace": ns, "name": label}, "spec": m.Spec}
+		registry.Entries = append(registry.Entries, management.RegistryEntry{Namespace: ns, Spec: m.Spec, Resolution: resolution})
+		next := m.DeepCopy()
+		next.Spec.Source.ExternalAPI.UpstreamModel = "test-second-model"
+		registry.Entries = append(registry.Entries, management.RegistryEntry{Namespace: ns, Spec: next.Spec, Resolution: resolution})
+	}
+	listener, e := net.Listen("tcp", "127.0.0.1:0")
+	if e != nil {
+		t.Fatal(e)
+	}
+	port := listener.Addr().(*net.TCPAddr).Port
+	listener.Close()
+	origin := fmt.Sprintf("http://127.0.0.1:%d", port)
+	session, csrf := uuid.NewString()+uuid.NewString(), uuid.NewString()+uuid.NewString()
+	digest := func(s string) string { v := sha256.Sum256([]byte(s)); return hex.EncodeToString(v[:]) }
+	handler := controlapi.Handler{Core: core, Sessions: controlapi.BootstrapSession{SessionSHA256: digest(session), CSRFSHA256: digest(csrf), Origin: origin, Expires: time.Now().Add(10 * time.Minute)}, Releases: service, Revisions: hr, Models: core, ModelGate: publisher, ModelNamespaces: access.Namespaces}
+	reconciler := &release.Reconciler{Client: kube, Reader: kube, Dependencies: release.Dependencies{Control: publisher, Inventory: publisher, Resolver: registry, Bundle: noGatewayBundle{}, Plugin: noGatewayProducer{}}}
+	lost, conflicted := false, false
+	wrapped := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.Method == "PUT" && strings.Contains(r.URL.Path, "unknown-browser-model") && !lost {
+			mutation.loseNext = true
+			lost = true
+		}
+		if r.Method == "PUT" && strings.Contains(r.URL.Path, "conflict-browser-model") && !conflicted {
+			mutation.conflictNext = true
+			conflicted = true
+		}
+		handler.ServeHTTP(w, r)
+		if r.Method != "GET" {
+			var models api.ModelReleaseList
+			if err := kube.List(ctx, &models, client.InNamespace(ns)); err == nil {
+				for i := range models.Items {
+					_, _ = reconciler.Reconcile(ctx, ctrl.Request{NamespacedName: client.ObjectKeyFromObject(&models.Items[i])})
+				}
+			}
+		}
+	})
+	server := httptest.NewServer(wrapped)
+	extraDBs := []*sql.DB{}
+	defer func() {
+		server.Close()
+		for _, d := range extraDBs {
+			d.Close()
+		}
+	}()
+	node, dir, nodeDir := os.Getenv("MAAS_FE_NODE"), os.Getenv("MAAS_FE_CONSOLE_DIR"), os.Getenv("MAAS_FE_CONSOLE_NODE_DIR")
+	if node == "" || dir == "" || nodeDir == "" {
+		t.Fatal("explicit frontend paths required")
+	}
+	publicFile := filepath.Join(dir, "artifacts", "release-browser-inputs.json")
+	if e := os.MkdirAll(filepath.Dir(publicFile), 0700); e != nil {
+		t.Fatal(e)
+	}
+	raw, _ := json.Marshal(publicInputs)
+	if e := os.WriteFile(publicFile, raw, 0600); e != nil {
+		t.Fatal(e)
+	}
+	defer os.Remove(publicFile)
+	command := exec.Command(node, nodeDir+"/scripts/release-browser.mjs")
+	command.Dir = dir
+	command.Env = append(os.Environ(), "MAAS_LOCAL_API="+server.URL, "MAAS_LOCAL_SESSION="+session, "MAAS_LOCAL_CSRF="+csrf, "MAAS_LOCAL_EXPIRES="+time.Now().Add(5*time.Minute).Format(time.RFC3339), "MAAS_LOCAL_PORT="+fmt.Sprint(port), "WSLENV=MAAS_LOCAL_API:MAAS_LOCAL_SESSION:MAAS_LOCAL_CSRF:MAAS_LOCAL_EXPIRES:MAAS_LOCAL_PORT")
+	output, err := command.CombinedOutput()
+	if err != nil {
+		t.Fatalf("release browser failed: %v\n%s", err, output)
+	}
+	t.Log(string(output))
+	result, e := os.ReadFile(dir + "/artifacts/release-browser/results.json")
+	if e != nil {
+		t.Fatal(e)
+	}
+	var report struct {
+		Checks []string
+		Errors []string
+	}
+	if json.Unmarshal(result, &report) != nil || len(report.Checks) < 15 || len(report.Errors) != 0 {
+		t.Fatal("all release browser checks must execute")
+	}
+	for _, table := range []string{"generation_requests", "usage_events", "budget_windows"} {
+		var count int
+		if e := db.QueryRow("SELECT COUNT(*) FROM " + table).Scan(&count); e != nil || count != 0 {
+			t.Fatalf("unexpected business write in %s", table)
+		}
+	}
+}

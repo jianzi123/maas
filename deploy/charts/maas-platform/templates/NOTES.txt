@@ -1,0 +1,4 @@
+MaaS Chart {{ .Chart.Version }}: configuration assembly only.
+Default workloads are disabled. Current review Operator readiness fails by design.
+No CRD, Secret, database, GPU workload, dependency installation or migration is performed.
+Confirm deploy/docs/readiness.md before requesting target-cluster authorization.

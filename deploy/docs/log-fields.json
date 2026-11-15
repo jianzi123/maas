@@ -1,0 +1,43 @@
+{
+  "status": "proposed-allowlist-not-runtime-implementation",
+  "allowed": [
+    "timestamp",
+    "level",
+    "component",
+    "event",
+    "reason_code",
+    "request_id",
+    "trace_id",
+    "command_id",
+    "model_alias",
+    "cr_uid",
+    "publication_id",
+    "activation_epoch",
+    "duration_ms"
+  ],
+  "redact": [
+    "Authorization",
+    "api_key",
+    "upstream_credential",
+    "tls_key",
+    "prompt",
+    "messages",
+    "raw_upstream_error"
+  ],
+  "metricsLabels": [
+    "component",
+    "reason_code",
+    "operation",
+    "source_type",
+    "outcome"
+  ],
+  "forbiddenMetricsLabels": [
+    "request_id",
+    "trace_id",
+    "cr_uid",
+    "key",
+    "credential",
+    "prompt"
+  ],
+  "retention": null
+}

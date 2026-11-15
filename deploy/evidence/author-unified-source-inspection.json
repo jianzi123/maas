@@ -1,0 +1,1792 @@
+{
+  "scope": "author-artifact-source-byte-recheck-only-no-runtime-or-independent-QA",
+  "attachmentId": "01a1d8eb-5ce5-7d72-9249-0909c7f64ca3",
+  "attachmentSha256": "92656b68b7446baa33ef492f291a83675d73977faa2a976b5b8f4f75f80d08ba",
+  "checks_total": 292,
+  "checks_passed": 292,
+  "checks": [
+    {
+      "path": ".gitattributes",
+      "expected_sha256": "5b93b86d7f7e94c3dafdd41b284afe95a95a985e8afc719914173db11890cd36",
+      "actual_sha256": "5b93b86d7f7e94c3dafdd41b284afe95a95a985e8afc719914173db11890cd36",
+      "passed": true
+    },
+    {
+      "path": ".gitignore",
+      "expected_sha256": "94dff7f86c33e84e28330d16ba02e2c90dc04ae76e8a030ab956377b1f91e5cd",
+      "actual_sha256": "94dff7f86c33e84e28330d16ba02e2c90dc04ae76e8a030ab956377b1f91e5cd",
+      "passed": true
+    },
+    {
+      "path": "api/v1alpha1/modelrelease.schema.json",
+      "expected_sha256": "84bb8a5d9f7a86206143ec6462d9a79277dd181487473031226f041334cebc3a",
+      "actual_sha256": "84bb8a5d9f7a86206143ec6462d9a79277dd181487473031226f041334cebc3a",
+      "passed": true
+    },
+    {
+      "path": "api/v1alpha1/types.go",
+      "expected_sha256": "839bfd01f621fc02c2d93db093ca0ac6b87b4dc59005af89f39c1fc140549a06",
+      "actual_sha256": "839bfd01f621fc02c2d93db093ca0ac6b87b4dc59005af89f39c1fc140549a06",
+      "passed": true
+    },
+    {
+      "path": "api/v1alpha1/validation.go",
+      "expected_sha256": "d44e275d9c14f00d142ba384d9c5fe40992e82a12a8e87738a83297466147964",
+      "actual_sha256": "d44e275d9c14f00d142ba384d9c5fe40992e82a12a8e87738a83297466147964",
+      "passed": true
+    },
+    {
+      "path": "api/v1alpha1/validation_test.go",
+      "expected_sha256": "6db84faecfc03d88bbe49a86b476877cf40b322a2d219592f84bd4efe70e1885",
+      "actual_sha256": "6db84faecfc03d88bbe49a86b476877cf40b322a2d219592f84bd4efe70e1885",
+      "passed": true
+    },
+    {
+      "path": "cmd/control-api/main.go",
+      "expected_sha256": "38cac312ea6fd081b0f6449a4ab034966a992cf92fa5ef348ecc589d83d6d6d5",
+      "actual_sha256": "38cac312ea6fd081b0f6449a4ab034966a992cf92fa5ef348ecc589d83d6d6d5",
+      "passed": true
+    },
+    {
+      "path": "cmd/control-api/readers.go",
+      "expected_sha256": "b071c6c301d9f6abb8aea571acbf69eaaf15f62d2c8acfffe9e236edc4079f99",
+      "actual_sha256": "b071c6c301d9f6abb8aea571acbf69eaaf15f62d2c8acfffe9e236edc4079f99",
+      "passed": true
+    },
+    {
+      "path": "cmd/control-api/readers_test.go",
+      "expected_sha256": "d4dd24227cb49761b26e4aa02a411625771ca32a960b182e487ef6333414f554",
+      "actual_sha256": "d4dd24227cb49761b26e4aa02a411625771ca32a960b182e487ef6333414f554",
+      "passed": true
+    },
+    {
+      "path": "cmd/operator/main.go",
+      "expected_sha256": "539a006cbcfb20076d5f5e4186c8ccb4a3917478ee193349ad768ecb3e71001c",
+      "actual_sha256": "539a006cbcfb20076d5f5e4186c8ccb4a3917478ee193349ad768ecb3e71001c",
+      "passed": true
+    },
+    {
+      "path": "cmd/workbench/identities.go",
+      "expected_sha256": "e9de64739b385f10cabc6a3ab09a8fe84be8c83a00c765f8c259a39877338e66",
+      "actual_sha256": "e9de64739b385f10cabc6a3ab09a8fe84be8c83a00c765f8c259a39877338e66",
+      "passed": true
+    },
+    {
+      "path": "cmd/workbench/identities_test.go",
+      "expected_sha256": "9b58740ebe44a720fa94948fd4a1efa9500c70ececcdee1866375004436f925f",
+      "actual_sha256": "9b58740ebe44a720fa94948fd4a1efa9500c70ececcdee1866375004436f925f",
+      "passed": true
+    },
+    {
+      "path": "cmd/workbench/main.go",
+      "expected_sha256": "a172832f9bf102336fd26262e2ac1f8e26ef00cb16fbf20898ab7bba4052b061",
+      "actual_sha256": "a172832f9bf102336fd26262e2ac1f8e26ef00cb16fbf20898ab7bba4052b061",
+      "passed": true
+    },
+    {
+      "path": "config/crd/modelreleases.yaml",
+      "expected_sha256": "1169272473c5fa8a484245cb82fc0a4b1c32db4a759f33e4add1fcc389ae1aa1",
+      "actual_sha256": "1169272473c5fa8a484245cb82fc0a4b1c32db4a759f33e4add1fcc389ae1aa1",
+      "passed": true
+    },
+    {
+      "path": "config/integration-sources.json",
+      "expected_sha256": "840773a64475be1e2cbe45af0bc0f6e6db01bb1652a66652593e5dad698c00c8",
+      "actual_sha256": "840773a64475be1e2cbe45af0bc0f6e6db01bb1652a66652593e5dad698c00c8",
+      "passed": true
+    },
+    {
+      "path": "config/mysql/controlapi-projections.sql",
+      "expected_sha256": "d35292ff6229b8c5ea858b1cba864ee093ffd61acb846805010a6b00ebc22a0c",
+      "actual_sha256": "d35292ff6229b8c5ea858b1cba864ee093ffd61acb846805010a6b00ebc22a0c",
+      "passed": true
+    },
+    {
+      "path": "config/mysql/kernel-permissions.sql",
+      "expected_sha256": "90cd69cdb26b7746c2c56cedf82332ed73669989317c1590d8a935e5e8cf96e3",
+      "actual_sha256": "90cd69cdb26b7746c2c56cedf82332ed73669989317c1590d8a935e5e8cf96e3",
+      "passed": true
+    },
+    {
+      "path": "config/mysql/release-permissions.sql",
+      "expected_sha256": "50306ce5ab11484daf31d143ca49f14da4dd60c6d0c998e0610cb08dce507056",
+      "actual_sha256": "50306ce5ab11484daf31d143ca49f14da4dd60c6d0c998e0610cb08dce507056",
+      "passed": true
+    },
+    {
+      "path": "config/samples/MAAS-2-modelrelease-externalapi-v0.4.example.yaml",
+      "expected_sha256": "1bab331661c9c909576a326ce9be94a83b87414399dd310f8402ae8575bebbda",
+      "actual_sha256": "1bab331661c9c909576a326ce9be94a83b87414399dd310f8402ae8575bebbda",
+      "passed": true
+    },
+    {
+      "path": "config/samples/MAAS-2-modelrelease-selfhosted-v0.4.example.yaml",
+      "expected_sha256": "ad8e89ac826ef2d7a0a48c36dcdba3fed1b8df121b45c67f7751b1d751f63c77",
+      "actual_sha256": "ad8e89ac826ef2d7a0a48c36dcdba3fed1b8df121b45c67f7751b1d751f63c77",
+      "passed": true
+    },
+    {
+      "path": "console/.env.fixtures",
+      "expected_sha256": "4d5e22f8eeb4bbf5a027a34c7a4bfef806876a470f89440f9611bd01a9d8c5f7",
+      "actual_sha256": "4d5e22f8eeb4bbf5a027a34c7a4bfef806876a470f89440f9611bd01a9d8c5f7",
+      "passed": true
+    },
+    {
+      "path": "console/.gitattributes",
+      "expected_sha256": "2242ec3ba48157768ebc95da289c89da5ceadd2cf0555379a3ea3092a31ec419",
+      "actual_sha256": "2242ec3ba48157768ebc95da289c89da5ceadd2cf0555379a3ea3092a31ec419",
+      "passed": true
+    },
+    {
+      "path": "console/.gitignore",
+      "expected_sha256": "e7e610305a9703505c63ae8420437b2aa0f887cfa562781e629116f77abaaea3",
+      "actual_sha256": "e7e610305a9703505c63ae8420437b2aa0f887cfa562781e629116f77abaaea3",
+      "passed": true
+    },
+    {
+      "path": "console/contracts/j01-v04.patch.json",
+      "expected_sha256": "453f09e67b5503d19c28eb20653ed520d6055360fd8d508bf59f53ac30060cec",
+      "actual_sha256": "453f09e67b5503d19c28eb20653ed520d6055360fd8d508bf59f53ac30060cec",
+      "passed": true
+    },
+    {
+      "path": "console/contracts/openapi-v0.4.json",
+      "expected_sha256": "fab7f71e47af03de3f956437a09e50be47b511991ca87b35bb745ba0228040f5",
+      "actual_sha256": "fab7f71e47af03de3f956437a09e50be47b511991ca87b35bb745ba0228040f5",
+      "passed": true
+    },
+    {
+      "path": "console/contracts/query-recovery-draft.json",
+      "expected_sha256": "4c8f0a01572eb09531bdc09fd62e0ae3cac75e368b3db2b9cf31b3a7c8f5abe3",
+      "actual_sha256": "4c8f0a01572eb09531bdc09fd62e0ae3cac75e368b3db2b9cf31b3a7c8f5abe3",
+      "passed": true
+    },
+    {
+      "path": "console/docs/consumer-binding-fixes.md",
+      "expected_sha256": "0f46b5c9ad5d7ec353b38a065bdc5efb990d1be2b649a4b4c9ded5053c141086",
+      "actual_sha256": "0f46b5c9ad5d7ec353b38a065bdc5efb990d1be2b649a4b4c9ded5053c141086",
+      "passed": true
+    },
+    {
+      "path": "console/docs/go-workbench.md",
+      "expected_sha256": "838eaa20045de96c5a068c130dcceecffc2d1f2963d1811b0c0247bede19cc76",
+      "actual_sha256": "838eaa20045de96c5a068c130dcceecffc2d1f2963d1811b0c0247bede19cc76",
+      "passed": true
+    },
+    {
+      "path": "console/docs/release-management.md",
+      "expected_sha256": "284f8f4a124efe8f6eee907ee79315fbabd0beb7bc73e4bc43f5b2c5f1fc0e77",
+      "actual_sha256": "284f8f4a124efe8f6eee907ee79315fbabd0beb7bc73e4bc43f5b2c5f1fc0e77",
+      "passed": true
+    },
+    {
+      "path": "console/docs/review-fixes.md",
+      "expected_sha256": "5f9f335775d58e1881da97fff45186ba2e79cda0164041e29e62735cc60d16aa",
+      "actual_sha256": "5f9f335775d58e1881da97fff45186ba2e79cda0164041e29e62735cc60d16aa",
+      "passed": true
+    },
+    {
+      "path": "console/docs/ui-reference.md",
+      "expected_sha256": "afaab289eebed9debee53e5f6ed83263dbec83fd25687ec613251ad597d7e261",
+      "actual_sha256": "afaab289eebed9debee53e5f6ed83263dbec83fd25687ec613251ad597d7e261",
+      "passed": true
+    },
+    {
+      "path": "console/docs/verification.md",
+      "expected_sha256": "e99807aef95cb257454e157285a13f4461d0bb346cf6f0c579249d52bf0ae563",
+      "actual_sha256": "e99807aef95cb257454e157285a13f4461d0bb346cf6f0c579249d52bf0ae563",
+      "passed": true
+    },
+    {
+      "path": "console/index.html",
+      "expected_sha256": "485beb73e9da2edf4cea345fce18c2748233d76f775f665f97340ac4797ea28a",
+      "actual_sha256": "485beb73e9da2edf4cea345fce18c2748233d76f775f665f97340ac4797ea28a",
+      "passed": true
+    },
+    {
+      "path": "console/package-lock.json",
+      "expected_sha256": "bd1680ee8b9e56eff80bc9bee3f8b49738ba44dbe04da230318a9b2c3201215e",
+      "actual_sha256": "bd1680ee8b9e56eff80bc9bee3f8b49738ba44dbe04da230318a9b2c3201215e",
+      "passed": true
+    },
+    {
+      "path": "console/package.json",
+      "expected_sha256": "85e453c24cc521497cc987fd6b4985cc1ccf9d21e9160b711d5a00ced3f5a34b",
+      "actual_sha256": "85e453c24cc521497cc987fd6b4985cc1ccf9d21e9160b711d5a00ced3f5a34b",
+      "passed": true
+    },
+    {
+      "path": "console/README.md",
+      "expected_sha256": "d5e6b6dc698a467b8f7454ca2042eb218d99bcd268d9fd8f9f5861043c83927b",
+      "actual_sha256": "d5e6b6dc698a467b8f7454ca2042eb218d99bcd268d9fd8f9f5861043c83927b",
+      "passed": true
+    },
+    {
+      "path": "console/scripts/browser-check.mjs",
+      "expected_sha256": "91c9ad65eefa04327744db36e39a917aa741e2f57e097b8127953276d6ef02d4",
+      "actual_sha256": "91c9ad65eefa04327744db36e39a917aa741e2f57e097b8127953276d6ef02d4",
+      "passed": true
+    },
+    {
+      "path": "console/scripts/consumer-binding-browser.mjs",
+      "expected_sha256": "29bcf530d12bbd4e5045fcb22e69a1d7ddf038ce31687f02e934bb508af7418d",
+      "actual_sha256": "29bcf530d12bbd4e5045fcb22e69a1d7ddf038ce31687f02e934bb508af7418d",
+      "passed": true
+    },
+    {
+      "path": "console/scripts/generate-types.mjs",
+      "expected_sha256": "033087fb02d67e361f8102e26d0ed43cbec47f1d114d6e59233381ff491ec3b0",
+      "actual_sha256": "033087fb02d67e361f8102e26d0ed43cbec47f1d114d6e59233381ff491ec3b0",
+      "passed": true
+    },
+    {
+      "path": "console/scripts/go-browser-harness.go.txt",
+      "expected_sha256": "8e61875bad1cbd500a7b493133d1315692aa6e78a8e89b5087614132acc0ce8a",
+      "actual_sha256": "8e61875bad1cbd500a7b493133d1315692aa6e78a8e89b5087614132acc0ce8a",
+      "passed": true
+    },
+    {
+      "path": "console/scripts/go-browser.mjs",
+      "expected_sha256": "9fdd10fb8d511892d8d69c97cc0b3cb315483c1968abb6ff0b1ac9909d38dd72",
+      "actual_sha256": "9fdd10fb8d511892d8d69c97cc0b3cb315483c1968abb6ff0b1ac9909d38dd72",
+      "passed": true
+    },
+    {
+      "path": "console/scripts/http-harness.go.txt",
+      "expected_sha256": "6672a37513d202f574d5b2109a59704f2d43ddf7c6382d3b30238beaa2588134",
+      "actual_sha256": "6672a37513d202f574d5b2109a59704f2d43ddf7c6382d3b30238beaa2588134",
+      "passed": true
+    },
+    {
+      "path": "console/scripts/local-control.d.mts",
+      "expected_sha256": "af4a7335cee2a01657c2d457e06027c4b24413a7f078bec0a284f054d5603881",
+      "actual_sha256": "af4a7335cee2a01657c2d457e06027c4b24413a7f078bec0a284f054d5603881",
+      "passed": true
+    },
+    {
+      "path": "console/scripts/local-control.mjs",
+      "expected_sha256": "956b3a8c018312c5600e8808cbf51d517e3b937956a2d7c0ec27855c16e7f9fb",
+      "actual_sha256": "956b3a8c018312c5600e8808cbf51d517e3b937956a2d7c0ec27855c16e7f9fb",
+      "passed": true
+    },
+    {
+      "path": "console/scripts/management-browser.mjs",
+      "expected_sha256": "98d26034d4813cd0e896bf604468b445bba29e839bb9ecd20ffa66b4bfdac327",
+      "actual_sha256": "98d26034d4813cd0e896bf604468b445bba29e839bb9ecd20ffa66b4bfdac327",
+      "passed": true
+    },
+    {
+      "path": "console/scripts/management-harness.go.txt",
+      "expected_sha256": "996941b97da5f885bbcb4331425767a7bdc413bb603725c8710711844002ef99",
+      "actual_sha256": "996941b97da5f885bbcb4331425767a7bdc413bb603725c8710711844002ef99",
+      "passed": true
+    },
+    {
+      "path": "console/scripts/reference-pages.mjs",
+      "expected_sha256": "99a91ba9286a1161e4cd1f8da1edb4a93a264dcfe24535ee90dce0374ff5caa3",
+      "actual_sha256": "99a91ba9286a1161e4cd1f8da1edb4a93a264dcfe24535ee90dce0374ff5caa3",
+      "passed": true
+    },
+    {
+      "path": "console/scripts/release-browser-harness.go.txt",
+      "expected_sha256": "5f1e6bf5562b0b896d3d842644fd03cbb2a35e36bfb9e7d02e1eda305bfed3b6",
+      "actual_sha256": "5f1e6bf5562b0b896d3d842644fd03cbb2a35e36bfb9e7d02e1eda305bfed3b6",
+      "passed": true
+    },
+    {
+      "path": "console/scripts/release-browser.mjs",
+      "expected_sha256": "451bceb1500ba2e4c10c3050958e6ba8a24dbf1f395e6c261506916dedaa7a3a",
+      "actual_sha256": "451bceb1500ba2e4c10c3050958e6ba8a24dbf1f395e6c261506916dedaa7a3a",
+      "passed": true
+    },
+    {
+      "path": "console/scripts/review-browser.mjs",
+      "expected_sha256": "0e18a1fa5e0d2d0f95a485a49377379d65d8c7c6ce96e78eb3df57884d6d9bd0",
+      "actual_sha256": "0e18a1fa5e0d2d0f95a485a49377379d65d8c7c6ce96e78eb3df57884d6d9bd0",
+      "passed": true
+    },
+    {
+      "path": "console/scripts/test-management-browser.sh",
+      "expected_sha256": "f9fb70d0ef6b25c689daefbb2d7c898eac02e218df981e046a3da2c5825bd1b6",
+      "actual_sha256": "f9fb70d0ef6b25c689daefbb2d7c898eac02e218df981e046a3da2c5825bd1b6",
+      "passed": true
+    },
+    {
+      "path": "console/src/api/client.ts",
+      "expected_sha256": "2db47a8cef2945e8c30ef780016b1c63becb1ed832c5052dc7a402c1ddf04103",
+      "actual_sha256": "2db47a8cef2945e8c30ef780016b1c63becb1ed832c5052dc7a402c1ddf04103",
+      "passed": true
+    },
+    {
+      "path": "console/src/api/contracts.ts",
+      "expected_sha256": "c4742fa44ddca61f47a910e7cc2f69bbacd90945fff0aba462622dc2d733d28e",
+      "actual_sha256": "c4742fa44ddca61f47a910e7cc2f69bbacd90945fff0aba462622dc2d733d28e",
+      "passed": true
+    },
+    {
+      "path": "console/src/api/draft-schema.ts",
+      "expected_sha256": "1058d9f5a9030a1d05daa52c58e66b7406869fa4adf642e22b2331c1e97cb5e6",
+      "actual_sha256": "1058d9f5a9030a1d05daa52c58e66b7406869fa4adf642e22b2331c1e97cb5e6",
+      "passed": true
+    },
+    {
+      "path": "console/src/api/local-control.ts",
+      "expected_sha256": "dc47c15344a9913567bc1063dda61ccab3139e1f0e3d8cc63b1dcfef20e05a5d",
+      "actual_sha256": "dc47c15344a9913567bc1063dda61ccab3139e1f0e3d8cc63b1dcfef20e05a5d",
+      "passed": true
+    },
+    {
+      "path": "console/src/api/recovery.ts",
+      "expected_sha256": "86d6b6edb01f91bef9085e390a3ff3eb1478d7970f0b49fb689f1623b33acc3e",
+      "actual_sha256": "86d6b6edb01f91bef9085e390a3ff3eb1478d7970f0b49fb689f1623b33acc3e",
+      "passed": true
+    },
+    {
+      "path": "console/src/api/schema.ts",
+      "expected_sha256": "73aadb9e1afc8fa359f0f732476ffbbefcc0299e16f8681240e788ba98998faf",
+      "actual_sha256": "73aadb9e1afc8fa359f0f732476ffbbefcc0299e16f8681240e788ba98998faf",
+      "passed": true
+    },
+    {
+      "path": "console/src/api/stream.ts",
+      "expected_sha256": "e62a034b028cabae8d31388db235872059f305e0e721adcda2376518cd458f3d",
+      "actual_sha256": "e62a034b028cabae8d31388db235872059f305e0e721adcda2376518cd458f3d",
+      "passed": true
+    },
+    {
+      "path": "console/src/App.vue",
+      "expected_sha256": "02d7e49f582db7002cbfc702bf20ef309c4fb04e183364ecdf19d38c001e7040",
+      "actual_sha256": "02d7e49f582db7002cbfc702bf20ef309c4fb04e183364ecdf19d38c001e7040",
+      "passed": true
+    },
+    {
+      "path": "console/src/architecture-review.test.ts",
+      "expected_sha256": "270aeb101ea389d1c56114f508583c9737cd405a72b70484e08805ce130e333b",
+      "actual_sha256": "270aeb101ea389d1c56114f508583c9737cd405a72b70484e08805ce130e333b",
+      "passed": true
+    },
+    {
+      "path": "console/src/backend-review.test.ts",
+      "expected_sha256": "01f4cdbd627f155beda45817e231b04f6e633dcc57e6ad3f954c016ef3febad1",
+      "actual_sha256": "01f4cdbd627f155beda45817e231b04f6e633dcc57e6ad3f954c016ef3febad1",
+      "passed": true
+    },
+    {
+      "path": "console/src/components/PanelDialog.vue",
+      "expected_sha256": "160843880b0542ae9f0ce843459b8f672d5f35e660251cdd968299636d494b90",
+      "actual_sha256": "160843880b0542ae9f0ce843459b8f672d5f35e660251cdd968299636d494b90",
+      "passed": true
+    },
+    {
+      "path": "console/src/console.test.ts",
+      "expected_sha256": "d23e39caa8b0fcd3f167e8fe3e3c0f62663ee98962b63f2c4ad61d9b92c40c01",
+      "actual_sha256": "d23e39caa8b0fcd3f167e8fe3e3c0f62663ee98962b63f2c4ad61d9b92c40c01",
+      "passed": true
+    },
+    {
+      "path": "console/src/consumer-binding.test.ts",
+      "expected_sha256": "e66874cf96455652f46aa72c8a8f1799041261a6185075fc8c1fb09af06665e1",
+      "actual_sha256": "e66874cf96455652f46aa72c8a8f1799041261a6185075fc8c1fb09af06665e1",
+      "passed": true
+    },
+    {
+      "path": "console/src/domain.ts",
+      "expected_sha256": "4e49d941d7afbaeafe609bae913e070d94616928013a5e52b00617e27e9c0498",
+      "actual_sha256": "4e49d941d7afbaeafe609bae913e070d94616928013a5e52b00617e27e9c0498",
+      "passed": true
+    },
+    {
+      "path": "console/src/fixture-data.json",
+      "expected_sha256": "e1b52465f6be8e5d9509939159571f4c7b2e5883a9ae5dcbc972aac6e67c88f1",
+      "actual_sha256": "e1b52465f6be8e5d9509939159571f4c7b2e5883a9ae5dcbc972aac6e67c88f1",
+      "passed": true
+    },
+    {
+      "path": "console/src/fixtures.ts",
+      "expected_sha256": "efd296ffabfd1cbb7ffbc80fb33418e3d099436eed48ad049fc418c76b27fa61",
+      "actual_sha256": "efd296ffabfd1cbb7ffbc80fb33418e3d099436eed48ad049fc418c76b27fa61",
+      "passed": true
+    },
+    {
+      "path": "console/src/http-continuation.test.ts",
+      "expected_sha256": "7c0d85b234d8ac19ec00bef8c016d1833487b2424c4a12e4efba94550c335e9c",
+      "actual_sha256": "7c0d85b234d8ac19ec00bef8c016d1833487b2424c4a12e4efba94550c335e9c",
+      "passed": true
+    },
+    {
+      "path": "console/src/key-workspace.test.ts",
+      "expected_sha256": "0fadd929e67af5f0197494d413112602f88ccde06991d616998699b525cb4228",
+      "actual_sha256": "0fadd929e67af5f0197494d413112602f88ccde06991d616998699b525cb4228",
+      "passed": true
+    },
+    {
+      "path": "console/src/main.ts",
+      "expected_sha256": "a9a77d229d3df173585188d0cfcdeb479cf61b5a0028b67353b4f5998c9e3ad9",
+      "actual_sha256": "a9a77d229d3df173585188d0cfcdeb479cf61b5a0028b67353b4f5998c9e3ad9",
+      "passed": true
+    },
+    {
+      "path": "console/src/pages/Keys.vue",
+      "expected_sha256": "d5ae38c4328a3dbaad0269bebd65a560670b1553e3e012a741bc78f6c225b639",
+      "actual_sha256": "d5ae38c4328a3dbaad0269bebd65a560670b1553e3e012a741bc78f6c225b639",
+      "passed": true
+    },
+    {
+      "path": "console/src/pages/Models.vue",
+      "expected_sha256": "7d3fa38ee3b2d1b3ec453daaedecc2fb1b249c96a294cb7c6dbf6302d6d0bb94",
+      "actual_sha256": "7d3fa38ee3b2d1b3ec453daaedecc2fb1b249c96a294cb7c6dbf6302d6d0bb94",
+      "passed": true
+    },
+    {
+      "path": "console/src/pages/Playground.vue",
+      "expected_sha256": "782e42d80d6e41454c75f5b9cabb065aab573ffb3323507fda5162882a4226a2",
+      "actual_sha256": "782e42d80d6e41454c75f5b9cabb065aab573ffb3323507fda5162882a4226a2",
+      "passed": true
+    },
+    {
+      "path": "console/src/pages/Releases.vue",
+      "expected_sha256": "ff84cf0a9d3f2268eaf1a56c92af0c11fbe7752b9296798ebe7b069f5872f09f",
+      "actual_sha256": "ff84cf0a9d3f2268eaf1a56c92af0c11fbe7752b9296798ebe7b069f5872f09f",
+      "passed": true
+    },
+    {
+      "path": "console/src/pages/Usage.vue",
+      "expected_sha256": "0fe496eadfa883a867347e526d5ceb88b74d96e081992a69264436ea32a4fe5b",
+      "actual_sha256": "0fe496eadfa883a867347e526d5ceb88b74d96e081992a69264436ea32a4fe5b",
+      "passed": true
+    },
+    {
+      "path": "console/src/protocol-errors.test.ts",
+      "expected_sha256": "548e0ae24e33dead0490cbaead6991a23918f5b9467862e37daa57fe293d0dab",
+      "actual_sha256": "548e0ae24e33dead0490cbaead6991a23918f5b9467862e37daa57fe293d0dab",
+      "passed": true
+    },
+    {
+      "path": "console/src/qa-review.test.ts",
+      "expected_sha256": "9f708612f6bd2e29a203a2c1825eb0e40d5b148bd94fab774d983b3db4939348",
+      "actual_sha256": "9f708612f6bd2e29a203a2c1825eb0e40d5b148bd94fab774d983b3db4939348",
+      "passed": true
+    },
+    {
+      "path": "console/src/release-compat.test.ts",
+      "expected_sha256": "c4c83ca80365f815a616b32b749bdc557be0bc3775657b877516792df6b4eb2c",
+      "actual_sha256": "c4c83ca80365f815a616b32b749bdc557be0bc3775657b877516792df6b4eb2c",
+      "passed": true
+    },
+    {
+      "path": "console/src/review-regression.test.ts",
+      "expected_sha256": "a09935974c732c8ba623da07b5cfd67c506cf8c39c963cb3112d7ff67185dad8",
+      "actual_sha256": "a09935974c732c8ba623da07b5cfd67c506cf8c39c963cb3112d7ff67185dad8",
+      "passed": true
+    },
+    {
+      "path": "console/src/stream-identity.test.ts",
+      "expected_sha256": "79acd66e7da32a97d3ecae9fb349d4f7889293bfa510df67f537d1c357ae2943",
+      "actual_sha256": "79acd66e7da32a97d3ecae9fb349d4f7889293bfa510df67f537d1c357ae2943",
+      "passed": true
+    },
+    {
+      "path": "console/src/style.css",
+      "expected_sha256": "dd0a7ecf979c4e62d36e0b5c706867ad1259657dba5747a6dc785a742540546d",
+      "actual_sha256": "dd0a7ecf979c4e62d36e0b5c706867ad1259657dba5747a6dc785a742540546d",
+      "passed": true
+    },
+    {
+      "path": "console/src/ui.ts",
+      "expected_sha256": "962561efe2087f38d7a8db7d3c0e150bc05a9e44650563d9fd6160bae6898e64",
+      "actual_sha256": "962561efe2087f38d7a8db7d3c0e150bc05a9e44650563d9fd6160bae6898e64",
+      "passed": true
+    },
+    {
+      "path": "console/tsconfig.json",
+      "expected_sha256": "422fbb63ee6a547ed52eb06e07dc123bf36fe7903a46fd7c9f5a0df5eeebaa11",
+      "actual_sha256": "422fbb63ee6a547ed52eb06e07dc123bf36fe7903a46fd7c9f5a0df5eeebaa11",
+      "passed": true
+    },
+    {
+      "path": "console/vite.config.ts",
+      "expected_sha256": "a3c231bde00b5c59de853ed7e3f9804746a99a5076844b490c2ae4a414f0fdb6",
+      "actual_sha256": "a3c231bde00b5c59de853ed7e3f9804746a99a5076844b490c2ae4a414f0fdb6",
+      "passed": true
+    },
+    {
+      "path": "deploy/.gitattributes",
+      "expected_sha256": "a79691a93b46e49ce460c26ef22afcc03d6eca1e63bf2edbc20e96159510f6c9",
+      "actual_sha256": "a79691a93b46e49ce460c26ef22afcc03d6eca1e63bf2edbc20e96159510f6c9",
+      "passed": true
+    },
+    {
+      "path": "deploy/.gitignore",
+      "expected_sha256": "b03ab30ac646ab4bdab424be43b1d1c707eb62736b452fc9f27d3658455e8b22",
+      "actual_sha256": "b03ab30ac646ab4bdab424be43b1d1c707eb62736b452fc9f27d3658455e8b22",
+      "passed": true
+    },
+    {
+      "path": "deploy/build-sources.lock.json",
+      "expected_sha256": "732ab1a5d5cac4b5cbeb6783a669570cd664625cefec72f0c6a5506428a63880",
+      "actual_sha256": "732ab1a5d5cac4b5cbeb6783a669570cd664625cefec72f0c6a5506428a63880",
+      "passed": true
+    },
+    {
+      "path": "deploy/charts/maas-platform/.helmignore",
+      "expected_sha256": "c626dca267e7906244d76ac8af4a379b47cbdd3b5052503a510b667872bea327",
+      "actual_sha256": "c626dca267e7906244d76ac8af4a379b47cbdd3b5052503a510b667872bea327",
+      "passed": true
+    },
+    {
+      "path": "deploy/charts/maas-platform/Chart.yaml",
+      "expected_sha256": "a25bda78f178174ce0a9fbddf96f4d805a4b0e0fc497c32e269ee201993458d3",
+      "actual_sha256": "a25bda78f178174ce0a9fbddf96f4d805a4b0e0fc497c32e269ee201993458d3",
+      "passed": true
+    },
+    {
+      "path": "deploy/charts/maas-platform/runtime-interface.json",
+      "expected_sha256": "d29a968ca1d349689e6fc3ec96a7c4896a989549a7dd00df87c830a43048721f",
+      "actual_sha256": "d29a968ca1d349689e6fc3ec96a7c4896a989549a7dd00df87c830a43048721f",
+      "passed": true
+    },
+    {
+      "path": "deploy/charts/maas-platform/templates/_helpers.tpl",
+      "expected_sha256": "0ffce991983a155143e6ce07a22f107b7deff0e29ae0f3755e6bf7a3d5985243",
+      "actual_sha256": "0ffce991983a155143e6ce07a22f107b7deff0e29ae0f3755e6bf7a3d5985243",
+      "passed": true
+    },
+    {
+      "path": "deploy/charts/maas-platform/templates/ingress.yaml",
+      "expected_sha256": "b5a3b1fc27a2db4f9795ec31501ca4ff702689c6bf5ef24cbcc7a05684ba1d78",
+      "actual_sha256": "b5a3b1fc27a2db4f9795ec31501ca4ff702689c6bf5ef24cbcc7a05684ba1d78",
+      "passed": true
+    },
+    {
+      "path": "deploy/charts/maas-platform/templates/networkpolicy.yaml",
+      "expected_sha256": "b1e53ce8392a933705204ae0e46e722b52e8a2542832f0daead79b45c9aa6190",
+      "actual_sha256": "b1e53ce8392a933705204ae0e46e722b52e8a2542832f0daead79b45c9aa6190",
+      "passed": true
+    },
+    {
+      "path": "deploy/charts/maas-platform/templates/NOTES.txt",
+      "expected_sha256": "0ec93409560c8c67bbaf31a1cd556542bea9a2fc98c8a094e30f4a853033c70e",
+      "actual_sha256": "0ec93409560c8c67bbaf31a1cd556542bea9a2fc98c8a094e30f4a853033c70e",
+      "passed": true
+    },
+    {
+      "path": "deploy/charts/maas-platform/templates/rbac.yaml",
+      "expected_sha256": "47f74ee28360a50ea448ef1909580c67f3f4f619b74e273f84435b68e2fb435c",
+      "actual_sha256": "47f74ee28360a50ea448ef1909580c67f3f4f619b74e273f84435b68e2fb435c",
+      "passed": true
+    },
+    {
+      "path": "deploy/charts/maas-platform/templates/services.yaml",
+      "expected_sha256": "9875ed7845663b44b6ddf79da958c60b3d6b6f9f447c385ff99741077190fd68",
+      "actual_sha256": "9875ed7845663b44b6ddf79da958c60b3d6b6f9f447c385ff99741077190fd68",
+      "passed": true
+    },
+    {
+      "path": "deploy/charts/maas-platform/templates/validate.yaml",
+      "expected_sha256": "1a4825fe12952b3b6703ff2de6c6b4e532ece1465f88f929cda7db794c4d8726",
+      "actual_sha256": "1a4825fe12952b3b6703ff2de6c6b4e532ece1465f88f929cda7db794c4d8726",
+      "passed": true
+    },
+    {
+      "path": "deploy/charts/maas-platform/templates/workloads.yaml",
+      "expected_sha256": "9ea3589da84232107e97ca5ae4d6577ab10d7ad114606ecaa90c03c12d116418",
+      "actual_sha256": "9ea3589da84232107e97ca5ae4d6577ab10d7ad114606ecaa90c03c12d116418",
+      "passed": true
+    },
+    {
+      "path": "deploy/charts/maas-platform/values-hybrid.yaml",
+      "expected_sha256": "7e3cbd162b70fb2c2a9438e7075374341732568bb505e7ae84608f5ee9e92fe5",
+      "actual_sha256": "7e3cbd162b70fb2c2a9438e7075374341732568bb505e7ae84608f5ee9e92fe5",
+      "passed": true
+    },
+    {
+      "path": "deploy/charts/maas-platform/values-internal.yaml",
+      "expected_sha256": "6cbe8e2108b8c2ecf345922780fc20ca2b49b05f68773462c4953aec3e5d1487",
+      "actual_sha256": "6cbe8e2108b8c2ecf345922780fc20ca2b49b05f68773462c4953aec3e5d1487",
+      "passed": true
+    },
+    {
+      "path": "deploy/charts/maas-platform/values.schema.json",
+      "expected_sha256": "84af36c4ea2445c8967aa6ebc6f8c67363c7031b83a8731c1c93e24bf93a0ed9",
+      "actual_sha256": "84af36c4ea2445c8967aa6ebc6f8c67363c7031b83a8731c1c93e24bf93a0ed9",
+      "passed": true
+    },
+    {
+      "path": "deploy/charts/maas-platform/values.yaml",
+      "expected_sha256": "dda60dcff22e3206e2877ca159065985e17d7db2e3f26037888fd9644b52677c",
+      "actual_sha256": "dda60dcff22e3206e2877ca159065985e17d7db2e3f26037888fd9644b52677c",
+      "passed": true
+    },
+    {
+      "path": "deploy/checks/candidate_wiring.py",
+      "expected_sha256": "aea4e53d731a8e9e165a79ea11f2a51301fa41693b457ff8e47767c817fc516e",
+      "actual_sha256": "aea4e53d731a8e9e165a79ea11f2a51301fa41693b457ff8e47767c817fc516e",
+      "passed": true
+    },
+    {
+      "path": "deploy/checks/identities.py",
+      "expected_sha256": "a88e5bb13a8769cf354cbb7283eff9403a4645799744717e55ec3124e9701880",
+      "actual_sha256": "a88e5bb13a8769cf354cbb7283eff9403a4645799744717e55ec3124e9701880",
+      "passed": true
+    },
+    {
+      "path": "deploy/checks/inspect_sources.py",
+      "expected_sha256": "d413d20e46a386f12920a8fb7a952ed79bca2a46a6379f070c9132e2e9de3075",
+      "actual_sha256": "d413d20e46a386f12920a8fb7a952ed79bca2a46a6379f070c9132e2e9de3075",
+      "passed": true
+    },
+    {
+      "path": "deploy/checks/permissions.py",
+      "expected_sha256": "47604cfac8f5f4a0a92aa5c4bd4ce07e649a8196bb5fd1ca8a0af74a87ef5008",
+      "actual_sha256": "47604cfac8f5f4a0a92aa5c4bd4ce07e649a8196bb5fd1ca8a0af74a87ef5008",
+      "passed": true
+    },
+    {
+      "path": "deploy/checks/preflight.py",
+      "expected_sha256": "734fce0208ab2657fade708224d412ad3d9273e41aaff8b3522b13bf2a2a7ccc",
+      "actual_sha256": "734fce0208ab2657fade708224d412ad3d9273e41aaff8b3522b13bf2a2a7ccc",
+      "passed": true
+    },
+    {
+      "path": "deploy/checks/requirements.txt",
+      "expected_sha256": "bfe5c2fbd8864d152c8113c9b86103c3cf62bbce3419eaf9b35f96733c06bc03",
+      "actual_sha256": "bfe5c2fbd8864d152c8113c9b86103c3cf62bbce3419eaf9b35f96733c06bc03",
+      "passed": true
+    },
+    {
+      "path": "deploy/checks/source_context.py",
+      "expected_sha256": "075a25eca4a10fd338c6eb361c01ab540110c3536156a7b537b633623323c514",
+      "actual_sha256": "075a25eca4a10fd338c6eb361c01ab540110c3536156a7b537b633623323c514",
+      "passed": true
+    },
+    {
+      "path": "deploy/checks/test_identities.py",
+      "expected_sha256": "174eb0c778d1c2d7e4058ac1358d1317a9fc3bd1faa7d23bbfbe9e15a25d7acb",
+      "actual_sha256": "174eb0c778d1c2d7e4058ac1358d1317a9fc3bd1faa7d23bbfbe9e15a25d7acb",
+      "passed": true
+    },
+    {
+      "path": "deploy/checks/test_permissions.py",
+      "expected_sha256": "95f00c14a37721fd7a1c04f17abcdce08724d8cc22aae47e817cc18fc911d568",
+      "actual_sha256": "95f00c14a37721fd7a1c04f17abcdce08724d8cc22aae47e817cc18fc911d568",
+      "passed": true
+    },
+    {
+      "path": "deploy/checks/test_preflight.py",
+      "expected_sha256": "4244d9dcd15a80cd75e8269938d4860b14f14d11256bc2e5519f140ddfd397ea",
+      "actual_sha256": "4244d9dcd15a80cd75e8269938d4860b14f14d11256bc2e5519f140ddfd397ea",
+      "passed": true
+    },
+    {
+      "path": "deploy/checks/test_source_context.py",
+      "expected_sha256": "b87ccd4e933aaccbf34e885a748c8f805484d45778ffc004bfbf98c3f2bf1dfe",
+      "actual_sha256": "b87ccd4e933aaccbf34e885a748c8f805484d45778ffc004bfbf98c3f2bf1dfe",
+      "passed": true
+    },
+    {
+      "path": "deploy/checks/verify.py",
+      "expected_sha256": "8b86ee0bf3864f2efa5132b1420be797d04320ee77c924918c0f287db008fe91",
+      "actual_sha256": "8b86ee0bf3864f2efa5132b1420be797d04320ee77c924918c0f287db008fe91",
+      "passed": true
+    },
+    {
+      "path": "deploy/console-server/main.go",
+      "expected_sha256": "85be94768bfbd31b8f1157c9aa2764770a075e9dc7be17ac100e604944d8193d",
+      "actual_sha256": "85be94768bfbd31b8f1157c9aa2764770a075e9dc7be17ac100e604944d8193d",
+      "passed": true
+    },
+    {
+      "path": "deploy/console-server/main_test.go",
+      "expected_sha256": "7620a3fd50f99aba64841f0794bf293569536ddddb27b5ca9fca4048a7b79e89",
+      "actual_sha256": "7620a3fd50f99aba64841f0794bf293569536ddddb27b5ca9fca4048a7b79e89",
+      "passed": true
+    },
+    {
+      "path": "deploy/dependencies.lock.json",
+      "expected_sha256": "94aae9fc40e083db043a4c0c35c3564a72e07b5e98cdd6760ee7fd101778307a",
+      "actual_sha256": "94aae9fc40e083db043a4c0c35c3564a72e07b5e98cdd6760ee7fd101778307a",
+      "passed": true
+    },
+    {
+      "path": "deploy/docs/current-assembly.md",
+      "expected_sha256": "6d45b17609272e4cc695846986b8f667308d20155d140e120d0561cc356c6dfa",
+      "actual_sha256": "6d45b17609272e4cc695846986b8f667308d20155d140e120d0561cc356c6dfa",
+      "passed": true
+    },
+    {
+      "path": "deploy/docs/database-identities.md",
+      "expected_sha256": "9f169d1d2e3aaee40369cacaadc260afe42a04b786b28f3eb0ac6c784c3e42a2",
+      "actual_sha256": "9f169d1d2e3aaee40369cacaadc260afe42a04b786b28f3eb0ac6c784c3e42a2",
+      "passed": true
+    },
+    {
+      "path": "deploy/docs/log-fields.json",
+      "expected_sha256": "bcb9dc20f6014a6fb0d1be6b93ad27c3b53994bc368fbede9e7bf13a6d2c6cae",
+      "actual_sha256": "bcb9dc20f6014a6fb0d1be6b93ad27c3b53994bc368fbede9e7bf13a6d2c6cae",
+      "passed": true
+    },
+    {
+      "path": "deploy/docs/readiness.md",
+      "expected_sha256": "8560be48ea5795240fa3eac642cb4929fe6f8534ea3565a619c1a524d2f83bb6",
+      "actual_sha256": "8560be48ea5795240fa3eac642cb4929fe6f8534ea3565a619c1a524d2f83bb6",
+      "passed": true
+    },
+    {
+      "path": "deploy/docs/runbook.md",
+      "expected_sha256": "1e0e0fa07b5912df64ae4459c5dda811db59c977779e38f6a29337743dbbed6b",
+      "actual_sha256": "1e0e0fa07b5912df64ae4459c5dda811db59c977779e38f6a29337743dbbed6b",
+      "passed": true
+    },
+    {
+      "path": "deploy/docs/signals.csv",
+      "expected_sha256": "224970d562bb3be9e9eda17167bd59767f40687b07fb8429d6c542b336d5cd7f",
+      "actual_sha256": "224970d562bb3be9e9eda17167bd59767f40687b07fb8429d6c542b336d5cd7f",
+      "passed": true
+    },
+    {
+      "path": "deploy/docs/source-assembly.md",
+      "expected_sha256": "18048adafb5aced0bc0934ac4192dcb0601b5a0aa06f99d3a9e989b5c1d2fbfe",
+      "actual_sha256": "18048adafb5aced0bc0934ac4192dcb0601b5a0aa06f99d3a9e989b5c1d2fbfe",
+      "passed": true
+    },
+    {
+      "path": "deploy/identities.json",
+      "expected_sha256": "b5ab9d8ffac13dc3cb6f44987309242bc26b5c91b220a98ea053a9b2a85707b4",
+      "actual_sha256": "b5ab9d8ffac13dc3cb6f44987309242bc26b5c91b220a98ea053a9b2a85707b4",
+      "passed": true
+    },
+    {
+      "path": "deploy/images/Dockerfile.console",
+      "expected_sha256": "7f1bf672bf16175fcebabe0bedfa423c3696668bbe90f257eabbd0ffb0ac0d65",
+      "actual_sha256": "7f1bf672bf16175fcebabe0bedfa423c3696668bbe90f257eabbd0ffb0ac0d65",
+      "passed": true
+    },
+    {
+      "path": "deploy/images/Dockerfile.operator",
+      "expected_sha256": "7f5d392cd7fb596d57ba39be5874f6d99a27d653e209161aafacbac0da11a029",
+      "actual_sha256": "7f5d392cd7fb596d57ba39be5874f6d99a27d653e209161aafacbac0da11a029",
+      "passed": true
+    },
+    {
+      "path": "deploy/probe/main.go",
+      "expected_sha256": "210ab94cd9ed69bf93bf4c816bead4d71f897211e04190909aaf91e0bcf8c199",
+      "actual_sha256": "210ab94cd9ed69bf93bf4c816bead4d71f897211e04190909aaf91e0bcf8c199",
+      "passed": true
+    },
+    {
+      "path": "deploy/probe/main_test.go",
+      "expected_sha256": "42c71942a322988ae57b0b1a8357a4d82a68c94cbb77866f7b3009f446432df8",
+      "actual_sha256": "42c71942a322988ae57b0b1a8357a4d82a68c94cbb77866f7b3009f446432df8",
+      "passed": true
+    },
+    {
+      "path": "deploy/README.md",
+      "expected_sha256": "85769e857b0b56a938a0626491f78bdce369740db7811ac2fdb7d4e38320ea14",
+      "actual_sha256": "85769e857b0b56a938a0626491f78bdce369740db7811ac2fdb7d4e38320ea14",
+      "passed": true
+    },
+    {
+      "path": "deploy/tests/fixtures/hybrid.yaml",
+      "expected_sha256": "fc97c9a90229547d964245ff54063a2429e1aec46e46e197a9fd2477fee00054",
+      "actual_sha256": "fc97c9a90229547d964245ff54063a2429e1aec46e46e197a9fd2477fee00054",
+      "passed": true
+    },
+    {
+      "path": "deploy/tests/fixtures/internal.yaml",
+      "expected_sha256": "312018eb0a67803ec3f70cd4a321c4ced47ebc63f631d7d68c24573d7dea78ef",
+      "actual_sha256": "312018eb0a67803ec3f70cd4a321c4ced47ebc63f631d7d68c24573d7dea78ef",
+      "passed": true
+    },
+    {
+      "path": "docs/contracts/MAAS-2-architecture-v0.3.md",
+      "expected_sha256": "6fe233758b69760cf5fd1ec719e2057f5fd91f8b885ed3f8dc8c3ec0fba43032",
+      "actual_sha256": "6fe233758b69760cf5fd1ec719e2057f5fd91f8b885ed3f8dc8c3ec0fba43032",
+      "passed": true
+    },
+    {
+      "path": "docs/contracts/MAAS-2-architecture-v0.4.md",
+      "expected_sha256": "00729c8f18934d789fe462e837a78631ff72cb04f6783141f0a7a9aceed6812c",
+      "actual_sha256": "00729c8f18934d789fe462e837a78631ff72cb04f6783141f0a7a9aceed6812c",
+      "passed": true
+    },
+    {
+      "path": "docs/controlled-api-continuation.md",
+      "expected_sha256": "34a1f80563c2aaca3a6c091e83f45ea64f140033de2682dbd9c0c2c12a6af562",
+      "actual_sha256": "34a1f80563c2aaca3a6c091e83f45ea64f140033de2682dbd9c0c2c12a6af562",
+      "passed": true
+    },
+    {
+      "path": "docs/controlled-api-verification.md",
+      "expected_sha256": "ccd6ad5cd1b959bf3c38364b48c60ec26b69e24fe1834ccf141b806297982eaf",
+      "actual_sha256": "ccd6ad5cd1b959bf3c38364b48c60ec26b69e24fe1834ccf141b806297982eaf",
+      "passed": true
+    },
+    {
+      "path": "docs/go-relay-d1-export.md",
+      "expected_sha256": "8dffd8d0a6021d296afba6993442356ba93752594c67b329b2a2aa991b79417f",
+      "actual_sha256": "8dffd8d0a6021d296afba6993442356ba93752594c67b329b2a2aa991b79417f",
+      "passed": true
+    },
+    {
+      "path": "docs/higress-minimal-patch-scope.md",
+      "expected_sha256": "eb8472c5b0ec120019cc1c069fad752809040115fda637663f0a13ff8d2cff93",
+      "actual_sha256": "eb8472c5b0ec120019cc1c069fad752809040115fda637663f0a13ff8d2cff93",
+      "passed": true
+    },
+    {
+      "path": "docs/history-public-handoff.md",
+      "expected_sha256": "2a536c86b70db869d4abe78d5d9baa596de60e95f4020d2f3adc6e92da4ad911",
+      "actual_sha256": "2a536c86b70db869d4abe78d5d9baa596de60e95f4020d2f3adc6e92da4ad911",
+      "passed": true
+    },
+    {
+      "path": "docs/integration.md",
+      "expected_sha256": "39bf7c58f3b3b88640588e441d100c08fe4d99c8b53808a89d6f6d448b174774",
+      "actual_sha256": "39bf7c58f3b3b88640588e441d100c08fe4d99c8b53808a89d6f6d448b174774",
+      "passed": true
+    },
+    {
+      "path": "docs/kernel-controlled.md",
+      "expected_sha256": "a2565285abaf16111333ba577583dc9158bb78b5f62fc95d74b568466fba08ae",
+      "actual_sha256": "a2565285abaf16111333ba577583dc9158bb78b5f62fc95d74b568466fba08ae",
+      "passed": true
+    },
+    {
+      "path": "docs/kernel-verification.md",
+      "expected_sha256": "eaf1ac66c7f5e0294b21cfab3a6e4eb0d41d28317dd21c72a46bbf2a714656f2",
+      "actual_sha256": "eaf1ac66c7f5e0294b21cfab3a6e4eb0d41d28317dd21c72a46bbf2a714656f2",
+      "passed": true
+    },
+    {
+      "path": "docs/local-service.md",
+      "expected_sha256": "a4980e00e07376b0db7419ea75f143e757a368a5c9ae5191498f758db601b01c",
+      "actual_sha256": "a4980e00e07376b0db7419ea75f143e757a368a5c9ae5191498f758db601b01c",
+      "passed": true
+    },
+    {
+      "path": "docs/maas17-r1-r3-fixes.md",
+      "expected_sha256": "48957d37ee49384035b8ae23293580f452ccc4937d95d5013713abadc25d9605",
+      "actual_sha256": "48957d37ee49384035b8ae23293580f452ccc4937d95d5013713abadc25d9605",
+      "passed": true
+    },
+    {
+      "path": "docs/mysql-release.md",
+      "expected_sha256": "5d2e4944aa779febc082398bf759604fd447fead5a738022579dd709676c35db",
+      "actual_sha256": "5d2e4944aa779febc082398bf759604fd447fead5a738022579dd709676c35db",
+      "passed": true
+    },
+    {
+      "path": "docs/mysql-verification.md",
+      "expected_sha256": "000a58429425df972b3bff59c3535e9050ca7e4ae55cb52a8f527b8299a07e96",
+      "actual_sha256": "000a58429425df972b3bff59c3535e9050ca7e4ae55cb52a8f527b8299a07e96",
+      "passed": true
+    },
+    {
+      "path": "docs/project-integration.md",
+      "expected_sha256": "eae09ef060b500f8f5b664e6ffc50578a49012bafb9ddb46772a577630c1e914",
+      "actual_sha256": "eae09ef060b500f8f5b664e6ffc50578a49012bafb9ddb46772a577630c1e914",
+      "passed": true
+    },
+    {
+      "path": "docs/qa003-error-classification.md",
+      "expected_sha256": "ac319bb1df97f89dd1c9b8e11bdd30156463d9f23657fe369850da8e4daea404",
+      "actual_sha256": "ac319bb1df97f89dd1c9b8e11bdd30156463d9f23657fe369850da8e4daea404",
+      "passed": true
+    },
+    {
+      "path": "docs/release-management-http.md",
+      "expected_sha256": "5112b13fa9ef19bb89eb37fe974e061ffaca14eef256e96660e36a6ea986020a",
+      "actual_sha256": "5112b13fa9ef19bb89eb37fe974e061ffaca14eef256e96660e36a6ea986020a",
+      "passed": true
+    },
+    {
+      "path": "docs/release-management-verification.md",
+      "expected_sha256": "5324661414282b295a797a24548dda5dad8d47e7a158a6ad100e1e5f084c2a18",
+      "actual_sha256": "5324661414282b295a797a24548dda5dad8d47e7a158a6ad100e1e5f084c2a18",
+      "passed": true
+    },
+    {
+      "path": "docs/release-management.md",
+      "expected_sha256": "9fe469cd8ada7c48c513e69f00c6eab32d72f3a9b52aa7dbdb68fe3aceaa68ca",
+      "actual_sha256": "9fe469cd8ada7c48c513e69f00c6eab32d72f3a9b52aa7dbdb68fe3aceaa68ca",
+      "passed": true
+    },
+    {
+      "path": "docs/retained-history.md",
+      "expected_sha256": "f72786711fc01d01c4202d0ab248c918f3d178e4cc6e621601e3bb226bf1e891",
+      "actual_sha256": "f72786711fc01d01c4202d0ab248c918f3d178e4cc6e621601e3bb226bf1e891",
+      "passed": true
+    },
+    {
+      "path": "docs/unified-workbench.md",
+      "expected_sha256": "64af6657a42cffc4479196c0bb462bdeaa1e363c58db90b4790e95edc6cffdb1",
+      "actual_sha256": "64af6657a42cffc4479196c0bb462bdeaa1e363c58db90b4790e95edc6cffdb1",
+      "passed": true
+    },
+    {
+      "path": "docs/usage-authority-continuation.md",
+      "expected_sha256": "a86665fc787f573f169025fc977ea8af19d1ade7a4dfa3e83c1a208ddc1ea578",
+      "actual_sha256": "a86665fc787f573f169025fc977ea8af19d1ade7a4dfa3e83c1a208ddc1ea578",
+      "passed": true
+    },
+    {
+      "path": "docs/usage-diagnostics-v2.md",
+      "expected_sha256": "436ad870400a49506b105d6f4d5db58e63129cbe2f106ccfe9834afdb8d2c0be",
+      "actual_sha256": "436ad870400a49506b105d6f4d5db58e63129cbe2f106ccfe9834afdb8d2c0be",
+      "passed": true
+    },
+    {
+      "path": "docs/verification.md",
+      "expected_sha256": "663c0952067d4e4c2ef7f6ef2108a387022a9ae4e16ebe57a79e68def2cd13b7",
+      "actual_sha256": "663c0952067d4e4c2ef7f6ef2108a387022a9ae4e16ebe57a79e68def2cd13b7",
+      "passed": true
+    },
+    {
+      "path": "go.mod",
+      "expected_sha256": "3fc1c612237e81b1a61efdf59eb3e108980b170fd85b8b2c855db0f08240457b",
+      "actual_sha256": "3fc1c612237e81b1a61efdf59eb3e108980b170fd85b8b2c855db0f08240457b",
+      "passed": true
+    },
+    {
+      "path": "go.sum",
+      "expected_sha256": "34ef9b8203162cccd56bdd7aa590ca1df2683c9a794ba118d3db0ff242609fb1",
+      "actual_sha256": "34ef9b8203162cccd56bdd7aa590ca1df2683c9a794ba118d3db0ff242609fb1",
+      "passed": true
+    },
+    {
+      "path": "internal/admission/handler.go",
+      "expected_sha256": "ac61df7e4e1a995cba390e7bc9757e51368788c8d0dd3c9cf171299d7edfddc1",
+      "actual_sha256": "ac61df7e4e1a995cba390e7bc9757e51368788c8d0dd3c9cf171299d7edfddc1",
+      "passed": true
+    },
+    {
+      "path": "internal/admission/handler_test.go",
+      "expected_sha256": "2a1d8c9548af0cee333fbb67a08d7f4e9b0ff8bc073152cf84141aa049a7b70a",
+      "actual_sha256": "2a1d8c9548af0cee333fbb67a08d7f4e9b0ff8bc073152cf84141aa049a7b70a",
+      "passed": true
+    },
+    {
+      "path": "internal/controlapi/history_http_test.go",
+      "expected_sha256": "05b420317c4cda3a41abf9cafed41c5fe3cd51f1c6621c78612c4c8a39853d37",
+      "actual_sha256": "05b420317c4cda3a41abf9cafed41c5fe3cd51f1c6621c78612c4c8a39853d37",
+      "passed": true
+    },
+    {
+      "path": "internal/controlapi/http.go",
+      "expected_sha256": "f5f034f116c823c0ff81e6ac2df83dd4e28abc380f242f81600e123a0babb5cd",
+      "actual_sha256": "f5f034f116c823c0ff81e6ac2df83dd4e28abc380f242f81600e123a0babb5cd",
+      "passed": true
+    },
+    {
+      "path": "internal/controlapi/mysql_test.go",
+      "expected_sha256": "eaf06fad59a457f9776e4b5acb8f00349bd13edfae9cabb3355f536c106dc7f7",
+      "actual_sha256": "eaf06fad59a457f9776e4b5acb8f00349bd13edfae9cabb3355f536c106dc7f7",
+      "passed": true
+    },
+    {
+      "path": "internal/gateway/authorize.go",
+      "expected_sha256": "a5a765bf7a2bed3c428046517233698a02819cc16d92c309fb3165ea846fc95f",
+      "actual_sha256": "a5a765bf7a2bed3c428046517233698a02819cc16d92c309fb3165ea846fc95f",
+      "passed": true
+    },
+    {
+      "path": "internal/gateway/authorize_test.go",
+      "expected_sha256": "91c986c3977f8df0f79d112dee35c0ae3bbef25513cd54fc5dbdecc373534ed6",
+      "actual_sha256": "91c986c3977f8df0f79d112dee35c0ae3bbef25513cd54fc5dbdecc373534ed6",
+      "passed": true
+    },
+    {
+      "path": "internal/gateway/gateway_test.go",
+      "expected_sha256": "ee8b8e958b2efa37465dbaf65c03c05657d4cde6cb3c447e1d8936c57d5ef206",
+      "actual_sha256": "ee8b8e958b2efa37465dbaf65c03c05657d4cde6cb3c447e1d8936c57d5ef206",
+      "passed": true
+    },
+    {
+      "path": "internal/gateway/kubernetes_secret.go",
+      "expected_sha256": "68dc75c5a5685c11d626e214339a15d5fc3c07359835d7fdc81443cd0d361cd4",
+      "actual_sha256": "68dc75c5a5685c11d626e214339a15d5fc3c07359835d7fdc81443cd0d361cd4",
+      "passed": true
+    },
+    {
+      "path": "internal/gateway/kubernetes_secret_test.go",
+      "expected_sha256": "cc594d9e183aca7156f9c8083cb6499bed7f7d748890e870daacd8b992794305",
+      "actual_sha256": "cc594d9e183aca7156f9c8083cb6499bed7f7d748890e870daacd8b992794305",
+      "passed": true
+    },
+    {
+      "path": "internal/gateway/receipt.go",
+      "expected_sha256": "114b7fee8f84822b395836bb642cf65f7a1796658173d4e59e86806a6be0bcdf",
+      "actual_sha256": "114b7fee8f84822b395836bb642cf65f7a1796658173d4e59e86806a6be0bcdf",
+      "passed": true
+    },
+    {
+      "path": "internal/gateway/secret.go",
+      "expected_sha256": "8df94f8624a3571e3e88db8224778331f404d0531160f31b9f35be4234626d7e",
+      "actual_sha256": "8df94f8624a3571e3e88db8224778331f404d0531160f31b9f35be4234626d7e",
+      "passed": true
+    },
+    {
+      "path": "internal/kernel/access.go",
+      "expected_sha256": "d9be4af935f7ee90fc30dbe0edd5e7fd2d693ba1e00d83abd92e2655a6c0cb33",
+      "actual_sha256": "d9be4af935f7ee90fc30dbe0edd5e7fd2d693ba1e00d83abd92e2655a6c0cb33",
+      "passed": true
+    },
+    {
+      "path": "internal/kernel/admit.go",
+      "expected_sha256": "fbb201a8fc90c6cdcc87b2c659e34f201be0b2a9bba5dd48f6938065264bd536",
+      "actual_sha256": "fbb201a8fc90c6cdcc87b2c659e34f201be0b2a9bba5dd48f6938065264bd536",
+      "passed": true
+    },
+    {
+      "path": "internal/kernel/catalog.go",
+      "expected_sha256": "3fbca96e4707b891ef62aef0105283ba845b2792f54dcf1e1571a760cc321014",
+      "actual_sha256": "3fbca96e4707b891ef62aef0105283ba845b2792f54dcf1e1571a760cc321014",
+      "passed": true
+    },
+    {
+      "path": "internal/kernel/content.go",
+      "expected_sha256": "664539a025f7b9307b8da0c3961adcee1170433e4f0939f5cae2bef49ed846b9",
+      "actual_sha256": "664539a025f7b9307b8da0c3961adcee1170433e4f0939f5cae2bef49ed846b9",
+      "passed": true
+    },
+    {
+      "path": "internal/kernel/control_mysql_test.go",
+      "expected_sha256": "b5033d39b2accd01bc4174eaa72cf614433fbfdb1b4745ef2d1d67b2bee5ae15",
+      "actual_sha256": "b5033d39b2accd01bc4174eaa72cf614433fbfdb1b4745ef2d1d67b2bee5ae15",
+      "passed": true
+    },
+    {
+      "path": "internal/kernel/diagnostics.go",
+      "expected_sha256": "61f38b173084bbe8a9e2fea43de0ca2c6a1d1a528f5475bff42c136855a969be",
+      "actual_sha256": "61f38b173084bbe8a9e2fea43de0ca2c6a1d1a528f5475bff42c136855a969be",
+      "passed": true
+    },
+    {
+      "path": "internal/kernel/diagnostics_mysql_test.go",
+      "expected_sha256": "6d72f5bc8d2a86c93413cef4e75ded69c17e2717f779edb252f9cb773172e8ff",
+      "actual_sha256": "6d72f5bc8d2a86c93413cef4e75ded69c17e2717f779edb252f9cb773172e8ff",
+      "passed": true
+    },
+    {
+      "path": "internal/kernel/evidence.go",
+      "expected_sha256": "bc5f642083a828f60d851c77669336fbafda0dbe8b7af61f1cd3054e752b02fb",
+      "actual_sha256": "bc5f642083a828f60d851c77669336fbafda0dbe8b7af61f1cd3054e752b02fb",
+      "passed": true
+    },
+    {
+      "path": "internal/kernel/finalize.go",
+      "expected_sha256": "1fd6673668af44aa82ab1c44d4c995f025f7a6d9ac795164b130821e2bd4c376",
+      "actual_sha256": "1fd6673668af44aa82ab1c44d4c995f025f7a6d9ac795164b130821e2bd4c376",
+      "passed": true
+    },
+    {
+      "path": "internal/kernel/maas17_review_test.go",
+      "expected_sha256": "4dac0037a305c2ab8bdc14491962e9ae2ec1fb7bb56994f0276489023132b0cc",
+      "actual_sha256": "4dac0037a305c2ab8bdc14491962e9ae2ec1fb7bb56994f0276489023132b0cc",
+      "passed": true
+    },
+    {
+      "path": "internal/kernel/management.go",
+      "expected_sha256": "ce4dc81a2f935c4019f0806c6673705070b94c2cbd087f869b1e9fcdb5fdf4ab",
+      "actual_sha256": "ce4dc81a2f935c4019f0806c6673705070b94c2cbd087f869b1e9fcdb5fdf4ab",
+      "passed": true
+    },
+    {
+      "path": "internal/kernel/migrate_control.go",
+      "expected_sha256": "9d24c45955d7aad596dbed875cb86d3069fb70f5d684f214c1ba754e20df8f59",
+      "actual_sha256": "9d24c45955d7aad596dbed875cb86d3069fb70f5d684f214c1ba754e20df8f59",
+      "passed": true
+    },
+    {
+      "path": "internal/kernel/money.go",
+      "expected_sha256": "8774c309b0341582421603a1d767019d338b658fa19eed700b12aa11dded2ed4",
+      "actual_sha256": "8774c309b0341582421603a1d767019d338b658fa19eed700b12aa11dded2ed4",
+      "passed": true
+    },
+    {
+      "path": "internal/kernel/money_test.go",
+      "expected_sha256": "10cfabc8fe180256dc2e8da0e4b193e0e499c57295bb05262147c1b92d00537f",
+      "actual_sha256": "10cfabc8fe180256dc2e8da0e4b193e0e499c57295bb05262147c1b92d00537f",
+      "passed": true
+    },
+    {
+      "path": "internal/kernel/mysql_test.go",
+      "expected_sha256": "62cfac34bb321d97ffc6a9d15b92af2cb62c61ca286cbf5f53aaac67cf1e539c",
+      "actual_sha256": "62cfac34bb321d97ffc6a9d15b92af2cb62c61ca286cbf5f53aaac67cf1e539c",
+      "passed": true
+    },
+    {
+      "path": "internal/kernel/permissions_mysql_test.go",
+      "expected_sha256": "d7e5ebee5032bb29f0ec00ae2922339b7c83748155d87ca40e6e09517409e67e",
+      "actual_sha256": "d7e5ebee5032bb29f0ec00ae2922339b7c83748155d87ca40e6e09517409e67e",
+      "passed": true
+    },
+    {
+      "path": "internal/kernel/public_http_test.go",
+      "expected_sha256": "fa85b6417e640351e637620f3eea938775f79e27cbe3ff3ed3dab4fb8557e95d",
+      "actual_sha256": "fa85b6417e640351e637620f3eea938775f79e27cbe3ff3ed3dab4fb8557e95d",
+      "passed": true
+    },
+    {
+      "path": "internal/kernel/public_response.go",
+      "expected_sha256": "84cabd8b8a6198dc429e6ebb437ee74048d58e4ddbe82598e0909c936d71644f",
+      "actual_sha256": "84cabd8b8a6198dc429e6ebb437ee74048d58e4ddbe82598e0909c936d71644f",
+      "passed": true
+    },
+    {
+      "path": "internal/kernel/public_response_test.go",
+      "expected_sha256": "32d4bbb0f15e3aba6225444065104394c60c02e43df0104fc891032e52b0f28d",
+      "actual_sha256": "32d4bbb0f15e3aba6225444065104394c60c02e43df0104fc891032e52b0f28d",
+      "passed": true
+    },
+    {
+      "path": "internal/kernel/publisher_runtime_test.go",
+      "expected_sha256": "d1e457c3ffc0da21859624a442f8e4e85be32fda9e8d57049ae5dda981188e1c",
+      "actual_sha256": "d1e457c3ffc0da21859624a442f8e4e85be32fda9e8d57049ae5dda981188e1c",
+      "passed": true
+    },
+    {
+      "path": "internal/kernel/query.go",
+      "expected_sha256": "1adac20d904f6c4fbc58fc4390cdd22d6ac9d24841442e9758a5b485ea1bec43",
+      "actual_sha256": "1adac20d904f6c4fbc58fc4390cdd22d6ac9d24841442e9758a5b485ea1bec43",
+      "passed": true
+    },
+    {
+      "path": "internal/kernel/r1_r3_boundaries_test.go",
+      "expected_sha256": "93e151df7e7028e890c65b162b6e73949d83237b0d83167bb09ef503a1663b82",
+      "actual_sha256": "93e151df7e7028e890c65b162b6e73949d83237b0d83167bb09ef503a1663b82",
+      "passed": true
+    },
+    {
+      "path": "internal/kernel/rebuild.go",
+      "expected_sha256": "ac65163fca54cdf8f665d490e5c215e8cb3f1ae6a00343197aa42171f02f47fd",
+      "actual_sha256": "ac65163fca54cdf8f665d490e5c215e8cb3f1ae6a00343197aa42171f02f47fd",
+      "passed": true
+    },
+    {
+      "path": "internal/kernel/recovery_process_test.go",
+      "expected_sha256": "ad2fcc30ba3b99d2ad3440432de9990cab801858fff5fe4f32d1abdfb68c75d7",
+      "actual_sha256": "ad2fcc30ba3b99d2ad3440432de9990cab801858fff5fe4f32d1abdfb68c75d7",
+      "passed": true
+    },
+    {
+      "path": "internal/kernel/redis.go",
+      "expected_sha256": "d3c3262d948bb7a7536f2dc9ab415ef7266d82973dd2375ae130184833d71813",
+      "actual_sha256": "d3c3262d948bb7a7536f2dc9ab415ef7266d82973dd2375ae130184833d71813",
+      "passed": true
+    },
+    {
+      "path": "internal/kernel/relay.go",
+      "expected_sha256": "50a6ed55b989123a7c7597b31ee7ddef6c7f7addbf4a493c41c35e6076fa2fd1",
+      "actual_sha256": "50a6ed55b989123a7c7597b31ee7ddef6c7f7addbf4a493c41c35e6076fa2fd1",
+      "passed": true
+    },
+    {
+      "path": "internal/kernel/relay_context_test.go",
+      "expected_sha256": "63daf8a7bb6f9130f9cb743252bdb646b1fe77e4b05c53a23425e3f5f972b9fa",
+      "actual_sha256": "63daf8a7bb6f9130f9cb743252bdb646b1fe77e4b05c53a23425e3f5f972b9fa",
+      "passed": true
+    },
+    {
+      "path": "internal/kernel/relay_deadline_test.go",
+      "expected_sha256": "a58a87fafd3ee8a17799a8da9da6de021786afc4fe174146223c64825ea1e571",
+      "actual_sha256": "a58a87fafd3ee8a17799a8da9da6de021786afc4fe174146223c64825ea1e571",
+      "passed": true
+    },
+    {
+      "path": "internal/kernel/relay_forward.go",
+      "expected_sha256": "72d629979fc1615913d364c1dbf4717b4e40130cc869435c700e8979ad75f6c3",
+      "actual_sha256": "72d629979fc1615913d364c1dbf4717b4e40130cc869435c700e8979ad75f6c3",
+      "passed": true
+    },
+    {
+      "path": "internal/kernel/relay_mysql_test.go",
+      "expected_sha256": "73f14344ef193c70cc73871a8994f7a2f78c9cd6afe7359b9d86ef4853abd7c7",
+      "actual_sha256": "73f14344ef193c70cc73871a8994f7a2f78c9cd6afe7359b9d86ef4853abd7c7",
+      "passed": true
+    },
+    {
+      "path": "internal/kernel/relay_sample.go",
+      "expected_sha256": "e6f5dc5ff60f4e2b10df142902665c716414fce0c77d556af678e354f0806df8",
+      "actual_sha256": "e6f5dc5ff60f4e2b10df142902665c716414fce0c77d556af678e354f0806df8",
+      "passed": true
+    },
+    {
+      "path": "internal/kernel/relay_sample_test.go",
+      "expected_sha256": "bf0395cfe253ac411b041e2b923fa91cc49d20edd5f760db4b67ad91c78dc484",
+      "actual_sha256": "bf0395cfe253ac411b041e2b923fa91cc49d20edd5f760db4b67ad91c78dc484",
+      "passed": true
+    },
+    {
+      "path": "internal/kernel/relay_sampling_mysql_test.go",
+      "expected_sha256": "dc863d86bea649a39d7487da3f2bbbb19b43d5c53001b59b7c950d12e9fc3ae3",
+      "actual_sha256": "dc863d86bea649a39d7487da3f2bbbb19b43d5c53001b59b7c950d12e9fc3ae3",
+      "passed": true
+    },
+    {
+      "path": "internal/kernel/schema/0001_kernel.sql",
+      "expected_sha256": "56616e6b64a6eba2cb2ee5ee152d56563220a9b98efa7fcd3eba951598e5a61c",
+      "actual_sha256": "56616e6b64a6eba2cb2ee5ee152d56563220a9b98efa7fcd3eba951598e5a61c",
+      "passed": true
+    },
+    {
+      "path": "internal/kernel/schema/0002_control.sql",
+      "expected_sha256": "0141b9219f0dae0edab942c73559d4baf81663364b9109ea3ee63150f7b9ff07",
+      "actual_sha256": "0141b9219f0dae0edab942c73559d4baf81663364b9109ea3ee63150f7b9ff07",
+      "passed": true
+    },
+    {
+      "path": "internal/kernel/schema/0003_diagnostics.sql",
+      "expected_sha256": "bdba48449e0685435f9dc0fca30a2827d2a51e245b0ecf783ef52542725a6015",
+      "actual_sha256": "bdba48449e0685435f9dc0fca30a2827d2a51e245b0ecf783ef52542725a6015",
+      "passed": true
+    },
+    {
+      "path": "internal/kernel/store.go",
+      "expected_sha256": "7533253cc9a9c436f05a3f09e138337acb7513ddda55bf9ea00eebf3eab5559c",
+      "actual_sha256": "7533253cc9a9c436f05a3f09e138337acb7513ddda55bf9ea00eebf3eab5559c",
+      "passed": true
+    },
+    {
+      "path": "internal/kernel/summary.go",
+      "expected_sha256": "0d383d3d6db1dafb6ef958f7c3ba893c1007d25fc90c6271f881cb2205e141b0",
+      "actual_sha256": "0d383d3d6db1dafb6ef958f7c3ba893c1007d25fc90c6271f881cb2205e141b0",
+      "passed": true
+    },
+    {
+      "path": "internal/kernel/types.go",
+      "expected_sha256": "ff0338b8edb48b45395e22d94f7faab61c28d9773ddec4868c69996e3eee3c70",
+      "actual_sha256": "ff0338b8edb48b45395e22d94f7faab61c28d9773ddec4868c69996e3eee3c70",
+      "passed": true
+    },
+    {
+      "path": "internal/kernel/usage_authority.go",
+      "expected_sha256": "b06d5fcb9c43986467d5618002d4929f5b8d85c15a425535a0f9d697c49ea823",
+      "actual_sha256": "b06d5fcb9c43986467d5618002d4929f5b8d85c15a425535a0f9d697c49ea823",
+      "passed": true
+    },
+    {
+      "path": "internal/kernel/usage_authority_mysql_test.go",
+      "expected_sha256": "d2939b230999bad420143d5656ab1c15dcf8bc8bb0685d8f28623945801580b5",
+      "actual_sha256": "d2939b230999bad420143d5656ab1c15dcf8bc8bb0685d8f28623945801580b5",
+      "passed": true
+    },
+    {
+      "path": "internal/kernel/usage_authority_test.go",
+      "expected_sha256": "c3cd954016d93968b29b3930b80238cecc2a96d87e4caf03b8da6ef59afc7ca8",
+      "actual_sha256": "c3cd954016d93968b29b3930b80238cecc2a96d87e4caf03b8da6ef59afc7ca8",
+      "passed": true
+    },
+    {
+      "path": "internal/protocol/contracts/diagnostic-provenance.json",
+      "expected_sha256": "22bf924e628d28460dc9efec2f90f5b9319f2f1b9f7be06a33b5c1c064ce91b1",
+      "actual_sha256": "22bf924e628d28460dc9efec2f90f5b9319f2f1b9f7be06a33b5c1c064ce91b1",
+      "passed": true
+    },
+    {
+      "path": "internal/protocol/contracts/diagnostic.schema.json",
+      "expected_sha256": "d35c305ab02acae560c7a8423e672b4d1b50f837c7fc314a75b20628fcb88a4a",
+      "actual_sha256": "d35c305ab02acae560c7a8423e672b4d1b50f837c7fc314a75b20628fcb88a4a",
+      "passed": true
+    },
+    {
+      "path": "internal/protocol/contracts/management-provenance.json",
+      "expected_sha256": "d10e0cc111b55a911c25025f6c949fc0165412d6231273eeae0d9e2da9d60e20",
+      "actual_sha256": "d10e0cc111b55a911c25025f6c949fc0165412d6231273eeae0d9e2da9d60e20",
+      "passed": true
+    },
+    {
+      "path": "internal/protocol/contracts/management.schema.json",
+      "expected_sha256": "e36a46511f0fbcf24220970f0e16bdd8dc55aaabd391d5c0a15d1eb747045dc6",
+      "actual_sha256": "e36a46511f0fbcf24220970f0e16bdd8dc55aaabd391d5c0a15d1eb747045dc6",
+      "passed": true
+    },
+    {
+      "path": "internal/protocol/contracts/private.schema.json",
+      "expected_sha256": "d6cbf4a37763885f28f66af98366a324953fe162db550ac7a2ec637fad945886",
+      "actual_sha256": "d6cbf4a37763885f28f66af98366a324953fe162db550ac7a2ec637fad945886",
+      "passed": true
+    },
+    {
+      "path": "internal/protocol/contracts/provenance.json",
+      "expected_sha256": "ef4cb6299e9fd6dcc2c9c888dd86251bfea669de9f9ae596f38b541fe7585825",
+      "actual_sha256": "ef4cb6299e9fd6dcc2c9c888dd86251bfea669de9f9ae596f38b541fe7585825",
+      "passed": true
+    },
+    {
+      "path": "internal/protocol/contracts/terminal.schema.json",
+      "expected_sha256": "3e9eac874ce12d294a91f81617f08cc982cd9f48fb8aade798db35416ab2a5a9",
+      "actual_sha256": "3e9eac874ce12d294a91f81617f08cc982cd9f48fb8aade798db35416ab2a5a9",
+      "passed": true
+    },
+    {
+      "path": "internal/protocol/schema.go",
+      "expected_sha256": "a493cd5fe0c8a54f97ca5959eb65384e623539fd84da73f7ac19b99fc394baa8",
+      "actual_sha256": "a493cd5fe0c8a54f97ca5959eb65384e623539fd84da73f7ac19b99fc394baa8",
+      "passed": true
+    },
+    {
+      "path": "internal/protocol/schema_test.go",
+      "expected_sha256": "375ae0a2b64765176962ea7de80698433c49f52f63c45afa07b34bd1a5fa8f63",
+      "actual_sha256": "375ae0a2b64765176962ea7de80698433c49f52f63c45afa07b34bd1a5fa8f63",
+      "passed": true
+    },
+    {
+      "path": "internal/release/bundle.go",
+      "expected_sha256": "6f872d224d9877f1cb96e04ec8012d571210cbd3dfa106e3c22ce85c4c1e75d0",
+      "actual_sha256": "6f872d224d9877f1cb96e04ec8012d571210cbd3dfa106e3c22ce85c4c1e75d0",
+      "passed": true
+    },
+    {
+      "path": "internal/release/bundle_test.go",
+      "expected_sha256": "bb0ad68fd64bac19d080269085f046c511c828a1c17b3c7b9ea7435e7da2eb91",
+      "actual_sha256": "bb0ad68fd64bac19d080269085f046c511c828a1c17b3c7b9ea7435e7da2eb91",
+      "passed": true
+    },
+    {
+      "path": "internal/release/compiler.go",
+      "expected_sha256": "ddfc0c56cc4a013e15793ddebfaa2c03efa86b75f24e796ed94359afcdd4d9b0",
+      "actual_sha256": "ddfc0c56cc4a013e15793ddebfaa2c03efa86b75f24e796ed94359afcdd4d9b0",
+      "passed": true
+    },
+    {
+      "path": "internal/release/compiler_test.go",
+      "expected_sha256": "d4168038539388cdb764299315e637e7c9935b6eb4e8699c29f8dd5862a72ae0",
+      "actual_sha256": "d4168038539388cdb764299315e637e7c9935b6eb4e8699c29f8dd5862a72ae0",
+      "passed": true
+    },
+    {
+      "path": "internal/release/history/kubernetes.go",
+      "expected_sha256": "728a1c6f4bc6ce492e835c1cf367ef2d24f093717a790520e047f274c530f1d3",
+      "actual_sha256": "728a1c6f4bc6ce492e835c1cf367ef2d24f093717a790520e047f274c530f1d3",
+      "passed": true
+    },
+    {
+      "path": "internal/release/history/reader.go",
+      "expected_sha256": "d3d70c47e2a474b02040ffde328eebf21e913704e8d3192bd239fdb87b126435",
+      "actual_sha256": "d3d70c47e2a474b02040ffde328eebf21e913704e8d3192bd239fdb87b126435",
+      "passed": true
+    },
+    {
+      "path": "internal/release/history/spec.go",
+      "expected_sha256": "0591c52ffdda379e72952dc50b04d4a707331442f91a30f1f0acbe97903ea46a",
+      "actual_sha256": "0591c52ffdda379e72952dc50b04d4a707331442f91a30f1f0acbe97903ea46a",
+      "passed": true
+    },
+    {
+      "path": "internal/release/history/spec_test.go",
+      "expected_sha256": "4aab096763612207bc4b0b62719de87104f9bac84656c120dc8c90c9ae0375d5",
+      "actual_sha256": "4aab096763612207bc4b0b62719de87104f9bac84656c120dc8c90c9ae0375d5",
+      "passed": true
+    },
+    {
+      "path": "internal/release/http.go",
+      "expected_sha256": "6ac0ff7d47f38c447e62fd1043ca6c04579a01b5dd43821ebf8e82bf32131d83",
+      "actual_sha256": "6ac0ff7d47f38c447e62fd1043ca6c04579a01b5dd43821ebf8e82bf32131d83",
+      "passed": true
+    },
+    {
+      "path": "internal/release/http_test.go",
+      "expected_sha256": "b46bf0226a3d58cb73bb01eae09b1ff7e92e504b7a72e990b0ad94bfd4c3bb37",
+      "actual_sha256": "b46bf0226a3d58cb73bb01eae09b1ff7e92e504b7a72e990b0ad94bfd4c3bb37",
+      "passed": true
+    },
+    {
+      "path": "internal/release/management/operations.go",
+      "expected_sha256": "93c7b69fbd25ba093b42a90de0ab32b4ab2c6993e265bc7b91c71ca4074826b9",
+      "actual_sha256": "93c7b69fbd25ba093b42a90de0ab32b4ab2c6993e265bc7b91c71ca4074826b9",
+      "passed": true
+    },
+    {
+      "path": "internal/release/management/registry.go",
+      "expected_sha256": "c76f71848d9e0b6fad156eb5c73c51bae23f5b37d098c2946d449d2410bdf6cc",
+      "actual_sha256": "c76f71848d9e0b6fad156eb5c73c51bae23f5b37d098c2946d449d2410bdf6cc",
+      "passed": true
+    },
+    {
+      "path": "internal/release/management/schema.sql",
+      "expected_sha256": "e02acd8ce3ea6b9b92f77e384cc363dfd85d11f8254a63f8981b682cdcb0ad84",
+      "actual_sha256": "e02acd8ce3ea6b9b92f77e384cc363dfd85d11f8254a63f8981b682cdcb0ad84",
+      "passed": true
+    },
+    {
+      "path": "internal/release/management/service.go",
+      "expected_sha256": "2873d9d6c6892ef895986f88deddbda4cf0fe4d3b530ebb905177e862b0e20b8",
+      "actual_sha256": "2873d9d6c6892ef895986f88deddbda4cf0fe4d3b530ebb905177e862b0e20b8",
+      "passed": true
+    },
+    {
+      "path": "internal/release/mysqlstore/control.go",
+      "expected_sha256": "38f036437ca79b7a9223431d69de9f19adff0a5edb603e36040a20a9b9df7c97",
+      "actual_sha256": "38f036437ca79b7a9223431d69de9f19adff0a5edb603e36040a20a9b9df7c97",
+      "passed": true
+    },
+    {
+      "path": "internal/release/mysqlstore/history.go",
+      "expected_sha256": "a7d7d551f0daa70b74b5fc3db888350e2c5173c211a5e90bb5847c08627b268f",
+      "actual_sha256": "a7d7d551f0daa70b74b5fc3db888350e2c5173c211a5e90bb5847c08627b268f",
+      "passed": true
+    },
+    {
+      "path": "internal/release/mysqlstore/history_permissions_test.go",
+      "expected_sha256": "7a18afd61ed0aeaa75ed625a1d8538711f090300d14461092d4fe88889301d67",
+      "actual_sha256": "7a18afd61ed0aeaa75ed625a1d8538711f090300d14461092d4fe88889301d67",
+      "passed": true
+    },
+    {
+      "path": "internal/release/mysqlstore/history_test.go",
+      "expected_sha256": "a1f13ff94b9597e9e29370e99e21bb8b6469967b2f8cb0168fe6569e2fb3165c",
+      "actual_sha256": "a1f13ff94b9597e9e29370e99e21bb8b6469967b2f8cb0168fe6569e2fb3165c",
+      "passed": true
+    },
+    {
+      "path": "internal/release/mysqlstore/inventory.go",
+      "expected_sha256": "819ed77f937fff686a5e580c3cdf25479748f1e3d229aab538c3309e7520e119",
+      "actual_sha256": "819ed77f937fff686a5e580c3cdf25479748f1e3d229aab538c3309e7520e119",
+      "passed": true
+    },
+    {
+      "path": "internal/release/mysqlstore/migrate.go",
+      "expected_sha256": "115e6bfed5c4489eaa2c2d84b0a74cf3b91d501bfa3cf145dd42ff4e504eaa07",
+      "actual_sha256": "115e6bfed5c4489eaa2c2d84b0a74cf3b91d501bfa3cf145dd42ff4e504eaa07",
+      "passed": true
+    },
+    {
+      "path": "internal/release/mysqlstore/mysql_test.go",
+      "expected_sha256": "77a934e23cb1d7c2e00e9d27e3be2b1a405e4e20a6fc685bf31c45ff70705b5e",
+      "actual_sha256": "77a934e23cb1d7c2e00e9d27e3be2b1a405e4e20a6fc685bf31c45ff70705b5e",
+      "passed": true
+    },
+    {
+      "path": "internal/release/mysqlstore/runtime.go",
+      "expected_sha256": "1e75972d2d588ebff3e7839974eb2f5e0e075ea95d8ddb22245b2ff2e606d47c",
+      "actual_sha256": "1e75972d2d588ebff3e7839974eb2f5e0e075ea95d8ddb22245b2ff2e606d47c",
+      "passed": true
+    },
+    {
+      "path": "internal/release/mysqlstore/schema/0001_release.sql",
+      "expected_sha256": "91ea4dc8699fafa8ae8e9433c637828fce60f43878fe71c4ae1b688fffed69d5",
+      "actual_sha256": "91ea4dc8699fafa8ae8e9433c637828fce60f43878fe71c4ae1b688fffed69d5",
+      "passed": true
+    },
+    {
+      "path": "internal/release/mysqlstore/schema/0002_history.sql",
+      "expected_sha256": "9294d4f9ca23354014607540fc52a472915c3e40f59dada293db74ae2f5b9193",
+      "actual_sha256": "9294d4f9ca23354014607540fc52a472915c3e40f59dada293db74ae2f5b9193",
+      "passed": true
+    },
+    {
+      "path": "internal/release/mysqlstore/store.go",
+      "expected_sha256": "a7d9d236d9e9b1dcc2b32f9323ec0abd18dfcc7f5e1a5a9d1ab912bba704f7b1",
+      "actual_sha256": "a7d9d236d9e9b1dcc2b32f9323ec0abd18dfcc7f5e1a5a9d1ab912bba704f7b1",
+      "passed": true
+    },
+    {
+      "path": "internal/release/mysqlstore/store_test.go",
+      "expected_sha256": "5f19dcecd84af46469936287d036c7fec1a4381537f220a9e43bbe675d98fbcc",
+      "actual_sha256": "5f19dcecd84af46469936287d036c7fec1a4381537f220a9e43bbe675d98fbcc",
+      "passed": true
+    },
+    {
+      "path": "internal/release/ports.go",
+      "expected_sha256": "d5fe9e15fddf051cfac057909b1d6f793e43498e00c166fb9a2332c6d5c12851",
+      "actual_sha256": "d5fe9e15fddf051cfac057909b1d6f793e43498e00c166fb9a2332c6d5c12851",
+      "passed": true
+    },
+    {
+      "path": "internal/release/reconciler.go",
+      "expected_sha256": "9917de4cd698e0208d374b4b94099fb5f2c1639308241f47fe14f67ea4e612d6",
+      "actual_sha256": "9917de4cd698e0208d374b4b94099fb5f2c1639308241f47fe14f67ea4e612d6",
+      "passed": true
+    },
+    {
+      "path": "internal/release/reconciler_test.go",
+      "expected_sha256": "9cbb12e25ed020c17badd373a1025e73cc37467288b3cf1261dbbaadf38f1d3a",
+      "actual_sha256": "9cbb12e25ed020c17badd373a1025e73cc37467288b3cf1261dbbaadf38f1d3a",
+      "passed": true
+    },
+    {
+      "path": "internal/release/resources.go",
+      "expected_sha256": "e187c3d50a37e04b23e3e5f2fe9ab2c845553b9695b6cf9ea8caba1f35de8c84",
+      "actual_sha256": "e187c3d50a37e04b23e3e5f2fe9ab2c845553b9695b6cf9ea8caba1f35de8c84",
+      "passed": true
+    },
+    {
+      "path": "internal/webconsole/handler.go",
+      "expected_sha256": "a7e8d5f1d18bca568dbf4c3bc76495c5fc412aa19f8be694131f0d073f2b3764",
+      "actual_sha256": "a7e8d5f1d18bca568dbf4c3bc76495c5fc412aa19f8be694131f0d073f2b3764",
+      "passed": true
+    },
+    {
+      "path": "internal/workbench/http.go",
+      "expected_sha256": "8fc5156f9d02ec95232dd41b315124f811bc5a86aea890eccf64a75ceb4fab74",
+      "actual_sha256": "8fc5156f9d02ec95232dd41b315124f811bc5a86aea890eccf64a75ceb4fab74",
+      "passed": true
+    },
+    {
+      "path": "internal/workbench/http_test.go",
+      "expected_sha256": "c2959d890525b3b8aa4e2c844a10aad960ea2ee343e953c2ce32288d8a918bc6",
+      "actual_sha256": "c2959d890525b3b8aa4e2c844a10aad960ea2ee343e953c2ce32288d8a918bc6",
+      "passed": true
+    },
+    {
+      "path": "package-lock.json",
+      "expected_sha256": "de2b1fa14400b2def0f1acb4be2640775fed250f7d5c864bca4116269bd4e90f",
+      "actual_sha256": "de2b1fa14400b2def0f1acb4be2640775fed250f7d5c864bca4116269bd4e90f",
+      "passed": true
+    },
+    {
+      "path": "package.json",
+      "expected_sha256": "131d389ba9470cf4e5511258441cea635e084ac7bc8e34046db01116ae7fa9db",
+      "actual_sha256": "131d389ba9470cf4e5511258441cea635e084ac7bc8e34046db01116ae7fa9db",
+      "passed": true
+    },
+    {
+      "path": "README.md",
+      "expected_sha256": "908dcff43fb0b51314fb1829445fdfb5805438c81c0f5080218b5377fed7cec7",
+      "actual_sha256": "908dcff43fb0b51314fb1829445fdfb5805438c81c0f5080218b5377fed7cec7",
+      "passed": true
+    },
+    {
+      "path": "scripts/assemble-workbench.py",
+      "expected_sha256": "7ae660b8adcb9cd3036a86d34a3d3d8cd3a867b156778a727ad00430c99a4061",
+      "actual_sha256": "7ae660b8adcb9cd3036a86d34a3d3d8cd3a867b156778a727ad00430c99a4061",
+      "passed": true
+    },
+    {
+      "path": "scripts/check-go.mjs",
+      "expected_sha256": "c9ed777d03970fba3ef3db8c015f22360bb298b610da99ce9d84a35c84b97beb",
+      "actual_sha256": "c9ed777d03970fba3ef3db8c015f22360bb298b610da99ce9d84a35c84b97beb",
+      "passed": true
+    },
+    {
+      "path": "scripts/check-go.sh",
+      "expected_sha256": "e89ee0c45c7c631bb97100a05ff14defb68511c1b74ad48e73743bb76961090f",
+      "actual_sha256": "e89ee0c45c7c631bb97100a05ff14defb68511c1b74ad48e73743bb76961090f",
+      "passed": true
+    },
+    {
+      "path": "scripts/collect-relay-d1.sh",
+      "expected_sha256": "a40e2fead2a6d4e66f8067832a7e91ea63acfdfd5384dedc9eaf2684aafb35c0",
+      "actual_sha256": "a40e2fead2a6d4e66f8067832a7e91ea63acfdfd5384dedc9eaf2684aafb35c0",
+      "passed": true
+    },
+    {
+      "path": "scripts/dev.mjs",
+      "expected_sha256": "50d4fd7a2b7e80a2c1d637a5573190fcd0552a5ecd6d7db789bb32833731babc",
+      "actual_sha256": "50d4fd7a2b7e80a2c1d637a5573190fcd0552a5ecd6d7db789bb32833731babc",
+      "passed": true
+    },
+    {
+      "path": "scripts/relay-d1-manifest.py",
+      "expected_sha256": "ccb01850bc5fb8160867c186e0b290e265ce55233105af8f0ad8bb05089518c8",
+      "actual_sha256": "ccb01850bc5fb8160867c186e0b290e265ce55233105af8f0ad8bb05089518c8",
+      "passed": true
+    },
+    {
+      "path": "scripts/setup-workbench.sh",
+      "expected_sha256": "99e7f9d09dc5b9872fb8fcf2a66db0cc837280872b7d96397c5a681958a9ef3c",
+      "actual_sha256": "99e7f9d09dc5b9872fb8fcf2a66db0cc837280872b7d96397c5a681958a9ef3c",
+      "passed": true
+    },
+    {
+      "path": "scripts/test-controlled.sh",
+      "expected_sha256": "70b57b60866b7e3a6ef0fa8285c03628b28b74679e7f977c155de6c039e50d43",
+      "actual_sha256": "70b57b60866b7e3a6ef0fa8285c03628b28b74679e7f977c155de6c039e50d43",
+      "passed": true
+    },
+    {
+      "path": "scripts/test-envtest.sh",
+      "expected_sha256": "b0ed9d3028589a776151038513f6c1e6c9abf52bca9fe7dc8efc44e108f085d3",
+      "actual_sha256": "b0ed9d3028589a776151038513f6c1e6c9abf52bca9fe7dc8efc44e108f085d3",
+      "passed": true
+    },
+    {
+      "path": "scripts/test-mysql.sh",
+      "expected_sha256": "e8a6085754b684335223bf9cad546033b88be097180689321b9be7c17a99012c",
+      "actual_sha256": "e8a6085754b684335223bf9cad546033b88be097180689321b9be7c17a99012c",
+      "passed": true
+    },
+    {
+      "path": "scripts/test-release-management.sh",
+      "expected_sha256": "e85e516354cb79328ad9bae10e37bfba20f14b913b205e55178102400bd548f7",
+      "actual_sha256": "e85e516354cb79328ad9bae10e37bfba20f14b913b205e55178102400bd548f7",
+      "passed": true
+    },
+    {
+      "path": "scripts/test.ps1",
+      "expected_sha256": "bd01c32c3cfab6743917dce89424a111ae83f931a1ce44f71f96a1cde9b6f1de",
+      "actual_sha256": "bd01c32c3cfab6743917dce89424a111ae83f931a1ce44f71f96a1cde9b6f1de",
+      "passed": true
+    },
+    {
+      "path": "scripts/workbench-service.mjs",
+      "expected_sha256": "d2f77f0d81783adb38c2d98ae52e1c83e939bb4e1810512f333c43a51653c6fc",
+      "actual_sha256": "d2f77f0d81783adb38c2d98ae52e1c83e939bb4e1810512f333c43a51653c6fc",
+      "passed": true
+    },
+    {
+      "path": "scripts/workbench-smoke.mjs",
+      "expected_sha256": "e9245d105de8a3be0de7cc65d33f6b43ef00dd7bb0dc80f44541f290b7d9ddc0",
+      "actual_sha256": "e9245d105de8a3be0de7cc65d33f6b43ef00dd7bb0dc80f44541f290b7d9ddc0",
+      "passed": true
+    },
+    {
+      "path": "scripts/workbench.sh",
+      "expected_sha256": "b877d498b52ef0a03be7cdc1bcdca429878429fbb8080a9afa48cf74bf1de574",
+      "actual_sha256": "b877d498b52ef0a03be7cdc1bcdca429878429fbb8080a9afa48cf74bf1de574",
+      "passed": true
+    },
+    {
+      "path": "test/integration/envtest_test.go",
+      "expected_sha256": "e11a569e06b79061cc2ae3d4fd764a1dcf3c1fca4d0ea733743bed5f7b75987a",
+      "actual_sha256": "e11a569e06b79061cc2ae3d4fd764a1dcf3c1fca4d0ea733743bed5f7b75987a",
+      "passed": true
+    },
+    {
+      "path": "test/integration/management_test.go",
+      "expected_sha256": "50a7d810c7c790045f1944b899a8d78dd57b835dfeded812173609ed286ad9f6",
+      "actual_sha256": "50a7d810c7c790045f1944b899a8d78dd57b835dfeded812173609ed286ad9f6",
+      "passed": true
+    },
+    {
+      "path": "tools/perf/.gitattributes",
+      "expected_sha256": "b6e64f9f6e3f54afedc6e02dc325bc89cb2c847a915c9592759d1c3ade130488",
+      "actual_sha256": "b6e64f9f6e3f54afedc6e02dc325bc89cb2c847a915c9592759d1c3ade130488",
+      "passed": true
+    },
+    {
+      "path": "tools/perf/.gitignore",
+      "expected_sha256": "59b649a94acdc3a5e6247aad7249272b5df5a8b7bf51d41dec6fae147dc82240",
+      "actual_sha256": "59b649a94acdc3a5e6247aad7249272b5df5a8b7bf51d41dec6fae147dc82240",
+      "passed": true
+    },
+    {
+      "path": "tools/perf/analyze.py",
+      "expected_sha256": "38a4302b09fd13ee74b4c1c7335ac1de0704534c039bbb5526c2067fa4e977fa",
+      "actual_sha256": "38a4302b09fd13ee74b4c1c7335ac1de0704534c039bbb5526c2067fa4e977fa",
+      "passed": true
+    },
+    {
+      "path": "tools/perf/contracts/observation.schema.json",
+      "expected_sha256": "0d7bb2370ea4d042d5b30d7598153d924e0aa9d5125949921bd48e83ebea9ef3",
+      "actual_sha256": "0d7bb2370ea4d042d5b30d7598153d924e0aa9d5125949921bd48e83ebea9ef3",
+      "passed": true
+    },
+    {
+      "path": "tools/perf/contracts/provenance.json",
+      "expected_sha256": "5f46b066e7a7f0a4cdaa4b086b87c6590de619b325e65a2af4b978ed4922c05c",
+      "actual_sha256": "5f46b066e7a7f0a4cdaa4b086b87c6590de619b325e65a2af4b978ed4922c05c",
+      "passed": true
+    },
+    {
+      "path": "tools/perf/contracts/terminal.schema.json",
+      "expected_sha256": "3e9eac874ce12d294a91f81617f08cc982cd9f48fb8aade798db35416ab2a5a9",
+      "actual_sha256": "3e9eac874ce12d294a91f81617f08cc982cd9f48fb8aade798db35416ab2a5a9",
+      "passed": true
+    },
+    {
+      "path": "tools/perf/docs/experiment-plan-v0.2.json",
+      "expected_sha256": "edaa4ee33f763c67bd440c287e059022039068b9847f83997dfd5168d75695cc",
+      "actual_sha256": "edaa4ee33f763c67bd440c287e059022039068b9847f83997dfd5168d75695cc",
+      "passed": true
+    },
+    {
+      "path": "tools/perf/docs/method-v0.2.md",
+      "expected_sha256": "6397042a8427544c32d9d545f38d9b852ee20c259bebaa3ac28b0d05cd80e35a",
+      "actual_sha256": "6397042a8427544c32d9d545f38d9b852ee20c259bebaa3ac28b0d05cd80e35a",
+      "passed": true
+    },
+    {
+      "path": "tools/perf/docs/observability-handoff-v0.2.csv",
+      "expected_sha256": "653c23bee32a42a4fa0b5bafe20864b02388afdc157d592068f2a70ca7d9ad72",
+      "actual_sha256": "653c23bee32a42a4fa0b5bafe20864b02388afdc157d592068f2a70ca7d9ad72",
+      "passed": true
+    },
+    {
+      "path": "tools/perf/fixtures/build_fixture.py",
+      "expected_sha256": "90ce9c604fffa5bf68c3770701426be96ba0dfebcf333bcc4adb5878e9416f65",
+      "actual_sha256": "90ce9c604fffa5bf68c3770701426be96ba0dfebcf333bcc4adb5878e9416f65",
+      "passed": true
+    },
+    {
+      "path": "tools/perf/fixtures/expected-report.json",
+      "expected_sha256": "54bf2162b96d8b02a68bc5ae41c9bdc6b9ca3f392fd32d58755fe98ee7099e6f",
+      "actual_sha256": "54bf2162b96d8b02a68bc5ae41c9bdc6b9ca3f392fd32d58755fe98ee7099e6f",
+      "passed": true
+    },
+    {
+      "path": "tools/perf/fixtures/source-template.json",
+      "expected_sha256": "224b67af291d5d097e7767cb77d1f6fc8b48f3af83eac0d23a3be652ea0562f4",
+      "actual_sha256": "224b67af291d5d097e7767cb77d1f6fc8b48f3af83eac0d23a3be652ea0562f4",
+      "passed": true
+    },
+    {
+      "path": "tools/perf/fixtures/synthetic.json",
+      "expected_sha256": "b8581faa3bc97b87e744f36dfd1b3d817b82e04fa5634370b8b823c4aa63c6b8",
+      "actual_sha256": "b8581faa3bc97b87e744f36dfd1b3d817b82e04fa5634370b8b823c4aa63c6b8",
+      "passed": true
+    },
+    {
+      "path": "tools/perf/README.md",
+      "expected_sha256": "99120050e96d14e97fac4b26bdbdd93306020732b44a7357cdfafef7993b3651",
+      "actual_sha256": "99120050e96d14e97fac4b26bdbdd93306020732b44a7357cdfafef7993b3651",
+      "passed": true
+    },
+    {
+      "path": "tools/perf/report.schema.json",
+      "expected_sha256": "132323672f4c88f93f31de22d5c284c801230d06c1065cabc9205caf0c468306",
+      "actual_sha256": "132323672f4c88f93f31de22d5c284c801230d06c1065cabc9205caf0c468306",
+      "passed": true
+    },
+    {
+      "path": "tools/perf/requirements.txt",
+      "expected_sha256": "e6a0c639c0aa0bd38107bbbc80c9ae963b7353c7cea0d2d1ef695ff791dc105e",
+      "actual_sha256": "e6a0c639c0aa0bd38107bbbc80c9ae963b7353c7cea0d2d1ef695ff791dc105e",
+      "passed": true
+    },
+    {
+      "path": "tools/perf/test_analyze.py",
+      "expected_sha256": "c71165e30d9d27bf2ef48bacef40dfdf1d4c847defb54aac1324211743ef7f1e",
+      "actual_sha256": "c71165e30d9d27bf2ef48bacef40dfdf1d4c847defb54aac1324211743ef7f1e",
+      "passed": true
+    },
+    {
+      "path": "workbench-example.json",
+      "expected_sha256": "b6474aa68972c0b79aefa464d62231c888b7c2e4080329ade79f4cff9a4eca83",
+      "actual_sha256": "b6474aa68972c0b79aefa464d62231c888b7c2e4080329ade79f4cff9a4eca83",
+      "passed": true
+    }
+  ],
+  "authorSummary": {
+    "kind": "author local assembly/runtime evidence; independent QA remains ac94 scope",
+    "backend": "f445362a94c18807d0059608a0c4c47968916983",
+    "console": "30cfce951df8a858810a035efe51846a75a4ade6",
+    "deployment": "e5647a2f2b44f53d39a80041be94b619f07c29d6",
+    "source_files": 292,
+    "console_source_files": 64,
+    "all_source_bytes_verified": true,
+    "actual_browser_checks": 15,
+    "frontend_targeted_tests": 35,
+    "synthetic_browser_cases": 5,
+    "publisher_factory_test": "pass; real default role, close/cleanup/original Pause, permission-failure rollback, seven denied SQLs",
+    "local_identity_test": "fail mysql1470 before -> pass after role shortened; five independent identities",
+    "service": {
+      "id": "282e10cd-d5a5-403d-ae51-b8d0b61a959a",
+      "pid": 11196,
+      "state": "ready",
+      "started_at": "2026-11-14T07:05:58.304Z",
+      "expires_at": "2026-11-14T15:05:58.304Z",
+      "url": "http://127.0.0.1:4179",
+      "cleaned": false
+    },
+    "production_callable": false,
+    "limits": [
+      "create/update/rollback 202 accepted; real publication evidence pending",
+      "no production operator/adapter/Higress/Secret/validation",
+      "new tests are author evidence; no new independent QA",
+      "no target deployment or real model/GPU/paid calls",
+      "temporary data removed on stop; independent Windows host survival best effort"
+    ]
+  }
+}

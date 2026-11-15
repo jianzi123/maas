@@ -1,0 +1,661 @@
+{
+  "resume_batch": "2026-11-07 / 01a1b6ab-5754-7a7d-ab7f-736cc8fa27de",
+  "at_utc": "2026-11-07T16:27:45.402033+00:00",
+  "resumed_qa_sha": "077b3418bbfd55e19dd97d586ed213001aff51a0",
+  "backend_sha": "bfc1f7d577e0529362e26346e49e7ff6dadf9852",
+  "backend_repair_sha": "bfc1f7d577e0529362e26346e49e7ff6dadf9852",
+  "frontend_sha": "aef53eeb7eac16bd7a956294fefab750a3de31f8",
+  "frontend_strict_consumer_sha": "428d44e0b4f64ec628e6a945fd4b63a0e45c260b",
+  "management_leaf_results": [
+    {
+      "name": "TestQAIndependentManagement/create-list-detail-and-exact-operation",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/catalogue-from-same-immutable-kernel-profile",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/namespace-bound-pagination-and-invalid-cursors",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/qa-origin-mismatch-no-mutation",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/qa-cross-scope-cursor-and-operation-isolation",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/qa-rollback-dependency-classification-closure/missing_payload",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/qa-rollback-dependency-classification-closure/missing_history_port",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/qa-rollback-dependency-classification-closure/missing_history_access",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/qa-rollback-dependency-classification-closure/closed_payload",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/qa-rollback-dependency-classification-closure/invalid_revision",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/qa-rollback-dependency-classification-closure/invalid_uid",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/qa-rollback-dependency-classification-closure/different_uid",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/qa-rollback-dependency-classification-closure/stale_rv",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/qa-rollback-dependency-classification-closure/missing_session",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/qa-rollback-dependency-classification-closure/wrong_origin",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/qa-rollback-dependency-classification-closure/restored_dependency",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/qa-approved-reference-error-mapping/unapproved",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/qa-approved-reference-error-mapping/legacy_unapproved",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/qa-approved-reference-error-mapping/expired",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/qa-approved-reference-error-mapping/policy_changed",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/qa-approved-reference-error-mapping/missing_registry_port",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/qa-approved-reference-error-mapping/empty_registry",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/qa-approved-reference-error-mapping/unknown_typed",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/qa-approved-reference-error-mapping/untyped",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/stale-version-and-uid-conflicts",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/unapproved-reference-and-unknown-fields-rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/api-server-CAS-race-is-not-retried",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/pause-during-registry-outage",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/resume-and-update",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/rollback-reuses-retained-source",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/lost-ack-query-never-replays",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/qa-operation-query-503-does-not-change-unknown",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/delete-and-query-after-removal",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/qa-same-name-new-uid-preserves-original-operations",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/qa-paused-to-paused-save-action-is-update",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/scope-and-query-validation",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/write-authentication-and-csrf-before-mutation",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/operation-reader-privilege-boundary",
+      "result": "PASS"
+    },
+    {
+      "name": "TestQAIndependentManagement/administration-never-generates-or-settles",
+      "result": "PASS"
+    }
+  ],
+  "qa003_closure_matrix": [
+    {
+      "case": "missing_payload",
+      "actual_status": 503,
+      "request_id": "fc78a403-b6b9-4c1c-b170-ca2068a7274b",
+      "body_error": {
+        "budget_dimension": null,
+        "code": "dependency_unavailable",
+        "message": "dependency_unavailable",
+        "param": null,
+        "policy_revision": null,
+        "request_id": "fc78a403-b6b9-4c1c-b170-ca2068a7274b",
+        "reset_at": null,
+        "retry_after_seconds": null,
+        "retryable": false
+      },
+      "expected_status": 503,
+      "passed": true
+    },
+    {
+      "case": "missing_history_port",
+      "actual_status": 503,
+      "request_id": "9e8cb641-3dd0-4bf6-a26e-cb929736696a",
+      "body_error": {
+        "budget_dimension": null,
+        "code": "dependency_unavailable",
+        "message": "dependency_unavailable",
+        "param": null,
+        "policy_revision": null,
+        "request_id": "9e8cb641-3dd0-4bf6-a26e-cb929736696a",
+        "reset_at": null,
+        "retry_after_seconds": null,
+        "retryable": false
+      },
+      "expected_status": 503,
+      "passed": true
+    },
+    {
+      "case": "missing_history_access",
+      "actual_status": 503,
+      "request_id": "ed9af270-36c7-4698-bda2-a19f276d1ebc",
+      "body_error": {
+        "budget_dimension": null,
+        "code": "dependency_unavailable",
+        "message": "dependency_unavailable",
+        "param": null,
+        "policy_revision": null,
+        "request_id": "ed9af270-36c7-4698-bda2-a19f276d1ebc",
+        "reset_at": null,
+        "retry_after_seconds": null,
+        "retryable": false
+      },
+      "expected_status": 503,
+      "passed": true
+    },
+    {
+      "case": "closed_payload",
+      "actual_status": 503,
+      "request_id": "5165ef59-1d47-485d-a4ed-641848f25376",
+      "body_error": {
+        "budget_dimension": null,
+        "code": "dependency_unavailable",
+        "message": "dependency_unavailable",
+        "param": null,
+        "policy_revision": null,
+        "request_id": "5165ef59-1d47-485d-a4ed-641848f25376",
+        "reset_at": null,
+        "retry_after_seconds": null,
+        "retryable": false
+      },
+      "expected_status": 503,
+      "passed": true
+    },
+    {
+      "case": "invalid_revision",
+      "actual_status": 400,
+      "request_id": "c9f5a37c-dbee-450f-b4f4-9b4297ef2fff",
+      "body_error": {
+        "budget_dimension": null,
+        "code": "invalid_request",
+        "message": "invalid_request",
+        "param": null,
+        "policy_revision": null,
+        "request_id": "c9f5a37c-dbee-450f-b4f4-9b4297ef2fff",
+        "reset_at": null,
+        "retry_after_seconds": null,
+        "retryable": false
+      },
+      "expected_status": 400,
+      "passed": true
+    },
+    {
+      "case": "invalid_uid",
+      "actual_status": 400,
+      "request_id": "c41634d2-d576-466c-b28a-501f9666c189",
+      "body_error": {
+        "budget_dimension": null,
+        "code": "invalid_request",
+        "message": "invalid_request",
+        "param": null,
+        "policy_revision": null,
+        "request_id": "c41634d2-d576-466c-b28a-501f9666c189",
+        "reset_at": null,
+        "retry_after_seconds": null,
+        "retryable": false
+      },
+      "expected_status": 400,
+      "passed": true
+    },
+    {
+      "case": "different_uid",
+      "actual_status": 409,
+      "request_id": "9e5b0479-8a55-469e-9371-2eb0a5045aba",
+      "body_error": {
+        "budget_dimension": null,
+        "code": "resource_version_conflict",
+        "message": "resource_version_conflict",
+        "param": null,
+        "policy_revision": null,
+        "request_id": "9e5b0479-8a55-469e-9371-2eb0a5045aba",
+        "reset_at": null,
+        "retry_after_seconds": null,
+        "retryable": false
+      },
+      "expected_status": 409,
+      "passed": true
+    },
+    {
+      "case": "stale_rv",
+      "actual_status": 409,
+      "request_id": "104c4c1e-53e5-4ec5-ba80-b37078473c61",
+      "body_error": {
+        "budget_dimension": null,
+        "code": "resource_version_conflict",
+        "message": "resource_version_conflict",
+        "param": null,
+        "policy_revision": null,
+        "request_id": "104c4c1e-53e5-4ec5-ba80-b37078473c61",
+        "reset_at": null,
+        "retry_after_seconds": null,
+        "retryable": false
+      },
+      "expected_status": 409,
+      "passed": true
+    },
+    {
+      "case": "missing_session",
+      "actual_status": 401,
+      "request_id": "1cbf24e6-d850-4173-8311-776abb99d2b4",
+      "body_error": {
+        "budget_dimension": null,
+        "code": "unauthenticated",
+        "message": "unauthenticated",
+        "param": null,
+        "policy_revision": null,
+        "request_id": "1cbf24e6-d850-4173-8311-776abb99d2b4",
+        "reset_at": null,
+        "retry_after_seconds": null,
+        "retryable": false
+      },
+      "expected_status": 401,
+      "passed": true
+    },
+    {
+      "case": "wrong_origin",
+      "actual_status": 403,
+      "request_id": "6a94ca02-6773-4764-9a3f-bb7de712b128",
+      "body_error": {
+        "budget_dimension": null,
+        "code": "csrf_failed",
+        "message": "csrf_failed",
+        "param": null,
+        "policy_revision": null,
+        "request_id": "6a94ca02-6773-4764-9a3f-bb7de712b128",
+        "reset_at": null,
+        "retry_after_seconds": null,
+        "retryable": false
+      },
+      "expected_status": 403,
+      "passed": true
+    },
+    {
+      "case": "restored_dependency",
+      "actual_status": 202,
+      "request_id": "2faba8a1-cccc-4428-8606-8b61d0481bfb",
+      "body_error": null,
+      "expected_status": 202,
+      "passed": true
+    }
+  ],
+  "counts": {
+    "management_total": 39,
+    "management_pass": 39,
+    "management_fail": 0,
+    "closure_total": 11,
+    "closure_pass": 11,
+    "closure_fail": 0,
+    "actual_http_schema": 65,
+    "schema_pass": 65,
+    "key_usage_browser": 14,
+    "browser_pageerrors": 0,
+    "frontend_component_pass": 100,
+    "frontend_component_skip": 11,
+    "frontend_component_fail": 0,
+    "reference_mapping_pass": 8
+  },
+  "frontend_product_files_byte_equal": 54,
+  "frontend_build": "PASS",
+  "qa001_targeted_eof": "PASS_THIS_RUN",
+  "qa002": "PRIOR_CONTROLLED_PASS_PRESERVED_NOT_RERUN",
+  "qa003": "CONTROLLED_RETEST_PASS_RECOMMEND_CLOSE",
+  "release_browser_21": "PRIOR_077_EVIDENCE_PRESERVED_NOT_RERUN",
+  "shared_72": "PRIOR_077_EVIDENCE_PRESERVED_NOT_RERUN",
+  "A01_A34": "NOT_ACCEPTED",
+  "cleanup": {
+    "mysql_dirs_removed": true,
+    "mysql_dir_count": 4,
+    "owned_dependency_processes": [],
+    "browser_harness_exit": 0
+  },
+  "pre_fix_backend_sha": "821269bd32164918443e63e66c6a7cbce45d440b",
+  "pre_fix_matrix": [
+    {
+      "case": "missing_payload",
+      "expected_status": 503,
+      "actual_status": 400,
+      "request_id": "d2b8b6c1-0f4a-4a18-bf53-00d3a82f5dff",
+      "passed": false,
+      "side_effect_assertions": "all_passed"
+    },
+    {
+      "case": "missing_history_port",
+      "expected_status": 503,
+      "actual_status": 503,
+      "request_id": "67cec37f-ca44-4b86-b2c8-b31a84d396ca",
+      "passed": true,
+      "side_effect_assertions": "all_passed"
+    },
+    {
+      "case": "missing_history_access",
+      "expected_status": 503,
+      "actual_status": 400,
+      "request_id": "eb055c89-2701-46f3-bead-349c8e4d14c9",
+      "passed": false,
+      "side_effect_assertions": "all_passed"
+    },
+    {
+      "case": "closed_payload",
+      "expected_status": 503,
+      "actual_status": 503,
+      "request_id": "2c388058-f8ec-4803-b4ec-abf63e873afd",
+      "passed": true,
+      "side_effect_assertions": "all_passed"
+    },
+    {
+      "case": "invalid_revision",
+      "expected_status": 400,
+      "actual_status": 400,
+      "request_id": "013d076c-360e-417b-af6f-15ff57eb8138",
+      "passed": true,
+      "side_effect_assertions": "all_passed"
+    },
+    {
+      "case": "invalid_uid",
+      "expected_status": 400,
+      "actual_status": 400,
+      "request_id": "20c358c1-56b5-451d-9ea8-2c1f29851c10",
+      "passed": true,
+      "side_effect_assertions": "all_passed"
+    },
+    {
+      "case": "different_uid",
+      "expected_status": 409,
+      "actual_status": 409,
+      "request_id": "4ba7c6e7-93ac-4d16-b150-7177c8560a51",
+      "passed": true,
+      "side_effect_assertions": "all_passed"
+    },
+    {
+      "case": "stale_rv",
+      "expected_status": 409,
+      "actual_status": 409,
+      "request_id": "5f574d4d-1c54-4071-8383-91badf5ded3f",
+      "passed": true,
+      "side_effect_assertions": "all_passed"
+    },
+    {
+      "case": "missing_session",
+      "expected_status": 401,
+      "actual_status": 401,
+      "request_id": "ea356db6-5424-45bb-b13b-6ca29c8182cf",
+      "passed": true,
+      "side_effect_assertions": "all_passed"
+    },
+    {
+      "case": "wrong_origin",
+      "expected_status": 403,
+      "actual_status": 403,
+      "request_id": "00c57a2b-82b3-446a-a194-faaa1623e0d4",
+      "passed": true,
+      "side_effect_assertions": "all_passed"
+    },
+    {
+      "case": "restored_dependency",
+      "expected_status": 202,
+      "actual_status": 202,
+      "request_id": "b0625d0e-f61d-44b1-b018-bd59cd7cb898",
+      "passed": true,
+      "side_effect_assertions": "all_passed"
+    }
+  ],
+  "reference_error_matrix": [
+    {
+      "case": "unapproved",
+      "actual_status": 403,
+      "request_id": "2099357e-5846-468a-8e27-558d8170a6be",
+      "body_error": {
+        "budget_dimension": null,
+        "code": "forbidden",
+        "message": "forbidden",
+        "param": null,
+        "policy_revision": null,
+        "request_id": "2099357e-5846-468a-8e27-558d8170a6be",
+        "reset_at": null,
+        "retry_after_seconds": null,
+        "retryable": false
+      }
+    },
+    {
+      "case": "legacy_unapproved",
+      "actual_status": 403,
+      "request_id": "cb6c09df-d2a9-493d-b131-cd95cb36852f",
+      "body_error": {
+        "budget_dimension": null,
+        "code": "forbidden",
+        "message": "forbidden",
+        "param": null,
+        "policy_revision": null,
+        "request_id": "cb6c09df-d2a9-493d-b131-cd95cb36852f",
+        "reset_at": null,
+        "retry_after_seconds": null,
+        "retryable": false
+      }
+    },
+    {
+      "case": "expired",
+      "actual_status": 403,
+      "request_id": "0f94853c-8c51-46a5-9743-d28a1e1d51e0",
+      "body_error": {
+        "budget_dimension": null,
+        "code": "forbidden",
+        "message": "forbidden",
+        "param": null,
+        "policy_revision": null,
+        "request_id": "0f94853c-8c51-46a5-9743-d28a1e1d51e0",
+        "reset_at": null,
+        "retry_after_seconds": null,
+        "retryable": false
+      }
+    },
+    {
+      "case": "policy_changed",
+      "actual_status": 409,
+      "request_id": "67d753bf-ac8f-48bf-9508-09b5d45ce243",
+      "body_error": {
+        "budget_dimension": null,
+        "code": "policy_changed",
+        "message": "policy_changed",
+        "param": null,
+        "policy_revision": null,
+        "request_id": "67d753bf-ac8f-48bf-9508-09b5d45ce243",
+        "reset_at": null,
+        "retry_after_seconds": null,
+        "retryable": false
+      }
+    },
+    {
+      "case": "missing_registry_port",
+      "actual_status": 503,
+      "request_id": "707e320b-da10-4c64-aae4-74d0d19fd6db",
+      "body_error": {
+        "budget_dimension": null,
+        "code": "dependency_unavailable",
+        "message": "dependency_unavailable",
+        "param": null,
+        "policy_revision": null,
+        "request_id": "707e320b-da10-4c64-aae4-74d0d19fd6db",
+        "reset_at": null,
+        "retry_after_seconds": null,
+        "retryable": false
+      }
+    },
+    {
+      "case": "empty_registry",
+      "actual_status": 503,
+      "request_id": "18a990a2-1d92-47af-81d4-cb687b7479f4",
+      "body_error": {
+        "budget_dimension": null,
+        "code": "dependency_unavailable",
+        "message": "dependency_unavailable",
+        "param": null,
+        "policy_revision": null,
+        "request_id": "18a990a2-1d92-47af-81d4-cb687b7479f4",
+        "reset_at": null,
+        "retry_after_seconds": null,
+        "retryable": false
+      }
+    },
+    {
+      "case": "unknown_typed",
+      "actual_status": 503,
+      "request_id": "a5e77691-1b0b-4c9d-b48d-4731b9e03302",
+      "body_error": {
+        "budget_dimension": null,
+        "code": "dependency_unavailable",
+        "message": "dependency_unavailable",
+        "param": null,
+        "policy_revision": null,
+        "request_id": "a5e77691-1b0b-4c9d-b48d-4731b9e03302",
+        "reset_at": null,
+        "retry_after_seconds": null,
+        "retryable": false
+      }
+    },
+    {
+      "case": "untyped",
+      "actual_status": 503,
+      "request_id": "132f5e16-4d7b-4e1e-a9ca-36e1b1385178",
+      "body_error": {
+        "budget_dimension": null,
+        "code": "dependency_unavailable",
+        "message": "dependency_unavailable",
+        "param": null,
+        "policy_revision": null,
+        "request_id": "132f5e16-4d7b-4e1e-a9ca-36e1b1385178",
+        "reset_at": null,
+        "retry_after_seconds": null,
+        "retryable": false
+      }
+    }
+  ],
+  "key_browser_backend_sha": "821269bd32164918443e63e66c6a7cbce45d440b",
+  "raw_files": [
+    {
+      "file": "resume-pre-fix-management.txt",
+      "sha256": "6db126311cbec81e2aff3b028b7d21a1f1ac38b270a89e0858711088643ff62d",
+      "bytes": 7557
+    },
+    {
+      "file": "resume-pre-fix-http.json",
+      "sha256": "b1693bf49ca79cb29df88841a984d7f63d1927966b82bad990971d66c24bb52b",
+      "bytes": 82818
+    },
+    {
+      "file": "resume-pre-fix-results.json",
+      "sha256": "c3e4a7e4bb59446fb393538f441ca0c567fd6f230c6826558aa7fc6d98351eb9",
+      "bytes": 7871
+    },
+    {
+      "file": "resume-first-bfc-management.txt",
+      "sha256": "08350c3ff164d95e57284464f9a63e73d704d7f8df8f3d13ad26cf2f4274b235",
+      "bytes": 5741
+    },
+    {
+      "file": "resume-final-management.txt",
+      "sha256": "039a56b8c7eff4b214fda2a189b46800e0f354245bc0f19518a82f25f9622e08",
+      "bytes": 9856
+    },
+    {
+      "file": "resume-final-http.json",
+      "sha256": "27030505a23833271760ffce912adb632e3988d196f9b17587898d6ceb5a6bb8",
+      "bytes": 87109
+    },
+    {
+      "file": "resume-final-schema.json",
+      "sha256": "ff38062179aa7f31f6a269d89833bdeb83c5896b3cbbaa97dadc957de2177cc9",
+      "bytes": 434
+    },
+    {
+      "file": "resume-final-eof.txt",
+      "sha256": "1e298cfefdfc689fdded7a35ededbe12817c1cc19dc71deb5d16f6c0bbab6ead",
+      "bytes": 886
+    },
+    {
+      "file": "qa-key-browser.txt",
+      "sha256": "1833901f641af91f9180210956c12744f12c6f3f7b1129020c3c4d6789a5dc22",
+      "bytes": 616
+    },
+    {
+      "file": "resume-final-cleanup.json",
+      "sha256": "6aa95c07b1a35db716200456dc5bc71c29788e7bc6269a1bac401f3fa462c3fa",
+      "bytes": 122
+    }
+  ]
+}

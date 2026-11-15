@@ -1,0 +1,301 @@
+package kernel
+
+import (
+	"context"
+	"database/sql"
+	"encoding/json"
+
+	"io"
+	"net/http"
+	"net/http/httptest"
+	"os"
+
+	"github.com/google/uuid"
+	"github.com/jianzi123/maas/internal/protocol"
+	"strings"
+	"sync/atomic"
+	"testing"
+)
+
+func TestQAUsageAuthority(t *testing.T) {
+	base := `{"prompt_tokens":12,"completion_tokens":7,"total_tokens":19,"prompt_tokens_details":{"cached_tokens":4},"completion_tokens_details":{"reasoning_tokens":3}}`
+	progress := `{"prompt_tokens":12,"completion_tokens":5,"total_tokens":17}`
+	partial := `{"prompt_tokens":12}`
+	frame := func(u string) string { return "data: {\"usage\":" + u + "}\n\n" }
+	finish := "data: {\"choices\":[{\"index\":0,\"delta\":{},\"finish_reason\":\"stop\"}]}\n\n"
+	done := "data: [DONE]\n\n"
+	content := "data: {\"choices\":[{\"delta\":{\"content\":\"qa\"}}]}\n\n"
+	type testCase struct {
+		name, mode, body, cause    string
+		success, nonstream, cancel bool
+		receipts                   int
+	}
+	cases := []testCase{
+		{name: "final_identical_repeat", mode: "final_only", body: frame(base) + frame(base) + finish + done, success: true, receipts: 2},
+		{name: "final_increasing_parent_conflict", mode: "final_only", body: frame(base) + frame(strings.ReplaceAll(strings.ReplaceAll(base, `"completion_tokens":7`, `"completion_tokens":8`), `"total_tokens":19`, `"total_tokens":20`)) + finish + done, cause: "usage_conflict", receipts: 2},
+		{name: "final_increasing_cache_conflict", mode: "final_only", body: frame(base) + frame(strings.ReplaceAll(base, `"cached_tokens":4`, `"cached_tokens":5`)) + finish + done, cause: "usage_conflict", receipts: 2},
+		{name: "final_reasoning_conflict", mode: "final_only", body: frame(base) + frame(strings.ReplaceAll(base, `"reasoning_tokens":3`, `"reasoning_tokens":4`)) + finish + done, cause: "usage_conflict", receipts: 2},
+		{name: "final_missing_field_conflict", mode: "final_only", body: frame(base) + frame(partial) + finish + done, cause: "usage_conflict", receipts: 2},
+		{name: "progress_latest_not_sum", mode: "cumulative_until_finish", body: frame(progress) + frame(base) + finish + done, success: true, receipts: 2},
+		{name: "finish_then_first_usage_and_repeat", mode: "cumulative_until_finish", body: finish + frame(base) + frame(base) + done, success: true, receipts: 2},
+		{name: "after_finish_growth_conflict", mode: "cumulative_until_finish", body: frame(progress) + finish + frame(base) + done, cause: "usage_conflict", receipts: 2},
+		{name: "same_event_finish_then_later_growth", mode: "cumulative_until_finish", body: "data: {\"choices\":[{\"index\":0,\"delta\":{},\"finish_reason\":\"stop\"}],\"usage\":" + progress + "}\n\n" + frame(base) + done, cause: "usage_conflict", receipts: 2},
+		{name: "partial_progress_cannot_hide_decrease", mode: "cumulative_until_finish", body: frame(base) + frame(partial) + frame(progress) + finish + done, cause: "usage_conflict", receipts: 3},
+		{name: "final_partial_not_backfilled", mode: "cumulative_until_finish", body: frame(base) + frame(partial) + finish + done, cause: "normal_completion", receipts: 2},
+		{name: "no_policy_diagnostic_only", mode: "none", body: frame(base) + finish + done, cause: "normal_completion", receipts: 1},
+		{name: "missing_adapter_revision", mode: "no_revision", body: frame(base) + finish + done, cause: "usage_conflict", receipts: 1},
+		{name: "unknown_policy_mode", mode: "unsupported", body: frame(base) + finish + done, cause: "usage_conflict", receipts: 1},
+		{name: "progress_eof", mode: "cumulative_until_finish", body: frame(base), cause: "eof", receipts: 1},
+		{name: "final_eof_after_finish_without_done", mode: "final_only", body: frame(base) + finish, cause: "eof", receipts: 1},
+		{name: "final_cancel", mode: "final_only", body: frame(base) + finish + done, cause: "explicit_cancel", cancel: true, receipts: 1},
+		{name: "nonstream_approved", mode: "final_only", body: `{"choices":[{"index":0,"message":{"role":"assistant","content":"ok"},"finish_reason":"stop"}],"usage":` + base + `}`, success: true, nonstream: true, receipts: 1},
+		{name: "nonstream_no_policy", mode: "none", body: `{"choices":[{"index":0,"message":{"role":"assistant","content":"ok"},"finish_reason":"stop"}],"usage":` + base + `}`, nonstream: true, cause: "normal_completion", receipts: 1},
+	}
+	evidence := []map[string]any{}
+	for _, tc := range cases {
+		t.Run(tc.name, func(t *testing.T) {
+			policy := &UsagePolicy{AdapterRevision: "qa-controlled-v1", Mode: tc.mode}
+			if tc.mode == "none" {
+				policy = nil
+			}
+			if tc.mode == "no_revision" {
+				policy.AdapterRevision = ""
+				policy.Mode = "final_only"
+			}
+			f := setupUsagePolicy(t, 1, policy)
+			in := f.input(t)
+			ctx, cancel := context.WithCancel(context.Background())
+			defer cancel()
+			var attempts atomic.Int64
+			server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+				attempts.Add(1)
+				io.Copy(io.Discard, r.Body)
+				if _, e := f.core.Admit(r.Context(), f.gate, in); e != nil {
+					t.Error(e)
+					w.WriteHeader(503)
+					return
+				}
+				if tc.nonstream {
+					io.WriteString(w, tc.body)
+				} else {
+					w.Header().Set("Content-Type", "text/event-stream")
+					io.WriteString(w, content+tc.body)
+				}
+			}))
+			defer server.Close()
+			rec := httptest.NewRecorder()
+			writer := &qaUsageWriter{ResponseWriter: rec, core: f.core, id: in.RequestID}
+			if tc.cancel {
+				writer.cancel = cancel
+			}
+			relay := &Relay{core: f.core, endpoint: server.URL, client: server.Client(), maxBytes: 65536, maxLine: 65536}
+			e := relay.Forward(ctx, writer, RelayCall{Input: in, Body: []byte(`{"model":"synthetic"}`), Stream: !tc.nonstream})
+			if (e == nil) != tc.success {
+				t.Errorf("success=%v expected=%v err=%v", e == nil, tc.success, e)
+			}
+			if attempts.Load() != 1 {
+				t.Errorf("generation attempts %d", attempts.Load())
+			}
+			var raw []byte
+			if e := f.db.QueryRow("SELECT event_json FROM usage_events WHERE request_id=?", in.RequestID).Scan(&raw); e != nil {
+				t.Fatal(e)
+			}
+			var event map[string]any
+			if e := json.Unmarshal(raw, &event); e != nil {
+				t.Fatal(e)
+			}
+			if e := protocol.Validate("Terminal", event); e != nil {
+				t.Fatal(e)
+			}
+			u := event["usage"].(map[string]any)
+			tok, mon := readCounter(t, f, "tokens"), readCounter(t, f, "money")
+			if tc.success {
+				if event["result"] != "succeeded" || u["total_tokens"] != float64(19) || tok.Known != "19" || tok.Held != "0" || mon.Held != "0" {
+					t.Errorf("wrong final booking %v %v %v", event["result"], tok, mon)
+				}
+				if !tc.nonstream && strings.Count(rec.Body.String(), "[DONE]") != 1 {
+					t.Error("success must end once")
+				}
+			} else {
+				if event["result"] == "succeeded" {
+					t.Error("abnormal became success")
+				}
+				for _, key := range []string{"input_tokens", "output_tokens", "total_tokens", "input_cached_tokens", "reasoning_tokens"} {
+					if tc.name == "final_partial_not_backfilled" && key == "input_tokens" {
+						if u[key] != float64(12) {
+							t.Error("approved known input lost")
+						}
+						continue
+					}
+					if u[key] != nil {
+						t.Errorf("actual %s not null", key)
+					}
+				}
+				accounting := event["budget_accounting"].(map[string]any)
+				if accounting["token_actual"] != nil || accounting["cost_actual_atomic"] != nil {
+					t.Error("unknown final finance became actual")
+				}
+				if tok != (Counter{Known: "0", Reserved: "0", Held: "140"}) || mon != (Counter{Known: "0", Reserved: "0", Held: "520000"}) {
+					t.Errorf("held changed %v %v", tok, mon)
+				}
+				if strings.Contains(rec.Body.String(), "[DONE]") {
+					t.Error("normal DONE on failure")
+				}
+			}
+			cfg := *f.config
+			account := "qa_diag_" + strings.ReplaceAll(uuid.NewString(), "-", "")[:12]
+			if _, e := f.db.Exec("CREATE USER '" + account + "'@'localhost'"); e != nil {
+				t.Fatal(e)
+			}
+			defer f.db.Exec("DROP USER '" + account + "'@'localhost'")
+			if _, e := f.db.Exec("GRANT SELECT ON `" + cfg.DBName + "`.request_usage_diagnostics TO '" + account + "'@'localhost'"); e != nil {
+				t.Fatal(e)
+			}
+			cfg.User = account
+			db, e := sql.Open("mysql", cfg.FormatDSN())
+			if e != nil {
+				t.Fatal(e)
+			}
+			defer db.Close()
+			reader, e := NewDiagnosticReader(db)
+			if e != nil {
+				t.Fatal(e)
+			}
+			rows, e := reader.Read(context.Background(), in.RequestID)
+			if e != nil {
+				t.Fatal(e)
+			}
+			if len(rows) != tc.receipts+1 {
+				t.Errorf("diagnostics=%d expected=%d", len(rows), tc.receipts+1)
+			}
+			if len(rows) > 0 {
+				last := rows[len(rows)-1]
+				if last.Type != "termination" || last.Cause == nil || *last.Cause != func() string {
+					if tc.success {
+						return "normal_completion"
+					}
+					return tc.cause
+				}() {
+					t.Errorf("wrong termination %+v", last)
+				}
+			}
+
+			expectedUsages := []map[string]any{}
+			if tc.nonstream {
+				var envelope map[string]any
+				json.Unmarshal([]byte(tc.body), &envelope)
+				expectedUsages = append(expectedUsages, envelope["usage"].(map[string]any))
+			} else {
+				for _, line := range strings.Split(tc.body, "\n") {
+					if !strings.HasPrefix(line, "data: ") {
+						continue
+					}
+					var envelope map[string]any
+					if json.Unmarshal([]byte(strings.TrimPrefix(line, "data: ")), &envelope) == nil {
+						if u, ok := envelope["usage"].(map[string]any); ok {
+							expectedUsages = append(expectedUsages, u)
+						}
+					}
+				}
+			}
+			for i := 0; i < tc.receipts && i < len(rows); i++ {
+				if i >= len(expectedUsages) || rows[i].Usage == nil {
+					t.Error("raw receipt missing")
+					continue
+				}
+				expected := expectedUsages[i]
+				d := rows[i].Usage
+				values := []struct {
+					key string
+					got *int64
+				}{{"prompt_tokens", d.Input}, {"completion_tokens", d.Output}, {"total_tokens", d.Total}}
+				for _, v := range values {
+					n, ok := expected[v.key].(float64)
+					if ok && (v.got == nil || *v.got != int64(n)) {
+						t.Error("raw conflicting parent receipt changed", v.key)
+					}
+					if !ok && v.got != nil {
+						t.Error("missing receipt parent fabricated", v.key)
+					}
+				}
+				for _, v := range []struct {
+					parent, key string
+					got         *int64
+				}{{"prompt_tokens_details", "cached_tokens", d.Cached}, {"completion_tokens_details", "reasoning_tokens", d.Reasoning}} {
+					details, _ := expected[v.parent].(map[string]any)
+					n, ok := details[v.key].(float64)
+					if ok && (v.got == nil || *v.got != int64(n)) {
+						t.Error("raw conflicting subset receipt changed", v.key)
+					}
+					if !ok && v.got != nil {
+						t.Error("missing receipt subset fabricated", v.key)
+					}
+				}
+			}
+			for i, d := range rows {
+				if d.RequestID != in.RequestID || d.Owner != in.Owner || d.Fence != 1 || d.Sequence != int64(i+1) || d.Authority != "diagnostic_only" {
+					t.Error("diagnostic identity/order")
+				}
+				if i < tc.receipts && d.Type != "receipt" {
+					t.Error("receipt lost")
+				}
+			}
+			assertSQL(t, f.db, "SELECT COUNT(*) FROM generation_requests", 1)
+			assertSQL(t, f.db, "SELECT COUNT(*) FROM usage_events", 1)
+			assertSQL(t, f.db, "SELECT SUM(finalized_total) FROM usage_daily", 1)
+			if !tc.success {
+				if e := f.core.Release(context.Background(), in.RequestID, uuid.NewString(), uuid.NewString()); e != nil {
+					t.Fatal(e)
+				}
+				if readCounter(t, f, "tokens") != tok || readCounter(t, f, "money") != mon {
+					t.Error("slot refund changed finance")
+				}
+				var after []byte
+				f.db.QueryRow("SELECT event_json FROM usage_events WHERE request_id=?", in.RequestID).Scan(&after)
+				if string(after) != string(raw) {
+					t.Error("slot release rewrote terminal")
+				}
+			}
+			evidence = append(evidence, map[string]any{"case": tc.name, "request_id": in.RequestID, "expected_success": tc.success, "terminal": event, "diagnostics": rows, "tokens": tok, "money": mon, "attempts": attempts.Load(), "passed": !t.Failed()})
+			t.Logf("request_id=%s result=%v actual=%v held=%s receipts=%d", in.RequestID, event["result"], u["total_tokens"], tok.Held, tc.receipts)
+		})
+	}
+	t.Run("immutable_policy_cannot_change", func(t *testing.T) {
+		f := setupUsagePolicy(t, 1, &UsagePolicy{AdapterRevision: "qa1", Mode: "final_only"})
+		p := f.profile
+		p.UsagePolicy = &UsagePolicy{AdapterRevision: "qa2", Mode: "cumulative_until_finish"}
+		if e := f.core.RegisterProfile(context.Background(), p); e == nil {
+			t.Error("existing profile policy overwritten")
+		}
+		original, e := f.core.Profile(context.Background(), f.profile.Binding.PublicationID)
+		if e != nil || original.UsagePolicy == nil || original.UsagePolicy.AdapterRevision != "qa1" {
+			t.Fatal("original frozen policy changed", e)
+		}
+	})
+	if path := os.Getenv("MAAS_QA_USAGE_EVIDENCE"); path != "" {
+		raw, _ := json.MarshalIndent(evidence, "", "  ")
+		if e := os.WriteFile(path, raw, 0600); e != nil {
+			t.Fatal(e)
+		}
+	} else {
+		t.Fatal("explicit evidence path required")
+	}
+}
+
+type qaUsageWriter struct {
+	http.ResponseWriter
+	core   *Store
+	id     string
+	cancel context.CancelFunc
+}
+
+func (w *qaUsageWriter) Write(p []byte) (int, error) {
+	if w.cancel != nil {
+		rows, e := w.core.ReadDiagnostics(context.Background(), w.id)
+		if e == nil && len(rows) > 0 {
+			w.cancel()
+			w.cancel = nil
+		}
+	}
+	return w.ResponseWriter.Write(p)
+}

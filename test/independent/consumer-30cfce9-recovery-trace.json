@@ -1,0 +1,23 @@
+[
+  {
+    "trusted_header": true,
+    "request_id": "00000000-0000-4000-8000-000000000001",
+    "generation_posts": 1,
+    "lookups": [
+      {
+        "path": "/api/admin/v1/usage/requests?request_id=00000000-0000-4000-8000-000000000001",
+        "method": "GET"
+      }
+    ],
+    "body_request_id_rejected": "00000000-0000-4000-8000-000000000099",
+    "status": "passed"
+  },
+  {
+    "trusted_header": false,
+    "request_id": null,
+    "generation_posts": 1,
+    "lookups": [],
+    "body_request_id_rejected": "00000000-0000-4000-8000-000000000099",
+    "status": "passed"
+  }
+]

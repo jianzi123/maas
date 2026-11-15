@@ -1,0 +1,87 @@
+{
+  "observed_utc": "2026-11-13T10:35:47.029769+00:00",
+  "product_sha": "c7e863b11fb34ee2828c947393444e1e5a9baf08",
+  "groups": {
+    "independent_sql": {
+      "TestQARelayErrorAndSampling/timing_before_diagnostic_write": "PASS",
+      "TestQARelayErrorAndSampling/empty_completion": "PASS",
+      "TestQARelayErrorAndSampling/usage_only_completion": "PASS",
+      "TestQARelayErrorAndSampling/error_immediate": "PASS",
+      "TestQARelayErrorAndSampling/error_after_role": "PASS",
+      "TestQARelayErrorAndSampling/error_after_content": "PASS",
+      "TestQARelayErrorAndSampling/error_with_usage": "PASS",
+      "TestQARelayErrorAndSampling/error_null": "PASS",
+      "TestQARelayErrorAndSampling/error_with_content": "PASS",
+      "TestQARelayErrorAndSampling/nonstream_error": "PASS",
+      "TestQARelayErrorAndSampling/eof_before_content": "PASS",
+      "TestQARelayErrorAndSampling/eof_after_content": "PASS",
+      "TestQARelayErrorAndSampling/cancel_before_content": "PASS",
+      "TestQARelayErrorAndSampling/timeout_after_content": "PASS",
+      "TestQARelayErrorAndSampling/content_write_failure": "PASS",
+      "TestQARelayErrorAndSampling/content_without_flusher": "PASS",
+      "TestQARelayErrorAndSampling/full_queue_success": "PASS",
+      "TestQARelayErrorAndSampling/sampling_disabled": "PASS",
+      "TestQARelayErrorAndSampling/nonstream_success": "PASS"
+    },
+    "independent_functions": {
+      "TestQASamplerLimits/zero_capacity": "PASS",
+      "TestQASamplerLimits/over_capacity": "PASS",
+      "TestQASamplerLimits/empty_run": "PASS",
+      "TestQASamplerLimits/long_run": "PASS",
+      "TestQASamplerLimits/invalid_instance": "PASS",
+      "TestQASamplerLimits/empty_revision": "PASS",
+      "TestQASamplerLimits/long_revision": "PASS",
+      "TestQASamplerLimits/bounded_concurrent_offer": "PASS",
+      "TestQASamplerLimits/boots_are_independent": "PASS"
+    },
+    "author_sql": {
+      "TestMySQLRelaySampling/content": "PASS",
+      "TestMySQLRelaySampling/empty": "PASS",
+      "TestMySQLRelaySampling/usage_only": "PASS",
+      "TestMySQLRelaySampling/error_then_finish": "PASS",
+      "TestMySQLRelaySampling/error_after_content": "PASS",
+      "TestMySQLRelaySampling/raw_eof": "PASS",
+      "TestMySQLRelaySampling/write_failure": "PASS",
+      "TestMySQLRelaySampling/cancel": "PASS",
+      "TestMySQLRelaySampling/timeout": "PASS",
+      "TestMySQLRelaySampling/full_sampler": "PASS"
+    },
+    "author_bounded_queue": {
+      "TestSamplerBoundedDrop": "PASS"
+    }
+  },
+  "denominator": {
+    "executions": 19,
+    "sampling_disabled": 1,
+    "offer_attempts_from_forward": 18,
+    "exported_summary": 17,
+    "dropped": 1,
+    "prefilled_queue_sentinel_is_not_business_request": true
+  },
+  "requests": {
+    "timing_before_diagnostic_write": "5529a200-ee1a-47a2-ad14-f01865f91a04",
+    "empty_completion": "8d49a8c9-b3e7-4ea3-8437-e1d0d6403847",
+    "usage_only_completion": "45256081-6f79-4f7a-a182-c07b7015dbb7",
+    "error_immediate": "09d1b0b3-2d23-478e-a299-4ca9b980e511",
+    "error_after_role": "390619e3-1a01-42b0-b1cc-0e42d168d3d4",
+    "error_after_content": "650e1164-99e7-49a2-b8de-48528bed35e6",
+    "error_with_usage": "91be5789-87fe-4b9b-bc71-08849e9f49df",
+    "error_null": "93423505-7fdd-4817-883e-e9a38b56d192",
+    "error_with_content": "9b47af14-a521-466a-8d5f-92a23e3f3ac6",
+    "nonstream_error": "6a0af234-0775-433a-a10a-5ff704b25490",
+    "eof_before_content": "bf8604d0-3d4f-4684-8f33-a5f43c3f1b08",
+    "eof_after_content": "460cf0a4-bd44-4705-b0ec-b22fd1cee089",
+    "cancel_before_content": "5866b0a3-439d-4fd6-87fb-b3b809aa933e",
+    "timeout_after_content": "ef9dacfc-ac42-4eff-a1ef-703dc4e02d86",
+    "content_write_failure": "0a0ee5bd-5cbb-4e46-b48d-09873398934d",
+    "content_without_flusher": "82ee4307-eec6-4213-8257-a49dac93703c",
+    "full_queue_success": "826b13b0-a062-43b6-ae57-df32b4742fb1",
+    "sampling_disabled": "e6bdd479-94a2-4e38-8183-d1dd1876263a",
+    "nonstream_success": "bb370907-b0cf-4308-9d83-ebf0b93951e7"
+  },
+  "no_new_product_failure": true,
+  "prior_usage_reader_qa001_002_003": "RETAINED_NOT_RERUN",
+  "full_80": "NOT_RERUN",
+  "d1_consumer_e1": "NOT_EXECUTED",
+  "production_callable": false
+}

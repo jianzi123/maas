@@ -1,0 +1,813 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "profile_version": {
+      "const": "0.3"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "source_kind": {
+      "enum": [
+        "SelfHosted",
+        "ExternalAPI",
+        "ControlledFixture"
+      ]
+    },
+    "scope": {
+      "enum": [
+        "candidate_pending_approval",
+        "controlled_only_pending_approval"
+      ]
+    },
+    "execution_enabled": {
+      "const": false
+    },
+    "approval": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "state": {
+          "const": "pending"
+        },
+        "reference": {
+          "type": "null"
+        }
+      },
+      "required": [
+        "state",
+        "reference"
+      ]
+    },
+    "contracts": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ticket": {
+          "const": 3
+        },
+        "terminal": {
+          "const": "3.0"
+        },
+        "observation": {
+          "const": "1.0"
+        },
+        "d1_terminal_proposal": {
+          "const": "3.1"
+        }
+      },
+      "required": [
+        "ticket",
+        "terminal",
+        "observation",
+        "d1_terminal_proposal"
+      ]
+    },
+    "hard_budget": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "const": "unverified"
+        },
+        "input_upper_tokens": {
+          "type": "null"
+        },
+        "output_upper_tokens": {
+          "type": "null"
+        },
+        "evidence_ref": {
+          "type": "null"
+        }
+      },
+      "required": [
+        "status",
+        "input_upper_tokens",
+        "output_upper_tokens",
+        "evidence_ref"
+      ]
+    },
+    "context": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "metadata_limits": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "proposed_service_tokens": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "verified_service_tokens": {
+          "type": "null"
+        },
+        "verified_total_generated_tokens": {
+          "type": "null"
+        }
+      },
+      "required": [
+        "metadata_limits",
+        "proposed_service_tokens",
+        "verified_service_tokens",
+        "verified_total_generated_tokens"
+      ]
+    },
+    "usage": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "enum": [
+            "unverified",
+            "documentation_only",
+            "source_inspected_not_runtime_verified"
+          ]
+        },
+        "prompt_path": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "completion_path": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "total_path": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "cache_path": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "reasoning_path": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "missing_is_zero": {
+          "const": false
+        },
+        "subsets_are_additive": {
+          "const": false
+        }
+      },
+      "required": [
+        "status",
+        "prompt_path",
+        "completion_path",
+        "total_path",
+        "cache_path",
+        "reasoning_path",
+        "missing_is_zero",
+        "subsets_are_additive"
+      ]
+    },
+    "cancellation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "const": "unverified"
+        },
+        "action_deadline_ms": {
+          "const": 2000
+        },
+        "action_evidence_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "engine_exit_evidence_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "capacity_recovery_evidence_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "transport_proof_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "observation_is_authority": {
+          "const": false
+        }
+      },
+      "required": [
+        "status",
+        "action_deadline_ms",
+        "action_evidence_ref",
+        "engine_exit_evidence_ref",
+        "capacity_recovery_evidence_ref",
+        "transport_proof_ref",
+        "observation_is_authority"
+      ]
+    },
+    "locks": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "endpoint_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "image_digest": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "weights_manifest_sha256": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "tokenizer_assets_sha256": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "effective_template_sha256": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "gpu_model": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "intra_node_links": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "inter_node_network": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "driver_version": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "cuda_pytorch_nccl_manifest": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "k8s_higress_lws_manifest": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "price_policy_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "key_budget_slot_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "quality_slo_policy_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "real_chain_evidence_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "gpu_count": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "gpu_memory_bytes_each": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        }
+      },
+      "required": [
+        "endpoint_ref",
+        "image_digest",
+        "weights_manifest_sha256",
+        "tokenizer_assets_sha256",
+        "effective_template_sha256",
+        "gpu_model",
+        "intra_node_links",
+        "inter_node_network",
+        "driver_version",
+        "cuda_pytorch_nccl_manifest",
+        "k8s_higress_lws_manifest",
+        "price_policy_ref",
+        "key_budget_slot_ref",
+        "quality_slo_policy_ref",
+        "real_chain_evidence_ref",
+        "gpu_count",
+        "gpu_memory_bytes_each"
+      ]
+    },
+    "model": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "provider": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "model_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "immutable_revision": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "architecture": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "metadata_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "provider",
+        "model_id",
+        "immutable_revision",
+        "architecture",
+        "metadata_ref"
+      ]
+    },
+    "engine": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "name": {
+              "const": "SGLang"
+            },
+            "source_tag": {
+              "const": "v0.5.18"
+            },
+            "source_commit": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{40}$"
+            },
+            "image_hint": {
+              "type": "string"
+            },
+            "image_existence_verified": {
+              "const": false
+            },
+            "workload": {
+              "const": "LeaderWorkerSet"
+            },
+            "lws_source_tag": {
+              "const": "v1.0.0"
+            },
+            "lws_source_commit": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{40}$"
+            }
+          },
+          "required": [
+            "name",
+            "source_tag",
+            "source_commit",
+            "image_hint",
+            "image_existence_verified",
+            "workload",
+            "lws_source_tag",
+            "lws_source_commit"
+          ]
+        }
+      ]
+    },
+    "configuration": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "precision_proposal": {
+              "const": "bfloat16"
+            },
+            "quantization_proposal": {
+              "type": "null"
+            },
+            "groups": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "pods_per_group": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "gpus_per_pod": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "tp": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "pp": {
+              "const": 1
+            },
+            "dp": {
+              "const": 1
+            },
+            "ep": {
+              "const": 1
+            },
+            "model_default_temperature_metadata": {
+              "type": "number"
+            },
+            "model_default_top_p_metadata": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "profile_approved": {
+              "const": false
+            }
+          },
+          "required": [
+            "precision_proposal",
+            "quantization_proposal",
+            "groups",
+            "pods_per_group",
+            "gpus_per_pod",
+            "tp",
+            "pp",
+            "dp",
+            "ep",
+            "model_default_temperature_metadata",
+            "model_default_top_p_metadata",
+            "profile_approved"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "adapter_profile_ref": {
+              "type": "null"
+            },
+            "proposed_fixed_mode": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "thinking": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "type": {
+                      "const": "disabled"
+                    }
+                  },
+                  "required": [
+                    "type"
+                  ]
+                }
+              },
+              "required": [
+                "thinking"
+              ]
+            },
+            "upstream_usage_only_in_trusted_adapter": {
+              "const": true
+            },
+            "profile_approved": {
+              "const": false
+            }
+          },
+          "required": [
+            "adapter_profile_ref",
+            "proposed_fixed_mode",
+            "upstream_usage_only_in_trusted_adapter",
+            "profile_approved"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "requests_are_synthetic": {
+              "const": true
+            },
+            "profile_approved": {
+              "const": false
+            }
+          },
+          "required": [
+            "requests_are_synthetic",
+            "profile_approved"
+          ]
+        }
+      ]
+    },
+    "conflicts": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "profile_version",
+    "id",
+    "source_kind",
+    "scope",
+    "execution_enabled",
+    "approval",
+    "contracts",
+    "hard_budget",
+    "context",
+    "usage",
+    "cancellation",
+    "locks",
+    "model",
+    "engine",
+    "configuration",
+    "conflicts"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MAAS-9 controlled/candidate input inventory; never runtime authorization",
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "source_kind": {
+            "const": "SelfHosted"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "configuration": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "precision_proposal": {
+                "const": "bfloat16"
+              },
+              "quantization_proposal": {
+                "type": "null"
+              },
+              "groups": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "pods_per_group": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "gpus_per_pod": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "tp": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "pp": {
+                "const": 1
+              },
+              "dp": {
+                "const": 1
+              },
+              "ep": {
+                "const": 1
+              },
+              "model_default_temperature_metadata": {
+                "type": "number"
+              },
+              "model_default_top_p_metadata": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "profile_approved": {
+                "const": false
+              }
+            },
+            "required": [
+              "precision_proposal",
+              "quantization_proposal",
+              "groups",
+              "pods_per_group",
+              "gpus_per_pod",
+              "tp",
+              "pp",
+              "dp",
+              "ep",
+              "model_default_temperature_metadata",
+              "model_default_top_p_metadata",
+              "profile_approved"
+            ]
+          },
+          "engine": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "const": "SGLang"
+              },
+              "source_tag": {
+                "const": "v0.5.18"
+              },
+              "source_commit": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{40}$"
+              },
+              "image_hint": {
+                "type": "string"
+              },
+              "image_existence_verified": {
+                "const": false
+              },
+              "workload": {
+                "const": "LeaderWorkerSet"
+              },
+              "lws_source_tag": {
+                "const": "v1.0.0"
+              },
+              "lws_source_commit": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{40}$"
+              }
+            },
+            "required": [
+              "name",
+              "source_tag",
+              "source_commit",
+              "image_hint",
+              "image_existence_verified",
+              "workload",
+              "lws_source_tag",
+              "lws_source_commit"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "source_kind": {
+            "const": "ExternalAPI"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "configuration": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "adapter_profile_ref": {
+                "type": "null"
+              },
+              "proposed_fixed_mode": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "thinking": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "type": {
+                        "const": "disabled"
+                      }
+                    },
+                    "required": [
+                      "type"
+                    ]
+                  }
+                },
+                "required": [
+                  "thinking"
+                ]
+              },
+              "upstream_usage_only_in_trusted_adapter": {
+                "const": true
+              },
+              "profile_approved": {
+                "const": false
+              }
+            },
+            "required": [
+              "adapter_profile_ref",
+              "proposed_fixed_mode",
+              "upstream_usage_only_in_trusted_adapter",
+              "profile_approved"
+            ]
+          },
+          "engine": {
+            "type": "null"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "source_kind": {
+            "const": "ControlledFixture"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "configuration": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "requests_are_synthetic": {
+                "const": true
+              },
+              "profile_approved": {
+                "const": false
+              }
+            },
+            "required": [
+              "requests_are_synthetic",
+              "profile_approved"
+            ]
+          },
+          "engine": {
+            "type": "null"
+          }
+        }
+      }
+    }
+  ]
+}

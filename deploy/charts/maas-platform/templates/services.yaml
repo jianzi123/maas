@@ -1,0 +1,24 @@
+{{- range $component := list "operator" "core" "console" }}
+{{- $w := index $.Values $component }}
+{{- if $w.enabled }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "maas.name" $ }}-{{ $component }}
+  namespace: {{ $.Release.Namespace }}
+  labels:
+    {{- include "maas.labels" $ | nindent 4 }}
+spec:
+  type: ClusterIP
+  selector:
+    {{- include "maas.selector" (dict "root" $ "component" $component) | nindent 4 }}
+  {{- if eq $component "operator" }}
+  # The review binary is never Ready. Webhook must still reject via its handler.
+  publishNotReadyAddresses: true
+  ports: [{name: webhook, port: 443, targetPort: 9443}]
+  {{- else }}
+  ports: [{name: http, port: {{ $w.port }}, targetPort: http}]
+  {{- end }}
+{{- end }}
+{{- end }}

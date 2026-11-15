@@ -1,0 +1,199 @@
+{
+  "source_commit": "c7e863b11fb34ee2828c947393444e1e5a9baf08",
+  "consumer_commit": "df8d40efa08fcbb72e4a29a922d15ef22a849ec4",
+  "delta_base": "8420aaf956b7d44d52c2bbe52c9d20d15fcdb781",
+  "python": "3.13.9 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 19:09:58) [MSC v.1929 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "unique_checks": 46,
+  "passed": 46,
+  "failed": 0,
+  "cli_invocations": 68,
+  "source_go_rerun": false,
+  "real_execution_enabled": false,
+  "checks": [
+    {
+      "id": "I01-fixed-originals-17-files-six-sources-schema",
+      "passed": true
+    },
+    {
+      "id": "P01-byte-exact-json-html-reproduction",
+      "passed": true
+    },
+    {
+      "id": "P02-nine-requests-ten-local-scenarios-no-global-denominator",
+      "passed": true
+    },
+    {
+      "id": "P03-four-milestones-and-two-origins",
+      "passed": true
+    },
+    {
+      "id": "P04-downgrade-and-html-disclosures",
+      "passed": true
+    },
+    {
+      "id": "N-raw-hash",
+      "passed": true
+    },
+    {
+      "id": "N-manifest-hash",
+      "passed": true
+    },
+    {
+      "id": "N-expected-commit",
+      "passed": true
+    },
+    {
+      "id": "N-source-digest",
+      "passed": true
+    },
+    {
+      "id": "N-sample-run",
+      "passed": true
+    },
+    {
+      "id": "N-request",
+      "passed": true
+    },
+    {
+      "id": "N-boot",
+      "passed": true
+    },
+    {
+      "id": "N-clock",
+      "passed": true
+    },
+    {
+      "id": "N-duplicate",
+      "passed": true
+    },
+    {
+      "id": "N-unmapped",
+      "passed": true
+    },
+    {
+      "id": "N-private-sample",
+      "passed": true
+    },
+    {
+      "id": "N-private-export",
+      "passed": true
+    },
+    {
+      "id": "N-private-manifest",
+      "passed": true
+    },
+    {
+      "id": "N-negative-time",
+      "passed": true
+    },
+    {
+      "id": "N-boolean-time",
+      "passed": true
+    },
+    {
+      "id": "N-nan-time",
+      "passed": true
+    },
+    {
+      "id": "N-infinite-time",
+      "passed": true
+    },
+    {
+      "id": "N-time-after-end",
+      "passed": true
+    },
+    {
+      "id": "N-missing-parent",
+      "passed": true
+    },
+    {
+      "id": "N-reversed-time",
+      "passed": true
+    },
+    {
+      "id": "N-version",
+      "passed": true
+    },
+    {
+      "id": "N-fake-complete-sidecar",
+      "passed": true
+    },
+    {
+      "id": "N-hide-missing-clock",
+      "passed": true
+    },
+    {
+      "id": "N-hide-missing-trace",
+      "passed": true
+    },
+    {
+      "id": "N-source-path-traversal",
+      "passed": true
+    },
+    {
+      "id": "N-manifest-command",
+      "passed": true
+    },
+    {
+      "id": "S-zero-synthetic-mutation",
+      "passed": true
+    },
+    {
+      "id": "S-all-null-synthetic-mutation",
+      "passed": true
+    },
+    {
+      "id": "N-raw-export-cannot-become-full-sidecar",
+      "passed": true
+    },
+    {
+      "id": "H01-twenty-historical-requests-oracle-null-zero-held-no-join",
+      "passed": true
+    },
+    {
+      "id": "H-archive-hash",
+      "passed": true
+    },
+    {
+      "id": "H-member-hash",
+      "passed": true
+    },
+    {
+      "id": "H-required-path",
+      "passed": true
+    },
+    {
+      "id": "H-duplicate-member",
+      "passed": true
+    },
+    {
+      "id": "H-unused-private-member",
+      "passed": true
+    },
+    {
+      "id": "S-historical-real-zero-value-vs-null-SYNTHETIC-only",
+      "passed": true
+    },
+    {
+      "id": "S-sidecar-no-calibration",
+      "passed": true
+    },
+    {
+      "id": "S-sidecar-untrusted-zero-error-calibration",
+      "passed": true
+    },
+    {
+      "id": "S-sidecar-missing-trace",
+      "passed": true
+    },
+    {
+      "id": "S-sidecar-missing-binding",
+      "passed": true
+    },
+    {
+      "id": "S-sidecar-missing-experiment",
+      "passed": true
+    }
+  ]
+}
