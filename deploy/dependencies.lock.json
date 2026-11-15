@@ -4,12 +4,12 @@
   "deploymentApproved": false,
   "sourceBaseline": {
     "chartBase": "e5647a2f2b44f53d39a80041be94b619f07c29d6",
-    "backendInspected": "fe09d60b4932f78ed07dd27da36878b2a375d0fd",
+    "backendInspected": "c648dda5a20b64d5658eb79f08b9ef464ea6687b",
     "contracts": "MAAS-2 v0.4 + retained v0.3 + query/recovery addenda + MAAS-1 role review",
     "terminal": "3.0",
     "ticket": "3",
     "proposedTerminal": "3.1 (not enabled)",
-    "consoleInspected": "fe09d60b4932f78ed07dd27da36878b2a375d0fd",
+    "consoleInspected": "c648dda5a20b64d5658eb79f08b9ef464ea6687b",
     "defaultBranch": "925d8c55be9ce823d100bf90a5c78cf19ea66d58",
     "candidatePR": null,
     "candidateState": "integrated-unmerged",
@@ -18,7 +18,7 @@
     "qaCore": "ac94a373ec0a61c5fd4dc5380a7985a4fb47840f",
     "qaEvidence": "50354a705c03383d0102d0d437119afd7ffed8b3",
     "sourceInventory": "deploy/build-sources.lock.json",
-    "sourceInventorySha256": "d84da8191fd294989a57513e977d50d6e22d853ca63632adea68246a071bdfb8",
+    "sourceInventorySha256": "d930591a37ac2d91af1275cc220a7a2021ab9f70040f8af074a453de670e906d",
     "upstreamWorkbenchDeployment": "e5647a2f2b44f53d39a80041be94b619f07c29d6",
     "backendBase": "0559fa46b4a728d6f542daf19532e794f8549b31",
     "integrationBranch": "integrate/MAAS-17-unified-20261114",
@@ -99,7 +99,7 @@
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "fe09d60b4932f78ed07dd27da36878b2a375d0fd",
+      "sourceCommit": "c648dda5a20b64d5658eb79f08b9ef464ea6687b",
       "compiledAPIGroup": "serving.maas.example"
     },
     {
@@ -116,7 +116,7 @@
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "fe09d60b4932f78ed07dd27da36878b2a375d0fd",
+      "sourceCommit": "c648dda5a20b64d5658eb79f08b9ef464ea6687b",
       "compiledAPIGroup": "serving.maas.example"
     },
     {
@@ -133,7 +133,7 @@
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "fe09d60b4932f78ed07dd27da36878b2a375d0fd"
+      "sourceCommit": "c648dda5a20b64d5658eb79f08b9ef464ea6687b"
     },
     {
       "id": "mysql",
@@ -432,7 +432,7 @@
   "databaseIdentities": {
     "schemaVersion": "1.0",
     "scope": "installation-input-only-no-secret-values",
-    "sourceCommit": "fe09d60b4932f78ed07dd27da36878b2a375d0fd",
+    "sourceCommit": "c648dda5a20b64d5658eb79f08b9ef464ea6687b",
     "productionWiringVerified": false,
     "connections": {
       "core": {
@@ -583,6 +583,7 @@
           "deploy/charts/maas-platform/values.yaml",
           "deploy/checks/candidate_wiring.py",
           "deploy/checks/identities.py",
+          "deploy/checks/inspect_source_inputs.py",
           "deploy/checks/inspect_sources.py",
           "deploy/checks/permissions.py",
           "deploy/checks/preflight.py",
@@ -597,6 +598,7 @@
           "deploy/docs/database-identities.md",
           "deploy/docs/publisher-factory.md",
           "deploy/docs/source-assembly.md",
+          "deploy/docs/source-inputs-20261115.md",
           "deploy/evidence/assembly-inspection.json",
           "deploy/evidence/author-unified-source-inspection.json",
           "deploy/evidence/candidate-validation.json",
@@ -616,12 +618,15 @@
           "deploy/evidence/identity-suites.json",
           "deploy/evidence/permissions.json",
           "deploy/evidence/publisher-source-negatives.json",
+          "deploy/evidence/source-input-negatives-20261115.json",
+          "deploy/evidence/source-inputs-20261115.json",
           "deploy/evidence/source-inspection.json",
           "deploy/evidence/source-negative.json",
           "deploy/evidence/verification.json",
           "deploy/identities.json",
           "deploy/images/Dockerfile.console",
           "deploy/images/Dockerfile.operator",
+          "deploy/intake/source-input-cards-20261115.json",
           "deploy/tests/fixtures/hybrid.yaml",
           "deploy/tests/fixtures/internal.yaml",
           "docs/local-service.md",
