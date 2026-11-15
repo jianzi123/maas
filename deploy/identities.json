@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "scope": "installation-input-only-no-secret-values",
-  "sourceCommit": "3b8a419b897a87bf7ceec78b7668978b114ff109",
+  "sourceCommit": "4fbb921d6e394c378a9b8b34a082473fa3ca3e94",
   "productionWiringVerified": false,
   "connections": {
     "core": {
@@ -228,6 +228,7 @@
         "docs/performance/engineering/19-native-kv-integration.md",
         "docs/performance/engineering/20-window-b-cost-drift.md",
         "docs/performance/engineering/21-literature-to-experiments.md",
+        "docs/performance/engineering/22-cadence-policy-pilot.md",
         "docs/performance/engineering/README.md",
         "docs/performance/engineering/figures/lease-lifecycle.svg",
         "docs/performance/engineering/figures/online-softmax.svg",
@@ -484,10 +485,13 @@
         "tools/perf/operators/gemm_validation.h",
         "tools/perf/operators/gemm_validation_host.cpp",
         "tools/perf/operators/local_gpu/README.md",
+        "tools/perf/operators/local_gpu/analyze_kv_cadence.py",
         "tools/perf/operators/local_gpu/analyze_kv_trace.py",
         "tools/perf/operators/local_gpu/analyze_kv_window_b.py",
+        "tools/perf/operators/local_gpu/bench_kv_cadence.py",
         "tools/perf/operators/local_gpu/bench_kv_interleaved.py",
         "tools/perf/operators/local_gpu/bench_native_kv.py",
+        "tools/perf/operators/local_gpu/cadence_protocol.py",
         "tools/perf/operators/local_gpu/check_decode_graph.py",
         "tools/perf/operators/local_gpu/check_kv_device_fault.py",
         "tools/perf/operators/local_gpu/check_native_kv_state.py",
@@ -581,6 +585,7 @@
         "tools/perf/operators/local_gpu/run_sglang.py",
         "tools/perf/operators/local_gpu/run_split_cap6.py",
         "tools/perf/operators/local_gpu/source_map.py",
+        "tools/perf/operators/local_gpu/test_cadence_protocol.py",
         "tools/perf/operators/plan.json",
         "tools/perf/operators/probe_local_gpu.py",
         "tools/perf/operators/profile_operator.py",

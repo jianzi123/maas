@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "scope": "observed-source-interface-not-production-readiness",
   "backend": {
-    "sourceCommit": "3b8a419b897a87bf7ceec78b7668978b114ff109",
+    "sourceCommit": "4fbb921d6e394c378a9b8b34a082473fa3ca3e94",
     "apiGroup": "serving.maas.example",
     "operator": {
       "command": [
@@ -196,10 +196,13 @@
       "tools/perf/scheduling/source_probe.py": "fa0ad531aca48ab62bc11fa10648ad81e474289d938b51021c2e2d1ebc0f5efc",
       "tools/perf/scheduling/test_scheduling.py": "596a7d009a8111f2f058298edc147dd26e52f109bbbb7bc2ef45de2ab74bf66f",
       "tools/perf/scheduling/__init__.py": "1a4b537867a781eaeaae222b5fa71eb4bb2dc706be43dd8f84e6d56191c6cc3c",
+      "tools/perf/operators/local_gpu/analyze_kv_cadence.py": "fdf166d738e4d85376a968ed8731aa82028f4c03f4c4c83ef73335d41c87be62",
       "tools/perf/operators/local_gpu/analyze_kv_trace.py": "7da022fd1fb70b6381f99e23105473d0ba000a4a736bfe5f6e7525855f3bc394",
       "tools/perf/operators/local_gpu/analyze_kv_window_b.py": "c38a45d8b56ba57f2c3c178c3c074e3c342255b2b9194137baeaf8f927c69810",
+      "tools/perf/operators/local_gpu/bench_kv_cadence.py": "b6d542c55fe208b302e54d7631412f4a0c31f84d2e62750adb9091f8cd8fa323",
       "tools/perf/operators/local_gpu/bench_kv_interleaved.py": "0be7d4877dda5969a009a1ecf70289a45d56d0e94e050afd37105c524e4aedd7",
       "tools/perf/operators/local_gpu/bench_native_kv.py": "f8c86cb12269363496bf14d0c0db3c606ebcfb4f3f0584fe7c02b044ad2328fd",
+      "tools/perf/operators/local_gpu/cadence_protocol.py": "b58cc3467a0e3a34c0f5f49ad812ac89bc4740b897d6d35d40e0ba84fec2ac9f",
       "tools/perf/operators/local_gpu/check_decode_graph.py": "a749f1ffac5579a189d7b8fe5ef8770c51ee7c5de42961dfbebf5bc1c488b104",
       "tools/perf/operators/local_gpu/check_kv_device_fault.py": "b4e43feada56871fb3bb09989ce79fe14dd88fce2fb6b86471b0bab5ab0d1b64",
       "tools/perf/operators/local_gpu/check_native_kv_state.py": "9f7b7d51c3bfbf2e6701e0d65882b300dc431659a2240ca93788cd8b2aa05975",
@@ -215,7 +218,7 @@
       "tools/perf/operators/local_gpu/probe_decode.py": "19ea0ee5db9923615c49d47549890b80ddae9ef32bee1b7fa4319ab24cf2569b",
       "tools/perf/operators/local_gpu/probe_framework_dummy.py": "6c3a073bd9bd2108e35d71fee6e0fa78025977bdf587b167020633be0399b182",
       "tools/perf/operators/local_gpu/probe_kv.py": "b03f63bd892f73dceb48cf20e5586d00822b5ce5e8874625715a427a6aad3ced",
-      "tools/perf/operators/local_gpu/README.md": "8c274fd9b4eadafb940ecd58836de596126ad70466685a19fa97d6548f865280",
+      "tools/perf/operators/local_gpu/README.md": "0fd696a8b69cfa95920d8dc65cdd37a23f0004a38dcb11dd4722f4602dfaeb0a",
       "tools/perf/operators/local_gpu/requirements-local.txt": "45a47fe4602f4e4f4f8b17c912dc0211dfe2266c8550928db361baec13763214",
       "tools/perf/operators/local_gpu/rmsnorm.cu": "2dc1099ba9b812d7796a7eeea7983949b5f19b2ed2b72353e162a29e745af8e4",
       "tools/perf/operators/local_gpu/rmsnorm.py": "957c726d7838edb485124f8e7da6fb0f5f36be07c8e1e4f318b325d0fd2408fc",
@@ -228,6 +231,7 @@
       "tools/perf/operators/local_gpu/run_sglang.py": "b21c7f90505593db6170bcdc5823bba9e7b3d9bad4aa87bbbb0a1c752c8d0e8b",
       "tools/perf/operators/local_gpu/run_split_cap6.py": "aba55f100f0f594f4d64ead31846a8d40632642e60552fd450b64643202449f6",
       "tools/perf/operators/local_gpu/source_map.py": "3eed64f7a07954fb8ff5742e1f22a13a7a4ddb840e5dbccc7758e560d545ec9b",
+      "tools/perf/operators/local_gpu/test_cadence_protocol.py": "9821f75f35c4d32ca37ea8b6f2e8ffae63748abd638683361b832797e87a59e8",
       "tools/perf/operators/local_gpu/evidence/engine-preflight.json": "9eb19a412a6de5796599262f65c8c8b81021048560b7a97b060fed97dfee72ac",
       "tools/perf/operators/local_gpu/evidence/environment.json": "9cfb2fec7ca3aabd8c79bb8bbdf23a51be1a7e380eb8de0f01fa8b5164b787a5",
       "tools/perf/operators/local_gpu/evidence/failure-excerpts.md": "791429896754c994a39584616557770cfd89278cc3e76df15f4be2f8f86ad849",
@@ -563,6 +567,7 @@
       "docs/performance/engineering/19-native-kv-integration.md": "5191ee895279368faa3762854773840e20f768333d159ae95f1b46550ad0a4b8",
       "docs/performance/engineering/20-window-b-cost-drift.md": "e13a7c4893e5a1f4a16e0e74921f870236af18975e988b8a1230124b6550c794",
       "docs/performance/engineering/21-literature-to-experiments.md": "d749b4ee36ac68cda5963b5b542ac6a83f40d9543b8e0da60194c0b11cbb419f",
+      "docs/performance/engineering/22-cadence-policy-pilot.md": "bb5d76fd37bb9620db1b06e1ccc39a5e082942e23ea98751310f2e4f7525db89",
       "docs/performance/engineering/README.md": "0630e28b61208f67d9f64f060b0424dc7103c9a3bfd7844bb473382aec97b1e4",
       "docs/performance/exercises/answer-key.md": "f4bedb35a2cdfd732da70df2a61947abc0ae2f0b963722553659a58b21434057",
       "docs/performance/exercises/README.md": "fc2c0aa91b03cc4cd6b897f8236abe95d74c9121e46797f436442530431591ca",
@@ -635,7 +640,7 @@
     }
   },
   "console": {
-    "sourceCommit": "3b8a419b897a87bf7ceec78b7668978b114ff109",
+    "sourceCommit": "4fbb921d6e394c378a9b8b34a082473fa3ca3e94",
     "build": "npm ci && npm run build",
     "output": "console/dist",
     "localBridge": "development-and-explicit-workbench-mode-only",
