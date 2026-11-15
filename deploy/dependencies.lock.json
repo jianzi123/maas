@@ -4,12 +4,12 @@
   "deploymentApproved": false,
   "sourceBaseline": {
     "chartBase": "e5647a2f2b44f53d39a80041be94b619f07c29d6",
-    "backendInspected": "f182ee2380424f70fc004657c0d9ed4a165c4132",
+    "backendInspected": "e323c54ea43b80d8acc218b11b077e290e6fa5a4",
     "contracts": "MAAS-2 v0.4 + retained v0.3 + query/recovery addenda + MAAS-1 role review",
     "terminal": "3.0",
     "ticket": "3",
     "proposedTerminal": "3.1 (not enabled)",
-    "consoleInspected": "f182ee2380424f70fc004657c0d9ed4a165c4132",
+    "consoleInspected": "e323c54ea43b80d8acc218b11b077e290e6fa5a4",
     "defaultBranch": "925d8c55be9ce823d100bf90a5c78cf19ea66d58",
     "candidatePR": null,
     "candidateState": "integrated-unmerged",
@@ -18,7 +18,7 @@
     "qaCore": "ac94a373ec0a61c5fd4dc5380a7985a4fb47840f",
     "qaEvidence": "50354a705c03383d0102d0d437119afd7ffed8b3",
     "sourceInventory": "deploy/build-sources.lock.json",
-    "sourceInventorySha256": "4b0a2154b6c87b587962fb1c201f1f377dc70bc8c2a3d68d1e299a32055dc683",
+    "sourceInventorySha256": "1c16fb79442c381a9744ce260359bc0d19b0088001be069e1058aecac00daec9",
     "upstreamWorkbenchDeployment": "e5647a2f2b44f53d39a80041be94b619f07c29d6",
     "backendBase": "0559fa46b4a728d6f542daf19532e794f8549b31",
     "integrationBranch": "integrate/MAAS-17-unified-20261114",
@@ -99,7 +99,7 @@
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "f182ee2380424f70fc004657c0d9ed4a165c4132",
+      "sourceCommit": "e323c54ea43b80d8acc218b11b077e290e6fa5a4",
       "compiledAPIGroup": "serving.maas.example"
     },
     {
@@ -116,7 +116,7 @@
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "f182ee2380424f70fc004657c0d9ed4a165c4132",
+      "sourceCommit": "e323c54ea43b80d8acc218b11b077e290e6fa5a4",
       "compiledAPIGroup": "serving.maas.example"
     },
     {
@@ -133,7 +133,7 @@
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "f182ee2380424f70fc004657c0d9ed4a165c4132"
+      "sourceCommit": "e323c54ea43b80d8acc218b11b077e290e6fa5a4"
     },
     {
       "id": "mysql",
@@ -432,7 +432,7 @@
   "databaseIdentities": {
     "schemaVersion": "1.0",
     "scope": "installation-input-only-no-secret-values",
-    "sourceCommit": "f182ee2380424f70fc004657c0d9ed4a165c4132",
+    "sourceCommit": "e323c54ea43b80d8acc218b11b077e290e6fa5a4",
     "productionWiringVerified": false,
     "connections": {
       "core": {
@@ -585,6 +585,8 @@
           "console/src/review-recovery.test.ts",
           "console/src/style.css",
           "console/src/ui.ts",
+          "console/src/usage-exact-interleaving.test.ts",
+          "console/src/usage-exact-review.test.ts",
           "deploy/README.md",
           "deploy/build-sources.lock.json",
           "deploy/charts/maas-platform/Chart.yaml",

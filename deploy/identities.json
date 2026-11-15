@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "scope": "installation-input-only-no-secret-values",
-  "sourceCommit": "f182ee2380424f70fc004657c0d9ed4a165c4132",
+  "sourceCommit": "e323c54ea43b80d8acc218b11b077e290e6fa5a4",
   "productionWiringVerified": false,
   "connections": {
     "core": {
@@ -154,6 +154,8 @@
         "console/src/review-recovery.test.ts",
         "console/src/style.css",
         "console/src/ui.ts",
+        "console/src/usage-exact-interleaving.test.ts",
+        "console/src/usage-exact-review.test.ts",
         "deploy/README.md",
         "deploy/build-sources.lock.json",
         "deploy/charts/maas-platform/Chart.yaml",
