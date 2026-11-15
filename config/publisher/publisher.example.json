@@ -1,0 +1,9 @@
+{
+  "listen": "127.0.0.1:8443",
+  "cluster_id": "replace-with-approved-cluster-id",
+  "publisher_dsn_file": "private/publisher.dsn",
+  "server_certificate_file": "private/server.crt",
+  "server_key_file": "private/server.key",
+  "operator_client_ca_file": "private/operator-ca.crt",
+  "operator_identity": "spiffe://replace.invalid/release/operator"
+}
