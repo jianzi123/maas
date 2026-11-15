@@ -32,7 +32,7 @@ flowchart LR
 | mature | capture之前 | index写0、store30 | index写0、store30 | 成熟单stream |
 | late | capture之后 | index写60、store0 | index写0、store30 | 旧图仍双stream，负控成立 |
 
-以上每行是一次30层模型forward范围，来自选定B3/pad4两个独立重放区域，全部原始trace保留。图总kernel378→348，eager399→369；计数不是速度收益。
+以上每行是一次30层模型forward范围，来自选定B3/pad4两个独立重放区域，全部原始trace保留。当时annotation区域总kernel378→348，eager399→369；计数不是速度收益。后续correlation审计分离出纯图364→334，另14个图外准备/观测核，见[第20章](20-window-b-cost-drift.md)。
 
 late变体数值依然完全一致，CPU op统计也会看到eager的成熟store；只看“输出对了”或“库op计数非零”都可能误报图已融合。必须确认graph区域中的实际kernel。late的integration.json标明expected_graph_fusion=false，不是融合成功变体。
 

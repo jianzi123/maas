@@ -1,0 +1,29 @@
+{
+  "scope": "CPU analysis corruption controls, not GPU kernel faults",
+  "results": [
+    {
+      "case": "missing_block",
+      "exit": 1,
+      "expected_error": "incomplete blocks",
+      "success_report_absent": true
+    },
+    {
+      "case": "nonfinite",
+      "exit": 1,
+      "expected_error": "nonfinite/nonpositive",
+      "success_report_absent": true
+    },
+    {
+      "case": "duplicate_variant",
+      "exit": 1,
+      "expected_error": "pair identities missing",
+      "success_report_absent": true
+    },
+    {
+      "case": "profile_as_cost",
+      "exit": 1,
+      "expected_error": "missing successful paired gates",
+      "success_report_absent": true
+    }
+  ]
+}

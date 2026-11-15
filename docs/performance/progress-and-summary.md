@@ -1,5 +1,9 @@
 # 阶段总结：2026-11-05
 
+## 窗口B v0.20：漂移保留与定位
+
+同模型双backend/独立原生图交错240块、两原入口进程54块完成；33/120配对成熟路径更慢，裸图也有长事件/等待，原因未知、稳定收益未成立。correlation核纯图364→334，修正区域378→348的简称；六格直接库RoPE+KV语义通过，尚未进入Llama caller。旧六份JSON与QA cf8cf1c范围保留，见[第20章](engineering/20-window-b-cost-drift.md)。
+
 ## 当前：成熟KV原生图接线
 
 基于已独立通过的b5e705d，在capture前接入现成store_kv_cache，原生图KV由60次索引写变为30次store；晚接入负控图不变。三变体各12次动态结构检查通过，native对mature/late24份完整logits逐位一致。另六进程三对去观测调用成本保留全部漂移，未给稳定加速结论；见[第19章](engineering/19-native-kv-integration.md)。依然是人工权重ModelRunner研究，未作Engine/serving或模型质量/生产验收。

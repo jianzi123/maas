@@ -1,0 +1,238 @@
+{
+  "scope": "separate profiler process; correlation-linked graph nodes only",
+  "profiled_times_used_as_clean_cost": false,
+  "regions": [
+    {
+      "region": "windowB/full/native",
+      "cudaGraphLaunch_correlations": [
+        187
+      ],
+      "graph_kernel_count": 364,
+      "index_writes": 60,
+      "mature_stores": 0,
+      "streams": [
+        7,
+        144
+      ],
+      "profiled_graph_envelope_us": 17836.43994140625,
+      "profiled_busy_union_us": 16304.51123046875,
+      "profiled_kernel_duration_sum_us": 17085.436,
+      "top_profiled_kernels": [
+        {
+          "name": "void cutlass::Kernel2<cutlass_80_wmma_tensorop_f16_s161616gemm_f16_16x16_128x1_tn_align8>(cutlass_80_wmma_tensorop_f16_s161616gemm_f16_16x16_128x1_tn_align8::Params)",
+          "count": 61,
+          "duration_sum_us": 7311.004999999999
+        },
+        {
+          "name": "void cutlass::Kernel2<cutlass_80_wmma_tensorop_f16_s161616gemm_f16_16x16_128x2_tn_align8>(cutlass_80_wmma_tensorop_f16_s161616gemm_f16_16x16_128x2_tn_align8::Params)",
+          "count": 60,
+          "duration_sum_us": 3875.368
+        },
+        {
+          "name": "void flashinfer::norm::FusedAddRMSNormKernel<8u, __half>(__half*, __half*, __half*, unsigned int, unsigned int, unsigned int, float, float)",
+          "count": 60,
+          "duration_sum_us": 1916.999
+        },
+        {
+          "name": "void at::native::index_elementwise_kernel<128, 4, at::native::gpu_index_kernel<at::native::index_put_kernel_impl<at::native::OpaqueType<2> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1}>(at::TensorIteratorBase&, c10::ArrayRef<long>, c10::ArrayRef<long>, at::native::index_put_kernel_impl<at::native::OpaqueType<2> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1} const&, bool)::{lambda(int)#1}>(long, at::native::gpu_index_kernel<at::native::index_put_kernel_impl<at::native::OpaqueType<2> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1}>(at::TensorIteratorBase&, c10::ArrayRef<long>, c10::ArrayRef<long>, at::native::index_put_kernel_impl<at::native::OpaqueType<2> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1} const&, bool)::{lambda(int)#1})",
+          "count": 60,
+          "duration_sum_us": 1602.518000000001
+        },
+        {
+          "name": "void flashinfer::activation::act_and_mul_kernel<__half, &(float silu<float>(float const&))>(__half*, __half const*, int)",
+          "count": 30,
+          "duration_sum_us": 1217.1659999999997
+        },
+        {
+          "name": "_fwd_kernel_stage2",
+          "count": 30,
+          "duration_sum_us": 706.939
+        },
+        {
+          "name": "_fwd_grouped_kernel_stage1",
+          "count": 30,
+          "duration_sum_us": 292.935
+        },
+        {
+          "name": "void flashinfer::BatchQKApplyRotaryPosIdsCosSinCacheHeadParallelismKernel<false, 64u, 8u, 8u, __half, long>(__half*, __half*, __half*, __half*, float*, long*, unsigned int, unsigned int, unsigned int, unsigned int, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long)",
+          "count": 30,
+          "duration_sum_us": 136.84099999999998
+        }
+      ]
+    },
+    {
+      "region": "windowB/bare/native",
+      "cudaGraphLaunch_correlations": [
+        388
+      ],
+      "graph_kernel_count": 364,
+      "index_writes": 60,
+      "mature_stores": 0,
+      "streams": [
+        7,
+        144
+      ],
+      "profiled_graph_envelope_us": 20370.48193359375,
+      "profiled_busy_union_us": 19163.5283203125,
+      "profiled_kernel_duration_sum_us": 19474.644,
+      "top_profiled_kernels": [
+        {
+          "name": "void cutlass::Kernel2<cutlass_80_wmma_tensorop_f16_s161616gemm_f16_16x16_128x1_tn_align8>(cutlass_80_wmma_tensorop_f16_s161616gemm_f16_16x16_128x1_tn_align8::Params)",
+          "count": 61,
+          "duration_sum_us": 10824.065
+        },
+        {
+          "name": "void cutlass::Kernel2<cutlass_80_wmma_tensorop_f16_s161616gemm_f16_16x16_128x2_tn_align8>(cutlass_80_wmma_tensorop_f16_s161616gemm_f16_16x16_128x2_tn_align8::Params)",
+          "count": 60,
+          "duration_sum_us": 6142.433
+        },
+        {
+          "name": "void flashinfer::norm::FusedAddRMSNormKernel<8u, __half>(__half*, __half*, __half*, unsigned int, unsigned int, unsigned int, float, float)",
+          "count": 60,
+          "duration_sum_us": 976.9269999999998
+        },
+        {
+          "name": "void at::native::index_elementwise_kernel<128, 4, at::native::gpu_index_kernel<at::native::index_put_kernel_impl<at::native::OpaqueType<2> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1}>(at::TensorIteratorBase&, c10::ArrayRef<long>, c10::ArrayRef<long>, at::native::index_put_kernel_impl<at::native::OpaqueType<2> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1} const&, bool)::{lambda(int)#1}>(long, at::native::gpu_index_kernel<at::native::index_put_kernel_impl<at::native::OpaqueType<2> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1}>(at::TensorIteratorBase&, c10::ArrayRef<long>, c10::ArrayRef<long>, at::native::index_put_kernel_impl<at::native::OpaqueType<2> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1} const&, bool)::{lambda(int)#1})",
+          "count": 60,
+          "duration_sum_us": 661.814
+        },
+        {
+          "name": "_fwd_grouped_kernel_stage1",
+          "count": 30,
+          "duration_sum_us": 292.943
+        },
+        {
+          "name": "void flashinfer::activation::act_and_mul_kernel<__half, &(float silu<float>(float const&))>(__half*, __half const*, int)",
+          "count": 30,
+          "duration_sum_us": 263.944
+        },
+        {
+          "name": "_fwd_kernel_stage2",
+          "count": 30,
+          "duration_sum_us": 150.43599999999995
+        },
+        {
+          "name": "void flashinfer::BatchQKApplyRotaryPosIdsCosSinCacheHeadParallelismKernel<false, 64u, 8u, 8u, __half, long>(__half*, __half*, __half*, __half*, float*, long*, unsigned int, unsigned int, unsigned int, unsigned int, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long)",
+          "count": 30,
+          "duration_sum_us": 136.12899999999996
+        }
+      ]
+    },
+    {
+      "region": "windowB/full/mature",
+      "cudaGraphLaunch_correlations": [
+        582
+      ],
+      "graph_kernel_count": 334,
+      "index_writes": 0,
+      "mature_stores": 30,
+      "streams": [
+        7
+      ],
+      "profiled_graph_envelope_us": 18717.4638671875,
+      "profiled_busy_union_us": 15711.72119140625,
+      "profiled_kernel_duration_sum_us": 15711.722,
+      "top_profiled_kernels": [
+        {
+          "name": "void cutlass::Kernel2<cutlass_80_wmma_tensorop_f16_s161616gemm_f16_16x16_128x1_tn_align8>(cutlass_80_wmma_tensorop_f16_s161616gemm_f16_16x16_128x1_tn_align8::Params)",
+          "count": 61,
+          "duration_sum_us": 4684.612999999999
+        },
+        {
+          "name": "void cutlass::Kernel2<cutlass_80_wmma_tensorop_f16_s161616gemm_f16_16x16_128x2_tn_align8>(cutlass_80_wmma_tensorop_f16_s161616gemm_f16_16x16_128x2_tn_align8::Params)",
+          "count": 60,
+          "duration_sum_us": 3928.4010000000003
+        },
+        {
+          "name": "void flashinfer::activation::act_and_mul_kernel<__half, &(float silu<float>(float const&))>(__half*, __half const*, int)",
+          "count": 30,
+          "duration_sum_us": 1827.6140000000003
+        },
+        {
+          "name": "void flashinfer::BatchQKApplyRotaryPosIdsCosSinCacheHeadParallelismKernel<false, 64u, 8u, 8u, __half, long>(__half*, __half*, __half*, __half*, float*, long*, unsigned int, unsigned int, unsigned int, unsigned int, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long)",
+          "count": 30,
+          "duration_sum_us": 1701.6260000000002
+        },
+        {
+          "name": "void flashinfer::norm::FusedAddRMSNormKernel<8u, __half>(__half*, __half*, __half*, unsigned int, unsigned int, unsigned int, float, float)",
+          "count": 60,
+          "duration_sum_us": 1291.749
+        },
+        {
+          "name": "_fwd_grouped_kernel_stage1",
+          "count": 30,
+          "duration_sum_us": 1281.387
+        },
+        {
+          "name": "void (anonymous namespace)::store_kv_cache_128x2<long>(unsigned long*, unsigned long*, long const*, unsigned long, unsigned long const*, unsigned long const*, unsigned long, unsigned long, unsigned long)",
+          "count": 30,
+          "duration_sum_us": 821.631
+        },
+        {
+          "name": "_fwd_kernel_stage2",
+          "count": 30,
+          "duration_sum_us": 147.851
+        }
+      ]
+    },
+    {
+      "region": "windowB/bare/mature",
+      "cudaGraphLaunch_correlations": [
+        783
+      ],
+      "graph_kernel_count": 334,
+      "index_writes": 0,
+      "mature_stores": 30,
+      "streams": [
+        7
+      ],
+      "profiled_graph_envelope_us": 16992.05810546875,
+      "profiled_busy_union_us": 15112.4345703125,
+      "profiled_kernel_duration_sum_us": 15112.436,
+      "top_profiled_kernels": [
+        {
+          "name": "void cutlass::Kernel2<cutlass_80_wmma_tensorop_f16_s161616gemm_f16_16x16_128x2_tn_align8>(cutlass_80_wmma_tensorop_f16_s161616gemm_f16_16x16_128x2_tn_align8::Params)",
+          "count": 60,
+          "duration_sum_us": 7155.9720000000025
+        },
+        {
+          "name": "void cutlass::Kernel2<cutlass_80_wmma_tensorop_f16_s161616gemm_f16_16x16_128x1_tn_align8>(cutlass_80_wmma_tensorop_f16_s161616gemm_f16_16x16_128x1_tn_align8::Params)",
+          "count": 61,
+          "duration_sum_us": 4950.380999999999
+        },
+        {
+          "name": "void (anonymous namespace)::store_kv_cache_128x2<long>(unsigned long*, unsigned long*, long const*, unsigned long, unsigned long const*, unsigned long const*, unsigned long, unsigned long, unsigned long)",
+          "count": 30,
+          "duration_sum_us": 1321.9050000000009
+        },
+        {
+          "name": "void flashinfer::norm::FusedAddRMSNormKernel<8u, __half>(__half*, __half*, __half*, unsigned int, unsigned int, unsigned int, float, float)",
+          "count": 60,
+          "duration_sum_us": 820.474
+        },
+        {
+          "name": "_fwd_grouped_kernel_stage1",
+          "count": 30,
+          "duration_sum_us": 290.53700000000003
+        },
+        {
+          "name": "void flashinfer::activation::act_and_mul_kernel<__half, &(float silu<float>(float const&))>(__half*, __half const*, int)",
+          "count": 30,
+          "duration_sum_us": 264.841
+        },
+        {
+          "name": "_fwd_kernel_stage2",
+          "count": 30,
+          "duration_sum_us": 146.34000000000003
+        },
+        {
+          "name": "void flashinfer::BatchQKApplyRotaryPosIdsCosSinCacheHeadParallelismKernel<false, 64u, 8u, 8u, __half, long>(__half*, __half*, __half*, __half*, float*, long*, unsigned int, unsigned int, unsigned int, unsigned int, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long)",
+          "count": 30,
+          "duration_sum_us": 135.106
+        }
+      ]
+    }
+  ],
+  "trace_sha256": "1b85f18d7aff89d70cb76edd18586cfec257c03bae2aa29e2b8f400535e9f14c",
+  "analysis_code_sha256": "7da022fd1fb70b6381f99e23105473d0ba000a4a736bfe5f6e7525855f3bc394"
+}

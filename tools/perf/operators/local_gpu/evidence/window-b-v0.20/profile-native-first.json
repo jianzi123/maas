@@ -1,0 +1,310 @@
+{
+  "scope": "artificial-weight static native-forward / bare graph diagnostic",
+  "Engine": false,
+  "pretrained_or_serving_claim": false,
+  "pid": 634,
+  "capture_first": "native",
+  "profile_only": true,
+  "source_commit": "b0d25e72c401f37b55d689ddbf05b8c583afe854",
+  "code_sha256": {
+    "bench_kv_interleaved.py": "0be7d4877dda5969a009a1ecf70289a45d56d0e94e050afd37105c524e4aedd7",
+    "native_kv_binding.py": "8d03d465e964a70c7dedcf358097628a47779902b0f4635633e5f2c783d00149"
+  },
+  "environment": {
+    "CUDA_LAUNCH_BLOCKING": null,
+    "CUDA_MODULE_LOADING": "AUTO",
+    "CUDA_DEVICE_MAX_CONNECTIONS": "4",
+    "OMP_NUM_THREADS": null,
+    "MKL_NUM_THREADS": null,
+    "LD_PRELOAD": null,
+    "PYTORCH_CUDA_ALLOC_CONF": null
+  },
+  "versions": {
+    "torch": "2.8.0",
+    "triton": "3.4.0",
+    "sglang": "0.5.2",
+    "sgl-kernel": "0.3.9.post2"
+  },
+  "telemetry_initial": {
+    "returncode": 0,
+    "csv": "2026/11/14 17:43:54.794, P0, 5540, 2409, 1980, 73, 27.63, 88",
+    "fields": [
+      "timestamp",
+      "pstate",
+      "free_MiB",
+      "used_MiB",
+      "SM_MHz",
+      "temp_C",
+      "power_W",
+      "util_pct"
+    ]
+  },
+  "host_initial": {
+    "monotonic_ns": 266005170470,
+    "loadavg": [
+      1.01123046875,
+      0.58349609375,
+      0.2529296875
+    ],
+    "cpu_user_s": 11.436194,
+    "cpu_sys_s": 1.962447,
+    "voluntary_switches": 13810,
+    "involuntary_switches": 175,
+    "allocated_bytes": 0,
+    "reserved_bytes": 0
+  },
+  "torch_threads": 6,
+  "affinity": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+  ],
+  "initialization": [
+    {
+      "variant": "native",
+      "seconds": 6.722941810000009,
+      "scope": "model load + native graph capture"
+    },
+    {
+      "variant": "mature",
+      "seconds": 0.8009822440000107,
+      "scope": "new backend + separate native graph capture; same model/KV"
+    }
+  ],
+  "gates": [
+    {
+      "phase": "before_cost",
+      "batch": 3,
+      "logits_sha256": "f000a3c32e8a0da4eff169106ec7cac7f412863e3e6487715c8249dbb7bb1247",
+      "KV_sha256": "03dbf5d72012cf3db791543d272490a9230b8d49af2579a9c78e2f017247793f",
+      "all30_layers": true,
+      "finite_bitwise_equal": true
+    },
+    {
+      "phase": "after_profile",
+      "batch": 3,
+      "logits_sha256": "f000a3c32e8a0da4eff169106ec7cac7f412863e3e6487715c8249dbb7bb1247",
+      "KV_sha256": "03dbf5d72012cf3db791543d272490a9230b8d49af2579a9c78e2f017247793f",
+      "all30_layers": true,
+      "finite_bitwise_equal": true
+    }
+  ],
+  "cold_calls": [
+    {
+      "batch": 3,
+      "cycle": 0,
+      "variant": "native",
+      "wall_us": 18507.997
+    },
+    {
+      "batch": 3,
+      "cycle": 0,
+      "variant": "mature",
+      "wall_us": 17264.262
+    },
+    {
+      "batch": 3,
+      "cycle": 1,
+      "variant": "mature",
+      "wall_us": 17754.734
+    },
+    {
+      "batch": 3,
+      "cycle": 1,
+      "variant": "native",
+      "wall_us": 19978.857
+    },
+    {
+      "batch": 3,
+      "cycle": 2,
+      "variant": "native",
+      "wall_us": 18658.052
+    },
+    {
+      "batch": 3,
+      "cycle": 2,
+      "variant": "mature",
+      "wall_us": 17856.738
+    },
+    {
+      "batch": 3,
+      "cycle": 3,
+      "variant": "mature",
+      "wall_us": 17213.625
+    },
+    {
+      "batch": 3,
+      "cycle": 3,
+      "variant": "native",
+      "wall_us": 19155.824
+    },
+    {
+      "batch": 3,
+      "cycle": 4,
+      "variant": "native",
+      "wall_us": 18978.886
+    },
+    {
+      "batch": 3,
+      "cycle": 4,
+      "variant": "mature",
+      "wall_us": 17821.847
+    },
+    {
+      "batch": 3,
+      "cycle": 5,
+      "variant": "mature",
+      "wall_us": 18111.813
+    },
+    {
+      "batch": 3,
+      "cycle": 5,
+      "variant": "native",
+      "wall_us": 18620.078
+    },
+    {
+      "batch": 3,
+      "cycle": 6,
+      "variant": "native",
+      "wall_us": 18522.318
+    },
+    {
+      "batch": 3,
+      "cycle": 6,
+      "variant": "mature",
+      "wall_us": 18316.457
+    },
+    {
+      "batch": 3,
+      "cycle": 7,
+      "variant": "mature",
+      "wall_us": 16855.766
+    },
+    {
+      "batch": 3,
+      "cycle": 7,
+      "variant": "native",
+      "wall_us": 19149.706
+    },
+    {
+      "batch": 3,
+      "cycle": 8,
+      "variant": "native",
+      "wall_us": 18145.398
+    },
+    {
+      "batch": 3,
+      "cycle": 8,
+      "variant": "mature",
+      "wall_us": 19669.239
+    },
+    {
+      "batch": 3,
+      "cycle": 9,
+      "variant": "mature",
+      "wall_us": 17218.561
+    },
+    {
+      "batch": 3,
+      "cycle": 9,
+      "variant": "native",
+      "wall_us": 18982.122
+    },
+    {
+      "batch": 3,
+      "cycle": 10,
+      "variant": "native",
+      "wall_us": 18442.877
+    },
+    {
+      "batch": 3,
+      "cycle": 10,
+      "variant": "mature",
+      "wall_us": 17211.051
+    },
+    {
+      "batch": 3,
+      "cycle": 11,
+      "variant": "mature",
+      "wall_us": 17559.088
+    },
+    {
+      "batch": 3,
+      "cycle": 11,
+      "variant": "native",
+      "wall_us": 18731.005
+    }
+  ],
+  "blocks": [],
+  "parameter_sample_sha256": "4638a178103f051f356688441d8f6975e7e1a4080a95f41a5c75e0ffd1001e71",
+  "graph_state": {
+    "native": {
+      "sizes": [
+        1,
+        2,
+        4,
+        8
+      ],
+      "input_ptr": 34567353344,
+      "kv_indices_ptr": 34481319424,
+      "scratch_ptr": 34807023104
+    },
+    "mature": {
+      "sizes": [
+        1,
+        2,
+        4,
+        8
+      ],
+      "input_ptr": 34481342976,
+      "kv_indices_ptr": 34481333760,
+      "scratch_ptr": 34807170560
+    }
+  },
+  "telemetry_final": {
+    "returncode": 0,
+    "csv": "2026/11/14 17:44:03.760, P0, 5094, 2855, 1980, 73, 27.70, 91",
+    "fields": [
+      "timestamp",
+      "pstate",
+      "free_MiB",
+      "used_MiB",
+      "SM_MHz",
+      "temp_C",
+      "power_W",
+      "util_pct"
+    ]
+  },
+  "host_final": {
+    "monotonic_ns": 274960188420,
+    "loadavg": [
+      1.01025390625,
+      0.5908203125,
+      0.25732421875
+    ],
+    "cpu_user_s": 18.672653,
+    "cpu_sys_s": 3.196764,
+    "voluntary_switches": 19759,
+    "involuntary_switches": 205,
+    "allocated_bytes": 315045376,
+    "reserved_bytes": 373293056
+  },
+  "peak_torch_bytes": 315704320,
+  "status": "passed",
+  "limitations": [
+    "same native ModelRunner/model/req+KV pool; separate native graphs/backends/pools",
+    "static inputs; repeated forwards do not advance scheduler/token sequence",
+    "CUDA events include host gaps; bare graph bypasses replay preparation, not a serving optimization",
+    "all correctness and profiler work excluded from clean blocks",
+    "CPU affinity/frequency/power are observations, not locked experimental controls"
+  ]
+}

@@ -1,5 +1,7 @@
 # 推理框架工程实现卷
 
+最新：[第20章窗口B成本漂移](20-window-b-cost-drift.md)，包含同进程交错、裸图定位、全部负结果和固定版RoPE+KV语义。
+
 最新：[第19章成熟KV原生图接线](19-native-kv-integration.md)，含capture前接线、晚绑定负控、完整输出和去观测成本研究。
 
 最新接续：[第18章原生ModelRunner与图重放](18-native-modelrunner-graphs.md)，使用人工权重、真实原生Req/ScheduleBatch/ForwardBatch和CudaGraphRunner，记录padding/stream/回收与成熟op实际命中。

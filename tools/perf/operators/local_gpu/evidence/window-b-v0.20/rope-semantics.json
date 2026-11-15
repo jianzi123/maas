@@ -1,0 +1,167 @@
+{
+  "scope": "direct mature library semantics; synthetic noncontiguous views, not native Llama caller",
+  "semantic_quality_or_performance_claim": false,
+  "cases": [
+    {
+      "batch": 3,
+      "nondefault_stream": false,
+      "qkv_stride": [
+        960,
+        1
+      ],
+      "q_stride": [
+        960,
+        1
+      ],
+      "k_stride": [
+        960,
+        1
+      ],
+      "q_alias": true,
+      "k_alias": true,
+      "key_input_unchanged": false,
+      "key_input_matches_reference": true,
+      "q_max_abs_reference": 0.0,
+      "kcache_max_abs_reference": 0.0,
+      "v_bitwise_equal": true,
+      "non_target_slots_unchanged": true,
+      "FP64_reference_rtol": 0.001,
+      "FP64_reference_atol": 0.002
+    },
+    {
+      "batch": 3,
+      "nondefault_stream": true,
+      "qkv_stride": [
+        960,
+        1
+      ],
+      "q_stride": [
+        960,
+        1
+      ],
+      "k_stride": [
+        960,
+        1
+      ],
+      "q_alias": true,
+      "k_alias": true,
+      "key_input_unchanged": false,
+      "key_input_matches_reference": true,
+      "q_max_abs_reference": 0.0,
+      "kcache_max_abs_reference": 0.0,
+      "v_bitwise_equal": true,
+      "non_target_slots_unchanged": true,
+      "FP64_reference_rtol": 0.001,
+      "FP64_reference_atol": 0.002
+    },
+    {
+      "batch": 5,
+      "nondefault_stream": false,
+      "qkv_stride": [
+        960,
+        1
+      ],
+      "q_stride": [
+        960,
+        1
+      ],
+      "k_stride": [
+        960,
+        1
+      ],
+      "q_alias": true,
+      "k_alias": true,
+      "key_input_unchanged": false,
+      "key_input_matches_reference": true,
+      "q_max_abs_reference": 0.0,
+      "kcache_max_abs_reference": 0.0,
+      "v_bitwise_equal": true,
+      "non_target_slots_unchanged": true,
+      "FP64_reference_rtol": 0.001,
+      "FP64_reference_atol": 0.002
+    },
+    {
+      "batch": 5,
+      "nondefault_stream": true,
+      "qkv_stride": [
+        960,
+        1
+      ],
+      "q_stride": [
+        960,
+        1
+      ],
+      "k_stride": [
+        960,
+        1
+      ],
+      "q_alias": true,
+      "k_alias": true,
+      "key_input_unchanged": false,
+      "key_input_matches_reference": true,
+      "q_max_abs_reference": 0.0,
+      "kcache_max_abs_reference": 0.0,
+      "v_bitwise_equal": true,
+      "non_target_slots_unchanged": true,
+      "FP64_reference_rtol": 0.001,
+      "FP64_reference_atol": 0.002
+    },
+    {
+      "batch": 8,
+      "nondefault_stream": false,
+      "qkv_stride": [
+        960,
+        1
+      ],
+      "q_stride": [
+        960,
+        1
+      ],
+      "k_stride": [
+        960,
+        1
+      ],
+      "q_alias": true,
+      "k_alias": true,
+      "key_input_unchanged": false,
+      "key_input_matches_reference": true,
+      "q_max_abs_reference": 0.0,
+      "kcache_max_abs_reference": 0.0,
+      "v_bitwise_equal": true,
+      "non_target_slots_unchanged": true,
+      "FP64_reference_rtol": 0.001,
+      "FP64_reference_atol": 0.002
+    },
+    {
+      "batch": 8,
+      "nondefault_stream": true,
+      "qkv_stride": [
+        960,
+        1
+      ],
+      "q_stride": [
+        960,
+        1
+      ],
+      "k_stride": [
+        960,
+        1
+      ],
+      "q_alias": true,
+      "k_alias": true,
+      "key_input_unchanged": false,
+      "key_input_matches_reference": true,
+      "q_max_abs_reference": 0.0,
+      "kcache_max_abs_reference": 0.0,
+      "v_bitwise_equal": true,
+      "non_target_slots_unchanged": true,
+      "FP64_reference_rtol": 0.001,
+      "FP64_reference_atol": 0.002
+    }
+  ],
+  "torch": "2.8.0+cu128",
+  "sgl_kernel": "0.3.9.post2",
+  "code_sha256": "b4fcd54ae9c7cd034317442745415f86f7e44b39bec9674982de47ffa6788124",
+  "peak_torch_bytes": 1912320,
+  "status": "passed"
+}
