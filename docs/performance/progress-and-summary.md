@@ -1,5 +1,9 @@
 # 阶段总结：2026-11-05
 
+## E-LIT-01真实策略 v0.22
+
+新增opt-in入口，旧WindowB及0.21设计卡不改。采前冻结6477d5d/plan ab0ac451，108cluster/1080块无缺测；16元数据回归、4实采CLI负例及隐藏R02分母验证通过。Idle342/360、query_block72/360匹配，Full完整组0/18，观察到校准与主查询节奏偏移，根因与稳定收益仍unknown；不追加补测。见[第22章](engineering/22-cadence-policy-pilot.md)。
+
 ## 文献接续 v0.21
 
 本批16项原始来源和Torch2.8辅助语义源接入；四项关键章节精读，15处源码符号/7份官方文件核对，三张可否证卡仍design_only。补算术强度、图地址/DAG、带尺度归并及workspace手算，保留窗口B漂移unknown与旧QA范围；本轮GPU0次、没有权重下载。见[第21章](engineering/21-literature-to-experiments.md)。

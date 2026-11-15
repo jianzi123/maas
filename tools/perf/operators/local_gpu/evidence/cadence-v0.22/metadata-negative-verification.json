@@ -1,0 +1,38 @@
+[
+  {
+    "case": "foreign_clock",
+    "exit": 1,
+    "expected_error": "foreign clock/runtime identity",
+    "success_report_absent": true,
+    "scope": "CPU mutation of real metadata, no GPU rerun"
+  },
+  {
+    "case": "nonfinite",
+    "exit": 1,
+    "expected_error": "nonfinite/nonpositive timing",
+    "success_report_absent": true,
+    "scope": "CPU mutation of real metadata, no GPU rerun"
+  },
+  {
+    "case": "matching_tamper",
+    "exit": 1,
+    "expected_error": "idle matching error/qualification changed",
+    "success_report_absent": true,
+    "scope": "CPU mutation of real metadata, no GPU rerun"
+  },
+  {
+    "case": "duplicate_id",
+    "exit": 1,
+    "expected_error": "unknown/duplicate block",
+    "success_report_absent": true,
+    "scope": "CPU mutation of real metadata, no GPU rerun"
+  },
+  {
+    "case": "withheld_R02",
+    "exit": 0,
+    "planned": 1080,
+    "measured": 540,
+    "missing": 540,
+    "scope": "intentional coverage regression; actual pilot had zero missing"
+  }
+]
