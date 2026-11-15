@@ -1,0 +1,2192 @@
+{
+  "candidate": "5f8bd5d83968f9ed5e674593bb8d19078c4575ad",
+  "manifests": {
+    "code": 30,
+    "evidence": 62
+  },
+  "canonical_plan_sha256": "ab0ac451d9d4beffd6a879ff04bcdcd4000a256ec3194b710f5e7dabca49d9c9",
+  "clusters": 108,
+  "measured_blocks": 1080,
+  "missing": 0,
+  "invalid": 0,
+  "calls": 10800,
+  "query_events": 436,
+  "gate_events": 26,
+  "snapshot_references": 104,
+  "unique_snapshot_paths": 12,
+  "matching": {
+    "query_block": {
+      "matched": 72,
+      "total": 360
+    },
+    "idle_matched": {
+      "matched": 342,
+      "total": 360
+    }
+  },
+  "strict_full_groups": {
+    "qualified": 0,
+    "denominator": 18
+  },
+  "strata": [
+    {
+      "run": "R01",
+      "scope": "full",
+      "batch": 3,
+      "policy": "query_block",
+      "variant": "native",
+      "role": "boundary",
+      "count": 1,
+      "median_error_ns": 13155443,
+      "max_abs_error_ns": 13155443
+    },
+    {
+      "run": "R01",
+      "scope": "full",
+      "batch": 3,
+      "policy": "query_block",
+      "variant": "mature",
+      "role": "within",
+      "count": 13,
+      "median_error_ns": 12884249,
+      "max_abs_error_ns": 21156755
+    },
+    {
+      "run": "R01",
+      "scope": "full",
+      "batch": 3,
+      "policy": "query_block",
+      "variant": "native",
+      "role": "within",
+      "count": 14,
+      "median_error_ns": 5514815.0,
+      "max_abs_error_ns": 13089345
+    },
+    {
+      "run": "R01",
+      "scope": "full",
+      "batch": 3,
+      "policy": "query_cluster",
+      "variant": "mature",
+      "role": "boundary",
+      "count": 2,
+      "median_error_ns": 66044026.5,
+      "max_abs_error_ns": 66211850
+    },
+    {
+      "run": "R01",
+      "scope": "full",
+      "batch": 3,
+      "policy": "query_cluster",
+      "variant": "native",
+      "role": "within",
+      "count": 14,
+      "median_error_ns": -33772589.0,
+      "max_abs_error_ns": 33940949
+    },
+    {
+      "run": "R01",
+      "scope": "full",
+      "batch": 3,
+      "policy": "query_cluster",
+      "variant": "mature",
+      "role": "within",
+      "count": 13,
+      "median_error_ns": -33870821,
+      "max_abs_error_ns": 34057095
+    },
+    {
+      "run": "R01",
+      "scope": "full",
+      "batch": 3,
+      "policy": "idle_matched",
+      "variant": "native",
+      "role": "boundary",
+      "count": 3,
+      "median_error_ns": 21362446,
+      "max_abs_error_ns": 22999579
+    },
+    {
+      "run": "R01",
+      "scope": "full",
+      "batch": 3,
+      "policy": "idle_matched",
+      "variant": "mature",
+      "role": "within",
+      "count": 15,
+      "median_error_ns": 105208,
+      "max_abs_error_ns": 119792
+    },
+    {
+      "run": "R01",
+      "scope": "full",
+      "batch": 3,
+      "policy": "idle_matched",
+      "variant": "native",
+      "role": "within",
+      "count": 12,
+      "median_error_ns": 105041.5,
+      "max_abs_error_ns": 124296
+    },
+    {
+      "run": "R01",
+      "scope": "full",
+      "batch": 3,
+      "policy": "query_block",
+      "variant": "mature",
+      "role": "boundary",
+      "count": 2,
+      "median_error_ns": 49566150.5,
+      "max_abs_error_ns": 59837122
+    },
+    {
+      "run": "R01",
+      "scope": "full",
+      "batch": 3,
+      "policy": "query_cluster",
+      "variant": "native",
+      "role": "boundary",
+      "count": 1,
+      "median_error_ns": 37010680,
+      "max_abs_error_ns": 37010680
+    },
+    {
+      "run": "R01",
+      "scope": "full",
+      "batch": 5,
+      "policy": "query_block",
+      "variant": "native",
+      "role": "boundary",
+      "count": 1,
+      "median_error_ns": 9563472,
+      "max_abs_error_ns": 9563472
+    },
+    {
+      "run": "R01",
+      "scope": "full",
+      "batch": 5,
+      "policy": "query_block",
+      "variant": "mature",
+      "role": "within",
+      "count": 13,
+      "median_error_ns": 11239026,
+      "max_abs_error_ns": 30401459
+    },
+    {
+      "run": "R01",
+      "scope": "full",
+      "batch": 5,
+      "policy": "query_block",
+      "variant": "native",
+      "role": "within",
+      "count": 14,
+      "median_error_ns": 11779847.0,
+      "max_abs_error_ns": 26196620
+    },
+    {
+      "run": "R01",
+      "scope": "full",
+      "batch": 5,
+      "policy": "query_cluster",
+      "variant": "mature",
+      "role": "boundary",
+      "count": 2,
+      "median_error_ns": 40491601.0,
+      "max_abs_error_ns": 49269983
+    },
+    {
+      "run": "R01",
+      "scope": "full",
+      "batch": 5,
+      "policy": "query_cluster",
+      "variant": "native",
+      "role": "within",
+      "count": 14,
+      "median_error_ns": -33774112.0,
+      "max_abs_error_ns": 33890784
+    },
+    {
+      "run": "R01",
+      "scope": "full",
+      "batch": 5,
+      "policy": "query_cluster",
+      "variant": "mature",
+      "role": "within",
+      "count": 13,
+      "median_error_ns": -33781380,
+      "max_abs_error_ns": 34031266
+    },
+    {
+      "run": "R01",
+      "scope": "full",
+      "batch": 5,
+      "policy": "idle_matched",
+      "variant": "native",
+      "role": "boundary",
+      "count": 3,
+      "median_error_ns": 5860928,
+      "max_abs_error_ns": 18520559
+    },
+    {
+      "run": "R01",
+      "scope": "full",
+      "batch": 5,
+      "policy": "idle_matched",
+      "variant": "mature",
+      "role": "within",
+      "count": 15,
+      "median_error_ns": 128073,
+      "max_abs_error_ns": 177916
+    },
+    {
+      "run": "R01",
+      "scope": "full",
+      "batch": 5,
+      "policy": "idle_matched",
+      "variant": "native",
+      "role": "within",
+      "count": 12,
+      "median_error_ns": 126861.5,
+      "max_abs_error_ns": 142741
+    },
+    {
+      "run": "R01",
+      "scope": "full",
+      "batch": 5,
+      "policy": "query_block",
+      "variant": "mature",
+      "role": "boundary",
+      "count": 2,
+      "median_error_ns": 93916291.0,
+      "max_abs_error_ns": 120402430
+    },
+    {
+      "run": "R01",
+      "scope": "full",
+      "batch": 5,
+      "policy": "query_cluster",
+      "variant": "native",
+      "role": "boundary",
+      "count": 1,
+      "median_error_ns": 76699568,
+      "max_abs_error_ns": 76699568
+    },
+    {
+      "run": "R01",
+      "scope": "full",
+      "batch": 8,
+      "policy": "query_block",
+      "variant": "native",
+      "role": "boundary",
+      "count": 1,
+      "median_error_ns": 5787244,
+      "max_abs_error_ns": 5787244
+    },
+    {
+      "run": "R01",
+      "scope": "full",
+      "batch": 8,
+      "policy": "query_block",
+      "variant": "mature",
+      "role": "within",
+      "count": 13,
+      "median_error_ns": 4608422,
+      "max_abs_error_ns": 18570176
+    },
+    {
+      "run": "R01",
+      "scope": "full",
+      "batch": 8,
+      "policy": "query_block",
+      "variant": "native",
+      "role": "within",
+      "count": 14,
+      "median_error_ns": 4963695.5,
+      "max_abs_error_ns": 7474873
+    },
+    {
+      "run": "R01",
+      "scope": "full",
+      "batch": 8,
+      "policy": "query_cluster",
+      "variant": "mature",
+      "role": "boundary",
+      "count": 2,
+      "median_error_ns": 39783407.0,
+      "max_abs_error_ns": 42840080
+    },
+    {
+      "run": "R01",
+      "scope": "full",
+      "batch": 8,
+      "policy": "query_cluster",
+      "variant": "native",
+      "role": "within",
+      "count": 14,
+      "median_error_ns": -33590302.5,
+      "max_abs_error_ns": 33962379
+    },
+    {
+      "run": "R01",
+      "scope": "full",
+      "batch": 8,
+      "policy": "query_cluster",
+      "variant": "mature",
+      "role": "within",
+      "count": 13,
+      "median_error_ns": -33922038,
+      "max_abs_error_ns": 34059519
+    },
+    {
+      "run": "R01",
+      "scope": "full",
+      "batch": 8,
+      "policy": "idle_matched",
+      "variant": "native",
+      "role": "boundary",
+      "count": 3,
+      "median_error_ns": 13639641,
+      "max_abs_error_ns": 14611374
+    },
+    {
+      "run": "R01",
+      "scope": "full",
+      "batch": 8,
+      "policy": "idle_matched",
+      "variant": "mature",
+      "role": "within",
+      "count": 15,
+      "median_error_ns": 102751,
+      "max_abs_error_ns": 115460
+    },
+    {
+      "run": "R01",
+      "scope": "full",
+      "batch": 8,
+      "policy": "idle_matched",
+      "variant": "native",
+      "role": "within",
+      "count": 12,
+      "median_error_ns": 108341.5,
+      "max_abs_error_ns": 130392
+    },
+    {
+      "run": "R01",
+      "scope": "full",
+      "batch": 8,
+      "policy": "query_block",
+      "variant": "mature",
+      "role": "boundary",
+      "count": 2,
+      "median_error_ns": 51290127.0,
+      "max_abs_error_ns": 59799549
+    },
+    {
+      "run": "R01",
+      "scope": "full",
+      "batch": 8,
+      "policy": "query_cluster",
+      "variant": "native",
+      "role": "boundary",
+      "count": 1,
+      "median_error_ns": 68358376,
+      "max_abs_error_ns": 68358376
+    },
+    {
+      "run": "R01",
+      "scope": "bare_graph",
+      "batch": 3,
+      "policy": "query_block",
+      "variant": "native",
+      "role": "boundary",
+      "count": 1,
+      "median_error_ns": 12754813,
+      "max_abs_error_ns": 12754813
+    },
+    {
+      "run": "R01",
+      "scope": "bare_graph",
+      "batch": 3,
+      "policy": "query_block",
+      "variant": "mature",
+      "role": "within",
+      "count": 13,
+      "median_error_ns": 7991203,
+      "max_abs_error_ns": 13766720
+    },
+    {
+      "run": "R01",
+      "scope": "bare_graph",
+      "batch": 3,
+      "policy": "query_block",
+      "variant": "native",
+      "role": "within",
+      "count": 14,
+      "median_error_ns": 4240891.5,
+      "max_abs_error_ns": 20776790
+    },
+    {
+      "run": "R01",
+      "scope": "bare_graph",
+      "batch": 3,
+      "policy": "query_cluster",
+      "variant": "mature",
+      "role": "boundary",
+      "count": 2,
+      "median_error_ns": 136066336.5,
+      "max_abs_error_ns": 220062014
+    },
+    {
+      "run": "R01",
+      "scope": "bare_graph",
+      "batch": 3,
+      "policy": "query_cluster",
+      "variant": "native",
+      "role": "within",
+      "count": 14,
+      "median_error_ns": -33733820.5,
+      "max_abs_error_ns": 33963882
+    },
+    {
+      "run": "R01",
+      "scope": "bare_graph",
+      "batch": 3,
+      "policy": "query_cluster",
+      "variant": "mature",
+      "role": "within",
+      "count": 13,
+      "median_error_ns": -33976691,
+      "max_abs_error_ns": 34093734
+    },
+    {
+      "run": "R01",
+      "scope": "bare_graph",
+      "batch": 3,
+      "policy": "idle_matched",
+      "variant": "native",
+      "role": "boundary",
+      "count": 3,
+      "median_error_ns": 26861780,
+      "max_abs_error_ns": 33776594
+    },
+    {
+      "run": "R01",
+      "scope": "bare_graph",
+      "batch": 3,
+      "policy": "idle_matched",
+      "variant": "mature",
+      "role": "within",
+      "count": 15,
+      "median_error_ns": 92269,
+      "max_abs_error_ns": 117187
+    },
+    {
+      "run": "R01",
+      "scope": "bare_graph",
+      "batch": 3,
+      "policy": "idle_matched",
+      "variant": "native",
+      "role": "within",
+      "count": 12,
+      "median_error_ns": 91325.5,
+      "max_abs_error_ns": 143652
+    },
+    {
+      "run": "R01",
+      "scope": "bare_graph",
+      "batch": 3,
+      "policy": "query_block",
+      "variant": "mature",
+      "role": "boundary",
+      "count": 2,
+      "median_error_ns": 1257934350.0,
+      "max_abs_error_ns": 2449090328
+    },
+    {
+      "run": "R01",
+      "scope": "bare_graph",
+      "batch": 3,
+      "policy": "query_cluster",
+      "variant": "native",
+      "role": "boundary",
+      "count": 1,
+      "median_error_ns": 52196755,
+      "max_abs_error_ns": 52196755
+    },
+    {
+      "run": "R01",
+      "scope": "bare_graph",
+      "batch": 5,
+      "policy": "query_block",
+      "variant": "native",
+      "role": "boundary",
+      "count": 1,
+      "median_error_ns": 6217176,
+      "max_abs_error_ns": 6217176
+    },
+    {
+      "run": "R01",
+      "scope": "bare_graph",
+      "batch": 5,
+      "policy": "query_block",
+      "variant": "mature",
+      "role": "within",
+      "count": 13,
+      "median_error_ns": 9700264,
+      "max_abs_error_ns": 31348663
+    },
+    {
+      "run": "R01",
+      "scope": "bare_graph",
+      "batch": 5,
+      "policy": "query_block",
+      "variant": "native",
+      "role": "within",
+      "count": 14,
+      "median_error_ns": 9827439.0,
+      "max_abs_error_ns": 19991103
+    },
+    {
+      "run": "R01",
+      "scope": "bare_graph",
+      "batch": 5,
+      "policy": "query_cluster",
+      "variant": "mature",
+      "role": "boundary",
+      "count": 2,
+      "median_error_ns": 218404962.5,
+      "max_abs_error_ns": 234944038
+    },
+    {
+      "run": "R01",
+      "scope": "bare_graph",
+      "batch": 5,
+      "policy": "query_cluster",
+      "variant": "native",
+      "role": "within",
+      "count": 14,
+      "median_error_ns": -33767714.5,
+      "max_abs_error_ns": 33942662
+    },
+    {
+      "run": "R01",
+      "scope": "bare_graph",
+      "batch": 5,
+      "policy": "query_cluster",
+      "variant": "mature",
+      "role": "within",
+      "count": 13,
+      "median_error_ns": -33866502,
+      "max_abs_error_ns": 34009895
+    },
+    {
+      "run": "R01",
+      "scope": "bare_graph",
+      "batch": 5,
+      "policy": "idle_matched",
+      "variant": "native",
+      "role": "boundary",
+      "count": 3,
+      "median_error_ns": 13810502,
+      "max_abs_error_ns": 128643556
+    },
+    {
+      "run": "R01",
+      "scope": "bare_graph",
+      "batch": 5,
+      "policy": "idle_matched",
+      "variant": "mature",
+      "role": "within",
+      "count": 15,
+      "median_error_ns": 102558,
+      "max_abs_error_ns": 141703
+    },
+    {
+      "run": "R01",
+      "scope": "bare_graph",
+      "batch": 5,
+      "policy": "idle_matched",
+      "variant": "native",
+      "role": "within",
+      "count": 12,
+      "median_error_ns": 98336.0,
+      "max_abs_error_ns": 117645
+    },
+    {
+      "run": "R01",
+      "scope": "bare_graph",
+      "batch": 5,
+      "policy": "query_block",
+      "variant": "mature",
+      "role": "boundary",
+      "count": 2,
+      "median_error_ns": 66584541.5,
+      "max_abs_error_ns": 76179575
+    },
+    {
+      "run": "R01",
+      "scope": "bare_graph",
+      "batch": 5,
+      "policy": "query_cluster",
+      "variant": "native",
+      "role": "boundary",
+      "count": 1,
+      "median_error_ns": 80162665,
+      "max_abs_error_ns": 80162665
+    },
+    {
+      "run": "R01",
+      "scope": "bare_graph",
+      "batch": 8,
+      "policy": "query_block",
+      "variant": "native",
+      "role": "boundary",
+      "count": 1,
+      "median_error_ns": 7728223,
+      "max_abs_error_ns": 7728223
+    },
+    {
+      "run": "R01",
+      "scope": "bare_graph",
+      "batch": 8,
+      "policy": "query_block",
+      "variant": "mature",
+      "role": "within",
+      "count": 13,
+      "median_error_ns": 12453184,
+      "max_abs_error_ns": 30862285
+    },
+    {
+      "run": "R01",
+      "scope": "bare_graph",
+      "batch": 8,
+      "policy": "query_block",
+      "variant": "native",
+      "role": "within",
+      "count": 14,
+      "median_error_ns": 12537233.5,
+      "max_abs_error_ns": 26735624
+    },
+    {
+      "run": "R01",
+      "scope": "bare_graph",
+      "batch": 8,
+      "policy": "query_cluster",
+      "variant": "mature",
+      "role": "boundary",
+      "count": 2,
+      "median_error_ns": 1754104931.5,
+      "max_abs_error_ns": 3453733624
+    },
+    {
+      "run": "R01",
+      "scope": "bare_graph",
+      "batch": 8,
+      "policy": "query_cluster",
+      "variant": "native",
+      "role": "within",
+      "count": 14,
+      "median_error_ns": -33572243.5,
+      "max_abs_error_ns": 33948533
+    },
+    {
+      "run": "R01",
+      "scope": "bare_graph",
+      "batch": 8,
+      "policy": "query_cluster",
+      "variant": "mature",
+      "role": "within",
+      "count": 13,
+      "median_error_ns": -33631856,
+      "max_abs_error_ns": 34043217
+    },
+    {
+      "run": "R01",
+      "scope": "bare_graph",
+      "batch": 8,
+      "policy": "idle_matched",
+      "variant": "native",
+      "role": "boundary",
+      "count": 3,
+      "median_error_ns": 8934801,
+      "max_abs_error_ns": 22558020
+    },
+    {
+      "run": "R01",
+      "scope": "bare_graph",
+      "batch": 8,
+      "policy": "idle_matched",
+      "variant": "mature",
+      "role": "within",
+      "count": 15,
+      "median_error_ns": 123887,
+      "max_abs_error_ns": 148333
+    },
+    {
+      "run": "R01",
+      "scope": "bare_graph",
+      "batch": 8,
+      "policy": "idle_matched",
+      "variant": "native",
+      "role": "within",
+      "count": 12,
+      "median_error_ns": 123906.0,
+      "max_abs_error_ns": 155800
+    },
+    {
+      "run": "R01",
+      "scope": "bare_graph",
+      "batch": 8,
+      "policy": "query_block",
+      "variant": "mature",
+      "role": "boundary",
+      "count": 2,
+      "median_error_ns": 83743828.0,
+      "max_abs_error_ns": 122851330
+    },
+    {
+      "run": "R01",
+      "scope": "bare_graph",
+      "batch": 8,
+      "policy": "query_cluster",
+      "variant": "native",
+      "role": "boundary",
+      "count": 1,
+      "median_error_ns": 55945106,
+      "max_abs_error_ns": 55945106
+    },
+    {
+      "run": "R02",
+      "scope": "full",
+      "batch": 3,
+      "policy": "idle_matched",
+      "variant": "mature",
+      "role": "boundary",
+      "count": 3,
+      "median_error_ns": 106987,
+      "max_abs_error_ns": 108075
+    },
+    {
+      "run": "R02",
+      "scope": "full",
+      "batch": 3,
+      "policy": "idle_matched",
+      "variant": "native",
+      "role": "within",
+      "count": 15,
+      "median_error_ns": 114309,
+      "max_abs_error_ns": 131276
+    },
+    {
+      "run": "R02",
+      "scope": "full",
+      "batch": 3,
+      "policy": "idle_matched",
+      "variant": "mature",
+      "role": "within",
+      "count": 12,
+      "median_error_ns": 108108.0,
+      "max_abs_error_ns": 117037
+    },
+    {
+      "run": "R02",
+      "scope": "full",
+      "batch": 3,
+      "policy": "query_cluster",
+      "variant": "native",
+      "role": "boundary",
+      "count": 2,
+      "median_error_ns": 29937846.0,
+      "max_abs_error_ns": 38738154
+    },
+    {
+      "run": "R02",
+      "scope": "full",
+      "batch": 3,
+      "policy": "query_cluster",
+      "variant": "mature",
+      "role": "within",
+      "count": 14,
+      "median_error_ns": -42059967.0,
+      "max_abs_error_ns": 42338737
+    },
+    {
+      "run": "R02",
+      "scope": "full",
+      "batch": 3,
+      "policy": "query_cluster",
+      "variant": "native",
+      "role": "within",
+      "count": 13,
+      "median_error_ns": -44339243,
+      "max_abs_error_ns": 44526685
+    },
+    {
+      "run": "R02",
+      "scope": "full",
+      "batch": 3,
+      "policy": "query_block",
+      "variant": "mature",
+      "role": "boundary",
+      "count": 1,
+      "median_error_ns": 28931168,
+      "max_abs_error_ns": 28931168
+    },
+    {
+      "run": "R02",
+      "scope": "full",
+      "batch": 3,
+      "policy": "query_block",
+      "variant": "native",
+      "role": "within",
+      "count": 13,
+      "median_error_ns": 625616,
+      "max_abs_error_ns": 8894697
+    },
+    {
+      "run": "R02",
+      "scope": "full",
+      "batch": 3,
+      "policy": "query_block",
+      "variant": "mature",
+      "role": "within",
+      "count": 14,
+      "median_error_ns": 3445719.0,
+      "max_abs_error_ns": 15820887
+    },
+    {
+      "run": "R02",
+      "scope": "full",
+      "batch": 3,
+      "policy": "query_block",
+      "variant": "native",
+      "role": "boundary",
+      "count": 2,
+      "median_error_ns": 27839426.5,
+      "max_abs_error_ns": 30383862
+    },
+    {
+      "run": "R02",
+      "scope": "full",
+      "batch": 3,
+      "policy": "query_cluster",
+      "variant": "mature",
+      "role": "boundary",
+      "count": 1,
+      "median_error_ns": 36270290,
+      "max_abs_error_ns": 36270290
+    },
+    {
+      "run": "R02",
+      "scope": "full",
+      "batch": 5,
+      "policy": "idle_matched",
+      "variant": "mature",
+      "role": "boundary",
+      "count": 3,
+      "median_error_ns": 101985,
+      "max_abs_error_ns": 104848
+    },
+    {
+      "run": "R02",
+      "scope": "full",
+      "batch": 5,
+      "policy": "idle_matched",
+      "variant": "native",
+      "role": "within",
+      "count": 15,
+      "median_error_ns": 109154,
+      "max_abs_error_ns": 116654
+    },
+    {
+      "run": "R02",
+      "scope": "full",
+      "batch": 5,
+      "policy": "idle_matched",
+      "variant": "mature",
+      "role": "within",
+      "count": 12,
+      "median_error_ns": 107064.5,
+      "max_abs_error_ns": 110930
+    },
+    {
+      "run": "R02",
+      "scope": "full",
+      "batch": 5,
+      "policy": "query_cluster",
+      "variant": "native",
+      "role": "boundary",
+      "count": 2,
+      "median_error_ns": 28369464.0,
+      "max_abs_error_ns": 33784881
+    },
+    {
+      "run": "R02",
+      "scope": "full",
+      "batch": 5,
+      "policy": "query_cluster",
+      "variant": "mature",
+      "role": "within",
+      "count": 14,
+      "median_error_ns": -41969004.0,
+      "max_abs_error_ns": 42229830
+    },
+    {
+      "run": "R02",
+      "scope": "full",
+      "batch": 5,
+      "policy": "query_cluster",
+      "variant": "native",
+      "role": "within",
+      "count": 13,
+      "median_error_ns": -44138337,
+      "max_abs_error_ns": 44377151
+    },
+    {
+      "run": "R02",
+      "scope": "full",
+      "batch": 5,
+      "policy": "query_block",
+      "variant": "mature",
+      "role": "boundary",
+      "count": 1,
+      "median_error_ns": 26391865,
+      "max_abs_error_ns": 26391865
+    },
+    {
+      "run": "R02",
+      "scope": "full",
+      "batch": 5,
+      "policy": "query_block",
+      "variant": "native",
+      "role": "within",
+      "count": 13,
+      "median_error_ns": 445202,
+      "max_abs_error_ns": 10825519
+    },
+    {
+      "run": "R02",
+      "scope": "full",
+      "batch": 5,
+      "policy": "query_block",
+      "variant": "mature",
+      "role": "within",
+      "count": 14,
+      "median_error_ns": 4886594.5,
+      "max_abs_error_ns": 30015709
+    },
+    {
+      "run": "R02",
+      "scope": "full",
+      "batch": 5,
+      "policy": "query_block",
+      "variant": "native",
+      "role": "boundary",
+      "count": 2,
+      "median_error_ns": 29582688.0,
+      "max_abs_error_ns": 33951739
+    },
+    {
+      "run": "R02",
+      "scope": "full",
+      "batch": 5,
+      "policy": "query_cluster",
+      "variant": "mature",
+      "role": "boundary",
+      "count": 1,
+      "median_error_ns": 42563945,
+      "max_abs_error_ns": 42563945
+    },
+    {
+      "run": "R02",
+      "scope": "full",
+      "batch": 8,
+      "policy": "idle_matched",
+      "variant": "mature",
+      "role": "boundary",
+      "count": 3,
+      "median_error_ns": 110177,
+      "max_abs_error_ns": 115684
+    },
+    {
+      "run": "R02",
+      "scope": "full",
+      "batch": 8,
+      "policy": "idle_matched",
+      "variant": "native",
+      "role": "within",
+      "count": 15,
+      "median_error_ns": 118157,
+      "max_abs_error_ns": 134016
+    },
+    {
+      "run": "R02",
+      "scope": "full",
+      "batch": 8,
+      "policy": "idle_matched",
+      "variant": "mature",
+      "role": "within",
+      "count": 12,
+      "median_error_ns": 114707.5,
+      "max_abs_error_ns": 151272
+    },
+    {
+      "run": "R02",
+      "scope": "full",
+      "batch": 8,
+      "policy": "query_cluster",
+      "variant": "native",
+      "role": "boundary",
+      "count": 2,
+      "median_error_ns": 37251400.0,
+      "max_abs_error_ns": 41595462
+    },
+    {
+      "run": "R02",
+      "scope": "full",
+      "batch": 8,
+      "policy": "query_cluster",
+      "variant": "mature",
+      "role": "within",
+      "count": 14,
+      "median_error_ns": -41991818.0,
+      "max_abs_error_ns": 42256641
+    },
+    {
+      "run": "R02",
+      "scope": "full",
+      "batch": 8,
+      "policy": "query_cluster",
+      "variant": "native",
+      "role": "within",
+      "count": 13,
+      "median_error_ns": -44104272,
+      "max_abs_error_ns": 44401897
+    },
+    {
+      "run": "R02",
+      "scope": "full",
+      "batch": 8,
+      "policy": "query_block",
+      "variant": "mature",
+      "role": "boundary",
+      "count": 1,
+      "median_error_ns": 55738706,
+      "max_abs_error_ns": 55738706
+    },
+    {
+      "run": "R02",
+      "scope": "full",
+      "batch": 8,
+      "policy": "query_block",
+      "variant": "native",
+      "role": "within",
+      "count": 13,
+      "median_error_ns": 2228033,
+      "max_abs_error_ns": 32788661
+    },
+    {
+      "run": "R02",
+      "scope": "full",
+      "batch": 8,
+      "policy": "query_block",
+      "variant": "mature",
+      "role": "within",
+      "count": 14,
+      "median_error_ns": 5563186.0,
+      "max_abs_error_ns": 24463968
+    },
+    {
+      "run": "R02",
+      "scope": "full",
+      "batch": 8,
+      "policy": "query_block",
+      "variant": "native",
+      "role": "boundary",
+      "count": 2,
+      "median_error_ns": 39340972.0,
+      "max_abs_error_ns": 46199158
+    },
+    {
+      "run": "R02",
+      "scope": "full",
+      "batch": 8,
+      "policy": "query_cluster",
+      "variant": "mature",
+      "role": "boundary",
+      "count": 1,
+      "median_error_ns": 41192287,
+      "max_abs_error_ns": 41192287
+    },
+    {
+      "run": "R02",
+      "scope": "bare_graph",
+      "batch": 3,
+      "policy": "idle_matched",
+      "variant": "mature",
+      "role": "boundary",
+      "count": 3,
+      "median_error_ns": 110187,
+      "max_abs_error_ns": 133893
+    },
+    {
+      "run": "R02",
+      "scope": "bare_graph",
+      "batch": 3,
+      "policy": "idle_matched",
+      "variant": "native",
+      "role": "within",
+      "count": 15,
+      "median_error_ns": 111943,
+      "max_abs_error_ns": 132065
+    },
+    {
+      "run": "R02",
+      "scope": "bare_graph",
+      "batch": 3,
+      "policy": "idle_matched",
+      "variant": "mature",
+      "role": "within",
+      "count": 12,
+      "median_error_ns": 113248.5,
+      "max_abs_error_ns": 147997
+    },
+    {
+      "run": "R02",
+      "scope": "bare_graph",
+      "batch": 3,
+      "policy": "query_cluster",
+      "variant": "native",
+      "role": "boundary",
+      "count": 2,
+      "median_error_ns": 32051393.5,
+      "max_abs_error_ns": 34272264
+    },
+    {
+      "run": "R02",
+      "scope": "bare_graph",
+      "batch": 3,
+      "policy": "query_cluster",
+      "variant": "mature",
+      "role": "within",
+      "count": 14,
+      "median_error_ns": -41960999.5,
+      "max_abs_error_ns": 42131534
+    },
+    {
+      "run": "R02",
+      "scope": "bare_graph",
+      "batch": 3,
+      "policy": "query_cluster",
+      "variant": "native",
+      "role": "within",
+      "count": 13,
+      "median_error_ns": -44165378,
+      "max_abs_error_ns": 44263394
+    },
+    {
+      "run": "R02",
+      "scope": "bare_graph",
+      "batch": 3,
+      "policy": "query_block",
+      "variant": "mature",
+      "role": "boundary",
+      "count": 1,
+      "median_error_ns": 34385344,
+      "max_abs_error_ns": 34385344
+    },
+    {
+      "run": "R02",
+      "scope": "bare_graph",
+      "batch": 3,
+      "policy": "query_block",
+      "variant": "native",
+      "role": "within",
+      "count": 13,
+      "median_error_ns": 2371823,
+      "max_abs_error_ns": 18341218
+    },
+    {
+      "run": "R02",
+      "scope": "bare_graph",
+      "batch": 3,
+      "policy": "query_block",
+      "variant": "mature",
+      "role": "within",
+      "count": 14,
+      "median_error_ns": 4518778.5,
+      "max_abs_error_ns": 15869537
+    },
+    {
+      "run": "R02",
+      "scope": "bare_graph",
+      "batch": 3,
+      "policy": "query_block",
+      "variant": "native",
+      "role": "boundary",
+      "count": 2,
+      "median_error_ns": 30509464.0,
+      "max_abs_error_ns": 32693088
+    },
+    {
+      "run": "R02",
+      "scope": "bare_graph",
+      "batch": 3,
+      "policy": "query_cluster",
+      "variant": "mature",
+      "role": "boundary",
+      "count": 1,
+      "median_error_ns": 47912111,
+      "max_abs_error_ns": 47912111
+    },
+    {
+      "run": "R02",
+      "scope": "bare_graph",
+      "batch": 5,
+      "policy": "idle_matched",
+      "variant": "mature",
+      "role": "boundary",
+      "count": 3,
+      "median_error_ns": 104168,
+      "max_abs_error_ns": 109157
+    },
+    {
+      "run": "R02",
+      "scope": "bare_graph",
+      "batch": 5,
+      "policy": "idle_matched",
+      "variant": "native",
+      "role": "within",
+      "count": 15,
+      "median_error_ns": 112891,
+      "max_abs_error_ns": 127915
+    },
+    {
+      "run": "R02",
+      "scope": "bare_graph",
+      "batch": 5,
+      "policy": "idle_matched",
+      "variant": "mature",
+      "role": "within",
+      "count": 12,
+      "median_error_ns": 106479.0,
+      "max_abs_error_ns": 125593
+    },
+    {
+      "run": "R02",
+      "scope": "bare_graph",
+      "batch": 5,
+      "policy": "query_cluster",
+      "variant": "native",
+      "role": "boundary",
+      "count": 2,
+      "median_error_ns": 28887959.5,
+      "max_abs_error_ns": 32268243
+    },
+    {
+      "run": "R02",
+      "scope": "bare_graph",
+      "batch": 5,
+      "policy": "query_cluster",
+      "variant": "mature",
+      "role": "within",
+      "count": 14,
+      "median_error_ns": -42038827.5,
+      "max_abs_error_ns": 42236654
+    },
+    {
+      "run": "R02",
+      "scope": "bare_graph",
+      "batch": 5,
+      "policy": "query_cluster",
+      "variant": "native",
+      "role": "within",
+      "count": 13,
+      "median_error_ns": -44182961,
+      "max_abs_error_ns": 44385085
+    },
+    {
+      "run": "R02",
+      "scope": "bare_graph",
+      "batch": 5,
+      "policy": "query_block",
+      "variant": "mature",
+      "role": "boundary",
+      "count": 1,
+      "median_error_ns": 42909903,
+      "max_abs_error_ns": 42909903
+    },
+    {
+      "run": "R02",
+      "scope": "bare_graph",
+      "batch": 5,
+      "policy": "query_block",
+      "variant": "native",
+      "role": "within",
+      "count": 13,
+      "median_error_ns": -1936919,
+      "max_abs_error_ns": 10427336
+    },
+    {
+      "run": "R02",
+      "scope": "bare_graph",
+      "batch": 5,
+      "policy": "query_block",
+      "variant": "mature",
+      "role": "within",
+      "count": 14,
+      "median_error_ns": -380889.5,
+      "max_abs_error_ns": 21453651
+    },
+    {
+      "run": "R02",
+      "scope": "bare_graph",
+      "batch": 5,
+      "policy": "query_block",
+      "variant": "native",
+      "role": "boundary",
+      "count": 2,
+      "median_error_ns": 29263275.0,
+      "max_abs_error_ns": 32487519
+    },
+    {
+      "run": "R02",
+      "scope": "bare_graph",
+      "batch": 5,
+      "policy": "query_cluster",
+      "variant": "mature",
+      "role": "boundary",
+      "count": 1,
+      "median_error_ns": 41770322,
+      "max_abs_error_ns": 41770322
+    },
+    {
+      "run": "R02",
+      "scope": "bare_graph",
+      "batch": 8,
+      "policy": "idle_matched",
+      "variant": "mature",
+      "role": "boundary",
+      "count": 3,
+      "median_error_ns": 103526,
+      "max_abs_error_ns": 109483
+    },
+    {
+      "run": "R02",
+      "scope": "bare_graph",
+      "batch": 8,
+      "policy": "idle_matched",
+      "variant": "native",
+      "role": "within",
+      "count": 15,
+      "median_error_ns": 110687,
+      "max_abs_error_ns": 128561
+    },
+    {
+      "run": "R02",
+      "scope": "bare_graph",
+      "batch": 8,
+      "policy": "idle_matched",
+      "variant": "mature",
+      "role": "within",
+      "count": 12,
+      "median_error_ns": 107027.5,
+      "max_abs_error_ns": 140350
+    },
+    {
+      "run": "R02",
+      "scope": "bare_graph",
+      "batch": 8,
+      "policy": "query_cluster",
+      "variant": "native",
+      "role": "boundary",
+      "count": 2,
+      "median_error_ns": 33297489.0,
+      "max_abs_error_ns": 40242262
+    },
+    {
+      "run": "R02",
+      "scope": "bare_graph",
+      "batch": 8,
+      "policy": "query_cluster",
+      "variant": "mature",
+      "role": "within",
+      "count": 14,
+      "median_error_ns": -41942073.0,
+      "max_abs_error_ns": 42254156
+    },
+    {
+      "run": "R02",
+      "scope": "bare_graph",
+      "batch": 8,
+      "policy": "query_cluster",
+      "variant": "native",
+      "role": "within",
+      "count": 13,
+      "median_error_ns": -44148346,
+      "max_abs_error_ns": 44284825
+    },
+    {
+      "run": "R02",
+      "scope": "bare_graph",
+      "batch": 8,
+      "policy": "query_block",
+      "variant": "mature",
+      "role": "boundary",
+      "count": 1,
+      "median_error_ns": 36387302,
+      "max_abs_error_ns": 36387302
+    },
+    {
+      "run": "R02",
+      "scope": "bare_graph",
+      "batch": 8,
+      "policy": "query_block",
+      "variant": "native",
+      "role": "within",
+      "count": 13,
+      "median_error_ns": -389279,
+      "max_abs_error_ns": 18570971
+    },
+    {
+      "run": "R02",
+      "scope": "bare_graph",
+      "batch": 8,
+      "policy": "query_block",
+      "variant": "mature",
+      "role": "within",
+      "count": 14,
+      "median_error_ns": 1075521.0,
+      "max_abs_error_ns": 14885684
+    },
+    {
+      "run": "R02",
+      "scope": "bare_graph",
+      "batch": 8,
+      "policy": "query_block",
+      "variant": "native",
+      "role": "boundary",
+      "count": 2,
+      "median_error_ns": 35853331.0,
+      "max_abs_error_ns": 37890792
+    },
+    {
+      "run": "R02",
+      "scope": "bare_graph",
+      "batch": 8,
+      "policy": "query_cluster",
+      "variant": "mature",
+      "role": "boundary",
+      "count": 1,
+      "median_error_ns": 37305291,
+      "max_abs_error_ns": 37305291
+    }
+  ],
+  "cluster_costs": [
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/full/B3/T0/query_block",
+      "scope": "full",
+      "full_cluster_ms_per_100_calls": 1616.339186,
+      "cost_us_per_call": 16163.39186
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/full/B3/T0/query_cluster",
+      "scope": "full",
+      "full_cluster_ms_per_100_calls": 604.317182,
+      "cost_us_per_call": 6043.1718200000005
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/full/B3/T0/idle_matched",
+      "scope": "full",
+      "full_cluster_ms_per_100_calls": 1057.460017,
+      "cost_us_per_call": 10574.60017
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/full/B3/T1/query_cluster",
+      "scope": "full",
+      "full_cluster_ms_per_100_calls": 722.197636,
+      "cost_us_per_call": 7221.976360000001
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/full/B3/T1/idle_matched",
+      "scope": "full",
+      "full_cluster_ms_per_100_calls": 1081.667953,
+      "cost_us_per_call": 10816.67953
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/full/B3/T1/query_block",
+      "scope": "full",
+      "full_cluster_ms_per_100_calls": 1480.885911,
+      "cost_us_per_call": 14808.85911
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/full/B3/T2/idle_matched",
+      "scope": "full",
+      "full_cluster_ms_per_100_calls": 1114.992713,
+      "cost_us_per_call": 11149.92713
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/full/B3/T2/query_block",
+      "scope": "full",
+      "full_cluster_ms_per_100_calls": 1593.585273,
+      "cost_us_per_call": 15935.85273
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/full/B3/T2/query_cluster",
+      "scope": "full",
+      "full_cluster_ms_per_100_calls": 585.851379,
+      "cost_us_per_call": 5858.51379
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/full/B5/T0/query_block",
+      "scope": "full",
+      "full_cluster_ms_per_100_calls": 1614.439125,
+      "cost_us_per_call": 16144.39125
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/full/B5/T0/query_cluster",
+      "scope": "full",
+      "full_cluster_ms_per_100_calls": 579.11809,
+      "cost_us_per_call": 5791.1809
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/full/B5/T0/idle_matched",
+      "scope": "full",
+      "full_cluster_ms_per_100_calls": 1173.506807,
+      "cost_us_per_call": 11735.068070000001
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/full/B5/T1/query_cluster",
+      "scope": "full",
+      "full_cluster_ms_per_100_calls": 591.493935,
+      "cost_us_per_call": 5914.93935
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/full/B5/T1/idle_matched",
+      "scope": "full",
+      "full_cluster_ms_per_100_calls": 1027.748903,
+      "cost_us_per_call": 10277.489029999999
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/full/B5/T1/query_block",
+      "scope": "full",
+      "full_cluster_ms_per_100_calls": 1743.557561,
+      "cost_us_per_call": 17435.57561
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/full/B5/T2/idle_matched",
+      "scope": "full",
+      "full_cluster_ms_per_100_calls": 1159.120742,
+      "cost_us_per_call": 11591.20742
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/full/B5/T2/query_block",
+      "scope": "full",
+      "full_cluster_ms_per_100_calls": 1573.12959,
+      "cost_us_per_call": 15731.295900000001
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/full/B5/T2/query_cluster",
+      "scope": "full",
+      "full_cluster_ms_per_100_calls": 609.763452,
+      "cost_us_per_call": 6097.63452
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/full/B8/T0/query_block",
+      "scope": "full",
+      "full_cluster_ms_per_100_calls": 1325.861984,
+      "cost_us_per_call": 13258.61984
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/full/B8/T0/query_cluster",
+      "scope": "full",
+      "full_cluster_ms_per_100_calls": 575.220513,
+      "cost_us_per_call": 5752.20513
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/full/B8/T0/idle_matched",
+      "scope": "full",
+      "full_cluster_ms_per_100_calls": 1086.257335,
+      "cost_us_per_call": 10862.573349999999
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/full/B8/T1/query_cluster",
+      "scope": "full",
+      "full_cluster_ms_per_100_calls": 600.181758,
+      "cost_us_per_call": 6001.81758
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/full/B8/T1/idle_matched",
+      "scope": "full",
+      "full_cluster_ms_per_100_calls": 1179.459492,
+      "cost_us_per_call": 11794.59492
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/full/B8/T1/query_block",
+      "scope": "full",
+      "full_cluster_ms_per_100_calls": 1602.752125,
+      "cost_us_per_call": 16027.52125
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/full/B8/T2/idle_matched",
+      "scope": "full",
+      "full_cluster_ms_per_100_calls": 1125.420348,
+      "cost_us_per_call": 11254.20348
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/full/B8/T2/query_block",
+      "scope": "full",
+      "full_cluster_ms_per_100_calls": 1586.588651,
+      "cost_us_per_call": 15865.88651
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/full/B8/T2/query_cluster",
+      "scope": "full",
+      "full_cluster_ms_per_100_calls": 600.029115,
+      "cost_us_per_call": 6000.29115
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/bare_graph/B3/T0/query_block",
+      "scope": "bare_graph",
+      "full_cluster_ms_per_100_calls": 1347.918169,
+      "cost_us_per_call": 13479.18169
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/bare_graph/B3/T0/query_cluster",
+      "scope": "bare_graph",
+      "full_cluster_ms_per_100_calls": 712.118089,
+      "cost_us_per_call": 7121.18089
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/bare_graph/B3/T0/idle_matched",
+      "scope": "bare_graph",
+      "full_cluster_ms_per_100_calls": 929.206208,
+      "cost_us_per_call": 9292.06208
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/bare_graph/B3/T1/query_cluster",
+      "scope": "bare_graph",
+      "full_cluster_ms_per_100_calls": 634.689415,
+      "cost_us_per_call": 6346.89415
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/bare_graph/B3/T1/idle_matched",
+      "scope": "bare_graph",
+      "full_cluster_ms_per_100_calls": 1087.104389,
+      "cost_us_per_call": 10871.04389
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/bare_graph/B3/T1/query_block",
+      "scope": "bare_graph",
+      "full_cluster_ms_per_100_calls": 1135.090239,
+      "cost_us_per_call": 11350.902390000001
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/bare_graph/B3/T2/idle_matched",
+      "scope": "bare_graph",
+      "full_cluster_ms_per_100_calls": 983.264527,
+      "cost_us_per_call": 9832.645269999999
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/bare_graph/B3/T2/query_block",
+      "scope": "bare_graph",
+      "full_cluster_ms_per_100_calls": 1527.959705,
+      "cost_us_per_call": 15279.59705
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/bare_graph/B3/T2/query_cluster",
+      "scope": "bare_graph",
+      "full_cluster_ms_per_100_calls": 452.24184,
+      "cost_us_per_call": 4522.4184000000005
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/bare_graph/B5/T0/query_block",
+      "scope": "bare_graph",
+      "full_cluster_ms_per_100_calls": 1264.021859,
+      "cost_us_per_call": 12640.21859
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/bare_graph/B5/T0/query_cluster",
+      "scope": "bare_graph",
+      "full_cluster_ms_per_100_calls": 450.169171,
+      "cost_us_per_call": 4501.69171
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/bare_graph/B5/T0/idle_matched",
+      "scope": "bare_graph",
+      "full_cluster_ms_per_100_calls": 995.007753,
+      "cost_us_per_call": 9950.077529999999
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/bare_graph/B5/T1/query_cluster",
+      "scope": "bare_graph",
+      "full_cluster_ms_per_100_calls": 666.463395,
+      "cost_us_per_call": 6664.63395
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/bare_graph/B5/T1/idle_matched",
+      "scope": "bare_graph",
+      "full_cluster_ms_per_100_calls": 931.039515,
+      "cost_us_per_call": 9310.39515
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/bare_graph/B5/T1/query_block",
+      "scope": "bare_graph",
+      "full_cluster_ms_per_100_calls": 1587.106966,
+      "cost_us_per_call": 15871.069660000001
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/bare_graph/B5/T2/idle_matched",
+      "scope": "bare_graph",
+      "full_cluster_ms_per_100_calls": 1224.236258,
+      "cost_us_per_call": 12242.36258
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/bare_graph/B5/T2/query_block",
+      "scope": "bare_graph",
+      "full_cluster_ms_per_100_calls": 1573.980547,
+      "cost_us_per_call": 15739.805470000001
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/bare_graph/B5/T2/query_cluster",
+      "scope": "bare_graph",
+      "full_cluster_ms_per_100_calls": 613.225516,
+      "cost_us_per_call": 6132.25516
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/bare_graph/B8/T0/query_block",
+      "scope": "bare_graph",
+      "full_cluster_ms_per_100_calls": 1400.852678,
+      "cost_us_per_call": 14008.52678
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/bare_graph/B8/T0/query_cluster",
+      "scope": "bare_graph",
+      "full_cluster_ms_per_100_calls": 443.282758,
+      "cost_us_per_call": 4432.82758
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/bare_graph/B8/T0/idle_matched",
+      "scope": "bare_graph",
+      "full_cluster_ms_per_100_calls": 1086.107778,
+      "cost_us_per_call": 10861.07778
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/bare_graph/B8/T1/query_cluster",
+      "scope": "bare_graph",
+      "full_cluster_ms_per_100_calls": 732.311434,
+      "cost_us_per_call": 7323.11434
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/bare_graph/B8/T1/idle_matched",
+      "scope": "bare_graph",
+      "full_cluster_ms_per_100_calls": 1165.87517,
+      "cost_us_per_call": 11658.751699999999
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/bare_graph/B8/T1/query_block",
+      "scope": "bare_graph",
+      "full_cluster_ms_per_100_calls": 1404.798184,
+      "cost_us_per_call": 14047.98184
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/bare_graph/B8/T2/idle_matched",
+      "scope": "bare_graph",
+      "full_cluster_ms_per_100_calls": 1075.575701,
+      "cost_us_per_call": 10755.75701
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/bare_graph/B8/T2/query_block",
+      "scope": "bare_graph",
+      "full_cluster_ms_per_100_calls": 1591.55855,
+      "cost_us_per_call": 15915.5855
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/bare_graph/B8/T2/query_cluster",
+      "scope": "bare_graph",
+      "full_cluster_ms_per_100_calls": 595.539388,
+      "cost_us_per_call": 5955.39388
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/full/B3/T0/idle_matched",
+      "scope": "full",
+      "full_cluster_ms_per_100_calls": 1278.327052,
+      "cost_us_per_call": 12783.27052
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/full/B3/T0/query_cluster",
+      "scope": "full",
+      "full_cluster_ms_per_100_calls": 732.43463,
+      "cost_us_per_call": 7324.3463
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/full/B3/T0/query_block",
+      "scope": "full",
+      "full_cluster_ms_per_100_calls": 1213.749817,
+      "cost_us_per_call": 12137.49817
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/full/B3/T1/query_block",
+      "scope": "full",
+      "full_cluster_ms_per_100_calls": 1465.206245,
+      "cost_us_per_call": 14652.06245
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/full/B3/T1/idle_matched",
+      "scope": "full",
+      "full_cluster_ms_per_100_calls": 1046.578849,
+      "cost_us_per_call": 10465.78849
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/full/B3/T1/query_cluster",
+      "scope": "full",
+      "full_cluster_ms_per_100_calls": 610.932478,
+      "cost_us_per_call": 6109.32478
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/full/B3/T2/query_cluster",
+      "scope": "full",
+      "full_cluster_ms_per_100_calls": 584.266017,
+      "cost_us_per_call": 5842.66017
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/full/B3/T2/query_block",
+      "scope": "full",
+      "full_cluster_ms_per_100_calls": 1565.621417,
+      "cost_us_per_call": 15656.21417
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/full/B3/T2/idle_matched",
+      "scope": "full",
+      "full_cluster_ms_per_100_calls": 1352.35468,
+      "cost_us_per_call": 13523.5468
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/full/B5/T0/idle_matched",
+      "scope": "full",
+      "full_cluster_ms_per_100_calls": 1271.21025,
+      "cost_us_per_call": 12712.1025
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/full/B5/T0/query_cluster",
+      "scope": "full",
+      "full_cluster_ms_per_100_calls": 621.938957,
+      "cost_us_per_call": 6219.38957
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/full/B5/T0/query_block",
+      "scope": "full",
+      "full_cluster_ms_per_100_calls": 1673.700974,
+      "cost_us_per_call": 16737.00974
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/full/B5/T1/query_block",
+      "scope": "full",
+      "full_cluster_ms_per_100_calls": 1482.591904,
+      "cost_us_per_call": 14825.919039999999
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/full/B5/T1/idle_matched",
+      "scope": "full",
+      "full_cluster_ms_per_100_calls": 1335.984166,
+      "cost_us_per_call": 13359.84166
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/full/B5/T1/query_cluster",
+      "scope": "full",
+      "full_cluster_ms_per_100_calls": 743.144769,
+      "cost_us_per_call": 7431.44769
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/full/B5/T2/query_cluster",
+      "scope": "full",
+      "full_cluster_ms_per_100_calls": 580.541036,
+      "cost_us_per_call": 5805.410360000001
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/full/B5/T2/query_block",
+      "scope": "full",
+      "full_cluster_ms_per_100_calls": 1396.952319,
+      "cost_us_per_call": 13969.52319
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/full/B5/T2/idle_matched",
+      "scope": "full",
+      "full_cluster_ms_per_100_calls": 1597.683464,
+      "cost_us_per_call": 15976.834640000001
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/full/B8/T0/idle_matched",
+      "scope": "full",
+      "full_cluster_ms_per_100_calls": 1274.344036,
+      "cost_us_per_call": 12743.440359999999
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/full/B8/T0/query_cluster",
+      "scope": "full",
+      "full_cluster_ms_per_100_calls": 765.232685,
+      "cost_us_per_call": 7652.3268499999995
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/full/B8/T0/query_block",
+      "scope": "full",
+      "full_cluster_ms_per_100_calls": 1547.920738,
+      "cost_us_per_call": 15479.207380000002
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/full/B8/T1/query_block",
+      "scope": "full",
+      "full_cluster_ms_per_100_calls": 1579.438858,
+      "cost_us_per_call": 15794.38858
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/full/B8/T1/idle_matched",
+      "scope": "full",
+      "full_cluster_ms_per_100_calls": 1383.591261,
+      "cost_us_per_call": 13835.91261
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/full/B8/T1/query_cluster",
+      "scope": "full",
+      "full_cluster_ms_per_100_calls": 742.259864,
+      "cost_us_per_call": 7422.598639999999
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/full/B8/T2/query_cluster",
+      "scope": "full",
+      "full_cluster_ms_per_100_calls": 574.510159,
+      "cost_us_per_call": 5745.10159
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/full/B8/T2/query_block",
+      "scope": "full",
+      "full_cluster_ms_per_100_calls": 1399.287986,
+      "cost_us_per_call": 13992.87986
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/full/B8/T2/idle_matched",
+      "scope": "full",
+      "full_cluster_ms_per_100_calls": 1586.57591,
+      "cost_us_per_call": 15865.7591
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/bare_graph/B3/T0/idle_matched",
+      "scope": "bare_graph",
+      "full_cluster_ms_per_100_calls": 1103.637866,
+      "cost_us_per_call": 11036.37866
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/bare_graph/B3/T0/query_cluster",
+      "scope": "bare_graph",
+      "full_cluster_ms_per_100_calls": 688.909179,
+      "cost_us_per_call": 6889.09179
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/bare_graph/B3/T0/query_block",
+      "scope": "bare_graph",
+      "full_cluster_ms_per_100_calls": 1422.032866,
+      "cost_us_per_call": 14220.328660000001
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/bare_graph/B3/T1/query_block",
+      "scope": "bare_graph",
+      "full_cluster_ms_per_100_calls": 1305.851298,
+      "cost_us_per_call": 13058.512980000001
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/bare_graph/B3/T1/idle_matched",
+      "scope": "bare_graph",
+      "full_cluster_ms_per_100_calls": 1504.924713,
+      "cost_us_per_call": 15049.247130000002
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/bare_graph/B3/T1/query_cluster",
+      "scope": "bare_graph",
+      "full_cluster_ms_per_100_calls": 459.932842,
+      "cost_us_per_call": 4599.32842
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/bare_graph/B3/T2/query_cluster",
+      "scope": "bare_graph",
+      "full_cluster_ms_per_100_calls": 585.678903,
+      "cost_us_per_call": 5856.78903
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/bare_graph/B3/T2/query_block",
+      "scope": "bare_graph",
+      "full_cluster_ms_per_100_calls": 1377.065054,
+      "cost_us_per_call": 13770.650539999999
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/bare_graph/B3/T2/idle_matched",
+      "scope": "bare_graph",
+      "full_cluster_ms_per_100_calls": 1341.145569,
+      "cost_us_per_call": 13411.455689999999
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/bare_graph/B5/T0/idle_matched",
+      "scope": "bare_graph",
+      "full_cluster_ms_per_100_calls": 1300.889351,
+      "cost_us_per_call": 13008.89351
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/bare_graph/B5/T0/query_cluster",
+      "scope": "bare_graph",
+      "full_cluster_ms_per_100_calls": 597.47128,
+      "cost_us_per_call": 5974.7128
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/bare_graph/B5/T0/query_block",
+      "scope": "bare_graph",
+      "full_cluster_ms_per_100_calls": 1386.335421,
+      "cost_us_per_call": 13863.354210000001
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/bare_graph/B5/T1/query_block",
+      "scope": "bare_graph",
+      "full_cluster_ms_per_100_calls": 1339.927528,
+      "cost_us_per_call": 13399.27528
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/bare_graph/B5/T1/idle_matched",
+      "scope": "bare_graph",
+      "full_cluster_ms_per_100_calls": 1595.962172,
+      "cost_us_per_call": 15959.621720000001
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/bare_graph/B5/T1/query_cluster",
+      "scope": "bare_graph",
+      "full_cluster_ms_per_100_calls": 572.793324,
+      "cost_us_per_call": 5727.93324
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/bare_graph/B5/T2/query_cluster",
+      "scope": "bare_graph",
+      "full_cluster_ms_per_100_calls": 578.575496,
+      "cost_us_per_call": 5785.75496
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/bare_graph/B5/T2/query_block",
+      "scope": "bare_graph",
+      "full_cluster_ms_per_100_calls": 1285.383819,
+      "cost_us_per_call": 12853.838189999999
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/bare_graph/B5/T2/idle_matched",
+      "scope": "bare_graph",
+      "full_cluster_ms_per_100_calls": 1517.760485,
+      "cost_us_per_call": 15177.60485
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/bare_graph/B8/T0/idle_matched",
+      "scope": "bare_graph",
+      "full_cluster_ms_per_100_calls": 1316.942292,
+      "cost_us_per_call": 13169.422919999999
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/bare_graph/B8/T0/query_cluster",
+      "scope": "bare_graph",
+      "full_cluster_ms_per_100_calls": 767.125512,
+      "cost_us_per_call": 7671.25512
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/bare_graph/B8/T0/query_block",
+      "scope": "bare_graph",
+      "full_cluster_ms_per_100_calls": 1393.283132,
+      "cost_us_per_call": 13932.831320000001
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/bare_graph/B8/T1/query_block",
+      "scope": "bare_graph",
+      "full_cluster_ms_per_100_calls": 1285.332108,
+      "cost_us_per_call": 12853.32108
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/bare_graph/B8/T1/idle_matched",
+      "scope": "bare_graph",
+      "full_cluster_ms_per_100_calls": 1400.713404,
+      "cost_us_per_call": 14007.134039999999
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/bare_graph/B8/T1/query_cluster",
+      "scope": "bare_graph",
+      "full_cluster_ms_per_100_calls": 797.351377,
+      "cost_us_per_call": 7973.51377
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/bare_graph/B8/T2/query_cluster",
+      "scope": "bare_graph",
+      "full_cluster_ms_per_100_calls": 570.579771,
+      "cost_us_per_call": 5705.79771
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/bare_graph/B8/T2/query_block",
+      "scope": "bare_graph",
+      "full_cluster_ms_per_100_calls": 1395.289167,
+      "cost_us_per_call": 13952.891669999999
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/bare_graph/B8/T2/idle_matched",
+      "scope": "bare_graph",
+      "full_cluster_ms_per_100_calls": 1324.531408,
+      "cost_us_per_call": 13245.31408
+    }
+  ],
+  "commands": [
+    {
+      "case": "evidence",
+      "exit_code": 0,
+      "stdout": "{\"planned_blocks\": 1080, \"status_counts\": {\"measured\": 1080}, \"complete_clusters\": 108, \"primary_scope\": \"full\", \"root_cause_claim\": false}\n",
+      "stderr": "",
+      "success_report": true
+    },
+    {
+      "case": "clock",
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-10-555c69ac1872\\workdir\\elit-source\\tools\\perf\\operators\\local_gpu\\analyze_kv_cadence.py\", line 247, in <module>\n    main()\n    ~~~~^^\n  File \"C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-10-555c69ac1872\\workdir\\elit-source\\tools\\perf\\operators\\local_gpu\\analyze_kv_cadence.py\", line 239, in main\n    result = analyze(plan, args.root)\n  File \"C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-10-555c69ac1872\\workdir\\elit-source\\tools\\perf\\operators\\local_gpu\\analyze_kv_cadence.py\", line 102, in analyze\n    validate_block(r, b, c, runtime, cell, config)\n    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-10-555c69ac1872\\workdir\\elit-source\\tools\\perf\\operators\\local_gpu\\analyze_kv_cadence.py\", line 37, in validate_block\n    raise ValueError(\"foreign clock/runtime identity\")\nValueError: foreign clock/runtime identity\n",
+      "success_report": false
+    },
+    {
+      "case": "nan",
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-10-555c69ac1872\\workdir\\elit-source\\tools\\perf\\operators\\local_gpu\\analyze_kv_cadence.py\", line 247, in <module>\n    main()\n    ~~~~^^\n  File \"C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-10-555c69ac1872\\workdir\\elit-source\\tools\\perf\\operators\\local_gpu\\analyze_kv_cadence.py\", line 239, in main\n    result = analyze(plan, args.root)\n  File \"C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-10-555c69ac1872\\workdir\\elit-source\\tools\\perf\\operators\\local_gpu\\analyze_kv_cadence.py\", line 102, in analyze\n    validate_block(r, b, c, runtime, cell, config)\n    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-10-555c69ac1872\\workdir\\elit-source\\tools\\perf\\operators\\local_gpu\\analyze_kv_cadence.py\", line 44, in validate_block\n    raise ValueError(\"nonfinite/nonpositive timing\")\nValueError: nonfinite/nonpositive timing\n",
+      "success_report": false
+    },
+    {
+      "case": "matching",
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-10-555c69ac1872\\workdir\\elit-source\\tools\\perf\\operators\\local_gpu\\analyze_kv_cadence.py\", line 247, in <module>\n    main()\n    ~~~~^^\n  File \"C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-10-555c69ac1872\\workdir\\elit-source\\tools\\perf\\operators\\local_gpu\\analyze_kv_cadence.py\", line 239, in main\n    result = analyze(plan, args.root)\n  File \"C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-10-555c69ac1872\\workdir\\elit-source\\tools\\perf\\operators\\local_gpu\\analyze_kv_cadence.py\", line 102, in analyze\n    validate_block(r, b, c, runtime, cell, config)\n    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-10-555c69ac1872\\workdir\\elit-source\\tools\\perf\\operators\\local_gpu\\analyze_kv_cadence.py\", line 60, in validate_block\n    raise ValueError(\"idle matching error/qualification changed\")\nValueError: idle matching error/qualification changed\n",
+      "success_report": false
+    },
+    {
+      "case": "duplicate",
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-10-555c69ac1872\\workdir\\elit-source\\tools\\perf\\operators\\local_gpu\\analyze_kv_cadence.py\", line 247, in <module>\n    main()\n    ~~~~^^\n  File \"C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-10-555c69ac1872\\workdir\\elit-source\\tools\\perf\\operators\\local_gpu\\analyze_kv_cadence.py\", line 239, in main\n    result = analyze(plan, args.root)\n  File \"C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-10-555c69ac1872\\workdir\\elit-source\\tools\\perf\\operators\\local_gpu\\analyze_kv_cadence.py\", line 99, in analyze\n    raise ValueError(\"unknown/duplicate block\")\nValueError: unknown/duplicate block\n",
+      "success_report": false
+    },
+    {
+      "case": "empty_gate",
+      "exit_code": 0,
+      "stdout": "{\"planned_blocks\": 1080, \"status_counts\": {\"measured\": 1080}, \"complete_clusters\": 108, \"primary_scope\": \"full\", \"root_cause_claim\": false}\n",
+      "stderr": "",
+      "success_report": true
+    },
+    {
+      "case": "hidden_R02",
+      "exit_code": 0,
+      "stdout": "{\"planned_blocks\": 1080, \"status_counts\": {\"measured\": 540, \"missing\": 540}, \"complete_clusters\": 54, \"primary_scope\": \"full\", \"root_cause_claim\": false}\n",
+      "stderr": "",
+      "success_report": true
+    }
+  ],
+  "empty_gate_rejected": false,
+  "gate_timestamp_limitation": "run/cell/phase references exist, but no separate per-gate monotonic timestamp; equal content hashes do not identify a collection event",
+  "GPU_executed": false,
+  "root_cause_or_gain_established": false,
+  "overall": "needs_fix",
+  "open_defect": "ELIT-QA-01: missing all vectors in one gate accepted by original analyzer"
+}

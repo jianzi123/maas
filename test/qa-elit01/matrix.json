@@ -1,0 +1,14 @@
+{
+  "candidate": "5f8bd5d83968f9ed5e674593bb8d19078c4575ad",
+  "raw_complete": true,
+  "strict_full_qualified": [
+    0,
+    18
+  ],
+  "protocol_regression_passed": 16,
+  "required_CLI_rejections_passed": 4,
+  "ELIT_QA_01": "OPEN: empty gate vectors accepted",
+  "overall": "needs_fix",
+  "GPU_executed": false,
+  "causal_or_gain_claim": false
+}
