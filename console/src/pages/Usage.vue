@@ -56,6 +56,7 @@ let applied = "",
 function clearResults() {
   detail.value = null;
   exactEpoch++;
+  exactBusy.value = false;
   exact.value = null;
   rows.value = [];
   summary.value = [];
