@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "sourceMode": "single-repository-code-commit",
   "backend": {
-    "sourceCommit": "fe09d60b4932f78ed07dd27da36878b2a375d0fd",
+    "sourceCommit": "ff3fa1d4fb99b7eccc976e225e4bc25510da80d8",
     "files": {
       ".gitattributes": "5b93b86d7f7e94c3dafdd41b284afe95a95a985e8afc719914173db11890cd36",
       ".gitignore": "46cf94096a926a26bc1a913b6cc632adacab0a96ab42d72a7dcbf216bcbaaa77",
@@ -300,6 +300,11 @@
       "test/qa-d1-consumer/report.md": "427b6afa05eaa0016b704c12a60c1ec8a2c9f8dc2fa74f3953a2dad4d622823a",
       "test/qa-d1-consumer/results.json": "1749078e3aeeb4560942109c2b962bd10fb6d40735099f347521075d757cfb60",
       "test/qa-d1-consumer/verify.py": "39eeacfde1b33db4475915f04985ef8ee7c8b14d96d691e94cf996e960436b8c",
+      "test/qa-elit01/audit.py": "f1aa584f9d46709f69b23d58ae97c136532cbc03aec692f00600a22da23d2ce9",
+      "test/qa-elit01/matrix.json": "0911602ff56bbbf8db761f988ce960a5df667775434ade2779ed4bbdfc4de527",
+      "test/qa-elit01/report.md": "d3b7c9efc987ce0681714d395bf26466831fed6a8d5c7888fae2af3bc2965473",
+      "test/qa-elit01/reproduce_empty_gate.py": "491fd55a79ea003693ee88f6718d681e54da60428ca4c23d7ee6ef45f90c7e20",
+      "test/qa-elit01/results.json": "544b774bc2672ecb2c7b53525d81e636792933ae9bf62021c5e26a25be440adb",
       "test/qa-gpu-e6de90e/matrix.json": "e84ea40cb1425a324e24cb6f6f9f384f16a77de67a8f7ba204002837474caeb9",
       "test/qa-gpu-e6de90e/oracle.py": "6a8b2f023d6edf60329dcf3814df4419ffa95b547b30b19002f9b835abc2cf0a",
       "test/qa-gpu-e6de90e/README.md": "1620da3d6ab057dc65d97453e8c38b92cc1f5afc9643523010cc51c8c1b47e55",
@@ -521,7 +526,7 @@
     }
   },
   "console": {
-    "sourceCommit": "fe09d60b4932f78ed07dd27da36878b2a375d0fd",
+    "sourceCommit": "ff3fa1d4fb99b7eccc976e225e4bc25510da80d8",
     "files": {
       "console/.env.fixtures": "4d5e22f8eeb4bbf5a027a34c7a4bfef806876a470f89440f9611bd01a9d8c5f7",
       "console/.env.workbench": "930edf078e756f41d37fad0f7ce87332d8af59e65dac57b11797bcf0117a9216",
@@ -804,6 +809,11 @@
       "test/qa-d1-consumer/report.md",
       "test/qa-d1-consumer/results.json",
       "test/qa-d1-consumer/verify.py",
+      "test/qa-elit01/audit.py",
+      "test/qa-elit01/matrix.json",
+      "test/qa-elit01/report.md",
+      "test/qa-elit01/reproduce_empty_gate.py",
+      "test/qa-elit01/results.json",
       "test/qa-gpu-e6de90e/README.md",
       "test/qa-gpu-e6de90e/matrix.json",
       "test/qa-gpu-e6de90e/oracle.py",

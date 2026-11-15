@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "scope": "installation-input-only-no-secret-values",
-  "sourceCommit": "fe09d60b4932f78ed07dd27da36878b2a375d0fd",
+  "sourceCommit": "ff3fa1d4fb99b7eccc976e225e4bc25510da80d8",
   "productionWiringVerified": false,
   "connections": {
     "core": {
@@ -328,6 +328,11 @@
         "test/qa-d1-consumer/report.md",
         "test/qa-d1-consumer/results.json",
         "test/qa-d1-consumer/verify.py",
+        "test/qa-elit01/audit.py",
+        "test/qa-elit01/matrix.json",
+        "test/qa-elit01/report.md",
+        "test/qa-elit01/reproduce_empty_gate.py",
+        "test/qa-elit01/results.json",
         "test/qa-gpu-e6de90e/README.md",
         "test/qa-gpu-e6de90e/matrix.json",
         "test/qa-gpu-e6de90e/oracle.py",
