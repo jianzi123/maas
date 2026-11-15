@@ -1,0 +1,13 @@
+{
+  "candidate": "bf319d6172d595140bf7ff86a67c589b1d5877b6",
+  "QA_base": "8dbf99ef59c847da775b83d0eeb7dc8f8bf48a9a",
+  "paired_cycles": 120,
+  "negative_pairs": 33,
+  "damaged_inputs_rejected": 4,
+  "rope_library_cases": 6,
+  "caller_integrated": false,
+  "save_false_tested": false,
+  "stable_gain": false,
+  "drift": "unknown",
+  "old_structure_scope_retained": true
+}

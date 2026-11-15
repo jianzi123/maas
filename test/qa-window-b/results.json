@@ -1,0 +1,581 @@
+{
+  "audit": {
+    "candidate": "bf319d6172d595140bf7ff86a67c589b1d5877b6",
+    "provenance": {
+      "execution_checkout_head": "dcc5a53bee0f58d7d0e58c5f085dcf2450dab7f8",
+      "execution_research_files_were_uncommitted": true,
+      "measured_source_hashes_match_code_commit": "7315b32f08d8cb84c8e330a55c68045545d7898c",
+      "delivery_head": "bf319d6172d595140bf7ff86a67c589b1d5877b6",
+      "scope": "six author-controlled local GPU processes; artificial weights/static ModelRunner or direct operator, no stable gain/Engine/serving claim",
+      "retained_v0_19_costs_unchanged": true,
+      "all_clean_blocks": 294,
+      "paired_cycles": 120,
+      "note": "240 interleaved +54 isolated clean blocks; profiled/correctness windows separate; negative-case folders are deliberate invalid CPU inputs"
+    },
+    "manifests": {
+      "code": 29,
+      "evidence": 74
+    },
+    "source_inventory": {
+      "backend": 556,
+      "console": 68
+    },
+    "clean_blocks": 240,
+    "paired_cycles": 120,
+    "adverse_pairs": 33,
+    "gates": 18,
+    "independent_control_blocks": 54,
+    "ratios": [
+      {
+        "process": "paired-native-first",
+        "batch": 3,
+        "scope": "full",
+        "all_ratios": [
+          0.9545822733768667,
+          0.9877937086020793,
+          0.9783494478335877,
+          0.9759850047134955,
+          0.9688515624729855,
+          0.9768042159592822,
+          0.9481601272426072,
+          0.9771429769143788,
+          0.9685462377761602,
+          0.9561434215381159
+        ],
+        "median_paired_ratio": 0.9724182835932405,
+        "slower": 0
+      },
+      {
+        "process": "paired-native-first",
+        "batch": 3,
+        "scope": "bare_graph",
+        "all_ratios": [
+          0.9578567254466472,
+          0.9820719997283338,
+          0.9793637867233645,
+          0.9829105026808657,
+          0.9578601980197352,
+          0.4367219019926297,
+          1.0190642798314218,
+          2.0586830255587736,
+          0.9591324009238723,
+          0.9659674542385105
+        ],
+        "median_paired_ratio": 0.9726656204809375,
+        "slower": 2
+      },
+      {
+        "process": "paired-native-first",
+        "batch": 5,
+        "scope": "full",
+        "all_ratios": [
+          0.9835044931465127,
+          1.0193849323620525,
+          1.0048156023657226,
+          1.0005084514995284,
+          0.9482466300845,
+          0.7468967611128662,
+          0.9555522076319469,
+          0.943591111069588,
+          0.9811850737730661,
+          0.9364580177334162
+        ],
+        "median_paired_ratio": 0.9683686407025065,
+        "slower": 3
+      },
+      {
+        "process": "paired-native-first",
+        "batch": 5,
+        "scope": "bare_graph",
+        "all_ratios": [
+          1.0787174086041817,
+          0.9918617358598393,
+          0.9872051290993049,
+          0.9968274171002354,
+          0.9679293410827032,
+          0.927937417910891,
+          1.0061926418182483,
+          1.0262364824336212,
+          0.952088018136362,
+          1.0350095817191656
+        ],
+        "median_paired_ratio": 0.9943445764800374,
+        "slower": 4
+      },
+      {
+        "process": "paired-native-first",
+        "batch": 8,
+        "scope": "full",
+        "all_ratios": [
+          1.844378974553847,
+          0.9245586128595947,
+          0.956940539692905,
+          0.8765909985740661,
+          0.7892283050980747,
+          0.977585940411002,
+          1.6667138904915964,
+          1.3824078358336633,
+          1.223266246298685,
+          1.7398899904675407
+        ],
+        "median_paired_ratio": 1.1004260933548435,
+        "slower": 5
+      },
+      {
+        "process": "paired-native-first",
+        "batch": 8,
+        "scope": "bare_graph",
+        "all_ratios": [
+          4.934617465814093,
+          0.4782743962649875,
+          3.1251094772806294,
+          1.6929220885354854,
+          2.623902956440591,
+          0.6996482926508913,
+          1.1932157985912561,
+          0.8570487288555919,
+          0.500135074010985,
+          0.9713633757136345
+        ],
+        "median_paired_ratio": 1.0822895871524454,
+        "slower": 5
+      },
+      {
+        "process": "paired-mature-first",
+        "batch": 3,
+        "scope": "full",
+        "all_ratios": [
+          0.910062567581177,
+          1.036730039942731,
+          0.9302450182061799,
+          1.0157473629344624,
+          0.9714563613837776,
+          0.931066504239078,
+          0.9312778787787026,
+          0.9453129213537839,
+          0.9774119122656987,
+          0.2601867697040279
+        ],
+        "median_paired_ratio": 0.9382954000662432,
+        "slower": 2
+      },
+      {
+        "process": "paired-mature-first",
+        "batch": 3,
+        "scope": "bare_graph",
+        "all_ratios": [
+          5.611337229831636,
+          3.370126013058048,
+          0.2901330739700706,
+          1.8479283492868281,
+          0.9774246580175442,
+          0.9821066143606968,
+          0.9628017546095146,
+          0.9283949534706678,
+          0.9395032222742117,
+          0.8865220873733888
+        ],
+        "median_paired_ratio": 0.9701132063135294,
+        "slower": 3
+      },
+      {
+        "process": "paired-mature-first",
+        "batch": 5,
+        "scope": "full",
+        "all_ratios": [
+          0.9826641724347973,
+          0.8971339513697436,
+          0.9528659442810191,
+          0.8914780333861871,
+          5.377517878355914,
+          0.29206041673662275,
+          2.702189836534236,
+          0.2903056990428138,
+          5.685536952140199,
+          0.5863981893390063
+        ],
+        "median_paired_ratio": 0.9249999478253814,
+        "slower": 3
+      },
+      {
+        "process": "paired-mature-first",
+        "batch": 5,
+        "scope": "bare_graph",
+        "all_ratios": [
+          0.9763024140185892,
+          0.9508044273854668,
+          0.8954169463140681,
+          0.8725572580696185,
+          0.9130387513599544,
+          0.9495737698791614,
+          0.9141427312143388,
+          0.8683495071675906,
+          0.9660585294232811,
+          0.8669860390810281
+        ],
+        "median_paired_ratio": 0.9135907412871466,
+        "slower": 0
+      },
+      {
+        "process": "paired-mature-first",
+        "batch": 8,
+        "scope": "full",
+        "all_ratios": [
+          1.0039437276666954,
+          0.9485798597855434,
+          6.025675766965044,
+          0.28527801074208503,
+          1.0040373367727116,
+          3.358721666601827,
+          0.44145150465010546,
+          0.9674678830116594,
+          0.9733619404203183,
+          0.9642552788444193
+        ],
+        "median_paired_ratio": 0.9704149117159888,
+        "slower": 4
+      },
+      {
+        "process": "paired-mature-first",
+        "batch": 8,
+        "scope": "bare_graph",
+        "all_ratios": [
+          0.972643680433396,
+          0.9142265516173379,
+          0.9709946360229064,
+          0.9663639135357651,
+          0.9943963245343131,
+          0.9546603388681133,
+          1.027890067520426,
+          0.9211716036026909,
+          0.2757939724821462,
+          3.315980614802753
+        ],
+        "median_paired_ratio": 0.9686792747793358,
+        "slower": 2
+      }
+    ],
+    "analyzer_commands": [
+      {
+        "input": "wb-input\\evidence",
+        "exit_code": 0,
+        "stdout": "{\"coverage\": {\"paired_blocks\": 240, \"paired_cycles\": 120, \"paired_state_gates\": 18, \"isolated_blocks\": 54}, \"adverse_pairs\": 33, \"stable_gain_established\": false}\n",
+        "stderr": "",
+        "report_exists": true
+      },
+      {
+        "input": "wb-summary-final\\negative-missing",
+        "exit_code": 1,
+        "stdout": "",
+        "stderr": "Traceback (most recent call last):\n  File \"C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-10-555c69ac1872\\workdir\\wb-source\\tools\\perf\\operators\\local_gpu\\analyze_kv_window_b.py\", line 90, in <module>\n    raise SystemExit(main())\n                     ~~~~^^\n  File \"C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-10-555c69ac1872\\workdir\\wb-source\\tools\\perf\\operators\\local_gpu\\analyze_kv_window_b.py\", line 30, in main\n    if len(d[\"blocks\"])!=120:raise ValueError(\"incomplete blocks\")\n                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: incomplete blocks\n",
+        "report_exists": false
+      },
+      {
+        "input": "wb-summary-final\\negative-nan",
+        "exit_code": 1,
+        "stdout": "",
+        "stderr": "Traceback (most recent call last):\n  File \"C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-10-555c69ac1872\\workdir\\wb-source\\tools\\perf\\operators\\local_gpu\\analyze_kv_window_b.py\", line 90, in <module>\n    raise SystemExit(main())\n                     ~~~~^^\n  File \"C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-10-555c69ac1872\\workdir\\wb-source\\tools\\perf\\operators\\local_gpu\\analyze_kv_window_b.py\", line 50, in main\n    raise ValueError(\"nonfinite/nonpositive measurement\")\nValueError: nonfinite/nonpositive measurement\n",
+        "report_exists": false
+      },
+      {
+        "input": "wb-summary-final\\negative-duplicate",
+        "exit_code": 1,
+        "stdout": "",
+        "stderr": "Traceback (most recent call last):\n  File \"C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-10-555c69ac1872\\workdir\\wb-source\\tools\\perf\\operators\\local_gpu\\analyze_kv_window_b.py\", line 90, in <module>\n    raise SystemExit(main())\n                     ~~~~^^\n  File \"C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-10-555c69ac1872\\workdir\\wb-source\\tools\\perf\\operators\\local_gpu\\analyze_kv_window_b.py\", line 42, in main\n    if set(pair)!={\"native\",\"mature\"}:raise ValueError(\"pair identities missing\")\n                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: pair identities missing\n",
+        "report_exists": false
+      },
+      {
+        "input": "wb-summary-final\\negative-profile",
+        "exit_code": 1,
+        "stdout": "",
+        "stderr": "Traceback (most recent call last):\n  File \"C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-10-555c69ac1872\\workdir\\wb-source\\tools\\perf\\operators\\local_gpu\\analyze_kv_window_b.py\", line 90, in <module>\n    raise SystemExit(main())\n                     ~~~~^^\n  File \"C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-10-555c69ac1872\\workdir\\wb-source\\tools\\perf\\operators\\local_gpu\\analyze_kv_window_b.py\", line 29, in main\n    raise ValueError(\"missing successful paired gates\")\nValueError: missing successful paired gates\n",
+        "report_exists": false
+      }
+    ],
+    "new_pure_graph": [
+      {
+        "region": "windowB/full/native",
+        "pure_graph": 364,
+        "region_total": 0,
+        "outside_graph": -364,
+        "correlation": 187
+      },
+      {
+        "region": "windowB/bare/native",
+        "pure_graph": 364,
+        "region_total": 0,
+        "outside_graph": -364,
+        "correlation": 388
+      },
+      {
+        "region": "windowB/full/mature",
+        "pure_graph": 334,
+        "region_total": 21,
+        "outside_graph": -313,
+        "correlation": 582
+      },
+      {
+        "region": "windowB/bare/mature",
+        "pure_graph": 334,
+        "region_total": 0,
+        "outside_graph": -334,
+        "correlation": 783
+      }
+    ],
+    "old_region_correction": [
+      {
+        "region": "framework/bs3/step0/graph",
+        "pure_graph": 364,
+        "region_total": 378,
+        "outside_graph": 14,
+        "correlation": 17891
+      },
+      {
+        "region": "framework/bs3/step1/graph",
+        "pure_graph": 364,
+        "region_total": 378,
+        "outside_graph": 14,
+        "correlation": 23120
+      },
+      {
+        "region": "framework/bs3/step0/graph",
+        "pure_graph": 334,
+        "region_total": 348,
+        "outside_graph": 14,
+        "correlation": 16343
+      },
+      {
+        "region": "framework/bs3/step1/graph",
+        "pure_graph": 334,
+        "region_total": 348,
+        "outside_graph": 14,
+        "correlation": 21092
+      }
+    ],
+    "stable_gain_established": false,
+    "drift_cause": "unknown",
+    "GPU_cost_rerun": false
+  },
+  "GPU": {
+    "pid": 365,
+    "status": "passed",
+    "cases": [
+      {
+        "batch": 3,
+        "nondefault": false,
+        "locations": [
+          11,
+          14,
+          17
+        ],
+        "positions": [
+          0,
+          127,
+          5
+        ],
+        "Q_stride": [
+          960,
+          1
+        ],
+        "K_stride": [
+          960,
+          1
+        ],
+        "Q_alias": true,
+        "K_alias": true,
+        "K_input_unchanged": false,
+        "K_matches_separate": true,
+        "V_bitwise_unchanged": true,
+        "non_target_slots_unchanged": true,
+        "CPU_FP64_passed": true,
+        "separate_bitwise": true
+      },
+      {
+        "batch": 3,
+        "nondefault": true,
+        "locations": [
+          75,
+          78,
+          81
+        ],
+        "positions": [
+          0,
+          127,
+          5
+        ],
+        "Q_stride": [
+          960,
+          1
+        ],
+        "K_stride": [
+          960,
+          1
+        ],
+        "Q_alias": true,
+        "K_alias": true,
+        "K_input_unchanged": false,
+        "K_matches_separate": true,
+        "V_bitwise_unchanged": true,
+        "non_target_slots_unchanged": true,
+        "CPU_FP64_passed": true,
+        "separate_bitwise": true
+      },
+      {
+        "batch": 5,
+        "nondefault": false,
+        "locations": [
+          11,
+          14,
+          17,
+          20,
+          23
+        ],
+        "positions": [
+          0,
+          127,
+          5,
+          63,
+          1
+        ],
+        "Q_stride": [
+          960,
+          1
+        ],
+        "K_stride": [
+          960,
+          1
+        ],
+        "Q_alias": true,
+        "K_alias": true,
+        "K_input_unchanged": false,
+        "K_matches_separate": true,
+        "V_bitwise_unchanged": true,
+        "non_target_slots_unchanged": true,
+        "CPU_FP64_passed": true,
+        "separate_bitwise": true
+      },
+      {
+        "batch": 5,
+        "nondefault": true,
+        "locations": [
+          75,
+          78,
+          81,
+          84,
+          87
+        ],
+        "positions": [
+          0,
+          127,
+          5,
+          63,
+          1
+        ],
+        "Q_stride": [
+          960,
+          1
+        ],
+        "K_stride": [
+          960,
+          1
+        ],
+        "Q_alias": true,
+        "K_alias": true,
+        "K_input_unchanged": false,
+        "K_matches_separate": true,
+        "V_bitwise_unchanged": true,
+        "non_target_slots_unchanged": true,
+        "CPU_FP64_passed": true,
+        "separate_bitwise": true
+      },
+      {
+        "batch": 8,
+        "nondefault": false,
+        "locations": [
+          11,
+          14,
+          17,
+          20,
+          23,
+          26,
+          29,
+          32
+        ],
+        "positions": [
+          0,
+          127,
+          5,
+          63,
+          1,
+          126,
+          64,
+          2
+        ],
+        "Q_stride": [
+          960,
+          1
+        ],
+        "K_stride": [
+          960,
+          1
+        ],
+        "Q_alias": true,
+        "K_alias": true,
+        "K_input_unchanged": false,
+        "K_matches_separate": true,
+        "V_bitwise_unchanged": true,
+        "non_target_slots_unchanged": true,
+        "CPU_FP64_passed": true,
+        "separate_bitwise": true
+      },
+      {
+        "batch": 8,
+        "nondefault": true,
+        "locations": [
+          75,
+          78,
+          81,
+          84,
+          87,
+          90,
+          93,
+          96
+        ],
+        "positions": [
+          0,
+          127,
+          5,
+          63,
+          1,
+          126,
+          64,
+          2
+        ],
+        "Q_stride": [
+          960,
+          1
+        ],
+        "K_stride": [
+          960,
+          1
+        ],
+        "Q_alias": true,
+        "K_alias": true,
+        "K_input_unchanged": false,
+        "K_matches_separate": true,
+        "V_bitwise_unchanged": true,
+        "non_target_slots_unchanged": true,
+        "CPU_FP64_passed": true,
+        "separate_bitwise": true
+      }
+    ],
+    "elapsed_s": 2.1129002571105957,
+    "torch": "2.8.0+cu128",
+    "cuda": "12.8",
+    "sgl_kernel": "0.3.9.post2",
+    "source_sha256": "7b65c21239308d8a926c22d2e325f5592f06138fc223f3aa3f701507c3cb1ccd",
+    "caller_integrated": false,
+    "save_false_tested": false,
+    "performance_claim": false
+  }
+}
