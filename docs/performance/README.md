@@ -1,5 +1,7 @@
 # MaaS 性能与框架工程手册
 
+文献接续：[原始资料索引](literature/README.md)与[第21章：从原文到实验](engineering/21-literature-to-experiments.md)。16来源、四关键章节笔记、三张待实现/执行实验卡；不新增GPU成本。
+
 最新实操：[窗口B成本漂移与RoPE+KV语义](engineering/20-window-b-cost-drift.md)。240块交错数据与33个不利配对完整保留，稳定收益未成立。
 
 当前接线进展：[第19章成熟KV原生图接线](engineering/19-native-kv-integration.md)。capture前安装已由实际图确认，晚接入负控只改变eager；24份跨变体完整logits逐位相同。干净调用成本有显著状态漂移，未建立稳定收益。

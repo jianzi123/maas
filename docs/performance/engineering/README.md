@@ -1,5 +1,7 @@
 # 推理框架工程实现卷
 
+文献接续：[第21章](21-literature-to-experiments.md)，把四篇关键阅读接到固定源码、已有负结果和可否证卡；[原文索引](../literature/README.md)单列硬件/版本边界。
+
 最新：[第20章窗口B成本漂移](20-window-b-cost-drift.md)，包含同进程交错、裸图定位、全部负结果和固定版RoPE+KV语义。
 
 最新：[第19章成熟KV原生图接线](19-native-kv-integration.md)，含capture前接线、晚绑定负控、完整输出和去观测成本研究。

@@ -1,0 +1,26 @@
+{
+  "scope": "CPU mathematical hand-check, no timing or GPU/paper reproduction",
+  "existing_reference_sha256": "a6b24122d115cdd3e7d8e76a408163092dc5355e9b6705be84f2165e1d6705fe",
+  "scores": [
+    0,
+    0.6931471805599453,
+    1.791759469228055
+  ],
+  "merged": [
+    0.7777777777777778,
+    0.888888888888889
+  ],
+  "expected": [
+    0.7777777777777778,
+    0.8888888888888888
+  ],
+  "naive_equal_block_average": [
+    0.6666666666666666,
+    0.8333333333333333
+  ],
+  "max_abs_error": 1.1102230246251565e-16,
+  "hypothetical_flashinfer_partial_output_elements": 42120,
+  "hypothetical_FP32_partial_output_bytes": 168480,
+  "triton_modelrunner_B8_H9_split8_D64_scratch_bytes": 149760,
+  "scratch_note": "different algorithms/assumptions; not total workspace or observed speedup"
+}

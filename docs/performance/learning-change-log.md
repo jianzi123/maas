@@ -1,5 +1,9 @@
 # 学习手册修订记录
 
+## 文献接续 v0.21
+
+本批16项原始来源和Torch2.8辅助语义源接入；四项关键章节精读，15处源码符号/7份官方文件核对，三张可否证卡仍design_only。补算术强度、图地址/DAG、带尺度归并及workspace手算，保留窗口B漂移unknown与旧QA范围；本轮GPU0次、没有权重下载。见[第21章](engineering/21-literature-to-experiments.md)。
+
 ## 窗口B v0.20：漂移保留与定位
 
 同模型双backend/独立原生图交错240块、两原入口进程54块完成；33/120配对成熟路径更慢，裸图也有长事件/等待，原因未知、稳定收益未成立。correlation核纯图364→334，修正区域378→348的简称；六格直接库RoPE+KV语义通过，尚未进入Llama caller。旧六份JSON与QA cf8cf1c范围保留，见[第20章](engineering/20-window-b-cost-drift.md)。
