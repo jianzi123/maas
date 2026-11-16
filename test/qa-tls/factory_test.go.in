@@ -1,0 +1,367 @@
+package kernel
+
+import (
+	"context"
+	"crypto/ecdsa"
+	"crypto/elliptic"
+	"crypto/rand"
+	"crypto/tls"
+	"crypto/x509"
+	"crypto/x509/pkix"
+	"encoding/pem"
+	"io"
+	"log"
+	"math/big"
+	"net"
+	"net/http"
+	"net/http/httptest"
+	"net/http/httptrace"
+	"os"
+	"path/filepath"
+	"strings"
+	"sync"
+	"sync/atomic"
+	"testing"
+	"time"
+)
+
+func TestQATLSFactory(t *testing.T) {
+	dir := t.TempDir()
+	key, _ := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)
+	now := time.Now()
+	ca := &x509.Certificate{SerialNumber: big.NewInt(1), Subject: pkix.Name{CommonName: "qa-controlled-ca"}, NotBefore: now.Add(-time.Hour), NotAfter: now.Add(time.Hour), IsCA: true, BasicConstraintsValid: true, KeyUsage: x509.KeyUsageCertSign}
+	der, e := x509.CreateCertificate(rand.Reader, ca, ca, &key.PublicKey, key)
+	if e != nil {
+		t.Fatal(e)
+	}
+	caPEM := pem.EncodeToMemory(&pem.Block{Type: "CERTIFICATE", Bytes: der})
+	serial := int64(10)
+	issue := func(usage x509.ExtKeyUsage, mode string) ([]byte, []byte) {
+		t.Helper()
+		serial++
+		k, _ := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)
+		leaf := &x509.Certificate{SerialNumber: big.NewInt(serial), NotBefore: ca.NotBefore, NotAfter: ca.NotAfter, KeyUsage: x509.KeyUsageDigitalSignature, ExtKeyUsage: []x509.ExtKeyUsage{usage}, IPAddresses: []net.IP{net.ParseIP("127.0.0.1")}}
+		if mode == "expired" {
+			leaf.NotBefore = now.Add(-2 * time.Hour)
+			leaf.NotAfter = now.Add(-time.Hour)
+		}
+		if mode == "future" {
+			leaf.NotBefore = now.Add(time.Hour)
+			leaf.NotAfter = now.Add(2 * time.Hour)
+		}
+		if mode == "wrong_name" {
+			leaf.IPAddresses = []net.IP{net.ParseIP("127.0.0.2")}
+		}
+		d, e := x509.CreateCertificate(rand.Reader, leaf, ca, &k.PublicKey, key)
+		if e != nil {
+			t.Fatal(e)
+		}
+		p, _ := x509.MarshalECPrivateKey(k)
+		return pem.EncodeToMemory(&pem.Block{Type: "CERTIFICATE", Bytes: d}), pem.EncodeToMemory(&pem.Block{Type: "EC PRIVATE KEY", Bytes: p})
+	}
+	write := func(name string, b []byte) string {
+		p := filepath.Join(dir, name)
+		if e := os.WriteFile(p, b, 0600); e != nil {
+			t.Fatal(e)
+		}
+		return p
+	}
+	sc, sk := issue(x509.ExtKeyUsageServerAuth, "")
+	cc, ck := issue(x509.ExtKeyUsageClientAuth, "")
+	expired, ek := issue(x509.ExtKeyUsageClientAuth, "expired")
+	future, fk := issue(x509.ExtKeyUsageClientAuth, "future")
+	wrongName, wk := issue(x509.ExtKeyUsageServerAuth, "wrong_name")
+	pool := x509.NewCertPool()
+	pool.AppendCertsFromPEM(caPEM)
+	var calls, escaped atomic.Int64
+	released := make(chan struct{})
+	var releaseOnce sync.Once
+	server := httptest.NewUnstartedServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		calls.Add(1)
+		if len(r.TLS.VerifiedChains) == 0 || len(r.TLS.PeerCertificates) == 0 {
+			t.Error("mTLS peer not verified")
+		}
+		switch r.URL.Path {
+		case "/slow":
+			time.Sleep(300 * time.Millisecond)
+		case "/stream":
+			w.Header().Set("Content-Type", "text/event-stream")
+			io.WriteString(w, "data: first\n\n")
+			w.(http.Flusher).Flush()
+			time.Sleep(250 * time.Millisecond)
+			io.WriteString(w, "data: last\n\n")
+			return
+		case "/cancel":
+			io.WriteString(w, "data: start\n\n")
+			w.(http.Flusher).Flush()
+			<-r.Context().Done()
+			return
+		case "/active":
+			io.WriteString(w, "data: open\n\n")
+			w.(http.Flusher).Flush()
+			select {
+			case <-released:
+			case <-r.Context().Done():
+				return
+			}
+			io.WriteString(w, "data: completed\n\n")
+			return
+		}
+		io.WriteString(w, "qa-component")
+	}))
+	pair, _ := tls.X509KeyPair(sc, sk)
+	server.TLS = &tls.Config{Certificates: []tls.Certificate{pair}, ClientAuth: tls.RequireAndVerifyClientCert, ClientCAs: pool, MinVersion: tls.VersionTLS12}
+	server.Config.ErrorLog = log.New(io.Discard, "", 0)
+	server.StartTLS()
+	defer server.Close()
+	config := RelayTLSFiles{Endpoint: server.URL, CAFile: write("ca", caPEM), CertificateFile: write("client", cc), KeyFile: write("key", ck), DialTimeout: time.Second, HeaderTimeout: time.Second, MaxBytes: 4096, MaxLine: 1024}
+	open := func(t *testing.T, c RelayTLSFiles) *Relay {
+		t.Helper()
+		r, e := OpenRelayTLS(&Store{}, c)
+		if e != nil {
+			t.Fatal("factory unexpectedly rejected valid fixture")
+		}
+		t.Cleanup(r.Close)
+		return r
+	}
+	t.Run("verified_mtls_and_fixed_transport", func(t *testing.T) {
+		r := open(t, config)
+		tr := r.client.Transport.(*http.Transport)
+		if tr.Proxy != nil || tr.TLSClientConfig.InsecureSkipVerify || tr.TLSClientConfig.MinVersion < tls.VersionTLS12 || r.endpoint != server.URL || r.maxBytes != 4096 || r.maxLine != 1024 {
+			t.Fatal("transport config changed")
+		}
+		res, e := r.client.Get(server.URL)
+		if e != nil {
+			t.Fatal(e)
+		}
+		defer res.Body.Close()
+		if res.StatusCode != 200 {
+			t.Fatal(res.StatusCode)
+		}
+	})
+	t.Run("continuous_sse_outlives_header_deadline", func(t *testing.T) {
+		c := config
+		c.HeaderTimeout = 100 * time.Millisecond
+		r := open(t, c)
+		res, e := r.client.Get(server.URL + "/stream")
+		if e != nil {
+			t.Fatal(e)
+		}
+		defer res.Body.Close()
+		b, e := io.ReadAll(res.Body)
+		if e != nil || string(b) != "data: first\n\ndata: last\n\n" {
+			t.Fatal("body treated as header deadline")
+		}
+	})
+	t.Run("header_wait_times_out", func(t *testing.T) {
+		c := config
+		c.HeaderTimeout = 70 * time.Millisecond
+		r := open(t, c)
+		res, e := r.client.Get(server.URL + "/slow")
+		if res != nil {
+			res.Body.Close()
+		}
+		if e == nil {
+			t.Fatal("missing header timeout")
+		}
+	})
+	t.Run("pre_cancel_zero_dial_zero_write", func(t *testing.T) {
+		r := open(t, config)
+		tr := r.client.Transport.(*http.Transport)
+		dial := tr.DialContext
+		var d, w atomic.Int64
+		tr.DialContext = func(ctx context.Context, n, a string) (net.Conn, error) { d.Add(1); return dial(ctx, n, a) }
+		ctx, cancel := context.WithCancel(context.Background())
+		cancel()
+		ctx = httptrace.WithClientTrace(ctx, &httptrace.ClientTrace{WroteRequest: func(httptrace.WroteRequestInfo) { w.Add(1) }})
+		before := calls.Load()
+		req, _ := http.NewRequestWithContext(ctx, "POST", server.URL, nil)
+		res, e := r.client.Do(req)
+		if res != nil {
+			res.Body.Close()
+		}
+		if e == nil || d.Load() != 0 || w.Load() != 0 || calls.Load() != before {
+			t.Fatal("pre-cancel sent traffic")
+		}
+	})
+	t.Run("cancel_active_body_propagates", func(t *testing.T) {
+		r := open(t, config)
+		ctx, cancel := context.WithCancel(context.Background())
+		defer cancel()
+		req, _ := http.NewRequestWithContext(ctx, "GET", server.URL+"/cancel", nil)
+		res, e := r.client.Do(req)
+		if e != nil {
+			t.Fatal(e)
+		}
+		defer res.Body.Close()
+		cancel()
+		_, e = io.ReadAll(res.Body)
+		if e == nil {
+			t.Fatal("body cancellation ignored")
+		}
+	})
+	t.Run("close_preserves_active_stream", func(t *testing.T) {
+		defer releaseOnce.Do(func() { close(released) })
+		r := open(t, config)
+		res, e := r.client.Get(server.URL + "/active")
+		if e != nil {
+			t.Fatal(e)
+		}
+		defer res.Body.Close()
+		r.Close()
+		releaseOnce.Do(func() { close(released) })
+		b, e := io.ReadAll(res.Body)
+		if e != nil || string(b) != "data: open\n\ndata: completed\n\n" {
+			t.Fatal("Close cancelled active connection")
+		}
+	})
+	proxy := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) { escaped.Add(1) }))
+	defer proxy.Close()
+	t.Run("environment_proxy_disabled", func(t *testing.T) {
+		t.Setenv("HTTPS_PROXY", proxy.URL)
+		t.Setenv("ALL_PROXY", proxy.URL)
+		r := open(t, config)
+		if r.client.Transport.(*http.Transport).Proxy != nil {
+			t.Fatal("environment proxy enabled")
+		}
+		res, e := r.client.Get(server.URL)
+		if e != nil {
+			t.Fatal(e)
+		}
+		res.Body.Close()
+		if escaped.Load() != 0 {
+			t.Fatal("proxy used")
+		}
+	})
+	for _, status := range []int{301, 302, 303, 307, 308} {
+		t.Run("redirect_"+http.StatusText(status), func(t *testing.T) {
+			redirect := httptest.NewUnstartedServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) { http.Redirect(w, r, proxy.URL, status) }))
+			redirect.TLS = server.TLS.Clone()
+			redirect.Config.ErrorLog = log.New(io.Discard, "", 0)
+			redirect.StartTLS()
+			defer redirect.Close()
+			c := config
+			c.Endpoint = redirect.URL
+			r := open(t, c)
+			before := escaped.Load()
+			res, e := r.client.Get(redirect.URL)
+			if e != nil {
+				t.Fatal(e)
+			}
+			res.Body.Close()
+			if res.StatusCode != status || escaped.Load() != before {
+				t.Fatal("redirect followed")
+			}
+		})
+	}
+	t.Run("trusted_chain_wrong_server_name_rejected", func(t *testing.T) {
+		bad := httptest.NewUnstartedServer(http.HandlerFunc(func(http.ResponseWriter, *http.Request) { t.Error("bad SAN handler reached") }))
+		p, _ := tls.X509KeyPair(wrongName, wk)
+		bad.TLS = &tls.Config{Certificates: []tls.Certificate{p}}
+		bad.Config.ErrorLog = log.New(io.Discard, "", 0)
+		bad.StartTLS()
+		defer bad.Close()
+		c := config
+		c.Endpoint = bad.URL
+		r := open(t, c)
+		res, e := r.client.Get(bad.URL)
+		if res != nil {
+			res.Body.Close()
+		}
+		if e == nil {
+			t.Fatal("wrong SAN accepted")
+		}
+	})
+	t.Run("untrusted_server_rejected", func(t *testing.T) {
+		bad := httptest.NewTLSServer(http.HandlerFunc(func(http.ResponseWriter, *http.Request) { t.Error("untrusted handler reached") }))
+		bad.Config.ErrorLog = log.New(io.Discard, "", 0)
+		defer bad.Close()
+		c := config
+		c.Endpoint = bad.URL
+		r := open(t, c)
+		res, e := r.client.Get(bad.URL)
+		if res != nil {
+			res.Body.Close()
+		}
+		if e == nil {
+			t.Fatal("wrong chain accepted")
+		}
+	})
+	t.Run("client_wrong_eku_rejected_by_peer", func(t *testing.T) {
+		c := config
+		c.CertificateFile = write("server-as-client", sc)
+		c.KeyFile = write("server-as-client-key", sk)
+		r := open(t, c)
+		before := calls.Load()
+		res, e := r.client.Get(server.URL)
+		if res != nil {
+			res.Body.Close()
+		}
+		if e == nil || calls.Load() != before {
+			t.Fatal("wrong EKU reached peer handler")
+		}
+	})
+	for _, mode := range []string{"expired", "future", "missing_ca", "missing_cert", "missing_key", "empty_ca", "big_ca", "bad_ca", "wrong_pair", "http", "user_info", "query", "fragment", "path", "zero_dial", "long_dial", "zero_header", "long_header", "zero_bytes", "large_bytes", "zero_line", "large_line", "nil_core"} {
+		t.Run("config/"+mode, func(t *testing.T) {
+			c := config
+			core := &Store{}
+			switch mode {
+			case "expired":
+				c.CertificateFile = write("expired", expired)
+				c.KeyFile = write("expired-key", ek)
+			case "future":
+				c.CertificateFile = write("future", future)
+				c.KeyFile = write("future-key", fk)
+			case "missing_ca":
+				c.CAFile = ""
+			case "missing_cert":
+				c.CertificateFile = ""
+			case "missing_key":
+				c.KeyFile = filepath.Join(dir, "QA_PRIVATE_PATH_MARKER")
+			case "empty_ca":
+				c.CAFile = write("empty", nil)
+			case "big_ca":
+				c.CAFile = write("big", append(append([]byte{},caPEM...),[]byte(strings.Repeat(" ",65537-len(caPEM)))...))
+			case "bad_ca":
+				c.CAFile = write("bad", []byte("QA_PRIVATE_PEM_MARKER"))
+			case "wrong_pair":
+				c.KeyFile = write("wrong", sk)
+			case "http":
+				c.Endpoint = "http://127.0.0.1"
+			case "user_info":
+				c.Endpoint = "https://QA_PRIVATE_USER@127.0.0.1"
+			case "query":
+				c.Endpoint += "?private=QA_PRIVATE_QUERY"
+			case "fragment":
+				c.Endpoint += "#private"
+			case "path":
+				c.Endpoint += "/other"
+			case "zero_dial":
+				c.DialTimeout = 0
+			case "long_dial":
+				c.DialTimeout = time.Minute + 1
+			case "zero_header":
+				c.HeaderTimeout = 0
+			case "long_header":
+				c.HeaderTimeout = time.Minute + 1
+			case "zero_bytes":
+				c.MaxBytes = 0
+			case "large_bytes":
+				c.MaxBytes = (16 << 20) + 1
+			case "zero_line":
+				c.MaxLine = 0
+			case "large_line":
+				c.MaxLine = (1 << 20) + 1
+			case "nil_core":
+				core = nil
+			}
+			r, e := OpenRelayTLS(core, c)
+			if r != nil {
+				r.Close()
+			}
+			if e != ErrUnavailable || r != nil || strings.Contains(e.Error(), "QA_PRIVATE") {
+				t.Fatal("configuration not sanitized/fail closed")
+			}
+		})
+	}
+}
