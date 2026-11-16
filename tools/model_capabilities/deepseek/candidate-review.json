@@ -1,0 +1,83 @@
+{
+  "version": "0.7",
+  "provider": "DeepSeek",
+  "source_type": "ExternalAPI",
+  "scope": "MAAS-18 single-model text Chat proposal",
+  "state": "pending_joint_review_and_member_input",
+  "execution_enabled": false,
+  "proposed_model_alias": "deepseek-flash",
+  "proposed_mode": "non-thinking",
+  "proposed_site_base_url": "https://api.deepseek.com",
+  "proposed_path": "/chat/completions",
+  "public_model_alias": null,
+  "fixed_source_id": null,
+  "approved_model": null,
+  "approved_site": null,
+  "profile_revision": null,
+  "adapter_revision": null,
+  "credential_channel_ref": null,
+  "approved_spend_ref": null,
+  "bound_verified": false,
+  "input_upper_tokens": null,
+  "output_upper_tokens": null,
+  "price_snapshot": null,
+  "document_facts": {
+    "model_alias": "deepseek-flash",
+    "version_label": "DeepSeek-V4.1-Flash-1017",
+    "context_window_tokens": 1048576,
+    "max_generated_tokens": 393216,
+    "immutable_service_commit": null,
+    "thinking_default": "enabled",
+    "cache_aliases": [
+      "prompt_cache_hit_tokens",
+      "prompt_tokens_details.cached_tokens"
+    ],
+    "pricing_has_peak_and_off_peak": true,
+    "currency_and_unit_are_not_approved": true
+  },
+  "public_request_fields": [
+    "model",
+    "messages",
+    "stream",
+    "max_tokens",
+    "temperature"
+  ],
+  "trusted_adapter_only": {
+    "thinking": {
+      "type": "disabled"
+    },
+    "stream_options": {
+      "include_usage": true
+    }
+  },
+  "source_profile_requirements": {
+    "usage_mode": "final_only_after_validated_source_finish",
+    "non_null_progress_usage": "reject_not_last_wins",
+    "stream_final_marker": "single choice non-content finish chunk with usage",
+    "completion_boundary": "finish + DONE + actual EOF/accepted termination within deadline; no cancellation/error",
+    "second_finish_in_same_wire": "reject_even_if_counts_equal",
+    "post_DONE_data_in_same_wire": "reject_before_success_commit",
+    "late_after_committed_terminal": "audit_only_separate_path"
+  },
+  "timeouts_ms": {
+    "first_content": null,
+    "idle_content": null,
+    "total": null,
+    "post_final_drain": null
+  },
+  "invalidation": [
+    "model/version or response fingerprint change",
+    "endpoint/source/profile/mode drift",
+    "expired price or UTC rate period changed",
+    "usage aliases/subsets inconsistent",
+    "unrecognized billed server tool usage",
+    "bound exceeded or termination observer missing",
+    "credential/approval expiry"
+  ],
+  "real_cancel_guarantees": {
+    "action_target_ms": 2000,
+    "supplier_execution_stop_verified": false,
+    "supplier_capacity_recovery_evidence": null,
+    "slot_and_budget_release_are_independent": true
+  }
+}

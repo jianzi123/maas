@@ -4,3 +4,4 @@ experiments/*.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,c
 
 finality/*.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 finality/source-samples/* -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+deepseek/*.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

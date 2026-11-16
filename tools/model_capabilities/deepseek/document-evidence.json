@@ -1,0 +1,70 @@
+{
+  "version": "0.7",
+  "source_type": "official_document_snapshot_only",
+  "sources": [
+    {
+      "id": "chat",
+      "url": "https://api-docs.deepseek.com/api/create-chat-completion/",
+      "sha256": "019adea1e0389075255b29ab6eca9deff1e0e152d53c39a8738082ca777d6898",
+      "bytes": 143099,
+      "captured_at_utc": "2026-11-16T06:29:51.255073+00:00",
+      "evidence_kind": "official_document_snapshot_not_account_runtime",
+      "status": "captured"
+    },
+    {
+      "id": "models",
+      "url": "https://api-docs.deepseek.com/api/list-models/",
+      "sha256": "20964507b1db6613fd77ec7e0af468f62e74c0dba6fc68822be4e7485f1f643b",
+      "bytes": 38918,
+      "captured_at_utc": "2026-11-16T06:29:51.230160+00:00",
+      "evidence_kind": "official_document_snapshot_not_account_runtime",
+      "status": "captured"
+    },
+    {
+      "id": "pricing",
+      "url": "https://api-docs.deepseek.com/quick_start/pricing/",
+      "sha256": "5126b5f69e78f6dacb0a8bfc91e0cf0b705416b0b918b12e1f45f66b122e7741",
+      "bytes": 29133,
+      "captured_at_utc": "2026-11-16T06:29:51.200929+00:00",
+      "evidence_kind": "official_document_snapshot_not_account_runtime",
+      "status": "captured"
+    },
+    {
+      "id": "rate",
+      "url": "https://api-docs.deepseek.com/quick_start/rate_limit/",
+      "sha256": "c89146deebebc2f7c1ebb61f1486b2c7703bf01da55cdb98e4ea8cbc9e321c8a",
+      "bytes": 39565,
+      "captured_at_utc": "2026-11-16T06:29:51.200036+00:00",
+      "evidence_kind": "official_document_snapshot_not_account_runtime",
+      "status": "captured"
+    },
+    {
+      "id": "token_usage",
+      "url": "https://api-docs.deepseek.com/quick_start/token_usage/",
+      "status": "captured",
+      "sha256": "f1579ae754961692f25162e2c39ca5987f1130ba11e20d488a2afb0335573bbd",
+      "bytes": 25134,
+      "captured_at_utc": "2026-11-16T06:37:04.104633+00:00",
+      "evidence_kind": "official_document_snapshot_not_account_runtime"
+    },
+    {
+      "id": "thinking",
+      "url": "https://api-docs.deepseek.com/guides/thinking_mode/",
+      "status": "captured",
+      "sha256": "d62cab17e1380fecba85f046a52ec6c0e439f1a11f990adea44dc189cd5466da",
+      "bytes": 120749,
+      "captured_at_utc": "2026-11-16T06:37:04.991606+00:00",
+      "evidence_kind": "official_document_snapshot_not_account_runtime"
+    },
+    {
+      "id": "errors",
+      "url": "https://api-docs.deepseek.com/quick_start/error_codes/",
+      "sha256": "35682471252d8725b7f1aaa9e759db2cde7ace9bea16d47242a20a28cb86cd31",
+      "bytes": 24552,
+      "captured_at_utc": "2026-11-16T06:29:55.388367+00:00",
+      "evidence_kind": "official_document_snapshot_not_account_runtime",
+      "status": "captured"
+    }
+  ],
+  "model_account_queries_executed": 0
+}
