@@ -5,7 +5,7 @@ import type { S, D } from "../api/contracts";
 import { streamChat } from "../api/stream";
 import { lookupRequest } from "../api/recovery";
 import { display } from "../domain";
-import { explain } from "../ui";
+import { explain, statusLabel } from "../ui";
 const props = withDefaults(
   defineProps<{ initialModel?: string; inferenceAvailable?: boolean }>(),
   { inferenceAvailable: true },
@@ -16,6 +16,8 @@ const models = ref<S["AdminModel"][]>([]),
   key = ref(""),
   prompt = ref(""),
   maxTokens = ref<number | undefined>(),
+  submittedPrompt = ref(""),
+  showExample = ref(false),
   output = ref(""),
   state = ref("idle"),
   id = ref(""),
@@ -67,6 +69,7 @@ async function send() {
   lookupEpoch++;
   looking.value = false;
   controller = new AbortController();
+  submittedPrompt.value = prompt.value;
   state.value = "streaming";
   output.value = "";
   id.value = "";
@@ -135,7 +138,9 @@ onBeforeUnmount(() => {
       <h1>在线试用</h1>
       <p class="muted">通过统一调用入口进行流式试用。</p>
     </div>
-    <span class="badge">{{ state }}</span>
+    <span class="badge" :class="state === 'streaming' ? 'good' : ''">{{
+      statusLabel(state)
+    }}</span>
   </div>
   <div v-if="props.inferenceAvailable === false" class="notice">
     当前 Go 服务尚未开放推理入口。可先查看模型、创建 Key
@@ -145,8 +150,10 @@ onBeforeUnmount(() => {
       查看模型发布
     </button>
   </div>
-  <div class="split">
-    <form class="panel" @submit.prevent="send">
+  <form class="play-workspace" @submit.prevent="send">
+    <section class="panel invocation-settings">
+      <h2>调用设置</h2>
+      <p class="caption">选择模型与本次调用凭证</p>
       <label
         >模型<select v-model="model" required :disabled="state === 'streaming'">
           <option disabled value="">选择模型</option>
@@ -184,47 +191,93 @@ onBeforeUnmount(() => {
           min="1"
           :max="selected?.capabilities.verified_max_output_tokens ?? 4096"
           placeholder="使用服务端上限内默认值"
-          :disabled="state === 'streaming'" /></label
-      ><label
-        >消息<textarea
-          v-model="prompt"
-          required
-          maxlength="8192"
-          rows="6"
           :disabled="state === 'streaming'"
-          placeholder="输入一条消息…"
-        ></textarea>
-      </label>
-      <div class="actions">
-        <button
-          class="primary"
-          :disabled="
-            props.inferenceAvailable === false ||
-            state === 'streaming' ||
-            !prompt.trim() ||
-            !selected?.callable
-          "
-        >
-          发送请求</button
-        ><button
-          type="button"
-          class="danger"
-          :disabled="state !== 'streaming'"
-          @click="stop"
-        >
-          停止传输
-        </button>
+      /></label>
+      <div class="chips">
+        <span class="chip">{{
+          selected?.source_type === "external"
+            ? "外部 API"
+            : selected
+              ? "私有推理"
+              : "尚未选择来源"
+        }}</span
+        ><span class="chip">固定来源</span>
       </div>
-    </form>
-    <section class="panel answer">
-      <p class="eyebrow">RESPONSE</p>
-      <pre aria-live="polite">{{ output || "响应将在这里逐步显示。" }}</pre>
+      <button type="button" class="quiet" @click="showExample = !showExample">
+        查看请求示例
+      </button>
+      <pre v-if="showExample">
+POST /v1/chat/completions
+{ "model": "{{ model || "模型别名" }}", "messages": […], "stream": true }</pre>
+      <p class="caption">消费 Key 只用于本次试用；不会保存对话到浏览器存储。</p>
     </section>
-  </div>
+    <div class="conversation-column">
+      <section class="panel answer conversation-pane">
+        <div class="conversation-heading">
+          <span class="model-icon">◈</span>
+          <div>
+            <strong>{{ selected?.display_name || "开始一次模型试用" }}</strong>
+            <p class="caption">
+              {{
+                selected?.callable
+                  ? "模型已开放，实际准入以服务端为准"
+                  : "选择可调用模型后发送"
+              }}
+            </p>
+          </div>
+        </div>
+        <div v-if="submittedPrompt" class="message-bubble user-message">
+          <small>你</small>
+          <p>{{ submittedPrompt }}</p>
+        </div>
+        <div class="message-bubble assistant-message">
+          <small>模型回复</small>
+          <pre aria-live="polite">{{ output || "响应将在这里逐步显示。" }}</pre>
+        </div>
+      </section>
+      <div class="panel composer">
+        <label
+          >消息<textarea
+            v-model="prompt"
+            required
+            maxlength="8192"
+            rows="3"
+            :disabled="state === 'streaming'"
+            placeholder="输入一条消息…"
+          ></textarea>
+        </label>
+        <div class="actions">
+          <button
+            class="primary"
+            :disabled="
+              props.inferenceAvailable === false ||
+              state === 'streaming' ||
+              !prompt.trim() ||
+              !selected?.callable
+            "
+          >
+            发送请求</button
+          ><button
+            type="button"
+            class="danger"
+            :disabled="state !== 'streaming'"
+            @click="stop"
+          >
+            停止传输
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
   <p v-if="message" role="alert" class="notice">{{ message }}</p>
   <section class="panel">
-    <h2>本次请求证据</h2>
-    <p>传输状态：{{ state }} · 实际生成停止：未核验</p>
+    <h2>本次请求结果</h2>
+    <details>
+      <summary>技术状态代码</summary>
+      <code>{{ state }}</code>
+    </details>
+    <p class="caption">停止后继续核对原请求，传输结果与账务状态分别呈现。</p>
+    <p>传输状态：{{ statusLabel(state) }} · 实际生成停止：未核验</p>
     <p>
       原请求 ID：<code>{{ id || "尚未获取" }}</code>
     </p>
@@ -252,6 +305,7 @@ onBeforeUnmount(() => {
       <p>容量观察时间：{{ lookup.lookup.capacity.checked_at }}</p>
       <details>
         <summary>原请求预算与修订快照</summary>
+        <p>技术传输状态：{{ state }}</p>
         <pre>{{
           JSON.stringify(
             {

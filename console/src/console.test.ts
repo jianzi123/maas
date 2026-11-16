@@ -346,7 +346,10 @@ describe("component interaction", () => {
     await flushPromises();
     expect(w.text()).toContain("尚无模型");
     api.fetcher = async () => fixtureError("dependency_unavailable");
-    await w.find("button").trigger("click");
+    await w
+      .findAll("button")
+      .find((b) => b.text() === "刷新目录")!
+      .trigger("click");
     await flushPromises();
     expect(w.find('[role="alert"]').exists()).toBe(true);
     w.unmount();
