@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "scope": "installation-input-only-no-secret-values",
-  "sourceCommit": "e323c54ea43b80d8acc218b11b077e290e6fa5a4",
+  "sourceCommit": "23571a983304d5465021ec00813cc15fb3463ccc",
   "productionWiringVerified": false,
   "connections": {
     "core": {
@@ -133,10 +133,13 @@
         "config/mysql/controlapi-projections.sql",
         "console/docs/consumer-binding-fixes.md",
         "console/docs/review-recovery-fixes.md",
+        "console/docs/single-model-continuation.md",
         "console/docs/ui16-redesign.md",
         "console/scripts/consumer-binding-browser.mjs",
+        "console/scripts/local-control.mjs",
         "console/scripts/redesign-browser.mjs",
         "console/scripts/review-recovery-browser.mjs",
+        "console/scripts/single-model-browser.mjs",
         "console/src/App.vue",
         "console/src/api/client.ts",
         "console/src/api/stream.ts",
@@ -152,6 +155,8 @@
         "console/src/pages/Usage.vue",
         "console/src/redesign.test.ts",
         "console/src/review-recovery.test.ts",
+        "console/src/single-model-mode.test.ts",
+        "console/src/single-model-replay.test.ts",
         "console/src/style.css",
         "console/src/ui.ts",
         "console/src/usage-exact-interleaving.test.ts",
