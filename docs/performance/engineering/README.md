@@ -1,5 +1,15 @@
 # 推理框架工程实现卷
 
+最新：[第23章单模型客户端采集与原件门禁修复](23-single-model-capture.md)。自有HTTP验证不是模型收益，真实Go/Higress链路仍待原角色接通。
+
+最新：[第22章](22-cadence-policy-pilot.md)，真实三策略入口/冻结分母/首批/匹配失败保留；不是文献新增摘要。
+
+文献接续：[第21章](21-literature-to-experiments.md)，把四篇关键阅读接到固定源码、已有负结果和可否证卡；[原文索引](../literature/README.md)单列硬件/版本边界。
+
+最新：[第20章窗口B成本漂移](20-window-b-cost-drift.md)，包含同进程交错、裸图定位、全部负结果和固定版RoPE+KV语义。
+
+最新：[第19章成熟KV原生图接线](19-native-kv-integration.md)，含capture前接线、晚绑定负控、完整输出和去观测成本研究。
+
 最新接续：[第18章原生ModelRunner与图重放](18-native-modelrunner-graphs.md)，使用人工权重、真实原生Req/ScheduleBatch/ForwardBatch和CudaGraphRunner，记录padding/stream/回收与成熟op实际命中。
 
 本轮接续见[第17章：cap6空CTA假设的GPU验证](17-cap6-empty-cta.md)：同分段切片、实际grid、配对结果与不能全局推广的边界。
@@ -36,6 +46,7 @@
 | [16 SGLang Decode/KV](16-sglang-decode-kv.md) | 实际后端/索引/两阶段核、split与KV融合GPU对照 | local_gpu/decode_path与run_kv_fusion |
 | [17 cap6切片验证](17-cap6-empty-cta.md) | 同分段/负对照、实际CTA grid、配对GPU数据 | local_gpu/run_split_cap6 |
 | [18 原生ModelRunner](18-native-modelrunner-graphs.md) | dummy人工权重、真实捕获/重放、padding/成熟caller | local_gpu/run_framework_dummy |
+| [19 成熟KV接线](19-native-kv-integration.md) | 真正入图、晚绑定负控、跨变体与干净调用成本 | native_kv_binding / run_native_kv_integration / bench_native_kv |
 
 ## 直接运行
 

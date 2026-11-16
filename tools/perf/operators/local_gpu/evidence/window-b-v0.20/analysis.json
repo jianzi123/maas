@@ -1,0 +1,1201 @@
+{
+  "scope": "author Window B; artificial weights/static native ForwardBatch",
+  "paired_processes": [
+    {
+      "pid": 382,
+      "capture_first": "native",
+      "initialization": [
+        {
+          "variant": "native",
+          "seconds": 7.285784397999997,
+          "scope": "model load + native graph capture"
+        },
+        {
+          "variant": "mature",
+          "seconds": 0.7880278009999984,
+          "scope": "new backend + separate native graph capture; same model/KV"
+        }
+      ],
+      "peak_torch_bytes": 317785600,
+      "environment": {
+        "CUDA_LAUNCH_BLOCKING": null,
+        "CUDA_MODULE_LOADING": "AUTO",
+        "CUDA_DEVICE_MAX_CONNECTIONS": "4",
+        "OMP_NUM_THREADS": null,
+        "MKL_NUM_THREADS": null,
+        "LD_PRELOAD": null,
+        "PYTORCH_CUDA_ALLOC_CONF": null
+      },
+      "versions": {
+        "torch": "2.8.0",
+        "triton": "3.4.0",
+        "sglang": "0.5.2",
+        "sgl-kernel": "0.3.9.post2"
+      },
+      "graph_state": {
+        "native": {
+          "sizes": [
+            1,
+            2,
+            4,
+            8
+          ],
+          "input_ptr": 34567353344,
+          "kv_indices_ptr": 34481319424,
+          "scratch_ptr": 34807023104
+        },
+        "mature": {
+          "sizes": [
+            1,
+            2,
+            4,
+            8
+          ],
+          "input_ptr": 34481342976,
+          "kv_indices_ptr": 34481333760,
+          "scratch_ptr": 34807170560
+        }
+      }
+    },
+    {
+      "pid": 788,
+      "capture_first": "mature",
+      "initialization": [
+        {
+          "variant": "mature",
+          "seconds": 5.869178659999989,
+          "scope": "model load + native graph capture"
+        },
+        {
+          "variant": "native",
+          "seconds": 0.8266409710000033,
+          "scope": "new backend + separate native graph capture; same model/KV"
+        }
+      ],
+      "peak_torch_bytes": 317785600,
+      "environment": {
+        "CUDA_LAUNCH_BLOCKING": null,
+        "CUDA_MODULE_LOADING": "AUTO",
+        "CUDA_DEVICE_MAX_CONNECTIONS": "4",
+        "OMP_NUM_THREADS": null,
+        "MKL_NUM_THREADS": null,
+        "LD_PRELOAD": null,
+        "PYTORCH_CUDA_ALLOC_CONF": null
+      },
+      "versions": {
+        "torch": "2.8.0",
+        "triton": "3.4.0",
+        "sglang": "0.5.2",
+        "sgl-kernel": "0.3.9.post2"
+      },
+      "graph_state": {
+        "mature": {
+          "sizes": [
+            1,
+            2,
+            4,
+            8
+          ],
+          "input_ptr": 34567353344,
+          "kv_indices_ptr": 34481319424,
+          "scratch_ptr": 34807023104
+        },
+        "native": {
+          "sizes": [
+            1,
+            2,
+            4,
+            8
+          ],
+          "input_ptr": 34481342976,
+          "kv_indices_ptr": 34481333760,
+          "scratch_ptr": 34807170560
+        }
+      }
+    }
+  ],
+  "rows": [
+    {
+      "process": "paired-native-first",
+      "batch": 3,
+      "scope": "full",
+      "paired_cycles": 10,
+      "mature_over_native": {
+        "min": 0.9481601272426072,
+        "median": 0.9724182835932405,
+        "max": 0.9877937086020793
+      },
+      "mature_slower_pairs": 0,
+      "ratios_all": [
+        0.9545822733768667,
+        0.9877937086020793,
+        0.9783494478335877,
+        0.9759850047134955,
+        0.9688515624729855,
+        0.9768042159592822,
+        0.9481601272426072,
+        0.9771429769143788,
+        0.9685462377761602,
+        0.9561434215381159
+      ],
+      "per_variant": {
+        "native": {
+          "wall_with_sync_us": {
+            "min": 13659.7591,
+            "median": 14005.371149999999,
+            "max": 14332.8091
+          },
+          "event_with_host_gaps_us": {
+            "min": 13542.131042480469,
+            "median": 13871.807861328125,
+            "max": 14207.475280761719
+          },
+          "host_enqueue_us": {
+            "min": 357.8624,
+            "median": 386.46975,
+            "max": 443.2517
+          },
+          "host_thread_cpu_us": {
+            "min": 357.8113,
+            "median": 386.47685,
+            "max": 443.2868
+          },
+          "wait_us": {
+            "min": 13281.2405,
+            "median": 13624.45255,
+            "max": 13889.5574
+          }
+        },
+        "mature": {
+          "wall_with_sync_us": {
+            "min": 13302.6353,
+            "median": 13641.92675,
+            "max": 13786.716
+          },
+          "event_with_host_gaps_us": {
+            "min": 13184.101867675781,
+            "median": 13469.286346435547,
+            "max": 13652.787780761719
+          },
+          "host_enqueue_us": {
+            "min": 388.9464,
+            "median": 432.51195,
+            "max": 717.4566
+          },
+          "host_thread_cpu_us": {
+            "min": 388.9336,
+            "median": 432.4695,
+            "max": 717.4968
+          },
+          "wait_us": {
+            "min": 12875.5384,
+            "median": 13156.5838,
+            "max": 13360.9445
+          }
+        }
+      }
+    },
+    {
+      "process": "paired-native-first",
+      "batch": 3,
+      "scope": "bare_graph",
+      "paired_cycles": 10,
+      "mature_over_native": {
+        "min": 0.4367219019926297,
+        "median": 0.9726656204809375,
+        "max": 2.0586830255587736
+      },
+      "mature_slower_pairs": 2,
+      "ratios_all": [
+        0.9578567254466472,
+        0.9820719997283338,
+        0.9793637867233645,
+        0.9829105026808657,
+        0.9578601980197352,
+        0.4367219019926297,
+        1.0190642798314218,
+        2.0586830255587736,
+        0.9591324009238723,
+        0.9659674542385105
+      ],
+      "per_variant": {
+        "native": {
+          "wall_with_sync_us": {
+            "min": 13202.1457,
+            "median": 13567.847300000001,
+            "max": 30967.018
+          },
+          "event_with_host_gaps_us": {
+            "min": 13126.931762695312,
+            "median": 13505.32455444336,
+            "max": 30836.532592773438
+          },
+          "host_enqueue_us": {
+            "min": 15.3682,
+            "median": 18.111400000000003,
+            "max": 50.8396
+          },
+          "host_thread_cpu_us": {
+            "min": 15.231,
+            "median": 17.9657,
+            "max": 50.8517
+          },
+          "wait_us": {
+            "min": 13169.9395,
+            "median": 13549.7359,
+            "max": 30916.1784
+          }
+        },
+        "mature": {
+          "wall_with_sync_us": {
+            "min": 12887.5336,
+            "median": 13207.78615,
+            "max": 28113.2457
+          },
+          "event_with_host_gaps_us": {
+            "min": 12833.573913574219,
+            "median": 13142.202758789062,
+            "max": 28042.034912109375
+          },
+          "host_enqueue_us": {
+            "min": 36.5755,
+            "median": 47.80785,
+            "max": 84.6098
+          },
+          "host_thread_cpu_us": {
+            "min": 36.4573,
+            "median": 47.684200000000004,
+            "max": 84.6199
+          },
+          "wait_us": {
+            "min": 12838.1407,
+            "median": 13164.71475,
+            "max": 28059.4203
+          }
+        }
+      }
+    },
+    {
+      "process": "paired-native-first",
+      "batch": 5,
+      "scope": "full",
+      "paired_cycles": 10,
+      "mature_over_native": {
+        "min": 0.7468967611128662,
+        "median": 0.9683686407025065,
+        "max": 1.0193849323620525
+      },
+      "mature_slower_pairs": 3,
+      "ratios_all": [
+        0.9835044931465127,
+        1.0193849323620525,
+        1.0048156023657226,
+        1.0005084514995284,
+        0.9482466300845,
+        0.7468967611128662,
+        0.9555522076319469,
+        0.943591111069588,
+        0.9811850737730661,
+        0.9364580177334162
+      ],
+      "per_variant": {
+        "native": {
+          "wall_with_sync_us": {
+            "min": 14117.754,
+            "median": 14596.44525,
+            "max": 17844.3884
+          },
+          "event_with_host_gaps_us": {
+            "min": 13888.716125488281,
+            "median": 14464.97573852539,
+            "max": 17692.568969726562
+          },
+          "host_enqueue_us": {
+            "min": 416.5439,
+            "median": 453.6504,
+            "max": 888.5772
+          },
+          "host_thread_cpu_us": {
+            "min": 416.6041,
+            "median": 453.65954999999997,
+            "max": 888.7549
+          },
+          "wait_us": {
+            "min": 13229.1768,
+            "median": 14178.2422,
+            "max": 17393.2468
+          }
+        },
+        "mature": {
+          "wall_with_sync_us": {
+            "min": 13327.9159,
+            "median": 14147.729,
+            "max": 16986.7139
+          },
+          "event_with_host_gaps_us": {
+            "min": 13204.786682128906,
+            "median": 13938.212585449219,
+            "max": 16831.692504882812
+          },
+          "host_enqueue_us": {
+            "min": 447.0534,
+            "median": 559.78715,
+            "max": 969.8317
+          },
+          "host_thread_cpu_us": {
+            "min": 447.0525,
+            "median": 559.845,
+            "max": 969.831
+          },
+          "wait_us": {
+            "min": 12782.2656,
+            "median": 13509.4133,
+            "max": 16412.7899
+          }
+        }
+      }
+    },
+    {
+      "process": "paired-native-first",
+      "batch": 5,
+      "scope": "bare_graph",
+      "paired_cycles": 10,
+      "mature_over_native": {
+        "min": 0.927937417910891,
+        "median": 0.9943445764800374,
+        "max": 1.0787174086041817
+      },
+      "mature_slower_pairs": 4,
+      "ratios_all": [
+        1.0787174086041817,
+        0.9918617358598393,
+        0.9872051290993049,
+        0.9968274171002354,
+        0.9679293410827032,
+        0.927937417910891,
+        1.0061926418182483,
+        1.0262364824336212,
+        0.952088018136362,
+        1.0350095817191656
+      ],
+      "per_variant": {
+        "native": {
+          "wall_with_sync_us": {
+            "min": 13193.8223,
+            "median": 13678.360250000002,
+            "max": 16272.1064
+          },
+          "event_with_host_gaps_us": {
+            "min": 13088.351440429688,
+            "median": 13614.118957519531,
+            "max": 16214.834594726562
+          },
+          "host_enqueue_us": {
+            "min": 15.7079,
+            "median": 16.47685,
+            "max": 36.7248
+          },
+          "host_thread_cpu_us": {
+            "min": 15.5376,
+            "median": 16.68975,
+            "max": 36.6076
+          },
+          "wait_us": {
+            "min": 13157.0975,
+            "median": 13662.433,
+            "max": 16255.0038
+          }
+        },
+        "mature": {
+          "wall_with_sync_us": {
+            "min": 12933.2187,
+            "median": 13417.216199999999,
+            "max": 16276.7522
+          },
+          "event_with_host_gaps_us": {
+            "min": 12880.963134765625,
+            "median": 13358.638000488281,
+            "max": 16206.515502929688
+          },
+          "host_enqueue_us": {
+            "min": 39.972,
+            "median": 46.2309,
+            "max": 73.6711
+          },
+          "host_thread_cpu_us": {
+            "min": 39.8057,
+            "median": 46.14525,
+            "max": 73.7452
+          },
+          "wait_us": {
+            "min": 12893.2467,
+            "median": 13362.902,
+            "max": 16227.0427
+          }
+        }
+      }
+    },
+    {
+      "process": "paired-native-first",
+      "batch": 8,
+      "scope": "full",
+      "paired_cycles": 10,
+      "mature_over_native": {
+        "min": 0.7892283050980747,
+        "median": 1.1004260933548435,
+        "max": 1.844378974553847
+      },
+      "mature_slower_pairs": 5,
+      "ratios_all": [
+        1.844378974553847,
+        0.9245586128595947,
+        0.956940539692905,
+        0.8765909985740661,
+        0.7892283050980747,
+        0.977585940411002,
+        1.6667138904915964,
+        1.3824078358336633,
+        1.223266246298685,
+        1.7398899904675407
+      ],
+      "per_variant": {
+        "native": {
+          "wall_with_sync_us": {
+            "min": 7843.4985,
+            "median": 8700.757300000001,
+            "max": 14395.5311
+          },
+          "event_with_host_gaps_us": {
+            "min": 7633.805084228516,
+            "median": 8526.243209838867,
+            "max": 14228.378295898438
+          },
+          "host_enqueue_us": {
+            "min": 438.3452,
+            "median": 503.61375,
+            "max": 681.1999
+          },
+          "host_thread_cpu_us": {
+            "min": 438.4406,
+            "median": 503.5645,
+            "max": 681.1701
+          },
+          "wait_us": {
+            "min": 7186.0418,
+            "median": 8122.37745,
+            "max": 13957.1859
+          }
+        },
+        "mature": {
+          "wall_with_sync_us": {
+            "min": 7450.5526,
+            "median": 11744.82945,
+            "max": 16829.4111
+          },
+          "event_with_host_gaps_us": {
+            "min": 7307.673645019531,
+            "median": 11591.629028320312,
+            "max": 16590.028381347656
+          },
+          "host_enqueue_us": {
+            "min": 414.3436,
+            "median": 556.4357,
+            "max": 810.8043
+          },
+          "host_thread_cpu_us": {
+            "min": 414.3198,
+            "median": 556.3999,
+            "max": 810.7876
+          },
+          "wait_us": {
+            "min": 6866.2489,
+            "median": 11066.00555,
+            "max": 16257.3838
+          }
+        }
+      }
+    },
+    {
+      "process": "paired-native-first",
+      "batch": 8,
+      "scope": "bare_graph",
+      "paired_cycles": 10,
+      "mature_over_native": {
+        "min": 0.4782743962649875,
+        "median": 1.0822895871524454,
+        "max": 4.934617465814093
+      },
+      "mature_slower_pairs": 5,
+      "ratios_all": [
+        4.934617465814093,
+        0.4782743962649875,
+        3.1251094772806294,
+        1.6929220885354854,
+        2.623902956440591,
+        0.6996482926508913,
+        1.1932157985912561,
+        0.8570487288555919,
+        0.500135074010985,
+        0.9713633757136345
+      ],
+      "per_variant": {
+        "native": {
+          "wall_with_sync_us": {
+            "min": 6402.6995,
+            "median": 9138.31395,
+            "max": 25508.3268
+          },
+          "event_with_host_gaps_us": {
+            "min": 6333.644866943359,
+            "median": 9083.79020690918,
+            "max": 25453.237915039062
+          },
+          "host_enqueue_us": {
+            "min": 15.238,
+            "median": 16.510350000000003,
+            "max": 26.5871
+          },
+          "host_thread_cpu_us": {
+            "min": 15.0857,
+            "median": 16.3275,
+            "max": 26.547
+          },
+          "wait_us": {
+            "min": 6376.1124,
+            "median": 9121.8036,
+            "max": 25492.168
+          }
+        },
+        "mature": {
+          "wall_with_sync_us": {
+            "min": 6219.3478,
+            "median": 10722.55595,
+            "max": 45989.1692
+          },
+          "event_with_host_gaps_us": {
+            "min": 6163.455963134766,
+            "median": 10657.056045532227,
+            "max": 45897.42126464844
+          },
+          "host_enqueue_us": {
+            "min": 38.0814,
+            "median": 46.054,
+            "max": 57.5674
+          },
+          "host_thread_cpu_us": {
+            "min": 37.9682,
+            "median": 45.933800000000005,
+            "max": 57.3641
+          },
+          "wait_us": {
+            "min": 6171.0019,
+            "median": 10676.50195,
+            "max": 45951.0878
+          }
+        }
+      }
+    },
+    {
+      "process": "paired-mature-first",
+      "batch": 3,
+      "scope": "full",
+      "paired_cycles": 10,
+      "mature_over_native": {
+        "min": 0.2601867697040279,
+        "median": 0.9382954000662432,
+        "max": 1.036730039942731
+      },
+      "mature_slower_pairs": 2,
+      "ratios_all": [
+        0.910062567581177,
+        1.036730039942731,
+        0.9302450182061799,
+        1.0157473629344624,
+        0.9714563613837776,
+        0.931066504239078,
+        0.9312778787787026,
+        0.9453129213537839,
+        0.9774119122656987,
+        0.2601867697040279
+      ],
+      "per_variant": {
+        "native": {
+          "wall_with_sync_us": {
+            "min": 6869.024,
+            "median": 7148.76175,
+            "max": 25459.9429
+          },
+          "event_with_host_gaps_us": {
+            "min": 6756.114959716797,
+            "median": 7003.529357910156,
+            "max": 25327.923583984375
+          },
+          "host_enqueue_us": {
+            "min": 342.7957,
+            "median": 376.79785000000004,
+            "max": 424.3533
+          },
+          "host_thread_cpu_us": {
+            "min": 342.7146,
+            "median": 376.7213,
+            "max": 424.2893
+          },
+          "wait_us": {
+            "min": 6511.3961,
+            "median": 6785.71955,
+            "max": 25072.1607
+          }
+        },
+        "mature": {
+          "wall_with_sync_us": {
+            "min": 6396.9701,
+            "median": 6793.04245,
+            "max": 7251.8383
+          },
+          "event_with_host_gaps_us": {
+            "min": 6284.492874145508,
+            "median": 6684.310531616211,
+            "max": 7144.3328857421875
+          },
+          "host_enqueue_us": {
+            "min": 366.4728,
+            "median": 400.9189,
+            "max": 448.1369
+          },
+          "host_thread_cpu_us": {
+            "min": 366.3246,
+            "median": 400.90355,
+            "max": 448.0509
+          },
+          "wait_us": {
+            "min": 5963.6593,
+            "median": 6387.67435,
+            "max": 6857.9904
+          }
+        }
+      }
+    },
+    {
+      "process": "paired-mature-first",
+      "batch": 3,
+      "scope": "bare_graph",
+      "paired_cycles": 10,
+      "mature_over_native": {
+        "min": 0.2901330739700706,
+        "median": 0.9701132063135294,
+        "max": 5.611337229831636
+      },
+      "mature_slower_pairs": 3,
+      "ratios_all": [
+        5.611337229831636,
+        3.370126013058048,
+        0.2901330739700706,
+        1.8479283492868281,
+        0.9774246580175442,
+        0.9821066143606968,
+        0.9628017546095146,
+        0.9283949534706678,
+        0.9395032222742117,
+        0.8865220873733888
+      ],
+      "per_variant": {
+        "native": {
+          "wall_with_sync_us": {
+            "min": 6670.3922,
+            "median": 6856.49495,
+            "max": 24274.0109
+          },
+          "event_with_host_gaps_us": {
+            "min": 6621.183776855469,
+            "median": 6801.049423217773,
+            "max": 24180.429077148438
+          },
+          "host_enqueue_us": {
+            "min": 15.0376,
+            "median": 17.366,
+            "max": 23.3183
+          },
+          "host_thread_cpu_us": {
+            "min": 14.9114,
+            "median": 17.2087,
+            "max": 23.2682
+          },
+          "wait_us": {
+            "min": 6655.0791,
+            "median": 6838.4742,
+            "max": 24256.1409
+          }
+        },
+        "mature": {
+          "wall_with_sync_us": {
+            "min": 6170.1127,
+            "median": 6622.9205,
+            "max": 41730.9516
+          },
+          "event_with_host_gaps_us": {
+            "min": 6100.275039672852,
+            "median": 6570.700836181641,
+            "max": 41641.16516113281
+          },
+          "host_enqueue_us": {
+            "min": 37.2539,
+            "median": 46.52845,
+            "max": 52.0199
+          },
+          "host_thread_cpu_us": {
+            "min": 37.1336,
+            "median": 46.424800000000005,
+            "max": 51.9578
+          },
+          "wait_us": {
+            "min": 6122.6625,
+            "median": 6582.9555,
+            "max": 41681.2912
+          }
+        }
+      }
+    },
+    {
+      "process": "paired-mature-first",
+      "batch": 5,
+      "scope": "full",
+      "paired_cycles": 10,
+      "mature_over_native": {
+        "min": 0.2903056990428138,
+        "median": 0.9249999478253814,
+        "max": 5.685536952140199
+      },
+      "mature_slower_pairs": 3,
+      "ratios_all": [
+        0.9826641724347973,
+        0.8971339513697436,
+        0.9528659442810191,
+        0.8914780333861871,
+        5.377517878355914,
+        0.29206041673662275,
+        2.702189836534236,
+        0.2903056990428138,
+        5.685536952140199,
+        0.5863981893390063
+      ],
+      "per_variant": {
+        "native": {
+          "wall_with_sync_us": {
+            "min": 6906.2812,
+            "median": 7570.5872,
+            "max": 22860.1599
+          },
+          "event_with_host_gaps_us": {
+            "min": 6785.027313232422,
+            "median": 7441.345596313477,
+            "max": 22714.88037109375
+          },
+          "host_enqueue_us": {
+            "min": 359.9241,
+            "median": 415.5845,
+            "max": 480.1487
+          },
+          "host_thread_cpu_us": {
+            "min": 359.8251,
+            "median": 415.5596,
+            "max": 480.1559
+          },
+          "wait_us": {
+            "min": 6535.337,
+            "median": 7126.82665,
+            "max": 22486.751
+          }
+        },
+        "mature": {
+          "wall_with_sync_us": {
+            "min": 6509.3796,
+            "median": 6797.91265,
+            "max": 41086.5258
+          },
+          "event_with_host_gaps_us": {
+            "min": 6395.999908447266,
+            "median": 6687.282943725586,
+            "max": 40940.7470703125
+          },
+          "host_enqueue_us": {
+            "min": 375.2223,
+            "median": 402.3163,
+            "max": 470.4543
+          },
+          "host_thread_cpu_us": {
+            "min": 375.1543,
+            "median": 402.28290000000004,
+            "max": 470.3993
+          },
+          "wait_us": {
+            "min": 6109.0015,
+            "median": 6394.69685,
+            "max": 40682.2713
+          }
+        }
+      }
+    },
+    {
+      "process": "paired-mature-first",
+      "batch": 5,
+      "scope": "bare_graph",
+      "paired_cycles": 10,
+      "mature_over_native": {
+        "min": 0.8669860390810281,
+        "median": 0.9135907412871466,
+        "max": 0.9763024140185892
+      },
+      "mature_slower_pairs": 0,
+      "ratios_all": [
+        0.9763024140185892,
+        0.9508044273854668,
+        0.8954169463140681,
+        0.8725572580696185,
+        0.9130387513599544,
+        0.9495737698791614,
+        0.9141427312143388,
+        0.8683495071675906,
+        0.9660585294232811,
+        0.8669860390810281
+      ],
+      "per_variant": {
+        "native": {
+          "wall_with_sync_us": {
+            "min": 6806.1665,
+            "median": 6946.1572,
+            "max": 7467.1327
+          },
+          "event_with_host_gaps_us": {
+            "min": 6748.057556152344,
+            "median": 6892.595291137695,
+            "max": 7412.940979003906
+          },
+          "host_enqueue_us": {
+            "min": 15.2841,
+            "median": 15.7584,
+            "max": 22.7141
+          },
+          "host_thread_cpu_us": {
+            "min": 15.1678,
+            "median": 15.6097,
+            "max": 22.6941
+          },
+          "wait_us": {
+            "min": 6787.4399,
+            "median": 6929.08825,
+            "max": 7451.2636
+          }
+        },
+        "mature": {
+          "wall_with_sync_us": {
+            "min": 6143.6078,
+            "median": 6484.370800000001,
+            "max": 6708.1651
+          },
+          "event_with_host_gaps_us": {
+            "min": 6091.3665771484375,
+            "median": 6431.999969482422,
+            "max": 6653.542327880859
+          },
+          "host_enqueue_us": {
+            "min": 37.3099,
+            "median": 40.215900000000005,
+            "max": 53.9636
+          },
+          "host_thread_cpu_us": {
+            "min": 37.1817,
+            "median": 40.106750000000005,
+            "max": 53.9656
+          },
+          "wait_us": {
+            "min": 6104.6347,
+            "median": 6445.7289,
+            "max": 6654.2015
+          }
+        }
+      }
+    },
+    {
+      "process": "paired-mature-first",
+      "batch": 8,
+      "scope": "full",
+      "paired_cycles": 10,
+      "mature_over_native": {
+        "min": 0.28527801074208503,
+        "median": 0.9704149117159888,
+        "max": 6.025675766965044
+      },
+      "mature_slower_pairs": 4,
+      "ratios_all": [
+        1.0039437276666954,
+        0.9485798597855434,
+        6.025675766965044,
+        0.28527801074208503,
+        1.0040373367727116,
+        3.358721666601827,
+        0.44145150465010546,
+        0.9674678830116594,
+        0.9733619404203183,
+        0.9642552788444193
+      ],
+      "per_variant": {
+        "native": {
+          "wall_with_sync_us": {
+            "min": 6767.5801,
+            "median": 7100.84095,
+            "max": 37665.7604
+          },
+          "event_with_host_gaps_us": {
+            "min": 6647.602844238281,
+            "median": 6941.489410400391,
+            "max": 37510.45227050781
+          },
+          "host_enqueue_us": {
+            "min": 334.4739,
+            "median": 385.4219,
+            "max": 476.6543
+          },
+          "host_thread_cpu_us": {
+            "min": 334.4359,
+            "median": 385.3893,
+            "max": 476.6573
+          },
+          "wait_us": {
+            "min": 6422.2877,
+            "median": 6708.237999999999,
+            "max": 37292.4365
+          }
+        },
+        "mature": {
+          "wall_with_sync_us": {
+            "min": 6605.1287,
+            "median": 6975.74885,
+            "max": 41860.4979
+          },
+          "event_with_host_gaps_us": {
+            "min": 6303.744125366211,
+            "median": 6848.921585083008,
+            "max": 41711.92321777344
+          },
+          "host_enqueue_us": {
+            "min": 345.9708,
+            "median": 402.983,
+            "max": 622.5942
+          },
+          "host_thread_cpu_us": {
+            "min": 345.9387,
+            "median": 402.96500000000003,
+            "max": 622.4781
+          },
+          "wait_us": {
+            "min": 5982.5345,
+            "median": 6546.08795,
+            "max": 41454.3447
+          }
+        }
+      }
+    },
+    {
+      "process": "paired-mature-first",
+      "batch": 8,
+      "scope": "bare_graph",
+      "paired_cycles": 10,
+      "mature_over_native": {
+        "min": 0.2757939724821462,
+        "median": 0.9686792747793358,
+        "max": 3.315980614802753
+      },
+      "mature_slower_pairs": 2,
+      "ratios_all": [
+        0.972643680433396,
+        0.9142265516173379,
+        0.9709946360229064,
+        0.9663639135357651,
+        0.9943963245343131,
+        0.9546603388681133,
+        1.027890067520426,
+        0.9211716036026909,
+        0.2757939724821462,
+        3.315980614802753
+      ],
+      "per_variant": {
+        "native": {
+          "wall_with_sync_us": {
+            "min": 6711.8482,
+            "median": 6907.972299999999,
+            "max": 23810.9921
+          },
+          "event_with_host_gaps_us": {
+            "min": 6661.222076416016,
+            "median": 6855.628967285156,
+            "max": 23755.059814453125
+          },
+          "host_enqueue_us": {
+            "min": 15.2189,
+            "median": 15.78205,
+            "max": 19.6764
+          },
+          "host_thread_cpu_us": {
+            "min": 15.0716,
+            "median": 15.63175,
+            "max": 19.6374
+          },
+          "wait_us": {
+            "min": 6696.5421,
+            "median": 6892.4007,
+            "max": 23793.7773
+          }
+        },
+        "mature": {
+          "wall_with_sync_us": {
+            "min": 6342.6637,
+            "median": 6594.6478,
+            "max": 22936.6021
+          },
+          "event_with_host_gaps_us": {
+            "min": 6279.475021362305,
+            "median": 6542.182159423828,
+            "max": 22854.96368408203
+          },
+          "host_enqueue_us": {
+            "min": 38.3238,
+            "median": 41.2184,
+            "max": 53.4336
+          },
+          "host_thread_cpu_us": {
+            "min": 38.2167,
+            "median": 41.0851,
+            "max": 53.3344
+          },
+          "wait_us": {
+            "min": 6289.2301,
+            "median": 6556.206249999999,
+            "max": 22895.8235
+          }
+        }
+      }
+    }
+  ],
+  "isolated_controls": [
+    {
+      "variant": "native",
+      "batch": 3,
+      "capture_batch": 4,
+      "wall_us": {
+        "min": 13603.911600000001,
+        "median": 14292.7106,
+        "max": 14523.9848
+      },
+      "event_us": {
+        "min": 13456.282043457031,
+        "median": 14085.939025878906,
+        "max": 14320.538330078125
+      }
+    },
+    {
+      "variant": "native",
+      "batch": 5,
+      "capture_batch": 8,
+      "wall_us": {
+        "min": 13698.8275,
+        "median": 14217.985999999999,
+        "max": 15404.761300000002
+      },
+      "event_us": {
+        "min": 13530.931091308594,
+        "median": 14037.196350097656,
+        "max": 15228.434753417969
+      }
+    },
+    {
+      "variant": "native",
+      "batch": 8,
+      "capture_batch": 8,
+      "wall_us": {
+        "min": 14035.191,
+        "median": 14716.1545,
+        "max": 15584.3838
+      },
+      "event_us": {
+        "min": 13882.572937011719,
+        "median": 14512.025451660156,
+        "max": 15430.57861328125
+      }
+    },
+    {
+      "variant": "mature",
+      "batch": 3,
+      "capture_batch": 4,
+      "wall_us": {
+        "min": 6002.9908000000005,
+        "median": 6322.5427,
+        "max": 25845.9741
+      },
+      "event_us": {
+        "min": 5874.585723876953,
+        "median": 6184.960174560547,
+        "max": 25730.047607421875
+      }
+    },
+    {
+      "variant": "mature",
+      "batch": 5,
+      "capture_batch": 8,
+      "wall_us": {
+        "min": 6134.6322,
+        "median": 6258.0998,
+        "max": 7101.3460000000005
+      },
+      "event_us": {
+        "min": 6009.344100952148,
+        "median": 6152.191925048828,
+        "max": 6975.078582763672
+      }
+    },
+    {
+      "variant": "mature",
+      "batch": 8,
+      "capture_batch": 8,
+      "wall_us": {
+        "min": 6113.2866,
+        "median": 6239.5777,
+        "max": 6818.5849
+      },
+      "event_us": {
+        "min": 5986.406326293945,
+        "median": 6161.81755065918,
+        "max": 6719.078063964844
+      }
+    }
+  ],
+  "sources": [
+    {
+      "path": "paired-native-first\\window-b.json",
+      "sha256": "90febe1b2c9e6891f8e5097bbf2a479d0e69cb93dbe4fcbaa47e7e7dbf87ed73"
+    },
+    {
+      "path": "paired-mature-first\\window-b.json",
+      "sha256": "6996d6ac8ec8b6d2f920010f6b009f9e84c25debd4aab6df73a03905f70510f2"
+    },
+    {
+      "path": "isolated-native\\cost.json",
+      "sha256": "5bf7dd3f6d45c581f844ead0019047d61f196fa02f29285e786c5a65a34c89ff"
+    },
+    {
+      "path": "isolated-mature\\cost.json",
+      "sha256": "9cc76236373e961bbf3c743d84415411ced035bede60ec4d369b15d7008920a0"
+    }
+  ],
+  "source_coverage": {
+    "paired_blocks": 240,
+    "paired_cycles": 120,
+    "paired_state_gates": 18,
+    "isolated_blocks": 54
+  },
+  "stable_gain_established": false,
+  "historical_drift_cause": "unknown",
+  "evidence": "bare graph also has long event/wait while host submission is short",
+  "causal_limit": "two capture orders are also two process/time windows; not a causal randomization of order",
+  "observer_limit": "nvidia-smi sampled outside every clean block; cadence differs from v0.19",
+  "statistical_limit": "within-process repeated blocks are dependent; no population CI/significance claim"
+}

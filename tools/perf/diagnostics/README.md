@@ -1,5 +1,7 @@
 # 请求到内核的离线诊断闭环
 
+新增client_capture.py / associate_client_relay.py：客户端真实SSE首内容、尝试/停止证据与保守request关联；默认无请求，实际审批/Go/clock缺口见[第23章](../../../docs/performance/engineering/23-single-model-capture.md)。
+
 新增入口复用 analyze.py 的指标/协议/用量/分母校验，以及 runtime_metrics.py 的恢复右删失计算。诊断sidecar只补区间、实例/boot/rank/batch关联和显式依赖，不修改票据v3、终态3.0、Observation1.0或原report.schema。
 
 ## 实际受控源端消费

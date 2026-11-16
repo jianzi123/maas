@@ -1,0 +1,18 @@
+{
+  "schema": "ELIT01-result-v1",
+  "run_id": "R01",
+  "clock_scope": "elit01-pilot1-20261115/R01/pid372-83d58a0b",
+  "plan_sha256": "ab0ac451d9d4beffd6a879ff04bcdcd4000a256ec3194b710f5e7dabca49d9c9",
+  "status": "completed",
+  "collection_complete": true,
+  "stable_gain_claim": false,
+  "failure": null,
+  "planned_blocks": 540,
+  "measured_blocks": 540,
+  "missing_or_invalid_blocks": 0,
+  "query_events": 218,
+  "runtime_manifest": "runtime-manifest.json",
+  "peak_torch_bytes": 316955136,
+  "scope_limit": "artificial-weight static calls; composite strategy comparison, no model/serving gain",
+  "elapsed_seconds": 94.077408519
+}

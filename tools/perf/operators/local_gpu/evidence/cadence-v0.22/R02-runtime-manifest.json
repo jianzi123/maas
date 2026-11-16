@@ -1,0 +1,92 @@
+{
+  "schema": "ELIT01-runtime-v1",
+  "run_id": "R02",
+  "clock_scope": "elit01-pilot1-20261115/R02/pid950-d5179599",
+  "plan_sha256": "ab0ac451d9d4beffd6a879ff04bcdcd4000a256ec3194b710f5e7dabca49d9c9",
+  "execution_checkout_commit": "6477d5dc4980f76e5a6551bf6616c237b4a55544",
+  "source_sha256": {
+    "cadence_protocol.py": "b58cc3467a0e3a34c0f5f49ad812ac89bc4740b897d6d35d40e0ba84fec2ac9f",
+    "bench_kv_cadence.py": "b6d542c55fe208b302e54d7631412f4a0c31f84d2e62750adb9091f8cd8fa323",
+    "analyze_kv_cadence.py": "fdf166d738e4d85376a968ed8731aa82028f4c03f4c4c83ef73335d41c87be62",
+    "bench_kv_interleaved.py": "0be7d4877dda5969a009a1ecf70289a45d56d0e94e050afd37105c524e4aedd7",
+    "native_kv_binding.py": "8d03d465e964a70c7dedcf358097628a47779902b0f4635633e5f2c783d00149",
+    "run_decode.py": "b747254afc705de607e31071c7388948ca6c9fbbdd0f723d326ac880064fe7dd"
+  },
+  "graph_identity": {
+    "native": {
+      "graph_ids": {
+        "8": 139635697872032,
+        "4": 139635697586064,
+        "2": 139636302697936,
+        "1": 139636302697856
+      },
+      "sizes": [
+        1,
+        2,
+        4,
+        8
+      ],
+      "inputs": {
+        "input_ids": 34567353344,
+        "positions": 34567355392,
+        "seq_lens": 34567354368,
+        "out_cache_loc": 34567354880,
+        "req_pool_indices": 34567353856
+      },
+      "kv_indices_ptr": 34481319424,
+      "scratch_ptr": 34807023104
+    },
+    "mature": {
+      "graph_ids": {
+        "8": 139635493461808,
+        "4": 139635697586624,
+        "2": 139636302698416,
+        "1": 139634479805472
+      },
+      "sizes": [
+        1,
+        2,
+        4,
+        8
+      ],
+      "inputs": {
+        "input_ids": 34481342976,
+        "positions": 34481345024,
+        "seq_lens": 34481344000,
+        "out_cache_loc": 34481344512,
+        "req_pool_indices": 34481343488
+      },
+      "kv_indices_ptr": 34481333760,
+      "scratch_ptr": 34807170560
+    }
+  },
+  "parameter_full_sha256": "222270299708933fdd7e25a8f030f89bd648fe25d484b364fb11ae9f5c1e548b",
+  "targets_ns": {
+    "native": 45016977,
+    "mature": 42892991
+  },
+  "calibration_sha256": "acabea9e8f432fd21577b57c78deadc283a8a36888b2ac5de887550d0b91c09a",
+  "versions": {
+    "torch": "2.8.0",
+    "triton": "3.4.0",
+    "sglang": "0.5.2",
+    "sgl-kernel": "0.3.9.post2"
+  },
+  "torch_version": "2.8.0+cu128",
+  "cuda": "12.8",
+  "GPU": "NVIDIA GeForce RTX 4070 Laptop GPU",
+  "initial_resources": {
+    "free_bytes": 6943670272,
+    "total_bytes": 8585216000,
+    "allocated_bytes": 314455552,
+    "reserved_bytes": 371195904
+  },
+  "match_clock": "host perf_counter; last observed own-device completion to pre-event submission",
+  "not_a_physical_GPU_idle_counter": true,
+  "primary_scope": "full",
+  "primary_metric": "completed_cluster_wall_ns_per_100_planned_calls",
+  "frozen_at_monotonic_ns": 124374172389,
+  "model_config_sha256": "d89dd5a56c63ac3d2f6cea098ad8aebd94e5fc4e4060fb61cd7e0e8bd0b678bb",
+  "profile_in_clean_blocks": false,
+  "status": "frozen_before_comparison"
+}

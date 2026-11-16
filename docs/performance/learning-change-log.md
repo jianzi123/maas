@@ -1,5 +1,27 @@
 # 学习手册修订记录
 
+## 单模型接线 v0.23
+
+先修ELIT-QA-01空/单侧/不对称快照可被接受问题，旧plan/producer/阈值与0/18不改；36项回归和6个实采CLI拒绝通过。客户端采集/关联新增18项HTTP/时钟测试及4条自有loopback CLI记录，真实产品入口/源导出仍待MAAS-3/8。GPU旧范围保留，本轮无新增GPU采样。见[第23章](engineering/23-single-model-capture.md)。
+
+## E-LIT-01真实策略 v0.22
+
+新增opt-in入口，旧WindowB及0.21设计卡不改。采前冻结6477d5d/plan ab0ac451，108cluster/1080块无缺测；16元数据回归、4实采CLI负例及隐藏R02分母验证通过。Idle342/360、query_block72/360匹配，Full完整组0/18，观察到校准与主查询节奏偏移，根因与稳定收益仍unknown；不追加补测。见[第22章](engineering/22-cadence-policy-pilot.md)。
+
+## 文献接续 v0.21
+
+本批16项原始来源和Torch2.8辅助语义源接入；四项关键章节精读，15处源码符号/7份官方文件核对，三张可否证卡仍design_only。补算术强度、图地址/DAG、带尺度归并及workspace手算，保留窗口B漂移unknown与旧QA范围；本轮GPU0次、没有权重下载。见[第21章](engineering/21-literature-to-experiments.md)。
+
+## 窗口B v0.20：漂移保留与定位
+
+同模型双backend/独立原生图交错240块、两原入口进程54块完成；33/120配对成熟路径更慢，裸图也有长事件/等待，原因未知、稳定收益未成立。correlation核纯图364→334，修正区域378→348的简称；六格直接库RoPE+KV语义通过，尚未进入Llama caller。旧六份JSON与QA cf8cf1c范围保留，见[第20章](engineering/20-window-b-cost-drift.md)。
+
+## 成熟KV接线 v0.19
+
+新增进程内成熟KV绑定、capture前/后负控及跨变体完整输出检查，原生图命中由CUPTI确认；另建无profiler/观测hook的三对调用成本研究，状态漂移全部保留。默认SGLang磁盘源与旧已验代码未改，接线仍为研究opt-in，未宣称预训练收益。
+
+另补直接图状态检查：30层、12次实际写槽K/V共24份FP16数组finite且逐位相同；24置零/10陈旧快照离线负控拒绝。状态采集与成本计时隔离，未扩展为预训练质量或稳定性能证明。
+
 ## 原生框架结构路径 v0.18
 
 沿6517a15新增原生dummy ModelRunner runner、9份源码锁、真实动态batch/graph/eager/回收及成熟caller记录。保留两次观测器错误与修正；实际图参数在固定cuda_graph_*缓冲，不能误读prefill metadata。默认路径与人工成熟op探针分列，不作模型质量或性能收益结论。

@@ -1,0 +1,8 @@
+{
+  "syntax_files": 4,
+  "hashes_match_actual_runs": true,
+  "local_links": 282,
+  "analysis_negative_controls_rejected": 4,
+  "all_6_GPU_processes_exit0": true,
+  "stable_gain_established": false
+}

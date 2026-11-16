@@ -1,0 +1,23 @@
+{
+  "scope": "portable metadata/source preflight; no GPU experiment",
+  "unittest_command": "python -X utf8 -m unittest discover -s repo/tools/perf/operators/local_gpu -p test_cadence_protocol.py -v",
+  "tests_passed": 16,
+  "result": "OK",
+  "first_invocation_note": "Initial discover start path omitted repo/ and failed before test import; corrected command above ran16 cases.",
+  "covered": [
+    "resource-budget tamper",
+    "duplicate/boolean schedule identity",
+    "source hash mismatch",
+    "NaN timing/tolerance",
+    "foreign clock/query",
+    "gap/wall accounting tamper",
+    "missing denominator1080",
+    "invalid plan CLI rejected before torch import and output-directory creation"
+  ],
+  "source_sha256": {
+    "cadence_protocol.py": "b58cc3467a0e3a34c0f5f49ad812ac89bc4740b897d6d35d40e0ba84fec2ac9f",
+    "bench_kv_cadence.py": "b6d542c55fe208b302e54d7631412f4a0c31f84d2e62750adb9091f8cd8fa323",
+    "analyze_kv_cadence.py": "fdf166d738e4d85376a968ed8731aa82028f4c03f4c4c83ef73335d41c87be62",
+    "test_cadence_protocol.py": "9821f75f35c4d32ca37ea8b6f2e8ffae63748abd638683361b832797e87a59e8"
+  }
+}

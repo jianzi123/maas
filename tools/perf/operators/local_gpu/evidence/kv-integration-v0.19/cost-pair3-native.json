@@ -1,0 +1,241 @@
+{
+  "variant": "native",
+  "pair": 3,
+  "scope": "native_forward_call_cost_with_artificial_weights",
+  "weights": "native_dummy_random",
+  "Engine": false,
+  "pretrained_performance_claim": false,
+  "sampler_scheduler_serving_in_timing": false,
+  "profiler_or_correctness_hooks_in_timing": false,
+  "warmup": 10,
+  "rounds": 9,
+  "iterations": 10,
+  "parameter_sample_sha256": "4638a178103f051f356688441d8f6975e7e1a4080a95f41a5c75e0ffd1001e71",
+  "torch": "2.8.0+cu128",
+  "sglang": "0.5.2",
+  "telemetry_before": {
+    "returncode": 0,
+    "csv": "2026/11/14 08:26:37.107, P0, 5521, 2428, 1980, 71, 20.56, 44",
+    "fields": [
+      "timestamp",
+      "pstate",
+      "free_MiB",
+      "used_MiB",
+      "SM_MHz",
+      "temp_C",
+      "power_W",
+      "util_pct"
+    ]
+  },
+  "code_sha256": {
+    "bench_native_kv.py": "f8c86cb12269363496bf14d0c0db3c606ebcfb4f3f0584fe7c02b044ad2328fd",
+    "native_kv_binding.py": "8d03d465e964a70c7dedcf358097628a47779902b0f4635633e5f2c783d00149"
+  },
+  "measurements": [
+    {
+      "batch": 3,
+      "capture_batch": 4,
+      "logits_sha256": "f000a3c32e8a0da4eff169106ec7cac7f412863e3e6487715c8249dbb7bb1247",
+      "samples": [
+        {
+          "round": 0,
+          "event_with_host_gaps_us_per_call": 17526.78680419922,
+          "wall_with_sync_us_per_call": 17667.9397
+        },
+        {
+          "round": 1,
+          "event_with_host_gaps_us_per_call": 14448.725891113281,
+          "wall_with_sync_us_per_call": 14613.488800000001
+        },
+        {
+          "round": 2,
+          "event_with_host_gaps_us_per_call": 14027.580261230469,
+          "wall_with_sync_us_per_call": 14176.3517
+        },
+        {
+          "round": 3,
+          "event_with_host_gaps_us_per_call": 14016.035461425781,
+          "wall_with_sync_us_per_call": 14170.6543
+        },
+        {
+          "round": 4,
+          "event_with_host_gaps_us_per_call": 14133.555603027344,
+          "wall_with_sync_us_per_call": 14279.832
+        },
+        {
+          "round": 5,
+          "event_with_host_gaps_us_per_call": 13969.100952148438,
+          "wall_with_sync_us_per_call": 14133.099400000001
+        },
+        {
+          "round": 6,
+          "event_with_host_gaps_us_per_call": 14098.226928710938,
+          "wall_with_sync_us_per_call": 14223.800899999998
+        },
+        {
+          "round": 7,
+          "event_with_host_gaps_us_per_call": 14007.807922363281,
+          "wall_with_sync_us_per_call": 14162.378200000001
+        },
+        {
+          "round": 8,
+          "event_with_host_gaps_us_per_call": 14119.322204589844,
+          "wall_with_sync_us_per_call": 14255.199100000002
+        }
+      ],
+      "telemetry_after": {
+        "returncode": 0,
+        "csv": "2026/11/14 08:26:39.018, P0, 5519, 2430, 1980, 72, 25.61, 98",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      }
+    },
+    {
+      "batch": 5,
+      "capture_batch": 8,
+      "logits_sha256": "5c4f105bf1033d0b924e522b59e878c7ec49a517775e649b6f6375b3b68e4d92",
+      "samples": [
+        {
+          "round": 0,
+          "event_with_host_gaps_us_per_call": 14130.995178222656,
+          "wall_with_sync_us_per_call": 14249.4853
+        },
+        {
+          "round": 1,
+          "event_with_host_gaps_us_per_call": 14234.419250488281,
+          "wall_with_sync_us_per_call": 14380.345000000001
+        },
+        {
+          "round": 2,
+          "event_with_host_gaps_us_per_call": 14142.976379394531,
+          "wall_with_sync_us_per_call": 14270.020800000002
+        },
+        {
+          "round": 3,
+          "event_with_host_gaps_us_per_call": 13878.268432617188,
+          "wall_with_sync_us_per_call": 14048.9225
+        },
+        {
+          "round": 4,
+          "event_with_host_gaps_us_per_call": 14018.765258789062,
+          "wall_with_sync_us_per_call": 14150.5385
+        },
+        {
+          "round": 5,
+          "event_with_host_gaps_us_per_call": 14170.419311523438,
+          "wall_with_sync_us_per_call": 14342.8954
+        },
+        {
+          "round": 6,
+          "event_with_host_gaps_us_per_call": 14356.480407714844,
+          "wall_with_sync_us_per_call": 14508.257699999998
+        },
+        {
+          "round": 7,
+          "event_with_host_gaps_us_per_call": 14142.678833007812,
+          "wall_with_sync_us_per_call": 14343.9719
+        },
+        {
+          "round": 8,
+          "event_with_host_gaps_us_per_call": 14201.344299316406,
+          "wall_with_sync_us_per_call": 14360.0324
+        }
+      ],
+      "telemetry_after": {
+        "returncode": 0,
+        "csv": "2026/11/14 08:26:40.565, P0, 5519, 2430, 1980, 72, 25.75, 99",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      }
+    },
+    {
+      "batch": 8,
+      "capture_batch": 8,
+      "logits_sha256": "b9df0c1a3d6258dda729d8ef1868e98fbfa9c2f7dd958682b90ed9a8a2ea73e4",
+      "samples": [
+        {
+          "round": 0,
+          "event_with_host_gaps_us_per_call": 14188.252258300781,
+          "wall_with_sync_us_per_call": 14317.272099999998
+        },
+        {
+          "round": 1,
+          "event_with_host_gaps_us_per_call": 14140.211486816406,
+          "wall_with_sync_us_per_call": 14308.541099999999
+        },
+        {
+          "round": 2,
+          "event_with_host_gaps_us_per_call": 13920.681762695312,
+          "wall_with_sync_us_per_call": 14074.7315
+        },
+        {
+          "round": 3,
+          "event_with_host_gaps_us_per_call": 13934.489440917969,
+          "wall_with_sync_us_per_call": 14128.4361
+        },
+        {
+          "round": 4,
+          "event_with_host_gaps_us_per_call": 14222.13134765625,
+          "wall_with_sync_us_per_call": 14363.6163
+        },
+        {
+          "round": 5,
+          "event_with_host_gaps_us_per_call": 13923.225402832031,
+          "wall_with_sync_us_per_call": 14056.6957
+        },
+        {
+          "round": 6,
+          "event_with_host_gaps_us_per_call": 14177.503967285156,
+          "wall_with_sync_us_per_call": 14310.8234
+        },
+        {
+          "round": 7,
+          "event_with_host_gaps_us_per_call": 13773.004150390625,
+          "wall_with_sync_us_per_call": 13921.110999999999
+        },
+        {
+          "round": 8,
+          "event_with_host_gaps_us_per_call": 14323.097229003906,
+          "wall_with_sync_us_per_call": 14455.360200000001
+        }
+      ],
+      "telemetry_after": {
+        "returncode": 0,
+        "csv": "2026/11/14 08:26:42.197, P0, 5499, 2450, 1980, 72, 25.70, 99",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      }
+    }
+  ],
+  "peak_torch_bytes": 308523008,
+  "caveats": [
+    "events include Python/driver launch gaps, not pure GPU kernel durations",
+    "artificial weights/native static batch call cost; not pretrained model performance or serving throughput",
+    "shared unlocked desktop; process pairs sequential, not statistical significance proof",
+    "no sampling/poison/reference in timed rounds; initialization and capture excluded"
+  ]
+}

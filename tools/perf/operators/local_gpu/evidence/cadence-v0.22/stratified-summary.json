@@ -1,0 +1,4987 @@
+{
+  "plan_sha256": "ab0ac451d9d4beffd6a879ff04bcdcd4000a256ec3194b710f5e7dabca49d9c9",
+  "summaries": [
+    {
+      "run_id": "R01",
+      "scope": "full",
+      "batch": 3,
+      "policy": "query_block",
+      "planned_blocks": 30,
+      "measured_blocks": 30,
+      "complete_clusters": 3,
+      "primary_cluster_ms_per_100_calls": {
+        "count": 3,
+        "min": 1480.885911,
+        "median": 1593.585273,
+        "p95_nearest_rank": 1616.339186,
+        "max": 1616.339186
+      },
+      "variants": {
+        "native": {
+          "event_ns": {
+            "count": 15,
+            "min": 4174.816131591797,
+            "median": 12225.965118408203,
+            "p95_nearest_rank": 23002.418518066406,
+            "max": 23002.418518066406
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 4243.0211,
+            "median": 12314.2449,
+            "p95_nearest_rank": 23075.7986,
+            "max": 23075.7986
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 253.6753,
+            "median": 282.7935,
+            "p95_nearest_rank": 334.0259,
+            "max": 334.0259
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 3957.395,
+            "median": 12054.5853,
+            "p95_nearest_rank": 22788.8877,
+            "max": 22788.8877
+          },
+          "gap_matched": 1,
+          "gap_total": 15
+        },
+        "mature": {
+          "event_ns": {
+            "count": 15,
+            "min": 3973.206329345703,
+            "median": 10630.451202392578,
+            "p95_nearest_rank": 22555.751037597656,
+            "max": 22555.751037597656
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 4032.7563,
+            "median": 10700.068,
+            "p95_nearest_rank": 22635.3365,
+            "max": 22635.3365
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 256.3553,
+            "median": 299.6215,
+            "p95_nearest_rank": 358.3733,
+            "max": 358.3733
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 3708.0576,
+            "median": 10409.196,
+            "p95_nearest_rank": 22328.926,
+            "max": 22328.926
+          },
+          "gap_matched": 1,
+          "gap_total": 15
+        }
+      },
+      "gap_error_ms": {
+        "count": 30,
+        "min": 0.924382,
+        "median": 8.718385999999999,
+        "p95_nearest_rank": 39.295179,
+        "max": 59.837122
+      },
+      "gap_abs_error_ms": {
+        "count": 30,
+        "min": 0.924382,
+        "median": 8.718385999999999,
+        "p95_nearest_rank": 39.295179,
+        "max": 59.837122
+      },
+      "gap_matched": 2
+    },
+    {
+      "run_id": "R01",
+      "scope": "full",
+      "batch": 3,
+      "policy": "query_cluster",
+      "planned_blocks": 30,
+      "measured_blocks": 30,
+      "complete_clusters": 3,
+      "primary_cluster_ms_per_100_calls": {
+        "count": 3,
+        "min": 585.851379,
+        "median": 604.317182,
+        "p95_nearest_rank": 722.197636,
+        "max": 722.197636
+      },
+      "variants": {
+        "native": {
+          "event_ns": {
+            "count": 15,
+            "min": 4173.513412475586,
+            "median": 4182.732772827148,
+            "p95_nearest_rank": 22365.110778808594,
+            "max": 22365.110778808594
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 4213.1917,
+            "median": 4232.2575,
+            "p95_nearest_rank": 22430.0763,
+            "max": 22430.0763
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 214.1872,
+            "median": 249.0033,
+            "p95_nearest_rank": 305.2343,
+            "max": 305.2343
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 3955.6743,
+            "median": 3999.0045,
+            "p95_nearest_rank": 22154.5035,
+            "max": 22154.5035
+          },
+          "gap_matched": 0,
+          "gap_total": 15
+        },
+        "mature": {
+          "event_ns": {
+            "count": 15,
+            "min": 3975.7823944091797,
+            "median": 3979.0592193603516,
+            "p95_nearest_rank": 10052.403259277344,
+            "max": 10052.403259277344
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 4013.3089,
+            "median": 4023.5922,
+            "p95_nearest_rank": 10155.1861,
+            "max": 10155.1861
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 236.0858,
+            "median": 278.3591,
+            "p95_nearest_rank": 455.2524,
+            "max": 455.2524
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 3598.4601,
+            "median": 3753.7944,
+            "p95_nearest_rank": 9790.3857,
+            "max": 9790.3857
+          },
+          "gap_matched": 0,
+          "gap_total": 15
+        }
+      },
+      "gap_error_ms": {
+        "count": 30,
+        "min": -34.057095,
+        "median": -33.8075125,
+        "p95_nearest_rank": 65.876203,
+        "max": 66.21185
+      },
+      "gap_abs_error_ms": {
+        "count": 30,
+        "min": 33.216131,
+        "median": 33.860463499999994,
+        "p95_nearest_rank": 65.876203,
+        "max": 66.21185
+      },
+      "gap_matched": 0
+    },
+    {
+      "run_id": "R01",
+      "scope": "full",
+      "batch": 3,
+      "policy": "idle_matched",
+      "planned_blocks": 30,
+      "measured_blocks": 30,
+      "complete_clusters": 3,
+      "primary_cluster_ms_per_100_calls": {
+        "count": 3,
+        "min": 1057.460017,
+        "median": 1081.667953,
+        "p95_nearest_rank": 1114.992713,
+        "max": 1114.992713
+      },
+      "variants": {
+        "native": {
+          "event_ns": {
+            "count": 15,
+            "min": 4173.619079589844,
+            "median": 7884.799957275391,
+            "p95_nearest_rank": 22376.55029296875,
+            "max": 22376.55029296875
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 4232.587,
+            "median": 7956.5459,
+            "p95_nearest_rank": 22472.8565,
+            "max": 22472.8565
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 222.4899,
+            "median": 268.7939,
+            "p95_nearest_rank": 292.1763,
+            "max": 292.1763
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 3957.1811,
+            "median": 7702.2785,
+            "p95_nearest_rank": 22180.6802,
+            "max": 22180.6802
+          },
+          "gap_matched": 12,
+          "gap_total": 15
+        },
+        "mature": {
+          "event_ns": {
+            "count": 15,
+            "min": 3975.270462036133,
+            "median": 4081.0497283935547,
+            "p95_nearest_rank": 12731.084442138672,
+            "max": 12731.084442138672
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 4040.9032,
+            "median": 4203.6653,
+            "p95_nearest_rank": 12824.7497,
+            "max": 12824.7497
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 243.1823,
+            "median": 299.5564,
+            "p95_nearest_rank": 357.0979,
+            "max": 357.0979
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 3721.3838,
+            "median": 3880.9187,
+            "p95_nearest_rank": 12487.1199,
+            "max": 12487.1199
+          },
+          "gap_matched": 15,
+          "gap_total": 15
+        }
+      },
+      "gap_error_ms": {
+        "count": 30,
+        "min": 0.088331,
+        "median": 0.1054745,
+        "p95_nearest_rank": 21.362446,
+        "max": 22.999579
+      },
+      "gap_abs_error_ms": {
+        "count": 30,
+        "min": 0.088331,
+        "median": 0.1054745,
+        "p95_nearest_rank": 21.362446,
+        "max": 22.999579
+      },
+      "gap_matched": 27
+    },
+    {
+      "run_id": "R01",
+      "scope": "full",
+      "batch": 5,
+      "policy": "query_block",
+      "planned_blocks": 30,
+      "measured_blocks": 30,
+      "complete_clusters": 3,
+      "primary_cluster_ms_per_100_calls": {
+        "count": 3,
+        "min": 1573.12959,
+        "median": 1614.439125,
+        "p95_nearest_rank": 1743.557561,
+        "max": 1743.557561
+      },
+      "variants": {
+        "native": {
+          "event_ns": {
+            "count": 15,
+            "min": 4151.174545288086,
+            "median": 4459.414291381836,
+            "p95_nearest_rank": 23273.983764648438,
+            "max": 23273.983764648438
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 4231.0108,
+            "median": 4617.2653,
+            "p95_nearest_rank": 23399.6039,
+            "max": 23399.6039
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 240.6555,
+            "median": 305.0188,
+            "p95_nearest_rank": 537.5659,
+            "max": 537.5659
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 3758.2669,
+            "median": 4212.9146,
+            "p95_nearest_rank": 23057.6118,
+            "max": 23057.6118
+          },
+          "gap_matched": 0,
+          "gap_total": 15
+        },
+        "mature": {
+          "event_ns": {
+            "count": 15,
+            "min": 3963.596725463867,
+            "median": 11787.366485595703,
+            "p95_nearest_rank": 31511.75537109375,
+            "max": 31511.75537109375
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 4039.3793,
+            "median": 11889.7658,
+            "p95_nearest_rank": 31603.0806,
+            "max": 31603.0806
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 263.8645,
+            "median": 356.6409,
+            "p95_nearest_rank": 461.6717,
+            "max": 461.6717
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 3669.4306,
+            "median": 11553.4375,
+            "p95_nearest_rank": 31214.6828,
+            "max": 31214.6828
+          },
+          "gap_matched": 0,
+          "gap_total": 15
+        }
+      },
+      "gap_error_ms": {
+        "count": 30,
+        "min": 2.052082,
+        "median": 11.344775,
+        "p95_nearest_rank": 67.430152,
+        "max": 120.40243
+      },
+      "gap_abs_error_ms": {
+        "count": 30,
+        "min": 2.052082,
+        "median": 11.344775,
+        "p95_nearest_rank": 67.430152,
+        "max": 120.40243
+      },
+      "gap_matched": 0
+    },
+    {
+      "run_id": "R01",
+      "scope": "full",
+      "batch": 5,
+      "policy": "query_cluster",
+      "planned_blocks": 30,
+      "measured_blocks": 30,
+      "complete_clusters": 3,
+      "primary_cluster_ms_per_100_calls": {
+        "count": 3,
+        "min": 579.11809,
+        "median": 591.493935,
+        "p95_nearest_rank": 609.763452,
+        "max": 609.763452
+      },
+      "variants": {
+        "native": {
+          "event_ns": {
+            "count": 15,
+            "min": 4149.350357055664,
+            "median": 4157.6446533203125,
+            "p95_nearest_rank": 11455.590057373047,
+            "max": 11455.590057373047
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 4187.2749,
+            "median": 4210.4817,
+            "p95_nearest_rank": 11498.7629,
+            "max": 11498.7629
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 206.5997,
+            "median": 245.5308,
+            "p95_nearest_rank": 321.7271,
+            "max": 321.7271
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 3883.8335,
+            "median": 3968.8372,
+            "p95_nearest_rank": 11279.0462,
+            "max": 11279.0462
+          },
+          "gap_matched": 0,
+          "gap_total": 15
+        },
+        "mature": {
+          "event_ns": {
+            "count": 15,
+            "min": 3955.3024291992188,
+            "median": 3969.5358276367188,
+            "p95_nearest_rank": 16159.333801269531,
+            "max": 16159.333801269531
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 3997.5262,
+            "median": 4033.9254,
+            "p95_nearest_rank": 16209.5243,
+            "max": 16209.5243
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 257.1399,
+            "median": 277.8431,
+            "p95_nearest_rank": 302.8266,
+            "max": 302.8266
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 3718.1074,
+            "median": 3752.6947,
+            "p95_nearest_rank": 15938.1655,
+            "max": 15938.1655
+          },
+          "gap_matched": 0,
+          "gap_total": 15
+        }
+      },
+      "gap_error_ms": {
+        "count": 30,
+        "min": -34.031266,
+        "median": -33.768851999999995,
+        "p95_nearest_rank": 49.269983,
+        "max": 76.699568
+      },
+      "gap_abs_error_ms": {
+        "count": 30,
+        "min": 31.713219,
+        "median": 33.778116499999996,
+        "p95_nearest_rank": 49.269983,
+        "max": 76.699568
+      },
+      "gap_matched": 0
+    },
+    {
+      "run_id": "R01",
+      "scope": "full",
+      "batch": 5,
+      "policy": "idle_matched",
+      "planned_blocks": 30,
+      "measured_blocks": 30,
+      "complete_clusters": 3,
+      "primary_cluster_ms_per_100_calls": {
+        "count": 3,
+        "min": 1027.748903,
+        "median": 1159.120742,
+        "p95_nearest_rank": 1173.506807,
+        "max": 1173.506807
+      },
+      "variants": {
+        "native": {
+          "event_ns": {
+            "count": 15,
+            "min": 4149.756622314453,
+            "median": 7184.486389160156,
+            "p95_nearest_rank": 17587.19940185547,
+            "max": 17587.19940185547
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 4219.7937,
+            "median": 7302.7247,
+            "p95_nearest_rank": 17675.8826,
+            "max": 17675.8826
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 252.8918,
+            "median": 352.8628,
+            "p95_nearest_rank": 601.8131,
+            "max": 601.8131
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 3693.266,
+            "median": 6915.4035,
+            "p95_nearest_rank": 17296.8551,
+            "max": 17296.8551
+          },
+          "gap_matched": 12,
+          "gap_total": 15
+        },
+        "mature": {
+          "event_ns": {
+            "count": 15,
+            "min": 3962.0609283447266,
+            "median": 5902.540969848633,
+            "p95_nearest_rank": 14052.146911621094,
+            "max": 14052.146911621094
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 4018.0913,
+            "median": 6015.135,
+            "p95_nearest_rank": 14187.844,
+            "max": 14187.844
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 267.6909,
+            "median": 382.966,
+            "p95_nearest_rank": 872.1222,
+            "max": 872.1222
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 3596.6596,
+            "median": 5534.4779,
+            "p95_nearest_rank": 13315.7218,
+            "max": 13315.7218
+          },
+          "gap_matched": 15,
+          "gap_total": 15
+        }
+      },
+      "gap_error_ms": {
+        "count": 30,
+        "min": 0.089677,
+        "median": 0.128747,
+        "p95_nearest_rank": 5.860928,
+        "max": 18.520559
+      },
+      "gap_abs_error_ms": {
+        "count": 30,
+        "min": 0.089677,
+        "median": 0.128747,
+        "p95_nearest_rank": 5.860928,
+        "max": 18.520559
+      },
+      "gap_matched": 27
+    },
+    {
+      "run_id": "R01",
+      "scope": "full",
+      "batch": 8,
+      "policy": "query_block",
+      "planned_blocks": 30,
+      "measured_blocks": 30,
+      "complete_clusters": 3,
+      "primary_cluster_ms_per_100_calls": {
+        "count": 3,
+        "min": 1325.861984,
+        "median": 1586.588651,
+        "p95_nearest_rank": 1602.752125,
+        "max": 1602.752125
+      },
+      "variants": {
+        "native": {
+          "event_ns": {
+            "count": 15,
+            "min": 4147.814559936523,
+            "median": 19281.613159179688,
+            "p95_nearest_rank": 23555.072021484375,
+            "max": 23555.072021484375
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 4215.0209,
+            "median": 19369.5108,
+            "p95_nearest_rank": 23631.4617,
+            "max": 23631.4617
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 185.3733,
+            "median": 241.8679,
+            "p95_nearest_rank": 297.6498,
+            "max": 297.6498
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 3980.361,
+            "median": 19096.3234,
+            "p95_nearest_rank": 23429.8224,
+            "max": 23429.8224
+          },
+          "gap_matched": 3,
+          "gap_total": 15
+        },
+        "mature": {
+          "event_ns": {
+            "count": 15,
+            "min": 3959.3982696533203,
+            "median": 10646.32339477539,
+            "p95_nearest_rank": 14106.112670898438,
+            "max": 14106.112670898438
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 4017.3613,
+            "median": 10715.9719,
+            "p95_nearest_rank": 14171.3701,
+            "max": 14171.3701
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 246.4756,
+            "median": 269.3741,
+            "p95_nearest_rank": 320.3891,
+            "max": 320.3891
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 3745.5597,
+            "median": 10428.9346,
+            "p95_nearest_rank": 13901.996,
+            "max": 13901.996
+          },
+          "gap_matched": 3,
+          "gap_total": 15
+        }
+      },
+      "gap_error_ms": {
+        "count": 30,
+        "min": -0.926772,
+        "median": 5.047363000000001,
+        "p95_nearest_rank": 42.780705,
+        "max": 59.799549
+      },
+      "gap_abs_error_ms": {
+        "count": 30,
+        "min": 0.470461,
+        "median": 5.047363000000001,
+        "p95_nearest_rank": 42.780705,
+        "max": 59.799549
+      },
+      "gap_matched": 6
+    },
+    {
+      "run_id": "R01",
+      "scope": "full",
+      "batch": 8,
+      "policy": "query_cluster",
+      "planned_blocks": 30,
+      "measured_blocks": 30,
+      "complete_clusters": 3,
+      "primary_cluster_ms_per_100_calls": {
+        "count": 3,
+        "min": 575.220513,
+        "median": 600.029115,
+        "p95_nearest_rank": 600.181758,
+        "max": 600.181758
+      },
+      "variants": {
+        "native": {
+          "event_ns": {
+            "count": 15,
+            "min": 4146.48323059082,
+            "median": 4154.265594482422,
+            "p95_nearest_rank": 14127.40478515625,
+            "max": 14127.40478515625
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 4187.8956,
+            "median": 4223.6186,
+            "p95_nearest_rank": 14169.3154,
+            "max": 14169.3154
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 201.2616,
+            "median": 228.7548,
+            "p95_nearest_rank": 322.6399,
+            "max": 322.6399
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 3900.9787,
+            "median": 3976.6565,
+            "p95_nearest_rank": 13963.0243,
+            "max": 13963.0243
+          },
+          "gap_matched": 0,
+          "gap_total": 15
+        },
+        "mature": {
+          "event_ns": {
+            "count": 15,
+            "min": 3958.0673217773438,
+            "median": 3962.5728607177734,
+            "p95_nearest_rank": 14840.730285644531,
+            "max": 14840.730285644531
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 3995.5461,
+            "median": 4002.1583,
+            "p95_nearest_rank": 14903.7695,
+            "max": 14903.7695
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 218.4523,
+            "median": 241.5362,
+            "p95_nearest_rank": 324.578,
+            "max": 324.578
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 3677.5803,
+            "median": 3767.1594,
+            "p95_nearest_rank": 14640.6083,
+            "max": 14640.6083
+          },
+          "gap_matched": 0,
+          "gap_total": 15
+        }
+      },
+      "gap_error_ms": {
+        "count": 30,
+        "min": -34.059519,
+        "median": -33.7738535,
+        "p95_nearest_rank": 42.84008,
+        "max": 68.358376
+      },
+      "gap_abs_error_ms": {
+        "count": 30,
+        "min": 33.249976,
+        "median": 33.8458855,
+        "p95_nearest_rank": 42.84008,
+        "max": 68.358376
+      },
+      "gap_matched": 0
+    },
+    {
+      "run_id": "R01",
+      "scope": "full",
+      "batch": 8,
+      "policy": "idle_matched",
+      "planned_blocks": 30,
+      "measured_blocks": 30,
+      "complete_clusters": 3,
+      "primary_cluster_ms_per_100_calls": {
+        "count": 3,
+        "min": 1086.257335,
+        "median": 1125.420348,
+        "p95_nearest_rank": 1179.459492,
+        "max": 1179.459492
+      },
+      "variants": {
+        "native": {
+          "event_ns": {
+            "count": 15,
+            "min": 4147.798538208008,
+            "median": 5096.150588989258,
+            "p95_nearest_rank": 23790.17333984375,
+            "max": 23790.17333984375
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 4208.4502,
+            "median": 5155.0478,
+            "p95_nearest_rank": 23857.7644,
+            "max": 23857.7644
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 153.8685,
+            "median": 218.4444,
+            "p95_nearest_rank": 295.0505,
+            "max": 295.0505
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 3958.4858,
+            "median": 4917.4631,
+            "p95_nearest_rank": 23651.871,
+            "max": 23651.871
+          },
+          "gap_matched": 12,
+          "gap_total": 15
+        },
+        "mature": {
+          "event_ns": {
+            "count": 15,
+            "min": 3958.3744049072266,
+            "median": 3963.8015747070312,
+            "p95_nearest_rank": 18143.23272705078,
+            "max": 18143.23272705078
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 3999.2982,
+            "median": 4031.5419,
+            "p95_nearest_rank": 18212.2464,
+            "max": 18212.2464
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 171.6874,
+            "median": 232.6163,
+            "p95_nearest_rank": 275.8094,
+            "max": 275.8094
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 3755.7325,
+            "median": 3804.4224,
+            "p95_nearest_rank": 17938.6022,
+            "max": 17938.6022
+          },
+          "gap_matched": 15,
+          "gap_total": 15
+        }
+      },
+      "gap_error_ms": {
+        "count": 30,
+        "min": 0.081776,
+        "median": 0.107739,
+        "p95_nearest_rank": 13.639641,
+        "max": 14.611374
+      },
+      "gap_abs_error_ms": {
+        "count": 30,
+        "min": 0.081776,
+        "median": 0.107739,
+        "p95_nearest_rank": 13.639641,
+        "max": 14.611374
+      },
+      "gap_matched": 27
+    },
+    {
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 3,
+      "policy": "query_block",
+      "planned_blocks": 30,
+      "measured_blocks": 30,
+      "complete_clusters": 3,
+      "primary_cluster_ms_per_100_calls": {
+        "count": 3,
+        "min": 1135.090239,
+        "median": 1347.918169,
+        "p95_nearest_rank": 1527.959705,
+        "max": 1527.959705
+      },
+      "variants": {
+        "native": {
+          "event_ns": {
+            "count": 15,
+            "min": 4103.782272338867,
+            "median": 4109.414291381836,
+            "p95_nearest_rank": 19035.74981689453,
+            "max": 19035.74981689453
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 4131.0391,
+            "median": 4143.7678,
+            "p95_nearest_rank": 19075.7864,
+            "max": 19075.7864
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 12.8244,
+            "median": 19.2486,
+            "p95_nearest_rank": 31.1743,
+            "max": 31.1743
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 4118.0712,
+            "median": 4124.8594,
+            "p95_nearest_rank": 19054.9418,
+            "max": 19054.9418
+          },
+          "gap_matched": 2,
+          "gap_total": 15
+        },
+        "mature": {
+          "event_ns": {
+            "count": 15,
+            "min": 3907.583999633789,
+            "median": 11394.662475585938,
+            "p95_nearest_rank": 22657.125854492188,
+            "max": 22657.125854492188
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 3934.1325,
+            "median": 11433.0163,
+            "p95_nearest_rank": 22687.1687,
+            "max": 22687.1687
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 30.3477,
+            "median": 35.0175,
+            "p95_nearest_rank": 50.9449,
+            "max": 50.9449
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 3902.9472,
+            "median": 11390.7899,
+            "p95_nearest_rank": 22654.8522,
+            "max": 22654.8522
+          },
+          "gap_matched": 1,
+          "gap_total": 15
+        }
+      },
+      "gap_error_ms": {
+        "count": 30,
+        "min": -1.73002,
+        "median": 7.989204,
+        "p95_nearest_rank": 66.778372,
+        "max": 2449.090328
+      },
+      "gap_abs_error_ms": {
+        "count": 30,
+        "min": 0.576489,
+        "median": 7.989204,
+        "p95_nearest_rank": 66.778372,
+        "max": 2449.090328
+      },
+      "gap_matched": 3
+    },
+    {
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 3,
+      "policy": "query_cluster",
+      "planned_blocks": 30,
+      "measured_blocks": 30,
+      "complete_clusters": 3,
+      "primary_cluster_ms_per_100_calls": {
+        "count": 3,
+        "min": 452.24184,
+        "median": 634.689415,
+        "p95_nearest_rank": 712.118089,
+        "max": 712.118089
+      },
+      "variants": {
+        "native": {
+          "event_ns": {
+            "count": 15,
+            "min": 4107.244873046875,
+            "median": 4108.563232421875,
+            "p95_nearest_rank": 22413.107299804688,
+            "max": 22413.107299804688
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 4119.983,
+            "median": 4127.3276,
+            "p95_nearest_rank": 22430.9571,
+            "max": 22430.9571
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 6.9963,
+            "median": 9.0542,
+            "p95_nearest_rank": 16.774,
+            "max": 16.774
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 4112.9867,
+            "median": 4116.6282,
+            "p95_nearest_rank": 22421.7436,
+            "max": 22421.7436
+          },
+          "gap_matched": 0,
+          "gap_total": 15
+        },
+        "mature": {
+          "event_ns": {
+            "count": 15,
+            "min": 3904.307174682617,
+            "median": 3909.1201782226562,
+            "p95_nearest_rank": 17169.100952148438,
+            "max": 17169.100952148438
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 3920.1291,
+            "median": 3923.4258,
+            "p95_nearest_rank": 17199.5724,
+            "max": 17199.5724
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 22.5909,
+            "median": 26.305,
+            "p95_nearest_rank": 39.2526,
+            "max": 39.2526
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 3894.2787,
+            "median": 3898.5016,
+            "p95_nearest_rank": 17165.7781,
+            "max": 17165.7781
+          },
+          "gap_matched": 0,
+          "gap_total": 15
+        }
+      },
+      "gap_error_ms": {
+        "count": 30,
+        "min": -34.093734,
+        "median": -33.780446,
+        "p95_nearest_rank": 52.196755,
+        "max": 220.062014
+      },
+      "gap_abs_error_ms": {
+        "count": 30,
+        "min": 33.395,
+        "median": 33.9309945,
+        "p95_nearest_rank": 52.196755,
+        "max": 220.062014
+      },
+      "gap_matched": 0
+    },
+    {
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 3,
+      "policy": "idle_matched",
+      "planned_blocks": 30,
+      "measured_blocks": 30,
+      "complete_clusters": 3,
+      "primary_cluster_ms_per_100_calls": {
+        "count": 3,
+        "min": 929.206208,
+        "median": 983.264527,
+        "p95_nearest_rank": 1087.104389,
+        "max": 1087.104389
+      },
+      "variants": {
+        "native": {
+          "event_ns": {
+            "count": 15,
+            "min": 4104.499053955078,
+            "median": 6585.549163818359,
+            "p95_nearest_rank": 21243.801879882812,
+            "max": 21243.801879882812
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 4121.5966,
+            "median": 6615.3328,
+            "p95_nearest_rank": 21278.2408,
+            "max": 21278.2408
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 8.9359,
+            "median": 10.6192,
+            "p95_nearest_rank": 18.1905,
+            "max": 18.1905
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 4112.4853,
+            "median": 6599.1731,
+            "p95_nearest_rank": 21260.8968,
+            "max": 21260.8968
+          },
+          "gap_matched": 12,
+          "gap_total": 15
+        },
+        "mature": {
+          "event_ns": {
+            "count": 15,
+            "min": 3904.7168731689453,
+            "median": 3908.30078125,
+            "p95_nearest_rank": 14185.983276367188,
+            "max": 14185.983276367188
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 3926.4159,
+            "median": 3932.0485,
+            "p95_nearest_rank": 14226.2733,
+            "max": 14226.2733
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 24.2742,
+            "median": 27.4271,
+            "p95_nearest_rank": 47.1667,
+            "max": 47.1667
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 3898.8897,
+            "median": 3904.8049,
+            "p95_nearest_rank": 14188.6417,
+            "max": 14188.6417
+          },
+          "gap_matched": 15,
+          "gap_total": 15
+        }
+      },
+      "gap_error_ms": {
+        "count": 30,
+        "min": 0.079665,
+        "median": 0.093444,
+        "p95_nearest_rank": 26.86178,
+        "max": 33.776594
+      },
+      "gap_abs_error_ms": {
+        "count": 30,
+        "min": 0.079665,
+        "median": 0.093444,
+        "p95_nearest_rank": 26.86178,
+        "max": 33.776594
+      },
+      "gap_matched": 27
+    },
+    {
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 5,
+      "policy": "query_block",
+      "planned_blocks": 30,
+      "measured_blocks": 30,
+      "complete_clusters": 3,
+      "primary_cluster_ms_per_100_calls": {
+        "count": 3,
+        "min": 1264.021859,
+        "median": 1573.980547,
+        "p95_nearest_rank": 1587.106966,
+        "max": 1587.106966
+      },
+      "variants": {
+        "native": {
+          "event_ns": {
+            "count": 15,
+            "min": 4087.500762939453,
+            "median": 10859.302520751953,
+            "p95_nearest_rank": 23465.164184570312,
+            "max": 23465.164184570312
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 4120.7419,
+            "median": 10891.0813,
+            "p95_nearest_rank": 23494.9781,
+            "max": 23494.9781
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 14.183,
+            "median": 17.9261,
+            "p95_nearest_rank": 22.7212,
+            "max": 22.7212
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 4104.498,
+            "median": 10874.8465,
+            "p95_nearest_rank": 23480.5877,
+            "max": 23480.5877
+          },
+          "gap_matched": 1,
+          "gap_total": 15
+        },
+        "mature": {
+          "event_ns": {
+            "count": 15,
+            "min": 3887.411117553711,
+            "median": 3900.0064849853516,
+            "p95_nearest_rank": 31776.5625,
+            "max": 31776.5625
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 3921.5549,
+            "median": 3945.2363,
+            "p95_nearest_rank": 31886.9485,
+            "max": 31886.9485
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 32.8284,
+            "median": 39.7165,
+            "p95_nearest_rank": 51.0721,
+            "max": 51.0721
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 3883.4717,
+            "median": 3910.3951,
+            "p95_nearest_rank": 31835.8764,
+            "max": 31835.8764
+          },
+          "gap_matched": 2,
+          "gap_total": 15
+        }
+      },
+      "gap_error_ms": {
+        "count": 30,
+        "min": -2.259663,
+        "median": 10.1767555,
+        "p95_nearest_rank": 56.989508,
+        "max": 76.179575
+      },
+      "gap_abs_error_ms": {
+        "count": 30,
+        "min": 0.818609,
+        "median": 10.1767555,
+        "p95_nearest_rank": 56.989508,
+        "max": 76.179575
+      },
+      "gap_matched": 3
+    },
+    {
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 5,
+      "policy": "query_cluster",
+      "planned_blocks": 30,
+      "measured_blocks": 30,
+      "complete_clusters": 3,
+      "primary_cluster_ms_per_100_calls": {
+        "count": 3,
+        "min": 450.169171,
+        "median": 613.225516,
+        "p95_nearest_rank": 666.463395,
+        "max": 666.463395
+      },
+      "variants": {
+        "native": {
+          "event_ns": {
+            "count": 15,
+            "min": 4084.940719604492,
+            "median": 4097.126388549805,
+            "p95_nearest_rank": 18172.210693359375,
+            "max": 18172.210693359375
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 4102.9962,
+            "median": 4115.8226,
+            "p95_nearest_rank": 18211.2796,
+            "max": 18211.2796
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 6.842,
+            "median": 9.8617,
+            "p95_nearest_rank": 22.2178,
+            "max": 22.2178
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 4093.7072,
+            "median": 4104.2756,
+            "p95_nearest_rank": 18191.6423,
+            "max": 18191.6423
+          },
+          "gap_matched": 0,
+          "gap_total": 15
+        },
+        "mature": {
+          "event_ns": {
+            "count": 15,
+            "min": 3894.784164428711,
+            "median": 3897.8561401367188,
+            "p95_nearest_rank": 25064.346313476562,
+            "max": 25064.346313476562
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 3910.6692,
+            "median": 3915.4755,
+            "p95_nearest_rank": 25106.8365,
+            "max": 25106.8365
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 25.6438,
+            "median": 29.9078,
+            "p95_nearest_rank": 46.0525,
+            "max": 46.0525
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 3873.426,
+            "median": 3886.8038,
+            "p95_nearest_rank": 25067.1741,
+            "max": 25067.1741
+          },
+          "gap_matched": 0,
+          "gap_total": 15
+        }
+      },
+      "gap_error_ms": {
+        "count": 30,
+        "min": -34.009895,
+        "median": -33.7533465,
+        "p95_nearest_rank": 201.865887,
+        "max": 234.944038
+      },
+      "gap_abs_error_ms": {
+        "count": 30,
+        "min": 33.45534,
+        "median": 33.814739,
+        "p95_nearest_rank": 201.865887,
+        "max": 234.944038
+      },
+      "gap_matched": 0
+    },
+    {
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 5,
+      "policy": "idle_matched",
+      "planned_blocks": 30,
+      "measured_blocks": 30,
+      "complete_clusters": 3,
+      "primary_cluster_ms_per_100_calls": {
+        "count": 3,
+        "min": 931.039515,
+        "median": 995.007753,
+        "p95_nearest_rank": 1224.236258,
+        "max": 1224.236258
+      },
+      "variants": {
+        "native": {
+          "event_ns": {
+            "count": 15,
+            "min": 4087.1936798095703,
+            "median": 4244.787216186523,
+            "p95_nearest_rank": 23065.49835205078,
+            "max": 23065.49835205078
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 4108.7382,
+            "median": 4270.081,
+            "p95_nearest_rank": 23100.3728,
+            "max": 23100.3728
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 8.9981,
+            "median": 12.4697,
+            "p95_nearest_rank": 24.8112,
+            "max": 24.8112
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 4098.9275,
+            "median": 4257.6113,
+            "p95_nearest_rank": 23083.8023,
+            "max": 23083.8023
+          },
+          "gap_matched": 12,
+          "gap_total": 15
+        },
+        "mature": {
+          "event_ns": {
+            "count": 15,
+            "min": 3894.6815490722656,
+            "median": 3897.8561401367188,
+            "p95_nearest_rank": 15597.056579589844,
+            "max": 15597.056579589844
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 3919.3734,
+            "median": 3947.9915,
+            "p95_nearest_rank": 15638.2773,
+            "max": 15638.2773
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 27.0685,
+            "median": 36.805,
+            "p95_nearest_rank": 48.3188,
+            "max": 48.3188
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 3890.6296,
+            "median": 3907.8169,
+            "p95_nearest_rank": 15597.2183,
+            "max": 15597.2183
+          },
+          "gap_matched": 15,
+          "gap_total": 15
+        }
+      },
+      "gap_error_ms": {
+        "count": 30,
+        "min": 0.082309,
+        "median": 0.102603,
+        "p95_nearest_rank": 13.810502,
+        "max": 128.643556
+      },
+      "gap_abs_error_ms": {
+        "count": 30,
+        "min": 0.082309,
+        "median": 0.102603,
+        "p95_nearest_rank": 13.810502,
+        "max": 128.643556
+      },
+      "gap_matched": 27
+    },
+    {
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 8,
+      "policy": "query_block",
+      "planned_blocks": 30,
+      "measured_blocks": 30,
+      "complete_clusters": 3,
+      "primary_cluster_ms_per_100_calls": {
+        "count": 3,
+        "min": 1400.852678,
+        "median": 1404.798184,
+        "p95_nearest_rank": 1591.55855,
+        "max": 1591.55855
+      },
+      "variants": {
+        "native": {
+          "event_ns": {
+            "count": 15,
+            "min": 4084.8384857177734,
+            "median": 10971.955108642578,
+            "p95_nearest_rank": 20292.5048828125,
+            "max": 20292.5048828125
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 4122.738,
+            "median": 11008.0451,
+            "p95_nearest_rank": 20452.5961,
+            "max": 20452.5961
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 14.8944,
+            "median": 20.2304,
+            "p95_nearest_rank": 32.8374,
+            "max": 32.8374
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 4100.8013,
+            "median": 10988.7073,
+            "p95_nearest_rank": 20433.0499,
+            "max": 20433.0499
+          },
+          "gap_matched": 1,
+          "gap_total": 15
+        },
+        "mature": {
+          "event_ns": {
+            "count": 15,
+            "min": 3893.452835083008,
+            "median": 4387.430572509766,
+            "p95_nearest_rank": 23995.904541015625,
+            "max": 23995.904541015625
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 3924.8258,
+            "median": 4421.256,
+            "p95_nearest_rank": 24042.9044,
+            "max": 24042.9044
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 34.6138,
+            "median": 41.7334,
+            "p95_nearest_rank": 87.336,
+            "max": 87.336
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 3869.1488,
+            "median": 4384.2155,
+            "p95_nearest_rank": 23993.4815,
+            "max": 23993.4815
+          },
+          "gap_matched": 0,
+          "gap_total": 15
+        }
+      },
+      "gap_error_ms": {
+        "count": 30,
+        "min": 0.174188,
+        "median": 12.5473555,
+        "p95_nearest_rank": 44.636326,
+        "max": 122.85133
+      },
+      "gap_abs_error_ms": {
+        "count": 30,
+        "min": 0.174188,
+        "median": 12.5473555,
+        "p95_nearest_rank": 44.636326,
+        "max": 122.85133
+      },
+      "gap_matched": 1
+    },
+    {
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 8,
+      "policy": "query_cluster",
+      "planned_blocks": 30,
+      "measured_blocks": 30,
+      "complete_clusters": 3,
+      "primary_cluster_ms_per_100_calls": {
+        "count": 3,
+        "min": 443.282758,
+        "median": 595.539388,
+        "p95_nearest_rank": 732.311434,
+        "max": 732.311434
+      },
+      "variants": {
+        "native": {
+          "event_ns": {
+            "count": 15,
+            "min": 4079.616165161133,
+            "median": 4088.422393798828,
+            "p95_nearest_rank": 12331.520080566406,
+            "max": 12331.520080566406
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 4100.2737,
+            "median": 4109.3472,
+            "p95_nearest_rank": 12357.2829,
+            "max": 12357.2829
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 6.6216,
+            "median": 10.8636,
+            "p95_nearest_rank": 27.9637,
+            "max": 27.9637
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 4089.4283,
+            "median": 4096.5659,
+            "p95_nearest_rank": 12343.4957,
+            "max": 12343.4957
+          },
+          "gap_matched": 0,
+          "gap_total": 15
+        },
+        "mature": {
+          "event_ns": {
+            "count": 15,
+            "min": 3890.2782440185547,
+            "median": 4063.9488220214844,
+            "p95_nearest_rank": 8396.595001220703,
+            "max": 8396.595001220703
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 3910.6457,
+            "median": 4085.87,
+            "p95_nearest_rank": 8417.9766,
+            "max": 8417.9766
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 24.188,
+            "median": 33.4336,
+            "p95_nearest_rank": 84.4682,
+            "max": 84.4682
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 3869.708,
+            "median": 4047.9439,
+            "p95_nearest_rank": 8387.9134,
+            "max": 8387.9134
+          },
+          "gap_matched": 0,
+          "gap_total": 15
+        }
+      },
+      "gap_error_ms": {
+        "count": 30,
+        "min": -34.043217,
+        "median": -33.5725065,
+        "p95_nearest_rank": 55.945106,
+        "max": 3453.733624
+      },
+      "gap_abs_error_ms": {
+        "count": 30,
+        "min": 32.866512,
+        "median": 33.6312375,
+        "p95_nearest_rank": 55.945106,
+        "max": 3453.733624
+      },
+      "gap_matched": 0
+    },
+    {
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 8,
+      "policy": "idle_matched",
+      "planned_blocks": 30,
+      "measured_blocks": 30,
+      "complete_clusters": 3,
+      "primary_cluster_ms_per_100_calls": {
+        "count": 3,
+        "min": 1075.575701,
+        "median": 1086.107778,
+        "p95_nearest_rank": 1165.87517,
+        "max": 1165.87517
+      },
+      "variants": {
+        "native": {
+          "event_ns": {
+            "count": 15,
+            "min": 4081.5616607666016,
+            "median": 7145.98388671875,
+            "p95_nearest_rank": 21253.529357910156,
+            "max": 21253.529357910156
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 4100.6331,
+            "median": 7188.9863,
+            "p95_nearest_rank": 21283.6245,
+            "max": 21283.6245
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 9.0281,
+            "median": 21.8826,
+            "p95_nearest_rank": 28.7106,
+            "max": 28.7106
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 4090.2554,
+            "median": 7167.1037,
+            "p95_nearest_rank": 21268.5458,
+            "max": 21268.5458
+          },
+          "gap_matched": 12,
+          "gap_total": 15
+        },
+        "mature": {
+          "event_ns": {
+            "count": 15,
+            "min": 3888.844680786133,
+            "median": 3897.8561401367188,
+            "p95_nearest_rank": 17779.916381835938,
+            "max": 17779.916381835938
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 3920.042,
+            "median": 3944.8109,
+            "p95_nearest_rank": 17823.1404,
+            "max": 17823.1404
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 25.5976,
+            "median": 49.2205,
+            "p95_nearest_rank": 85.0487,
+            "max": 85.0487
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 3865.3855,
+            "median": 3894.4444,
+            "p95_nearest_rank": 17777.9014,
+            "max": 17777.9014
+          },
+          "gap_matched": 15,
+          "gap_total": 15
+        }
+      },
+      "gap_error_ms": {
+        "count": 30,
+        "min": 0.081411,
+        "median": 0.124083,
+        "p95_nearest_rank": 8.934801,
+        "max": 22.55802
+      },
+      "gap_abs_error_ms": {
+        "count": 30,
+        "min": 0.081411,
+        "median": 0.124083,
+        "p95_nearest_rank": 8.934801,
+        "max": 22.55802
+      },
+      "gap_matched": 27
+    },
+    {
+      "run_id": "R02",
+      "scope": "full",
+      "batch": 3,
+      "policy": "query_block",
+      "planned_blocks": 30,
+      "measured_blocks": 30,
+      "complete_clusters": 3,
+      "primary_cluster_ms_per_100_calls": {
+        "count": 3,
+        "min": 1213.749817,
+        "median": 1465.206245,
+        "p95_nearest_rank": 1565.621417,
+        "max": 1565.621417
+      },
+      "variants": {
+        "native": {
+          "event_ns": {
+            "count": 15,
+            "min": 4174.028778076172,
+            "median": 4180.377578735352,
+            "p95_nearest_rank": 33949.81384277344,
+            "max": 33949.81384277344
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 4238.9404,
+            "median": 4327.2643,
+            "p95_nearest_rank": 34057.8384,
+            "max": 34057.8384
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 240.861,
+            "median": 312.1124,
+            "p95_nearest_rank": 595.4169,
+            "max": 595.4169
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 3731.8474,
+            "median": 4005.7745,
+            "p95_nearest_rank": 33712.0721,
+            "max": 33712.0721
+          },
+          "gap_matched": 5,
+          "gap_total": 15
+        },
+        "mature": {
+          "event_ns": {
+            "count": 15,
+            "min": 3973.5294342041016,
+            "median": 4479.359817504883,
+            "p95_nearest_rank": 21422.181701660156,
+            "max": 21422.181701660156
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 4041.782,
+            "median": 4607.0602,
+            "p95_nearest_rank": 21502.9339,
+            "max": 21502.9339
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 258.7479,
+            "median": 343.2986,
+            "p95_nearest_rank": 535.0582,
+            "max": 535.0582
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 3650.2983,
+            "median": 4099.0309,
+            "p95_nearest_rank": 21200.9157,
+            "max": 21200.9157
+          },
+          "gap_matched": 5,
+          "gap_total": 15
+        }
+      },
+      "gap_error_ms": {
+        "count": 30,
+        "min": -7.18417,
+        "median": 2.4731474999999996,
+        "p95_nearest_rank": 28.931168,
+        "max": 30.383862
+      },
+      "gap_abs_error_ms": {
+        "count": 30,
+        "min": 0.322718,
+        "median": 3.8937555,
+        "p95_nearest_rank": 28.931168,
+        "max": 30.383862
+      },
+      "gap_matched": 10
+    },
+    {
+      "run_id": "R02",
+      "scope": "full",
+      "batch": 3,
+      "policy": "query_cluster",
+      "planned_blocks": 30,
+      "measured_blocks": 30,
+      "complete_clusters": 3,
+      "primary_cluster_ms_per_100_calls": {
+        "count": 3,
+        "min": 584.266017,
+        "median": 610.932478,
+        "p95_nearest_rank": 732.43463,
+        "max": 732.43463
+      },
+      "variants": {
+        "native": {
+          "event_ns": {
+            "count": 15,
+            "min": 4174.4384765625,
+            "median": 4176.998519897461,
+            "p95_nearest_rank": 17307.443237304688,
+            "max": 17307.443237304688
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 4214.7514,
+            "median": 4232.9564,
+            "p95_nearest_rank": 17433.2877,
+            "max": 17433.2877
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 213.547,
+            "median": 294.5129,
+            "p95_nearest_rank": 387.928,
+            "max": 387.928
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 3901.0862,
+            "median": 3994.8443,
+            "p95_nearest_rank": 17102.0439,
+            "max": 17102.0439
+          },
+          "gap_matched": 0,
+          "gap_total": 15
+        },
+        "mature": {
+          "event_ns": {
+            "count": 15,
+            "min": 3973.8014221191406,
+            "median": 3980.284881591797,
+            "p95_nearest_rank": 22867.251586914062,
+            "max": 22867.251586914062
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 4014.7081,
+            "median": 4035.2021,
+            "p95_nearest_rank": 22907.1113,
+            "max": 22907.1113
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 242.2075,
+            "median": 320.7588,
+            "p95_nearest_rank": 455.9545,
+            "max": 455.9545
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 3657.2049,
+            "median": 3722.2527,
+            "p95_nearest_rank": 22659.21,
+            "max": 22659.21
+          },
+          "gap_matched": 0,
+          "gap_total": 15
+        }
+      },
+      "gap_error_ms": {
+        "count": 30,
+        "min": -44.526685,
+        "median": -42.280477000000005,
+        "p95_nearest_rank": 36.27029,
+        "max": 38.738154
+      },
+      "gap_abs_error_ms": {
+        "count": 30,
+        "min": 21.137538,
+        "median": 42.280477000000005,
+        "p95_nearest_rank": 44.510564,
+        "max": 44.526685
+      },
+      "gap_matched": 0
+    },
+    {
+      "run_id": "R02",
+      "scope": "full",
+      "batch": 3,
+      "policy": "idle_matched",
+      "planned_blocks": 30,
+      "measured_blocks": 30,
+      "complete_clusters": 3,
+      "primary_cluster_ms_per_100_calls": {
+        "count": 3,
+        "min": 1046.578849,
+        "median": 1278.327052,
+        "p95_nearest_rank": 1352.35468,
+        "max": 1352.35468
+      },
+      "variants": {
+        "native": {
+          "event_ns": {
+            "count": 15,
+            "min": 4167.782211303711,
+            "median": 4175.667190551758,
+            "p95_nearest_rank": 14934.016418457031,
+            "max": 14934.016418457031
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 4230.4798,
+            "median": 4275.6067,
+            "p95_nearest_rank": 15076.9389,
+            "max": 15076.9389
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 240.7377,
+            "median": 275.8384,
+            "p95_nearest_rank": 350.0796,
+            "max": 350.0796
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 3928.452,
+            "median": 3987.1401,
+            "p95_nearest_rank": 14727.3784,
+            "max": 14727.3784
+          },
+          "gap_matched": 15,
+          "gap_total": 15
+        },
+        "mature": {
+          "event_ns": {
+            "count": 15,
+            "min": 3971.583938598633,
+            "median": 4471.193695068359,
+            "p95_nearest_rank": 21318.14422607422,
+            "max": 21318.14422607422
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 4039.4856,
+            "median": 4566.2551,
+            "p95_nearest_rank": 21387.8125,
+            "max": 21387.8125
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 293.9228,
+            "median": 308.0647,
+            "p95_nearest_rank": 384.0281,
+            "max": 384.0281
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 3664.0019,
+            "median": 4261.7361,
+            "p95_nearest_rank": 21093.2275,
+            "max": 21093.2275
+          },
+          "gap_matched": 15,
+          "gap_total": 15
+        }
+      },
+      "gap_error_ms": {
+        "count": 30,
+        "min": 0.093749,
+        "median": 0.11049300000000001,
+        "p95_nearest_rank": 0.126036,
+        "max": 0.131276
+      },
+      "gap_abs_error_ms": {
+        "count": 30,
+        "min": 0.093749,
+        "median": 0.11049300000000001,
+        "p95_nearest_rank": 0.126036,
+        "max": 0.131276
+      },
+      "gap_matched": 30
+    },
+    {
+      "run_id": "R02",
+      "scope": "full",
+      "batch": 5,
+      "policy": "query_block",
+      "planned_blocks": 30,
+      "measured_blocks": 30,
+      "complete_clusters": 3,
+      "primary_cluster_ms_per_100_calls": {
+        "count": 3,
+        "min": 1396.952319,
+        "median": 1482.591904,
+        "p95_nearest_rank": 1673.700974,
+        "max": 1673.700974
+      },
+      "variants": {
+        "native": {
+          "event_ns": {
+            "count": 15,
+            "min": 4153.855895996094,
+            "median": 4510.310363769531,
+            "p95_nearest_rank": 20096.71630859375,
+            "max": 20096.71630859375
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 4225.7875,
+            "median": 4654.5055,
+            "p95_nearest_rank": 20223.1825,
+            "max": 20223.1825
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 243.4027,
+            "median": 298.264,
+            "p95_nearest_rank": 607.7915,
+            "max": 607.7915
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 3859.1605,
+            "median": 4133.2035,
+            "p95_nearest_rank": 19838.679,
+            "max": 19838.679
+          },
+          "gap_matched": 4,
+          "gap_total": 15
+        },
+        "mature": {
+          "event_ns": {
+            "count": 15,
+            "min": 3958.4766387939453,
+            "median": 11676.057434082031,
+            "p95_nearest_rank": 27020.596313476562,
+            "max": 27020.596313476562
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 4032.7847,
+            "median": 11740.3184,
+            "p95_nearest_rank": 27119.1567,
+            "max": 27119.1567
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 287.0216,
+            "median": 327.5837,
+            "p95_nearest_rank": 670.3824,
+            "max": 670.3824
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 3710.8982,
+            "median": 11326.7691,
+            "p95_nearest_rank": 26808.1364,
+            "max": 26808.1364
+          },
+          "gap_matched": 4,
+          "gap_total": 15
+        }
+      },
+      "gap_error_ms": {
+        "count": 30,
+        "min": -6.175176,
+        "median": 2.101401,
+        "p95_nearest_rank": 30.015709,
+        "max": 33.951739
+      },
+      "gap_abs_error_ms": {
+        "count": 30,
+        "min": 0.031997,
+        "median": 5.130326500000001,
+        "p95_nearest_rank": 30.015709,
+        "max": 33.951739
+      },
+      "gap_matched": 8
+    },
+    {
+      "run_id": "R02",
+      "scope": "full",
+      "batch": 5,
+      "policy": "query_cluster",
+      "planned_blocks": 30,
+      "measured_blocks": 30,
+      "complete_clusters": 3,
+      "primary_cluster_ms_per_100_calls": {
+        "count": 3,
+        "min": 580.541036,
+        "median": 621.938957,
+        "p95_nearest_rank": 743.144769,
+        "max": 743.144769
+      },
+      "variants": {
+        "native": {
+          "event_ns": {
+            "count": 15,
+            "min": 4146.892929077148,
+            "median": 4157.0526123046875,
+            "p95_nearest_rank": 20270.591735839844,
+            "max": 20270.591735839844
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 4196.5515,
+            "median": 4209.8632,
+            "p95_nearest_rank": 20365.0501,
+            "max": 20365.0501
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 217.9634,
+            "median": 270.9742,
+            "p95_nearest_rank": 314.5851,
+            "max": 314.5851
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 3899.7637,
+            "median": 3953.5065,
+            "p95_nearest_rank": 20067.3392,
+            "max": 20067.3392
+          },
+          "gap_matched": 0,
+          "gap_total": 15
+        },
+        "mature": {
+          "event_ns": {
+            "count": 15,
+            "min": 3952.640151977539,
+            "median": 3965.6448364257812,
+            "p95_nearest_rank": 20701.695251464844,
+            "max": 20701.695251464844
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 3995.4197,
+            "median": 4032.0056,
+            "p95_nearest_rank": 20754.713,
+            "max": 20754.713
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 269.0525,
+            "median": 301.7536,
+            "p95_nearest_rank": 378.3383,
+            "max": 378.3383
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 3659.3988,
+            "median": 3717.819,
+            "p95_nearest_rank": 20449.9766,
+            "max": 20449.9766
+          },
+          "gap_matched": 0,
+          "gap_total": 15
+        }
+      },
+      "gap_error_ms": {
+        "count": 30,
+        "min": -44.377151,
+        "median": -42.1577035,
+        "p95_nearest_rank": 33.784881,
+        "max": 42.563945
+      },
+      "gap_abs_error_ms": {
+        "count": 30,
+        "min": 22.954047,
+        "median": 42.19802,
+        "p95_nearest_rank": 44.325272,
+        "max": 44.377151
+      },
+      "gap_matched": 0
+    },
+    {
+      "run_id": "R02",
+      "scope": "full",
+      "batch": 5,
+      "policy": "idle_matched",
+      "planned_blocks": 30,
+      "measured_blocks": 30,
+      "complete_clusters": 3,
+      "primary_cluster_ms_per_100_calls": {
+        "count": 3,
+        "min": 1271.21025,
+        "median": 1335.984166,
+        "p95_nearest_rank": 1597.683464,
+        "max": 1597.683464
+      },
+      "variants": {
+        "native": {
+          "event_ns": {
+            "count": 15,
+            "min": 4147.200012207031,
+            "median": 11803.955078125,
+            "p95_nearest_rank": 22784.921264648438,
+            "max": 22784.921264648438
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 4227.5545,
+            "median": 11878.9321,
+            "p95_nearest_rank": 22872.9299,
+            "max": 22872.9299
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 223.4488,
+            "median": 283.4188,
+            "p95_nearest_rank": 362.8948,
+            "max": 362.8948
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 3889.0349,
+            "median": 11619.9317,
+            "p95_nearest_rank": 22628.5273,
+            "max": 22628.5273
+          },
+          "gap_matched": 15,
+          "gap_total": 15
+        },
+        "mature": {
+          "event_ns": {
+            "count": 15,
+            "min": 3958.979034423828,
+            "median": 3964.313507080078,
+            "p95_nearest_rank": 21629.132080078125,
+            "max": 21629.132080078125
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 4027.6241,
+            "median": 4049.0743,
+            "p95_nearest_rank": 21718.0468,
+            "max": 21718.0468
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 249.4573,
+            "median": 310.0013,
+            "p95_nearest_rank": 378.3953,
+            "max": 378.3953
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 3669.5605,
+            "median": 3759.2751,
+            "p95_nearest_rank": 21407.4413,
+            "max": 21407.4413
+          },
+          "gap_matched": 15,
+          "gap_total": 15
+        }
+      },
+      "gap_error_ms": {
+        "count": 30,
+        "min": 0.090458,
+        "median": 0.10699249999999999,
+        "p95_nearest_rank": 0.113475,
+        "max": 0.116654
+      },
+      "gap_abs_error_ms": {
+        "count": 30,
+        "min": 0.090458,
+        "median": 0.10699249999999999,
+        "p95_nearest_rank": 0.113475,
+        "max": 0.116654
+      },
+      "gap_matched": 30
+    },
+    {
+      "run_id": "R02",
+      "scope": "full",
+      "batch": 8,
+      "policy": "query_block",
+      "planned_blocks": 30,
+      "measured_blocks": 30,
+      "complete_clusters": 3,
+      "primary_cluster_ms_per_100_calls": {
+        "count": 3,
+        "min": 1399.287986,
+        "median": 1547.920738,
+        "p95_nearest_rank": 1579.438858,
+        "max": 1579.438858
+      },
+      "variants": {
+        "native": {
+          "event_ns": {
+            "count": 15,
+            "min": 4146.380615234375,
+            "median": 12504.780578613281,
+            "p95_nearest_rank": 35031.756591796875,
+            "max": 35031.756591796875
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 4244.065,
+            "median": 12608.9253,
+            "p95_nearest_rank": 35149.1846,
+            "max": 35149.1846
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 240.3489,
+            "median": 302.93,
+            "p95_nearest_rank": 369.8592,
+            "max": 369.8592
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 3942.8474,
+            "median": 12273.6089,
+            "p95_nearest_rank": 34837.8397,
+            "max": 34837.8397
+          },
+          "gap_matched": 7,
+          "gap_total": 15
+        },
+        "mature": {
+          "event_ns": {
+            "count": 15,
+            "min": 3955.916976928711,
+            "median": 3962.1631622314453,
+            "p95_nearest_rank": 17763.731384277344,
+            "max": 17763.731384277344
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 4038.2174,
+            "median": 4065.0066,
+            "p95_nearest_rank": 17853.9422,
+            "max": 17853.9422
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 302.0657,
+            "median": 332.7705,
+            "p95_nearest_rank": 427.8564,
+            "max": 427.8564
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 3678.4604,
+            "median": 3732.2964,
+            "p95_nearest_rank": 17426.0858,
+            "max": 17426.0858
+          },
+          "gap_matched": 0,
+          "gap_total": 15
+        }
+      },
+      "gap_error_ms": {
+        "count": 30,
+        "min": -2.391687,
+        "median": 5.1385765,
+        "p95_nearest_rank": 46.199158,
+        "max": 55.738706
+      },
+      "gap_abs_error_ms": {
+        "count": 30,
+        "min": 0.007834,
+        "median": 5.1385765,
+        "p95_nearest_rank": 46.199158,
+        "max": 55.738706
+      },
+      "gap_matched": 7
+    },
+    {
+      "run_id": "R02",
+      "scope": "full",
+      "batch": 8,
+      "policy": "query_cluster",
+      "planned_blocks": 30,
+      "measured_blocks": 30,
+      "complete_clusters": 3,
+      "primary_cluster_ms_per_100_calls": {
+        "count": 3,
+        "min": 574.510159,
+        "median": 742.259864,
+        "p95_nearest_rank": 765.232685,
+        "max": 765.232685
+      },
+      "variants": {
+        "native": {
+          "event_ns": {
+            "count": 15,
+            "min": 4139.382553100586,
+            "median": 4440.985488891602,
+            "p95_nearest_rank": 12803.6865234375,
+            "max": 12803.6865234375
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 4189.5834,
+            "median": 4493.0564,
+            "p95_nearest_rank": 12922.829,
+            "max": 12922.829
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 237.2661,
+            "median": 271.5112,
+            "p95_nearest_rank": 404.5216,
+            "max": 404.5216
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 3864.7944,
+            "median": 4255.7573,
+            "p95_nearest_rank": 12575.103,
+            "max": 12575.103
+          },
+          "gap_matched": 0,
+          "gap_total": 15
+        },
+        "mature": {
+          "event_ns": {
+            "count": 15,
+            "min": 3950.156784057617,
+            "median": 3964.108657836914,
+            "p95_nearest_rank": 21676.23748779297,
+            "max": 21676.23748779297
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 3996.7653,
+            "median": 4038.7837,
+            "p95_nearest_rank": 21749.8304,
+            "max": 21749.8304
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 265.4257,
+            "median": 293.3317,
+            "p95_nearest_rank": 402.5634,
+            "max": 402.5634
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 3634.2806,
+            "median": 3726.0076,
+            "p95_nearest_rank": 21395.0488,
+            "max": 21395.0488
+          },
+          "gap_matched": 0,
+          "gap_total": 15
+        }
+      },
+      "gap_error_ms": {
+        "count": 30,
+        "min": -44.401897,
+        "median": -42.149813,
+        "p95_nearest_rank": 41.192287,
+        "max": 41.595462
+      },
+      "gap_abs_error_ms": {
+        "count": 30,
+        "min": 32.907338,
+        "median": 42.149813,
+        "p95_nearest_rank": 44.24549,
+        "max": 44.401897
+      },
+      "gap_matched": 0
+    },
+    {
+      "run_id": "R02",
+      "scope": "full",
+      "batch": 8,
+      "policy": "idle_matched",
+      "planned_blocks": 30,
+      "measured_blocks": 30,
+      "complete_clusters": 3,
+      "primary_cluster_ms_per_100_calls": {
+        "count": 3,
+        "min": 1274.344036,
+        "median": 1383.591261,
+        "p95_nearest_rank": 1586.57591,
+        "max": 1586.57591
+      },
+      "variants": {
+        "native": {
+          "event_ns": {
+            "count": 15,
+            "min": 4150.579071044922,
+            "median": 12572.160339355469,
+            "p95_nearest_rank": 22378.23028564453,
+            "max": 22378.23028564453
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 4244.857,
+            "median": 12755.5715,
+            "p95_nearest_rank": 22498.2661,
+            "max": 22498.2661
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 263.4087,
+            "median": 312.6804,
+            "p95_nearest_rank": 408.1639,
+            "max": 408.1639
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 3956.6697,
+            "median": 12440.704,
+            "p95_nearest_rank": 22164.5768,
+            "max": 22164.5768
+          },
+          "gap_matched": 15,
+          "gap_total": 15
+        },
+        "mature": {
+          "event_ns": {
+            "count": 15,
+            "min": 3953.561782836914,
+            "median": 3960.3199005126953,
+            "p95_nearest_rank": 23933.23516845703,
+            "max": 23933.23516845703
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 4018.7559,
+            "median": 4052.0901,
+            "p95_nearest_rank": 24013.9227,
+            "max": 24013.9227
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 297.5206,
+            "median": 330.1046,
+            "p95_nearest_rank": 437.3404,
+            "max": 437.3404
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 3605.0493,
+            "median": 3738.427,
+            "p95_nearest_rank": 23654.7322,
+            "max": 23654.7322
+          },
+          "gap_matched": 15,
+          "gap_total": 15
+        }
+      },
+      "gap_error_ms": {
+        "count": 30,
+        "min": 0.100301,
+        "median": 0.117516,
+        "p95_nearest_rank": 0.134016,
+        "max": 0.151272
+      },
+      "gap_abs_error_ms": {
+        "count": 30,
+        "min": 0.100301,
+        "median": 0.117516,
+        "p95_nearest_rank": 0.134016,
+        "max": 0.151272
+      },
+      "gap_matched": 30
+    },
+    {
+      "run_id": "R02",
+      "scope": "bare_graph",
+      "batch": 3,
+      "policy": "query_block",
+      "planned_blocks": 30,
+      "measured_blocks": 30,
+      "complete_clusters": 3,
+      "primary_cluster_ms_per_100_calls": {
+        "count": 3,
+        "min": 1305.851298,
+        "median": 1377.065054,
+        "p95_nearest_rank": 1422.032866,
+        "max": 1422.032866
+      },
+      "variants": {
+        "native": {
+          "event_ns": {
+            "count": 15,
+            "min": 4105.011367797852,
+            "median": 4111.769485473633,
+            "p95_nearest_rank": 21516.90216064453,
+            "max": 21516.90216064453
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 4140.775,
+            "median": 4151.2482,
+            "p95_nearest_rank": 21553.6046,
+            "max": 21553.6046
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 18.1004,
+            "median": 19.7055,
+            "p95_nearest_rank": 23.8945,
+            "max": 23.8945
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 4121.3891,
+            "median": 4129.3936,
+            "p95_nearest_rank": 21534.5073,
+            "max": 21534.5073
+          },
+          "gap_matched": 4,
+          "gap_total": 15
+        },
+        "mature": {
+          "event_ns": {
+            "count": 15,
+            "min": 3903.692626953125,
+            "median": 8510.157012939453,
+            "p95_nearest_rank": 20059.237670898438,
+            "max": 20059.237670898438
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 3943.7268,
+            "median": 8548.3652,
+            "p95_nearest_rank": 20097.3367,
+            "max": 20097.3367
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 40.3698,
+            "median": 45.2199,
+            "p95_nearest_rank": 60.6093,
+            "max": 60.6093
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 3892.597,
+            "median": 8505.7882,
+            "p95_nearest_rank": 20056.8377,
+            "max": 20056.8377
+          },
+          "gap_matched": 3,
+          "gap_total": 15
+        }
+      },
+      "gap_error_ms": {
+        "count": 30,
+        "min": -4.090316,
+        "median": 4.1335895,
+        "p95_nearest_rank": 32.693088,
+        "max": 34.385344
+      },
+      "gap_abs_error_ms": {
+        "count": 30,
+        "min": 0.021488,
+        "median": 4.1335895,
+        "p95_nearest_rank": 32.693088,
+        "max": 34.385344
+      },
+      "gap_matched": 7
+    },
+    {
+      "run_id": "R02",
+      "scope": "bare_graph",
+      "batch": 3,
+      "policy": "query_cluster",
+      "planned_blocks": 30,
+      "measured_blocks": 30,
+      "complete_clusters": 3,
+      "primary_cluster_ms_per_100_calls": {
+        "count": 3,
+        "min": 459.932842,
+        "median": 585.678903,
+        "p95_nearest_rank": 688.909179,
+        "max": 688.909179
+      },
+      "variants": {
+        "native": {
+          "event_ns": {
+            "count": 15,
+            "min": 4105.420684814453,
+            "median": 4109.004974365234,
+            "p95_nearest_rank": 19749.58038330078,
+            "max": 19749.58038330078
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 4123.4083,
+            "median": 4127.6445,
+            "p95_nearest_rank": 19787.1689,
+            "max": 19787.1689
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 8.7997,
+            "median": 9.992,
+            "p95_nearest_rank": 19.3047,
+            "max": 19.3047
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 4114.512,
+            "median": 4117.2553,
+            "p95_nearest_rank": 19768.4152,
+            "max": 19768.4152
+          },
+          "gap_matched": 0,
+          "gap_total": 15
+        },
+        "mature": {
+          "event_ns": {
+            "count": 15,
+            "min": 3903.385543823242,
+            "median": 3908.4030151367188,
+            "p95_nearest_rank": 11064.627075195312,
+            "max": 11064.627075195312
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 3922.323,
+            "median": 3927.2922,
+            "p95_nearest_rank": 11088.3393,
+            "max": 11088.3393
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 29.2275,
+            "median": 31.3737,
+            "p95_nearest_rank": 48.1064,
+            "max": 48.1064
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 3880.5705,
+            "median": 3896.674,
+            "p95_nearest_rank": 11045.4197,
+            "max": 11045.4197
+          },
+          "gap_matched": 0,
+          "gap_total": 15
+        }
+      },
+      "gap_error_ms": {
+        "count": 30,
+        "min": -44.263394,
+        "median": -42.109005499999995,
+        "p95_nearest_rank": 34.272264,
+        "max": 47.912111
+      },
+      "gap_abs_error_ms": {
+        "count": 30,
+        "min": 29.830523,
+        "median": 42.122822,
+        "p95_nearest_rank": 44.263394,
+        "max": 47.912111
+      },
+      "gap_matched": 0
+    },
+    {
+      "run_id": "R02",
+      "scope": "bare_graph",
+      "batch": 3,
+      "policy": "idle_matched",
+      "planned_blocks": 30,
+      "measured_blocks": 30,
+      "complete_clusters": 3,
+      "primary_cluster_ms_per_100_calls": {
+        "count": 3,
+        "min": 1103.637866,
+        "median": 1341.145569,
+        "p95_nearest_rank": 1504.924713,
+        "max": 1504.924713
+      },
+      "variants": {
+        "native": {
+          "event_ns": {
+            "count": 15,
+            "min": 4100.608062744141,
+            "median": 4111.155319213867,
+            "p95_nearest_rank": 15331.021118164062,
+            "max": 15331.021118164062
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 4137.6435,
+            "median": 4158.0833,
+            "p95_nearest_rank": 15370.8499,
+            "max": 15370.8499
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 16.3831,
+            "median": 21.3736,
+            "p95_nearest_rank": 35.4985,
+            "max": 35.4985
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 4119.9449,
+            "median": 4134.3462,
+            "p95_nearest_rank": 15350.6726,
+            "max": 15350.6726
+          },
+          "gap_matched": 15,
+          "gap_total": 15
+        },
+        "mature": {
+          "event_ns": {
+            "count": 15,
+            "min": 3900.1087188720703,
+            "median": 11390.361785888672,
+            "p95_nearest_rank": 22165.196228027344,
+            "max": 22165.196228027344
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 3932.1883,
+            "median": 11433.6028,
+            "p95_nearest_rank": 22207.1297,
+            "max": 22207.1297
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 34.7811,
+            "median": 43.9516,
+            "p95_nearest_rank": 67.7358,
+            "max": 67.7358
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 3897.4072,
+            "median": 11389.9899,
+            "p95_nearest_rank": 22150.0501,
+            "max": 22150.0501
+          },
+          "gap_matched": 15,
+          "gap_total": 15
+        }
+      },
+      "gap_error_ms": {
+        "count": 30,
+        "min": 0.096184,
+        "median": 0.1129425,
+        "p95_nearest_rank": 0.133893,
+        "max": 0.147997
+      },
+      "gap_abs_error_ms": {
+        "count": 30,
+        "min": 0.096184,
+        "median": 0.1129425,
+        "p95_nearest_rank": 0.133893,
+        "max": 0.147997
+      },
+      "gap_matched": 30
+    },
+    {
+      "run_id": "R02",
+      "scope": "bare_graph",
+      "batch": 5,
+      "policy": "query_block",
+      "planned_blocks": 30,
+      "measured_blocks": 30,
+      "complete_clusters": 3,
+      "primary_cluster_ms_per_100_calls": {
+        "count": 3,
+        "min": 1285.383819,
+        "median": 1339.927528,
+        "p95_nearest_rank": 1386.335421,
+        "max": 1386.335421
+      },
+      "variants": {
+        "native": {
+          "event_ns": {
+            "count": 15,
+            "min": 4084.4287872314453,
+            "median": 4092.006301879883,
+            "p95_nearest_rank": 22790.757751464844,
+            "max": 22790.757751464844
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 4115.8187,
+            "median": 4126.2591,
+            "p95_nearest_rank": 22826.6678,
+            "max": 22826.6678
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 16.3962,
+            "median": 17.8179,
+            "p95_nearest_rank": 38.3198,
+            "max": 38.3198
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 4098.3536,
+            "median": 4108.3501,
+            "p95_nearest_rank": 22808.7968,
+            "max": 22808.7968
+          },
+          "gap_matched": 6,
+          "gap_total": 15
+        },
+        "mature": {
+          "event_ns": {
+            "count": 15,
+            "min": 3886.0801696777344,
+            "median": 11547.545623779297,
+            "p95_nearest_rank": 20587.417602539062,
+            "max": 20587.417602539062
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 3925.1869,
+            "median": 11584.4253,
+            "p95_nearest_rank": 20630.7943,
+            "max": 20630.7943
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 34.1399,
+            "median": 40.529,
+            "p95_nearest_rank": 54.5176,
+            "max": 54.5176
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 3880.5039,
+            "median": 11544.9602,
+            "p95_nearest_rank": 20590.2653,
+            "max": 20590.2653
+          },
+          "gap_matched": 6,
+          "gap_total": 15
+        }
+      },
+      "gap_error_ms": {
+        "count": 30,
+        "min": -4.701311,
+        "median": -1.0148455,
+        "p95_nearest_rank": 32.487519,
+        "max": 42.909903
+      },
+      "gap_abs_error_ms": {
+        "count": 30,
+        "min": 0.183914,
+        "median": 3.955873,
+        "p95_nearest_rank": 32.487519,
+        "max": 42.909903
+      },
+      "gap_matched": 12
+    },
+    {
+      "run_id": "R02",
+      "scope": "bare_graph",
+      "batch": 5,
+      "policy": "query_cluster",
+      "planned_blocks": 30,
+      "measured_blocks": 30,
+      "complete_clusters": 3,
+      "primary_cluster_ms_per_100_calls": {
+        "count": 3,
+        "min": 572.793324,
+        "median": 578.575496,
+        "p95_nearest_rank": 597.47128,
+        "max": 597.47128
+      },
+      "variants": {
+        "native": {
+          "event_ns": {
+            "count": 15,
+            "min": 4085.1455688476562,
+            "median": 4089.344024658203,
+            "p95_nearest_rank": 17918.56689453125,
+            "max": 17918.56689453125
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 4100.1294,
+            "median": 4108.2895,
+            "p95_nearest_rank": 17952.8756,
+            "max": 17952.8756
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 7.7367,
+            "median": 9.6283,
+            "p95_nearest_rank": 16.9873,
+            "max": 16.9873
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 4092.3927,
+            "median": 4097.1623,
+            "p95_nearest_rank": 17935.8883,
+            "max": 17935.8883
+          },
+          "gap_matched": 0,
+          "gap_total": 15
+        },
+        "mature": {
+          "event_ns": {
+            "count": 15,
+            "min": 3892.940902709961,
+            "median": 3897.7535247802734,
+            "p95_nearest_rank": 10427.903747558594,
+            "max": 10427.903747558594
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 3909.5536,
+            "median": 3918.8219,
+            "p95_nearest_rank": 10449.489,
+            "max": 10449.489
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 26.2139,
+            "median": 31.2544,
+            "p95_nearest_rank": 41.1783,
+            "max": 41.1783
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 3874.8557,
+            "median": 3887.5358,
+            "p95_nearest_rank": 10416.7277,
+            "max": 10416.7277
+          },
+          "gap_matched": 0,
+          "gap_total": 15
+        }
+      },
+      "gap_error_ms": {
+        "count": 30,
+        "min": -44.385085,
+        "median": -42.210103000000004,
+        "p95_nearest_rank": 32.268243,
+        "max": 41.770322
+      },
+      "gap_abs_error_ms": {
+        "count": 30,
+        "min": 25.507676,
+        "median": 42.210103000000004,
+        "p95_nearest_rank": 44.312528,
+        "max": 44.385085
+      },
+      "gap_matched": 0
+    },
+    {
+      "run_id": "R02",
+      "scope": "bare_graph",
+      "batch": 5,
+      "policy": "idle_matched",
+      "planned_blocks": 30,
+      "measured_blocks": 30,
+      "complete_clusters": 3,
+      "primary_cluster_ms_per_100_calls": {
+        "count": 3,
+        "min": 1300.889351,
+        "median": 1517.760485,
+        "p95_nearest_rank": 1595.962172,
+        "max": 1595.962172
+      },
+      "variants": {
+        "native": {
+          "event_ns": {
+            "count": 15,
+            "min": 4079.616165161133,
+            "median": 8660.582733154297,
+            "p95_nearest_rank": 22624.563598632812,
+            "max": 22624.563598632812
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 4111.7387,
+            "median": 8706.5359,
+            "p95_nearest_rank": 22661.8736,
+            "max": 22661.8736
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 16.4443,
+            "median": 19.3608,
+            "p95_nearest_rank": 31.8656,
+            "max": 31.8656
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 4095.2944,
+            "median": 8683.3729,
+            "p95_nearest_rank": 22643.702,
+            "max": 22643.702
+          },
+          "gap_matched": 15,
+          "gap_total": 15
+        },
+        "mature": {
+          "event_ns": {
+            "count": 15,
+            "min": 3889.664077758789,
+            "median": 11702.067565917969,
+            "p95_nearest_rank": 22985.317993164062,
+            "max": 22985.317993164062
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 3922.6985,
+            "median": 11740.0573,
+            "p95_nearest_rank": 23012.4447,
+            "max": 23012.4447
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 33.0859,
+            "median": 42.5128,
+            "p95_nearest_rank": 56.9814,
+            "max": 56.9814
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 3885.4578,
+            "median": 11697.5445,
+            "p95_nearest_rank": 22974.8282,
+            "max": 22974.8282
+          },
+          "gap_matched": 15,
+          "gap_total": 15
+        }
+      },
+      "gap_error_ms": {
+        "count": 30,
+        "min": 0.093566,
+        "median": 0.10834450000000001,
+        "p95_nearest_rank": 0.126197,
+        "max": 0.127915
+      },
+      "gap_abs_error_ms": {
+        "count": 30,
+        "min": 0.093566,
+        "median": 0.10834450000000001,
+        "p95_nearest_rank": 0.126197,
+        "max": 0.127915
+      },
+      "gap_matched": 30
+    },
+    {
+      "run_id": "R02",
+      "scope": "bare_graph",
+      "batch": 8,
+      "policy": "query_block",
+      "planned_blocks": 30,
+      "measured_blocks": 30,
+      "complete_clusters": 3,
+      "primary_cluster_ms_per_100_calls": {
+        "count": 3,
+        "min": 1285.332108,
+        "median": 1393.283132,
+        "p95_nearest_rank": 1395.289167,
+        "max": 1395.289167
+      },
+      "variants": {
+        "native": {
+          "event_ns": {
+            "count": 15,
+            "min": 4079.4113159179688,
+            "median": 7938.355255126953,
+            "p95_nearest_rank": 15477.964782714844,
+            "max": 15477.964782714844
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 4111.8772,
+            "median": 7971.5329,
+            "p95_nearest_rank": 15516.545,
+            "max": 15516.545
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 15.3652,
+            "median": 18.5513,
+            "p95_nearest_rank": 20.6122,
+            "max": 20.6122
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 4094.3749,
+            "median": 7953.8122,
+            "p95_nearest_rank": 15495.9328,
+            "max": 15495.9328
+          },
+          "gap_matched": 7,
+          "gap_total": 15
+        },
+        "mature": {
+          "event_ns": {
+            "count": 15,
+            "min": 3890.073776245117,
+            "median": 4179.967880249023,
+            "p95_nearest_rank": 21327.154541015625,
+            "max": 21327.154541015625
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 3926.6801,
+            "median": 4217.1664,
+            "p95_nearest_rank": 21369.5311,
+            "max": 21369.5311
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 36.1648,
+            "median": 39.8006,
+            "p95_nearest_rank": 55.778,
+            "max": 55.778
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 3884.7935,
+            "median": 4177.3658,
+            "p95_nearest_rank": 21322.7502,
+            "max": 21322.7502
+          },
+          "gap_matched": 6,
+          "gap_total": 15
+        }
+      },
+      "gap_error_ms": {
+        "count": 30,
+        "min": -5.46013,
+        "median": 1.075521,
+        "p95_nearest_rank": 36.387302,
+        "max": 37.890792
+      },
+      "gap_abs_error_ms": {
+        "count": 30,
+        "min": 0.165141,
+        "median": 2.525677,
+        "p95_nearest_rank": 36.387302,
+        "max": 37.890792
+      },
+      "gap_matched": 13
+    },
+    {
+      "run_id": "R02",
+      "scope": "bare_graph",
+      "batch": 8,
+      "policy": "query_cluster",
+      "planned_blocks": 30,
+      "measured_blocks": 30,
+      "complete_clusters": 3,
+      "primary_cluster_ms_per_100_calls": {
+        "count": 3,
+        "min": 570.579771,
+        "median": 767.125512,
+        "p95_nearest_rank": 797.351377,
+        "max": 797.351377
+      },
+      "variants": {
+        "native": {
+          "event_ns": {
+            "count": 15,
+            "min": 4084.3265533447266,
+            "median": 4091.904067993164,
+            "p95_nearest_rank": 36559.87243652344,
+            "max": 36559.87243652344
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 4103.2337,
+            "median": 4112.7254,
+            "p95_nearest_rank": 36602.6659,
+            "max": 36602.6659
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 8.929,
+            "median": 11.1722,
+            "p95_nearest_rank": 21.518,
+            "max": 21.518
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 4092.0615,
+            "median": 4100.762,
+            "p95_nearest_rank": 36581.1479,
+            "max": 36581.1479
+          },
+          "gap_matched": 0,
+          "gap_total": 15
+        },
+        "mature": {
+          "event_ns": {
+            "count": 15,
+            "min": 3894.8863983154297,
+            "median": 3898.4703063964844,
+            "p95_nearest_rank": 11801.907348632812,
+            "max": 11801.907348632812
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 3912.8603,
+            "median": 3922.3975,
+            "p95_nearest_rank": 11823.5973,
+            "max": 11823.5973
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 28.0112,
+            "median": 33.4195,
+            "p95_nearest_rank": 46.6026,
+            "max": 46.6026
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 3873.8267,
+            "median": 3888.978,
+            "p95_nearest_rank": 11792.5232,
+            "max": 11792.5232
+          },
+          "gap_matched": 0,
+          "gap_total": 15
+        }
+      },
+      "gap_error_ms": {
+        "count": 30,
+        "min": -44.284825,
+        "median": -42.164621,
+        "p95_nearest_rank": 37.305291,
+        "max": 40.242262
+      },
+      "gap_abs_error_ms": {
+        "count": 30,
+        "min": 26.352716,
+        "median": 42.164621,
+        "p95_nearest_rank": 44.263374,
+        "max": 44.284825
+      },
+      "gap_matched": 0
+    },
+    {
+      "run_id": "R02",
+      "scope": "bare_graph",
+      "batch": 8,
+      "policy": "idle_matched",
+      "planned_blocks": 30,
+      "measured_blocks": 30,
+      "complete_clusters": 3,
+      "primary_cluster_ms_per_100_calls": {
+        "count": 3,
+        "min": 1316.942292,
+        "median": 1324.531408,
+        "p95_nearest_rank": 1400.713404,
+        "max": 1400.713404
+      },
+      "variants": {
+        "native": {
+          "event_ns": {
+            "count": 15,
+            "min": 4083.9168548583984,
+            "median": 12624.384307861328,
+            "p95_nearest_rank": 22504.24346923828,
+            "max": 22504.24346923828
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 4115.0052,
+            "median": 12666.7222,
+            "p95_nearest_rank": 22536.6217,
+            "max": 22536.6217
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 13.4776,
+            "median": 17.8299,
+            "p95_nearest_rank": 23.2812,
+            "max": 23.2812
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 4098.9236,
+            "median": 12643.6704,
+            "p95_nearest_rank": 22523.1441,
+            "max": 22523.1441
+          },
+          "gap_matched": 15,
+          "gap_total": 15
+        },
+        "mature": {
+          "event_ns": {
+            "count": 15,
+            "min": 3890.073776245117,
+            "median": 3897.4464416503906,
+            "p95_nearest_rank": 19340.80047607422,
+            "max": 19340.80047607422
+          },
+          "wall_ns": {
+            "count": 15,
+            "min": 3919.3256,
+            "median": 3934.6413,
+            "p95_nearest_rank": 19379.6241,
+            "max": 19379.6241
+          },
+          "host_enqueue_ns": {
+            "count": 15,
+            "min": 32.9847,
+            "median": 40.3938,
+            "p95_nearest_rank": 51.8666,
+            "max": 51.8666
+          },
+          "wait_ns": {
+            "count": 15,
+            "min": 3883.4555,
+            "median": 3890.9482,
+            "p95_nearest_rank": 19342.191,
+            "max": 19342.191
+          },
+          "gap_matched": 15,
+          "gap_total": 15
+        }
+      },
+      "gap_error_ms": {
+        "count": 30,
+        "min": 0.090072,
+        "median": 0.1087195,
+        "p95_nearest_rank": 0.128561,
+        "max": 0.14035
+      },
+      "gap_abs_error_ms": {
+        "count": 30,
+        "min": 0.090072,
+        "median": 0.1087195,
+        "p95_nearest_rank": 0.128561,
+        "max": 0.14035
+      },
+      "gap_matched": 30
+    }
+  ],
+  "variant_policy_contrasts": [
+    {
+      "triplet_id": "elit01-pilot1-20261115/R01/full/B3/T0",
+      "run_id": "R01",
+      "scope": "full",
+      "batch": 3,
+      "rotation": 0,
+      "variant": "native",
+      "event_us_per_call": {
+        "query_block": 11233.074951171875,
+        "query_cluster": 4178.636932373047,
+        "idle_matched": 4672.9217529296875
+      },
+      "event_ratio_vs_query_block": {
+        "query_block": 1.0,
+        "query_cluster": 0.3719940399700722,
+        "idle_matched": 0.4159966681645075
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R01/full/B3/T0",
+      "run_id": "R01",
+      "scope": "full",
+      "batch": 3,
+      "rotation": 0,
+      "variant": "mature",
+      "event_us_per_call": {
+        "query_block": 18942.874145507812,
+        "query_cluster": 3980.2879333496094,
+        "idle_matched": 8357.990264892578
+      },
+      "event_ratio_vs_query_block": {
+        "query_block": 1.0,
+        "query_cluster": 0.21012059219606388,
+        "idle_matched": 0.4412208095081825
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R01/full/B3/T1",
+      "run_id": "R01",
+      "scope": "full",
+      "batch": 3,
+      "rotation": 1,
+      "variant": "native",
+      "event_us_per_call": {
+        "query_cluster": 4185.292816162109,
+        "idle_matched": 11300.556945800781,
+        "query_block": 14531.686401367188
+      },
+      "event_ratio_vs_query_block": {
+        "query_cluster": 0.28801150125069747,
+        "idle_matched": 0.777649381749498,
+        "query_block": 1.0
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R01/full/B3/T1",
+      "run_id": "R01",
+      "scope": "full",
+      "batch": 3,
+      "rotation": 1,
+      "variant": "mature",
+      "event_us_per_call": {
+        "query_cluster": 3979.6737670898438,
+        "idle_matched": 3981.0047149658203,
+        "query_block": 5605.0689697265625
+      },
+      "event_ratio_vs_query_block": {
+        "query_cluster": 0.7100133448106327,
+        "idle_matched": 0.7102507991369158,
+        "query_block": 1.0
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R01/full/B3/T2",
+      "run_id": "R01",
+      "scope": "full",
+      "batch": 3,
+      "rotation": 2,
+      "variant": "native",
+      "event_us_per_call": {
+        "idle_matched": 4189.388656616211,
+        "query_block": 19652.198791503906,
+        "query_cluster": 4191.334533691406
+      },
+      "event_ratio_vs_query_block": {
+        "idle_matched": 0.21317658655210525,
+        "query_block": 1.0,
+        "query_cluster": 0.2132756022956279
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R01/full/B3/T2",
+      "run_id": "R01",
+      "scope": "full",
+      "batch": 3,
+      "rotation": 2,
+      "variant": "mature",
+      "event_us_per_call": {
+        "idle_matched": 4346.982574462891,
+        "query_block": 10630.451202392578,
+        "query_cluster": 3978.4446716308594
+      },
+      "event_ratio_vs_query_block": {
+        "idle_matched": 0.4089179745714389,
+        "query_block": 1.0,
+        "query_cluster": 0.37424984094141156
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R01/full/B5/T0",
+      "run_id": "R01",
+      "scope": "full",
+      "batch": 5,
+      "rotation": 0,
+      "variant": "native",
+      "event_us_per_call": {
+        "query_block": 11958.998107910156,
+        "query_cluster": 4158.16650390625,
+        "idle_matched": 10373.017883300781
+      },
+      "event_ratio_vs_query_block": {
+        "query_block": 1.0,
+        "query_cluster": 0.3477019116807012,
+        "idle_matched": 0.8673818483539734
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R01/full/B5/T0",
+      "run_id": "R01",
+      "scope": "full",
+      "batch": 5,
+      "rotation": 0,
+      "variant": "mature",
+      "event_us_per_call": {
+        "query_block": 18365.951538085938,
+        "query_cluster": 3970.662307739258,
+        "idle_matched": 4447.641754150391
+      },
+      "event_ratio_vs_query_block": {
+        "query_block": 1.0,
+        "query_cluster": 0.216196928294469,
+        "idle_matched": 0.24216778231866742
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R01/full/B5/T1",
+      "run_id": "R01",
+      "scope": "full",
+      "batch": 5,
+      "rotation": 1,
+      "variant": "native",
+      "event_us_per_call": {
+        "query_cluster": 4341.452789306641,
+        "idle_matched": 4156.927871704102,
+        "query_block": 4156.489562988281
+      },
+      "event_ratio_vs_query_block": {
+        "query_cluster": 1.0444998654550648,
+        "idle_matched": 1.0001054516579864,
+        "query_block": 1.0
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R01/full/B5/T1",
+      "run_id": "R01",
+      "scope": "full",
+      "batch": 5,
+      "rotation": 1,
+      "variant": "mature",
+      "event_us_per_call": {
+        "query_cluster": 3968.204879760742,
+        "idle_matched": 9856.819152832031,
+        "query_block": 20145.86944580078
+      },
+      "event_ratio_vs_query_block": {
+        "query_cluster": 0.1969736223316923,
+        "idle_matched": 0.4892724624941215,
+        "query_block": 1.0
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R01/full/B5/T2",
+      "run_id": "R01",
+      "scope": "full",
+      "batch": 5,
+      "rotation": 2,
+      "variant": "native",
+      "event_us_per_call": {
+        "idle_matched": 13589.913940429688,
+        "query_block": 19819.92950439453,
+        "query_cluster": 4156.288146972656
+      },
+      "event_ratio_vs_query_block": {
+        "idle_matched": 0.6856691360792425,
+        "query_block": 1.0,
+        "query_cluster": 0.20970246872225817
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R01/full/B5/T2",
+      "run_id": "R01",
+      "scope": "full",
+      "batch": 5,
+      "rotation": 2,
+      "variant": "mature",
+      "event_us_per_call": {
+        "idle_matched": 4260.454559326172,
+        "query_block": 9338.674926757812,
+        "query_cluster": 3966.668701171875
+      },
+      "event_ratio_vs_query_block": {
+        "idle_matched": 0.4562161755003191,
+        "query_block": 1.0,
+        "query_cluster": 0.42475712371209146
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R01/full/B8/T0",
+      "run_id": "R01",
+      "scope": "full",
+      "batch": 8,
+      "rotation": 0,
+      "variant": "native",
+      "event_us_per_call": {
+        "query_block": 4152.83203125,
+        "query_cluster": 4154.060745239258,
+        "idle_matched": 11476.6845703125
+      },
+      "event_ratio_vs_query_block": {
+        "query_block": 1.0,
+        "query_cluster": 1.0002958737507348,
+        "idle_matched": 2.7635802469135804
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R01/full/B8/T0",
+      "run_id": "R01",
+      "scope": "full",
+      "batch": 8,
+      "rotation": 0,
+      "variant": "mature",
+      "event_us_per_call": {
+        "query_block": 3961.0366821289062,
+        "query_cluster": 3961.113739013672,
+        "idle_matched": 3962.4481201171875
+      },
+      "event_ratio_vs_query_block": {
+        "query_block": 1.0,
+        "query_cluster": 1.0000194537165266,
+        "idle_matched": 1.00035633045123
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R01/full/B8/T1",
+      "run_id": "R01",
+      "scope": "full",
+      "batch": 8,
+      "rotation": 1,
+      "variant": "native",
+      "event_us_per_call": {
+        "query_cluster": 4680.777740478516,
+        "idle_matched": 4156.927871704102,
+        "query_block": 19281.613159179688
+      },
+      "event_ratio_vs_query_block": {
+        "query_cluster": 0.2427586168146967,
+        "idle_matched": 0.21559025364664836,
+        "query_block": 1.0
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R01/full/B8/T1",
+      "run_id": "R01",
+      "scope": "full",
+      "batch": 8,
+      "rotation": 1,
+      "variant": "mature",
+      "event_us_per_call": {
+        "query_cluster": 3963.884735107422,
+        "idle_matched": 8300.335693359375,
+        "query_block": 11867.545318603516
+      },
+      "event_ratio_vs_query_block": {
+        "query_cluster": 0.33401049911253783,
+        "idle_matched": 0.6994147037591508,
+        "query_block": 1.0
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R01/full/B8/T2",
+      "run_id": "R01",
+      "scope": "full",
+      "batch": 8,
+      "rotation": 2,
+      "variant": "native",
+      "event_us_per_call": {
+        "idle_matched": 4677.302551269531,
+        "query_block": 20392.46368408203,
+        "query_cluster": 4153.65104675293
+      },
+      "event_ratio_vs_query_block": {
+        "idle_matched": 0.2293642702387424,
+        "query_block": 1.0,
+        "query_cluster": 0.2036855924375234
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R01/full/B8/T2",
+      "run_id": "R01",
+      "scope": "full",
+      "batch": 8,
+      "rotation": 2,
+      "variant": "mature",
+      "event_us_per_call": {
+        "idle_matched": 3963.4944915771484,
+        "query_block": 10646.32339477539,
+        "query_cluster": 3962.134552001953
+      },
+      "event_ratio_vs_query_block": {
+        "idle_matched": 0.37228762875287125,
+        "query_block": 1.0,
+        "query_cluster": 0.37215989079820205
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R01/bare_graph/B3/T0",
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 3,
+      "rotation": 0,
+      "variant": "native",
+      "event_us_per_call": {
+        "query_block": 4110.847854614258,
+        "query_cluster": 4108.563232421875,
+        "idle_matched": 8880.84487915039
+      },
+      "event_ratio_vs_query_block": {
+        "query_block": 1.0,
+        "query_cluster": 0.9994442455003976,
+        "idle_matched": 2.1603438495496756
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R01/bare_graph/B3/T0",
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 3,
+      "rotation": 0,
+      "variant": "mature",
+      "event_us_per_call": {
+        "query_block": 4070.502471923828,
+        "query_cluster": 3909.1201782226562,
+        "idle_matched": 3908.505630493164
+      },
+      "event_ratio_vs_query_block": {
+        "query_block": 1.0,
+        "query_cluster": 0.960353225476633,
+        "idle_matched": 0.9602022495876044
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R01/bare_graph/B3/T1",
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 3,
+      "rotation": 1,
+      "variant": "native",
+      "event_us_per_call": {
+        "query_cluster": 4113.919830322266,
+        "idle_matched": 11001.651000976562,
+        "query_block": 4107.059097290039
+      },
+      "event_ratio_vs_query_block": {
+        "query_cluster": 1.001670473414116,
+        "idle_matched": 2.6787174813812107,
+        "query_block": 1.0
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R01/bare_graph/B3/T1",
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 3,
+      "rotation": 1,
+      "variant": "mature",
+      "event_us_per_call": {
+        "query_cluster": 3909.017562866211,
+        "idle_matched": 3907.788848876953,
+        "query_block": 9928.90853881836
+      },
+      "event_ratio_vs_query_block": {
+        "query_cluster": 0.3937006316035039,
+        "idle_matched": 0.3935768804394707,
+        "query_block": 1.0
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R01/bare_graph/B3/T2",
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 3,
+      "rotation": 2,
+      "variant": "native",
+      "event_us_per_call": {
+        "idle_matched": 4109.414291381836,
+        "query_block": 4109.926223754883,
+        "query_cluster": 4108.390426635742
+      },
+      "event_ratio_vs_query_block": {
+        "idle_matched": 0.999875440009096,
+        "query_block": 1.0,
+        "query_cluster": 0.9996263200272881
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R01/bare_graph/B3/T2",
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 3,
+      "rotation": 2,
+      "variant": "mature",
+      "event_us_per_call": {
+        "idle_matched": 11143.270111083984,
+        "query_block": 19383.29620361328,
+        "query_cluster": 3909.734344482422
+      },
+      "event_ratio_vs_query_block": {
+        "idle_matched": 0.5748903588960655,
+        "query_block": 1.0,
+        "query_cluster": 0.20170637147636428
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R01/bare_graph/B5/T0",
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 5,
+      "rotation": 0,
+      "variant": "native",
+      "event_us_per_call": {
+        "query_block": 11783.577728271484,
+        "query_cluster": 4097.536087036133,
+        "idle_matched": 4088.627243041992
+      },
+      "event_ratio_vs_query_block": {
+        "query_block": 1.0,
+        "query_cluster": 0.34773276686631527,
+        "idle_matched": 0.3469767278941476
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R01/bare_graph/B5/T0",
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 5,
+      "rotation": 0,
+      "variant": "mature",
+      "event_us_per_call": {
+        "query_block": 3896.8318939208984,
+        "query_cluster": 3897.8561401367188,
+        "idle_matched": 7562.547302246094
+      },
+      "event_ratio_vs_query_block": {
+        "query_block": 1.0,
+        "query_cluster": 1.0002628407495375,
+        "idle_matched": 1.9406911840471621
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R01/bare_graph/B5/T1",
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 5,
+      "rotation": 1,
+      "variant": "native",
+      "event_us_per_call": {
+        "query_cluster": 4090.777587890625,
+        "idle_matched": 4244.787216186523,
+        "query_block": 18924.954223632812
+      },
+      "event_ratio_vs_query_block": {
+        "query_cluster": 0.2161578590653713,
+        "idle_matched": 0.2242957719224379,
+        "query_block": 1.0
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R01/bare_graph/B5/T1",
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 5,
+      "rotation": 1,
+      "variant": "mature",
+      "event_us_per_call": {
+        "query_cluster": 3898.060989379883,
+        "idle_matched": 3896.422576904297,
+        "query_block": 12570.829010009766
+      },
+      "event_ratio_vs_query_block": {
+        "query_cluster": 0.3100878220741032,
+        "idle_matched": 0.30995748759303743,
+        "query_block": 1.0
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R01/bare_graph/B5/T2",
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 5,
+      "rotation": 2,
+      "variant": "native",
+      "event_us_per_call": {
+        "idle_matched": 11612.159729003906,
+        "query_block": 4090.6753540039062,
+        "query_cluster": 4096.716690063477
+      },
+      "event_ratio_vs_query_block": {
+        "idle_matched": 2.838690124269592,
+        "query_block": 1.0,
+        "query_cluster": 1.001476855417934
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R01/bare_graph/B5/T2",
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 5,
+      "rotation": 2,
+      "variant": "mature",
+      "event_us_per_call": {
+        "idle_matched": 3897.8561401367188,
+        "query_block": 12687.052917480469,
+        "query_cluster": 3897.8561401367188
+      },
+      "event_ratio_vs_query_block": {
+        "idle_matched": 0.3072310146012063,
+        "query_block": 1.0,
+        "query_cluster": 0.3072310146012063
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R01/bare_graph/B8/T0",
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 8,
+      "rotation": 0,
+      "variant": "native",
+      "event_us_per_call": {
+        "query_block": 14279.986572265625,
+        "query_cluster": 4088.422393798828,
+        "idle_matched": 10604.338836669922
+      },
+      "event_ratio_vs_query_block": {
+        "query_block": 1.0,
+        "query_cluster": 0.2863043584186067,
+        "idle_matched": 0.7426014571516131
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R01/bare_graph/B8/T0",
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 8,
+      "rotation": 0,
+      "variant": "mature",
+      "event_us_per_call": {
+        "query_block": 3898.1632232666016,
+        "query_cluster": 3897.139358520508,
+        "idle_matched": 3897.6512908935547
+      },
+      "event_ratio_vs_query_block": {
+        "query_block": 1.0,
+        "query_cluster": 0.9997373468766052,
+        "idle_matched": 0.9998686734383025
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R01/bare_graph/B8/T1",
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 8,
+      "rotation": 1,
+      "variant": "native",
+      "event_us_per_call": {
+        "query_cluster": 4085.2481842041016,
+        "idle_matched": 9228.594970703125,
+        "query_block": 4089.9585723876953
+      },
+      "event_ratio_vs_query_block": {
+        "query_cluster": 0.9988483041820045,
+        "idle_matched": 2.2564030435436715,
+        "query_block": 1.0
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R01/bare_graph/B8/T1",
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 8,
+      "rotation": 1,
+      "variant": "mature",
+      "event_us_per_call": {
+        "query_cluster": 6293.708801269531,
+        "idle_matched": 3897.6512908935547,
+        "query_block": 7940.402984619141
+      },
+      "event_ratio_vs_query_block": {
+        "query_cluster": 0.7926183108666754,
+        "idle_matched": 0.4908631587645428,
+        "query_block": 1.0
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R01/bare_graph/B8/T2",
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 8,
+      "rotation": 2,
+      "variant": "native",
+      "event_us_per_call": {
+        "idle_matched": 4089.548873901367,
+        "query_block": 20074.496459960938,
+        "query_cluster": 4090.572738647461
+      },
+      "event_ratio_vs_query_block": {
+        "idle_matched": 0.20371862786486675,
+        "query_block": 1.0,
+        "query_cluster": 0.20376963112405863
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R01/bare_graph/B8/T2",
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 8,
+      "rotation": 2,
+      "variant": "mature",
+      "event_us_per_call": {
+        "idle_matched": 9912.934112548828,
+        "query_block": 9861.427307128906,
+        "query_cluster": 4063.9488220214844
+      },
+      "event_ratio_vs_query_block": {
+        "idle_matched": 1.005223057861278,
+        "query_block": 1.0,
+        "query_cluster": 0.4121055396396445
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R02/full/B3/T0",
+      "run_id": "R02",
+      "scope": "full",
+      "batch": 3,
+      "rotation": 0,
+      "variant": "native",
+      "event_us_per_call": {
+        "idle_matched": 4177.715301513672,
+        "query_cluster": 4177.510452270508,
+        "query_block": 4180.377578735352
+      },
+      "event_ratio_vs_query_block": {
+        "idle_matched": 0.9993631491004014,
+        "query_cluster": 0.9993141465308234,
+        "query_block": 1.0
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R02/full/B3/T0",
+      "run_id": "R02",
+      "scope": "full",
+      "batch": 3,
+      "rotation": 0,
+      "variant": "mature",
+      "event_us_per_call": {
+        "idle_matched": 4471.193695068359,
+        "query_cluster": 3982.950210571289,
+        "query_block": 4479.359817504883
+      },
+      "event_ratio_vs_query_block": {
+        "idle_matched": 0.9981769443024847,
+        "query_cluster": 0.8891784480019499,
+        "query_block": 1.0
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R02/full/B3/T1",
+      "run_id": "R02",
+      "scope": "full",
+      "batch": 3,
+      "rotation": 1,
+      "variant": "native",
+      "event_us_per_call": {
+        "query_block": 12223.795318603516,
+        "idle_matched": 4173.516845703125,
+        "query_cluster": 4175.667190551758
+      },
+      "event_ratio_vs_query_block": {
+        "query_block": 1.0,
+        "idle_matched": 0.34142561593381787,
+        "query_cluster": 0.3416015305980106
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R02/full/B3/T1",
+      "run_id": "R02",
+      "scope": "full",
+      "batch": 3,
+      "rotation": 1,
+      "variant": "mature",
+      "event_us_per_call": {
+        "query_block": 3977.4208068847656,
+        "idle_matched": 5095.014572143555,
+        "query_cluster": 3980.284881591797
+      },
+      "event_ratio_vs_query_block": {
+        "query_block": 1.0,
+        "idle_matched": 1.2809845423758723,
+        "query_cluster": 1.0007200834023078
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R02/full/B3/T2",
+      "run_id": "R02",
+      "scope": "full",
+      "batch": 3,
+      "rotation": 2,
+      "variant": "native",
+      "event_us_per_call": {
+        "query_cluster": 4176.998519897461,
+        "query_block": 4174.540710449219,
+        "idle_matched": 4178.432083129883
+      },
+      "event_ratio_vs_query_block": {
+        "query_cluster": 1.0005887616431888,
+        "query_block": 1.0,
+        "idle_matched": 1.0009321678600291
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R02/full/B3/T2",
+      "run_id": "R02",
+      "scope": "full",
+      "batch": 3,
+      "rotation": 2,
+      "variant": "mature",
+      "event_us_per_call": {
+        "query_cluster": 3979.9808502197266,
+        "query_block": 14601.727294921875,
+        "idle_matched": 3974.96337890625
+      },
+      "event_ratio_vs_query_block": {
+        "query_cluster": 0.27256918101763666,
+        "query_block": 1.0,
+        "idle_matched": 0.27222555925206504
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R02/full/B5/T0",
+      "run_id": "R02",
+      "scope": "full",
+      "batch": 5,
+      "rotation": 0,
+      "variant": "native",
+      "event_us_per_call": {
+        "idle_matched": 11803.955078125,
+        "query_cluster": 4150.579071044922,
+        "query_block": 4185.270309448242
+      },
+      "event_ratio_vs_query_block": {
+        "idle_matched": 2.820356680780591,
+        "query_cluster": 0.9917111116276038,
+        "query_block": 1.0
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R02/full/B5/T0",
+      "run_id": "R02",
+      "scope": "full",
+      "batch": 5,
+      "rotation": 0,
+      "variant": "mature",
+      "event_us_per_call": {
+        "idle_matched": 3963.4944915771484,
+        "query_cluster": 3959.9105834960938,
+        "query_block": 20959.642028808594
+      },
+      "event_ratio_vs_query_block": {
+        "idle_matched": 0.18910124925461072,
+        "query_cluster": 0.1889302583533287,
+        "query_block": 1.0
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R02/full/B5/T1",
+      "run_id": "R02",
+      "scope": "full",
+      "batch": 5,
+      "rotation": 1,
+      "variant": "native",
+      "event_us_per_call": {
+        "query_block": 8128.511810302734,
+        "idle_matched": 4165.8111572265625,
+        "query_cluster": 4157.747268676758
+      },
+      "event_ratio_vs_query_block": {
+        "query_block": 1.0,
+        "idle_matched": 0.512493707882232,
+        "query_cluster": 0.5115016580780374
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R02/full/B5/T1",
+      "run_id": "R02",
+      "scope": "full",
+      "batch": 5,
+      "rotation": 1,
+      "variant": "mature",
+      "event_us_per_call": {
+        "query_block": 11676.057434082031,
+        "idle_matched": 3964.313507080078,
+        "query_cluster": 4060.038375854492
+      },
+      "event_ratio_vs_query_block": {
+        "query_block": 1.0,
+        "idle_matched": 0.33952500914464295,
+        "query_cluster": 0.347723398824964
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R02/full/B5/T2",
+      "run_id": "R02",
+      "scope": "full",
+      "batch": 5,
+      "rotation": 2,
+      "variant": "native",
+      "event_us_per_call": {
+        "query_cluster": 4157.0526123046875,
+        "query_block": 7859.436798095703,
+        "idle_matched": 19176.358032226562
+      },
+      "event_ratio_vs_query_block": {
+        "query_cluster": 0.5289250004926457,
+        "query_block": 1.0,
+        "idle_matched": 2.43991503778908
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R02/full/B5/T2",
+      "run_id": "R02",
+      "scope": "full",
+      "batch": 5,
+      "rotation": 2,
+      "variant": "mature",
+      "event_us_per_call": {
+        "query_cluster": 3965.542221069336,
+        "query_block": 4998.348617553711,
+        "idle_matched": 11617.996978759766
+      },
+      "event_ratio_vs_query_block": {
+        "query_cluster": 0.7933704758293049,
+        "query_block": 1.0,
+        "idle_matched": 2.3243670795507336
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R02/full/B8/T0",
+      "run_id": "R02",
+      "scope": "full",
+      "batch": 8,
+      "rotation": 0,
+      "variant": "native",
+      "event_us_per_call": {
+        "idle_matched": 12572.160339355469,
+        "query_cluster": 8229.273223876953,
+        "query_block": 13103.82080078125
+      },
+      "event_ratio_vs_query_block": {
+        "idle_matched": 0.9594270656239374,
+        "query_cluster": 0.628005628967875,
+        "query_block": 1.0
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R02/full/B8/T0",
+      "run_id": "R02",
+      "scope": "full",
+      "batch": 8,
+      "rotation": 0,
+      "variant": "mature",
+      "event_us_per_call": {
+        "idle_matched": 3957.2479248046875,
+        "query_cluster": 6492.1600341796875,
+        "query_block": 3960.4225158691406
+      },
+      "event_ratio_vs_query_block": {
+        "idle_matched": 0.9991984211149864,
+        "query_cluster": 1.6392594497597286,
+        "query_block": 1.0
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R02/full/B8/T1",
+      "run_id": "R02",
+      "scope": "full",
+      "batch": 8,
+      "rotation": 1,
+      "variant": "native",
+      "event_us_per_call": {
+        "query_block": 4151.603317260742,
+        "idle_matched": 4203.724670410156,
+        "query_cluster": 4301.414489746094
+      },
+      "event_ratio_vs_query_block": {
+        "query_block": 1.0,
+        "idle_matched": 1.01255451187562,
+        "query_cluster": 1.0360851365212316
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R02/full/B8/T1",
+      "run_id": "R02",
+      "scope": "full",
+      "batch": 8,
+      "rotation": 1,
+      "variant": "mature",
+      "event_us_per_call": {
+        "query_block": 3962.4481201171875,
+        "idle_matched": 4256.051254272461,
+        "query_cluster": 4040.9088134765625
+      },
+      "event_ratio_vs_query_block": {
+        "query_block": 1.0,
+        "idle_matched": 1.0740963983010055,
+        "query_cluster": 1.0198010651448113
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R02/full/B8/T2",
+      "run_id": "R02",
+      "scope": "full",
+      "batch": 8,
+      "rotation": 2,
+      "variant": "native",
+      "event_us_per_call": {
+        "query_cluster": 4150.579071044922,
+        "query_block": 4170.137786865234,
+        "idle_matched": 19939.22576904297
+      },
+      "event_ratio_vs_query_block": {
+        "query_cluster": 0.9953098154497636,
+        "query_block": 1.0,
+        "idle_matched": 4.781430923420791
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R02/full/B8/T2",
+      "run_id": "R02",
+      "scope": "full",
+      "batch": 8,
+      "rotation": 2,
+      "variant": "mature",
+      "event_us_per_call": {
+        "query_cluster": 3961.9583129882812,
+        "query_block": 3962.1631622314453,
+        "idle_matched": 11597.926330566406
+      },
+      "event_ratio_vs_query_block": {
+        "query_cluster": 0.9999482986351707,
+        "query_block": 1.0,
+        "idle_matched": 2.9271702995781186
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R02/bare_graph/B3/T0",
+      "run_id": "R02",
+      "scope": "bare_graph",
+      "batch": 3,
+      "rotation": 0,
+      "variant": "native",
+      "event_us_per_call": {
+        "idle_matched": 6093.401718139648,
+        "query_cluster": 4274.483108520508,
+        "query_block": 16081.510925292969
+      },
+      "event_ratio_vs_query_block": {
+        "idle_matched": 0.3789072896475143,
+        "query_cluster": 0.2658010884908587,
+        "query_block": 1.0
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R02/bare_graph/B3/T0",
+      "run_id": "R02",
+      "scope": "bare_graph",
+      "batch": 3,
+      "rotation": 0,
+      "variant": "mature",
+      "event_us_per_call": {
+        "idle_matched": 3938.7134552001953,
+        "query_cluster": 3907.4817657470703,
+        "query_block": 3905.228805541992
+      },
+      "event_ratio_vs_query_block": {
+        "idle_matched": 1.0085743118586763,
+        "query_cluster": 1.0005769086312897,
+        "query_block": 1.0
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R02/bare_graph/B3/T1",
+      "run_id": "R02",
+      "scope": "bare_graph",
+      "batch": 3,
+      "rotation": 1,
+      "variant": "native",
+      "event_us_per_call": {
+        "query_block": 4109.516906738281,
+        "idle_matched": 4101.107025146484,
+        "query_cluster": 4107.673645019531
+      },
+      "event_ratio_vs_query_block": {
+        "query_block": 1.0,
+        "idle_matched": 0.9979535595587872,
+        "query_cluster": 0.9995514651087752
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R02/bare_graph/B3/T1",
+      "run_id": "R02",
+      "scope": "bare_graph",
+      "batch": 3,
+      "rotation": 1,
+      "variant": "mature",
+      "event_us_per_call": {
+        "query_block": 11652.91519165039,
+        "idle_matched": 19842.15087890625,
+        "query_cluster": 3908.30078125
+      },
+      "event_ratio_vs_query_block": {
+        "query_block": 1.0,
+        "idle_matched": 1.7027628325248307,
+        "query_cluster": 0.33539253628571813
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R02/bare_graph/B3/T2",
+      "run_id": "R02",
+      "scope": "bare_graph",
+      "batch": 3,
+      "rotation": 2,
+      "variant": "native",
+      "event_us_per_call": {
+        "query_cluster": 4109.004974365234,
+        "query_block": 4254.31022644043,
+        "idle_matched": 4122.521591186523
+      },
+      "event_ratio_vs_query_block": {
+        "query_cluster": 0.9658451677613619,
+        "query_block": 1.0,
+        "idle_matched": 0.9690223260083755
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R02/bare_graph/B3/T2",
+      "run_id": "R02",
+      "scope": "bare_graph",
+      "batch": 3,
+      "rotation": 2,
+      "variant": "mature",
+      "event_us_per_call": {
+        "query_cluster": 4400.947189331055,
+        "query_block": 3907.583999633789,
+        "idle_matched": 4376.166534423828
+      },
+      "event_ratio_vs_query_block": {
+        "query_cluster": 1.1262578590104533,
+        "query_block": 1.0,
+        "idle_matched": 1.1199161770633603
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R02/bare_graph/B5/T0",
+      "run_id": "R02",
+      "scope": "bare_graph",
+      "batch": 5,
+      "rotation": 0,
+      "variant": "native",
+      "event_us_per_call": {
+        "idle_matched": 11790.643310546875,
+        "query_cluster": 4089.446258544922,
+        "query_block": 4089.139175415039
+      },
+      "event_ratio_vs_query_block": {
+        "idle_matched": 2.883404747247359,
+        "query_cluster": 1.0000750972556105,
+        "query_block": 1.0
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R02/bare_graph/B5/T0",
+      "run_id": "R02",
+      "scope": "bare_graph",
+      "batch": 5,
+      "rotation": 0,
+      "variant": "mature",
+      "event_us_per_call": {
+        "idle_matched": 3895.7054138183594,
+        "query_cluster": 3896.5248107910156,
+        "query_block": 3895.8080291748047
+      },
+      "event_ratio_vs_query_block": {
+        "idle_matched": 0.9999736600582788,
+        "query_cluster": 1.0001839879200523,
+        "query_block": 1.0
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R02/bare_graph/B5/T1",
+      "run_id": "R02",
+      "scope": "bare_graph",
+      "batch": 5,
+      "rotation": 1,
+      "variant": "native",
+      "event_us_per_call": {
+        "query_block": 4095.3857421875,
+        "idle_matched": 19876.351928710938,
+        "query_cluster": 4622.5311279296875
+      },
+      "event_ratio_vs_query_block": {
+        "query_block": 1.0,
+        "idle_matched": 4.853352817039947,
+        "query_cluster": 1.1287169070087693
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R02/bare_graph/B5/T1",
+      "run_id": "R02",
+      "scope": "bare_graph",
+      "batch": 5,
+      "rotation": 1,
+      "variant": "mature",
+      "event_us_per_call": {
+        "query_block": 3896.217727661133,
+        "idle_matched": 11975.782775878906,
+        "query_cluster": 3896.6270446777344
+      },
+      "event_ratio_vs_query_block": {
+        "query_block": 1.0,
+        "idle_matched": 3.0736944423965418,
+        "query_cluster": 1.0001050549648947
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R02/bare_graph/B5/T2",
+      "run_id": "R02",
+      "scope": "bare_graph",
+      "batch": 5,
+      "rotation": 2,
+      "variant": "native",
+      "event_us_per_call": {
+        "query_cluster": 4088.8320922851562,
+        "query_block": 4091.5969848632812,
+        "idle_matched": 4087.705612182617
+      },
+      "event_ratio_vs_query_block": {
+        "query_cluster": 0.9993242509982402,
+        "query_block": 1.0,
+        "idle_matched": 0.9990489354902108
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R02/bare_graph/B5/T2",
+      "run_id": "R02",
+      "scope": "bare_graph",
+      "batch": 5,
+      "rotation": 2,
+      "variant": "mature",
+      "event_us_per_call": {
+        "query_cluster": 4242.943954467773,
+        "query_block": 11979.776000976562,
+        "idle_matched": 20301.72119140625
+      },
+      "event_ratio_vs_query_block": {
+        "query_cluster": 0.35417556673195716,
+        "query_block": 1.0,
+        "idle_matched": 1.694666176542141
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R02/bare_graph/B8/T0",
+      "run_id": "R02",
+      "scope": "bare_graph",
+      "batch": 8,
+      "rotation": 0,
+      "variant": "native",
+      "event_us_per_call": {
+        "idle_matched": 12624.384307861328,
+        "query_cluster": 4093.4398651123047,
+        "query_block": 4631.85920715332
+      },
+      "event_ratio_vs_query_block": {
+        "idle_matched": 2.7255544141679793,
+        "query_cluster": 0.8837574032454408,
+        "query_block": 1.0
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R02/bare_graph/B8/T0",
+      "run_id": "R02",
+      "scope": "bare_graph",
+      "batch": 8,
+      "rotation": 0,
+      "variant": "mature",
+      "event_us_per_call": {
+        "idle_matched": 3896.9345092773438,
+        "query_cluster": 3896.6270446777344,
+        "query_block": 4418.662261962891
+      },
+      "event_ratio_vs_query_block": {
+        "idle_matched": 0.8819263112329881,
+        "query_cluster": 0.8818567280466342,
+        "query_block": 1.0
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R02/bare_graph/B8/T1",
+      "run_id": "R02",
+      "scope": "bare_graph",
+      "batch": 8,
+      "rotation": 1,
+      "variant": "native",
+      "event_us_per_call": {
+        "query_block": 11863.859558105469,
+        "idle_matched": 12929.330444335938,
+        "query_cluster": 4090.367889404297
+      },
+      "event_ratio_vs_query_block": {
+        "query_block": 1.0,
+        "idle_matched": 1.0898081169127236,
+        "query_cluster": 0.34477548131541474
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R02/bare_graph/B8/T1",
+      "run_id": "R02",
+      "scope": "bare_graph",
+      "batch": 8,
+      "rotation": 1,
+      "variant": "mature",
+      "event_us_per_call": {
+        "query_block": 3899.1870880126953,
+        "idle_matched": 3903.897476196289,
+        "query_cluster": 3898.4703063964844
+      },
+      "event_ratio_vs_query_block": {
+        "query_block": 1.0,
+        "idle_matched": 1.0012080436453217,
+        "query_cluster": 0.999816171524979
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R02/bare_graph/B8/T2",
+      "run_id": "R02",
+      "scope": "bare_graph",
+      "batch": 8,
+      "rotation": 2,
+      "variant": "native",
+      "event_us_per_call": {
+        "query_cluster": 4091.904067993164,
+        "query_block": 4090.3392791748047,
+        "idle_matched": 4596.01936340332
+      },
+      "event_ratio_vs_query_block": {
+        "query_cluster": 1.0003825572187437,
+        "query_block": 1.0,
+        "idle_matched": 1.1236279070548232
+      },
+      "unconditional_all_samples": true
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R02/bare_graph/B8/T2",
+      "run_id": "R02",
+      "scope": "bare_graph",
+      "batch": 8,
+      "rotation": 2,
+      "variant": "mature",
+      "event_us_per_call": {
+        "query_cluster": 3898.5729217529297,
+        "query_block": 4409.75341796875,
+        "idle_matched": 3897.9583740234375
+      },
+      "event_ratio_vs_query_block": {
+        "query_cluster": 0.8840795736712,
+        "query_block": 1.0,
+        "idle_matched": 0.883940212652285
+      },
+      "unconditional_all_samples": true
+    }
+  ],
+  "matching": [
+    {
+      "run_id": "R01",
+      "scope": "full",
+      "policy": "query_block",
+      "blocks": 90,
+      "matched": 8,
+      "abs_error_ms": {
+        "count": 90,
+        "min": 0.470461,
+        "median": 7.594906,
+        "p95_nearest_rank": 42.780705,
+        "max": 120.40243
+      }
+    },
+    {
+      "run_id": "R01",
+      "scope": "full",
+      "policy": "idle_matched",
+      "blocks": 90,
+      "matched": 81,
+      "abs_error_ms": {
+        "count": 90,
+        "min": 0.081776,
+        "median": 0.111468,
+        "p95_nearest_rank": 14.611374,
+        "max": 22.999579
+      }
+    },
+    {
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "policy": "query_block",
+      "blocks": 90,
+      "matched": 7,
+      "abs_error_ms": {
+        "count": 90,
+        "min": 0.174188,
+        "median": 10.5698995,
+        "p95_nearest_rank": 56.989508,
+        "max": 2449.090328
+      }
+    },
+    {
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "policy": "idle_matched",
+      "blocks": 90,
+      "matched": 81,
+      "abs_error_ms": {
+        "count": 90,
+        "min": 0.079665,
+        "median": 0.102603,
+        "p95_nearest_rank": 13.810502,
+        "max": 128.643556
+      }
+    },
+    {
+      "run_id": "R02",
+      "scope": "full",
+      "policy": "query_block",
+      "blocks": 90,
+      "matched": 25,
+      "abs_error_ms": {
+        "count": 90,
+        "min": 0.007834,
+        "median": 4.863739499999999,
+        "p95_nearest_rank": 32.482786,
+        "max": 55.738706
+      }
+    },
+    {
+      "run_id": "R02",
+      "scope": "full",
+      "policy": "idle_matched",
+      "blocks": 90,
+      "matched": 90,
+      "abs_error_ms": {
+        "count": 90,
+        "min": 0.090458,
+        "median": 0.10980100000000001,
+        "p95_nearest_rank": 0.127784,
+        "max": 0.151272
+      }
+    },
+    {
+      "run_id": "R02",
+      "scope": "bare_graph",
+      "policy": "query_block",
+      "blocks": 90,
+      "matched": 32,
+      "abs_error_ms": {
+        "count": 90,
+        "min": 0.021488,
+        "median": 3.9819009999999997,
+        "p95_nearest_rank": 33.81587,
+        "max": 42.909903
+      }
+    },
+    {
+      "run_id": "R02",
+      "scope": "bare_graph",
+      "policy": "idle_matched",
+      "blocks": 90,
+      "matched": 90,
+      "abs_error_ms": {
+        "count": 90,
+        "min": 0.090072,
+        "median": 0.110437,
+        "p95_nearest_rank": 0.128561,
+        "max": 0.147997
+      }
+    }
+  ],
+  "fully_gap_matched_full_triplets": 0,
+  "all_full_triplets": 18,
+  "cross_process_full_parameters_and_config_match": true,
+  "code_sha256": "5bf101c83e41e4cc342f686b4f668d2575d79fd5467b8508330e80fb47ccdea9",
+  "no_filtered_performance_estimate": true,
+  "root_cause_or_model_gain_claim": false
+}

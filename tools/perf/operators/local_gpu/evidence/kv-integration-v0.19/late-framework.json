@@ -1,0 +1,778 @@
+{
+  "scope": "actual native ModelRunner / original batch helpers / original CudaGraphRunner",
+  "weights": "artificial random weights via native DummyModelLoader",
+  "pretrained_weights": false,
+  "weight_download": false,
+  "semantic_quality_claim": false,
+  "Engine_constructed": false,
+  "online_scheduler_or_serving": false,
+  "ModelRunner_constructed": true,
+  "records": [
+    {
+      "label": "bs1/step0",
+      "raw_batch": 1,
+      "captured_batch": 1,
+      "padding": 0,
+      "seq_lens": [
+        13
+      ],
+      "graph_splits": [
+        7
+      ],
+      "eager_splits": [
+        7
+      ],
+      "padding_seq_lens": [],
+      "padding_cache_locations": [],
+      "max_abs_graph_eager": 0.0,
+      "logit_max_abs": 6.258487701416016e-06,
+      "logits_sha256": "1a6f132a86b3dcc62ea2e7b5ba4e5b4562a2900644a651496ba46d521c96e0e4",
+      "output_aliases_native_graph_buffer": true,
+      "scratch_poison_gate_passed": true,
+      "input_buffers_stable": true
+    },
+    {
+      "label": "bs1/step1",
+      "raw_batch": 1,
+      "captured_batch": 1,
+      "padding": 0,
+      "seq_lens": [
+        14
+      ],
+      "graph_splits": [
+        7
+      ],
+      "eager_splits": [
+        7
+      ],
+      "padding_seq_lens": [],
+      "padding_cache_locations": [],
+      "max_abs_graph_eager": 0.0,
+      "logit_max_abs": 5.781650543212891e-06,
+      "logits_sha256": "8119832375775ea188af22e25a99a274bd36035a08d273c838365613b494807d",
+      "output_aliases_native_graph_buffer": true,
+      "scratch_poison_gate_passed": true,
+      "input_buffers_stable": true
+    },
+    {
+      "label": "bs3/step0",
+      "raw_batch": 3,
+      "captured_batch": 4,
+      "padding": 1,
+      "seq_lens": [
+        13,
+        13,
+        13
+      ],
+      "graph_splits": [
+        7,
+        7,
+        7,
+        1
+      ],
+      "eager_splits": [
+        4,
+        4,
+        4
+      ],
+      "padding_seq_lens": [
+        1
+      ],
+      "padding_cache_locations": [
+        0
+      ],
+      "max_abs_graph_eager": 0.0,
+      "logit_max_abs": 6.616115570068359e-06,
+      "logits_sha256": "be44ba705708bc5d0bc26edf244724dc6983db874c8e68f29fa43c879b6f0ec0",
+      "output_aliases_native_graph_buffer": true,
+      "scratch_poison_gate_passed": true,
+      "input_buffers_stable": true
+    },
+    {
+      "label": "bs3/step1",
+      "raw_batch": 3,
+      "captured_batch": 4,
+      "padding": 1,
+      "seq_lens": [
+        14,
+        14,
+        14
+      ],
+      "graph_splits": [
+        7,
+        7,
+        7,
+        1
+      ],
+      "eager_splits": [
+        4,
+        4,
+        4
+      ],
+      "padding_seq_lens": [
+        1
+      ],
+      "padding_cache_locations": [
+        0
+      ],
+      "max_abs_graph_eager": 0.0,
+      "logit_max_abs": 6.556510925292969e-06,
+      "logits_sha256": "f6d66eeebf967b98e6d5c9b1e3fa1d90cdd2f4688f895b8ce4a0f4be6b3b10ec",
+      "output_aliases_native_graph_buffer": true,
+      "scratch_poison_gate_passed": true,
+      "input_buffers_stable": true
+    },
+    {
+      "label": "bs2/step0",
+      "raw_batch": 2,
+      "captured_batch": 2,
+      "padding": 0,
+      "seq_lens": [
+        13,
+        13
+      ],
+      "graph_splits": [
+        5,
+        5
+      ],
+      "eager_splits": [
+        5,
+        5
+      ],
+      "padding_seq_lens": [],
+      "padding_cache_locations": [],
+      "max_abs_graph_eager": 0.0,
+      "logit_max_abs": 6.020069122314453e-06,
+      "logits_sha256": "fc6a263ed8ce1d94c862837e0226744abba0a912d4605ce30668363159255978",
+      "output_aliases_native_graph_buffer": true,
+      "scratch_poison_gate_passed": true,
+      "input_buffers_stable": true
+    },
+    {
+      "label": "bs2/step1",
+      "raw_batch": 2,
+      "captured_batch": 2,
+      "padding": 0,
+      "seq_lens": [
+        14,
+        14
+      ],
+      "graph_splits": [
+        5,
+        5
+      ],
+      "eager_splits": [
+        5,
+        5
+      ],
+      "padding_seq_lens": [],
+      "padding_cache_locations": [],
+      "max_abs_graph_eager": 0.0,
+      "logit_max_abs": 6.258487701416016e-06,
+      "logits_sha256": "36b43c4e6829c0f5bc76ee77530cc46f2d8a89ecca29c15a73fee2a15648899a",
+      "output_aliases_native_graph_buffer": true,
+      "scratch_poison_gate_passed": true,
+      "input_buffers_stable": true
+    },
+    {
+      "label": "bs5/step0",
+      "raw_batch": 5,
+      "captured_batch": 8,
+      "padding": 3,
+      "seq_lens": [
+        13,
+        13,
+        13,
+        13,
+        13
+      ],
+      "graph_splits": [
+        7,
+        7,
+        7,
+        7,
+        7,
+        1,
+        1,
+        1
+      ],
+      "eager_splits": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "padding_seq_lens": [
+        1,
+        1,
+        1
+      ],
+      "padding_cache_locations": [
+        0,
+        0,
+        0
+      ],
+      "max_abs_graph_eager": 0.0,
+      "logit_max_abs": 6.556510925292969e-06,
+      "logits_sha256": "b06c496f32e8831fd169bd30568d4883d820c0c4402110511d1c4e5b811b42b2",
+      "output_aliases_native_graph_buffer": true,
+      "scratch_poison_gate_passed": true,
+      "input_buffers_stable": true
+    },
+    {
+      "label": "bs5/step1",
+      "raw_batch": 5,
+      "captured_batch": 8,
+      "padding": 3,
+      "seq_lens": [
+        14,
+        14,
+        14,
+        14,
+        14
+      ],
+      "graph_splits": [
+        7,
+        7,
+        7,
+        7,
+        7,
+        1,
+        1,
+        1
+      ],
+      "eager_splits": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "padding_seq_lens": [
+        1,
+        1,
+        1
+      ],
+      "padding_cache_locations": [
+        0,
+        0,
+        0
+      ],
+      "max_abs_graph_eager": 0.0,
+      "logit_max_abs": 6.67572021484375e-06,
+      "logits_sha256": "e681ce31644c199acddd4a36de6f2c52856e0218df8c0931b345f0fcd5ff8a30",
+      "output_aliases_native_graph_buffer": true,
+      "scratch_poison_gate_passed": true,
+      "input_buffers_stable": true
+    },
+    {
+      "label": "bs8/step0",
+      "raw_batch": 8,
+      "captured_batch": 8,
+      "padding": 0,
+      "seq_lens": [
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13
+      ],
+      "graph_splits": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "eager_splits": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "padding_seq_lens": [],
+      "padding_cache_locations": [],
+      "max_abs_graph_eager": 0.0,
+      "logit_max_abs": 6.854534149169922e-06,
+      "logits_sha256": "2d43cdbe0f803cc1499a299dd741a2cc51d238f82f1145f8978621a3752be42d",
+      "output_aliases_native_graph_buffer": true,
+      "scratch_poison_gate_passed": true,
+      "input_buffers_stable": true
+    },
+    {
+      "label": "bs8/step1",
+      "raw_batch": 8,
+      "captured_batch": 8,
+      "padding": 0,
+      "seq_lens": [
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14
+      ],
+      "graph_splits": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "eager_splits": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "padding_seq_lens": [],
+      "padding_cache_locations": [],
+      "max_abs_graph_eager": 0.0,
+      "logit_max_abs": 6.9141387939453125e-06,
+      "logits_sha256": "3074f65c238057b781f9615ff744bdb86f03148b27e9a300d219fee954b13e82",
+      "output_aliases_native_graph_buffer": true,
+      "scratch_poison_gate_passed": true,
+      "input_buffers_stable": true
+    },
+    {
+      "label": "shrink3/step",
+      "raw_batch": 3,
+      "captured_batch": 4,
+      "padding": 1,
+      "seq_lens": [
+        15,
+        15,
+        15
+      ],
+      "graph_splits": [
+        8,
+        8,
+        8,
+        1
+      ],
+      "eager_splits": [
+        4,
+        4,
+        4
+      ],
+      "padding_seq_lens": [
+        1
+      ],
+      "padding_cache_locations": [
+        0
+      ],
+      "max_abs_graph_eager": 0.0,
+      "logit_max_abs": 6.794929504394531e-06,
+      "logits_sha256": "79d69c4dad79e08afb6a43edcb2390f6c5811c02f819ec67d130ea93525ef7b9",
+      "output_aliases_native_graph_buffer": true,
+      "scratch_poison_gate_passed": true,
+      "input_buffers_stable": true
+    },
+    {
+      "label": "shrink1/step",
+      "raw_batch": 1,
+      "captured_batch": 1,
+      "padding": 0,
+      "seq_lens": [
+        16
+      ],
+      "graph_splits": [
+        8
+      ],
+      "eager_splits": [
+        8
+      ],
+      "padding_seq_lens": [],
+      "padding_cache_locations": [],
+      "max_abs_graph_eager": 0.0,
+      "logit_max_abs": 6.020069122314453e-06,
+      "logits_sha256": "8295795dd55501045968164e805e90c41c9ba5ce2a23d64a9428f408eab8ae08",
+      "output_aliases_native_graph_buffer": true,
+      "scratch_poison_gate_passed": true,
+      "input_buffers_stable": true
+    }
+  ],
+  "pool_checks": [
+    {
+      "initial_batch": 1,
+      "before": {
+        "req_free": 8,
+        "kv_free": 512
+      },
+      "after": {
+        "req_free": 8,
+        "kv_free": 512
+      },
+      "reconciled": true
+    },
+    {
+      "initial_batch": 3,
+      "before": {
+        "req_free": 8,
+        "kv_free": 512
+      },
+      "after": {
+        "req_free": 8,
+        "kv_free": 512
+      },
+      "reconciled": true
+    },
+    {
+      "initial_batch": 2,
+      "before": {
+        "req_free": 8,
+        "kv_free": 512
+      },
+      "after": {
+        "req_free": 8,
+        "kv_free": 512
+      },
+      "reconciled": true
+    },
+    {
+      "initial_batch": 5,
+      "before": {
+        "req_free": 8,
+        "kv_free": 512
+      },
+      "after": {
+        "req_free": 8,
+        "kv_free": 512
+      },
+      "reconciled": true
+    },
+    {
+      "initial_batch": 8,
+      "before": {
+        "req_free": 8,
+        "kv_free": 512
+      },
+      "after": {
+        "req_free": 8,
+        "kv_free": 512
+      },
+      "reconciled": true
+    }
+  ],
+  "rope_observations": [
+    {
+      "class": "RotaryEmbedding",
+      "q_shape": [
+        12,
+        576
+      ],
+      "q_stride": [
+        960,
+        1
+      ],
+      "k_shape": [
+        12,
+        192
+      ],
+      "k_stride": [
+        960,
+        1
+      ],
+      "dtype": "torch.float16",
+      "q_output_alias": true,
+      "k_output_alias": true,
+      "scope": "eager native module caller; hooks installed AFTER graph capture"
+    },
+    {
+      "class": "RotaryEmbedding",
+      "q_shape": [
+        12,
+        576
+      ],
+      "q_stride": [
+        960,
+        1
+      ],
+      "k_shape": [
+        12,
+        192
+      ],
+      "k_stride": [
+        960,
+        1
+      ],
+      "dtype": "torch.float16",
+      "q_output_alias": true,
+      "k_output_alias": true,
+      "scope": "eager native module caller; hooks installed AFTER graph capture"
+    },
+    {
+      "class": "RotaryEmbedding",
+      "q_shape": [
+        12,
+        576
+      ],
+      "q_stride": [
+        960,
+        1
+      ],
+      "k_shape": [
+        12,
+        192
+      ],
+      "k_stride": [
+        960,
+        1
+      ],
+      "dtype": "torch.float16",
+      "q_output_alias": true,
+      "k_output_alias": true,
+      "scope": "eager native module caller; hooks installed AFTER graph capture"
+    },
+    {
+      "class": "RotaryEmbedding",
+      "q_shape": [
+        12,
+        576
+      ],
+      "q_stride": [
+        960,
+        1
+      ],
+      "k_shape": [
+        12,
+        192
+      ],
+      "k_stride": [
+        960,
+        1
+      ],
+      "dtype": "torch.float16",
+      "q_output_alias": true,
+      "k_output_alias": true,
+      "scope": "eager native module caller; hooks installed AFTER graph capture"
+    }
+  ],
+  "kv_observations": [
+    {
+      "layer": 0,
+      "tokens": 12,
+      "k_shape": [
+        12,
+        3,
+        64
+      ],
+      "k_stride": [
+        960,
+        64,
+        1
+      ],
+      "dtype": "torch.float16",
+      "scope": "eager actual MHATokenToKVPool caller"
+    },
+    {
+      "layer": 1,
+      "tokens": 12,
+      "k_shape": [
+        12,
+        3,
+        64
+      ],
+      "k_stride": [
+        960,
+        64,
+        1
+      ],
+      "dtype": "torch.float16",
+      "scope": "eager actual MHATokenToKVPool caller"
+    },
+    {
+      "layer": 2,
+      "tokens": 12,
+      "k_shape": [
+        12,
+        3,
+        64
+      ],
+      "k_stride": [
+        960,
+        64,
+        1
+      ],
+      "dtype": "torch.float16",
+      "scope": "eager actual MHATokenToKVPool caller"
+    },
+    {
+      "layer": 3,
+      "tokens": 12,
+      "k_shape": [
+        12,
+        3,
+        64
+      ],
+      "k_stride": [
+        960,
+        64,
+        1
+      ],
+      "dtype": "torch.float16",
+      "scope": "eager actual MHATokenToKVPool caller"
+    }
+  ],
+  "instrumentation": "extra eager references/sync/poison/CPU snapshots; no performance baseline claim",
+  "torch": "2.8.0+cu128",
+  "cuda": "12.8",
+  "sglang": "0.5.2",
+  "sgl_kernel": "0.3.9.post2",
+  "device": "NVIDIA GeForce RTX 4070 Laptop GPU",
+  "source_commit": "b0d25e72c401f37b55d689ddbf05b8c583afe854",
+  "source_files": 9,
+  "runner_source_sha256": "f32583d4f8c9c4e13f6873ed2ff8197b528a383e0785163ddcd2de82d324833d",
+  "local_files": {
+    "generation_config.json": "42d3ca95148e3caf72ca9765f96319a92ee080596274d4d14a313e443cd69fcc",
+    "merges.txt": "0b54e8aa4e53d5383e2e4bc635a56b43f9647f7b13832d5d9ecd8f82dac4f510",
+    "vocab.json": "82b84012e3add4d01d12ba14442026e49b8cbbaead1f79ecf3d919784f82dc79",
+    "tokenizer_config.json": "75668bda11eb0d5ece137b4eb3fb2ad679f847fd19846b726369a26d92f9f28e",
+    "special_tokens_map.json": "33725cb94317e674e9dad3007c35cedecf5928a4d3c9533598d9d3add76838a8",
+    "tokenizer.json": "9ca9acddb6525a194ec8ac7a87f24fbba7232a9a15ffa1af0c1224fcd888e47c",
+    "config.json": "d89dd5a56c63ac3d2f6cea098ad8aebd94e5fc4e4060fb61cd7e0e8bd0b678bb"
+  },
+  "caps": {
+    "allocator_fraction": 0.2,
+    "planner_mem_fraction_static": 0.2,
+    "max_total_tokens": 512,
+    "context_length": 128,
+    "max_batch": 8,
+    "capture_bs": [
+      1,
+      2,
+      4,
+      8
+    ],
+    "outer_timeout_s": 600
+  },
+  "native_dummy_loader_called": true,
+  "model_type": "LlamaForCausalLM",
+  "parameter_count": 134515008,
+  "graph_type": "CudaGraphRunner",
+  "captured_sizes": [
+    1,
+    2,
+    4,
+    8
+  ],
+  "setup_s": 8.636316776999934,
+  "backend": "TritonAttnBackend",
+  "engine_default_kv_splits": 8,
+  "manual_mature_KV_probe": {
+    "scope": "manual direct op on actual layer0 prefill view; NOT default caller",
+    "k_shape": [
+      12,
+      3,
+      64
+    ],
+    "k_stride": [
+      960,
+      64,
+      1
+    ],
+    "input_contiguous": false,
+    "fallback_used": false,
+    "status": "supported_bitwise_equal",
+    "kernel_names": [
+      "void (anonymous namespace)::store_kv_cache_128x2<long>(unsigned long*, unsigned long*, long const*, unsigned long, unsigned long const*, unsigned long const*, unsigned long, unsigned long, unsigned long)"
+    ],
+    "kernel_count": 1,
+    "op_counts": {
+      "sgl_kernel::store_kv_cache": 1,
+      "aten::view": 4,
+      "Activity Buffer Request": 1,
+      "cudaLaunchKernel": 1,
+      "cudaDeviceSynchronize": 2,
+      "void (anonymous namespace)::store_kv_cache_128x2<long>(unsigned long*, unsigned long*, long const*, unsigned long, unsigned long const*, unsigned long const*, unsigned long, unsigned long, unsigned long)": 1
+    }
+  },
+  "native_nondefault_stream_scenario_passed": true,
+  "native_op_counts": {
+    "sgl_kernel::rmsnorm": 3,
+    "sgl_kernel::apply_rope_pos_ids_cos_sin_cache": 90,
+    "sgl_kernel::store_kv_cache": 90,
+    "sgl_kernel::fused_add_rmsnorm": 180,
+    "sgl_kernel::silu_and_mul": 90
+  },
+  "actual_kernel_names": [
+    "_fwd_grouped_kernel_stage1",
+    "_fwd_kernel",
+    "_fwd_kernel_stage2",
+    "ampere_fp16_s16816gemm_fp16_128x64_ldg8_f2f_stages_32x6_tn",
+    "compute_position_kernel",
+    "create_flashinfer_kv_indices_triton",
+    "get_num_kv_splits_triton",
+    "triton_poi_fused_clamp_sub_0",
+    "void (anonymous namespace)::elementwise_kernel_with_index<int, at::native::arange_cuda_out(c10::Scalar const&, c10::Scalar const&, c10::Scalar const&, at::Tensor&)::{lambda()#1}::operator()() const::{lambda()#4}::operator()() const::{lambda(long)#1}>(int, at::native::arange_cuda_out(c10::Scalar const&, c10::Scalar const&, c10::Scalar const&, at::Tensor&)::{lambda()#1}::operator()() const::{lambda()#4}::operator()() const::{lambda(long)#1}, function_traits<at::native::arange_cuda_out(c10::Scalar const&, c10::Scalar const&, c10::Scalar const&, at::Tensor&)::{lambda()#1}::operator()() const::{lambda()#4}::operator()() const::{lambda(long)#1}>::result_type*)",
+    "void (anonymous namespace)::store_kv_cache_128x2<long>(unsigned long*, unsigned long*, long const*, unsigned long, unsigned long const*, unsigned long const*, unsigned long, unsigned long, unsigned long)",
+    "void at::native::(anonymous namespace)::CatArrayBatchedCopy_alignedK_contig<at::native::(anonymous namespace)::OpaqueType<4u>, unsigned int, 1, 128, 1, 16>(at::native::(anonymous namespace)::OpaqueType<4u>*, at::native::(anonymous namespace)::CatArrInputTensorMetadata<at::native::(anonymous namespace)::OpaqueType<4u>, unsigned int, 128, 1>, at::native::(anonymous namespace)::TensorSizeStride<unsigned int, 4u>, int, unsigned int)",
+    "void at::native::(anonymous namespace)::indexSelectSmallIndex<c10::Half, long, unsigned int, 2, 2, -2>(at::cuda::detail::TensorInfo<c10::Half, unsigned int>, at::cuda::detail::TensorInfo<c10::Half const, unsigned int>, at::cuda::detail::TensorInfo<long const, unsigned int>, int, int, unsigned int, long)",
+    "void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#10}::operator()() const::{lambda(c10::Half)#1}>(at::TensorIteratorBase&, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#10}::operator()() const::{lambda(c10::Half)#1} const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#10}::operator()() const::{lambda(c10::Half)#1}>(at::TensorIteratorBase&, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#10}::operator()() const::{lambda(c10::Half)#1} const&)::{lambda(int)#1})",
+    "void at::native::index_elementwise_kernel<128, 4, at::native::gpu_index_kernel<at::native::index_put_kernel_impl<at::native::OpaqueType<2> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1}>(at::TensorIteratorBase&, c10::ArrayRef<long>, c10::ArrayRef<long>, at::native::index_put_kernel_impl<at::native::OpaqueType<2> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1} const&, bool)::{lambda(int)#1}>(long, at::native::gpu_index_kernel<at::native::index_put_kernel_impl<at::native::OpaqueType<2> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1}>(at::TensorIteratorBase&, c10::ArrayRef<long>, c10::ArrayRef<long>, at::native::index_put_kernel_impl<at::native::OpaqueType<2> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1} const&, bool)::{lambda(int)#1})",
+    "void at::native::index_elementwise_kernel<128, 4, at::native::gpu_index_kernel<at::native::index_put_kernel_impl<at::native::OpaqueType<4> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1}>(at::TensorIteratorBase&, c10::ArrayRef<long>, c10::ArrayRef<long>, at::native::index_put_kernel_impl<at::native::OpaqueType<4> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1} const&, bool)::{lambda(int)#1}>(long, at::native::gpu_index_kernel<at::native::index_put_kernel_impl<at::native::OpaqueType<4> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1}>(at::TensorIteratorBase&, c10::ArrayRef<long>, c10::ArrayRef<long>, at::native::index_put_kernel_impl<at::native::OpaqueType<4> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1} const&, bool)::{lambda(int)#1})",
+    "void at::native::reduce_kernel<512, 1, at::native::ReduceOp<bool, at::native::func_wrapper_t<bool, at::native::and_kernel_cuda(at::TensorIterator&)::{lambda()#1}::operator()() const::{lambda()#12}::operator()() const::{lambda(bool, bool)#1}>, unsigned int, bool, 4, 4> >(at::native::ReduceOp<bool, at::native::func_wrapper_t<bool, at::native::and_kernel_cuda(at::TensorIterator&)::{lambda()#1}::operator()() const::{lambda()#12}::operator()() const::{lambda(bool, bool)#1}>, unsigned int, bool, 4, 4>)",
+    "void at::native::reduce_kernel<512, 1, at::native::ReduceOp<float, at::native::ArgMaxOps<float>, unsigned int, long, 4, 4> >(at::native::ReduceOp<float, at::native::ArgMaxOps<float>, unsigned int, long, 4, 4>)",
+    "void at::native::reduce_kernel<512, 1, at::native::ReduceOp<float, at::native::func_wrapper_t<float, at::native::MaxNanFunctor<float> >, unsigned int, float, 4, 4> >(at::native::ReduceOp<float, at::native::func_wrapper_t<float, at::native::MaxNanFunctor<float> >, unsigned int, float, 4, 4>)",
+    "void at::native::reduce_kernel<512, 1, at::native::ReduceOp<long, at::native::func_wrapper_t<long, at::native::sum_functor<long, long, long>::operator()(at::TensorIterator&)::{lambda(long, long)#1}>, unsigned int, long, 4, 4> >(at::native::ReduceOp<long, at::native::func_wrapper_t<long, at::native::sum_functor<long, long, long>::operator()(at::TensorIterator&)::{lambda(long, long)#1}>, unsigned int, long, 4, 4>)",
+    "void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#3}::operator()() const::{lambda(int)#1}, std::array<char*, 2ul>, 4, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1> >(int, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#3}::operator()() const::{lambda(int)#1}, std::array<char*, 2ul>, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1>)",
+    "void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#4}::operator()() const::{lambda(long)#1}, std::array<char*, 2ul>, 4, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1> >(int, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#4}::operator()() const::{lambda(long)#1}, std::array<char*, 2ul>, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1>)",
+    "void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul>, 4, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1> >(int, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul>, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1>)",
+    "void at::native::vectorized_elementwise_kernel<2, at::native::CUDAFunctorOnSelf_add<long>, std::array<char*, 2ul> >(int, at::native::CUDAFunctorOnSelf_add<long>, std::array<char*, 2ul>)",
+    "void at::native::vectorized_elementwise_kernel<2, at::native::CUDAFunctor_add<long>, std::array<char*, 3ul> >(int, at::native::CUDAFunctor_add<long>, std::array<char*, 3ul>)",
+    "void at::native::vectorized_elementwise_kernel<2, at::native::FillFunctor<long>, std::array<char*, 1ul> >(int, at::native::FillFunctor<long>, std::array<char*, 1ul>)",
+    "void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::CompareFunctor<float>, std::array<char*, 3ul> >(int, at::native::(anonymous namespace)::CompareFunctor<float>, std::array<char*, 3ul>)",
+    "void at::native::vectorized_elementwise_kernel<4, at::native::AUnaryFunctor<float, float, bool, at::native::(anonymous namespace)::CompareEqFunctor<float> >, std::array<char*, 2ul> >(int, at::native::AUnaryFunctor<float, float, bool, at::native::(anonymous namespace)::CompareEqFunctor<float> >, std::array<char*, 2ul>)",
+    "void at::native::vectorized_elementwise_kernel<4, at::native::AUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> >, std::array<char*, 2ul> >(int, at::native::AUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> >, std::array<char*, 2ul>)",
+    "void at::native::vectorized_elementwise_kernel<4, at::native::AbsFunctor<float>, std::array<char*, 2ul> >(int, at::native::AbsFunctor<float>, std::array<char*, 2ul>)",
+    "void at::native::vectorized_elementwise_kernel<4, at::native::BinaryFunctor<bool, bool, bool, at::native::BitwiseAndFunctor<bool> >, std::array<char*, 3ul> >(int, at::native::BinaryFunctor<bool, bool, bool, at::native::BitwiseAndFunctor<bool> >, std::array<char*, 3ul>)",
+    "void at::native::vectorized_elementwise_kernel<4, at::native::BinaryFunctor<bool, bool, bool, at::native::BitwiseOrFunctor<bool> >, std::array<char*, 3ul> >(int, at::native::BinaryFunctor<bool, bool, bool, at::native::BitwiseOrFunctor<bool> >, std::array<char*, 3ul>)",
+    "void at::native::vectorized_elementwise_kernel<4, at::native::BinaryFunctor<bool, bool, bool, at::native::binary_internal::MulFunctor<bool> >, std::array<char*, 3ul> >(int, at::native::BinaryFunctor<bool, bool, bool, at::native::binary_internal::MulFunctor<bool> >, std::array<char*, 3ul>)",
+    "void at::native::vectorized_elementwise_kernel<4, at::native::BinaryFunctor<float, float, bool, at::native::(anonymous namespace)::CompareEqFunctor<float> >, std::array<char*, 3ul> >(int, at::native::BinaryFunctor<float, float, bool, at::native::(anonymous namespace)::CompareEqFunctor<float> >, std::array<char*, 3ul>)",
+    "void at::native::vectorized_elementwise_kernel<4, at::native::CUDAFunctorOnSelf_add<float>, std::array<char*, 2ul> >(int, at::native::CUDAFunctorOnSelf_add<float>, std::array<char*, 2ul>)",
+    "void at::native::vectorized_elementwise_kernel<4, at::native::CUDAFunctorOnSelf_add<int>, std::array<char*, 2ul> >(int, at::native::CUDAFunctorOnSelf_add<int>, std::array<char*, 2ul>)",
+    "void at::native::vectorized_elementwise_kernel<4, at::native::CUDAFunctor_add<float>, std::array<char*, 3ul> >(int, at::native::CUDAFunctor_add<float>, std::array<char*, 3ul>)",
+    "void at::native::vectorized_elementwise_kernel<4, at::native::FillFunctor<float>, std::array<char*, 1ul> >(int, at::native::FillFunctor<float>, std::array<char*, 1ul>)",
+    "void at::native::vectorized_elementwise_kernel<4, at::native::FillFunctor<int>, std::array<char*, 1ul> >(int, at::native::FillFunctor<int>, std::array<char*, 1ul>)",
+    "void at::native::vectorized_elementwise_kernel<4, at::native::compare_scalar_kernel<int>(at::TensorIteratorBase&, at::native::(anonymous namespace)::OpType, int)::{lambda(int)#1}, std::array<char*, 2ul> >(int, at::native::compare_scalar_kernel<int>(at::TensorIteratorBase&, at::native::(anonymous namespace)::OpType, int)::{lambda(int)#1}, std::array<char*, 2ul>)",
+    "void at::native::vectorized_gather_kernel<16, long>(char*, char*, long*, int, long, long, long, long, bool)",
+    "void at_cuda_detail::cub::DeviceCompactInitKernel<at_cuda_detail::cub::ScanTileState<int, true>, long*>(at_cuda_detail::cub::ScanTileState<int, true>, int, long*)",
+    "void at_cuda_detail::cub::DeviceRadixSortSingleTileKernel<at_cuda_detail::cub::DeviceRadixSortPolicy<int, at_cuda_detail::cub::NullType, unsigned long long>::Policy900, false, int, at_cuda_detail::cub::NullType, unsigned long long, at_cuda_detail::cub::detail::identity_decomposer_t>(int const*, int*, at_cuda_detail::cub::NullType const*, at_cuda_detail::cub::NullType*, unsigned long long, int, int, at_cuda_detail::cub::detail::identity_decomposer_t)",
+    "void at_cuda_detail::cub::DeviceScanInitKernel<at_cuda_detail::cub::ScanTileState<long, true> >(at_cuda_detail::cub::ScanTileState<long, true>, int)",
+    "void at_cuda_detail::cub::DeviceScanKernel<at_cuda_detail::cub::DeviceScanPolicy<long, std::plus<long> >::Policy900, long const*, long*, at_cuda_detail::cub::ScanTileState<long, true>, std::plus<long>, at_cuda_detail::cub::NullType, unsigned int, long, false>(long const*, long*, at_cuda_detail::cub::ScanTileState<long, true>, int, std::plus<long>, at_cuda_detail::cub::NullType, unsigned int)",
+    "void at_cuda_detail::cub::DeviceSelectSweepKernel<at_cuda_detail::cub::detail::device_select_policy_hub<int, at_cuda_detail::cub::NullType, int, false, false>::Policy900, int const*, at_cuda_detail::cub::NullType*, int*, long*, at_cuda_detail::cub::ScanTileState<int, true>, at_cuda_detail::cub::NullType, cuda::std::__4::equal_to<void>, int, false, false>(int const*, at_cuda_detail::cub::NullType*, int*, long*, at_cuda_detail::cub::ScanTileState<int, true>, at_cuda_detail::cub::NullType, cuda::std::__4::equal_to<void>, int, int, at_cuda_detail::cub::detail::vsmem_t)",
+    "void cublasLt::splitKreduce_kernel<32, 16, int, __half, __half, float, __half, false, __half, __half, __half, true, false, false>(cublasLt::cublasSplitKParams<float>, __half const*, __half const*, __half*, __half*, float const*, float const*, __half const*, __half const*, __half*, void*, long, float*, int*, float*, float*, float const*, float const*, float const*, float const*, float const*)",
+    "void cutlass::Kernel2<cutlass_80_wmma_tensorop_f16_s161616gemm_f16_16x16_128x1_tn_align8>(cutlass_80_wmma_tensorop_f16_s161616gemm_f16_16x16_128x1_tn_align8::Params)",
+    "void cutlass::Kernel2<cutlass_80_wmma_tensorop_f16_s161616gemm_f16_16x16_128x2_tn_align8>(cutlass_80_wmma_tensorop_f16_s161616gemm_f16_16x16_128x2_tn_align8::Params)",
+    "void cutlass::Kernel2<cutlass_80_wmma_tensorop_f16_s161616gemm_f16_32x32_128x2_tn_align8>(cutlass_80_wmma_tensorop_f16_s161616gemm_f16_32x32_128x2_tn_align8::Params)",
+    "void flashinfer::BatchQKApplyRotaryPosIdsCosSinCacheHeadParallelismKernel<false, 64u, 8u, 8u, __half, long>(__half*, __half*, __half*, __half*, float*, long*, unsigned int, unsigned int, unsigned int, unsigned int, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long)",
+    "void flashinfer::activation::act_and_mul_kernel<__half, &(float silu<float>(float const&))>(__half*, __half const*, int)",
+    "void flashinfer::norm::FusedAddRMSNormKernel<8u, __half>(__half*, __half*, __half*, unsigned int, unsigned int, unsigned int, float, float)",
+    "void flashinfer::norm::RMSNormKernel<8u, __half>(__half*, __half*, __half*, unsigned int, unsigned int, unsigned int, float, float)",
+    "write_req_to_token_pool_triton"
+  ],
+  "kernel_counts": 1952,
+  "profile_scope": "B3/pad4 only; instrumentation/reference sync, no performance baseline",
+  "status": "passed",
+  "peak_torch_bytes": 323878912
+}

@@ -40,7 +40,7 @@
       "cost": "保留临时张量/拷贝、峰值显存、prefill/decode尾延迟及质量影响",
       "evidence": "逐shape原始时延、stride/dtype、数值误差、kernel/DRAM/copy时间线、占比及基线来源",
       "abandon": "成熟baseline已优；目标占比太小；减少局部时间却增加搬运/显存或模型误差",
-      "now": "人工权重原生ModelRunner结构已实跑；下一步优先成熟KV/RoPE真实接线等价性，再用完整获准权重建质量与性能基线",
+      "now": "成熟KV已在原生图capture前接入并验证等价；晚接入负控保留；调用成本状态漂移未收敛，下一步成熟RoPE+KV及测量稳定性",
       "state": "exploratory",
       "actual_profile_ref": "tools/perf/operators/local_gpu/evidence/cap6-v0.17/summary.json",
       "approval_ref": null,
@@ -51,7 +51,8 @@
         "source_files_verified": 6,
         "summary": "three GPU studies, three processes each; existing mature fusion preferred; prototype has no stable cross-shape superiority"
       },
-      "framework_structure_ref": "tools/perf/operators/local_gpu/evidence/framework-v0.18/summary.json"
+      "framework_structure_ref": "tools/perf/operators/local_gpu/evidence/framework-v0.18/summary.json",
+      "native_integration_ref": "tools/perf/operators/local_gpu/evidence/kv-integration-v0.19/summary.json"
     },
     {
       "id": "K02",

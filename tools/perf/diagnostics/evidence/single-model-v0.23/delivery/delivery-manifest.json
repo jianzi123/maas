@@ -1,0 +1,29 @@
+{
+  "head": "029fd0528e99034de769d7fde6c24bee1e4a248e",
+  "baseline": "5f8bd5d83968f9ed5e674593bb8d19078c4575ad",
+  "source_files": 28,
+  "evidence_items": 53,
+  "cadence_tests": 36,
+  "client_tests": 18,
+  "bad_gate_CLI_refusals": 6,
+  "controlled_client_CLI_records": 4,
+  "GPU_experiments": 0,
+  "protected_product_path_executed": false,
+  "packages": [
+    {
+      "file": "MAAS-10-single-model-v0.23-code.zip",
+      "bytes": 180790,
+      "sha256": "1f28ac78765578148164518a8f4efa8ad7e9110b354641a9adef5591e2940689"
+    },
+    {
+      "file": "MAAS-10-single-model-v0.23-evidence.zip",
+      "bytes": 199315,
+      "sha256": "dece2c5479b7ccfe792ff6de5f4ddaa396481bead9d02dd11be0f87dbff227ff"
+    },
+    {
+      "file": "MAAS-10-single-model-iteration.html",
+      "bytes": 3597,
+      "sha256": "9d40b7d1fd7d0b5a2bd00a5897004bd857a045027d43017e0aff4f6b27ce2d9b"
+    }
+  ]
+}
