@@ -175,4 +175,3 @@ it("QA missing trusted R stays unknown and never guesses lookup or repeats POST"
  expect(calls.filter(c=>c.path==="/v1/chat/completions")).toHaveLength(1);expect(calls.some(c=>c.path.includes("request_id="))).toBe(false);
  console.log(JSON.stringify({qaMode:"missing_R",calls,originalR:null,lookup:null}));
 });
-
