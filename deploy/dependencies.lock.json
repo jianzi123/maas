@@ -4,12 +4,12 @@
   "deploymentApproved": false,
   "sourceBaseline": {
     "chartBase": "e5647a2f2b44f53d39a80041be94b619f07c29d6",
-    "backendInspected": "fe09d60b4932f78ed07dd27da36878b2a375d0fd",
+    "backendInspected": "09349dc3449646d94d235060afe7869643309c57",
     "contracts": "MAAS-2 v0.4 + retained v0.3 + query/recovery addenda + MAAS-1 role review",
     "terminal": "3.0",
     "ticket": "3",
     "proposedTerminal": "3.1 (not enabled)",
-    "consoleInspected": "fe09d60b4932f78ed07dd27da36878b2a375d0fd",
+    "consoleInspected": "09349dc3449646d94d235060afe7869643309c57",
     "defaultBranch": "925d8c55be9ce823d100bf90a5c78cf19ea66d58",
     "candidatePR": null,
     "candidateState": "integrated-unmerged",
@@ -18,7 +18,7 @@
     "qaCore": "ac94a373ec0a61c5fd4dc5380a7985a4fb47840f",
     "qaEvidence": "50354a705c03383d0102d0d437119afd7ffed8b3",
     "sourceInventory": "deploy/build-sources.lock.json",
-    "sourceInventorySha256": "d84da8191fd294989a57513e977d50d6e22d853ca63632adea68246a071bdfb8",
+    "sourceInventorySha256": "d1703ac5245cb758b4f4f4c8bc2322f152735952d63cb0c26c5f209b0dd4b451",
     "upstreamWorkbenchDeployment": "e5647a2f2b44f53d39a80041be94b619f07c29d6",
     "backendBase": "0559fa46b4a728d6f542daf19532e794f8549b31",
     "integrationBranch": "integrate/MAAS-17-unified-20261114",
@@ -99,7 +99,7 @@
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "fe09d60b4932f78ed07dd27da36878b2a375d0fd",
+      "sourceCommit": "09349dc3449646d94d235060afe7869643309c57",
       "compiledAPIGroup": "serving.maas.example"
     },
     {
@@ -116,7 +116,7 @@
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "fe09d60b4932f78ed07dd27da36878b2a375d0fd",
+      "sourceCommit": "09349dc3449646d94d235060afe7869643309c57",
       "compiledAPIGroup": "serving.maas.example"
     },
     {
@@ -133,7 +133,7 @@
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "fe09d60b4932f78ed07dd27da36878b2a375d0fd"
+      "sourceCommit": "09349dc3449646d94d235060afe7869643309c57"
     },
     {
       "id": "mysql",
@@ -432,7 +432,7 @@
   "databaseIdentities": {
     "schemaVersion": "1.0",
     "scope": "installation-input-only-no-secret-values",
-    "sourceCommit": "fe09d60b4932f78ed07dd27da36878b2a375d0fd",
+    "sourceCommit": "09349dc3449646d94d235060afe7869643309c57",
     "productionWiringVerified": false,
     "connections": {
       "core": {
@@ -788,6 +788,16 @@
           "test/qa-relay/results.json",
           "test/qa-relay/run.sh",
           "test/qa-relay/summarize.py",
+          "test/qa-single-model/manifest.template.json",
+          "test/qa-single-model/matrix.json",
+          "test/qa-single-model/report.md",
+          "test/qa-single-model/source.json",
+          "test/qa-single-model/template-rejection.json",
+          "test/qa-single-model/test_oracle.py",
+          "test/qa-single-model/u2-results.json",
+          "test/qa-single-model/usage-exact-interleaving.test.ts.in",
+          "test/qa-single-model/usage-exact-review.test.ts.in",
+          "test/qa-single-model/verify_evidence.py",
           "test/qa-usage/README.md",
           "test/qa-usage/kernel_test.go.in",
           "test/qa-usage/matrix.json",

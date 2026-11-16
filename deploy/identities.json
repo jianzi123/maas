@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "scope": "installation-input-only-no-secret-values",
-  "sourceCommit": "fe09d60b4932f78ed07dd27da36878b2a375d0fd",
+  "sourceCommit": "09349dc3449646d94d235060afe7869643309c57",
   "productionWiringVerified": false,
   "connections": {
     "core": {
@@ -357,6 +357,16 @@
         "test/qa-relay/results.json",
         "test/qa-relay/run.sh",
         "test/qa-relay/summarize.py",
+        "test/qa-single-model/manifest.template.json",
+        "test/qa-single-model/matrix.json",
+        "test/qa-single-model/report.md",
+        "test/qa-single-model/source.json",
+        "test/qa-single-model/template-rejection.json",
+        "test/qa-single-model/test_oracle.py",
+        "test/qa-single-model/u2-results.json",
+        "test/qa-single-model/usage-exact-interleaving.test.ts.in",
+        "test/qa-single-model/usage-exact-review.test.ts.in",
+        "test/qa-single-model/verify_evidence.py",
         "test/qa-usage/README.md",
         "test/qa-usage/kernel_test.go.in",
         "test/qa-usage/matrix.json",
