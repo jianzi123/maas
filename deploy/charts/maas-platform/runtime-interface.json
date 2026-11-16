@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "scope": "observed-source-interface-not-production-readiness",
   "backend": {
-    "sourceCommit": "3a2966225cd0102663687ad281a0264cb5e0822e",
+    "sourceCommit": "7b0f27a52822225afdfd17095e0ef2d9b1e27aae",
     "apiGroup": "serving.maas.example",
     "operator": {
       "command": [
@@ -329,7 +329,7 @@
       "tools/perf/diagnostics/evidence/single-model-v0.23/cancel-client-source.json": "43daa8258a0a0be2c72c2e5100c710931aa163cb15373e277c226de029f8f8f3",
       "tools/perf/diagnostics/evidence/single-model-v0.23/content-client-source.json": "62d3c39e4489159493490190b016adbc91b49a0a75fe1448f8b346b0b9789791",
       "tools/perf/diagnostics/evidence/single-model-v0.23/controlled-client-verification.json": "9672a14f9abc084641febce5500adb5a28ac8a5746c917e28987d58f28c4ce74",
-      "tools/perf/diagnostics/evidence/single-model-v0.23/dependency-handoff.json": "6dde3aa7da199214b1baf50e553a266aa491e39b1037bdb5639e017c9a6ae433",
+      "tools/perf/diagnostics/evidence/single-model-v0.23/dependency-handoff.json": "afad6273585eebfa87940ab08fd8e10447bd6541f7e7196f7f7aaf077bb71218",
       "tools/perf/diagnostics/evidence/single-model-v0.23/error_after-client-source.json": "45af33689ebe8651c0dcffb3c4b9375fe4b1f48d0d98b918d095005e2e05ddb4",
       "tools/perf/diagnostics/evidence/single-model-v0.23/gate-fix-verification.json": "51274d5548c600fc25582556309d40044ab0ac1ceb0864c940900bf16c6db50a",
       "tools/perf/diagnostics/evidence/single-model-v0.23/reject-client-source.json": "8a348f84f87931aaad0fb9d906c91578aa29bbb61df5585d860d5692b74cd944",
@@ -600,7 +600,7 @@
       "docs/performance/engineering/20-window-b-cost-drift.md": "e13a7c4893e5a1f4a16e0e74921f870236af18975e988b8a1230124b6550c794",
       "docs/performance/engineering/21-literature-to-experiments.md": "d749b4ee36ac68cda5963b5b542ac6a83f40d9543b8e0da60194c0b11cbb419f",
       "docs/performance/engineering/22-cadence-policy-pilot.md": "25745f5568812241f3a08749c562c97727c853e263e4c6cb8463c89613db9e97",
-      "docs/performance/engineering/23-single-model-capture.md": "a511376e60274b2ce3839eb188eaa917654a76b2f47f4b9aac8cc300bec02976",
+      "docs/performance/engineering/23-single-model-capture.md": "4448ec7e73ae4dfd30454335336480edae8c8ea80fc14109e00a7311afaab46c",
       "docs/performance/engineering/README.md": "0e0fab762fa5d4614b1452828eea687b84bbaabf4b7344a31a8cf4280ab3319b",
       "docs/performance/exercises/answer-key.md": "f4bedb35a2cdfd732da70df2a61947abc0ae2f0b963722553659a58b21434057",
       "docs/performance/exercises/README.md": "fc2c0aa91b03cc4cd6b897f8236abe95d74c9121e46797f436442530431591ca",
@@ -673,7 +673,7 @@
     }
   },
   "console": {
-    "sourceCommit": "3a2966225cd0102663687ad281a0264cb5e0822e",
+    "sourceCommit": "7b0f27a52822225afdfd17095e0ef2d9b1e27aae",
     "build": "npm ci && npm run build",
     "output": "console/dist",
     "localBridge": "development-and-explicit-workbench-mode-only",
