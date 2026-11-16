@@ -4,12 +4,12 @@
   "deploymentApproved": false,
   "sourceBaseline": {
     "chartBase": "e5647a2f2b44f53d39a80041be94b619f07c29d6",
-    "backendInspected": "6933fedbea4a80f23962971e3e610ad87afc46be",
+    "backendInspected": "3a2966225cd0102663687ad281a0264cb5e0822e",
     "contracts": "MAAS-2 v0.4 + retained v0.3 + query/recovery addenda + MAAS-1 role review",
     "terminal": "3.0",
     "ticket": "3",
     "proposedTerminal": "3.1 (not enabled)",
-    "consoleInspected": "6933fedbea4a80f23962971e3e610ad87afc46be",
+    "consoleInspected": "3a2966225cd0102663687ad281a0264cb5e0822e",
     "defaultBranch": "925d8c55be9ce823d100bf90a5c78cf19ea66d58",
     "candidatePR": null,
     "candidateState": "integrated-unmerged",
@@ -18,7 +18,7 @@
     "qaCore": "ac94a373ec0a61c5fd4dc5380a7985a4fb47840f",
     "qaEvidence": "50354a705c03383d0102d0d437119afd7ffed8b3",
     "sourceInventory": "deploy/build-sources.lock.json",
-    "sourceInventorySha256": "f4ec2ebc5440536b9c736ae6dcd78a3197da0cef29b2fc6b6237bb859f124861",
+    "sourceInventorySha256": "892f134046e28a90ca355b31a87c2b0fb662b749650251030086cbf6b11f2c78",
     "upstreamWorkbenchDeployment": "e5647a2f2b44f53d39a80041be94b619f07c29d6",
     "backendBase": "0559fa46b4a728d6f542daf19532e794f8549b31",
     "integrationBranch": "integrate/MAAS-17-unified-20261114",
@@ -99,7 +99,7 @@
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "6933fedbea4a80f23962971e3e610ad87afc46be",
+      "sourceCommit": "3a2966225cd0102663687ad281a0264cb5e0822e",
       "compiledAPIGroup": "serving.maas.example"
     },
     {
@@ -116,7 +116,7 @@
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "6933fedbea4a80f23962971e3e610ad87afc46be",
+      "sourceCommit": "3a2966225cd0102663687ad281a0264cb5e0822e",
       "compiledAPIGroup": "serving.maas.example"
     },
     {
@@ -133,7 +133,7 @@
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "6933fedbea4a80f23962971e3e610ad87afc46be"
+      "sourceCommit": "3a2966225cd0102663687ad281a0264cb5e0822e"
     },
     {
       "id": "mysql",
@@ -432,7 +432,7 @@
   "databaseIdentities": {
     "schemaVersion": "1.0",
     "scope": "installation-input-only-no-secret-values",
-    "sourceCommit": "6933fedbea4a80f23962971e3e610ad87afc46be",
+    "sourceCommit": "3a2966225cd0102663687ad281a0264cb5e0822e",
     "productionWiringVerified": false,
     "connections": {
       "core": {
@@ -661,6 +661,7 @@
           "docs/performance/engineering/20-window-b-cost-drift.md",
           "docs/performance/engineering/21-literature-to-experiments.md",
           "docs/performance/engineering/22-cadence-policy-pilot.md",
+          "docs/performance/engineering/23-single-model-capture.md",
           "docs/performance/engineering/README.md",
           "docs/performance/engineering/figures/lease-lifecycle.svg",
           "docs/performance/engineering/figures/online-softmax.svg",
@@ -870,9 +871,20 @@
           "tools/perf/diagnostics/README.md",
           "tools/perf/diagnostics/__init__.py",
           "tools/perf/diagnostics/assets.json",
+          "tools/perf/diagnostics/associate_client_relay.py",
+          "tools/perf/diagnostics/client_capture.py",
           "tools/perf/diagnostics/collection-map.json",
           "tools/perf/diagnostics/consume.py",
           "tools/perf/diagnostics/consume_relay.py",
+          "tools/perf/diagnostics/evidence/single-model-v0.23/.gitattributes",
+          "tools/perf/diagnostics/evidence/single-model-v0.23/cancel-client-source.json",
+          "tools/perf/diagnostics/evidence/single-model-v0.23/content-client-source.json",
+          "tools/perf/diagnostics/evidence/single-model-v0.23/controlled-client-verification.json",
+          "tools/perf/diagnostics/evidence/single-model-v0.23/dependency-handoff.json",
+          "tools/perf/diagnostics/evidence/single-model-v0.23/error_after-client-source.json",
+          "tools/perf/diagnostics/evidence/single-model-v0.23/gate-fix-verification.json",
+          "tools/perf/diagnostics/evidence/single-model-v0.23/reject-client-source.json",
+          "tools/perf/diagnostics/evidence/single-model-v0.23/verification.json",
           "tools/perf/diagnostics/fixtures/timeline.synthetic.json",
           "tools/perf/diagnostics/fixtures/timing-origin.json",
           "tools/perf/diagnostics/html_report.py",
@@ -881,10 +893,12 @@
           "tools/perf/diagnostics/relay_import.py",
           "tools/perf/diagnostics/report.py",
           "tools/perf/diagnostics/run.py",
+          "tools/perf/diagnostics/single-model-client-plan.template.json",
           "tools/perf/diagnostics/source-contracts/.gitattributes",
           "tools/perf/diagnostics/source-contracts/diagnostic-0.1-draft.1.schema.json",
           "tools/perf/diagnostics/source-contracts/provenance.json",
           "tools/perf/diagnostics/source_import.py",
+          "tools/perf/diagnostics/test_client_capture.py",
           "tools/perf/diagnostics/test_diagnostics.py",
           "tools/perf/diagnostics/test_relay_import.py",
           "tools/perf/diagnostics/test_source_import.py",
@@ -1015,6 +1029,8 @@
           "tools/perf/operators/local_gpu/kv_aten.cpp",
           "tools/perf/operators/local_gpu/kv_extension.py",
           "tools/perf/operators/local_gpu/kv_fused.cu",
+          "tools/perf/operators/local_gpu/legacy_source/.gitattributes",
+          "tools/perf/operators/local_gpu/legacy_source/analyze_kv_cadence.v0.22.py.txt",
           "tools/perf/operators/local_gpu/native_kv_binding.py",
           "tools/perf/operators/local_gpu/probe_decode.py",
           "tools/perf/operators/local_gpu/probe_framework_dummy.py",
@@ -1032,6 +1048,7 @@
           "tools/perf/operators/local_gpu/run_split_cap6.py",
           "tools/perf/operators/local_gpu/source_map.py",
           "tools/perf/operators/local_gpu/summarize_kv_cadence.py",
+          "tools/perf/operators/local_gpu/test_cadence_gates.py",
           "tools/perf/operators/local_gpu/test_cadence_protocol.py",
           "tools/perf/operators/plan.json",
           "tools/perf/operators/probe_local_gpu.py",
