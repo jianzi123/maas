@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "single-model-run-1.0",
+  "model": {
+    "alias": null,
+    "sourceType": "ExternalAPI",
+    "profileRef": null,
+    "approvalRef": null
+  },
+  "runtime": {
+    "entrypoint": null,
+    "environmentRef": null,
+    "stopInstructionsRef": null,
+    "logLocationRef": null
+  },
+  "artifacts": [
+    {
+      "id": "higress-gateway",
+      "version": null,
+      "digest": null,
+      "configDigest": null,
+      "evidenceRef": null
+    },
+    {
+      "id": "higress-controller",
+      "version": null,
+      "digest": null,
+      "configDigest": null,
+      "evidenceRef": null
+    },
+    {
+      "id": "H1-H4-wasm",
+      "version": null,
+      "digest": null,
+      "configDigest": null,
+      "evidenceRef": null
+    },
+    {
+      "id": "H2-envoy-reporter",
+      "version": null,
+      "digest": null,
+      "configDigest": null,
+      "evidenceRef": null
+    },
+    {
+      "id": "H3-instance-agent",
+      "version": null,
+      "digest": null,
+      "configDigest": null,
+      "evidenceRef": null
+    },
+    {
+      "id": "secret-agent",
+      "version": null,
+      "digest": null,
+      "configDigest": null,
+      "evidenceRef": null
+    }
+  ],
+  "requestEvidence": {
+    "requestId": null,
+    "publicationId": null,
+    "activationEpoch": null,
+    "logEvidenceRef": null,
+    "usageEvidenceRef": null
+  },
+  "observedCallable": false
+}
