@@ -1,0 +1,29 @@
+{
+  "kind": "offline_evidence_oracle_only",
+  "accepted": false,
+  "errors": [
+    "missing manifest identity: backend_sha",
+    "missing manifest identity: frontend_sha",
+    "missing manifest identity: deployment_digest",
+    "missing manifest identity: profile_revision",
+    "missing manifest identity: model",
+    "missing manifest identity: source_id",
+    "missing manifest identity: price_revision",
+    "missing manifest identity: environment",
+    "missing manifest identity: evidence_kind",
+    "invalid evidence_kind",
+    "publish: not executed/pass",
+    "key_budget: not executed/pass",
+    "stream: not executed/pass",
+    "cancel: not executed/pass",
+    "upstream_error: not executed/pass",
+    "original_id: not executed/pass",
+    "known_usage: not executed/pass",
+    "unknown_usage: not executed/pass",
+    "quota: not executed/pass",
+    "revoked: not executed/pass",
+    "duplicate_terminal: not executed/pass"
+  ],
+  "evidence_kind": null,
+  "not_production_acceptance": true
+}

@@ -1,0 +1,97 @@
+{
+  "baseline": "8dbf99ef59c847da775b83d0eeb7dc8f8bf48a9a",
+  "ui_candidate": "aa9720f635c1e152ab8b096ef9713933232bcec0",
+  "publisher_candidate": "532b1547b1bcef959c7caa9cc159b21eb8162a61",
+  "real_profile": null,
+  "rows": [
+    {
+      "id": "publish",
+      "assertion": "发布/真实网关验证与固定来源",
+      "acceptance": "A01,A25-A30",
+      "controlled": "NOT_EXECUTED_THIS_BATCH",
+      "real_upstream": "NOT_EXECUTED",
+      "production": "NOT_ACCEPTED"
+    },
+    {
+      "id": "key_budget",
+      "assertion": "Key创建/显式三维预算/原值隔离",
+      "acceptance": "A02,A19",
+      "controlled": "NOT_EXECUTED_THIS_BATCH",
+      "real_upstream": "NOT_EXECUTED",
+      "production": "NOT_ACCEPTED"
+    },
+    {
+      "id": "stream",
+      "assertion": "唯一准入→分片→提交终态→正常DONE",
+      "acceptance": "A03,A20",
+      "controlled": "NOT_EXECUTED_THIS_BATCH",
+      "real_upstream": "NOT_EXECUTED",
+      "production": "NOT_ACCEPTED"
+    },
+    {
+      "id": "cancel",
+      "assertion": "停止传播/终止原因/原slot与未知held",
+      "acceptance": "A08,A11,A18,A20",
+      "controlled": "NOT_EXECUTED_THIS_BATCH",
+      "real_upstream": "NOT_EXECUTED",
+      "production": "NOT_ACCEPTED"
+    },
+    {
+      "id": "upstream_error",
+      "assertion": "首片前后上游失败/不发正常DONE",
+      "acceptance": "A07,A20",
+      "controlled": "NOT_EXECUTED_THIS_BATCH",
+      "real_upstream": "NOT_EXECUTED",
+      "production": "NOT_ACCEPTED"
+    },
+    {
+      "id": "original_id",
+      "assertion": "原R精确回查/迟到终态/无写入",
+      "acceptance": "A10,A12,A24",
+      "controlled": "NOT_EXECUTED_THIS_BATCH",
+      "real_upstream": "NOT_EXECUTED",
+      "production": "NOT_ACCEPTED"
+    },
+    {
+      "id": "known_usage",
+      "assertion": "可信最终usage/原价表/非空页面",
+      "acceptance": "A09,A10,A23",
+      "controlled": "NOT_EXECUTED_THIS_BATCH",
+      "real_upstream": "NOT_EXECUTED",
+      "production": "NOT_ACCEPTED"
+    },
+    {
+      "id": "unknown_usage",
+      "assertion": "未知实际null/held保留/slot独立",
+      "acceptance": "A09,A20,A23",
+      "controlled": "NOT_EXECUTED_THIS_BATCH",
+      "real_upstream": "NOT_EXECUTED",
+      "production": "NOT_ACCEPTED"
+    },
+    {
+      "id": "quota",
+      "assertion": "超额转发前拒绝/零上游/零预留",
+      "acceptance": "A05,A19",
+      "controlled": "NOT_EXECUTED_THIS_BATCH",
+      "real_upstream": "NOT_EXECUTED",
+      "production": "NOT_ACCEPTED"
+    },
+    {
+      "id": "revoked",
+      "assertion": "撤销后新请求拒绝",
+      "acceptance": "A04,A18",
+      "controlled": "NOT_EXECUTED_THIS_BATCH",
+      "real_upstream": "NOT_EXECUTED",
+      "production": "NOT_ACCEPTED"
+    },
+    {
+      "id": "duplicate_terminal",
+      "assertion": "相同event/hash重投仅一次",
+      "acceptance": "A10,A22",
+      "controlled": "NOT_EXECUTED_THIS_BATCH",
+      "real_upstream": "NOT_EXECUTED",
+      "production": "NOT_ACCEPTED"
+    }
+  ],
+  "A01_A34": "NOT_ACCEPTED"
+}

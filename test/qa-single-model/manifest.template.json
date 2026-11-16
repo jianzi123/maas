@@ -1,0 +1,68 @@
+{
+  "backend_sha": null,
+  "frontend_sha": null,
+  "deployment_digest": null,
+  "profile_revision": null,
+  "model": null,
+  "source_id": null,
+  "price_revision": null,
+  "environment": null,
+  "evidence_kind": null,
+  "cases": {
+    "publish": {
+      "status": "NOT_EXECUTED",
+      "raw_evidence": null,
+      "request_id": null
+    },
+    "key_budget": {
+      "status": "NOT_EXECUTED",
+      "raw_evidence": null,
+      "request_id": null
+    },
+    "stream": {
+      "status": "NOT_EXECUTED",
+      "raw_evidence": null,
+      "request_id": null
+    },
+    "cancel": {
+      "status": "NOT_EXECUTED",
+      "raw_evidence": null,
+      "request_id": null
+    },
+    "upstream_error": {
+      "status": "NOT_EXECUTED",
+      "raw_evidence": null,
+      "request_id": null
+    },
+    "original_id": {
+      "status": "NOT_EXECUTED",
+      "raw_evidence": null,
+      "request_id": null
+    },
+    "known_usage": {
+      "status": "NOT_EXECUTED",
+      "raw_evidence": null,
+      "request_id": null
+    },
+    "unknown_usage": {
+      "status": "NOT_EXECUTED",
+      "raw_evidence": null,
+      "request_id": null
+    },
+    "quota": {
+      "status": "NOT_EXECUTED",
+      "raw_evidence": null,
+      "request_id": null
+    },
+    "revoked": {
+      "status": "NOT_EXECUTED",
+      "raw_evidence": null,
+      "request_id": null
+    },
+    "duplicate_terminal": {
+      "status": "NOT_EXECUTED",
+      "raw_evidence": null,
+      "request_id": null
+    }
+  }
+}

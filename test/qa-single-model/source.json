@@ -1,0 +1,10 @@
+{
+  "baseline": "8dbf99ef59c847da775b83d0eeb7dc8f8bf48a9a",
+  "candidate": "aa9720f635c1e152ab8b096ef9713933232bcec0",
+  "files": {
+    "src/pages/Usage.vue": "3664dd74244fe7297dc5a8dc98e704ffc2586f63524da3e407263b9f4fe5392a",
+    "src/usage-exact-review.test.ts": "021870aad57ed22f2aaa0a2778397d4433b4c8e79c663c3ed16cc39495ad6797",
+    "src/usage-exact-interleaving.test.ts": "a0f2dbdc9806e76befb1af755490d591276616898eec69db177fab4d29f307e8",
+    "package-lock.json": "bd1680ee8b9e56eff80bc9bee3f8b49738ba44dbe04da230318a9b2c3201215e"
+  }
+}
