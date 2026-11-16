@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "sourceMode": "single-repository-code-commit",
   "backend": {
-    "sourceCommit": "fe09d60b4932f78ed07dd27da36878b2a375d0fd",
+    "sourceCommit": "6a21d852d9c826ff9fc473061e50e08425782aeb",
     "files": {
       ".gitattributes": "5b93b86d7f7e94c3dafdd41b284afe95a95a985e8afc719914173db11890cd36",
       ".gitignore": "46cf94096a926a26bc1a913b6cc632adacab0a96ab42d72a7dcbf216bcbaaa77",
@@ -521,7 +521,7 @@
     }
   },
   "console": {
-    "sourceCommit": "fe09d60b4932f78ed07dd27da36878b2a375d0fd",
+    "sourceCommit": "6a21d852d9c826ff9fc473061e50e08425782aeb",
     "files": {
       "console/.env.fixtures": "4d5e22f8eeb4bbf5a027a34c7a4bfef806876a470f89440f9611bd01a9d8c5f7",
       "console/.env.workbench": "930edf078e756f41d37fad0f7ce87332d8af59e65dac57b11797bcf0117a9216",
@@ -631,16 +631,19 @@
       "deploy/checks/inspect_sources.py",
       "deploy/checks/permissions.py",
       "deploy/checks/preflight.py",
+      "deploy/checks/single_model.py",
       "deploy/checks/source_context.py",
       "deploy/checks/test_identities.py",
       "deploy/checks/test_permissions.py",
       "deploy/checks/test_preflight.py",
+      "deploy/checks/test_single_model.py",
       "deploy/checks/test_source_context.py",
       "deploy/checks/verify.py",
       "deploy/dependencies.lock.json",
       "deploy/docs/current-assembly.md",
       "deploy/docs/database-identities.md",
       "deploy/docs/publisher-factory.md",
+      "deploy/docs/single-model-run.md",
       "deploy/docs/source-assembly.md",
       "deploy/evidence/assembly-inspection.json",
       "deploy/evidence/author-unified-source-inspection.json",
@@ -667,6 +670,7 @@
       "deploy/identities.json",
       "deploy/images/Dockerfile.console",
       "deploy/images/Dockerfile.operator",
+      "deploy/single-model/combination.json",
       "deploy/tests/fixtures/hybrid.yaml",
       "deploy/tests/fixtures/internal.yaml",
       "docs/local-service.md",
