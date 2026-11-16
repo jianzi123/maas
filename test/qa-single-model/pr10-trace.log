@@ -1,0 +1,31 @@
+
+ RUN  v5.1.0 C:/Users/a9786/multica_workspaces_desktop-api.multica.ai/maas-007-da4ec7313117/maas-7-6bf78f4f3528/workdir/qa-single-model/.cache/pr10-new/console
+
+stdout | src/single-model-replay.test.ts > single model known projects original request without repeating generation
+{"qaMode":"known","originalR":"00000000-0000-4000-8000-000000000001","queryQ":"00000000-0000-4000-8000-000000000099","calls":[{"path":"/api/admin/v1/models","method":"GET"},{"path":"/v1/chat/completions","method":"POST"},{"path":"/api/admin/v1/usage/requests?request_id=00000000-0000-4000-8000-000000000001","method":"GET"}],"actual":19}
+
+stdout | src/single-model-replay.test.ts > single model unknown projects original request without repeating generation
+{"qaMode":"unknown","originalR":"00000000-0000-4000-8000-000000000001","queryQ":"00000000-0000-4000-8000-000000000099","calls":[{"path":"/api/admin/v1/models","method":"GET"},{"path":"/v1/chat/completions","method":"POST"},{"path":"/api/admin/v1/usage/requests?request_id=00000000-0000-4000-8000-000000000001","method":"GET"}],"actual":null}
+
+stdout | src/single-model-replay.test.ts > single model eof projects original request without repeating generation
+{"qaMode":"eof","originalR":"00000000-0000-4000-8000-000000000001","queryQ":"00000000-0000-4000-8000-000000000099","calls":[{"path":"/api/admin/v1/models","method":"GET"},{"path":"/v1/chat/completions","method":"POST"},{"path":"/api/admin/v1/usage/requests?request_id=00000000-0000-4000-8000-000000000001","method":"GET"}],"actual":null}
+
+stdout | src/single-model-replay.test.ts > single model error projects original request without repeating generation
+{"qaMode":"error","originalR":"00000000-0000-4000-8000-000000000001","queryQ":"00000000-0000-4000-8000-000000000099","calls":[{"path":"/api/admin/v1/models","method":"GET"},{"path":"/v1/chat/completions","method":"POST"},{"path":"/api/admin/v1/usage/requests?request_id=00000000-0000-4000-8000-000000000001","method":"GET"}],"actual":null}
+
+stdout | src/single-model-replay.test.ts > single model stop projects original request without repeating generation
+{"qaMode":"stop","originalR":"00000000-0000-4000-8000-000000000001","queryQ":"00000000-0000-4000-8000-000000000099","calls":[{"path":"/api/admin/v1/models","method":"GET"},{"path":"/v1/chat/completions","method":"POST"},{"path":"/api/admin/v1/usage/requests?request_id=00000000-0000-4000-8000-000000000001","method":"GET"}],"actual":null}
+
+ ✓ src/single-model-replay.test.ts > single model known projects original request without repeating generation 203ms
+ ✓ src/single-model-replay.test.ts > single model unknown projects original request without repeating generation 16ms
+ ✓ src/single-model-replay.test.ts > single model eof projects original request without repeating generation 17ms
+ ✓ src/single-model-replay.test.ts > single model error projects original request without repeating generation 17ms
+ ✓ src/single-model-replay.test.ts > single model stop projects original request without repeating generation 16ms
+ ✓ src/single-model-replay.test.ts > unavailable inference never sends POST even if catalogue is callable 6ms
+
+ Test Files  1 passed (1)
+      Tests  6 passed (6)
+   Start at  23:39:22
+   Duration  2.75s (environment 71%, import 14%, tests 11%, transform 4%)
+
+JSON report written to C:/Users/a9786/multica_workspaces_desktop-api.multica.ai/maas-007-da4ec7313117/maas-7-6bf78f4f3528/workdir/qa-single-model/test/qa-single-model/pr10-trace-results.json

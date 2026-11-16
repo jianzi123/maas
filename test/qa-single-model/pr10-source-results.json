@@ -1,0 +1,87 @@
+{
+  "candidate": "5481ac0fddbf02cb5e22e3145d5a3dc69c76acd9",
+  "code": "23571a983304d5465021ec00813cc15fb3463ccc",
+  "base": "8dbf99ef59c847da775b83d0eeb7dc8f8bf48a9a",
+  "sourceChecks": [
+    {
+      "component": "backend",
+      "expected": 514,
+      "matched": 514,
+      "missing": [],
+      "unexpected": [],
+      "changed": [],
+      "passed": true
+    },
+    {
+      "component": "console",
+      "expected": 78,
+      "matched": 78,
+      "missing": [],
+      "unexpected": [],
+      "changed": [],
+      "passed": true
+    }
+  ],
+  "sourceHash": {
+    "console/src/single-model-mode.test.ts": "7eed79be9fca8c97e37404ca1dbc511449bfaf25c86565c33fc72ae87702db0c",
+    "console/src/single-model-replay.test.ts": "95dd548528fecf317e1b8141924a287ff9fd9fc05df2a0d13758dc6fa29266ac",
+    "console/src/App.vue": "2fcecdb8b0c498713f90a0a229e0b9c4b06280605ec6631954e01b5745c5b26d",
+    "console/scripts/local-control.mjs": "5e3f9df04bf966b36128fcae60f170fd4b88458a295bd5e1525574aa6bbd67af",
+    "console/vite.config.ts": "a3c231bde00b5c59de853ed7e3f9804746a99a5076844b490c2ae4a414f0fdb6",
+    "console/docs/single-model-continuation.md": "08b179f38a04e112af8db080fa38bfb904d86540a63f3971fdcb8806a1b81767",
+    "console/package-lock.json": "bd1680ee8b9e56eff80bc9bee3f8b49738ba44dbe04da230318a9b2c3201215e",
+    "internal/workbench/http.go": "8fc5156f9d02ec95232dd41b315124f811bc5a86aea890eccf64a75ceb4fab74"
+  },
+  "fourLocks": {
+    "deploy/build-sources.lock.json": "168c94fa06650d1563bb6b87965c6770249a6bbdc6797806342449caf87973ba",
+    "deploy/charts/maas-platform/runtime-interface.json": "f4956d9df0724c656d24fa80e4c3fb54b09f137b9b85ca9e8a989150601810e1",
+    "deploy/dependencies.lock.json": "e4c5a9003937f6cadb2c6add5a60786ed7e74f6e089e08253a808d92762fcc49",
+    "deploy/identities.json": "a8f49b91bb1b4ae7775dbdf569d898132c7e76ee708e9cb2a78c5683198b2934"
+  },
+  "tests": [
+    {
+      "name": "local inference opt-in undefined",
+      "result": "passed"
+    },
+    {
+      "name": "local inference opt-in 0",
+      "result": "passed"
+    },
+    {
+      "name": "local inference opt-in 1",
+      "result": "passed"
+    },
+    {
+      "name": "invalid local inference flag is rejected",
+      "result": "passed"
+    },
+    {
+      "name": "single model known projects original request without repeating generation",
+      "result": "passed"
+    },
+    {
+      "name": "single model unknown projects original request without repeating generation",
+      "result": "passed"
+    },
+    {
+      "name": "single model eof projects original request without repeating generation",
+      "result": "passed"
+    },
+    {
+      "name": "single model error projects original request without repeating generation",
+      "result": "passed"
+    },
+    {
+      "name": "single model stop projects original request without repeating generation",
+      "result": "passed"
+    },
+    {
+      "name": "unavailable inference never sends POST even if catalogue is callable",
+      "result": "passed"
+    }
+  ],
+  "uniqueCases": 10,
+  "instrumentedReplayCases": 6,
+  "scope": "Response/jsdom synthetic only",
+  "productionAccepted": false
+}

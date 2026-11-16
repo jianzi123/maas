@@ -1,0 +1,23 @@
+
+ RUN  v5.1.0 C:/Users/a9786/multica_workspaces_desktop-api.multica.ai/maas-007-da4ec7313117/maas-7-6bf78f4f3528/workdir/qa-single-model/.cache/pr10-new/console
+
+ ✓ src/single-model-replay.test.ts > single model known projects original request without repeating generation 216ms
+ ✓ src/single-model-replay.test.ts > single model unknown projects original request without repeating generation 17ms
+ ✓ src/single-model-replay.test.ts > single model eof projects original request without repeating generation 15ms
+ ✓ src/single-model-replay.test.ts > single model error projects original request without repeating generation 18ms
+ ✓ src/single-model-replay.test.ts > single model stop projects original request without repeating generation 17ms
+ ✓ src/single-model-replay.test.ts > unavailable inference never sends POST even if catalogue is callable 8ms
+ ✓ src/single-model-mode.test.ts > local inference opt-in undefined 4ms
+ ✓ src/single-model-mode.test.ts > local inference opt-in 0 0ms
+ ✓ src/single-model-mode.test.ts > local inference opt-in 1 0ms
+ ✓ src/single-model-mode.test.ts > invalid local inference flag is rejected 2ms
+
+ Test Files  2 passed (2)
+      Tests  10 passed (10)
+   Start at  23:38:20
+   Duration  8.10s (environment 79%, import 10%, transform 6%, tests 4%)
+
+    Isolate  2 workers spawned · ~3.26s startup each (spawn + environment, per file)
+             at least ~3.26s faster with isolate: false — reuses workers across files instead of one per file
+
+JSON report written to C:/Users/a9786/multica_workspaces_desktop-api.multica.ai/maas-007-da4ec7313117/maas-7-6bf78f4f3528/workdir/qa-single-model/test/qa-single-model/pr10-new-results.json

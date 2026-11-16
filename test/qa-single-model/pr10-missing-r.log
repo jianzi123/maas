@@ -1,0 +1,20 @@
+
+ RUN  v5.1.0 C:/Users/a9786/multica_workspaces_desktop-api.multica.ai/maas-007-da4ec7313117/maas-7-6bf78f4f3528/workdir/qa-single-model/.cache/pr10-new/console
+
+stdout | src/single-model-replay.test.ts > QA missing trusted R stays unknown and never guesses lookup or repeats POST
+{"qaMode":"missing_R","calls":[{"path":"/api/admin/v1/models","method":"GET"},{"path":"/v1/chat/completions","method":"POST"}],"originalR":null,"lookup":null}
+
+ ↓ src/single-model-replay.test.ts > single model known projects original request without repeating generation
+ ↓ src/single-model-replay.test.ts > single model unknown projects original request without repeating generation
+ ↓ src/single-model-replay.test.ts > single model eof projects original request without repeating generation
+ ↓ src/single-model-replay.test.ts > single model error projects original request without repeating generation
+ ↓ src/single-model-replay.test.ts > single model stop projects original request without repeating generation
+ ↓ src/single-model-replay.test.ts > unavailable inference never sends POST even if catalogue is callable
+ ✓ src/single-model-replay.test.ts > QA missing trusted R stays unknown and never guesses lookup or repeats POST 91ms
+
+ Test Files  1 passed (1)
+      Tests  1 passed | 6 skipped (7)
+   Start at  23:42:20
+   Duration  2.70s (environment 77%, import 15%, transform 4%, tests 4%)
+
+JSON report written to C:/Users/a9786/multica_workspaces_desktop-api.multica.ai/maas-007-da4ec7313117/maas-7-6bf78f4f3528/workdir/qa-single-model/test/qa-single-model/pr10-missing-r.json
