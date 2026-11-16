@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "scope": "observed-source-interface-not-production-readiness",
   "backend": {
-    "sourceCommit": "09349dc3449646d94d235060afe7869643309c57",
+    "sourceCommit": "e52b14201b7eb55036e658e50f4dd17dd54578e0",
     "apiGroup": "serving.maas.example",
     "operator": {
       "command": [
@@ -376,7 +376,18 @@
       "test/qa-relay/summarize.py": "37ae9f56d7f2b3d6265c8b3503cbf050179d4b5b36803f42d4ab9676c088a3ae",
       "test/qa-single-model/manifest.template.json": "be0200d3c632e7c962ed3872cdca5b9e2e5fbb55eba63edf7bf21fe8b440c8c4",
       "test/qa-single-model/matrix.json": "f321a63bfa9ba3e1b34bebe665f64e210ee30e6264081be69c3394f93a994682",
+      "test/qa-single-model/pr10-missing-r.json": "88078abad0f8b484b5f7434967f34cf124df9f9e37c1f1187ce6367a13770987",
+      "test/qa-single-model/pr10-missing-r.log": "c55d5f903aa5eb09154249efcc19dcce9e00edf3c92b0e25382a31d8b00f9763",
+      "test/qa-single-model/pr10-new-report.md": "ee6bd7c2e64972729449a5068b6bf8dd5ed9411890aa2474e297e3dad8324457",
+      "test/qa-single-model/pr10-new-results.json": "ccbcb7a27063ee55bfbed8084d3f675cd63b92020a1f76b21fe8caef805d2901",
+      "test/qa-single-model/pr10-new.log": "fda7da7368fb2db764452f94c2704f699757cf2af480f0f212cf4a9f937f9fee",
+      "test/qa-single-model/pr10-source-results.json": "1c4f2cbfaa2c2067d33da24b6a9490eafb1df8e563aaf70d109dca1299d7b69c",
+      "test/qa-single-model/pr10-trace-results.json": "632c3a9c4f967b0f8dcb01959e8c3510251c5eddefe5e86922c22e81edb8b2d4",
+      "test/qa-single-model/pr10-trace.log": "13cf9e6a71cb4b90ed9b743ff4df9cd640530aa4b0b2b9c06543c58b45753ce2",
       "test/qa-single-model/report.md": "5cad44db68f735f3f7c22514a77f46f44e129c94d1657014c5d72175b69d35c2",
+      "test/qa-single-model/single-model-mode.test.ts.in": "7eed79be9fca8c97e37404ca1dbc511449bfaf25c86565c33fc72ae87702db0c",
+      "test/qa-single-model/single-model-replay-instrumented.test.ts.in": "53e508f0573a80f9fa28a2ea108986f083079db5c63c279f38402ddf1f447fa6",
+      "test/qa-single-model/single-model-replay.test.ts.in": "95dd548528fecf317e1b8141924a287ff9fd9fc05df2a0d13758dc6fa29266ac",
       "test/qa-single-model/source.json": "467dc0c5e3e4f85ecc05c63f62bfccc2447d1a1536c4f725e370c149fb1aa32b",
       "test/qa-single-model/template-rejection.json": "b77c42ee65b56486fa1fedd4f2fa29b3b81f024814bdebfe552ebed146a3e128",
       "test/qa-single-model/test_oracle.py": "dd2da2f41a9c58c0a4524050716689854b00c20272607e1ba464812ceb546590",
@@ -591,7 +602,7 @@
     }
   },
   "console": {
-    "sourceCommit": "09349dc3449646d94d235060afe7869643309c57",
+    "sourceCommit": "e52b14201b7eb55036e658e50f4dd17dd54578e0",
     "build": "npm ci && npm run build",
     "output": "console/dist",
     "localBridge": "development-and-explicit-workbench-mode-only",

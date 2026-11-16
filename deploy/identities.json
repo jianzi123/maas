@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "scope": "installation-input-only-no-secret-values",
-  "sourceCommit": "09349dc3449646d94d235060afe7869643309c57",
+  "sourceCommit": "e52b14201b7eb55036e658e50f4dd17dd54578e0",
   "productionWiringVerified": false,
   "connections": {
     "core": {
@@ -359,7 +359,18 @@
         "test/qa-relay/summarize.py",
         "test/qa-single-model/manifest.template.json",
         "test/qa-single-model/matrix.json",
+        "test/qa-single-model/pr10-missing-r.json",
+        "test/qa-single-model/pr10-missing-r.log",
+        "test/qa-single-model/pr10-new-report.md",
+        "test/qa-single-model/pr10-new-results.json",
+        "test/qa-single-model/pr10-new.log",
+        "test/qa-single-model/pr10-source-results.json",
+        "test/qa-single-model/pr10-trace-results.json",
+        "test/qa-single-model/pr10-trace.log",
         "test/qa-single-model/report.md",
+        "test/qa-single-model/single-model-mode.test.ts.in",
+        "test/qa-single-model/single-model-replay-instrumented.test.ts.in",
+        "test/qa-single-model/single-model-replay.test.ts.in",
         "test/qa-single-model/source.json",
         "test/qa-single-model/template-rejection.json",
         "test/qa-single-model/test_oracle.py",
