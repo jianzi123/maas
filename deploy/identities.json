@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "scope": "installation-input-only-no-secret-values",
-  "sourceCommit": "6a21d852d9c826ff9fc473061e50e08425782aeb",
+  "sourceCommit": "53383e1fac216a6f9542780e5da1db3c970fbcb6",
   "productionWiringVerified": false,
   "connections": {
     "core": {
@@ -161,6 +161,7 @@
         "deploy/checks/test_permissions.py",
         "deploy/checks/test_preflight.py",
         "deploy/checks/test_single_model.py",
+        "deploy/checks/test_single_model_snapshot.py",
         "deploy/checks/test_source_context.py",
         "deploy/checks/verify.py",
         "deploy/dependencies.lock.json",
