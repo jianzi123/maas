@@ -28,6 +28,10 @@ function navigate(
 const local =
   (import.meta.env.DEV || import.meta.env.MODE === "workbench") &&
   import.meta.env.VITE_LOCAL_CONTROL === "true";
+const inferenceAvailable =
+  !local ||
+  (import.meta.env.DEV &&
+    import.meta.env.VITE_LOCAL_INFERENCE_ENABLED === "true");
 const demo =
   import.meta.env.DEV && import.meta.env.VITE_CONSOLE_FIXTURES === "true";
 async function boot() {
@@ -202,7 +206,7 @@ const nav = [
           @navigate="navigate" /><Playground
           v-else-if="tab === 'play'"
           :initial-model="playModel"
-          :inference-available="!local"
+          :inference-available="inferenceAvailable"
           @navigate="navigate" /><Releases
           v-else-if="tab === 'releases'"
           :initial-model="playModel" /><Usage
