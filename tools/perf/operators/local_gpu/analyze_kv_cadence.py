@@ -74,6 +74,75 @@ def validate_block(row, block, cluster, runtime, cell, config):
             raise ValueError("sleep request changed")
 
 
+def load_analysis_plan(path):
+    """Upgrade offline gates without rewriting the historical producer plan."""
+    import hashlib
+    from cadence_protocol import SOURCE_FILES
+    plan = load_plan(path, verify_sources=False)
+    original = Path(__file__).parent / "legacy_source/analyze_kv_cadence.v0.22.py.txt"
+    known_legacy = "fdf166d738e4d85376a968ed8731aa82028f4c03f4c4c83ef73335d41c87be62"
+    for name in SOURCE_FILES:
+        actual = hashlib.sha256(Path(__file__).with_name(name).read_bytes()).hexdigest()
+        expected = plan["source_sha256"][name]
+        if actual == expected:
+            continue
+        if name != "analyze_kv_cadence.py" or expected != known_legacy:
+            raise ValueError("producer source digest mismatch: " + name)
+        if hashlib.sha256(original.read_bytes()).hexdigest() != expected:
+            raise ValueError("historical analyzer snapshot mismatch")
+    return plan
+
+
+def validate_gate(gate, folder):
+    """Require BOTH complete role lists; an empty zip is never evidence."""
+    import hashlib
+    import numpy as np
+    snapshots = gate.get("snapshots")
+    if not isinstance(snapshots, dict) or set(snapshots) != {"native", "mature"}:
+        raise ValueError("state gate variants incomplete")
+    if gate.get("all30_layers") is not True or gate.get("status") != "passed":
+        raise ValueError("state gate not passed")
+    cell = gate.get("cell_id", "")
+    import re
+    match = re.fullmatch(r"(?:R0[12]/(?:full|bare_graph)|calibration)/B([358])", cell)
+    if not match:
+        raise ValueError("state gate cell identity")
+    batch = int(match.group(1))
+    arrays = {}
+    for variant in ("native", "mature"):
+        refs = snapshots[variant]
+        if not isinstance(refs, list) or len(refs) != 2:
+            raise ValueError("state gate requires logits and KV")
+        arrays[variant] = []
+        for role, snapshot in enumerate(refs):
+            if not isinstance(snapshot, dict) or set(snapshot) != {"path", "raw_sha256", "shape", "dtype"}:
+                raise ValueError("state snapshot fields")
+            rel = snapshot["path"]
+            if not isinstance(rel, str) or not re.fullmatch(r"snapshots/[0-9a-f]{64}\.npz", rel):
+                raise ValueError("snapshot path")
+            path = (folder / rel).resolve()
+            if not path.is_relative_to(folder.resolve()):
+                raise ValueError("snapshot path escaped evidence")
+            with np.load(path, allow_pickle=False) as archive:
+                if set(archive.files) != {"value"}:
+                    raise ValueError("snapshot archive roles")
+                value = archive["value"]
+                if role == 0:
+                    if value.dtype != np.float32 or value.ndim != 2 or value.shape[0] != batch or value.shape[1] != 49152:
+                        raise ValueError("full logits role/shape/dtype")
+                elif value.dtype != np.float16 or value.shape != (30, 2, batch, 3, 64):
+                    raise ValueError("full30-layer KV role/shape/dtype")
+                if (not np.isfinite(value).all() or list(value.shape) != snapshot["shape"]
+                        or str(value.dtype) != snapshot["dtype"]
+                        or hashlib.sha256(value.tobytes()).hexdigest() != snapshot["raw_sha256"]):
+                    raise ValueError("snapshot finite/hash mismatch")
+                arrays[variant].append(value.copy())
+    for role in range(2):
+        a, b = arrays["native"][role], arrays["mature"][role]
+        if a.dtype != b.dtype or a.shape != b.shape or a.tobytes() != b.tobytes():
+            raise ValueError("state gate bitwise mismatch")
+
+
 def analyze(plan, root):
     config = plan["config"]
     all_rows, complete_clusters, run_summaries = [], {}, []
@@ -141,26 +210,14 @@ def analyze(plan, root):
             gates = json.loads((folder / "gates.json").read_text())
             if len(gates) != 13 or any(g["status"] != "passed" for g in gates):
                 raise ValueError("complete run lacks state gates")
-            import hashlib
-            import numpy as np
+            expected_gates = {("calibration/B3", "before_calibration")}
+            expected_gates.update((f"{name}/{scope}/B{batch}", phase)
+                for scope in ("full", "bare_graph") for batch in (3, 5, 8) for phase in ("before", "after"))
+            actual_gates = [(g.get("cell_id"), g.get("phase")) for g in gates]
+            if len(set(actual_gates)) != 13 or set(actual_gates) != expected_gates:
+                raise ValueError("state gate coverage/identity")
             for gate in gates:
-                arrays = {}
-                for variant, snapshots in gate["snapshots"].items():
-                    arrays[variant] = []
-                    for snapshot in snapshots:
-                        path = (folder / snapshot["path"]).resolve()
-                        if not path.is_relative_to(folder.resolve()):
-                            raise ValueError("snapshot path escaped evidence")
-                        with np.load(path, allow_pickle=False) as archive:
-                            value = archive["value"]
-                            if (not np.isfinite(value).all() or list(value.shape) != snapshot["shape"]
-                                    or str(value.dtype) != snapshot["dtype"]
-                                    or hashlib.sha256(value.tobytes()).hexdigest() != snapshot["raw_sha256"]):
-                                raise ValueError("snapshot finite/hash mismatch")
-                            arrays[variant].append(value.copy())
-                for a, b in zip(arrays["native"], arrays["mature"]):
-                    if a.dtype != b.dtype or a.shape != b.shape or a.tobytes() != b.tobytes():
-                        raise ValueError("state gate bitwise mismatch")
+                validate_gate(gate, folder)
         reports = json.loads((folder / "clusters.json").read_text()) if (folder / "clusters.json").exists() else []
         expected_by_cid = {c["cluster_id"]: c for c in expected_clusters}
         seen = set()
@@ -216,7 +273,7 @@ def analyze(plan, root):
             row["ratio_vs_query_block"] = {p: r["cluster_wall_ms_per_100_calls"] / base for p, r in found.items()}
             row["idle_match_qualified"] = found["idle_matched"]["gap_matched"] == 10 and found["query_block"]["gap_matched"] == 10
         triplets.append(row)
-    return {"schema": "ELIT01-analysis-v1", "plan_sha256": digest(plan),
+    return {"schema": "ELIT01-analysis-v2", "plan_sha256": digest(plan),
         "primary_scope": config["primary_scope"], "primary_metric": config["primary_metric"],
         "planned_clusters": 108, "planned_blocks": 1080, "planned_calls": 10800,
         "block_status_counts": dict(Counter(r["status"] for r in all_rows)),
@@ -235,8 +292,10 @@ def main():
     args = p.parse_args()
     if args.output.exists():
         raise FileExistsError(args.output)
-    plan = load_plan(args.plan)
+    plan = load_analysis_plan(args.plan)
     result = analyze(plan, args.root)
+    result["analysis_source_sha256"] = __import__("hashlib").sha256(Path(__file__).read_bytes()).hexdigest()
+    result["historical_plan_unchanged"] = True
     write_json(args.output, result, exclusive=True)
     print(json.dumps({"planned_blocks": result["planned_blocks"],
         "status_counts": result["block_status_counts"], "complete_clusters": len(result["clusters"]),

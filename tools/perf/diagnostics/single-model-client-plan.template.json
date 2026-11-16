@@ -1,0 +1,12 @@
+{
+  "schema": "client-stream-plan-1.0",
+  "run_id": "REQUIRED_APPROVED_RUN",
+  "evidence_kind": "protected_endpoint_unverified",
+  "protected_url": null,
+  "execution_enabled": false,
+  "approval_ref": "",
+  "source_ref": "REQUIRED_SOURCE_SHA_PROFILE",
+  "timeout_seconds": 30,
+  "max_response_bytes": 1048576,
+  "max_event_bytes": 65536
+}

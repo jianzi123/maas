@@ -1,0 +1,48 @@
+{
+  "issue": "ELIT-QA-01",
+  "cases": [
+    {
+      "case": "both_empty",
+      "exit": 1,
+      "expected_error": "requires logits and KV",
+      "success_report_absent": true
+    },
+    {
+      "case": "native_empty",
+      "exit": 1,
+      "expected_error": "requires logits and KV",
+      "success_report_absent": true
+    },
+    {
+      "case": "mature_empty",
+      "exit": 1,
+      "expected_error": "requires logits and KV",
+      "success_report_absent": true
+    },
+    {
+      "case": "asymmetric",
+      "exit": 1,
+      "expected_error": "requires logits and KV",
+      "success_report_absent": true
+    },
+    {
+      "case": "missing_variant",
+      "exit": 1,
+      "expected_error": "variants incomplete",
+      "success_report_absent": true
+    },
+    {
+      "case": "swapped_roles",
+      "exit": 1,
+      "expected_error": "full logits role/shape/dtype",
+      "success_report_absent": true
+    }
+  ],
+  "valid_original_reanalyzed": true,
+  "all_numeric_outcomes_unchanged": true,
+  "original_plan_file_sha256": "c42a4755b426fe964b7423ffb6cf4001e75f42bc52bf9ff018de6184a58c52c7",
+  "original_plan_canonical_sha256": "ab0ac451d9d4beffd6a879ff04bcdcd4000a256ec3194b710f5e7dabca49d9c9",
+  "full_qualified_triplets": 0,
+  "full_triplets": 18,
+  "GPU_experiments_this_run": 0
+}

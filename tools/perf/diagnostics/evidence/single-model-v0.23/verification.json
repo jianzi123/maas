@@ -1,0 +1,15 @@
+{
+  "scope": "targeted implementation/transport validation, not model performance",
+  "cadence_gate_metadata_tests": 36,
+  "real_gate_CLI_refusals": 6,
+  "original_numerics_unchanged": true,
+  "client_protocol_tests": 18,
+  "controlled_client_CLI_records": 4,
+  "source_links": 324,
+  "syntax_files": 6,
+  "legacy_analyzer_exact": true,
+  "GPU_producer_sources_unchanged": true,
+  "protected_product_path_executed": false,
+  "new_GPU_experiments": 0,
+  "missing_approved_template_rejected_before_request": true
+}

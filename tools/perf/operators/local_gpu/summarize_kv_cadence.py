@@ -4,7 +4,8 @@ import hashlib
 import json
 from pathlib import Path
 import statistics
-from cadence_protocol import load_plan,digest,write_json
+from cadence_protocol import digest,write_json
+from analyze_kv_cadence import load_analysis_plan
 
 
 def describe(xs):
@@ -21,7 +22,7 @@ def main():
     p.add_argument("--output",type=Path,required=True)
     args=p.parse_args()
     if args.output.exists():raise FileExistsError(args.output)
-    plan=load_plan(args.plan)
+    plan=load_analysis_plan(args.plan)
     analysis=json.loads(args.analysis.read_text())
     if analysis["plan_sha256"]!=digest(plan):raise ValueError("analysis plan mismatch")
     rows=[];runtimes=[]

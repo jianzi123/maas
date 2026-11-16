@@ -1,5 +1,7 @@
 # 推理框架工程实现卷
 
+最新：[第23章单模型客户端采集与原件门禁修复](23-single-model-capture.md)。自有HTTP验证不是模型收益，真实Go/Higress链路仍待原角色接通。
+
 最新：[第22章](22-cadence-policy-pilot.md)，真实三策略入口/冻结分母/首批/匹配失败保留；不是文献新增摘要。
 
 文献接续：[第21章](21-literature-to-experiments.md)，把四篇关键阅读接到固定源码、已有负结果和可否证卡；[原文索引](../literature/README.md)单列硬件/版本边界。

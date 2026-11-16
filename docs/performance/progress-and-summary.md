@@ -1,5 +1,9 @@
 # 阶段总结：2026-11-05
 
+## 单模型接线 v0.23
+
+先修ELIT-QA-01空/单侧/不对称快照可被接受问题，旧plan/producer/阈值与0/18不改；36项回归和6个实采CLI拒绝通过。客户端采集/关联新增18项HTTP/时钟测试及4条自有loopback CLI记录，真实产品入口/源导出仍待MAAS-3/8。GPU旧范围保留，本轮无新增GPU采样。见[第23章](engineering/23-single-model-capture.md)。
+
 ## E-LIT-01真实策略 v0.22
 
 新增opt-in入口，旧WindowB及0.21设计卡不改。采前冻结6477d5d/plan ab0ac451，108cluster/1080块无缺测；16元数据回归、4实采CLI负例及隐藏R02分母验证通过。Idle342/360、query_block72/360匹配，Full完整组0/18，观察到校准与主查询节奏偏移，根因与稳定收益仍unknown；不追加补测。见[第22章](engineering/22-cadence-policy-pilot.md)。

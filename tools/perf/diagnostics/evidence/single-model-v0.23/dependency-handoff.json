@@ -1,0 +1,46 @@
+{
+  "schema": "single-model-perf-handoff-0.23",
+  "product_path_executed": false,
+  "confirmed_sources": [
+    {
+      "issue": "MAAS-3",
+      "basis": "latest implementation handoff + expired management-only workbench record",
+      "online_inference_proven": false
+    },
+    {
+      "issue": "MAAS-8",
+      "PR": "https://github.com/jianzi123/maas/pull/13",
+      "code_commit": "6a21d852d9c826ff9fc473061e50e08425782aeb",
+      "delivery_commit": "84ff5a8c3727af61a79d3ca4c31d79be9cd8c8e9",
+      "basis": "single-model composition refused with120 missing/unapproved inputs; not120 product failures"
+    }
+  ],
+  "dependencies": [
+    {
+      "owner": "MAAS-3",
+      "required": "approved protected Go/Higress streaming URL + platform Key channel; live requestID and same-run Go RelaySample export; actual terminal/usage by originalID",
+      "present_this_run": false
+    },
+    {
+      "owner": "MAAS-8",
+      "required": "matching immutable running composition, Higress/Secret/validation provenance, instance/boot references and cleanup instructions",
+      "present_this_run": false
+    },
+    {
+      "owner": "MAAS-2/9 via Mika",
+      "required": "exact model/mode/profile approval, permitted endpoint/source, quota/budget/price and SLO/quality inputs",
+      "present_this_run": false
+    },
+    {
+      "owner": "MAAS-3 + actual Worker/provider",
+      "required": "trace/full binding/clock mapping or explicit external-provider internal-not-observable evidence",
+      "present_this_run": false
+    }
+  ],
+  "collector_delivered": "tools/perf/diagnostics/client_capture.py",
+  "consumer_delivered": "tools/perf/diagnostics/associate_client_relay.py",
+  "milestone_read_limit": "MAAS-18 issue get repeatedly returned Could not reach the Multica server; project latest description and direct role threads read successfully",
+  "no_direct_supplier_call": true,
+  "no_new_GPU_run": true,
+  "model_bottleneck": null
+}

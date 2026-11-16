@@ -1,0 +1,43 @@
+{
+  "source_kind": "controlled_loopback",
+  "records": [
+    {
+      "mode": "content",
+      "termination": "done_observed",
+      "first_protocol_ms": 11.034,
+      "first_content_ms": 27.7442,
+      "observed_request_id": "20f6ebaf-d980-4efd-b05c-46d31f2c3566",
+      "source": "owned Python loopback HTTP, not Go/Higress/model",
+      "Go_runtime_this_capture": false
+    },
+    {
+      "mode": "error_after",
+      "termination": "error_event",
+      "first_protocol_ms": 9.7034,
+      "first_content_ms": 25.6578,
+      "observed_request_id": "20f6ebaf-d980-4efd-b05c-46d31f2c3566",
+      "source": "owned Python loopback HTTP, not Go/Higress/model",
+      "Go_runtime_this_capture": false
+    },
+    {
+      "mode": "cancel",
+      "termination": "client_stopped_after_content",
+      "first_protocol_ms": 11.0552,
+      "first_content_ms": 27.06,
+      "observed_request_id": "20f6ebaf-d980-4efd-b05c-46d31f2c3566",
+      "source": "owned Python loopback HTTP, not Go/Higress/model",
+      "Go_runtime_this_capture": false
+    },
+    {
+      "mode": "reject",
+      "termination": "http_rejected",
+      "first_protocol_ms": null,
+      "first_content_ms": null,
+      "observed_request_id": "20f6ebaf-d980-4efd-b05c-46d31f2c3566",
+      "source": "owned Python loopback HTTP, not Go/Higress/model",
+      "Go_runtime_this_capture": false
+    }
+  ],
+  "protected_product_chain_executed": false,
+  "client_unit_tests": 18
+}

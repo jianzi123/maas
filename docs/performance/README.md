@@ -1,5 +1,7 @@
 # MaaS 性能与框架工程手册
 
+单模型接线：[第23章](engineering/23-single-model-capture.md)，含ELIT-QA-01完整向量拒绝修复、实际客户端SSE采集与原角色输入缺口。
+
 最新实作：[第22章E-LIT-01三策略首批](engineering/22-cadence-policy-pilot.md)，1080块完整，Full严格gap匹配0/18组，不判根因/稳定收益。
 
 文献接续：[原始资料索引](literature/README.md)与[第21章：从原文到实验](engineering/21-literature-to-experiments.md)。16来源、四关键章节笔记、三张待实现/执行实验卡；不新增GPU成本。
