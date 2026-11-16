@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "scope": "installation-input-only-no-secret-values",
-  "sourceCommit": "7b0f27a52822225afdfd17095e0ef2d9b1e27aae",
+  "sourceCommit": "7c10e4d3397848de1f4508ec4295b7dc25324a45",
   "productionWiringVerified": false,
   "connections": {
     "core": {
@@ -449,6 +449,11 @@
         "tools/perf/diagnostics/evidence/single-model-v0.23/cancel-client-source.json",
         "tools/perf/diagnostics/evidence/single-model-v0.23/content-client-source.json",
         "tools/perf/diagnostics/evidence/single-model-v0.23/controlled-client-verification.json",
+        "tools/perf/diagnostics/evidence/single-model-v0.23/delivery/MAAS-10-single-model-iteration.html",
+        "tools/perf/diagnostics/evidence/single-model-v0.23/delivery/MAAS-10-single-model-v0.23-code.zip",
+        "tools/perf/diagnostics/evidence/single-model-v0.23/delivery/MAAS-10-single-model-v0.23-evidence.zip",
+        "tools/perf/diagnostics/evidence/single-model-v0.23/delivery/README.md",
+        "tools/perf/diagnostics/evidence/single-model-v0.23/delivery/delivery-manifest.json",
         "tools/perf/diagnostics/evidence/single-model-v0.23/dependency-handoff.json",
         "tools/perf/diagnostics/evidence/single-model-v0.23/error_after-client-source.json",
         "tools/perf/diagnostics/evidence/single-model-v0.23/gate-fix-verification.json",

@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "scope": "observed-source-interface-not-production-readiness",
   "backend": {
-    "sourceCommit": "7b0f27a52822225afdfd17095e0ef2d9b1e27aae",
+    "sourceCommit": "7c10e4d3397848de1f4508ec4295b7dc25324a45",
     "apiGroup": "serving.maas.example",
     "operator": {
       "command": [
@@ -334,6 +334,11 @@
       "tools/perf/diagnostics/evidence/single-model-v0.23/gate-fix-verification.json": "51274d5548c600fc25582556309d40044ab0ac1ceb0864c940900bf16c6db50a",
       "tools/perf/diagnostics/evidence/single-model-v0.23/reject-client-source.json": "8a348f84f87931aaad0fb9d906c91578aa29bbb61df5585d860d5692b74cd944",
       "tools/perf/diagnostics/evidence/single-model-v0.23/verification.json": "be4e9443986bc5c81aa9ba624aa0d269f74ec93501d2aef0c480b789508e6f12",
+      "tools/perf/diagnostics/evidence/single-model-v0.23/delivery/delivery-manifest.json": "b270dcf482b61f4e23fe8e206e4b821fc8fd69846f4dff2dd49c68ce67e46a9d",
+      "tools/perf/diagnostics/evidence/single-model-v0.23/delivery/MAAS-10-single-model-iteration.html": "9d40b7d1fd7d0b5a2bd00a5897004bd857a045027d43017e0aff4f6b27ce2d9b",
+      "tools/perf/diagnostics/evidence/single-model-v0.23/delivery/MAAS-10-single-model-v0.23-code.zip": "1f28ac78765578148164518a8f4efa8ad7e9110b354641a9adef5591e2940689",
+      "tools/perf/diagnostics/evidence/single-model-v0.23/delivery/MAAS-10-single-model-v0.23-evidence.zip": "dece2c5479b7ccfe792ff6de5f4ddaa396481bead9d02dd11be0f87dbff227ff",
+      "tools/perf/diagnostics/evidence/single-model-v0.23/delivery/README.md": "735779871af3e00afed81f248cf4e724caff0b98ca6171d7cedb02ffc0a4c4c5",
       "tools/model_capabilities/evidence/consumer-map.json": "5334abfc5e4d9625a5f4ae1adf0e7e808d875eee59dc9125245040d41c59176a",
       "tools/model_capabilities/evidence/contract-provenance.json": "3def4bb4d81eace0836ab07d09ff2baeb508903b5433ff4cf9dced8d42dca72e",
       "tools/model_capabilities/evidence/current-openapi.json": "fab7f71e47af03de3f956437a09e50be47b511991ca87b35bb745ba0228040f5",
@@ -673,7 +678,7 @@
     }
   },
   "console": {
-    "sourceCommit": "7b0f27a52822225afdfd17095e0ef2d9b1e27aae",
+    "sourceCommit": "7c10e4d3397848de1f4508ec4295b7dc25324a45",
     "build": "npm ci && npm run build",
     "output": "console/dist",
     "localBridge": "development-and-explicit-workbench-mode-only",
