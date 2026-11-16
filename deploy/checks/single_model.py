@@ -43,7 +43,7 @@ def inspect(repo, revision, values, combination):
         lock=json.loads((source/"deploy/dependencies.lock.json").read_text(encoding="utf-8"))
         interface=json.loads((source/"deploy/charts/maas-platform/runtime-interface.json").read_text(encoding="utf-8"))
         from identities import binding_blockers
-        issues=blockers(values,lock,interface)+binding_blockers(values,lock["databaseIdentities"],interface)+combination_blockers(combination)
+        issues=blockers(values,lock,interface,source_root=source/"deploy")+binding_blockers(values,lock["databaseIdentities"],interface)+combination_blockers(combination)
         hashes={p:hashlib.sha256((source/p).read_bytes()).hexdigest() for p in (
             "deploy/build-sources.lock.json","deploy/dependencies.lock.json","deploy/identities.json","deploy/charts/maas-platform/runtime-interface.json")}
         return {"scope":"offline-combination-not-runtime-acceptance","repositoryCommit":commit,"sourceCodeCommit":code,

@@ -8,11 +8,13 @@ from jsonschema import Draft7Validator
 from verify import CHART, ROOT, load_values, validate_network
 from identities import identity_blockers, binding_blockers
 
-def blockers(values, lock, interface=None):
+def blockers(values, lock, interface=None, source_root=None):
+    root = ROOT if source_root is None else Path(source_root)
+    chart = CHART if source_root is None else root / "charts/maas-platform"
     if interface is None:
-        interface = json.loads((CHART / "runtime-interface.json").read_text(encoding="utf-8"))
+        interface = json.loads((chart / "runtime-interface.json").read_text(encoding="utf-8"))
     result = identity_blockers(lock.get("databaseIdentities", {}), lock.get("target", {}).get("namespace"))
-    schema = json.loads((CHART / "values.schema.json").read_text())
+    schema = json.loads((chart / "values.schema.json").read_text())
     if not Draft7Validator(schema).is_valid(values):
         result.append("values.schema")
         return result
@@ -22,7 +24,7 @@ def blockers(values, lock, interface=None):
     if lock.get("sourceBaseline", {}).get("candidateState") != "merged" or interface["backend"].get("candidateState") != "merged" or interface["console"].get("candidateState") != "merged":
         result.append("source.candidateNotMerged")
     try:
-        inventory_bytes = (ROOT / "build-sources.lock.json").read_bytes()
+        inventory_bytes = (root / "build-sources.lock.json").read_bytes()
         inventory = json.loads(inventory_bytes)
         if lock.get("sourceBaseline", {}).get("sourceInventorySha256") != hashlib.sha256(inventory_bytes).hexdigest():
             result.append("source.inventoryChecksum")
