@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "scope": "observed-source-interface-not-production-readiness",
   "backend": {
-    "sourceCommit": "e52b14201b7eb55036e658e50f4dd17dd54578e0",
+    "sourceCommit": "eb5572b25455547395cf2afc36fdd77ac78a189f",
     "apiGroup": "serving.maas.example",
     "operator": {
       "command": [
@@ -386,7 +386,7 @@
       "test/qa-single-model/pr10-trace.log": "13cf9e6a71cb4b90ed9b743ff4df9cd640530aa4b0b2b9c06543c58b45753ce2",
       "test/qa-single-model/report.md": "5cad44db68f735f3f7c22514a77f46f44e129c94d1657014c5d72175b69d35c2",
       "test/qa-single-model/single-model-mode.test.ts.in": "7eed79be9fca8c97e37404ca1dbc511449bfaf25c86565c33fc72ae87702db0c",
-      "test/qa-single-model/single-model-replay-instrumented.test.ts.in": "53e508f0573a80f9fa28a2ea108986f083079db5c63c279f38402ddf1f447fa6",
+      "test/qa-single-model/single-model-replay-instrumented.test.ts.in": "e3dce6562875c9845f05d0859be0c46070169058d76ade6d343bc4f29e943d3a",
       "test/qa-single-model/single-model-replay.test.ts.in": "95dd548528fecf317e1b8141924a287ff9fd9fc05df2a0d13758dc6fa29266ac",
       "test/qa-single-model/source.json": "467dc0c5e3e4f85ecc05c63f62bfccc2447d1a1536c4f725e370c149fb1aa32b",
       "test/qa-single-model/template-rejection.json": "b77c42ee65b56486fa1fedd4f2fa29b3b81f024814bdebfe552ebed146a3e128",
@@ -602,7 +602,7 @@
     }
   },
   "console": {
-    "sourceCommit": "e52b14201b7eb55036e658e50f4dd17dd54578e0",
+    "sourceCommit": "eb5572b25455547395cf2afc36fdd77ac78a189f",
     "build": "npm ci && npm run build",
     "output": "console/dist",
     "localBridge": "development-and-explicit-workbench-mode-only",
