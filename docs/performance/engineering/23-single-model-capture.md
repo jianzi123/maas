@@ -60,3 +60,9 @@ MAAS-3最新评论明确旧4179工作台已过保留期，只证明历史管理�
 | Go/实际Worker源负责人 | 可用trace/完整binding/时钟映射，或明确ExternalAPI内部不可观测；新增导出字段由原角色协调，不由性能工具伪造 |
 
 本轮真实产品受保护链路、D1整体、E1和模型调用未执行。当前客户端工具与拒绝门禁已可审；已授权本地GPU研究仍有效，本轮未因平台链路缺失撤销它，也未重复旧GPU样本。下一GPU参考小窗继续遵守校准→冻结→独立holdout→主比较门槛，不把现有0/18改为支持优化。
+
+## 交付前增量核对
+
+最终增量线程已读到后端[PR #15](https://github.com/jianzi123/maas/pull/15)：代码d0b8b41a241a1b208516446d68fa8a6ca618c14d、四锁head ca1a173574d4ef2d20dfdc732e10476e2e035f25，依赖[PR #14](https://github.com/jianzi123/maas/pull/14)固定head00a3e62c539b726113fa21686e29096be88820e2。前者增加最小安装组合根、后者增加TLS工厂；均不是已运行的受保护模型入口。
+
+生产binary尚未消费组合根，H1/完整H4、H2/H3真实sealed/boot、registry及validation仍缺；Wasm实际构建失败tinygo executable unavailable，批准工具链/digest也pending。没有将这些候选检查与PR #13或本性能分支相加当最终组合。Mika归并后须重新生成最终唯一四锁，消费端随后才按实际源采集。

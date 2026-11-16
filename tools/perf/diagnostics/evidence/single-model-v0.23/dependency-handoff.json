@@ -4,8 +4,12 @@
   "confirmed_sources": [
     {
       "issue": "MAAS-3",
-      "basis": "latest implementation handoff + expired management-only workbench record",
-      "online_inference_proven": false
+      "basis": "final incremental thread read: installation composition code delivered; production binary not consuming it; H1/H2/H3/fullH4/registry/validation pending; Wasm build failed tinygo executable unavailable",
+      "online_inference_proven": false,
+      "latest_PR": "https://github.com/jianzi123/maas/pull/15",
+      "latest_code_commit": "d0b8b41a241a1b208516446d68fa8a6ca618c14d",
+      "latest_delivery_commit": "ca1a173574d4ef2d20dfdc732e10476e2e035f25",
+      "dependency_PR14_head": "00a3e62c539b726113fa21686e29096be88820e2"
     },
     {
       "issue": "MAAS-8",
