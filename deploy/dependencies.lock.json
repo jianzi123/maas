@@ -4,12 +4,12 @@
   "deploymentApproved": false,
   "sourceBaseline": {
     "chartBase": "e5647a2f2b44f53d39a80041be94b619f07c29d6",
-    "backendInspected": "fe09d60b4932f78ed07dd27da36878b2a375d0fd",
+    "backendInspected": "c501f7daa9a8098b994940a3d7dd0ffb3d37b56f",
     "contracts": "MAAS-2 v0.4 + retained v0.3 + query/recovery addenda + MAAS-1 role review",
     "terminal": "3.0",
     "ticket": "3",
     "proposedTerminal": "3.1 (not enabled)",
-    "consoleInspected": "fe09d60b4932f78ed07dd27da36878b2a375d0fd",
+    "consoleInspected": "c501f7daa9a8098b994940a3d7dd0ffb3d37b56f",
     "defaultBranch": "925d8c55be9ce823d100bf90a5c78cf19ea66d58",
     "candidatePR": null,
     "candidateState": "integrated-unmerged",
@@ -18,7 +18,7 @@
     "qaCore": "ac94a373ec0a61c5fd4dc5380a7985a4fb47840f",
     "qaEvidence": "50354a705c03383d0102d0d437119afd7ffed8b3",
     "sourceInventory": "deploy/build-sources.lock.json",
-    "sourceInventorySha256": "d84da8191fd294989a57513e977d50d6e22d853ca63632adea68246a071bdfb8",
+    "sourceInventorySha256": "0db1c1a8e7cbd9d7011b5e15a74fd792ecf89947321350d848e8302d6c8124f8",
     "upstreamWorkbenchDeployment": "e5647a2f2b44f53d39a80041be94b619f07c29d6",
     "backendBase": "0559fa46b4a728d6f542daf19532e794f8549b31",
     "integrationBranch": "integrate/MAAS-17-unified-20261114",
@@ -99,7 +99,7 @@
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "fe09d60b4932f78ed07dd27da36878b2a375d0fd",
+      "sourceCommit": "c501f7daa9a8098b994940a3d7dd0ffb3d37b56f",
       "compiledAPIGroup": "serving.maas.example"
     },
     {
@@ -116,7 +116,7 @@
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "fe09d60b4932f78ed07dd27da36878b2a375d0fd",
+      "sourceCommit": "c501f7daa9a8098b994940a3d7dd0ffb3d37b56f",
       "compiledAPIGroup": "serving.maas.example"
     },
     {
@@ -133,7 +133,7 @@
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "fe09d60b4932f78ed07dd27da36878b2a375d0fd"
+      "sourceCommit": "c501f7daa9a8098b994940a3d7dd0ffb3d37b56f"
     },
     {
       "id": "mysql",
@@ -432,7 +432,7 @@
   "databaseIdentities": {
     "schemaVersion": "1.0",
     "scope": "installation-input-only-no-secret-values",
-    "sourceCommit": "fe09d60b4932f78ed07dd27da36878b2a375d0fd",
+    "sourceCommit": "c501f7daa9a8098b994940a3d7dd0ffb3d37b56f",
     "productionWiringVerified": false,
     "connections": {
       "core": {
@@ -627,6 +627,7 @@
           "docs/local-service.md",
           "docs/maas17-r5-history.md",
           "docs/model-capabilities/README.md",
+          "docs/model-capabilities/deepseek-single-model-v0.7.md",
           "docs/model-capabilities/kv-pd-inputs-v0.4.md",
           "docs/model-capabilities/usage-finality-v0.5.md",
           "docs/performance/README.md",
@@ -801,6 +802,12 @@
           "tools/model_capabilities/README.md",
           "tools/model_capabilities/check.py",
           "tools/model_capabilities/codex-pending.json",
+          "tools/model_capabilities/deepseek/approval-inputs.json",
+          "tools/model_capabilities/deepseek/candidate-review.json",
+          "tools/model_capabilities/deepseek/document-evidence.json",
+          "tools/model_capabilities/deepseek/minimum-quality.json",
+          "tools/model_capabilities/deepseek/protocol-vectors.json",
+          "tools/model_capabilities/deepseek_milestone.py",
           "tools/model_capabilities/evidence/consumer-map.json",
           "tools/model_capabilities/evidence/contract-provenance.json",
           "tools/model_capabilities/evidence/current-openapi.json",
@@ -830,6 +837,7 @@
           "tools/model_capabilities/profiles/deepseek-external-candidate.json",
           "tools/model_capabilities/profiles/sglang-r1-distill-qwen7b-candidate.json",
           "tools/model_capabilities/test_capabilities.py",
+          "tools/model_capabilities/test_deepseek_milestone.py",
           "tools/model_capabilities/test_kv_pd.py",
           "tools/model_capabilities/test_usage_finality.py",
           "tools/model_capabilities/usage_finality.py",

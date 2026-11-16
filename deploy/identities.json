@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "scope": "installation-input-only-no-secret-values",
-  "sourceCommit": "fe09d60b4932f78ed07dd27da36878b2a375d0fd",
+  "sourceCommit": "c501f7daa9a8098b994940a3d7dd0ffb3d37b56f",
   "productionWiringVerified": false,
   "connections": {
     "core": {
@@ -196,6 +196,7 @@
         "docs/local-service.md",
         "docs/maas17-r5-history.md",
         "docs/model-capabilities/README.md",
+        "docs/model-capabilities/deepseek-single-model-v0.7.md",
         "docs/model-capabilities/kv-pd-inputs-v0.4.md",
         "docs/model-capabilities/usage-finality-v0.5.md",
         "docs/performance/README.md",
@@ -370,6 +371,12 @@
         "tools/model_capabilities/README.md",
         "tools/model_capabilities/check.py",
         "tools/model_capabilities/codex-pending.json",
+        "tools/model_capabilities/deepseek/approval-inputs.json",
+        "tools/model_capabilities/deepseek/candidate-review.json",
+        "tools/model_capabilities/deepseek/document-evidence.json",
+        "tools/model_capabilities/deepseek/minimum-quality.json",
+        "tools/model_capabilities/deepseek/protocol-vectors.json",
+        "tools/model_capabilities/deepseek_milestone.py",
         "tools/model_capabilities/evidence/consumer-map.json",
         "tools/model_capabilities/evidence/contract-provenance.json",
         "tools/model_capabilities/evidence/current-openapi.json",
@@ -399,6 +406,7 @@
         "tools/model_capabilities/profiles/deepseek-external-candidate.json",
         "tools/model_capabilities/profiles/sglang-r1-distill-qwen7b-candidate.json",
         "tools/model_capabilities/test_capabilities.py",
+        "tools/model_capabilities/test_deepseek_milestone.py",
         "tools/model_capabilities/test_kv_pd.py",
         "tools/model_capabilities/test_usage_finality.py",
         "tools/model_capabilities/usage_finality.py",
