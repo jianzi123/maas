@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "scope": "observed-source-interface-not-production-readiness",
   "backend": {
-    "sourceCommit": "fe09d60b4932f78ed07dd27da36878b2a375d0fd",
+    "sourceCommit": "ada28d8f3552d18a3f9cfc448b4b54e1dabc0b93",
     "apiGroup": "serving.maas.example",
     "operator": {
       "command": [
@@ -76,6 +76,7 @@
       "docs/release-management-verification.md": "5324661414282b295a797a24548dda5dad8d47e7a158a6ad100e1e5f084c2a18",
       "docs/release-management.md": "9fe469cd8ada7c48c513e69f00c6eab32d72f3a9b52aa7dbdb68fe3aceaa68ca",
       "docs/retained-history.md": "f72786711fc01d01c4202d0ab248c918f3d178e4cc6e621601e3bb226bf1e891",
+      "docs/single-model-runtime-increment.md": "05d4ef9514a5fe53729ba3842136c54fcec8ee37c365fa2e4a4ba7f9bc80086d",
       "docs/unified-status.md": "a9d692ae621c00ac6084139301fee71ab65ee986c0c1766888ab23a6ebc19554",
       "docs/unified-workbench.md": "5f41647d36d5c79c4dc389df50e77a8f55f061b72bfa1dd8d9254d27ba50156c",
       "docs/usage-authority-continuation.md": "a86665fc787f573f169025fc977ea8af19d1ade7a4dfa3e83c1a208ddc1ea578",
@@ -425,6 +426,8 @@
       "internal/kernel/relay_deadline_test.go": "a58a87fafd3ee8a17799a8da9da6de021786afc4fe174146223c64825ea1e571",
       "internal/kernel/relay_forward.go": "72d629979fc1615913d364c1dbf4717b4e40130cc869435c700e8979ad75f6c3",
       "internal/kernel/relay_mysql_test.go": "73f14344ef193c70cc73871a8994f7a2f78c9cd6afe7359b9d86ef4853abd7c7",
+      "internal/kernel/relay_runtime.go": "25b175ed144f352e5402b79f3f31b702bfb2c550987af1f5f9f8a4947bf5adbf",
+      "internal/kernel/relay_runtime_test.go": "867678da3410413409fa3c4f12a08bbdaf92536a5a971ce6a06d3a8213205cb4",
       "internal/kernel/relay_sample.go": "e6f5dc5ff60f4e2b10df142902665c716414fce0c77d556af678e354f0806df8",
       "internal/kernel/relay_sample_test.go": "bf0395cfe253ac411b041e2b923fa91cc49d20edd5f760db4b67ad91c78dc484",
       "internal/kernel/relay_sampling_mysql_test.go": "dc863d86bea649a39d7487da3f2bbbb19b43d5c53001b59b7c950d12e9fc3ae3",
@@ -581,7 +584,7 @@
     }
   },
   "console": {
-    "sourceCommit": "fe09d60b4932f78ed07dd27da36878b2a375d0fd",
+    "sourceCommit": "ada28d8f3552d18a3f9cfc448b4b54e1dabc0b93",
     "build": "npm ci && npm run build",
     "output": "console/dist",
     "localBridge": "development-and-explicit-workbench-mode-only",

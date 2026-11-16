@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "scope": "installation-input-only-no-secret-values",
-  "sourceCommit": "fe09d60b4932f78ed07dd27da36878b2a375d0fd",
+  "sourceCommit": "ada28d8f3552d18a3f9cfc448b4b54e1dabc0b93",
   "productionWiringVerified": false,
   "connections": {
     "core": {
@@ -260,9 +260,12 @@
         "docs/performance/templates/experiment-record.md",
         "docs/performance/templates/optimization-goal.md",
         "docs/performance/templates/weekly-summary.md",
+        "docs/single-model-runtime-increment.md",
         "docs/unified-status.md",
         "docs/unified-workbench.md",
         "internal/kernel/publisher_runtime_test.go",
+        "internal/kernel/relay_runtime.go",
+        "internal/kernel/relay_runtime_test.go",
         "internal/release/history/kubernetes.go",
         "internal/release/history/spec.go",
         "internal/release/management/service.go",
