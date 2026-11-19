@@ -4,12 +4,12 @@
   "deploymentApproved": false,
   "sourceBaseline": {
     "chartBase": "e5647a2f2b44f53d39a80041be94b619f07c29d6",
-    "backendInspected": "c06112de2dbfd2a92252cf85f8f91c6637621a77",
+    "backendInspected": "39462c6af5e17e18a8f7ce9b6f2bfce2efa60da5",
     "contracts": "MAAS-2 v0.4 + retained v0.3 + query/recovery addenda + MAAS-1 role review",
     "terminal": "3.0",
     "ticket": "3",
     "proposedTerminal": "3.1 (not enabled)",
-    "consoleInspected": "c06112de2dbfd2a92252cf85f8f91c6637621a77",
+    "consoleInspected": "39462c6af5e17e18a8f7ce9b6f2bfce2efa60da5",
     "defaultBranch": "925d8c55be9ce823d100bf90a5c78cf19ea66d58",
     "candidatePR": null,
     "candidateState": "integrated-unmerged",
@@ -18,7 +18,7 @@
     "qaCore": "ac94a373ec0a61c5fd4dc5380a7985a4fb47840f",
     "qaEvidence": "50354a705c03383d0102d0d437119afd7ffed8b3",
     "sourceInventory": "deploy/build-sources.lock.json",
-    "sourceInventorySha256": "e7235e9f713d0d2341de19919137c43522fa6356c08621821d1c5d0b14b71668",
+    "sourceInventorySha256": "4513966715c99ccfc538a1de19a33b979345568b4d24d0c5469d612669ff89dd",
     "upstreamWorkbenchDeployment": "e5647a2f2b44f53d39a80041be94b619f07c29d6",
     "backendBase": "0559fa46b4a728d6f542daf19532e794f8549b31",
     "integrationBranch": "integrate/MAAS-17-unified-20261114",
@@ -99,7 +99,7 @@
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "c06112de2dbfd2a92252cf85f8f91c6637621a77",
+      "sourceCommit": "39462c6af5e17e18a8f7ce9b6f2bfce2efa60da5",
       "compiledAPIGroup": "serving.maas.example"
     },
     {
@@ -116,7 +116,7 @@
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "c06112de2dbfd2a92252cf85f8f91c6637621a77",
+      "sourceCommit": "39462c6af5e17e18a8f7ce9b6f2bfce2efa60da5",
       "compiledAPIGroup": "serving.maas.example"
     },
     {
@@ -133,7 +133,7 @@
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "c06112de2dbfd2a92252cf85f8f91c6637621a77"
+      "sourceCommit": "39462c6af5e17e18a8f7ce9b6f2bfce2efa60da5"
     },
     {
       "id": "mysql",
@@ -432,7 +432,7 @@
   "databaseIdentities": {
     "schemaVersion": "1.0",
     "scope": "installation-input-only-no-secret-values",
-    "sourceCommit": "c06112de2dbfd2a92252cf85f8f91c6637621a77",
+    "sourceCommit": "39462c6af5e17e18a8f7ce9b6f2bfce2efa60da5",
     "productionWiringVerified": false,
     "connections": {
       "core": {
@@ -558,6 +558,7 @@
           ".gitattributes",
           ".gitignore",
           "README.md",
+          "cmd/agent-headless/http.go",
           "cmd/agent-headless/main.go",
           "cmd/workbench/identities.go",
           "cmd/workbench/identities_test.go",
@@ -702,6 +703,15 @@
           "docs/performance/templates/weekly-summary.md",
           "docs/unified-status.md",
           "docs/unified-workbench.md",
+          "internal/agentruntime/ar_commands.go",
+          "internal/agentruntime/ar_host_test.go",
+          "internal/agentruntime/ar_http.go",
+          "internal/agentruntime/ar_http_test.go",
+          "internal/agentruntime/ar_mysql_test.go",
+          "internal/agentruntime/ar_projection.go",
+          "internal/agentruntime/ar_recovery_test.go",
+          "internal/agentruntime/ar_transport_test.go",
+          "internal/agentruntime/ar_types.go",
           "internal/agentruntime/host.go",
           "internal/agentruntime/host_test.go",
           "internal/agentruntime/http.go",
@@ -730,6 +740,7 @@
           "scripts/dev.mjs",
           "scripts/lock-unified-source.py",
           "scripts/setup-workbench.sh",
+          "scripts/test-agent-mysql.sh",
           "scripts/test-agent-runtime.ps1",
           "scripts/test-mysql.sh",
           "scripts/test-r5.sh",
@@ -738,6 +749,12 @@
           "scripts/workbench-service.mjs",
           "scripts/workbench-smoke.mjs",
           "scripts/workbench.sh",
+          "test/controlled/maas20/ar1/ar1-trace.json",
+          "test/controlled/maas20/ar1/headless-native.jsonl",
+          "test/controlled/maas20/ar1/linux-mysql-tests.jsonl",
+          "test/controlled/maas20/ar1/mysql-server.log",
+          "test/controlled/maas20/ar1/windows-kernel-skipped.jsonl",
+          "test/controlled/maas20/ar1/windows-tests.jsonl",
           "test/controlled/maas20/headless.jsonl",
           "test/controlled/maas20/mysql.jsonl",
           "test/controlled/maas20/tests.jsonl",
