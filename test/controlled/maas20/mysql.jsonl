@@ -1,0 +1,9 @@
+{"Time":"2026-11-18T20:01:59.6521624-08:00","Action":"start","Package":"github.com/jianzi123/maas/internal/kernel"}
+{"Time":"2026-11-18T20:02:00.5810467-08:00","Action":"run","Package":"github.com/jianzi123/maas/internal/kernel","Test":"TestMySQLAgentChildrenUseOneLedger"}
+{"Time":"2026-11-18T20:02:00.5810467-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/kernel","Test":"TestMySQLAgentChildrenUseOneLedger","Output":"=== RUN   TestMySQLAgentChildrenUseOneLedger\n"}
+{"Time":"2026-11-18T20:02:00.5810467-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/kernel","Test":"TestMySQLAgentChildrenUseOneLedger","Output":"    mysql_test.go:80: real MySQL not provided; run scripts/test-mysql.sh\n"}
+{"Time":"2026-11-18T20:02:00.5810467-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/kernel","Test":"TestMySQLAgentChildrenUseOneLedger","Output":"--- SKIP: TestMySQLAgentChildrenUseOneLedger (0.00s)\n"}
+{"Time":"2026-11-18T20:02:00.5810467-08:00","Action":"skip","Package":"github.com/jianzi123/maas/internal/kernel","Test":"TestMySQLAgentChildrenUseOneLedger","Elapsed":0}
+{"Time":"2026-11-18T20:02:00.5810467-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/kernel","Output":"PASS\n"}
+{"Time":"2026-11-18T20:02:00.587118-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/kernel","Output":"ok  \tgithub.com/jianzi123/maas/internal/kernel\t0.934s\n"}
+{"Time":"2026-11-18T20:02:00.587118-08:00","Action":"pass","Package":"github.com/jianzi123/maas/internal/kernel","Elapsed":0.935}
