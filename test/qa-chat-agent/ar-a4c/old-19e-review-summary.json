@@ -1,0 +1,229 @@
+{
+  "observed_at": "2026-11-19T05:32:02.583171+00:00",
+  "candidate": "19e43ba980f1bd9f499a92dda435b74b626bf7e9",
+  "combination": "4a86482c5b0f397fc7cfeeb2eaf43232d2c712fd",
+  "code": "e21ee9bcd6b39b112508d59593f37c768fe591ea",
+  "tree": "cb29a6eb28ae34331fde35a20a9ddf381a769d4b",
+  "source_verification": [
+    {
+      "head": "19e43ba980f1bd9f499a92dda435b74b626bf7e9",
+      "code": "39462c6af5e17e18a8f7ce9b6f2bfce2efa60da5",
+      "rows": [
+        {
+          "component": "backend",
+          "expected": 557,
+          "matched": 557,
+          "missing": [],
+          "unexpected": [],
+          "changed": [],
+          "passed": true
+        },
+        {
+          "component": "console",
+          "expected": 68,
+          "matched": 68,
+          "missing": [],
+          "unexpected": [],
+          "changed": [],
+          "passed": true
+        }
+      ]
+    },
+    {
+      "head": "4a86482c5b0f397fc7cfeeb2eaf43232d2c712fd",
+      "code": "e21ee9bcd6b39b112508d59593f37c768fe591ea",
+      "rows": [
+        {
+          "component": "backend",
+          "expected": 566,
+          "matched": 566,
+          "missing": [],
+          "unexpected": [],
+          "changed": [],
+          "passed": true
+        },
+        {
+          "component": "console",
+          "expected": 87,
+          "matched": 87,
+          "missing": [],
+          "unexpected": [],
+          "changed": [],
+          "passed": true
+        }
+      ]
+    }
+  ],
+  "original_contract_files_verified": {
+    "openapi.json": "b8a503492a847c419e5a844cd9582567d6f0532d1c7782b5b4685be072f209a8",
+    "session-event.schema.json": "b2513e7799729e7bbfe38262bdc0f8155d777ebb36e7c49d66d0d434125ba089",
+    "AR-B01-B02.md": "ec2aede5e795891a8b167637cc09bbd39360bee9c4a23648bcc1e557e66d599b"
+  },
+  "operations": 19,
+  "author_trace_events_validated": 34,
+  "baseline": {
+    "top": {
+      "pass": 30,
+      "fail": 0,
+      "skip": 1
+    },
+    "including_subtests": {
+      "pass": 58,
+      "fail": 0,
+      "skip": 1
+    },
+    "leaf_review_cases": [
+      {
+        "case": "TestAR1HostApprovalResumeAndWaitingDeadline/resume",
+        "result": "pass"
+      },
+      {
+        "case": "TestAR1HostApprovalResumeAndWaitingDeadline/expire",
+        "result": "pass"
+      },
+      {
+        "case": "TestAR1LimitsAndCapabilityRejectionsPrecedeDispatch/wire10001",
+        "result": "pass"
+      },
+      {
+        "case": "TestAR1LimitsAndCapabilityRejectionsPrecedeDispatch/policy",
+        "result": "pass"
+      },
+      {
+        "case": "TestAR1LimitsAndCapabilityRejectionsPrecedeDispatch/chat2",
+        "result": "pass"
+      },
+      {
+        "case": "TestAR1LimitsAndCapabilityRejectionsPrecedeDispatch/unknownTool",
+        "result": "pass"
+      },
+      {
+        "case": "TestAR1LimitsAndCapabilityRejectionsPrecedeDispatch/unknownModel",
+        "result": "pass"
+      },
+      {
+        "case": "TestAR1ModelUnknownAndPartialAccountingStayExplicit/unknown",
+        "result": "pass"
+      },
+      {
+        "case": "TestAR1ModelUnknownAndPartialAccountingStayExplicit/partial",
+        "result": "pass"
+      },
+      {
+        "case": "TestAR1ContextAndNoProgressLimitsStopNewChildren/context",
+        "result": "pass"
+      },
+      {
+        "case": "TestAR1ContextAndNoProgressLimitsStopNewChildren/no_progress",
+        "result": "pass"
+      },
+      {
+        "case": "TestAR1ContextAndNoProgressLimitsStopNewChildren/revocation",
+        "result": "pass"
+      },
+      {
+        "case": "TestDurationAndBudgetBound/duration",
+        "result": "pass"
+      },
+      {
+        "case": "TestDurationAndBudgetBound/bound",
+        "result": "pass"
+      },
+      {
+        "case": "TestToolProtocolAndLimits/unknown",
+        "result": "pass"
+      },
+      {
+        "case": "TestToolProtocolAndLimits/schema",
+        "result": "pass"
+      },
+      {
+        "case": "TestToolProtocolAndLimits/duplicate",
+        "result": "pass"
+      },
+      {
+        "case": "TestToolProtocolAndLimits/eof",
+        "result": "pass"
+      },
+      {
+        "case": "TestToolProtocolAndLimits/empty_tools",
+        "result": "pass"
+      },
+      {
+        "case": "TestToolProtocolAndLimits/unknown_usage",
+        "result": "pass"
+      },
+      {
+        "case": "TestToolProtocolAndLimits/steps",
+        "result": "pass"
+      },
+      {
+        "case": "TestToolProtocolAndLimits/permission",
+        "result": "pass"
+      },
+      {
+        "case": "TestApprovalBindingExpiryAndResume/expired",
+        "result": "pass"
+      },
+      {
+        "case": "TestConcurrentClaimAndRecoveryNeverReplaysUnknown/tool_inflight",
+        "result": "pass"
+      },
+      {
+        "case": "TestConcurrentClaimAndRecoveryNeverReplaysUnknown/ready",
+        "result": "pass"
+      },
+      {
+        "case": "TestConcurrentClaimAndRecoveryNeverReplaysUnknown/tools",
+        "result": "pass"
+      },
+      {
+        "case": "TestToolTimeoutAndOutputBound/timeout",
+        "result": "pass"
+      },
+      {
+        "case": "TestToolTimeoutAndOutputBound/oversize",
+        "result": "pass"
+      }
+    ]
+  },
+  "new_review": {
+    "top": {
+      "pass": 0,
+      "fail": 2,
+      "skip": 0
+    },
+    "including_subtests": {
+      "pass": 2,
+      "fail": 4,
+      "skip": 0
+    },
+    "leaf_review_cases": [
+      {
+        "case": "TestReviewSnapshotPagesKeepWatermark/old_messages_0",
+        "result": "pass"
+      },
+      {
+        "case": "TestReviewSnapshotPagesKeepWatermark/old_messages_100",
+        "result": "fail"
+      },
+      {
+        "case": "TestReviewToolDeadlineRemainsSchemaValid/cancel_false",
+        "result": "fail"
+      },
+      {
+        "case": "TestReviewToolDeadlineRemainsSchemaValid/cancel_true",
+        "result": "pass"
+      }
+    ]
+  },
+  "integration_product_bytes_match_candidate": true,
+  "sql_selectors_both_preserved": true,
+  "deploymentApproved": false,
+  "sql_independent": "not accepted; environment/invocation issues recorded separately",
+  "probe_sha256": "12a60c8acaedba71fed1548bfc9ea11c145be2a724c308ca979a611a25299515",
+  "final_probe_fixture": "50 completed controlled HTTP/service Chat runs construct 100 persisted messages; not 50 provider calls",
+  "vet_passed": true,
+  "controlled_headless_build_passed": true,
+  "deployment_checks_passed": 72
+}

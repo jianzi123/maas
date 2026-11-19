@@ -1,0 +1,1 @@
+{"windows_recorded_go_pids":[35240,59100],"matching_selector":"TestQAAR","action":"each verified go.exe command line then stopped exact PID","sql_started":false,"mysql_datadir":null,"mysql_socket":null,"linux_original_go_pid":34109,"linux_control_c_sent":true,"linux_absence_verified":false}
