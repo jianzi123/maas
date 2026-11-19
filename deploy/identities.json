@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "scope": "installation-input-only-no-secret-values",
-  "sourceCommit": "f33395b8256769991260827b18ac4c3eac1d0258",
+  "sourceCommit": "c9eb936f95589faa6fa1c75a7ca88ea41b8cbdd0",
   "productionWiringVerified": false,
   "connections": {
     "core": {
@@ -146,6 +146,7 @@
         "console/scripts/ar1-local.d.mts",
         "console/scripts/ar1-local.mjs",
         "console/scripts/chat-ar1-browser.mjs",
+        "console/scripts/chat-ar1-pagination-browser.mjs",
         "console/scripts/chat-browser.mjs",
         "console/scripts/consumer-binding-browser.mjs",
         "console/scripts/generate-ar1-types.mjs",
