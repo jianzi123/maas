@@ -4,12 +4,12 @@
   "deploymentApproved": false,
   "sourceBaseline": {
     "chartBase": "e5647a2f2b44f53d39a80041be94b619f07c29d6",
-    "backendInspected": "23571a983304d5465021ec00813cc15fb3463ccc",
+    "backendInspected": "b478bb115be6086a3fce5032f728b07fe35cae21",
     "contracts": "MAAS-2 v0.4 + retained v0.3 + query/recovery addenda + MAAS-1 role review",
     "terminal": "3.0",
     "ticket": "3",
     "proposedTerminal": "3.1 (not enabled)",
-    "consoleInspected": "23571a983304d5465021ec00813cc15fb3463ccc",
+    "consoleInspected": "b478bb115be6086a3fce5032f728b07fe35cae21",
     "defaultBranch": "925d8c55be9ce823d100bf90a5c78cf19ea66d58",
     "candidatePR": null,
     "candidateState": "integrated-unmerged",
@@ -18,7 +18,7 @@
     "qaCore": "ac94a373ec0a61c5fd4dc5380a7985a4fb47840f",
     "qaEvidence": "50354a705c03383d0102d0d437119afd7ffed8b3",
     "sourceInventory": "deploy/build-sources.lock.json",
-    "sourceInventorySha256": "168c94fa06650d1563bb6b87965c6770249a6bbdc6797806342449caf87973ba",
+    "sourceInventorySha256": "bcb58d086372158c0e28354859a70a99392204021a70dd261a028ed7caecd2ef",
     "upstreamWorkbenchDeployment": "e5647a2f2b44f53d39a80041be94b619f07c29d6",
     "backendBase": "0559fa46b4a728d6f542daf19532e794f8549b31",
     "integrationBranch": "integrate/MAAS-17-unified-20261114",
@@ -99,7 +99,7 @@
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "23571a983304d5465021ec00813cc15fb3463ccc",
+      "sourceCommit": "b478bb115be6086a3fce5032f728b07fe35cae21",
       "compiledAPIGroup": "serving.maas.example"
     },
     {
@@ -116,7 +116,7 @@
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "23571a983304d5465021ec00813cc15fb3463ccc",
+      "sourceCommit": "b478bb115be6086a3fce5032f728b07fe35cae21",
       "compiledAPIGroup": "serving.maas.example"
     },
     {
@@ -133,7 +133,7 @@
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "23571a983304d5465021ec00813cc15fb3463ccc"
+      "sourceCommit": "b478bb115be6086a3fce5032f728b07fe35cae21"
     },
     {
       "id": "mysql",
@@ -432,7 +432,7 @@
   "databaseIdentities": {
     "schemaVersion": "1.0",
     "scope": "installation-input-only-no-secret-values",
-    "sourceCommit": "23571a983304d5465021ec00813cc15fb3463ccc",
+    "sourceCommit": "b478bb115be6086a3fce5032f728b07fe35cae21",
     "productionWiringVerified": false,
     "connections": {
       "core": {
@@ -562,10 +562,14 @@
           "cmd/workbench/main.go",
           "config/integration-sources.json",
           "config/mysql/controlapi-projections.sql",
+          "console/docs/chat-workbench.md",
           "console/docs/consumer-binding-fixes.md",
           "console/docs/review-recovery-fixes.md",
           "console/docs/single-model-continuation.md",
           "console/docs/ui16-redesign.md",
+          "console/package-lock.json",
+          "console/package.json",
+          "console/scripts/chat-browser.mjs",
           "console/scripts/consumer-binding-browser.mjs",
           "console/scripts/local-control.mjs",
           "console/scripts/redesign-browser.mjs",
@@ -574,11 +578,18 @@
           "console/src/App.vue",
           "console/src/api/client.ts",
           "console/src/api/stream.ts",
+          "console/src/chat-development.test.ts",
+          "console/src/chat-workspace.test.ts",
+          "console/src/chat/development.ts",
+          "console/src/chat/render.ts",
+          "console/src/chat/types.ts",
+          "console/src/components/ChatMarkdown.vue",
           "console/src/components/PanelDialog.vue",
           "console/src/components/ReleaseForm.vue",
           "console/src/console.test.ts",
           "console/src/consumer-binding.test.ts",
           "console/src/fixtures.ts",
+          "console/src/pages/ChatWorkspace.vue",
           "console/src/pages/Keys.vue",
           "console/src/pages/Models.vue",
           "console/src/pages/Playground.vue",
