@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "scope": "observed-source-interface-not-production-readiness",
   "backend": {
-    "sourceCommit": "7cf46fa3aa1a5b76ee6dcbe26c59c8ea7ca2d5b8",
+    "sourceCommit": "c06112de2dbfd2a92252cf85f8f91c6637621a77",
     "apiGroup": "serving.maas.example",
     "operator": {
       "command": [
@@ -49,7 +49,7 @@
       "status": "implemented-controlled-evidence-production-invocation-pending"
     },
     "files": {
-      ".gitattributes": "5b93b86d7f7e94c3dafdd41b284afe95a95a985e8afc719914173db11890cd36",
+      ".gitattributes": "c7ab3bf5adee31f2644ddb0b7fd7ad7898147f787c8a5a5f5c38632a9c84771a",
       ".gitignore": "46cf94096a926a26bc1a913b6cc632adacab0a96ab42d72a7dcbf216bcbaaa77",
       "go.mod": "3fc1c612237e81b1a61efdf59eb3e108980b170fd85b8b2c855db0f08240457b",
       "go.sum": "34ef9b8203162cccd56bdd7aa590ca1df2683c9a794ba118d3db0ff242609fb1",
@@ -566,10 +566,10 @@
       "docs/performance/engineering/figures/lease-lifecycle.svg": "a9a19b39061dec6e138daaa0ad7c6209e1b8e51aa4b032a8391c515d28aaf2e2",
       "docs/performance/engineering/figures/online-softmax.svg": "0f664b59e642cb279f5c0bc9e7e4c6e64815e173870f6f0b6a4dd32848226204",
       "docs/performance/engineering/figures/runtime-flow.svg": "23b06c39e38d37de8882b0a718b851b8beb3cf4b0204809d9cbba13aa48ce5f4",
-      "docs/contracts/agent-runtime/ar1-draft2/ADR-chat-agent.md": "2db61d221ed8928336c0a055b58c7040fd857295a83066fd7b53ea41d7081514",
+      "docs/contracts/agent-runtime/ar1-draft2/ADR-chat-agent.md": "e8915866a709c54de7f389e7d159d52019c623b2993e62e5c055ae9b0337f6d7",
       "docs/contracts/agent-runtime/ar1-draft2/AR-B01-B02.md": "ec2aede5e795891a8b167637cc09bbd39360bee9c4a23648bcc1e557e66d599b",
-      "docs/contracts/agent-runtime/ar1-draft2/openapi.json": "a44cdde30e44eee93acb5190aad0b3c275ecc0a77acc021b6c2d82ec0b833649",
-      "docs/contracts/agent-runtime/ar1-draft2/session-event.schema.json": "ce8a6530f6aa31b933ca9e1928dabbe8fe64bad68aef50b2e852b7f85efc0243",
+      "docs/contracts/agent-runtime/ar1-draft2/openapi.json": "b8a503492a847c419e5a844cd9582567d6f0532d1c7782b5b4685be072f209a8",
+      "docs/contracts/agent-runtime/ar1-draft2/session-event.schema.json": "b2513e7799729e7bbfe38262bdc0f8155d777ebb36e7c49d66d0d434125ba089",
       "docs/contracts/agent-runtime/ar1-draft2/source.json": "679921e88a9421eddff4bceb7f1c720371f99b8b59222125cceb94149186805a",
       "config/crd/modelreleases.yaml": "1169272473c5fa8a484245cb82fc0a4b1c32db4a759f33e4add1fcc389ae1aa1",
       "config/mysql/controlapi-projections.sql": "d35292ff6229b8c5ea858b1cba864ee093ffd61acb846805010a6b00ebc22a0c",
@@ -607,7 +607,7 @@
     }
   },
   "console": {
-    "sourceCommit": "7cf46fa3aa1a5b76ee6dcbe26c59c8ea7ca2d5b8",
+    "sourceCommit": "c06112de2dbfd2a92252cf85f8f91c6637621a77",
     "build": "npm ci && npm run build",
     "output": "console/dist",
     "localBridge": "development-and-explicit-workbench-mode-only",
