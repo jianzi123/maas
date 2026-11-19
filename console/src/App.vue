@@ -1,13 +1,16 @@
 <script setup lang="ts">
-import { onMounted, onBeforeUnmount, ref } from "vue";
+import { onMounted, onBeforeUnmount, ref, defineAsyncComponent } from "vue";
 import { api } from "./api/client";
 import { explain } from "./ui";
+const ChatWorkspace = defineAsyncComponent(
+  () => import("./pages/ChatWorkspace.vue"),
+);
 import Models from "./pages/Models.vue";
 import Keys from "./pages/Keys.vue";
 import Playground from "./pages/Playground.vue";
 import Releases from "./pages/Releases.vue";
 import Usage from "./pages/Usage.vue";
-const tab = ref("models"),
+const tab = ref(location.hash.startsWith("#chat") ? "chat" : "models"),
   authenticated = ref(false),
   busy = ref(true),
   error = ref(""),
@@ -104,6 +107,7 @@ onBeforeUnmount(() => {
   window.removeEventListener("pagehide", expired);
 });
 const nav = [
+  ["chat", "Chat 工作台"],
   ["models", "模型目录"],
   ["keys", "平台 Key"],
   ["play", "在线试用"],
@@ -125,11 +129,15 @@ const nav = [
           v-for="group in [
             {
               label: 'BUILD / 开发',
-              items: nav.filter((x) => ['models', 'play'].includes(x[0]!)),
+              items: nav.filter((x) =>
+                ['chat', 'models', 'play'].includes(x[0]!),
+              ),
             },
             {
               label: 'OPERATE / 运营',
-              items: nav.filter((x) => !['models', 'play'].includes(x[0]!)),
+              items: nav.filter(
+                (x) => !['chat', 'models', 'play'].includes(x[0]!),
+              ),
             },
           ]"
           :key="group.label"
@@ -201,7 +209,9 @@ const nav = [
         </form>
       </section>
       <template v-else
-        ><Models v-if="tab === 'models'" @navigate="navigate" /><Keys
+        ><ChatWorkspace v-if="tab === 'chat'" :development="demo" /><Models
+          v-else-if="tab === 'models'"
+          @navigate="navigate" /><Keys
           v-else-if="tab === 'keys'"
           @navigate="navigate" /><Playground
           v-else-if="tab === 'play'"
