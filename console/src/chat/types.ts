@@ -1,10 +1,17 @@
-// UI development port; shared MAAS-2/20 wire protocol is pending. No production routes implied.
+// UI port. The HTTP adapter validates AR-1 wire DTOs separately.
 export type Mode = "chat" | "agent";
 export type RunState =
-  "running" | "waiting_approval" | "completed" | "cancelled" | "failed";
+  | "accepted"
+  | "running"
+  | "waiting_approval"
+  | "needs_confirmation"
+  | "completed"
+  | "cancelled"
+  | "failed"
+  | "limit_reached";
 export interface Message {
   id: string;
-  role: "user" | "assistant";
+  role: "user" | "assistant" | "tool";
   content: string;
   runId?: string;
   requestId?: string;
@@ -19,6 +26,27 @@ export interface Step {
   output?: string;
   callId?: string;
 }
+export interface Approval {
+  id: string;
+  callId: string;
+  tool: string;
+  revision: string;
+  argsHash: string;
+  policyRevision: string;
+  expiresAt: string;
+  state: string;
+  input: string;
+}
+export interface UsageGroup {
+  currency: string;
+  price_version: string;
+  known_tokens: string;
+  held_tokens: string;
+  inflight_tokens: string;
+  known_money_atomic: string;
+  held_money_atomic: string;
+  inflight_money_atomic: string;
+}
 export interface Run {
   id: string;
   commandId: string;
@@ -26,9 +54,15 @@ export interface Run {
   model: string;
   state: RunState;
   assistantId: string;
-  cursor: number;
+  cursor: number | string;
+  sequence?: string;
+  cancelRequested?: boolean;
+  childRequestIds?: string[];
+  aggregationComplete?: boolean;
+  usageGroups?: UsageGroup[];
+  approvals?: Approval[];
   steps: Step[];
-  usage: { tokens: number | null; reason: string | null };
+  usage: { tokens: number | string | null; reason: string | null };
   error?: string;
 }
 export interface Session {
@@ -37,11 +71,14 @@ export interface Session {
   updatedAt: string;
   messages: Message[];
   runs: Run[];
+  revision?: string;
+  activeRunId?: string | null;
 }
 export interface ChatEvent {
-  seq: number;
+  seq: number | string;
   runId: string;
   type:
+    | "sync"
     | "delta"
     | "step"
     | "approval"
@@ -64,16 +101,21 @@ export interface StartInput {
   model: string;
   mode: Mode;
   replaces?: string;
+  operation?: "send" | "edit" | "regenerate";
 }
 export interface ChatService {
   models(): Promise<{ id: string; label: string; modes: Mode[] }[]>;
   list(): Promise<Session[]>;
-  create(): Promise<Session>;
+  create(model?: string): Promise<Session>;
   rename(id: string, title: string): Promise<void>;
   remove(id: string): Promise<void>;
   read(id: string): Promise<Session>;
   start(input: StartInput): Promise<Run>;
-  events(sessionId: string, runId: string, after: number): Promise<EventPage>;
+  events(
+    sessionId: string,
+    runId: string,
+    after: number | string,
+  ): Promise<EventPage>;
   cancel(sessionId: string, runId: string): Promise<void>;
   approve(
     sessionId: string,
@@ -82,4 +124,8 @@ export interface ChatService {
     allow: boolean,
   ): Promise<void>;
   clear(): Promise<void>;
+  recover?(): Promise<Session | null>;
+  hasPending?(): boolean;
+  stopEvents?(): void;
+  dispose?(): void;
 }

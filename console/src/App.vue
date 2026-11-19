@@ -31,6 +31,9 @@ function navigate(
 const local =
   (import.meta.env.DEV || import.meta.env.MODE === "workbench") &&
   import.meta.env.VITE_LOCAL_CONTROL === "true";
+const ar1Controlled =
+  import.meta.env.DEV && import.meta.env.VITE_CHAT_AR1_CONTROLLED === "true";
+const ar1Enabled = import.meta.env.VITE_CHAT_AR1_ENABLED === "true";
 const inferenceAvailable =
   !local ||
   (import.meta.env.DEV &&
@@ -43,10 +46,10 @@ async function boot() {
       const { fixtureFetch } = await import("./fixtures");
       api.fetcher = fixtureFetch;
     }
-    if (local) {
+    if (local || ar1Controlled) {
       const { enterLocalControl } = await import("./api/local-control");
       await enterLocalControl();
-      tab.value = "models";
+      tab.value = ar1Controlled ? "chat" : "models";
     } else await api.session();
     authenticated.value = true;
   } catch (e) {
@@ -59,10 +62,10 @@ async function login() {
   busy.value = true;
   error.value = "";
   try {
-    if (local) {
+    if (local || ar1Controlled) {
       const { enterLocalControl } = await import("./api/local-control");
       await enterLocalControl();
-      tab.value = "models";
+      tab.value = ar1Controlled ? "chat" : "models";
     } else
       await api.login({ username: username.value, password: password.value });
     authenticated.value = true;
@@ -76,7 +79,7 @@ async function login() {
 async function logout() {
   busy.value = true;
   try {
-    if (local) {
+    if (local || ar1Controlled) {
       const { leaveLocalControl } = await import("./api/local-control");
       await leaveLocalControl();
     } else await api.logout();
@@ -129,14 +132,17 @@ const nav = [
           v-for="group in [
             {
               label: 'BUILD / 开发',
-              items: nav.filter((x) =>
-                ['chat', 'models', 'play'].includes(x[0]!),
+              items: nav.filter(
+                (x) =>
+                  ['chat', 'models', 'play'].includes(x[0]!) &&
+                  (!ar1Controlled || x[0] === 'chat'),
               ),
             },
             {
               label: 'OPERATE / 运营',
               items: nav.filter(
-                (x) => !['chat', 'models', 'play'].includes(x[0]!),
+                (x) =>
+                  !ar1Controlled && !['chat', 'models', 'play'].includes(x[0]!),
               ),
             },
           ]"
@@ -186,8 +192,13 @@ const nav = [
         <p class="eyebrow">ADMIN CONSOLE</p>
         <h1>登录管理工作台</h1>
         <p class="muted">使用管理员会话管理模型和预算。</p>
-        <button v-if="local" class="primary" :disabled="busy" @click="login">
-          连接本地 Go 管理接口
+        <button
+          v-if="local || ar1Controlled"
+          class="primary"
+          :disabled="busy"
+          @click="login"
+        >
+          连接本地 Go 会话
         </button>
         <form v-else @submit.prevent="login">
           <label
@@ -209,7 +220,11 @@ const nav = [
         </form>
       </section>
       <template v-else
-        ><ChatWorkspace v-if="tab === 'chat'" :development="demo" /><Models
+        ><ChatWorkspace
+          v-if="tab === 'chat'"
+          :development="demo"
+          :http="ar1Enabled && !demo"
+          :controlled="ar1Controlled" /><Models
           v-else-if="tab === 'models'"
           @navigate="navigate" /><Keys
           v-else-if="tab === 'keys'"

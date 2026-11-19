@@ -1,41 +1,54 @@
-# Chat 工作台：可交互开发阶段
+# Chat 工作台与 AR-1 服务接线
 
-本轮沿 MAAS-5 增加独立 Chat 工作台，原模型/Key/试用/发布/用量页保留。界面支持会话列表、新建/重命名/删除、多轮消息、模型选择、流式 Markdown/代码块、停止、错误/未知用量、刷新历史恢复、只读事件重连；编辑和重新生成会建立关联原消息的新运行，旧消息与运行保留。
+沿 MAAS-5 / PR #17 的现有 Vue 页面及 ChatService 接入 AR-1 / 1.0.0-draft.2。模型、Key、发布、在线试用和管理用量继续保留；不另建页面或计量账本。
 
-## 预览与操作
+## 实际接入与启动
 
-在 console/ 执行 npm ci、npm run dev:fixtures，登录后的侧栏选择“Chat 工作台”。新建会话后发送消息，切换普通 Chat / Agent；Agent 演示纯计算 text_length 工具，界面显示步骤、输入、结果和批准/拒绝。发送 /error 模拟失败。浏览器刷新后按 URL 中非秘密会话 ID 恢复，断开/重连只读事件，不重新启动运行。
+先在后端 PR #18 固定提交 19e43ba980f1bd9f499a92dda435b74b626bf7e9 启动原受控服务：
 
-开发模式仅使用浏览器本地存储（maas.chat.development.v1），内容和事件可通过“清空开发会话数据”删除。没有持久化平台 Key、管理员 cookie/CSRF或上游凭证；Chat页面也不接收这些凭证。开发适配未执行真实模型或后端工具，不代表生产持久化或跨用户隔离。请勿输入敏感信息。两个浏览器/不同origin之间不共享历史；其并发/存储额度也不作真实服务保证。
+    go run -tags agentcontrolled ./cmd/agent-headless --state-dir .cache/ar1-http --owner-id 4c421973-919f-4b8a-997f-909fc6fd010a --listen 127.0.0.1:4188
 
-普通真实服务模式当前显示“会话/运行服务正在接线”，不发出虚构的HTTP请求，不回退本地开发数据。现有在线试用及管理接口继续可用。没有新增不可用的文件上传按钮。
+在本前端 console 目录：
 
-## 可替换接点（待MAAS-2/20批准，不是稳定HTTP协议）
+    npm ci
+    $env:MAAS_LOCAL_AGENT_API = "http://127.0.0.1:4188"
+    npm run dev
 
-src/chat/types.ts 的 ChatService 是UI内部开发port：models/list/create/rename/remove/read/start/events/cancel/approve/clear。页面接受 service 注入，开发模式显式装配 DevelopmentChat；尚未指定生产API路径。
+Vite 只绑定 loopback。开发桥直接代理该 Go 服务的 /__maas/local-session 与 /api/agent/v1，先校验浏览器同源 Host/Origin，再转到 Go 配置的精确 Origin；Cookie 由原 Go LocalSession 签发，CSRF 只保存在当前页面内存。不能同时设置 MAAS_LOCAL_API 来拼接另一服务的同名 Cookie。该独立受控入口只启用 Chat 导航；完整管理导航仍保留在原统一工作台装配中。
 
-最小需要收敛的字段：
+模型目录来自 capabilities，demo 明确标为受控模型。受控启动使用后端文档的 TST / 100 Token / 100 原子金额、4步、4模型调用、8工具调用、10秒等测试上限；普通 Chat 固定一次模型调用。这些不是生产默认或批准额度。
 
-- Session.id/title/updatedAt/messages/runs，由服务端核验当前主体所有权。客户端不能因已知ID跨用户读写。
-- Message.id/role/content/runId/requestId/replaces/createdAt；消息修订与重生成保持原关联和消费记录。
-- Run.id/commandId/model/mode/state/assistantId/cursor/steps/usage；commandId用于原写入恢复，不等于推理request_id或结算事件。
-- events(sessionId,runId,after)返回有序seq和同session/run快照，游标去重；恢复是读取既有事件，不启动模型/工具。
-- 工具批准绑定session/run/callId和原输入；真实版本还需由共享契约提供输入摘要/批准令牌/时效和权限。UI不制造授权。
-- 当前内部usage.tokens=null明确为未知，不是余额或第二套账本。父run/每个子request的完整权威用量字段由真实服务契约提供，不能由前端自行累加财务结果。
+生产构建只有显式 VITE_CHAT_AR1_ENABLED=true 且 VITE_CHAT_AR1_CONFIG 提供 JSON 对象 {limits, tools:[{name,revision}]} 时才装配 HTTPChat；限制遵循锁定 RunLimits，并由 Go 与安装策略取交集。没有有效配置或 capability 时显示具体错误、不启用生成，也不回退开发数据。生产登录沿原 api.session/login/logout；模型/来源批准、生产 Auth/Catalog/Reauthorize/Prepare/Usage/最窄 SQL 身份仍须由原后端/运维装配。生产 tools-v1 缺批准时保持拒绝。
 
-本port字段是页面和开发适配的候选输入。真实Go会话/运行API、事件版本、取消ACK/停止事实、幂等查询、审批证明、消息分支与分页等以MAAS-2审定、MAAS-20实际实现为准；没有把旧严格Chat Completions纯文本消费者当作tool_calls协议。
+## 行为和恢复边界
 
-## 安全与未知结果
+- Session 创建/重命名/删除、多轮、edit/regenerate 和消息关联消费正式 DTO。写入带原 Cookie、CSRF，修改/运行提交带快照 revision 的 If-Match。重新生成发送 operation=regenerate、text=null 及原 assistant ID。
+- 首建与发送前只在 sessionStorage 记录非秘密原 operation UUID、请求规范 SHA256 和必要 session ID，不保存正文、平台 Key、Cookie 或 CSRF。响应未知后先 GET 原创建命令或会话内命令，核对 operation/hash/归属；404/503 不证明未执行，不自动 POST。刷新恢复原命令和 URL 会话，不按标题猜。
+- 原 Go 快照提供 revision、event_run_id、last_event_seq、resume_cursor 一致水位。历史消息与 steps/tool-calls 按不透明 cursor 读取全部分页；有界读取超限明确报错，不把一页冒充全量。后端快照目前最多保留100个 Run 投影，前端不补造更早 Run 的账务；消息历史仍按 messages 分页读取。
+- SSE 使用 /events/stream?after=原不透明cursor，不同时发送 Last-Event-ID。严格校验 AR 事件 Schema、session/run/单调连续十进制 seq、SSE id/event 与 envelope，并按 UTF-8 字节校验 delta.offset。页面更新采用服务端持久快照，避免重复拼接；410 只 GET 新快照。断流/EOF 不推断成功，不触发新 Run。
+- accepted/running/waiting_approval/needs_confirmation 都阻止同会话并发发送。停止 ACK 仅表示取消已请求，UI 等待实际终止；needs_confirmation 无“批准重跑”入口。会话切换、断开和卸载隔离旧事件，旧列表完成也不能中断新会话事件连接。
+- 审批从已持久事件发现 approval_id，再 GET 原 Approval；展示规范参数、摘要、工具版本、期限，决策携带新的 decision_id、原参数哈希/工具/策略版本。未知决策不自动重试；权限、期限与最终执行由 Go 重核。工具结果一律按文本显示，Markdown 净化，不执行代码。
+- 父 Run 显示原 child_request_ids 及权威 usage_groups，按 currency/price_version 展示 known/inflight/held。所有数值保留十进制字符串；空分组显示未知，aggregation_complete 与执行终态分别显示，不合并币种、不补零、不重复扣量。
 
-Markdown使用marked解析、DOMPurify净化，禁止图片/表单/iframe/script等活动内容；工具输入/结果用Vue文本pre展示，工具结果不成为系统指令。代码块只显示，不执行。会话切换/卸载使旧事件回调失效；UI模型能力来自适配器，发送前检查运行模式。等待/运行中的同一会话拒绝并发发送，未完成运行不能删除。未知提交结果锁住重放，显式原会话重读只在匹配commandId时恢复。
+## 开发适配
 
-开发工具批准只消费一次；真实鉴权、工具Schema、幂等与取消/账务边界仍由后端负责。停止UI不会宣称引擎停止、退款或slot释放。
+npm run dev:fixtures 仍显式使用 DevelopmentChat；会话与历史只存在 maas.chat.development.v1 浏览器本地数据中，可以清空。它没有 Go 存储、真实工具权限或供应商调用证据。HTTP 模式不读取或写入这份开发历史。没有新增无后端能力的附件按钮。
 
-## 验证与下一步
+## 可复现验证
 
-定向：node node_modules/vitest/vitest.mjs run src/chat-development.test.ts src/chat-workspace.test.ts
-浏览器：node scripts/chat-browser.mjs
-构建/回归：npm test；npm run build；npm run format:check。
-artifacts/chat/包含结果及桌面、移动、等待批准截图；均为明确标注的浏览器本地开发适配。
+    npm test
+    npm run build
+    npm run format:check
+    npm run types:ar1
+    npm run test:chat-ar1
 
-下一步由MAAS-2/20收敛上述最小字段/版本和运行端点后，替换port并用同一浏览器流程验证真实受控服务的持久化、跨用户权限、取消/审批和ACK恢复。本轮不改Go/DDL/模型网关或唯一账本，不以开发模型替代MAAS-18真实调用闭环，不执行真实供应商、目标部署或付费资源。
+test:chat-ar1 默认后端目录为 ../../ar1-backend，或显式 MAAS_AR1_BACKEND_ROOT。先验证完整 Git SHA，再构建受控入口。需本机 Go 1.26.0、Edge、已获准的本地依赖。脚本依次运行原入口和明确的浏览器测试适配，两组覆盖重叠，不相加为独立场景数：
+
+1. official：原 agentcontrolled 入口、真实 LocalSession/HTTP/LocalStore/Host/安全工具；验证持久历史、原命令 ACK 丢失恢复、编辑/再生成、原 R 用量、匿名/错误 CSRF、窄屏和删除。
+2. extended：相同固定 AR-1 核心和原安全工具，只替换测试 ModelClient（慢流、已确认失败、OutcomeUnknown），并对计算工具显式增加批准要求、为测试可信主体加入 tools.approve。验证审批刷新/决策、中文/emoji 字节流、只读重连、停止终态、未知结果屏障与未知用量。该适配不是原默认模型行为或生产授权。
+
+结果、无凭证网络轨迹、持久快照/JSON事件/SSE、截图和自有 PID/端口清理记录在 artifacts/chat-ar1。Windows 非控制台子进程无法可移植发送 SIGINT，原未改入口仅通过自有子进程句柄结束，原状态目录保留、不抢占其锁；扩展测试入口添加 stdin stop 生命周期钩子，等待 Go Host/HTTP 正常关闭。每轮使用独有状态目录，确认4188/4189监听已关闭，不留常驻服务。
+
+本前端作者联调使用真实 Go 文件存储，不是浏览器本地开发适配；模型/计价/上下文计数为明确受控适配，工具/HTTP/存储是真实现。未执行真实供应商、生产 Higress/Secret、目标集群、真实 SQL 浏览器组合、完整跨用户主体矩阵或独立 QA；MAAS-18 底层真实闭环和 MAAS-7 验收继续单列。后端原真实 MySQL 作者结果不计入本前端测试。
+
+contracts/ar1-openapi.json 与 ar1-session-event.schema.json 从固定后端原字节复制，.gitattributes 禁止换行转换；类型由 generate-ar1-types.mjs 生成，校验采用原 Schema。提交按产品代码→标准 lock-unified-source.py→四锁独立提交，组合装配后的来源锁由原集成流程重算。

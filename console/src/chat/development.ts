@@ -188,7 +188,8 @@ export class DevelopmentChat implements ChatService {
       this.append(d, r, "completed");
     }
   }
-  async events(id: string, runId: string, after: number) {
+  async events(id: string, runId: string, after: number | string) {
+    if (typeof after !== "number") throw Error("开发游标格式错误。");
     const d = this.load(),
       s = this.session(d, id),
       r = s.runs.find((r) => r.id === runId);
@@ -196,7 +197,7 @@ export class DevelopmentChat implements ChatService {
     const ready = Math.floor((Date.now() - (d.ready[runId] ?? 0)) / 80) + 1;
     const available = (d.events[runId] ?? []).slice(0, Math.max(0, ready));
     // A read materializes already recorded demo events. It never calls a model/tool or restarts a run.
-    for (const e of available.filter((e) => e.seq > r.cursor)) {
+    for (const e of available.filter((e) => BigInt(e.seq) > BigInt(r.cursor))) {
       if (e.type === "delta")
         s.messages.find((m) => m.id === r.assistantId)!.content += e.text ?? "";
       if (e.step) {
@@ -217,7 +218,9 @@ export class DevelopmentChat implements ChatService {
     }
     this.save(d);
     return {
-      events: structuredClone(available.filter((e) => e.seq > after)),
+      events: structuredClone(
+        available.filter((e) => BigInt(e.seq) > BigInt(after)),
+      ),
       snapshot: structuredClone(s),
     };
   }
@@ -227,7 +230,7 @@ export class DevelopmentChat implements ChatService {
       r = s.runs.find((r) => r.id === runId);
     if (!r) throw Error("运行不存在。");
     if (!["running", "waiting_approval"].includes(r.state)) return;
-    d.events[r.id] = (d.events[r.id] ?? []).slice(0, r.cursor);
+    d.events[r.id] = (d.events[r.id] ?? []).slice(0, Number(r.cursor));
     this.append(d, r, "cancelled");
     d.ready[r.id] = 0;
     this.save(d);
@@ -261,7 +264,7 @@ export class DevelopmentChat implements ChatService {
         s.messages.filter((m) => m.role === "user").length,
       );
     } else this.append(d, r, "cancelled");
-    d.ready[r.id] = Date.now() - r.cursor * 80;
+    d.ready[r.id] = Date.now() - Number(r.cursor) * 80;
     this.save(d);
   }
 }
