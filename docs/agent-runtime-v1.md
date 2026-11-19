@@ -1,89 +1,55 @@
-MAAS-20 Agent Runtime v1 · 实现候选
+MAAS-20 原生 Go 运行时 · 第一段实现
 =================================
 
-这是可运行的原生 Go 内核与候选 HTTP 入口，待 MAAS-2 审定共享契约后与 MAAS-5/8/17 装配。它没有修改原公开 `/v1/chat/completions`，没有开放生产模型工具调用。普通 Chat 与 Agent 使用相同存储、事件和执行服务。
+已实现可替换核心、持久存储、受控 HTTP/headless 和真实安全工具。**共享协议唯一依据是 MAAS-2 的 AR-1 `1.0.0-draft.2`，本提交尚未提供其完整 HTTP 适配，不是完整 Chat 联调交付。** 先前提出的数字 cursor/client_id/同路径 SSE 候选已撤回为内部测试格式；`ControlledHandler` 只识别 `/__maas/controlled-agent/v0/`，没有占用 `/api/agent/v1`，不得接入正式前端或生产二进制。
 
-设计事实、选择和边界
+架构原件在 [AR-1目录](contracts/agent-runtime/ar1-draft2/source.json)：OpenAPI、事件Schema、原ADR及B01/B02补充按字节保留，下载使用认证attachment CLI，两个ZIP SHA256均与架构公布值一致。API实施必须直接采用这些字段，不能另起协议。本任务继续 in_progress。
+
+已实现的核心
+------------
+
+`ModelClient`、`ToolRegistry`、`SessionStore`、`AgentLoop` 是可替换边界；`Service.Drive` 是首个循环，`Host` 提供有界并发、执行前身份重核和停止等待。原生Go/Registry沿MAAS-2 ADR决定，不引入第二控制面或DSH运行时。官方参考固定 [Harness 2e39e704](https://github.com/deepseek-ai/deepseek-harness/blob/2e39e70496aa02986ca6a820c5d497e816b69d7e/docs/architecture.md)，无DSH兼容/性能声明。
+
+Session聚合包含owner、Message/Part、Run、Step、ToolCall、Event与Checkpoint。所有变更使用revision CAS，消息/检查点/事件一起提交；一个会话一个非终态run，waiting_approval/needs_confirmation继续占执行屏障。接受态已采用accepted，Chat运行强制一次模型调用。内部client ID同载荷返回原run，异载荷冲突；公开client_operation_id/If-Match及原命令查回仍需AR-1适配。
+
+MySQL迁移是 `internal/agentruntime/migrations/001_sessions.sql`，只新增 `agent_sessions_v1`，不复制财务账本。生产迁移使用单独迁移身份，运行连接仅需该表SELECT/INSERT/UPDATE。聚合保护上限为32MiB/2048条消息，会话列表最多200条；生产所需分页/归档沿AR-1后续实现，不能静默截断。
+
+首期真实工具名已对齐 `bounded_arithmetic@1`（有界整数加减乘，不eval）和 `list_visible_models@1`（调用可信Principal范围的目录函数）。两者分别是pure/read，不内置write、shell、MCP、文件或外发工具。注册工具有Schema/版本/权限，执行校验当前权限与run原权限交集、版本和参数；工具输出以tool role数据回填。副作用接口只供受控测试验证未知结果不重放。正式ToolManifest输出Schema/effect/scope等DTO仍需对齐AR-1。
+
+每步模型request_id在发送前持久化，父run只保存引用和已知/未知投影，不扣量。`kernelmodel.RelayModel`复用原 `kernel.Relay.Forward`，只支持text-v1；Prepare/Usage工厂缺失或tools-v1时拒绝。Prepare必须使用原获准Key/Profile/Ticket/Plan，发送前校验剩余Token/金额预留和币种，不允许直接供应商URL或回退。旧文本归一化继续拒tool_calls，生产tools-v1分支/profile未实现或未批准时不能启用Agent。
+
+步数、模型调用数、Token、同币种原子金额、总时间、工具时间/输出、输入字节与事件数量采用显式Limits并冻结到run；测试值不是生产默认。任一子用量未知时不继续下一模型调用，对应累计值保留null。真实price_version/known/inflight/held/aggregation_complete投影尚需接原账本，当前内部Usage不是AR-1公开usage_groups。
+
+取消先落cancel_requested，再取消当前执行context；实际模型/工具返回后才写终态，不释放slot、不退款、不清除held。工具提供者必须合作响应context。审批绑定owner/auth revision、run/call、工具版本与参数哈希，拒绝重复/过期/修改后批准；公开decision_id幂等和完整审批DTO仍待接。未知write结果进入needs_confirmation。
+
+恢复由可信宿主先确认旧执行进程停止，再调用Recover隔离旧executor。ready/tools边界可恢复；model_inflight/tool_inflight进入needs_confirmation并保留原身份，不自动重发。没有通用“确认未知写入成功”的公开API。LocalStore是单进程开发实现，fsync后发布不可变版本并持有目录锁；崩溃锁不自动抢占，须核实`.owner-lock`的PID停止后再删除准确锁文件，不能作为生产MySQL或掉电保证。
+
+编辑保留原消息和消费，以新输入关联原user消息；后续历史投影沿编辑分支。AR-1 regenerate引用原assistant/head的完整规则仍待适配，内部parent_message_id不能直接当共享referenced_message_id。
+
+下一段公开适配清单
 ------------------
 
-官方参考固定到 [DeepSeek Harness 2e39e70496aa02986ca6a820c5d497e816b69d7e](https://github.com/deepseek-ai/deepseek-harness/tree/2e39e70496aa02986ca6a820c5d497e816b69d7e)，读取其 [architecture.md](https://github.com/deepseek-ai/deepseek-harness/blob/2e39e70496aa02986ca6a820c5d497e816b69d7e/docs/architecture.md) 和 packages 导航。官方采用 Cordis 插件服务，模型适配、会话日志、工具和循环可以替换，提供 headless/SDK/Web 组合。这里借鉴组件边界，没有复制其运行时或宣称协议兼容。
-
-ADR-20-01 建议采用 Go 接口：`ModelClient`、`ToolRegistry`、`SessionStore`、`AgentLoop`。默认 `Service.Drive` 实现循环；`Host` 提供有界并发和停止等待。理由是可直接复用现有 Go/MySQL、Higress Relay 和权限/预算约束。DSH sidecar 可复用 TypeScript 插件，但需要新增 Node 部署、跨进程取消/身份/存储映射，并适配每一步唯一准入；本轮成本更高。保留未来由锁版 sidecar 实现 `ModelClient` 或循环的空间。此为实现建议，最终 ADR/公开路径由 MAAS-2 审定。
-
-本候选新增依赖为零，沿 go.mod/go.sum 的 Go 1.26.0、uuid 1.6.0、MySQL driver 1.9.3、jsonschema/v5 5.3.1。未启用外部工具、MCP、shell、文件执行、子 Agent、权重下载或真实付费调用。
-
-实体与事务
-----------
-
-Session 包含 owner、Message/Part、Run、Step、ToolCall、RunEvent 和 Checkpoint。每次变更通过 session revision 做 CAS，消息、检查点和事件一起提交。MySQL 迁移为 `internal/agentruntime/migrations/001_sessions.sql`，仅新增 `agent_sessions_v1`；不修改 `generation_requests` 或预算表。安装迁移使用迁移身份；运行身份仅需该表 SELECT/INSERT/UPDATE，不需要账本写权限。生产装配须使用独立授权连接与现有数据保留策略。
-
-两个副本同时启动同一 queued run，只有一个 CAS 可以取得 executor 身份；所有后续写入继续验证该身份。单会话最多一个非终态 run，包含 waiting_approval 与 needs_confirmation。client_id 在会话内唯一；相同输入返回原 run，不同输入返回 409。数据库提交结果不明时只按 client_id 查询，不重发模型。模型每步 request_id 在发起前写入检查点。
-
-编辑/重新生成以新的提交、client_id 和 user message 表示；`parent_message_id` 必须引用本会话原 user message。传入新文字表示编辑，传入原文字表示重新生成。上下文取原消息之前的成功历史，再接新分支；原消息、run、子 request 和消费记录保留。当前只允许替换 user message，不支持任意 Part 原地改写。
-
-存储采用有界会话聚合，默认无隐含生产限值；安装方必须显式提供 Limits。最大 2048 条消息、200 个会话列表项、32 MiB 聚合是实现保护上限；事件、输入/输出、步数、请求次数、Token、金额/币种、运行时间、工具时间和审批 TTL 由配置固定在 run。大历史分页/归档尚未实现，需要时返回明确限制，不能静默裁剪。
-
-金额为安装方批准的同币种原子单位；本候选要求各子响应匹配该币种。生产适配须将价格快照及原子精度绑定到原 Model/Profile/Plan；不得把不同计价单位的原子金额相加。父 run 只展示子请求已知值之和，任何一项未知对应聚合为 null。子请求在发起前获得剩余 Token/金额上界；真实 Prepare 必须把该上界纳入原预留计划，不能只在响应后检查。
-
-工具与模型
-----------
-
-内置真实工具为 `integer_calculator@1`（有界整数加减乘）和 `model_directory@1`（由可信 Principal 限定可见目录）。目录 Read 必须接已有授权目录适配；headless 示例只返回明确的本地受控目录。工具声明 JSON Schema、版本、权限、pure/read/write 等级和审批要求。write 必须要求批准，首期没有内置 write 实现。
-
-模型仅提出调用，不能提供权限。注册表只向模型展示获准 Schema；执行时再次检查 run 原权限与当前权限交集、版本、参数 Schema。重复调用 ID、未注册或未授权工具、畸形参数都失败停止。每批最多 16 个调用，串行执行；输出作为 tool result Part 加回历史，不作为 system 指令。重复无进展循环最终受步数/调用数/预算/总时间限制。
-
-`text-v1` 与 `tools-v1` 显式协商，Agent 必须 tools-v1。`kernelmodel.RelayModel` 只支持 text-v1，复用原 `kernel.Relay.Forward`；它要求可信安装方提供原 Key/Profile/Ticket/Plan 的 Prepare 和唯一账本 Usage 读取器，缺任一项返回 dependency_unavailable。它没有独立供应商客户端、URL 配置或第二份结算。已有严格文本归一化没有放宽或丢弃 tool_calls。真实 tools-v1 adapter/profile 未批准时，生产 Agent 继续明确不可用。
-
-取消、审批和恢复
-----------------
-
-取消先持久化 `run.cancel_requested`，执行者每 25ms 检查并取消当前模型/工具的 context；模型/工具实际返回后才写 cancelled 或失败。queued/waiting_approval 可在未执行时取消。工具适配必须响应 context；不能用脱离管理的 goroutine 伪造超时完成。本服务不释放 ledger slot、不退款、不解除 held；这些仍由原内核根据可信终止证据处理。
-
-审批哈希绑定协议、session/run、owner/auth revision、call ID、工具版本与参数。重复、过期、权限改变、哈希不匹配均冲突；拒绝结束 run。批准后再次执行原调用；并不重新请求模型生成参数。工具版本改变使旧批准无效。
-
-恢复必须由可信宿主先确认旧进程停止，再调用 `Recover`，不能由浏览器报告“断线”触发。ready/tools 边界可以重新排队；model_inflight/tool_inflight 进入 needs_confirmation，保留原 request/call 身份，旧 executor 被隔离，迟到写入被拒绝。不确定 write 错误也进入 needs_confirmation，不自动重放。当前没有通用的“确认未知写入成功/失败”公开 API；须由后续经过工具专用证据与原账本查询的协调器接入，不能用一个 bool 解锁未知执行。needs_confirmation 会继续占用会话活动位。
-
-候选 HTTP 协议
---------------
-
-`Handler` 需要宿主提供 Authenticator，写请求必须验证当前登录、Origin/CSRF；body 严格拒绝额外字段。owner、权限、币种和限值均不由浏览器设置。Host.Resolve 在执行/审批续跑前重新验证当前授权；每个真实模型子请求继续走原 Key 撤销/限额检查。工具若依赖可变外部授权，也必须在 Execute 中核验当前权限。
-
-| 方法与路径（前缀 `/api/agent/v1`） | 行为 |
+| AR-1固定接点 | 当前差异/下一步 |
 | --- | --- |
-| POST /sessions `{title}` | 201 Session |
-| GET /sessions | 200 `{items}`，仅当前 owner |
-| GET /sessions/{sid} | Session/消息/运行持久历史 |
-| PATCH /sessions/{sid} `{title}` | 重命名，204 |
-| DELETE /sessions/{sid} | 无活动 run 时软删除，204 |
-| POST /sessions/{sid}/runs | Submit，202 Run |
-| GET /sessions/{sid}/runs/{rid} | 查询运行/步骤/子 request/用量 |
-| POST /sessions/{sid}/runs/{rid}/cancel | 202 cancel_requested |
-| POST /sessions/{sid}/runs/{rid}/approvals | `{call_id,sha256,allow}`，202 |
-| GET /sessions/{sid}/runs/{rid}/events?after=N | JSON `{items,next_cursor}` 或 Accept: text/event-stream |
+| ConversationCreate/RunCreate | body.client_operation_id UUID，稳定principal域原子创建命令；Run If-Match同命令优先匹配；完整RunLimits与tools白名单 |
+| B01 | 实现 `/session-creation-commands/{operation_id}`，原Session删除后映射仍保留；404/503均不证明未执行 |
+| B02 | wire 1..10000/Chat=1；超过较小安装cap为422，不能裁剪。内部cap目前≤256，不宣称已验证10000完整恢复 |
+| 消息/事件 | 严格AR envelope与事件data，UUID、run seq字符串、绑定scope/session/run/版本/seq的保护cursor；message.created→UTF8 offset delta→message.committed，同事务快照水位 |
+| 事件入口 | `/events` JSON、`/events/stream` SSE；after与Last-Event-ID二选一，410后只GET快照；当前受控快照回放不是该协议 |
+| DTO与命令 | RunAccepted.input_message、Command查回、accepted/fence、steps/tool-calls/checkpoint分页、原message关联及审批decision_id |
+| 限额与账本 | max_tool_calls/context_tokens/no_progress、工具Schema和包装输入上界、price_version分组known/inflight/held与完整性，不能伪造0 |
+| 身份与运行 | 原Cookie/CSRF/Origin，正式目录/Prepare/Usage工厂、真实MySQL与每child唯一结算；tools-v1批准和真实来源仍沿MAAS-18 |
 
-提交例子（受控能力，不能直接用作生产来源配置）：
+这些都是本任务剩余实现，不以“架构待定”概括：draft.2现已给出确定规则。PR保持draft，不将受控Handler交MAAS-5冒充AR-1服务；正式接线在同一核心/PR增量完成。
 
-```json
-{"client_id":"send-1","text":"6乘7并列出我可见的模型","mode":"agent","model":{"alias":"demo","source_id":"controlled-local","revision":"1","protocol":"tools-v1"}}
-```
-
-事件使用会话内单调 cursor，run 过滤后允许有间隔。每次最多 200 条，先持久化后发送。SSE 为有界回放快照，读完关闭；客户端以 Last-Event-ID 或 after 继续订阅，不因断线重新 POST。所有 GET 都不执行模型/工具。事件种类为 run.queued/started/cancel_requested/completed/failed/cancelled/limit_reached/recovered/needs_confirmation、step.started/finished、message.delta/completed、tool.call/started/result、approval.needed/resolved、usage。失败文本是规范化原因，不回显上游错误或凭证。
-
-Handler.Dispatch 接 Host.Schedule；没有 Dispatcher 的嵌入式调用只入持久队列，由宿主显式调度。宿主关闭调用 Host.Close 等待全部执行结束。新进程可枚举已授权会话并调度 queued，running 先按前述规则恢复。生产二进制暂未注册候选路径，待 MAAS-2 核定后沿已有管理身份装配，避免并发修改 MAAS-3 安装组合根。
-
-开发和验证
-----------
+复现
+----
 
 ```powershell
 ./scripts/test-agent-runtime.ps1
-# 或分别运行：
-go test ./internal/agentruntime/... -count=1
-go vet ./internal/agentruntime/...
 go run -tags agentcontrolled ./cmd/agent-headless --state-dir .cache/agent-demo
 ```
 
-headless 被 `agentcontrolled` build tag 隔离，普通生产构建不包含测试模型。它实际执行两个安全工具，落盘消息/检查点/完整事件并打印 JSONL；模型选择和最终回答来自可见的确定性受控模型。LocalStore 是单进程开发存储，以 fsync 后不可变版本发布，持有目录独占锁；崩溃后锁不自动抢占，必须核实 `.owner-lock` 中的 PID 已停止后才能删除该确切锁文件。操作系统掉电持久保证尚未验证，不能替代生产 MySQL。
+headless的确定性模型被agentcontrolled build tag隔离，实际选择并执行两个真实安全工具、回填结果并落盘完整轨迹。测试数值为TST、100 Token/100原子金额、4步/4次调用、5秒（headless10秒）、工具1秒/审批1分钟、32KiB输入/8KiB输出/500事件；Chat内部仍强制单次。文件重开与未知状态验证是真实文件读写，模拟崩溃/受控模型和真实组件范围见验证报告。
 
-`internal/kernel/agent_runtime_mysql_test.go` 在原 disposable MySQL fixture 上调用真实 Admit/Finalize 和 MySQLSessionStore，验证两子请求、重复终态、重复提交/事件读取、旧 revision 冲突及两次唯一消费；模型和网关证据生产者仍是替身。运行需已获准临时 MySQL，设置原 `MAAS_DISPOSABLE_MYSQL=1` 与 `MAAS_MYSQL_TEST_SOCKET`，随后 `go test ./internal/kernel -run '^TestMySQLAgentChildrenUseOneLedger$' -count=1 -v`。没有环境时该测试明确 skip，不能报告 SQL 通过。
-
-交接：MAAS-2 审定候选协议/ADR及工具能力批准；MAAS-5 消费事件/审批/停止与编辑关联；MAAS-7 独立验收本候选差异；MAAS-8 核 MySQL 身份/迁移及宿主装配；MAAS-17 统一基线 PR 集成。真实来源调用和完整 H1–H4 仍沿 MAAS-18，生产 tools-v1、正式 HTTP 身份接线、未知结果协调器和真实 MySQL复验分别记录，不以受控模型/文件测试代替。
+MySQL唯一结算测试在 `internal/kernel/agent_runtime_mysql_test.go`。需原授权的disposable socket与MAAS_DISPOSABLE_MYSQL=1，执行 `go test ./internal/kernel -run '^TestMySQLAgentChildrenUseOneLedger$' -count=1 -v`；缺环境时明确skip。WSL启动失败记录保留，没有重启共享环境或调用真实模型。

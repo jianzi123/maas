@@ -131,6 +131,9 @@ func plain(_ context.Context, r Request, emit func(string) error) (Response, err
 func TestChatPersistenceIdempotencyAndReplay(t *testing.T) {
 	s, m, v := setupService(t, plain)
 	r := send(t, s, v, input("chat"))
+	if r.Limits.Calls != 1 || r.Limits.Steps != 1 {
+		t.Fatal("chat must use one model call", r.Limits)
+	}
 	same := send(t, s, v, input("chat"))
 	if same.ID != r.ID {
 		t.Fatal("duplicate run")
@@ -176,7 +179,7 @@ func TestChatPersistenceIdempotencyAndReplay(t *testing.T) {
 func TestAgentExecutesRealToolsThenObservesResults(t *testing.T) {
 	s, m, v := setupService(t, func(_ context.Context, r Request, emit func(string) error) (Response, error) {
 		for _, msg := range r.Messages {
-			if msg.Role == "tool" && msg.Parts[0].Name == "model_directory" {
+			if msg.Role == "tool" && msg.Parts[0].Name == "list_visible_models" {
 				if msg.Parts[0].Text != `["owner-a-visible"]` {
 					t.Fatal(msg)
 				}
@@ -184,7 +187,7 @@ func TestAgentExecutesRealToolsThenObservesResults(t *testing.T) {
 				return Response{RequestID: r.RequestID, Finish: "stop", Usage: known()}, nil
 			}
 		}
-		return Response{RequestID: r.RequestID, Finish: "tool_calls", Usage: known(), Calls: []Call{{ID: "calc-1", Name: "integer_calculator", Arguments: json.RawMessage(`{"a":6,"b":7,"op":"multiply"}`)}, {ID: "catalog-1", Name: "model_directory", Arguments: json.RawMessage(`{}`)}}}, nil
+		return Response{RequestID: r.RequestID, Finish: "tool_calls", Usage: known(), Calls: []Call{{ID: "calc-1", Name: "bounded_arithmetic", Arguments: json.RawMessage(`{"a":6,"b":7,"op":"multiply"}`)}, {ID: "catalog-1", Name: "list_visible_models", Arguments: json.RawMessage(`{}`)}}}, nil
 	})
 	r := send(t, s, v, input("agent"))
 	if e := s.Drive(context.Background(), actor, v.ID, r.ID); e != nil {
@@ -207,11 +210,11 @@ func TestToolProtocolAndLimits(t *testing.T) {
 		reason string
 	}{
 		{"unknown", []Call{{ID: "1", Name: "shell", Arguments: json.RawMessage(`{}`)}}, "tool_calls", known(), "tool_forbidden"},
-		{"schema", []Call{{ID: "1", Name: "integer_calculator", Arguments: json.RawMessage(`{"a":"bad"}`)}}, "tool_calls", known(), "invalid_tool_call"},
-		{"duplicate", []Call{{ID: "1", Name: "model_directory", Arguments: json.RawMessage(`{}`)}, {ID: "1", Name: "model_directory", Arguments: json.RawMessage(`{}`)}}, "tool_calls", known(), "invalid_tool_call"},
+		{"schema", []Call{{ID: "1", Name: "bounded_arithmetic", Arguments: json.RawMessage(`{"a":"bad"}`)}}, "tool_calls", known(), "invalid_tool_call"},
+		{"duplicate", []Call{{ID: "1", Name: "list_visible_models", Arguments: json.RawMessage(`{}`)}, {ID: "1", Name: "list_visible_models", Arguments: json.RawMessage(`{}`)}}, "tool_calls", known(), "invalid_tool_call"},
 		{"eof", nil, "", known(), "model_protocol_error"},
 		{"empty_tools", nil, "tool_calls", known(), "model_protocol_error"},
-		{"unknown_usage", []Call{{ID: "1", Name: "model_directory", Arguments: json.RawMessage(`{}`)}}, "tool_calls", Usage{}, "usage_unknown"},
+		{"unknown_usage", []Call{{ID: "1", Name: "list_visible_models", Arguments: json.RawMessage(`{}`)}}, "tool_calls", Usage{}, "usage_unknown"},
 	}
 	for _, tc := range cases {
 		t.Run(tc.name, func(t *testing.T) {
@@ -232,7 +235,7 @@ func TestToolProtocolAndLimits(t *testing.T) {
 		var n int
 		s, _, v := setupService(t, func(_ context.Context, r Request, _ func(string) error) (Response, error) {
 			n++
-			return Response{RequestID: r.RequestID, Finish: "tool_calls", Usage: known(), Calls: []Call{{ID: strings.Repeat("x", n), Name: "model_directory", Arguments: json.RawMessage(`{}`)}}}, nil
+			return Response{RequestID: r.RequestID, Finish: "tool_calls", Usage: known(), Calls: []Call{{ID: strings.Repeat("x", n), Name: "list_visible_models", Arguments: json.RawMessage(`{}`)}}}, nil
 		})
 		s.Limits.Steps = 1
 		r := send(t, s, v, input("agent"))
@@ -253,7 +256,7 @@ func TestToolProtocolAndLimits(t *testing.T) {
 			if len(r.Tools) != 0 {
 				t.Fatal("unauthorized schemas")
 			}
-			return Response{RequestID: r.RequestID, Finish: "tool_calls", Calls: []Call{{ID: "x", Name: "model_directory", Arguments: json.RawMessage(`{}`)}}}, nil
+			return Response{RequestID: r.RequestID, Finish: "tool_calls", Calls: []Call{{ID: "x", Name: "list_visible_models", Arguments: json.RawMessage(`{}`)}}}, nil
 		}}
 		_ = s.Drive(context.Background(), p, v.ID, r.ID)
 		if readRun(t, s, v, r).Reason != "tool_forbidden" {
@@ -409,7 +412,7 @@ func TestConcurrentClaimAndRecoveryNeverReplaysUnknown(t *testing.T) {
 			})
 			_ = s.Recover(context.Background(), actor, v.ID, r.ID)
 			got := readRun(t, s, v, r)
-			want := "queued"
+			want := "accepted"
 			if phase == "tool_inflight" {
 				want = "needs_confirmation"
 			}
@@ -456,9 +459,9 @@ func (testAuth) Authenticate(r *http.Request, write bool) (Principal, error) {
 }
 func TestHTTPStrictIdentityAndReadOnlyReplay(t *testing.T) {
 	s, m, v := setupService(t, plain)
-	h := Handler{Service: s, Auth: testAuth{}}
+	h := ControlledHandler{Service: s, Auth: testAuth{}}
 	rr := httptest.NewRecorder()
-	req := httptest.NewRequest("POST", "/api/agent/v1/sessions", strings.NewReader(`{"title":"x","owner":"other"}`))
+	req := httptest.NewRequest("POST", "/__maas/controlled-agent/v0/sessions", strings.NewReader(`{"title":"x","owner":"other"}`))
 	req.Header.Set("X-CSRF-Token", "verified")
 	h.ServeHTTP(rr, req)
 	if rr.Code != 400 {
@@ -468,7 +471,7 @@ func TestHTTPStrictIdentityAndReadOnlyReplay(t *testing.T) {
 	_ = s.Drive(context.Background(), actor, v.ID, r.ID)
 	for i := 0; i < 2; i++ {
 		rr = httptest.NewRecorder()
-		req = httptest.NewRequest("GET", "/api/agent/v1/sessions/"+v.ID+"/runs/"+r.ID+"/events", nil)
+		req = httptest.NewRequest("GET", "/__maas/controlled-agent/v0/sessions/"+v.ID+"/runs/"+r.ID+"/events", nil)
 		req.Header.Set("Accept", "text/event-stream")
 		h.ServeHTTP(rr, req)
 		if rr.Code != 200 || !strings.Contains(rr.Body.String(), "event: run.completed") || m.calls.Load() != 1 {

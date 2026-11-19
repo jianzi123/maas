@@ -27,7 +27,7 @@ func (controlledModel) Generate(_ context.Context, r a.Request, emit func(string
 	t, m := int64(10), int64(1)
 	response := a.Response{RequestID: r.RequestID, Usage: a.Usage{Tokens: &t, Money: &m, Currency: "TST"}}
 	for _, msg := range r.Messages {
-		if msg.Role == "tool" && msg.Parts[0].Name == "model_directory" {
+		if msg.Role == "tool" && msg.Parts[0].Name == "list_visible_models" {
 			if e := emit("6 × 7 = 42; directory is visible only to the authenticated owner."); e != nil {
 				return response, e
 			}
@@ -36,7 +36,7 @@ func (controlledModel) Generate(_ context.Context, r a.Request, emit func(string
 		}
 	}
 	response.Finish = "tool_calls"
-	response.Calls = []a.Call{{ID: "demo-calculate", Name: "integer_calculator", Arguments: json.RawMessage(`{"a":6,"b":7,"op":"multiply"}`)}, {ID: "demo-catalog", Name: "model_directory", Arguments: json.RawMessage(`{}`)}}
+	response.Calls = []a.Call{{ID: "demo-calculate", Name: "bounded_arithmetic", Arguments: json.RawMessage(`{"a":6,"b":7,"op":"multiply"}`)}, {ID: "demo-catalog", Name: "list_visible_models", Arguments: json.RawMessage(`{}`)}}
 	return response, nil
 }
 func main() {

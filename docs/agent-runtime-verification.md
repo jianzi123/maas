@@ -1,6 +1,8 @@
 MAAS-20 本轮验证记录（2026-11-19 UTC）
 =====================================
 
+本轮后半段已接到并校验AR-1 draft.2。先前候选HTTP不兼容其完整字段，现已撤出共享命名空间，仅保留 `/__maas/controlled-agent/v0` 的ControlledHandler；工具名对齐bounded_arithmetic/list_visible_models、接受态采用accepted、Chat强制一次调用。原件保存在docs/contracts/agent-runtime/ar1-draft2。**AR-1正式适配仍是确定的剩余实现，不能再称“待架构给契约”，也不能将本报告算作AR-1/Chat联调通过。**
+
 本报告与实现、原始 JSONL 在同一代码提交，随后独立四锁提交引用该代码 SHA。起点为统一分支 `agent/MAAS-10-offline-metrics` 的 `8dbf99ef59c847da775b83d0eeb7dc8f8bf48a9a`；在任务隔离分支实施，没有合并既有 #14/#15 候选或覆盖其他工作树。
 
 执行 `scripts/test-agent-runtime.ps1`：16 个顶层测试通过，连同子测试为 32 个通过，0 失败。两包 `internal/agentruntime/...` 实际运行，`go vet ./internal/agentruntime/... ./internal/kernel` 退出 0。受控 headless 实际产生 18 条事件，以 run.completed 结束。
@@ -24,7 +26,7 @@ MAAS-20 本轮验证记录（2026-11-19 UTC）
 - `TestMySQLAgentChildrenUseOneLedger` 编译成功但运行 SKIP（无 disposable MySQL socket）。WSL Ubuntu-22.04 启动返回 Wsl/Service/WSAETIMEDOUT，未关闭/重启共享 WSL 或修改系统环境。这个 skip 不是数据库通过；SQL 迁移、双副本 CAS、真实 Admit/Finalize 去重与金额投影仍需用原获准临时组件入口实际复验。
 - LocalStore 是单进程开发实现，未测试操作系统掉电或跨主机持久性；内存恢复测试是模拟崩溃，文件测试覆盖真实写入后关闭/重开，不夸称强杀/断电故障注入。
 - Relay 文本适配的缺项拒绝、事件分帧和发送前计划约束有测试；没有实际调用生产 Relay/Higress。Prepare/Usage 工厂、正式管理身份与目录、tools-v1/profile批准还需原 MAAS-3/18 链路输入。
-- `/api/agent/v1` 是候选协议，待 MAAS-2 审定。生产入口尚未挂载；UI联调、正式授权/迁移装配、独立QA及最终集成尚未完成。没有通用未知写入确认/协调 API，不允许自动重放。
+- `/api/agent/v1` 必须采用已交AR-1 draft.2，本PR没有暴露不兼容的原候选。正式命令幂等查回/If-Match、保护cursor和严格事件DTO、UTF8 offset/快照水位、limits/usage_groups/审批DTO及regenerate关联仍需在同一核心接续；具体差异见agent-runtime-v1.md。UI联调、正式授权/迁移装配、独立QA及最终集成尚未完成。
 - 测试值为 TST 币种、100 Token/100原子金额、4 步/4 次调用、5 秒总时间（headless 为10秒），工具1秒、审批1分钟、32KiB输入/8KiB输出/500事件。它们不是生产默认或资源批准。
 
 本轮交可审代码与受控内核证据；MAAS-20 继续 in_progress，尚未达到完整 Chat 产品集成或真实模型验收。后续沿同一 PR 收敛，最终交付才转 in_review，done 由成员确认。

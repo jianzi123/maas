@@ -1,0 +1,17 @@
+{
+  "authority": "MAAS-2",
+  "contract": "AR-1",
+  "version": "1.0.0-draft.2",
+  "eventVersion": "ar.session.event/1.0",
+  "draft1Attachment": "01a1f1e7-b553-7f12-8c2c-c40443aaab31",
+  "draft1ZipSha256": "702f7d74eb101baa1de45a2ebb815f2a933f07fb822272b5b582e69909a73572",
+  "draft2Attachment": "01a1f1f3-90a0-7629-8827-1b243b51ea62",
+  "draft2ZipSha256": "459d804f2f06416f294d5c6ee3f1ee8f13b20752a3c4a766e6c08cd6827a3751",
+  "files": {
+    "openapi.json": "byte-preserved draft.2 original",
+    "session-event.schema.json": "byte-preserved draft.2 original",
+    "AR-B01-B02.md": "byte-preserved draft.2 original",
+    "ADR-chat-agent.md": "byte-preserved draft.1 ADR; supplemented by AR-B01-B02.md"
+  },
+  "implementationStatus": "core and controlled harness only; public AR-1 adapter not implemented"
+}

@@ -184,10 +184,15 @@ func (s *Service) Submit(ctx context.Context, p Principal, id string, in Submit)
 			}
 		}
 		sort.Strings(granted)
-		r := Run{ID: rid, MessageID: mid, ClientID: in.ClientID, InputHash: inputHash, AuthRevision: p.Revision, Granted: granted, Mode: in.Mode, Model: in.Model, Status: "queued", Deadline: time.Now().UTC().Add(s.Limits.Duration), Limits: s.Limits, Steps: []Step{}, Checkpoint: Checkpoint{Phase: "ready"}}
+		effectiveLimits := s.Limits
+		if in.Mode == "chat" {
+			effectiveLimits.Calls = 1
+			effectiveLimits.Steps = 1
+		}
+		r := Run{ID: rid, MessageID: mid, ClientID: in.ClientID, InputHash: inputHash, AuthRevision: p.Revision, Granted: granted, Mode: in.Mode, Model: in.Model, Status: "accepted", Deadline: time.Now().UTC().Add(effectiveLimits.Duration), Limits: effectiveLimits, Steps: []Step{}, Checkpoint: Checkpoint{Phase: "ready"}}
 		v.Messages = append(v.Messages, Message{ID: mid, Role: "user", RunID: rid, ParentID: in.ParentID, Parts: []Part{{Type: "text", Text: in.Text}}})
 		v.Runs = append(v.Runs, r)
-		event(v, &v.Runs[len(v.Runs)-1], "run.queued", map[string]any{"message_id": mid})
+		event(v, &v.Runs[len(v.Runs)-1], "run.accepted", map[string]any{"message_id": mid})
 		return nil
 	})
 	if e != nil {
@@ -233,7 +238,7 @@ func (s *Service) Cancel(ctx context.Context, p Principal, id, rid string) error
 		}
 		r.CancelRequested = true
 		event(v, r, "run.cancel_requested", nil)
-		if r.Status == "queued" || r.Status == "waiting_approval" {
+		if r.Status == "accepted" || r.Status == "waiting_approval" {
 			finish(v, r, "cancelled", "cancelled_before_execution")
 		}
 		return nil
@@ -268,7 +273,7 @@ func (s *Service) Approve(ctx context.Context, p Principal, id, rid, callID, has
 				return nil
 			}
 			c.State = "approved"
-			r.Status = "queued"
+			r.Status = "accepted"
 			r.Executor = ""
 			event(v, r, "approval.resolved", map[string]any{"call_id": callID, "allowed": true})
 			return nil
@@ -304,7 +309,7 @@ func (s *Service) Recover(ctx context.Context, p Principal, id, rid string) erro
 			}
 			event(v, r, "run.needs_confirmation", r.Checkpoint)
 		} else {
-			r.Status = "queued"
+			r.Status = "accepted"
 			event(v, r, "run.recovered", r.Checkpoint)
 		}
 		return nil
@@ -375,7 +380,7 @@ func (s *Service) Drive(ctx context.Context, p Principal, id, rid string) (resul
 		if r == nil {
 			return ErrNotFound
 		}
-		if r.Status != "queued" {
+		if r.Status != "accepted" {
 			return ErrConflict
 		}
 		if r.AuthRevision != p.Revision {

@@ -53,7 +53,7 @@ func (m *agentLedgerModel) Generate(ctx context.Context, r a.Request, emit func(
 	res := a.Response{RequestID: r.RequestID, Usage: u}
 	if m.calls == 1 {
 		res.Finish = "tool_calls"
-		res.Calls = []a.Call{{ID: "calc", Name: "integer_calculator", Arguments: json.RawMessage(`{"a":6,"b":7,"op":"multiply"}`)}}
+		res.Calls = []a.Call{{ID: "calc", Name: "bounded_arithmetic", Arguments: json.RawMessage(`{"a":6,"b":7,"op":"multiply"}`)}}
 	} else {
 		res.Finish = "stop"
 		if e = emit("42"); e != nil {

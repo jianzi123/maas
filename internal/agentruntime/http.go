@@ -15,15 +15,16 @@ import (
 type Authenticator interface {
 	Authenticate(*http.Request, bool) (Principal, error)
 }
-type Handler struct {
+type ControlledHandler struct {
 	Service  *Service
 	Auth     Authenticator
 	Dispatch func(Principal, string, string) error
 }
 
-// ServeHTTP exposes a candidate versioned protocol. It never starts execution on
-// GET, replay or reconnect. Hosts schedule durable queued runs via the same Drive.
-func (h Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+// ServeHTTP is ONLY the controlled internal test harness, outside /api/agent/v1.
+// AR-1 draft.2 is the sole shared public contract and still requires its
+// DTO/command/cursor adapter. Do not register this handler in production.
+func (h ControlledHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Cache-Control", "no-store")
 	w.Header().Set("Content-Type", "application/json")
 	fail := func(e error) {
@@ -59,7 +60,7 @@ func (h Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		fail(ErrForbidden)
 		return
 	}
-	path := strings.TrimPrefix(r.URL.Path, "/api/agent/v1/")
+	path := strings.TrimPrefix(r.URL.Path, "/__maas/controlled-agent/v0/")
 	if path == r.URL.Path {
 		fail(ErrNotFound)
 		return
@@ -154,7 +155,7 @@ func (h Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			fail(e)
 			return
 		}
-		if h.Dispatch != nil && v.Status == "queued" {
+		if h.Dispatch != nil && v.Status == "accepted" {
 			if e = h.Dispatch(p, sid, v.ID); e != nil {
 				fail(e)
 				return

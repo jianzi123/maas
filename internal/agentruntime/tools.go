@@ -80,7 +80,7 @@ func validate(t Tool, b []byte) error {
 type Calculator struct{}
 
 func (Calculator) Spec() ToolSpec {
-	return ToolSpec{Name: "integer_calculator", Version: "1", Permission: "tools.calculate", Effect: "pure", Schema: json.RawMessage(`{"type":"object","properties":{"a":{"type":"integer","minimum":-1000000000,"maximum":1000000000},"b":{"type":"integer","minimum":-1000000000,"maximum":1000000000},"op":{"enum":["add","subtract","multiply"]}},"required":["a","b","op"],"additionalProperties":false}`)}
+	return ToolSpec{Name: "bounded_arithmetic", Version: "1", Permission: "tools.calculate", Effect: "pure", Schema: json.RawMessage(`{"type":"object","properties":{"a":{"type":"integer","minimum":-1000000000,"maximum":1000000000},"b":{"type":"integer","minimum":-1000000000,"maximum":1000000000},"op":{"enum":["add","subtract","multiply"]}},"required":["a","b","op"],"additionalProperties":false}`)}
 }
 func (Calculator) Execute(ctx context.Context, _ Principal, _ string, b json.RawMessage) (string, error) {
 	if ctx.Err() != nil {
@@ -113,7 +113,7 @@ type ModelDirectory struct {
 }
 
 func (ModelDirectory) Spec() ToolSpec {
-	return ToolSpec{Name: "model_directory", Version: "1", Permission: "models.read", Effect: "read", Schema: json.RawMessage(`{"type":"object","properties":{},"additionalProperties":false}`)}
+	return ToolSpec{Name: "list_visible_models", Version: "1", Permission: "models.read", Effect: "read", Schema: json.RawMessage(`{"type":"object","properties":{},"additionalProperties":false}`)}
 }
 func (t ModelDirectory) Execute(ctx context.Context, p Principal, _ string, _ json.RawMessage) (string, error) {
 	if t.Read == nil {

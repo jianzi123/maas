@@ -51,7 +51,7 @@ func (h *Host) Schedule(p Principal, sid, rid string) error {
 				if r == nil {
 					return ErrNotFound
 				}
-				if r.Status == "queued" {
+				if r.Status == "accepted" {
 					finish(v, r, "failed", "authorization_changed")
 				}
 				return nil

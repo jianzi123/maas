@@ -17,9 +17,9 @@ func TestHTTPHostRunsSameCoreAndJoinsShutdown(t *testing.T) {
 		t.Fatal(e)
 	}
 	defer host.Close()
-	h := Handler{Service: s, Auth: testAuth{}, Dispatch: host.Schedule}
+	h := ControlledHandler{Service: s, Auth: testAuth{}, Dispatch: host.Schedule}
 	body, _ := json.Marshal(input("agent"))
-	req := httptest.NewRequest("POST", "/api/agent/v1/sessions/"+v.ID+"/runs", strings.NewReader(string(body)))
+	req := httptest.NewRequest("POST", "/__maas/controlled-agent/v0/sessions/"+v.ID+"/runs", strings.NewReader(string(body)))
 	req.Header.Set("X-CSRF-Token", "verified")
 	rr := httptest.NewRecorder()
 	h.ServeHTTP(rr, req)
