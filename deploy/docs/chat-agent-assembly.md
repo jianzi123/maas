@@ -1,3 +1,5 @@
+> C08新实际接口已到：见[AR-1受控装配](ar1-controlled-assembly.md)。下文8dbf99e截点的未实现记录保留历史，不再当PR #18状态。
+
 # Chat / Agent 最小开发与部署接续（MAAS-8）
 
 核对截点：统一分支 agent/MAAS-10-offline-metrics / 8dbf99ef59c847da775b83d0eeb7dc8f8bf48a9a。MAAS-20由原后端实现Session/Run/Agent核心，MAAS-5实现Chat；本轮不并行重写会话库或发明API/环境变量。实际源码变化后按新SHA重新核对，下列缺口不等于已批准的运行参数。
