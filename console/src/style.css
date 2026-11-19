@@ -1706,7 +1706,7 @@ footer {
   border: 1px solid #dce6eb;
   border-radius: 12px;
   padding: 20px;
-  position: sticky;
+  position: static;
   bottom: 8px;
   box-shadow: 0 4px 20px #19354810;
 }

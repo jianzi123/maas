@@ -109,7 +109,7 @@ try {
   checks.push("failure visible and no automatic generation");
   await page.screenshot({ path: dir + "/chat-error.png", fullPage: true });
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.screenshot({ path: dir + "/chat-mobile.png", fullPage: true });
+  await page.screenshot({ path: dir + "/chat-mobile.png", fullPage: false });
   assert.equal(
     await page.evaluate(
       () => document.documentElement.scrollWidth > innerWidth,
