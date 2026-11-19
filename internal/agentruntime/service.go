@@ -77,6 +77,9 @@ func finish(v *Session, r *Run, status, reason string) {
 			c := &st.Calls[i]
 			if c.State == "executing" {
 				c.State = status
+				if status == "limit_reached" {
+					c.State = "failed"
+				}
 			} else if c.State == "pending" || c.State == "approved" || c.State == "waiting_approval" {
 				c.State = "not_executed"
 			}
@@ -583,6 +586,7 @@ func (s *Service) Drive(ctx context.Context, p Principal, id, rid string) (resul
 						cc := &r.Steps[len(r.Steps)-1].Calls[i]
 						if cc.ID == c.ID {
 							cc.State = "executing"
+							cc.Attempt++
 						}
 					}
 					event(v, r, "tool.started", map[string]any{"call_id": c.ID})

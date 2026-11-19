@@ -72,6 +72,7 @@ func (l Limits) valid() bool {
 }
 
 type Call struct {
+	Attempt         int             `json:"attempt,omitempty"`
 	ID              string          `json:"id"`
 	Name            string          `json:"name"`
 	Arguments       json.RawMessage `json:"arguments"`

@@ -179,8 +179,9 @@ func arCall(r Run, st Step, c Call) map[string]any {
 	if c.State == "completed" || c.State == "failed" || c.State == "unknown" {
 		result = arToolResult(c)
 	}
-	attempt := 0
-	if c.State == "executing" || c.State == "completed" || c.State == "failed" || c.State == "unknown" {
+	attempt := c.Attempt
+	// Preserve projections for pre-attempt documents without rewriting history.
+	if attempt == 0 && (c.State == "executing" || c.State == "completed" || c.State == "failed" || c.State == "unknown") {
 		attempt = 1
 	}
 	return map[string]any{"id": c.ID, "run_id": r.ID, "step_id": st.ID, "name": c.Name, "tool_revision": c.ToolVersion, "args_sha256": c.ArgsHash, "state": state, "effect": arEffect(c.Effect), "attempt": attempt, "idempotency_key": uuid.NewSHA1(uuid.NameSpaceOID, []byte(c.ID+"/idempotency")).String(), "result": result, "source_call_id": c.SourceID, "arguments": c.Arguments}

@@ -95,7 +95,7 @@ func (h *ARHandler) pageToken(p Principal, path string, index any) string {
 	_, _ = m.Write([]byte(encoded))
 	return encoded + "." + base64.RawURLEncoding.EncodeToString(m.Sum(nil))
 }
-func (h *ARHandler) pageIndex(p Principal, path, token string) (int, error) {
+func (h *ARHandler) pageIndex(p Principal, path, token string, revision int64) (int, error) {
 	if token == "" {
 		return 0, nil
 	}
@@ -103,11 +103,19 @@ func (h *ARHandler) pageIndex(p Principal, path, token string) (int, error) {
 	if e != nil {
 		return 0, e
 	}
-	var n int
-	if json.Unmarshal(value, &n) != nil || n < 0 {
+	// Valid old position-only tokens have no provable document watermark.
+	var legacy int
+	if json.Unmarshal(value, &legacy) == nil && legacy >= 0 {
+		return 0, arFailure(410, "cursor_expired")
+	}
+	var position []int64
+	if json.Unmarshal(value, &position) != nil || len(position) != 2 || position[0] < 1 || position[1] < 0 {
 		return 0, ErrInvalid
 	}
-	return n, nil
+	if position[0] != revision {
+		return 0, arFailure(410, "cursor_expired")
+	}
+	return int(position[1]), nil
 }
 func (h *ARHandler) pageValue(p Principal, path, token string) (json.RawMessage, error) {
 	if len(token) > 4096 {
@@ -227,9 +235,13 @@ func (h *ARHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 	}
-	page := func(schema string, data []any) {
-		index, e := h.pageIndex(p, r.URL.Path, r.URL.Query().Get("cursor"))
-		if e != nil || index > len(data) {
+	page := func(schema string, data []any, revision int64) {
+		index, e := h.pageIndex(p, r.URL.Path, r.URL.Query().Get("cursor"), revision)
+		if e != nil {
+			fail(e)
+			return
+		}
+		if index > len(data) {
 			fail(ErrInvalid)
 			return
 		}
@@ -239,7 +251,7 @@ func (h *ARHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		}
 		var next any
 		if end < len(data) {
-			next = h.pageToken(p, r.URL.Path, end)
+			next = h.pageToken(p, r.URL.Path, []int64{revision, int64(end)})
 		}
 		write(schema, 200, map[string]any{"data": data[index:end], "next_cursor": next})
 	}
@@ -386,7 +398,7 @@ func (h *ARHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 				seq = decimal(current.AR.Seq)
 			}
 			if len(messages) > 100 {
-				next = h.pageToken(p, "/api/agent/v1/sessions/"+sid+"/messages", 100)
+				next = h.pageToken(p, "/api/agent/v1/sessions/"+sid+"/messages", []int64{v.Revision, 100})
 				messages = messages[:100]
 			}
 			write("Snapshot", 200, map[string]any{"conversation": arConversation(v), "messages": messages, "runs": runs, "last_event_seq": seq, "event_run_id": eventRun, "resume_cursor": resume, "messages_next_cursor": next})
@@ -445,7 +457,7 @@ func (h *ARHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		for _, m := range v.Messages {
 			data = append(data, arMessage(v, m))
 		}
-		page("MessagePage", data)
+		page("MessagePage", data, v.Revision)
 		return
 	}
 	if len(parts) == 4 && parts[2] == "commands" && r.Method == "GET" {
@@ -496,7 +508,7 @@ func (h *ARHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			for _, st := range current.Steps {
 				data = append(data, arStep(*current, st))
 			}
-			page("StepPage", data)
+			page("StepPage", data, v.Revision)
 			return
 		case "tool-calls":
 			data := []any{}
@@ -505,7 +517,7 @@ func (h *ARHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 					data = append(data, arCall(*current, st, call))
 				}
 			}
-			page("ToolCallPage", data)
+			page("ToolCallPage", data, v.Revision)
 			return
 		case "checkpoint":
 			write("Checkpoint", 200, arCheckpoint(v, *current))
