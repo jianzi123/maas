@@ -18,14 +18,23 @@ import (
 type controlledModel struct{}
 
 func (controlledModel) Supports(_ context.Context, m a.Model) error {
-	if m.Source != "controlled-local" || m.Revision != "1" || m.Protocol != "tools-v1" {
+	if m.Source != "controlled-local" || m.Revision != "1" || (m.Protocol != "tools-v1" && m.Protocol != "text-v1") {
 		return a.ErrCapability
 	}
 	return nil
 }
 func (controlledModel) Generate(_ context.Context, r a.Request, emit func(string) error) (a.Response, error) {
 	t, m := int64(10), int64(1)
-	response := a.Response{RequestID: r.RequestID, Usage: a.Usage{Tokens: &t, Money: &m, Currency: "TST"}}
+	response := a.Response{RequestID: r.RequestID, TerminalConfirmed: true, Usage: a.Usage{Tokens: &t, Money: &m, Currency: "TST"}}
+	response.Usage.Complete = true
+	response.Usage.Groups = []a.ARUsageGroup{{Currency: "TST", Price: "controlled-v1", KnownTokens: "10", KnownMoney: "1", HeldTokens: "0", InflightTokens: "0", HeldMoney: "0", InflightMoney: "0"}}
+	if r.Model.Protocol == "text-v1" {
+		if e := emit("Controlled Chat response."); e != nil {
+			return response, e
+		}
+		response.Finish = "stop"
+		return response, nil
+	}
 	for _, msg := range r.Messages {
 		if msg.Role == "tool" && msg.Parts[0].Name == "list_visible_models" {
 			if e := emit("6 × 7 = 42; directory is visible only to the authenticated owner."); e != nil {
@@ -47,6 +56,9 @@ func main() {
 }
 func execute() error {
 	dir := flag.String("state-dir", "", "explicit local development state directory")
+	listen := flag.String("listen", "", "optional loopback AR-1 server, for example 127.0.0.1:4188")
+	owner := flag.String("owner-id", "", "stable local test principal UUID; required for HTTP mode")
+	contract := flag.String("contract", "docs/contracts/agent-runtime/ar1-draft2/openapi.json", "locked AR-1 draft2 contract file")
 	flag.Parse()
 	if *dir == "" {
 		return a.ErrInvalid
@@ -56,6 +68,9 @@ func execute() error {
 		return e
 	}
 	defer store.Close()
+	if *listen != "" {
+		return serveAR(*listen, *owner, *contract, *dir, store)
+	}
 	tools, e := a.NewRegistry(a.Calculator{}, a.ModelDirectory{Read: func(_ context.Context, p a.Principal) ([]string, error) {
 		return []string{p.ID + "/controlled-model"}, nil
 	}})

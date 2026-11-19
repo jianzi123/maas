@@ -38,16 +38,20 @@ type Part struct {
 	Arguments json.RawMessage `json:"arguments,omitempty"`
 }
 type Message struct {
-	ID       string `json:"id"`
-	Role     string `json:"role"`
-	RunID    string `json:"run_id"`
-	ParentID string `json:"parent_id,omitempty"`
-	Parts    []Part `json:"parts"`
+	ID       string    `json:"id"`
+	Role     string    `json:"role"`
+	RunID    string    `json:"run_id"`
+	ParentID string    `json:"parent_id,omitempty"`
+	Parts    []Part    `json:"parts"`
+	Status   string    `json:"message_status,omitempty"`
+	Created  time.Time `json:"created_at,omitempty"`
 }
 type Usage struct {
-	Tokens   *int64 `json:"tokens"`
-	Money    *int64 `json:"money_atomic"`
-	Currency string `json:"currency"`
+	Tokens   *int64         `json:"tokens"`
+	Money    *int64         `json:"money_atomic"`
+	Currency string         `json:"currency"`
+	Groups   []ARUsageGroup `json:"groups,omitempty"`
+	Complete bool           `json:"complete"`
 }
 type Limits struct {
 	Currency    string        `json:"currency"`
@@ -64,7 +68,7 @@ type Limits struct {
 }
 
 func (l Limits) valid() bool {
-	return l.Steps > 0 && l.Steps <= 256 && l.Calls > 0 && l.Calls <= 256 && l.Tokens > 0 && l.Tokens <= 9007199254740991 && l.Money > 0 && l.Money <= 9007199254740991 && l.Duration > 0 && l.Duration <= 24*time.Hour && l.ToolTimeout > 0 && l.ApprovalTTL > 0 && l.InputBytes > 0 && l.InputBytes <= 1<<20 && l.OutputBytes > 0 && l.OutputBytes <= 1<<20 && l.Events >= 32 && l.Events <= 100000
+	return l.Steps > 0 && l.Steps <= 1000000 && l.Calls > 0 && l.Calls <= 10000 && l.Tokens > 0 && l.Tokens <= 9007199254740991 && l.Money > 0 && l.Money <= 9007199254740991 && l.Duration > 0 && l.Duration <= 24*time.Hour && l.ToolTimeout > 0 && l.ApprovalTTL > 0 && l.InputBytes > 0 && l.InputBytes <= 1<<20 && l.OutputBytes > 0 && l.OutputBytes <= 1<<20 && l.Events >= 32 && l.Events <= 100000
 }
 
 type Call struct {
@@ -76,13 +80,23 @@ type Call struct {
 	State           string          `json:"state"`
 	Result          string          `json:"result,omitempty"`
 	ApprovalExpires time.Time       `json:"approval_expires_at,omitempty"`
+	SourceID        string          `json:"source_call_id,omitempty"`
+	Effect          string          `json:"effect,omitempty"`
+	ArgsHash        string          `json:"args_sha256,omitempty"`
+	ApprovalID      string          `json:"approval_id,omitempty"`
+	DecisionID      string          `json:"decision_id,omitempty"`
+	DecisionHash    string          `json:"decision_sha256,omitempty"`
+	Decision        string          `json:"decision,omitempty"`
 }
 type Step struct {
-	Number    int    `json:"number"`
-	RequestID string `json:"request_id"`
-	State     string `json:"state"`
-	Calls     []Call `json:"tool_calls"`
-	Usage     Usage  `json:"usage"`
+	ID         string `json:"id,omitempty"`
+	InputHash  string `json:"input_sha256,omitempty"`
+	OutputHash string `json:"output_sha256,omitempty"`
+	Number     int    `json:"number"`
+	RequestID  string `json:"request_id"`
+	State      string `json:"state"`
+	Calls      []Call `json:"tool_calls"`
+	Usage      Usage  `json:"usage"`
 }
 type Checkpoint struct {
 	Phase          string `json:"phase"`
@@ -91,25 +105,27 @@ type Checkpoint struct {
 	RequestID      string `json:"request_id,omitempty"`
 }
 type Run struct {
-	ID              string     `json:"id"`
-	MessageID       string     `json:"message_id"`
-	ClientID        string     `json:"client_id"`
-	InputHash       string     `json:"input_sha256"`
-	AuthRevision    string     `json:"auth_revision"`
-	Granted         []string   `json:"granted_permissions"`
-	Mode            string     `json:"mode"`
-	Model           Model      `json:"model"`
-	Status          string     `json:"status"`
-	Reason          string     `json:"reason,omitempty"`
-	CancelRequested bool       `json:"cancel_requested"`
-	Executor        string     `json:"executor,omitempty"`
-	Deadline        time.Time  `json:"deadline"`
-	Limits          Limits     `json:"limits"`
-	Steps           []Step     `json:"steps"`
-	Checkpoint      Checkpoint `json:"checkpoint"`
-	Usage           Usage      `json:"usage"`
+	AR              *ARExecution `json:"ar1,omitempty"`
+	ID              string       `json:"id"`
+	MessageID       string       `json:"message_id"`
+	ClientID        string       `json:"client_id"`
+	InputHash       string       `json:"input_sha256"`
+	AuthRevision    string       `json:"auth_revision"`
+	Granted         []string     `json:"granted_permissions"`
+	Mode            string       `json:"mode"`
+	Model           Model        `json:"model"`
+	Status          string       `json:"status"`
+	Reason          string       `json:"reason,omitempty"`
+	CancelRequested bool         `json:"cancel_requested"`
+	Executor        string       `json:"executor,omitempty"`
+	Deadline        time.Time    `json:"deadline"`
+	Limits          Limits       `json:"limits"`
+	Steps           []Step       `json:"steps"`
+	Checkpoint      Checkpoint   `json:"checkpoint"`
+	Usage           Usage        `json:"usage"`
 }
 type Event struct {
+	Wire   json.RawMessage `json:"ar1,omitempty"`
 	Cursor int64           `json:"cursor"`
 	RunID  string          `json:"run_id"`
 	Type   string          `json:"type"`
@@ -117,15 +133,16 @@ type Event struct {
 	Data   json.RawMessage `json:"data"`
 }
 type Session struct {
-	Version  string    `json:"schema_version"`
-	ID       string    `json:"id"`
-	Owner    string    `json:"owner"`
-	Title    string    `json:"title"`
-	Deleted  bool      `json:"deleted"`
-	Revision int64     `json:"revision"`
-	Messages []Message `json:"messages"`
-	Runs     []Run     `json:"runs"`
-	Events   []Event   `json:"events"`
+	AR       *ARSession `json:"ar1,omitempty"`
+	Version  string     `json:"schema_version"`
+	ID       string     `json:"id"`
+	Owner    string     `json:"owner"`
+	Title    string     `json:"title"`
+	Deleted  bool       `json:"deleted"`
+	Revision int64      `json:"revision"`
+	Messages []Message  `json:"messages"`
+	Runs     []Run      `json:"runs"`
+	Events   []Event    `json:"events"`
 }
 
 // CompareAndSwap must atomically replace the entire document or return conflict.
@@ -143,24 +160,30 @@ type Request struct {
 	Tools                       []ToolSpec
 	TokenUpper, MoneyUpper      int64
 	Currency                    string
+	ContextTokenLimit           int64
 }
 type Response struct {
-	RequestID string
-	Finish    string // stop or tool_calls; EOF is never success
-	Calls     []Call
-	Usage     Usage
+	// True only after the protected client's original child terminal is durable.
+	// Controlled clients declare their simulated terminal explicitly.
+	TerminalConfirmed bool
+	OutcomeUnknown    bool
+	RequestID         string
+	Finish            string // stop or tool_calls; EOF is never success
+	Calls             []Call
+	Usage             Usage
 }
 type ModelClient interface {
 	Supports(context.Context, Model) error
 	Generate(context.Context, Request, func(string) error) (Response, error)
 }
 type ToolSpec struct {
-	Name       string          `json:"name"`
-	Version    string          `json:"version"`
-	Schema     json.RawMessage `json:"parameters"`
-	Permission string          `json:"permission"`
-	Effect     string          `json:"effect"` // pure, read, write
-	Approval   bool            `json:"approval_required"`
+	Name         string          `json:"name"`
+	Version      string          `json:"version"`
+	Schema       json.RawMessage `json:"parameters"`
+	OutputSchema json.RawMessage `json:"output_schema,omitempty"`
+	Permission   string          `json:"permission"`
+	Effect       string          `json:"effect"` // pure, read, write
+	Approval     bool            `json:"approval_required"`
 }
 type Tool interface {
 	Spec() ToolSpec
@@ -174,9 +197,12 @@ type AgentLoop interface {
 	Drive(context.Context, Principal, string, string) error
 }
 type Submit struct {
-	ClientID string `json:"client_id"`
-	Text     string `json:"text"`
-	ParentID string `json:"parent_message_id,omitempty"`
-	Mode     string `json:"mode"`
-	Model    Model  `json:"model"`
+	AR               *ARExecution `json:"-"`
+	CommandHash      string       `json:"-"`
+	ExpectedRevision *int64       `json:"-"`
+	ClientID         string       `json:"client_id"`
+	Text             string       `json:"text"`
+	ParentID         string       `json:"parent_message_id,omitempty"`
+	Mode             string       `json:"mode"`
+	Model            Model        `json:"model"`
 }

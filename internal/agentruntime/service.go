@@ -19,13 +19,16 @@ type Service struct {
 	Model  ModelClient
 	Tools  ToolRegistry
 	Limits Limits
+	// Source-specific bound including system input, schemas and role wrappers.
+	CountContext func(context.Context, Request) (int64, error)
+	Reauthorize  func(context.Context, Principal) (Principal, error)
 }
 
 func NewService(store SessionStore, model ModelClient, tools ToolRegistry, limits Limits) (*Service, error) {
 	if store == nil || model == nil || tools == nil || !limits.valid() || len(limits.Currency) != 3 {
 		return nil, ErrInvalid
 	}
-	return &Service{store, model, tools, limits}, nil
+	return &Service{Store: store, Model: model, Tools: tools, Limits: limits}, nil
 }
 func digest(v any) string {
 	b, _ := json.Marshal(v)
@@ -51,9 +54,20 @@ func run(v *Session, id string) *Run {
 }
 func event(v *Session, r *Run, kind string, data any) {
 	b, _ := json.Marshal(data)
-	v.Events = append(v.Events, Event{Cursor: int64(len(v.Events) + 1), RunID: r.ID, Type: kind, At: time.Now().UTC(), Data: b})
+	at := time.Now().UTC()
+	wire := projectEvent(v, r, kind, data, at)
+	v.Events = append(v.Events, Event{Cursor: int64(len(v.Events) + 1), RunID: r.ID, Type: kind, At: at, Data: b, Wire: wire})
 }
 func finish(v *Session, r *Run, status, reason string) {
+	if r.AR != nil {
+		now := time.Now().UTC()
+		r.AR.Finished = &now
+		for i := range v.Messages {
+			if v.Messages[i].RunID == r.ID && v.Messages[i].Status == "partial" {
+				v.Messages[i].Status = "interrupted"
+			}
+		}
+	}
 	if len(r.Steps) > 0 {
 		st := &r.Steps[len(r.Steps)-1]
 		if st.State != "completed" {
@@ -85,6 +99,9 @@ func (s *Service) mutate(ctx context.Context, p Principal, id string, f func(*Se
 		}
 		if e = f(&v); e != nil {
 			return Session{}, e
+		}
+		if v.AR != nil {
+			v.AR.Updated = time.Now().UTC()
 		}
 		rev := v.Revision
 		v.Revision++
@@ -148,11 +165,17 @@ func (s *Service) Submit(ctx context.Context, p Principal, id string, in Submit)
 		return Run{}, e
 	}
 	inputHash := digest(in)
+	if in.CommandHash != "" {
+		inputHash = in.CommandHash
+	}
 	rid, mid := uuid.NewString(), uuid.NewString()
 	v, e := s.mutate(ctx, p, id, func(v *Session) error {
 		for _, r := range v.Runs {
 			if r.ClientID == in.ClientID {
 				if r.InputHash != inputHash {
+					if in.AR != nil {
+						return arFailure(409, "operation_conflict")
+					}
 					return ErrConflict
 				}
 				return nil
@@ -161,8 +184,14 @@ func (s *Service) Submit(ctx context.Context, p Principal, id string, in Submit)
 		if len(v.Events) > s.Limits.Events-24 || len(v.Messages) >= 2048 {
 			return ErrInvalid
 		}
+		if in.ExpectedRevision != nil && *in.ExpectedRevision != v.Revision {
+			return arFailure(409, "revision_conflict")
+		}
 		for _, r := range v.Runs {
 			if !terminal(r.Status) {
+				if in.AR != nil {
+					return arFailure(409, "conversation_busy")
+				}
 				return ErrConflict
 			}
 		}
@@ -185,14 +214,32 @@ func (s *Service) Submit(ctx context.Context, p Principal, id string, in Submit)
 		}
 		sort.Strings(granted)
 		effectiveLimits := s.Limits
+		if in.AR != nil {
+			effectiveLimits = internalLimits(s.Limits, in.AR.Limits)
+		}
 		if in.Mode == "chat" {
 			effectiveLimits.Calls = 1
 			effectiveLimits.Steps = 1
 		}
-		r := Run{ID: rid, MessageID: mid, ClientID: in.ClientID, InputHash: inputHash, AuthRevision: p.Revision, Granted: granted, Mode: in.Mode, Model: in.Model, Status: "accepted", Deadline: time.Now().UTC().Add(effectiveLimits.Duration), Limits: effectiveLimits, Steps: []Step{}, Checkpoint: Checkpoint{Phase: "ready"}}
-		v.Messages = append(v.Messages, Message{ID: mid, Role: "user", RunID: rid, ParentID: in.ParentID, Parts: []Part{{Type: "text", Text: in.Text}}})
+		r := Run{ID: rid, MessageID: mid, ClientID: in.ClientID, InputHash: inputHash, AuthRevision: p.Revision, Granted: granted, Mode: in.Mode, Model: in.Model, Status: "accepted", Deadline: time.Now().UTC().Add(effectiveLimits.Duration), Limits: effectiveLimits, Steps: []Step{}, Checkpoint: Checkpoint{Phase: "ready"}, AR: in.AR}
+		v.Messages = append(v.Messages, Message{ID: mid, Role: "user", RunID: rid, ParentID: in.ParentID, Parts: []Part{{Type: "text", Text: in.Text}}, Status: "committed", Created: time.Now().UTC()})
 		v.Runs = append(v.Runs, r)
+		if r.AR != nil {
+			current := &v.Runs[len(v.Runs)-1]
+			current.AR.ContextHash = digest(history(*v, *current))
+			specs := []ToolSpec{}
+			for _, spec := range s.Tools.Specs(p) {
+				if selectedTool(*current, spec.Name, spec.Version) {
+					specs = append(specs, spec)
+				}
+			}
+			current.AR.RegistryHash = digest(specs)
+		}
 		event(v, &v.Runs[len(v.Runs)-1], "run.accepted", map[string]any{"message_id": mid})
+		if r.AR != nil {
+			event(v, &v.Runs[len(v.Runs)-1], "message.created", map[string]any{"message_id": mid})
+			event(v, &v.Runs[len(v.Runs)-1], "message.completed", map[string]any{"message_id": mid})
+		}
 		return nil
 	})
 	if e != nil {
@@ -240,6 +287,21 @@ func (s *Service) Cancel(ctx context.Context, p Principal, id, rid string) error
 		event(v, r, "run.cancel_requested", nil)
 		if r.Status == "accepted" || r.Status == "waiting_approval" {
 			finish(v, r, "cancelled", "cancelled_before_execution")
+		}
+		return nil
+	})
+	return e
+}
+
+// Expire is a scheduler action; GET/replay never changes execution state.
+func (s *Service) Expire(ctx context.Context, p Principal, sid, rid string) error {
+	_, e := s.mutate(ctx, p, sid, func(v *Session) error {
+		r := run(v, rid)
+		if r == nil {
+			return ErrNotFound
+		}
+		if (r.Status == "accepted" || r.Status == "waiting_approval") && !time.Now().Before(r.Deadline) {
+			finish(v, r, "limit_reached", "duration_limit")
 		}
 		return nil
 	})
@@ -346,6 +408,9 @@ func history(v Session, r Run) []Message {
 			if m.ID == id {
 				break
 			}
+			if m.Status == "partial" || m.Status == "interrupted" {
+				continue
+			}
 			if m.RunID == r.ID {
 				continue
 			}
@@ -367,7 +432,7 @@ func history(v Session, r Run) []Message {
 	}
 	msgs := before(target)
 	for _, m := range v.Messages {
-		if m.RunID == r.ID {
+		if m.RunID == r.ID && m.Status != "partial" && m.Status != "interrupted" {
 			msgs = append(msgs, m)
 		}
 	}
@@ -388,6 +453,9 @@ func (s *Service) Drive(ctx context.Context, p Principal, id, rid string) (resul
 		}
 		r.Status = "running"
 		r.Executor = token
+		if r.AR != nil {
+			r.AR.Fence++
+		}
 		event(v, r, "run.started", nil)
 		return nil
 	})
@@ -444,6 +512,7 @@ func (s *Service) Drive(ctx context.Context, p Principal, id, rid string) (resul
 	}
 	for {
 		r = *run(&v, rid)
+		currentPrincipal := p
 		if work.Err() != nil {
 			status, reason := "failed", "execution_interrupted"
 			fresh, err := s.Get(context.WithoutCancel(ctx), p, id)
@@ -457,6 +526,19 @@ func (s *Service) Drive(ctx context.Context, p Principal, id, rid string) (resul
 			}
 			return stop(status, reason)
 		}
+		if r.AR != nil {
+			if s.Reauthorize == nil {
+				return stop("failed", "authorization_unavailable")
+			}
+			fresh, authErr := s.Reauthorize(work, p)
+			if authErr != nil || fresh.ID != p.ID || fresh.Revision != r.AuthRevision {
+				return stop("failed", "authorization_changed")
+			}
+			currentPrincipal = fresh
+			if digest(selectedSpecs(s.Tools, currentPrincipal, r)) != r.AR.RegistryHash {
+				return stop("failed", "tool_registry_changed")
+			}
+		}
 		if len(v.Events) >= r.Limits.Events-16 {
 			return stop("limit_reached", "event_limit")
 		}
@@ -469,8 +551,8 @@ func (s *Service) Drive(ctx context.Context, p Principal, id, rid string) (resul
 				}
 				pending = true
 				t, ok := s.Tools.Lookup(c.Name)
-				ep := effective(p, r)
-				if !ok || !ep.Permissions[t.Spec().Permission] || t.Spec().Version != c.ToolVersion {
+				ep := effective(currentPrincipal, r)
+				if !ok || !ep.Permissions[t.Spec().Permission] || t.Spec().Version != c.ToolVersion || !selectedTool(r, c.Name, c.ToolVersion) {
 					return stop("failed", "tool_forbidden")
 				}
 				if t.Spec().Approval && c.State != "approved" {
@@ -542,6 +624,9 @@ func (s *Service) Drive(ctx context.Context, p Principal, id, rid string) (resul
 				if len(output) > r.Limits.OutputBytes || !utf8.ValidString(output) {
 					return stop("failed", "tool_output_limit")
 				}
+				if r.AR != nil && validateOutput(t, output) != nil {
+					return stop("failed", "tool_output_invalid")
+				}
 				if e = mut(func(v *Session, r *Run) error {
 					for i := range r.Steps[len(r.Steps)-1].Calls {
 						cc := &r.Steps[len(r.Steps)-1].Calls[i]
@@ -550,10 +635,16 @@ func (s *Service) Drive(ctx context.Context, p Principal, id, rid string) (resul
 							cc.Result = output
 						}
 					}
-					v.Messages = append(v.Messages, Message{ID: uuid.NewString(), RunID: rid, Role: "tool", Parts: []Part{{Type: "tool_result", CallID: c.ID, Name: c.Name, Text: output}}})
+					msg := Message{ID: uuid.NewString(), RunID: rid, Role: "tool", Parts: []Part{{Type: "tool_result", CallID: c.ID, Name: c.Name, Text: output}}, Status: "committed", Created: time.Now().UTC()}
+					v.Messages = append(v.Messages, msg)
 					r.Checkpoint.Phase = "tools"
 					r.Checkpoint.PendingCall = ""
 					event(v, r, "tool.result", map[string]any{"call_id": c.ID, "output": output})
+					if r.AR != nil {
+						event(v, r, "message.created", map[string]any{"message_id": msg.ID})
+						event(v, r, "message.completed", map[string]any{"message_id": msg.ID})
+						event(v, r, "checkpoint.saved", nil)
+					}
 					return nil
 				}); e != nil {
 					return e
@@ -567,9 +658,29 @@ func (s *Service) Drive(ctx context.Context, p Principal, id, rid string) (resul
 				r.Steps[len(r.Steps)-1].State = "completed"
 				r.Checkpoint = Checkpoint{Phase: "ready", CompletedSteps: len(r.Steps)}
 				event(v, r, "step.finished", map[string]any{"step": len(r.Steps)})
+				if r.AR != nil {
+					proposal := []any{}
+					for _, c := range r.Steps[len(r.Steps)-1].Calls {
+						proposal = append(proposal, []any{c.Name, c.ArgsHash, c.Result})
+					}
+					sig := digest(proposal)
+					if sig == r.AR.LastSignature {
+						r.AR.NoProgress++
+					} else {
+						r.AR.NoProgress = 0
+					}
+					r.AR.LastSignature = sig
+					if r.AR.NoProgress >= r.AR.Limits.NoProgress {
+						finish(v, r, "limit_reached", "no_progress_limit")
+					}
+					event(v, r, "checkpoint.saved", nil)
+				}
 				return nil
 			}); e != nil {
 				return e
+			}
+			if terminal(run(&v, rid).Status) {
+				return nil
 			}
 			continue
 		}
@@ -592,13 +703,53 @@ func (s *Service) Drive(ctx context.Context, p Principal, id, rid string) (resul
 		}
 		requestID := uuid.NewString()
 		messageID := uuid.NewString()
+		ep := effective(currentPrincipal, r)
+		specs := []ToolSpec{}
+		if r.Mode == "agent" {
+			for _, spec := range s.Tools.Specs(ep) {
+				if selectedTool(r, spec.Name, spec.Version) {
+					specs = append(specs, spec)
+				}
+			}
+		}
+		req := Request{Principal: ep, SessionID: id, RunID: rid, RequestID: requestID, Model: r.Model, Messages: history(v, r), Tools: specs, TokenUpper: r.Limits.Tokens - usedT, MoneyUpper: r.Limits.Money - usedM, Currency: r.Limits.Currency}
+		contextBytes, _ := json.Marshal(struct {
+			Messages []Message
+			Tools    []ToolSpec
+		}{req.Messages, req.Tools})
+		if len(contextBytes) > r.Limits.InputBytes {
+			return stop("limit_reached", "context_limit")
+		}
+		if r.AR != nil {
+			req.ContextTokenLimit = int64(r.AR.Limits.ContextTokens)
+			if s.CountContext == nil {
+				return stop("failed", "context_bound_unavailable")
+			}
+			bound, boundErr := s.CountContext(work, req)
+			if boundErr != nil || bound < 0 {
+				return stop("failed", "context_bound_unavailable")
+			}
+			if bound > req.ContextTokenLimit {
+				return stop("limit_reached", "context_limit")
+			}
+		}
 		if e = mut(func(v *Session, r *Run) error {
 			if r.CancelRequested {
 				return context.Canceled
 			}
-			r.Steps = append(r.Steps, Step{Number: len(r.Steps) + 1, RequestID: requestID, State: "running", Calls: []Call{}})
+			r.Steps = append(r.Steps, Step{Number: len(r.Steps) + 1, RequestID: requestID, State: "running", Calls: []Call{}, ID: uuid.NewString(), InputHash: digest(req)})
 			r.Checkpoint.Phase = "model_inflight"
 			r.Checkpoint.RequestID = requestID
+			if r.AR != nil {
+				r.AR.ContextHash = digest(req.Messages)
+				r.AR.RegistryHash = digest(req.Tools)
+				v.Messages = append(v.Messages, Message{ID: messageID, Role: "assistant", RunID: rid, Parts: []Part{{Type: "text", Text: ""}}, Status: "partial", Created: time.Now().UTC()})
+				if r.AR.Operation == "regenerate" {
+					v.Messages[len(v.Messages)-1].ParentID = r.AR.Reference
+				}
+				event(v, r, "message.created", map[string]any{"message_id": messageID})
+				event(v, r, "checkpoint.saved", nil)
+			}
 			event(v, r, "step.started", map[string]any{"step": len(r.Steps), "request_id": requestID})
 			return nil
 		}); e != nil {
@@ -608,20 +759,6 @@ func (s *Service) Drive(ctx context.Context, p Principal, id, rid string) (resul
 			return e
 		}
 		r = *run(&v, rid)
-		ep := effective(p, r)
-		specs := []ToolSpec{}
-		if r.Mode == "agent" {
-			specs = s.Tools.Specs(ep)
-		}
-		req := Request{Principal: ep, SessionID: id, RunID: rid, RequestID: requestID, Model: r.Model, Messages: history(v, r), Tools: specs, TokenUpper: r.Limits.Tokens - usedT, MoneyUpper: r.Limits.Money - usedM, Currency: r.Limits.Currency}
-		inputBytes := 0
-		for _, m := range req.Messages {
-			b, _ := json.Marshal(m)
-			inputBytes += len(b)
-		}
-		if inputBytes > r.Limits.InputBytes {
-			return stop("limit_reached", "context_limit")
-		}
 		text := ""
 		res, modelErr := s.Model.Generate(work, req, func(delta string) error {
 			if work.Err() != nil {
@@ -630,6 +767,7 @@ func (s *Service) Drive(ctx context.Context, p Principal, id, rid string) (resul
 			if !utf8.ValidString(delta) || len(text)+len(delta) > r.Limits.OutputBytes {
 				return ErrInvalid
 			}
+			offset := len(text)
 			text += delta
 			return mut(func(v *Session, r *Run) error {
 				if r.CancelRequested {
@@ -638,10 +776,35 @@ func (s *Service) Drive(ctx context.Context, p Principal, id, rid string) (resul
 				if len(v.Events) >= r.Limits.Events-16 {
 					return ErrInvalid
 				}
-				event(v, r, "message.delta", map[string]any{"message_id": messageID, "text": delta, "request_id": requestID})
+				if r.AR != nil {
+					for i := range v.Messages {
+						if v.Messages[i].ID == messageID {
+							v.Messages[i].Parts[0].Text = text
+						}
+					}
+				}
+				event(v, r, "message.delta", map[string]any{"message_id": messageID, "text": delta, "request_id": requestID, "offset": decimal(int64(offset))})
 				return nil
 			})
 		})
+		if r.AR != nil && res.TerminalConfirmed && res.RequestID == requestID {
+			if e = mut(func(v *Session, r *Run) error {
+				r.Steps[len(r.Steps)-1].Usage = res.Usage
+				r.Usage = aggregate(r.Steps)
+				event(v, r, "usage", map[string]any{"request_id": requestID, "usage": res.Usage})
+				return nil
+			}); e != nil {
+				return e
+			}
+		}
+		if res.OutcomeUnknown || (r.AR != nil && modelErr == nil && res.Finish != "" && !res.TerminalConfirmed) {
+			return mut(func(v *Session, r *Run) error {
+				r.Status, r.Executor, r.Reason = "needs_confirmation", "", "model_outcome_unknown"
+				r.Steps[len(r.Steps)-1].State = "unknown"
+				event(v, r, "run.needs_confirmation", r.Checkpoint)
+				return nil
+			})
+		}
 		if work.Err() != nil {
 			continue
 		} // transport/tool has returned before terminal cancellation
@@ -655,21 +818,38 @@ func (s *Service) Drive(ctx context.Context, p Principal, id, rid string) (resul
 			return stop("failed", "model_budget_bound_violated")
 		}
 		seen := map[string]bool{}
+		priorCalls := 0
 		for _, old := range r.Steps {
 			for _, c := range old.Calls {
-				seen[c.ID] = true
+				priorCalls++
+				key := c.SourceID
+				if key == "" {
+					key = c.ID
+				}
+				seen[key] = true
 			}
+		}
+		if r.AR != nil && priorCalls+len(res.Calls) > r.AR.Limits.Tools {
+			return stop("limit_reached", "tool_call_limit")
 		}
 		for i := range res.Calls {
 			c := &res.Calls[i]
 			t, ok := s.Tools.Lookup(c.Name)
-			if !ok || !ep.Permissions[t.Spec().Permission] {
+			if !ok || !ep.Permissions[t.Spec().Permission] || !selectedTool(r, c.Name, t.Spec().Version) {
 				return stop("failed", "tool_forbidden")
 			}
 			if c.ID == "" || len(c.ID) > 128 || seen[c.ID] || len(c.Arguments) > r.Limits.InputBytes || validate(t, c.Arguments) != nil {
 				return stop("failed", "invalid_tool_call")
 			}
 			seen[c.ID] = true
+			if r.AR != nil {
+				c.SourceID = c.ID
+				c.ID = uuid.NewString()
+				c.Effect = t.Spec().Effect
+				c.Arguments = mustCanonical(c.Arguments)
+				c.ArgsHash = rawHash(mustCanonical(c.Arguments))
+				c.ApprovalID = uuid.NewString()
+			}
 			c.State = "pending"
 			c.Result = ""
 			c.ToolVersion = t.Spec().Version
@@ -683,14 +863,26 @@ func (s *Service) Drive(ctx context.Context, p Principal, id, rid string) (resul
 			st := &r.Steps[len(r.Steps)-1]
 			st.Calls = res.Calls
 			st.Usage = res.Usage
+			st.OutputHash = digest([]any{text, res.Calls})
 			r.Usage = aggregate(r.Steps)
 			parts := []Part{{Type: "text", Text: text}}
 			for _, c := range res.Calls {
 				parts = append(parts, Part{Type: "tool_call", CallID: c.ID, Name: c.Name, Arguments: c.Arguments})
 				event(v, r, "tool.call", c)
 			}
-			v.Messages = append(v.Messages, Message{ID: messageID, Role: "assistant", RunID: rid, Parts: parts})
-			event(v, r, "usage", map[string]any{"request_id": requestID, "usage": res.Usage, "aggregate": r.Usage})
+			if r.AR == nil {
+				v.Messages = append(v.Messages, Message{ID: messageID, Role: "assistant", RunID: rid, Parts: parts})
+			} else {
+				for i := range v.Messages {
+					if v.Messages[i].ID == messageID {
+						v.Messages[i].Parts = parts
+						v.Messages[i].Status = "committed"
+					}
+				}
+			}
+			if r.AR == nil {
+				event(v, r, "usage", map[string]any{"request_id": requestID, "usage": res.Usage, "aggregate": r.Usage})
+			}
 			event(v, r, "message.completed", map[string]any{"message_id": messageID})
 			if res.Finish == "stop" {
 				st.State = "completed"
@@ -699,6 +891,9 @@ func (s *Service) Drive(ctx context.Context, p Principal, id, rid string) (resul
 				finish(v, r, "completed", "")
 			} else {
 				r.Checkpoint.Phase = "tools"
+			}
+			if r.AR != nil {
+				event(v, r, "checkpoint.saved", nil)
 			}
 			return nil
 		}); e != nil {

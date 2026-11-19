@@ -4,9 +4,12 @@ Set-Location -LiteralPath $repo
 $env:GOCACHE = Join-Path $repo '.cache/build'
 $evidence = Join-Path $repo 'artifacts/agent-runtime'
 New-Item -ItemType Directory -Path $evidence -Force | Out-Null
+$env:MAAS_AR_EVIDENCE = Join-Path $evidence 'ar1-trace.json'
 go test -json ./internal/agentruntime/... -count=1 -timeout=90s | Tee-Object -FilePath (Join-Path $evidence 'tests.jsonl')
 if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 go vet ./internal/agentruntime/... ./internal/kernel
+if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+go vet -tags agentcontrolled ./cmd/agent-headless
 if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 go test -json ./internal/kernel -run '^TestMySQLAgentChildrenUseOneLedger$' -count=1 -timeout=90s | Tee-Object -FilePath (Join-Path $evidence 'mysql.jsonl')
 if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }

@@ -33,7 +33,8 @@ func (m *agentLedgerModel) Generate(ctx context.Context, r a.Request, emit func(
 	fin.Result = "succeeded"
 	fin.Submitted = true
 	fin.EvidenceRef = uuid.NewString()
-	fin.Usage = Usage{Input: &i, Output: &o, Total: &total, Source: "upstream"}
+	zero := int64(0)
+	fin.Usage = Usage{Input: &i, Output: &o, Total: &total, Cached: &zero, Reasoning: &zero, Source: "upstream"}
 	if e = m.f.core.Finalize(ctx, fin); e != nil {
 		return a.Response{}, e
 	}
@@ -50,7 +51,9 @@ func (m *agentLedgerModel) Generate(ctx context.Context, r a.Request, emit func(
 		return a.Response{}, e
 	}
 	u.Money = &money
-	res := a.Response{RequestID: r.RequestID, Usage: u}
+	u.Complete = true
+	u.Groups = []a.ARUsageGroup{{Currency: "TST", Price: m.f.profile.Price.Version, KnownTokens: "19", KnownMoney: amount, HeldTokens: "0", InflightTokens: "0", HeldMoney: "0", InflightMoney: "0"}}
+	res := a.Response{RequestID: r.RequestID, Usage: u, TerminalConfirmed: true}
 	if m.calls == 1 {
 		res.Finish = "tool_calls"
 		res.Calls = []a.Call{{ID: "calc", Name: "bounded_arithmetic", Arguments: json.RawMessage(`{"a":6,"b":7,"op":"multiply"}`)}}
@@ -75,12 +78,18 @@ func TestMySQLAgentChildrenUseOneLedger(t *testing.T) {
 	if e != nil {
 		t.Fatal(e)
 	}
-	p := a.Principal{ID: "controlled-owner", Revision: "1", Permissions: map[string]bool{"tools.calculate": true}}
+	p := a.Principal{ID: "75b49016-0aa4-42fc-ac6d-9f67318c1dce", Revision: "1", Permissions: map[string]bool{"tools.calculate": true}}
+	s.Reauthorize = func(_ context.Context, p a.Principal) (a.Principal, error) { return p, nil }
 	v, e := s.Create(ctx, p, "unique ledger")
 	if e != nil {
 		t.Fatal(e)
 	}
-	in := a.Submit{ClientID: "once", Text: "multiply", Mode: "agent", Model: a.Model{Alias: "controlled", Source: "controlled-test", Revision: "1", Protocol: "tools-v1"}}
+	in := a.Submit{ClientID: uuid.NewString(), Text: "multiply", Mode: "agent", Model: a.Model{Alias: "controlled", Source: "controlled-test", Revision: "1", Protocol: "tools-v1"}}
+	s.CountContext = func(_ context.Context, r a.Request) (int64, error) {
+		b, _ := json.Marshal(r)
+		return int64(len(b)), nil
+	}
+	in.AR = &a.ARExecution{Limits: a.ARLimits{Steps: 4, Calls: 4, Tools: 4, Duration: 10000, ToolTimeout: 1000, OutputBytes: 8192, ContextTokens: 32768, NoProgress: 3, Tokens: "1000", Money: "10000000", Currency: "TST"}, Tools: []a.ARToolRef{{Name: "bounded_arithmetic", Revision: "1"}}, Created: time.Now().UTC(), Fence: 1, PolicyRevision: "controlled-policy"}
 	r, e := s.Submit(ctx, p, v.ID, in)
 	if e != nil {
 		t.Fatal(e)

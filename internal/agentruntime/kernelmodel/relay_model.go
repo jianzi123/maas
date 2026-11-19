@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"strconv"
 	"strings"
+	"time"
 
 	a "github.com/jianzi123/maas/internal/agentruntime"
 	"github.com/jianzi123/maas/internal/kernel"
@@ -23,6 +24,9 @@ type RelayModel struct {
 	// Usage reads the unique durable accounting record, including currency/price
 	// approval, and returns only the run's already-approved currency's atomic value.
 	Usage func(context.Context, string) (a.Usage, error)
+	// FailureResolved consults the original durable request identity. Absent or
+	// unavailable proof remains unknown and cannot unlock the Session barrier.
+	FailureResolved func(context.Context, string) (bool, error)
 }
 
 func (m RelayModel) Supports(_ context.Context, v a.Model) error {
@@ -55,6 +59,24 @@ func (m RelayModel) Generate(ctx context.Context, req a.Request, emit func(strin
 	w := &relayWriter{header: http.Header{}, emit: emit}
 	e = m.Relay.Forward(ctx, w, call)
 	if e != nil {
+		out.OutcomeUnknown = true
+		if m.FailureResolved != nil {
+			proof, cancel := context.WithTimeout(context.WithoutCancel(ctx), 5*time.Second)
+			resolved, resolveErr := m.FailureResolved(proof, req.RequestID)
+			cancel()
+			if resolveErr == nil && resolved {
+				out.OutcomeUnknown = false
+				out.TerminalConfirmed = true
+			}
+		}
+		if out.TerminalConfirmed {
+			read, cancel := context.WithTimeout(context.WithoutCancel(ctx), 5*time.Second)
+			usage, readErr := m.Usage(read, req.RequestID)
+			cancel()
+			if readErr == nil {
+				out.Usage = usage
+			}
+		}
 		return out, e
 	}
 	if w.err != nil {
@@ -65,6 +87,10 @@ func (m RelayModel) Generate(ctx context.Context, req a.Request, emit func(strin
 	}
 	out.Finish = "stop"
 	out.Usage, e = m.Usage(ctx, req.RequestID)
+	out.TerminalConfirmed = e == nil
+	if e != nil {
+		out.OutcomeUnknown = true
+	}
 	return out, e
 }
 
@@ -77,6 +103,9 @@ func checkPlan(req a.Request, p kernel.Plan) error {
 		return e == nil && value >= 0 && value <= limit
 	}
 	if !within(p.Tokens, req.TokenUpper) || !within(p.Money, req.MoneyUpper) || p.Currency == nil || *p.Currency != req.Currency {
+		return a.ErrInvalid
+	}
+	if req.ContextTokenLimit > 0 && !within(p.Input, req.ContextTokenLimit) {
 		return a.ErrInvalid
 	}
 	return nil

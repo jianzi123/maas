@@ -126,7 +126,7 @@ func plain(_ context.Context, r Request, emit func(string) error) (Response, err
 	if e := emit("hello"); e != nil {
 		return Response{}, e
 	}
-	return Response{RequestID: r.RequestID, Finish: "stop", Usage: known()}, nil
+	return Response{RequestID: r.RequestID, TerminalConfirmed: true, Finish: "stop", Usage: known()}, nil
 }
 func TestChatPersistenceIdempotencyAndReplay(t *testing.T) {
 	s, m, v := setupService(t, plain)
@@ -184,10 +184,10 @@ func TestAgentExecutesRealToolsThenObservesResults(t *testing.T) {
 					t.Fatal(msg)
 				}
 				_ = emit("42; catalog visible")
-				return Response{RequestID: r.RequestID, Finish: "stop", Usage: known()}, nil
+				return Response{RequestID: r.RequestID, TerminalConfirmed: true, Finish: "stop", Usage: known()}, nil
 			}
 		}
-		return Response{RequestID: r.RequestID, Finish: "tool_calls", Usage: known(), Calls: []Call{{ID: "calc-1", Name: "bounded_arithmetic", Arguments: json.RawMessage(`{"a":6,"b":7,"op":"multiply"}`)}, {ID: "catalog-1", Name: "list_visible_models", Arguments: json.RawMessage(`{}`)}}}, nil
+		return Response{RequestID: r.RequestID, TerminalConfirmed: true, Finish: "tool_calls", Usage: known(), Calls: []Call{{ID: "calc-1", Name: "bounded_arithmetic", Arguments: json.RawMessage(`{"a":6,"b":7,"op":"multiply"}`)}, {ID: "catalog-1", Name: "list_visible_models", Arguments: json.RawMessage(`{}`)}}}, nil
 	})
 	r := send(t, s, v, input("agent"))
 	if e := s.Drive(context.Background(), actor, v.ID, r.ID); e != nil {
@@ -219,7 +219,7 @@ func TestToolProtocolAndLimits(t *testing.T) {
 	for _, tc := range cases {
 		t.Run(tc.name, func(t *testing.T) {
 			s, _, v := setupService(t, func(_ context.Context, r Request, _ func(string) error) (Response, error) {
-				return Response{RequestID: r.RequestID, Finish: tc.finish, Usage: tc.usage, Calls: tc.calls}, nil
+				return Response{RequestID: r.RequestID, TerminalConfirmed: true, Finish: tc.finish, Usage: tc.usage, Calls: tc.calls}, nil
 			})
 			r := send(t, s, v, input("agent"))
 			if e := s.Drive(context.Background(), actor, v.ID, r.ID); e != nil {
@@ -235,7 +235,7 @@ func TestToolProtocolAndLimits(t *testing.T) {
 		var n int
 		s, _, v := setupService(t, func(_ context.Context, r Request, _ func(string) error) (Response, error) {
 			n++
-			return Response{RequestID: r.RequestID, Finish: "tool_calls", Usage: known(), Calls: []Call{{ID: strings.Repeat("x", n), Name: "list_visible_models", Arguments: json.RawMessage(`{}`)}}}, nil
+			return Response{RequestID: r.RequestID, TerminalConfirmed: true, Finish: "tool_calls", Usage: known(), Calls: []Call{{ID: strings.Repeat("x", n), Name: "list_visible_models", Arguments: json.RawMessage(`{}`)}}}, nil
 		})
 		s.Limits.Steps = 1
 		r := send(t, s, v, input("agent"))
@@ -256,7 +256,7 @@ func TestToolProtocolAndLimits(t *testing.T) {
 			if len(r.Tools) != 0 {
 				t.Fatal("unauthorized schemas")
 			}
-			return Response{RequestID: r.RequestID, Finish: "tool_calls", Calls: []Call{{ID: "x", Name: "list_visible_models", Arguments: json.RawMessage(`{}`)}}}, nil
+			return Response{RequestID: r.RequestID, TerminalConfirmed: true, Finish: "tool_calls", Calls: []Call{{ID: "x", Name: "list_visible_models", Arguments: json.RawMessage(`{}`)}}}, nil
 		}}
 		_ = s.Drive(context.Background(), p, v.ID, r.ID)
 		if readRun(t, s, v, r).Reason != "tool_forbidden" {
@@ -286,10 +286,10 @@ func controlledTool(write bool) *testTool {
 func toolResponse(_ context.Context, r Request, _ func(string) error) (Response, error) {
 	for _, m := range r.Messages {
 		if m.Role == "tool" {
-			return Response{RequestID: r.RequestID, Finish: "stop", Usage: known()}, nil
+			return Response{RequestID: r.RequestID, TerminalConfirmed: true, Finish: "stop", Usage: known()}, nil
 		}
 	}
-	return Response{RequestID: r.RequestID, Finish: "tool_calls", Usage: known(), Calls: []Call{{ID: "tool-1", Name: "controlled_tool", Arguments: json.RawMessage(`{}`)}}}, nil
+	return Response{RequestID: r.RequestID, TerminalConfirmed: true, Finish: "tool_calls", Usage: known(), Calls: []Call{{ID: "tool-1", Name: "controlled_tool", Arguments: json.RawMessage(`{}`)}}}, nil
 }
 func TestApprovalBindingExpiryAndResume(t *testing.T) {
 	tool := controlledTool(true)

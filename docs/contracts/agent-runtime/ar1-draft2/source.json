@@ -13,5 +13,5 @@
     "AR-B01-B02.md": "byte-preserved draft.2 original",
     "ADR-chat-agent.md": "byte-preserved draft.1 ADR; supplemented by AR-B01-B02.md"
   },
-  "implementationStatus": "core and controlled harness only; public AR-1 adapter not implemented"
+  "implementationStatus": "AR-1 handler and managed controlled HTTP/headless implemented; real provider tools-v1/production factories remain separately gated"
 }

@@ -76,6 +76,18 @@ func validate(t Tool, b []byte) error {
 	return nil
 }
 
+func validateOutput(t Tool, output string) error {
+	raw := t.Spec().OutputSchema
+	if len(raw) == 0 {
+		raw = json.RawMessage(`{"type":"string"}`)
+	}
+	s, e := compile(raw)
+	if e != nil {
+		return e
+	}
+	return s.Validate(output)
+}
+
 // Calculator deliberately accepts only bounded integer arithmetic, never code.
 type Calculator struct{}
 

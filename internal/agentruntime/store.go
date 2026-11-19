@@ -34,7 +34,7 @@ func (s MySQLStore) Get(ctx context.Context, id string) (Session, error) {
 	return v, nil
 }
 func (s MySQLStore) List(ctx context.Context, owner string) ([]Session, error) {
-	rows, e := s.DB.QueryContext(ctx, "SELECT document FROM agent_sessions_v1 WHERE owner_id=? ORDER BY session_id LIMIT 200", owner)
+	rows, e := s.DB.QueryContext(ctx, "SELECT document FROM agent_sessions_v1 WHERE owner_id=? ORDER BY session_id", owner)
 	if e != nil {
 		return nil, e
 	}
