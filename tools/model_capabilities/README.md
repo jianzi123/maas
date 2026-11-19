@@ -1,5 +1,7 @@
 # MAAS-9 offline capability inputs
 
+Tool capability v0.8: `tool_calls.py` and `tool-calls/` provide a proposed `tools-v1` ModelClient turn schema, complete controlled captures and local pure-function feedback. See `docs/model-capabilities/tool-calls-v0.8.md`. MAAS-2/20 review and real source approval remain pending.
+
 Three candidate/controlled profiles, source-pinned evidence, synthetic adapter/quality vectors and consumer lock conditions. All profiles are pending approval and execution_enabled=false. Nothing here launches a model, accesses an endpoint/Secret, settles usage or grants production permission.
 
 From repository root:
