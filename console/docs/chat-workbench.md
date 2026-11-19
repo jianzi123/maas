@@ -4,7 +4,7 @@
 
 ## 实际接入与启动
 
-先在后端 PR #18 固定提交 19e43ba980f1bd9f499a92dda435b74b626bf7e9 启动原受控服务：
+先在后端 PR #18 固定提交 a4c1347b6e01ed6fdf9925cf9ee26cb82251c405 启动原受控服务：
 
     go run -tags agentcontrolled ./cmd/agent-headless --state-dir .cache/ar1-http --owner-id 4c421973-919f-4b8a-997f-909fc6fd010a --listen 127.0.0.1:4188
 
@@ -52,3 +52,22 @@ test:chat-ar1 默认后端目录为 ../../ar1-backend，或显式 MAAS_AR1_BACKE
 本前端作者联调使用真实 Go 文件存储，不是浏览器本地开发适配；模型/计价/上下文计数为明确受控适配，工具/HTTP/存储是真实现。未执行真实供应商、生产 Higress/Secret、目标集群、真实 SQL 浏览器组合、完整跨用户主体矩阵或独立 QA；MAAS-18 底层真实闭环和 MAAS-7 验收继续单列。后端原真实 MySQL 作者结果不计入本前端测试。
 
 contracts/ar1-openapi.json 与 ar1-session-event.schema.json 从固定后端原字节复制，.gitattributes 禁止换行转换；类型由 generate-ar1-types.mjs 生成，校验采用原 Schema。提交按产品代码→标准 lock-unified-source.py→四锁独立提交，组合装配后的来源锁由原集成流程重算。
+
+## a4c分页修复段接续（2026-11-19 UTC）
+
+当前测试入口完整后端guard更新到a4c1347b6e01ed6fdf9925cf9ee26cb82251c405（代码b808dc6）；原8/13组与192/11skip是19e43ba对端的历史证据，不外推新头。三份原契约文件/生成类型不变。
+
+HTTPChat.read遇到合法410 cursor_expired、snapshot_required=true、retryable=false时丢弃本次局部页和旧快照缓存，从新的Snapshot重新读取全部消息/步骤/工具页；最多三轮，持续变更后明确提示并显示只读重连；重连目标保留为实际请求的会话，而非之前打开的会话。它不重试创建/生成/批准。事件恢复仍只用新Snapshot的原不透明cursor。每会话读取epoch使迟到A不能继续恢复或删除/覆盖B快照；页面原A/B guard保留。
+
+定向Response/jsdom回归覆盖三个分页资源失效后只GET重取、三轮边界、畸形410不恢复、同会话A/B晚到、原安全整数外seq/UTF8 offset/ACK未知及页面隔离。未重做原有UI16/Delete的独立评审；整套单测仍包含既有回归，作者回归不替代独立QA。
+新受影响浏览器入口：设置MAAS_AR1_BROWSER_PROFILE=extended、MAAS_AR1_BROWSER_CASE=pagination后执行npm run test:chat-ar1；产物目录artifacts/chat-ar1-pagination，保留旧目录。用正常Go Session/Run/rename/edit API构造98/100/102及后续历史，再由实际410触发整组重取，检查中文emoji及无恢复生成POST。该测试使用明确ModelClient/批准适配和仅消息数量的合成模型上下文计数；真实Cookie/CSRF/Principal、HTTP、Host、文件存储不替换。没有模型/供应商或Higress/Secret/生产证据。
+
+
+### AR-R01-C1核签补充
+
+按MAAS-2的AR-R01-C1（原三份draft.2契约未改）：首张StepPage/ToolCallPage即使无token返回200，也须带可核对的Session ETag并与根Snapshot一致。HTTP适配对本批消息/步骤/工具页统一核对，变化则整批GET重取，缺ETag则协议异常，不拼入视图。Run事件cursor依持久seq继续回放，Session文档revision变化不自动作废事件cursor。定向正反用例分别覆盖首张步骤/工具页变化及缺失，保留原严格Schema。
+
+
+工具调用标注服务端的实际attempt（含0），不把取消前未执行当作一次尝试。受控回归分别校验cancelled/0、failed/1、unknown/1的严格ToolCall投影、结果和Run limit_reached保留；unknown不生成批准入口或重跑请求。
+
+本次受影响验证记录：Response/jsdom覆盖、Vue/TypeScript构建与格式检查；Edge分页/恢复/编辑及原Run中文事件HTTP读回；后端a4c的TestARReviewToolOutcomeMatrix九个叶子用例。浏览器工具总时限、真实SQL/跨实例与独立QA未在本轮执行；旧19e的停止/审批/8和13组不能外推到a4c。本轮原始证据单独放artifacts/chat-ar1-pagination，发布结果按各自范围分列。

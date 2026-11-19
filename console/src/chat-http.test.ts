@@ -56,7 +56,7 @@ const key = "maas.chat.ar1.pending.v1";
 const json = (v: unknown, status = 200, headers: Record<string, string> = {}) =>
   new Response(JSON.stringify(v), {
     status,
-    headers: { "Content-Type": "application/json", ...headers },
+    headers: { "Content-Type": "application/json", ETag: '"1"', ...headers },
   });
 const err = (code: string, status: number) =>
   json(
@@ -382,3 +382,274 @@ it("large grouped amounts remain exact strings; completed and accounting complet
   expect(r.usage.tokens).toBeNull();
   expect(r.state).toBe("completed");
 });
+
+describe("AR-R01 revision-bound page recovery", () => {
+  for (const resource of ["messages", "steps", "tool-calls"]) {
+    it(
+      "restarts the complete snapshot after " +
+        resource +
+        " cursor expires, using GET only",
+      async () => {
+        let reads = 0,
+          expired = false;
+        const calls: { path: string; method: string }[] = [];
+        const fetcher = vi.fn(async (path: string, init?: RequestInit) => {
+          calls.push({ path, method: init?.method ?? "GET" });
+          if (path === root + "/sessions/" + sid) {
+            reads++;
+            const s = snapshot(
+              [
+                run({
+                  last_event_seq: reads === 1 ? "1" : "2",
+                  resume_cursor: reads === 1 ? "opaque-A" : "opaque-B",
+                }),
+              ],
+              [message(reads === 1 ? "old" : "你好🌏")],
+              reads === 1 ? "1" : "2",
+              reads === 1 ? "opaque-A" : "opaque-B",
+            );
+            s.conversation.revision = String(reads);
+            if (reads === 1 && resource === "messages")
+              s.messages_next_cursor = "old-page" as any;
+            return json(s, 200, { ETag: '"' + reads + '"' });
+          }
+          if (path.includes("/" + resource + "?") && !expired) {
+            expired = true;
+            return err("cursor_expired", 410);
+          }
+          return json({ data: [], next_cursor: null }, 200, {
+            ETag: '"' + reads + '"',
+          });
+        });
+        const service = new HTTPChat(config, new Api(fetcher as typeof fetch));
+        const result = await service.read(sid);
+        expect(reads).toBe(2);
+        expect(result.messages.map((m) => m.content)).toEqual(["你好🌏"]);
+        expect(result.runs[0]!.cursor).toBe("opaque-B");
+        expect(calls.every((c) => c.method === "GET")).toBe(true);
+        expect(calls.filter((c) => c.path.includes("old-page"))).toHaveLength(
+          resource === "messages" ? 1 : 0,
+        );
+      },
+    );
+  }
+  it("continuous mutation is bounded to three snapshots and never creates a run", async () => {
+    let reads = 0;
+    const calls: string[] = [];
+    const fetcher = vi.fn(async (path: string, init?: RequestInit) => {
+      calls.push(init?.method ?? "GET");
+      if (path === root + "/sessions/" + sid) {
+        reads++;
+        const s = snapshot();
+        s.messages_next_cursor = "expires" as any;
+        return json(s, 200, { ETag: '"1"' });
+      }
+      return err("cursor_expired", 410);
+    });
+    await expect(
+      new HTTPChat(config, new Api(fetcher as typeof fetch)).read(sid),
+    ).rejects.toThrow("会话持续变化");
+    expect(reads).toBe(3);
+    expect(calls.every((c) => c === "GET")).toBe(true);
+  });
+  it("a malformed 410 does not trigger automatic snapshot recovery", async () => {
+    let reads = 0;
+    const fetcher = vi.fn(async (path: string) => {
+      if (path === root + "/sessions/" + sid) {
+        reads++;
+        const s = snapshot();
+        s.messages_next_cursor = "invalid" as any;
+        return json(s, 200, { ETag: '"1"' });
+      }
+      const response = await err("cursor_expired", 410).json();
+      response.error.snapshot_required = false;
+      return json(response, 410, { "X-Request-ID": eid });
+    });
+    await expect(
+      new HTTPChat(config, new Api(fetcher as typeof fetch)).read(sid),
+    ).rejects.toThrow("关联");
+    expect(reads).toBe(1);
+  });
+});
+
+it("a late A page 410 cannot erase B snapshot or start another recovery loop", async () => {
+  let reads = 0;
+  let release!: (r: Response) => void;
+  const oldPage = new Promise<Response>((r) => (release = r));
+  const fetcher = vi.fn(async (path: string) => {
+    if (path === root + "/sessions/" + sid) {
+      reads++;
+      const s = snapshot(
+        [
+          run({
+            last_event_seq: reads === 1 ? "1" : "2",
+            resume_cursor: reads === 1 ? "opaque-A" : "opaque-B",
+          }),
+        ],
+        [message(reads === 1 ? "old" : "B你好🙂")],
+        reads === 1 ? "1" : "2",
+        reads === 1 ? "opaque-A" : "opaque-B",
+      );
+      s.conversation.revision = String(reads);
+      if (reads === 1) s.messages_next_cursor = "A-page" as any;
+      return json(s, 200, { ETag: '"' + reads + '"' });
+    }
+    if (path.includes("A-page")) return oldPage;
+    return json({ data: [], next_cursor: null }, 200, {
+      ETag: '"' + reads + '"',
+    });
+  });
+  const service = new HTTPChat(config, new Api(fetcher as typeof fetch));
+  const a = service.read(sid).catch((e) => e);
+  await vi.waitFor(() =>
+    expect(fetcher.mock.calls.some(([p]) => String(p).includes("A-page"))).toBe(
+      true,
+    ),
+  );
+  const b = await service.read(sid);
+  expect(b.runs[0]!.cursor).toBe("opaque-B");
+  release(err("cursor_expired", 410));
+  await a;
+  expect(reads).toBe(2);
+  // B's cache remains usable by the next ordinary events call; an empty EOF reads a fresh B snapshot.
+  fetcher.mockImplementation(async (path: string) => {
+    if (path.includes("/events/stream"))
+      return new Response("", {
+        headers: { "Content-Type": "text/event-stream" },
+      });
+    if (path === root + "/sessions/" + sid) {
+      const s = snapshot(
+        [run({ last_event_seq: "2", resume_cursor: "opaque-B" })],
+        [message("B你好🙂")],
+        "2",
+        "opaque-B",
+      );
+      s.conversation.revision = "2";
+      return json(s, 200, { ETag: '"2"' });
+    }
+    return json({ data: [], next_cursor: null }, 200, { ETag: '"2"' });
+  });
+  const result = await service.events(sid, rid, "opaque-B");
+  expect(result.snapshot.messages[0]!.content).toBe("B你好🙂");
+  expect(result.snapshot.runs[0]!.cursor).toBe("opaque-B");
+});
+
+for (const resource of ["steps", "tool-calls"])
+  for (const missing of [false, true]) {
+    it(
+      "AR-R01-C1 " +
+        resource +
+        " first page " +
+        (missing ? "missing" : "changed") +
+        " Session ETag cannot join root snapshot",
+      async () => {
+        let reads = 0;
+        const fetcher = vi.fn(async (path: string, init?: RequestInit) => {
+          if (path === root + "/sessions/" + sid) {
+            reads++;
+            const rev = String(reads);
+            const s = snapshot(
+              [run()],
+              [message(reads === 1 ? "old" : "fresh")],
+              "1",
+              "opaque-A",
+            );
+            s.conversation.revision = rev;
+            return json(s, 200, { ETag: '"' + rev + '"' });
+          }
+          if (path.includes("/" + resource + "?") && reads === 1) {
+            const r = json({ data: [], next_cursor: null }, 200, {
+              ETag: '"2"',
+            });
+            if (missing) r.headers.delete("ETag");
+            return r;
+          }
+          return json({ data: [], next_cursor: null }, 200, {
+            ETag: '"' + reads + '"',
+          });
+        });
+        const service = new HTTPChat(config, new Api(fetcher as typeof fetch));
+        if (missing) {
+          await expect(service.read(sid)).rejects.toThrow("关联");
+          expect(reads).toBe(1);
+        } else {
+          const s = await service.read(sid);
+          expect(s.revision).toBe("2");
+          expect(s.messages[0]!.content).toBe("fresh");
+          expect(reads).toBe(2);
+        }
+        expect(
+          fetcher.mock.calls.every(
+            ([, init]) => (init?.method ?? "GET") === "GET",
+          ),
+        ).toBe(true);
+      },
+    );
+  }
+
+for (const [state, attempt] of [
+  ["cancelled", 0],
+  ["failed", 1],
+  ["unknown", 1],
+] as const) {
+  it(
+    "AR-R02 keeps authoritative " +
+      state +
+      " attempt=" +
+      attempt +
+      " without rerunning",
+    async () => {
+      const r = run({
+        state: "limit_reached",
+        reason: "max_duration",
+        finished_at: date,
+      });
+      const call = {
+        id: mid,
+        run_id: rid,
+        step_id: eid,
+        name: "calculator",
+        tool_revision: "1",
+        args_sha256: "a".repeat(64),
+        state,
+        effect: "pure",
+        attempt,
+        idempotency_key: eid,
+        source_call_id: "source-1",
+        arguments: { expression: "1+1" },
+        result:
+          state === "cancelled"
+            ? null
+            : {
+                type: "tool_result",
+                call_id: mid,
+                outcome: state,
+                result: { message: "受控工具终态" },
+              },
+      };
+      const fetcher = vi.fn(async (path: string, init?: RequestInit) => {
+        expect(init?.method ?? "GET").toBe("GET");
+        return path === root + "/sessions/" + sid
+          ? json(snapshot([r], [], "1", "opaque-A"))
+          : json({
+              data: path.includes("/tool-calls?") ? [call] : [],
+              next_cursor: null,
+            });
+      });
+      const s = await new HTTPChat(
+        config,
+        new Api(fetcher as typeof fetch),
+      ).read(sid);
+      expect(s.runs[0]!.state).toBe("limit_reached");
+      expect(s.runs[0]!.steps[0]!.label).toContain("实际尝试 " + attempt);
+      expect(s.runs[0]!.steps[0]!.state).toBe(state);
+      expect(s.runs[0]!.steps[0]!.output).toBe(
+        state === "cancelled"
+          ? undefined
+          : JSON.stringify(call.result!.result, null, 2),
+      );
+      expect(s.runs[0]!.approvals).toEqual([]);
+      expect(fetcher).toHaveBeenCalledTimes(3);
+    },
+  );
+}

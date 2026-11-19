@@ -160,3 +160,56 @@ it("a text-only model explains unsupported Agent mode and cannot dispatch", asyn
   await w.get("form.chat-composer").trigger("submit");
   expect(start).not.toHaveBeenCalled();
 });
+
+it("bounded snapshot recovery exposes a read-only reconnect without regenerating", async () => {
+  const service = new DevelopmentChat();
+  const start = vi.spyOn(service, "start");
+  const read = vi.spyOn(service, "read");
+  w = mount(ChatWorkspace, { props: { service } });
+  await flushPromises();
+  await w
+    .findAll("button")
+    .find((b) => b.text() === "＋ 新建会话")!
+    .trigger("click");
+  await flushPromises();
+  read.mockRejectedValueOnce(
+    Error("会话持续变化，已停止自动恢复。请稍后只读重连。"),
+  );
+  await w.get("textarea").setValue("同一条生成");
+  await w.get("form.chat-composer").trigger("submit");
+  await flushPromises();
+  expect(start).toHaveBeenCalledTimes(1);
+  expect(w.text()).toContain("已停止自动恢复");
+  await w
+    .findAll("button")
+    .find((b) => b.text() === "只读重连")!
+    .trigger("click");
+  await flushPromises();
+  expect(start).toHaveBeenCalledTimes(1);
+  expect(w.findAll("button").some((b) => b.text() === "只读重连")).toBe(false);
+  expect(w.text()).not.toContain("已停止自动恢复");
+});
+
+it("failed first read reconnects its target rather than the previously selected session", async () => {
+  const service = new DevelopmentChat();
+  const a = await service.create(),
+    b = await service.create();
+  const read = vi.spyOn(service, "read");
+  const start = vi.spyOn(service, "start");
+  w = mount(ChatWorkspace, { props: { service } });
+  await flushPromises();
+  read.mockRejectedValueOnce(Error("会话持续变化"));
+  const rows = w.findAll(".chat-session");
+  await rows[1]!.trigger("click");
+  await flushPromises();
+  const target = read.mock.calls.at(-1)![0];
+  expect([a.id, b.id]).toContain(target);
+  await w
+    .findAll("button")
+    .find((x) => x.text() === "只读重连")!
+    .trigger("click");
+  await flushPromises();
+  expect(read.mock.calls.at(-1)![0]).toBe(target);
+  expect(w.findAll("button").some((x) => x.text() === "只读重连")).toBe(false);
+  expect(start).not.toHaveBeenCalled();
+});

@@ -10,6 +10,7 @@ import (
  "fmt"
  "os"
  "time"
+ "strings"
  a "github.com/jianzi123/maas/internal/agentruntime"
 )
 type approvalTool struct{ a.Tool }
@@ -24,6 +25,7 @@ func (controlledModel) Generate(ctx context.Context, r a.Request, emit func(stri
  Groups:[]a.ARUsageGroup{{Currency:"TST",Price:"browser-controlled-v1",KnownTokens:"10",KnownMoney:"1",HeldTokens:"0",InflightTokens:"0",HeldMoney:"0",InflightMoney:"0"}}}}
  text:=""
  for _,m:=range r.Messages { if m.Role=="user" { text=""; for _,p:=range m.Parts { text+=p.Text } } }
+ if strings.HasPrefix(text,"/history") { if e:=emit("你🙂");e!=nil{return out,e};out.Finish="stop";return out,nil }
  if text=="/unknown" { return a.Response{RequestID:r.RequestID,OutcomeUnknown:true},errors.New("controlled_unknown_result") }
  if text=="/error" { return out,errors.New("controlled_upstream_failure") }
  if text=="/slow" {

@@ -34,6 +34,7 @@ const service = shallowRef<ChatService>(),
 const models = ref<{ id: string; label: string; modes: Mode[] }[]>([]);
 let alive = true,
   epoch = 0,
+  openTarget: string | undefined,
   timer: ReturnType<typeof setTimeout> | undefined;
 const currentRun = computed(
     () =>
@@ -126,6 +127,7 @@ async function poll(
 async function open(id: string) {
   if (!service.value) return;
   const mine = ++epoch;
+  openTarget = id;
   stopPolling();
   busy.value = true;
   error.value = "";
@@ -152,7 +154,10 @@ async function open(id: string) {
     if (r && ["accepted", "running", "waiting_approval"].includes(r.state))
       void poll(id, r.id, r.cursor, mine, r.sequence);
   } catch (e) {
-    if (mine === epoch) report(e);
+    if (alive && mine === epoch) {
+      report(e);
+      connected.value = false;
+    }
   } finally {
     if (alive && mine === epoch) busy.value = false;
   }
@@ -277,6 +282,7 @@ async function remove() {
     epoch++;
     stopPolling();
     selected.value = null;
+    openTarget = undefined;
     location.hash = "chat";
     deleting.value = false;
     await refreshList();
@@ -293,6 +299,7 @@ async function clear() {
   stopPolling();
   sessions.value = [];
   selected.value = null;
+  openTarget = undefined;
   location.hash = "chat";
   uncertain.value = false;
   pendingCommand.value = "";
@@ -311,7 +318,7 @@ async function reconnect() {
       pendingCommand.value = "";
       await refreshList();
       await open(restored.id);
-    } else if (selected.value) await open(selected.value.id);
+    } else if (openTarget) await open(openTarget);
     if (service.value?.hasPending) uncertain.value = service.value.hasPending();
   } catch (e) {
     report(e);

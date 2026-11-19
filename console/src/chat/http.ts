@@ -89,6 +89,7 @@ const compare = (a: string, b: string) =>
 export class HTTPChat implements ChatService {
   private caps?: AR["Capabilities"];
   private snapshots = new Map<string, Session>();
+  private readEpoch = new Map<string, number>();
   private approvals = new Map<string, AR["Approval"]>();
   private controller?: AbortController;
   constructor(
@@ -157,6 +158,10 @@ export class HTTPChat implements ChatService {
       try {
         const v = checked("Error", await r.json());
         owns(v.error.http_request_id === r.headers.get("X-Request-ID"));
+        if (r.status === 410 && v.error.code === "cursor_expired")
+          owns(
+            v.error.snapshot_required === true && v.error.retryable === false,
+          );
         code = v.error.code;
       } catch {
         /* Never render arbitrary error bodies. */
@@ -173,8 +178,15 @@ export class HTTPChat implements ChatService {
     path: string,
     schema: K,
     init: RequestInit = {},
+    revision?: string,
   ): Promise<AR[K]> {
     const r = await this.response(path, init);
+    if (revision !== undefined) {
+      const tag = r.headers.get("ETag");
+      if (!tag) throw new ChatHTTPError("protocol_error");
+      if (tag !== '"' + revision + '"')
+        throw new ChatHTTPError("cursor_expired", false, 410);
+    }
     try {
       const value = checked(schema, await r.json());
       if (schema === "Snapshot") {
@@ -214,6 +226,7 @@ export class HTTPChat implements ChatService {
     path: string,
     schema: K,
     cursor: string | null = null,
+    revision?: string,
   ): Promise<AR[K]["data"]> {
     const out: unknown[] = [],
       seen = new Set<string>();
@@ -222,7 +235,7 @@ export class HTTPChat implements ChatService {
         page_size: "100",
         ...(cursor ? { cursor } : {}),
       });
-      const page = await this.json(path + "?" + query, schema);
+      const page = await this.json(path + "?" + query, schema, {}, revision);
       out.push(...page.data);
       cursor = page.next_cursor;
       if (cursor) {
@@ -382,6 +395,27 @@ export class HTTPChat implements ChatService {
     return out;
   }
   async read(id: string): Promise<Session> {
+    const epoch = (this.readEpoch.get(id) ?? 0) + 1;
+    this.readEpoch.set(id, epoch);
+    for (let attempt = 0; attempt < 3; attempt++) {
+      const previous = this.snapshots.get(id);
+      try {
+        return await this.readSnapshot(id, epoch);
+      } catch (e) {
+        if (this.readEpoch.get(id) !== epoch) throw e;
+        if (!(
+          e instanceof ChatHTTPError &&
+          e.status === 410 &&
+          e.code === "cursor_expired"
+        ))
+          throw e;
+        // Discard only this read's obsolete cache, never a newer B snapshot.
+        if (this.snapshots.get(id) === previous) this.snapshots.delete(id);
+      }
+    }
+    throw Error("会话持续变化，已停止自动恢复。请稍后只读重连。");
+  }
+  private async readSnapshot(id: string, epoch: number): Promise<Session> {
     const wire = await this.json(sidPath(id), "Snapshot");
     owns(
       wire.conversation.id === id &&
@@ -394,6 +428,7 @@ export class HTTPChat implements ChatService {
             sidPath(id) + "/messages",
             "MessagePage",
             wire.messages_next_cursor,
+            wire.conversation.revision,
           )
         : []),
     ];
@@ -417,10 +452,14 @@ export class HTTPChat implements ChatService {
       const steps = await this.pages(
         runPath(id, current.id) + "/steps",
         "StepPage",
+        null,
+        wire.conversation.revision,
       );
       const calls = await this.pages(
         runPath(id, current.id) + "/tool-calls",
         "ToolCallPage",
+        null,
+        wire.conversation.revision,
       );
       owns(
         steps.every((s) => s.run_id === current.id) &&
@@ -438,7 +477,7 @@ export class HTTPChat implements ChatService {
         ...calls.map((c) => ({
           id: c.id,
           callId: c.id,
-          label: c.name + "@" + c.tool_revision,
+          label: c.name + "@" + c.tool_revision + " · 实际尝试 " + c.attempt,
           state: c.state,
           input: JSON.stringify(c.arguments, null, 2),
           output: c.result
@@ -512,6 +551,7 @@ export class HTTPChat implements ChatService {
       })),
       runs,
     };
+    owns(this.readEpoch.get(id) === epoch);
     const old = this.snapshots.get(id);
     if (old?.revision && BigInt(old.revision) > BigInt(result.revision!))
       return structuredClone(old);
@@ -681,7 +721,11 @@ export class HTTPChat implements ChatService {
       }
       if (done && buffer.trim()) throw new ChatHTTPError("protocol_error");
     } catch (e) {
-      if (e instanceof ChatHTTPError && e.status === 410)
+      if (
+        e instanceof ChatHTTPError &&
+        e.status === 410 &&
+        e.code === "cursor_expired"
+      )
         return { events: [], snapshot: await this.read(sid) };
       if (!controller.signal.aborted) throw e;
     } finally {

@@ -11,7 +11,7 @@ if (
   !["official", "extended"].includes(process.env.MAAS_AR1_BROWSER_PROFILE)
 )
   throw Error("MAAS_AR1_BROWSER_PROFILE must be official or extended.");
-const expected = "19e43ba980f1bd9f499a92dda435b74b626bf7e9";
+const expected = "a4c1347b6e01ed6fdf9925cf9ee26cb82251c405";
 assert.equal(
   execFileSync("git", ["rev-parse", "HEAD"], {
     cwd: backend,
@@ -19,7 +19,17 @@ assert.equal(
   }).trim(),
   expected,
 );
-const artifacts = path.resolve("artifacts/chat-ar1");
+if (
+  process.env.MAAS_AR1_BROWSER_CASE &&
+  process.env.MAAS_AR1_BROWSER_CASE !== "pagination"
+)
+  throw Error("MAAS_AR1_BROWSER_CASE must be pagination when set");
+const pagination = process.env.MAAS_AR1_BROWSER_CASE === "pagination";
+if (pagination && process.env.MAAS_AR1_BROWSER_PROFILE !== "extended")
+  throw Error("pagination requires the explicit extended controlled profile");
+const artifacts = path.resolve(
+  pagination ? "artifacts/chat-ar1-pagination" : "artifacts/chat-ar1",
+);
 await fs.mkdir(artifacts, { recursive: true });
 const build = async (args) => {
   const p = spawn("go", args, {
@@ -59,6 +69,11 @@ http = http.replace(
   lifecycle +
     '\n go func() { var line string; fmt.Fscanln(os.Stdin, &line); if line == "stop" { stop() } }()',
 );
+if (pagination)
+  http = http.replace(
+    "return int64(len(b)), nil",
+    "_ = b; return int64(len(r.Messages)), nil // synthetic browser model context counts messages only",
+  );
 await fs.writeFile(path.join(harnessDir, "http.go"), http);
 await fs.copyFile(
   "scripts/ar1-browser-model.go.txt",
@@ -133,16 +148,24 @@ for (const [profile, exe, port] of [
       await new Promise((resolve) => setTimeout(resolve, 100));
     }
     assert(ready, "Go AR-1 was not ready");
-    const browser = spawn(process.execPath, ["scripts/chat-ar1-browser.mjs"], {
-      cwd: process.cwd(),
-      windowsHide: true,
-      stdio: "inherit",
-      env: {
-        ...process.env,
-        MAAS_AR1_BROWSER_API: "http://127.0.0.1:" + port,
-        MAAS_AR1_BROWSER_EXTENDED: profile === "extended" ? "1" : "0",
+    const browser = spawn(
+      process.execPath,
+      [
+        pagination
+          ? "scripts/chat-ar1-pagination-browser.mjs"
+          : "scripts/chat-ar1-browser.mjs",
+      ],
+      {
+        cwd: process.cwd(),
+        windowsHide: true,
+        stdio: "inherit",
+        env: {
+          ...process.env,
+          MAAS_AR1_BROWSER_API: "http://127.0.0.1:" + port,
+          MAAS_AR1_BROWSER_EXTENDED: profile === "extended" ? "1" : "0",
+        },
       },
-    });
+    );
     const [code] = await once(browser, "exit");
     assert.equal(code, 0, profile + " browser checks failed");
   } finally {
