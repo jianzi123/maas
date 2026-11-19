@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "scope": "installation-input-only-no-secret-values",
-  "sourceCommit": "131e8352aac6913fa9efebf9b8e9bfac3d633618",
+  "sourceCommit": "7cf46fa3aa1a5b76ee6dcbe26c59c8ea7ca2d5b8",
   "productionWiringVerified": false,
   "connections": {
     "core": {
@@ -196,6 +196,11 @@
         "deploy/tests/fixtures/internal.yaml",
         "docs/agent-runtime-v1.md",
         "docs/agent-runtime-verification.md",
+        "docs/contracts/agent-runtime/ar1-draft2/ADR-chat-agent.md",
+        "docs/contracts/agent-runtime/ar1-draft2/AR-B01-B02.md",
+        "docs/contracts/agent-runtime/ar1-draft2/openapi.json",
+        "docs/contracts/agent-runtime/ar1-draft2/session-event.schema.json",
+        "docs/contracts/agent-runtime/ar1-draft2/source.json",
         "docs/local-service.md",
         "docs/maas17-r5-history.md",
         "docs/model-capabilities/README.md",
