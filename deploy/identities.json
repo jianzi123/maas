@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "scope": "installation-input-only-no-secret-values",
-  "sourceCommit": "39462c6af5e17e18a8f7ce9b6f2bfce2efa60da5",
+  "sourceCommit": "b808dc6abe73b6614ef865238f8a1e0ec31aae5f",
   "productionWiringVerified": false,
   "connections": {
     "core": {
@@ -196,6 +196,7 @@
         "deploy/images/Dockerfile.operator",
         "deploy/tests/fixtures/hybrid.yaml",
         "deploy/tests/fixtures/internal.yaml",
+        "docs/agent-runtime-review-fixes.md",
         "docs/agent-runtime-v1.md",
         "docs/agent-runtime-verification.md",
         "docs/contracts/agent-runtime/ar1-draft2/ADR-chat-agent.md",
@@ -279,6 +280,8 @@
         "internal/agentruntime/ar_mysql_test.go",
         "internal/agentruntime/ar_projection.go",
         "internal/agentruntime/ar_recovery_test.go",
+        "internal/agentruntime/ar_review_regression_test.go",
+        "internal/agentruntime/ar_review_tools_test.go",
         "internal/agentruntime/ar_transport_test.go",
         "internal/agentruntime/ar_types.go",
         "internal/agentruntime/host.go",
