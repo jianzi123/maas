@@ -1,0 +1,7 @@
+{
+  "contract_approved": false,
+  "product_sha": null,
+  "base": "http://127.0.0.1:PORT",
+  "reads": [],
+  "instructions": "Only fill reviewed GET paths and expected statuses after MAAS-2/20 deliver; use separate temporary sessions for owner A/B. No guessed API path."
+}

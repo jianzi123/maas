@@ -1,0 +1,26 @@
+[
+  {
+    "case": "unknown_replay",
+    "exit": 2,
+    "success_artifact_created": false,
+    "stdout": "{\"accepted\": false, \"errors\": [\"unknown side effect replayed\", \"final answer over unresolved execution\"]}\n"
+  },
+  {
+    "case": "wrong_owner",
+    "exit": 2,
+    "success_artifact_created": false,
+    "stdout": "{\"accepted\": false, \"errors\": [\"approval binding mismatch\"]}\n"
+  },
+  {
+    "case": "double_settle",
+    "exit": 2,
+    "success_artifact_created": false,
+    "stdout": "{\"accepted\": false, \"errors\": [\"child request not uniquely settled\"]}\n"
+  },
+  {
+    "case": "missing_identity",
+    "exit": 2,
+    "success_artifact_created": false,
+    "stdout": "{\"accepted\": false, \"errors\": [\"missing product_sha\", \"missing contract_version\", \"missing environment\", \"missing session_id\", \"missing run_id\", \"missing owner\", \"invalid evidence kind\", \"raw source association not independently verified\", \"parent duplicated business ledger\", \"missing explicit step_limit\", \"missing explicit time_limit_ms\", \"missing explicit budget_limit\", \"missing explicit tool_timeout_ms\", \"event replay caused execution\"]}\n"
+  }
+]

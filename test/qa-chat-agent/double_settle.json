@@ -1,0 +1,58 @@
+{
+  "product_sha": "fixture",
+  "contract_version": "qa-normalized-v1",
+  "environment": "synthetic",
+  "session_id": "S",
+  "run_id": "R",
+  "owner": "U",
+  "evidence_kind": "controlled_model",
+  "raw_evidence_verified": true,
+  "events": [
+    {
+      "id": "E1",
+      "sequence": 1,
+      "session_id": "S",
+      "run_id": "R"
+    }
+  ],
+  "tools": [
+    {
+      "call_id": "T",
+      "args_hash": "H",
+      "executions": 1,
+      "authorized": true,
+      "schema_valid": true,
+      "approval_required": true,
+      "approval_id": "P",
+      "approval_state": "approved",
+      "approved_args_hash": "H",
+      "approved_owner": "U",
+      "outcome": "known",
+      "result_fed_to_model": true,
+      "result_event_id": "E2"
+    }
+  ],
+  "model_requests": [
+    {
+      "request_id": "M1",
+      "attempts": 1,
+      "request_rows": 1,
+      "terminal_rows": 2,
+      "summary_count": 1,
+      "through_kernel_gateway": true,
+      "usage_state": "unknown",
+      "actual": null,
+      "held_preserved": true
+    }
+  ],
+  "parent_business_debits": 0,
+  "limits": {
+    "step_limit": 3,
+    "time_limit_ms": 1000,
+    "budget_limit": 20,
+    "tool_timeout_ms": 200
+  },
+  "event_reconnect_model_calls": 0,
+  "event_reconnect_tool_executions": 0,
+  "final_answer": true
+}

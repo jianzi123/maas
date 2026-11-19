@@ -1,0 +1,22 @@
+test_approval_wrong_args (test_trace.Controls.test_approval_wrong_args) ... ok
+test_approval_wrong_owner (test_trace.Controls.test_approval_wrong_owner) ... ok
+test_changed_event (test_trace.Controls.test_changed_event) ... ok
+test_child_double_settle (test_trace.Controls.test_child_double_settle) ... ok
+test_denied_tool (test_trace.Controls.test_denied_tool) ... ok
+test_duplicate_execution (test_trace.Controls.test_duplicate_execution) ... ok
+test_edit_missing_lineage (test_trace.Controls.test_edit_missing_lineage) ... ok
+test_exact_event_duplicate_is_readonly (test_trace.Controls.test_exact_event_duplicate_is_readonly) ... ok
+test_malformed_tool (test_trace.Controls.test_malformed_tool) ... ok
+test_missing_limit (test_trace.Controls.test_missing_limit) ... ok
+test_other_session (test_trace.Controls.test_other_session) ... ok
+test_parent_double_debit (test_trace.Controls.test_parent_double_debit) ... ok
+test_reconnect_executes (test_trace.Controls.test_reconnect_executes) ... ok
+test_unknown_as_zero (test_trace.Controls.test_unknown_as_zero) ... ok
+test_unknown_side_effect_replay (test_trace.Controls.test_unknown_side_effect_replay) ... ok
+test_valid_fixture (test_trace.Controls.test_valid_fixture) ... ok
+test_waiting_approval (test_trace.Controls.test_waiting_approval) ... ok
+
+----------------------------------------------------------------------
+Ran 17 tests in 0.004s
+
+OK
