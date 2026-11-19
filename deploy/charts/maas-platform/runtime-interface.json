@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "scope": "observed-source-interface-not-production-readiness",
   "backend": {
-    "sourceCommit": "5fe2703fea633e1419b5ae77dd09e8fd0831c290",
+    "sourceCommit": "ccf62131af4548d6623b11a2656841946e266175",
     "apiGroup": "serving.maas.example",
     "operator": {
       "command": [
@@ -342,7 +342,7 @@
       "test/qa-cap6/summarize.py": "edcc54cccd1fb3fa45bdc76a58527b9fe28f68d99fac6c0efd416d480aca0857",
       "test/qa-chat-agent/cli-rejections.json": "20e4743b37b459a6e862faad61d1980e38dab3422b5e06217a5295af2c1b328e",
       "test/qa-chat-agent/double_settle.json": "118dab0f762bebdf2f51b0ee574420a516e53212087a459a86d46586a27098ad",
-      "test/qa-chat-agent/matrix.json": "27f0a5461e1b64f0ff8442c81ffdbc5879a056074643d2f893c772324b198a0f",
+      "test/qa-chat-agent/matrix.json": "06eee42b91b7ea79f3ba4970cc170ff57bcb16426e7b857d4f00aa7d5ec1fcd5",
       "test/qa-chat-agent/matrix.md": "73f59f7d9b111684562e149b6ded92e53601484fddbfae42c7e99aa8a71c9673",
       "test/qa-chat-agent/missing_identity.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
       "test/qa-chat-agent/oracle-tests.txt": "11d3334528baa6df20befb62c2927743e72c52a8cfddee389a415d4704c62047",
@@ -417,6 +417,20 @@
       "test/qa-usage/results.json": "8d968d8611e9f873f7eb09596bc9fc108058dbbafad8ce6c8225705ffeecbacb",
       "test/qa-usage/run.sh": "b9e3734622f1dee496e570b67d48e9ed49de9f48892b8f85e423e531624f8ee7",
       "test/qa-usage/summarize.py": "f910732f6fc6e6d43f212d9a9fb972507c9a593c05933686dfe557dd07b39382",
+      "test/qa-chat-agent/ar-a4c/.gitattributes": "a0e55af33882dd423d422a2f137f522411a2465ead074b329500dfbd31998f9e",
+      "test/qa-chat-agent/ar-a4c/ar_review_regression_test.go.in": "d7b2c6cabd3ec799b599bfff20d664337f0e2494b016e931160723675791da7d",
+      "test/qa-chat-agent/ar-a4c/ar_review_tools_test.go.in": "7adcbd9829d287a09dcbbd15f0e2cc1b581ce84422d9b4ec58298774f9f4af62",
+      "test/qa-chat-agent/ar-a4c/cleanup.json": "45cca9f6e71439931d387b1da4d0a25f0eefcaf104929cd39a57886328d72791",
+      "test/qa-chat-agent/ar-a4c/old-19e-review-probes.jsonl": "61a0589f5190d30bba77c90f85b281a605e12d8c988eee4a74cbd18712b3bfad",
+      "test/qa-chat-agent/ar-a4c/old-19e-review-summary.json": "4a1a13f903a36fdcdd7e16303625b7a7819b214351e29d65e1f766177c33226d",
+      "test/qa-chat-agent/ar-a4c/old-19e-review_probes_test.go": "12a60c8acaedba71fed1548bfc9ea11c145be2a724c308ca979a611a25299515",
+      "test/qa-chat-agent/ar-a4c/old-19e-validation-status.json": "65d7726e26fa2d5e7fc0f116b3f94d7ff085207c91a92ef1326cf67f0e50ef1b",
+      "test/qa-chat-agent/ar-a4c/overlay-windows.json": "d68df2dbab1494d381974a16c0ef89e2e5399e1cb95e4db959b9f376dedbc9ec",
+      "test/qa-chat-agent/ar-a4c/qa-a4c-author-regressions.txt": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "test/qa-chat-agent/ar-a4c/qa-a4c-independent.txt": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "test/qa-chat-agent/ar-a4c/qa-a4c-offline.txt": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "test/qa-chat-agent/ar-a4c/report.md": "d2987e5acc7678f53ea0f71b83175fae7d4f537a0ec417f9ea800f36a7b6b751",
+      "test/qa-chat-agent/ar-a4c/source-and-execution.json": "2cb78e0b61ba4387314ffe5041231d5d0d4aa85b8de1cd72afeb7e382cbee8ca",
       "scripts/tests/test_unified_sources.py": "9baa0c1b26691e7068e030ab10386a1bfa406ef794aa067150c85d7566d95735",
       "internal/admission/handler.go": "ac61df7e4e1a995cba390e7bc9757e51368788c8d0dd3c9cf171299d7edfddc1",
       "internal/admission/handler_test.go": "2a1d8c9548af0cee333fbb67a08d7f4e9b0ff8bc073152cf84141aa049a7b70a",
@@ -616,7 +630,7 @@
     }
   },
   "console": {
-    "sourceCommit": "5fe2703fea633e1419b5ae77dd09e8fd0831c290",
+    "sourceCommit": "ccf62131af4548d6623b11a2656841946e266175",
     "build": "npm ci && npm run build",
     "output": "console/dist",
     "localBridge": "development-and-explicit-workbench-mode-only",
