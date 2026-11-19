@@ -30,3 +30,5 @@ python test/qa-chat-agent/probe_reads.py test/qa-chat-agent/read-plan.template.j
 5. 真实Higress/profile/tool_calls批准/价表/Secret/额度/目标环境沿已有门槛，MAAS-18底层单模型闭环不因新增应用准备被关闭；工具次数与父run视图不构建第二份预算真源。
 
 旧U2/5481新10＋缺R1、UI16/Delete、R1–R3、Usage20/Reader12、QA-001/002/003、TLS/性能等已有记录保持各原SHA与范围，不重开或重跑。本轮未启动GPU、浏览器、Vite、DB、真实工具产品进程或调用供应商/目标集群；无后台工作，工具命令已前台收齐。MAAS-7保持in_progress，Chat/Agent和A01–A34整体未验收，下一轮在新契约/实现SHA上按影响范围定向运行并一次性交Mika归并。
+
+远端交付限制：本轮git push被GitHub拒绝，原文为remote: Invalid username or token. Password authentication is not supported for Git operations. / Authentication failed。先前cache daemon错误另列，不能据此误报推送成功。没有修改凭证/权限、绕过认证或创建新remote；可审提交与完整bundle通过任务附件交付，恢复仓库认证后推送原分支。远端读回仍为7487928，本地最新提交及四锁另记。
