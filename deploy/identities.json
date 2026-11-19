@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "scope": "installation-input-only-no-secret-values",
-  "sourceCommit": "c501f7daa9a8098b994940a3d7dd0ffb3d37b56f",
+  "sourceCommit": "ac5e9af36c2fbdda09e3713f3d0b6f9e6ca11f88",
   "productionWiringVerified": false,
   "connections": {
     "core": {
@@ -198,6 +198,7 @@
         "docs/model-capabilities/README.md",
         "docs/model-capabilities/deepseek-single-model-v0.7.md",
         "docs/model-capabilities/kv-pd-inputs-v0.4.md",
+        "docs/model-capabilities/tool-calls-v0.8.md",
         "docs/model-capabilities/usage-finality-v0.5.md",
         "docs/performance/README.md",
         "docs/performance/advanced.md",
@@ -408,7 +409,13 @@
         "tools/model_capabilities/test_capabilities.py",
         "tools/model_capabilities/test_deepseek_milestone.py",
         "tools/model_capabilities/test_kv_pd.py",
+        "tools/model_capabilities/test_tool_calls.py",
         "tools/model_capabilities/test_usage_finality.py",
+        "tools/model_capabilities/tool-calls/capability.json",
+        "tools/model_capabilities/tool-calls/source-evidence.json",
+        "tools/model_capabilities/tool-calls/turn.schema.json",
+        "tools/model_capabilities/tool-calls/vectors.json",
+        "tools/model_capabilities/tool_calls.py",
         "tools/model_capabilities/usage_finality.py",
         "tools/model_capabilities/vectors/U04.proposal-3.1.json",
         "tools/model_capabilities/vectors/U08.proposal-3.1.json",
