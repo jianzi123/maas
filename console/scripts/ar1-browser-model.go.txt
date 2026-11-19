@@ -1,0 +1,57 @@
+// Controlled browser-only model. Compile with the fixed backend's http.go.
+// ARHandler, Host, LocalStore, LocalSession, registry and safe tool execution are unchanged.
+package main
+
+import (
+ "context"
+ "encoding/json"
+ "errors"
+ "flag"
+ "fmt"
+ "os"
+ "time"
+ a "github.com/jianzi123/maas/internal/agentruntime"
+)
+type approvalTool struct{ a.Tool }
+func (t approvalTool) Spec() a.ToolSpec { s:=t.Tool.Spec(); s.Approval=true; return s }
+type controlledModel struct{}
+func (controlledModel) Supports(_ context.Context, m a.Model) error {
+ if m.Source!="controlled-local" || m.Revision!="1" || (m.Protocol!="text-v1" && m.Protocol!="tools-v1") { return a.ErrCapability }; return nil
+}
+func (controlledModel) Generate(ctx context.Context, r a.Request, emit func(string) error) (a.Response,error) {
+ tokens,money:=int64(10),int64(1)
+ out:=a.Response{RequestID:r.RequestID,TerminalConfirmed:true,Usage:a.Usage{Tokens:&tokens,Money:&money,Currency:"TST",Complete:true,
+ Groups:[]a.ARUsageGroup{{Currency:"TST",Price:"browser-controlled-v1",KnownTokens:"10",KnownMoney:"1",HeldTokens:"0",InflightTokens:"0",HeldMoney:"0",InflightMoney:"0"}}}}
+ text:=""
+ for _,m:=range r.Messages { if m.Role=="user" { text=""; for _,p:=range m.Parts { text+=p.Text } } }
+ if text=="/unknown" { return a.Response{RequestID:r.RequestID,OutcomeUnknown:true},errors.New("controlled_unknown_result") }
+ if text=="/error" { return out,errors.New("controlled_upstream_failure") }
+ if text=="/slow" {
+   if e:=emit("正在生成，等待取消或只读重连。"); e!=nil {return out,e}
+   select { case <-ctx.Done():return out,ctx.Err();case <-time.After(3*time.Second): }
+ }
+ if r.Model.Protocol=="tools-v1" {
+   hasTool:=false
+   for _,m:=range r.Messages { if m.Role=="tool" {hasTool=true} }
+   if !hasTool {
+     out.Finish="tool_calls"
+     out.Calls=[]a.Call{{ID:"browser-calculate",Name:"bounded_arithmetic",Arguments:json.RawMessage(`{"a":6,"b":7,"op":"multiply"}`)},{ID:"browser-catalog",Name:"list_visible_models",Arguments:json.RawMessage(`{}`)}}
+     return out,nil
+   }
+ }
+ for _,chunk:=range []string{"### 受控回复\n\n","你好，🌏。","6 × 7 = 42。\n\n","```ts\nconst answer = 42;\n```\n","<img src=x onerror=alert(1)>"} {
+   if e:=emit(chunk);e!=nil{return out,e}
+   select {case <-ctx.Done():return out,ctx.Err();case <-time.After(80*time.Millisecond):}
+ }
+ out.Finish="stop"
+ return out,nil
+}
+func main() {
+ dir:=flag.String("state-dir","","local state")
+ listen:=flag.String("listen","","loopback")
+ owner:=flag.String("owner-id","","test principal")
+ contract:=flag.String("contract","docs/contracts/agent-runtime/ar1-draft2/openapi.json","fixed contract")
+ flag.Parse()
+ store,e:=a.OpenLocalStore(*dir);if e!=nil{panic(e)};defer store.Close()
+ if e=serveAR(*listen,*owner,*contract,*dir,store);e!=nil{fmt.Fprintln(os.Stderr,e);os.Exit(1)}
+}

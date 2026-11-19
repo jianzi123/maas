@@ -1,6 +1,8 @@
 // Development-only bridge to the existing loopback Go management API.
 export function localControlFromEnv(env = process.env) {
   if (!env.MAAS_LOCAL_API) return undefined;
+  if (![undefined, "0", "1"].includes(env.MAAS_LOCAL_INFERENCE_ENABLED))
+    throw Error("MAAS_LOCAL_INFERENCE_ENABLED must be 0 or 1");
   const target = new URL(env.MAAS_LOCAL_API);
   if (
     target.protocol !== "http:" ||
@@ -32,6 +34,9 @@ export function localControlFromEnv(env = process.env) {
       return {
         define: {
           "import.meta.env.VITE_LOCAL_CONTROL": JSON.stringify("true"),
+          "import.meta.env.VITE_LOCAL_INFERENCE_ENABLED": JSON.stringify(
+            env.MAAS_LOCAL_INFERENCE_ENABLED === "1" ? "true" : "false",
+          ),
           "import.meta.env.VITE_CONSOLE_FIXTURES": JSON.stringify("false"),
         },
         server: {

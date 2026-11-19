@@ -9,9 +9,11 @@ import {
   assertReleaseAccepted,
   releaseUpdateAction,
 } from "../api/recovery";
+import ReleaseForm from "../components/ReleaseForm.vue";
 import { callableLabel } from "../domain";
+const props = defineProps<{ initialModel?: string }>();
 const workbenchMode = import.meta.env.MODE === "workbench";
-import { usePage, explain, uncertain } from "../ui";
+import { usePage, explain, uncertain, statusLabel, reasonLabel } from "../ui";
 const { rows, busy, error, cursor, refresh } = usePage((cursor) =>
   api.json<S["ReleaseList"]>(
     ADMIN +
@@ -33,6 +35,28 @@ const selected = shallowRef<S["ReleaseModelRelease"] | null>(null),
   confirmDelete = ref(false),
   operationReading = ref(false),
   needsRead = ref(false);
+const progressStages = [
+  { label: "配置受理", type: "Accepted" },
+  { label: "依赖准备", type: "DependenciesReady" },
+  { label: "来源就绪", type: "RuntimeReady" },
+  { label: "网关应用", type: "GatewayApplied" },
+  { label: "保护验证", type: "ValidationPassed" },
+  { label: "可调用", type: "Callable" },
+];
+const blocked = computed(
+  () =>
+    selected.value?.status?.conditions.filter(
+      (c) =>
+        c.status !== "True" &&
+        ![
+          "Progressing",
+          "Drained",
+          "CleanupComplete",
+          "Degraded",
+          "AdmissionClosed",
+        ].includes(c.type),
+    ) ?? [],
+);
 const operationResolved = computed(
   () =>
     operation.value?.state === "Succeeded" ||
@@ -101,7 +125,7 @@ function template(source: "ExternalAPI" | "SelfHosted") {
       kind: "ModelRelease",
       metadata: { namespace: "", name: "" },
       spec: {
-        modelAlias: "",
+        modelAlias: props.initialModel ?? "",
         source: sourceSpec,
         gatewayRef: profile(),
         businessRefs: {
@@ -366,6 +390,22 @@ async function recoverOperation() {
     )
       throw new Error("操作归属不一致，保留原操作供核对。");
     operation.value = op;
+    if (op.action === "Delete" && op.state === "Succeeded") {
+      selectionEpoch++;
+      selected.value = null;
+      editBaseline.value = null;
+      editor.value = "";
+      history.value = null;
+      editing.value = false;
+      reading.value = false;
+      needsRead.value = false;
+      unknown.value = false;
+      confirmDelete.value = false;
+      message.value =
+        "原删除操作已确认完成；保留原操作记录，可手动创建新配置。";
+      await refresh();
+      return;
+    }
     if (unknown.value) {
       if (op.state === "Succeeded" || op.state === "Failed") {
         // A terminal operation resolves the write, but an older CR is no edit baseline.
@@ -388,7 +428,15 @@ async function recoverOperation() {
     if (current()) operationReading.value = false;
   }
 }
-onMounted(() => refresh());
+onMounted(async () => {
+  await refresh();
+  if (props.initialModel) {
+    const row = rows.value.find(
+      (r) => r.spec.modelAlias === props.initialModel,
+    );
+    if (row) await select(row);
+  }
+});
 onBeforeUnmount(() => {
   alive = false;
   selectionEpoch++;
@@ -426,19 +474,46 @@ onBeforeUnmount(() => {
   </button>
   <p v-if="busy" role="status">正在读取发布…</p>
   <p v-if="!busy && !rows.length && !error" class="empty">暂无模型发布。</p>
-  <div class="card-grid">
-    <button
-      v-for="r in rows"
-      :key="r.metadata.uid ?? r.metadata.name"
-      class="panel release-card"
-      :disabled="reading || writing"
-      @click="select(r)"
-    >
-      <strong>{{ r.spec.modelAlias }}</strong
-      ><span>{{ r.spec.source.type }} · {{ r.status?.phase ?? "未观测" }}</span
-      ><span class="badge">{{ callableLabel(r) }}</span
-      ><small>{{ r.metadata.namespace }} / {{ r.metadata.name }}</small>
-    </button>
+  <div class="panel table-scroll release-inventory">
+    <table>
+      <thead>
+        <tr>
+          <th>模型 / 配置名称</th>
+          <th>来源</th>
+          <th>当前阶段</th>
+          <th>活动版本</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="r in rows" :key="r.metadata.uid ?? r.metadata.name">
+          <td data-label="模型">
+            <strong>{{ r.spec.modelAlias }}</strong
+            ><small class="cell-sub"
+              >{{ r.metadata.namespace }} / {{ r.metadata.name }}</small
+            >
+          </td>
+          <td data-label="来源">
+            {{ r.spec.source.type === "ExternalAPI" ? "外部 API" : "私有推理" }}
+          </td>
+          <td data-label="阶段">
+            <span class="badge">{{
+              statusLabel(r.status?.phase ?? "unknown")
+            }}</span>
+          </td>
+          <td data-label="活动">{{ callableLabel(r) }}</td>
+          <td data-label="操作">
+            <button
+              class="release-card"
+              :disabled="reading || writing"
+              @click="select(r)"
+            >
+              查看详情
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
   <button v-if="cursor" :disabled="busy" @click="refresh(true)">
     加载更多发布
@@ -450,40 +525,89 @@ onBeforeUnmount(() => {
         重读当前 CR
       </button>
     </div>
-    <dl>
-      <dt>已提交 generation</dt>
-      <dd>{{ selected.metadata.generation ?? "未知" }}</dd>
-      <dt>已观测 generation</dt>
-      <dd>{{ selected.status?.observedGeneration ?? "未知" }}</dd>
-      <dt>活动 generation</dt>
-      <dd>{{ selected.status?.activeGeneration ?? "未知" }}</dd>
-      <dt>期望修订</dt>
-      <dd class="mono">{{ selected.status?.desiredRevision ?? "未知" }}</dd>
-      <dt>活动修订</dt>
-      <dd class="mono">{{ selected.status?.activeRevision ?? "未知" }}</dd>
-      <dt>可调用</dt>
-      <dd>{{ callableLabel(selected) }}</dd>
-    </dl>
-    <div class="table-scroll">
-      <table>
-        <thead>
-          <tr>
-            <th>条件</th>
-            <th>状态</th>
-            <th>原因 / 信息</th>
-            <th>观测代数</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="c in selected.status?.conditions" :key="c.type">
-            <td>{{ c.type }}</td>
-            <td>{{ c.status }}</td>
-            <td>{{ c.reason }} · {{ c.message }}</td>
-            <td>{{ c.observedGeneration }}</td>
-          </tr>
-        </tbody>
-      </table>
+    <ol class="release-progress">
+      <li
+        v-for="stage in progressStages"
+        :key="stage.type"
+        :class="{
+          done: selected.status?.conditions.some(
+            (c) =>
+              c.type === stage.type &&
+              c.status === 'True' &&
+              (stage.type === 'Callable' ||
+                c.observedGeneration === selected?.metadata.generation),
+          ),
+        }"
+      >
+        <span>{{
+          selected.status?.conditions.some(
+            (c) =>
+              c.type === stage.type &&
+              c.status === "True" &&
+              (stage.type === "Callable" ||
+                c.observedGeneration === selected?.metadata.generation),
+          )
+            ? "✓"
+            : "○"
+        }}</span
+        >{{ stage.label }}
+      </li>
+    </ol>
+    <div class="info-strip">
+      当前活动：{{ callableLabel(selected) }} · 目标：{{
+        selected.status?.observedGeneration !== selected.metadata.generation
+          ? "等待观测新配置"
+          : statusLabel(selected.status?.phase ?? "unknown")
+      }}
     </div>
+    <div v-if="blocked.length" class="blocked-list">
+      <h3>当前阻塞与下一步</h3>
+      <p v-for="c in blocked" :key="c.type">
+        <strong>{{ reasonLabel(c.reason) }}</strong
+        ><small>{{ c.message }}</small>
+      </p>
+    </div>
+    <details class="technical-detail">
+      <summary>技术详情 · 完整条件、UID / RV 与修订</summary>
+      <dl>
+        <dt>CR UID / RV</dt>
+        <dd>
+          {{ selected.metadata.uid }} / {{ selected.metadata.resourceVersion }}
+        </dd>
+        <dt>已提交 generation</dt>
+        <dd>{{ selected.metadata.generation ?? "未知" }}</dd>
+        <dt>已观测 generation</dt>
+        <dd>{{ selected.status?.observedGeneration ?? "未知" }}</dd>
+        <dt>活动 generation</dt>
+        <dd>{{ selected.status?.activeGeneration ?? "未知" }}</dd>
+        <dt>期望修订</dt>
+        <dd class="mono">{{ selected.status?.desiredRevision ?? "未知" }}</dd>
+        <dt>活动修订</dt>
+        <dd class="mono">{{ selected.status?.activeRevision ?? "未知" }}</dd>
+        <dt>可调用</dt>
+        <dd>{{ callableLabel(selected) }}</dd>
+      </dl>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>条件</th>
+              <th>状态</th>
+              <th>原因 / 信息</th>
+              <th>观测代数</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="c in selected.status?.conditions" :key="c.type">
+              <td>{{ c.type }}</td>
+              <td>{{ c.status }}</td>
+              <td>{{ c.reason }} · {{ c.message }}</td>
+              <td>{{ c.observedGeneration }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
     <p v-if="!selected.status" class="notice">
       尚无状态观测；配置存在不代表已生效。
     </p>
@@ -556,18 +680,11 @@ onBeforeUnmount(() => {
       填入经过批准的引用与参数。模板空值和 0 占位必须补齐；Secret 只接受名称/key
       引用，禁止录入凭证正文。
     </p>
-    <label
-      >ModelRelease JSON<textarea
-        v-model="editor"
-        class="code-editor"
-        rows="22"
-        spellcheck="false"
-        required
-        :disabled="writing || unknown"
-      ></textarea></label
-    ><button class="primary" :disabled="writing || unknown">
-      校验并提交配置
-    </button>
+    <ReleaseForm
+      v-model="editor"
+      :busy="writing || unknown"
+      :existing="!!selected"
+    />
   </form>
   <section v-if="operation" class="panel">
     <h2>原操作查询</h2>

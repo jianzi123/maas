@@ -172,7 +172,9 @@ for (const kind of ["requests", "summary"]) {
       return Response.json(page);
     };
     const w = await openUsage(kind);
-    expect(w.findAll("article")).toHaveLength(1);
+    expect(
+      w.findAll(kind === "requests" ? "[data-testid=request-row]" : "article"),
+    ).toHaveLength(1);
     failing = true;
     const alias = w
       .findAll("label")
@@ -181,14 +183,20 @@ for (const kind of ["requests", "summary"]) {
     await alias.setValue("model-b");
     await w.find("form").trigger("submit");
     await flushPromises();
-    expect(w.findAll("article")).toHaveLength(0);
+    expect(
+      w.findAll(kind === "requests" ? "[data-testid=request-row]" : "article"),
+    ).toHaveLength(0);
     expect(w.text()).not.toContain("本次查询数据完整");
     expect(w.find(".empty").exists()).toBe(false);
     expect(w.find('[role="alert"]').exists()).toBe(true);
     failing = false;
     await w.find("form").trigger("submit");
     await flushPromises();
-    expect(w.find("article").text()).toContain("model-b");
+    expect(
+      w
+        .find(kind === "requests" ? "[data-testid=request-row]" : "article")
+        .text(),
+    ).toContain("model-b");
     expect(w.text()).toContain("本次查询数据完整");
     if (kind === "requests") expect(w.text()).toContain("未知 / 不可获取");
     else expect(w.text()).toContain("140");
@@ -207,13 +215,17 @@ for (const kind of ["requests", "summary"]) {
     const w = await openUsage(kind);
     await button(w, "加载更多").trigger("click");
     await flushPromises();
-    expect(w.findAll("article")).toHaveLength(0);
+    expect(
+      w.findAll(kind === "requests" ? "[data-testid=request-row]" : "article"),
+    ).toHaveLength(0);
     expect(w.text()).not.toContain("本次查询数据完整");
     expect(w.text()).not.toContain("加载更多");
     await w.find("form").trigger("submit");
     await flushPromises();
     expect(queries.at(-1)).not.toContain("cursor=");
-    expect(w.findAll("article")).toHaveLength(1);
+    expect(
+      w.findAll(kind === "requests" ? "[data-testid=request-row]" : "article"),
+    ).toHaveLength(1);
   });
 }
 it("FE-U1: a late page cannot replace a newer successful filter", async () => {
@@ -240,7 +252,7 @@ it("FE-U1: a late page cannot replace a newer successful filter", async () => {
   await flushPromises();
   pending.resolve(fixtureError("dependency_unavailable", 503));
   await flushPromises();
-  expect(w.find("article").text()).toContain("new");
+  expect(w.find("[data-testid=request-row]").text()).toContain("new");
   expect(w.find('[role="alert"]').exists()).toBe(false);
   expect(w.text()).toContain("本次查询数据完整");
 });

@@ -1,0 +1,14 @@
+{
+  "contract": "AR-1 / 1.0.0-draft.2",
+  "repository": "https://github.com/jianzi123/maas",
+  "backendCommit": "19e43ba980f1bd9f499a92dda435b74b626bf7e9",
+  "openapi": {
+    "source": "docs/contracts/agent-runtime/ar1-draft2/openapi.json",
+    "sha256": "b8a503492a847c419e5a844cd9582567d6f0532d1c7782b5b4685be072f209a8"
+  },
+  "eventSchema": {
+    "source": "docs/contracts/agent-runtime/ar1-draft2/session-event.schema.json",
+    "sha256": "b2513e7799729e7bbfe38262bdc0f8155d777ebb36e7c49d66d0d434125ba089"
+  },
+  "runtimeValidation": "Same Go AR-1 service; controlled model, real safe tools and file store. No production or supplier acceptance."
+}
