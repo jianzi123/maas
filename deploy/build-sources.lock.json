@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "sourceMode": "single-repository-code-commit",
   "backend": {
-    "sourceCommit": "a7b3b2c7dcad711a054184df00c17e3a10ee37df",
+    "sourceCommit": "5fe2703fea633e1419b5ae77dd09e8fd0831c290",
     "files": {
       ".gitattributes": "5b93b86d7f7e94c3dafdd41b284afe95a95a985e8afc719914173db11890cd36",
       ".gitignore": "46cf94096a926a26bc1a913b6cc632adacab0a96ab42d72a7dcbf216bcbaaa77",
@@ -303,7 +303,7 @@
       "test/qa-chat-agent/oracle-tests.txt": "11d3334528baa6df20befb62c2927743e72c52a8cfddee389a415d4704c62047",
       "test/qa-chat-agent/probe_reads.py": "e7fa85b01f13dc66a470a88665bd6bd75e8846c39975987b853c29501b41d5d4",
       "test/qa-chat-agent/read-plan.template.json": "b9a47f01f357c9954a69e441f467e757ae5e7ecfe31b7cd3c8db1cc29e3018ed",
-      "test/qa-chat-agent/report.md": "9f8ca9c4d8a9220727488e5c3118d64108fac3049dedbfc9bc1755cc73a237bb",
+      "test/qa-chat-agent/report.md": "049885605d01783e8a3f549d7aee8f97e6a31d84829095ea21b32d963dc0e32e",
       "test/qa-chat-agent/synthetic-valid.json": "00589aef9690e85952a89f565afef1133ef314b0f6cea7af442a8bc97e51cadb",
       "test/qa-chat-agent/test_trace.py": "262d9b8f561adb4726fedc6701e2c3776c3ad748fe17457f7499071f85665bb3",
       "test/qa-chat-agent/unknown_replay.json": "bd59a9ef219c0d42df20b748e4b15356edee4a581adc70c49bd65a4d597cd687",
@@ -556,7 +556,7 @@
     }
   },
   "console": {
-    "sourceCommit": "a7b3b2c7dcad711a054184df00c17e3a10ee37df",
+    "sourceCommit": "5fe2703fea633e1419b5ae77dd09e8fd0831c290",
     "files": {
       "console/.env.fixtures": "4d5e22f8eeb4bbf5a027a34c7a4bfef806876a470f89440f9611bd01a9d8c5f7",
       "console/.env.workbench": "930edf078e756f41d37fad0f7ce87332d8af59e65dac57b11797bcf0117a9216",
