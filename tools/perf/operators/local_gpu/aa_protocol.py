@@ -69,6 +69,14 @@ def check_budget(lease):
  need(0<=lease["driver_elapsed_at_send_ns"]<600_000_000_000,"driver elapsed")
  need(0<lease["soft_remaining_ns"]<=540_000_000_000-lease["driver_elapsed_at_send_ns"],"budget reset soft")
  need(lease["soft_remaining_ns"]<lease["hard_remaining_ns"]<=600_000_000_000-lease["driver_elapsed_at_send_ns"],"budget reset hard")
+def encode_lease(lease):
+ check_budget(lease)
+ return json.dumps(lease,sort_keys=True).encode("utf-8")+bytes((10,))
+def read_lease(stream):
+ line=stream.readline()
+ need(line.endswith(chr(10)),"lease framing requires actual LF")
+ need(stream.read()=="","exactly one lease frame required")
+ lease=json.loads(line);check_budget(lease);return lease
 def check_binding(b):
  need(set(b["aliases"])=={"A","Aprime"} and b["aliases"]["A"]==b["aliases"]["Aprime"],"alias identity")
  a=b["aliases"]["A"];need(a["callable_object"]==b["callable_object"] and a["graph_object"]==b["graph_object"],"graph/callable")

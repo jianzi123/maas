@@ -1,0 +1,12 @@
+usage: run_aa_window.py [-h] --plan PLAN [--output OUTPUT] [--execute]
+                        [--validate-only] [--validate-lease-only]
+
+P25-AA parent: one inherited research lock, two serial workers, one budget.
+
+options:
+  -h, --help            show this help message and exit
+  --plan PLAN
+  --output OUTPUT
+  --execute
+  --validate-only
+  --validate-lease-only

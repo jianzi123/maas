@@ -1,0 +1,14 @@
+{
+  "reconstructed_from_frozen_source_and_saved_lease": true,
+  "raw_stderr_file": "execution/foreground.log",
+  "execution_checkout": "dea6485a4fa62426f610e0f15463513e63e880f6",
+  "suffix_hex": "5c6e",
+  "error": {
+    "type": "JSONDecodeError",
+    "message": "Extra data: line 1 column 229 (char 228)",
+    "position": 228
+  },
+  "GPU_workers_started": 0,
+  "measurement_not_performed": true,
+  "additional_GPU_attempts": 0
+}

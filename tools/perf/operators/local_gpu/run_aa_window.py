@@ -2,17 +2,22 @@
 import argparse,json,os,signal,subprocess,sys,time,uuid
 from pathlib import Path
 from cadence_protocol import digest,write_json
-from aa_protocol import CONFIG,load,need,check_budget
+from aa_protocol import CONFIG,load,need,check_budget,read_lease
 def main():
  p=argparse.ArgumentParser(description=__doc__);p.add_argument("--plan",type=Path,required=True)
  p.add_argument("--output",type=Path);p.add_argument("--execute",action="store_true");p.add_argument("--validate-only",action="store_true")
+ p.add_argument("--validate-lease-only",action="store_true")
  a=p.parse_args();plan=load(a.plan)
+ if a.validate_lease_only:
+  lease=read_lease(sys.stdin)
+  need(not any(n in sys.modules for n in ("torch","sglang","pynvml")),"GPU import in lease validation")
+  print(json.dumps({"lease_validated":True,"GPU_imports":False,"window_id":lease["window_id"]}));return 0
  if a.validate_only:
   print(json.dumps({"validated":True,"GPU_imports":False,"rows":128,"max_workers":2,"total_seconds":600}));return 0
  need(a.execute and plan["execution_enabled"] and a.output and os.name=="posix","explicit authorized POSIX window required")
  a.output.mkdir(parents=True,exist_ok=False)
  write_json(a.output/"ready.json",{"pid":os.getpid(),"plan_sha256":digest(plan),"GPU_started":False},exclusive=True)
- lease=json.loads(sys.stdin.readline());check_budget(lease)
+ lease=read_lease(sys.stdin)
  start=time.perf_counter_ns();clock=f"{lease['window_id']}/parent/pid{os.getpid()}"
  lifecycle=[];failure=None;guard=None;bank=None;work=None
  def elapsed():return time.perf_counter_ns()-start

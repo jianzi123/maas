@@ -1,0 +1,94 @@
+{
+  "old_window_replayed_exactly": true,
+  "old_GPU_workers": 0,
+  "planned_identities": 128,
+  "alias_pair_identities": 32,
+  "difference_and_ratio": "all null, not measured",
+  "checks": [
+    {
+      "host": "Windows",
+      "packet": "fixed",
+      "command": [
+        "D:\\ProgramData\\anaconda3\\python.exe",
+        "-X",
+        "utf8",
+        "C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-10-79a30240b357\\workdir\\repo\\tools\\perf\\operators\\local_gpu\\run_aa_window.py",
+        "--plan",
+        "C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-10-79a30240b357\\workdir\\deliverables\\aa-v0.26\\transport-fix-disabled-plan.json",
+        "--validate-lease-only"
+      ],
+      "exit_code": 0,
+      "GPU_execution": false
+    },
+    {
+      "host": "Windows",
+      "packet": "old_literal_escape",
+      "command": [
+        "D:\\ProgramData\\anaconda3\\python.exe",
+        "-X",
+        "utf8",
+        "C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-10-79a30240b357\\workdir\\repo\\tools\\perf\\operators\\local_gpu\\run_aa_window.py",
+        "--plan",
+        "C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-10-79a30240b357\\workdir\\deliverables\\aa-v0.26\\transport-fix-disabled-plan.json",
+        "--validate-lease-only"
+      ],
+      "exit_code": 1,
+      "GPU_execution": false
+    },
+    {
+      "host": "WSL",
+      "packet": "fixed",
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu-22.04",
+        "--",
+        "/var/tmp/maas-10-gpu-01a1a5ba/bin/python",
+        "/mnt/c/Users/a9786/multica_workspaces_desktop-api.multica.ai/maas-007-da4ec7313117/maas-10-79a30240b357/workdir/repo/tools/perf/operators/local_gpu/run_aa_window.py",
+        "--plan",
+        "/mnt/c/Users/a9786/multica_workspaces_desktop-api.multica.ai/maas-007-da4ec7313117/maas-10-79a30240b357/workdir/deliverables/aa-v0.26/transport-fix-disabled-plan.json",
+        "--validate-lease-only"
+      ],
+      "exit_code": 0,
+      "GPU_execution": false
+    },
+    {
+      "host": "WSL",
+      "packet": "old_literal_escape",
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu-22.04",
+        "--",
+        "/var/tmp/maas-10-gpu-01a1a5ba/bin/python",
+        "/mnt/c/Users/a9786/multica_workspaces_desktop-api.multica.ai/maas-007-da4ec7313117/maas-10-79a30240b357/workdir/repo/tools/perf/operators/local_gpu/run_aa_window.py",
+        "--plan",
+        "/mnt/c/Users/a9786/multica_workspaces_desktop-api.multica.ai/maas-007-da4ec7313117/maas-10-79a30240b357/workdir/deliverables/aa-v0.26/transport-fix-disabled-plan.json",
+        "--validate-lease-only"
+      ],
+      "exit_code": 1,
+      "GPU_execution": false
+    }
+  ],
+  "fixed_packet_suffix_hex": "0a",
+  "old_packet_suffix_hex": "5c6e",
+  "new_qualification_window_started": false,
+  "fixed_plan_execution_enabled": false,
+  "fixed_sources": {
+    "test_aa_window.py": "04e572c502063e99d1736fe9e4092c1a8127b41a0f6fa1fa513ad8a870795139",
+    "aa_protocol.py": "fbc051bdf0f4d7bdf3dbf446742c0958ae7ae9619668b555a1da285c76185212",
+    "aa_runtime.py": "e28b1795cd5a1fcc793cb9250b57f8ac2d1a9c73cc49ddb5512feec687394f50",
+    "aa_worker.py": "f6bd6b62ae26dac4cfb20f5e23b2369c8599b0592704a0a5344da1591c4d55eb",
+    "run_aa_window.py": "734823cbd20db42f215ba7840782fc8fce8c821c6ca42d172b241572479df6e6",
+    "analyze_aa_window.py": "697c167199ed502f9de95aa840a4f52a8b0eaef10fd8d69e7fa09466abd927a8",
+    "launch_aa_window.py": "a01c9eaa4500c251f29297246d4880d986bdee4b4e67bee56205d241b0f7c082",
+    "reference_runtime.py": "e00d867403a9d0a8cb87c26ced5a9e5f0050d25244b1c93272a5a6792fe38ad5",
+    "native_kv_binding.py": "8d03d465e964a70c7dedcf358097628a47779902b0f4635633e5f2c783d00149",
+    "analyze_kv_cadence.py": "3d4c176f257afe7a977fcf1fdcfd9da2b0df9fa29eed977256c36c9291a0639b",
+    "run_decode.py": "b747254afc705de607e31071c7388948ca6c9fbbdd0f723d326ac880064fe7dd",
+    "decode_path.py": "0ec39daec3debde3594c969559d8b9f46371f18f1b0d8741dc2c1c18f4b51561",
+    "cadence_protocol.py": "b58cc3467a0e3a34c0f5f49ad812ac89bc4740b897d6d35d40e0ba84fec2ac9f",
+    "decode-source-lock.json": "fc91e7d18da871fa5f234e24c8ebde3f686ee614f59211b9f0f8b9cc6020ea70",
+    "evidence/framework-v0.18/framework-source-lock.json": "1b8e855ba811073f6e13ceb87a071f5cfc9dcd08601402040cbcff96d80d9b9e"
+  }
+}

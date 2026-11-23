@@ -154,4 +154,31 @@ class AATests(unittest.TestCase):
  def test_128_missing_still_32_pairs(self):
   for proc in ("REF","HOLD"):(self.root/proc/"blocks.jsonl").write_text("")
   r=analyze(self.plan,self.root);self.assertEqual((r["measured_rows"],len(r["alias_pairs"])),(0,32));self.assertFalse(r["criteria_satisfied"])
+class LeaseTransportTests(unittest.TestCase):
+ def setUp(self):
+  self.lease={"window_id":"UNIT_LEASE","total_seconds":600,"stop_new_seconds":540,"driver_elapsed_at_send_ns":1000,
+   "soft_remaining_ns":539999998000,"hard_remaining_ns":599999998000,"protected_daemon_pid":99999}
+ def test_actual_LF_roundtrip(self):
+  import io
+  from aa_protocol import encode_lease,read_lease
+  payload=encode_lease(self.lease)
+  self.assertEqual(payload[-1:],bytes((10,)));self.assertNotEqual(payload[-2:],bytes((92,110)))
+  self.assertEqual(read_lease(io.StringIO(payload.decode())),self.lease)
+ def test_frozen_literal_escape_failure(self):
+  import io
+  from aa_protocol import read_lease
+  payload=json.dumps(self.lease).encode()+bytes((92,110))
+  with self.assertRaises(json.JSONDecodeError):json.loads(payload)
+  with self.assertRaisesRegex(ValueError,"actual LF"):read_lease(io.StringIO(payload.decode()))
+ def test_extra_frame_rejected(self):
+  import io
+  from aa_protocol import encode_lease,read_lease
+  with self.assertRaisesRegex(ValueError,"exactly one"):
+   read_lease(io.StringIO((encode_lease(self.lease)+bytes((123,125,10))).decode()))
+ def test_EOF_and_invalid_lease_rejected(self):
+  import io
+  from aa_protocol import encode_lease,read_lease
+  with self.assertRaisesRegex(ValueError,"actual LF"):read_lease(io.StringIO(""))
+  self.lease["soft_remaining_ns"]=540000000000
+  with self.assertRaises(ValueError):encode_lease(self.lease)
 if __name__=="__main__":unittest.main()

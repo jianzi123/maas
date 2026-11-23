@@ -31,4 +31,6 @@ Engine只做过导入，模型生成、scheduler/serving及质量未验证。手
 
 离线代表性审计：audit_reference_representativeness.py仅消费v0.24原件，输出128行不重叠时间分解和16层均值差，见[审计及新采前设计v0.25](../../../../docs/performance/literature/elit01-representativeness-audit-v0.25.md)。不启动GPU、采集器或主比较；旧bank/hash/34/64不变。
 
-P25-AA opt-in入口：aa_protocol.py / launch_aa_window.py / run_aa_window.py / aa_worker.py / analyze_aa_window.py。18项新CPU门禁；双进程共用600s，别名直接同一method，结果仅为本窗重复性。见[采前协议v0.26](../../../../docs/performance/literature/p25-aa-method-v0.26.md)。旧query bank与v0.25设计不回写。
+P25-AA opt-in入口：aa_protocol.py / launch_aa_window.py / run_aa_window.py / aa_worker.py / analyze_aa_window.py。采前18项门禁、报文修复后22项CPU检查；双进程共用600s，别名直接同一method，结果仅为本窗重复性。见[采前协议v0.26](../../../../docs/performance/literature/p25-aa-method-v0.26.md)。旧query bank与v0.25设计不回写。
+
+P25-AA本次实际窗口在启动报文阶段失败，未启动模型worker；原15源码/128缺测和CPU修复见[结果v0.26](../../../../docs/performance/literature/p25-aa-result-v0.26.md)。当前22项CPU检查不等于GPU验证；旧plan需用冻结producer离线复核。

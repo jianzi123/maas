@@ -2,7 +2,7 @@
 import argparse,json,os,subprocess,sys,time,uuid,datetime
 from pathlib import Path
 from cadence_protocol import digest,write_json
-from aa_protocol import load,need
+from aa_protocol import load,need,encode_lease
 def main():
  p=argparse.ArgumentParser(description=__doc__);p.add_argument("--plan",type=Path,required=True);p.add_argument("--output",type=Path,required=True)
  p.add_argument("--execute",action="store_true");p.add_argument("--validate-only",action="store_true");p.add_argument("--protected-daemon-pid",type=int)
@@ -39,7 +39,7 @@ def main():
      "soft_remaining_ns":540_000_000_000-elapsed-1_000_000_000,
      "hard_remaining_ns":600_000_000_000-elapsed-1_000_000_000,"protected_daemon_pid":a.protected_daemon_pid}
    write_json(a.output/"lease.json",lease,exclusive=True)
-   child.stdin.write((json.dumps(lease)+"\\n").encode());child.stdin.flush();child.stdin.close()
+   child.stdin.write(encode_lease(lease));child.stdin.flush();child.stdin.close()
    remaining=max(.1,(600_000_000_000-(time.perf_counter_ns()-start))/1e9)
    try:rc=child.wait(timeout=remaining)
    except subprocess.TimeoutExpired:

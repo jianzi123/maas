@@ -1,0 +1,20 @@
+{
+  "command": [
+    "D:\\ProgramData\\anaconda3\\python.exe",
+    "-X",
+    "utf8",
+    "C:\\Users\\a9786\\AppData\\Local\\Temp\\multica-task-757470084\\aa-frozen-2kg396wb\\analyze_aa_window.py",
+    "--plan",
+    "C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-10-79a30240b357\\workdir\\deliverables\\aa-v0.26\\plan.json",
+    "--root",
+    "C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-10-79a30240b357\\workdir\\deliverables\\aa-v0.26\\execution\\window",
+    "--output",
+    "C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-10-79a30240b357\\workdir\\deliverables\\aa-v0.26\\frozen-offline-reanalysis.json"
+  ],
+  "exit_code": 2,
+  "stdout": "{\"engineering_repeatability_qualified\": false, \"measured_rows\": 0, \"holdout_matched\": 0, \"integrity_valid\": false}\n",
+  "stderr": "",
+  "report_equals_original": true,
+  "frozen_source_count": 15,
+  "GPU_executed": false
+}

@@ -1,5 +1,7 @@
 # MaaS 性能与框架工程手册
 
+本轮：[P25-AA启动失败与CPU修复v0.26](literature/p25-aa-result-v0.26.md)。一次窗口在JSON报文阶段退出，模型worker0、128缺测；修复后22项CPU检查与双端报文验证通过，未重试GPU，重复性仍未检验。
+
 本轮：[代表性审计与新的采前设计v0.25](literature/elit01-representativeness-audit-v0.25.md)。解释16层前缀/prepare/query差异、状态缺口和固定目标的适用性；仅离线，P25-AA是待评审资格设计，不启动GPU或主比较。
 
 本轮：[真实参考模板资格小窗v0.24](literature/elit01-reference-qualification-v0.24.md)。一个GPU进程128块完整，holdout仅34/64匹配，模板不合格；已停在资格阶段并保留完整超差与最小复现。
