@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "sourceMode": "single-repository-code-commit",
   "backend": {
-    "sourceCommit": "3cf24eecaca96c7423523281adb7977093cd7b86",
+    "sourceCommit": "23eb8898dbce6f9ab1efbfc970a1611ecd632ca5",
     "files": {
       ".gitattributes": "dfd50b4d90593dde1621efa8da5b6dc071c7cf1844c139932e5b26df2607e6d5",
       ".gitignore": "46cf94096a926a26bc1a913b6cc632adacab0a96ab42d72a7dcbf216bcbaaa77",
@@ -614,7 +614,7 @@
     }
   },
   "console": {
-    "sourceCommit": "3cf24eecaca96c7423523281adb7977093cd7b86",
+    "sourceCommit": "23eb8898dbce6f9ab1efbfc970a1611ecd632ca5",
     "files": {
       "console/.env.fixtures": "4d5e22f8eeb4bbf5a027a34c7a4bfef806876a470f89440f9611bd01a9d8c5f7",
       "console/.env.workbench": "930edf078e756f41d37fad0f7ce87332d8af59e65dac57b11797bcf0117a9216",
