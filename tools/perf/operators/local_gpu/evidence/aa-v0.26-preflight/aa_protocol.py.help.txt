@@ -1,0 +1,13 @@
+usage: aa_protocol.py [-h] [--create] [--experiment EXPERIMENT]
+                      [--checkout CHECKOUT] [--enable-authorized-window]
+                      --plan PLAN
+
+P25-AA opt-in protocol. Pure standard library; no GPU imports.
+
+options:
+  -h, --help            show this help message and exit
+  --create
+  --experiment EXPERIMENT
+  --checkout CHECKOUT
+  --enable-authorized-window
+  --plan PLAN

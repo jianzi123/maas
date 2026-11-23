@@ -1,0 +1,23 @@
+test_128_missing_still_32_pairs (test_aa_window.AATests.test_128_missing_still_32_pairs) ... ok
+test_alias_callable_change (test_aa_window.AATests.test_alias_callable_change) ... ok
+test_budget_reset (test_aa_window.AATests.test_budget_reset) ... ok
+test_clock_mismatch (test_aa_window.AATests.test_clock_mismatch) ... ok
+test_disabled_plan_no_execute (test_aa_window.AATests.test_disabled_plan_no_execute) ... ok
+test_duplicate_identity (test_aa_window.AATests.test_duplicate_identity) ... ok
+test_eager_wrapper_rejected (test_aa_window.AATests.test_eager_wrapper_rejected) ... ok
+test_endpoint_gate_does_not_establish_zero_bias (test_aa_window.AATests.test_endpoint_gate_does_not_establish_zero_bias) ... ok
+test_graph_identity_change (test_aa_window.AATests.test_graph_identity_change) ... ok
+test_input_mismatch (test_aa_window.AATests.test_input_mismatch) ... ok
+test_late_bank (test_aa_window.AATests.test_late_bank) ... ok
+test_late_worker_launch_rejected (test_aa_window.AATests.test_late_worker_launch_rejected) ... ok
+test_lease_reset (test_aa_window.AATests.test_lease_reset) ... ok
+test_missing_full_denominator (test_aa_window.AATests.test_missing_full_denominator) ... ok
+test_parameter_mismatch (test_aa_window.AATests.test_parameter_mismatch) ... ok
+test_same_caller_cannot_claim_mature (test_aa_window.AATests.test_same_caller_cannot_claim_mature) ... ok
+test_schedule_balanced (test_aa_window.AATests.test_schedule_balanced) ... ok
+test_tolerance_boundary (test_aa_window.AATests.test_tolerance_boundary) ... ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 14.224s
+
+OK

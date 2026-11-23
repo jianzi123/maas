@@ -1,0 +1,23 @@
+{
+  "results": [
+    {
+      "entry": "aa_worker.py",
+      "loaded_GPU_modules": false
+    },
+    {
+      "entry": "run_aa_window.py",
+      "loaded_GPU_modules": false
+    },
+    {
+      "entry": "launch_aa_window.py",
+      "loaded_GPU_modules": false
+    }
+  ],
+  "versions": {
+    "torch": "2.8.0",
+    "triton": "3.4.0",
+    "sglang": "0.5.2",
+    "sgl-kernel": "0.3.9.post2"
+  },
+  "torch_graphs_sha256": "b707ce7ada16e40bed7e588da0ef46b2b31a74a20ad77f4d100a5b89f13f44b9"
+}

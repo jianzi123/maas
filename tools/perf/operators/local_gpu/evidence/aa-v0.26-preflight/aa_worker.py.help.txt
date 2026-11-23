@@ -1,0 +1,12 @@
+usage: aa_worker.py [-h] --plan PLAN [--job JOB] [--output OUTPUT] [--execute]
+                    [--validate-only]
+
+One inherited-lock P25-AA worker. --validate-only imports no GPU framework.
+
+options:
+  -h, --help       show this help message and exit
+  --plan PLAN
+  --job JOB
+  --output OUTPUT
+  --execute
+  --validate-only

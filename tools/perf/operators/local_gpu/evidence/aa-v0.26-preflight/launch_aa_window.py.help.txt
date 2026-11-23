@@ -1,0 +1,14 @@
+usage: launch_aa_window.py [-h] --plan PLAN --output OUTPUT [--execute]
+                           [--validate-only]
+                           [--protected-daemon-pid PROTECTED_DAEMON_PID]
+
+Windows foreground launcher with a single600s wall clock and conservative
+lease.
+
+options:
+  -h, --help            show this help message and exit
+  --plan PLAN
+  --output OUTPUT
+  --execute
+  --validate-only
+  --protected-daemon-pid PROTECTED_DAEMON_PID

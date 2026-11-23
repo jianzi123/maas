@@ -1,0 +1,45 @@
+{
+  "GPU_started": false,
+  "tests": 18,
+  "test_command": [
+    "D:\\ProgramData\\anaconda3\\python.exe",
+    "-X",
+    "utf8",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "repo\\tools\\perf\\operators\\local_gpu",
+    "-p",
+    "test_aa_window.py",
+    "-v"
+  ],
+  "test_exit": 0,
+  "entries": [
+    {
+      "entry": "aa_protocol.py",
+      "help_exit": 0,
+      "validate_only_GPU_import": "not applicable"
+    },
+    {
+      "entry": "aa_worker.py",
+      "help_exit": 0,
+      "validate_only_GPU_import": false
+    },
+    {
+      "entry": "run_aa_window.py",
+      "help_exit": 0,
+      "validate_only_GPU_import": false
+    },
+    {
+      "entry": "analyze_aa_window.py",
+      "help_exit": 0,
+      "validate_only_GPU_import": "not applicable"
+    },
+    {
+      "entry": "launch_aa_window.py",
+      "help_exit": 0,
+      "validate_only_GPU_import": false
+    }
+  ]
+}

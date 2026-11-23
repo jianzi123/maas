@@ -30,3 +30,5 @@ Engine只做过导入，模型生成、scheduler/serving及质量未验证。手
 参考模板资格入口：reference_protocol.py / bench_cadence_reference.py / analyze_cadence_reference.py。一次128块小窗、共同先验目标和独立holdout，见[资格方法v0.24](../../../../docs/performance/literature/elit01-reference-qualification-v0.24.md)。只做资格，不重跑旧108 cluster；未取得有效门禁独立签收与模板资格时不得进入新主比较。
 
 离线代表性审计：audit_reference_representativeness.py仅消费v0.24原件，输出128行不重叠时间分解和16层均值差，见[审计及新采前设计v0.25](../../../../docs/performance/literature/elit01-representativeness-audit-v0.25.md)。不启动GPU、采集器或主比较；旧bank/hash/34/64不变。
+
+P25-AA opt-in入口：aa_protocol.py / launch_aa_window.py / run_aa_window.py / aa_worker.py / analyze_aa_window.py。18项新CPU门禁；双进程共用600s，别名直接同一method，结果仅为本窗重复性。见[采前协议v0.26](../../../../docs/performance/literature/p25-aa-method-v0.26.md)。旧query bank与v0.25设计不回写。

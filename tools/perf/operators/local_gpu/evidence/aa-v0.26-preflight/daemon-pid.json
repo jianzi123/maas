@@ -1,0 +1,8 @@
+{
+  "daemon_PID_fields": [
+    {
+      "field": "/pid",
+      "pid": 42228
+    }
+  ]
+}

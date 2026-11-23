@@ -1,0 +1,9 @@
+usage: analyze_aa_window.py [-h] --plan PLAN --root ROOT --output OUTPUT
+
+Offline P25-AA engineering qualification. No GPU imports or collection.
+
+options:
+  -h, --help       show this help message and exit
+  --plan PLAN
+  --root ROOT
+  --output OUTPUT
