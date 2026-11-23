@@ -1,0 +1,26 @@
+{
+  "repository": "https://github.com/higress-group/higress",
+  "tag": "v2.2.5",
+  "tagObject": "ff104552c04c486e5c4c535b6344be8a47187484",
+  "commit": "4deae1dd3b4cb2707273748985e55bef28e747d1",
+  "gitlinks": {
+    "envoy/envoy": "9bd2ded786073d115beb71d0f2ca0afc075e4f4d",
+    "istio/proxy": "919836551144ad42c41bbe25597d74c1b9cb8421"
+  },
+  "files": {
+    "plugins/wasm-go/extensions/ext-auth/main.go": "884ace2733069e63edb02d9fdeaf425f06956cf9f742abcf4286c8b4f3acf0e8",
+    "plugins/wasm-go/extensions/ai-proxy/main.go": "4de727e1e6ec918dffd27867520c0aafec345bfd3ba93a0b06495a6f63e0441f"
+  },
+  "patches": {
+    "0001-ext-auth-required-ticket-fail-closed.patch": "555da93be1fdcede71f989cc647689a199dbe00b8d6d5d5632fa3f88ca258be9"
+  },
+  "scope": "dedicated MaaS ext-auth fail-closed hardening; not complete H4",
+  "wasmBuildVerified": false,
+  "H1CredentialLookupImplemented": false,
+  "H2H3ProducersImplemented": false,
+  "toolchain": {
+    "wasmCompiler": "tinygo",
+    "approvedVersion": null,
+    "approvedBinarySha256": null
+  }
+}
