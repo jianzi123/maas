@@ -26,3 +26,5 @@ E-LIT-01新增真实三策略入口：cadence_protocol.py / bench_kv_cadence.py 
 Engine只做过导入，模型生成、scheduler/serving及质量未验证。手动torch graph不是SGLang CudaGraphRunner；当前KV分支未开启Engine的alt-stream捕获flag。不要通用替换原实现。
 
 本轮另有 check_native_kv_state.py / compare_native_kv_state.py：直接读取原生图实际写槽的30层K/V，24份FP16数组逐位核对；24置零/10陈旧快照负控全部拒绝。采集与成本计时分开，复现命令见第19章。
+
+参考模板资格入口：reference_protocol.py / bench_cadence_reference.py / analyze_cadence_reference.py。一次128块小窗、共同先验目标和独立holdout，见[资格方法v0.24](../../../../docs/performance/literature/elit01-reference-qualification-v0.24.md)。只做资格，不重跑旧108 cluster；未取得有效门禁独立签收与模板资格时不得进入新主比较。
