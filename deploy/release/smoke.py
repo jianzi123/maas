@@ -120,7 +120,7 @@ try:
         for saved in record["runs"]:
             rp=sp+"/runs/"+saved["id"]
             _,run=get(rp);_,events=get(rp+"/events?page_size=100");_,tools=get(rp+"/tool-calls?page_size=100")
-            if run["state"]!="completed" or run["child_request_ids"]!=saved["children"] or run["last_event_seq"]!=saved["lastSeq"]:raise RuntimeError("run changed after restart")
+            if run["state"]!=saved.get("state","completed") or run["child_request_ids"]!=saved["children"] or run["last_event_seq"]!=saved["lastSeq"]:raise RuntimeError("run changed after restart")
             if hash_json(events)!=saved["eventsHash"] or hash_json(tools)!=saved["toolsHash"]:raise RuntimeError("history changed after restart")
             for child,want in zip(saved["children"],saved["usageHashes"]):
                 _,row=get("/api/admin/v1/usage/requests?request_id="+child)

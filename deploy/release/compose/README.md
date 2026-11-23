@@ -68,3 +68,13 @@ create只在显式demo配置使用，真实供应商/付费调用需对应批准
 使用同版本MySQL8.4、已授权的maas数据库和安装账号；首次版本以maas schema/3306为约定。用configure --database-host <DNS> --root-password-file <受保护文件>生成对应DSN，并使用compose.external.yaml，内部mysql服务不会启动。若由DBA预置运行账号/最窄角色，按source角色脚本审定，设置MAAS_INSTALL_PROVISION_ROLES=0并用批准DSN替换生成文件；不能把全局同名maas角色脚本直接叠加到他人共享实例。私有CA/不同端口/非root安装账号按实际DSN和mysql-client.cnf配置，先验证TLS与权限；无明确授权不连接目标环境。
 
 Kubernetes、真实供应商/生产Higress/Secret/付费/公开镜像发布分别按对应批准，不能由本包健康结果推定已验。
+
+### 已准入停止与原ID验证
+
+离线站点启动后可显式运行（只允许loopback、正常MySQL离线profile）：
+
+```sh
+python source/scripts/smoke-product-cancel.py --url http://localhost:18080 --password-file .secrets/migration/maas_bootstrap_password --record smoke-cancel.json
+```
+
+脚本先读原child的in_progress账本，确认已经准入再发送停止；保存原Run/child和终态/消费hash，不自动重试写。使用同一smoke.py的verify命令、将record换为smoke-cancel.json，可在应用/MySQL重启后只读验证cancelled原记录。不要覆盖已有record去重跑。create默认读取同源console-config.json的实际限额；--limits-file可显式指定同版本公开配置，不回退其他示例币种。

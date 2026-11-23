@@ -116,3 +116,17 @@ flowchart TD
 3. 固定代码提交后运行标准锁脚本、单独提交四锁，再从该 ref 生成两份包并执行 `python scripts/verify-delivery.py COMPOSE.zip KUBERNETES.zip --ref REF --output artifacts/maas21/archive-integrity.json`。默认分支合入仍等待具体批准，采用 Merge commit。
 4. 升级前备份 MySQL 并记录 schema/镜像/配置/源码 SHA。回退应用时保留数据卷、账本、tombstone、unknown/held 和全部会话事件；不以删库、重放不确定 Run 或重复扣量“恢复”。破坏性迁移另走批准与备份验证。
 5. 部署闭环稳定后再清理历史锁说明、测试脚本重复和未接适配。每个整理为独立可回退 PR，不改变共享契约或原故障关闭语义；架构师审共享语义、原作者实施、QA独立复验、Mika协调成员验收。
+
+## 最新收口与固定验证范围
+
+以下更新覆盖本文早期截点的“尚未实现/未关闭”，不改其历史失败件。
+
+- 后端源228bbe4（含f990576）已提供正常maas-service显式offline-controlled、独立002迁移、原Admit/Finalize与两个真实工具/批准/停止，以及可选管理四独立DSN工厂。离线与真实models/管理互斥；默认生产配置不启用受控模型。管理disabled仍不可用；enabled的Registry/K8s与真实publisher目标装配未验。
+- 安装源3f97e9b已进入组合，完整Compose/外置MySQL/原生YAML、配置/Secret/三镜像构建与两包生成器。历史/payload/Operations不再预授core；旧直接/default/继承角色不合格失败关闭、不自动撤权。已修的挂载子目录0755/外层0700和非root容器保留。先前两个P1的代码接线与受控站点条件已满足，真实目标验收仍另列。
+- AR-R01/R02已由独立QA在879a7aa/代码07b00d8受控后端范围关闭：原oracle+Step/Tool页5顶层20叶、Linux legacy attempt5叶；MySQL5顶层，含mixed两child known19/held140/金额held520000/parent aggregation_complete=false且重复Submit/GET不重计。原正常二进制模型inflight夹具经重启只进入needs_confirmation、原ID不变、新request/usage为0。QA代码00adf077→四锁66139c99，证据ZIP SHA25619fc82766ea7110a51f58c5510c8c93841a7aa112995354713eeeb5e9e58aba4。后续新profile不自动继承该整项验收。
+- 新工具上下文/总时限/取消/unknown定向3顶层通过；新产品SQL4顶层/6含子测在独立MySQL8.0.44通过。新UI217通过/11条件skip，构建成功。来源和旧结果分别记录，不累计为全仓数字。
+- 当前正常Linux服务/非root UID65532/独立MySQL离线站点实际完成：普通Chat及SSE、两真实工具、一次批准、第二model child、重复命令同原Run、原child用量；完成Agent两child known20。应用重启后以及MySQL重启、服务恢复后，消息/工具/事件/child消费hash均不变。已实际准入的另一个child经公开cancel变cancelled、单条消费；已有完整历史浏览器3过、pageerror0、Run POST0。该测试库累计6request/6唯一终态，均为明确标注的合成模型，不是供应商计费。
+- 首次独立容器在MySQL尚未ready时启动退出product_database_unavailable，未改产品断言；原日志保留。等待DB健康并采用与正式安装一致的unless-stopped后恢复只读验证通过。这个负结果不登记成已通过的旧运行，也不隐藏。
+- 安装smoke原CLI不传可选limits-file时硬编码TST，实际USD配置返回422，现默认从同源公开安装配置读真实limits、先校验再写。当前README已显式提供limits-file；失败针对的是缺省CLI路径，不能说当前文档本身缺参数。原422记录保留；修后缺省调用的完整create及verify通过。
+
+最终两ZIP必须从最终四锁ref重生成，并按包根VERSION、MANIFEST、scripts/verify-delivery.py及verify_bundle.py逐文件回读。最终包内原生构建/Compose与独立QA结果以主任务最后交付为准；本节不冒充尚未执行的最终包验证。K8s仅schema，真实供应商/Higress/正式tools-v1/管理目标/完整Operator与A01–A34不因本受控交付关闭。
