@@ -4,12 +4,12 @@
   "deploymentApproved": false,
   "sourceBaseline": {
     "chartBase": "e5647a2f2b44f53d39a80041be94b619f07c29d6",
-    "backendInspected": "c045a90a2b8c2f79802767754cc124a3a01c97b3",
+    "backendInspected": "03a31e15175704063ba52dd058e340968e10c6af",
     "contracts": "MAAS-2 v0.4 + retained v0.3 + query/recovery addenda + MAAS-1 role review",
     "terminal": "3.0",
     "ticket": "3",
     "proposedTerminal": "3.1 (not enabled)",
-    "consoleInspected": "c045a90a2b8c2f79802767754cc124a3a01c97b3",
+    "consoleInspected": "03a31e15175704063ba52dd058e340968e10c6af",
     "defaultBranch": "925d8c55be9ce823d100bf90a5c78cf19ea66d58",
     "candidatePR": null,
     "candidateState": "integrated-unmerged",
@@ -18,7 +18,7 @@
     "qaCore": "ac94a373ec0a61c5fd4dc5380a7985a4fb47840f",
     "qaEvidence": "50354a705c03383d0102d0d437119afd7ffed8b3",
     "sourceInventory": "deploy/build-sources.lock.json",
-    "sourceInventorySha256": "3eb2afeaf2d92e8a591e247bcef2e965c69f78d9e034dffa7495497da2c3ad23",
+    "sourceInventorySha256": "46162ab5ed9f7ff2cce06c707e2dfb148c3c937b3b4f617428c018e69c8eac80",
     "upstreamWorkbenchDeployment": "e5647a2f2b44f53d39a80041be94b619f07c29d6",
     "backendBase": "0559fa46b4a728d6f542daf19532e794f8549b31",
     "integrationBranch": "integrate/MAAS-17-unified-20261114",
@@ -99,7 +99,7 @@
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "c045a90a2b8c2f79802767754cc124a3a01c97b3",
+      "sourceCommit": "03a31e15175704063ba52dd058e340968e10c6af",
       "compiledAPIGroup": "serving.maas.example"
     },
     {
@@ -116,7 +116,7 @@
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "c045a90a2b8c2f79802767754cc124a3a01c97b3",
+      "sourceCommit": "03a31e15175704063ba52dd058e340968e10c6af",
       "compiledAPIGroup": "serving.maas.example"
     },
     {
@@ -133,7 +133,7 @@
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "c045a90a2b8c2f79802767754cc124a3a01c97b3"
+      "sourceCommit": "03a31e15175704063ba52dd058e340968e10c6af"
     },
     {
       "id": "mysql",
@@ -432,7 +432,7 @@
   "databaseIdentities": {
     "schemaVersion": "1.0",
     "scope": "installation-input-only-no-secret-values",
-    "sourceCommit": "c045a90a2b8c2f79802767754cc124a3a01c97b3",
+    "sourceCommit": "03a31e15175704063ba52dd058e340968e10c6af",
     "productionWiringVerified": false,
     "connections": {
       "core": {
@@ -698,6 +698,7 @@
           "docs/performance/literature/notes/B05-flash-decoding.md",
           "docs/performance/literature/notes/B06-cuda-graphs.md",
           "docs/performance/literature/notes/P02-flashinfer.md",
+          "docs/performance/literature/p25-aa-method-v0.26.md",
           "docs/performance/literature/source-access.json",
           "docs/performance/literature/source-map.json",
           "docs/performance/literature/sources.json",
@@ -938,6 +939,10 @@
           "tools/perf/operators/gemm_validation.h",
           "tools/perf/operators/gemm_validation_host.cpp",
           "tools/perf/operators/local_gpu/README.md",
+          "tools/perf/operators/local_gpu/aa_protocol.py",
+          "tools/perf/operators/local_gpu/aa_runtime.py",
+          "tools/perf/operators/local_gpu/aa_worker.py",
+          "tools/perf/operators/local_gpu/analyze_aa_window.py",
           "tools/perf/operators/local_gpu/analyze_cadence_reference.py",
           "tools/perf/operators/local_gpu/analyze_kv_cadence.py",
           "tools/perf/operators/local_gpu/analyze_kv_trace.py",
@@ -955,6 +960,23 @@
           "tools/perf/operators/local_gpu/compare_native_kv_state.py",
           "tools/perf/operators/local_gpu/decode-source-lock.json",
           "tools/perf/operators/local_gpu/decode_path.py",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.26-preflight/WSL-CPU-preflight.json",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.26-preflight/WSL-CPU-stderr.log",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.26-preflight/WSL-CPU-stdout.log",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.26-preflight/aa_protocol.py.help.txt",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.26-preflight/aa_worker.py.help.txt",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.26-preflight/aa_worker.py.validate.txt",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.26-preflight/analyze_aa_window.py.help.txt",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.26-preflight/cpu-plan-command.json",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.26-preflight/cpu-plan-v4.json",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.26-preflight/cpu-preflight.json",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.26-preflight/cpu-tests.log",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.26-preflight/daemon-pid.json",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.26-preflight/launch_aa_window.py.help.txt",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.26-preflight/launch_aa_window.py.validate.txt",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.26-preflight/manifest.json",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.26-preflight/run_aa_window.py.help.txt",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.26-preflight/run_aa_window.py.validate.txt",
           "tools/perf/operators/local_gpu/evidence/cadence-v0.22/R01-calibration.json",
           "tools/perf/operators/local_gpu/evidence/cadence-v0.22/R01-run.json",
           "tools/perf/operators/local_gpu/evidence/cadence-v0.22/R01-runtime-manifest.json",
@@ -1087,6 +1109,7 @@
           "tools/perf/operators/local_gpu/kv_aten.cpp",
           "tools/perf/operators/local_gpu/kv_extension.py",
           "tools/perf/operators/local_gpu/kv_fused.cu",
+          "tools/perf/operators/local_gpu/launch_aa_window.py",
           "tools/perf/operators/local_gpu/legacy_source/.gitattributes",
           "tools/perf/operators/local_gpu/legacy_source/analyze_kv_cadence.v0.22.py.txt",
           "tools/perf/operators/local_gpu/native_kv_binding.py",
@@ -1099,6 +1122,7 @@
           "tools/perf/operators/local_gpu/requirements-local.txt",
           "tools/perf/operators/local_gpu/rmsnorm.cu",
           "tools/perf/operators/local_gpu/rmsnorm.py",
+          "tools/perf/operators/local_gpu/run_aa_window.py",
           "tools/perf/operators/local_gpu/run_decode.py",
           "tools/perf/operators/local_gpu/run_framework_dummy.py",
           "tools/perf/operators/local_gpu/run_kv_fusion.py",
@@ -1109,6 +1133,7 @@
           "tools/perf/operators/local_gpu/run_split_cap6.py",
           "tools/perf/operators/local_gpu/source_map.py",
           "tools/perf/operators/local_gpu/summarize_kv_cadence.py",
+          "tools/perf/operators/local_gpu/test_aa_window.py",
           "tools/perf/operators/local_gpu/test_cadence_gates.py",
           "tools/perf/operators/local_gpu/test_cadence_protocol.py",
           "tools/perf/operators/local_gpu/test_reference_qualification.py",
