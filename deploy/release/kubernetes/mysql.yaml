@@ -1,0 +1,117 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+  namespace: maas
+spec:
+  clusterIP: None
+  selector:
+    app: maas-mysql
+  ports:
+  - name: mysql
+    port: 3306
+    targetPort: mysql
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mysql
+  namespace: maas
+spec:
+  serviceName: mysql
+  replicas: 1
+  selector:
+    matchLabels:
+      app: maas-mysql
+  template:
+    metadata:
+      labels:
+        app: maas-mysql
+    spec:
+      automountServiceAccountToken: false
+      terminationGracePeriodSeconds: 60
+      containers:
+      - name: mysql
+        image: mysql:8.4.7@sha256:0426ec38c7a10aa45ba383887df7878f74ee70e2fd589c7b69207f3577901903
+        args:
+        - --character-set-server=utf8mb4
+        - --collation-server=utf8mb4_bin
+        ports:
+        - name: mysql
+          containerPort: 3306
+        env:
+        - name: MYSQL_DATABASE
+          value: maas
+        - name: MYSQL_ROOT_HOST
+          value: '%'
+        - name: MYSQL_ROOT_PASSWORD_FILE
+          value: /run/mysql-secret/root-password
+        volumeMounts:
+        - name: data
+          mountPath: /var/lib/mysql
+        - name: mysql-secret
+          mountPath: /run/mysql-secret
+          readOnly: true
+        resources:
+          requests:
+            cpu: 250m
+            memory: 512Mi
+          limits:
+            cpu: '2'
+            memory: 1536Mi
+        startupProbe:
+          exec:
+            command:
+            - mysqladmin
+            - ping
+            - -h
+            - 127.0.0.1
+            - --silent
+          failureThreshold: 150
+          periodSeconds: 2
+        readinessProbe:
+          exec:
+            command:
+            - mysqladmin
+            - ping
+            - -h
+            - 127.0.0.1
+            - --silent
+          periodSeconds: 5
+        livenessProbe:
+          exec:
+            command:
+            - mysqladmin
+            - ping
+            - -h
+            - 127.0.0.1
+            - --silent
+          periodSeconds: 10
+      volumes:
+      - name: mysql-secret
+        secret:
+          secretName: maas-mysql
+      nodeSelector:
+        kubernetes.io/arch: amd64
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 10Gi
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata: {name: mysql-access, namespace: maas}
+spec:
+  podSelector: {matchLabels: {app: maas-mysql}}
+  policyTypes: [Ingress]
+  ingress:
+  - from:
+    - podSelector:
+        matchExpressions:
+        - {key: app, operator: In, values: [maas, maas-migrate]}
+    ports: [{protocol: TCP, port: 3306}]

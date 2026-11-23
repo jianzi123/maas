@@ -1,0 +1,47 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: maas-migrate-__IMAGE_TAG__
+  namespace: maas
+spec:
+  backoffLimit: 2
+  template:
+    metadata:
+      labels:
+        app: maas-migrate
+    spec:
+      restartPolicy: Never
+      automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65532
+        runAsGroup: 65532
+        fsGroup: 65532
+      containers:
+      - name: migrate
+        image: maas-migrate:__IMAGE_TAG__
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+        - name: config
+          mountPath: /etc/maas/migration.json
+          subPath: migration.json
+          readOnly: true
+        - name: secret
+          mountPath: /run/secrets
+          readOnly: true
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: '1'
+            memory: 512Mi
+      volumes:
+      - name: config
+        configMap:
+          name: maas-config
+      - name: secret
+        secret:
+          secretName: maas-migration
+      nodeSelector:
+        kubernetes.io/arch: amd64
