@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { onMounted, onBeforeUnmount, ref } from "vue";
-const props = defineProps<{ title: string; busy?: boolean }>();
+const props = defineProps<{
+  title: string;
+  busy?: boolean;
+  drawer?: boolean;
+}>();
 const emit = defineEmits<{ close: [] }>();
 const element = ref<HTMLDialogElement>();
 let previous: HTMLElement | null = null;
@@ -22,6 +26,7 @@ onBeforeUnmount(() => {
   <dialog
     ref="element"
     class="panel-dialog"
+    :class="{ drawer: props.drawer }"
     aria-labelledby="dialog-title"
     @cancel.prevent="close"
     @click="
