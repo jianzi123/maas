@@ -1,0 +1,605 @@
+{
+  "schema_version": "reading-0.21",
+  "seed_map_attachment": "01a1dce2-ad99-7a82-b16f-8259d6a7d65f",
+  "seed_map_sha256": "42d5df36dd5bdd5e8885ccd3d0261c7e4aabf4caf3db136a86ed93c8933e324f",
+  "read_at_utc": "2026-11-15T02:11:11.476338+00:00",
+  "primary_sources": [
+    {
+      "id": "B01",
+      "kind": "blog",
+      "title": "How to Optimize a CUDA Matmul Kernel for cuBLAS-like Performance: a Worklog",
+      "authors": [
+        "Simon Boehm"
+      ],
+      "publication": {
+        "value": "2022-12",
+        "precision": "month"
+      },
+      "version_read": "article snapshot; code commit not pinned",
+      "priority": "P1",
+      "url": "https://siboehm.com/articles/22/CUDA-MMM",
+      "accessed_at_utc": "2026-11-15T02:11:11.476338+00:00",
+      "accessed_date_local": "2026-11-14",
+      "reading_depth": "abstract_metadata",
+      "sections_read": [
+        "metadata / introductory or benchmark setup passages; not full text"
+      ],
+      "mechanism": "从合并访存到分块/warp布局逐个解释改动",
+      "reported_hardware": "NVIDIA A6000 / Ampere",
+      "reported_shape_dtype_workload": "FP32 SGEMM; article example4092²; not TF32/BF16 comparison",
+      "reported_baseline_and_denominator": "cuBLAS FP32；本轮未核完整计时协议",
+      "numerical_quality_constraints": "正文未精读时不推定全部精度/质量约束；不将exact attention等同浮点逐位一致",
+      "limits": "只核引言与硬件/基线段；不外推4070 FP16或模型收益",
+      "paper_or_article_reproduced_here": false,
+      "local_speedup_claim": false
+    },
+    {
+      "id": "B02",
+      "kind": "blog",
+      "title": "CUDA Matrix Multiplication Optimization",
+      "authors": [
+        "Lei Mao"
+      ],
+      "publication": {
+        "value": "2024-01-20",
+        "precision": "day"
+      },
+      "version_read": "article snapshot; repository revision unpinned",
+      "priority": "P1",
+      "url": "https://leimao.github.io/article/CUDA-Matrix-Multiplication-Optimization/",
+      "accessed_at_utc": "2026-11-15T02:11:11.476338+00:00",
+      "accessed_date_local": "2026-11-14",
+      "reading_depth": "abstract_metadata",
+      "sections_read": [
+        "metadata / introductory or benchmark setup passages; not full text"
+      ],
+      "mechanism": "索引/leading dimension、分块与Tensor Core扩展",
+      "reported_hardware": "RTX3090 / Ampere",
+      "reported_shape_dtype_workload": "row-major GEMM; leading dimension padding FP32/FP16分别说明",
+      "reported_baseline_and_denominator": "文中CUDA GEMM实现及成熟库；完整数值/计时设置未精读",
+      "numerical_quality_constraints": "正文未精读时不推定全部精度/质量约束；不将exact attention等同浮点逐位一致",
+      "limits": "本文很长，本轮只核引言与RTX3090设定，不标完整精读",
+      "paper_or_article_reproduced_here": false,
+      "local_speedup_claim": false
+    },
+    {
+      "id": "B03",
+      "kind": "blog",
+      "title": "Making Deep Learning Go Brrrr From First Principles",
+      "authors": [
+        "Horace He"
+      ],
+      "publication": {
+        "value": "2022",
+        "precision": "year"
+      },
+      "version_read": "author page snapshot; exact day unknown",
+      "priority": "P0",
+      "url": "https://horace.io/brrr_intro.html",
+      "accessed_at_utc": "2026-11-15T02:11:11.476338+00:00",
+      "accessed_date_local": "2026-11-14",
+      "reading_depth": "key_sections",
+      "sections_read": [
+        "Compute",
+        "Bandwidth / Reasoning about Memory-Bandwidth Costs",
+        "Overhead",
+        "footnote3 / BibTeX"
+      ],
+      "mechanism": "先区分计算、搬运和提交开销，再选择干预",
+      "reported_hardware": "A100为分析示例，非本机测量",
+      "reported_shape_dtype_workload": "算子/批量/算术强度示例；非统一模型基准",
+      "reported_baseline_and_denominator": "分析框架；没有本项目同条件性能分母",
+      "numerical_quality_constraints": "同运算/精度条件；峰值按scalar/Tensor Core/稀疏分别计；理论强度不构成模型质量验证",
+      "limits": "利用率/放大batch都不能单独证明瓶颈；作者脚注指出batch也会改变算术强度",
+      "paper_or_article_reproduced_here": false,
+      "local_speedup_claim": false,
+      "date_evidence": "author BibTeX confirms2022; day/month not stated",
+      "source_map_ids": [
+        "S03",
+        "S06",
+        "S08"
+      ],
+      "note": "notes/B03-principles.md"
+    },
+    {
+      "id": "B04",
+      "kind": "blog",
+      "title": "CUTLASS Tutorial: Mastering the NVIDIA Tensor Memory Accelerator (TMA)",
+      "authors": [
+        "Colfax Research"
+      ],
+      "publication": {
+        "value": "2024-06-24",
+        "precision": "day"
+      },
+      "version_read": "article snapshot; CuTe revision not pinned",
+      "priority": "P2",
+      "url": "https://research.colfax-intl.com/tutorial-hopper-tma/",
+      "accessed_at_utc": "2026-11-15T02:11:11.476338+00:00",
+      "accessed_date_local": "2026-11-14",
+      "reading_depth": "abstract_metadata",
+      "sections_read": [
+        "metadata / introductory or benchmark setup passages; not full text"
+      ],
+      "mechanism": "描述符与异步搬运/同步工程",
+      "reported_hardware": "Hopper / SM90 TMA",
+      "reported_shape_dtype_workload": "2D GMEM↔SMEM tile-copy examples; asynchronous barriers",
+      "reported_baseline_and_denominator": "教程，不提供本项目性能对照",
+      "numerical_quality_constraints": "正文未精读时不推定全部精度/质量约束；不将exact attention等同浮点逐位一致",
+      "limits": "Ada8.9不能直接执行SM90 TMA路径；只核引言/示例前提/发布日期",
+      "paper_or_article_reproduced_here": false,
+      "local_speedup_claim": false,
+      "authorship_note": "organization credited; full individual byline not confirmed; publication date from page footer"
+    },
+    {
+      "id": "B05",
+      "kind": "blog",
+      "title": "Flash-Decoding for long-context inference",
+      "authors": [
+        "Tri Dao",
+        "Daniel Haziza",
+        "Francisco Massa",
+        "Grigory Sizov"
+      ],
+      "publication": {
+        "value": "2023-10-13",
+        "precision": "day"
+      },
+      "version_read": "article; benchmark lists FlashAttention2.0.9; implementation package availability separately stated",
+      "priority": "P0",
+      "url": "https://pytorch.org/blog/flash-decoding/",
+      "accessed_at_utc": "2026-11-15T02:11:11.476338+00:00",
+      "accessed_date_local": "2026-11-14",
+      "reading_depth": "key_sections",
+      "sections_read": [
+        "Multi-head attention for decoding",
+        "A faster attention for decoding",
+        "Benchmarks on CodeLlama34B",
+        "Component-level micro-benchmarks / Using"
+      ],
+      "mechanism": "沿KV维分块，保存局部输出尺度，再归并",
+      "reported_hardware": "A100; CodeLlama34B benchmark; 4-GPU head-shard analogy",
+      "reported_shape_dtype_workload": "component FP16, Hq16/Hkv2/D128; table varies B and L; not one constant-B sweep",
+      "reported_baseline_and_denominator": "PyTorch eager / FA2 / FasterTransformer / Flash-Decoding；组件us与整模型token/s分开",
+      "numerical_quality_constraints": "数学归并等价不保证浮点逐位一致；文中FP16设定；本轮没有复现其模型质量/速度",
+      "limits": "小query长KV是动机；table逐行B变化，不能将跨行数值作为固定B的长度斜率",
+      "paper_or_article_reproduced_here": false,
+      "local_speedup_claim": false,
+      "source_map_ids": [
+        "S07",
+        "S08",
+        "S09"
+      ],
+      "note": "notes/B05-flash-decoding.md"
+    },
+    {
+      "id": "B06",
+      "kind": "blog",
+      "title": "Accelerating PyTorch with CUDA Graphs",
+      "authors": [
+        "Vinh Nguyen",
+        "Michael Carilli",
+        "Sukru Burc Eryilmaz",
+        "Vartika Singh",
+        "Michelle Lin",
+        "Natalia Gimelshein",
+        "Alban Desmaison",
+        "Edward Yang"
+      ],
+      "publication": {
+        "value": "2021-10-26",
+        "precision": "day"
+      },
+      "version_read": "PyTorch1.10-era article; API checked against2.8 docs",
+      "priority": "P0",
+      "url": "https://pytorch.org/blog/accelerating-pytorch-with-cuda-graphs/",
+      "accessed_at_utc": "2026-11-15T02:11:11.476338+00:00",
+      "accessed_date_local": "2026-11-14",
+      "reading_depth": "key_sections",
+      "sections_read": [
+        "CUDA Graphs",
+        "API overview / example",
+        "partial capture",
+        "NCCL boundary only"
+      ],
+      "mechanism": "固定图及长生命周期buffer；重放前更新内容",
+      "reported_hardware": "GPU/multi-GPU training examples; no local Ada baseline",
+      "reported_shape_dtype_workload": "static input/output addresses; example training shapes640×4096; not ModelRunner decode workload",
+      "reported_baseline_and_denominator": "captured vs eager examples；不将训练MLPerf结果当本项目baseline",
+      "numerical_quality_constraints": "图只记录捕获设备工作；状态/地址/alias/控制流按Torch2.8核查；本地数值门禁不是预训练质量验收",
+      "limits": "图重放主要减少提交开销，不保证消除所有长等待；旧API示例须和2.8核对",
+      "paper_or_article_reproduced_here": false,
+      "local_speedup_claim": false,
+      "source_map_ids": [
+        "S01",
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "note": "notes/B06-cuda-graphs.md",
+      "page_also_displays_date": "2024-11-15"
+    },
+    {
+      "id": "B07",
+      "kind": "blog",
+      "title": "SGLang v0.4: Zero-Overhead Batch Scheduler, Cache-Aware Load Balancer, Faster Structured Outputs",
+      "authors": [
+        "The SGLang Team"
+      ],
+      "publication": {
+        "value": "2024-12-04",
+        "precision": "day"
+      },
+      "version_read": "SGLang0.4 article, not0.5.2 snapshot",
+      "priority": "P1",
+      "url": "https://www.lmsys.org/blog/2024-12-04-sglang-v0-4/",
+      "accessed_at_utc": "2026-11-15T02:11:11.476338+00:00",
+      "accessed_date_local": "2026-11-14",
+      "reading_depth": "abstract_metadata",
+      "sections_read": [
+        "metadata / introductory or benchmark setup passages; not full text"
+      ],
+      "mechanism": "以事件/未来token处理依赖，重叠下一批CPU准备",
+      "reported_hardware": "router example8×A10080GB; section settings differ",
+      "reported_shape_dtype_workload": "scheduler exampleLlama3.2-3B,500 prompts,input4096/output2048; router shared-prefix workload",
+      "reported_baseline_and_denominator": "v0.4对旧overlap关闭对照；router对轮询不同分母",
+      "numerical_quality_constraints": "正文未精读时不推定全部精度/质量约束；不将exact attention等同浮点逐位一致",
+      "limits": "本地静态ModelRunner无在线scheduler且disable_overlap_schedule=True，不能照抄旧CLI flags",
+      "paper_or_article_reproduced_here": false,
+      "local_speedup_claim": false
+    },
+    {
+      "id": "B08",
+      "kind": "blog",
+      "title": "Mini-SGLang: Efficient Inference Engine in a Nutshell",
+      "authors": [
+        "Ziyi Xu"
+      ],
+      "publication": {
+        "value": "2025-12-17",
+        "precision": "day"
+      },
+      "version_read": "independent mini-sglang article snapshot",
+      "priority": "P1",
+      "url": "https://www.lmsys.org/blog/2025-12-17-minisgl/",
+      "accessed_at_utc": "2026-11-15T02:11:11.476338+00:00",
+      "accessed_date_local": "2026-11-14",
+      "reading_depth": "abstract_metadata",
+      "sections_read": [
+        "metadata / introductory or benchmark setup passages; not full text"
+      ],
+      "mechanism": "简化框架连接缓存/调度/kernel",
+      "reported_hardware": "Hopper kernels / singleH200 benchmark",
+      "reported_shape_dtype_workload": "Qwen3-0.6B/14B offline vs Nano-vLLM; online另列",
+      "reported_baseline_and_denominator": "Nano-vLLM / separate online baselines; only benchmark setup inspected",
+      "numerical_quality_constraints": "正文未精读时不推定全部精度/质量约束；不将exact attention等同浮点逐位一致",
+      "limits": "不是当前SGLang0.5.2；FA3/FlashInfer Hopper路径不能在Ada上直接当已复现",
+      "paper_or_article_reproduced_here": false,
+      "local_speedup_claim": false
+    },
+    {
+      "id": "P01",
+      "kind": "paper",
+      "title": "SGLang: Efficient Execution of Structured Language Model Programs",
+      "authors": [
+        "Lianmin Zheng",
+        "Liangsheng Yin",
+        "Zhiqiang Xie",
+        "Chuyue Sun",
+        "Jeff Huang",
+        "Cody Hao Yu",
+        "Shiyi Cao",
+        "Christos Kozyrakis",
+        "Ion Stoica",
+        "Joseph E. Gonzalez",
+        "Clark Barrett",
+        "Ying Sheng"
+      ],
+      "publication": {
+        "value": "2023-12-12",
+        "precision": "day"
+      },
+      "version_read": "arXiv2312.07104v2 / 2024-06-06",
+      "priority": "P1",
+      "url": "https://arxiv.org/abs/2312.07104v2",
+      "accessed_at_utc": "2026-11-15T02:11:11.476338+00:00",
+      "accessed_date_local": "2026-11-14",
+      "reading_depth": "abstract_metadata",
+      "sections_read": [
+        "metadata / introductory or benchmark setup passages; not full text"
+      ],
+      "mechanism": "RadixAttention缓存复用及结构化程序执行",
+      "reported_hardware": "正文硬件未在本轮精读",
+      "reported_shape_dtype_workload": "structured generation / prefix reuse; full setup pending",
+      "reported_baseline_and_denominator": "摘要系统吞吐；条件未从正文核对",
+      "numerical_quality_constraints": "正文未精读时不推定全部精度/质量约束；不将exact attention等同浮点逐位一致",
+      "limits": "论文版本不等于0.5.2；仅摘要/元数据，不承诺全部机制已运行",
+      "paper_or_article_reproduced_here": false,
+      "local_speedup_claim": false,
+      "revised_date": "2024-06-06"
+    },
+    {
+      "id": "P02",
+      "kind": "paper",
+      "title": "FlashInfer: Efficient and Customizable Attention Engine for LLM Inference Serving",
+      "authors": [
+        "Zihao Ye",
+        "Lequn Chen",
+        "Ruihang Lai",
+        "Wuwei Lin",
+        "Yineng Zhang",
+        "Stephanie Wang",
+        "Tianqi Chen",
+        "Baris Kasikci",
+        "Vinod Grover",
+        "Arvind Krishnamurthy",
+        "Luis Ceze"
+      ],
+      "publication": {
+        "value": "2025-01-02",
+        "precision": "day"
+      },
+      "version_read": "arXiv2501.01005v2 / 2025-04-21; paper runtime FlashInferv0.2",
+      "priority": "P0",
+      "url": "https://arxiv.org/html/2501.01005v2",
+      "accessed_at_utc": "2026-11-15T02:11:11.476338+00:00",
+      "accessed_date_local": "2026-11-14",
+      "reading_depth": "key_sections",
+      "sections_read": [
+        "§2.2 attention composition",
+        "§3.1 KV formats",
+        "§3.2 tile/JIT",
+        "§3.3 scheduling / Algorithm1",
+        "§3.4 plan/run",
+        "§4.1–4.2 setup",
+        "Appendix D.1–D.3"
+      ],
+      "mechanism": "分离plan/run，用固定workspace承载动态计划和局部归并",
+      "reported_hardware": "A10040GB SXM / H10080GB SXM",
+      "reported_shape_dtype_workload": "CUDA12.4/PyTorch2.4/FP16; SGLang0.3.4; variable input512–2048; kernel B16 constant/uniform/Zipf",
+      "reported_baseline_and_denominator": "SGLang Triton3.0；在线TTFT/ITL、kernel条件分开，§4.1按P99TTFT约束调请求率",
+      "numerical_quality_constraints": "相同序列信息固定归并顺序；浮点结合律不保证逐位相等；FP16存算与FP8另分；模型级质量未复现",
+      "limits": "本地Triton3.4不是论文FlashInfer；FP8/其他模型质量未核；v2§4.1有遗留指代句，不复述其闭源表述",
+      "paper_or_article_reproduced_here": false,
+      "local_speedup_claim": false,
+      "revised_date": "2025-04-21",
+      "source_map_ids": [
+        "S04",
+        "S05",
+        "S13",
+        "S14"
+      ],
+      "note": "notes/P02-flashinfer.md"
+    },
+    {
+      "id": "P03",
+      "kind": "paper",
+      "title": "Efficient Memory Management for Large Language Model Serving with PagedAttention",
+      "authors": [
+        "Woosuk Kwon",
+        "Zhuohan Li",
+        "Siyuan Zhuang",
+        "Ying Sheng",
+        "Lianmin Zheng",
+        "Cody Hao Yu",
+        "Joseph E. Gonzalez",
+        "Hao Zhang",
+        "Ion Stoica"
+      ],
+      "publication": {
+        "value": "2023-09-12",
+        "precision": "day"
+      },
+      "version_read": "arXiv2309.06180v1",
+      "priority": "P1",
+      "url": "https://arxiv.org/abs/2309.06180v1",
+      "accessed_at_utc": "2026-11-15T02:11:11.476338+00:00",
+      "accessed_date_local": "2026-11-14",
+      "reading_depth": "abstract_metadata",
+      "sections_read": [
+        "metadata / introductory or benchmark setup passages; not full text"
+      ],
+      "mechanism": "分页与共享减少KV浪费",
+      "reported_hardware": "正文硬件未精读",
+      "reported_shape_dtype_workload": "dynamic KV paging / sharing; workload details pending",
+      "reported_baseline_and_denominator": "摘要提及FasterTransformer/Orca；同延迟水平吞吐，不复制宣传倍数",
+      "numerical_quality_constraints": "正文未精读时不推定全部精度/质量约束；不将exact attention等同浮点逐位一致",
+      "limits": "只读摘要；PagedAttention不等于Radix prefix复用，内存与时延收益分别证明",
+      "paper_or_article_reproduced_here": false,
+      "local_speedup_claim": false
+    },
+    {
+      "id": "P04",
+      "kind": "paper",
+      "title": "Taming Throughput-Latency Tradeoff in LLM Inference with Sarathi-Serve",
+      "authors": [
+        "Amey Agrawal",
+        "Nitin Kedia",
+        "Ashish Panwar",
+        "Jayashree Mohan",
+        "Nipun Kwatra",
+        "Bhargav S. Gulavani",
+        "Alexey Tumanov",
+        "Ramachandran Ramjee"
+      ],
+      "publication": {
+        "value": "2024-03-04",
+        "precision": "day"
+      },
+      "version_read": "arXiv2403.02310v3 / 2024-06-17",
+      "priority": "P1",
+      "url": "https://arxiv.org/abs/2403.02310v3",
+      "accessed_at_utc": "2026-11-15T02:11:11.476338+00:00",
+      "accessed_date_local": "2026-11-14",
+      "reading_depth": "abstract_metadata",
+      "sections_read": [
+        "metadata / introductory or benchmark setup passages; not full text"
+      ],
+      "mechanism": "在尾延迟约束下组织prefill/decode",
+      "reported_hardware": "摘要A100单/双卡及大模型pipeline；正文细节未核",
+      "reported_shape_dtype_workload": "chunked prefill / mixed batches",
+      "reported_baseline_and_denominator": "摘要vLLM serving capacity；完整基线参数待核",
+      "numerical_quality_constraints": "正文未精读时不推定全部精度/质量约束；不将exact attention等同浮点逐位一致",
+      "limits": "不把已有chunked prefill机制当新发明；正文负载/SLO未精读",
+      "paper_or_article_reproduced_here": false,
+      "local_speedup_claim": false,
+      "revised_date": "2024-06-17"
+    },
+    {
+      "id": "P05",
+      "kind": "paper",
+      "title": "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness",
+      "authors": [
+        "Tri Dao",
+        "Daniel Y. Fu",
+        "Stefano Ermon",
+        "Atri Rudra",
+        "Christopher Ré"
+      ],
+      "publication": {
+        "value": "2022-05-27",
+        "precision": "day"
+      },
+      "version_read": "arXiv2205.14135v2 / 2022-06-23",
+      "priority": "P1",
+      "url": "https://arxiv.org/abs/2205.14135v2",
+      "accessed_at_utc": "2026-11-15T02:11:11.476338+00:00",
+      "accessed_date_local": "2026-11-14",
+      "reading_depth": "abstract_metadata",
+      "sections_read": [
+        "metadata / introductory or benchmark setup passages; not full text"
+      ],
+      "mechanism": "IO-aware tiling / online softmax",
+      "reported_hardware": "正文硬件未精读",
+      "reported_shape_dtype_workload": "training/long sequence; dtype/case details pending",
+      "reported_baseline_and_denominator": "摘要训练基线；不当decode成本分母",
+      "numerical_quality_constraints": "正文未精读时不推定全部精度/质量约束；不将exact attention等同浮点逐位一致",
+      "limits": "exact算法不保证浮点逐位相等；未读全部消融/质量设置",
+      "paper_or_article_reproduced_here": false,
+      "local_speedup_claim": false,
+      "revised_date": "2022-06-23"
+    },
+    {
+      "id": "P06",
+      "kind": "paper",
+      "title": "FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning",
+      "authors": [
+        "Tri Dao"
+      ],
+      "publication": {
+        "value": "2023-07-17",
+        "precision": "day"
+      },
+      "version_read": "arXiv2307.08691v1",
+      "priority": "P1",
+      "url": "https://arxiv.org/abs/2307.08691v1",
+      "accessed_at_utc": "2026-11-15T02:11:11.476338+00:00",
+      "accessed_date_local": "2026-11-14",
+      "reading_depth": "abstract_metadata",
+      "sections_read": [
+        "metadata / introductory or benchmark setup passages; not full text"
+      ],
+      "mechanism": "减少非matmul工作与共享内存通信",
+      "reported_hardware": "A100摘要",
+      "reported_shape_dtype_workload": "block/warp任务划分；完整shape未精读",
+      "reported_baseline_and_denominator": "摘要对FlashAttention及GEMM效率；本轮未复现",
+      "numerical_quality_constraints": "正文未精读时不推定全部精度/质量约束；不将exact attention等同浮点逐位一致",
+      "limits": "训练/prefill结论不能直接套query=1 decode",
+      "paper_or_article_reproduced_here": false,
+      "local_speedup_claim": false
+    },
+    {
+      "id": "P07",
+      "kind": "paper",
+      "title": "FlashAttention-3: Fast and Accurate Attention with Asynchrony and Low-precision",
+      "authors": [
+        "Jay Shah",
+        "Ganesh Bikshandi",
+        "Ying Zhang",
+        "Vijay Thakkar",
+        "Pradeep Ramani",
+        "Tri Dao"
+      ],
+      "publication": {
+        "value": "2024-07-11",
+        "precision": "day"
+      },
+      "version_read": "arXiv2407.08608v2 / 2024-07-12",
+      "priority": "P2",
+      "url": "https://arxiv.org/abs/2407.08608v2",
+      "accessed_at_utc": "2026-11-15T02:11:11.476338+00:00",
+      "accessed_date_local": "2026-11-14",
+      "reading_depth": "abstract_metadata",
+      "sections_read": [
+        "metadata / introductory or benchmark setup passages; not full text"
+      ],
+      "mechanism": "异步Tensor Core/TMA与warp specialization",
+      "reported_hardware": "Hopper/H100",
+      "reported_shape_dtype_workload": "FP16与FP8 separate; shape details pending",
+      "reported_baseline_and_denominator": "摘要H100对FA2；FP8数值基线另列",
+      "numerical_quality_constraints": "正文未精读时不推定全部精度/质量约束；不将exact attention等同浮点逐位一致",
+      "limits": "仅摘要，Ada无相同TMA/WGMMA条件；FP8改变精度须另验质量",
+      "paper_or_article_reproduced_here": false,
+      "local_speedup_claim": false,
+      "revised_date": "2024-07-12"
+    },
+    {
+      "id": "P08",
+      "kind": "paper",
+      "title": "FlashAttention-4: Algorithm and Kernel Pipelining Co-Design for Asymmetric Hardware Scaling",
+      "authors": [
+        "Ted Zadouri",
+        "Markus Hoehnerbach",
+        "Jay Shah",
+        "Timmy Liu",
+        "Vijay Thakkar",
+        "Tri Dao"
+      ],
+      "publication": {
+        "value": "2026-03-05",
+        "precision": "day"
+      },
+      "version_read": "arXiv2603.05451v1",
+      "priority": "P2",
+      "url": "https://arxiv.org/abs/2603.05451v1",
+      "accessed_at_utc": "2026-11-15T02:11:11.476338+00:00",
+      "accessed_date_local": "2026-11-14",
+      "reading_depth": "abstract_metadata",
+      "sections_read": [
+        "metadata / introductory or benchmark setup passages; not full text"
+      ],
+      "mechanism": "异步MMA/非matmul开销与流水协同",
+      "reported_hardware": "Blackwell/B200",
+      "reported_shape_dtype_workload": "BF16摘要；完整shape未精读",
+      "reported_baseline_and_denominator": "摘要cuDNN9.13/Triton；未复现",
+      "numerical_quality_constraints": "正文未精读时不推定全部精度/质量约束；不将exact attention等同浮点逐位一致",
+      "limits": "不是Ada升级路线；只核元数据/摘要，不宣称全论文或CuTe-DSL实作",
+      "paper_or_article_reproduced_here": false,
+      "local_speedup_claim": false
+    }
+  ],
+  "supplementary_sources": [
+    {
+      "id": "T28",
+      "authors": [
+        "PyTorch Contributors"
+      ],
+      "url": "https://docs.pytorch.org/docs/2.8/notes/cuda.html#cuda-graphs",
+      "version_read": "2.8",
+      "reading_depth": "key_sections",
+      "sections_read": [
+        "Graph constraints",
+        "multiple streams",
+        "Graph memory management / sharing pools"
+      ],
+      "accessed_at_utc": "2026-11-15T02:11:11.476338+00:00"
+    }
+  ],
+  "depth_definitions": {
+    "abstract_metadata": "metadata plus abstract/intro/setup only; not full paper",
+    "key_sections": "named sections read and related local source inspected; not full paper reproduction",
+    "full_read": "whole paper including figures/appendices critically read",
+    "reproduced": "actual same-setting algorithm/system reproduction, separately evidenced"
+  },
+  "no_source_marked_full_or_reproduced": true
+}

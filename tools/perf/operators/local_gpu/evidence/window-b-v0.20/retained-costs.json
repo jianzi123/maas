@@ -1,0 +1,32 @@
+[
+  {
+    "path": "tools/perf/operators/local_gpu/evidence/kv-integration-v0.19/cost-pair1-mature.json",
+    "sha256": "df38a5e7b7501ddcac1715df9320d08a63c863e3b15d800c6a155ed42743a678",
+    "unchanged": true
+  },
+  {
+    "path": "tools/perf/operators/local_gpu/evidence/kv-integration-v0.19/cost-pair1-native.json",
+    "sha256": "473079d0bfaa60f967f59f168baaaa2abbfa783bb40c125ca94130eb59d6a9c2",
+    "unchanged": true
+  },
+  {
+    "path": "tools/perf/operators/local_gpu/evidence/kv-integration-v0.19/cost-pair2-mature.json",
+    "sha256": "6a78b942afec30753ba722e2ca7745bf97ebbd0b2c3338a2cc8e43b3ffa54637",
+    "unchanged": true
+  },
+  {
+    "path": "tools/perf/operators/local_gpu/evidence/kv-integration-v0.19/cost-pair2-native.json",
+    "sha256": "7040f8f967bf708955ca380d0b77d8ed86641b41e819973c9b0a90af7ed12e04",
+    "unchanged": true
+  },
+  {
+    "path": "tools/perf/operators/local_gpu/evidence/kv-integration-v0.19/cost-pair3-mature.json",
+    "sha256": "ceb2416f3e7bacae1e9940dbbb79c52dfe81a3bce3303b23016c15db8b4a9ddb",
+    "unchanged": true
+  },
+  {
+    "path": "tools/perf/operators/local_gpu/evidence/kv-integration-v0.19/cost-pair3-native.json",
+    "sha256": "63e82a32915135af0141463b24c47bc2b85bbee01d406d811503c3661a46cd06",
+    "unchanged": true
+  }
+]

@@ -1,0 +1,34 @@
+from pathlib import Path
+import datetime,hashlib,json,subprocess,sys,time,os
+root=Path("repo").resolve();out=Path("deliverables/reference-v0.24").resolve()
+sys.path.insert(0,str(root/"tools/perf/operators/local_gpu"))
+from reference_protocol import make_plan,validate,load
+from cadence_protocol import digest,write_json
+head=subprocess.check_output(["git","-C",str(root),"rev-parse","HEAD"],text=True).strip()
+assert not subprocess.check_output(["git","-C",str(root),"status","--porcelain"])
+plan_path=out/"plan.json"
+if sys.argv[1]=="prepare":
+ p=make_plan("ELIT01_REF24",head);validate(p);write_json(plan_path,p,exclusive=True)
+ print(json.dumps({"execution_commit":head,"plan_sha256":digest(p),"file_sha256":hashlib.sha256(plan_path.read_bytes()).hexdigest(),"blocks":128}))
+ raise SystemExit(0)
+p=load(plan_path);assert p["checkout"]==head
+# This exclusive record is also a one-shot protection against accidental reruns.
+write_json(out/"one-shot-permit.json",{"execution_commit":head,"plan_sha256":digest(p),"created_utc":datetime.datetime.now(datetime.timezone.utc).isoformat(),"repeat_prohibited":True},exclusive=True)
+def linux(path):
+ path=str(path.resolve()).replace("\\","/")
+ return "/mnt/"+path[0].lower()+path[2:]
+cmd=["wsl.exe","-d","Ubuntu-22.04","--","/usr/bin/timeout","--kill-after=10s","600s",
+     "/var/tmp/maas-10-gpu-01a1a5ba/bin/python",linux(root/"tools/perf/operators/local_gpu/bench_cadence_reference.py"),
+     "--plan",linux(plan_path),"--output",linux(out/"window")]
+record={"command":cmd,"execution_commit":head,"plan_sha256":digest(p),"UTC_start":datetime.datetime.now(datetime.timezone.utc).isoformat(),"planned_blocks":128,"total_GPU_budget_seconds":600}
+write_json(out/"command.json",record,exclusive=True)
+start=time.perf_counter()
+with (out/"foreground.log").open("w",encoding="utf-8") as log:
+ child=subprocess.Popen(cmd,stdout=log,stderr=subprocess.STDOUT,env=dict(os.environ,PYTHONUNBUFFERED="1"))
+ record["owned_WSL_child_pid"]=child.pid
+ write_json(out/"command.json",record)
+ rc=child.wait()
+record.update(exit_code=rc,foreground_wall_seconds=time.perf_counter()-start,UTC_end=datetime.datetime.now(datetime.timezone.utc).isoformat(),own_process_collected=True)
+write_json(out/"command.json",record)
+print(json.dumps(record))
+raise SystemExit(rc)

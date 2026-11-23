@@ -1,0 +1,40 @@
+{
+  "tests": [
+    {
+      "command": [
+        "D:\\ProgramData\\anaconda3\\python.exe",
+        "-X",
+        "utf8",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-10-79a30240b357\\workdir\\repo\\tools\\perf\\operators\\local_gpu",
+        "-p",
+        "test_reference_qualification.py",
+        "-v"
+      ],
+      "exit_code": 0,
+      "log": "post-test_reference_qualification.py.log"
+    },
+    {
+      "command": [
+        "D:\\ProgramData\\anaconda3\\python.exe",
+        "-X",
+        "utf8",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-10-79a30240b357\\workdir\\repo\\tools\\perf\\operators\\local_gpu",
+        "-p",
+        "test_cadence*.py",
+        "-v"
+      ],
+      "exit_code": 0,
+      "log": "post-test_cadenceall.py.log"
+    }
+  ],
+  "link_errors": [],
+  "no_new_GPU_execution": true
+}

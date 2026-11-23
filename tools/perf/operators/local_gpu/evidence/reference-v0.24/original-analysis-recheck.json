@@ -1,0 +1,4511 @@
+{
+  "schema": "ELIT01-analysis-v2",
+  "plan_sha256": "ab0ac451d9d4beffd6a879ff04bcdcd4000a256ec3194b710f5e7dabca49d9c9",
+  "primary_scope": "full",
+  "primary_metric": "completed_cluster_wall_ns_per_100_planned_calls",
+  "planned_clusters": 108,
+  "planned_blocks": 1080,
+  "planned_calls": 10800,
+  "block_status_counts": {
+    "measured": 1080
+  },
+  "run_summaries": [
+    {
+      "run_id": "R01",
+      "result": {
+        "schema": "ELIT01-result-v1",
+        "run_id": "R01",
+        "clock_scope": "elit01-pilot1-20261115/R01/pid372-83d58a0b",
+        "plan_sha256": "ab0ac451d9d4beffd6a879ff04bcdcd4000a256ec3194b710f5e7dabca49d9c9",
+        "status": "completed",
+        "collection_complete": true,
+        "stable_gain_claim": false,
+        "failure": null,
+        "planned_blocks": 540,
+        "measured_blocks": 540,
+        "missing_or_invalid_blocks": 0,
+        "query_events": 218,
+        "runtime_manifest": "runtime-manifest.json",
+        "peak_torch_bytes": 316955136,
+        "scope_limit": "artificial-weight static calls; composite strategy comparison, no model/serving gain",
+        "elapsed_seconds": 94.077408519
+      },
+      "planned_blocks": 540,
+      "status_counts": {
+        "measured": 540
+      },
+      "observed_ledger_rows": 540,
+      "unobserved_identities": 0,
+      "query_events": 218,
+      "complete_clusters": 54
+    },
+    {
+      "run_id": "R02",
+      "result": {
+        "schema": "ELIT01-result-v1",
+        "run_id": "R02",
+        "clock_scope": "elit01-pilot1-20261115/R02/pid950-d5179599",
+        "plan_sha256": "ab0ac451d9d4beffd6a879ff04bcdcd4000a256ec3194b710f5e7dabca49d9c9",
+        "status": "completed",
+        "collection_complete": true,
+        "stable_gain_claim": false,
+        "failure": null,
+        "planned_blocks": 540,
+        "measured_blocks": 540,
+        "missing_or_invalid_blocks": 0,
+        "query_events": 218,
+        "runtime_manifest": "runtime-manifest.json",
+        "peak_torch_bytes": 316955136,
+        "scope_limit": "artificial-weight static calls; composite strategy comparison, no model/serving gain",
+        "elapsed_seconds": 86.22449241
+      },
+      "planned_blocks": 540,
+      "status_counts": {
+        "measured": 540
+      },
+      "observed_ledger_rows": 540,
+      "unobserved_identities": 0,
+      "query_events": 218,
+      "complete_clusters": 54
+    }
+  ],
+  "clusters": [
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/full/B3/T0/query_block",
+      "run_id": "R01",
+      "scope": "full",
+      "batch": 3,
+      "rotation": 0,
+      "policy": "query_block",
+      "strategy_position": 0,
+      "cluster_wall_ms_per_100_calls": 1616.339186,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 11302.4268,
+          "event_ns": 11233.074951171875,
+          "host_enqueue_ns": 259.6596,
+          "wait_ns": 11044.7374
+        },
+        "mature": {
+          "wall_ns": 19027.5854,
+          "event_ns": 18942.874145507812,
+          "host_enqueue_ns": 305.1702,
+          "wait_ns": 18749.615
+        }
+      },
+      "gap_matched": 1,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        13155443,
+        13642123,
+        12884249,
+        924382,
+        9361059,
+        4878950,
+        10435778,
+        4794945,
+        4983393,
+        21156755
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/full/B3/T0/query_cluster",
+      "run_id": "R01",
+      "scope": "full",
+      "batch": 3,
+      "rotation": 0,
+      "policy": "query_cluster",
+      "strategy_position": 1,
+      "cluster_wall_ms_per_100_calls": 604.317182,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4227.4418,
+          "event_ns": 4178.636932373047,
+          "host_enqueue_ns": 222.4318,
+          "wait_ns": 3999.0045
+        },
+        "mature": {
+          "wall_ns": 4023.5922,
+          "event_ns": 3980.2879333496094,
+          "host_enqueue_ns": 250.7116,
+          "wait_ns": 3770.6781
+        }
+      },
+      "gap_matched": 0,
+      "gap_qualification_denominator": 0,
+      "match_errors_ns": []
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/full/B3/T0/idle_matched",
+      "run_id": "R01",
+      "scope": "full",
+      "batch": 3,
+      "rotation": 0,
+      "policy": "idle_matched",
+      "strategy_position": 2,
+      "cluster_wall_ms_per_100_calls": 1057.460017,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4730.0265,
+          "event_ns": 4672.9217529296875,
+          "host_enqueue_ns": 254.2674,
+          "wait_ns": 4470.3369
+        },
+        "mature": {
+          "wall_ns": 8441.0585,
+          "event_ns": 8357.990264892578,
+          "host_enqueue_ns": 258.4433,
+          "wait_ns": 8182.6152
+        }
+      },
+      "gap_matched": 9,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        17657664,
+        111070,
+        103525,
+        88331,
+        124296,
+        111866,
+        96928,
+        102056,
+        105545,
+        109331
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/full/B3/T1/query_cluster",
+      "run_id": "R01",
+      "scope": "full",
+      "batch": 3,
+      "rotation": 1,
+      "policy": "query_cluster",
+      "strategy_position": 0,
+      "cluster_wall_ms_per_100_calls": 722.197636,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4245.4381,
+          "event_ns": 4185.292816162109,
+          "host_enqueue_ns": 249.0033,
+          "wait_ns": 3997.9661
+        },
+        "mature": {
+          "wall_ns": 4016.0079,
+          "event_ns": 3979.6737670898438,
+          "host_enqueue_ns": 278.2739,
+          "wait_ns": 3754.6411
+        }
+      },
+      "gap_matched": 0,
+      "gap_qualification_denominator": 0,
+      "match_errors_ns": []
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/full/B3/T1/idle_matched",
+      "run_id": "R01",
+      "scope": "full",
+      "batch": 3,
+      "rotation": 1,
+      "policy": "idle_matched",
+      "strategy_position": 1,
+      "cluster_wall_ms_per_100_calls": 1081.667953,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 11364.722,
+          "event_ns": 11300.556945800781,
+          "host_enqueue_ns": 277.0001,
+          "wait_ns": 11081.4134
+        },
+        "mature": {
+          "wall_ns": 4082.9195,
+          "event_ns": 3981.0047149658203,
+          "host_enqueue_ns": 319.5745,
+          "wait_ns": 3763.345
+        }
+      },
+      "gap_matched": 9,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        21362446,
+        99834,
+        103956,
+        92503,
+        102477,
+        105208,
+        119792,
+        95150,
+        115498,
+        97338
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/full/B3/T1/query_block",
+      "run_id": "R01",
+      "scope": "full",
+      "batch": 3,
+      "rotation": 1,
+      "policy": "query_block",
+      "strategy_position": 2,
+      "cluster_wall_ms_per_100_calls": 1480.885911,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 14601.3433,
+          "event_ns": 14531.686401367188,
+          "host_enqueue_ns": 284.0459,
+          "wait_ns": 14319.6679
+        },
+        "mature": {
+          "wall_ns": 5685.9844,
+          "event_ns": 5605.0689697265625,
+          "host_enqueue_ns": 311.3984,
+          "wait_ns": 5337.3611
+        }
+      },
+      "gap_matched": 0,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        39295179,
+        2243402,
+        7714939,
+        12668319,
+        16445129,
+        13089345,
+        2101905,
+        2731988,
+        18749814,
+        2960074
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/full/B3/T2/idle_matched",
+      "run_id": "R01",
+      "scope": "full",
+      "batch": 3,
+      "rotation": 2,
+      "policy": "idle_matched",
+      "strategy_position": 0,
+      "cluster_wall_ms_per_100_calls": 1114.992713,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4287.5249,
+          "event_ns": 4189.388656616211,
+          "host_enqueue_ns": 279.6395,
+          "wait_ns": 4007.8854
+        },
+        "mature": {
+          "wall_ns": 4433.9217,
+          "event_ns": 4346.982574462891,
+          "host_enqueue_ns": 299.5564,
+          "wait_ns": 4151.8826
+        }
+      },
+      "gap_matched": 9,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        22999579,
+        105404,
+        114713,
+        117156,
+        115714,
+        107579,
+        92229,
+        104538,
+        112041,
+        98788
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/full/B3/T2/query_block",
+      "run_id": "R01",
+      "scope": "full",
+      "batch": 3,
+      "rotation": 2,
+      "policy": "query_block",
+      "strategy_position": 1,
+      "cluster_wall_ms_per_100_calls": 1593.585273,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 19734.5344,
+          "event_ns": 19652.198791503906,
+          "host_enqueue_ns": 283.5881,
+          "wait_ns": 19447.2132
+        },
+        "mature": {
+          "wall_ns": 10700.068,
+          "event_ns": 10630.451202392578,
+          "host_enqueue_ns": 290.872,
+          "wait_ns": 10409.196
+        }
+      },
+      "gap_matched": 1,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        59837122,
+        8075713,
+        6046237,
+        3085845,
+        17963060,
+        2500512,
+        10502202,
+        1449219,
+        14021256,
+        7275902
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/full/B3/T2/query_cluster",
+      "run_id": "R01",
+      "scope": "full",
+      "batch": 3,
+      "rotation": 2,
+      "policy": "query_cluster",
+      "strategy_position": 2,
+      "cluster_wall_ms_per_100_calls": 585.851379,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4276.6225,
+          "event_ns": 4191.334533691406,
+          "host_enqueue_ns": 263.0281,
+          "wait_ns": 4013.5944
+        },
+        "mature": {
+          "wall_ns": 4041.3219,
+          "event_ns": 3978.4446716308594,
+          "host_enqueue_ns": 293.3826,
+          "wait_ns": 3742.8483
+        }
+      },
+      "gap_matched": 0,
+      "gap_qualification_denominator": 0,
+      "match_errors_ns": []
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/full/B5/T0/query_block",
+      "run_id": "R01",
+      "scope": "full",
+      "batch": 5,
+      "rotation": 0,
+      "policy": "query_block",
+      "strategy_position": 0,
+      "cluster_wall_ms_per_100_calls": 1614.439125,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 12023.9588,
+          "event_ns": 11958.998107910156,
+          "host_enqueue_ns": 284.0881,
+          "wait_ns": 11770.5291
+        },
+        "mature": {
+          "wall_ns": 18448.818,
+          "event_ns": 18365.951538085938,
+          "host_enqueue_ns": 329.6677,
+          "wait_ns": 18119.1503
+        }
+      },
+      "gap_matched": 0,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        9563472,
+        11450524,
+        12723811,
+        5391972,
+        15557186,
+        11239026,
+        4382128,
+        2052082,
+        14319563,
+        9463562
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/full/B5/T0/query_cluster",
+      "run_id": "R01",
+      "scope": "full",
+      "batch": 5,
+      "rotation": 0,
+      "policy": "query_cluster",
+      "strategy_position": 1,
+      "cluster_wall_ms_per_100_calls": 579.11809,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4206.6272,
+          "event_ns": 4158.16650390625,
+          "host_enqueue_ns": 246.738,
+          "wait_ns": 3961.5899
+        },
+        "mature": {
+          "wall_ns": 4033.9254,
+          "event_ns": 3970.662307739258,
+          "host_enqueue_ns": 287.218,
+          "wait_ns": 3752.6947
+        }
+      },
+      "gap_matched": 0,
+      "gap_qualification_denominator": 0,
+      "match_errors_ns": []
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/full/B5/T0/idle_matched",
+      "run_id": "R01",
+      "scope": "full",
+      "batch": 5,
+      "rotation": 0,
+      "policy": "idle_matched",
+      "strategy_position": 2,
+      "cluster_wall_ms_per_100_calls": 1173.506807,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 10454.0449,
+          "event_ns": 10373.017883300781,
+          "host_enqueue_ns": 257.5336,
+          "wait_ns": 10189.6774
+        },
+        "mature": {
+          "wall_ns": 4495.3175,
+          "event_ns": 4447.641754150391,
+          "host_enqueue_ns": 279.4382,
+          "wait_ns": 4215.8793
+        }
+      },
+      "gap_matched": 9,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        5860928,
+        109135,
+        95373,
+        96264,
+        113312,
+        95259,
+        89677,
+        121929,
+        110416,
+        92067
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/full/B5/T1/query_cluster",
+      "run_id": "R01",
+      "scope": "full",
+      "batch": 5,
+      "rotation": 1,
+      "policy": "query_cluster",
+      "strategy_position": 0,
+      "cluster_wall_ms_per_100_calls": 591.493935,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4401.9004,
+          "event_ns": 4341.452789306641,
+          "host_enqueue_ns": 216.777,
+          "wait_ns": 4128.1911
+        },
+        "mature": {
+          "wall_ns": 4065.3978,
+          "event_ns": 3968.204879760742,
+          "host_enqueue_ns": 277.8431,
+          "wait_ns": 3788.1147
+        }
+      },
+      "gap_matched": 0,
+      "gap_qualification_denominator": 0,
+      "match_errors_ns": []
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/full/B5/T1/idle_matched",
+      "run_id": "R01",
+      "scope": "full",
+      "batch": 5,
+      "rotation": 1,
+      "policy": "idle_matched",
+      "strategy_position": 1,
+      "cluster_wall_ms_per_100_calls": 1027.748903,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4289.2323,
+          "event_ns": 4156.927871704102,
+          "host_enqueue_ns": 395.8205,
+          "wait_ns": 3843.9452
+        },
+        "mature": {
+          "wall_ns": 9958.4136,
+          "event_ns": 9856.819152832031,
+          "host_enqueue_ns": 679.5929,
+          "wait_ns": 9581.943
+        }
+      },
+      "gap_matched": 9,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        5415426,
+        127726,
+        177916,
+        125506,
+        141745,
+        127713,
+        139316,
+        128217,
+        142741,
+        150725
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/full/B5/T1/query_block",
+      "run_id": "R01",
+      "scope": "full",
+      "batch": 5,
+      "rotation": 1,
+      "policy": "query_block",
+      "strategy_position": 2,
+      "cluster_wall_ms_per_100_calls": 1743.557561,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4295.8328,
+          "event_ns": 4156.489562988281,
+          "host_enqueue_ns": 404.3507,
+          "wait_ns": 3919.2464
+        },
+        "mature": {
+          "wall_ns": 20256.4175,
+          "event_ns": 20145.86944580078,
+          "host_enqueue_ns": 424.5159,
+          "wait_ns": 19794.7458
+        }
+      },
+      "gap_matched": 0,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        120402430,
+        13041137,
+        10518557,
+        13510361,
+        30401459,
+        19961060,
+        18768439,
+        22606802,
+        25376146,
+        26196620
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/full/B5/T2/idle_matched",
+      "run_id": "R01",
+      "scope": "full",
+      "batch": 5,
+      "rotation": 2,
+      "policy": "idle_matched",
+      "strategy_position": 0,
+      "cluster_wall_ms_per_100_calls": 1159.120742,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 13723.45,
+          "event_ns": 13589.913940429688,
+          "host_enqueue_ns": 379.0275,
+          "wait_ns": 13343.2072
+        },
+        "mature": {
+          "wall_ns": 4361.8083,
+          "event_ns": 4260.454559326172,
+          "host_enqueue_ns": 410.1427,
+          "wait_ns": 3978.8423
+        }
+      },
+      "gap_matched": 9,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        18520559,
+        144440,
+        139583,
+        140506,
+        133418,
+        133429,
+        129277,
+        106658,
+        129370,
+        128073
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/full/B5/T2/query_block",
+      "run_id": "R01",
+      "scope": "full",
+      "batch": 5,
+      "rotation": 2,
+      "policy": "query_block",
+      "strategy_position": 1,
+      "cluster_wall_ms_per_100_calls": 1573.12959,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 19907.8448,
+          "event_ns": 19819.92950439453,
+          "host_enqueue_ns": 305.0188,
+          "wait_ns": 19647.3636
+        },
+        "mature": {
+          "wall_ns": 9475.5451,
+          "event_ns": 9338.674926757812,
+          "host_enqueue_ns": 336.3283,
+          "wait_ns": 9111.2206
+        }
+      },
+      "gap_matched": 0,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        67430152,
+        5898838,
+        6588303,
+        10569542,
+        10999799,
+        14664019,
+        6107409,
+        2854837,
+        9864749,
+        9283240
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/full/B5/T2/query_cluster",
+      "run_id": "R01",
+      "scope": "full",
+      "batch": 5,
+      "rotation": 2,
+      "policy": "query_cluster",
+      "strategy_position": 2,
+      "cluster_wall_ms_per_100_calls": 609.763452,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4221.3959,
+          "event_ns": 4156.288146972656,
+          "host_enqueue_ns": 264.3856,
+          "wait_ns": 3964.9509
+        },
+        "mature": {
+          "wall_ns": 4020.934,
+          "event_ns": 3966.668701171875,
+          "host_enqueue_ns": 273.7919,
+          "wait_ns": 3741.5729
+        }
+      },
+      "gap_matched": 0,
+      "gap_qualification_denominator": 0,
+      "match_errors_ns": []
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/full/B8/T0/query_block",
+      "run_id": "R01",
+      "scope": "full",
+      "batch": 8,
+      "rotation": 0,
+      "policy": "query_block",
+      "strategy_position": 0,
+      "cluster_wall_ms_per_100_calls": 1325.861984,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4240.9045,
+          "event_ns": 4152.83203125,
+          "host_enqueue_ns": 233.6702,
+          "wait_ns": 4003.7142
+        },
+        "mature": {
+          "wall_ns": 4023.3309,
+          "event_ns": 3961.0366821289062,
+          "host_enqueue_ns": 262.0672,
+          "wait_ns": 3769.297
+        }
+      },
+      "gap_matched": 5,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        5787244,
+        3201523,
+        1395984,
+        5004538,
+        7474873,
+        1257586,
+        4013378,
+        -512825,
+        -470461,
+        -926772
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/full/B8/T0/query_cluster",
+      "run_id": "R01",
+      "scope": "full",
+      "batch": 8,
+      "rotation": 0,
+      "policy": "query_cluster",
+      "strategy_position": 1,
+      "cluster_wall_ms_per_100_calls": 575.220513,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4223.6186,
+          "event_ns": 4154.060745239258,
+          "host_enqueue_ns": 240.3368,
+          "wait_ns": 3963.4055
+        },
+        "mature": {
+          "wall_ns": 4010.436,
+          "event_ns": 3961.113739013672,
+          "host_enqueue_ns": 259.1606,
+          "wait_ns": 3759.9599
+        }
+      },
+      "gap_matched": 0,
+      "gap_qualification_denominator": 0,
+      "match_errors_ns": []
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/full/B8/T0/idle_matched",
+      "run_id": "R01",
+      "scope": "full",
+      "batch": 8,
+      "rotation": 0,
+      "policy": "idle_matched",
+      "strategy_position": 2,
+      "cluster_wall_ms_per_100_calls": 1086.257335,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 11564.1443,
+          "event_ns": 11476.6845703125,
+          "host_enqueue_ns": 165.0617,
+          "wait_ns": 11328.288
+        },
+        "mature": {
+          "wall_ns": 4010.5977,
+          "event_ns": 3962.4481201171875,
+          "host_enqueue_ns": 224.3275,
+          "wait_ns": 3803.0533
+        }
+      },
+      "gap_matched": 9,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        7491915,
+        84486,
+        81776,
+        82858,
+        91281,
+        89766,
+        87636,
+        110088,
+        115779,
+        107338
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/full/B8/T1/query_cluster",
+      "run_id": "R01",
+      "scope": "full",
+      "batch": 8,
+      "rotation": 1,
+      "policy": "query_cluster",
+      "strategy_position": 0,
+      "cluster_wall_ms_per_100_calls": 600.181758,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4730.5914,
+          "event_ns": 4680.777740478516,
+          "host_enqueue_ns": 227.288,
+          "wait_ns": 4480.4999
+        },
+        "mature": {
+          "wall_ns": 4005.9805,
+          "event_ns": 3963.884735107422,
+          "host_enqueue_ns": 255.5498,
+          "wait_ns": 3772.142
+        }
+      },
+      "gap_matched": 0,
+      "gap_qualification_denominator": 0,
+      "match_errors_ns": []
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/full/B8/T1/idle_matched",
+      "run_id": "R01",
+      "scope": "full",
+      "batch": 8,
+      "rotation": 1,
+      "policy": "idle_matched",
+      "strategy_position": 1,
+      "cluster_wall_ms_per_100_calls": 1179.459492,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4253.5363,
+          "event_ns": 4156.927871704102,
+          "host_enqueue_ns": 240.0924,
+          "wait_ns": 3997.1795
+        },
+        "mature": {
+          "wall_ns": 8377.1485,
+          "event_ns": 8300.335693359375,
+          "host_enqueue_ns": 269.4413,
+          "wait_ns": 8127.4108
+        }
+      },
+      "gap_matched": 9,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        14611374,
+        102751,
+        113541,
+        117549,
+        106595,
+        113395,
+        112567,
+        116946,
+        130392,
+        115370
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/full/B8/T1/query_block",
+      "run_id": "R01",
+      "scope": "full",
+      "batch": 8,
+      "rotation": 1,
+      "policy": "query_block",
+      "strategy_position": 2,
+      "cluster_wall_ms_per_100_calls": 1602.752125,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 19369.5108,
+          "event_ns": 19281.613159179688,
+          "host_enqueue_ns": 241.8679,
+          "wait_ns": 19096.3234
+        },
+        "mature": {
+          "wall_ns": 11950.0489,
+          "event_ns": 11867.545318603516,
+          "host_enqueue_ns": 292.0222,
+          "wait_ns": 11650.2499
+        }
+      },
+      "gap_matched": 0,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        42780705,
+        4249995,
+        4524968,
+        1832865,
+        18570176,
+        7264105,
+        6146435,
+        4608422,
+        13100007,
+        3361030
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/full/B8/T2/idle_matched",
+      "run_id": "R01",
+      "scope": "full",
+      "batch": 8,
+      "rotation": 2,
+      "policy": "idle_matched",
+      "strategy_position": 0,
+      "cluster_wall_ms_per_100_calls": 1125.420348,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4754.4422,
+          "event_ns": 4677.302551269531,
+          "host_enqueue_ns": 213.6883,
+          "wait_ns": 4496.0449
+        },
+        "mature": {
+          "wall_ns": 4031.5419,
+          "event_ns": 3963.4944915771484,
+          "host_enqueue_ns": 222.492,
+          "wait_ns": 3806.7815
+        }
+      },
+      "gap_matched": 9,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        13639641,
+        108140,
+        99871,
+        88750,
+        99713,
+        100356,
+        95993,
+        96362,
+        110618,
+        115460
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/full/B8/T2/query_block",
+      "run_id": "R01",
+      "scope": "full",
+      "batch": 8,
+      "rotation": 2,
+      "policy": "query_block",
+      "strategy_position": 1,
+      "cluster_wall_ms_per_100_calls": 1586.588651,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 20485.3036,
+          "event_ns": 20392.46368408203,
+          "host_enqueue_ns": 271.2326,
+          "wait_ns": 20187.6538
+        },
+        "mature": {
+          "wall_ns": 10735.3547,
+          "event_ns": 10646.32339477539,
+          "host_enqueue_ns": 275.1642,
+          "wait_ns": 10428.9346
+        }
+      },
+      "gap_matched": 1,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        59799549,
+        7239559,
+        6781177,
+        6509861,
+        5525379,
+        4922853,
+        7353136,
+        5090188,
+        10657949,
+        1712256
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/full/B8/T2/query_cluster",
+      "run_id": "R01",
+      "scope": "full",
+      "batch": 8,
+      "rotation": 2,
+      "policy": "query_cluster",
+      "strategy_position": 2,
+      "cluster_wall_ms_per_100_calls": 600.029115,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4210.1274,
+          "event_ns": 4153.65104675293,
+          "host_enqueue_ns": 220.685,
+          "wait_ns": 3976.6565
+        },
+        "mature": {
+          "wall_ns": 3997.8964,
+          "event_ns": 3962.134552001953,
+          "host_enqueue_ns": 233.3727,
+          "wait_ns": 3767.1594
+        }
+      },
+      "gap_matched": 0,
+      "gap_qualification_denominator": 0,
+      "match_errors_ns": []
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/bare_graph/B3/T0/query_block",
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 3,
+      "rotation": 0,
+      "policy": "query_block",
+      "strategy_position": 0,
+      "cluster_wall_ms_per_100_calls": 1347.918169,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4150.3002,
+          "event_ns": 4110.847854614258,
+          "host_enqueue_ns": 20.8446,
+          "wait_ns": 4128.6401
+        },
+        "mature": {
+          "wall_ns": 4103.0604,
+          "event_ns": 4070.502471923828,
+          "host_enqueue_ns": 40.2184,
+          "wait_ns": 4068.0429
+        }
+      },
+      "gap_matched": 0,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        12754813,
+        11121580,
+        8014162,
+        20776790,
+        13732888,
+        13508788,
+        12576920,
+        17370274,
+        3178153,
+        2676972
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/bare_graph/B3/T0/query_cluster",
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 3,
+      "rotation": 0,
+      "policy": "query_cluster",
+      "strategy_position": 1,
+      "cluster_wall_ms_per_100_calls": 712.118089,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4122.6921,
+          "event_ns": 4108.563232421875,
+          "host_enqueue_ns": 8.9741,
+          "wait_ns": 4114.7061
+        },
+        "mature": {
+          "wall_ns": 3923.4258,
+          "event_ns": 3909.1201782226562,
+          "host_enqueue_ns": 25.0757,
+          "wait_ns": 3900.8349
+        }
+      },
+      "gap_matched": 0,
+      "gap_qualification_denominator": 0,
+      "match_errors_ns": []
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/bare_graph/B3/T0/idle_matched",
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 3,
+      "rotation": 0,
+      "policy": "idle_matched",
+      "strategy_position": 2,
+      "cluster_wall_ms_per_100_calls": 929.206208,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 8910.2747,
+          "event_ns": 8880.84487915039,
+          "host_enqueue_ns": 14.74,
+          "wait_ns": 8895.5347
+        },
+        "mature": {
+          "wall_ns": 3930.64,
+          "event_ns": 3908.505630493164,
+          "host_enqueue_ns": 26.6016,
+          "wait_ns": 3902.3768
+        }
+      },
+      "gap_matched": 9,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        8303127,
+        82812,
+        87291,
+        98846,
+        86542,
+        92269,
+        81989,
+        92926,
+        143652,
+        101919
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/bare_graph/B3/T1/query_cluster",
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 3,
+      "rotation": 1,
+      "policy": "query_cluster",
+      "strategy_position": 0,
+      "cluster_wall_ms_per_100_calls": 634.689415,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4128.6033,
+          "event_ns": 4113.919830322266,
+          "host_enqueue_ns": 8.1385,
+          "wait_ns": 4120.4648
+        },
+        "mature": {
+          "wall_ns": 3922.9743,
+          "event_ns": 3909.017562866211,
+          "host_enqueue_ns": 24.2852,
+          "wait_ns": 3898.2372
+        }
+      },
+      "gap_matched": 0,
+      "gap_qualification_denominator": 0,
+      "match_errors_ns": []
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/bare_graph/B3/T1/idle_matched",
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 3,
+      "rotation": 1,
+      "policy": "idle_matched",
+      "strategy_position": 1,
+      "cluster_wall_ms_per_100_calls": 1087.104389,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 11021.6784,
+          "event_ns": 11001.651000976562,
+          "host_enqueue_ns": 10.8436,
+          "wait_ns": 11012.4759
+        },
+        "mature": {
+          "wall_ns": 3929.8701,
+          "event_ns": 3907.788848876953,
+          "host_enqueue_ns": 26.0776,
+          "wait_ns": 3904.2594
+        }
+      },
+      "gap_matched": 9,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        26861780,
+        109858,
+        82320,
+        93962,
+        101410,
+        86650,
+        98831,
+        89418,
+        97425,
+        96807
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/bare_graph/B3/T1/query_block",
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 3,
+      "rotation": 1,
+      "policy": "query_block",
+      "strategy_position": 2,
+      "cluster_wall_ms_per_100_calls": 1135.090239,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4132.8233,
+          "event_ns": 4107.059097290039,
+          "host_enqueue_ns": 13.9506,
+          "wait_ns": 4119.8987
+        },
+        "mature": {
+          "wall_ns": 9977.8496,
+          "event_ns": 9928.90853881836,
+          "host_enqueue_ns": 33.7802,
+          "wait_ns": 9943.5163
+        }
+      },
+      "gap_matched": 2,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        66778372,
+        3367132,
+        1818456,
+        5044875,
+        7461383,
+        4227558,
+        -1730020,
+        1180179,
+        2293465,
+        -576489
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/bare_graph/B3/T2/idle_matched",
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 3,
+      "rotation": 2,
+      "policy": "idle_matched",
+      "strategy_position": 0,
+      "cluster_wall_ms_per_100_calls": 983.264527,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4129.3304,
+          "event_ns": 4109.414291381836,
+          "host_enqueue_ns": 10.0561,
+          "wait_ns": 4119.8239
+        },
+        "mature": {
+          "wall_ns": 11167.5919,
+          "event_ns": 11143.270111083984,
+          "host_enqueue_ns": 37.6316,
+          "wait_ns": 11140.9893
+        }
+      },
+      "gap_matched": 9,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        33776594,
+        117187,
+        88183,
+        82598,
+        89333,
+        101897,
+        92254,
+        79665,
+        89725,
+        94995
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/bare_graph/B3/T2/query_block",
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 3,
+      "rotation": 2,
+      "policy": "query_block",
+      "strategy_position": 1,
+      "cluster_wall_ms_per_100_calls": 1527.959705,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4146.3698,
+          "event_ns": 4109.926223754883,
+          "host_enqueue_ns": 19.2486,
+          "wait_ns": 4128.9156
+        },
+        "mature": {
+          "wall_ns": 19561.9259,
+          "event_ns": 19383.29620361328,
+          "host_enqueue_ns": 41.8516,
+          "wait_ns": 19510.981
+        }
+      },
+      "gap_matched": 1,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        2449090328,
+        15080879,
+        4254225,
+        10619030,
+        13766720,
+        7987205,
+        10728056,
+        7991203,
+        5316493,
+        1658625
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/bare_graph/B3/T2/query_cluster",
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 3,
+      "rotation": 2,
+      "policy": "query_cluster",
+      "strategy_position": 2,
+      "cluster_wall_ms_per_100_calls": 452.24184,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4127.3276,
+          "event_ns": 4108.390426635742,
+          "host_enqueue_ns": 9.997,
+          "wait_ns": 4116.6282
+        },
+        "mature": {
+          "wall_ns": 3928.9156,
+          "event_ns": 3909.734344482422,
+          "host_enqueue_ns": 28.6365,
+          "wait_ns": 3898.5016
+        }
+      },
+      "gap_matched": 0,
+      "gap_qualification_denominator": 0,
+      "match_errors_ns": []
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/bare_graph/B5/T0/query_block",
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 5,
+      "rotation": 0,
+      "policy": "query_block",
+      "strategy_position": 0,
+      "cluster_wall_ms_per_100_calls": 1264.021859,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 11812.3428,
+          "event_ns": 11783.577728271484,
+          "host_enqueue_ns": 15.0095,
+          "wait_ns": 11797.3333
+        },
+        "mature": {
+          "wall_ns": 3927.9871,
+          "event_ns": 3896.8318939208984,
+          "host_enqueue_ns": 36.6096,
+          "wait_ns": 3888.2706
+        }
+      },
+      "gap_matched": 3,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        6217176,
+        8829835,
+        818609,
+        2720661,
+        8703449,
+        2603985,
+        -2259663,
+        12324574,
+        831208,
+        -967973
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/bare_graph/B5/T0/query_cluster",
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 5,
+      "rotation": 0,
+      "policy": "query_cluster",
+      "strategy_position": 1,
+      "cluster_wall_ms_per_100_calls": 450.169171,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4111.1538,
+          "event_ns": 4097.536087036133,
+          "host_enqueue_ns": 8.2547,
+          "wait_ns": 4103.9771
+        },
+        "mature": {
+          "wall_ns": 3913.8452,
+          "event_ns": 3897.8561401367188,
+          "host_enqueue_ns": 28.364,
+          "wait_ns": 3885.5835
+        }
+      },
+      "gap_matched": 0,
+      "gap_qualification_denominator": 0,
+      "match_errors_ns": []
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/bare_graph/B5/T0/idle_matched",
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 5,
+      "rotation": 0,
+      "policy": "idle_matched",
+      "strategy_position": 2,
+      "cluster_wall_ms_per_100_calls": 995.007753,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4112.1517,
+          "event_ns": 4088.627243041992,
+          "host_enqueue_ns": 9.8938,
+          "wait_ns": 4101.0245
+        },
+        "mature": {
+          "wall_ns": 7591.8647,
+          "event_ns": 7562.547302246094,
+          "host_enqueue_ns": 31.3316,
+          "wait_ns": 7561.7594
+        }
+      },
+      "gap_matched": 9,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        128643556,
+        102558,
+        102648,
+        88525,
+        113604,
+        112242,
+        82309,
+        82540,
+        88085,
+        84454
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/bare_graph/B5/T1/query_cluster",
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 5,
+      "rotation": 1,
+      "policy": "query_cluster",
+      "strategy_position": 0,
+      "cluster_wall_ms_per_100_calls": 666.463395,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4117.2578,
+          "event_ns": 4090.777587890625,
+          "host_enqueue_ns": 9.8617,
+          "wait_ns": 4105.789
+        },
+        "mature": {
+          "wall_ns": 3915.4848,
+          "event_ns": 3898.060989379883,
+          "host_enqueue_ns": 30.1955,
+          "wait_ns": 3887.6225
+        }
+      },
+      "gap_matched": 0,
+      "gap_qualification_denominator": 0,
+      "match_errors_ns": []
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/bare_graph/B5/T1/idle_matched",
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 5,
+      "rotation": 1,
+      "policy": "idle_matched",
+      "strategy_position": 1,
+      "cluster_wall_ms_per_100_calls": 931.039515,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4270.081,
+          "event_ns": 4244.787216186523,
+          "host_enqueue_ns": 12.4697,
+          "wait_ns": 4257.6113
+        },
+        "mature": {
+          "wall_ns": 3938.8178,
+          "event_ns": 3896.422576904297,
+          "host_enqueue_ns": 31.7203,
+          "wait_ns": 3894.6146
+        }
+      },
+      "gap_matched": 9,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        9143531,
+        96347,
+        95900,
+        98313,
+        84728,
+        84063,
+        83772,
+        93877,
+        117645,
+        141703
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/bare_graph/B5/T1/query_block",
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 5,
+      "rotation": 1,
+      "policy": "query_block",
+      "strategy_position": 2,
+      "cluster_wall_ms_per_100_calls": 1587.106966,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 18961.7649,
+          "event_ns": 18924.954223632812,
+          "host_enqueue_ns": 19.6203,
+          "wait_ns": 18942.6525
+        },
+        "mature": {
+          "wall_ns": 12608.2691,
+          "event_ns": 12570.829010009766,
+          "host_enqueue_ns": 45.6287,
+          "wait_ns": 12567.9213
+        }
+      },
+      "gap_matched": 0,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        76179575,
+        6469226,
+        7783889,
+        9700264,
+        10653247,
+        11478415,
+        11623823,
+        19444043,
+        4200286,
+        10951429
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/bare_graph/B5/T2/idle_matched",
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 5,
+      "rotation": 2,
+      "policy": "idle_matched",
+      "strategy_position": 0,
+      "cluster_wall_ms_per_100_calls": 1224.236258,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 11644.7294,
+          "event_ns": 11612.159729003906,
+          "host_enqueue_ns": 16.5705,
+          "wait_ns": 11629.2359
+        },
+        "mature": {
+          "wall_ns": 3949.1155,
+          "event_ns": 3897.8561401367188,
+          "host_enqueue_ns": 38.9591,
+          "wait_ns": 3906.243
+        }
+      },
+      "gap_matched": 9,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        13810502,
+        107523,
+        101967,
+        98359,
+        104200,
+        113569,
+        120558,
+        103573,
+        116514,
+        117715
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/bare_graph/B5/T2/query_block",
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 5,
+      "rotation": 2,
+      "policy": "query_block",
+      "strategy_position": 1,
+      "cluster_wall_ms_per_100_calls": 1573.980547,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4124.5992,
+          "event_ns": 4090.6753540039062,
+          "host_enqueue_ns": 19.3919,
+          "wait_ns": 4107.5999
+        },
+        "mature": {
+          "wall_ns": 12721.8615,
+          "event_ns": 12687.052917480469,
+          "host_enqueue_ns": 40.5441,
+          "wait_ns": 12683.5557
+        }
+      },
+      "gap_matched": 0,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        56989508,
+        4484076,
+        5428066,
+        31348663,
+        18092632,
+        19991103,
+        14934885,
+        28769878,
+        17633869,
+        16847344
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/bare_graph/B5/T2/query_cluster",
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 5,
+      "rotation": 2,
+      "policy": "query_cluster",
+      "strategy_position": 2,
+      "cluster_wall_ms_per_100_calls": 613.225516,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4115.925,
+          "event_ns": 4096.716690063477,
+          "host_enqueue_ns": 11.547,
+          "wait_ns": 4104.2756
+        },
+        "mature": {
+          "wall_ns": 3914.1837,
+          "event_ns": 3897.8561401367188,
+          "host_enqueue_ns": 29.9078,
+          "wait_ns": 3883.5615
+        }
+      },
+      "gap_matched": 0,
+      "gap_qualification_denominator": 0,
+      "match_errors_ns": []
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/bare_graph/B8/T0/query_block",
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 8,
+      "rotation": 0,
+      "policy": "query_block",
+      "strategy_position": 0,
+      "cluster_wall_ms_per_100_calls": 1400.852678,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 14314.6557,
+          "event_ns": 14279.986572265625,
+          "host_enqueue_ns": 18.446,
+          "wait_ns": 14296.2097
+        },
+        "mature": {
+          "wall_ns": 3933.2732,
+          "event_ns": 3898.1632232666016,
+          "host_enqueue_ns": 37.7749,
+          "wait_ns": 3893.6001
+        }
+      },
+      "gap_matched": 1,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        7728223,
+        8338314,
+        6731153,
+        12742878,
+        8675050,
+        2849946,
+        2319571,
+        4748148,
+        174188,
+        12453184
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/bare_graph/B8/T0/query_cluster",
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 8,
+      "rotation": 0,
+      "policy": "query_cluster",
+      "strategy_position": 1,
+      "cluster_wall_ms_per_100_calls": 443.282758,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4101.4723,
+          "event_ns": 4088.422393798828,
+          "host_enqueue_ns": 7.5464,
+          "wait_ns": 4093.7006
+        },
+        "mature": {
+          "wall_ns": 3912.4985,
+          "event_ns": 3897.139358520508,
+          "host_enqueue_ns": 27.9772,
+          "wait_ns": 3885.3304
+        }
+      },
+      "gap_matched": 0,
+      "gap_qualification_denominator": 0,
+      "match_errors_ns": []
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/bare_graph/B8/T0/idle_matched",
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 8,
+      "rotation": 0,
+      "policy": "idle_matched",
+      "strategy_position": 2,
+      "cluster_wall_ms_per_100_calls": 1086.107778,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 10626.6744,
+          "event_ns": 10604.338836669922,
+          "host_enqueue_ns": 14.8763,
+          "wait_ns": 10617.6463
+        },
+        "mature": {
+          "wall_ns": 3927.3177,
+          "event_ns": 3897.6512908935547,
+          "host_enqueue_ns": 34.7251,
+          "wait_ns": 3893.0776
+        }
+      },
+      "gap_matched": 9,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        22558020,
+        110245,
+        135233,
+        106265,
+        101623,
+        92311,
+        89166,
+        81411,
+        90473,
+        93396
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/bare_graph/B8/T1/query_cluster",
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 8,
+      "rotation": 1,
+      "policy": "query_cluster",
+      "strategy_position": 0,
+      "cluster_wall_ms_per_100_calls": 732.311434,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4127.6715,
+          "event_ns": 4085.2481842041016,
+          "host_enqueue_ns": 12.8033,
+          "wait_ns": 4099.7078
+        },
+        "mature": {
+          "wall_ns": 6391.2009,
+          "event_ns": 6293.708801269531,
+          "host_enqueue_ns": 42.3024,
+          "wait_ns": 6306.7327
+        }
+      },
+      "gap_matched": 0,
+      "gap_qualification_denominator": 0,
+      "match_errors_ns": []
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/bare_graph/B8/T1/idle_matched",
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 8,
+      "rotation": 1,
+      "policy": "idle_matched",
+      "strategy_position": 1,
+      "cluster_wall_ms_per_100_calls": 1165.87517,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 9278.2843,
+          "event_ns": 9228.594970703125,
+          "host_enqueue_ns": 24.5687,
+          "wait_ns": 9254.3528
+        },
+        "mature": {
+          "wall_ns": 3944.8109,
+          "event_ns": 3897.6512908935547,
+          "host_enqueue_ns": 54.8562,
+          "wait_ns": 3895.9159
+        }
+      },
+      "gap_matched": 9,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        2808220,
+        123887,
+        125812,
+        126196,
+        145379,
+        124049,
+        126047,
+        155800,
+        136373,
+        115358
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/bare_graph/B8/T1/query_block",
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 8,
+      "rotation": 1,
+      "policy": "query_block",
+      "strategy_position": 2,
+      "cluster_wall_ms_per_100_calls": 1404.798184,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4139.6698,
+          "event_ns": 4089.9585723876953,
+          "host_enqueue_ns": 25.8301,
+          "wait_ns": 4111.2037
+        },
+        "mature": {
+          "wall_ns": 7986.6953,
+          "event_ns": 7940.402984619141,
+          "host_enqueue_ns": 49.4229,
+          "wait_ns": 7938.7892
+        }
+      },
+      "gap_matched": 0,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        122851330,
+        25108435,
+        10520769,
+        12641527,
+        19480576,
+        22913688,
+        18167806,
+        19609412,
+        30862285,
+        26735624
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/bare_graph/B8/T2/idle_matched",
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 8,
+      "rotation": 2,
+      "policy": "idle_matched",
+      "strategy_position": 0,
+      "cluster_wall_ms_per_100_calls": 1075.575701,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4140.2549,
+          "event_ns": 4089.548873901367,
+          "host_enqueue_ns": 24.1589,
+          "wait_ns": 4112.424
+        },
+        "mature": {
+          "wall_ns": 9972.9978,
+          "event_ns": 9912.934112548828,
+          "host_enqueue_ns": 50.7766,
+          "wait_ns": 9897.5814
+        }
+      },
+      "gap_matched": 9,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        8934801,
+        148333,
+        136310,
+        137331,
+        121616,
+        124117,
+        120122,
+        117428,
+        145154,
+        123220
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/bare_graph/B8/T2/query_block",
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 8,
+      "rotation": 2,
+      "policy": "query_block",
+      "strategy_position": 1,
+      "cluster_wall_ms_per_100_calls": 1591.55855,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 20114.4455,
+          "event_ns": 20074.496459960938,
+          "host_enqueue_ns": 20.0561,
+          "wait_ns": 20094.3894
+        },
+        "mature": {
+          "wall_ns": 9897.7036,
+          "event_ns": 9861.427307128906,
+          "host_enqueue_ns": 37.9431,
+          "wait_ns": 9859.7785
+        }
+      },
+      "gap_matched": 0,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        44636326,
+        12331589,
+        6221202,
+        7875635,
+        16963360,
+        13688292,
+        15728785,
+        13567443,
+        9548984,
+        9111992
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R01/bare_graph/B8/T2/query_cluster",
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 8,
+      "rotation": 2,
+      "policy": "query_cluster",
+      "strategy_position": 2,
+      "cluster_wall_ms_per_100_calls": 595.539388,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4133.512,
+          "event_ns": 4090.572738647461,
+          "host_enqueue_ns": 13.2722,
+          "wait_ns": 4112.9569
+        },
+        "mature": {
+          "wall_ns": 4085.87,
+          "event_ns": 4063.9488220214844,
+          "host_enqueue_ns": 41.4407,
+          "wait_ns": 4052.8462
+        }
+      },
+      "gap_matched": 0,
+      "gap_qualification_denominator": 0,
+      "match_errors_ns": []
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/full/B3/T0/idle_matched",
+      "run_id": "R02",
+      "scope": "full",
+      "batch": 3,
+      "rotation": 0,
+      "policy": "idle_matched",
+      "strategy_position": 0,
+      "cluster_wall_ms_per_100_calls": 1278.327052,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4289.2109,
+          "event_ns": 4177.715301513672,
+          "host_enqueue_ns": 251.5362,
+          "wait_ns": 4023.1771
+        },
+        "mature": {
+          "wall_ns": 4566.2551,
+          "event_ns": 4471.193695068359,
+          "host_enqueue_ns": 304.519,
+          "wait_ns": 4261.7361
+        }
+      },
+      "gap_matched": 10,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        108075,
+        119310,
+        112250,
+        105651,
+        102866,
+        97597,
+        118819,
+        106663,
+        117037,
+        101800
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/full/B3/T0/query_cluster",
+      "run_id": "R02",
+      "scope": "full",
+      "batch": 3,
+      "rotation": 0,
+      "policy": "query_cluster",
+      "strategy_position": 1,
+      "cluster_wall_ms_per_100_calls": 732.43463,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4220.2693,
+          "event_ns": 4177.510452270508,
+          "host_enqueue_ns": 225.0809,
+          "wait_ns": 4001.2044
+        },
+        "mature": {
+          "wall_ns": 4019.4701,
+          "event_ns": 3982.950210571289,
+          "host_enqueue_ns": 264.3647,
+          "wait_ns": 3755.1054
+        }
+      },
+      "gap_matched": 0,
+      "gap_qualification_denominator": 0,
+      "match_errors_ns": []
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/full/B3/T0/query_block",
+      "run_id": "R02",
+      "scope": "full",
+      "batch": 3,
+      "rotation": 0,
+      "policy": "query_block",
+      "strategy_position": 2,
+      "cluster_wall_ms_per_100_calls": 1213.749817,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4327.2643,
+          "event_ns": 4180.377578735352,
+          "host_enqueue_ns": 277.6277,
+          "wait_ns": 4005.7745
+        },
+        "mature": {
+          "wall_ns": 4607.0602,
+          "event_ns": 4479.359817504883,
+          "host_enqueue_ns": 302.0182,
+          "wait_ns": 4099.0309
+        }
+      },
+      "gap_matched": 4,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        28931168,
+        -7184170,
+        -3385018,
+        4107079,
+        4830874,
+        625616,
+        -1022572,
+        -853042,
+        -1330535,
+        -6751949
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/full/B3/T1/query_block",
+      "run_id": "R02",
+      "scope": "full",
+      "batch": 3,
+      "rotation": 1,
+      "policy": "query_block",
+      "strategy_position": 0,
+      "cluster_wall_ms_per_100_calls": 1465.206245,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 12303.9236,
+          "event_ns": 12223.795318603516,
+          "host_enqueue_ns": 308.9283,
+          "wait_ns": 12039.8165
+        },
+        "mature": {
+          "wall_ns": 4087.4467,
+          "event_ns": 3977.4208068847656,
+          "host_enqueue_ns": 335.6171,
+          "wait_ns": 3738.0415
+        }
+      },
+      "gap_matched": 2,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        25294991,
+        1988596,
+        8150445,
+        2161936,
+        6641948,
+        -3680432,
+        4264614,
+        3517755,
+        -3585018,
+        2784359
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/full/B3/T1/idle_matched",
+      "run_id": "R02",
+      "scope": "full",
+      "batch": 3,
+      "rotation": 1,
+      "policy": "idle_matched",
+      "strategy_position": 1,
+      "cluster_wall_ms_per_100_calls": 1046.578849,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4262.3679,
+          "event_ns": 4173.516845703125,
+          "host_enqueue_ns": 299.2002,
+          "wait_ns": 3949.4935
+        },
+        "mature": {
+          "wall_ns": 5164.4383,
+          "event_ns": 5095.014572143555,
+          "host_enqueue_ns": 308.0647,
+          "wait_ns": 4870.5155
+        }
+      },
+      "gap_matched": 10,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        103281,
+        113861,
+        93749,
+        107480,
+        101933,
+        115437,
+        114309,
+        113571,
+        115341,
+        126036
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/full/B3/T1/query_cluster",
+      "run_id": "R02",
+      "scope": "full",
+      "batch": 3,
+      "rotation": 1,
+      "policy": "query_cluster",
+      "strategy_position": 2,
+      "cluster_wall_ms_per_100_calls": 610.932478,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4244.0512,
+          "event_ns": 4175.667190551758,
+          "host_enqueue_ns": 331.2438,
+          "wait_ns": 3936.3465
+        },
+        "mature": {
+          "wall_ns": 4035.2021,
+          "event_ns": 3980.284881591797,
+          "host_enqueue_ns": 356.9567,
+          "wait_ns": 3689.2066
+        }
+      },
+      "gap_matched": 0,
+      "gap_qualification_denominator": 0,
+      "match_errors_ns": []
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/full/B3/T2/query_cluster",
+      "run_id": "R02",
+      "scope": "full",
+      "batch": 3,
+      "rotation": 2,
+      "policy": "query_cluster",
+      "strategy_position": 0,
+      "cluster_wall_ms_per_100_calls": 584.266017,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4237.381,
+          "event_ns": 4176.998519897461,
+          "host_enqueue_ns": 319.0626,
+          "wait_ns": 3960.2289
+        },
+        "mature": {
+          "wall_ns": 4068.1342,
+          "event_ns": 3979.9808502197266,
+          "host_enqueue_ns": 321.3529,
+          "wait_ns": 3715.9921
+        }
+      },
+      "gap_matched": 0,
+      "gap_qualification_denominator": 0,
+      "match_errors_ns": []
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/full/B3/T2/query_block",
+      "run_id": "R02",
+      "scope": "full",
+      "batch": 3,
+      "rotation": 2,
+      "policy": "query_block",
+      "strategy_position": 1,
+      "cluster_wall_ms_per_100_calls": 1565.621417,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4271.7057,
+          "event_ns": 4174.540710449219,
+          "host_enqueue_ns": 345.7663,
+          "wait_ns": 3937.88
+        },
+        "mature": {
+          "wall_ns": 14763.9639,
+          "event_ns": 14601.727294921875,
+          "host_enqueue_ns": 369.1323,
+          "wait_ns": 14430.0951
+        }
+      },
+      "gap_matched": 4,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        30383862,
+        827097,
+        9729011,
+        8894697,
+        5078773,
+        322718,
+        9008165,
+        1918430,
+        -654567,
+        15820887
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/full/B3/T2/idle_matched",
+      "run_id": "R02",
+      "scope": "full",
+      "batch": 3,
+      "rotation": 2,
+      "policy": "idle_matched",
+      "strategy_position": 2,
+      "cluster_wall_ms_per_100_calls": 1352.35468,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4287.3199,
+          "event_ns": 4178.432083129883,
+          "host_enqueue_ns": 327.4646,
+          "wait_ns": 3999.9105
+        },
+        "mature": {
+          "wall_ns": 4069.2402,
+          "event_ns": 3974.96337890625,
+          "host_enqueue_ns": 320.5805,
+          "wait_ns": 3759.9949
+        }
+      },
+      "gap_matched": 10,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        106987,
+        131276,
+        120962,
+        100426,
+        116181,
+        97983,
+        97764,
+        113150,
+        108736,
+        117610
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/full/B5/T0/idle_matched",
+      "run_id": "R02",
+      "scope": "full",
+      "batch": 5,
+      "rotation": 0,
+      "policy": "idle_matched",
+      "strategy_position": 0,
+      "cluster_wall_ms_per_100_calls": 1271.21025,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 11878.9321,
+          "event_ns": 11803.955078125,
+          "host_enqueue_ns": 248.4453,
+          "wait_ns": 11619.9317
+        },
+        "mature": {
+          "wall_ns": 4049.0743,
+          "event_ns": 3963.4944915771484,
+          "host_enqueue_ns": 307.4706,
+          "wait_ns": 3749.5324
+        }
+      },
+      "gap_matched": 10,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        104848,
+        103319,
+        100658,
+        104910,
+        108762,
+        90458,
+        93424,
+        100361,
+        109362,
+        106945
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/full/B5/T0/query_cluster",
+      "run_id": "R02",
+      "scope": "full",
+      "batch": 5,
+      "rotation": 0,
+      "policy": "query_cluster",
+      "strategy_position": 1,
+      "cluster_wall_ms_per_100_calls": 621.938957,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4209.1614,
+          "event_ns": 4150.579071044922,
+          "host_enqueue_ns": 286.7992,
+          "wait_ns": 3933.9136
+        },
+        "mature": {
+          "wall_ns": 4015.4172,
+          "event_ns": 3959.9105834960938,
+          "host_enqueue_ns": 301.8989,
+          "wait_ns": 3713.5183
+        }
+      },
+      "gap_matched": 0,
+      "gap_qualification_denominator": 0,
+      "match_errors_ns": []
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/full/B5/T0/query_block",
+      "run_id": "R02",
+      "scope": "full",
+      "batch": 5,
+      "rotation": 0,
+      "policy": "query_block",
+      "strategy_position": 2,
+      "cluster_wall_ms_per_100_calls": 1673.700974,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4252.4087,
+          "event_ns": 4185.270309448242,
+          "host_enqueue_ns": 278.6507,
+          "wait_ns": 3980.8995
+        },
+        "mature": {
+          "wall_ns": 21047.0502,
+          "event_ns": 20959.642028808594,
+          "host_enqueue_ns": 311.0203,
+          "wait_ns": 20722.3469
+        }
+      },
+      "gap_matched": 2,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        26391865,
+        -5549156,
+        1148397,
+        18883121,
+        14963529,
+        -2333621,
+        34340,
+        5264846,
+        4508343,
+        -4896605
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/full/B5/T1/query_block",
+      "run_id": "R02",
+      "scope": "full",
+      "batch": 5,
+      "rotation": 1,
+      "policy": "query_block",
+      "strategy_position": 0,
+      "cluster_wall_ms_per_100_calls": 1482.591904,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 8276.1346,
+          "event_ns": 8128.511810302734,
+          "host_enqueue_ns": 297.8473,
+          "wait_ns": 7899.8092
+        },
+        "mature": {
+          "wall_ns": 11740.3184,
+          "event_ns": 11676.057434082031,
+          "host_enqueue_ns": 313.4498,
+          "wait_ns": 11453.2968
+        }
+      },
+      "gap_matched": 2,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        25213637,
+        -4520622,
+        -4995807,
+        -5634182,
+        3053654,
+        -31997,
+        -1097054,
+        -6175176,
+        3860578,
+        10519801
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/full/B5/T1/idle_matched",
+      "run_id": "R02",
+      "scope": "full",
+      "batch": 5,
+      "rotation": 1,
+      "policy": "idle_matched",
+      "strategy_position": 1,
+      "cluster_wall_ms_per_100_calls": 1335.984166,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4254.8268,
+          "event_ns": 4165.8111572265625,
+          "host_enqueue_ns": 301.9209,
+          "wait_ns": 3974.606
+        },
+        "mature": {
+          "wall_ns": 4037.0081,
+          "event_ns": 3964.313507080078,
+          "host_enqueue_ns": 301.9476,
+          "wait_ns": 3767.8574
+        }
+      },
+      "gap_matched": 10,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        101985,
+        106207,
+        111366,
+        103910,
+        99401,
+        109202,
+        110609,
+        106639,
+        109936,
+        113475
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/full/B5/T1/query_cluster",
+      "run_id": "R02",
+      "scope": "full",
+      "batch": 5,
+      "rotation": 1,
+      "policy": "query_cluster",
+      "strategy_position": 2,
+      "cluster_wall_ms_per_100_calls": 743.144769,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4209.8632,
+          "event_ns": 4157.747268676758,
+          "host_enqueue_ns": 257.0647,
+          "wait_ns": 3957.0558
+        },
+        "mature": {
+          "wall_ns": 4101.6851,
+          "event_ns": 4060.038375854492,
+          "host_enqueue_ns": 291.3319,
+          "wait_ns": 3832.6326
+        }
+      },
+      "gap_matched": 0,
+      "gap_qualification_denominator": 0,
+      "match_errors_ns": []
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/full/B5/T2/query_cluster",
+      "run_id": "R02",
+      "scope": "full",
+      "batch": 5,
+      "rotation": 2,
+      "policy": "query_cluster",
+      "strategy_position": 0,
+      "cluster_wall_ms_per_100_calls": 580.541036,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4217.4858,
+          "event_ns": 4157.0526123046875,
+          "host_enqueue_ns": 255.7892,
+          "wait_ns": 3978.5881
+        },
+        "mature": {
+          "wall_ns": 4032.0056,
+          "event_ns": 3965.542221069336,
+          "host_enqueue_ns": 337.4665,
+          "wait_ns": 3694.5391
+        }
+      },
+      "gap_matched": 0,
+      "gap_qualification_denominator": 0,
+      "match_errors_ns": []
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/full/B5/T2/query_block",
+      "run_id": "R02",
+      "scope": "full",
+      "batch": 5,
+      "rotation": 2,
+      "policy": "query_block",
+      "strategy_position": 1,
+      "cluster_wall_ms_per_100_calls": 1396.952319,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 7986.0501,
+          "event_ns": 7859.436798095703,
+          "host_enqueue_ns": 321.7436,
+          "wait_ns": 7664.3065
+        },
+        "mature": {
+          "wall_ns": 5103.0473,
+          "event_ns": 4998.348617553711,
+          "host_enqueue_ns": 337.2501,
+          "wait_ns": 4765.7972
+        }
+      },
+      "gap_matched": 4,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        33951739,
+        6369241,
+        30015709,
+        7291235,
+        1149148,
+        927976,
+        9136056,
+        10825519,
+        445202,
+        -1487987
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/full/B5/T2/idle_matched",
+      "run_id": "R02",
+      "scope": "full",
+      "batch": 5,
+      "rotation": 2,
+      "policy": "idle_matched",
+      "strategy_position": 2,
+      "cluster_wall_ms_per_100_calls": 1597.683464,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 19290.6428,
+          "event_ns": 19176.358032226562,
+          "host_enqueue_ns": 348.5536,
+          "wait_ns": 18937.1603
+        },
+        "mature": {
+          "wall_ns": 11698.2445,
+          "event_ns": 11617.996978759766,
+          "host_enqueue_ns": 320.7838,
+          "wait_ns": 11388.2432
+        }
+      },
+      "gap_matched": 10,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        100667,
+        107040,
+        109154,
+        91819,
+        109018,
+        110919,
+        116654,
+        107490,
+        110930,
+        110788
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/full/B8/T0/idle_matched",
+      "run_id": "R02",
+      "scope": "full",
+      "batch": 8,
+      "rotation": 0,
+      "policy": "idle_matched",
+      "strategy_position": 0,
+      "cluster_wall_ms_per_100_calls": 1274.344036,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 12755.5715,
+          "event_ns": 12572.160339355469,
+          "host_enqueue_ns": 314.8675,
+          "wait_ns": 12440.704
+        },
+        "mature": {
+          "wall_ns": 4033.2595,
+          "event_ns": 3957.2479248046875,
+          "host_enqueue_ns": 328.6126,
+          "wait_ns": 3704.1644
+        }
+      },
+      "gap_matched": 10,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        100301,
+        109666,
+        123241,
+        121592,
+        104650,
+        118157,
+        119083,
+        116922,
+        119403,
+        120937
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/full/B8/T0/query_cluster",
+      "run_id": "R02",
+      "scope": "full",
+      "batch": 8,
+      "rotation": 0,
+      "policy": "query_cluster",
+      "strategy_position": 1,
+      "cluster_wall_ms_per_100_calls": 765.232685,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 8332.0291,
+          "event_ns": 8229.273223876953,
+          "host_enqueue_ns": 267.0607,
+          "wait_ns": 8029.3777
+        },
+        "mature": {
+          "wall_ns": 6543.1832,
+          "event_ns": 6492.1600341796875,
+          "host_enqueue_ns": 300.9201,
+          "wait_ns": 6242.2631
+        }
+      },
+      "gap_matched": 0,
+      "gap_qualification_denominator": 0,
+      "match_errors_ns": []
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/full/B8/T0/query_block",
+      "run_id": "R02",
+      "scope": "full",
+      "batch": 8,
+      "rotation": 0,
+      "policy": "query_block",
+      "strategy_position": 2,
+      "cluster_wall_ms_per_100_calls": 1547.920738,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 13209.0676,
+          "event_ns": 13103.82080078125,
+          "host_enqueue_ns": 348.4454,
+          "wait_ns": 12857.9591
+        },
+        "mature": {
+          "wall_ns": 4060.3319,
+          "event_ns": 3960.4225158691406,
+          "host_enqueue_ns": 332.7705,
+          "wait_ns": 3732.2964
+        }
+      },
+      "gap_matched": 1,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        55738706,
+        32788661,
+        15597842,
+        7471463,
+        2762672,
+        2228033,
+        5350738,
+        2197769,
+        2782180,
+        3061788
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/full/B8/T1/query_block",
+      "run_id": "R02",
+      "scope": "full",
+      "batch": 8,
+      "rotation": 1,
+      "policy": "query_block",
+      "strategy_position": 0,
+      "cluster_wall_ms_per_100_calls": 1579.438858,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4265.341,
+          "event_ns": 4151.603317260742,
+          "host_enqueue_ns": 299.841,
+          "wait_ns": 3987.2438
+        },
+        "mature": {
+          "wall_ns": 4066.2104,
+          "event_ns": 3962.4481201171875,
+          "host_enqueue_ns": 349.6884,
+          "wait_ns": 3730.3774
+        }
+      },
+      "gap_matched": 3,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        46199158,
+        13154193,
+        3358407,
+        -7834,
+        34067,
+        4926415,
+        9770565,
+        5521634,
+        -1141980,
+        15437623
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/full/B8/T1/idle_matched",
+      "run_id": "R02",
+      "scope": "full",
+      "batch": 8,
+      "rotation": 1,
+      "policy": "idle_matched",
+      "strategy_position": 1,
+      "cluster_wall_ms_per_100_calls": 1383.591261,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4269.3501,
+          "event_ns": 4203.724670410156,
+          "host_enqueue_ns": 292.961,
+          "wait_ns": 3977.54
+        },
+        "mature": {
+          "wall_ns": 4328.2065,
+          "event_ns": 4256.051254272461,
+          "host_enqueue_ns": 353.8227,
+          "wait_ns": 3974.3838
+        }
+      },
+      "gap_matched": 10,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        110177,
+        107386,
+        118044,
+        108204,
+        121546,
+        116988,
+        109063,
+        151272,
+        123754,
+        108577
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/full/B8/T1/query_cluster",
+      "run_id": "R02",
+      "scope": "full",
+      "batch": 8,
+      "rotation": 1,
+      "policy": "query_cluster",
+      "strategy_position": 2,
+      "cluster_wall_ms_per_100_calls": 742.259864,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4375.176,
+          "event_ns": 4301.414489746094,
+          "host_enqueue_ns": 289.4402,
+          "wait_ns": 4064.7297
+        },
+        "mature": {
+          "wall_ns": 4091.0996,
+          "event_ns": 4040.9088134765625,
+          "host_enqueue_ns": 313.4239,
+          "wait_ns": 3777.6757
+        }
+      },
+      "gap_matched": 0,
+      "gap_qualification_denominator": 0,
+      "match_errors_ns": []
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/full/B8/T2/query_cluster",
+      "run_id": "R02",
+      "scope": "full",
+      "batch": 8,
+      "rotation": 2,
+      "policy": "query_cluster",
+      "strategy_position": 0,
+      "cluster_wall_ms_per_100_calls": 574.510159,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4199.0029,
+          "event_ns": 4150.579071044922,
+          "host_enqueue_ns": 265.9897,
+          "wait_ns": 3961.7368
+        },
+        "mature": {
+          "wall_ns": 4005.4599,
+          "event_ns": 3961.9583129882812,
+          "host_enqueue_ns": 281.4611,
+          "wait_ns": 3722.0997
+        }
+      },
+      "gap_matched": 0,
+      "gap_qualification_denominator": 0,
+      "match_errors_ns": []
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/full/B8/T2/query_block",
+      "run_id": "R02",
+      "scope": "full",
+      "batch": 8,
+      "rotation": 2,
+      "policy": "query_block",
+      "strategy_position": 1,
+      "cluster_wall_ms_per_100_calls": 1399.287986,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4275.0324,
+          "event_ns": 4170.137786865234,
+          "host_enqueue_ns": 288.2229,
+          "wait_ns": 3992.298
+        },
+        "mature": {
+          "wall_ns": 4065.0066,
+          "event_ns": 3962.1631622314453,
+          "host_enqueue_ns": 312.2667,
+          "wait_ns": 3743.3978
+        }
+      },
+      "gap_matched": 3,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        32482786,
+        3251068,
+        24463968,
+        1560243,
+        -379130,
+        6199957,
+        -2391687,
+        10467438,
+        1083310,
+        11111122
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/full/B8/T2/idle_matched",
+      "run_id": "R02",
+      "scope": "full",
+      "batch": 8,
+      "rotation": 2,
+      "policy": "idle_matched",
+      "strategy_position": 2,
+      "cluster_wall_ms_per_100_calls": 1586.57591,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 20055.3683,
+          "event_ns": 19939.22576904297,
+          "host_enqueue_ns": 340.9412,
+          "wait_ns": 19714.4271
+        },
+        "mature": {
+          "wall_ns": 11690.3966,
+          "event_ns": 11597.926330566406,
+          "host_enqueue_ns": 329.1707,
+          "wait_ns": 11360.292
+        }
+      },
+      "gap_matched": 10,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        115684,
+        134016,
+        122558,
+        105706,
+        110259,
+        128496,
+        118132,
+        111496,
+        112493,
+        127784
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/bare_graph/B3/T0/idle_matched",
+      "run_id": "R02",
+      "scope": "bare_graph",
+      "batch": 3,
+      "rotation": 0,
+      "policy": "idle_matched",
+      "strategy_position": 0,
+      "cluster_wall_ms_per_100_calls": 1103.637866,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 6133.9274,
+          "event_ns": 6093.401718139648,
+          "host_enqueue_ns": 20.8075,
+          "wait_ns": 6112.5538
+        },
+        "mature": {
+          "wall_ns": 3984.8762,
+          "event_ns": 3938.7134552001953,
+          "host_enqueue_ns": 53.7422,
+          "wait_ns": 3928.0522
+        }
+      },
+      "gap_matched": 10,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        133893,
+        107075,
+        102424,
+        106001,
+        147997,
+        110912,
+        111943,
+        117043,
+        113119,
+        100863
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/bare_graph/B3/T0/query_cluster",
+      "run_id": "R02",
+      "scope": "bare_graph",
+      "batch": 3,
+      "rotation": 0,
+      "policy": "query_cluster",
+      "strategy_position": 1,
+      "cluster_wall_ms_per_100_calls": 688.909179,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4296.2309,
+          "event_ns": 4274.483108520508,
+          "host_enqueue_ns": 10.2805,
+          "wait_ns": 4286.6747
+        },
+        "mature": {
+          "wall_ns": 3928.9485,
+          "event_ns": 3907.4817657470703,
+          "host_enqueue_ns": 33.0609,
+          "wait_ns": 3897.4005
+        }
+      },
+      "gap_matched": 0,
+      "gap_qualification_denominator": 0,
+      "match_errors_ns": []
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/bare_graph/B3/T0/query_block",
+      "run_id": "R02",
+      "scope": "bare_graph",
+      "batch": 3,
+      "rotation": 0,
+      "policy": "query_block",
+      "strategy_position": 2,
+      "cluster_wall_ms_per_100_calls": 1422.032866,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 16119.5902,
+          "event_ns": 16081.510925292969,
+          "host_enqueue_ns": 19.4229,
+          "wait_ns": 16099.8567
+        },
+        "mature": {
+          "wall_ns": 3946.2439,
+          "event_ns": 3905.228805541992,
+          "host_enqueue_ns": 46.1627,
+          "wait_ns": 3900.2823
+        }
+      },
+      "gap_matched": 1,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        34385344,
+        5115637,
+        17924444,
+        11920436,
+        15869537,
+        388713,
+        -4090316,
+        5164071,
+        13421743,
+        4139609
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/bare_graph/B3/T1/query_block",
+      "run_id": "R02",
+      "scope": "bare_graph",
+      "batch": 3,
+      "rotation": 1,
+      "policy": "query_block",
+      "strategy_position": 0,
+      "cluster_wall_ms_per_100_calls": 1305.851298,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4146.9942,
+          "event_ns": 4109.516906738281,
+          "host_enqueue_ns": 19.9679,
+          "wait_ns": 4127.2887
+        },
+        "mature": {
+          "wall_ns": 11691.2276,
+          "event_ns": 11652.91519165039,
+          "host_enqueue_ns": 42.577,
+          "wait_ns": 11649.8559
+        }
+      },
+      "gap_matched": 3,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        28325840,
+        -848926,
+        6211741,
+        7174307,
+        -1963854,
+        3110551,
+        9985601,
+        -1680781,
+        2371823,
+        3873486
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/bare_graph/B3/T1/idle_matched",
+      "run_id": "R02",
+      "scope": "bare_graph",
+      "batch": 3,
+      "rotation": 1,
+      "policy": "idle_matched",
+      "strategy_position": 1,
+      "cluster_wall_ms_per_100_calls": 1504.924713,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4143.5633,
+          "event_ns": 4101.107025146484,
+          "host_enqueue_ns": 19.8798,
+          "wait_ns": 4121.4713
+        },
+        "mature": {
+          "wall_ns": 19888.6526,
+          "event_ns": 19842.15087890625,
+          "host_enqueue_ns": 45.2661,
+          "wait_ns": 19820.9168
+        }
+      },
+      "gap_matched": 10,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        109495,
+        126975,
+        123649,
+        96184,
+        126176,
+        115738,
+        109677,
+        114540,
+        119925,
+        108350
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/bare_graph/B3/T1/query_cluster",
+      "run_id": "R02",
+      "scope": "bare_graph",
+      "batch": 3,
+      "rotation": 1,
+      "policy": "query_cluster",
+      "strategy_position": 2,
+      "cluster_wall_ms_per_100_calls": 459.932842,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4125.8382,
+          "event_ns": 4107.673645019531,
+          "host_enqueue_ns": 9.992,
+          "wait_ns": 4116.3872
+        },
+        "mature": {
+          "wall_ns": 3926.0582,
+          "event_ns": 3908.30078125,
+          "host_enqueue_ns": 30.6182,
+          "wait_ns": 3895.973
+        }
+      },
+      "gap_matched": 0,
+      "gap_qualification_denominator": 0,
+      "match_errors_ns": []
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/bare_graph/B3/T2/query_cluster",
+      "run_id": "R02",
+      "scope": "bare_graph",
+      "batch": 3,
+      "rotation": 2,
+      "policy": "query_cluster",
+      "strategy_position": 0,
+      "cluster_wall_ms_per_100_calls": 585.678903,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4126.2177,
+          "event_ns": 4109.004974365234,
+          "host_enqueue_ns": 9.8037,
+          "wait_ns": 4115.5008
+        },
+        "mature": {
+          "wall_ns": 4422.6783,
+          "event_ns": 4400.947189331055,
+          "host_enqueue_ns": 29.8908,
+          "wait_ns": 4392.9208
+        }
+      },
+      "gap_matched": 0,
+      "gap_qualification_denominator": 0,
+      "match_errors_ns": []
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/bare_graph/B3/T2/query_block",
+      "run_id": "R02",
+      "scope": "bare_graph",
+      "batch": 3,
+      "rotation": 2,
+      "policy": "query_block",
+      "strategy_position": 1,
+      "cluster_wall_ms_per_100_calls": 1377.065054,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4293.0356,
+          "event_ns": 4254.31022644043,
+          "host_enqueue_ns": 19.3859,
+          "wait_ns": 4272.777
+        },
+        "mature": {
+          "wall_ns": 3958.6928,
+          "event_ns": 3907.583999633789,
+          "host_enqueue_ns": 45.2199,
+          "wait_ns": 3903.38
+        }
+      },
+      "gap_matched": 3,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        32693088,
+        -356125,
+        2520473,
+        -2252839,
+        18341218,
+        -21488,
+        2742607,
+        -886997,
+        4127570,
+        11555073
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/bare_graph/B3/T2/idle_matched",
+      "run_id": "R02",
+      "scope": "bare_graph",
+      "batch": 3,
+      "rotation": 2,
+      "policy": "idle_matched",
+      "strategy_position": 2,
+      "cluster_wall_ms_per_100_calls": 1341.145569,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4171.4272,
+          "event_ns": 4122.521591186523,
+          "host_enqueue_ns": 22.9256,
+          "wait_ns": 4146.8124
+        },
+        "mature": {
+          "wall_ns": 4409.085,
+          "event_ns": 4376.166534423828,
+          "host_enqueue_ns": 38.8338,
+          "wait_ns": 4372.1117
+        }
+      },
+      "gap_matched": 10,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        110187,
+        116897,
+        118605,
+        113378,
+        112766,
+        106958,
+        132065,
+        112100,
+        109656,
+        115484
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/bare_graph/B5/T0/idle_matched",
+      "run_id": "R02",
+      "scope": "bare_graph",
+      "batch": 5,
+      "rotation": 0,
+      "policy": "idle_matched",
+      "strategy_position": 0,
+      "cluster_wall_ms_per_100_calls": 1300.889351,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 11827.0646,
+          "event_ns": 11790.643310546875,
+          "host_enqueue_ns": 19.4069,
+          "wait_ns": 11807.6577
+        },
+        "mature": {
+          "wall_ns": 3934.7591,
+          "event_ns": 3895.7054138183594,
+          "host_enqueue_ns": 45.5596,
+          "wait_ns": 3886.913
+        }
+      },
+      "gap_matched": 10,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        109157,
+        127915,
+        121457,
+        113596,
+        99053,
+        109208,
+        119373,
+        115028,
+        105841,
+        126197
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/bare_graph/B5/T0/query_cluster",
+      "run_id": "R02",
+      "scope": "bare_graph",
+      "batch": 5,
+      "rotation": 0,
+      "policy": "query_cluster",
+      "strategy_position": 1,
+      "cluster_wall_ms_per_100_calls": 597.47128,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4108.2895,
+          "event_ns": 4089.446258544922,
+          "host_enqueue_ns": 9.5502,
+          "wait_ns": 4097.2966
+        },
+        "mature": {
+          "wall_ns": 3914.5692,
+          "event_ns": 3896.5248107910156,
+          "host_enqueue_ns": 27.8199,
+          "wait_ns": 3885.9403
+        }
+      },
+      "gap_matched": 0,
+      "gap_qualification_denominator": 0,
+      "match_errors_ns": []
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/bare_graph/B5/T0/query_block",
+      "run_id": "R02",
+      "scope": "bare_graph",
+      "batch": 5,
+      "rotation": 0,
+      "policy": "query_block",
+      "strategy_position": 2,
+      "cluster_wall_ms_per_100_calls": 1386.335421,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4131.4854,
+          "event_ns": 4089.139175415039,
+          "host_enqueue_ns": 19.5933,
+          "wait_ns": 4114.9429
+        },
+        "mature": {
+          "wall_ns": 3939.9034,
+          "event_ns": 3895.8080291748047,
+          "host_enqueue_ns": 40.0682,
+          "wait_ns": 3900.1127
+        }
+      },
+      "gap_matched": 5,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        42909903,
+        -4326002,
+        -1936919,
+        -3127030,
+        21453651,
+        10427336,
+        -866305,
+        1564329,
+        1157726,
+        -2244566
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/bare_graph/B5/T1/query_block",
+      "run_id": "R02",
+      "scope": "bare_graph",
+      "batch": 5,
+      "rotation": 1,
+      "policy": "query_block",
+      "strategy_position": 0,
+      "cluster_wall_ms_per_100_calls": 1339.927528,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4143.039,
+          "event_ns": 4095.3857421875,
+          "host_enqueue_ns": 17.6155,
+          "wait_ns": 4125.2211
+        },
+        "mature": {
+          "wall_ns": 3935.0215,
+          "event_ns": 3896.217727661133,
+          "host_enqueue_ns": 39.4651,
+          "wait_ns": 3890.4178
+        }
+      },
+      "gap_matched": 3,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        26039031,
+        -4679977,
+        -1209274,
+        -1083998,
+        -4701311,
+        -4219663,
+        1630674,
+        -3766609,
+        4145137,
+        -4336435
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/bare_graph/B5/T1/idle_matched",
+      "run_id": "R02",
+      "scope": "bare_graph",
+      "batch": 5,
+      "rotation": 1,
+      "policy": "idle_matched",
+      "strategy_position": 1,
+      "cluster_wall_ms_per_100_calls": 1595.962172,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 19916.8499,
+          "event_ns": 19876.351928710938,
+          "host_enqueue_ns": 19.8327,
+          "wait_ns": 19896.7708
+        },
+        "mature": {
+          "wall_ns": 12003.585,
+          "event_ns": 11975.782775878906,
+          "host_enqueue_ns": 38.0243,
+          "wait_ns": 11966.0246
+        }
+      },
+      "gap_matched": 10,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        104168,
+        105818,
+        107532,
+        118526,
+        103527,
+        119784,
+        96154,
+        101166,
+        125593,
+        126069
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/bare_graph/B5/T1/query_cluster",
+      "run_id": "R02",
+      "scope": "bare_graph",
+      "batch": 5,
+      "rotation": 1,
+      "policy": "query_cluster",
+      "strategy_position": 2,
+      "cluster_wall_ms_per_100_calls": 572.793324,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4656.0738,
+          "event_ns": 4622.5311279296875,
+          "host_enqueue_ns": 11.3185,
+          "wait_ns": 4639.1807
+        },
+        "mature": {
+          "wall_ns": 3915.8111,
+          "event_ns": 3896.6270446777344,
+          "host_enqueue_ns": 31.9828,
+          "wait_ns": 3882.3027
+        }
+      },
+      "gap_matched": 0,
+      "gap_qualification_denominator": 0,
+      "match_errors_ns": []
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/bare_graph/B5/T2/query_cluster",
+      "run_id": "R02",
+      "scope": "bare_graph",
+      "batch": 5,
+      "rotation": 2,
+      "policy": "query_cluster",
+      "strategy_position": 0,
+      "cluster_wall_ms_per_100_calls": 578.575496,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4105.8038,
+          "event_ns": 4088.8320922851562,
+          "host_enqueue_ns": 9.1785,
+          "wait_ns": 4096.4875
+        },
+        "mature": {
+          "wall_ns": 4262.2662,
+          "event_ns": 4242.943954467773,
+          "host_enqueue_ns": 35.7079,
+          "wait_ns": 4233.0306
+        }
+      },
+      "gap_matched": 0,
+      "gap_qualification_denominator": 0,
+      "match_errors_ns": []
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/bare_graph/B5/T2/query_block",
+      "run_id": "R02",
+      "scope": "bare_graph",
+      "batch": 5,
+      "rotation": 2,
+      "policy": "query_block",
+      "strategy_position": 1,
+      "cluster_wall_ms_per_100_calls": 1285.383819,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4124.4363,
+          "event_ns": 4091.5969848632812,
+          "host_enqueue_ns": 18.4701,
+          "wait_ns": 4105.8409
+        },
+        "mature": {
+          "wall_ns": 12017.3777,
+          "event_ns": 11979.776000976562,
+          "host_enqueue_ns": 41.8261,
+          "wait_ns": 11974.9841
+        }
+      },
+      "gap_matched": 4,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        32487519,
+        -4319559,
+        -945693,
+        -2026641,
+        8423496,
+        4291839,
+        10772554,
+        -3377114,
+        -1141975,
+        183914
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/bare_graph/B5/T2/idle_matched",
+      "run_id": "R02",
+      "scope": "bare_graph",
+      "batch": 5,
+      "rotation": 2,
+      "policy": "idle_matched",
+      "strategy_position": 2,
+      "cluster_wall_ms_per_100_calls": 1517.760485,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4125.155,
+          "event_ns": 4087.705612182617,
+          "host_enqueue_ns": 16.9362,
+          "wait_ns": 4106.6428
+        },
+        "mature": {
+          "wall_ns": 20347.5675,
+          "event_ns": 20301.72119140625,
+          "host_enqueue_ns": 37.6165,
+          "wait_ns": 20299.8678
+        }
+      },
+      "gap_matched": 10,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        98171,
+        126030,
+        102352,
+        124543,
+        95886,
+        103992,
+        96870,
+        93566,
+        107117,
+        112891
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/bare_graph/B8/T0/idle_matched",
+      "run_id": "R02",
+      "scope": "bare_graph",
+      "batch": 8,
+      "rotation": 0,
+      "policy": "idle_matched",
+      "strategy_position": 0,
+      "cluster_wall_ms_per_100_calls": 1316.942292,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 12666.7222,
+          "event_ns": 12624.384307861328,
+          "host_enqueue_ns": 14.8162,
+          "wait_ns": 12643.6704
+        },
+        "mature": {
+          "wall_ns": 3928.8011,
+          "event_ns": 3896.9345092773438,
+          "host_enqueue_ns": 37.899,
+          "wait_ns": 3889.3131
+        }
+      },
+      "gap_matched": 10,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        109483,
+        110687,
+        98493,
+        102494,
+        96132,
+        108162,
+        90072,
+        104527,
+        96473,
+        94135
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/bare_graph/B8/T0/query_cluster",
+      "run_id": "R02",
+      "scope": "bare_graph",
+      "batch": 8,
+      "rotation": 0,
+      "policy": "query_cluster",
+      "strategy_position": 1,
+      "cluster_wall_ms_per_100_calls": 767.125512,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4109.691,
+          "event_ns": 4093.4398651123047,
+          "host_enqueue_ns": 11.1722,
+          "wait_ns": 4100.762
+        },
+        "mature": {
+          "wall_ns": 3915.2463,
+          "event_ns": 3896.6270446777344,
+          "host_enqueue_ns": 30.2815,
+          "wait_ns": 3884.9648
+        }
+      },
+      "gap_matched": 0,
+      "gap_qualification_denominator": 0,
+      "match_errors_ns": []
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/bare_graph/B8/T0/query_block",
+      "run_id": "R02",
+      "scope": "bare_graph",
+      "batch": 8,
+      "rotation": 0,
+      "policy": "query_block",
+      "strategy_position": 2,
+      "cluster_wall_ms_per_100_calls": 1393.283132,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4668.554,
+          "event_ns": 4631.85920715332,
+          "host_enqueue_ns": 18.8799,
+          "wait_ns": 4649.1371
+        },
+        "mature": {
+          "wall_ns": 4453.0453,
+          "event_ns": 4418.662261962891,
+          "host_enqueue_ns": 41.7463,
+          "wait_ns": 4410.8902
+        }
+      },
+      "gap_matched": 4,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        36387302,
+        11179681,
+        7938333,
+        1227442,
+        -2447368,
+        -389279,
+        165141,
+        13163264,
+        -1637698,
+        9468997
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/bare_graph/B8/T1/query_block",
+      "run_id": "R02",
+      "scope": "bare_graph",
+      "batch": 8,
+      "rotation": 1,
+      "policy": "query_block",
+      "strategy_position": 0,
+      "cluster_wall_ms_per_100_calls": 1285.332108,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 11895.9943,
+          "event_ns": 11863.859558105469,
+          "host_enqueue_ns": 17.4582,
+          "wait_ns": 11878.5361
+        },
+        "mature": {
+          "wall_ns": 3950.9147,
+          "event_ns": 3899.1870880126953,
+          "host_enqueue_ns": 39.4941,
+          "wait_ns": 3906.1486
+        }
+      },
+      "gap_matched": 5,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        33815870,
+        -2603986,
+        13252805,
+        -5460130,
+        -1077704,
+        -2215934,
+        -442091,
+        -1532361,
+        -1883614,
+        923600
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/bare_graph/B8/T1/idle_matched",
+      "run_id": "R02",
+      "scope": "bare_graph",
+      "batch": 8,
+      "rotation": 1,
+      "policy": "idle_matched",
+      "strategy_position": 1,
+      "cluster_wall_ms_per_100_calls": 1400.713404,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 12966.5705,
+          "event_ns": 12929.330444335938,
+          "host_enqueue_ns": 20.0071,
+          "wait_ns": 12948.7406
+        },
+        "mature": {
+          "wall_ns": 3939.5536,
+          "event_ns": 3903.897476196289,
+          "host_enqueue_ns": 42.6571,
+          "wait_ns": 3896.8965
+        }
+      },
+      "gap_matched": 10,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        103526,
+        123221,
+        101589,
+        112884,
+        114993,
+        111117,
+        128561,
+        113320,
+        140350,
+        118722
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/bare_graph/B8/T1/query_cluster",
+      "run_id": "R02",
+      "scope": "bare_graph",
+      "batch": 8,
+      "rotation": 1,
+      "policy": "query_cluster",
+      "strategy_position": 2,
+      "cluster_wall_ms_per_100_calls": 797.351377,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4107.7073,
+          "event_ns": 4090.367889404297,
+          "host_enqueue_ns": 10.1463,
+          "wait_ns": 4097.9177
+        },
+        "mature": {
+          "wall_ns": 3918.128,
+          "event_ns": 3898.4703063964844,
+          "host_enqueue_ns": 30.4098,
+          "wait_ns": 3887.2792
+        }
+      },
+      "gap_matched": 0,
+      "gap_qualification_denominator": 0,
+      "match_errors_ns": []
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/bare_graph/B8/T2/query_cluster",
+      "run_id": "R02",
+      "scope": "bare_graph",
+      "batch": 8,
+      "rotation": 2,
+      "policy": "query_cluster",
+      "strategy_position": 0,
+      "cluster_wall_ms_per_100_calls": 570.579771,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4114.0254,
+          "event_ns": 4091.904067993164,
+          "host_enqueue_ns": 12.2693,
+          "wait_ns": 4101.9238
+        },
+        "mature": {
+          "wall_ns": 3936.3505,
+          "event_ns": 3898.5729217529297,
+          "host_enqueue_ns": 36.2349,
+          "wait_ns": 3889.7479
+        }
+      },
+      "gap_matched": 0,
+      "gap_qualification_denominator": 0,
+      "match_errors_ns": []
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/bare_graph/B8/T2/query_block",
+      "run_id": "R02",
+      "scope": "bare_graph",
+      "batch": 8,
+      "rotation": 2,
+      "policy": "query_block",
+      "strategy_position": 1,
+      "cluster_wall_ms_per_100_calls": 1395.289167,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4125.9117,
+          "event_ns": 4090.3392791748047,
+          "host_enqueue_ns": 18.7988,
+          "wait_ns": 4106.8886
+        },
+        "mature": {
+          "wall_ns": 4443.7452,
+          "event_ns": 4409.75341796875,
+          "host_enqueue_ns": 40.2786,
+          "wait_ns": 4407.5804
+        }
+      },
+      "gap_matched": 4,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        37890792,
+        3027700,
+        -1594643,
+        -1377532,
+        18570971,
+        14885684,
+        1751694,
+        -4716852,
+        1916449,
+        13704213
+      ]
+    },
+    {
+      "cluster_id": "elit01-pilot1-20261115/R02/bare_graph/B8/T2/idle_matched",
+      "run_id": "R02",
+      "scope": "bare_graph",
+      "batch": 8,
+      "rotation": 2,
+      "policy": "idle_matched",
+      "strategy_position": 2,
+      "cluster_wall_ms_per_100_calls": 1324.531408,
+      "variant_block_median_us_per_call": {
+        "native": {
+          "wall_ns": 4642.5476,
+          "event_ns": 4596.01936340332,
+          "host_enqueue_ns": 19.2877,
+          "wait_ns": 4619.2664
+        },
+        "mature": {
+          "wall_ns": 3934.6413,
+          "event_ns": 3897.9583740234375,
+          "host_enqueue_ns": 40.3938,
+          "wait_ns": 3890.9482
+        }
+      },
+      "gap_matched": 10,
+      "gap_qualification_denominator": 10,
+      "match_errors_ns": [
+        103146,
+        108763,
+        112570,
+        105379,
+        108676,
+        107621,
+        115024,
+        127567,
+        104221,
+        114504
+      ]
+    }
+  ],
+  "triplets": [
+    {
+      "triplet_id": "elit01-pilot1-20261115/R01/full/B3/T0",
+      "scope": "full",
+      "run_id": "R01",
+      "batch": 3,
+      "rotation": 0,
+      "completed_policies": 3,
+      "complete": true,
+      "policy_cluster_ms": {
+        "query_block": 1616.339186,
+        "query_cluster": 604.317182,
+        "idle_matched": 1057.460017
+      },
+      "ratio_vs_query_block": {
+        "query_block": 1.0,
+        "query_cluster": 0.3738801776473172,
+        "idle_matched": 0.6542315042283459
+      },
+      "idle_match_qualified": false
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R01/full/B3/T1",
+      "scope": "full",
+      "run_id": "R01",
+      "batch": 3,
+      "rotation": 1,
+      "completed_policies": 3,
+      "complete": true,
+      "policy_cluster_ms": {
+        "query_cluster": 722.197636,
+        "idle_matched": 1081.667953,
+        "query_block": 1480.885911
+      },
+      "ratio_vs_query_block": {
+        "query_cluster": 0.4876794563548251,
+        "idle_matched": 0.7304195042746948,
+        "query_block": 1.0
+      },
+      "idle_match_qualified": false
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R01/full/B3/T2",
+      "scope": "full",
+      "run_id": "R01",
+      "batch": 3,
+      "rotation": 2,
+      "completed_policies": 3,
+      "complete": true,
+      "policy_cluster_ms": {
+        "idle_matched": 1114.992713,
+        "query_block": 1593.585273,
+        "query_cluster": 585.851379
+      },
+      "ratio_vs_query_block": {
+        "idle_matched": 0.6996755880537057,
+        "query_block": 1.0,
+        "query_cluster": 0.3676310197678389
+      },
+      "idle_match_qualified": false
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R01/full/B5/T0",
+      "scope": "full",
+      "run_id": "R01",
+      "batch": 5,
+      "rotation": 0,
+      "completed_policies": 3,
+      "complete": true,
+      "policy_cluster_ms": {
+        "query_block": 1614.439125,
+        "query_cluster": 579.11809,
+        "idle_matched": 1173.506807
+      },
+      "ratio_vs_query_block": {
+        "query_block": 1.0,
+        "query_cluster": 0.35871162996003336,
+        "idle_matched": 0.7268820414644002
+      },
+      "idle_match_qualified": false
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R01/full/B5/T1",
+      "scope": "full",
+      "run_id": "R01",
+      "batch": 5,
+      "rotation": 1,
+      "completed_policies": 3,
+      "complete": true,
+      "policy_cluster_ms": {
+        "query_cluster": 591.493935,
+        "idle_matched": 1027.748903,
+        "query_block": 1743.557561
+      },
+      "ratio_vs_query_block": {
+        "query_cluster": 0.3392454302803485,
+        "idle_matched": 0.589455103742342,
+        "query_block": 1.0
+      },
+      "idle_match_qualified": false
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R01/full/B5/T2",
+      "scope": "full",
+      "run_id": "R01",
+      "batch": 5,
+      "rotation": 2,
+      "completed_policies": 3,
+      "complete": true,
+      "policy_cluster_ms": {
+        "idle_matched": 1159.120742,
+        "query_block": 1573.12959,
+        "query_cluster": 609.763452
+      },
+      "ratio_vs_query_block": {
+        "idle_matched": 0.7368247024073841,
+        "query_block": 1.0,
+        "query_cluster": 0.3876117109970578
+      },
+      "idle_match_qualified": false
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R01/full/B8/T0",
+      "scope": "full",
+      "run_id": "R01",
+      "batch": 8,
+      "rotation": 0,
+      "completed_policies": 3,
+      "complete": true,
+      "policy_cluster_ms": {
+        "query_block": 1325.861984,
+        "query_cluster": 575.220513,
+        "idle_matched": 1086.257335
+      },
+      "ratio_vs_query_block": {
+        "query_block": 1.0,
+        "query_cluster": 0.43384644853049803,
+        "idle_matched": 0.8192838682370729
+      },
+      "idle_match_qualified": false
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R01/full/B8/T1",
+      "scope": "full",
+      "run_id": "R01",
+      "batch": 8,
+      "rotation": 1,
+      "completed_policies": 3,
+      "complete": true,
+      "policy_cluster_ms": {
+        "query_cluster": 600.181758,
+        "idle_matched": 1179.459492,
+        "query_block": 1602.752125
+      },
+      "ratio_vs_query_block": {
+        "query_cluster": 0.3744694819855565,
+        "idle_matched": 0.7358963832289412,
+        "query_block": 1.0
+      },
+      "idle_match_qualified": false
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R01/full/B8/T2",
+      "scope": "full",
+      "run_id": "R01",
+      "batch": 8,
+      "rotation": 2,
+      "completed_policies": 3,
+      "complete": true,
+      "policy_cluster_ms": {
+        "idle_matched": 1125.420348,
+        "query_block": 1586.588651,
+        "query_cluster": 600.029115
+      },
+      "ratio_vs_query_block": {
+        "idle_matched": 0.7093334162516962,
+        "query_block": 1.0,
+        "query_cluster": 0.3781882056333958
+      },
+      "idle_match_qualified": false
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R01/bare_graph/B3/T0",
+      "scope": "bare_graph",
+      "run_id": "R01",
+      "batch": 3,
+      "rotation": 0,
+      "completed_policies": 3,
+      "complete": true,
+      "policy_cluster_ms": {
+        "query_block": 1347.918169,
+        "query_cluster": 712.118089,
+        "idle_matched": 929.206208
+      },
+      "ratio_vs_query_block": {
+        "query_block": 1.0,
+        "query_cluster": 0.5283095853870043,
+        "idle_matched": 0.6893639609364149
+      },
+      "idle_match_qualified": false
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R01/bare_graph/B3/T1",
+      "scope": "bare_graph",
+      "run_id": "R01",
+      "batch": 3,
+      "rotation": 1,
+      "completed_policies": 3,
+      "complete": true,
+      "policy_cluster_ms": {
+        "query_cluster": 634.689415,
+        "idle_matched": 1087.104389,
+        "query_block": 1135.090239
+      },
+      "ratio_vs_query_block": {
+        "query_cluster": 0.5591532665800679,
+        "idle_matched": 0.9577250791599838,
+        "query_block": 1.0
+      },
+      "idle_match_qualified": false
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R01/bare_graph/B3/T2",
+      "scope": "bare_graph",
+      "run_id": "R01",
+      "batch": 3,
+      "rotation": 2,
+      "completed_policies": 3,
+      "complete": true,
+      "policy_cluster_ms": {
+        "idle_matched": 983.264527,
+        "query_block": 1527.959705,
+        "query_cluster": 452.24184
+      },
+      "ratio_vs_query_block": {
+        "idle_matched": 0.6435146972674911,
+        "query_block": 1.0,
+        "query_cluster": 0.2959775958227904
+      },
+      "idle_match_qualified": false
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R01/bare_graph/B5/T0",
+      "scope": "bare_graph",
+      "run_id": "R01",
+      "batch": 5,
+      "rotation": 0,
+      "completed_policies": 3,
+      "complete": true,
+      "policy_cluster_ms": {
+        "query_block": 1264.021859,
+        "query_cluster": 450.169171,
+        "idle_matched": 995.007753
+      },
+      "ratio_vs_query_block": {
+        "query_block": 1.0,
+        "query_cluster": 0.3561403371268756,
+        "idle_matched": 0.7871760649670854
+      },
+      "idle_match_qualified": false
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R01/bare_graph/B5/T1",
+      "scope": "bare_graph",
+      "run_id": "R01",
+      "batch": 5,
+      "rotation": 1,
+      "completed_policies": 3,
+      "complete": true,
+      "policy_cluster_ms": {
+        "query_cluster": 666.463395,
+        "idle_matched": 931.039515,
+        "query_block": 1587.106966
+      },
+      "ratio_vs_query_block": {
+        "query_cluster": 0.41992342625758466,
+        "idle_matched": 0.5866268215976062,
+        "query_block": 1.0
+      },
+      "idle_match_qualified": false
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R01/bare_graph/B5/T2",
+      "scope": "bare_graph",
+      "run_id": "R01",
+      "batch": 5,
+      "rotation": 2,
+      "completed_policies": 3,
+      "complete": true,
+      "policy_cluster_ms": {
+        "idle_matched": 1224.236258,
+        "query_block": 1573.980547,
+        "query_cluster": 613.225516
+      },
+      "ratio_vs_query_block": {
+        "idle_matched": 0.7777963077964266,
+        "query_block": 1.0,
+        "query_cluster": 0.38960171214873346
+      },
+      "idle_match_qualified": false
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R01/bare_graph/B8/T0",
+      "scope": "bare_graph",
+      "run_id": "R01",
+      "batch": 8,
+      "rotation": 0,
+      "completed_policies": 3,
+      "complete": true,
+      "policy_cluster_ms": {
+        "query_block": 1400.852678,
+        "query_cluster": 443.282758,
+        "idle_matched": 1086.107778
+      },
+      "ratio_vs_query_block": {
+        "query_block": 1.0,
+        "query_cluster": 0.316437813170244,
+        "idle_matched": 0.7753190574976365
+      },
+      "idle_match_qualified": false
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R01/bare_graph/B8/T1",
+      "scope": "bare_graph",
+      "run_id": "R01",
+      "batch": 8,
+      "rotation": 1,
+      "completed_policies": 3,
+      "complete": true,
+      "policy_cluster_ms": {
+        "query_cluster": 732.311434,
+        "idle_matched": 1165.87517,
+        "query_block": 1404.798184
+      },
+      "ratio_vs_query_block": {
+        "query_cluster": 0.5212929816828408,
+        "idle_matched": 0.8299236027486209,
+        "query_block": 1.0
+      },
+      "idle_match_qualified": false
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R01/bare_graph/B8/T2",
+      "scope": "bare_graph",
+      "run_id": "R01",
+      "batch": 8,
+      "rotation": 2,
+      "completed_policies": 3,
+      "complete": true,
+      "policy_cluster_ms": {
+        "idle_matched": 1075.575701,
+        "query_block": 1591.55855,
+        "query_cluster": 595.539388
+      },
+      "ratio_vs_query_block": {
+        "idle_matched": 0.6758002720038166,
+        "query_block": 1.0,
+        "query_cluster": 0.37418628928228875
+      },
+      "idle_match_qualified": false
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R02/full/B3/T0",
+      "scope": "full",
+      "run_id": "R02",
+      "batch": 3,
+      "rotation": 0,
+      "completed_policies": 3,
+      "complete": true,
+      "policy_cluster_ms": {
+        "idle_matched": 1278.327052,
+        "query_cluster": 732.43463,
+        "query_block": 1213.749817
+      },
+      "ratio_vs_query_block": {
+        "idle_matched": 1.053204733047552,
+        "query_cluster": 0.6034477779039699,
+        "query_block": 1.0
+      },
+      "idle_match_qualified": false
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R02/full/B3/T1",
+      "scope": "full",
+      "run_id": "R02",
+      "batch": 3,
+      "rotation": 1,
+      "completed_policies": 3,
+      "complete": true,
+      "policy_cluster_ms": {
+        "query_block": 1465.206245,
+        "idle_matched": 1046.578849,
+        "query_cluster": 610.932478
+      },
+      "ratio_vs_query_block": {
+        "query_block": 1.0,
+        "idle_matched": 0.7142877342841246,
+        "query_cluster": 0.4169600560226932
+      },
+      "idle_match_qualified": false
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R02/full/B3/T2",
+      "scope": "full",
+      "run_id": "R02",
+      "batch": 3,
+      "rotation": 2,
+      "completed_policies": 3,
+      "complete": true,
+      "policy_cluster_ms": {
+        "query_cluster": 584.266017,
+        "query_block": 1565.621417,
+        "idle_matched": 1352.35468
+      },
+      "ratio_vs_query_block": {
+        "query_cluster": 0.3731847371630584,
+        "query_block": 1.0,
+        "idle_matched": 0.8637814131281776
+      },
+      "idle_match_qualified": false
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R02/full/B5/T0",
+      "scope": "full",
+      "run_id": "R02",
+      "batch": 5,
+      "rotation": 0,
+      "completed_policies": 3,
+      "complete": true,
+      "policy_cluster_ms": {
+        "idle_matched": 1271.21025,
+        "query_cluster": 621.938957,
+        "query_block": 1673.700974
+      },
+      "ratio_vs_query_block": {
+        "idle_matched": 0.7595205295017053,
+        "query_cluster": 0.37159502603002004,
+        "query_block": 1.0
+      },
+      "idle_match_qualified": false
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R02/full/B5/T1",
+      "scope": "full",
+      "run_id": "R02",
+      "batch": 5,
+      "rotation": 1,
+      "completed_policies": 3,
+      "complete": true,
+      "policy_cluster_ms": {
+        "query_block": 1482.591904,
+        "idle_matched": 1335.984166,
+        "query_cluster": 743.144769
+      },
+      "ratio_vs_query_block": {
+        "query_block": 1.0,
+        "idle_matched": 0.901113895466139,
+        "query_cluster": 0.5012470167920193
+      },
+      "idle_match_qualified": false
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R02/full/B5/T2",
+      "scope": "full",
+      "run_id": "R02",
+      "batch": 5,
+      "rotation": 2,
+      "completed_policies": 3,
+      "complete": true,
+      "policy_cluster_ms": {
+        "query_cluster": 580.541036,
+        "query_block": 1396.952319,
+        "idle_matched": 1597.683464
+      },
+      "ratio_vs_query_block": {
+        "query_cluster": 0.41557684403686507,
+        "query_block": 1.0,
+        "idle_matched": 1.14369219498035
+      },
+      "idle_match_qualified": false
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R02/full/B8/T0",
+      "scope": "full",
+      "run_id": "R02",
+      "batch": 8,
+      "rotation": 0,
+      "completed_policies": 3,
+      "complete": true,
+      "policy_cluster_ms": {
+        "idle_matched": 1274.344036,
+        "query_cluster": 765.232685,
+        "query_block": 1547.920738
+      },
+      "ratio_vs_query_block": {
+        "idle_matched": 0.8232618148436486,
+        "query_cluster": 0.49436167254191793,
+        "query_block": 1.0
+      },
+      "idle_match_qualified": false
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R02/full/B8/T1",
+      "scope": "full",
+      "run_id": "R02",
+      "batch": 8,
+      "rotation": 1,
+      "completed_policies": 3,
+      "complete": true,
+      "policy_cluster_ms": {
+        "query_block": 1579.438858,
+        "idle_matched": 1383.591261,
+        "query_cluster": 742.259864
+      },
+      "ratio_vs_query_block": {
+        "query_block": 1.0,
+        "idle_matched": 0.8760017863255585,
+        "query_cluster": 0.4699516288588108
+      },
+      "idle_match_qualified": false
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R02/full/B8/T2",
+      "scope": "full",
+      "run_id": "R02",
+      "batch": 8,
+      "rotation": 2,
+      "completed_policies": 3,
+      "complete": true,
+      "policy_cluster_ms": {
+        "query_cluster": 574.510159,
+        "query_block": 1399.287986,
+        "idle_matched": 1586.57591
+      },
+      "ratio_vs_query_block": {
+        "query_cluster": 0.41057320919497986,
+        "query_block": 1.0,
+        "idle_matched": 1.1338451597339734
+      },
+      "idle_match_qualified": false
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R02/bare_graph/B3/T0",
+      "scope": "bare_graph",
+      "run_id": "R02",
+      "batch": 3,
+      "rotation": 0,
+      "completed_policies": 3,
+      "complete": true,
+      "policy_cluster_ms": {
+        "idle_matched": 1103.637866,
+        "query_cluster": 688.909179,
+        "query_block": 1422.032866
+      },
+      "ratio_vs_query_block": {
+        "idle_matched": 0.7760987051617132,
+        "query_cluster": 0.48445376718880984,
+        "query_block": 1.0
+      },
+      "idle_match_qualified": false
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R02/bare_graph/B3/T1",
+      "scope": "bare_graph",
+      "run_id": "R02",
+      "batch": 3,
+      "rotation": 1,
+      "completed_policies": 3,
+      "complete": true,
+      "policy_cluster_ms": {
+        "query_block": 1305.851298,
+        "idle_matched": 1504.924713,
+        "query_cluster": 459.932842
+      },
+      "ratio_vs_query_block": {
+        "query_block": 1.0,
+        "idle_matched": 1.1524472313998497,
+        "query_cluster": 0.3522092007753244
+      },
+      "idle_match_qualified": false
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R02/bare_graph/B3/T2",
+      "scope": "bare_graph",
+      "run_id": "R02",
+      "batch": 3,
+      "rotation": 2,
+      "completed_policies": 3,
+      "complete": true,
+      "policy_cluster_ms": {
+        "query_cluster": 585.678903,
+        "query_block": 1377.065054,
+        "idle_matched": 1341.145569
+      },
+      "ratio_vs_query_block": {
+        "query_cluster": 0.42530953878958866,
+        "query_block": 1.0,
+        "idle_matched": 0.9739159127626806
+      },
+      "idle_match_qualified": false
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R02/bare_graph/B5/T0",
+      "scope": "bare_graph",
+      "run_id": "R02",
+      "batch": 5,
+      "rotation": 0,
+      "completed_policies": 3,
+      "complete": true,
+      "policy_cluster_ms": {
+        "idle_matched": 1300.889351,
+        "query_cluster": 597.47128,
+        "query_block": 1386.335421
+      },
+      "ratio_vs_query_block": {
+        "idle_matched": 0.9383655147912433,
+        "query_cluster": 0.4309716616553217,
+        "query_block": 1.0
+      },
+      "idle_match_qualified": false
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R02/bare_graph/B5/T1",
+      "scope": "bare_graph",
+      "run_id": "R02",
+      "batch": 5,
+      "rotation": 1,
+      "completed_policies": 3,
+      "complete": true,
+      "policy_cluster_ms": {
+        "query_block": 1339.927528,
+        "idle_matched": 1595.962172,
+        "query_cluster": 572.793324
+      },
+      "ratio_vs_query_block": {
+        "query_block": 1.0,
+        "idle_matched": 1.191080964193759,
+        "query_cluster": 0.42748082417185773
+      },
+      "idle_match_qualified": false
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R02/bare_graph/B5/T2",
+      "scope": "bare_graph",
+      "run_id": "R02",
+      "batch": 5,
+      "rotation": 2,
+      "completed_policies": 3,
+      "complete": true,
+      "policy_cluster_ms": {
+        "query_cluster": 578.575496,
+        "query_block": 1285.383819,
+        "idle_matched": 1517.760485
+      },
+      "ratio_vs_query_block": {
+        "query_cluster": 0.4501188574554478,
+        "query_block": 1.0,
+        "idle_matched": 1.1807838737076868
+      },
+      "idle_match_qualified": false
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R02/bare_graph/B8/T0",
+      "scope": "bare_graph",
+      "run_id": "R02",
+      "batch": 8,
+      "rotation": 0,
+      "completed_policies": 3,
+      "complete": true,
+      "policy_cluster_ms": {
+        "idle_matched": 1316.942292,
+        "query_cluster": 767.125512,
+        "query_block": 1393.283132
+      },
+      "ratio_vs_query_block": {
+        "idle_matched": 0.9452079493057409,
+        "query_cluster": 0.5505883867974654,
+        "query_block": 1.0
+      },
+      "idle_match_qualified": false
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R02/bare_graph/B8/T1",
+      "scope": "bare_graph",
+      "run_id": "R02",
+      "batch": 8,
+      "rotation": 1,
+      "completed_policies": 3,
+      "complete": true,
+      "policy_cluster_ms": {
+        "query_block": 1285.332108,
+        "idle_matched": 1400.713404,
+        "query_cluster": 797.351377
+      },
+      "ratio_vs_query_block": {
+        "query_block": 1.0,
+        "idle_matched": 1.0897676913864196,
+        "query_cluster": 0.6203465797183679
+      },
+      "idle_match_qualified": false
+    },
+    {
+      "triplet_id": "elit01-pilot1-20261115/R02/bare_graph/B8/T2",
+      "scope": "bare_graph",
+      "run_id": "R02",
+      "batch": 8,
+      "rotation": 2,
+      "completed_policies": 3,
+      "complete": true,
+      "policy_cluster_ms": {
+        "query_cluster": 570.579771,
+        "query_block": 1395.289167,
+        "idle_matched": 1324.531408
+      },
+      "ratio_vs_query_block": {
+        "query_cluster": 0.40893299001725864,
+        "query_block": 1.0,
+        "idle_matched": 0.9492881040908993
+      },
+      "idle_match_qualified": false
+    }
+  ],
+  "full_independent_processes_planned": 2,
+  "dependent_blocks_not_population_samples": true,
+  "stable_model_gain_claim": false,
+  "isolated_query_or_idle_root_cause_claim": false,
+  "scope_limit": "artificial-weight static calls/replays; all missing/slow/mismatched blocks retained",
+  "analysis_source_sha256": "3d4c176f257afe7a977fcf1fdcfd9da2b0df9fa29eed977256c36c9291a0639b",
+  "historical_plan_unchanged": true
+}

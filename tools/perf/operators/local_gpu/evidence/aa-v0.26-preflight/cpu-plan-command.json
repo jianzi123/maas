@@ -1,0 +1,18 @@
+{
+  "command": [
+    "D:\\ProgramData\\anaconda3\\python.exe",
+    "-X",
+    "utf8",
+    "repo\\tools\\perf\\operators\\local_gpu\\aa_protocol.py",
+    "--create",
+    "--experiment",
+    "P25_AA_CPU_PREFLIGHT",
+    "--checkout",
+    "b07a3485835850702da6e637519478d807767c98",
+    "--plan",
+    "deliverables\\aa-v0.26\\cpu-plan-v4.json"
+  ],
+  "exit_code": 0,
+  "stdout": "{\"plan_sha256\": \"e61816eb6a6539cd3da5dd82c76712e5cbff59b23ffc3546e90bd71aa99d85e1\", \"blocks\": 128, \"execution_enabled\": false, \"GPU_imports\": false}\n",
+  "stderr": ""
+}

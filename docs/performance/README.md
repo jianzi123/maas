@@ -1,5 +1,21 @@
 # MaaS 性能与框架工程手册
 
+本轮：[P25-AA启动失败与CPU修复v0.26](literature/p25-aa-result-v0.26.md)。一次窗口在JSON报文阶段退出，模型worker0、128缺测；修复后22项CPU检查与双端报文验证通过，未重试GPU，重复性仍未检验。
+
+本轮：[代表性审计与新的采前设计v0.25](literature/elit01-representativeness-audit-v0.25.md)。解释16层前缀/prepare/query差异、状态缺口和固定目标的适用性；仅离线，P25-AA是待评审资格设计，不启动GPU或主比较。
+
+本轮：[真实参考模板资格小窗v0.24](literature/elit01-reference-qualification-v0.24.md)。一个GPU进程128块完整，holdout仅34/64匹配，模板不合格；已停在资格阶段并保留完整超差与最小复现。
+
+单模型接线：[第23章](engineering/23-single-model-capture.md)，含ELIT-QA-01完整向量拒绝修复、实际客户端SSE采集与原角色输入缺口。
+
+最新实作：[第22章E-LIT-01三策略首批](engineering/22-cadence-policy-pilot.md)，1080块完整，Full严格gap匹配0/18组，不判根因/稳定收益。
+
+文献接续：[原始资料索引](literature/README.md)与[第21章：从原文到实验](engineering/21-literature-to-experiments.md)。16来源、四关键章节笔记、三张待实现/执行实验卡；不新增GPU成本。
+
+最新实操：[窗口B成本漂移与RoPE+KV语义](engineering/20-window-b-cost-drift.md)。240块交错数据与33个不利配对完整保留，稳定收益未成立。
+
+当前接线进展：[第19章成熟KV原生图接线](engineering/19-native-kv-integration.md)。capture前安装已由实际图确认，晚接入负控只改变eager；24份跨变体完整logits逐位相同。干净调用成本有显著状态漂移，未建立稳定收益。
+
 本轮新证据：[第18章原生ModelRunner结构验证](engineering/18-native-modelrunner-graphs.md)已用原生dummy loader实际构造完整架构，完成捕获/重放、padding、缩批回收和成熟caller检查。人工权重，不作预训练语义或性能结论。
 
 当前GPU接续：[cap6固定切片验证](engineering/17-cap6-empty-cta.md)已完成。B8/L1024保持相同分段，grid由192减为144 CTA，三进程局部改善；512保留退化，未改Engine默认。

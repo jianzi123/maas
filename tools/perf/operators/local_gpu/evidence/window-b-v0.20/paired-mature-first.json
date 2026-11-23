@@ -1,0 +1,7375 @@
+{
+  "scope": "artificial-weight static native-forward / bare graph diagnostic",
+  "Engine": false,
+  "pretrained_or_serving_claim": false,
+  "pid": 788,
+  "capture_first": "mature",
+  "profile_only": false,
+  "source_commit": "b0d25e72c401f37b55d689ddbf05b8c583afe854",
+  "code_sha256": {
+    "bench_kv_interleaved.py": "0be7d4877dda5969a009a1ecf70289a45d56d0e94e050afd37105c524e4aedd7",
+    "native_kv_binding.py": "8d03d465e964a70c7dedcf358097628a47779902b0f4635633e5f2c783d00149"
+  },
+  "environment": {
+    "CUDA_LAUNCH_BLOCKING": null,
+    "CUDA_MODULE_LOADING": "AUTO",
+    "CUDA_DEVICE_MAX_CONNECTIONS": "4",
+    "OMP_NUM_THREADS": null,
+    "MKL_NUM_THREADS": null,
+    "LD_PRELOAD": null,
+    "PYTORCH_CUDA_ALLOC_CONF": null
+  },
+  "versions": {
+    "torch": "2.8.0",
+    "triton": "3.4.0",
+    "sglang": "0.5.2",
+    "sgl-kernel": "0.3.9.post2"
+  },
+  "telemetry_initial": {
+    "returncode": 0,
+    "csv": "2026/11/14 17:41:10.109, P0, 5446, 2503, 1980, 72, 19.07, 11",
+    "fields": [
+      "timestamp",
+      "pstate",
+      "free_MiB",
+      "used_MiB",
+      "SM_MHz",
+      "temp_C",
+      "power_W",
+      "util_pct"
+    ]
+  },
+  "host_initial": {
+    "monotonic_ns": 101316194774,
+    "loadavg": [
+      0.89599609375,
+      0.3369140625,
+      0.12451171875
+    ],
+    "cpu_user_s": 12.015626,
+    "cpu_sys_s": 2.110634,
+    "voluntary_switches": 13814,
+    "involuntary_switches": 271,
+    "allocated_bytes": 0,
+    "reserved_bytes": 0
+  },
+  "torch_threads": 6,
+  "affinity": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+  ],
+  "initialization": [
+    {
+      "variant": "mature",
+      "seconds": 5.869178659999989,
+      "scope": "model load + native graph capture"
+    },
+    {
+      "variant": "native",
+      "seconds": 0.8266409710000033,
+      "scope": "new backend + separate native graph capture; same model/KV"
+    }
+  ],
+  "gates": [
+    {
+      "phase": "before_cost",
+      "batch": 3,
+      "logits_sha256": "f000a3c32e8a0da4eff169106ec7cac7f412863e3e6487715c8249dbb7bb1247",
+      "KV_sha256": "03dbf5d72012cf3db791543d272490a9230b8d49af2579a9c78e2f017247793f",
+      "all30_layers": true,
+      "finite_bitwise_equal": true
+    },
+    {
+      "phase": "after_full",
+      "batch": 3,
+      "logits_sha256": "f000a3c32e8a0da4eff169106ec7cac7f412863e3e6487715c8249dbb7bb1247",
+      "KV_sha256": "03dbf5d72012cf3db791543d272490a9230b8d49af2579a9c78e2f017247793f",
+      "all30_layers": true,
+      "finite_bitwise_equal": true
+    },
+    {
+      "phase": "after_bare_graph",
+      "batch": 3,
+      "logits_sha256": "f000a3c32e8a0da4eff169106ec7cac7f412863e3e6487715c8249dbb7bb1247",
+      "KV_sha256": "03dbf5d72012cf3db791543d272490a9230b8d49af2579a9c78e2f017247793f",
+      "all30_layers": true,
+      "finite_bitwise_equal": true
+    },
+    {
+      "phase": "before_cost",
+      "batch": 5,
+      "logits_sha256": "5c4f105bf1033d0b924e522b59e878c7ec49a517775e649b6f6375b3b68e4d92",
+      "KV_sha256": "15af0b91f16a9bc4873eda5b2b1ba47603b4d0f9061f22a62614d1e623fac8e6",
+      "all30_layers": true,
+      "finite_bitwise_equal": true
+    },
+    {
+      "phase": "after_full",
+      "batch": 5,
+      "logits_sha256": "5c4f105bf1033d0b924e522b59e878c7ec49a517775e649b6f6375b3b68e4d92",
+      "KV_sha256": "15af0b91f16a9bc4873eda5b2b1ba47603b4d0f9061f22a62614d1e623fac8e6",
+      "all30_layers": true,
+      "finite_bitwise_equal": true
+    },
+    {
+      "phase": "after_bare_graph",
+      "batch": 5,
+      "logits_sha256": "5c4f105bf1033d0b924e522b59e878c7ec49a517775e649b6f6375b3b68e4d92",
+      "KV_sha256": "15af0b91f16a9bc4873eda5b2b1ba47603b4d0f9061f22a62614d1e623fac8e6",
+      "all30_layers": true,
+      "finite_bitwise_equal": true
+    },
+    {
+      "phase": "before_cost",
+      "batch": 8,
+      "logits_sha256": "b9df0c1a3d6258dda729d8ef1868e98fbfa9c2f7dd958682b90ed9a8a2ea73e4",
+      "KV_sha256": "5d441e5cadee401a7b56246a0b1349aa537d3d8bab003567303c83ed87ac73f1",
+      "all30_layers": true,
+      "finite_bitwise_equal": true
+    },
+    {
+      "phase": "after_full",
+      "batch": 8,
+      "logits_sha256": "b9df0c1a3d6258dda729d8ef1868e98fbfa9c2f7dd958682b90ed9a8a2ea73e4",
+      "KV_sha256": "5d441e5cadee401a7b56246a0b1349aa537d3d8bab003567303c83ed87ac73f1",
+      "all30_layers": true,
+      "finite_bitwise_equal": true
+    },
+    {
+      "phase": "after_bare_graph",
+      "batch": 8,
+      "logits_sha256": "b9df0c1a3d6258dda729d8ef1868e98fbfa9c2f7dd958682b90ed9a8a2ea73e4",
+      "KV_sha256": "5d441e5cadee401a7b56246a0b1349aa537d3d8bab003567303c83ed87ac73f1",
+      "all30_layers": true,
+      "finite_bitwise_equal": true
+    }
+  ],
+  "cold_calls": [
+    {
+      "batch": 3,
+      "cycle": 0,
+      "variant": "native",
+      "wall_us": 6504.264
+    },
+    {
+      "batch": 3,
+      "cycle": 0,
+      "variant": "mature",
+      "wall_us": 7537.836
+    },
+    {
+      "batch": 3,
+      "cycle": 1,
+      "variant": "mature",
+      "wall_us": 7310.147
+    },
+    {
+      "batch": 3,
+      "cycle": 1,
+      "variant": "native",
+      "wall_us": 8906.822
+    },
+    {
+      "batch": 3,
+      "cycle": 2,
+      "variant": "native",
+      "wall_us": 9476.399
+    },
+    {
+      "batch": 3,
+      "cycle": 2,
+      "variant": "mature",
+      "wall_us": 7535.145
+    },
+    {
+      "batch": 3,
+      "cycle": 3,
+      "variant": "mature",
+      "wall_us": 6549.892
+    },
+    {
+      "batch": 3,
+      "cycle": 3,
+      "variant": "native",
+      "wall_us": 6706.434
+    },
+    {
+      "batch": 3,
+      "cycle": 4,
+      "variant": "native",
+      "wall_us": 11245.268
+    },
+    {
+      "batch": 3,
+      "cycle": 4,
+      "variant": "mature",
+      "wall_us": 6043.469
+    },
+    {
+      "batch": 3,
+      "cycle": 5,
+      "variant": "mature",
+      "wall_us": 6305.057
+    },
+    {
+      "batch": 3,
+      "cycle": 5,
+      "variant": "native",
+      "wall_us": 6147.186
+    },
+    {
+      "batch": 3,
+      "cycle": 6,
+      "variant": "native",
+      "wall_us": 8177.968
+    },
+    {
+      "batch": 3,
+      "cycle": 6,
+      "variant": "mature",
+      "wall_us": 5240.753
+    },
+    {
+      "batch": 3,
+      "cycle": 7,
+      "variant": "mature",
+      "wall_us": 6190.859
+    },
+    {
+      "batch": 3,
+      "cycle": 7,
+      "variant": "native",
+      "wall_us": 7648.3
+    },
+    {
+      "batch": 3,
+      "cycle": 8,
+      "variant": "native",
+      "wall_us": 7258.429
+    },
+    {
+      "batch": 3,
+      "cycle": 8,
+      "variant": "mature",
+      "wall_us": 7903.1
+    },
+    {
+      "batch": 3,
+      "cycle": 9,
+      "variant": "mature",
+      "wall_us": 6142.763
+    },
+    {
+      "batch": 3,
+      "cycle": 9,
+      "variant": "native",
+      "wall_us": 7719.015
+    },
+    {
+      "batch": 3,
+      "cycle": 10,
+      "variant": "native",
+      "wall_us": 7196.691
+    },
+    {
+      "batch": 3,
+      "cycle": 10,
+      "variant": "mature",
+      "wall_us": 6101.99
+    },
+    {
+      "batch": 3,
+      "cycle": 11,
+      "variant": "mature",
+      "wall_us": 8858.871
+    },
+    {
+      "batch": 3,
+      "cycle": 11,
+      "variant": "native",
+      "wall_us": 7876.284
+    },
+    {
+      "batch": 5,
+      "cycle": 0,
+      "variant": "native",
+      "wall_us": 9826.4
+    },
+    {
+      "batch": 5,
+      "cycle": 0,
+      "variant": "mature",
+      "wall_us": 7672.991
+    },
+    {
+      "batch": 5,
+      "cycle": 1,
+      "variant": "mature",
+      "wall_us": 7162.4
+    },
+    {
+      "batch": 5,
+      "cycle": 1,
+      "variant": "native",
+      "wall_us": 6351.074
+    },
+    {
+      "batch": 5,
+      "cycle": 2,
+      "variant": "native",
+      "wall_us": 10184.991
+    },
+    {
+      "batch": 5,
+      "cycle": 2,
+      "variant": "mature",
+      "wall_us": 6317.82
+    },
+    {
+      "batch": 5,
+      "cycle": 3,
+      "variant": "mature",
+      "wall_us": 7561.484
+    },
+    {
+      "batch": 5,
+      "cycle": 3,
+      "variant": "native",
+      "wall_us": 7801.941
+    },
+    {
+      "batch": 5,
+      "cycle": 4,
+      "variant": "native",
+      "wall_us": 6683.179
+    },
+    {
+      "batch": 5,
+      "cycle": 4,
+      "variant": "mature",
+      "wall_us": 10061.127
+    },
+    {
+      "batch": 5,
+      "cycle": 5,
+      "variant": "mature",
+      "wall_us": 7182.063
+    },
+    {
+      "batch": 5,
+      "cycle": 5,
+      "variant": "native",
+      "wall_us": 6443.669
+    },
+    {
+      "batch": 5,
+      "cycle": 6,
+      "variant": "native",
+      "wall_us": 7536.462
+    },
+    {
+      "batch": 5,
+      "cycle": 6,
+      "variant": "mature",
+      "wall_us": 8760.613
+    },
+    {
+      "batch": 5,
+      "cycle": 7,
+      "variant": "mature",
+      "wall_us": 7679.463
+    },
+    {
+      "batch": 5,
+      "cycle": 7,
+      "variant": "native",
+      "wall_us": 7776.442
+    },
+    {
+      "batch": 5,
+      "cycle": 8,
+      "variant": "native",
+      "wall_us": 8236.192
+    },
+    {
+      "batch": 5,
+      "cycle": 8,
+      "variant": "mature",
+      "wall_us": 9084.55
+    },
+    {
+      "batch": 5,
+      "cycle": 9,
+      "variant": "mature",
+      "wall_us": 6090.988
+    },
+    {
+      "batch": 5,
+      "cycle": 9,
+      "variant": "native",
+      "wall_us": 7388.34
+    },
+    {
+      "batch": 5,
+      "cycle": 10,
+      "variant": "native",
+      "wall_us": 6511.804
+    },
+    {
+      "batch": 5,
+      "cycle": 10,
+      "variant": "mature",
+      "wall_us": 5963.265
+    },
+    {
+      "batch": 5,
+      "cycle": 11,
+      "variant": "mature",
+      "wall_us": 10722.638
+    },
+    {
+      "batch": 5,
+      "cycle": 11,
+      "variant": "native",
+      "wall_us": 7382.263
+    },
+    {
+      "batch": 8,
+      "cycle": 0,
+      "variant": "native",
+      "wall_us": 7401.442
+    },
+    {
+      "batch": 8,
+      "cycle": 0,
+      "variant": "mature",
+      "wall_us": 7863.697
+    },
+    {
+      "batch": 8,
+      "cycle": 1,
+      "variant": "mature",
+      "wall_us": 6432.62
+    },
+    {
+      "batch": 8,
+      "cycle": 1,
+      "variant": "native",
+      "wall_us": 7597.72
+    },
+    {
+      "batch": 8,
+      "cycle": 2,
+      "variant": "native",
+      "wall_us": 7810.871
+    },
+    {
+      "batch": 8,
+      "cycle": 2,
+      "variant": "mature",
+      "wall_us": 5900.177
+    },
+    {
+      "batch": 8,
+      "cycle": 3,
+      "variant": "mature",
+      "wall_us": 11014.983
+    },
+    {
+      "batch": 8,
+      "cycle": 3,
+      "variant": "native",
+      "wall_us": 6659.697
+    },
+    {
+      "batch": 8,
+      "cycle": 4,
+      "variant": "native",
+      "wall_us": 6555.774
+    },
+    {
+      "batch": 8,
+      "cycle": 4,
+      "variant": "mature",
+      "wall_us": 7302.714
+    },
+    {
+      "batch": 8,
+      "cycle": 5,
+      "variant": "mature",
+      "wall_us": 9249.752
+    },
+    {
+      "batch": 8,
+      "cycle": 5,
+      "variant": "native",
+      "wall_us": 7637.12
+    },
+    {
+      "batch": 8,
+      "cycle": 6,
+      "variant": "native",
+      "wall_us": 7105.609
+    },
+    {
+      "batch": 8,
+      "cycle": 6,
+      "variant": "mature",
+      "wall_us": 6047.128
+    },
+    {
+      "batch": 8,
+      "cycle": 7,
+      "variant": "mature",
+      "wall_us": 8701.594
+    },
+    {
+      "batch": 8,
+      "cycle": 7,
+      "variant": "native",
+      "wall_us": 7532.201
+    },
+    {
+      "batch": 8,
+      "cycle": 8,
+      "variant": "native",
+      "wall_us": 7653.05
+    },
+    {
+      "batch": 8,
+      "cycle": 8,
+      "variant": "mature",
+      "wall_us": 5936.878
+    },
+    {
+      "batch": 8,
+      "cycle": 9,
+      "variant": "mature",
+      "wall_us": 5748.399
+    },
+    {
+      "batch": 8,
+      "cycle": 9,
+      "variant": "native",
+      "wall_us": 9047.682
+    },
+    {
+      "batch": 8,
+      "cycle": 10,
+      "variant": "native",
+      "wall_us": 6170.872
+    },
+    {
+      "batch": 8,
+      "cycle": 10,
+      "variant": "mature",
+      "wall_us": 5720.206
+    },
+    {
+      "batch": 8,
+      "cycle": 11,
+      "variant": "mature",
+      "wall_us": 6126.688
+    },
+    {
+      "batch": 8,
+      "cycle": 11,
+      "variant": "native",
+      "wall_us": 7500.651
+    }
+  ],
+  "blocks": [
+    {
+      "batch": 3,
+      "capture_batch": 4,
+      "scope": "full",
+      "cycle": 0,
+      "position": 0,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 7063.724517822266,
+      "host_enqueue_us": 378.177,
+      "host_thread_cpu_us": 378.0959,
+      "wait_us": 6806.8858,
+      "wall_with_sync_us": 7185.0628,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:17.409, P0, 5173, 2776, 1980, 72, 20.47, 85",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 108612750592,
+        "loadavg": [
+          0.90478515625,
+          0.34814453125,
+          0.12939453125
+        ],
+        "cpu_user_s": 17.753104,
+        "cpu_sys_s": 3.349413,
+        "voluntary_switches": 18508,
+        "involuntary_switches": 291,
+        "allocated_bytes": 315045376,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 108685073998,
+        "loadavg": [
+          0.90478515625,
+          0.34814453125,
+          0.12939453125
+        ],
+        "cpu_user_s": 17.826146,
+        "cpu_sys_s": 3.349473,
+        "voluntary_switches": 18543,
+        "involuntary_switches": 292,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 3,
+      "capture_batch": 4,
+      "scope": "full",
+      "cycle": 0,
+      "position": 1,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6345.7183837890625,
+      "host_enqueue_us": 448.1369,
+      "host_thread_cpu_us": 448.0509,
+      "wait_us": 6090.7198,
+      "wall_with_sync_us": 6538.8567,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:17.548, P0, 5173, 2776, 1980, 72, 22.52, 44",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 108764632048,
+        "loadavg": [
+          0.90478515625,
+          0.34814453125,
+          0.12939453125
+        ],
+        "cpu_user_s": 17.828807,
+        "cpu_sys_s": 3.349973,
+        "voluntary_switches": 18583,
+        "involuntary_switches": 292,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 108830576392,
+        "loadavg": [
+          0.90478515625,
+          0.34814453125,
+          0.12939453125
+        ],
+        "cpu_user_s": 17.891628,
+        "cpu_sys_s": 3.35367,
+        "voluntary_switches": 18611,
+        "involuntary_switches": 293,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 3,
+      "capture_batch": 4,
+      "scope": "full",
+      "cycle": 1,
+      "position": 0,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 7144.3328857421875,
+      "host_enqueue_us": 417.122,
+      "host_thread_cpu_us": 417.1011,
+      "wait_us": 6834.7163,
+      "wall_with_sync_us": 7251.8383,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:17.687, P0, 5173, 2776, 1980, 72, 23.14, 44",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 108886356629,
+        "loadavg": [
+          0.90478515625,
+          0.34814453125,
+          0.12939453125
+        ],
+        "cpu_user_s": 17.892059,
+        "cpu_sys_s": 3.357033,
+        "voluntary_switches": 18645,
+        "involuntary_switches": 293,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 108959320207,
+        "loadavg": [
+          0.90478515625,
+          0.34814453125,
+          0.12939453125
+        ],
+        "cpu_user_s": 17.965608,
+        "cpu_sys_s": 3.357189,
+        "voluntary_switches": 18676,
+        "involuntary_switches": 294,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 3,
+      "capture_batch": 4,
+      "scope": "full",
+      "cycle": 1,
+      "position": 1,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6866.022491455078,
+      "host_enqueue_us": 366.8955,
+      "host_thread_cpu_us": 366.8526,
+      "wait_us": 6628.0193,
+      "wall_with_sync_us": 6994.9148,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:17.825, P0, 5173, 2776, 1980, 72, 23.37, 59",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 109024162492,
+        "loadavg": [
+          0.90478515625,
+          0.34814453125,
+          0.12939453125
+        ],
+        "cpu_user_s": 17.965608,
+        "cpu_sys_s": 3.360353,
+        "voluntary_switches": 18708,
+        "involuntary_switches": 295,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 109094567636,
+        "loadavg": [
+          0.90478515625,
+          0.34814453125,
+          0.12939453125
+        ],
+        "cpu_user_s": 18.036259,
+        "cpu_sys_s": 3.360843,
+        "voluntary_switches": 18742,
+        "involuntary_switches": 296,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 3,
+      "capture_batch": 4,
+      "scope": "full",
+      "cycle": 2,
+      "position": 0,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 7147.315216064453,
+      "host_enqueue_us": 411.4538,
+      "host_thread_cpu_us": 411.4589,
+      "wait_us": 6879.5595,
+      "wall_with_sync_us": 7291.0133,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:17.947, P0, 5173, 2776, 1980, 73, 23.89, 49",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 109164863858,
+        "loadavg": [
+          0.90478515625,
+          0.34814453125,
+          0.12939453125
+        ],
+        "cpu_user_s": 18.039529,
+        "cpu_sys_s": 3.360843,
+        "voluntary_switches": 18778,
+        "involuntary_switches": 296,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 109238242321,
+        "loadavg": [
+          0.90478515625,
+          0.34814453125,
+          0.12939453125
+        ],
+        "cpu_user_s": 18.113493,
+        "cpu_sys_s": 3.360933,
+        "voluntary_switches": 18812,
+        "involuntary_switches": 297,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 3,
+      "capture_batch": 4,
+      "scope": "full",
+      "cycle": 2,
+      "position": 1,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6670.9442138671875,
+      "host_enqueue_us": 408.726,
+      "host_thread_cpu_us": 408.7532,
+      "wait_us": 6373.7028,
+      "wall_with_sync_us": 6782.4288,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:18.089, P0, 5173, 2776, 1980, 73, 24.35, 49",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 109288617317,
+        "loadavg": [
+          0.90478515625,
+          0.34814453125,
+          0.12939453125
+        ],
+        "cpu_user_s": 18.113621,
+        "cpu_sys_s": 3.364246,
+        "voluntary_switches": 18842,
+        "involuntary_switches": 297,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 109356865982,
+        "loadavg": [
+          0.90478515625,
+          0.34814453125,
+          0.12939453125
+        ],
+        "cpu_user_s": 18.182578,
+        "cpu_sys_s": 3.364302,
+        "voluntary_switches": 18872,
+        "involuntary_switches": 298,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 3,
+      "capture_batch": 4,
+      "scope": "full",
+      "cycle": 3,
+      "position": 0,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 7117.814636230469,
+      "host_enqueue_us": 366.4728,
+      "host_thread_cpu_us": 366.3246,
+      "wait_us": 6857.9904,
+      "wall_with_sync_us": 7224.4632,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:18.212, P0, 5173, 2776, 1980, 73, 24.81, 61",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 109412060790,
+        "loadavg": [
+          0.90478515625,
+          0.34814453125,
+          0.12939453125
+        ],
+        "cpu_user_s": 18.182578,
+        "cpu_sys_s": 3.367269,
+        "voluntary_switches": 18905,
+        "involuntary_switches": 298,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 109484738335,
+        "loadavg": [
+          0.90478515625,
+          0.34814453125,
+          0.12939453125
+        ],
+        "cpu_user_s": 18.255036,
+        "cpu_sys_s": 3.368296,
+        "voluntary_switches": 18940,
+        "involuntary_switches": 299,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 3,
+      "capture_batch": 4,
+      "scope": "full",
+      "cycle": 3,
+      "position": 1,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6933.641815185547,
+      "host_enqueue_us": 347.9074,
+      "host_thread_cpu_us": 347.7612,
+      "wait_us": 6764.5533,
+      "wall_with_sync_us": 7112.4607,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:18.347, P0, 5173, 2776, 1980, 73, 25.09, 49",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 109564517801,
+        "loadavg": [
+          0.90478515625,
+          0.34814453125,
+          0.12939453125
+        ],
+        "cpu_user_s": 18.257579,
+        "cpu_sys_s": 3.368765,
+        "voluntary_switches": 18979,
+        "involuntary_switches": 299,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 109636190419,
+        "loadavg": [
+          0.90478515625,
+          0.34814453125,
+          0.12939453125
+        ],
+        "cpu_user_s": 18.329887,
+        "cpu_sys_s": 3.368765,
+        "voluntary_switches": 19012,
+        "involuntary_switches": 300,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 3,
+      "capture_batch": 4,
+      "scope": "full",
+      "cycle": 4,
+      "position": 0,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 7126.630401611328,
+      "host_enqueue_us": 342.7957,
+      "host_thread_cpu_us": 342.7146,
+      "wait_us": 6903.5019,
+      "wall_with_sync_us": 7246.2976,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:18.489, P0, 5173, 2776, 1980, 73, 24.83, 49",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 109692243516,
+        "loadavg": [
+          0.90478515625,
+          0.34814453125,
+          0.12939453125
+        ],
+        "cpu_user_s": 18.332667999999998,
+        "cpu_sys_s": 3.369203,
+        "voluntary_switches": 19042,
+        "involuntary_switches": 300,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 109765259052,
+        "loadavg": [
+          0.90478515625,
+          0.34814453125,
+          0.12939453125
+        ],
+        "cpu_user_s": 18.4062,
+        "cpu_sys_s": 3.369352,
+        "voluntary_switches": 19075,
+        "involuntary_switches": 301,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 3,
+      "capture_batch": 4,
+      "scope": "full",
+      "cycle": 4,
+      "position": 1,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6919.455718994141,
+      "host_enqueue_us": 381.8639,
+      "host_thread_cpu_us": 381.853,
+      "wait_us": 6657.598,
+      "wall_with_sync_us": 7039.4619,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:18.627, P0, 5173, 2776, 1980, 73, 24.91, 58",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 109826400977,
+        "loadavg": [
+          0.90478515625,
+          0.34814453125,
+          0.12939453125
+        ],
+        "cpu_user_s": 18.409178,
+        "cpu_sys_s": 3.369897,
+        "voluntary_switches": 19108,
+        "involuntary_switches": 301,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 109897659368,
+        "loadavg": [
+          0.90478515625,
+          0.34814453125,
+          0.12939453125
+        ],
+        "cpu_user_s": 18.481109,
+        "cpu_sys_s": 3.369897,
+        "voluntary_switches": 19142,
+        "involuntary_switches": 302,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 3,
+      "capture_batch": 4,
+      "scope": "full",
+      "cycle": 5,
+      "position": 0,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6697.676849365234,
+      "host_enqueue_us": 366.7953,
+      "host_thread_cpu_us": 366.7353,
+      "wait_us": 6436.8608,
+      "wall_with_sync_us": 6803.6561,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:18.750, P0, 5173, 2776, 1980, 73, 24.78, 53",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 109970539563,
+        "loadavg": [
+          0.90478515625,
+          0.34814453125,
+          0.12939453125
+        ],
+        "cpu_user_s": 18.485677,
+        "cpu_sys_s": 3.369897,
+        "voluntary_switches": 19182,
+        "involuntary_switches": 302,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 110039005141,
+        "loadavg": [
+          0.90478515625,
+          0.34814453125,
+          0.12939453125
+        ],
+        "cpu_user_s": 18.55473,
+        "cpu_sys_s": 3.369913,
+        "voluntary_switches": 19210,
+        "involuntary_switches": 303,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 3,
+      "capture_batch": 4,
+      "scope": "full",
+      "cycle": 5,
+      "position": 1,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 7139.520263671875,
+      "host_enqueue_us": 424.3533,
+      "host_thread_cpu_us": 424.2893,
+      "wait_us": 6883.026,
+      "wall_with_sync_us": 7307.3793,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:18.899, P0, 5173, 2776, 1980, 73, 24.99, 53",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 110098042508,
+        "loadavg": [
+          0.90478515625,
+          0.34814453125,
+          0.12939453125
+        ],
+        "cpu_user_s": 18.557667,
+        "cpu_sys_s": 3.369913,
+        "voluntary_switches": 19243,
+        "involuntary_switches": 303,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 110171621162,
+        "loadavg": [
+          0.90478515625,
+          0.34814453125,
+          0.12939453125
+        ],
+        "cpu_user_s": 18.631896,
+        "cpu_sys_s": 3.369985,
+        "voluntary_switches": 19279,
+        "involuntary_switches": 304,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 3,
+      "capture_batch": 4,
+      "scope": "full",
+      "cycle": 6,
+      "position": 0,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6756.114959716797,
+      "host_enqueue_us": 357.6279,
+      "host_thread_cpu_us": 357.5849,
+      "wait_us": 6511.3961,
+      "wall_with_sync_us": 6869.024,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:19.032, P0, 5173, 2776, 1980, 73, 25.03, 54",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 110232790980,
+        "loadavg": [
+          0.90478515625,
+          0.34814453125,
+          0.12939453125
+        ],
+        "cpu_user_s": 18.631896,
+        "cpu_sys_s": 3.372582,
+        "voluntary_switches": 19309,
+        "involuntary_switches": 304,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 110301917218,
+        "loadavg": [
+          0.91259765625,
+          0.359375,
+          0.13427734375
+        ],
+        "cpu_user_s": 18.700873,
+        "cpu_sys_s": 3.373348,
+        "voluntary_switches": 19341,
+        "involuntary_switches": 305,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 3,
+      "capture_batch": 4,
+      "scope": "full",
+      "cycle": 6,
+      "position": 1,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6284.492874145508,
+      "host_enqueue_us": 433.3108,
+      "host_thread_cpu_us": 433.2688,
+      "wait_us": 5963.6593,
+      "wall_with_sync_us": 6396.9701,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:19.154, P0, 5173, 2776, 1980, 73, 24.89, 54",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 110366720127,
+        "loadavg": [
+          0.91259765625,
+          0.359375,
+          0.13427734375
+        ],
+        "cpu_user_s": 18.703566,
+        "cpu_sys_s": 3.373834,
+        "voluntary_switches": 19378,
+        "involuntary_switches": 305,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 110431223142,
+        "loadavg": [
+          0.91259765625,
+          0.359375,
+          0.13427734375
+        ],
+        "cpu_user_s": 18.768556,
+        "cpu_sys_s": 3.373895,
+        "voluntary_switches": 19407,
+        "involuntary_switches": 306,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 3,
+      "capture_batch": 4,
+      "scope": "full",
+      "cycle": 7,
+      "position": 0,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6575.308990478516,
+      "host_enqueue_us": 389.5816,
+      "host_thread_cpu_us": 389.5226,
+      "wait_us": 6300.6459,
+      "wall_with_sync_us": 6690.2275,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:19.287, P0, 5173, 2776, 1980, 73, 25.04, 54",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 110486216226,
+        "loadavg": [
+          0.91259765625,
+          0.359375,
+          0.13427734375
+        ],
+        "cpu_user_s": 18.771779,
+        "cpu_sys_s": 3.373895,
+        "voluntary_switches": 19439,
+        "involuntary_switches": 306,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 110554005267,
+        "loadavg": [
+          0.91259765625,
+          0.359375,
+          0.13427734375
+        ],
+        "cpu_user_s": 18.840166,
+        "cpu_sys_s": 3.373895,
+        "voluntary_switches": 19467,
+        "involuntary_switches": 307,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 3,
+      "capture_batch": 4,
+      "scope": "full",
+      "cycle": 7,
+      "position": 1,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6943.334197998047,
+      "host_enqueue_us": 375.4187,
+      "host_thread_cpu_us": 375.3467,
+      "wait_us": 6701.8436,
+      "wall_with_sync_us": 7077.2623,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:19.407, P0, 5173, 2776, 1980, 73, 25.06, 59",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 110606958550,
+        "loadavg": [
+          0.91259765625,
+          0.359375,
+          0.13427734375
+        ],
+        "cpu_user_s": 18.842782,
+        "cpu_sys_s": 3.374163,
+        "voluntary_switches": 19498,
+        "involuntary_switches": 307,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 110678217398,
+        "loadavg": [
+          0.91259765625,
+          0.359375,
+          0.13427734375
+        ],
+        "cpu_user_s": 18.914776,
+        "cpu_sys_s": 3.374163,
+        "voluntary_switches": 19532,
+        "involuntary_switches": 308,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 3,
+      "capture_batch": 4,
+      "scope": "full",
+      "cycle": 8,
+      "position": 0,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6866.7388916015625,
+      "host_enqueue_us": 406.388,
+      "host_thread_cpu_us": 406.3732,
+      "wait_us": 6597.9101,
+      "wall_with_sync_us": 7004.2981,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:19.529, P0, 5173, 2776, 1980, 73, 25.03, 59",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 110732265165,
+        "loadavg": [
+          0.91259765625,
+          0.359375,
+          0.13427734375
+        ],
+        "cpu_user_s": 18.917279,
+        "cpu_sys_s": 3.374477,
+        "voluntary_switches": 19558,
+        "involuntary_switches": 308,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 110802773361,
+        "loadavg": [
+          0.91259765625,
+          0.359375,
+          0.13427734375
+        ],
+        "cpu_user_s": 18.988056,
+        "cpu_sys_s": 3.374846,
+        "voluntary_switches": 19591,
+        "involuntary_switches": 309,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 3,
+      "capture_batch": 4,
+      "scope": "full",
+      "cycle": 8,
+      "position": 1,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6732.492828369141,
+      "host_enqueue_us": 444.4385,
+      "host_thread_cpu_us": 444.4616,
+      "wait_us": 6401.6459,
+      "wall_with_sync_us": 6846.0844,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:19.655, P0, 5173, 2776, 1980, 73, 25.10, 48",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 110853612073,
+        "loadavg": [
+          0.91259765625,
+          0.359375,
+          0.13427734375
+        ],
+        "cpu_user_s": 18.990867,
+        "cpu_sys_s": 3.374846,
+        "voluntary_switches": 19617,
+        "involuntary_switches": 309,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 110922521450,
+        "loadavg": [
+          0.91259765625,
+          0.359375,
+          0.13427734375
+        ],
+        "cpu_user_s": 19.060417,
+        "cpu_sys_s": 3.374846,
+        "voluntary_switches": 19650,
+        "involuntary_switches": 311,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 3,
+      "capture_batch": 4,
+      "scope": "full",
+      "cycle": 9,
+      "position": 0,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6509.967803955078,
+      "host_enqueue_us": 393.1118,
+      "host_thread_cpu_us": 393.0539,
+      "wait_us": 6231.2285,
+      "wall_with_sync_us": 6624.3403,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:19.792, P0, 5200, 2749, 1980, 73, 25.37, 69",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 110991533962,
+        "loadavg": [
+          0.91259765625,
+          0.359375,
+          0.13427734375
+        ],
+        "cpu_user_s": 19.060417,
+        "cpu_sys_s": 3.377848,
+        "voluntary_switches": 19689,
+        "involuntary_switches": 311,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 111058220507,
+        "loadavg": [
+          0.91259765625,
+          0.359375,
+          0.13427734375
+        ],
+        "cpu_user_s": 19.127637,
+        "cpu_sys_s": 3.377848,
+        "voluntary_switches": 19716,
+        "involuntary_switches": 312,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 3,
+      "capture_batch": 4,
+      "scope": "full",
+      "cycle": 9,
+      "position": 1,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 25327.923583984375,
+      "host_enqueue_us": 387.7822,
+      "host_thread_cpu_us": 387.7242,
+      "wait_us": 25072.1607,
+      "wall_with_sync_us": 25459.9429,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:19.919, P0, 5213, 2736, 1980, 73, 25.20, 69",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 111117434162,
+        "loadavg": [
+          0.91259765625,
+          0.359375,
+          0.13427734375
+        ],
+        "cpu_user_s": 19.127637,
+        "cpu_sys_s": 3.380872,
+        "voluntary_switches": 19748,
+        "involuntary_switches": 312,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 111372594246,
+        "loadavg": [
+          0.91259765625,
+          0.359375,
+          0.13427734375
+        ],
+        "cpu_user_s": 19.37881,
+        "cpu_sys_s": 3.38796,
+        "voluntary_switches": 19871,
+        "involuntary_switches": 314,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 3,
+      "capture_batch": 4,
+      "scope": "bare_graph",
+      "cycle": 0,
+      "position": 0,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 7381.913757324219,
+      "host_enqueue_us": 17.2758,
+      "host_thread_cpu_us": 17.1386,
+      "wait_us": 7419.6238,
+      "wall_with_sync_us": 7436.8996,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:20.254, P0, 5213, 2736, 1980, 72, 23.32, 99",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 111454153299,
+        "loadavg": [
+          0.91259765625,
+          0.359375,
+          0.13427734375
+        ],
+        "cpu_user_s": 19.401116,
+        "cpu_sys_s": 3.388329,
+        "voluntary_switches": 19910,
+        "involuntary_switches": 314,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 111529048155,
+        "loadavg": [
+          0.91259765625,
+          0.359375,
+          0.13427734375
+        ],
+        "cpu_user_s": 19.473499,
+        "cpu_sys_s": 3.391611,
+        "voluntary_switches": 19944,
+        "involuntary_switches": 315,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 3,
+      "capture_batch": 4,
+      "scope": "bare_graph",
+      "cycle": 0,
+      "position": 1,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 41641.16516113281,
+      "host_enqueue_us": 49.6604,
+      "host_thread_cpu_us": 49.5282,
+      "wait_us": 41681.2912,
+      "wall_with_sync_us": 41730.9516,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:20.405, P4, 5213, 2736, 765, 72, 23.32, 65",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 111605716577,
+        "loadavg": [
+          0.91259765625,
+          0.359375,
+          0.13427734375
+        ],
+        "cpu_user_s": 19.476781,
+        "cpu_sys_s": 3.392182,
+        "voluntary_switches": 19985,
+        "involuntary_switches": 315,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 112023546332,
+        "loadavg": [
+          0.91259765625,
+          0.359375,
+          0.13427734375
+        ],
+        "cpu_user_s": 19.899723,
+        "cpu_sys_s": 3.392686,
+        "voluntary_switches": 20175,
+        "involuntary_switches": 318,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 3,
+      "capture_batch": 4,
+      "scope": "bare_graph",
+      "cycle": 1,
+      "position": 0,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 25620.071411132812,
+      "host_enqueue_us": 48.6635,
+      "host_thread_cpu_us": 48.5233,
+      "wait_us": 25631.1484,
+      "wall_with_sync_us": 25679.8119,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:20.905, P0, 5213, 2736, 1980, 72, 19.17, 100",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 112108322146,
+        "loadavg": [
+          0.91259765625,
+          0.359375,
+          0.13427734375
+        ],
+        "cpu_user_s": 19.904122,
+        "cpu_sys_s": 3.392748,
+        "voluntary_switches": 20218,
+        "involuntary_switches": 318,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 112365671252,
+        "loadavg": [
+          0.91259765625,
+          0.359375,
+          0.13427734375
+        ],
+        "cpu_user_s": 20.164496,
+        "cpu_sys_s": 3.393064,
+        "voluntary_switches": 20338,
+        "involuntary_switches": 320,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 3,
+      "capture_batch": 4,
+      "scope": "bare_graph",
+      "cycle": 1,
+      "position": 1,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 7564.595031738281,
+      "host_enqueue_us": 17.4562,
+      "host_thread_cpu_us": 17.2788,
+      "wait_us": 7602.3811,
+      "wall_with_sync_us": 7619.8373,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:21.227, P0, 5213, 2736, 1980, 72, 17.84, 99",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 112429140747,
+        "loadavg": [
+          0.91259765625,
+          0.359375,
+          0.13427734375
+        ],
+        "cpu_user_s": 20.167542,
+        "cpu_sys_s": 3.393576,
+        "voluntary_switches": 20372,
+        "involuntary_switches": 320,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 112505858147,
+        "loadavg": [
+          0.91259765625,
+          0.359375,
+          0.13427734375
+        ],
+        "cpu_user_s": 20.245038,
+        "cpu_sys_s": 3.3937,
+        "voluntary_switches": 20408,
+        "involuntary_switches": 321,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 3,
+      "capture_batch": 4,
+      "scope": "bare_graph",
+      "cycle": 2,
+      "position": 0,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 24180.429077148438,
+      "host_enqueue_us": 17.87,
+      "host_thread_cpu_us": 17.6386,
+      "wait_us": 24256.1409,
+      "wall_with_sync_us": 24274.0109,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:21.370, P4, 5213, 2736, 660, 72, 18.78, 55",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 112575706953,
+        "loadavg": [
+          0.91259765625,
+          0.359375,
+          0.13427734375
+        ],
+        "cpu_user_s": 20.248512,
+        "cpu_sys_s": 3.3937,
+        "voluntary_switches": 20445,
+        "involuntary_switches": 321,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 112818984033,
+        "loadavg": [
+          0.91259765625,
+          0.359375,
+          0.13427734375
+        ],
+        "cpu_user_s": 20.494633,
+        "cpu_sys_s": 3.3937,
+        "voluntary_switches": 20553,
+        "involuntary_switches": 322,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 3,
+      "capture_batch": 4,
+      "scope": "bare_graph",
+      "cycle": 2,
+      "position": 1,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6988.288116455078,
+      "host_enqueue_us": 41.548,
+      "host_thread_cpu_us": 41.3606,
+      "wait_us": 7001.1454,
+      "wall_with_sync_us": 7042.6934,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:21.671, P0, 5213, 2736, 1980, 72, 18.66, 82",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 112871904865,
+        "loadavg": [
+          0.91259765625,
+          0.359375,
+          0.13427734375
+        ],
+        "cpu_user_s": 20.498808,
+        "cpu_sys_s": 3.3937,
+        "voluntary_switches": 20585,
+        "involuntary_switches": 322,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 112942949402,
+        "loadavg": [
+          0.91259765625,
+          0.359375,
+          0.13427734375
+        ],
+        "cpu_user_s": 20.570561,
+        "cpu_sys_s": 3.3937,
+        "voluntary_switches": 20616,
+        "involuntary_switches": 324,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 3,
+      "capture_batch": 4,
+      "scope": "bare_graph",
+      "cycle": 3,
+      "position": 0,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 12364.697265625,
+      "host_enqueue_us": 52.0199,
+      "host_thread_cpu_us": 51.9578,
+      "wait_us": 12494.2287,
+      "wall_with_sync_us": 12546.2486,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:21.796, P4, 5213, 2736, 885, 72, 19.70, 74",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 112995384270,
+        "loadavg": [
+          0.91259765625,
+          0.359375,
+          0.13427734375
+        ],
+        "cpu_user_s": 20.573653,
+        "cpu_sys_s": 3.3937,
+        "voluntary_switches": 20647,
+        "involuntary_switches": 324,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 113121313453,
+        "loadavg": [
+          0.91259765625,
+          0.359375,
+          0.13427734375
+        ],
+        "cpu_user_s": 20.700766,
+        "cpu_sys_s": 3.3937,
+        "voluntary_switches": 20701,
+        "involuntary_switches": 325,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 3,
+      "capture_batch": 4,
+      "scope": "bare_graph",
+      "cycle": 3,
+      "position": 1,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6738.329315185547,
+      "host_enqueue_us": 15.7209,
+      "host_thread_cpu_us": 15.5466,
+      "wait_us": 6773.6379,
+      "wall_with_sync_us": 6789.3588,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:21.992, P0, 5213, 2736, 1980, 72, 19.93, 69",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 113191805972,
+        "loadavg": [
+          0.91259765625,
+          0.359375,
+          0.13427734375
+        ],
+        "cpu_user_s": 20.703904,
+        "cpu_sys_s": 3.3937,
+        "voluntary_switches": 20740,
+        "involuntary_switches": 325,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 113260230058,
+        "loadavg": [
+          0.91259765625,
+          0.359375,
+          0.13427734375
+        ],
+        "cpu_user_s": 20.772858,
+        "cpu_sys_s": 3.3937,
+        "voluntary_switches": 20769,
+        "involuntary_switches": 326,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 3,
+      "capture_batch": 4,
+      "scope": "bare_graph",
+      "cycle": 4,
+      "position": 0,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6794.239807128906,
+      "host_enqueue_us": 17.6796,
+      "host_thread_cpu_us": 17.5193,
+      "wait_us": 6830.2521,
+      "wall_with_sync_us": 6847.9317,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:22.111, P0, 5213, 2736, 1980, 72, 20.08, 69",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 113311508357,
+        "loadavg": [
+          0.91259765625,
+          0.359375,
+          0.13427734375
+        ],
+        "cpu_user_s": 20.775604,
+        "cpu_sys_s": 3.3937,
+        "voluntary_switches": 20800,
+        "involuntary_switches": 326,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 113380443371,
+        "loadavg": [
+          0.91259765625,
+          0.359375,
+          0.13427734375
+        ],
+        "cpu_user_s": 20.845587,
+        "cpu_sys_s": 3.3937,
+        "voluntary_switches": 20837,
+        "involuntary_switches": 327,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 3,
+      "capture_batch": 4,
+      "scope": "bare_graph",
+      "cycle": 4,
+      "position": 1,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6638.591766357422,
+      "host_enqueue_us": 42.6761,
+      "host_thread_cpu_us": 42.5759,
+      "wait_us": 6650.6612,
+      "wall_with_sync_us": 6693.3373,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:22.231, P0, 5213, 2736, 1980, 72, 20.75, 48",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 113431502072,
+        "loadavg": [
+          0.91259765625,
+          0.359375,
+          0.13427734375
+        ],
+        "cpu_user_s": 20.845721,
+        "cpu_sys_s": 3.396213,
+        "voluntary_switches": 20862,
+        "involuntary_switches": 327,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 113498912762,
+        "loadavg": [
+          0.91259765625,
+          0.359375,
+          0.13427734375
+        ],
+        "cpu_user_s": 20.913816,
+        "cpu_sys_s": 3.396213,
+        "voluntary_switches": 20895,
+        "involuntary_switches": 328,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 3,
+      "capture_batch": 4,
+      "scope": "bare_graph",
+      "cycle": 5,
+      "position": 0,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6489.087677001953,
+      "host_enqueue_us": 51.6262,
+      "host_thread_cpu_us": 51.497,
+      "wait_us": 6499.4101,
+      "wall_with_sync_us": 6551.0363,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:22.350, P0, 5213, 2736, 1980, 72, 22.23, 59",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 113571032645,
+        "loadavg": [
+          0.91259765625,
+          0.359375,
+          0.13427734375
+        ],
+        "cpu_user_s": 20.913929,
+        "cpu_sys_s": 3.399522,
+        "voluntary_switches": 20933,
+        "involuntary_switches": 328,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 113637450634,
+        "loadavg": [
+          0.91259765625,
+          0.359375,
+          0.13427734375
+        ],
+        "cpu_user_s": 20.980843,
+        "cpu_sys_s": 3.399522,
+        "voluntary_switches": 20960,
+        "involuntary_switches": 329,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 3,
+      "capture_batch": 4,
+      "scope": "bare_graph",
+      "cycle": 5,
+      "position": 1,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6621.183776855469,
+      "host_enqueue_us": 15.3131,
+      "host_thread_cpu_us": 15.1788,
+      "wait_us": 6655.0791,
+      "wall_with_sync_us": 6670.3922,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:22.486, P0, 5213, 2736, 1980, 73, 22.19, 59",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 113686074271,
+        "loadavg": [
+          0.91259765625,
+          0.359375,
+          0.13427734375
+        ],
+        "cpu_user_s": 20.983532,
+        "cpu_sys_s": 3.399679,
+        "voluntary_switches": 20990,
+        "involuntary_switches": 329,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 113753225042,
+        "loadavg": [
+          0.91259765625,
+          0.359375,
+          0.13427734375
+        ],
+        "cpu_user_s": 21.05134,
+        "cpu_sys_s": 3.399679,
+        "voluntary_switches": 21019,
+        "involuntary_switches": 330,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 3,
+      "capture_batch": 4,
+      "scope": "bare_graph",
+      "cycle": 6,
+      "position": 0,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6752.153778076172,
+      "host_enqueue_us": 15.0376,
+      "host_thread_cpu_us": 14.9114,
+      "wait_us": 6790.6248,
+      "wall_with_sync_us": 6805.6624,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:22.606, P0, 5213, 2736, 1980, 73, 23.08, 59",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 113804872177,
+        "loadavg": [
+          0.91259765625,
+          0.359375,
+          0.13427734375
+        ],
+        "cpu_user_s": 21.054019,
+        "cpu_sys_s": 3.399977,
+        "voluntary_switches": 21049,
+        "involuntary_switches": 330,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 113873383956,
+        "loadavg": [
+          0.91259765625,
+          0.359375,
+          0.13427734375
+        ],
+        "cpu_user_s": 21.120327,
+        "cpu_sys_s": 3.402988,
+        "voluntary_switches": 21082,
+        "involuntary_switches": 331,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 3,
+      "capture_batch": 4,
+      "scope": "bare_graph",
+      "cycle": 6,
+      "position": 1,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6502.809906005859,
+      "host_enqueue_us": 37.2539,
+      "host_thread_cpu_us": 37.1336,
+      "wait_us": 6515.2498,
+      "wall_with_sync_us": 6552.5037,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:22.744, P0, 5213, 2736, 1980, 73, 23.94, 46",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 113944155315,
+        "loadavg": [
+          0.91259765625,
+          0.359375,
+          0.13427734375
+        ],
+        "cpu_user_s": 21.120327,
+        "cpu_sys_s": 3.406109,
+        "voluntary_switches": 21116,
+        "involuntary_switches": 331,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 114010118053,
+        "loadavg": [
+          0.91259765625,
+          0.359375,
+          0.13427734375
+        ],
+        "cpu_user_s": 21.186332,
+        "cpu_sys_s": 3.4066039999999997,
+        "voluntary_switches": 21146,
+        "involuntary_switches": 332,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 3,
+      "capture_batch": 4,
+      "scope": "bare_graph",
+      "cycle": 7,
+      "position": 0,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6245.375823974609,
+      "host_enqueue_us": 45.6067,
+      "host_thread_cpu_us": 45.4334,
+      "wait_us": 6256.0069,
+      "wall_with_sync_us": 6301.6136,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:22.867, P0, 5213, 2736, 1980, 73, 24.05, 46",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 114068981932,
+        "loadavg": [
+          0.91259765625,
+          0.359375,
+          0.13427734375
+        ],
+        "cpu_user_s": 21.18872,
+        "cpu_sys_s": 3.406988,
+        "voluntary_switches": 21178,
+        "involuntary_switches": 332,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 114132527845,
+        "loadavg": [
+          0.91259765625,
+          0.359375,
+          0.13427734375
+        ],
+        "cpu_user_s": 21.25283,
+        "cpu_sys_s": 3.406988,
+        "voluntary_switches": 21205,
+        "involuntary_switches": 333,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 3,
+      "capture_batch": 4,
+      "scope": "bare_graph",
+      "cycle": 7,
+      "position": 1,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6733.721923828125,
+      "host_enqueue_us": 16.5114,
+      "host_thread_cpu_us": 16.3401,
+      "wait_us": 6771.1317,
+      "wall_with_sync_us": 6787.6431,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:22.987, P0, 5213, 2736, 1980, 73, 25.00, 67",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 114187619292,
+        "loadavg": [
+          0.91259765625,
+          0.359375,
+          0.13427734375
+        ],
+        "cpu_user_s": 21.255524,
+        "cpu_sys_s": 3.407343,
+        "voluntary_switches": 21240,
+        "involuntary_switches": 333,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 114256071047,
+        "loadavg": [
+          0.91259765625,
+          0.359375,
+          0.13427734375
+        ],
+        "cpu_user_s": 21.320992,
+        "cpu_sys_s": 3.4108739999999997,
+        "voluntary_switches": 21267,
+        "involuntary_switches": 334,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 3,
+      "capture_batch": 4,
+      "scope": "bare_graph",
+      "cycle": 8,
+      "position": 0,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6807.859039306641,
+      "host_enqueue_us": 18.3619,
+      "host_thread_cpu_us": 18.1755,
+      "wait_us": 6846.6963,
+      "wall_with_sync_us": 6865.0582,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:23.110, P0, 5213, 2736, 1980, 73, 24.92, 67",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 114311897482,
+        "loadavg": [
+          0.91259765625,
+          0.359375,
+          0.13427734375
+        ],
+        "cpu_user_s": 21.324188,
+        "cpu_sys_s": 3.411385,
+        "voluntary_switches": 21299,
+        "involuntary_switches": 334,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 114381201035,
+        "loadavg": [
+          0.91259765625,
+          0.359375,
+          0.13427734375
+        ],
+        "cpu_user_s": 21.394531,
+        "cpu_sys_s": 3.411385,
+        "voluntary_switches": 21336,
+        "involuntary_switches": 336,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 3,
+      "capture_batch": 4,
+      "scope": "bare_graph",
+      "cycle": 8,
+      "position": 1,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6397.849655151367,
+      "host_enqueue_us": 39.8147,
+      "host_thread_cpu_us": 39.6955,
+      "wait_us": 6409.9296,
+      "wall_with_sync_us": 6449.7443,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:23.238, P0, 5213, 2736, 1980, 73, 24.95, 48",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 114437174720,
+        "loadavg": [
+          0.91259765625,
+          0.359375,
+          0.13427734375
+        ],
+        "cpu_user_s": 21.397401,
+        "cpu_sys_s": 3.411472,
+        "voluntary_switches": 21363,
+        "involuntary_switches": 336,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 114502168667,
+        "loadavg": [
+          0.91259765625,
+          0.359375,
+          0.13427734375
+        ],
+        "cpu_user_s": 21.462928,
+        "cpu_sys_s": 3.41162,
+        "voluntary_switches": 21395,
+        "involuntary_switches": 337,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 3,
+      "capture_batch": 4,
+      "scope": "bare_graph",
+      "cycle": 9,
+      "position": 0,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6100.275039672852,
+      "host_enqueue_us": 47.4502,
+      "host_thread_cpu_us": 47.4162,
+      "wait_us": 6122.6625,
+      "wall_with_sync_us": 6170.1127,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:23.355, P0, 5213, 2736, 1980, 73, 25.15, 58",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 114566249132,
+        "loadavg": [
+          0.91259765625,
+          0.359375,
+          0.13427734375
+        ],
+        "cpu_user_s": 21.466247,
+        "cpu_sys_s": 3.41162,
+        "voluntary_switches": 21427,
+        "involuntary_switches": 337,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 114628427566,
+        "loadavg": [
+          0.91259765625,
+          0.359375,
+          0.13427734375
+        ],
+        "cpu_user_s": 21.528942,
+        "cpu_sys_s": 3.41162,
+        "voluntary_switches": 21454,
+        "involuntary_switches": 338,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 3,
+      "capture_batch": 4,
+      "scope": "bare_graph",
+      "cycle": 9,
+      "position": 1,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6900.224304199219,
+      "host_enqueue_us": 23.3183,
+      "host_thread_cpu_us": 23.2682,
+      "wait_us": 6936.5903,
+      "wall_with_sync_us": 6959.9086,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:23.486, P0, 5213, 2736, 1980, 73, 25.17, 58",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 114687503593,
+        "loadavg": [
+          0.91259765625,
+          0.359375,
+          0.13427734375
+        ],
+        "cpu_user_s": 21.528942,
+        "cpu_sys_s": 3.415075,
+        "voluntary_switches": 21489,
+        "involuntary_switches": 338,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 114757574305,
+        "loadavg": [
+          0.91259765625,
+          0.359375,
+          0.13427734375
+        ],
+        "cpu_user_s": 21.599662,
+        "cpu_sys_s": 3.415075,
+        "voluntary_switches": 21518,
+        "involuntary_switches": 339,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 5,
+      "capture_batch": 8,
+      "scope": "full",
+      "cycle": 0,
+      "position": 0,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6785.027313232422,
+      "host_enqueue_us": 370.9442,
+      "host_thread_cpu_us": 370.9613,
+      "wait_us": 6535.337,
+      "wall_with_sync_us": 6906.2812,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:23.868, P0, 5213, 2736, 1980, 73, 25.87, 85",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 115067714903,
+        "loadavg": [
+          0.91259765625,
+          0.359375,
+          0.13427734375
+        ],
+        "cpu_user_s": 21.84853,
+        "cpu_sys_s": 3.430861,
+        "voluntary_switches": 21667,
+        "involuntary_switches": 341,
+        "allocated_bytes": 315438592,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 115137324433,
+        "loadavg": [
+          0.91259765625,
+          0.359375,
+          0.13427734375
+        ],
+        "cpu_user_s": 21.918796,
+        "cpu_sys_s": 3.430861,
+        "voluntary_switches": 21697,
+        "involuntary_switches": 342,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 5,
+      "capture_batch": 8,
+      "scope": "full",
+      "cycle": 0,
+      "position": 1,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6670.540618896484,
+      "host_enqueue_us": 411.4833,
+      "host_thread_cpu_us": 411.3251,
+      "wait_us": 6375.0718,
+      "wall_with_sync_us": 6786.5551,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:23.992, P0, 5213, 2736, 1980, 73, 25.84, 73",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 115191695967,
+        "loadavg": [
+          0.91259765625,
+          0.359375,
+          0.13427734375
+        ],
+        "cpu_user_s": 21.922484,
+        "cpu_sys_s": 3.431064,
+        "voluntary_switches": 21729,
+        "involuntary_switches": 342,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 115260094952,
+        "loadavg": [
+          0.91259765625,
+          0.359375,
+          0.13427734375
+        ],
+        "cpu_user_s": 21.991387,
+        "cpu_sys_s": 3.431064,
+        "voluntary_switches": 21758,
+        "involuntary_switches": 343,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 5,
+      "capture_batch": 8,
+      "scope": "full",
+      "cycle": 1,
+      "position": 0,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6602.137756347656,
+      "host_enqueue_us": 376.4797,
+      "host_thread_cpu_us": 376.4027,
+      "wait_us": 6337.9062,
+      "wall_with_sync_us": 6714.3859,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:24.111, P0, 5213, 2736, 1980, 73, 25.70, 73",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 115310811317,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 21.993991,
+        "cpu_sys_s": 3.431064,
+        "voluntary_switches": 21788,
+        "involuntary_switches": 343,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 115378421682,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 22.062543,
+        "cpu_sys_s": 3.431064,
+        "voluntary_switches": 21823,
+        "involuntary_switches": 344,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 5,
+      "capture_batch": 8,
+      "scope": "full",
+      "cycle": 1,
+      "position": 1,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 7363.148498535156,
+      "host_enqueue_us": 390.8861,
+      "host_thread_cpu_us": 390.8812,
+      "wait_us": 7093.3763,
+      "wall_with_sync_us": 7484.2624,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:24.229, P0, 5213, 2736, 1980, 73, 25.77, 49",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 115430698424,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 22.065275,
+        "cpu_sys_s": 3.431064,
+        "voluntary_switches": 21849,
+        "involuntary_switches": 344,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 115505998698,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 22.141265,
+        "cpu_sys_s": 3.431064,
+        "voluntary_switches": 21884,
+        "involuntary_switches": 345,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 5,
+      "capture_batch": 8,
+      "scope": "full",
+      "cycle": 2,
+      "position": 0,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 7042.662048339844,
+      "host_enqueue_us": 359.9241,
+      "host_thread_cpu_us": 359.8251,
+      "wait_us": 6808.3154,
+      "wall_with_sync_us": 7168.2395,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:24.357, P0, 5213, 2736, 1980, 73, 26.08, 60",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 115570861420,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 22.141265,
+        "cpu_sys_s": 3.433741,
+        "voluntary_switches": 21919,
+        "involuntary_switches": 345,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 115643010893,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 22.213269,
+        "cpu_sys_s": 3.4345,
+        "voluntary_switches": 21951,
+        "involuntary_switches": 346,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 5,
+      "capture_batch": 8,
+      "scope": "full",
+      "cycle": 2,
+      "position": 1,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6710.272216796875,
+      "host_enqueue_us": 416.0494,
+      "host_thread_cpu_us": 416.0205,
+      "wait_us": 6414.3219,
+      "wall_with_sync_us": 6830.3713,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:24.493, P0, 5213, 2736, 1980, 73, 26.04, 60",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 115692267623,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 22.215923,
+        "cpu_sys_s": 3.4345,
+        "voluntary_switches": 21981,
+        "involuntary_switches": 346,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 115761052231,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 22.285227,
+        "cpu_sys_s": 3.4345,
+        "voluntary_switches": 22007,
+        "involuntary_switches": 347,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 5,
+      "capture_batch": 8,
+      "scope": "full",
+      "cycle": 3,
+      "position": 0,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6568.217468261719,
+      "host_enqueue_us": 394.7824,
+      "host_thread_cpu_us": 394.7726,
+      "wait_us": 6291.9703,
+      "wall_with_sync_us": 6686.7527,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:24.613, P0, 5213, 2736, 1980, 73, 25.89, 58",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 115810720965,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 22.28862,
+        "cpu_sys_s": 3.434917,
+        "voluntary_switches": 22037,
+        "involuntary_switches": 347,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 115878031404,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 22.356554,
+        "cpu_sys_s": 3.434917,
+        "voluntary_switches": 22071,
+        "involuntary_switches": 349,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 5,
+      "capture_batch": 8,
+      "scope": "full",
+      "cycle": 3,
+      "position": 1,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 7381.913757324219,
+      "host_enqueue_us": 461.304,
+      "host_thread_cpu_us": 461.2971,
+      "wait_us": 7039.4447,
+      "wall_with_sync_us": 7500.7487,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:24.729, P0, 5213, 2736, 1980, 73, 26.00, 58",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 115930521052,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 22.358988,
+        "cpu_sys_s": 3.435186,
+        "voluntary_switches": 22096,
+        "involuntary_switches": 349,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 116005971300,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 22.431776,
+        "cpu_sys_s": 3.438624,
+        "voluntary_switches": 22133,
+        "involuntary_switches": 350,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 5,
+      "capture_batch": 8,
+      "scope": "full",
+      "cycle": 4,
+      "position": 0,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 7500.777435302734,
+      "host_enqueue_us": 480.1487,
+      "host_thread_cpu_us": 480.1559,
+      "wait_us": 7160.277,
+      "wall_with_sync_us": 7640.4257,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:24.864, P0, 5213, 2736, 1980, 73, 25.67, 51",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 116063070008,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 22.43416,
+        "cpu_sys_s": 3.438989,
+        "voluntary_switches": 22161,
+        "involuntary_switches": 350,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 116139953466,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 22.511669,
+        "cpu_sys_s": 3.439114,
+        "voluntary_switches": 22197,
+        "involuntary_switches": 351,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 5,
+      "capture_batch": 8,
+      "scope": "full",
+      "cycle": 4,
+      "position": 1,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 40940.7470703125,
+      "host_enqueue_us": 404.2545,
+      "host_thread_cpu_us": 404.2166,
+      "wait_us": 40682.2713,
+      "wall_with_sync_us": 41086.5258,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:25.001, P4, 5213, 2736, 900, 73, 25.55, 72",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 116200544017,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 22.514705,
+        "cpu_sys_s": 3.439114,
+        "voluntary_switches": 22232,
+        "involuntary_switches": 351,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 116611857436,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 22.930384,
+        "cpu_sys_s": 3.439114,
+        "voluntary_switches": 22422,
+        "involuntary_switches": 353,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 5,
+      "capture_batch": 8,
+      "scope": "full",
+      "cycle": 5,
+      "position": 0,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6395.999908447266,
+      "host_enqueue_us": 400.3781,
+      "host_thread_cpu_us": 400.3492,
+      "wait_us": 6109.0015,
+      "wall_with_sync_us": 6509.3796,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:25.466, P0, 5213, 2736, 1980, 72, 21.64, 99",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 116666654078,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 22.933295,
+        "cpu_sys_s": 3.439114,
+        "voluntary_switches": 22449,
+        "involuntary_switches": 353,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 116732180106,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 22.999339,
+        "cpu_sys_s": 3.439114,
+        "voluntary_switches": 22479,
+        "involuntary_switches": 354,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 5,
+      "capture_batch": 8,
+      "scope": "full",
+      "cycle": 5,
+      "position": 1,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 22137.65106201172,
+      "host_enqueue_us": 404.0421,
+      "host_thread_cpu_us": 404.0111,
+      "wait_us": 21883.7423,
+      "wall_with_sync_us": 22287.7844,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:25.585, P4, 5213, 2736, 855, 72, 21.65, 73",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 116783133262,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 23.00268,
+        "cpu_sys_s": 3.439114,
+        "voluntary_switches": 22511,
+        "involuntary_switches": 354,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 117007368977,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 23.229094,
+        "cpu_sys_s": 3.439114,
+        "voluntary_switches": 22613,
+        "involuntary_switches": 357,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 5,
+      "capture_batch": 8,
+      "scope": "full",
+      "cycle": 6,
+      "position": 0,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 7752.909088134766,
+      "host_enqueue_us": 478.238,
+      "host_thread_cpu_us": 478.1902,
+      "wait_us": 7442.6683,
+      "wall_with_sync_us": 7920.9063,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:25.864, P0, 5213, 2736, 1980, 72, 19.80, 76",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 117063401148,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 23.232035,
+        "cpu_sys_s": 3.439114,
+        "voluntary_switches": 22640,
+        "involuntary_switches": 357,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 117143121273,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 23.312525,
+        "cpu_sys_s": 3.439114,
+        "voluntary_switches": 22677,
+        "involuntary_switches": 358,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 5,
+      "capture_batch": 8,
+      "scope": "full",
+      "cycle": 6,
+      "position": 1,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 21267.864990234375,
+      "host_enqueue_us": 397.4846,
+      "host_thread_cpu_us": 397.4206,
+      "wait_us": 21006.3079,
+      "wall_with_sync_us": 21403.7925,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:25.993, P4, 5213, 2736, 870, 72, 19.67, 72",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 117192573049,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 23.315278,
+        "cpu_sys_s": 3.439114,
+        "voluntary_switches": 22707,
+        "involuntary_switches": 358,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 117407062151,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 23.528898,
+        "cpu_sys_s": 3.442564,
+        "voluntary_switches": 22807,
+        "involuntary_switches": 359,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 5,
+      "capture_batch": 8,
+      "scope": "full",
+      "cycle": 7,
+      "position": 0,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6532.198333740234,
+      "host_enqueue_us": 417.9901,
+      "host_thread_cpu_us": 417.9922,
+      "wait_us": 6218.4446,
+      "wall_with_sync_us": 6636.4347,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:26.259, P0, 5213, 2736, 1980, 72, 19.30, 76",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 117457086351,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 23.531709,
+        "cpu_sys_s": 3.442564,
+        "voluntary_switches": 22833,
+        "involuntary_switches": 359,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 117523884692,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 23.598951,
+        "cpu_sys_s": 3.442775,
+        "voluntary_switches": 22865,
+        "involuntary_switches": 360,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 5,
+      "capture_batch": 8,
+      "scope": "full",
+      "cycle": 7,
+      "position": 1,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 22714.88037109375,
+      "host_enqueue_us": 373.4089,
+      "host_thread_cpu_us": 373.4151,
+      "wait_us": 22486.751,
+      "wall_with_sync_us": 22860.1599,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:26.386, P4, 5213, 2736, 840, 72, 20.43, 71",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 117585307210,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 23.602235,
+        "cpu_sys_s": 3.442775,
+        "voluntary_switches": 22900,
+        "involuntary_switches": 360,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 117814365788,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 23.833465,
+        "cpu_sys_s": 3.442775,
+        "voluntary_switches": 23001,
+        "involuntary_switches": 361,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 5,
+      "capture_batch": 8,
+      "scope": "full",
+      "cycle": 8,
+      "position": 0,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6792.192077636719,
+      "host_enqueue_us": 435.1191,
+      "host_thread_cpu_us": 435.0742,
+      "wait_us": 6553.3408,
+      "wall_with_sync_us": 6988.4599,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:26.672, P0, 5213, 2736, 1980, 72, 19.51, 75",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 117870690550,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 23.83662,
+        "cpu_sys_s": 3.442775,
+        "voluntary_switches": 23032,
+        "involuntary_switches": 361,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 117941060471,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 23.907632,
+        "cpu_sys_s": 3.442775,
+        "voluntary_switches": 23063,
+        "involuntary_switches": 363,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 5,
+      "capture_batch": 8,
+      "scope": "full",
+      "cycle": 8,
+      "position": 1,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 39589.37683105469,
+      "host_enqueue_us": 470.4543,
+      "host_thread_cpu_us": 470.3993,
+      "wait_us": 39262.6927,
+      "wall_with_sync_us": 39733.147,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:26.811, P4, 5213, 2736, 855, 72, 20.44, 72",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 118012230123,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 23.908049,
+        "cpu_sys_s": 3.445987,
+        "voluntary_switches": 23102,
+        "involuntary_switches": 363,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 118410049911,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 24.307126,
+        "cpu_sys_s": 3.445987,
+        "voluntary_switches": 23286,
+        "involuntary_switches": 365,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 5,
+      "capture_batch": 8,
+      "scope": "full",
+      "cycle": 9,
+      "position": 0,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6704.0252685546875,
+      "host_enqueue_us": 375.2223,
+      "host_thread_cpu_us": 375.1543,
+      "wait_us": 6434.0479,
+      "wall_with_sync_us": 6809.2702,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:27.263, P0, 5213, 2736, 1980, 71, 19.30, 100",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 118462350623,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 24.309412,
+        "cpu_sys_s": 3.446254,
+        "voluntary_switches": 23314,
+        "involuntary_switches": 365,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 118530919250,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 24.37854,
+        "cpu_sys_s": 3.446328,
+        "voluntary_switches": 23345,
+        "involuntary_switches": 366,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 5,
+      "capture_batch": 8,
+      "scope": "full",
+      "cycle": 9,
+      "position": 1,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 11458.159637451172,
+      "host_enqueue_us": 427.1269,
+      "host_thread_cpu_us": 427.1081,
+      "wait_us": 11184.8977,
+      "wall_with_sync_us": 11612.0246,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:27.385, P4, 5213, 2736, 855, 71, 19.50, 73",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 118584380217,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 24.37854,
+        "cpu_sys_s": 3.449118,
+        "voluntary_switches": 23378,
+        "involuntary_switches": 366,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 118700984954,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 24.495077,
+        "cpu_sys_s": 3.450295,
+        "voluntary_switches": 23430,
+        "involuntary_switches": 367,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 5,
+      "capture_batch": 8,
+      "scope": "bare_graph",
+      "cycle": 0,
+      "position": 0,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6819.225311279297,
+      "host_enqueue_us": 15.3532,
+      "host_thread_cpu_us": 15.1999,
+      "wait_us": 6855.6378,
+      "wall_with_sync_us": 6870.991,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:27.584, P0, 5213, 2736, 1980, 71, 19.64, 69",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 118783769270,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 24.521953,
+        "cpu_sys_s": 3.450669,
+        "voluntary_switches": 23473,
+        "involuntary_switches": 367,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 118853017003,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 24.591811,
+        "cpu_sys_s": 3.450669,
+        "voluntary_switches": 23502,
+        "involuntary_switches": 368,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 5,
+      "capture_batch": 8,
+      "scope": "bare_graph",
+      "cycle": 0,
+      "position": 1,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6653.542327880859,
+      "host_enqueue_us": 53.9636,
+      "host_thread_cpu_us": 53.9656,
+      "wait_us": 6654.2015,
+      "wall_with_sync_us": 6708.1651,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:27.706, P0, 5214, 2735, 1980, 71, 20.52, 69",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 118906207672,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 24.594929,
+        "cpu_sys_s": 3.450716,
+        "voluntary_switches": 23532,
+        "involuntary_switches": 368,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 118973758374,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 24.662999,
+        "cpu_sys_s": 3.450716,
+        "voluntary_switches": 23562,
+        "involuntary_switches": 370,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 5,
+      "capture_batch": 8,
+      "scope": "bare_graph",
+      "cycle": 1,
+      "position": 0,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6435.737609863281,
+      "host_enqueue_us": 39.1214,
+      "host_thread_cpu_us": 39.0141,
+      "wait_us": 6451.5822,
+      "wall_with_sync_us": 6490.7036,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:27.825, P0, 5236, 2713, 1980, 72, 20.50, 51",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 119025866459,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 24.665899,
+        "cpu_sys_s": 3.451046,
+        "voluntary_switches": 23591,
+        "involuntary_switches": 370,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 119091234422,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 24.731812,
+        "cpu_sys_s": 3.451232,
+        "voluntary_switches": 23624,
+        "involuntary_switches": 371,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 5,
+      "capture_batch": 8,
+      "scope": "bare_graph",
+      "cycle": 1,
+      "position": 1,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6771.6094970703125,
+      "host_enqueue_us": 15.5386,
+      "host_thread_cpu_us": 15.3673,
+      "wait_us": 6811.0005,
+      "wall_with_sync_us": 6826.5391,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:27.945, P0, 5244, 2705, 1980, 72, 21.39, 56",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 119162350011,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 24.734964,
+        "cpu_sys_s": 3.451232,
+        "voluntary_switches": 23658,
+        "involuntary_switches": 371,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 119231083832,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 24.804356,
+        "cpu_sys_s": 3.451232,
+        "voluntary_switches": 23690,
+        "involuntary_switches": 372,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 5,
+      "capture_batch": 8,
+      "scope": "bare_graph",
+      "cycle": 2,
+      "position": 0,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6808.16650390625,
+      "host_enqueue_us": 15.6167,
+      "host_thread_cpu_us": 15.4284,
+      "wait_us": 6845.5532,
+      "wall_with_sync_us": 6861.1699,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:28.085, P0, 5244, 2705, 1980, 72, 22.48, 56",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 119284125873,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 24.804604,
+        "cpu_sys_s": 3.454163,
+        "voluntary_switches": 23722,
+        "involuntary_switches": 372,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 119353188208,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 24.874032,
+        "cpu_sys_s": 3.454278,
+        "voluntary_switches": 23751,
+        "involuntary_switches": 373,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 5,
+      "capture_batch": 8,
+      "scope": "bare_graph",
+      "cycle": 2,
+      "position": 1,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6091.3665771484375,
+      "host_enqueue_us": 38.9731,
+      "host_thread_cpu_us": 38.8519,
+      "wait_us": 6104.6347,
+      "wall_with_sync_us": 6143.6078,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:28.205, P0, 5244, 2705, 1980, 72, 23.41, 60",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 119403814568,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 24.876754,
+        "cpu_sys_s": 3.454656,
+        "voluntary_switches": 23784,
+        "involuntary_switches": 373,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 119465773630,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 24.939222,
+        "cpu_sys_s": 3.454656,
+        "voluntary_switches": 23809,
+        "involuntary_switches": 374,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 5,
+      "capture_batch": 8,
+      "scope": "bare_graph",
+      "cycle": 3,
+      "position": 0,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6179.840087890625,
+      "host_enqueue_us": 40.6853,
+      "host_thread_cpu_us": 40.534,
+      "wait_us": 6192.7929,
+      "wall_with_sync_us": 6233.4782,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:28.322, P0, 5244, 2705, 1980, 73, 24.42, 60",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 119520810147,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 24.942406,
+        "cpu_sys_s": 3.454805,
+        "voluntary_switches": 23840,
+        "involuntary_switches": 374,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 119583592410,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 25.005409,
+        "cpu_sys_s": 3.455146,
+        "voluntary_switches": 23870,
+        "involuntary_switches": 375,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 5,
+      "capture_batch": 8,
+      "scope": "bare_graph",
+      "cycle": 3,
+      "position": 1,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 7083.827209472656,
+      "host_enqueue_us": 22.7141,
+      "host_thread_cpu_us": 22.6941,
+      "wait_us": 7121.2047,
+      "wall_with_sync_us": 7143.9188,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:28.433, P0, 5244, 2705, 1980, 73, 24.44, 50",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 119631590493,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 25.008563,
+        "cpu_sys_s": 3.455146,
+        "voluntary_switches": 23895,
+        "involuntary_switches": 375,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 119703486369,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 25.081102,
+        "cpu_sys_s": 3.455146,
+        "voluntary_switches": 23929,
+        "involuntary_switches": 376,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 5,
+      "capture_batch": 8,
+      "scope": "bare_graph",
+      "cycle": 4,
+      "position": 0,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6906.060791015625,
+      "host_enqueue_us": 15.2841,
+      "host_thread_cpu_us": 15.1678,
+      "wait_us": 6941.1995,
+      "wall_with_sync_us": 6956.4836,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:28.576, P0, 5244, 2705, 1980, 73, 25.42, 63",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 119776708417,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 25.084497,
+        "cpu_sys_s": 3.455146,
+        "voluntary_switches": 23967,
+        "involuntary_switches": 376,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 119846733989,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 25.155016,
+        "cpu_sys_s": 3.4551819999999998,
+        "voluntary_switches": 23996,
+        "involuntary_switches": 378,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 5,
+      "capture_batch": 8,
+      "scope": "bare_graph",
+      "cycle": 4,
+      "position": 1,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6299.443054199219,
+      "host_enqueue_us": 38.8008,
+      "host_thread_cpu_us": 38.6375,
+      "wait_us": 6312.7383,
+      "wall_with_sync_us": 6351.5391,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:28.702, P0, 5244, 2705, 1980, 73, 25.21, 63",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 119900484442,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 25.158053,
+        "cpu_sys_s": 3.4551819999999998,
+        "voluntary_switches": 24030,
+        "involuntary_switches": 378,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 119964463685,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 25.222553,
+        "cpu_sys_s": 3.4551819999999998,
+        "voluntary_switches": 24055,
+        "involuntary_switches": 380,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 5,
+      "capture_batch": 8,
+      "scope": "bare_graph",
+      "cycle": 5,
+      "position": 0,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6533.222198486328,
+      "host_enqueue_us": 40.4579,
+      "host_thread_cpu_us": 40.3207,
+      "wait_us": 6545.6251,
+      "wall_with_sync_us": 6586.083,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:28.817, P0, 5244, 2705, 1980, 73, 25.25, 54",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 120015622414,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 25.224971,
+        "cpu_sys_s": 3.455364,
+        "voluntary_switches": 24086,
+        "involuntary_switches": 380,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 120082145990,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 25.292245,
+        "cpu_sys_s": 3.455364,
+        "voluntary_switches": 24119,
+        "involuntary_switches": 381,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 5,
+      "capture_batch": 8,
+      "scope": "bare_graph",
+      "cycle": 5,
+      "position": 1,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6879.129791259766,
+      "host_enqueue_us": 18.8538,
+      "host_thread_cpu_us": 18.5573,
+      "wait_us": 6916.977,
+      "wall_with_sync_us": 6935.8308,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:28.937, P0, 5244, 2705, 1980, 73, 25.29, 54",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 120136617839,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 25.292245,
+        "cpu_sys_s": 3.458639,
+        "voluntary_switches": 24144,
+        "involuntary_switches": 381,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 120206519906,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 25.362566,
+        "cpu_sys_s": 3.458898,
+        "voluntary_switches": 24178,
+        "involuntary_switches": 384,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 5,
+      "capture_batch": 8,
+      "scope": "bare_graph",
+      "cycle": 6,
+      "position": 0,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 7041.741180419922,
+      "host_enqueue_us": 15.6477,
+      "host_thread_cpu_us": 15.5065,
+      "wait_us": 7078.0592,
+      "wall_with_sync_us": 7093.7069,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:29.057, P0, 5244, 2705, 1980, 73, 25.41, 52",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 120254816697,
+        "loadavg": [
+          0.919921875,
+          0.3701171875,
+          0.13916015625
+        ],
+        "cpu_user_s": 25.362566,
+        "cpu_sys_s": 3.4614789999999998,
+        "voluntary_switches": 24204,
+        "involuntary_switches": 384,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 120326662824,
+        "loadavg": [
+          0.9267578125,
+          0.380859375,
+          0.14404296875
+        ],
+        "cpu_user_s": 25.433759,
+        "cpu_sys_s": 3.462736,
+        "voluntary_switches": 24237,
+        "involuntary_switches": 385,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 5,
+      "capture_batch": 8,
+      "scope": "bare_graph",
+      "cycle": 6,
+      "position": 1,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6433.586883544922,
+      "host_enqueue_us": 37.3099,
+      "host_thread_cpu_us": 37.1817,
+      "wait_us": 6447.3507,
+      "wall_with_sync_us": 6484.6606,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:29.186, P0, 5244, 2705, 1980, 73, 25.43, 72",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 120384120429,
+        "loadavg": [
+          0.9267578125,
+          0.380859375,
+          0.14404296875
+        ],
+        "cpu_user_s": 25.433759,
+        "cpu_sys_s": 3.465793,
+        "voluntary_switches": 24274,
+        "involuntary_switches": 385,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 120449445525,
+        "loadavg": [
+          0.9267578125,
+          0.380859375,
+          0.14404296875
+        ],
+        "cpu_user_s": 25.499159,
+        "cpu_sys_s": 3.466336,
+        "voluntary_switches": 24299,
+        "involuntary_switches": 386,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 5,
+      "capture_batch": 8,
+      "scope": "bare_graph",
+      "cycle": 7,
+      "position": 0,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6430.413055419922,
+      "host_enqueue_us": 39.9739,
+      "host_thread_cpu_us": 39.8928,
+      "wait_us": 6444.1071,
+      "wall_with_sync_us": 6484.081,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:29.305, P0, 5244, 2705, 1980, 73, 25.47, 72",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 120504700783,
+        "loadavg": [
+          0.9267578125,
+          0.380859375,
+          0.14404296875
+        ],
+        "cpu_user_s": 25.501878,
+        "cpu_sys_s": 3.466705,
+        "voluntary_switches": 24332,
+        "involuntary_switches": 386,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 120570010896,
+        "loadavg": [
+          0.9267578125,
+          0.380859375,
+          0.14404296875
+        ],
+        "cpu_user_s": 25.567565,
+        "cpu_sys_s": 3.466857,
+        "voluntary_switches": 24358,
+        "involuntary_switches": 387,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 5,
+      "capture_batch": 8,
+      "scope": "bare_graph",
+      "cycle": 7,
+      "position": 1,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 7412.940979003906,
+      "host_enqueue_us": 15.8691,
+      "host_thread_cpu_us": 15.7129,
+      "wait_us": 7451.2636,
+      "wall_with_sync_us": 7467.1327,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:29.424, P0, 5244, 2705, 1980, 73, 25.42, 49",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 120622849216,
+        "loadavg": [
+          0.9267578125,
+          0.380859375,
+          0.14404296875
+        ],
+        "cpu_user_s": 25.570191,
+        "cpu_sys_s": 3.467213,
+        "voluntary_switches": 24389,
+        "involuntary_switches": 387,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 120697997610,
+        "loadavg": [
+          0.9267578125,
+          0.380859375,
+          0.14404296875
+        ],
+        "cpu_user_s": 25.646122,
+        "cpu_sys_s": 3.467213,
+        "voluntary_switches": 24426,
+        "involuntary_switches": 388,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 5,
+      "capture_batch": 8,
+      "scope": "bare_graph",
+      "cycle": 8,
+      "position": 0,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6748.057556152344,
+      "host_enqueue_us": 18.7266,
+      "host_thread_cpu_us": 18.7155,
+      "wait_us": 6787.4399,
+      "wall_with_sync_us": 6806.1665,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:29.549, P0, 5244, 2705, 1980, 73, 25.49, 58",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 120763092086,
+        "loadavg": [
+          0.9267578125,
+          0.380859375,
+          0.14404296875
+        ],
+        "cpu_user_s": 25.648815,
+        "cpu_sys_s": 3.467474,
+        "voluntary_switches": 24456,
+        "involuntary_switches": 388,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 120831598626,
+        "loadavg": [
+          0.9267578125,
+          0.380859375,
+          0.14404296875
+        ],
+        "cpu_user_s": 25.717912,
+        "cpu_sys_s": 3.467538,
+        "voluntary_switches": 24489,
+        "involuntary_switches": 389,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 5,
+      "capture_batch": 8,
+      "scope": "bare_graph",
+      "cycle": 8,
+      "position": 1,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6517.145538330078,
+      "host_enqueue_us": 41.062,
+      "host_thread_cpu_us": 40.9429,
+      "wait_us": 6534.0932,
+      "wall_with_sync_us": 6575.1552,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:29.684, P0, 5244, 2705, 1980, 73, 25.45, 58",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 120882559617,
+        "loadavg": [
+          0.9267578125,
+          0.380859375,
+          0.14404296875
+        ],
+        "cpu_user_s": 25.721798,
+        "cpu_sys_s": 3.467538,
+        "voluntary_switches": 24520,
+        "involuntary_switches": 389,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 120948793787,
+        "loadavg": [
+          0.9267578125,
+          0.380859375,
+          0.14404296875
+        ],
+        "cpu_user_s": 25.788509,
+        "cpu_sys_s": 3.467538,
+        "voluntary_switches": 24545,
+        "involuntary_switches": 390,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 5,
+      "capture_batch": 8,
+      "scope": "bare_graph",
+      "cycle": 9,
+      "position": 0,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6269.747161865234,
+      "host_enqueue_us": 49.0974,
+      "host_thread_cpu_us": 49.0963,
+      "wait_us": 6280.0492,
+      "wall_with_sync_us": 6329.1466,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:29.802, P0, 5244, 2705, 1980, 73, 25.41, 61",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 121001269047,
+        "loadavg": [
+          0.9267578125,
+          0.380859375,
+          0.14404296875
+        ],
+        "cpu_user_s": 25.788509,
+        "cpu_sys_s": 3.471143,
+        "voluntary_switches": 24579,
+        "involuntary_switches": 390,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 121065038051,
+        "loadavg": [
+          0.9267578125,
+          0.380859375,
+          0.14404296875
+        ],
+        "cpu_user_s": 25.852653,
+        "cpu_sys_s": 3.471238,
+        "voluntary_switches": 24604,
+        "involuntary_switches": 391,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 5,
+      "capture_batch": 8,
+      "scope": "bare_graph",
+      "cycle": 9,
+      "position": 1,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 7243.775939941406,
+      "host_enqueue_us": 15.9073,
+      "host_thread_cpu_us": 15.765,
+      "wait_us": 7284.264,
+      "wall_with_sync_us": 7300.1713,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:29.925, P0, 5244, 2705, 1980, 73, 25.43, 61",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 121124655937,
+        "loadavg": [
+          0.9267578125,
+          0.380859375,
+          0.14404296875
+        ],
+        "cpu_user_s": 25.856314,
+        "cpu_sys_s": 3.471729,
+        "voluntary_switches": 24638,
+        "involuntary_switches": 391,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 121198127042,
+        "loadavg": [
+          0.9267578125,
+          0.380859375,
+          0.14404296875
+        ],
+        "cpu_user_s": 25.930377,
+        "cpu_sys_s": 3.471917,
+        "voluntary_switches": 24672,
+        "involuntary_switches": 392,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 8,
+      "capture_batch": 8,
+      "scope": "full",
+      "cycle": 0,
+      "position": 0,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6896.5118408203125,
+      "host_enqueue_us": 339.8442,
+      "host_thread_cpu_us": 339.8161,
+      "wait_us": 6698.2432,
+      "wall_with_sync_us": 7038.0874,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:30.316, P0, 5244, 2705, 1980, 73, 25.76, 80",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 121514810773,
+        "loadavg": [
+          0.9267578125,
+          0.380859375,
+          0.14404296875
+        ],
+        "cpu_user_s": 26.18683,
+        "cpu_sys_s": 3.487272,
+        "voluntary_switches": 24823,
+        "involuntary_switches": 392,
+        "allocated_bytes": 316028416,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 121585662663,
+        "loadavg": [
+          0.9267578125,
+          0.380859375,
+          0.14404296875
+        ],
+        "cpu_user_s": 26.258419,
+        "cpu_sys_s": 3.487272,
+        "voluntary_switches": 24857,
+        "involuntary_switches": 393,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 8,
+      "capture_batch": 8,
+      "scope": "full",
+      "cycle": 0,
+      "position": 1,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6955.622100830078,
+      "host_enqueue_us": 384.996,
+      "host_thread_cpu_us": 384.8307,
+      "wait_us": 6680.8477,
+      "wall_with_sync_us": 7065.8437,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:30.445, P0, 5244, 2705, 1980, 73, 25.84, 71",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 121644298762,
+        "loadavg": [
+          0.9267578125,
+          0.380859375,
+          0.14404296875
+        ],
+        "cpu_user_s": 26.26162,
+        "cpu_sys_s": 3.487556,
+        "voluntary_switches": 24886,
+        "involuntary_switches": 393,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 121715566357,
+        "loadavg": [
+          0.9267578125,
+          0.380859375,
+          0.14404296875
+        ],
+        "cpu_user_s": 26.333196,
+        "cpu_sys_s": 3.487947,
+        "voluntary_switches": 24920,
+        "involuntary_switches": 394,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 8,
+      "capture_batch": 8,
+      "scope": "full",
+      "cycle": 1,
+      "position": 0,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6602.239990234375,
+      "host_enqueue_us": 371.4262,
+      "host_thread_cpu_us": 371.3731,
+      "wait_us": 6348.7789,
+      "wall_with_sync_us": 6720.2051,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:30.586, P0, 5244, 2705, 1980, 73, 26.06, 63",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 121785865081,
+        "loadavg": [
+          0.9267578125,
+          0.380859375,
+          0.14404296875
+        ],
+        "cpu_user_s": 26.336482,
+        "cpu_sys_s": 3.487947,
+        "voluntary_switches": 24959,
+        "involuntary_switches": 394,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 121853522607,
+        "loadavg": [
+          0.9267578125,
+          0.380859375,
+          0.14404296875
+        ],
+        "cpu_user_s": 26.404725,
+        "cpu_sys_s": 3.487947,
+        "voluntary_switches": 24987,
+        "involuntary_switches": 395,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 8,
+      "capture_batch": 8,
+      "scope": "full",
+      "cycle": 1,
+      "position": 1,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6923.05908203125,
+      "host_enqueue_us": 433.0984,
+      "host_thread_cpu_us": 433.0755,
+      "wait_us": 6651.3922,
+      "wall_with_sync_us": 7084.4906,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:30.707, P0, 5244, 2705, 1980, 73, 25.89, 63",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 121910919439,
+        "loadavg": [
+          0.9267578125,
+          0.380859375,
+          0.14404296875
+        ],
+        "cpu_user_s": 26.408185,
+        "cpu_sys_s": 3.488254,
+        "voluntary_switches": 25021,
+        "involuntary_switches": 395,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 121982315423,
+        "loadavg": [
+          0.9267578125,
+          0.380859375,
+          0.14404296875
+        ],
+        "cpu_user_s": 26.480385,
+        "cpu_sys_s": 3.488254,
+        "voluntary_switches": 25055,
+        "involuntary_switches": 397,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 8,
+      "capture_batch": 8,
+      "scope": "full",
+      "cycle": 2,
+      "position": 0,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6804.582214355469,
+      "host_enqueue_us": 476.6543,
+      "host_thread_cpu_us": 476.6573,
+      "wait_us": 6470.367,
+      "wall_with_sync_us": 6947.0213,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:30.842, P0, 5244, 2705, 1980, 73, 25.72, 47",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 122045666457,
+        "loadavg": [
+          0.9267578125,
+          0.380859375,
+          0.14404296875
+        ],
+        "cpu_user_s": 26.484004,
+        "cpu_sys_s": 3.488254,
+        "voluntary_switches": 25084,
+        "involuntary_switches": 397,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 122115686325,
+        "loadavg": [
+          0.9267578125,
+          0.380859375,
+          0.14404296875
+        ],
+        "cpu_user_s": 26.554808,
+        "cpu_sys_s": 3.488422,
+        "voluntary_switches": 25118,
+        "involuntary_switches": 398,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 8,
+      "capture_batch": 8,
+      "scope": "full",
+      "cycle": 2,
+      "position": 1,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 41711.92321777344,
+      "host_enqueue_us": 406.1532,
+      "host_thread_cpu_us": 406.1643,
+      "wait_us": 41454.3447,
+      "wall_with_sync_us": 41860.4979,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:30.988, P4, 5244, 2705, 750, 73, 25.88, 61",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 122193231280,
+        "loadavg": [
+          0.9267578125,
+          0.380859375,
+          0.14404296875
+        ],
+        "cpu_user_s": 26.558304,
+        "cpu_sys_s": 3.488422,
+        "voluntary_switches": 25158,
+        "involuntary_switches": 398,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 122612304560,
+        "loadavg": [
+          0.9267578125,
+          0.380859375,
+          0.14404296875
+        ],
+        "cpu_user_s": 26.981822,
+        "cpu_sys_s": 3.488422,
+        "voluntary_switches": 25352,
+        "involuntary_switches": 400,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 8,
+      "capture_batch": 8,
+      "scope": "full",
+      "cycle": 3,
+      "position": 0,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 10622.045135498047,
+      "host_enqueue_us": 394.1605,
+      "host_thread_cpu_us": 394.1795,
+      "wait_us": 10351.0527,
+      "wall_with_sync_us": 10745.2132,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:31.475, P0, 5244, 2705, 1980, 72, 21.50, 100",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 122675383600,
+        "loadavg": [
+          0.9267578125,
+          0.380859375,
+          0.14404296875
+        ],
+        "cpu_user_s": 26.985003,
+        "cpu_sys_s": 3.488422,
+        "voluntary_switches": 25384,
+        "involuntary_switches": 400,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 122783303732,
+        "loadavg": [
+          0.9267578125,
+          0.380859375,
+          0.14404296875
+        ],
+        "cpu_user_s": 27.094226,
+        "cpu_sys_s": 3.488422,
+        "voluntary_switches": 25437,
+        "involuntary_switches": 401,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 8,
+      "capture_batch": 8,
+      "scope": "full",
+      "cycle": 3,
+      "position": 1,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 37510.45227050781,
+      "host_enqueue_us": 373.3239,
+      "host_thread_cpu_us": 373.2828,
+      "wait_us": 37292.4365,
+      "wall_with_sync_us": 37665.7604,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:31.642, P4, 5244, 2705, 810, 72, 20.47, 69",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 122842431170,
+        "loadavg": [
+          0.9267578125,
+          0.380859375,
+          0.14404296875
+        ],
+        "cpu_user_s": 27.097966,
+        "cpu_sys_s": 3.488422,
+        "voluntary_switches": 25466,
+        "involuntary_switches": 401,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 123219604936,
+        "loadavg": [
+          0.9267578125,
+          0.380859375,
+          0.14404296875
+        ],
+        "cpu_user_s": 27.476027,
+        "cpu_sys_s": 3.491518,
+        "voluntary_switches": 25638,
+        "involuntary_switches": 404,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 8,
+      "capture_batch": 8,
+      "scope": "full",
+      "cycle": 4,
+      "position": 0,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6647.602844238281,
+      "host_enqueue_us": 345.2924,
+      "host_thread_cpu_us": 345.2695,
+      "wait_us": 6422.2877,
+      "wall_with_sync_us": 6767.5801,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:32.070, P0, 5244, 2705, 1980, 72, 17.43, 100",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 123269279331,
+        "loadavg": [
+          0.9267578125,
+          0.380859375,
+          0.14404296875
+        ],
+        "cpu_user_s": 27.479518,
+        "cpu_sys_s": 3.491518,
+        "voluntary_switches": 25664,
+        "involuntary_switches": 404,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 123337424064,
+        "loadavg": [
+          0.9267578125,
+          0.380859375,
+          0.14404296875
+        ],
+        "cpu_user_s": 27.548332,
+        "cpu_sys_s": 3.491518,
+        "voluntary_switches": 25697,
+        "involuntary_switches": 405,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 8,
+      "capture_batch": 8,
+      "scope": "full",
+      "cycle": 4,
+      "position": 1,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6691.6351318359375,
+      "host_enqueue_us": 345.9708,
+      "host_thread_cpu_us": 345.9387,
+      "wait_us": 6448.9323,
+      "wall_with_sync_us": 6794.9031,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:32.188, P0, 5244, 2705, 1980, 72, 18.21, 76",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 123388484420,
+        "loadavg": [
+          0.9267578125,
+          0.380859375,
+          0.14404296875
+        ],
+        "cpu_user_s": 27.551196,
+        "cpu_sys_s": 3.491836,
+        "voluntary_switches": 25731,
+        "involuntary_switches": 405,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 123456867456,
+        "loadavg": [
+          0.9267578125,
+          0.380859375,
+          0.14404296875
+        ],
+        "cpu_user_s": 27.620061,
+        "cpu_sys_s": 3.491866,
+        "voluntary_switches": 25757,
+        "involuntary_switches": 406,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 8,
+      "capture_batch": 8,
+      "scope": "full",
+      "cycle": 5,
+      "position": 0,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 24521.286010742188,
+      "host_enqueue_us": 399.8128,
+      "host_thread_cpu_us": 399.7657,
+      "wait_us": 24231.4199,
+      "wall_with_sync_us": 24631.2327,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:32.306, P0, 5244, 2705, 1980, 72, 19.16, 76",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 123508327851,
+        "loadavg": [
+          0.9267578125,
+          0.380859375,
+          0.14404296875
+        ],
+        "cpu_user_s": 27.622563,
+        "cpu_sys_s": 3.492183,
+        "voluntary_switches": 25787,
+        "involuntary_switches": 406,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 123755126993,
+        "loadavg": [
+          0.9267578125,
+          0.380859375,
+          0.14404296875
+        ],
+        "cpu_user_s": 27.871648,
+        "cpu_sys_s": 3.492535,
+        "voluntary_switches": 25899,
+        "involuntary_switches": 407,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 8,
+      "capture_batch": 8,
+      "scope": "full",
+      "cycle": 5,
+      "position": 1,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 7196.364593505859,
+      "host_enqueue_us": 334.4739,
+      "host_thread_cpu_us": 334.4359,
+      "wait_us": 6999.0402,
+      "wall_with_sync_us": 7333.5141,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:32.612, P0, 5244, 2705, 1980, 72, 19.69, 99",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 123811153280,
+        "loadavg": [
+          0.9267578125,
+          0.380859375,
+          0.14404296875
+        ],
+        "cpu_user_s": 27.875385,
+        "cpu_sys_s": 3.492535,
+        "voluntary_switches": 25930,
+        "involuntary_switches": 407,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 123884958725,
+        "loadavg": [
+          0.9267578125,
+          0.380859375,
+          0.14404296875
+        ],
+        "cpu_user_s": 27.949925,
+        "cpu_sys_s": 3.492535,
+        "voluntary_switches": 25967,
+        "involuntary_switches": 408,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 8,
+      "capture_batch": 8,
+      "scope": "full",
+      "cycle": 6,
+      "position": 0,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 15250.738525390625,
+      "host_enqueue_us": 356.0079,
+      "host_thread_cpu_us": 355.9889,
+      "wait_us": 15024.6111,
+      "wall_with_sync_us": 15380.619,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:32.741, P0, 5244, 2705, 1980, 72, 20.15, 99",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 123938848721,
+        "loadavg": [
+          0.9267578125,
+          0.380859375,
+          0.14404296875
+        ],
+        "cpu_user_s": 27.952536,
+        "cpu_sys_s": 3.492552,
+        "voluntary_switches": 25992,
+        "involuntary_switches": 408,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 124093110196,
+        "loadavg": [
+          0.9267578125,
+          0.380859375,
+          0.14404296875
+        ],
+        "cpu_user_s": 28.10825,
+        "cpu_sys_s": 3.492552,
+        "voluntary_switches": 26065,
+        "involuntary_switches": 410,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 8,
+      "capture_batch": 8,
+      "scope": "full",
+      "cycle": 6,
+      "position": 1,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6656.797027587891,
+      "host_enqueue_us": 414.7526,
+      "host_thread_cpu_us": 414.6905,
+      "wait_us": 6375.0448,
+      "wall_with_sync_us": 6789.7974,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:32.948, P0, 5244, 2705, 1980, 72, 21.41, 78",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 124154730303,
+        "loadavg": [
+          0.9267578125,
+          0.380859375,
+          0.14404296875
+        ],
+        "cpu_user_s": 28.110766,
+        "cpu_sys_s": 3.492647,
+        "voluntary_switches": 26094,
+        "involuntary_switches": 410,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 124223683563,
+        "loadavg": [
+          0.9267578125,
+          0.380859375,
+          0.14404296875
+        ],
+        "cpu_user_s": 28.180358,
+        "cpu_sys_s": 3.492765,
+        "voluntary_switches": 26128,
+        "involuntary_switches": 412,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 8,
+      "capture_batch": 8,
+      "scope": "full",
+      "cycle": 7,
+      "position": 0,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6753.587341308594,
+      "host_enqueue_us": 410.4183,
+      "host_thread_cpu_us": 410.3702,
+      "wait_us": 6475.2357,
+      "wall_with_sync_us": 6885.654,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:33.086, P0, 5244, 2705, 1980, 73, 22.56, 78",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 124291089582,
+        "loadavg": [
+          0.9267578125,
+          0.380859375,
+          0.14404296875
+        ],
+        "cpu_user_s": 28.184264,
+        "cpu_sys_s": 3.492765,
+        "voluntary_switches": 26166,
+        "involuntary_switches": 412,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 124360452755,
+        "loadavg": [
+          0.9267578125,
+          0.380859375,
+          0.14404296875
+        ],
+        "cpu_user_s": 28.254634,
+        "cpu_sys_s": 3.492765,
+        "voluntary_switches": 26198,
+        "involuntary_switches": 413,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 8,
+      "capture_batch": 8,
+      "scope": "full",
+      "cycle": 7,
+      "position": 1,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6959.919738769531,
+      "host_enqueue_us": 398.9585,
+      "host_thread_cpu_us": 398.9225,
+      "wait_us": 6718.2328,
+      "wall_with_sync_us": 7117.1913,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:33.222, P0, 5244, 2705, 1980, 73, 22.44, 56",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 124423157972,
+        "loadavg": [
+          0.9267578125,
+          0.380859375,
+          0.14404296875
+        ],
+        "cpu_user_s": 28.257908,
+        "cpu_sys_s": 3.492868,
+        "voluntary_switches": 26232,
+        "involuntary_switches": 413,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 124494865533,
+        "loadavg": [
+          0.9267578125,
+          0.380859375,
+          0.14404296875
+        ],
+        "cpu_user_s": 28.326871,
+        "cpu_sys_s": 3.496446,
+        "voluntary_switches": 26266,
+        "involuntary_switches": 414,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 8,
+      "capture_batch": 8,
+      "scope": "full",
+      "cycle": 8,
+      "position": 0,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 7132.057952880859,
+      "host_enqueue_us": 397.5199,
+      "host_thread_cpu_us": 397.4958,
+      "wait_us": 6865.389,
+      "wall_with_sync_us": 7262.9089,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:33.349, P0, 5244, 2705, 1980, 73, 22.36, 52",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 124563940269,
+        "loadavg": [
+          0.9267578125,
+          0.380859375,
+          0.14404296875
+        ],
+        "cpu_user_s": 28.330296,
+        "cpu_sys_s": 3.496446,
+        "voluntary_switches": 26300,
+        "involuntary_switches": 414,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 124637137558,
+        "loadavg": [
+          0.9267578125,
+          0.380859375,
+          0.14404296875
+        ],
+        "cpu_user_s": 28.404201,
+        "cpu_sys_s": 3.496446,
+        "voluntary_switches": 26333,
+        "involuntary_switches": 415,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 8,
+      "capture_batch": 8,
+      "scope": "full",
+      "cycle": 8,
+      "position": 1,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6944.255828857422,
+      "host_enqueue_us": 452.4989,
+      "host_thread_cpu_us": 452.4528,
+      "wait_us": 6616.9402,
+      "wall_with_sync_us": 7069.4391,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:33.491, P0, 5244, 2705, 1980, 73, 22.45, 52",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 124691295973,
+        "loadavg": [
+          0.9267578125,
+          0.380859375,
+          0.14404296875
+        ],
+        "cpu_user_s": 28.407854,
+        "cpu_sys_s": 3.496446,
+        "voluntary_switches": 26365,
+        "involuntary_switches": 415,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 124762482109,
+        "loadavg": [
+          0.9267578125,
+          0.380859375,
+          0.14404296875
+        ],
+        "cpu_user_s": 28.47983,
+        "cpu_sys_s": 3.496446,
+        "voluntary_switches": 26394,
+        "involuntary_switches": 416,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 8,
+      "capture_batch": 8,
+      "scope": "full",
+      "cycle": 9,
+      "position": 0,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6303.744125366211,
+      "host_enqueue_us": 622.5942,
+      "host_thread_cpu_us": 622.4781,
+      "wait_us": 5982.5345,
+      "wall_with_sync_us": 6605.1287,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:33.628, P0, 5244, 2705, 1980, 73, 22.92, 57",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 124831614980,
+        "loadavg": [
+          0.9267578125,
+          0.380859375,
+          0.14404296875
+        ],
+        "cpu_user_s": 28.480918,
+        "cpu_sys_s": 3.499072,
+        "voluntary_switches": 26432,
+        "involuntary_switches": 416,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 124898339528,
+        "loadavg": [
+          0.9267578125,
+          0.380859375,
+          0.14404296875
+        ],
+        "cpu_user_s": 28.548661,
+        "cpu_sys_s": 3.499072,
+        "voluntary_switches": 26465,
+        "involuntary_switches": 417,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 8,
+      "capture_batch": 8,
+      "scope": "full",
+      "cycle": 9,
+      "position": 1,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6718.796539306641,
+      "host_enqueue_us": 420.7991,
+      "host_thread_cpu_us": 420.8051,
+      "wait_us": 6429.1802,
+      "wall_with_sync_us": 6849.9793,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:33.784, P0, 5244, 2705, 1980, 73, 24.24, 50",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 124986180068,
+        "loadavg": [
+          0.9267578125,
+          0.380859375,
+          0.14404296875
+        ],
+        "cpu_user_s": 28.548661,
+        "cpu_sys_s": 3.502852,
+        "voluntary_switches": 26512,
+        "involuntary_switches": 417,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 125055221560,
+        "loadavg": [
+          0.9267578125,
+          0.380859375,
+          0.14404296875
+        ],
+        "cpu_user_s": 28.618047,
+        "cpu_sys_s": 3.503097,
+        "voluntary_switches": 26537,
+        "involuntary_switches": 418,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 8,
+      "capture_batch": 8,
+      "scope": "bare_graph",
+      "cycle": 0,
+      "position": 0,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6810.009765625,
+      "host_enqueue_us": 18.6034,
+      "host_thread_cpu_us": 18.3389,
+      "wait_us": 6850.2007,
+      "wall_with_sync_us": 6868.8041,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:33.944, P0, 5244, 2705, 1980, 73, 24.85, 46",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 125160940998,
+        "loadavg": [
+          0.9267578125,
+          0.380859375,
+          0.14404296875
+        ],
+        "cpu_user_s": 28.65117,
+        "cpu_sys_s": 3.503199,
+        "voluntary_switches": 26592,
+        "involuntary_switches": 418,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 125230190406,
+        "loadavg": [
+          0.9267578125,
+          0.380859375,
+          0.14404296875
+        ],
+        "cpu_user_s": 28.721014,
+        "cpu_sys_s": 3.50335,
+        "voluntary_switches": 26625,
+        "involuntary_switches": 419,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 8,
+      "capture_batch": 8,
+      "scope": "bare_graph",
+      "cycle": 0,
+      "position": 1,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6625.177764892578,
+      "host_enqueue_us": 42.3205,
+      "host_thread_cpu_us": 42.081,
+      "wait_us": 6638.5784,
+      "wall_with_sync_us": 6680.8989,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:34.085, P0, 5244, 2705, 1980, 73, 24.93, 46",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 125289482928,
+        "loadavg": [
+          0.9267578125,
+          0.380859375,
+          0.14404296875
+        ],
+        "cpu_user_s": 28.721014,
+        "cpu_sys_s": 3.506667,
+        "voluntary_switches": 26657,
+        "involuntary_switches": 419,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 125356820481,
+        "loadavg": [
+          0.93310546875,
+          0.3916015625,
+          0.14892578125
+        ],
+        "cpu_user_s": 28.784731999999998,
+        "cpu_sys_s": 3.510825,
+        "voluntary_switches": 26684,
+        "involuntary_switches": 421,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 8,
+      "capture_batch": 8,
+      "scope": "bare_graph",
+      "cycle": 1,
+      "position": 0,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6451.814270019531,
+      "host_enqueue_us": 38.5533,
+      "host_thread_cpu_us": 38.412,
+      "wait_us": 6465.9993,
+      "wall_with_sync_us": 6504.5526,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:34.207, P0, 5244, 2705, 1980, 73, 24.71, 59",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 125408146091,
+        "loadavg": [
+          0.93310546875,
+          0.3916015625,
+          0.14892578125
+        ],
+        "cpu_user_s": 28.784731999999998,
+        "cpu_sys_s": 3.514231,
+        "voluntary_switches": 26718,
+        "involuntary_switches": 421,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 125473638507,
+        "loadavg": [
+          0.93310546875,
+          0.3916015625,
+          0.14892578125
+        ],
+        "cpu_user_s": 28.850126,
+        "cpu_sys_s": 3.514961,
+        "voluntary_switches": 26747,
+        "involuntary_switches": 422,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 8,
+      "capture_batch": 8,
+      "scope": "bare_graph",
+      "cycle": 1,
+      "position": 1,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 7057.100677490234,
+      "host_enqueue_us": 16.0806,
+      "host_thread_cpu_us": 15.9683,
+      "wait_us": 7098.7342,
+      "wall_with_sync_us": 7114.8148,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:34.324, P0, 5244, 2705, 1980, 73, 24.85, 59",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 125523326482,
+        "loadavg": [
+          0.93310546875,
+          0.3916015625,
+          0.14892578125
+        ],
+        "cpu_user_s": 28.852574,
+        "cpu_sys_s": 3.515259,
+        "voluntary_switches": 26777,
+        "involuntary_switches": 422,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 125594922492,
+        "loadavg": [
+          0.93310546875,
+          0.3916015625,
+          0.14892578125
+        ],
+        "cpu_user_s": 28.924868,
+        "cpu_sys_s": 3.515259,
+        "voluntary_switches": 26811,
+        "involuntary_switches": 423,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 8,
+      "capture_batch": 8,
+      "scope": "bare_graph",
+      "cycle": 2,
+      "position": 0,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6661.222076416016,
+      "host_enqueue_us": 15.3061,
+      "host_thread_cpu_us": 15.2089,
+      "wait_us": 6696.5421,
+      "wall_with_sync_us": 6711.8482,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:34.445, P0, 5244, 2705, 1980, 73, 25.02, 52",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 125645014746,
+        "loadavg": [
+          0.93310546875,
+          0.3916015625,
+          0.14892578125
+        ],
+        "cpu_user_s": 28.927904,
+        "cpu_sys_s": 3.515259,
+        "voluntary_switches": 26836,
+        "involuntary_switches": 423,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 125712583995,
+        "loadavg": [
+          0.93310546875,
+          0.3916015625,
+          0.14892578125
+        ],
+        "cpu_user_s": 28.996051,
+        "cpu_sys_s": 3.515259,
+        "voluntary_switches": 26867,
+        "involuntary_switches": 424,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 8,
+      "capture_batch": 8,
+      "scope": "bare_graph",
+      "cycle": 2,
+      "position": 1,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6465.843200683594,
+      "host_enqueue_us": 41.6582,
+      "host_thread_cpu_us": 41.5139,
+      "wait_us": 6475.5104,
+      "wall_with_sync_us": 6517.1686,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:34.579, P0, 5244, 2705, 1980, 73, 25.09, 67",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 125778552009,
+        "loadavg": [
+          0.93310546875,
+          0.3916015625,
+          0.14892578125
+        ],
+        "cpu_user_s": 28.99901,
+        "cpu_sys_s": 3.5153980000000002,
+        "voluntary_switches": 26902,
+        "involuntary_switches": 424,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 125844195141,
+        "loadavg": [
+          0.93310546875,
+          0.3916015625,
+          0.14892578125
+        ],
+        "cpu_user_s": 29.065238,
+        "cpu_sys_s": 3.5153980000000002,
+        "voluntary_switches": 26930,
+        "involuntary_switches": 425,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 8,
+      "capture_batch": 8,
+      "scope": "bare_graph",
+      "cycle": 3,
+      "position": 0,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6551.039886474609,
+      "host_enqueue_us": 38.5593,
+      "host_thread_cpu_us": 38.4341,
+      "wait_us": 6564.5772,
+      "wall_with_sync_us": 6603.1365,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:34.696, P0, 5244, 2705, 1980, 73, 25.17, 67",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 125894529841,
+        "loadavg": [
+          0.93310546875,
+          0.3916015625,
+          0.14892578125
+        ],
+        "cpu_user_s": 29.068228,
+        "cpu_sys_s": 3.5153980000000002,
+        "voluntary_switches": 26961,
+        "involuntary_switches": 425,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 125961034586,
+        "loadavg": [
+          0.93310546875,
+          0.3916015625,
+          0.14892578125
+        ],
+        "cpu_user_s": 29.135208,
+        "cpu_sys_s": 3.5153980000000002,
+        "voluntary_switches": 26989,
+        "involuntary_switches": 427,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 8,
+      "capture_batch": 8,
+      "scope": "bare_graph",
+      "cycle": 3,
+      "position": 1,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6781.235504150391,
+      "host_enqueue_us": 15.2701,
+      "host_thread_cpu_us": 15.1448,
+      "wait_us": 6817.7008,
+      "wall_with_sync_us": 6832.9709,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:34.812, P0, 5244, 2705, 1980, 73, 25.35, 55",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 126010036463,
+        "loadavg": [
+          0.93310546875,
+          0.3916015625,
+          0.14892578125
+        ],
+        "cpu_user_s": 29.138134,
+        "cpu_sys_s": 3.5153980000000002,
+        "voluntary_switches": 27019,
+        "involuntary_switches": 427,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 126078836035,
+        "loadavg": [
+          0.93310546875,
+          0.3916015625,
+          0.14892578125
+        ],
+        "cpu_user_s": 29.207782,
+        "cpu_sys_s": 3.5153980000000002,
+        "voluntary_switches": 27051,
+        "involuntary_switches": 428,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 8,
+      "capture_batch": 8,
+      "scope": "bare_graph",
+      "cycle": 4,
+      "position": 0,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 7091.200256347656,
+      "host_enqueue_us": 19.6764,
+      "host_thread_cpu_us": 19.6374,
+      "wait_us": 7129.3279,
+      "wall_with_sync_us": 7149.0043,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:34.932, P0, 5244, 2705, 1980, 73, 25.21, 55",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 126131673580,
+        "loadavg": [
+          0.93310546875,
+          0.3916015625,
+          0.14892578125
+        ],
+        "cpu_user_s": 29.210946,
+        "cpu_sys_s": 3.5153980000000002,
+        "voluntary_switches": 27079,
+        "involuntary_switches": 428,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 126203672741,
+        "loadavg": [
+          0.93310546875,
+          0.3916015625,
+          0.14892578125
+        ],
+        "cpu_user_s": 29.283627,
+        "cpu_sys_s": 3.5153980000000002,
+        "voluntary_switches": 27113,
+        "involuntary_switches": 429,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 8,
+      "capture_batch": 8,
+      "scope": "bare_graph",
+      "cycle": 4,
+      "position": 1,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 7049.2156982421875,
+      "host_enqueue_us": 47.5674,
+      "host_thread_cpu_us": 47.4622,
+      "wait_us": 7061.3762,
+      "wall_with_sync_us": 7108.9436,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:35.056, P0, 5244, 2705, 1980, 73, 25.56, 51",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 126254985491,
+        "loadavg": [
+          0.93310546875,
+          0.3916015625,
+          0.14892578125
+        ],
+        "cpu_user_s": 29.28712,
+        "cpu_sys_s": 3.5153980000000002,
+        "voluntary_switches": 27138,
+        "involuntary_switches": 429,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 126326557575,
+        "loadavg": [
+          0.93310546875,
+          0.3916015625,
+          0.14892578125
+        ],
+        "cpu_user_s": 29.356987,
+        "cpu_sys_s": 3.517836,
+        "voluntary_switches": 27172,
+        "involuntary_switches": 430,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 8,
+      "capture_batch": 8,
+      "scope": "bare_graph",
+      "cycle": 5,
+      "position": 0,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6533.324432373047,
+      "host_enqueue_us": 38.3238,
+      "host_thread_cpu_us": 38.2167,
+      "wait_us": 6547.8353,
+      "wall_with_sync_us": 6586.1591,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:35.186, P0, 5244, 2705, 1980, 73, 25.59, 72",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 126388274903,
+        "loadavg": [
+          0.93310546875,
+          0.3916015625,
+          0.14892578125
+        ],
+        "cpu_user_s": 29.360467,
+        "cpu_sys_s": 3.517836,
+        "voluntary_switches": 27210,
+        "involuntary_switches": 430,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 126454616557,
+        "loadavg": [
+          0.93310546875,
+          0.3916015625,
+          0.14892578125
+        ],
+        "cpu_user_s": 29.427076,
+        "cpu_sys_s": 3.5180160000000003,
+        "voluntary_switches": 27238,
+        "involuntary_switches": 432,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 8,
+      "capture_batch": 8,
+      "scope": "bare_graph",
+      "cycle": 5,
+      "position": 1,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6848.102569580078,
+      "host_enqueue_us": 15.2189,
+      "host_thread_cpu_us": 15.0716,
+      "wait_us": 6883.7365,
+      "wall_with_sync_us": 6898.9554,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:35.304, P0, 5244, 2705, 1980, 73, 25.58, 72",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 126503867833,
+        "loadavg": [
+          0.93310546875,
+          0.3916015625,
+          0.14892578125
+        ],
+        "cpu_user_s": 29.42984,
+        "cpu_sys_s": 3.5180160000000003,
+        "voluntary_switches": 27269,
+        "involuntary_switches": 432,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 126573398476,
+        "loadavg": [
+          0.93310546875,
+          0.3916015625,
+          0.14892578125
+        ],
+        "cpu_user_s": 29.49985,
+        "cpu_sys_s": 3.5180160000000003,
+        "voluntary_switches": 27296,
+        "involuntary_switches": 433,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 8,
+      "capture_batch": 8,
+      "scope": "bare_graph",
+      "cycle": 6,
+      "position": 0,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6906.982421875,
+      "host_enqueue_us": 15.6398,
+      "host_thread_cpu_us": 15.4714,
+      "wait_us": 6942.9952,
+      "wall_with_sync_us": 6958.635,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:35.428, P0, 5244, 2705, 1980, 73, 25.59, 50",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 126628055910,
+        "loadavg": [
+          0.93310546875,
+          0.3916015625,
+          0.14892578125
+        ],
+        "cpu_user_s": 29.502737,
+        "cpu_sys_s": 3.5180160000000003,
+        "voluntary_switches": 27328,
+        "involuntary_switches": 433,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 126698130317,
+        "loadavg": [
+          0.93310546875,
+          0.3916015625,
+          0.14892578125
+        ],
+        "cpu_user_s": 29.573469,
+        "cpu_sys_s": 3.5180160000000003,
+        "voluntary_switches": 27362,
+        "involuntary_switches": 434,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 8,
+      "capture_batch": 8,
+      "scope": "bare_graph",
+      "cycle": 6,
+      "position": 1,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 7091.916656494141,
+      "host_enqueue_us": 46.4183,
+      "host_thread_cpu_us": 46.3952,
+      "wait_us": 7106.2935,
+      "wall_with_sync_us": 7152.7118,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:35.548, P0, 5244, 2705, 1980, 73, 25.58, 57",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 126767586603,
+        "loadavg": [
+          0.93310546875,
+          0.3916015625,
+          0.14892578125
+        ],
+        "cpu_user_s": 29.576302,
+        "cpu_sys_s": 3.5180160000000003,
+        "voluntary_switches": 27396,
+        "involuntary_switches": 434,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 126839576841,
+        "loadavg": [
+          0.93310546875,
+          0.3916015625,
+          0.14892578125
+        ],
+        "cpu_user_s": 29.649023,
+        "cpu_sys_s": 3.518022,
+        "voluntary_switches": 27429,
+        "involuntary_switches": 435,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 8,
+      "capture_batch": 8,
+      "scope": "bare_graph",
+      "cycle": 7,
+      "position": 0,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6279.475021362305,
+      "host_enqueue_us": 53.4336,
+      "host_thread_cpu_us": 53.3344,
+      "wait_us": 6289.2301,
+      "wall_with_sync_us": 6342.6637,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:35.700, P0, 5244, 2705, 1980, 73, 25.50, 57",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 126900343633,
+        "loadavg": [
+          0.93310546875,
+          0.3916015625,
+          0.14892578125
+        ],
+        "cpu_user_s": 29.652387,
+        "cpu_sys_s": 3.518022,
+        "voluntary_switches": 27464,
+        "involuntary_switches": 435,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 126965158739,
+        "loadavg": [
+          0.93310546875,
+          0.3916015625,
+          0.14892578125
+        ],
+        "cpu_user_s": 29.717728,
+        "cpu_sys_s": 3.518036,
+        "voluntary_switches": 27490,
+        "involuntary_switches": 437,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 8,
+      "capture_batch": 8,
+      "scope": "bare_graph",
+      "cycle": 7,
+      "position": 1,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6833.049774169922,
+      "host_enqueue_us": 15.5135,
+      "host_thread_cpu_us": 15.3692,
+      "wait_us": 6869.9177,
+      "wall_with_sync_us": 6885.4312,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:35.822, P0, 5244, 2705, 1980, 73, 25.38, 54",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 127021431986,
+        "loadavg": [
+          0.93310546875,
+          0.3916015625,
+          0.14892578125
+        ],
+        "cpu_user_s": 29.720735,
+        "cpu_sys_s": 3.518036,
+        "voluntary_switches": 27523,
+        "involuntary_switches": 437,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 127090747645,
+        "loadavg": [
+          0.93310546875,
+          0.3916015625,
+          0.14892578125
+        ],
+        "cpu_user_s": 29.787126999999998,
+        "cpu_sys_s": 3.52169,
+        "voluntary_switches": 27557,
+        "involuntary_switches": 438,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 8,
+      "capture_batch": 8,
+      "scope": "bare_graph",
+      "cycle": 8,
+      "position": 0,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 23755.059814453125,
+      "host_enqueue_us": 17.2148,
+      "host_thread_cpu_us": 17.0364,
+      "wait_us": 23793.7773,
+      "wall_with_sync_us": 23810.9921,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:35.945, P0, 5244, 2705, 1980, 73, 25.42, 54",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 127159662607,
+        "loadavg": [
+          0.93310546875,
+          0.3916015625,
+          0.14892578125
+        ],
+        "cpu_user_s": 29.790072,
+        "cpu_sys_s": 3.52169,
+        "voluntary_switches": 27587,
+        "involuntary_switches": 438,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 127398271306,
+        "loadavg": [
+          0.93310546875,
+          0.3916015625,
+          0.14892578125
+        ],
+        "cpu_user_s": 30.031591,
+        "cpu_sys_s": 3.52169,
+        "voluntary_switches": 27703,
+        "involuntary_switches": 439,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 8,
+      "capture_batch": 8,
+      "scope": "bare_graph",
+      "cycle": 8,
+      "position": 1,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6513.561248779297,
+      "host_enqueue_us": 40.4779,
+      "host_thread_cpu_us": 40.3668,
+      "wait_us": 6526.4502,
+      "wall_with_sync_us": 6566.9281,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:36.250, P0, 5244, 2705, 1980, 72, 23.40, 86",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 127449264238,
+        "loadavg": [
+          0.93310546875,
+          0.3916015625,
+          0.14892578125
+        ],
+        "cpu_user_s": 30.034041,
+        "cpu_sys_s": 3.521788,
+        "voluntary_switches": 27728,
+        "involuntary_switches": 439,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 127515366151,
+        "loadavg": [
+          0.93310546875,
+          0.3916015625,
+          0.14892578125
+        ],
+        "cpu_user_s": 30.100675,
+        "cpu_sys_s": 3.522033,
+        "voluntary_switches": 27762,
+        "involuntary_switches": 440,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 8,
+      "capture_batch": 8,
+      "scope": "bare_graph",
+      "cycle": 9,
+      "position": 0,
+      "variant": "mature",
+      "iterations": 10,
+      "event_with_host_gaps_us": 22854.96368408203,
+      "host_enqueue_us": 40.7786,
+      "host_thread_cpu_us": 40.6563,
+      "wait_us": 22895.8235,
+      "wall_with_sync_us": 22936.6021,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:36.377, P4, 5244, 2705, 795, 72, 23.63, 68",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 127576398036,
+        "loadavg": [
+          0.93310546875,
+          0.3916015625,
+          0.14892578125
+        ],
+        "cpu_user_s": 30.1036,
+        "cpu_sys_s": 3.522033,
+        "voluntary_switches": 27792,
+        "involuntary_switches": 440,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 127806248247,
+        "loadavg": [
+          0.93310546875,
+          0.3916015625,
+          0.14892578125
+        ],
+        "cpu_user_s": 30.335836,
+        "cpu_sys_s": 3.522033,
+        "voluntary_switches": 27898,
+        "involuntary_switches": 441,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    },
+    {
+      "batch": 8,
+      "capture_batch": 8,
+      "scope": "bare_graph",
+      "cycle": 9,
+      "position": 1,
+      "variant": "native",
+      "iterations": 10,
+      "event_with_host_gaps_us": 6863.155364990234,
+      "host_enqueue_us": 15.9243,
+      "host_thread_cpu_us": 15.7921,
+      "wait_us": 6901.0649,
+      "wall_with_sync_us": 6916.9892,
+      "gpu_before": {
+        "returncode": 0,
+        "csv": "2026/11/14 17:41:36.661, P0, 5244, 2705, 1980, 72, 21.62, 79",
+        "fields": [
+          "timestamp",
+          "pstate",
+          "free_MiB",
+          "used_MiB",
+          "SM_MHz",
+          "temp_C",
+          "power_W",
+          "util_pct"
+        ]
+      },
+      "host_before": {
+        "monotonic_ns": 127859383423,
+        "loadavg": [
+          0.93310546875,
+          0.3916015625,
+          0.14892578125
+        ],
+        "cpu_user_s": 30.338628,
+        "cpu_sys_s": 3.522033,
+        "voluntary_switches": 27926,
+        "involuntary_switches": 441,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      },
+      "host_after": {
+        "monotonic_ns": 127929024901,
+        "loadavg": [
+          0.93310546875,
+          0.3916015625,
+          0.14892578125
+        ],
+        "cpu_user_s": 30.405648,
+        "cpu_sys_s": 3.525409,
+        "voluntary_switches": 27959,
+        "involuntary_switches": 442,
+        "allocated_bytes": 314455552,
+        "reserved_bytes": 373293056
+      }
+    }
+  ],
+  "parameter_sample_sha256": "4638a178103f051f356688441d8f6975e7e1a4080a95f41a5c75e0ffd1001e71",
+  "graph_state": {
+    "mature": {
+      "sizes": [
+        1,
+        2,
+        4,
+        8
+      ],
+      "input_ptr": 34567353344,
+      "kv_indices_ptr": 34481319424,
+      "scratch_ptr": 34807023104
+    },
+    "native": {
+      "sizes": [
+        1,
+        2,
+        4,
+        8
+      ],
+      "input_ptr": 34481342976,
+      "kv_indices_ptr": 34481333760,
+      "scratch_ptr": 34807170560
+    }
+  },
+  "telemetry_final": {
+    "returncode": 0,
+    "csv": "2026/11/14 17:41:36.865, P4, 5244, 2705, 870, 72, 20.97, 74",
+    "fields": [
+      "timestamp",
+      "pstate",
+      "free_MiB",
+      "used_MiB",
+      "SM_MHz",
+      "temp_C",
+      "power_W",
+      "util_pct"
+    ]
+  },
+  "host_final": {
+    "monotonic_ns": 128068270461,
+    "loadavg": [
+      0.93310546875,
+      0.3916015625,
+      0.14892578125
+    ],
+    "cpu_user_s": 30.490124,
+    "cpu_sys_s": 3.529883,
+    "voluntary_switches": 28025,
+    "involuntary_switches": 443,
+    "allocated_bytes": 314455552,
+    "reserved_bytes": 373293056
+  },
+  "peak_torch_bytes": 317785600,
+  "status": "passed",
+  "limitations": [
+    "same native ModelRunner/model/req+KV pool; separate native graphs/backends/pools",
+    "static inputs; repeated forwards do not advance scheduler/token sequence",
+    "CUDA events include host gaps; bare graph bypasses replay preparation, not a serving optimization",
+    "all correctness and profiler work excluded from clean blocks",
+    "CPU affinity/frequency/power are observations, not locked experimental controls"
+  ]
+}

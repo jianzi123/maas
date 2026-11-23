@@ -1,0 +1,15 @@
+{
+  "scope": "postrun read-only snapshot; not claimed continuous/in-run control",
+  "recorded_utc": "2026-11-15T03:07:08.884626+00:00",
+  "command": [
+    "wsl",
+    "-d",
+    "Ubuntu-22.04",
+    "--",
+    "/usr/lib/wsl/lib/nvidia-smi",
+    "--query-gpu=name,driver_version,memory.total,compute_cap",
+    "--format=csv,noheader,nounits"
+  ],
+  "exit": 0,
+  "stdout": "NVIDIA GeForce RTX 4070 Laptop GPU, 581.29, 8188, 8.9"
+}

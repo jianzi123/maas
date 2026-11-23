@@ -1,0 +1,427 @@
+{
+  "status": "passed",
+  "source": "real local GPU native ModelRunner, artificial weights",
+  "scope": "all30 layers, actual graph-written locations; unused KV pool excluded",
+  "arrays": [
+    {
+      "state": "k00",
+      "shape": [
+        30,
+        1,
+        3,
+        64
+      ],
+      "bitwise_equal": true
+    },
+    {
+      "state": "k01",
+      "shape": [
+        30,
+        1,
+        3,
+        64
+      ],
+      "bitwise_equal": true
+    },
+    {
+      "state": "k02",
+      "shape": [
+        30,
+        3,
+        3,
+        64
+      ],
+      "bitwise_equal": true
+    },
+    {
+      "state": "k03",
+      "shape": [
+        30,
+        3,
+        3,
+        64
+      ],
+      "bitwise_equal": true
+    },
+    {
+      "state": "k04",
+      "shape": [
+        30,
+        2,
+        3,
+        64
+      ],
+      "bitwise_equal": true
+    },
+    {
+      "state": "k05",
+      "shape": [
+        30,
+        2,
+        3,
+        64
+      ],
+      "bitwise_equal": true
+    },
+    {
+      "state": "k06",
+      "shape": [
+        30,
+        5,
+        3,
+        64
+      ],
+      "bitwise_equal": true
+    },
+    {
+      "state": "k07",
+      "shape": [
+        30,
+        5,
+        3,
+        64
+      ],
+      "bitwise_equal": true
+    },
+    {
+      "state": "k08",
+      "shape": [
+        30,
+        8,
+        3,
+        64
+      ],
+      "bitwise_equal": true
+    },
+    {
+      "state": "k09",
+      "shape": [
+        30,
+        8,
+        3,
+        64
+      ],
+      "bitwise_equal": true
+    },
+    {
+      "state": "k10",
+      "shape": [
+        30,
+        3,
+        3,
+        64
+      ],
+      "bitwise_equal": true
+    },
+    {
+      "state": "k11",
+      "shape": [
+        30,
+        1,
+        3,
+        64
+      ],
+      "bitwise_equal": true
+    },
+    {
+      "state": "v00",
+      "shape": [
+        30,
+        1,
+        3,
+        64
+      ],
+      "bitwise_equal": true
+    },
+    {
+      "state": "v01",
+      "shape": [
+        30,
+        1,
+        3,
+        64
+      ],
+      "bitwise_equal": true
+    },
+    {
+      "state": "v02",
+      "shape": [
+        30,
+        3,
+        3,
+        64
+      ],
+      "bitwise_equal": true
+    },
+    {
+      "state": "v03",
+      "shape": [
+        30,
+        3,
+        3,
+        64
+      ],
+      "bitwise_equal": true
+    },
+    {
+      "state": "v04",
+      "shape": [
+        30,
+        2,
+        3,
+        64
+      ],
+      "bitwise_equal": true
+    },
+    {
+      "state": "v05",
+      "shape": [
+        30,
+        2,
+        3,
+        64
+      ],
+      "bitwise_equal": true
+    },
+    {
+      "state": "v06",
+      "shape": [
+        30,
+        5,
+        3,
+        64
+      ],
+      "bitwise_equal": true
+    },
+    {
+      "state": "v07",
+      "shape": [
+        30,
+        5,
+        3,
+        64
+      ],
+      "bitwise_equal": true
+    },
+    {
+      "state": "v08",
+      "shape": [
+        30,
+        8,
+        3,
+        64
+      ],
+      "bitwise_equal": true
+    },
+    {
+      "state": "v09",
+      "shape": [
+        30,
+        8,
+        3,
+        64
+      ],
+      "bitwise_equal": true
+    },
+    {
+      "state": "v10",
+      "shape": [
+        30,
+        3,
+        3,
+        64
+      ],
+      "bitwise_equal": true
+    },
+    {
+      "state": "v11",
+      "shape": [
+        30,
+        1,
+        3,
+        64
+      ],
+      "bitwise_equal": true
+    }
+  ],
+  "negative_controls": [
+    {
+      "state": "k00",
+      "mutation": "zero",
+      "rejected": true
+    },
+    {
+      "state": "k01",
+      "mutation": "zero",
+      "rejected": true
+    },
+    {
+      "state": "k02",
+      "mutation": "zero",
+      "rejected": true
+    },
+    {
+      "state": "k03",
+      "mutation": "zero",
+      "rejected": true
+    },
+    {
+      "state": "k04",
+      "mutation": "zero",
+      "rejected": true
+    },
+    {
+      "state": "k05",
+      "mutation": "zero",
+      "rejected": true
+    },
+    {
+      "state": "k06",
+      "mutation": "zero",
+      "rejected": true
+    },
+    {
+      "state": "k07",
+      "mutation": "zero",
+      "rejected": true
+    },
+    {
+      "state": "k08",
+      "mutation": "zero",
+      "rejected": true
+    },
+    {
+      "state": "k09",
+      "mutation": "zero",
+      "rejected": true
+    },
+    {
+      "state": "k10",
+      "mutation": "zero",
+      "rejected": true
+    },
+    {
+      "state": "k11",
+      "mutation": "zero",
+      "rejected": true
+    },
+    {
+      "state": "v00",
+      "mutation": "zero",
+      "rejected": true
+    },
+    {
+      "state": "v01",
+      "mutation": "zero",
+      "rejected": true
+    },
+    {
+      "state": "v02",
+      "mutation": "zero",
+      "rejected": true
+    },
+    {
+      "state": "v03",
+      "mutation": "zero",
+      "rejected": true
+    },
+    {
+      "state": "v04",
+      "mutation": "zero",
+      "rejected": true
+    },
+    {
+      "state": "v05",
+      "mutation": "zero",
+      "rejected": true
+    },
+    {
+      "state": "v06",
+      "mutation": "zero",
+      "rejected": true
+    },
+    {
+      "state": "v07",
+      "mutation": "zero",
+      "rejected": true
+    },
+    {
+      "state": "v08",
+      "mutation": "zero",
+      "rejected": true
+    },
+    {
+      "state": "v09",
+      "mutation": "zero",
+      "rejected": true
+    },
+    {
+      "state": "v10",
+      "mutation": "zero",
+      "rejected": true
+    },
+    {
+      "state": "v11",
+      "mutation": "zero",
+      "rejected": true
+    },
+    {
+      "state": "k01",
+      "mutation": "stale:k00",
+      "rejected": true
+    },
+    {
+      "state": "k03",
+      "mutation": "stale:k02",
+      "rejected": true
+    },
+    {
+      "state": "k05",
+      "mutation": "stale:k04",
+      "rejected": true
+    },
+    {
+      "state": "k07",
+      "mutation": "stale:k06",
+      "rejected": true
+    },
+    {
+      "state": "k09",
+      "mutation": "stale:k08",
+      "rejected": true
+    },
+    {
+      "state": "v01",
+      "mutation": "stale:v00",
+      "rejected": true
+    },
+    {
+      "state": "v03",
+      "mutation": "stale:v02",
+      "rejected": true
+    },
+    {
+      "state": "v05",
+      "mutation": "stale:v04",
+      "rejected": true
+    },
+    {
+      "state": "v07",
+      "mutation": "stale:v06",
+      "rejected": true
+    },
+    {
+      "state": "v09",
+      "mutation": "stale:v08",
+      "rejected": true
+    }
+  ],
+  "negative_controls_scope": "offline snapshot mutations, not mutated GPU kernels",
+  "finite_and_bitwise_equal": true,
+  "inputs_sha256": {
+    "reference": "be193ccc42b83080f5d197e7d6f3870abe4d863e1faa5f76ae7ab100d6796721",
+    "candidate": "be193ccc42b83080f5d197e7d6f3870abe4d863e1faa5f76ae7ab100d6796721"
+  },
+  "comparison_code_sha256": "026c285c41496d2f233bdd261de4f878d98a862a411336d0285889651987f81a",
+  "timing_or_model_quality_claim": false
+}

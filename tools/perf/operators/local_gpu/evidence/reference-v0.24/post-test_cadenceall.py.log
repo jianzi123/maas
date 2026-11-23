@@ -1,0 +1,41 @@
+test_asymmetric_extra (test_cadence_gates.GateTests.test_asymmetric_extra) ... ok
+test_both_empty (test_cadence_gates.GateTests.test_both_empty) ... ok
+test_both_variants_missing_layer_still_rejected (test_cadence_gates.GateTests.test_both_variants_missing_layer_still_rejected) ... ok
+test_both_variants_truncated_still_rejected (test_cadence_gates.GateTests.test_both_variants_truncated_still_rejected) ... ok
+test_both_variants_wrong_bitwidth_still_rejected (test_cadence_gates.GateTests.test_both_variants_wrong_bitwidth_still_rejected) ... ok
+test_complete_fixture (test_cadence_gates.GateTests.test_complete_fixture) ... ok
+test_duplicate_logits_not_KV (test_cadence_gates.GateTests.test_duplicate_logits_not_KV) ... ok
+test_extra_archive_role (test_cadence_gates.GateTests.test_extra_archive_role) ... ok
+test_historical_analyzer_only_compatibility (test_cadence_gates.GateTests.test_historical_analyzer_only_compatibility) ... ok
+test_missing_KV_layer (test_cadence_gates.GateTests.test_missing_KV_layer) ... ok
+test_nonfinite (test_cadence_gates.GateTests.test_nonfinite) ... ok
+test_one_side_empty (test_cadence_gates.GateTests.test_one_side_empty) ... ok
+test_producer_digest_change_rejected (test_cadence_gates.GateTests.test_producer_digest_change_rejected) ... ok
+test_single_vector (test_cadence_gates.GateTests.test_single_vector) ... ok
+test_swapped_roles (test_cadence_gates.GateTests.test_swapped_roles) ... ok
+test_truncated_logits_even_with_honest_hash (test_cadence_gates.GateTests.test_truncated_logits_even_with_honest_hash) ... ok
+test_unknown_analyzer_digest_rejected (test_cadence_gates.GateTests.test_unknown_analyzer_digest_rejected) ... ok
+test_variant_missing (test_cadence_gates.GateTests.test_variant_missing) ... ok
+test_wrong_hash (test_cadence_gates.GateTests.test_wrong_hash) ... ok
+test_wrong_logits_bitwidth (test_cadence_gates.GateTests.test_wrong_logits_bitwidth) ... ok
+test_foreign_clock_rejected (test_cadence_protocol.BlockTests.test_foreign_clock_rejected) ... ok
+test_foreign_query_rejected (test_cadence_protocol.BlockTests.test_foreign_query_rejected) ... ok
+test_matching_error_not_trusted (test_cadence_protocol.BlockTests.test_matching_error_not_trusted) ... ok
+test_missing_cannot_carry_timing (test_cadence_protocol.BlockTests.test_missing_cannot_carry_timing) ... ok
+test_nonfinite_timing_rejected (test_cadence_protocol.BlockTests.test_nonfinite_timing_rejected) ... ok
+test_valid_measured_identity (test_cadence_protocol.BlockTests.test_valid_measured_identity) ... ok
+test_valid_missing_is_retained (test_cadence_protocol.BlockTests.test_valid_missing_is_retained) ... ok
+test_wall_accounting_not_trusted (test_cadence_protocol.BlockTests.test_wall_accounting_not_trusted) ... ok
+test_boolean_schedule_is_not_integer (test_cadence_protocol.ProtocolTests.test_boolean_schedule_is_not_integer) ... ok
+test_config_cannot_raise_resource_cap (test_cadence_protocol.ProtocolTests.test_config_cannot_raise_resource_cap) ... ok
+test_duplicate_schedule_identity_rejected (test_cadence_protocol.ProtocolTests.test_duplicate_schedule_identity_rejected) ... ok
+test_frozen_denominator (test_cadence_protocol.ProtocolTests.test_frozen_denominator) ... ok
+test_invalid_plan_cli_does_not_import_torch_or_make_success_dir (test_cadence_protocol.ProtocolTests.test_invalid_plan_cli_does_not_import_torch_or_make_success_dir) ... ok
+test_missing_runs_stay_in_denominator (test_cadence_protocol.ProtocolTests.test_missing_runs_stay_in_denominator) ... ok
+test_nonfinite_matching_tolerance_rejected (test_cadence_protocol.ProtocolTests.test_nonfinite_matching_tolerance_rejected) ... ok
+test_source_digest_cannot_be_changed (test_cadence_protocol.ProtocolTests.test_source_digest_cannot_be_changed) ... ok
+
+----------------------------------------------------------------------
+Ran 36 tests in 4.440s
+
+OK

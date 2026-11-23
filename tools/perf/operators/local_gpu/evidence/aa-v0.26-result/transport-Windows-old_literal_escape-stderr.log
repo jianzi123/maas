@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "C:\Users\a9786\multica_workspaces_desktop-api.multica.ai\maas-007-da4ec7313117\maas-10-79a30240b357\workdir\repo\tools\perf\operators\local_gpu\run_aa_window.py", line 87, in <module>
+    if __name__=="__main__":raise SystemExit(main())
+                                             ~~~~^^
+  File "C:\Users\a9786\multica_workspaces_desktop-api.multica.ai\maas-007-da4ec7313117\maas-10-79a30240b357\workdir\repo\tools\perf\operators\local_gpu\run_aa_window.py", line 12, in main
+    lease=read_lease(sys.stdin)
+  File "C:\Users\a9786\multica_workspaces_desktop-api.multica.ai\maas-007-da4ec7313117\maas-10-79a30240b357\workdir\repo\tools\perf\operators\local_gpu\aa_protocol.py", line 77, in read_lease
+    need(line.endswith(chr(10)),"lease framing requires actual LF")
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\a9786\multica_workspaces_desktop-api.multica.ai\maas-007-da4ec7313117\maas-10-79a30240b357\workdir\repo\tools\perf\operators\local_gpu\aa_protocol.py", line 23, in need
+    if not ok:raise ValueError(message)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: lease framing requires actual LF

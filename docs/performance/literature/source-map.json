@@ -1,0 +1,233 @@
+{
+  "installed_versions": {
+    "sglang": "0.5.2",
+    "torch": "2.8.0",
+    "triton": "3.4.0",
+    "sgl-kernel": "0.3.9.post2",
+    "flashinfer-python": null,
+    "flashinfer": null
+  },
+  "fixed_sglang_commit": "b0d25e72c401f37b55d689ddbf05b8c583afe854",
+  "scope": "AST/source read only; no imports of framework kernels or GPU experiment",
+  "symbols": [
+    {
+      "id": "S01",
+      "package": "sglang",
+      "path": "srt/model_executor/cuda_graph_runner.py",
+      "symbol": "CudaGraphRunner.capture_one_batch_size",
+      "line": 525,
+      "end_line": 678,
+      "file_sha256": "68e0b8b0a663d70a800154cb9dc46794eb04d67ba3045ff3f06694733783b7e2",
+      "url": "https://github.com/sgl-project/sglang/blob/b0d25e72c401f37b55d689ddbf05b8c583afe854/python/sglang/srt/model_executor/cuda_graph_runner.py#L525",
+      "official_byte_match": true
+    },
+    {
+      "id": "S02",
+      "package": "sglang",
+      "path": "srt/model_executor/cuda_graph_runner.py",
+      "symbol": "CudaGraphRunner.replay_prepare",
+      "line": 711,
+      "end_line": 799,
+      "file_sha256": "68e0b8b0a663d70a800154cb9dc46794eb04d67ba3045ff3f06694733783b7e2",
+      "url": "https://github.com/sgl-project/sglang/blob/b0d25e72c401f37b55d689ddbf05b8c583afe854/python/sglang/srt/model_executor/cuda_graph_runner.py#L711",
+      "official_byte_match": true
+    },
+    {
+      "id": "S03",
+      "package": "sglang",
+      "path": "srt/model_executor/cuda_graph_runner.py",
+      "symbol": "CudaGraphRunner.replay",
+      "line": 801,
+      "end_line": 829,
+      "file_sha256": "68e0b8b0a663d70a800154cb9dc46794eb04d67ba3045ff3f06694733783b7e2",
+      "url": "https://github.com/sgl-project/sglang/blob/b0d25e72c401f37b55d689ddbf05b8c583afe854/python/sglang/srt/model_executor/cuda_graph_runner.py#L801",
+      "official_byte_match": true
+    },
+    {
+      "id": "S04",
+      "package": "sglang",
+      "path": "srt/layers/attention/triton_backend.py",
+      "symbol": "TritonAttnBackend.init_cuda_graph_state",
+      "line": 369,
+      "end_line": 425,
+      "file_sha256": "7ef7092da25a33c244f50f4d9269f47737589e7625c042c2a31406328a92f469",
+      "url": "https://github.com/sgl-project/sglang/blob/b0d25e72c401f37b55d689ddbf05b8c583afe854/python/sglang/srt/layers/attention/triton_backend.py#L369",
+      "official_byte_match": true
+    },
+    {
+      "id": "S05",
+      "package": "sglang",
+      "path": "srt/layers/attention/triton_backend.py",
+      "symbol": "TritonAttnBackend.init_forward_metadata_replay_cuda_graph",
+      "line": 583,
+      "end_line": 703,
+      "file_sha256": "7ef7092da25a33c244f50f4d9269f47737589e7625c042c2a31406328a92f469",
+      "url": "https://github.com/sgl-project/sglang/blob/b0d25e72c401f37b55d689ddbf05b8c583afe854/python/sglang/srt/layers/attention/triton_backend.py#L583",
+      "official_byte_match": true
+    },
+    {
+      "id": "S06",
+      "package": "sglang",
+      "path": "srt/layers/attention/triton_backend.py",
+      "symbol": "TritonAttnBackend.forward_decode",
+      "line": 771,
+      "end_line": 821,
+      "file_sha256": "7ef7092da25a33c244f50f4d9269f47737589e7625c042c2a31406328a92f469",
+      "url": "https://github.com/sgl-project/sglang/blob/b0d25e72c401f37b55d689ddbf05b8c583afe854/python/sglang/srt/layers/attention/triton_backend.py#L771",
+      "official_byte_match": true
+    },
+    {
+      "id": "S07",
+      "package": "sglang",
+      "path": "srt/layers/attention/triton_backend.py",
+      "symbol": "get_num_kv_splits_triton",
+      "line": 965,
+      "end_line": 1013,
+      "file_sha256": "7ef7092da25a33c244f50f4d9269f47737589e7625c042c2a31406328a92f469",
+      "url": "https://github.com/sgl-project/sglang/blob/b0d25e72c401f37b55d689ddbf05b8c583afe854/python/sglang/srt/layers/attention/triton_backend.py#L965",
+      "official_byte_match": true
+    },
+    {
+      "id": "S08",
+      "package": "sglang",
+      "path": "srt/layers/attention/triton_ops/decode_attention.py",
+      "symbol": "_decode_grouped_att_m_fwd",
+      "line": 426,
+      "end_line": 512,
+      "file_sha256": "2673adaad3d71209ff4f44788060913b1d6cce5021bbf1bf38334a09acf3d251",
+      "url": "https://github.com/sgl-project/sglang/blob/b0d25e72c401f37b55d689ddbf05b8c583afe854/python/sglang/srt/layers/attention/triton_ops/decode_attention.py#L426",
+      "official_byte_match": true
+    },
+    {
+      "id": "S09",
+      "package": "sglang",
+      "path": "srt/layers/attention/triton_ops/decode_attention.py",
+      "symbol": "_decode_softmax_reducev_fwd",
+      "line": 585,
+      "end_line": 630,
+      "file_sha256": "2673adaad3d71209ff4f44788060913b1d6cce5021bbf1bf38334a09acf3d251",
+      "url": "https://github.com/sgl-project/sglang/blob/b0d25e72c401f37b55d689ddbf05b8c583afe854/python/sglang/srt/layers/attention/triton_ops/decode_attention.py#L585",
+      "official_byte_match": true
+    },
+    {
+      "id": "S10",
+      "package": "sglang",
+      "path": "srt/mem_cache/memory_pool.py",
+      "symbol": "MHATokenToKVPool.set_kv_buffer",
+      "line": 594,
+      "end_line": 632,
+      "file_sha256": "0914922deb9e75024e211e9339a28a4a0bebefdfdc7f7ca9571d7fa2f3357cb0",
+      "url": "https://github.com/sgl-project/sglang/blob/b0d25e72c401f37b55d689ddbf05b8c583afe854/python/sglang/srt/mem_cache/memory_pool.py#L594",
+      "official_byte_match": true
+    },
+    {
+      "id": "S11",
+      "package": "sglang",
+      "path": "srt/layers/rotary_embedding.py",
+      "symbol": "RotaryEmbedding.forward_cuda",
+      "line": 219,
+      "end_line": 255,
+      "file_sha256": "d12cce7fc4a751b60dc5e14b1f9b481ae2bf1efd2b44e3518513c664b76ec61f",
+      "url": "https://github.com/sgl-project/sglang/blob/b0d25e72c401f37b55d689ddbf05b8c583afe854/python/sglang/srt/layers/rotary_embedding.py#L219",
+      "official_byte_match": true
+    },
+    {
+      "id": "S12",
+      "package": "sglang",
+      "path": "srt/models/llama.py",
+      "symbol": "LlamaAttention.forward",
+      "line": 188,
+      "end_line": 199,
+      "file_sha256": "b5dc94a27ea2730ceaa385d3024171540d9ff3683cd001abf597b32b5b979a43",
+      "url": "https://github.com/sgl-project/sglang/blob/b0d25e72c401f37b55d689ddbf05b8c583afe854/python/sglang/srt/models/llama.py#L188",
+      "official_byte_match": true
+    },
+    {
+      "id": "S13",
+      "package": "sglang",
+      "path": "srt/layers/attention/flashinfer_backend.py",
+      "symbol": "FlashInferAttnBackend.init_cuda_graph_state",
+      "line": 278,
+      "end_line": 310,
+      "file_sha256": "8037ca60bff1ba23e10da9236e8a86b0c7039dff53aaee351cdc667d3bd46870",
+      "url": "https://github.com/sgl-project/sglang/blob/b0d25e72c401f37b55d689ddbf05b8c583afe854/python/sglang/srt/layers/attention/flashinfer_backend.py#L278",
+      "official_byte_match": true
+    },
+    {
+      "id": "S14",
+      "package": "sglang",
+      "path": "srt/layers/attention/flashinfer_backend.py",
+      "symbol": "FlashInferAttnBackend.init_forward_metadata_replay_cuda_graph",
+      "line": 417,
+      "end_line": 463,
+      "file_sha256": "8037ca60bff1ba23e10da9236e8a86b0c7039dff53aaee351cdc667d3bd46870",
+      "url": "https://github.com/sgl-project/sglang/blob/b0d25e72c401f37b55d689ddbf05b8c583afe854/python/sglang/srt/layers/attention/flashinfer_backend.py#L417",
+      "official_byte_match": true
+    },
+    {
+      "id": "S15",
+      "package": "sgl-kernel",
+      "path": "sgl_kernel/elementwise.py",
+      "symbol": "apply_rope_with_cos_sin_cache_inplace",
+      "line": 266,
+      "end_line": 353,
+      "file_sha256": "5020e01cee506a450ef4b1baa7b5fb488c758356253524984837c7716986783a",
+      "url": null,
+      "official_byte_match": null,
+      "provenance": "installed wheel0.3.9.post2 source captured in windowB; not asserted same commit as SGLang",
+      "live_installed_file_rechecked": true
+    }
+  ],
+  "accessed_at_utc": "2026-11-15T02:09:57.799529+00:00",
+  "official_file_checks": [
+    {
+      "path": "srt/model_executor/cuda_graph_runner.py",
+      "sha256": "68e0b8b0a663d70a800154cb9dc46794eb04d67ba3045ff3f06694733783b7e2",
+      "bytes": 34143,
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/b0d25e72c401f37b55d689ddbf05b8c583afe854/python/sglang/srt/model_executor/cuda_graph_runner.py",
+      "official_byte_match": true
+    },
+    {
+      "path": "srt/layers/attention/triton_backend.py",
+      "sha256": "7ef7092da25a33c244f50f4d9269f47737589e7625c042c2a31406328a92f469",
+      "bytes": 41858,
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/b0d25e72c401f37b55d689ddbf05b8c583afe854/python/sglang/srt/layers/attention/triton_backend.py",
+      "official_byte_match": true
+    },
+    {
+      "path": "srt/layers/attention/triton_ops/decode_attention.py",
+      "sha256": "2673adaad3d71209ff4f44788060913b1d6cce5021bbf1bf38334a09acf3d251",
+      "bytes": 20554,
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/b0d25e72c401f37b55d689ddbf05b8c583afe854/python/sglang/srt/layers/attention/triton_ops/decode_attention.py",
+      "official_byte_match": true
+    },
+    {
+      "path": "srt/mem_cache/memory_pool.py",
+      "sha256": "0914922deb9e75024e211e9339a28a4a0bebefdfdc7f7ca9571d7fa2f3357cb0",
+      "bytes": 49716,
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/b0d25e72c401f37b55d689ddbf05b8c583afe854/python/sglang/srt/mem_cache/memory_pool.py",
+      "official_byte_match": true
+    },
+    {
+      "path": "srt/layers/rotary_embedding.py",
+      "sha256": "d12cce7fc4a751b60dc5e14b1f9b481ae2bf1efd2b44e3518513c664b76ec61f",
+      "bytes": 73462,
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/b0d25e72c401f37b55d689ddbf05b8c583afe854/python/sglang/srt/layers/rotary_embedding.py",
+      "official_byte_match": true
+    },
+    {
+      "path": "srt/models/llama.py",
+      "sha256": "b5dc94a27ea2730ceaa385d3024171540d9ff3683cd001abf597b32b5b979a43",
+      "bytes": 28126,
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/b0d25e72c401f37b55d689ddbf05b8c583afe854/python/sglang/srt/models/llama.py",
+      "official_byte_match": true
+    },
+    {
+      "path": "srt/layers/attention/flashinfer_backend.py",
+      "sha256": "8037ca60bff1ba23e10da9236e8a86b0c7039dff53aaee351cdc667d3bd46870",
+      "bytes": 54407,
+      "url": "https://raw.githubusercontent.com/sgl-project/sglang/b0d25e72c401f37b55d689ddbf05b8c583afe854/python/sglang/srt/layers/attention/flashinfer_backend.py",
+      "official_byte_match": true
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "author_check_not_independent_QA": true,
+  "cases": [
+    {
+      "case": "empty_both",
+      "accepted": false,
+      "error": "ValueError: state gate requires logits and KV"
+    },
+    {
+      "case": "empty_one_side",
+      "accepted": false,
+      "error": "ValueError: state gate requires logits and KV"
+    },
+    {
+      "case": "asymmetric",
+      "accepted": false,
+      "error": "ValueError: state gate requires logits and KV"
+    },
+    {
+      "case": "missing_variant",
+      "accepted": false,
+      "error": "ValueError: state gate variants incomplete"
+    },
+    {
+      "case": "missing_KV_both",
+      "accepted": false,
+      "error": "ValueError: state gate requires logits and KV"
+    },
+    {
+      "case": "logits_truncation_metadata",
+      "accepted": false,
+      "error": "ValueError: snapshot finite/hash mismatch"
+    },
+    {
+      "case": "KV_incomplete_metadata",
+      "accepted": false,
+      "error": "ValueError: snapshot finite/hash mismatch"
+    }
+  ]
+}

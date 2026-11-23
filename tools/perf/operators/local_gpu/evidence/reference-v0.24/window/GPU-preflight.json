@@ -1,0 +1,11 @@
+{
+  "returncode": 0,
+  "csv": "0, NVIDIA GeForce RTX 4070 Laptop GPU, 6177, 8188, 581.29",
+  "fields": [
+    "index",
+    "name",
+    "free_MiB",
+    "total_MiB",
+    "driver"
+  ]
+}

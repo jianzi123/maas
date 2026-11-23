@@ -1,0 +1,1407 @@
+[
+  {
+    "kind": "boundary_observation",
+    "row_id": "ELIT01_REF24/reference/full/B3/p0/native",
+    "host": {
+      "monotonic_ns": 209938816607789,
+      "loadavg": [
+        58.9033203125,
+        57.53564453125,
+        44.09912109375
+      ],
+      "cpu_user_s": 54.252061,
+      "cpu_sys_s": 68.652004,
+      "voluntary_switches": 63854,
+      "involuntary_switches": 16893,
+      "allocated_bytes": 314455552,
+      "reserved_bytes": 371195904
+    },
+    "resource": {
+      "free": 6943670272,
+      "total": 8585216000,
+      "allocated": 314455552,
+      "reserved": 371195904
+    },
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "kind": "boundary_observation",
+    "row_id": "ELIT01_REF24/reference/full/B3/p1/mature",
+    "host": {
+      "monotonic_ns": 209939876322413,
+      "loadavg": [
+        58.9033203125,
+        57.53564453125,
+        44.09912109375
+      ],
+      "cpu_user_s": 54.421554,
+      "cpu_sys_s": 68.83247,
+      "voluntary_switches": 64309,
+      "involuntary_switches": 16993,
+      "allocated_bytes": 314455552,
+      "reserved_bytes": 371195904
+    },
+    "resource": {
+      "free": 6943670272,
+      "total": 8585216000,
+      "allocated": 314455552,
+      "reserved": 371195904
+    },
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "kind": "boundary_observation",
+    "row_id": "ELIT01_REF24/reference/full/B3/p2/native",
+    "host": {
+      "monotonic_ns": 209940466904368,
+      "loadavg": [
+        58.9033203125,
+        57.53564453125,
+        44.09912109375
+      ],
+      "cpu_user_s": 54.511451,
+      "cpu_sys_s": 68.898413,
+      "voluntary_switches": 64563,
+      "involuntary_switches": 17029,
+      "allocated_bytes": 314455552,
+      "reserved_bytes": 371195904
+    },
+    "resource": {
+      "free": 6943670272,
+      "total": 8585216000,
+      "allocated": 314455552,
+      "reserved": 371195904
+    },
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "kind": "boundary_observation",
+    "row_id": "ELIT01_REF24/reference/full/B3/p3/mature",
+    "host": {
+      "monotonic_ns": 209941368596614,
+      "loadavg": [
+        58.9033203125,
+        57.53564453125,
+        44.09912109375
+      ],
+      "cpu_user_s": 54.794868,
+      "cpu_sys_s": 68.983381,
+      "voluntary_switches": 64939,
+      "involuntary_switches": 17074,
+      "allocated_bytes": 314455552,
+      "reserved_bytes": 371195904
+    },
+    "resource": {
+      "free": 6943670272,
+      "total": 8585216000,
+      "allocated": 314455552,
+      "reserved": 371195904
+    },
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "kind": "boundary_observation",
+    "row_id": "ELIT01_REF24/reference/full/B3/p4/native",
+    "host": {
+      "monotonic_ns": 209942267480086,
+      "loadavg": [
+        58.9033203125,
+        57.53564453125,
+        44.09912109375
+      ],
+      "cpu_user_s": 54.949925,
+      "cpu_sys_s": 69.01312,
+      "voluntary_switches": 65292,
+      "involuntary_switches": 17111,
+      "allocated_bytes": 314455552,
+      "reserved_bytes": 371195904
+    },
+    "resource": {
+      "free": 6943670272,
+      "total": 8585216000,
+      "allocated": 314455552,
+      "reserved": 371195904
+    },
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "kind": "boundary_observation",
+    "row_id": "ELIT01_REF24/reference/full/B3/p5/mature",
+    "host": {
+      "monotonic_ns": 209943233020079,
+      "loadavg": [
+        58.9912109375,
+        57.57666015625,
+        44.1845703125
+      ],
+      "cpu_user_s": 55.13337,
+      "cpu_sys_s": 69.092762,
+      "voluntary_switches": 65700,
+      "involuntary_switches": 17170,
+      "allocated_bytes": 314455552,
+      "reserved_bytes": 371195904
+    },
+    "resource": {
+      "free": 6943670272,
+      "total": 8585216000,
+      "allocated": 314455552,
+      "reserved": 371195904
+    },
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "kind": "boundary_observation",
+    "row_id": "ELIT01_REF24/reference/full/B8/p0/mature",
+    "host": {
+      "monotonic_ns": 209949105098222,
+      "loadavg": [
+        57.14990234375,
+        57.21826171875,
+        44.14013671875
+      ],
+      "cpu_user_s": 56.530204,
+      "cpu_sys_s": 69.938378,
+      "voluntary_switches": 69399,
+      "involuntary_switches": 17589,
+      "allocated_bytes": 314455552,
+      "reserved_bytes": 371195904
+    },
+    "resource": {
+      "free": 6943670272,
+      "total": 8585216000,
+      "allocated": 314455552,
+      "reserved": 371195904
+    },
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "kind": "boundary_observation",
+    "row_id": "ELIT01_REF24/reference/full/B8/p1/native",
+    "host": {
+      "monotonic_ns": 209950403681166,
+      "loadavg": [
+        57.14990234375,
+        57.21826171875,
+        44.14013671875
+      ],
+      "cpu_user_s": 56.667463,
+      "cpu_sys_s": 70.095021,
+      "voluntary_switches": 69917,
+      "involuntary_switches": 17717,
+      "allocated_bytes": 314455552,
+      "reserved_bytes": 371195904
+    },
+    "resource": {
+      "free": 6943670272,
+      "total": 8585216000,
+      "allocated": 314455552,
+      "reserved": 371195904
+    },
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "kind": "boundary_observation",
+    "row_id": "ELIT01_REF24/reference/full/B8/p2/mature",
+    "host": {
+      "monotonic_ns": 209951231003616,
+      "loadavg": [
+        57.14990234375,
+        57.21826171875,
+        44.14013671875
+      ],
+      "cpu_user_s": 56.723489,
+      "cpu_sys_s": 70.163687,
+      "voluntary_switches": 70280,
+      "involuntary_switches": 17734,
+      "allocated_bytes": 314455552,
+      "reserved_bytes": 371195904
+    },
+    "resource": {
+      "free": 6943670272,
+      "total": 8585216000,
+      "allocated": 314455552,
+      "reserved": 371195904
+    },
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "kind": "boundary_observation",
+    "row_id": "ELIT01_REF24/reference/full/B8/p3/native",
+    "host": {
+      "monotonic_ns": 209952189270419,
+      "loadavg": [
+        57.14990234375,
+        57.21826171875,
+        44.14013671875
+      ],
+      "cpu_user_s": 56.847542,
+      "cpu_sys_s": 70.166384,
+      "voluntary_switches": 70672,
+      "involuntary_switches": 17778,
+      "allocated_bytes": 314455552,
+      "reserved_bytes": 371195904
+    },
+    "resource": {
+      "free": 6943670272,
+      "total": 8585216000,
+      "allocated": 314455552,
+      "reserved": 371195904
+    },
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "kind": "boundary_observation",
+    "row_id": "ELIT01_REF24/reference/full/B8/p4/mature",
+    "host": {
+      "monotonic_ns": 209952991145558,
+      "loadavg": [
+        57.14990234375,
+        57.21826171875,
+        44.14013671875
+      ],
+      "cpu_user_s": 57.006475,
+      "cpu_sys_s": 70.338402,
+      "voluntary_switches": 71016,
+      "involuntary_switches": 17882,
+      "allocated_bytes": 314455552,
+      "reserved_bytes": 371195904
+    },
+    "resource": {
+      "free": 6943670272,
+      "total": 8585216000,
+      "allocated": 314455552,
+      "reserved": 371195904
+    },
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "kind": "boundary_observation",
+    "row_id": "ELIT01_REF24/reference/full/B8/p5/native",
+    "host": {
+      "monotonic_ns": 209953413041251,
+      "loadavg": [
+        53.6943359375,
+        56.50048828125,
+        43.97802734375
+      ],
+      "cpu_user_s": 57.097424,
+      "cpu_sys_s": 70.376453,
+      "voluntary_switches": 71224,
+      "involuntary_switches": 17908,
+      "allocated_bytes": 314455552,
+      "reserved_bytes": 371195904
+    },
+    "resource": {
+      "free": 6943670272,
+      "total": 8585216000,
+      "allocated": 314455552,
+      "reserved": 371195904
+    },
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "kind": "boundary_observation",
+    "row_id": "ELIT01_REF24/reference/bare_graph/B3/p0/native",
+    "host": {
+      "monotonic_ns": 209957893357713,
+      "loadavg": [
+        53.6943359375,
+        56.50048828125,
+        43.97802734375
+      ],
+      "cpu_user_s": 58.140749,
+      "cpu_sys_s": 70.809681,
+      "voluntary_switches": 74401,
+      "involuntary_switches": 18080,
+      "allocated_bytes": 314455552,
+      "reserved_bytes": 371195904
+    },
+    "resource": {
+      "free": 6943670272,
+      "total": 8585216000,
+      "allocated": 314455552,
+      "reserved": 371195904
+    },
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "kind": "boundary_observation",
+    "row_id": "ELIT01_REF24/reference/bare_graph/B3/p1/mature",
+    "host": {
+      "monotonic_ns": 209958491361375,
+      "loadavg": [
+        51.236328125,
+        55.94384765625,
+        43.865234375
+      ],
+      "cpu_user_s": 58.242201,
+      "cpu_sys_s": 70.854703,
+      "voluntary_switches": 74658,
+      "involuntary_switches": 18110,
+      "allocated_bytes": 314455552,
+      "reserved_bytes": 371195904
+    },
+    "resource": {
+      "free": 6943670272,
+      "total": 8585216000,
+      "allocated": 314455552,
+      "reserved": 371195904
+    },
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "kind": "boundary_observation",
+    "row_id": "ELIT01_REF24/reference/bare_graph/B3/p2/native",
+    "host": {
+      "monotonic_ns": 209959026454212,
+      "loadavg": [
+        51.236328125,
+        55.94384765625,
+        43.865234375
+      ],
+      "cpu_user_s": 58.328103,
+      "cpu_sys_s": 70.887682,
+      "voluntary_switches": 74907,
+      "involuntary_switches": 18182,
+      "allocated_bytes": 314455552,
+      "reserved_bytes": 371195904
+    },
+    "resource": {
+      "free": 6943670272,
+      "total": 8585216000,
+      "allocated": 314455552,
+      "reserved": 371195904
+    },
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "kind": "boundary_observation",
+    "row_id": "ELIT01_REF24/reference/bare_graph/B3/p3/mature",
+    "host": {
+      "monotonic_ns": 209959812621038,
+      "loadavg": [
+        51.236328125,
+        55.94384765625,
+        43.865234375
+      ],
+      "cpu_user_s": 58.570323,
+      "cpu_sys_s": 71.016457,
+      "voluntary_switches": 75248,
+      "involuntary_switches": 18223,
+      "allocated_bytes": 314455552,
+      "reserved_bytes": 371195904
+    },
+    "resource": {
+      "free": 6943670272,
+      "total": 8585216000,
+      "allocated": 314455552,
+      "reserved": 371195904
+    },
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "kind": "boundary_observation",
+    "row_id": "ELIT01_REF24/reference/bare_graph/B3/p4/native",
+    "host": {
+      "monotonic_ns": 209960359761362,
+      "loadavg": [
+        51.236328125,
+        55.94384765625,
+        43.865234375
+      ],
+      "cpu_user_s": 58.663474,
+      "cpu_sys_s": 71.033147,
+      "voluntary_switches": 75500,
+      "involuntary_switches": 18241,
+      "allocated_bytes": 314455552,
+      "reserved_bytes": 371195904
+    },
+    "resource": {
+      "free": 6943670272,
+      "total": 8585216000,
+      "allocated": 314455552,
+      "reserved": 371195904
+    },
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "kind": "boundary_observation",
+    "row_id": "ELIT01_REF24/reference/bare_graph/B3/p5/mature",
+    "host": {
+      "monotonic_ns": 209960909906418,
+      "loadavg": [
+        51.236328125,
+        55.94384765625,
+        43.865234375
+      ],
+      "cpu_user_s": 58.768262,
+      "cpu_sys_s": 71.056084,
+      "voluntary_switches": 75757,
+      "involuntary_switches": 18254,
+      "allocated_bytes": 314455552,
+      "reserved_bytes": 371195904
+    },
+    "resource": {
+      "free": 6943670272,
+      "total": 8585216000,
+      "allocated": 314455552,
+      "reserved": 371195904
+    },
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "kind": "boundary_observation",
+    "row_id": "ELIT01_REF24/reference/bare_graph/B8/p0/mature",
+    "host": {
+      "monotonic_ns": 209965535066214,
+      "loadavg": [
+        48.57470703125,
+        55.3134765625,
+        43.72607421875
+      ],
+      "cpu_user_s": 59.797239,
+      "cpu_sys_s": 71.623046,
+      "voluntary_switches": 78961,
+      "involuntary_switches": 18488,
+      "allocated_bytes": 314455552,
+      "reserved_bytes": 371195904
+    },
+    "resource": {
+      "free": 6943670272,
+      "total": 8585216000,
+      "allocated": 314455552,
+      "reserved": 371195904
+    },
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "kind": "boundary_observation",
+    "row_id": "ELIT01_REF24/reference/bare_graph/B8/p1/native",
+    "host": {
+      "monotonic_ns": 209966730224279,
+      "loadavg": [
+        48.57470703125,
+        55.3134765625,
+        43.72607421875
+      ],
+      "cpu_user_s": 60.23932,
+      "cpu_sys_s": 71.69402,
+      "voluntary_switches": 79483,
+      "involuntary_switches": 18548,
+      "allocated_bytes": 314455552,
+      "reserved_bytes": 371195904
+    },
+    "resource": {
+      "free": 6943670272,
+      "total": 8585216000,
+      "allocated": 314455552,
+      "reserved": 371195904
+    },
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "kind": "boundary_observation",
+    "row_id": "ELIT01_REF24/reference/bare_graph/B8/p2/mature",
+    "host": {
+      "monotonic_ns": 209967654632857,
+      "loadavg": [
+        48.57470703125,
+        55.3134765625,
+        43.72607421875
+      ],
+      "cpu_user_s": 60.739038,
+      "cpu_sys_s": 71.763705,
+      "voluntary_switches": 79863,
+      "involuntary_switches": 18581,
+      "allocated_bytes": 314455552,
+      "reserved_bytes": 371195904
+    },
+    "resource": {
+      "free": 6943670272,
+      "total": 8585216000,
+      "allocated": 314455552,
+      "reserved": 371195904
+    },
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "kind": "boundary_observation",
+    "row_id": "ELIT01_REF24/reference/bare_graph/B8/p3/native",
+    "host": {
+      "monotonic_ns": 209968117955532,
+      "loadavg": [
+        46.6865234375,
+        54.81005859375,
+        43.62548828125
+      ],
+      "cpu_user_s": 60.825424,
+      "cpu_sys_s": 71.801115,
+      "voluntary_switches": 80087,
+      "involuntary_switches": 18601,
+      "allocated_bytes": 314455552,
+      "reserved_bytes": 371195904
+    },
+    "resource": {
+      "free": 6943670272,
+      "total": 8585216000,
+      "allocated": 314455552,
+      "reserved": 371195904
+    },
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "kind": "boundary_observation",
+    "row_id": "ELIT01_REF24/reference/bare_graph/B8/p4/mature",
+    "host": {
+      "monotonic_ns": 209968865285450,
+      "loadavg": [
+        46.6865234375,
+        54.81005859375,
+        43.62548828125
+      ],
+      "cpu_user_s": 61.011688,
+      "cpu_sys_s": 71.923801,
+      "voluntary_switches": 80416,
+      "involuntary_switches": 18648,
+      "allocated_bytes": 314455552,
+      "reserved_bytes": 371195904
+    },
+    "resource": {
+      "free": 6943670272,
+      "total": 8585216000,
+      "allocated": 314455552,
+      "reserved": 371195904
+    },
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "kind": "boundary_observation",
+    "row_id": "ELIT01_REF24/reference/bare_graph/B8/p5/native",
+    "host": {
+      "monotonic_ns": 209969581954921,
+      "loadavg": [
+        46.6865234375,
+        54.81005859375,
+        43.62548828125
+      ],
+      "cpu_user_s": 61.473026,
+      "cpu_sys_s": 71.946849,
+      "voluntary_switches": 80757,
+      "involuntary_switches": 18669,
+      "allocated_bytes": 314455552,
+      "reserved_bytes": 371195904
+    },
+    "resource": {
+      "free": 6943670272,
+      "total": 8585216000,
+      "allocated": 314455552,
+      "reserved": 371195904
+    },
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "kind": "freeze_complete",
+    "end_ns": 209970690190891,
+    "previous_done_unchanged": 209969982783590
+  },
+  {
+    "kind": "boundary_observation",
+    "row_id": "ELIT01_REF24/holdout/full/B3/p0/mature",
+    "host": {
+      "monotonic_ns": 209971579951470,
+      "loadavg": [
+        46.6865234375,
+        54.81005859375,
+        43.62548828125
+      ],
+      "cpu_user_s": 62.271262,
+      "cpu_sys_s": 72.064152,
+      "voluntary_switches": 83066,
+      "involuntary_switches": 18714,
+      "allocated_bytes": 314455552,
+      "reserved_bytes": 371195904
+    },
+    "resource": {
+      "free": 6943670272,
+      "total": 8585216000,
+      "allocated": 314455552,
+      "reserved": 371195904
+    },
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "kind": "boundary_observation",
+    "row_id": "ELIT01_REF24/holdout/full/B3/p1/native",
+    "host": {
+      "monotonic_ns": 209972412719646,
+      "loadavg": [
+        46.6865234375,
+        54.81005859375,
+        43.62548828125
+      ],
+      "cpu_user_s": 62.555321,
+      "cpu_sys_s": 72.120517,
+      "voluntary_switches": 83431,
+      "involuntary_switches": 18762,
+      "allocated_bytes": 314455552,
+      "reserved_bytes": 371195904
+    },
+    "resource": {
+      "free": 6943670272,
+      "total": 8585216000,
+      "allocated": 314455552,
+      "reserved": 371195904
+    },
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "kind": "boundary_observation",
+    "row_id": "ELIT01_REF24/holdout/full/B3/p2/mature",
+    "host": {
+      "monotonic_ns": 209973338902921,
+      "loadavg": [
+        43.50830078125,
+        54.01611328125,
+        43.4287109375
+      ],
+      "cpu_user_s": 62.753981,
+      "cpu_sys_s": 72.2415,
+      "voluntary_switches": 83827,
+      "involuntary_switches": 18800,
+      "allocated_bytes": 314455552,
+      "reserved_bytes": 371195904
+    },
+    "resource": {
+      "free": 6943670272,
+      "total": 8585216000,
+      "allocated": 314455552,
+      "reserved": 371195904
+    },
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "kind": "boundary_observation",
+    "row_id": "ELIT01_REF24/holdout/full/B3/p3/native",
+    "host": {
+      "monotonic_ns": 209974147011962,
+      "loadavg": [
+        43.50830078125,
+        54.01611328125,
+        43.4287109375
+      ],
+      "cpu_user_s": 63.110645,
+      "cpu_sys_s": 72.263585,
+      "voluntary_switches": 84202,
+      "involuntary_switches": 18837,
+      "allocated_bytes": 314455552,
+      "reserved_bytes": 371195904
+    },
+    "resource": {
+      "free": 6943670272,
+      "total": 8585216000,
+      "allocated": 314455552,
+      "reserved": 371195904
+    },
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "kind": "boundary_observation",
+    "row_id": "ELIT01_REF24/holdout/full/B3/p4/mature",
+    "host": {
+      "monotonic_ns": 209974755175405,
+      "loadavg": [
+        43.50830078125,
+        54.01611328125,
+        43.4287109375
+      ],
+      "cpu_user_s": 63.327451,
+      "cpu_sys_s": 72.286483,
+      "voluntary_switches": 84494,
+      "involuntary_switches": 18865,
+      "allocated_bytes": 314455552,
+      "reserved_bytes": 371195904
+    },
+    "resource": {
+      "free": 6943670272,
+      "total": 8585216000,
+      "allocated": 314455552,
+      "reserved": 371195904
+    },
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "kind": "boundary_observation",
+    "row_id": "ELIT01_REF24/holdout/full/B3/p5/native",
+    "host": {
+      "monotonic_ns": 209975164535440,
+      "loadavg": [
+        43.50830078125,
+        54.01611328125,
+        43.4287109375
+      ],
+      "cpu_user_s": 63.448487,
+      "cpu_sys_s": 72.286483,
+      "voluntary_switches": 84710,
+      "involuntary_switches": 18883,
+      "allocated_bytes": 314455552,
+      "reserved_bytes": 371195904
+    },
+    "resource": {
+      "free": 6943670272,
+      "total": 8585216000,
+      "allocated": 314455552,
+      "reserved": 371195904
+    },
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "kind": "boundary_observation",
+    "row_id": "ELIT01_REF24/holdout/full/B3/p6/mature",
+    "host": {
+      "monotonic_ns": 209976002516414,
+      "loadavg": [
+        43.50830078125,
+        54.01611328125,
+        43.4287109375
+      ],
+      "cpu_user_s": 63.542066,
+      "cpu_sys_s": 72.305662,
+      "voluntary_switches": 85110,
+      "involuntary_switches": 18892,
+      "allocated_bytes": 314455552,
+      "reserved_bytes": 371195904
+    },
+    "resource": {
+      "free": 6943670272,
+      "total": 8585216000,
+      "allocated": 314455552,
+      "reserved": 371195904
+    },
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "kind": "boundary_observation",
+    "row_id": "ELIT01_REF24/holdout/full/B3/p7/native",
+    "host": {
+      "monotonic_ns": 209976521594421,
+      "loadavg": [
+        43.50830078125,
+        54.01611328125,
+        43.4287109375
+      ],
+      "cpu_user_s": 63.646304,
+      "cpu_sys_s": 72.305662,
+      "voluntary_switches": 85368,
+      "involuntary_switches": 18898,
+      "allocated_bytes": 314455552,
+      "reserved_bytes": 371195904
+    },
+    "resource": {
+      "free": 6943670272,
+      "total": 8585216000,
+      "allocated": 314455552,
+      "reserved": 371195904
+    },
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "kind": "boundary_observation",
+    "row_id": "ELIT01_REF24/holdout/full/B8/p0/native",
+    "host": {
+      "monotonic_ns": 209980050292357,
+      "loadavg": [
+        41.62548828125,
+        53.451171875,
+        43.302734375
+      ],
+      "cpu_user_s": 64.802473,
+      "cpu_sys_s": 72.628419,
+      "voluntary_switches": 88225,
+      "involuntary_switches": 19080,
+      "allocated_bytes": 314455552,
+      "reserved_bytes": 371195904
+    },
+    "resource": {
+      "free": 6943670272,
+      "total": 8585216000,
+      "allocated": 314455552,
+      "reserved": 371195904
+    },
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "kind": "boundary_observation",
+    "row_id": "ELIT01_REF24/holdout/full/B8/p1/mature",
+    "host": {
+      "monotonic_ns": 209982173072980,
+      "loadavg": [
+        41.62548828125,
+        53.451171875,
+        43.302734375
+      ],
+      "cpu_user_s": 64.998666,
+      "cpu_sys_s": 72.704767,
+      "voluntary_switches": 89111,
+      "involuntary_switches": 19177,
+      "allocated_bytes": 314455552,
+      "reserved_bytes": 371195904
+    },
+    "resource": {
+      "free": 6943670272,
+      "total": 8585216000,
+      "allocated": 314455552,
+      "reserved": 371195904
+    },
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "kind": "boundary_observation",
+    "row_id": "ELIT01_REF24/holdout/full/B8/p2/native",
+    "host": {
+      "monotonic_ns": 209982906412171,
+      "loadavg": [
+        41.62548828125,
+        53.451171875,
+        43.302734375
+      ],
+      "cpu_user_s": 65.181411,
+      "cpu_sys_s": 72.757635,
+      "voluntary_switches": 89431,
+      "involuntary_switches": 19195,
+      "allocated_bytes": 314455552,
+      "reserved_bytes": 371195904
+    },
+    "resource": {
+      "free": 6943670272,
+      "total": 8585216000,
+      "allocated": 314455552,
+      "reserved": 371195904
+    },
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "kind": "boundary_observation",
+    "row_id": "ELIT01_REF24/holdout/full/B8/p3/mature",
+    "host": {
+      "monotonic_ns": 209983578977030,
+      "loadavg": [
+        40.9345703125,
+        53.111328125,
+        43.2470703125
+      ],
+      "cpu_user_s": 65.315335,
+      "cpu_sys_s": 72.78501,
+      "voluntary_switches": 89741,
+      "involuntary_switches": 19216,
+      "allocated_bytes": 314455552,
+      "reserved_bytes": 371195904
+    },
+    "resource": {
+      "free": 6943670272,
+      "total": 8585216000,
+      "allocated": 314455552,
+      "reserved": 371195904
+    },
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "kind": "boundary_observation",
+    "row_id": "ELIT01_REF24/holdout/full/B8/p4/native",
+    "host": {
+      "monotonic_ns": 209984390817016,
+      "loadavg": [
+        40.9345703125,
+        53.111328125,
+        43.2470703125
+      ],
+      "cpu_user_s": 65.429627,
+      "cpu_sys_s": 72.836393,
+      "voluntary_switches": 90113,
+      "involuntary_switches": 19237,
+      "allocated_bytes": 314455552,
+      "reserved_bytes": 371195904
+    },
+    "resource": {
+      "free": 6943670272,
+      "total": 8585216000,
+      "allocated": 314455552,
+      "reserved": 371195904
+    },
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "kind": "boundary_observation",
+    "row_id": "ELIT01_REF24/holdout/full/B8/p5/mature",
+    "host": {
+      "monotonic_ns": 209984990064309,
+      "loadavg": [
+        40.9345703125,
+        53.111328125,
+        43.2470703125
+      ],
+      "cpu_user_s": 65.699033,
+      "cpu_sys_s": 72.854184,
+      "voluntary_switches": 90418,
+      "involuntary_switches": 19256,
+      "allocated_bytes": 314455552,
+      "reserved_bytes": 371195904
+    },
+    "resource": {
+      "free": 6943670272,
+      "total": 8585216000,
+      "allocated": 314455552,
+      "reserved": 371195904
+    },
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "kind": "boundary_observation",
+    "row_id": "ELIT01_REF24/holdout/full/B8/p6/native",
+    "host": {
+      "monotonic_ns": 209985866378280,
+      "loadavg": [
+        40.9345703125,
+        53.111328125,
+        43.2470703125
+      ],
+      "cpu_user_s": 65.799745,
+      "cpu_sys_s": 72.872463,
+      "voluntary_switches": 90822,
+      "involuntary_switches": 19264,
+      "allocated_bytes": 314455552,
+      "reserved_bytes": 371195904
+    },
+    "resource": {
+      "free": 6943670272,
+      "total": 8585216000,
+      "allocated": 314455552,
+      "reserved": 371195904
+    },
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "kind": "boundary_observation",
+    "row_id": "ELIT01_REF24/holdout/full/B8/p7/mature",
+    "host": {
+      "monotonic_ns": 209986540356652,
+      "loadavg": [
+        40.9345703125,
+        53.111328125,
+        43.2470703125
+      ],
+      "cpu_user_s": 65.87937,
+      "cpu_sys_s": 72.922655,
+      "voluntary_switches": 91138,
+      "involuntary_switches": 19277,
+      "allocated_bytes": 314455552,
+      "reserved_bytes": 371195904
+    },
+    "resource": {
+      "free": 6943670272,
+      "total": 8585216000,
+      "allocated": 314455552,
+      "reserved": 371195904
+    },
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "kind": "boundary_observation",
+    "row_id": "ELIT01_REF24/holdout/bare_graph/B3/p0/mature",
+    "host": {
+      "monotonic_ns": 209990218370981,
+      "loadavg": [
+        38.13671875,
+        52.3291015625,
+        43.046875
+      ],
+      "cpu_user_s": 67.064315,
+      "cpu_sys_s": 73.213753,
+      "voluntary_switches": 94047,
+      "involuntary_switches": 19422,
+      "allocated_bytes": 314455552,
+      "reserved_bytes": 371195904
+    },
+    "resource": {
+      "free": 6943670272,
+      "total": 8585216000,
+      "allocated": 314455552,
+      "reserved": 371195904
+    },
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "kind": "boundary_observation",
+    "row_id": "ELIT01_REF24/holdout/bare_graph/B3/p1/native",
+    "host": {
+      "monotonic_ns": 209991345296480,
+      "loadavg": [
+        38.13671875,
+        52.3291015625,
+        43.046875
+      ],
+      "cpu_user_s": 67.230108,
+      "cpu_sys_s": 73.243998,
+      "voluntary_switches": 94558,
+      "involuntary_switches": 19435,
+      "allocated_bytes": 314455552,
+      "reserved_bytes": 371195904
+    },
+    "resource": {
+      "free": 6943670272,
+      "total": 8585216000,
+      "allocated": 314455552,
+      "reserved": 371195904
+    },
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "kind": "boundary_observation",
+    "row_id": "ELIT01_REF24/holdout/bare_graph/B3/p2/mature",
+    "host": {
+      "monotonic_ns": 209992112877430,
+      "loadavg": [
+        38.13671875,
+        52.3291015625,
+        43.046875
+      ],
+      "cpu_user_s": 67.493673,
+      "cpu_sys_s": 73.310442,
+      "voluntary_switches": 94900,
+      "involuntary_switches": 19453,
+      "allocated_bytes": 314455552,
+      "reserved_bytes": 371195904
+    },
+    "resource": {
+      "free": 6943670272,
+      "total": 8585216000,
+      "allocated": 314455552,
+      "reserved": 371195904
+    },
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "kind": "boundary_observation",
+    "row_id": "ELIT01_REF24/holdout/bare_graph/B3/p3/native",
+    "host": {
+      "monotonic_ns": 209992706477258,
+      "loadavg": [
+        38.13671875,
+        52.3291015625,
+        43.046875
+      ],
+      "cpu_user_s": 67.601728,
+      "cpu_sys_s": 73.356901,
+      "voluntary_switches": 95168,
+      "involuntary_switches": 19459,
+      "allocated_bytes": 314455552,
+      "reserved_bytes": 371195904
+    },
+    "resource": {
+      "free": 6943670272,
+      "total": 8585216000,
+      "allocated": 314455552,
+      "reserved": 371195904
+    },
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "kind": "boundary_observation",
+    "row_id": "ELIT01_REF24/holdout/bare_graph/B3/p4/mature",
+    "host": {
+      "monotonic_ns": 209993162250420,
+      "loadavg": [
+        36.44384765625,
+        51.7421875,
+        42.90673828125
+      ],
+      "cpu_user_s": 67.698147,
+      "cpu_sys_s": 73.380349,
+      "voluntary_switches": 95398,
+      "involuntary_switches": 19486,
+      "allocated_bytes": 314455552,
+      "reserved_bytes": 371195904
+    },
+    "resource": {
+      "free": 6943670272,
+      "total": 8585216000,
+      "allocated": 314455552,
+      "reserved": 371195904
+    },
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "kind": "boundary_observation",
+    "row_id": "ELIT01_REF24/holdout/bare_graph/B3/p5/native",
+    "host": {
+      "monotonic_ns": 209994077388120,
+      "loadavg": [
+        36.44384765625,
+        51.7421875,
+        42.90673828125
+      ],
+      "cpu_user_s": 67.94897,
+      "cpu_sys_s": 73.455758,
+      "voluntary_switches": 95797,
+      "involuntary_switches": 19523,
+      "allocated_bytes": 314455552,
+      "reserved_bytes": 371195904
+    },
+    "resource": {
+      "free": 6943670272,
+      "total": 8585216000,
+      "allocated": 314455552,
+      "reserved": 371195904
+    },
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "kind": "boundary_observation",
+    "row_id": "ELIT01_REF24/holdout/bare_graph/B3/p6/mature",
+    "host": {
+      "monotonic_ns": 209994675761448,
+      "loadavg": [
+        36.44384765625,
+        51.7421875,
+        42.90673828125
+      ],
+      "cpu_user_s": 68.162609,
+      "cpu_sys_s": 73.46739,
+      "voluntary_switches": 96065,
+      "involuntary_switches": 19557,
+      "allocated_bytes": 314455552,
+      "reserved_bytes": 371195904
+    },
+    "resource": {
+      "free": 6943670272,
+      "total": 8585216000,
+      "allocated": 314455552,
+      "reserved": 371195904
+    },
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "kind": "boundary_observation",
+    "row_id": "ELIT01_REF24/holdout/bare_graph/B3/p7/native",
+    "host": {
+      "monotonic_ns": 209995333577222,
+      "loadavg": [
+        36.44384765625,
+        51.7421875,
+        42.90673828125
+      ],
+      "cpu_user_s": 68.318616,
+      "cpu_sys_s": 73.521246,
+      "voluntary_switches": 96375,
+      "involuntary_switches": 19598,
+      "allocated_bytes": 314455552,
+      "reserved_bytes": 371195904
+    },
+    "resource": {
+      "free": 6943670272,
+      "total": 8585216000,
+      "allocated": 314455552,
+      "reserved": 371195904
+    },
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "kind": "boundary_observation",
+    "row_id": "ELIT01_REF24/holdout/bare_graph/B8/p0/native",
+    "host": {
+      "monotonic_ns": 209998398069392,
+      "loadavg": [
+        34.005859375,
+        50.982421875,
+        42.70849609375
+      ],
+      "cpu_user_s": 69.44188,
+      "cpu_sys_s": 73.695667,
+      "voluntary_switches": 99112,
+      "involuntary_switches": 19739,
+      "allocated_bytes": 314455552,
+      "reserved_bytes": 371195904
+    },
+    "resource": {
+      "free": 6943670272,
+      "total": 8585216000,
+      "allocated": 314455552,
+      "reserved": 371195904
+    },
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "kind": "boundary_observation",
+    "row_id": "ELIT01_REF24/holdout/bare_graph/B8/p1/mature",
+    "host": {
+      "monotonic_ns": 209998812602644,
+      "loadavg": [
+        34.005859375,
+        50.982421875,
+        42.70849609375
+      ],
+      "cpu_user_s": 69.539121,
+      "cpu_sys_s": 73.70583,
+      "voluntary_switches": 99326,
+      "involuntary_switches": 19752,
+      "allocated_bytes": 314455552,
+      "reserved_bytes": 371195904
+    },
+    "resource": {
+      "free": 6943670272,
+      "total": 8585216000,
+      "allocated": 314455552,
+      "reserved": 371195904
+    },
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "kind": "boundary_observation",
+    "row_id": "ELIT01_REF24/holdout/bare_graph/B8/p2/native",
+    "host": {
+      "monotonic_ns": 209999260443730,
+      "loadavg": [
+        34.005859375,
+        50.982421875,
+        42.70849609375
+      ],
+      "cpu_user_s": 69.647788,
+      "cpu_sys_s": 73.713522,
+      "voluntary_switches": 99551,
+      "involuntary_switches": 19757,
+      "allocated_bytes": 314455552,
+      "reserved_bytes": 371195904
+    },
+    "resource": {
+      "free": 6943670272,
+      "total": 8585216000,
+      "allocated": 314455552,
+      "reserved": 371195904
+    },
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "kind": "boundary_observation",
+    "row_id": "ELIT01_REF24/holdout/bare_graph/B8/p3/mature",
+    "host": {
+      "monotonic_ns": 209999917167665,
+      "loadavg": [
+        34.005859375,
+        50.982421875,
+        42.70849609375
+      ],
+      "cpu_user_s": 69.883,
+      "cpu_sys_s": 73.743095,
+      "voluntary_switches": 99865,
+      "involuntary_switches": 19767,
+      "allocated_bytes": 314455552,
+      "reserved_bytes": 371195904
+    },
+    "resource": {
+      "free": 6943670272,
+      "total": 8585216000,
+      "allocated": 314455552,
+      "reserved": 371195904
+    },
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "kind": "boundary_observation",
+    "row_id": "ELIT01_REF24/holdout/bare_graph/B8/p4/native",
+    "host": {
+      "monotonic_ns": 210001016583040,
+      "loadavg": [
+        34.005859375,
+        50.982421875,
+        42.70849609375
+      ],
+      "cpu_user_s": 70.559981,
+      "cpu_sys_s": 73.743095,
+      "voluntary_switches": 100362,
+      "involuntary_switches": 19816,
+      "allocated_bytes": 314455552,
+      "reserved_bytes": 371195904
+    },
+    "resource": {
+      "free": 6943670272,
+      "total": 8585216000,
+      "allocated": 314455552,
+      "reserved": 371195904
+    },
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "kind": "boundary_observation",
+    "row_id": "ELIT01_REF24/holdout/bare_graph/B8/p5/mature",
+    "host": {
+      "monotonic_ns": 210001427462299,
+      "loadavg": [
+        34.005859375,
+        50.982421875,
+        42.70849609375
+      ],
+      "cpu_user_s": 70.676464,
+      "cpu_sys_s": 73.743095,
+      "voluntary_switches": 100572,
+      "involuntary_switches": 19822,
+      "allocated_bytes": 314455552,
+      "reserved_bytes": 371195904
+    },
+    "resource": {
+      "free": 6943670272,
+      "total": 8585216000,
+      "allocated": 314455552,
+      "reserved": 371195904
+    },
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "kind": "boundary_observation",
+    "row_id": "ELIT01_REF24/holdout/bare_graph/B8/p6/native",
+    "host": {
+      "monotonic_ns": 210001889839926,
+      "loadavg": [
+        34.005859375,
+        50.982421875,
+        42.70849609375
+      ],
+      "cpu_user_s": 70.780334,
+      "cpu_sys_s": 73.74463,
+      "voluntary_switches": 100796,
+      "involuntary_switches": 19834,
+      "allocated_bytes": 314455552,
+      "reserved_bytes": 371195904
+    },
+    "resource": {
+      "free": 6943670272,
+      "total": 8585216000,
+      "allocated": 314455552,
+      "reserved": 371195904
+    },
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "kind": "boundary_observation",
+    "row_id": "ELIT01_REF24/holdout/bare_graph/B8/p7/mature",
+    "host": {
+      "monotonic_ns": 210002397435711,
+      "loadavg": [
+        34.005859375,
+        50.982421875,
+        42.70849609375
+      ],
+      "cpu_user_s": 70.877486,
+      "cpu_sys_s": 73.750962,
+      "voluntary_switches": 101049,
+      "involuntary_switches": 19846,
+      "allocated_bytes": 314455552,
+      "reserved_bytes": 371195904
+    },
+    "resource": {
+      "free": 6943670272,
+      "total": 8585216000,
+      "allocated": 314455552,
+      "reserved": 371195904
+    },
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  }
+]

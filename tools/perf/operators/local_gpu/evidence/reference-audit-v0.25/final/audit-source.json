@@ -1,0 +1,6 @@
+{
+  "source_sha256": "b0db2752398f113caa7c1b710465756059e0723440184ab9762047b5ce561066",
+  "GPU_imported": false,
+  "input_root": "repo\\tools\\perf\\operators\\local_gpu\\evidence\\reference-v0.24",
+  "input_count": 36
+}

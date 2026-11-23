@@ -1,0 +1,74 @@
+{
+  "schema": "reference-runtime1",
+  "plan_sha256": "192d80712b2955543b0a14955d4a0858c556db7d18ded7bc5fe80e042f261e36",
+  "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d",
+  "metadata": {
+    "sglang_commit": "b0d25e72c401f37b55d689ddbf05b8c583afe854",
+    "versions": {
+      "torch": "2.8.0",
+      "triton": "3.4.0",
+      "sglang": "0.5.2",
+      "sgl-kernel": "0.3.9.post2"
+    },
+    "torch": "2.8.0+cu128",
+    "cuda": "12.8",
+    "GPU": "NVIDIA GeForce RTX 4070 Laptop GPU",
+    "SMs": 36,
+    "initial_resources": {
+      "free": 6645313536,
+      "total": 8585216000,
+      "allocated": 0,
+      "reserved": 0
+    },
+    "CC": [
+      8,
+      9
+    ],
+    "model_config_sha256": "d89dd5a56c63ac3d2f6cea098ad8aebd94e5fc4e4060fb61cd7e0e8bd0b678bb",
+    "weights": "native DummyModelLoader random parameters",
+    "parameter_full_sha256": "222270299708933fdd7e25a8f030f89bd648fe25d484b364fb11ae9f5c1e548b",
+    "graph_identity": {
+      "native": {
+        "graphs": {
+          "8": 133513654163456,
+          "4": 133514231624176,
+          "2": 133513651258768,
+          "1": 133514231623696
+        },
+        "inputs": {
+          "input_ids": 34567353344,
+          "positions": 34567355392,
+          "seq_lens": 34567354368,
+          "out_cache_loc": 34567354880,
+          "req_pool_indices": 34567353856
+        },
+        "indices": 34481319424,
+        "scratch": 34807023104
+      },
+      "mature": {
+        "graphs": {
+          "8": 133514231624096,
+          "4": 133513634923760,
+          "2": 133513553956352,
+          "1": 133513553964912
+        },
+        "inputs": {
+          "input_ids": 34481342976,
+          "positions": 34481345024,
+          "seq_lens": 34481344000,
+          "out_cache_loc": 34481344512,
+          "req_pool_indices": 34481343488
+        },
+        "indices": 34481333760,
+        "scratch": 34807170560
+      }
+    },
+    "Engine": false,
+    "serving": false
+  },
+  "root_observed_done_ns": 209908452659696,
+  "root_kind": "only_initial_boot_event_observation",
+  "frozen_ns": 209908460453613,
+  "capture_first": "native",
+  "profile_in_hot_blocks": false
+}

@@ -1,0 +1,15 @@
+{
+  "command": [
+    "D:\\ProgramData\\anaconda3\\python.exe",
+    "-X",
+    "utf8",
+    "repo/tools/perf/operators/local_gpu/audit_reference_representativeness.py",
+    "--root",
+    "repo/tools/perf/operators/local_gpu/evidence/reference-v0.24",
+    "--output",
+    "deliverables\\reference-audit-v0.25\\final"
+  ],
+  "exit_code": 0,
+  "stdout": "{\"rows\": 128, \"strata\": 16, \"unmatched\": 30, \"GPU_execution\": false, \"input_unchanged\": true, \"aggregate\": {\"bookkeeping\": 46448.135416666664, \"boundary_io\": -13917778.083333334, \"unresolved_prefix\": -8409437.625, \"prepare\": -276559.6041666667, \"pre_query\": 20.28125, \"query\": -4788939.3125, \"post_query_or_wait\": 2054.59375}}\n",
+  "stderr": ""
+}

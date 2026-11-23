@@ -1,0 +1,70 @@
+{
+  "stage": "CPU_preflight_only",
+  "GPU_started": false,
+  "files": {
+    "aa_protocol.py.help.txt": {
+      "sha256": "4c01632dddb51993858e5ea3c7b164dfa338336b8cce4a9effe627471f021a72",
+      "bytes": 416
+    },
+    "aa_worker.py.help.txt": {
+      "sha256": "437759a26c093667ab0dd27a50f648f15fd3f9caee7a5147f9ce3b3f9368c251",
+      "bytes": 341
+    },
+    "aa_worker.py.validate.txt": {
+      "sha256": "36935fbc44f87a1eb9727dc8b5eb2b5bb374fcb696096340a9d4517407b09839",
+      "bytes": 87
+    },
+    "analyze_aa_window.py.help.txt": {
+      "sha256": "1d89adada6c288bf6bea9a01ef99e04c5e44c6f5095c9567657bec9530b8bb79",
+      "bytes": 262
+    },
+    "cpu-plan-command.json": {
+      "sha256": "835d2ad3d132ad26fe8c281de9f5fda57186a43cc29e265fbd19cbdb9d26e995",
+      "bytes": 573
+    },
+    "cpu-plan-v4.json": {
+      "sha256": "ffc6e74d0b1ae4f4178983de7e7085056a29991679cee7c7949c0b669690a5a0",
+      "bytes": 52232
+    },
+    "cpu-preflight.json": {
+      "sha256": "c0aae2a944d669556d7b8f46ff7d6a624f66c9466c923bb5851304f313f53a53",
+      "bytes": 933
+    },
+    "cpu-tests.log": {
+      "sha256": "ff3b0f0ef22cc07e1b9ea5f55e923bf12ac3083373b1135a173fc9f11eddd0cb",
+      "bytes": 1653
+    },
+    "daemon-pid.json": {
+      "sha256": "c6cfd4550e5ab718f29dd2bd379c8b0527818ff5f17dd37e93bfec29abbff58b",
+      "bytes": 95
+    },
+    "launch_aa_window.py.help.txt": {
+      "sha256": "7bdac10038604f7cdd7b12602a873ff50a430efa781c25be2ca195ad38a295d5",
+      "bytes": 460
+    },
+    "launch_aa_window.py.validate.txt": {
+      "sha256": "4b44fd777409ef68197f4289706d76eaa0acd949de0879c20055d11b1599483c",
+      "bytes": 107
+    },
+    "run_aa_window.py.help.txt": {
+      "sha256": "1f9d632b5f6033c3f15892d83503394aba930d926786b94492b3f377676a9f81",
+      "bytes": 324
+    },
+    "run_aa_window.py.validate.txt": {
+      "sha256": "9ddb35f58da8d79a45988ef46a0ebe0274deef3892c909fb1fc927e907efe26d",
+      "bytes": 127
+    },
+    "WSL-CPU-preflight.json": {
+      "sha256": "e5637ee5ad65573a6577283052e9bb4e697e5e84f21a9e24d098bc0699332aa1",
+      "bytes": 481
+    },
+    "WSL-CPU-stderr.log": {
+      "sha256": "b280c454d6f559e56eb3f5ed39f3ba084b8d1744a3ff7fe016b21ff86dea1aca",
+      "bytes": 132
+    },
+    "WSL-CPU-stdout.log": {
+      "sha256": "f3fef8806100bbbc71846e283eb662a803ed4f5cf890bd06c0c11f4aa9c0b104",
+      "bytes": 608
+    }
+  }
+}

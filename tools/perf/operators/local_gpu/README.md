@@ -1,5 +1,11 @@
 # 本地GPU实验
 
+E-LIT-01新增真实三策略入口：cadence_protocol.py / bench_kv_cadence.py / analyze_kv_cadence.py，旧WindowB入口不变。见[第22章](../../../../docs/performance/engineering/22-cadence-policy-pilot.md)。
+
+窗口B入口：bench_kv_interleaved.py、analyze_kv_window_b.py、analyze_kv_trace.py；check_rope_kv_semantics.py仅为库级语义探针。完整方法见 [第20章](../../../../docs/performance/engineering/20-window-b-cost-drift.md)。
+
+最新：[第19章](../../../../docs/performance/engineering/19-native-kv-integration.md)。native_kv_binding.py仅做进程内研究绑定；run_native_kv_integration.py在capture前接入并含晚接入负控；bench_native_kv.py另做无观测调用成本，不与结构trace计时混用。总体成功须有integration.json与退出0。
+
 最新：run_framework_dummy.py使用原生DummyModelLoader和bench batch入口实际构造ModelRunner，执行1/2/4/8原生图和动态batch；见[第18章](../../../../docs/performance/engineering/18-native-modelrunner-graphs.md)。预训练权重门禁不变；原run_sglang.py不作为本次人工权重入口。
 
 最新：run_split_cap6.py与[第17章](../../../../docs/performance/engineering/17-cap6-empty-cta.md)。环境恢复在任务/var/tmp隔离目录；只验证后端张量切片，未改Engine默认。
@@ -18,3 +24,13 @@
 默认使用任务原WSL环境与构建目录；迁移环境须固定torch/CUDA/ABI并使用自己的任务目录。输出必须全新；不自动安装SDK、下载权重或修改全局驱动。
 
 Engine只做过导入，模型生成、scheduler/serving及质量未验证。手动torch graph不是SGLang CudaGraphRunner；当前KV分支未开启Engine的alt-stream捕获flag。不要通用替换原实现。
+
+本轮另有 check_native_kv_state.py / compare_native_kv_state.py：直接读取原生图实际写槽的30层K/V，24份FP16数组逐位核对；24置零/10陈旧快照负控全部拒绝。采集与成本计时分开，复现命令见第19章。
+
+参考模板资格入口：reference_protocol.py / bench_cadence_reference.py / analyze_cadence_reference.py。一次128块小窗、共同先验目标和独立holdout，见[资格方法v0.24](../../../../docs/performance/literature/elit01-reference-qualification-v0.24.md)。只做资格，不重跑旧108 cluster；未取得有效门禁独立签收与模板资格时不得进入新主比较。
+
+离线代表性审计：audit_reference_representativeness.py仅消费v0.24原件，输出128行不重叠时间分解和16层均值差，见[审计及新采前设计v0.25](../../../../docs/performance/literature/elit01-representativeness-audit-v0.25.md)。不启动GPU、采集器或主比较；旧bank/hash/34/64不变。
+
+P25-AA opt-in入口：aa_protocol.py / launch_aa_window.py / run_aa_window.py / aa_worker.py / analyze_aa_window.py。采前18项门禁、报文修复后22项CPU检查；双进程共用600s，别名直接同一method，结果仅为本窗重复性。见[采前协议v0.26](../../../../docs/performance/literature/p25-aa-method-v0.26.md)。旧query bank与v0.25设计不回写。
+
+P25-AA本次实际窗口在启动报文阶段失败，未启动模型worker；原15源码/128缺测和CPU修复见[结果v0.26](../../../../docs/performance/literature/p25-aa-result-v0.26.md)。当前22项CPU检查不等于GPU验证；旧plan需用冻结producer离线复核。

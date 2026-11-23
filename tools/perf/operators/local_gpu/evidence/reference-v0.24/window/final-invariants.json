@@ -1,0 +1,10 @@
+{
+  "parameters_unchanged": true,
+  "graphs_unchanged": true,
+  "resources": {
+    "free": 6943670272,
+    "total": 8585216000,
+    "allocated": 314455552,
+    "reserved": 371195904
+  }
+}

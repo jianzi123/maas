@@ -1,0 +1,200 @@
+{
+  "calibration_vs_actual": [
+    {
+      "run_id": "R01",
+      "variant": "native",
+      "target_gap_ms": 34.460657,
+      "calibration_query_median_ms": 33.7833205,
+      "main_query_median_ms": 40.8787315,
+      "main_prepare_prefix_median_ms": 0.995618,
+      "main_actual_gap_median_ms": 41.8746615
+    },
+    {
+      "run_id": "R01",
+      "variant": "mature",
+      "target_gap_ms": 34.588785,
+      "calibration_query_median_ms": 33.842957,
+      "main_query_median_ms": 44.1313975,
+      "main_prepare_prefix_median_ms": 0.9883245,
+      "main_actual_gap_median_ms": 45.6494745
+    },
+    {
+      "run_id": "R02",
+      "variant": "native",
+      "target_gap_ms": 45.016977,
+      "calibration_query_median_ms": 41.9021755,
+      "main_query_median_ms": 44.3132545,
+      "main_prepare_prefix_median_ms": 1.034482,
+      "main_actual_gap_median_ms": 46.3716725
+    },
+    {
+      "run_id": "R02",
+      "variant": "mature",
+      "target_gap_ms": 42.892991,
+      "calibration_query_median_ms": 40.989304,
+      "main_query_median_ms": 44.8362625,
+      "main_prepare_prefix_median_ms": 0.9905935,
+      "main_actual_gap_median_ms": 46.1977285
+    }
+  ],
+  "largest_absolute_gap_error_rows": [
+    {
+      "block_id": "elit01-pilot1-20261115/R01/bare_graph/B8/T1/query_cluster/b00",
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 8,
+      "policy": "query_cluster",
+      "slot": 0,
+      "previous_kind": "previous_measured_block_completion",
+      "actual_gap_ms": 3488.322409,
+      "prepare_prefix_ms": 3324.460942,
+      "query_ms": 163.850366,
+      "matching_error_ms": 3453.733624
+    },
+    {
+      "block_id": "elit01-pilot1-20261115/R01/bare_graph/B3/T2/query_block/b00",
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 3,
+      "policy": "query_block",
+      "slot": 0,
+      "previous_kind": "previous_measured_block_completion",
+      "actual_gap_ms": 2483.679113,
+      "prepare_prefix_ms": 2423.317864,
+      "query_ms": 60.349938,
+      "matching_error_ms": 2449.090328
+    },
+    {
+      "block_id": "elit01-pilot1-20261115/R01/bare_graph/B5/T0/query_cluster/b00",
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 5,
+      "policy": "query_cluster",
+      "slot": 0,
+      "previous_kind": "previous_measured_block_completion",
+      "actual_gap_ms": 269.532823,
+      "prepare_prefix_ms": 232.697845,
+      "query_ms": 36.828776,
+      "matching_error_ms": 234.944038
+    },
+    {
+      "block_id": "elit01-pilot1-20261115/R01/bare_graph/B3/T1/query_cluster/b00",
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 3,
+      "policy": "query_cluster",
+      "slot": 0,
+      "previous_kind": "previous_measured_block_completion",
+      "actual_gap_ms": 254.650799,
+      "prepare_prefix_ms": 215.994702,
+      "query_ms": 38.649896,
+      "matching_error_ms": 220.062014
+    },
+    {
+      "block_id": "elit01-pilot1-20261115/R01/bare_graph/B5/T1/query_cluster/b00",
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 5,
+      "policy": "query_cluster",
+      "slot": 0,
+      "previous_kind": "previous_measured_block_completion",
+      "actual_gap_ms": 236.454672,
+      "prepare_prefix_ms": 199.36495,
+      "query_ms": 37.081646,
+      "matching_error_ms": 201.865887
+    },
+    {
+      "block_id": "elit01-pilot1-20261115/R01/bare_graph/B5/T0/idle_matched/b00",
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 5,
+      "policy": "idle_matched",
+      "slot": 0,
+      "previous_kind": "previous_measured_block_completion",
+      "actual_gap_ms": 163.104213,
+      "prepare_prefix_ms": 163.099975,
+      "query_ms": null,
+      "matching_error_ms": 128.643556
+    },
+    {
+      "block_id": "elit01-pilot1-20261115/R01/bare_graph/B8/T1/query_block/b00",
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 8,
+      "policy": "query_block",
+      "slot": 0,
+      "previous_kind": "previous_measured_block_completion",
+      "actual_gap_ms": 157.440115,
+      "prepare_prefix_ms": 112.705084,
+      "query_ms": 44.696388,
+      "matching_error_ms": 122.85133
+    },
+    {
+      "block_id": "elit01-pilot1-20261115/R01/full/B5/T1/query_block/b00",
+      "run_id": "R01",
+      "scope": "full",
+      "batch": 5,
+      "policy": "query_block",
+      "slot": 0,
+      "previous_kind": "previous_measured_block_completion",
+      "actual_gap_ms": 154.991215,
+      "prepare_prefix_ms": 104.377535,
+      "query_ms": 50.605795,
+      "matching_error_ms": 120.40243
+    },
+    {
+      "block_id": "elit01-pilot1-20261115/R01/bare_graph/B5/T2/query_cluster/b00",
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 5,
+      "policy": "query_cluster",
+      "slot": 0,
+      "previous_kind": "previous_measured_block_completion",
+      "actual_gap_ms": 114.623322,
+      "prepare_prefix_ms": 57.349706,
+      "query_ms": 57.264639,
+      "matching_error_ms": 80.162665
+    },
+    {
+      "block_id": "elit01-pilot1-20261115/R01/full/B5/T2/query_cluster/b00",
+      "run_id": "R01",
+      "scope": "full",
+      "batch": 5,
+      "policy": "query_cluster",
+      "slot": 0,
+      "previous_kind": "previous_measured_block_completion",
+      "actual_gap_ms": 111.160225,
+      "prepare_prefix_ms": 73.57011,
+      "query_ms": 37.582862,
+      "matching_error_ms": 76.699568
+    },
+    {
+      "block_id": "elit01-pilot1-20261115/R01/bare_graph/B5/T1/query_block/b00",
+      "run_id": "R01",
+      "scope": "bare_graph",
+      "batch": 5,
+      "policy": "query_block",
+      "slot": 0,
+      "previous_kind": "previous_measured_block_completion",
+      "actual_gap_ms": 110.76836,
+      "prepare_prefix_ms": 67.137473,
+      "query_ms": 43.623243,
+      "matching_error_ms": 76.179575
+    },
+    {
+      "block_id": "elit01-pilot1-20261115/R01/full/B8/T2/query_cluster/b00",
+      "run_id": "R01",
+      "scope": "full",
+      "batch": 8,
+      "policy": "query_cluster",
+      "slot": 0,
+      "previous_kind": "previous_measured_block_completion",
+      "actual_gap_ms": 102.819033,
+      "prepare_prefix_ms": 64.866727,
+      "query_ms": 37.944381,
+      "matching_error_ms": 68.358376
+    }
+  ],
+  "interpretation": "targets were frozen before collection; query-policy actual gap shifted; do not retune/drop samples",
+  "physical_query_vs_idle_root_cause": "unknown"
+}

@@ -1,0 +1,202 @@
+[
+  {
+    "variant": "native",
+    "sample": 0,
+    "previous_done_ns": 123430785442,
+    "ready_ns": 123431373791,
+    "query_id": "R02/cal/native/0",
+    "submit_proxy_ns": 123485769345,
+    "total_gap_ns": 54983903,
+    "query_duration_ns": 54388501
+  },
+  {
+    "variant": "mature",
+    "sample": 0,
+    "previous_done_ns": 123485867161,
+    "ready_ns": 123486566331,
+    "query_id": "R02/cal/mature/0",
+    "submit_proxy_ns": 123526611778,
+    "total_gap_ns": 40744617,
+    "query_duration_ns": 40039877
+  },
+  {
+    "variant": "native",
+    "sample": 1,
+    "previous_done_ns": 123526683054,
+    "ready_ns": 123527346866,
+    "query_id": "R02/cal/native/1",
+    "submit_proxy_ns": 123573961933,
+    "total_gap_ns": 47278879,
+    "query_duration_ns": 46608925
+  },
+  {
+    "variant": "mature",
+    "sample": 1,
+    "previous_done_ns": 123574038528,
+    "ready_ns": 123574813552,
+    "query_id": "R02/cal/mature/1",
+    "submit_proxy_ns": 123628456886,
+    "total_gap_ns": 54418358,
+    "query_duration_ns": 53636822
+  },
+  {
+    "variant": "native",
+    "sample": 2,
+    "previous_done_ns": 123628538311,
+    "ready_ns": 123629278859,
+    "query_id": "R02/cal/native/2",
+    "submit_proxy_ns": 123666290568,
+    "total_gap_ns": 37752257,
+    "query_duration_ns": 37006259
+  },
+  {
+    "variant": "mature",
+    "sample": 2,
+    "previous_done_ns": 123666347917,
+    "ready_ns": 123666976733,
+    "query_id": "R02/cal/mature/2",
+    "submit_proxy_ns": 123717874112,
+    "total_gap_ns": 51526195,
+    "query_duration_ns": 50889975
+  },
+  {
+    "variant": "native",
+    "sample": 3,
+    "previous_done_ns": 123718001154,
+    "ready_ns": 123718778782,
+    "query_id": "R02/cal/native/3",
+    "submit_proxy_ns": 123758445549,
+    "total_gap_ns": 40444395,
+    "query_duration_ns": 39659563
+  },
+  {
+    "variant": "mature",
+    "sample": 3,
+    "previous_done_ns": 123758546811,
+    "ready_ns": 123759509522,
+    "query_id": "R02/cal/mature/3",
+    "submit_proxy_ns": 123802012381,
+    "total_gap_ns": 43465570,
+    "query_duration_ns": 42497029
+  },
+  {
+    "variant": "native",
+    "sample": 4,
+    "previous_done_ns": 123802082644,
+    "ready_ns": 123803111190,
+    "query_id": "R02/cal/native/4",
+    "submit_proxy_ns": 123844930815,
+    "total_gap_ns": 42848171,
+    "query_duration_ns": 41814015
+  },
+  {
+    "variant": "mature",
+    "sample": 4,
+    "previous_done_ns": 123844987383,
+    "ready_ns": 123846009155,
+    "query_id": "R02/cal/mature/4",
+    "submit_proxy_ns": 123895881996,
+    "total_gap_ns": 50894613,
+    "query_duration_ns": 49866579
+  },
+  {
+    "variant": "native",
+    "sample": 5,
+    "previous_done_ns": 123895953672,
+    "ready_ns": 123897252662,
+    "query_id": "R02/cal/native/5",
+    "submit_proxy_ns": 123939249239,
+    "total_gap_ns": 43295567,
+    "query_duration_ns": 41990336
+  },
+  {
+    "variant": "mature",
+    "sample": 5,
+    "previous_done_ns": 123939317659,
+    "ready_ns": 123940352496,
+    "query_id": "R02/cal/mature/5",
+    "submit_proxy_ns": 123980735511,
+    "total_gap_ns": 41417852,
+    "query_duration_ns": 40375179
+  },
+  {
+    "variant": "native",
+    "sample": 6,
+    "previous_done_ns": 123980799172,
+    "ready_ns": 123981876590,
+    "query_id": "R02/cal/native/6",
+    "submit_proxy_ns": 124031665636,
+    "total_gap_ns": 50866464,
+    "query_duration_ns": 49783154
+  },
+  {
+    "variant": "mature",
+    "sample": 6,
+    "previous_done_ns": 124031730550,
+    "ready_ns": 124032916154,
+    "query_id": "R02/cal/mature/6",
+    "submit_proxy_ns": 124072096642,
+    "total_gap_ns": 40366092,
+    "query_duration_ns": 39172173
+  },
+  {
+    "variant": "native",
+    "sample": 7,
+    "previous_done_ns": 124072178488,
+    "ready_ns": 124073264082,
+    "query_id": "R02/cal/native/7",
+    "submit_proxy_ns": 124113641390,
+    "total_gap_ns": 41462902,
+    "query_duration_ns": 40371447
+  },
+  {
+    "variant": "mature",
+    "sample": 7,
+    "previous_done_ns": 124113707646,
+    "ready_ns": 124114735019,
+    "query_id": "R02/cal/mature/7",
+    "submit_proxy_ns": 124155556066,
+    "total_gap_ns": 41848420,
+    "query_duration_ns": 40814324
+  },
+  {
+    "variant": "native",
+    "sample": 8,
+    "previous_done_ns": 124155644023,
+    "ready_ns": 124156889170,
+    "query_id": "R02/cal/native/8",
+    "submit_proxy_ns": 124219575708,
+    "total_gap_ns": 63931685,
+    "query_duration_ns": 62678964
+  },
+  {
+    "variant": "mature",
+    "sample": 8,
+    "previous_done_ns": 124219685707,
+    "ready_ns": 124220998192,
+    "query_id": "R02/cal/mature/8",
+    "submit_proxy_ns": 124262006119,
+    "total_gap_ns": 42320412,
+    "query_duration_ns": 41000433
+  },
+  {
+    "variant": "native",
+    "sample": 9,
+    "previous_done_ns": 124262110347,
+    "ready_ns": 124268375788,
+    "query_id": "R02/cal/native/9",
+    "submit_proxy_ns": 124308848734,
+    "total_gap_ns": 46738387,
+    "query_duration_ns": 40463928
+  },
+  {
+    "variant": "mature",
+    "sample": 9,
+    "previous_done_ns": 124308950898,
+    "ready_ns": 124311805575,
+    "query_id": "R02/cal/mature/9",
+    "submit_proxy_ns": 124352791305,
+    "total_gap_ns": 43840407,
+    "query_duration_ns": 40978175
+  }
+]

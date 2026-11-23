@@ -1,0 +1,52 @@
+{
+  "schema": "P25-AA-preregistered-manifest1",
+  "implementation_commit": "03a31e15175704063ba52dd058e340968e10c6af",
+  "execution_checkout": "dea6485a4fa62426f610e0f15463513e63e880f6",
+  "plan_sha256": "92a3ef939dc27746f39a1db4331c055cb1aaba92bd68f63dd823167dc5dbf1ae",
+  "plan_file_sha256": "ce7190a145ed43c53c83a3da03797a0ff29126f224c03fc05b34961c371a798d",
+  "method_sha256": "250095f13c2b3c369b1b737bbedde3e73ecf17438986b73ce4d6d5585e05d9f2",
+  "sources": {
+    "test_aa_window.py": "b5f190efd5b13f487b59fa733f006ecf5d96e4ee92a13fcbd5e0cce0001a933f",
+    "aa_protocol.py": "9ff1b074b3c1e46f010106863f44d7316fdf85581ba72d361dbf8be35c782bf5",
+    "aa_runtime.py": "e28b1795cd5a1fcc793cb9250b57f8ac2d1a9c73cc49ddb5512feec687394f50",
+    "aa_worker.py": "f6bd6b62ae26dac4cfb20f5e23b2369c8599b0592704a0a5344da1591c4d55eb",
+    "run_aa_window.py": "d177aab7ff2f6ff443d62b97713af75ef9bca79fda02a509679c8783473bf8c9",
+    "analyze_aa_window.py": "697c167199ed502f9de95aa840a4f52a8b0eaef10fd8d69e7fa09466abd927a8",
+    "launch_aa_window.py": "e39606f255101c1f3dde445f656b9c1d0178c0bd5b4bcc3a9ed8473b0d2dbbde",
+    "reference_runtime.py": "e00d867403a9d0a8cb87c26ced5a9e5f0050d25244b1c93272a5a6792fe38ad5",
+    "native_kv_binding.py": "8d03d465e964a70c7dedcf358097628a47779902b0f4635633e5f2c783d00149",
+    "analyze_kv_cadence.py": "3d4c176f257afe7a977fcf1fdcfd9da2b0df9fa29eed977256c36c9291a0639b",
+    "run_decode.py": "b747254afc705de607e31071c7388948ca6c9fbbdd0f723d326ac880064fe7dd",
+    "decode_path.py": "0ec39daec3debde3594c969559d8b9f46371f18f1b0d8741dc2c1c18f4b51561",
+    "cadence_protocol.py": "b58cc3467a0e3a34c0f5f49ad812ac89bc4740b897d6d35d40e0ba84fec2ac9f",
+    "decode-source-lock.json": "fc91e7d18da871fa5f234e24c8ebde3f686ee614f59211b9f0f8b9cc6020ea70",
+    "evidence/framework-v0.18/framework-source-lock.json": "1b8e855ba811073f6e13ceb87a071f5cfc9dcd08601402040cbcff96d80d9b9e"
+  },
+  "resources": {
+    "GPU": 0,
+    "allocator_fraction": 0.2,
+    "planner_fraction": 0.2,
+    "req": 8,
+    "KV": 512,
+    "context": 128,
+    "min_free_bytes": 1073741824,
+    "parent_total_seconds": 600,
+    "parent_stop_new_seconds": 540,
+    "child_cleanup_grace_seconds": 10,
+    "final_record_reserve_seconds": 20,
+    "lock": "/var/tmp/maas-10-gpu-01a1a5ba/gpu0-research.lock"
+  },
+  "counts": {
+    "reference": 48,
+    "holdout": 64,
+    "transition": 16,
+    "blocks": 128,
+    "calls": 1280,
+    "alias_pairs": 32
+  },
+  "protected_daemon_pid": 42228,
+  "allowed_parent_windows": 1,
+  "CPU_checked_source_bytes_identical": true,
+  "trigger_comment": "01a2090f-dd00-7e29-b4ce-a87d2d7418ff",
+  "no_NM_comparison": true
+}
