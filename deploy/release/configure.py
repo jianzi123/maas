@@ -5,6 +5,7 @@ from pathlib import Path
 import yaml
 p=argparse.ArgumentParser(description=__doc__)
 p.add_argument("--format",choices=["compose","kubernetes"],required=True)
+p.add_argument("--profile",choices=["external-api","offline-controlled"],default="external-api",help="Explicit offline opt-in; normal install never falls back to a demo")
 p.add_argument("--directory",type=Path,default=Path("."))
 p.add_argument("--source",type=Path)
 p.add_argument("--origin")
@@ -19,7 +20,7 @@ root=a.directory.resolve()
 source=a.source.resolve() if a.source else root/"source"
 state=root/".secrets"
 if state.exists():raise SystemExit("Existing .secrets: retain installation identity/passwords; edit nonsecret config or use a new install directory.")
-example=source/"config/product.example.json"
+example=source/("config/product.offline.example.json" if a.profile=="offline-controlled" else "config/product.example.json")
 if not example.is_file():raise SystemExit("Actual product config example is required from the same source snapshot")
 config=json.loads(example.read_text(encoding="utf-8"))
 public_candidates=[source/"console/public/console-config.json",source/"console/public/console-config.example.json"]
@@ -55,6 +56,8 @@ migration_config=copy.deepcopy(config)
 def json_file(path,value):path.write_text(json.dumps(value,indent=2)+"\n",encoding="utf-8",newline="\n")
 json_file(root/"config/product.json",config);json_file(root/"config/migration.json",migration_config)
 public_json={"schema_version":"maas.console/1","chat":{"enabled":True,"limits":copy.deepcopy(config["agent"]["limits"]),"tools":[]}}
+if a.profile=="offline-controlled":
+    public_json["chat"]["tools"]=[{"name":name,"revision":"1"} for name in ("bounded_arithmetic","list_visible_models")]
 json_file(root/"config/console-config.json",public_json)
 if a.format=="compose":
     version=json.loads((root/"VERSION.json").read_text()) if (root/"VERSION.json").is_file() else {"imageTag":"ops-2307"}
@@ -69,4 +72,4 @@ else:
       {"apiVersion":"v1","kind":"ConfigMap","metadata":{"name":"maas-console","namespace":"maas"},"data":{"console-config.json":json.dumps(public_json)}}]
     (root/"config.yaml").write_text(yaml.safe_dump_all(documents,sort_keys=False),encoding="utf-8")
     os.chmod(root/"config.yaml",0o600)
-print("Configuration generated. No model is implicitly approved. Initial admin password is only in .secrets/migration/maas_bootstrap_password; keep all secrets and installation IDs across restart/upgrade.")
+print("Configuration generated; profile="+a.profile+". No real model is implicitly approved. Initial admin password is only in .secrets/migration/maas_bootstrap_password; keep all secrets and installation IDs across restart/upgrade.")

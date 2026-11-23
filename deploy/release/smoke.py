@@ -6,7 +6,7 @@ p=argparse.ArgumentParser(description=__doc__)
 p.add_argument("--base",required=True)
 p.add_argument("--password-file",required=True,type=Path)
 p.add_argument("--username",default="admin")
-p.add_argument("--model",default="demo")
+p.add_argument("--model",default="offline-controlled")
 p.add_argument("--limits-file",type=Path)
 p.add_argument("--phase",choices=["create","verify"],required=True)
 p.add_argument("--record",required=True,type=Path)
@@ -43,7 +43,8 @@ def hash_json(v):return hashlib.sha256(json.dumps(v,sort_keys=True,separators=("
 api="/api/agent/v1"
 try:
     request("GET","/healthz")
-    request("GET","/readyz")
+    _,ready=get("/readyz")
+    if ready.get("profile")!="offline-controlled" or ready.get("persistence")!="mysql":raise RuntimeError("normal MySQL offline profile required; no model POST sent")
     h,b=request("POST","/api/admin/v1/session",{"username":a.username,"password":a.password_file.read_text().strip()})
     csrf=json.loads(b)["csrf_token"]
     if a.phase=="create":
@@ -73,8 +74,21 @@ try:
             _,b=request("POST",sp+"/runs",body,etag,status=202);rid=json.loads(b)["run"]["id"];rp=sp+"/runs/"+rid
             record["pendingCommand"]["run_id"]=rid
             a.record.write_text(json.dumps(record,indent=2)+"\n")
-            for _ in range(150):
+            decisions=set();deadline=time.monotonic()+90
+            while time.monotonic()<deadline:
                 _,run=get(rp)
+                if run["state"]=="waiting_approval":
+                    _,page=get(rp+"/events?page_size=100")
+                    for event in page["data"]:
+                        if event["type"]!="approval.required":continue
+                        approval=event["data"]
+                        if approval["id"] in decisions:continue
+                        if approval["tool_name"] not in ("bounded_arithmetic","list_visible_models"):raise RuntimeError("unapproved extension tool")
+                        decision={"decision_id":str(uuid.uuid4()),"decision":"allow","args_sha256":approval["args_sha256"],"tool_revision":approval["tool_revision"],"policy_revision":approval["policy_revision"]}
+                        record["pendingApproval"]={"id":approval["id"],"decision_id":decision["decision_id"]}
+                        a.record.write_text(json.dumps(record,indent=2)+"\n")
+                        request("POST",rp+"/approvals/"+approval["id"]+"/decision",decision,status=200)
+                        decisions.add(approval["id"])
                 if run["state"] in ("completed","failed","needs_confirmation","cancelled"):break
                 time.sleep(0.1)
             if run["state"]!="completed":raise RuntimeError(mode+" did not complete")
@@ -95,6 +109,7 @@ try:
             runs.append({"id":rid,"mode":mode,"eventsHash":hash_json(events),"toolsHash":hash_json(tools),"children":run["child_request_ids"],"usageHashes":usages,"lastSeq":run["last_event_seq"]})
             record["runs"]=runs
             record.pop("pendingCommand",None)
+            record.pop("pendingApproval",None)
             a.record.write_text(json.dumps(record,indent=2)+"\n")
     else:
         record=json.loads(a.record.read_text());sid=record["sessionId"];sp=api+"/sessions/"+sid

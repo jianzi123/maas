@@ -21,6 +21,7 @@ if ! mysql --defaults-extra-file=/run/secrets/mysql-client.cnf >/dev/null 2>/dev
 CREATE ROLE IF NOT EXISTS maas_product_auth_runtime;
 GRANT SELECT ON $database.product_admins TO maas_product_auth_runtime;
 GRANT SELECT ON $database.product_schema_migrations TO maas_product_auth_runtime;
+GRANT SELECT ON $database.product_offline_state TO maas_product_auth_runtime;
 GRANT SELECT,INSERT,UPDATE ON $database.product_sessions TO maas_product_auth_runtime;
 GRANT SELECT,INSERT,UPDATE ON $database.product_login_attempts TO maas_product_auth_runtime;
 CREATE USER IF NOT EXISTS 'maas_runtime'@'%' IDENTIFIED BY '$password';

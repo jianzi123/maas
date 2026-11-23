@@ -36,7 +36,9 @@ MySQL首次初始化在本机约2分钟，安装等待上限5分钟。/healthz�
 
 先初始化/登录/读取MySQL，再由安装者填写已有获准publication、平台Key文件及私有Higress TLS/签票输入。实际完整字段见source/config/product.example.json、source/docs/product-service.md；配置的models/gateway从Go严格解析，不直接调用供应商或自动换来源。运行Secret额外文件放.secrets/runtime，按JSON引用/run/secrets下同名文件。正式text-v1与tools-v1独立，未有真实tools批准/适配时准确拒绝。空models启动成功不等于Chat/两工具闭环成功。
 
-受控演示必须另有同MySQL/唯一计量的显式profile；本包不会用agentcontrolled/文件会话入口冒充。可用状态及未验项以本包VALIDATION.md和主交付清单为准。14分钟UI步骤及工具接口/功能清单：source/console/docs/demo-15min.md、source/console/docs/agent-features.md及source/docs/agent-runtime-v1.md。
+本包提供同一正常maas-service/MySQL/唯一账本的显式离线profile，不用agentcontrolled/文件会话。首次安装选择：`python source/deploy/release/configure.py --format compose --directory . --port 18080 --profile offline-controlled`，其余构建/迁移/启动命令相同；默认不传profile仍为external-api且没有获准模型。离线profile与真实models/管理装配互斥，使用专属数据库/身份，不能改已有生产数据库来演示。回答标明离线，模型、rate及来源证明是受限替身；预算、两工具/批准/事件/原child用量在真实MySQL。不调用真实供应商、不承诺生产Ready。
+
+新002迁移初始化加密内部Key，只保存在MySQL；保留pepper/cursor/cluster/卷，勿重建随机安装身份。工具/模型能力及实际消费见source/docs/product-management-and-offline.md。14分钟UI步骤及功能清单保留source/console/docs，最终验证范围以本包VALIDATION.md及任务原始证据为准。
 
 仅在明确启用离线demo模型后：
 ```sh
@@ -47,6 +49,10 @@ python source/deploy/release/smoke.py --base http://localhost:18080 --password-f
 ```
 
 create只在显式demo配置使用，真实供应商/付费调用需对应批准。verify只GET原记录，不自动重新生成。没有模型时smoke应拒绝而非填假数据。
+
+也可运行后端原验收器：`python source/scripts/smoke-product-offline.py --url http://localhost:18080 --config config/product.json --password-file .secrets/migration/maas_bootstrap_password --approve-safe-tools --record backend-offline-record.json`；重启后用相同前三个参数加`--verify-record backend-offline-record.json`只读核对。它仅支持受控loopback，不用于真实模型。
+
+管理页/API默认明确不可用。启用须按source/docs/product-management-and-offline.md配置真实management字段及四条独立DSN（history/payload/operations/publisher）、单角色账号、批准Registry/kubeconfig/namespace/domain。沿原角色模板由DBA建独立身份，将各DSN/证书文件加入.secrets/runtime并仅按实际路径挂载，Registry可额外只读挂载。不要改成core DSN或把四角色授给core；无目标K8s/CRD/Operator/Higress输入保持关闭，不据健康宣称管理可用。
 
 ## 停止、升级、恢复与排障
 

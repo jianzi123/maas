@@ -19,6 +19,10 @@ docker build --target migrate -t maas-migrate:<tag> --build-arg SOURCE_REVISION=
 
 对自己的隔离kind集群可用kind load docker-image三镜像；远端节点需先按授权私库映射修改application.yaml/migration.yaml镜像名或digest及imagePullSecrets。未经批准不写已有目标集群。容器runtime/迁移/代理与Compose完全相同。
 
+专属离线演示可在首次生成时显式加`--profile offline-controlled`，默认external-api不启用替身。此profile使用同正常入口/MySQL及原计量，不能混用真实models或management；模型/rate/来源证明为受限合成，工具、审批、历史和账本为实际实现。当前核心运行账号仅kernel+release_reader+agent+auth，检测到历史额外角色会拒绝迁移，不自动撤权。
+
+正式管理装配另需四个独立DSN/单角色及批准Registry/kubeconfig/授权域，详见source/docs/product-management-and-offline.md。将文件加入maas-runtime Secret并精确挂载；不得复用core，不默认获得集群权限。缺前置保持management关闭，原生YAML安装成功不等于模型/发布链Ready。
+
 ## 原生应用顺序
 
 确认当前context为明确批准目标，namespace maas未被其他项目占用或这是保留原Secret的同一安装。

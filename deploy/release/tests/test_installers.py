@@ -47,4 +47,16 @@ class InstallerTest(unittest.TestCase):
             r=subprocess.run([sys.executable,str(RELEASE/"configure.py"),"--format","compose","--directory",str(root),"--source",str(RELEASE.parents[1]),"--origin","https://user:pass@example.invalid/path"],capture_output=True,text=True)
             self.assertNotEqual(r.returncode,0)
             self.assertFalse((root/".secrets").exists())
+    def test_offline_is_explicit_and_projects_real_policy(self):
+        for profile in ("external-api","offline-controlled"):
+            with self.subTest(profile=profile),tempfile.TemporaryDirectory() as d:
+                root=Path(d)
+                r=subprocess.run([sys.executable,str(RELEASE/"configure.py"),"--format","compose","--directory",str(root),"--source",str(RELEASE.parents[1]),"--profile",profile],capture_output=True,text=True)
+                self.assertEqual(r.returncode,0,r.stderr)
+                private=json.loads((root/"config/product.json").read_text())
+                public=json.loads((root/"config/console-config.json").read_text())
+                self.assertEqual(private.get("offline_controlled",{}).get("enabled",False),profile=="offline-controlled")
+                self.assertEqual(public["chat"]["limits"],private["agent"]["limits"])
+                self.assertEqual(len(public["chat"]["tools"]),2 if profile=="offline-controlled" else 0)
+                self.assertFalse(private.get("management",{}).get("enabled",False))
 if __name__=="__main__":unittest.main()
