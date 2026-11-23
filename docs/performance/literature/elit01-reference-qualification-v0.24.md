@@ -38,3 +38,54 @@ python analyze_cadence_reference.py --plan <plan.json> --root <window-dir> --out
 ## 证据边界
 
 SGLang0.5.2固定b0d25e7、Torch2.8、现有SmolLM135M配置和DummyModelLoader人工权重，实际ModelRunner/CudaGraphRunner。每份门禁保存完整[B,49152] FP32 logits和[30,2,B,3,64] FP16 KV，并严格核双方finite/shape/hash/bitwise。这不代表预训练质量、Engine/serving或TTFT/TPOT。Ada本机结果不外推Hopper/Blackwell。既有官方文献和固定源码卡解释机制，本轮不新增泛化性能宣传。
+
+## 本轮实采与资格结论（2026-11-23 UTC）
+
+**采集完整，模板不合格。到此停止，未补采、未生成或执行主比较计划。**
+
+- 执行代码提交 e816a744a61166213186bd4835296e4b24c3e4ff；独立四锁/实际执行提交 1bc758cd2fe16992f81a5194e8a32a4279227d53。
+- plan语义SHA256：192d80712b2955543b0a14955d4a0858c556db7d18ded7bc5fe80e042f261e36；原文件SHA256：30aeec5b33108c775b77382caac47d1400668475bcbda83659fb5b669642f600。
+- bank语义SHA256：bb86a22e693948878ef8577a034368d74675c24bb23a7024e8dcd55e4de7c9dd；原文件SHA256：0c219eaacdd64d8c706a81bc1e023882a171edca5d7606ec0e15b8615501f6dc。
+
+- 一个前台GPU进程，357.615s外层墙钟（含WSL/解释器启动等）、336.815s采集器内部计时；正常退出0表示采集完成，不表示资格通过。
+- RTX4070 Laptop / 8188MiB / CC8.9 / 36SM，驱动581.29；采前6177MiB空闲。Torch2.8.0+cu128、CUDA12.8、Triton3.4.0、sglang0.5.2/b0d25e72c401f37b55d689ddbf05b8c583afe854、sgl-kernel0.3.9.post2。
+- 128/128块、1280/1280计时调用，48参考/64 holdout/16过渡，真实missing0、invalid0。80次完整query观察、全部边界I/O、bookkeeping时点、prepare和事件/主机计时均保留。内部graph capture调用量未计入1280，不声称已知其总调用数。
+- 16/16 gate、64向量引用完整验证；跨参考/holdout同scope/B输入hash相同，参数和原生图身份保持。峰值Torch allocated316946432B，仅为Torch口径，不是整进程或整卡峰值。
+- 作者新18项资格回归＋重跑既有36项协议/门禁回归通过。另对本次实采gate做7种损坏拒绝，均失败关闭。它们不是独立QA。
+
+| holdout层 | 计划/测得 | 匹配 |
+|---|---:|---:|
+| full/B3 | 16/16 | 9 |
+| full/B8 | 16/16 | 8 |
+| bare_graph/B3 | 16/16 | 9 |
+| bare_graph/B8 | 16/16 | 8 |
+| 全部query | 32/32 | 2 |
+| 全部idle | 32/32 | 32 |
+| 完整资格分母 | 64/64 | **34** |
+
+[全部holdout超差图](../../../tools/perf/operators/local_gpu/evidence/reference-v0.24/holdout-errors.png)与[完整原件目录](../../../tools/perf/operators/local_gpu/evidence/reference-v0.24/)可逐行核对。绿色带为原先冻结容差；图不删除30个超差，也不展示筛选后的收益。
+
+### 一个可手算、可运行的真实反例
+
+按冻结顺序取首个超差，非按最大误差挑选：ELIT01_REF24/holdout/full/B3/p0/native（interior）。它使用的三个先验参考中位数为207.192994ms，实际gap223.403356ms；误差16.210362ms，大于原容差10.3596497ms，因此不合格。原query调用自身217.717464ms；before_prepare1.175324ms、prepare4.498182ms、ready→submit217.729850ms，这些主机区间相加得到同一gap。前块bookkeeping位于before_prepare内，不能再加一次。
+
+这说明了怎样核验时间分解，不能把该query耗时当成原6–7ms/13–15ms设备成本漂移的因果证明。CUDA事件是设备区间，host gap是主机观察区间；nvidia-smi CSV的墙钟时间原样保留，不拿它与monotonic或设备时钟直接相减。32/32 idle匹配说明该次deadline结果符合先验目标，不证明物理GPU idle等价。只有2/32 query匹配，说明当前静态参考代表性不足；不能因此放宽原容差或按策略后拟合。
+
+仓库根目录下可完全离线复现，不触发CUDA：
+
+~~~bash
+python tools/perf/operators/local_gpu/analyze_cadence_reference.py --plan tools/perf/operators/local_gpu/evidence/reference-v0.24/plan.json --root tools/perf/operators/local_gpu/evidence/reference-v0.24/window --output /path/to/new-analysis.json
+python tools/perf/operators/local_gpu/reproduce_reference_error.py --plan tools/perf/operators/local_gpu/evidence/reference-v0.24/plan.json --root tools/perf/operators/local_gpu/evidence/reference-v0.24/window --row ELIT01_REF24/holdout/full/B3/p0/native --output /path/to/new-repro.json
+~~~
+
+结果应为integrity_valid=true、qualified=false、matched_holdout=34。已保存实际命令、退出码及minimal-repro.json；输出目录/文件必须全新。18项回归中的合成输入明确标为UNIT_SYNTHETIC，不能混入这128块原件。
+
+### 独立签收与下一研究顺序
+
+QA于本批评论01a208a6-0531-71e4-9ff0-6d40e14aae2f独立关闭旧ELIT-QA-01/P2范围：修复实现3a2966225cd0102663687ad281a0264cb5e0822e、provider head4ab8a277efe5edb9219d83cc9aea204add36af8e；QA代码0e8ec0f2b4937801cdec8b48df06aaeece9d4df3、QA四锁39ef6d7feaee02474e88d0b5a0f0fefffc5c9380，16/16唯一用例、32次CLI，未执行GPU。这里引用其回交，不当成本作者重跑或本新模板已获独立验收。
+
+当前最先需要解决的是**参考模板代表性**，不是据本窗口宣布模型优化瓶颈。下一批可先离线比较30个超差与全部先验参考的prepare/query/边界前缀分布，并核对初始化、进程负载和轮转时间等尚未解释的共变；若拟采用新的校准设计，必须先登记新设计并重新冻结，再另批取得资格，不能拿本holdout回填旧目标。本批没有追加GPU采样，没有自动进入该下一批。
+
+只有模板holdout合格并保留已获门禁签收，才考虑恢复E-LIT-01主策略比较。E-LIT-02仍须保证stage2可读分段全部定义，E-LIT-03仍须同次同层同槽写入证实后才能save=False，cap8默认不改。原108cluster/1080块/10800调用、Full严格0/18和稳定收益未知均保持。
+
+机制解释继续沿[固定版本原文与源码资料卡](README.md)和[从原文到实验](../engineering/21-literature-to-experiments.md)：CUDA Graph固定地址/生命周期，不会自动消除主机观测与I/O差异；Flash-Decoding分段和FlashInfer plan/run各有不同正确性前置。本次不新增宣传倍数、Hopper/Blackwell外推或未实测的Engine/serving结论。

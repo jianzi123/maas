@@ -1,0 +1,19 @@
+{
+  "command": [
+    "D:\\ProgramData\\anaconda3\\python.exe",
+    "-X",
+    "utf8",
+    "C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-10-79a30240b357\\workdir\\repo\\tools\\perf\\operators\\local_gpu\\reproduce_reference_error.py",
+    "--plan",
+    "C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-10-79a30240b357\\workdir\\deliverables\\reference-v0.24\\plan.json",
+    "--root",
+    "C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-10-79a30240b357\\workdir\\deliverables\\reference-v0.24\\window",
+    "--row",
+    "ELIT01_REF24/holdout/full/B3/p0/native",
+    "--output",
+    "C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-10-79a30240b357\\workdir\\deliverables\\reference-v0.24\\minimal-repro.json"
+  ],
+  "exit_code": 0,
+  "stdout": "{\"gap_ns\": 223403356, \"target_ns\": 207192994, \"error_ns\": 16210362, \"limit_ns\": 10359649.700000001, \"matched\": false}\n",
+  "stderr": ""
+}

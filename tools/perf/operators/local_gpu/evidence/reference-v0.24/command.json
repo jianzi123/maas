@@ -1,0 +1,27 @@
+{
+  "command": [
+    "wsl.exe",
+    "-d",
+    "Ubuntu-22.04",
+    "--",
+    "/usr/bin/timeout",
+    "--kill-after=10s",
+    "600s",
+    "/var/tmp/maas-10-gpu-01a1a5ba/bin/python",
+    "/mnt/c/Users/a9786/multica_workspaces_desktop-api.multica.ai/maas-007-da4ec7313117/maas-10-79a30240b357/workdir/repo/tools/perf/operators/local_gpu/bench_cadence_reference.py",
+    "--plan",
+    "/mnt/c/Users/a9786/multica_workspaces_desktop-api.multica.ai/maas-007-da4ec7313117/maas-10-79a30240b357/workdir/deliverables/reference-v0.24/plan.json",
+    "--output",
+    "/mnt/c/Users/a9786/multica_workspaces_desktop-api.multica.ai/maas-007-da4ec7313117/maas-10-79a30240b357/workdir/deliverables/reference-v0.24/window"
+  ],
+  "execution_commit": "1bc758cd2fe16992f81a5194e8a32a4279227d53",
+  "plan_sha256": "192d80712b2955543b0a14955d4a0858c556db7d18ded7bc5fe80e042f261e36",
+  "UTC_start": "2026-11-23T13:44:20.897019+00:00",
+  "planned_blocks": 128,
+  "total_GPU_budget_seconds": 600,
+  "owned_WSL_child_pid": 52832,
+  "exit_code": 0,
+  "foreground_wall_seconds": 357.61548109998694,
+  "UTC_end": "2026-11-23T13:50:18.519662+00:00",
+  "own_process_collected": true
+}

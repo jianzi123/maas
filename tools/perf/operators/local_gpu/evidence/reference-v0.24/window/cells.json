@@ -1,0 +1,74 @@
+[
+  {
+    "phase": "reference",
+    "scope": "full",
+    "batch": 3,
+    "input_sha256": "b326ea88ac30c4b08aadf54fed66af741992f9e7f2ee3df870ae0c1bf31c5033",
+    "begin_ns": 209908699432037,
+    "ready_ns": 209938124093288,
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "phase": "reference",
+    "scope": "full",
+    "batch": 8,
+    "input_sha256": "3678f2fd9ac4c39391dc9ec367bde9448eb70b1576038d11d7a3c44920b175e6",
+    "begin_ns": 209945441555251,
+    "ready_ns": 209948736911620,
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "phase": "reference",
+    "scope": "bare_graph",
+    "batch": 3,
+    "input_sha256": "b326ea88ac30c4b08aadf54fed66af741992f9e7f2ee3df870ae0c1bf31c5033",
+    "begin_ns": 209956040155125,
+    "ready_ns": 209957656533524,
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "phase": "reference",
+    "scope": "bare_graph",
+    "batch": 8,
+    "input_sha256": "3678f2fd9ac4c39391dc9ec367bde9448eb70b1576038d11d7a3c44920b175e6",
+    "begin_ns": 209963333928161,
+    "ready_ns": 209965328895148,
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "phase": "holdout",
+    "scope": "full",
+    "batch": 3,
+    "input_sha256": "b326ea88ac30c4b08aadf54fed66af741992f9e7f2ee3df870ae0c1bf31c5033",
+    "begin_ns": 209970690209438,
+    "ready_ns": 209971345446617,
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "phase": "holdout",
+    "scope": "full",
+    "batch": 8,
+    "input_sha256": "3678f2fd9ac4c39391dc9ec367bde9448eb70b1576038d11d7a3c44920b175e6",
+    "begin_ns": 209977748762916,
+    "ready_ns": 209979854053719,
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "phase": "holdout",
+    "scope": "bare_graph",
+    "batch": 3,
+    "input_sha256": "b326ea88ac30c4b08aadf54fed66af741992f9e7f2ee3df870ae0c1bf31c5033",
+    "begin_ns": 209988298807596,
+    "ready_ns": 209990043687213,
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  },
+  {
+    "phase": "holdout",
+    "scope": "bare_graph",
+    "batch": 8,
+    "input_sha256": "3678f2fd9ac4c39391dc9ec367bde9448eb70b1576038d11d7a3c44920b175e6",
+    "begin_ns": 209997096612833,
+    "ready_ns": 209998211778598,
+    "clock_scope": "ELIT01_REF24/R01/pid13270-43a4514d"
+  }
+]

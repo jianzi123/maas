@@ -1,5 +1,7 @@
 # MaaS 性能与框架工程手册
 
+本轮：[真实参考模板资格小窗v0.24](literature/elit01-reference-qualification-v0.24.md)。一个GPU进程128块完整，holdout仅34/64匹配，模板不合格；已停在资格阶段并保留完整超差与最小复现。
+
 单模型接线：[第23章](engineering/23-single-model-capture.md)，含ELIT-QA-01完整向量拒绝修复、实际客户端SSE采集与原角色输入缺口。
 
 最新实作：[第22章E-LIT-01三策略首批](engineering/22-cadence-policy-pilot.md)，1080块完整，Full严格gap匹配0/18组，不判根因/稳定收益。

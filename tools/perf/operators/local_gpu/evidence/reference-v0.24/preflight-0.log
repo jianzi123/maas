@@ -1,0 +1,23 @@
+test_balanced_frozen_schedule (test_reference_qualification.QualificationTests.test_balanced_frozen_schedule) ... ok
+test_boundary_io_required (test_reference_qualification.QualificationTests.test_boundary_io_required) ... ok
+test_complete_vector_shape_required (test_reference_qualification.QualificationTests.test_complete_vector_shape_required) ... ok
+test_empty_one_sided_asymmetric_missing_roles_rejected (test_reference_qualification.QualificationTests.test_empty_one_sided_asymmetric_missing_roles_rejected) ... ok
+test_final_invariants_required (test_reference_qualification.QualificationTests.test_final_invariants_required) ... ok
+test_input_identity_rejected (test_reference_qualification.QualificationTests.test_input_identity_rejected) ... ok
+test_late_freeze_rejected (test_reference_qualification.QualificationTests.test_late_freeze_rejected) ... ok
+test_missing_and_slow_not_dropped (test_reference_qualification.QualificationTests.test_missing_and_slow_not_dropped) ... ok
+test_missing_gate_rejected (test_reference_qualification.QualificationTests.test_missing_gate_rejected) ... ok
+test_missing_runtime_and_bank_no_success (test_reference_qualification.QualificationTests.test_missing_runtime_and_bank_no_success) ... ok
+test_other_clock_rejected (test_reference_qualification.QualificationTests.test_other_clock_rejected) ... ok
+test_plan_tolerance_mutation (test_reference_qualification.QualificationTests.test_plan_tolerance_mutation) ... ok
+test_policy_postfit_rejected (test_reference_qualification.QualificationTests.test_policy_postfit_rejected) ... ok
+test_previous_done_not_reset (test_reference_qualification.QualificationTests.test_previous_done_not_reset) ... ok
+test_query_identity_rejected (test_reference_qualification.QualificationTests.test_query_identity_rejected) ... ok
+test_query_orphan_rejected (test_reference_qualification.QualificationTests.test_query_orphan_rejected) ... ok
+test_tolerance_boundary (test_reference_qualification.QualificationTests.test_tolerance_boundary) ... ok
+test_unmatched_is_valid_negative_result (test_reference_qualification.QualificationTests.test_unmatched_is_valid_negative_result) ... ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 12.044s
+
+OK
