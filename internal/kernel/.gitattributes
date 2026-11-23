@@ -1,0 +1,1 @@
+qa_mixed_agent_mysql_test.go -text whitespace=cr-at-eol
