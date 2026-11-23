@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "scope": "installation-input-only-no-secret-values",
-  "sourceCommit": "9ece932e6020935bb24f5c7f4c89fb5333e94556",
+  "sourceCommit": "41e8ec3f09b83f247503cf2599e2d126b8171f33",
   "productionWiringVerified": false,
   "connections": {
     "core": {
@@ -276,6 +276,7 @@
         "deploy/release/compose/compose.external.yaml",
         "deploy/release/compose/compose.yaml",
         "deploy/release/configure.py",
+        "deploy/release/fetch_source.py",
         "deploy/release/identity_smoke.py",
         "deploy/release/kubernetes/.gitignore",
         "deploy/release/kubernetes/README.md",

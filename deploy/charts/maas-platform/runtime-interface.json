@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "scope": "observed-source-interface-not-production-readiness",
   "backend": {
-    "sourceCommit": "9ece932e6020935bb24f5c7f4c89fb5333e94556",
+    "sourceCommit": "41e8ec3f09b83f247503cf2599e2d126b8171f33",
     "apiGroup": "serving.maas.example",
     "operator": {
       "command": [
@@ -66,7 +66,7 @@
       "docs/agent-tool-interface.md": "ae8f0c22026543f32a73cf53ba8a17651648080cdc29fde52f7703edf5526e8b",
       "docs/controlled-api-continuation.md": "34a1f80563c2aaca3a6c091e83f45ea64f140033de2682dbd9c0c2c12a6af562",
       "docs/controlled-api-verification.md": "ccd6ad5cd1b959bf3c38364b48c60ec26b69e24fe1834ccf141b806297982eaf",
-      "docs/delivery-feature-matrix.md": "a4380e9e15c60c3f08cf7652ba2d2b548892cc2b5f13f533e5b3dfe6c9a6f784",
+      "docs/delivery-feature-matrix.md": "9ac1a319b6e89fc0c65d9eeac8221931f11529b1153dde3a2fdbe92b2dffff91",
       "docs/delivery-integration-review.md": "b38164ad3a4d79a6d26107464283d8e5bc83b58a904fecd7be41367de5a98335",
       "docs/go-relay-d1-export.md": "8dffd8d0a6021d296afba6993442356ba93752594c67b329b2a2aa991b79417f",
       "docs/higress-minimal-patch-scope.md": "eb8472c5b0ec120019cc1c069fad752809040115fda637663f0a13ff8d2cff93",
@@ -118,7 +118,7 @@
       "scripts/test-release-management.sh": "e85e516354cb79328ad9bae10e37bfba20f14b913b205e55178102400bd548f7",
       "scripts/test.ps1": "bd01c32c3cfab6743917dce89424a111ae83f931a1ce44f71f96a1cde9b6f1de",
       "scripts/unified_sources.py": "edd7ee251396adfab8a1240f87b7b7f1d16c4c88027b4775c344e861447ac358",
-      "scripts/verify-delivery.py": "55ea18afba882919b1e1ed06e203eb24f1d5b0667ebff455550d7e3aa17ef7dd",
+      "scripts/verify-delivery.py": "2bd0068cdb685d8765f280f72e7332bd5eb17316854724a5f54ecd73be169c7a",
       "scripts/workbench-service.mjs": "d2f77f0d81783adb38c2d98ae52e1c83e939bb4e1810512f333c43a51653c6fc",
       "scripts/workbench-smoke.mjs": "e9245d105de8a3be0de7cc65d33f6b43ef00dd7bb0dc80f44541f290b7d9ddc0",
       "scripts/workbench.sh": "9aa73de47850a2e240472c2dd5b3082e9c7fc2323dcc06d2317bb1563cd6fb08",
@@ -676,7 +676,7 @@
     }
   },
   "console": {
-    "sourceCommit": "9ece932e6020935bb24f5c7f4c89fb5333e94556",
+    "sourceCommit": "41e8ec3f09b83f247503cf2599e2d126b8171f33",
     "build": "npm ci && npm run build",
     "output": "console/dist",
     "localBridge": "development-and-explicit-workbench-mode-only",
