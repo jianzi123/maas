@@ -165,7 +165,8 @@ const nav = [
             :disabled="!authenticated"
             @click="navigate(id)"
           >
-            <span>{{ label }}</span><span aria-hidden="true">↗</span>
+            <span>{{ label }}</span
+            ><span aria-hidden="true">↗</span>
           </button></template
         >
       </nav>
