@@ -67,7 +67,7 @@ test_log="${MAAS_TEST_LOG_NAME:-mysql-tests.txt}"
 if [[ "${MAAS_TEST_AGENT_RUNTIME:-}" == 1 ]]; then
     "$GOROOT/bin/go" test ./internal/agentruntime ./internal/kernel -json -count=1 -timeout=180s -run '^(TestAR1|TestMySQLAR1|TestMySQLAgent)' | tee "$task_root/artifacts/$test_log"
 elif [[ "${MAAS_TEST_WORKBENCH_IDENTITY:-}" == 1 ]]; then
-    "$GOROOT/bin/go" test -tags localworkbench ./cmd/workbench -count=1 -v -timeout=120s -run '^TestLocalRuntimeIdentities$' | tee "$task_root/artifacts/$test_log"
+    "$GOROOT/bin/go" test -tags localworkbench ./cmd/workbench -count=1 -v -timeout=120s -run '^(TestLocalRuntimeIdentities|TestInstallationComposition)$' | tee "$task_root/artifacts/$test_log"
 else
     "$GOROOT/bin/go" test ./internal/release/mysqlstore ./internal/release/management ./internal/kernel ./internal/controlapi ./cmd/control-api -count=1 -v -timeout=180s -run "${MAAS_TEST_PATTERN:-.}" | tee "$task_root/artifacts/$test_log"
 fi
