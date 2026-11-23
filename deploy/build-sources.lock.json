@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "sourceMode": "single-repository-code-commit",
   "backend": {
-    "sourceCommit": "23eb8898dbce6f9ab1efbfc970a1611ecd632ca5",
+    "sourceCommit": "64b36c3480735ae28148bf973103678c92a76d0b",
     "files": {
       ".gitattributes": "dfd50b4d90593dde1621efa8da5b6dc071c7cf1844c139932e5b26df2607e6d5",
       ".gitignore": "46cf94096a926a26bc1a913b6cc632adacab0a96ab42d72a7dcbf216bcbaaa77",
@@ -21,7 +21,8 @@
       "docs/agent-tool-interface.md": "ae8f0c22026543f32a73cf53ba8a17651648080cdc29fde52f7703edf5526e8b",
       "docs/controlled-api-continuation.md": "34a1f80563c2aaca3a6c091e83f45ea64f140033de2682dbd9c0c2c12a6af562",
       "docs/controlled-api-verification.md": "ccd6ad5cd1b959bf3c38364b48c60ec26b69e24fe1834ccf141b806297982eaf",
-      "docs/delivery-integration-review.md": "dba7a6faf300747af9d8c0922193ac243c3d65a327f70da7a855acd4b113abf0",
+      "docs/delivery-feature-matrix.md": "a4380e9e15c60c3f08cf7652ba2d2b548892cc2b5f13f533e5b3dfe6c9a6f784",
+      "docs/delivery-integration-review.md": "b38164ad3a4d79a6d26107464283d8e5bc83b58a904fecd7be41367de5a98335",
       "docs/go-relay-d1-export.md": "8dffd8d0a6021d296afba6993442356ba93752594c67b329b2a2aa991b79417f",
       "docs/higress-minimal-patch-scope.md": "eb8472c5b0ec120019cc1c069fad752809040115fda637663f0a13ff8d2cff93",
       "docs/history-public-handoff.md": "2a536c86b70db869d4abe78d5d9baa596de60e95f4020d2f3adc6e92da4ad911",
@@ -60,6 +61,7 @@
       "scripts/lock-unified-source.py": "9daeb080aef88177c54976396960bfc5e24d71bc263520b0a656814f21baf060",
       "scripts/relay-d1-manifest.py": "ccb01850bc5fb8160867c186e0b290e265ce55233105af8f0ad8bb05089518c8",
       "scripts/setup-workbench.sh": "71ff8b40f1a092190cc9bdaa282deb377d130995d9c24301ffdc17c74654cc9a",
+      "scripts/smoke-product-cancel.py": "3c689eda5a9bba8ef5759f6026aa5359ffb37d4d8c9ebad3b483fb8c5e0de473",
       "scripts/smoke-product-offline.py": "b5f90868878d607a340c3f93f488982a1dee0d16cb81328b1ece994e17796e09",
       "scripts/test-agent-mysql.sh": "27ef2164f6ae6acd608eddf6a6b53d89d95e890dc585d6371acb2bc5d07d53f8",
       "scripts/test-agent-runtime.ps1": "5a83cce18911396af51f89c07a89d9368af845d7543d8d82361e8114bed7409c",
@@ -614,7 +616,7 @@
     }
   },
   "console": {
-    "sourceCommit": "23eb8898dbce6f9ab1efbfc970a1611ecd632ca5",
+    "sourceCommit": "64b36c3480735ae28148bf973103678c92a76d0b",
     "files": {
       "console/.env.fixtures": "4d5e22f8eeb4bbf5a027a34c7a4bfef806876a470f89440f9611bd01a9d8c5f7",
       "console/.env.workbench": "930edf078e756f41d37fad0f7ce87332d8af59e65dac57b11797bcf0117a9216",
@@ -915,6 +917,7 @@
       "docs/contracts/agent-runtime/ar1-draft2/openapi.json",
       "docs/contracts/agent-runtime/ar1-draft2/session-event.schema.json",
       "docs/contracts/agent-runtime/ar1-draft2/source.json",
+      "docs/delivery-feature-matrix.md",
       "docs/delivery-integration-review.md",
       "docs/installation-composition.md",
       "docs/local-service.md",
@@ -1056,6 +1059,7 @@
       "scripts/dev.mjs",
       "scripts/lock-unified-source.py",
       "scripts/setup-workbench.sh",
+      "scripts/smoke-product-cancel.py",
       "scripts/smoke-product-offline.py",
       "scripts/test-agent-mysql.sh",
       "scripts/test-agent-runtime.ps1",

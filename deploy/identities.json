@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "scope": "installation-input-only-no-secret-values",
-  "sourceCommit": "23eb8898dbce6f9ab1efbfc970a1611ecd632ca5",
+  "sourceCommit": "64b36c3480735ae28148bf973103678c92a76d0b",
   "productionWiringVerified": false,
   "connections": {
     "core": {
@@ -304,6 +304,7 @@
         "docs/contracts/agent-runtime/ar1-draft2/openapi.json",
         "docs/contracts/agent-runtime/ar1-draft2/session-event.schema.json",
         "docs/contracts/agent-runtime/ar1-draft2/source.json",
+        "docs/delivery-feature-matrix.md",
         "docs/delivery-integration-review.md",
         "docs/installation-composition.md",
         "docs/local-service.md",
@@ -445,6 +446,7 @@
         "scripts/dev.mjs",
         "scripts/lock-unified-source.py",
         "scripts/setup-workbench.sh",
+        "scripts/smoke-product-cancel.py",
         "scripts/smoke-product-offline.py",
         "scripts/test-agent-mysql.sh",
         "scripts/test-agent-runtime.ps1",
