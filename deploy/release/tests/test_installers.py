@@ -59,4 +59,17 @@ class InstallerTest(unittest.TestCase):
                 self.assertEqual(public["chat"]["limits"],private["agent"]["limits"])
                 self.assertEqual(len(public["chat"]["tools"]),2 if profile=="offline-controlled" else 0)
                 self.assertFalse(private.get("management",{}).get("enabled",False))
+    def test_incomplete_smoke_record_cannot_pass_without_verifying_data(self):
+        with tempfile.TemporaryDirectory() as d:
+            root=Path(d);record=root/"partial.json";output=root/"result.json"
+            for partial in ({"sessionId":"owned","runs":[],"pendingCommand":{"run_id":"unknown"}},
+                            {"sessionId":"owned","runs":[{"children":[],"usageHashes":[]}]}):
+                record.write_text(json.dumps(partial))
+                command=[sys.executable,str(RELEASE/"smoke.py"),"--base","http://127.0.0.1:1","--password-file",str(root/"must-not-be-read"),"--offline-demo","--phase","verify","--record",str(record),"--output",str(output)]
+                result=subprocess.run(command,capture_output=True,text=True)
+                self.assertNotEqual(result.returncode,0)
+                report=json.loads(output.read_text())
+                self.assertFalse(report["passed"])
+                self.assertEqual(report["checks"],[])
+                self.assertIn("Incomplete smoke record",report["reason"])
 if __name__=="__main__":unittest.main()

@@ -64,7 +64,7 @@ def main():
         while time.monotonic() < deadline:
             current, _ = request('GET', base)
             if current['state'] in ('completed', 'failed', 'cancelled', 'needs_confirmation', 'limit_reached'):
-                raise RuntimeError('Run terminated before an admitted cancellation; inspect original IDs')
+                raise RuntimeError('Run terminated before an admitted cancellation; inspect original IDs. Use an explicitly slower offline step_delay_ms (e.g. 5000), restart the owned app, then use a NEW record; never repeat this command.')
             for candidate in current['child_request_ids']:
                 usage, _ = request('GET', '/api/admin/v1/usage/requests?request_id=' + urllib.parse.quote(candidate))
                 if len(usage['data']) == 1 and usage['data'][0]['status'] == 'in_progress':

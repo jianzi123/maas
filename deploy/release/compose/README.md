@@ -73,8 +73,12 @@ Kubernetes、真实供应商/生产Higress/Secret/付费/公开镜像发布分�
 
 离线站点启动后可显式运行（只允许loopback、正常MySQL离线profile）：
 
+停止演示应先把私有 `config/product.json` 的 `offline_controlled.step_delay_ms` 设为 `5000`，执行 `docker compose restart maas` 并等待 `/readyz`；这是合成延迟配置，不更改真实来源或预算。默认快速回答可能在观察前自然完成，此时脚本会拒绝宣称停止成功。保留该次record，使用新record验证，不自动重新生成。
+
 ```sh
 python source/scripts/smoke-product-cancel.py --url http://localhost:18080 --password-file .secrets/migration/maas_bootstrap_password --record smoke-cancel.json
 ```
 
 脚本先读原child的in_progress账本，确认已经准入再发送停止；保存原Run/child和终态/消费hash，不自动重试写。使用同一smoke.py的verify命令、将record换为smoke-cancel.json，可在应用/MySQL重启后只读验证cancelled原记录。不要覆盖已有record去重跑。create默认读取同源console-config.json的实际限额；--limits-file可显式指定同版本公开配置，不回退其他示例币种。
+
+未完成或仍含pendingCommand/pendingApproval的record不能当作恢复成功证据；verify在任何网络/认证请求前拒绝空runs、缺child消费或未知终态清单，请按原operation/run只读核实。

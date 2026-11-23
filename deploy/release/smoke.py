@@ -42,6 +42,13 @@ def get(path):
 def hash_json(v):return hashlib.sha256(json.dumps(v,sort_keys=True,separators=(",",":")).encode()).hexdigest()
 api="/api/agent/v1"
 try:
+    if a.phase=="verify":
+        record=json.loads(a.record.read_text(encoding="utf-8"))
+        if record.get("pendingCommand") or record.get("pendingApproval") or not isinstance(record.get("runs"),list) or not record["runs"]:
+            raise RuntimeError("Incomplete smoke record: inspect original commands; no business records verified")
+        for saved in record["runs"]:
+            if not saved.get("children") or len(saved["children"])!=len(saved.get("usageHashes",[])) or saved.get("state","completed") not in ("completed","cancelled"):
+                raise RuntimeError("Incomplete smoke record: original child usage and terminal state required")
     request("GET","/healthz")
     _,ready=get("/readyz")
     if ready.get("profile")!="offline-controlled" or ready.get("persistence")!="mysql":raise RuntimeError("normal MySQL offline profile required; no model POST sent")
@@ -116,7 +123,7 @@ try:
             record.pop("pendingApproval",None)
             a.record.write_text(json.dumps(record,indent=2)+"\n")
     else:
-        record=json.loads(a.record.read_text());sid=record["sessionId"];sp=api+"/sessions/"+sid
+        sid=record["sessionId"];sp=api+"/sessions/"+sid
         for saved in record["runs"]:
             rp=sp+"/runs/"+saved["id"]
             _,run=get(rp);_,events=get(rp+"/events?page_size=100");_,tools=get(rp+"/tool-calls?page_size=100")
