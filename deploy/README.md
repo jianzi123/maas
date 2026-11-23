@@ -24,3 +24,5 @@ Windows可用 `--helm-command "wsl -d Ubuntu-22.04 -- helm"`。静态结果见ev
 
 见[环境门槛](docs/readiness.md)、[运维手册](docs/runbook.md)、[依赖锁定清单](dependencies.lock.json)。目标集群/模型/付费调用与公开发布继续按原授权门槛。
 四条连接的 `core.databaseSecrets`、角色模板和源码必须对应；未合入候选、缺配置/证据/消费变量、共享身份、Reader写角色、过期来源清单和publisher模板摘要均被预检拒绝。R3真实default role/hook正反证据引用QA50354a7的ac94受控范围，本轮只做部署检查；历史117/25、工厂单测及QA业务结果不计作新验证。当前原后端工作台保持运行，本轮不操作服务或共享数据。
+
+Chat/Agent新接续：实际入口、15秒HTTP限制、迁移/身份/恢复缺口及有界本地SSE探测见 [Chat/Agent装配](docs/chat-agent-assembly.md)。当前不注入尚无消费者的Agent变量或安装DSH sidecar。
