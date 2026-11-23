@@ -1,0 +1,6 @@
+{
+  "schema_version": "maas.console/1",
+  "chat": {
+    "enabled": false
+  }
+}

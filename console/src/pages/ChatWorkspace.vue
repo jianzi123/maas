@@ -3,6 +3,7 @@ import { computed, onMounted, onBeforeUnmount, ref, shallowRef } from "vue";
 import type { ChatService, Session, Run, Mode, Message } from "../chat/types";
 import ChatMarkdown from "../components/ChatMarkdown.vue";
 import PanelDialog from "../components/PanelDialog.vue";
+import { deployedChatConfig } from "../deployment";
 const props = defineProps<{
   development?: boolean;
   service?: ChatService;
@@ -349,7 +350,9 @@ onMounted(async () => {
     } else if (props.http) {
       const { HTTPChat } = await import("../chat/http");
       service.value = new HTTPChat(
-        JSON.parse(import.meta.env.VITE_CHAT_AR1_CONFIG || "null"),
+        import.meta.env.DEV
+          ? JSON.parse(import.meta.env.VITE_CHAT_AR1_CONFIG || "null")
+          : deployedChatConfig(),
       );
     }
     if (service.value) {
