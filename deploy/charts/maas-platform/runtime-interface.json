@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "scope": "observed-source-interface-not-production-readiness",
   "backend": {
-    "sourceCommit": "41e8ec3f09b83f247503cf2599e2d126b8171f33",
+    "sourceCommit": "bee3ae513068791a857c2b41489b55058ce67720",
     "apiGroup": "serving.maas.example",
     "operator": {
       "command": [
@@ -103,7 +103,7 @@
       "scripts/check-source.mjs": "7d793d26d5a39db7e8ed5a7ea428ad6653d3677ce205d4d7352e17312a81a0c6",
       "scripts/collect-relay-d1.sh": "a40e2fead2a6d4e66f8067832a7e91ea63acfdfd5384dedc9eaf2684aafb35c0",
       "scripts/dev.mjs": "9c9f0033dfea817dc4b5d797598971a5b33686d118bf3a1d894378e98f5f0405",
-      "scripts/lock-unified-source.py": "9daeb080aef88177c54976396960bfc5e24d71bc263520b0a656814f21baf060",
+      "scripts/lock-unified-source.py": "200da416b66d08eb812618e0d195c913bcc606c94671ca8f2a0571491c25e27f",
       "scripts/relay-d1-manifest.py": "ccb01850bc5fb8160867c186e0b290e265ce55233105af8f0ad8bb05089518c8",
       "scripts/setup-workbench.sh": "71ff8b40f1a092190cc9bdaa282deb377d130995d9c24301ffdc17c74654cc9a",
       "scripts/smoke-product-cancel.py": "9676c388c56b2e116fe0ffbd4c478a3105b79f411756c261188d5c0042da79ab",
@@ -676,7 +676,7 @@
     }
   },
   "console": {
-    "sourceCommit": "41e8ec3f09b83f247503cf2599e2d126b8171f33",
+    "sourceCommit": "bee3ae513068791a857c2b41489b55058ce67720",
     "build": "npm ci && npm run build",
     "output": "console/dist",
     "localBridge": "development-and-explicit-workbench-mode-only",
