@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "sourceMode": "single-repository-code-commit",
   "backend": {
-    "sourceCommit": "b38084153f796f3d6ee53179f1441341d3c4fb45",
+    "sourceCommit": "ebef095b6d13facfe0b386f74ad4a819b6fa4ae2",
     "files": {
       ".gitattributes": "dfd50b4d90593dde1621efa8da5b6dc071c7cf1844c139932e5b26df2607e6d5",
       ".gitignore": "46cf94096a926a26bc1a913b6cc632adacab0a96ab42d72a7dcbf216bcbaaa77",
@@ -60,6 +60,7 @@
       "scripts/test-release-management.sh": "e85e516354cb79328ad9bae10e37bfba20f14b913b205e55178102400bd548f7",
       "scripts/test.ps1": "bd01c32c3cfab6743917dce89424a111ae83f931a1ce44f71f96a1cde9b6f1de",
       "scripts/unified_sources.py": "edd7ee251396adfab8a1240f87b7b7f1d16c4c88027b4775c344e861447ac358",
+      "scripts/verify-delivery.py": "55ea18afba882919b1e1ed06e203eb24f1d5b0667ebff455550d7e3aa17ef7dd",
       "scripts/workbench-service.mjs": "d2f77f0d81783adb38c2d98ae52e1c83e939bb4e1810512f333c43a51653c6fc",
       "scripts/workbench-smoke.mjs": "e9245d105de8a3be0de7cc65d33f6b43ef00dd7bb0dc80f44541f290b7d9ddc0",
       "scripts/workbench.sh": "9aa73de47850a2e240472c2dd5b3082e9c7fc2323dcc06d2317bb1563cd6fb08",
@@ -576,7 +577,7 @@
     }
   },
   "console": {
-    "sourceCommit": "b38084153f796f3d6ee53179f1441341d3c4fb45",
+    "sourceCommit": "ebef095b6d13facfe0b386f74ad4a819b6fa4ae2",
     "files": {
       "console/.env.fixtures": "4d5e22f8eeb4bbf5a027a34c7a4bfef806876a470f89440f9611bd01a9d8c5f7",
       "console/.env.workbench": "930edf078e756f41d37fad0f7ce87332d8af59e65dac57b11797bcf0117a9216",
@@ -947,6 +948,7 @@
       "scripts/test-r5.sh",
       "scripts/tests/test_unified_sources.py",
       "scripts/unified_sources.py",
+      "scripts/verify-delivery.py",
       "scripts/workbench-service.mjs",
       "scripts/workbench-smoke.mjs",
       "scripts/workbench.sh",

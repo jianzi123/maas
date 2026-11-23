@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "scope": "installation-input-only-no-secret-values",
-  "sourceCommit": "b38084153f796f3d6ee53179f1441341d3c4fb45",
+  "sourceCommit": "ebef095b6d13facfe0b386f74ad4a819b6fa4ae2",
   "productionWiringVerified": false,
   "connections": {
     "core": {
@@ -383,6 +383,7 @@
         "scripts/test-r5.sh",
         "scripts/tests/test_unified_sources.py",
         "scripts/unified_sources.py",
+        "scripts/verify-delivery.py",
         "scripts/workbench-service.mjs",
         "scripts/workbench-smoke.mjs",
         "scripts/workbench.sh",
