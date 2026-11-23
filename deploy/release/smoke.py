@@ -52,6 +52,13 @@ try:
         selected=next((m for m in cap["model_modes"] if m["model_alias"]==a.model),None)
         if selected is None:raise RuntimeError("demo model absent")
         if selected.get("approval_state") not in ("controlled","offline-demo"):raise RuntimeError("offline smoke refuses a real or unmarked provider")
+        if a.limits_file:
+            installed=json.loads(a.limits_file.read_text(encoding="utf-8"))
+        else:
+            _,installed=get("/console-config.json")
+        if installed.get("schema_version")!="maas.console/1" or installed.get("chat",{}).get("enabled") is not True or not isinstance(installed["chat"].get("limits"),dict):
+            raise RuntimeError("enabled same-version public installation limits required before any model command")
+        installed_limits=installed["chat"]["limits"]
         creation=str(uuid.uuid4())
         a.record.parent.mkdir(parents=True,exist_ok=True)
         record={"creationOperationId":creation,"runs":[]}
@@ -62,11 +69,8 @@ try:
         a.record.write_text(json.dumps(record,indent=2)+"\n")
         for mode in ("chat","agent"):
             _,snap=get(sp);etag='"'+snap["conversation"]["revision"]+'"'
-            limits={"max_steps":4,"max_model_calls":1 if mode=="chat" else 4,"max_tool_calls":0 if mode=="chat" else 8,"max_duration_ms":10000,"tool_timeout_ms":1000,"max_tool_output_bytes":8192,"max_context_tokens":32768,"no_progress_limit":3,"max_tokens":"100","max_money_atomic":"100","currency":"TST"}
-            if a.limits_file:
-                installed=json.loads(a.limits_file.read_text(encoding="utf-8"))
-                limits=copy.deepcopy(installed["chat"]["limits"])
-                if mode=="chat":limits.update(max_model_calls=1,max_tool_calls=0)
+            limits=copy.deepcopy(installed_limits)
+            if mode=="chat":limits.update(max_model_calls=1,max_tool_calls=0)
             op=str(uuid.uuid4())
             body={"client_operation_id":op,"mode":mode,"operation":"send","text":"6 times 7 and list visible models" if mode=="agent" else "Hello from the MySQL installer","referenced_message_id":None,"model_alias":a.model,"limits":limits,"tools":[] if mode=="chat" else [{"name":"bounded_arithmetic","revision":"1"},{"name":"list_visible_models","revision":"1"}]}
             record["pendingCommand"]={"client_operation_id":op,"bodyHash":hash_json(body)}
