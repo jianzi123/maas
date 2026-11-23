@@ -25,6 +25,9 @@ cases=[
  ("no_ddl","CREATE TABLE maas_owned_forbidden_probe(id INT);",False),
  ("no_global_credentials","SELECT User FROM mysql.user LIMIT 0;",False),
  ("no_admin_policy_write","UPDATE product_admins SET enabled=enabled WHERE 1=0;",False),
+ ("no_history_metadata","SELECT * FROM release_history_projection LIMIT 0;",False),
+ ("no_private_payload","SELECT spec_bytes FROM retained_release_snapshots LIMIT 0;",False),
+ ("no_management_operations","SELECT * FROM release_management_operations LIMIT 0;",False),
 ]
 for name,sql,allowed in cases:
     r=query(sql);code=re.search(r"ERROR\s+(\d+)",r.stderr)

@@ -3,7 +3,7 @@
 
 准确源码、四锁、镜像版本以包根 VERSION.json 为准。以下分项记录，不将健康或作者历史结果代替模型闭环。
 
-已实际完成：Go1.26.0普通cmd/maas-service构建、Node22.23.4生产Vue、应用/Web/迁移三镜像构建；独立Compose四服务启动，MySQL/Go/Web健康、迁移正常退出；同一Cookie/管理员/CSRF跨应用与MySQL重启保留、退出401；实际maas_runtime/default roles七项允许/拒绝SQL检查通过；正式站点只读浏览器3项/0页面错误/0 Run POST；安装器四项回归通过。
+已实际完成：Go1.26.0普通cmd/maas-service构建、Node22.23.4生产Vue、应用/Web/迁移三镜像构建；独立Compose四服务启动，MySQL/Go/Web健康、迁移正常退出；同一Cookie/管理员/CSRF跨应用与MySQL重启保留、退出401；正式站点只读浏览器3项/0页面错误/0 Run POST；安装器四项回归通过。初轮七项SQL检查是历史候选范围；权限审查后移除未消费的metadata/payload/Operations三角色，新增三项拒绝检查及旧角色故障关闭门槛，最终回归结果见任务原始证据。
 
 K8s使用kubeconform模块v0.7.0及K8s1.36.0公开schema做静态校验。没有获准自有隔离集群，未执行目标kubectl安装/重启，不能据静态结果宣称集群应用通过。
 

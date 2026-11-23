@@ -24,11 +24,30 @@ GRANT SELECT ON $database.product_schema_migrations TO maas_product_auth_runtime
 GRANT SELECT,INSERT,UPDATE ON $database.product_sessions TO maas_product_auth_runtime;
 GRANT SELECT,INSERT,UPDATE ON $database.product_login_attempts TO maas_product_auth_runtime;
 CREATE USER IF NOT EXISTS 'maas_runtime'@'%' IDENTIFIED BY '$password';
-GRANT maas_kernel_runtime,maas_release_reader,maas_release_history_reader,maas_history_payload_reader,maas_release_operations_runtime,maas_agent_session_runtime,maas_product_auth_runtime TO 'maas_runtime'@'%';
-SET DEFAULT ROLE ALL TO 'maas_runtime'@'%';
 SQL
 then
   echo "Runtime account/default-role provisioning failed; secret-bearing SQL is not logged." >&2
   exit 1
 fi
+# Reject older overgrants instead of silently retaining them. Also reject any
+# inherited role beneath a permitted role; DBA review remains necessary for
+# direct object grants and modifications to the role templates themselves.
+unexpected="$(mysql --defaults-extra-file=/run/secrets/mysql-client.cnf --batch --skip-column-names <<'SQL'
+SELECT
+ (SELECT COUNT(*) FROM mysql.role_edges WHERE
+   (TO_USER='maas_runtime' AND TO_HOST='%' AND
+    (FROM_HOST<>'%' OR FROM_USER NOT IN ('maas_kernel_runtime','maas_release_reader','maas_agent_session_runtime','maas_product_auth_runtime') OR WITH_ADMIN_OPTION<>'N'))
+   OR (TO_HOST='%' AND TO_USER IN ('maas_kernel_runtime','maas_release_reader','maas_agent_session_runtime','maas_product_auth_runtime')))
+ + (SELECT COUNT(*) FROM mysql.default_roles WHERE USER='maas_runtime' AND HOST='%' AND
+    (DEFAULT_ROLE_HOST<>'%' OR DEFAULT_ROLE_USER NOT IN ('maas_kernel_runtime','maas_release_reader','maas_agent_session_runtime','maas_product_auth_runtime')));
+SQL
+)"
+if [[ "$unexpected" != 0 ]]; then
+  echo "Runtime has unexpected direct/default/inherited roles; request authorized DBA review. No existing roles were revoked." >&2
+  exit 1
+fi
+mysql --defaults-extra-file=/run/secrets/mysql-client.cnf <<'SQL'
+GRANT maas_kernel_runtime,maas_release_reader,maas_agent_session_runtime,maas_product_auth_runtime TO 'maas_runtime'@'%';
+SET DEFAULT ROLE maas_kernel_runtime,maas_release_reader,maas_agent_session_runtime,maas_product_auth_runtime TO 'maas_runtime'@'%';
+SQL
 echo "Migrations and explicit runtime roles completed; no existing password or ledger is reset."

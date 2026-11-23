@@ -28,6 +28,8 @@ PowerShell选择构建文件用：`$env:MAAS_DOCKERFILE='deploy/release/Dockerfi
 
 mysql:8.4.7独立卷，默认不发布3306；migrate一次执行真正Go迁移和原窄角色模板；maas常驻serve，无DDL且只挂runtime DSN/pepper/cursor；web提供生产Vue和公开JSON，把全部/api及/v1代理到同一个Go。迁移DSN、bootstrap密码不挂常驻应用。就绪检查/单活scheduler保证与MySQL一致，replicas=1，更新短时停机，不宣称无缝多活。
 
+当前核心账户仅授kernel_runtime、release_reader、agent_session_runtime、product_auth_runtime四角色。未消费的history/payload/Operations/publisher不预授给核心；后续正式管理接线需各自独立DSN/Secret，不能回退core。旧安装如存在其他直接/default/继承角色，迁移拒绝并提示DBA审查，不自动撤权或声称只删GRANT即收紧。角色模板的对象权限及外置实例直接授权仍需安装方审计。
+
 MySQL首次初始化在本机约2分钟，安装等待上限5分钟。/healthz是Web存活，/readyz转发到Go检查数据库/所有权；ready不等于模型Callable。SSE禁缓冲，代理75秒超时覆盖当前后端30秒响应窗口；Cookie/CSRF/If-Match/ETag保持同源。日志仅方法/路径/状态/时长/后端请求ID，不记录查询串、消息或凭据。
 
 ## 模型与验收
