@@ -4,12 +4,12 @@
   "deploymentApproved": false,
   "sourceBaseline": {
     "chartBase": "e5647a2f2b44f53d39a80041be94b619f07c29d6",
-    "backendInspected": "f233da2682660c11a432281790a4b500ee73620f",
+    "backendInspected": "c045a90a2b8c2f79802767754cc124a3a01c97b3",
     "contracts": "MAAS-2 v0.4 + retained v0.3 + query/recovery addenda + MAAS-1 role review",
     "terminal": "3.0",
     "ticket": "3",
     "proposedTerminal": "3.1 (not enabled)",
-    "consoleInspected": "f233da2682660c11a432281790a4b500ee73620f",
+    "consoleInspected": "c045a90a2b8c2f79802767754cc124a3a01c97b3",
     "defaultBranch": "925d8c55be9ce823d100bf90a5c78cf19ea66d58",
     "candidatePR": null,
     "candidateState": "integrated-unmerged",
@@ -18,7 +18,7 @@
     "qaCore": "ac94a373ec0a61c5fd4dc5380a7985a4fb47840f",
     "qaEvidence": "50354a705c03383d0102d0d437119afd7ffed8b3",
     "sourceInventory": "deploy/build-sources.lock.json",
-    "sourceInventorySha256": "579d912cde254c98d3f296f0a078b25ac3768a0c2d08ff307a535faf1e4b5cff",
+    "sourceInventorySha256": "3eb2afeaf2d92e8a591e247bcef2e965c69f78d9e034dffa7495497da2c3ad23",
     "upstreamWorkbenchDeployment": "e5647a2f2b44f53d39a80041be94b619f07c29d6",
     "backendBase": "0559fa46b4a728d6f542daf19532e794f8549b31",
     "integrationBranch": "integrate/MAAS-17-unified-20261114",
@@ -99,7 +99,7 @@
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "f233da2682660c11a432281790a4b500ee73620f",
+      "sourceCommit": "c045a90a2b8c2f79802767754cc124a3a01c97b3",
       "compiledAPIGroup": "serving.maas.example"
     },
     {
@@ -116,7 +116,7 @@
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "f233da2682660c11a432281790a4b500ee73620f",
+      "sourceCommit": "c045a90a2b8c2f79802767754cc124a3a01c97b3",
       "compiledAPIGroup": "serving.maas.example"
     },
     {
@@ -133,7 +133,7 @@
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "f233da2682660c11a432281790a4b500ee73620f"
+      "sourceCommit": "c045a90a2b8c2f79802767754cc124a3a01c97b3"
     },
     {
       "id": "mysql",
@@ -432,7 +432,7 @@
   "databaseIdentities": {
     "schemaVersion": "1.0",
     "scope": "installation-input-only-no-secret-values",
-    "sourceCommit": "f233da2682660c11a432281790a4b500ee73620f",
+    "sourceCommit": "c045a90a2b8c2f79802767754cc124a3a01c97b3",
     "productionWiringVerified": false,
     "connections": {
       "core": {
@@ -690,6 +690,7 @@
           "docs/performance/learning-change-log.md",
           "docs/performance/literature/README.md",
           "docs/performance/literature/elit01-reference-qualification-v0.24.md",
+          "docs/performance/literature/elit01-representativeness-audit-v0.25.md",
           "docs/performance/literature/experiment-cards.json",
           "docs/performance/literature/experiment-cards.md",
           "docs/performance/literature/math-check.json",
@@ -941,6 +942,7 @@
           "tools/perf/operators/local_gpu/analyze_kv_cadence.py",
           "tools/perf/operators/local_gpu/analyze_kv_trace.py",
           "tools/perf/operators/local_gpu/analyze_kv_window_b.py",
+          "tools/perf/operators/local_gpu/audit_reference_representativeness.py",
           "tools/perf/operators/local_gpu/bench_cadence_reference.py",
           "tools/perf/operators/local_gpu/bench_kv_cadence.py",
           "tools/perf/operators/local_gpu/bench_kv_interleaved.py",
@@ -1018,6 +1020,17 @@
           "tools/perf/operators/local_gpu/evidence/measured-source/run_rmsnorm.py",
           "tools/perf/operators/local_gpu/evidence/measured-source/run_sglang.py",
           "tools/perf/operators/local_gpu/evidence/measured-source/source_map.py",
+          "tools/perf/operators/local_gpu/evidence/reference-audit-v0.25/component-deltas.png",
+          "tools/perf/operators/local_gpu/evidence/reference-audit-v0.25/evidence-manifest.json",
+          "tools/perf/operators/local_gpu/evidence/reference-audit-v0.25/final-command.json",
+          "tools/perf/operators/local_gpu/evidence/reference-audit-v0.25/final-tests.log",
+          "tools/perf/operators/local_gpu/evidence/reference-audit-v0.25/final/audit-source.json",
+          "tools/perf/operators/local_gpu/evidence/reference-audit-v0.25/final/audit.json",
+          "tools/perf/operators/local_gpu/evidence/reference-audit-v0.25/final/rows.csv",
+          "tools/perf/operators/local_gpu/evidence/reference-audit-v0.25/final/tables.md",
+          "tools/perf/operators/local_gpu/evidence/reference-audit-v0.25/links.json",
+          "tools/perf/operators/local_gpu/evidence/reference-audit-v0.25/original-byte-verification.json",
+          "tools/perf/operators/local_gpu/evidence/reference-audit-v0.25/verification.json",
           "tools/perf/operators/local_gpu/evidence/reference-v0.24/CPU-preflight.json",
           "tools/perf/operators/local_gpu/evidence/reference-v0.24/actual-vector-negatives.json",
           "tools/perf/operators/local_gpu/evidence/reference-v0.24/all-slow-and-unmatched.json",
@@ -1099,6 +1112,7 @@
           "tools/perf/operators/local_gpu/test_cadence_gates.py",
           "tools/perf/operators/local_gpu/test_cadence_protocol.py",
           "tools/perf/operators/local_gpu/test_reference_qualification.py",
+          "tools/perf/operators/local_gpu/test_representativeness_audit.py",
           "tools/perf/operators/plan.json",
           "tools/perf/operators/probe_local_gpu.py",
           "tools/perf/operators/profile_operator.py",
