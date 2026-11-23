@@ -46,8 +46,9 @@ type modelSource interface {
 	Close()
 }
 
-// Open uses only MySQL. There is no fallback provider, DDL, demo model or local
-// bootstrap bypass in serve. One DB advisory lease defines the active scheduler;
+// Open uses only MySQL. There is no fallback provider, DDL or local bootstrap
+// bypass in serve. The controlled model is an explicit isolated profile, never
+// a production failure fallback. A DB advisory lease defines the active scheduler;
 // a second process fails closed instead of replaying another replica's work.
 func Open(ctx context.Context, c Config) (*Runtime, error) {
 	if e := c.Validate(); e != nil {

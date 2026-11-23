@@ -1,5 +1,5 @@
-// Package app assembles the normal MySQL-backed product process. Controlled
-// models/file stores are never selected by this entrypoint.
+// Package app assembles the MySQL-backed product process. File stores are never
+// selected; the isolated controlled model requires explicit opt-in configuration.
 package app
 
 import (

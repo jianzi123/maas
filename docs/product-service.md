@@ -1,6 +1,8 @@
 正常产品服务接线（MAAS-20／MAAS-21）
 ====================================
 
+后续接线补充以`product-management-and-offline.md`为准：新增同一正常进程的显式MySQL offline_controlled profile，以及可选management四独立DSN/原工厂挂载。默认生产行为仍不启用demo，任何失败不切换来源；下文“agentcontrolled测试入口”是旧测试程序，不是新增可部署离线profile。`docs/product-offline-verification.md`给出新profile实际作者SQL范围和未验边界。
+
 构建：`GOMAXPROCS=2 go build -p=2 -buildvcs=false -o maas-service ./cmd/maas-service`，不加agentcontrolled/localworkbench标签。配置入口是`config/product.example.json`的严格JSON；所有数值都是安装样例，使用者必须明确选择运行/预算/速率值，不代表已有生产批准。
 
 进程与迁移：
