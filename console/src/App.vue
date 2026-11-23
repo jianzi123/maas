@@ -2,6 +2,7 @@
 import { onMounted, onBeforeUnmount, ref, defineAsyncComponent } from "vue";
 import { api } from "./api/client";
 import { explain } from "./ui";
+import { loadDeployment } from "./deployment";
 const ChatWorkspace = defineAsyncComponent(
   () => import("./pages/ChatWorkspace.vue"),
 );
@@ -33,7 +34,13 @@ const local =
   import.meta.env.VITE_LOCAL_CONTROL === "true";
 const ar1Controlled =
   import.meta.env.DEV && import.meta.env.VITE_CHAT_AR1_CONTROLLED === "true";
-const ar1Enabled = import.meta.env.VITE_CHAT_AR1_ENABLED === "true";
+const ar1Enabled = ref(
+  import.meta.env.DEV && import.meta.env.VITE_CHAT_AR1_ENABLED === "true",
+);
+async function configureDeployment() {
+  if (!import.meta.env.DEV)
+    ar1Enabled.value = (await loadDeployment(api.fetcher)).chat.enabled;
+}
 const inferenceAvailable =
   !local ||
   (import.meta.env.DEV &&
@@ -42,6 +49,7 @@ const demo =
   import.meta.env.DEV && import.meta.env.VITE_CONSOLE_FIXTURES === "true";
 async function boot() {
   try {
+    await configureDeployment();
     if (demo) {
       const { fixtureFetch } = await import("./fixtures");
       api.fetcher = fixtureFetch;
@@ -62,6 +70,7 @@ async function login() {
   busy.value = true;
   error.value = "";
   try {
+    await configureDeployment();
     if (local || ar1Controlled) {
       const { enterLocalControl } = await import("./api/local-control");
       await enterLocalControl();

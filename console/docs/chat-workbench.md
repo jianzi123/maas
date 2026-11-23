@@ -18,7 +18,7 @@ Vite 只绑定 loopback。开发桥直接代理该 Go 服务的 /__maas/local-se
 
 模型目录来自 capabilities，demo 明确标为受控模型。受控启动使用后端文档的 TST / 100 Token / 100 原子金额、4步、4模型调用、8工具调用、10秒等测试上限；普通 Chat 固定一次模型调用。这些不是生产默认或批准额度。
 
-生产构建只有显式 VITE_CHAT_AR1_ENABLED=true 且 VITE_CHAT_AR1_CONFIG 提供 JSON 对象 {limits, tools:[{name,revision}]} 时才装配 HTTPChat；限制遵循锁定 RunLimits，并由 Go 与安装策略取交集。没有有效配置或 capability 时显示具体错误、不启用生成，也不回退开发数据。生产登录沿原 api.session/login/logout；模型/来源批准、生产 Auth/Catalog/Reauthorize/Prepare/Usage/最窄 SQL 身份仍须由原后端/运维装配。生产 tools-v1 缺批准时保持拒绝。
+正式静态构建从同源 /console-config.json 读取 schema_version=maas.console/1 与 chat.enabled/limits/tools，再装配 HTTPChat；生产不再依赖 VITE_CHAT_AR1_ENABLED/CONFIG，开发验证仍显式保留。限制遵循锁定 RunLimits，并由 Go 与安装策略取交集。无有效配置或 capability 时显示具体错误，不启用生成或回退开发数据。生产登录沿原 api.session/login/logout，与正式 Go/MySQL 同源。部署接点见 deployment.md，演示见 demo-15min.md，当前能力见 agent-features.md；最终 Auth/Catalog/Reauthorize/Prepare/Usage/SQL 组合仍按原后端与集成交付实测。生产 tools-v1 缺批准时保持拒绝。
 
 ## 行为和恢复边界
 
@@ -71,3 +71,4 @@ HTTPChat.read遇到合法410 cursor_expired、snapshot_required=true、retryable
 工具调用标注服务端的实际attempt（含0），不把取消前未执行当作一次尝试。受控回归分别校验cancelled/0、failed/1、unknown/1的严格ToolCall投影、结果和Run limit_reached保留；unknown不生成批准入口或重跑请求。
 
 本次受影响验证记录：Response/jsdom覆盖、Vue/TypeScript构建与格式检查；Edge分页/恢复/编辑及原Run中文事件HTTP读回；后端a4c的TestARReviewToolOutcomeMatrix九个叶子用例。浏览器工具总时限、真实SQL/跨实例与独立QA未在本轮执行；旧19e的停止/审批/8和13组不能外推到a4c。本轮原始证据单独放artifacts/chat-ar1-pagination，发布结果按各自范围分列。
+
