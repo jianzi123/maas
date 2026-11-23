@@ -65,7 +65,7 @@ mkdir -p "$task_root/artifacts"
 test_log="${MAAS_TEST_LOG_NAME:-mysql-tests.txt}"
 [[ "$test_log" =~ ^[a-zA-Z0-9._-]+$ ]] || { echo 'Invalid test log name' >&2; exit 1; }
 if [[ "${MAAS_TEST_WORKBENCH_IDENTITY:-}" == 1 ]]; then
-    "$GOROOT/bin/go" test -tags localworkbench ./cmd/workbench -count=1 -v -timeout=120s -run '^TestLocalRuntimeIdentities$' | tee "$task_root/artifacts/$test_log"
+    "$GOROOT/bin/go" test -tags localworkbench ./cmd/workbench -count=1 -v -timeout=120s -run '^(TestLocalRuntimeIdentities|TestInstallationComposition)$' | tee "$task_root/artifacts/$test_log"
 else
     "$GOROOT/bin/go" test ./internal/release/mysqlstore ./internal/release/management ./internal/kernel ./internal/controlapi ./cmd/control-api -count=1 -v -timeout=180s -run "${MAAS_TEST_PATTERN:-.}" | tee "$task_root/artifacts/$test_log"
 fi

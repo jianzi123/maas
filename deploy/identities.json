@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "scope": "installation-input-only-no-secret-values",
-  "sourceCommit": "ada28d8f3552d18a3f9cfc448b4b54e1dabc0b93",
+  "sourceCommit": "d0b8b41a241a1b208516446d68fa8a6ca618c14d",
   "productionWiringVerified": false,
   "connections": {
     "core": {
@@ -128,6 +128,7 @@
         "README.md",
         "cmd/workbench/identities.go",
         "cmd/workbench/identities_test.go",
+        "cmd/workbench/installation_test.go",
         "cmd/workbench/main.go",
         "config/integration-sources.json",
         "config/mysql/controlapi-projections.sql",
@@ -193,6 +194,7 @@
         "deploy/images/Dockerfile.operator",
         "deploy/tests/fixtures/hybrid.yaml",
         "deploy/tests/fixtures/internal.yaml",
+        "docs/installation-composition.md",
         "docs/local-service.md",
         "docs/maas17-r5-history.md",
         "docs/model-capabilities/README.md",
@@ -263,6 +265,7 @@
         "docs/single-model-runtime-increment.md",
         "docs/unified-status.md",
         "docs/unified-workbench.md",
+        "internal/installation/runtime.go",
         "internal/kernel/publisher_runtime_test.go",
         "internal/kernel/relay_runtime.go",
         "internal/kernel/relay_runtime_test.go",
@@ -271,6 +274,9 @@
         "internal/release/management/service.go",
         "internal/release/mysqlstore/runtime.go",
         "package.json",
+        "patches/higress/v2.2.5-maas-r1/0001-ext-auth-required-ticket-fail-closed.patch",
+        "patches/higress/v2.2.5-maas-r1/apply.py",
+        "patches/higress/v2.2.5-maas-r1/manifest.json",
         "scripts/assemble-workbench.py",
         "scripts/check-go.mjs",
         "scripts/check-go.sh",
