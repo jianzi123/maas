@@ -1,0 +1,7 @@
+.git
+.cache
+artifacts
+node_modules
+console/node_modules
+**/.env
+**/.secrets
