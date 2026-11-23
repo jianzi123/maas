@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "sourceMode": "single-repository-code-commit",
   "backend": {
-    "sourceCommit": "64b36c3480735ae28148bf973103678c92a76d0b",
+    "sourceCommit": "9ece932e6020935bb24f5c7f4c89fb5333e94556",
     "files": {
       ".gitattributes": "dfd50b4d90593dde1621efa8da5b6dc071c7cf1844c139932e5b26df2607e6d5",
       ".gitignore": "46cf94096a926a26bc1a913b6cc632adacab0a96ab42d72a7dcbf216bcbaaa77",
@@ -61,7 +61,7 @@
       "scripts/lock-unified-source.py": "9daeb080aef88177c54976396960bfc5e24d71bc263520b0a656814f21baf060",
       "scripts/relay-d1-manifest.py": "ccb01850bc5fb8160867c186e0b290e265ce55233105af8f0ad8bb05089518c8",
       "scripts/setup-workbench.sh": "71ff8b40f1a092190cc9bdaa282deb377d130995d9c24301ffdc17c74654cc9a",
-      "scripts/smoke-product-cancel.py": "3c689eda5a9bba8ef5759f6026aa5359ffb37d4d8c9ebad3b483fb8c5e0de473",
+      "scripts/smoke-product-cancel.py": "9676c388c56b2e116fe0ffbd4c478a3105b79f411756c261188d5c0042da79ab",
       "scripts/smoke-product-offline.py": "b5f90868878d607a340c3f93f488982a1dee0d16cb81328b1ece994e17796e09",
       "scripts/test-agent-mysql.sh": "27ef2164f6ae6acd608eddf6a6b53d89d95e890dc585d6371acb2bc5d07d53f8",
       "scripts/test-agent-runtime.ps1": "5a83cce18911396af51f89c07a89d9368af845d7543d8d82361e8114bed7409c",
@@ -616,7 +616,7 @@
     }
   },
   "console": {
-    "sourceCommit": "64b36c3480735ae28148bf973103678c92a76d0b",
+    "sourceCommit": "9ece932e6020935bb24f5c7f4c89fb5333e94556",
     "files": {
       "console/.env.fixtures": "4d5e22f8eeb4bbf5a027a34c7a4bfef806876a470f89440f9611bd01a9d8c5f7",
       "console/.env.workbench": "930edf078e756f41d37fad0f7ce87332d8af59e65dac57b11797bcf0117a9216",

@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "scope": "installation-input-only-no-secret-values",
-  "sourceCommit": "64b36c3480735ae28148bf973103678c92a76d0b",
+  "sourceCommit": "9ece932e6020935bb24f5c7f4c89fb5333e94556",
   "productionWiringVerified": false,
   "connections": {
     "core": {
