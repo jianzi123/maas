@@ -64,8 +64,10 @@ fi
 mkdir -p "$task_root/artifacts"
 test_log="${MAAS_TEST_LOG_NAME:-mysql-tests.txt}"
 [[ "$test_log" =~ ^[a-zA-Z0-9._-]+$ ]] || { echo 'Invalid test log name' >&2; exit 1; }
-if [[ "${MAAS_TEST_AGENT_RUNTIME:-}" == 1 ]]; then
-    "$GOROOT/bin/go" test ./internal/agentruntime ./internal/kernel -json -count=1 -timeout=180s -run '^(TestAR1|TestMySQLAR1|TestMySQLAgent)' | tee "$task_root/artifacts/$test_log"
+if [[ "${MAAS_TEST_PRODUCT_SERVICE:-}" == 1 ]]; then
+    "$GOROOT/bin/go" test ./internal/app ./internal/agentruntime ./internal/kernel -json -count=1 -timeout=180s -run "${MAAS_TEST_PRODUCT_PATTERN:-^(TestProduct|TestAR1|TestARReview|TestMySQLAR1|TestMySQLAgent)}" | tee "$task_root/artifacts/$test_log"
+elif [[ "${MAAS_TEST_AGENT_RUNTIME:-}" == 1 ]]; then
+    "$GOROOT/bin/go" test ./internal/agentruntime ./internal/kernel -json -count=1 -timeout=180s -run '^(TestAR1|TestARReview|TestMySQLAR1|TestMySQLAgent)' | tee "$task_root/artifacts/$test_log"
 elif [[ "${MAAS_TEST_WORKBENCH_IDENTITY:-}" == 1 ]]; then
     "$GOROOT/bin/go" test -tags localworkbench ./cmd/workbench -count=1 -v -timeout=120s -run '^(TestLocalRuntimeIdentities|TestInstallationComposition)$' | tee "$task_root/artifacts/$test_log"
 else

@@ -69,7 +69,9 @@ func (m *Models) Visible(ctx context.Context, p a.Principal) ([]string, error) {
 	}
 	out := []string{}
 	for _, e := range m.Config.Models {
-		out = append(out, e.Alias)
+		if _, _, err := m.profile(ctx, e.Alias); err == nil {
+			out = append(out, e.Alias)
+		}
 	}
 	return out, nil
 }
@@ -205,6 +207,9 @@ func (m *Models) prepare(ctx context.Context, req a.Request) (kernel.RelayCall, 
 	if err != nil {
 		return kernel.RelayCall{}, err
 	}
+	if protocol.Validate("ReservationPlan", plan) != nil {
+		return kernel.RelayCall{}, a.NewFailure(503, "reservation_plan_invalid")
+	}
 	messages := []map[string]string{}
 	for _, msg := range req.Messages {
 		if msg.Role != "user" && msg.Role != "assistant" {
@@ -262,6 +267,9 @@ func (m *Models) prepare(ctx context.Context, req a.Request) (kernel.RelayCall, 
 	if err != nil {
 		return kernel.RelayCall{}, err
 	}
+	if protocol.Validate("AdmissionClaims", claims) != nil {
+		return kernel.RelayCall{}, a.NewFailure(503, "admission_claims_invalid")
+	}
 	input := base64.RawURLEncoding.EncodeToString(header) + "." + base64.RawURLEncoding.EncodeToString(payload)
 	mac := hmac.New(sha256.New, signing)
 	_, _ = mac.Write([]byte(input))
@@ -301,6 +309,10 @@ func (m *Models) usage(ctx context.Context, id string) (a.Usage, error) {
 	if e != nil {
 		return a.Usage{}, e
 	}
+	return projectUsage(r)
+}
+func projectUsage(r map[string]any) (a.Usage, error) {
+	var e error
 	b, _ := json.Marshal(r["reservation_plan"])
 	var p kernel.Plan
 	if json.Unmarshal(b, &p) != nil || p.Tokens == nil || p.Money == nil || p.Currency == nil || p.PriceVersion == nil {
@@ -350,6 +362,39 @@ func (m *Models) usage(ctx context.Context, id string) (a.Usage, error) {
 		g.KnownMoney = strconv.FormatInt(*u.Money, 10)
 	} else {
 		g.HeldMoney = *p.Money
+	}
+	u.Groups = []a.ARUsageGroup{g}
+	// Read actual per-dimension settlements, including proven no-send releases.
+	// A null actual alone must never be interpreted as either zero or full held.
+	token, ok := account["token"].(map[string]any)
+	if !ok {
+		return u, a.ErrUnavailable
+	}
+	money, ok := account["money"].(map[string]any)
+	if !ok {
+		return u, a.ErrUnavailable
+	}
+	for _, pair := range []struct {
+		source      map[string]any
+		known, held *string
+	}{{token, &g.KnownTokens, &g.HeldTokens}, {money, &g.KnownMoney, &g.HeldMoney}} {
+		known, ok := pair.source["known_used"].(string)
+		if !ok {
+			return u, a.ErrUnavailable
+		}
+		held, ok := pair.source["unknown_held"].(string)
+		if !ok {
+			return u, a.ErrUnavailable
+		}
+		*pair.known = known
+		*pair.held = held
+	}
+	zero := int64(0)
+	if token["state"] == "released" && g.KnownTokens == "0" && g.HeldTokens == "0" {
+		u.Tokens = &zero
+	}
+	if money["state"] == "released" && g.KnownMoney == "0" && g.HeldMoney == "0" {
+		u.Money = &zero
 	}
 	u.Groups = []a.ARUsageGroup{g}
 	u.Complete = true

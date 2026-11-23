@@ -36,10 +36,14 @@ func openDB(ctx context.Context, file string) (*sql.DB, error) {
 	cfg.ParseTime = true
 	cfg.Loc = time.UTC
 	cfg.Timeout = 5e9
+	cfg.ReadTimeout = 10 * time.Second
+	cfg.WriteTimeout = 10 * time.Second
 	db, e := sql.Open("mysql", cfg.FormatDSN())
 	if e != nil {
 		return nil, ErrConfig
 	}
+	db.SetMaxOpenConns(20)
+	db.SetMaxIdleConns(5)
 	if db.PingContext(ctx) != nil {
 		db.Close()
 		return nil, errors.New("product_database_unavailable")
@@ -105,13 +109,16 @@ func Migrate(ctx context.Context, c Config) error {
 	if e = initializeLedger(ctx, db, c); e != nil {
 		return e
 	}
+	if e = applyExtraMigration(ctx, conn, 2, offlineMigration); e != nil {
+		return e
+	}
 	var existing string
 	e = conn.QueryRowContext(ctx, "SELECT admin_id FROM product_admins WHERE username=?", c.Auth.Username).Scan(&existing)
 	if e == nil {
 		if existing != c.Auth.AdminID {
 			return errors.New("admin_identity_conflict")
 		}
-		return nil
+		return initializeOffline(ctx, db, c)
 	}
 	if !errors.Is(e, sql.ErrNoRows) {
 		return e
@@ -137,7 +144,34 @@ func Migrate(ctx context.Context, c Config) error {
 	if e != nil {
 		return errors.New("admin_initialization_failed")
 	}
-	return nil
+	return initializeOffline(ctx, db, c)
+}
+
+func applyExtraMigration(ctx context.Context, conn *sql.Conn, version int, migration string) error {
+	want := sum(migration)
+	var hash, state string
+	e := conn.QueryRowContext(ctx, "SELECT sha256,state FROM product_schema_migrations WHERE version=?", version).Scan(&hash, &state)
+	if e == nil {
+		if hash != want || state != "Applied" {
+			return errors.New("product_schema_needs_reconciliation")
+		}
+		return nil
+	}
+	if !errors.Is(e, sql.ErrNoRows) {
+		return e
+	}
+	if _, e = conn.ExecContext(ctx, "INSERT INTO product_schema_migrations VALUES(?,?,'Applying')", version, want); e != nil {
+		return e
+	}
+	for _, statement := range strings.Split(migration, ";") {
+		if strings.TrimSpace(statement) != "" {
+			if _, e = conn.ExecContext(ctx, statement); e != nil {
+				return errors.New("product_extra_migration_failed")
+			}
+		}
+	}
+	_, e = conn.ExecContext(ctx, "UPDATE product_schema_migrations SET state='Applied' WHERE version=?", version)
+	return e
 }
 func validateSchema(ctx context.Context, db *sql.DB) error {
 	var sha, state string

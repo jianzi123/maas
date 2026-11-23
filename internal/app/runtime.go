@@ -5,6 +5,7 @@ import (
 	"database/sql"
 	"encoding/json"
 	"errors"
+	"io"
 	"net/http"
 	"os"
 	"strconv"
@@ -15,23 +16,34 @@ import (
 	a "github.com/jianzi123/maas/internal/agentruntime"
 	"github.com/jianzi123/maas/internal/controlapi"
 	"github.com/jianzi123/maas/internal/kernel"
-	"github.com/jianzi123/maas/internal/release/mysqlstore"
 	"github.com/jianzi123/maas/internal/webconsole"
 )
 
 type Runtime struct {
-	Handler   http.Handler
-	Service   *a.Service
-	Sessions  *Sessions
-	DB        *sql.DB
-	Core      *kernel.Store
-	ctx       context.Context
-	cancel    context.CancelFunc
-	host      *a.Host
-	lease     *sql.Conn
-	closeOnce sync.Once
-	models    *Models
-	done      chan struct{}
+	closers        []io.Closer
+	monitorStarted bool
+	Agent          *a.ARHandler
+	Handler        http.Handler
+	Service        *a.Service
+	Sessions       *Sessions
+	DB             *sql.DB
+	Core           *kernel.Store
+	ctx            context.Context
+	cancel         context.CancelFunc
+	host           *a.Host
+	lease          *sql.Conn
+	closeOnce      sync.Once
+	models         modelSource
+	done           chan struct{}
+}
+
+type modelSource interface {
+	a.ModelClient
+	a.ARCatalog
+	Namespaces() map[string]bool
+	Visible(context.Context, a.Principal) ([]string, error)
+	CountContext(context.Context, a.Request) (int64, error)
+	Close()
 }
 
 // Open uses only MySQL. There is no fallback provider, DDL, demo model or local
@@ -56,6 +68,10 @@ func Open(ctx context.Context, c Config) (*Runtime, error) {
 	if e = validateSchema(ctx, db); e != nil {
 		return nil, e
 	}
+	var cluster string
+	if e = db.QueryRowContext(ctx, "SELECT cluster_id FROM kernel_guard WHERE id=1").Scan(&cluster); e != nil || cluster != c.Cluster {
+		return nil, errors.New("ledger_cluster_conflict")
+	}
 	lease, e := db.Conn(ctx)
 	if e != nil {
 		return nil, e
@@ -73,23 +89,19 @@ func Open(ctx context.Context, c Config) (*Runtime, error) {
 	if e != nil {
 		return nil, errors.New("cursor_key_unavailable")
 	}
-	core, e := kernel.New(db, c.Cluster, pepper, nil, &kernel.DurableProofs{Cluster: c.Cluster})
+	models, core, gate, e := openModelSource(ctx, db, c, pepper)
 	if e != nil {
 		return nil, e
 	}
 	r.Core = core
-	gate, e := mysqlstore.New(db, c.Cluster, core)
-	if e != nil {
-		return nil, e
-	}
-	models := &Models{Config: c, Core: core, Gate: gate}
-	if e = models.Open(); e != nil {
-		return nil, e
-	}
 	r.models = models
 	sessions := &Sessions{DB: db, Config: c.Auth, Origin: c.Origin}
 	r.Sessions = sessions
-	registry, e := a.NewRegistry(a.Calculator{}, a.ModelDirectory{Read: models.Visible})
+	var calculator a.Tool = a.Calculator{}
+	if c.Offline.Enabled && c.Offline.RequireApproval {
+		calculator = approvalTool{Tool: calculator}
+	}
+	registry, e := a.NewRegistry(calculator, a.ModelDirectory{Read: models.Visible})
 	if e != nil {
 		return nil, e
 	}
@@ -124,7 +136,11 @@ func Open(ctx context.Context, c Config) (*Runtime, error) {
 		return nil, e
 	}
 	agent.Dispatch = host.Schedule
+	r.Agent = agent
 	admin := controlapi.Handler{Core: core, Sessions: sessions, Models: core, ModelGate: gate, ModelNamespaces: models.Namespaces()}
+	if e = r.wireManagement(ctx, c, &admin, cursor); e != nil {
+		return nil, e
+	}
 	static := webconsole.Handler(c.StaticDir)
 	r.Handler = http.HandlerFunc(func(w http.ResponseWriter, q *http.Request) {
 		w.Header().Set("Cache-Control", "no-store")
@@ -140,7 +156,12 @@ func Open(ctx context.Context, c Config) (*Runtime, error) {
 				return
 			}
 			w.Header().Set("Content-Type", "application/json")
-			_ = json.NewEncoder(w).Encode(map[string]any{"status": "ready", "persistence": "mysql", "models_configured": len(c.Models)})
+			mode, count := "production", len(c.Models)
+			if c.Offline.Enabled {
+				mode = "offline-controlled"
+				count = 1
+			}
+			_ = json.NewEncoder(w).Encode(map[string]any{"status": "ready", "persistence": "mysql", "models_configured": count, "profile": mode, "management_enabled": c.Management.Enabled})
 		case q.URL.Path == "/api/admin/v1/session":
 			sessions.ServeHTTP(w, q)
 		case strings.HasPrefix(q.URL.Path, "/api/agent/v1/"):
@@ -176,6 +197,7 @@ func Open(ctx context.Context, c Config) (*Runtime, error) {
 			}
 		}
 	}
+	r.monitorStarted = true
 	go func() {
 		defer close(r.done)
 		tick := time.NewTicker(time.Second)
@@ -214,7 +236,13 @@ func (r *Runtime) Close() {
 			r.lease.Close()
 		}
 		if r.DB != nil {
+			for i := len(r.closers) - 1; i >= 0; i-- {
+				_ = r.closers[i].Close()
+			}
 			r.DB.Close()
+		}
+		if r.monitorStarted {
+			<-r.done
 		}
 	})
 }
