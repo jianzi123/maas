@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "scope": "observed-source-interface-not-production-readiness",
   "backend": {
-    "sourceCommit": "0afe74a9c68655955a7a4b1439c6b1070f7c07ab",
+    "sourceCommit": "58cef48957132b4d45dbe4a97061dfbf89bd20c8",
     "apiGroup": "serving.maas.example",
     "operator": {
       "command": [
@@ -63,7 +63,7 @@
       "docs/agent-runtime-verification.md": "c8fc6b9cd7d71db159545e459d04058d6e3d362cc0fbb2c48fd6ae29b008e256",
       "docs/controlled-api-continuation.md": "34a1f80563c2aaca3a6c091e83f45ea64f140033de2682dbd9c0c2c12a6af562",
       "docs/controlled-api-verification.md": "ccd6ad5cd1b959bf3c38364b48c60ec26b69e24fe1834ccf141b806297982eaf",
-      "docs/delivery-integration-review.md": "2f8472831e4829f06b85557f127937a98c38f2d2b6bfda38342196c8d4be0fba",
+      "docs/delivery-integration-review.md": "dba7a6faf300747af9d8c0922193ac243c3d65a327f70da7a855acd4b113abf0",
       "docs/go-relay-d1-export.md": "8dffd8d0a6021d296afba6993442356ba93752594c67b329b2a2aa991b79417f",
       "docs/higress-minimal-patch-scope.md": "eb8472c5b0ec120019cc1c069fad752809040115fda637663f0a13ff8d2cff93",
       "docs/history-public-handoff.md": "2a536c86b70db869d4abe78d5d9baa596de60e95f4020d2f3adc6e92da4ad911",
@@ -649,7 +649,7 @@
     }
   },
   "console": {
-    "sourceCommit": "0afe74a9c68655955a7a4b1439c6b1070f7c07ab",
+    "sourceCommit": "58cef48957132b4d45dbe4a97061dfbf89bd20c8",
     "build": "npm ci && npm run build",
     "output": "console/dist",
     "localBridge": "development-and-explicit-workbench-mode-only",
