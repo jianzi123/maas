@@ -5,6 +5,8 @@ Agent功能状态（本轮正常产品接线）
 
 | 功能 | 当前状态 | 入口/依据与限制 |
 | --- | --- | --- |
+| 同正常入口的显式离线profile | 已实现并有作者真实SQL闭环 | product.offline.example.json显式enabled；同MySQL/身份/原Admit/Finalize，合成模型/证据标controlled；2真实工具/审批/停止、3child/3usage、重启回放零新增；默认不开启，不是供应商tools-v1已验 |
+| 发布/修订/操作管理装配 | 已接原工厂，待真实K8s/独立角色组合验证 | management.enabled需四独立DSN/对应单默认角色、原Registry/kubeconfig；不回退core。disabled时这些API仍不可用，不能称全管理闭环恢复 |
 | 正常服务/容器监听 | 已实现并完成可构建验证 | cmd/maas-service，serve/migrate独立；监听来自明确JSON，非agentcontrolled；实际镜像/包由原运维/集成构建 |
 | MySQL业务持久化 | 已实现并有作者真实SQL验证 | internal/app、agentruntime.MySQLStore；无正式文件/内存/SQLite回退，原kernel/release账本不复制 |
 | 登录/稳定主体/CSRF | 已实现并有作者真实SQL验证 | 唯一/api/admin/v1/session，product_admins/product_sessions；原管理与AR-1共用 |
