@@ -52,6 +52,15 @@ def verify(path, ref):
         if len(candidates) != 1:
             raise ValueError("expected exactly one complete source lock")
         prefix = candidates[0]
+        version_names=[n for n in files if n=="VERSION.json"]
+        version=json.loads(archive.read(version_names[0])) if version_names else {}
+        fetched=version.get("sourceMode")=="fetch"
+        retrieval=json.loads(archive.read("SOURCE.sha256.json")) if fetched else None
+        if fetched:
+            if version["repositoryCommit"]!=git("rev-parse",ref).decode().strip() or version["codeCommit"]!=code:
+                raise ValueError("retrieval version differs from delivery")
+            if archive.read("fetch_source.py")!=git("show",f"{ref}:deploy/release/fetch_source.py"):
+                raise ValueError("source retrieval program differs from delivery")
         for name, expected in expected_locks.items():
             if archive.read(prefix + name) != expected:
                 raise ValueError("metadata differs from committed delivery: " + name)
@@ -59,14 +68,26 @@ def verify(path, ref):
         for component in ("backend", "console"):
             inventory = lock[component]["files"]
             for name, expected in inventory.items():
-                if digest(archive.read(prefix + name)) != expected:
+                actual=retrieval[name]["sha256"] if fetched else digest(archive.read(prefix + name))
+                if actual != expected:
                     raise ValueError("source inventory mismatch: " + name)
             counts[component] = len(inventory)
         # Deployment files are excluded from the code inventories; compare their
         # exact bytes separately, including the image recipes and migrations.
         deployment = git("ls-tree", "-r", "--name-only", ref, "deploy").decode().splitlines()
+        if fetched:
+            expected_paths=set(lock["backend"]["files"])|set(lock["console"]["files"])|set(deployment)
+            if set(retrieval)!=expected_paths:
+                raise ValueError("retrieval manifest does not cover the exact source tree")
+            for row in git("ls-tree","-r","-l","-z",ref).decode().split('\0'):
+                if not row:continue
+                metadata,name=row.split('\t',1)
+                if int(metadata.split()[-1])!=retrieval[name]["bytes"]:
+                    raise ValueError("retrieval source size mismatch: "+name)
         for name in deployment:
-            if archive.read(prefix + name) != git("show", f"{ref}:{name}"):
+            expected=git("show", f"{ref}:{name}")
+            mismatch=retrieval[name]["sha256"]!=digest(expected) if fetched else archive.read(prefix + name)!=expected
+            if mismatch:
                 raise ValueError("deployment file differs from delivery: " + name)
         readmes = [n for n in files if PurePosixPath(n).name.lower() == "readme.md"]
         if not readmes:
@@ -74,7 +95,7 @@ def verify(path, ref):
     return {"archive": str(path.resolve()), "sha256": digest(path.read_bytes()),
             "bytes": path.stat().st_size, "deliveryCommit": git("rev-parse", ref).decode().strip(),
             "sourceCodeCommit": code, "sourcePrefix": prefix, "verifiedSourceFiles": counts,
-            "verifiedDeploymentFiles": len(deployment), "integrityPassed": True,
+            "verifiedDeploymentFiles": len(deployment), "sourceMode":"fetch" if fetched else "full", "integrityPassed": True,
             "scope": "archive/source integrity only; runtime, SQL, QA and real model evidence are separate"}
 
 

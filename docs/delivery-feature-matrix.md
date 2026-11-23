@@ -31,3 +31,5 @@
 发布Operator的cmd/operator仍是nil适配器的审查入口；源代码保留不等于生产装配已完成。性能/算法入口实际包括tools/perf/analyze.py、controlled_transport.py、engineering/、scheduling/、diagnostics/及tools/model_capabilities/check.py；它们属于离线/研究/评测链，与本次HTTP主调用图分开，新的SGLang研究分支未为安装而重做或清除。
 
 真实供应商/Higress生产接流、正式tools-v1、管理目标/完整Operator装配、K8s集群安装与重启、GPU/性能及A01–A34整体均未因本次受控交付关闭。所有生产Ready/付费/目标部署和远端默认分支合入仍按原批准。
+
+轻量获取型ZIP同样固定最终Git ref并附四锁/完整SOURCE.sha256清单：先运行包根fetch_source.py，已用真实GitHub固定b868 ref核对833个源码文件及四锁，再按原README构建。它是完整获取方式而非全离线介质；完整内嵌源码包可用package.py默认模式生成，--source-mode fetch生成可传输轻量包。验证器对两种模式分别标注覆盖范围，不将尚未获取的源码说成已在ZIP中。
