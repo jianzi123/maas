@@ -20,18 +20,20 @@ import (
 )
 
 type Runtime struct {
-	Handler   http.Handler
-	Service   *a.Service
-	Sessions  *Sessions
-	DB        *sql.DB
-	Core      *kernel.Store
-	ctx       context.Context
-	cancel    context.CancelFunc
-	host      *a.Host
-	lease     *sql.Conn
-	closeOnce sync.Once
-	models    *Models
-	done      chan struct{}
+	monitorStarted bool
+	Agent          *a.ARHandler
+	Handler        http.Handler
+	Service        *a.Service
+	Sessions       *Sessions
+	DB             *sql.DB
+	Core           *kernel.Store
+	ctx            context.Context
+	cancel         context.CancelFunc
+	host           *a.Host
+	lease          *sql.Conn
+	closeOnce      sync.Once
+	models         *Models
+	done           chan struct{}
 }
 
 // Open uses only MySQL. There is no fallback provider, DDL, demo model or local
@@ -55,6 +57,10 @@ func Open(ctx context.Context, c Config) (*Runtime, error) {
 	}()
 	if e = validateSchema(ctx, db); e != nil {
 		return nil, e
+	}
+	var cluster string
+	if e = db.QueryRowContext(ctx, "SELECT cluster_id FROM kernel_guard WHERE id=1").Scan(&cluster); e != nil || cluster != c.Cluster {
+		return nil, errors.New("ledger_cluster_conflict")
 	}
 	lease, e := db.Conn(ctx)
 	if e != nil {
@@ -124,6 +130,7 @@ func Open(ctx context.Context, c Config) (*Runtime, error) {
 		return nil, e
 	}
 	agent.Dispatch = host.Schedule
+	r.Agent = agent
 	admin := controlapi.Handler{Core: core, Sessions: sessions, Models: core, ModelGate: gate, ModelNamespaces: models.Namespaces()}
 	static := webconsole.Handler(c.StaticDir)
 	r.Handler = http.HandlerFunc(func(w http.ResponseWriter, q *http.Request) {
@@ -176,6 +183,7 @@ func Open(ctx context.Context, c Config) (*Runtime, error) {
 			}
 		}
 	}
+	r.monitorStarted = true
 	go func() {
 		defer close(r.done)
 		tick := time.NewTicker(time.Second)
@@ -215,6 +223,9 @@ func (r *Runtime) Close() {
 		}
 		if r.DB != nil {
 			r.DB.Close()
+		}
+		if r.monitorStarted {
+			<-r.done
 		}
 	})
 }

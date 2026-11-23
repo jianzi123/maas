@@ -39,6 +39,9 @@ func (s *Sessions) principal(ctx context.Context, id string) (a.Principal, error
 	var p a.Principal
 	var enabled bool
 	e := s.DB.QueryRowContext(ctx, "SELECT admin_id,policy_revision,enabled FROM product_admins WHERE admin_id=?", id).Scan(&p.ID, &p.Revision, &enabled)
+	if e != nil && !errors.Is(e, sql.ErrNoRows) {
+		return p, a.ErrUnavailable
+	}
 	if e != nil || !enabled {
 		return p, a.ErrForbidden
 	}
@@ -65,6 +68,9 @@ func (s *Sessions) Authenticate(r *http.Request, write bool) (a.Principal, error
 	var expires time.Time
 	var revoked bool
 	e := s.DB.QueryRowContext(r.Context(), "SELECT admin_id,csrf_token,expires_at,revoked FROM product_sessions WHERE token_sha256=?", sum(cookies[0])).Scan(&id, &csrf, &expires, &revoked)
+	if e != nil && !errors.Is(e, sql.ErrNoRows) {
+		return a.Principal{}, a.ErrUnavailable
+	}
 	if e != nil || revoked || !time.Now().UTC().Before(expires) {
 		return a.Principal{}, errors.New("unauthenticated")
 	}
@@ -143,6 +149,14 @@ func (s *Sessions) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 	p, e := s.Authenticate(r, r.Method != "GET")
 	if e != nil {
+		if errors.Is(e, a.ErrUnavailable) {
+			fail(503, "dependency_unavailable")
+			return
+		}
+		if errors.Is(e, a.ErrForbidden) {
+			fail(403, "forbidden")
+			return
+		}
 		fail(401, "unauthenticated")
 		return
 	}

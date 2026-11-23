@@ -1,0 +1,38 @@
+{"Time":"2026-11-23T07:26:32.713619773-08:00","Action":"start","Package":"github.com/jianzi123/maas/internal/app"}
+{"Time":"2026-11-23T07:26:32.913790685-08:00","Action":"run","Package":"github.com/jianzi123/maas/internal/app","Test":"TestProductConfiguredModelPreparesOriginalTicketWithoutSending"}
+{"Time":"2026-11-23T07:26:32.915496899-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/app","Test":"TestProductConfiguredModelPreparesOriginalTicketWithoutSending","Output":"=== RUN   TestProductConfiguredModelPreparesOriginalTicketWithoutSending\n"}
+{"Time":"2026-11-23T07:26:35.343419847-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/app","Test":"TestProductConfiguredModelPreparesOriginalTicketWithoutSending","Output":"--- PASS: TestProductConfiguredModelPreparesOriginalTicketWithoutSending (2.43s)\n"}
+{"Time":"2026-11-23T07:26:35.343574522-08:00","Action":"pass","Package":"github.com/jianzi123/maas/internal/app","Test":"TestProductConfiguredModelPreparesOriginalTicketWithoutSending","Elapsed":2.43}
+{"Time":"2026-11-23T07:26:35.343631223-08:00","Action":"run","Package":"github.com/jianzi123/maas/internal/app","Test":"TestProductUsageReadsAuthoritativeReleaseAndHeld"}
+{"Time":"2026-11-23T07:26:35.343636654-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/app","Test":"TestProductUsageReadsAuthoritativeReleaseAndHeld","Output":"=== RUN   TestProductUsageReadsAuthoritativeReleaseAndHeld\n"}
+{"Time":"2026-11-23T07:26:35.343640552-08:00","Action":"run","Package":"github.com/jianzi123/maas/internal/app","Test":"TestProductUsageReadsAuthoritativeReleaseAndHeld/released"}
+{"Time":"2026-11-23T07:26:35.343643528-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/app","Test":"TestProductUsageReadsAuthoritativeReleaseAndHeld/released","Output":"=== RUN   TestProductUsageReadsAuthoritativeReleaseAndHeld/released\n"}
+{"Time":"2026-11-23T07:26:35.34365988-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/app","Test":"TestProductUsageReadsAuthoritativeReleaseAndHeld/released","Output":"--- PASS: TestProductUsageReadsAuthoritativeReleaseAndHeld/released (0.00s)\n"}
+{"Time":"2026-11-23T07:26:35.343663046-08:00","Action":"pass","Package":"github.com/jianzi123/maas/internal/app","Test":"TestProductUsageReadsAuthoritativeReleaseAndHeld/released","Elapsed":0}
+{"Time":"2026-11-23T07:26:35.343668136-08:00","Action":"run","Package":"github.com/jianzi123/maas/internal/app","Test":"TestProductUsageReadsAuthoritativeReleaseAndHeld/held"}
+{"Time":"2026-11-23T07:26:35.343670531-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/app","Test":"TestProductUsageReadsAuthoritativeReleaseAndHeld/held","Output":"=== RUN   TestProductUsageReadsAuthoritativeReleaseAndHeld/held\n"}
+{"Time":"2026-11-23T07:26:35.343674409-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/app","Test":"TestProductUsageReadsAuthoritativeReleaseAndHeld/held","Output":"--- PASS: TestProductUsageReadsAuthoritativeReleaseAndHeld/held (0.00s)\n"}
+{"Time":"2026-11-23T07:26:35.343677344-08:00","Action":"pass","Package":"github.com/jianzi123/maas/internal/app","Test":"TestProductUsageReadsAuthoritativeReleaseAndHeld/held","Elapsed":0}
+{"Time":"2026-11-23T07:26:35.343680481-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/app","Test":"TestProductUsageReadsAuthoritativeReleaseAndHeld","Output":"--- PASS: TestProductUsageReadsAuthoritativeReleaseAndHeld (0.00s)\n"}
+{"Time":"2026-11-23T07:26:35.343683346-08:00","Action":"pass","Package":"github.com/jianzi123/maas/internal/app","Test":"TestProductUsageReadsAuthoritativeReleaseAndHeld","Elapsed":0}
+{"Time":"2026-11-23T07:26:35.34372091-08:00","Action":"run","Package":"github.com/jianzi123/maas/internal/app","Test":"TestProductMySQLSharedLoginRestartAndNoReplay"}
+{"Time":"2026-11-23T07:26:35.343723976-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/app","Test":"TestProductMySQLSharedLoginRestartAndNoReplay","Output":"=== RUN   TestProductMySQLSharedLoginRestartAndNoReplay\n"}
+{"Time":"2026-11-23T07:26:38.196307047-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/app","Test":"TestProductMySQLSharedLoginRestartAndNoReplay","Output":"--- PASS: TestProductMySQLSharedLoginRestartAndNoReplay (2.85s)\n"}
+{"Time":"2026-11-23T07:26:38.196348328-08:00","Action":"pass","Package":"github.com/jianzi123/maas/internal/app","Test":"TestProductMySQLSharedLoginRestartAndNoReplay","Elapsed":2.85}
+{"Time":"2026-11-23T07:26:38.196357907-08:00","Action":"run","Package":"github.com/jianzi123/maas/internal/app","Test":"TestProductServeRequiresMigratedMySQL"}
+{"Time":"2026-11-23T07:26:38.196365172-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/app","Test":"TestProductServeRequiresMigratedMySQL","Output":"=== RUN   TestProductServeRequiresMigratedMySQL\n"}
+{"Time":"2026-11-23T07:26:38.223640252-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/app","Test":"TestProductServeRequiresMigratedMySQL","Output":"--- PASS: TestProductServeRequiresMigratedMySQL (0.03s)\n"}
+{"Time":"2026-11-23T07:26:38.223683968-08:00","Action":"pass","Package":"github.com/jianzi123/maas/internal/app","Test":"TestProductServeRequiresMigratedMySQL","Elapsed":0.03}
+{"Time":"2026-11-23T07:26:38.223693126-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/app","Output":"PASS\n"}
+{"Time":"2026-11-23T07:26:38.230643487-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/app","Output":"ok  \tgithub.com/jianzi123/maas/internal/app\t5.518s\n"}
+{"Time":"2026-11-23T07:26:38.231321403-08:00","Action":"pass","Package":"github.com/jianzi123/maas/internal/app","Elapsed":5.52}
+{"Time":"2026-11-23T07:26:44.046747558-08:00","Action":"start","Package":"github.com/jianzi123/maas/internal/agentruntime"}
+{"Time":"2026-11-23T07:26:44.264601194-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/agentruntime","Output":"testing: warning: no tests to run\n"}
+{"Time":"2026-11-23T07:26:44.264688577-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/agentruntime","Output":"PASS\n"}
+{"Time":"2026-11-23T07:26:44.268717327-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/agentruntime","Output":"ok  \tgithub.com/jianzi123/maas/internal/agentruntime\t0.222s [no tests to run]\n"}
+{"Time":"2026-11-23T07:26:44.26875919-08:00","Action":"pass","Package":"github.com/jianzi123/maas/internal/agentruntime","Elapsed":0.222}
+{"Time":"2026-11-23T07:26:44.657168341-08:00","Action":"start","Package":"github.com/jianzi123/maas/internal/kernel"}
+{"Time":"2026-11-23T07:26:44.808044909-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/kernel","Output":"testing: warning: no tests to run\n"}
+{"Time":"2026-11-23T07:26:44.808138945-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/kernel","Output":"PASS\n"}
+{"Time":"2026-11-23T07:26:44.813207611-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/kernel","Output":"ok  \tgithub.com/jianzi123/maas/internal/kernel\t0.156s [no tests to run]\n"}
+{"Time":"2026-11-23T07:26:44.813266067-08:00","Action":"pass","Package":"github.com/jianzi123/maas/internal/kernel","Elapsed":0.156}

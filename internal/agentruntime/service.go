@@ -598,6 +598,7 @@ func (s *Service) Drive(ctx context.Context, p Principal, id, rid string) (resul
 					return e
 				}
 				toolCtx, toolCancel := context.WithTimeout(work, r.Limits.ToolTimeout)
+				toolCtx = toolContext(toolCtx, ep, id, r, c)
 				output, toolErr := t.Execute(toolCtx, ep, c.ID, c.Arguments)
 				expired := toolCtx.Err()
 				toolCancel()

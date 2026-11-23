@@ -36,10 +36,14 @@ func openDB(ctx context.Context, file string) (*sql.DB, error) {
 	cfg.ParseTime = true
 	cfg.Loc = time.UTC
 	cfg.Timeout = 5e9
+	cfg.ReadTimeout = 10 * time.Second
+	cfg.WriteTimeout = 10 * time.Second
 	db, e := sql.Open("mysql", cfg.FormatDSN())
 	if e != nil {
 		return nil, ErrConfig
 	}
+	db.SetMaxOpenConns(20)
+	db.SetMaxIdleConns(5)
 	if db.PingContext(ctx) != nil {
 		db.Close()
 		return nil, errors.New("product_database_unavailable")
