@@ -96,6 +96,9 @@ func LoadConfig(name string) (Config, error) {
 	return c, c.Validate()
 }
 func (c Config) Validate() error {
+	if len(c.Models) > 100 || len(c.Auth.Username) > 128 {
+		return ErrConfig
+	}
 	if c.Ledger.Revision == "" || c.Ledger.Epoch < 1 || c.Ledger.WindowMS < 1 || c.Ledger.GlobalLimit < 1 || c.Ledger.KeyLimit < 1 || c.Ledger.Slots < 1 || c.Ledger.Slots > 10000 {
 		return ErrConfig
 	}
