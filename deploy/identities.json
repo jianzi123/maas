@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "scope": "installation-input-only-no-secret-values",
-  "sourceCommit": "6826427348b99ff92cf8d522638eb1c8c96a135e",
+  "sourceCommit": "7c07dc751263f3a5da29106f4da62d3434dd1c15",
   "productionWiringVerified": false,
   "connections": {
     "core": {
@@ -194,6 +194,7 @@
         "deploy/images/Dockerfile.operator",
         "deploy/local-wsl/operator-review.yaml",
         "deploy/local-wsl/operator.Dockerfile",
+        "deploy/local-wsl/shared-mcpbridge.yaml",
         "deploy/tests/fixtures/hybrid.yaml",
         "deploy/tests/fixtures/internal.yaml",
         "docs/installation-composition.md",

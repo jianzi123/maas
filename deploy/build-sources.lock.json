@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "sourceMode": "single-repository-code-commit",
   "backend": {
-    "sourceCommit": "6826427348b99ff92cf8d522638eb1c8c96a135e",
+    "sourceCommit": "7c07dc751263f3a5da29106f4da62d3434dd1c15",
     "files": {
       ".gitattributes": "5b93b86d7f7e94c3dafdd41b284afe95a95a985e8afc719914173db11890cd36",
       ".gitignore": "46cf94096a926a26bc1a913b6cc632adacab0a96ab42d72a7dcbf216bcbaaa77",
@@ -533,7 +533,7 @@
     }
   },
   "console": {
-    "sourceCommit": "6826427348b99ff92cf8d522638eb1c8c96a135e",
+    "sourceCommit": "7c07dc751263f3a5da29106f4da62d3434dd1c15",
     "files": {
       "console/.env.fixtures": "4d5e22f8eeb4bbf5a027a34c7a4bfef806876a470f89440f9611bd01a9d8c5f7",
       "console/.env.workbench": "930edf078e756f41d37fad0f7ce87332d8af59e65dac57b11797bcf0117a9216",
@@ -682,6 +682,7 @@
       "deploy/images/Dockerfile.operator",
       "deploy/local-wsl/operator-review.yaml",
       "deploy/local-wsl/operator.Dockerfile",
+      "deploy/local-wsl/shared-mcpbridge.yaml",
       "deploy/tests/fixtures/hybrid.yaml",
       "deploy/tests/fixtures/internal.yaml",
       "docs/installation-composition.md",
