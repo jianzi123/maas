@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "scope": "observed-source-interface-not-production-readiness",
   "backend": {
-    "sourceCommit": "17b6f1a5d1f9c22583fbcd41d3b6329c1b4482e3",
+    "sourceCommit": "7f1b638eda55c67947fa411ed5a3d568ae413dd8",
     "apiGroup": "serving.maas.example",
     "operator": {
       "command": [
@@ -581,7 +581,7 @@
     }
   },
   "console": {
-    "sourceCommit": "17b6f1a5d1f9c22583fbcd41d3b6329c1b4482e3",
+    "sourceCommit": "7f1b638eda55c67947fa411ed5a3d568ae413dd8",
     "build": "npm ci && npm run build",
     "output": "console/dist",
     "localBridge": "development-and-explicit-workbench-mode-only",
@@ -613,11 +613,11 @@
       "console/contracts/j01-v04.patch.json": "453f09e67b5503d19c28eb20653ed520d6055360fd8d508bf59f53ac30060cec",
       "console/contracts/openapi-v0.4.json": "fab7f71e47af03de3f956437a09e50be47b511991ca87b35bb745ba0228040f5",
       "console/contracts/query-recovery-draft.json": "4c8f0a01572eb09531bdc09fd62e0ae3cac75e368b3db2b9cf31b3a7c8f5abe3",
-      "console/docs/agent-features.md": "ea0fb970e90e2f866554da01e67b7d68ca356ed43a0181e699a08b59a83b10af",
+      "console/docs/agent-features.md": "fdc1b6b0b243fa81c161535c8269da31f735f363803f2606f1012abb9c3862e7",
       "console/docs/chat-workbench.md": "de7181e55f0138e12abeed9e633e0761fd4092b755ca238704bdbd6b3420bcaa",
       "console/docs/consumer-binding-fixes.md": "0f46b5c9ad5d7ec353b38a065bdc5efb990d1be2b649a4b4c9ded5053c141086",
-      "console/docs/demo-15min.md": "c9df8c64b47f9ea9437db9d20aefd373653ad70cb4247180014446d2133b2fe6",
-      "console/docs/deployment.md": "459f985a8d6eac10d284fa115d8feb482a1b2b7b04ed1a01b9a64b3ad143e3c4",
+      "console/docs/demo-15min.md": "3fae8486625fc1fd51f64ee58b352b5e370af8f94d2253f4392c05bae4bb0625",
+      "console/docs/deployment.md": "a755d8d7f7c3ca65676276f8f9de0b03dc32af20c412a47bed91b2864cddbe6b",
       "console/docs/go-workbench.md": "838eaa20045de96c5a068c130dcceecffc2d1f2963d1811b0c0247bede19cc76",
       "console/docs/release-management.md": "284f8f4a124efe8f6eee907ee79315fbabd0beb7bc73e4bc43f5b2c5f1fc0e77",
       "console/docs/review-fixes.md": "5f9f335775d58e1881da97fff45186ba2e79cda0164041e29e62735cc60d16aa",
