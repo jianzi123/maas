@@ -4,12 +4,12 @@
   "deploymentApproved": false,
   "sourceBaseline": {
     "chartBase": "e5647a2f2b44f53d39a80041be94b619f07c29d6",
-    "backendInspected": "07b00d85796da273567c377c9d232f8bf08c3373",
+    "backendInspected": "0afe74a9c68655955a7a4b1439c6b1070f7c07ab",
     "contracts": "MAAS-2 v0.4 + retained v0.3 + query/recovery addenda + MAAS-1 role review",
     "terminal": "3.0",
     "ticket": "3",
     "proposedTerminal": "3.1 (not enabled)",
-    "consoleInspected": "07b00d85796da273567c377c9d232f8bf08c3373",
+    "consoleInspected": "0afe74a9c68655955a7a4b1439c6b1070f7c07ab",
     "defaultBranch": "925d8c55be9ce823d100bf90a5c78cf19ea66d58",
     "candidatePR": null,
     "candidateState": "integrated-unmerged",
@@ -18,7 +18,7 @@
     "qaCore": "ac94a373ec0a61c5fd4dc5380a7985a4fb47840f",
     "qaEvidence": "50354a705c03383d0102d0d437119afd7ffed8b3",
     "sourceInventory": "deploy/build-sources.lock.json",
-    "sourceInventorySha256": "cc486ac731dcf20e43a5182ac7c702e863896d74498d8a3e325e5595949bbcc3",
+    "sourceInventorySha256": "457b8cdb94d239c47e461554a24d7497b413a1f8b98305ba72f953265a556d54",
     "upstreamWorkbenchDeployment": "e5647a2f2b44f53d39a80041be94b619f07c29d6",
     "backendBase": "0559fa46b4a728d6f542daf19532e794f8549b31",
     "integrationBranch": "integrate/MAAS-17-unified-20261114",
@@ -99,7 +99,7 @@
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "07b00d85796da273567c377c9d232f8bf08c3373",
+      "sourceCommit": "0afe74a9c68655955a7a4b1439c6b1070f7c07ab",
       "compiledAPIGroup": "serving.maas.example"
     },
     {
@@ -116,7 +116,7 @@
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "07b00d85796da273567c377c9d232f8bf08c3373",
+      "sourceCommit": "0afe74a9c68655955a7a4b1439c6b1070f7c07ab",
       "compiledAPIGroup": "serving.maas.example"
     },
     {
@@ -133,7 +133,7 @@
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "07b00d85796da273567c377c9d232f8bf08c3373"
+      "sourceCommit": "0afe74a9c68655955a7a4b1439c6b1070f7c07ab"
     },
     {
       "id": "mysql",
@@ -432,7 +432,7 @@
   "databaseIdentities": {
     "schemaVersion": "1.0",
     "scope": "installation-input-only-no-secret-values",
-    "sourceCommit": "07b00d85796da273567c377c9d232f8bf08c3373",
+    "sourceCommit": "0afe74a9c68655955a7a4b1439c6b1070f7c07ab",
     "productionWiringVerified": false,
     "connections": {
       "core": {
@@ -571,13 +571,18 @@
           "console/contracts/ar1-openapi.json",
           "console/contracts/ar1-session-event.schema.json",
           "console/contracts/ar1-source.json",
+          "console/docs/agent-features.md",
           "console/docs/chat-workbench.md",
           "console/docs/consumer-binding-fixes.md",
+          "console/docs/demo-15min.md",
+          "console/docs/deployment.md",
           "console/docs/review-recovery-fixes.md",
           "console/docs/single-model-continuation.md",
           "console/docs/ui16-redesign.md",
+          "console/examples/console-config.controlled.json",
           "console/package-lock.json",
           "console/package.json",
+          "console/public/console-config.json",
           "console/scripts/ar1-browser-model.go.txt",
           "console/scripts/ar1-local.d.mts",
           "console/scripts/ar1-local.mjs",
@@ -585,6 +590,8 @@
           "console/scripts/chat-ar1-pagination-browser.mjs",
           "console/scripts/chat-browser.mjs",
           "console/scripts/consumer-binding-browser.mjs",
+          "console/scripts/deployed-build-browser.mjs",
+          "console/scripts/deployed-smoke.mjs",
           "console/scripts/generate-ar1-types.mjs",
           "console/scripts/local-control.mjs",
           "console/scripts/redesign-browser.mjs",
@@ -608,6 +615,8 @@
           "console/src/components/ReleaseForm.vue",
           "console/src/console.test.ts",
           "console/src/consumer-binding.test.ts",
+          "console/src/deployment.test.ts",
+          "console/src/deployment.ts",
           "console/src/fixtures.ts",
           "console/src/pages/ChatWorkspace.vue",
           "console/src/pages/Keys.vue",
