@@ -1,0 +1,361 @@
+{
+  "status": "PASS bounded SQL and formal empty-model recovery scope",
+  "SQL_failures": [],
+  "resource_run": "maas7-879a-baa9bb93",
+  "cookie_sha256": "95f83e87dd6d9b7a0c82c86c88d7db77b4740e8d9a2e0af7bcada3e8adad5297",
+  "csrf_sha256": "1479a2d5f35f36621536fd808629733cb5ef8cec6bb79b8f40327d8d1075ce07",
+  "principal_id": "4c421973-919f-4b8a-997f-909fc6fd010a",
+  "seed": {
+    "child_request_id": "cb01ccac-3104-45b7-bf27-751f93bcca56",
+    "fixture": "SQL persisted crash checkpoint; no upstream dispatched",
+    "principal_id": "4c421973-919f-4b8a-997f-909fc6fd010a",
+    "run_id": "39b050b2-d21d-4c66-9adf-13d621e6a9d4",
+    "session_id": "8f88918b-738b-57d9-afca-a27a46ed8428"
+  },
+  "before_after_SQL_equal": true,
+  "new_generation_requests": 0,
+  "new_usage_events": 0,
+  "models_configured": 0,
+  "transport": "own container loopback HTTP; host/proxy/browser not validated",
+  "model_calls": 0,
+  "restart_cookie_and_csrf_equal": true,
+  "HTTP_cases": [
+    {
+      "kind": "HTTP",
+      "transport": "own-container loopback via net/http",
+      "method": "GET",
+      "path": "/readyz",
+      "status": 200,
+      "response": {
+        "models_configured": 0,
+        "persistence": "mysql",
+        "status": "ready"
+      }
+    },
+    {
+      "kind": "HTTP",
+      "transport": "own-container loopback via net/http",
+      "method": "GET",
+      "path": "/api/admin/v1/session",
+      "status": 401,
+      "response": {
+        "error": {
+          "budget_dimension": null,
+          "code": "unauthenticated",
+          "message": "unauthenticated",
+          "param": null,
+          "policy_revision": null,
+          "request_id": "c90ff513-1df5-42d8-949b-ddd5266b0224",
+          "reset_at": null,
+          "retry_after_seconds": null,
+          "retryable": false
+        }
+      }
+    },
+    {
+      "kind": "HTTP",
+      "transport": "own-container loopback via net/http",
+      "method": "POST",
+      "path": "/api/admin/v1/session",
+      "status": 403,
+      "response": {
+        "error": {
+          "budget_dimension": null,
+          "code": "forbidden",
+          "message": "forbidden",
+          "param": null,
+          "policy_revision": null,
+          "request_id": "638b8ad4-ddab-47fb-8949-28da96857eb9",
+          "reset_at": null,
+          "retry_after_seconds": null,
+          "retryable": false
+        }
+      }
+    },
+    {
+      "kind": "HTTP",
+      "transport": "own-container loopback via net/http",
+      "method": "POST",
+      "path": "/api/admin/v1/session",
+      "status": 200,
+      "response": {
+        "admin_id": "4c421973-919f-4b8a-997f-909fc6fd010a",
+        "expires_at": "2026-11-23T23:34:09.943866169Z",
+        "csrf_token_sha256": "1479a2d5f35f36621536fd808629733cb5ef8cec6bb79b8f40327d8d1075ce07"
+      }
+    },
+    {
+      "kind": "HTTP",
+      "transport": "own-container loopback via net/http",
+      "method": "GET",
+      "path": "/api/admin/v1/session",
+      "status": 200,
+      "response": {
+        "admin_id": "4c421973-919f-4b8a-997f-909fc6fd010a",
+        "expires_at": "2026-11-23T23:34:09.943866Z",
+        "csrf_token_sha256": "1479a2d5f35f36621536fd808629733cb5ef8cec6bb79b8f40327d8d1075ce07"
+      }
+    },
+    {
+      "kind": "HTTP",
+      "transport": "own-container loopback via net/http",
+      "method": "POST",
+      "path": "/api/agent/v1/sessions",
+      "status": 403,
+      "response": {
+        "error": {
+          "child_request_id": null,
+          "code": "forbidden",
+          "http_request_id": "7c0c0cf3-8391-4d35-8c3e-6ce117638c77",
+          "message": "forbidden",
+          "retryable": false,
+          "run_id": null,
+          "snapshot_required": false
+        }
+      }
+    },
+    {
+      "kind": "HTTP",
+      "transport": "own-container loopback via net/http",
+      "method": "POST",
+      "path": "/api/agent/v1/sessions",
+      "status": 422,
+      "response": {
+        "error": {
+          "child_request_id": null,
+          "code": "model_not_configured",
+          "http_request_id": "ef3987c8-796b-4164-a321-9102f42d8864",
+          "message": "model_not_configured",
+          "retryable": false,
+          "run_id": null,
+          "snapshot_required": false
+        }
+      }
+    },
+    {
+      "kind": "HTTP",
+      "transport": "own-container loopback via net/http",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/8f88918b-738b-57d9-afca-a27a46ed8428",
+      "status": 200,
+      "response": {
+        "conversation": {
+          "active_run_id": "39b050b2-d21d-4c66-9adf-13d621e6a9d4",
+          "created_at": "2026-11-23T15:34:06.362933422Z",
+          "deleted_at": null,
+          "id": "8f88918b-738b-57d9-afca-a27a46ed8428",
+          "model_alias": "controlled",
+          "owner_id": "4c421973-919f-4b8a-997f-909fc6fd010a",
+          "revision": "4",
+          "title": "test",
+          "updated_at": "2026-11-23T15:34:08.507227604Z"
+        },
+        "event_run_id": "39b050b2-d21d-4c66-9adf-13d621e6a9d4",
+        "last_event_seq": "4",
+        "messages": [
+          {
+            "created_at": "2026-11-23T15:34:06.373275857Z",
+            "id": "8c45b166-d607-44be-be3d-4316849e5f1f",
+            "parts": [
+              {
+                "text": "calculate",
+                "type": "text"
+              }
+            ],
+            "position": "1",
+            "role": "user",
+            "run_id": "39b050b2-d21d-4c66-9adf-13d621e6a9d4",
+            "session_id": "8f88918b-738b-57d9-afca-a27a46ed8428",
+            "status": "committed",
+            "supersedes_message_id": null
+          }
+        ],
+        "messages_next_cursor": null,
+        "resume_cursor": "65b0e441d955a6139a30390d19745c36457615354ad72b06b8f4090e2df3833f",
+        "runs": [
+          {
+            "aggregation_complete": false,
+            "cancel_requested": false,
+            "child_request_ids": [
+              "cb01ccac-3104-45b7-bf27-751f93bcca56"
+            ],
+            "client_operation_id": "f175e135-939e-430c-85a2-6d1202a12291",
+            "created_at": "2026-11-23T15:34:06.372560807Z",
+            "deadline_at": "2026-11-23T15:34:11.373275025Z",
+            "fence": "1",
+            "finished_at": null,
+            "id": "39b050b2-d21d-4c66-9adf-13d621e6a9d4",
+            "input_head_message_id": "8c45b166-d607-44be-be3d-4316849e5f1f",
+            "last_event_seq": "4",
+            "limits": {
+              "max_steps": 4,
+              "max_model_calls": 1,
+              "max_tool_calls": 0,
+              "max_duration_ms": 5000,
+              "tool_timeout_ms": 1000,
+              "max_tool_output_bytes": 8192,
+              "max_context_tokens": 32768,
+              "no_progress_limit": 3,
+              "max_tokens": "100",
+              "max_money_atomic": "100",
+              "currency": "TST"
+            },
+            "mode": "chat",
+            "model_alias": "controlled",
+            "protocol_revision": "text-v1",
+            "reason": "execution_outcome_unknown",
+            "resume_cursor": "65b0e441d955a6139a30390d19745c36457615354ad72b06b8f4090e2df3833f",
+            "revision": "4",
+            "session_id": "8f88918b-738b-57d9-afca-a27a46ed8428",
+            "state": "needs_confirmation",
+            "step_count": 1,
+            "usage_groups": []
+          }
+        ]
+      }
+    },
+    {
+      "kind": "HTTP",
+      "transport": "own-container loopback via net/http",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/8f88918b-738b-57d9-afca-a27a46ed8428/runs/39b050b2-d21d-4c66-9adf-13d621e6a9d4",
+      "status": 200,
+      "response": {
+        "aggregation_complete": false,
+        "cancel_requested": false,
+        "child_request_ids": [
+          "cb01ccac-3104-45b7-bf27-751f93bcca56"
+        ],
+        "client_operation_id": "f175e135-939e-430c-85a2-6d1202a12291",
+        "created_at": "2026-11-23T15:34:06.372560807Z",
+        "deadline_at": "2026-11-23T15:34:11.373275025Z",
+        "fence": "1",
+        "finished_at": null,
+        "id": "39b050b2-d21d-4c66-9adf-13d621e6a9d4",
+        "input_head_message_id": "8c45b166-d607-44be-be3d-4316849e5f1f",
+        "last_event_seq": "4",
+        "limits": {
+          "max_steps": 4,
+          "max_model_calls": 1,
+          "max_tool_calls": 0,
+          "max_duration_ms": 5000,
+          "tool_timeout_ms": 1000,
+          "max_tool_output_bytes": 8192,
+          "max_context_tokens": 32768,
+          "no_progress_limit": 3,
+          "max_tokens": "100",
+          "max_money_atomic": "100",
+          "currency": "TST"
+        },
+        "mode": "chat",
+        "model_alias": "controlled",
+        "protocol_revision": "text-v1",
+        "reason": "execution_outcome_unknown",
+        "resume_cursor": "65b0e441d955a6139a30390d19745c36457615354ad72b06b8f4090e2df3833f",
+        "revision": "4",
+        "session_id": "8f88918b-738b-57d9-afca-a27a46ed8428",
+        "state": "needs_confirmation",
+        "step_count": 1,
+        "usage_groups": []
+      }
+    },
+    {
+      "kind": "HTTP",
+      "transport": "own-container loopback via net/http",
+      "method": "GET",
+      "path": "/readyz",
+      "status": 200,
+      "response": {
+        "models_configured": 0,
+        "persistence": "mysql",
+        "status": "ready"
+      }
+    },
+    {
+      "kind": "HTTP",
+      "transport": "own-container loopback via net/http",
+      "method": "GET",
+      "path": "/api/admin/v1/session",
+      "status": 200,
+      "response": {
+        "admin_id": "4c421973-919f-4b8a-997f-909fc6fd010a",
+        "expires_at": "2026-11-23T23:34:09.943866Z",
+        "csrf_token_sha256": "1479a2d5f35f36621536fd808629733cb5ef8cec6bb79b8f40327d8d1075ce07"
+      }
+    },
+    {
+      "kind": "HTTP",
+      "transport": "own-container loopback via net/http",
+      "method": "GET",
+      "path": "/readyz",
+      "status": 200,
+      "response": {
+        "models_configured": 0,
+        "persistence": "mysql",
+        "status": "ready"
+      }
+    },
+    {
+      "kind": "HTTP",
+      "transport": "own-container loopback via net/http",
+      "method": "GET",
+      "path": "/api/admin/v1/session",
+      "status": 200,
+      "response": {
+        "admin_id": "4c421973-919f-4b8a-997f-909fc6fd010a",
+        "expires_at": "2026-11-23T23:34:09.943866Z",
+        "csrf_token_sha256": "1479a2d5f35f36621536fd808629733cb5ef8cec6bb79b8f40327d8d1075ce07"
+      }
+    },
+    {
+      "kind": "HTTP",
+      "transport": "own-container loopback via net/http",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/8f88918b-738b-57d9-afca-a27a46ed8428/runs/39b050b2-d21d-4c66-9adf-13d621e6a9d4",
+      "status": 200,
+      "response": {
+        "aggregation_complete": false,
+        "cancel_requested": false,
+        "child_request_ids": [
+          "cb01ccac-3104-45b7-bf27-751f93bcca56"
+        ],
+        "client_operation_id": "f175e135-939e-430c-85a2-6d1202a12291",
+        "created_at": "2026-11-23T15:34:06.372560807Z",
+        "deadline_at": "2026-11-23T15:34:11.373275025Z",
+        "fence": "1",
+        "finished_at": null,
+        "id": "39b050b2-d21d-4c66-9adf-13d621e6a9d4",
+        "input_head_message_id": "8c45b166-d607-44be-be3d-4316849e5f1f",
+        "last_event_seq": "4",
+        "limits": {
+          "max_steps": 4,
+          "max_model_calls": 1,
+          "max_tool_calls": 0,
+          "max_duration_ms": 5000,
+          "tool_timeout_ms": 1000,
+          "max_tool_output_bytes": 8192,
+          "max_context_tokens": 32768,
+          "no_progress_limit": 3,
+          "max_tokens": "100",
+          "max_money_atomic": "100",
+          "currency": "TST"
+        },
+        "mode": "chat",
+        "model_alias": "controlled",
+        "protocol_revision": "text-v1",
+        "reason": "execution_outcome_unknown",
+        "resume_cursor": "65b0e441d955a6139a30390d19745c36457615354ad72b06b8f4090e2df3833f",
+        "revision": "4",
+        "session_id": "8f88918b-738b-57d9-afca-a27a46ed8428",
+        "state": "needs_confirmation",
+        "step_count": 1,
+        "usage_groups": []
+      }
+    }
+  ],
+  "limitations": [
+    "No configured model, real source, browser or final deployment package acceptance",
+    "Seed is a controlled prior crash checkpoint, not a claim of real upstream side effects",
+    "Product role tested only for empty-model auth/recovery; stock core roles separately tested by identities and Installation"
+  ]
+}

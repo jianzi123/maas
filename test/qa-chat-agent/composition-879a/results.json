@@ -1,0 +1,711 @@
+{
+  "product_head": "879a7aa489eb347661a889a969ea2586b5f74cbb",
+  "product_code": "07b00d85796da273567c377c9d232f8bf08c3373",
+  "service_code": "c96e598ba245aeb02b418a6d601e036e892717d1",
+  "UI_at_target": "f939f3b5e7eda20938c367f9a9ee3e34c43a81a4",
+  "later_UI_head": "fa81e175c0c6be832ba90c89310147b32f8c17ca",
+  "later_Go_diff": [],
+  "UTC": "2026-11-23T15:38:45.522682+00:00",
+  "windows_actual": {
+    "TestAR1": {
+      "top_level": 14,
+      "pass_events": 26,
+      "unique_leaves": 22
+    },
+    "TestARReview": {
+      "top_level": 4,
+      "pass_events": 23,
+      "unique_leaves": 19
+    },
+    "TestQAAR": {
+      "top_level": 5,
+      "pass_events": 24,
+      "unique_leaves": 20
+    }
+  },
+  "Windows_product_failures": 0,
+  "legacy_attempt": {
+    "top_level": 1,
+    "unique_leaves": 5,
+    "passed": 5,
+    "evidence": "sql-attempt1/controlled-legacy-attempt.log"
+  },
+  "SQL": {
+    "passed_top_level": 5,
+    "sources": {
+      "SessionStore": "sql-attempt1/sql-session-store.log",
+      "known_and_mixed_ledger": "sql-attempt2/sql-unique-ledger.log",
+      "identities_and_installation": "sql-attempt2/sql-identities-installation.log"
+    },
+    "mixed_actual": {
+      "known_tokens": "19",
+      "held_tokens": "140",
+      "held_money_atomic": "520000",
+      "children": 2,
+      "usage_events": 2,
+      "aggregation_complete": false
+    }
+  },
+  "formal": {
+    "status": "PASS bounded SQL and formal empty-model recovery scope",
+    "SQL_failures": [],
+    "resource_run": "maas7-879a-baa9bb93",
+    "cookie_sha256": "95f83e87dd6d9b7a0c82c86c88d7db77b4740e8d9a2e0af7bcada3e8adad5297",
+    "csrf_sha256": "1479a2d5f35f36621536fd808629733cb5ef8cec6bb79b8f40327d8d1075ce07",
+    "principal_id": "4c421973-919f-4b8a-997f-909fc6fd010a",
+    "seed": {
+      "child_request_id": "cb01ccac-3104-45b7-bf27-751f93bcca56",
+      "fixture": "SQL persisted crash checkpoint; no upstream dispatched",
+      "principal_id": "4c421973-919f-4b8a-997f-909fc6fd010a",
+      "run_id": "39b050b2-d21d-4c66-9adf-13d621e6a9d4",
+      "session_id": "8f88918b-738b-57d9-afca-a27a46ed8428"
+    },
+    "before_after_SQL_equal": true,
+    "new_generation_requests": 0,
+    "new_usage_events": 0,
+    "models_configured": 0,
+    "transport": "own container loopback HTTP; host/proxy/browser not validated",
+    "model_calls": 0,
+    "restart_cookie_and_csrf_equal": true,
+    "HTTP_cases": [
+      {
+        "kind": "HTTP",
+        "transport": "own-container loopback via net/http",
+        "method": "GET",
+        "path": "/readyz",
+        "status": 200,
+        "response": {
+          "models_configured": 0,
+          "persistence": "mysql",
+          "status": "ready"
+        }
+      },
+      {
+        "kind": "HTTP",
+        "transport": "own-container loopback via net/http",
+        "method": "GET",
+        "path": "/api/admin/v1/session",
+        "status": 401,
+        "response": {
+          "error": {
+            "budget_dimension": null,
+            "code": "unauthenticated",
+            "message": "unauthenticated",
+            "param": null,
+            "policy_revision": null,
+            "request_id": "c90ff513-1df5-42d8-949b-ddd5266b0224",
+            "reset_at": null,
+            "retry_after_seconds": null,
+            "retryable": false
+          }
+        }
+      },
+      {
+        "kind": "HTTP",
+        "transport": "own-container loopback via net/http",
+        "method": "POST",
+        "path": "/api/admin/v1/session",
+        "status": 403,
+        "response": {
+          "error": {
+            "budget_dimension": null,
+            "code": "forbidden",
+            "message": "forbidden",
+            "param": null,
+            "policy_revision": null,
+            "request_id": "638b8ad4-ddab-47fb-8949-28da96857eb9",
+            "reset_at": null,
+            "retry_after_seconds": null,
+            "retryable": false
+          }
+        }
+      },
+      {
+        "kind": "HTTP",
+        "transport": "own-container loopback via net/http",
+        "method": "POST",
+        "path": "/api/admin/v1/session",
+        "status": 200,
+        "response": {
+          "admin_id": "4c421973-919f-4b8a-997f-909fc6fd010a",
+          "expires_at": "2026-11-23T23:34:09.943866169Z",
+          "csrf_token_sha256": "1479a2d5f35f36621536fd808629733cb5ef8cec6bb79b8f40327d8d1075ce07"
+        }
+      },
+      {
+        "kind": "HTTP",
+        "transport": "own-container loopback via net/http",
+        "method": "GET",
+        "path": "/api/admin/v1/session",
+        "status": 200,
+        "response": {
+          "admin_id": "4c421973-919f-4b8a-997f-909fc6fd010a",
+          "expires_at": "2026-11-23T23:34:09.943866Z",
+          "csrf_token_sha256": "1479a2d5f35f36621536fd808629733cb5ef8cec6bb79b8f40327d8d1075ce07"
+        }
+      },
+      {
+        "kind": "HTTP",
+        "transport": "own-container loopback via net/http",
+        "method": "POST",
+        "path": "/api/agent/v1/sessions",
+        "status": 403,
+        "response": {
+          "error": {
+            "child_request_id": null,
+            "code": "forbidden",
+            "http_request_id": "7c0c0cf3-8391-4d35-8c3e-6ce117638c77",
+            "message": "forbidden",
+            "retryable": false,
+            "run_id": null,
+            "snapshot_required": false
+          }
+        }
+      },
+      {
+        "kind": "HTTP",
+        "transport": "own-container loopback via net/http",
+        "method": "POST",
+        "path": "/api/agent/v1/sessions",
+        "status": 422,
+        "response": {
+          "error": {
+            "child_request_id": null,
+            "code": "model_not_configured",
+            "http_request_id": "ef3987c8-796b-4164-a321-9102f42d8864",
+            "message": "model_not_configured",
+            "retryable": false,
+            "run_id": null,
+            "snapshot_required": false
+          }
+        }
+      },
+      {
+        "kind": "HTTP",
+        "transport": "own-container loopback via net/http",
+        "method": "GET",
+        "path": "/api/agent/v1/sessions/8f88918b-738b-57d9-afca-a27a46ed8428",
+        "status": 200,
+        "response": {
+          "conversation": {
+            "active_run_id": "39b050b2-d21d-4c66-9adf-13d621e6a9d4",
+            "created_at": "2026-11-23T15:34:06.362933422Z",
+            "deleted_at": null,
+            "id": "8f88918b-738b-57d9-afca-a27a46ed8428",
+            "model_alias": "controlled",
+            "owner_id": "4c421973-919f-4b8a-997f-909fc6fd010a",
+            "revision": "4",
+            "title": "test",
+            "updated_at": "2026-11-23T15:34:08.507227604Z"
+          },
+          "event_run_id": "39b050b2-d21d-4c66-9adf-13d621e6a9d4",
+          "last_event_seq": "4",
+          "messages": [
+            {
+              "created_at": "2026-11-23T15:34:06.373275857Z",
+              "id": "8c45b166-d607-44be-be3d-4316849e5f1f",
+              "parts": [
+                {
+                  "text": "calculate",
+                  "type": "text"
+                }
+              ],
+              "position": "1",
+              "role": "user",
+              "run_id": "39b050b2-d21d-4c66-9adf-13d621e6a9d4",
+              "session_id": "8f88918b-738b-57d9-afca-a27a46ed8428",
+              "status": "committed",
+              "supersedes_message_id": null
+            }
+          ],
+          "messages_next_cursor": null,
+          "resume_cursor": "65b0e441d955a6139a30390d19745c36457615354ad72b06b8f4090e2df3833f",
+          "runs": [
+            {
+              "aggregation_complete": false,
+              "cancel_requested": false,
+              "child_request_ids": [
+                "cb01ccac-3104-45b7-bf27-751f93bcca56"
+              ],
+              "client_operation_id": "f175e135-939e-430c-85a2-6d1202a12291",
+              "created_at": "2026-11-23T15:34:06.372560807Z",
+              "deadline_at": "2026-11-23T15:34:11.373275025Z",
+              "fence": "1",
+              "finished_at": null,
+              "id": "39b050b2-d21d-4c66-9adf-13d621e6a9d4",
+              "input_head_message_id": "8c45b166-d607-44be-be3d-4316849e5f1f",
+              "last_event_seq": "4",
+              "limits": {
+                "max_steps": 4,
+                "max_model_calls": 1,
+                "max_tool_calls": 0,
+                "max_duration_ms": 5000,
+                "tool_timeout_ms": 1000,
+                "max_tool_output_bytes": 8192,
+                "max_context_tokens": 32768,
+                "no_progress_limit": 3,
+                "max_tokens": "100",
+                "max_money_atomic": "100",
+                "currency": "TST"
+              },
+              "mode": "chat",
+              "model_alias": "controlled",
+              "protocol_revision": "text-v1",
+              "reason": "execution_outcome_unknown",
+              "resume_cursor": "65b0e441d955a6139a30390d19745c36457615354ad72b06b8f4090e2df3833f",
+              "revision": "4",
+              "session_id": "8f88918b-738b-57d9-afca-a27a46ed8428",
+              "state": "needs_confirmation",
+              "step_count": 1,
+              "usage_groups": []
+            }
+          ]
+        }
+      },
+      {
+        "kind": "HTTP",
+        "transport": "own-container loopback via net/http",
+        "method": "GET",
+        "path": "/api/agent/v1/sessions/8f88918b-738b-57d9-afca-a27a46ed8428/runs/39b050b2-d21d-4c66-9adf-13d621e6a9d4",
+        "status": 200,
+        "response": {
+          "aggregation_complete": false,
+          "cancel_requested": false,
+          "child_request_ids": [
+            "cb01ccac-3104-45b7-bf27-751f93bcca56"
+          ],
+          "client_operation_id": "f175e135-939e-430c-85a2-6d1202a12291",
+          "created_at": "2026-11-23T15:34:06.372560807Z",
+          "deadline_at": "2026-11-23T15:34:11.373275025Z",
+          "fence": "1",
+          "finished_at": null,
+          "id": "39b050b2-d21d-4c66-9adf-13d621e6a9d4",
+          "input_head_message_id": "8c45b166-d607-44be-be3d-4316849e5f1f",
+          "last_event_seq": "4",
+          "limits": {
+            "max_steps": 4,
+            "max_model_calls": 1,
+            "max_tool_calls": 0,
+            "max_duration_ms": 5000,
+            "tool_timeout_ms": 1000,
+            "max_tool_output_bytes": 8192,
+            "max_context_tokens": 32768,
+            "no_progress_limit": 3,
+            "max_tokens": "100",
+            "max_money_atomic": "100",
+            "currency": "TST"
+          },
+          "mode": "chat",
+          "model_alias": "controlled",
+          "protocol_revision": "text-v1",
+          "reason": "execution_outcome_unknown",
+          "resume_cursor": "65b0e441d955a6139a30390d19745c36457615354ad72b06b8f4090e2df3833f",
+          "revision": "4",
+          "session_id": "8f88918b-738b-57d9-afca-a27a46ed8428",
+          "state": "needs_confirmation",
+          "step_count": 1,
+          "usage_groups": []
+        }
+      },
+      {
+        "kind": "HTTP",
+        "transport": "own-container loopback via net/http",
+        "method": "GET",
+        "path": "/readyz",
+        "status": 200,
+        "response": {
+          "models_configured": 0,
+          "persistence": "mysql",
+          "status": "ready"
+        }
+      },
+      {
+        "kind": "HTTP",
+        "transport": "own-container loopback via net/http",
+        "method": "GET",
+        "path": "/api/admin/v1/session",
+        "status": 200,
+        "response": {
+          "admin_id": "4c421973-919f-4b8a-997f-909fc6fd010a",
+          "expires_at": "2026-11-23T23:34:09.943866Z",
+          "csrf_token_sha256": "1479a2d5f35f36621536fd808629733cb5ef8cec6bb79b8f40327d8d1075ce07"
+        }
+      },
+      {
+        "kind": "HTTP",
+        "transport": "own-container loopback via net/http",
+        "method": "GET",
+        "path": "/readyz",
+        "status": 200,
+        "response": {
+          "models_configured": 0,
+          "persistence": "mysql",
+          "status": "ready"
+        }
+      },
+      {
+        "kind": "HTTP",
+        "transport": "own-container loopback via net/http",
+        "method": "GET",
+        "path": "/api/admin/v1/session",
+        "status": 200,
+        "response": {
+          "admin_id": "4c421973-919f-4b8a-997f-909fc6fd010a",
+          "expires_at": "2026-11-23T23:34:09.943866Z",
+          "csrf_token_sha256": "1479a2d5f35f36621536fd808629733cb5ef8cec6bb79b8f40327d8d1075ce07"
+        }
+      },
+      {
+        "kind": "HTTP",
+        "transport": "own-container loopback via net/http",
+        "method": "GET",
+        "path": "/api/agent/v1/sessions/8f88918b-738b-57d9-afca-a27a46ed8428/runs/39b050b2-d21d-4c66-9adf-13d621e6a9d4",
+        "status": 200,
+        "response": {
+          "aggregation_complete": false,
+          "cancel_requested": false,
+          "child_request_ids": [
+            "cb01ccac-3104-45b7-bf27-751f93bcca56"
+          ],
+          "client_operation_id": "f175e135-939e-430c-85a2-6d1202a12291",
+          "created_at": "2026-11-23T15:34:06.372560807Z",
+          "deadline_at": "2026-11-23T15:34:11.373275025Z",
+          "fence": "1",
+          "finished_at": null,
+          "id": "39b050b2-d21d-4c66-9adf-13d621e6a9d4",
+          "input_head_message_id": "8c45b166-d607-44be-be3d-4316849e5f1f",
+          "last_event_seq": "4",
+          "limits": {
+            "max_steps": 4,
+            "max_model_calls": 1,
+            "max_tool_calls": 0,
+            "max_duration_ms": 5000,
+            "tool_timeout_ms": 1000,
+            "max_tool_output_bytes": 8192,
+            "max_context_tokens": 32768,
+            "no_progress_limit": 3,
+            "max_tokens": "100",
+            "max_money_atomic": "100",
+            "currency": "TST"
+          },
+          "mode": "chat",
+          "model_alias": "controlled",
+          "protocol_revision": "text-v1",
+          "reason": "execution_outcome_unknown",
+          "resume_cursor": "65b0e441d955a6139a30390d19745c36457615354ad72b06b8f4090e2df3833f",
+          "revision": "4",
+          "session_id": "8f88918b-738b-57d9-afca-a27a46ed8428",
+          "state": "needs_confirmation",
+          "step_count": 1,
+          "usage_groups": []
+        }
+      }
+    ],
+    "limitations": [
+      "No configured model, real source, browser or final deployment package acceptance",
+      "Seed is a controlled prior crash checkpoint, not a claim of real upstream side effects",
+      "Product role tested only for empty-model auth/recovery; stock core roles separately tested by identities and Installation"
+    ]
+  },
+  "cleanup": {
+    "cleanup.json": [
+      {
+        "kind": "container",
+        "name": "maas7-879a-baa9bb93-app",
+        "removed": true
+      },
+      {
+        "kind": "network",
+        "name": "maas7-879a-baa9bb93-http",
+        "removed": true
+      },
+      {
+        "kind": "container",
+        "name": "maas7-879a-baa9bb93-mysql",
+        "removed": true
+      },
+      {
+        "kind": "volume",
+        "name": "maas7-879a-baa9bb93-socket",
+        "removed": true
+      },
+      {
+        "kind": "volume",
+        "name": "maas7-879a-baa9bb93-data",
+        "removed": true
+      }
+    ],
+    "sql-attempt1\\cleanup.json": [
+      {
+        "kind": "container",
+        "name": "maas7-879a-385df8f0-mysql",
+        "removed": true
+      },
+      {
+        "kind": "volume",
+        "name": "maas7-879a-385df8f0-socket",
+        "removed": true
+      },
+      {
+        "kind": "volume",
+        "name": "maas7-879a-385df8f0-data",
+        "removed": true
+      }
+    ],
+    "sql-attempt2\\cleanup.json": [
+      {
+        "kind": "container",
+        "name": "maas7-879a-6e44d067-app",
+        "removed": true
+      },
+      {
+        "kind": "network",
+        "name": "maas7-879a-6e44d067-http",
+        "removed": true
+      },
+      {
+        "kind": "container",
+        "name": "maas7-879a-6e44d067-mysql",
+        "removed": true
+      },
+      {
+        "kind": "volume",
+        "name": "maas7-879a-6e44d067-socket",
+        "removed": true
+      },
+      {
+        "kind": "volume",
+        "name": "maas7-879a-6e44d067-data",
+        "removed": true
+      }
+    ],
+    "sql-attempt3\\cleanup.json": [
+      {
+        "kind": "container",
+        "name": "maas7-879a-20952ed1-app",
+        "removed": true
+      },
+      {
+        "kind": "network",
+        "name": "maas7-879a-20952ed1-http",
+        "removed": true
+      },
+      {
+        "kind": "container",
+        "name": "maas7-879a-20952ed1-mysql",
+        "removed": true
+      },
+      {
+        "kind": "volume",
+        "name": "maas7-879a-20952ed1-socket",
+        "removed": true
+      },
+      {
+        "kind": "volume",
+        "name": "maas7-879a-20952ed1-data",
+        "removed": true
+      }
+    ],
+    "sql-attempt4\\cleanup.json": [
+      {
+        "kind": "container",
+        "name": "maas7-879a-1c15b283-app",
+        "removed": true
+      },
+      {
+        "kind": "network",
+        "name": "maas7-879a-1c15b283-http",
+        "removed": true
+      },
+      {
+        "kind": "container",
+        "name": "maas7-879a-1c15b283-mysql",
+        "removed": true
+      },
+      {
+        "kind": "volume",
+        "name": "maas7-879a-1c15b283-socket",
+        "removed": true
+      },
+      {
+        "kind": "volume",
+        "name": "maas7-879a-1c15b283-data",
+        "removed": true
+      }
+    ]
+  },
+  "product_original_files_sha256": {
+    "cmd/agent-headless/http.go": "838f7c5e4722d043625bdbfb55e983cdd0adc845ecd6a3147a438d9eecae7ef9",
+    "cmd/agent-headless/main.go": "b26686f56c1b127cebbd8bd4d7012f0b606f81daf2be64914986423ac6eff5be",
+    "cmd/control-api/main.go": "38cac312ea6fd081b0f6449a4ab034966a992cf92fa5ef348ecc589d83d6d6d5",
+    "cmd/control-api/readers.go": "b071c6c301d9f6abb8aea571acbf69eaaf15f62d2c8acfffe9e236edc4079f99",
+    "cmd/control-api/readers_test.go": "d4dd24227cb49761b26e4aa02a411625771ca32a960b182e487ef6333414f554",
+    "cmd/maas-service/main.go": "1672857ddd04a7696d3cacea7f6b07f3c488fe6a039ab94267a1dba51586ebea",
+    "cmd/operator/main.go": "539a006cbcfb20076d5f5e4186c8ccb4a3917478ee193349ad768ecb3e71001c",
+    "cmd/workbench/identities.go": "e9de64739b385f10cabc6a3ab09a8fe84be8c83a00c765f8c259a39877338e66",
+    "cmd/workbench/identities_test.go": "9b58740ebe44a720fa94948fd4a1efa9500c70ececcdee1866375004436f925f",
+    "cmd/workbench/installation_test.go": "0df374fbdb4d254f109612665d35e16ccdc360348df8fad313033bfab29f88b7",
+    "cmd/workbench/main.go": "a172832f9bf102336fd26262e2ac1f8e26ef00cb16fbf20898ab7bba4052b061",
+    "deploy/build-sources.lock.json": "cc486ac731dcf20e43a5182ac7c702e863896d74498d8a3e325e5595949bbcc3",
+    "deploy/charts/maas-platform/runtime-interface.json": "90cfe2c2755fe59bbac071d92d4fdd679cef25d4e8034c95bc823cbcb2aaa25f",
+    "deploy/dependencies.lock.json": "4869cea107c700a1941e3db231f2a953d4e3e58fb6e5937e31360dc09ae03d88",
+    "deploy/identities.json": "ecfd91105090668c738aa363f361ad0083b692d05fa68871e638f13d3410ef02",
+    "docs/contracts/agent-runtime/ar1-draft2/ADR-chat-agent.md": "e8915866a709c54de7f389e7d159d52019c623b2993e62e5c055ae9b0337f6d7",
+    "docs/contracts/agent-runtime/ar1-draft2/AR-B01-B02.md": "ec2aede5e795891a8b167637cc09bbd39360bee9c4a23648bcc1e557e66d599b",
+    "docs/contracts/agent-runtime/ar1-draft2/openapi.json": "b8a503492a847c419e5a844cd9582567d6f0532d1c7782b5b4685be072f209a8",
+    "docs/contracts/agent-runtime/ar1-draft2/session-event.schema.json": "b2513e7799729e7bbfe38262bdc0f8155d777ebb36e7c49d66d0d434125ba089",
+    "docs/contracts/agent-runtime/ar1-draft2/source.json": "f346b4969f146091f7e68a119244803b303bc763615d026c00d82bfb16e9d282",
+    "go.mod": "3fc1c612237e81b1a61efdf59eb3e108980b170fd85b8b2c855db0f08240457b",
+    "go.sum": "34ef9b8203162cccd56bdd7aa590ca1df2683c9a794ba118d3db0ff242609fb1",
+    "internal/admission/handler.go": "ac61df7e4e1a995cba390e7bc9757e51368788c8d0dd3c9cf171299d7edfddc1",
+    "internal/admission/handler_test.go": "2a1d8c9548af0cee333fbb67a08d7f4e9b0ff8bc073152cf84141aa049a7b70a",
+    "internal/agentruntime/ar_commands.go": "cc0ca62ec5a1b8fbb8a5a463c9e452560b19cd9fff07751a9ca246ea39beb258",
+    "internal/agentruntime/ar_host_test.go": "55013f7973fdc07d14598d99fb51b10aa426da088e3076b2b473004cca3b4362",
+    "internal/agentruntime/ar_http.go": "095eae500df48e7970616079ab1f0e3cc679be9c142bcd807f71147d3c51ade1",
+    "internal/agentruntime/ar_http_test.go": "9e5fec9f185ecc0afb956a037f52a145377b6afa8db002e9390ac4509df157e7",
+    "internal/agentruntime/ar_mysql_test.go": "c9fbe9527e7674309789eb3badfedb1b46c7128a9f00081b673e9699f4a21d75",
+    "internal/agentruntime/ar_projection.go": "9d473637e71b26cc5911729f8d889cfb5d83c6e83e1949d8d84e32f007e07482",
+    "internal/agentruntime/ar_recovery_test.go": "fcea4a59274de657847e053950bc7e6279971ab4d8bc652f67f3be4df866b4da",
+    "internal/agentruntime/ar_review_regression_test.go": "19308068508944659a6bf7d17add73137a5ed9be31121bd3be1641f5fb6a8ded",
+    "internal/agentruntime/ar_review_tools_test.go": "1fe404e6e75d9e2aed6eca5e6949ecc7e343249f8efaa53b8a4446582805639b",
+    "internal/agentruntime/ar_transport_test.go": "b02052932ceede1dd7929024c36c314d0705fcef7338f9bc81f4012df4b942ed",
+    "internal/agentruntime/ar_types.go": "ae3aa8e424fe5c6f1edc569b3ee1daa10867d21059e368e9051ebbb263bed4c3",
+    "internal/agentruntime/host.go": "3a185dda51302731c20c263696b48deadef4bda77579d70c5803db37076a0a31",
+    "internal/agentruntime/host_test.go": "442609179084dec88b85d6b158e8618a6484664045a6848fc274657016d40099",
+    "internal/agentruntime/http.go": "93f1625b02d195ddb2fc4091c8f74b6e5b2b09225b835fda3ebdb5dadc02d01a",
+    "internal/agentruntime/kernelmodel/relay_model.go": "3384dd932803b7ee60c54edee7335ca003b533cf4542cefce1e535bdf6b9073d",
+    "internal/agentruntime/kernelmodel/relay_model_test.go": "c4e03c275c0280a955a9ee205817c499fbad6c4d003807dfcc8969419028771d",
+    "internal/agentruntime/localstore.go": "6778fac5e8e778ab79608bc79fe1a5231135c6118dcd7920e59a000174260dd1",
+    "internal/agentruntime/localstore_test.go": "4221874183ec5802ece469f045b9dcd633a86488ea9c9b8dc28c18731ba66437",
+    "internal/agentruntime/migrations/001_sessions.sql": "a9934c1bcd8fef5abaf078f9d1d7316601918c6552b82d26f91b1c832749509a",
+    "internal/agentruntime/public_error.go": "a18ad7c316fb8ff6c2dee9413973cbebac3c522c182a040c1e6da8511929bf6d",
+    "internal/agentruntime/service.go": "d60a1576acf89dad6db10e798bfc6e29c7fa9f14aee51d31e77e971f964c06c1",
+    "internal/agentruntime/service_test.go": "6763641d07326d536e27d04ce88110e5cde1fcec3d4270bc5a651ebd0251f715",
+    "internal/agentruntime/store.go": "f6e76dfe6e172dac63408e81f5a11946298f27be1fa2e817d16af77517c77c5e",
+    "internal/agentruntime/tools.go": "0125f87660b51ebf8f991abbf847cfe87131d8f63070ff7805c49c05f99f0391",
+    "internal/agentruntime/types.go": "5a91b0b63768f8fc1a2eaf760df32a05836c2299ca8541e0648b60e367122e68",
+    "internal/app/auth.go": "ea98368560dbc1da84d0b5fd23a030c18e128e030ad5d1c8dec2b132610a01ca",
+    "internal/app/config.go": "a779232d4aba3cadb04af14649ff77c732820b0767cde158c9a4f27ecbdcba94",
+    "internal/app/database.go": "4c8d0156dc6ef17bdbf484db5e6e8742e3ecc87763d22e8dd0786ac46fe139c9",
+    "internal/app/ledger.go": "614513b00050d2281fc1cd279199dacbee03814e1ac26c01d2b953e56ac5de74",
+    "internal/app/migrations/001_product.sql": "90b596cbfbdf8ec137b464cf0bce7c22bd189d28281380b24f6bfb6ac18df29f",
+    "internal/app/models.go": "e22d9dd591e4fb67a5fbf13d6d79b5129350251c394eac703d39da47b62ac73a",
+    "internal/app/runtime.go": "765d24761a5b0c0b881f6c48e59ef33c701d9419fd2ecdbe6f4eb40066bc5eb3",
+    "internal/controlapi/history_http_test.go": "05b420317c4cda3a41abf9cafed41c5fe3cd51f1c6621c78612c4c8a39853d37",
+    "internal/controlapi/http.go": "f5f034f116c823c0ff81e6ac2df83dd4e28abc380f242f81600e123a0babb5cd",
+    "internal/controlapi/mysql_test.go": "eaf06fad59a457f9776e4b5acb8f00349bd13edfae9cabb3355f536c106dc7f7",
+    "internal/gateway/authorize.go": "a5a765bf7a2bed3c428046517233698a02819cc16d92c309fb3165ea846fc95f",
+    "internal/gateway/authorize_test.go": "91c986c3977f8df0f79d112dee35c0ae3bbef25513cd54fc5dbdecc373534ed6",
+    "internal/gateway/gateway_test.go": "ee8b8e958b2efa37465dbaf65c03c05657d4cde6cb3c447e1d8936c57d5ef206",
+    "internal/gateway/kubernetes_secret.go": "68dc75c5a5685c11d626e214339a15d5fc3c07359835d7fdc81443cd0d361cd4",
+    "internal/gateway/kubernetes_secret_test.go": "cc594d9e183aca7156f9c8083cb6499bed7f7d748890e870daacd8b992794305",
+    "internal/gateway/receipt.go": "114b7fee8f84822b395836bb642cf65f7a1796658173d4e59e86806a6be0bcdf",
+    "internal/gateway/secret.go": "8df94f8624a3571e3e88db8224778331f404d0531160f31b9f35be4234626d7e",
+    "internal/installation/runtime.go": "6f01f8e456ee31d4fa849883cdf4fd9f927da10dd36861c4d290c50690d22d79",
+    "internal/kernel/access.go": "2de2c89e126bac232827a4cb8fdc768bb42261a6a54d47b5781006adac90f1eb",
+    "internal/kernel/admit.go": "fbb201a8fc90c6cdcc87b2c659e34f201be0b2a9bba5dd48f6938065264bd536",
+    "internal/kernel/agent_runtime_mysql_test.go": "c7f2978c822548360e03dcdf61e533bda1863b2835ca2c319a3ba78fdddbc76b",
+    "internal/kernel/catalog.go": "3fbca96e4707b891ef62aef0105283ba845b2792f54dcf1e1571a760cc321014",
+    "internal/kernel/content.go": "664539a025f7b9307b8da0c3961adcee1170433e4f0939f5cae2bef49ed846b9",
+    "internal/kernel/control_mysql_test.go": "b5033d39b2accd01bc4174eaa72cf614433fbfdb1b4745ef2d1d67b2bee5ae15",
+    "internal/kernel/diagnostics.go": "61f38b173084bbe8a9e2fea43de0ca2c6a1d1a528f5475bff42c136855a969be",
+    "internal/kernel/diagnostics_mysql_test.go": "6d72f5bc8d2a86c93413cef4e75ded69c17e2717f779edb252f9cb773172e8ff",
+    "internal/kernel/evidence.go": "bc5f642083a828f60d851c77669336fbafda0dbe8b7af61f1cd3054e752b02fb",
+    "internal/kernel/finalize.go": "1fd6673668af44aa82ab1c44d4c995f025f7a6d9ac795164b130821e2bd4c376",
+    "internal/kernel/maas17_review_test.go": "4dac0037a305c2ab8bdc14491962e9ae2ec1fb7bb56994f0276489023132b0cc",
+    "internal/kernel/management.go": "ce4dc81a2f935c4019f0806c6673705070b94c2cbd087f869b1e9fcdb5fdf4ab",
+    "internal/kernel/migrate_control.go": "9d24c45955d7aad596dbed875cb86d3069fb70f5d684f214c1ba754e20df8f59",
+    "internal/kernel/money.go": "8774c309b0341582421603a1d767019d338b658fa19eed700b12aa11dded2ed4",
+    "internal/kernel/money_test.go": "10cfabc8fe180256dc2e8da0e4b193e0e499c57295bb05262147c1b92d00537f",
+    "internal/kernel/mysql_test.go": "62cfac34bb321d97ffc6a9d15b92af2cb62c61ca286cbf5f53aaac67cf1e539c",
+    "internal/kernel/permissions_mysql_test.go": "d7e5ebee5032bb29f0ec00ae2922339b7c83748155d87ca40e6e09517409e67e",
+    "internal/kernel/public_http_test.go": "fa85b6417e640351e637620f3eea938775f79e27cbe3ff3ed3dab4fb8557e95d",
+    "internal/kernel/public_response.go": "84cabd8b8a6198dc429e6ebb437ee74048d58e4ddbe82598e0909c936d71644f",
+    "internal/kernel/public_response_test.go": "32d4bbb0f15e3aba6225444065104394c60c02e43df0104fc891032e52b0f28d",
+    "internal/kernel/publisher_runtime_test.go": "d1e457c3ffc0da21859624a442f8e4e85be32fda9e8d57049ae5dda981188e1c",
+    "internal/kernel/query.go": "1adac20d904f6c4fbc58fc4390cdd22d6ac9d24841442e9758a5b485ea1bec43",
+    "internal/kernel/r1_r3_boundaries_test.go": "93e151df7e7028e890c65b162b6e73949d83237b0d83167bb09ef503a1663b82",
+    "internal/kernel/rebuild.go": "ac65163fca54cdf8f665d490e5c215e8cb3f1ae6a00343197aa42171f02f47fd",
+    "internal/kernel/recovery_process_test.go": "ad2fcc30ba3b99d2ad3440432de9990cab801858fff5fe4f32d1abdfb68c75d7",
+    "internal/kernel/redis.go": "d3c3262d948bb7a7536f2dc9ab415ef7266d82973dd2375ae130184833d71813",
+    "internal/kernel/relay.go": "50a6ed55b989123a7c7597b31ee7ddef6c7f7addbf4a493c41c35e6076fa2fd1",
+    "internal/kernel/relay_context_test.go": "63daf8a7bb6f9130f9cb743252bdb646b1fe77e4b05c53a23425e3f5f972b9fa",
+    "internal/kernel/relay_deadline_test.go": "a58a87fafd3ee8a17799a8da9da6de021786afc4fe174146223c64825ea1e571",
+    "internal/kernel/relay_forward.go": "72d629979fc1615913d364c1dbf4717b4e40130cc869435c700e8979ad75f6c3",
+    "internal/kernel/relay_mysql_test.go": "73f14344ef193c70cc73871a8994f7a2f78c9cd6afe7359b9d86ef4853abd7c7",
+    "internal/kernel/relay_runtime.go": "25b175ed144f352e5402b79f3f31b702bfb2c550987af1f5f9f8a4947bf5adbf",
+    "internal/kernel/relay_runtime_test.go": "867678da3410413409fa3c4f12a08bbdaf92536a5a971ce6a06d3a8213205cb4",
+    "internal/kernel/relay_sample.go": "e6f5dc5ff60f4e2b10df142902665c716414fce0c77d556af678e354f0806df8",
+    "internal/kernel/relay_sample_test.go": "bf0395cfe253ac411b041e2b923fa91cc49d20edd5f760db4b67ad91c78dc484",
+    "internal/kernel/relay_sampling_mysql_test.go": "dc863d86bea649a39d7487da3f2bbbb19b43d5c53001b59b7c950d12e9fc3ae3",
+    "internal/kernel/schema/0001_kernel.sql": "56616e6b64a6eba2cb2ee5ee152d56563220a9b98efa7fcd3eba951598e5a61c",
+    "internal/kernel/schema/0002_control.sql": "0141b9219f0dae0edab942c73559d4baf81663364b9109ea3ee63150f7b9ff07",
+    "internal/kernel/schema/0003_diagnostics.sql": "bdba48449e0685435f9dc0fca30a2827d2a51e245b0ecf783ef52542725a6015",
+    "internal/kernel/store.go": "7533253cc9a9c436f05a3f09e138337acb7513ddda55bf9ea00eebf3eab5559c",
+    "internal/kernel/summary.go": "0d383d3d6db1dafb6ef958f7c3ba893c1007d25fc90c6271f881cb2205e141b0",
+    "internal/kernel/types.go": "ff0338b8edb48b45395e22d94f7faab61c28d9773ddec4868c69996e3eee3c70",
+    "internal/kernel/usage_authority.go": "b06d5fcb9c43986467d5618002d4929f5b8d85c15a425535a0f9d697c49ea823",
+    "internal/kernel/usage_authority_mysql_test.go": "d2939b230999bad420143d5656ab1c15dcf8bc8bb0685d8f28623945801580b5",
+    "internal/kernel/usage_authority_test.go": "c3cd954016d93968b29b3930b80238cecc2a96d87e4caf03b8da6ef59afc7ca8",
+    "internal/protocol/contracts/diagnostic-provenance.json": "22bf924e628d28460dc9efec2f90f5b9319f2f1b9f7be06a33b5c1c064ce91b1",
+    "internal/protocol/contracts/diagnostic.schema.json": "d35c305ab02acae560c7a8423e672b4d1b50f837c7fc314a75b20628fcb88a4a",
+    "internal/protocol/contracts/management-provenance.json": "d10e0cc111b55a911c25025f6c949fc0165412d6231273eeae0d9e2da9d60e20",
+    "internal/protocol/contracts/management.schema.json": "e36a46511f0fbcf24220970f0e16bdd8dc55aaabd391d5c0a15d1eb747045dc6",
+    "internal/protocol/contracts/private.schema.json": "d6cbf4a37763885f28f66af98366a324953fe162db550ac7a2ec637fad945886",
+    "internal/protocol/contracts/provenance.json": "ef4cb6299e9fd6dcc2c9c888dd86251bfea669de9f9ae596f38b541fe7585825",
+    "internal/protocol/contracts/terminal.schema.json": "3e9eac874ce12d294a91f81617f08cc982cd9f48fb8aade798db35416ab2a5a9",
+    "internal/protocol/schema.go": "a493cd5fe0c8a54f97ca5959eb65384e623539fd84da73f7ac19b99fc394baa8",
+    "internal/protocol/schema_test.go": "375ae0a2b64765176962ea7de80698433c49f52f63c45afa07b34bd1a5fa8f63",
+    "internal/release/bundle.go": "6f872d224d9877f1cb96e04ec8012d571210cbd3dfa106e3c22ce85c4c1e75d0",
+    "internal/release/bundle_test.go": "bb0ad68fd64bac19d080269085f046c511c828a1c17b3c7b9ea7435e7da2eb91",
+    "internal/release/compiler.go": "ddfc0c56cc4a013e15793ddebfaa2c03efa86b75f24e796ed94359afcdd4d9b0",
+    "internal/release/compiler_test.go": "d4168038539388cdb764299315e637e7c9935b6eb4e8699c29f8dd5862a72ae0",
+    "internal/release/history/kubernetes.go": "d6240c9324f70f7c9df887e044a7d65b1d2b5e89a6ab28d80838e34d4ff1d989",
+    "internal/release/history/reader.go": "d3d70c47e2a474b02040ffde328eebf21e913704e8d3192bd239fdb87b126435",
+    "internal/release/history/spec.go": "980de19d7de3dd761b80ba363f77478b8737a2a1b734cc975c108f2cb14a02dc",
+    "internal/release/history/spec_test.go": "4aab096763612207bc4b0b62719de87104f9bac84656c120dc8c90c9ae0375d5",
+    "internal/release/http.go": "6ac0ff7d47f38c447e62fd1043ca6c04579a01b5dd43821ebf8e82bf32131d83",
+    "internal/release/http_test.go": "b46bf0226a3d58cb73bb01eae09b1ff7e92e504b7a72e990b0ad94bfd4c3bb37",
+    "internal/release/management/operations.go": "93c7b69fbd25ba093b42a90de0ab32b4ab2c6993e265bc7b91c71ca4074826b9",
+    "internal/release/management/registry.go": "c76f71848d9e0b6fad156eb5c73c51bae23f5b37d098c2946d449d2410bdf6cc",
+    "internal/release/management/schema.sql": "e02acd8ce3ea6b9b92f77e384cc363dfd85d11f8254a63f8981b682cdcb0ad84",
+    "internal/release/management/service.go": "6fe991ddd315603cc46763a40f953b01cc6a5dad83e390cac2ef83f5321501d4",
+    "internal/release/mysqlstore/control.go": "38f036437ca79b7a9223431d69de9f19adff0a5edb603e36040a20a9b9df7c97",
+    "internal/release/mysqlstore/history.go": "a7d7d551f0daa70b74b5fc3db888350e2c5173c211a5e90bb5847c08627b268f",
+    "internal/release/mysqlstore/history_permissions_test.go": "7a18afd61ed0aeaa75ed625a1d8538711f090300d14461092d4fe88889301d67",
+    "internal/release/mysqlstore/history_test.go": "a1f13ff94b9597e9e29370e99e21bb8b6469967b2f8cb0168fe6569e2fb3165c",
+    "internal/release/mysqlstore/inventory.go": "819ed77f937fff686a5e580c3cdf25479748f1e3d229aab538c3309e7520e119",
+    "internal/release/mysqlstore/migrate.go": "115e6bfed5c4489eaa2c2d84b0a74cf3b91d501bfa3cf145dd42ff4e504eaa07",
+    "internal/release/mysqlstore/mysql_test.go": "77a934e23cb1d7c2e00e9d27e3be2b1a405e4e20a6fc685bf31c45ff70705b5e",
+    "internal/release/mysqlstore/runtime.go": "1e75972d2d588ebff3e7839974eb2f5e0e075ea95d8ddb22245b2ff2e606d47c",
+    "internal/release/mysqlstore/schema/0001_release.sql": "91ea4dc8699fafa8ae8e9433c637828fce60f43878fe71c4ae1b688fffed69d5",
+    "internal/release/mysqlstore/schema/0002_history.sql": "9294d4f9ca23354014607540fc52a472915c3e40f59dada293db74ae2f5b9193",
+    "internal/release/mysqlstore/store.go": "a7d9d236d9e9b1dcc2b32f9323ec0abd18dfcc7f5e1a5a9d1ab912bba704f7b1",
+    "internal/release/mysqlstore/store_test.go": "5f19dcecd84af46469936287d036c7fec1a4381537f220a9e43bbe675d98fbcc",
+    "internal/release/ports.go": "d5fe9e15fddf051cfac057909b1d6f793e43498e00c166fb9a2332c6d5c12851",
+    "internal/release/reconciler.go": "9917de4cd698e0208d374b4b94099fb5f2c1639308241f47fe14f67ea4e612d6",
+    "internal/release/reconciler_test.go": "9cbb12e25ed020c17badd373a1025e73cc37467288b3cf1261dbbaadf38f1d3a",
+    "internal/release/resources.go": "e187c3d50a37e04b23e3e5f2fe9ab2c845553b9695b6cf9ea8caba1f35de8c84",
+    "internal/webconsole/handler.go": "a7e8d5f1d18bca568dbf4c3bc76495c5fc412aa19f8be694131f0d073f2b3764",
+    "internal/workbench/http.go": "8fc5156f9d02ec95232dd41b315124f811bc5a86aea890eccf64a75ceb4fab74",
+    "internal/workbench/http_test.go": "c2959d890525b3b8aa4e2c844a10aad960ea2ee343e953c2ce32288d8a918bc6",
+    "package-lock.json": "de2b1fa14400b2def0f1acb4be2640775fed250f7d5c864bca4116269bd4e90f"
+  },
+  "binary_sha256": {
+    "agent.test": "8b86f622c56fbbf5289d9d49e2362059e9c742d911a25651fe631b8b9f4d1cbe",
+    "kernel.test": "95bebc03c640b8e4b3c8509d0525ec34736044eaa2d8a93cae1289b86371d4ff",
+    "installation.test": "c87dae9d3859f867079180ad4e3330ccce47baa042e3e579eab885d519a3e630",
+    "maas-service": "444bf55dde3c46fd9b4d693617cf896ff21b975ba3da60eb6e4b2d93a2dceb0b",
+    "qa-http-probe": "41de48f0fb40d3016d5af7a3301c42cff38966197c13f2149910ac245d5c9df5"
+  },
+  "boundaries": {
+    "AR-R01": "CLOSED controlled backend at fixed head; browser/final deployment not included",
+    "AR-R02": "CLOSED controlled backend at fixed head; external write side effects not claimed",
+    "all_18": "PARTIAL",
+    "A01_A34": "NOT_FULLY_ACCEPTED",
+    "real_upstream_calls": 0,
+    "GPU_runs": 0,
+    "remote_merge": false,
+    "paid_calls": 0
+  }
+}

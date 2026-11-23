@@ -1,0 +1,13 @@
+{
+  "sql_accepted": false,
+  "reason": "source-switch invalidation then WSL/Service/WSAETIMEDOUT prevented fixed-version rerun",
+  "cleanup": {
+    "wsl_filesystem_reachable": true,
+    "owned_datadir_exists": false,
+    "owned_tooldir_exists": false,
+    "recorded_pid_exists": false,
+    "recorded_pid_is_owned_mysql": false
+  },
+  "product_defects_confirmed": 2,
+  "remote_merge_performed": false
+}

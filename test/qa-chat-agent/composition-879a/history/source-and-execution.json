@@ -1,0 +1,30 @@
+{
+  "actual_head": "a4c1347b6e01ed6fdf9925cf9ee26cb82251c405",
+  "docs/contracts/agent-runtime/ar1-draft2/openapi.json": {
+    "sha256": "b8a503492a847c419e5a844cd9582567d6f0532d1c7782b5b4685be072f209a8",
+    "unchanged_from_19e": true
+  },
+  "docs/contracts/agent-runtime/ar1-draft2/session-event.schema.json": {
+    "sha256": "b2513e7799729e7bbfe38262bdc0f8155d777ebb36e7c49d66d0d434125ba089",
+    "unchanged_from_19e": true
+  },
+  "frozen_files": {
+    "internal/agentruntime/ar_http.go": "095eae500df48e7970616079ab1f0e3cc679be9c142bcd807f71147d3c51ade1",
+    "internal/agentruntime/ar_projection.go": "9d473637e71b26cc5911729f8d889cfb5d83c6e83e1949d8d84e32f007e07482",
+    "internal/agentruntime/service.go": "d60a1576acf89dad6db10e798bfc6e29c7fa9f14aee51d31e77e971f964c06c1",
+    "internal/agentruntime/ar_review_regression_test.go": "19308068508944659a6bf7d17add73137a5ed9be31121bd3be1641f5fb6a8ded",
+    "internal/agentruntime/ar_review_tools_test.go": "1fe404e6e75d9e2aed6eca5e6949ecc7e343249f8efaa53b8a4446582805639b"
+  },
+  "execution": {
+    "linux_session": 33084,
+    "windows_session": 80975,
+    "windows_offline_session": 99469,
+    "all_exit_after_interrupt": 1,
+    "effective_product_tests": 0,
+    "product_pass": 0,
+    "product_fail": 0,
+    "sql": "NOT_STARTED",
+    "ui": "NOT_EXECUTED",
+    "status": "NOT_ACCEPTED"
+  }
+}

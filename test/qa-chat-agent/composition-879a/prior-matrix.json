@@ -1,0 +1,214 @@
+{
+  "kind": "QA acceptance plan; not product contract",
+  "baseline": "8dbf99ef59c847da775b83d0eeb7dc8f8bf48a9a",
+  "agent_task": "01a1f1d7-1187-7bc5-9e5f-718ce6462e0d",
+  "contract_sha": null,
+  "product_candidate_sha": null,
+  "rows": [
+    {
+      "id": "CHAT-01",
+      "capability": "新建/重命名/删除/刷新多轮持久历史",
+      "assertions": "重建Store与刷新浏览器后原消息顺序/owner保持；删除按契约，不用当前页缓存自证",
+      "controlled_model": "NOT_EXECUTED_NO_CONTRACT_OR_CANDIDATE",
+      "real_chain": "NOT_EXECUTED",
+      "production": "NOT_ACCEPTED",
+      "ar_a4c_repair": {
+        "sha": "a4c1347b6e01ed6fdf9925cf9ee26cb82251c405",
+        "status": "NOT_EXECUTED_CHANNEL_NO_TEST_EVENTS",
+        "product_failure": false,
+        "entry": "test/qa-chat-agent/ar-a4c"
+      }
+    },
+    {
+      "id": "CHAT-02",
+      "capability": "用户与会话隔离",
+      "assertions": "用户B不可列出/读取/订阅/取消/批准用户A；不存在与不可见按契约404/403，原始内容不泄漏",
+      "controlled_model": "NOT_EXECUTED_NO_CONTRACT_OR_CANDIDATE",
+      "real_chain": "NOT_EXECUTED",
+      "production": "NOT_ACCEPTED"
+    },
+    {
+      "id": "CHAT-03",
+      "capability": "流式/停止",
+      "assertions": "仅一次生成；停止传播到原模型/工具；取消请求和实际停止分列，未证关闭不释放slot/held",
+      "controlled_model": "NOT_EXECUTED_NO_CONTRACT_OR_CANDIDATE",
+      "real_chain": "NOT_EXECUTED",
+      "production": "NOT_ACCEPTED",
+      "ar_a4c_repair": {
+        "sha": "a4c1347b6e01ed6fdf9925cf9ee26cb82251c405",
+        "status": "NOT_EXECUTED_CHANNEL_NO_TEST_EVENTS",
+        "product_failure": false,
+        "entry": "test/qa-chat-agent/ar-a4c"
+      }
+    },
+    {
+      "id": "CHAT-04",
+      "capability": "断线重连/刷新恢复",
+      "assertions": "cursor回放仅持久事件，重复GET不新增模型/工具执行，原R与查询Q分域",
+      "controlled_model": "NOT_EXECUTED_NO_CONTRACT_OR_CANDIDATE",
+      "real_chain": "NOT_EXECUTED",
+      "production": "NOT_ACCEPTED",
+      "ar_a4c_repair": {
+        "sha": "a4c1347b6e01ed6fdf9925cf9ee26cb82251c405",
+        "status": "NOT_EXECUTED_CHANNEL_NO_TEST_EVENTS",
+        "product_failure": false,
+        "entry": "test/qa-chat-agent/ar-a4c"
+      }
+    },
+    {
+      "id": "CHAT-05",
+      "capability": "编辑/重新生成",
+      "assertions": "原消息/新分支/原子R新R与账务关联，未知写入不自动重试",
+      "controlled_model": "NOT_EXECUTED_NO_CONTRACT_OR_CANDIDATE",
+      "real_chain": "NOT_EXECUTED",
+      "production": "NOT_ACCEPTED",
+      "ar_a4c_repair": {
+        "sha": "a4c1347b6e01ed6fdf9925cf9ee26cb82251c405",
+        "status": "NOT_EXECUTED_CHANNEL_NO_TEST_EVENTS",
+        "product_failure": false,
+        "entry": "test/qa-chat-agent/ar-a4c"
+      }
+    },
+    {
+      "id": "CHAT-06",
+      "capability": "Markdown/代码与错误/非空未知用量",
+      "assertions": "展示转义/代码不执行；最终usage来自原子结算，未知null不填0",
+      "controlled_model": "NOT_EXECUTED_NO_CONTRACT_OR_CANDIDATE",
+      "real_chain": "NOT_EXECUTED",
+      "production": "NOT_ACCEPTED"
+    },
+    {
+      "id": "AGENT-01",
+      "capability": "真实安全工具→观察回填→最终答复",
+      "assertions": "受控ModelClient选择真实纯计算/本用户只读工具；执行计数/结果事件/下一模型上下文可回溯",
+      "controlled_model": "NOT_EXECUTED_NO_CONTRACT_OR_CANDIDATE",
+      "real_chain": "NOT_EXECUTED",
+      "production": "NOT_ACCEPTED"
+    },
+    {
+      "id": "AGENT-02",
+      "capability": "畸形/未授权/未知工具",
+      "assertions": "Schema/能力/owner先验证，执行计数0，模型选择不能提权",
+      "controlled_model": "NOT_EXECUTED_NO_CONTRACT_OR_CANDIDATE",
+      "real_chain": "NOT_EXECUTED",
+      "production": "NOT_ACCEPTED"
+    },
+    {
+      "id": "AGENT-03",
+      "capability": "等待批准/拒绝/重复批准",
+      "assertions": "批准绑定run/call/owner/args_hash，拒绝0执行、重复批准最多1次；修改参数旧批准失效",
+      "controlled_model": "NOT_EXECUTED_NO_CONTRACT_OR_CANDIDATE",
+      "real_chain": "NOT_EXECUTED",
+      "production": "NOT_ACCEPTED",
+      "ar_a4c_repair": {
+        "sha": "a4c1347b6e01ed6fdf9925cf9ee26cb82251c405",
+        "status": "NOT_EXECUTED_CHANNEL_NO_TEST_EVENTS",
+        "product_failure": false,
+        "entry": "test/qa-chat-agent/ar-a4c"
+      }
+    },
+    {
+      "id": "AGENT-04",
+      "capability": "工具超时/输出上限",
+      "assertions": "真实有界测试工具超时/输出截断按契约记录；超时不等于未知副作用可重放",
+      "controlled_model": "NOT_EXECUTED_NO_CONTRACT_OR_CANDIDATE",
+      "real_chain": "NOT_EXECUTED",
+      "production": "NOT_ACCEPTED",
+      "ar_a4c_repair": {
+        "sha": "a4c1347b6e01ed6fdf9925cf9ee26cb82251c405",
+        "status": "NOT_EXECUTED_CHANNEL_NO_TEST_EVENTS",
+        "product_failure": false,
+        "entry": "test/qa-chat-agent/ar-a4c"
+      }
+    },
+    {
+      "id": "AGENT-05",
+      "capability": "步数/时长/预算/无进展限制",
+      "assertions": "显式合成限值触发终止，不能默认无限循环，累计账务来自各子请求",
+      "controlled_model": "NOT_EXECUTED_NO_CONTRACT_OR_CANDIDATE",
+      "real_chain": "NOT_EXECUTED",
+      "production": "NOT_ACCEPTED",
+      "ar_a4c_repair": {
+        "sha": "a4c1347b6e01ed6fdf9925cf9ee26cb82251c405",
+        "status": "NOT_EXECUTED_CHANNEL_NO_TEST_EVENTS",
+        "product_failure": false,
+        "entry": "test/qa-chat-agent/ar-a4c"
+      }
+    },
+    {
+      "id": "AGENT-06",
+      "capability": "崩溃/Checkpoint恢复",
+      "assertions": "独立进程退出后从持久checkpoint恢复；已知工具不重复执行，未知写保持待确认",
+      "controlled_model": "NOT_EXECUTED_NO_CONTRACT_OR_CANDIDATE",
+      "real_chain": "NOT_EXECUTED",
+      "production": "NOT_ACCEPTED"
+    },
+    {
+      "id": "AGENT-07",
+      "capability": "未知副作用",
+      "assertions": "同call幂等键/结果未知不自动重放；批准也不抹去未知事实",
+      "controlled_model": "NOT_EXECUTED_NO_CONTRACT_OR_CANDIDATE",
+      "real_chain": "NOT_EXECUTED",
+      "production": "NOT_ACCEPTED",
+      "ar_a4c_repair": {
+        "sha": "a4c1347b6e01ed6fdf9925cf9ee26cb82251c405",
+        "status": "NOT_EXECUTED_CHANNEL_NO_TEST_EVENTS",
+        "product_failure": false,
+        "entry": "test/qa-chat-agent/ar-a4c"
+      }
+    },
+    {
+      "id": "AGENT-08",
+      "capability": "重复/乱序事件",
+      "assertions": "相同事件重复读不执行；同ID异内容拒绝，cursor/run/session不可串读",
+      "controlled_model": "NOT_EXECUTED_NO_CONTRACT_OR_CANDIDATE",
+      "real_chain": "NOT_EXECUTED",
+      "production": "NOT_ACCEPTED",
+      "ar_a4c_repair": {
+        "sha": "a4c1347b6e01ed6fdf9925cf9ee26cb82251c405",
+        "status": "NOT_EXECUTED_CHANNEL_NO_TEST_EVENTS",
+        "product_failure": false,
+        "entry": "test/qa-chat-agent/ar-a4c"
+      }
+    },
+    {
+      "id": "AGENT-09",
+      "capability": "子模型请求唯一准入/结算",
+      "assertions": "每子R一次预留/终态/汇总，重复event同hash幂等，父run不建第二扣量账本",
+      "controlled_model": "NOT_EXECUTED_NO_CONTRACT_OR_CANDIDATE",
+      "real_chain": "NOT_EXECUTED",
+      "production": "NOT_ACCEPTED",
+      "ar_a4c_repair": {
+        "sha": "a4c1347b6e01ed6fdf9925cf9ee26cb82251c405",
+        "status": "NOT_EXECUTED_CHANNEL_NO_TEST_EVENTS",
+        "product_failure": false,
+        "entry": "test/qa-chat-agent/ar-a4c"
+      }
+    },
+    {
+      "id": "AGENT-10",
+      "capability": "取消及晚到工具/模型结果",
+      "assertions": "fence/版本与原run绑定，晚结果不得恢复已终止run或释放新allocation",
+      "controlled_model": "NOT_EXECUTED_NO_CONTRACT_OR_CANDIDATE",
+      "real_chain": "NOT_EXECUTED",
+      "production": "NOT_ACCEPTED"
+    },
+    {
+      "id": "AGENT-11",
+      "capability": "版本化tool_calls与能力",
+      "assertions": "严格文本v3/3.0不暗加工具字段；协商版本和批准模型profile缺失拒绝工具模式",
+      "controlled_model": "NOT_EXECUTED_NO_CONTRACT_OR_CANDIDATE",
+      "real_chain": "NOT_EXECUTED",
+      "production": "NOT_ACCEPTED"
+    },
+    {
+      "id": "AGENT-12",
+      "capability": "工具输出为数据/秘密隔离",
+      "assertions": "提示注入不能改系统授权；事件/日志无平台Key/Secret/DSN/私密跨用户输入",
+      "controlled_model": "NOT_EXECUTED_NO_CONTRACT_OR_CANDIDATE",
+      "real_chain": "NOT_EXECUTED",
+      "production": "NOT_ACCEPTED"
+    }
+  ],
+  "A01_A34": "PRIOR_SCOPES_PRESERVED_NOT_REOPENED"
+}
