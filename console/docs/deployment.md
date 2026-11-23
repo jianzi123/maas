@@ -51,3 +51,19 @@ npm run test:deployed-site
 ```
 
 可选 MAAS_SMOKE_SESSION_ID 指定原会话。只有另行具备该模型/额度授权时才设置 MAAS_SMOKE_SEND=1、MAAS_SMOKE_MODEL；MAAS_SMOKE_MODE 默认为chat，MAAS_SMOKE_PROMPT可覆盖安全测试提示词。开关不代表付费授权；脚本不自动批准、不重新执行未知工具。输出在artifacts/deployed-site，截图可能含测试会话内容，应使用无敏感信息的演示数据。
+
+## MAAS-20 正式入口接点（2026-11-23交接，待最终Go SHA装配验证）
+
+已认证读取 MAAS-20 的 product.example.json / product-service.md 接点附件。原后端正在沿PR18交付 `cmd/maas-service`，构建与进程为：
+
+```sh
+GOMAXPROCS=2 go build -p=2 -buildvcs=false -o maas-service ./cmd/maas-service
+maas-service migrate --config /etc/maas/product.json
+maas-service serve --config /etc/maas/product.json
+```
+
+不加开发build tags。迁移命令消费独立 migration_dsn_file，serve消费runtime_dsn_file并验证迁移/权限，不在常驻进程执行DDL。JSON的listen可为0.0.0.0:8080，origin须等于浏览器入口；healthz仅存活，readyz还验证MySQL与调度所有权。该接点首期replicas=1，不宣称多活调度。实际配置/Secret/迁移与验证版本由MAAS-20/21最终源码记录，不从前端猜默认。
+
+若由该Go进程直接托管静态文件，dist放入product配置的static_dir（附件例为/usr/share/maas/console），公开JSON随同挂在 static_dir/console-config.json；若仍由现有独立静态容器托管，则沿/app/dist挂载。二者选择一种同源路由装配，不同时启动第二登录来源。前端chat.limits应只从安装已确认的agent.limits白名单投影；**不能把整份product配置放进静态目录**。附件agent限制使用USD等安装样例，与本目录TST受控样例不同，不能未经核定直接混用。
+
+该正式入口当前仅装配原严格text-v1 Relay；真实tools-v1尚未装配/批准时拒绝，不切换demo。空models可初始化、登录和读取持久历史，不能调用模型；页面会显示无获准模型并禁用发送。两个真实安全工具的旧受控证据不等于本次正式模型已能选择工具。正式普通模型配置引用原publication_id/platform_key_file和私有Higress/TLS/签票链，由后端/安装者管理，不能在浏览器输入上游Secret。

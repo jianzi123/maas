@@ -27,3 +27,5 @@
 先执行 `npm test`、`npm run build`、`node scripts/deployed-build-browser.mjs`（后者仅生产静态产物＋HTTP夹具）。正式站点用 `scripts/deployed-smoke.mjs`；默认只读验证，启用生成必须显式设置开关且具备对应模型/额度批准。应用/MySQL重启只在主交付隔离环境执行，不由前端脚本擅自重启。
 
 结束时交截图、实际操作结果、准确组合和未执行项。文件上传、shell、MCP、检索/长期记忆、子Agent/多Agent尚未实现，不演示空按钮或列为已完成。清理只停止本演示自有服务，保留需要移交的数据；无需长期运行时不留常驻进程。
+
+本轮正式入口接点更新（MAAS-20 2026-11-23附件，尚待固定新Go SHA装配）：migrate/serve --config /etc/maas/product.json，MySQL-only，共享原管理登录；当前正常产品适配只有text-v1。故真实上游Agent工具演示、批准及多步工具调用应标“当前正式适配未装配/未执行”，直到独立、明确的MySQL受控profile或获准tools-v1适配到位。不能用原agentcontrolled文件会话替代本表第10分钟的MySQL重启步骤。普通Chat也须具备已发布Profile、平台Key预算、Higress/TLS/签票等真实输入，空models仅能登录/查历史。
