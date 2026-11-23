@@ -1,0 +1,29 @@
+{
+  "schema_version": "maas.console/1",
+  "chat": {
+    "enabled": true,
+    "limits": {
+      "max_steps": 4,
+      "max_model_calls": 4,
+      "max_tool_calls": 8,
+      "max_duration_ms": 10000,
+      "tool_timeout_ms": 1000,
+      "max_tool_output_bytes": 8192,
+      "max_context_tokens": 32768,
+      "no_progress_limit": 3,
+      "max_tokens": "100",
+      "max_money_atomic": "100",
+      "currency": "TST"
+    },
+    "tools": [
+      {
+        "name": "bounded_arithmetic",
+        "revision": "1"
+      },
+      {
+        "name": "list_visible_models",
+        "revision": "1"
+      }
+    ]
+  }
+}

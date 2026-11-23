@@ -3,6 +3,7 @@ import { computed, onMounted, onBeforeUnmount, ref, shallowRef } from "vue";
 import type { ChatService, Session, Run, Mode, Message } from "../chat/types";
 import ChatMarkdown from "../components/ChatMarkdown.vue";
 import PanelDialog from "../components/PanelDialog.vue";
+import { deployedChatConfig } from "../deployment";
 const props = defineProps<{
   development?: boolean;
   service?: ChatService;
@@ -349,7 +350,9 @@ onMounted(async () => {
     } else if (props.http) {
       const { HTTPChat } = await import("../chat/http");
       service.value = new HTTPChat(
-        JSON.parse(import.meta.env.VITE_CHAT_AR1_CONFIG || "null"),
+        import.meta.env.DEV
+          ? JSON.parse(import.meta.env.VITE_CHAT_AR1_CONFIG || "null")
+          : deployedChatConfig(),
       );
     }
     if (service.value) {
@@ -399,8 +402,9 @@ onBeforeUnmount(() => {
         :class="{ chosen: selected?.id === s.id }"
         @click="open(s.id)"
       >
-        <strong>{{ s.title }}</strong
-        ><small>{{ new Date(s.updatedAt).toLocaleString() }}</small></button
+        <strong>{{ s.title }}</strong><small>{{
+          new Date(s.updatedAt).toLocaleString()
+        }}</small></button
       ><button
         v-if="development"
         class="quiet"
@@ -497,8 +501,7 @@ onBeforeUnmount(() => {
           <div class="chat-message-meta">
             <strong>{{
               m.role === "user" ? "你" : m.role === "tool" ? "工具" : "助手"
-            }}</strong
-            ><small>{{ m.createdAt }}</small>
+            }}</strong><small>{{ m.createdAt }}</small>
           </div>
           <pre v-if="m.role === 'tool'">{{ m.content }}</pre>
           <ChatMarkdown v-else :content="messageContent(m)" /><small
@@ -547,8 +550,9 @@ onBeforeUnmount(() => {
           }}工具输入和结果按不可信数据展示。
         </p>
         <article v-for="step in currentRun.steps" :key="step.id">
-          <strong>{{ step.label }}</strong
-          ><span class="badge">{{ step.state }}</span>
+          <strong>{{ step.label }}</strong><span class="badge">{{
+            step.state
+          }}</span>
           <details open>
             <summary>工具输入 / 结果</summary>
             <pre>{{ step.input }}</pre>
