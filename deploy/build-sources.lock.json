@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "sourceMode": "single-repository-code-commit",
   "backend": {
-    "sourceCommit": "ebef095b6d13facfe0b386f74ad4a819b6fa4ae2",
+    "sourceCommit": "d0875dec551df83b4ac127e8c82c54acdad90bdb",
     "files": {
       ".gitattributes": "dfd50b4d90593dde1621efa8da5b6dc071c7cf1844c139932e5b26df2607e6d5",
       ".gitignore": "46cf94096a926a26bc1a913b6cc632adacab0a96ab42d72a7dcbf216bcbaaa77",
@@ -17,6 +17,7 @@
       "docs/agent-runtime-verification.md": "c8fc6b9cd7d71db159545e459d04058d6e3d362cc0fbb2c48fd6ae29b008e256",
       "docs/controlled-api-continuation.md": "34a1f80563c2aaca3a6c091e83f45ea64f140033de2682dbd9c0c2c12a6af562",
       "docs/controlled-api-verification.md": "ccd6ad5cd1b959bf3c38364b48c60ec26b69e24fe1834ccf141b806297982eaf",
+      "docs/delivery-integration-review.md": "2f8472831e4829f06b85557f127937a98c38f2d2b6bfda38342196c8d4be0fba",
       "docs/go-relay-d1-export.md": "8dffd8d0a6021d296afba6993442356ba93752594c67b329b2a2aa991b79417f",
       "docs/higress-minimal-patch-scope.md": "eb8472c5b0ec120019cc1c069fad752809040115fda637663f0a13ff8d2cff93",
       "docs/history-public-handoff.md": "2a536c86b70db869d4abe78d5d9baa596de60e95f4020d2f3adc6e92da4ad911",
@@ -577,7 +578,7 @@
     }
   },
   "console": {
-    "sourceCommit": "ebef095b6d13facfe0b386f74ad4a819b6fa4ae2",
+    "sourceCommit": "d0875dec551df83b4ac127e8c82c54acdad90bdb",
     "files": {
       "console/.env.fixtures": "4d5e22f8eeb4bbf5a027a34c7a4bfef806876a470f89440f9611bd01a9d8c5f7",
       "console/.env.workbench": "930edf078e756f41d37fad0f7ce87332d8af59e65dac57b11797bcf0117a9216",
@@ -826,6 +827,7 @@
       "docs/contracts/agent-runtime/ar1-draft2/openapi.json",
       "docs/contracts/agent-runtime/ar1-draft2/session-event.schema.json",
       "docs/contracts/agent-runtime/ar1-draft2/source.json",
+      "docs/delivery-integration-review.md",
       "docs/installation-composition.md",
       "docs/local-service.md",
       "docs/maas17-r5-history.md",

@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "scope": "installation-input-only-no-secret-values",
-  "sourceCommit": "ebef095b6d13facfe0b386f74ad4a819b6fa4ae2",
+  "sourceCommit": "d0875dec551df83b4ac127e8c82c54acdad90bdb",
   "productionWiringVerified": false,
   "connections": {
     "core": {
@@ -261,6 +261,7 @@
         "docs/contracts/agent-runtime/ar1-draft2/openapi.json",
         "docs/contracts/agent-runtime/ar1-draft2/session-event.schema.json",
         "docs/contracts/agent-runtime/ar1-draft2/source.json",
+        "docs/delivery-integration-review.md",
         "docs/installation-composition.md",
         "docs/local-service.md",
         "docs/maas17-r5-history.md",
