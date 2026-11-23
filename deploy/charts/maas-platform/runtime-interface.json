@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "scope": "observed-source-interface-not-production-readiness",
   "backend": {
-    "sourceCommit": "7c07dc751263f3a5da29106f4da62d3434dd1c15",
+    "sourceCommit": "304bc6fb1778102619c488101e5eaef2f367089f",
     "apiGroup": "serving.maas.example",
     "operator": {
       "command": [
@@ -83,7 +83,7 @@
       "docs/usage-authority-continuation.md": "a86665fc787f573f169025fc977ea8af19d1ade7a4dfa3e83c1a208ddc1ea578",
       "docs/usage-diagnostics-v2.md": "436ad870400a49506b105d6f4d5db58e63129cbe2f106ccfe9834afdb8d2c0be",
       "docs/verification.md": "663c0952067d4e4c2ef7f6ef2108a387022a9ae4e16ebe57a79e68def2cd13b7",
-      "docs/wsl-publish-resources.md": "e0dd1e34d5524f6122b13cac08d67fb6c042b542a2deb664312339083d039e5c",
+      "docs/wsl-publish-resources.md": "a544c678803ee3dccbe9450d3fde395cda063f47fe9835a3e24b70809f7fefe5",
       "scripts/assemble-workbench.py": "da7587ae75b54ed26cee8408810a8c5051edf652f4c2be0bab5564620e8214f1",
       "scripts/check-go.mjs": "7d2eee84a55a766888a10e826c5dc296de6c64545c433187773fa7c648826d62",
       "scripts/check-go.sh": "fcf24339c1d965536e06b399baf925a0c0c5d71391d2f40fe58d4160bd5da5d3",
@@ -593,7 +593,7 @@
     }
   },
   "console": {
-    "sourceCommit": "7c07dc751263f3a5da29106f4da62d3434dd1c15",
+    "sourceCommit": "304bc6fb1778102619c488101e5eaef2f367089f",
     "build": "npm ci && npm run build",
     "output": "console/dist",
     "localBridge": "development-and-explicit-workbench-mode-only",
