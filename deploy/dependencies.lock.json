@@ -4,12 +4,12 @@
   "deploymentApproved": false,
   "sourceBaseline": {
     "chartBase": "e5647a2f2b44f53d39a80041be94b619f07c29d6",
-    "backendInspected": "7c10e4d3397848de1f4508ec4295b7dc25324a45",
+    "backendInspected": "e816a744a61166213186bd4835296e4b24c3e4ff",
     "contracts": "MAAS-2 v0.4 + retained v0.3 + query/recovery addenda + MAAS-1 role review",
     "terminal": "3.0",
     "ticket": "3",
     "proposedTerminal": "3.1 (not enabled)",
-    "consoleInspected": "7c10e4d3397848de1f4508ec4295b7dc25324a45",
+    "consoleInspected": "e816a744a61166213186bd4835296e4b24c3e4ff",
     "defaultBranch": "925d8c55be9ce823d100bf90a5c78cf19ea66d58",
     "candidatePR": null,
     "candidateState": "integrated-unmerged",
@@ -18,7 +18,7 @@
     "qaCore": "ac94a373ec0a61c5fd4dc5380a7985a4fb47840f",
     "qaEvidence": "50354a705c03383d0102d0d437119afd7ffed8b3",
     "sourceInventory": "deploy/build-sources.lock.json",
-    "sourceInventorySha256": "b63b60c8304d02bc5ec8f14d1b2d4cfd2b4ef627956e7a569ad6016de0804c60",
+    "sourceInventorySha256": "1e42267b246659624aba2b2497c1060e14a902470a0e9be862836a9d09f67b2c",
     "upstreamWorkbenchDeployment": "e5647a2f2b44f53d39a80041be94b619f07c29d6",
     "backendBase": "0559fa46b4a728d6f542daf19532e794f8549b31",
     "integrationBranch": "integrate/MAAS-17-unified-20261114",
@@ -99,7 +99,7 @@
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "7c10e4d3397848de1f4508ec4295b7dc25324a45",
+      "sourceCommit": "e816a744a61166213186bd4835296e4b24c3e4ff",
       "compiledAPIGroup": "serving.maas.example"
     },
     {
@@ -116,7 +116,7 @@
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "7c10e4d3397848de1f4508ec4295b7dc25324a45",
+      "sourceCommit": "e816a744a61166213186bd4835296e4b24c3e4ff",
       "compiledAPIGroup": "serving.maas.example"
     },
     {
@@ -133,7 +133,7 @@
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "7c10e4d3397848de1f4508ec4295b7dc25324a45"
+      "sourceCommit": "e816a744a61166213186bd4835296e4b24c3e4ff"
     },
     {
       "id": "mysql",
@@ -432,7 +432,7 @@
   "databaseIdentities": {
     "schemaVersion": "1.0",
     "scope": "installation-input-only-no-secret-values",
-    "sourceCommit": "7c10e4d3397848de1f4508ec4295b7dc25324a45",
+    "sourceCommit": "e816a744a61166213186bd4835296e4b24c3e4ff",
     "productionWiringVerified": false,
     "connections": {
       "core": {
@@ -689,6 +689,7 @@
           "docs/performance/integration-map.md",
           "docs/performance/learning-change-log.md",
           "docs/performance/literature/README.md",
+          "docs/performance/literature/elit01-reference-qualification-v0.24.md",
           "docs/performance/literature/experiment-cards.json",
           "docs/performance/literature/experiment-cards.md",
           "docs/performance/literature/math-check.json",
@@ -936,9 +937,11 @@
           "tools/perf/operators/gemm_validation.h",
           "tools/perf/operators/gemm_validation_host.cpp",
           "tools/perf/operators/local_gpu/README.md",
+          "tools/perf/operators/local_gpu/analyze_cadence_reference.py",
           "tools/perf/operators/local_gpu/analyze_kv_cadence.py",
           "tools/perf/operators/local_gpu/analyze_kv_trace.py",
           "tools/perf/operators/local_gpu/analyze_kv_window_b.py",
+          "tools/perf/operators/local_gpu/bench_cadence_reference.py",
           "tools/perf/operators/local_gpu/bench_kv_cadence.py",
           "tools/perf/operators/local_gpu/bench_kv_interleaved.py",
           "tools/perf/operators/local_gpu/bench_native_kv.py",
@@ -1040,6 +1043,8 @@
           "tools/perf/operators/local_gpu/probe_decode.py",
           "tools/perf/operators/local_gpu/probe_framework_dummy.py",
           "tools/perf/operators/local_gpu/probe_kv.py",
+          "tools/perf/operators/local_gpu/reference_protocol.py",
+          "tools/perf/operators/local_gpu/reference_runtime.py",
           "tools/perf/operators/local_gpu/requirements-local.txt",
           "tools/perf/operators/local_gpu/rmsnorm.cu",
           "tools/perf/operators/local_gpu/rmsnorm.py",
@@ -1055,6 +1060,7 @@
           "tools/perf/operators/local_gpu/summarize_kv_cadence.py",
           "tools/perf/operators/local_gpu/test_cadence_gates.py",
           "tools/perf/operators/local_gpu/test_cadence_protocol.py",
+          "tools/perf/operators/local_gpu/test_reference_qualification.py",
           "tools/perf/operators/plan.json",
           "tools/perf/operators/probe_local_gpu.py",
           "tools/perf/operators/profile_operator.py",
