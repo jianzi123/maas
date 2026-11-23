@@ -64,18 +64,20 @@ type GatewayConfig struct {
 	MaxEventBytes    int    `json:"max_event_bytes"`
 }
 type Config struct {
-	Ledger       LedgerConfig  `json:"ledger"`
-	Listen       string        `json:"listen"`
-	Origin       string        `json:"origin"`
-	Cluster      string        `json:"cluster_id"`
-	StaticDir    string        `json:"static_dir"`
-	ContractFile string        `json:"contract_file"`
-	MySQL        MySQLConfig   `json:"mysql"`
-	Auth         AuthConfig    `json:"auth"`
-	Secrets      Secrets       `json:"secrets"`
-	Agent        AgentConfig   `json:"agent"`
-	Models       []ModelConfig `json:"models"`
-	Gateway      GatewayConfig `json:"gateway"`
+	Offline      OfflineConfig    `json:"offline_controlled"`
+	Management   ManagementConfig `json:"management"`
+	Ledger       LedgerConfig     `json:"ledger"`
+	Listen       string           `json:"listen"`
+	Origin       string           `json:"origin"`
+	Cluster      string           `json:"cluster_id"`
+	StaticDir    string           `json:"static_dir"`
+	ContractFile string           `json:"contract_file"`
+	MySQL        MySQLConfig      `json:"mysql"`
+	Auth         AuthConfig       `json:"auth"`
+	Secrets      Secrets          `json:"secrets"`
+	Agent        AgentConfig      `json:"agent"`
+	Models       []ModelConfig    `json:"models"`
+	Gateway      GatewayConfig    `json:"gateway"`
 }
 
 func LoadConfig(name string) (Config, error) {
@@ -96,6 +98,12 @@ func LoadConfig(name string) (Config, error) {
 	return c, c.Validate()
 }
 func (c Config) Validate() error {
+	if c.Offline.Enabled && (len(c.Models) > 0 || c.Management.Enabled || c.Offline.StepDelayMS < 0 || c.Offline.StepDelayMS > 10000) {
+		return ErrConfig
+	}
+	if c.Management.Enabled && (c.Management.HistoryDSNFile == "" || c.Management.PayloadDSNFile == "" || c.Management.OperationsDSNFile == "" || c.Management.PublisherDSNFile == "" || c.Management.KubeconfigFile == "" || c.Management.RegistryFile == "" || c.Management.ScopeID == "" || len(c.Management.Namespaces) == 0 || len(c.Management.Domains) == 0) {
+		return ErrConfig
+	}
 	if len(c.Models) > 100 || len(c.Auth.Username) > 128 {
 		return ErrConfig
 	}
