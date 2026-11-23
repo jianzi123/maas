@@ -4,12 +4,12 @@
   "deploymentApproved": false,
   "sourceBaseline": {
     "chartBase": "e5647a2f2b44f53d39a80041be94b619f07c29d6",
-    "backendInspected": "41e8ec3f09b83f247503cf2599e2d126b8171f33",
+    "backendInspected": "668120878cf803183862100fbfed9604fe126764",
     "contracts": "MAAS-2 v0.4 + retained v0.3 + query/recovery addenda + MAAS-1 role review",
     "terminal": "3.0",
     "ticket": "3",
     "proposedTerminal": "3.1 (not enabled)",
-    "consoleInspected": "41e8ec3f09b83f247503cf2599e2d126b8171f33",
+    "consoleInspected": "668120878cf803183862100fbfed9604fe126764",
     "defaultBranch": "925d8c55be9ce823d100bf90a5c78cf19ea66d58",
     "candidatePR": null,
     "candidateState": "integrated-unmerged",
@@ -18,7 +18,7 @@
     "qaCore": "ac94a373ec0a61c5fd4dc5380a7985a4fb47840f",
     "qaEvidence": "50354a705c03383d0102d0d437119afd7ffed8b3",
     "sourceInventory": "deploy/build-sources.lock.json",
-    "sourceInventorySha256": "7af969fa33c4cc1e9ddf37a089923506ac33f0aced1ddfe1985817970e554f63",
+    "sourceInventorySha256": "70d60b25bbd8d2f84be4ab59f5ca76ad313422f558b970bcb1d3a12c41f38b78",
     "upstreamWorkbenchDeployment": "e5647a2f2b44f53d39a80041be94b619f07c29d6",
     "backendBase": "0559fa46b4a728d6f542daf19532e794f8549b31",
     "integrationBranch": "integrate/MAAS-17-unified-20261114",
@@ -99,7 +99,7 @@
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "41e8ec3f09b83f247503cf2599e2d126b8171f33",
+      "sourceCommit": "668120878cf803183862100fbfed9604fe126764",
       "compiledAPIGroup": "serving.maas.example"
     },
     {
@@ -116,7 +116,7 @@
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "41e8ec3f09b83f247503cf2599e2d126b8171f33",
+      "sourceCommit": "668120878cf803183862100fbfed9604fe126764",
       "compiledAPIGroup": "serving.maas.example"
     },
     {
@@ -133,7 +133,7 @@
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "41e8ec3f09b83f247503cf2599e2d126b8171f33"
+      "sourceCommit": "668120878cf803183862100fbfed9604fe126764"
     },
     {
       "id": "mysql",
@@ -432,7 +432,7 @@
   "databaseIdentities": {
     "schemaVersion": "1.0",
     "scope": "installation-input-only-no-secret-values",
-    "sourceCommit": "41e8ec3f09b83f247503cf2599e2d126b8171f33",
+    "sourceCommit": "668120878cf803183862100fbfed9604fe126764",
     "productionWiringVerified": false,
     "connections": {
       "core": {
@@ -813,6 +813,7 @@
           "docs/single-model-runtime-increment.md",
           "docs/unified-status.md",
           "docs/unified-workbench.md",
+          "internal/agentruntime/.gitattributes",
           "internal/agentruntime/ar_commands.go",
           "internal/agentruntime/ar_host_test.go",
           "internal/agentruntime/ar_http.go",
@@ -833,6 +834,8 @@
           "internal/agentruntime/localstore_test.go",
           "internal/agentruntime/migrations/001_sessions.sql",
           "internal/agentruntime/public_error.go",
+          "internal/agentruntime/qa_b868_context_test.go",
+          "internal/agentruntime/qa_b868_unknown_test.go",
           "internal/agentruntime/service.go",
           "internal/agentruntime/service_test.go",
           "internal/agentruntime/store.go",
@@ -951,6 +954,21 @@
           "test/qa-d1-consumer/report.md",
           "test/qa-d1-consumer/results.json",
           "test/qa-d1-consumer/verify.py",
+          "test/qa-delivery-b868/.gitattributes",
+          "test/qa-delivery-b868/README.md",
+          "test/qa-delivery-b868/audit_smoke.py",
+          "test/qa-delivery-b868/bc2-fetch-source-deploy-verification.json",
+          "test/qa-delivery-b868/bc2-full-source-deploy-verification.json",
+          "test/qa-delivery-b868/check_artifact_guards.py",
+          "test/qa-delivery-b868/check_new_record_guard.py",
+          "test/qa-delivery-b868/execution-source.sha256.json",
+          "test/qa-delivery-b868/oracle-source.sha256",
+          "test/qa-delivery-b868/original-tools-oracle.go.in",
+          "test/qa-delivery-b868/prepare_fetch_packages.py",
+          "test/qa-delivery-b868/reproduce_manifest_001.py",
+          "test/qa-delivery-b868/results.json",
+          "test/qa-delivery-b868/run_actual_fetch.py",
+          "test/qa-delivery-b868/run_manifest_cli.py",
           "test/qa-gpu-e6de90e/README.md",
           "test/qa-gpu-e6de90e/matrix.json",
           "test/qa-gpu-e6de90e/oracle.py",
