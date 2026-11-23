@@ -1,0 +1,308 @@
+{
+  "defect": "ELIT-QA-01/P2",
+  "product_head": "4ab8a277efe5edb9219d83cc9aea204add36af8e",
+  "old_delivery": "5f8bd5d83968f9ed5e674593bb8d19078c4575ad",
+  "implementation": "3a2966225cd0102663687ad281a0264cb5e0822e",
+  "delivery": "7c10e4d3397848de1f4508ec4295b7dc25324a45",
+  "prior_qa": "df4d45cb2c477650404da9da72a0fb0074a86b59",
+  "unique_current_cases": 16,
+  "passed_current_cases": 16,
+  "historical_controls": 1,
+  "actual_cli_invocations": 32,
+  "cases": [
+    {
+      "id": "P00",
+      "name": "original archive",
+      "pass": true,
+      "invariants": {
+        "planned_blocks": 1080,
+        "planned_calls": 10800,
+        "planned_clusters": 108,
+        "complete_clusters": 108,
+        "block_status_counts": {
+          "measured": 1080
+        },
+        "full_strict": [
+          0,
+          18
+        ],
+        "plan_sha256": "ab0ac451d9d4beffd6a879ff04bcdcd4000a256ec3194b710f5e7dabca49d9c9",
+        "plan_file_sha256": "c42a4755b426fe964b7423ffb6cf4001e75f42bc52bf9ff018de6184a58c52c7"
+      }
+    },
+    {
+      "id": "H00",
+      "name": "legacy defect control",
+      "historical_defect_reproduced": true,
+      "repair_pass": false,
+      "report_sha256": "076e30f82c9d446fbf0e69eef2a4c758c943b84e4aeaceac6edd00199f3ca59e"
+    },
+    {
+      "id": "N01",
+      "name": "both empty",
+      "pass": true,
+      "checks": {
+        "fresh_nonzero": true,
+        "no_new_success": true,
+        "expected_validation_error": true,
+        "existing_nonzero": true,
+        "exclusive_error": true,
+        "existing_success_unchanged": true
+      },
+      "fresh_exit": 1,
+      "existing_exit": 1,
+      "expected_error": "requires logits and KV",
+      "existing_success_sha256": "65468554d32f882012d5898c2a283a3bc08884bc38d547661422ac18ae3a843b"
+    },
+    {
+      "id": "N02",
+      "name": "native empty",
+      "pass": true,
+      "checks": {
+        "fresh_nonzero": true,
+        "no_new_success": true,
+        "expected_validation_error": true,
+        "existing_nonzero": true,
+        "exclusive_error": true,
+        "existing_success_unchanged": true
+      },
+      "fresh_exit": 1,
+      "existing_exit": 1,
+      "expected_error": "requires logits and KV",
+      "existing_success_sha256": "65468554d32f882012d5898c2a283a3bc08884bc38d547661422ac18ae3a843b"
+    },
+    {
+      "id": "N03",
+      "name": "mature empty",
+      "pass": true,
+      "checks": {
+        "fresh_nonzero": true,
+        "no_new_success": true,
+        "expected_validation_error": true,
+        "existing_nonzero": true,
+        "exclusive_error": true,
+        "existing_success_unchanged": true
+      },
+      "fresh_exit": 1,
+      "existing_exit": 1,
+      "expected_error": "requires logits and KV",
+      "existing_success_sha256": "65468554d32f882012d5898c2a283a3bc08884bc38d547661422ac18ae3a843b"
+    },
+    {
+      "id": "N04",
+      "name": "native missing",
+      "pass": true,
+      "checks": {
+        "fresh_nonzero": true,
+        "no_new_success": true,
+        "expected_validation_error": true,
+        "existing_nonzero": true,
+        "exclusive_error": true,
+        "existing_success_unchanged": true
+      },
+      "fresh_exit": 1,
+      "existing_exit": 1,
+      "expected_error": "variants incomplete",
+      "existing_success_sha256": "65468554d32f882012d5898c2a283a3bc08884bc38d547661422ac18ae3a843b"
+    },
+    {
+      "id": "N05",
+      "name": "mature missing",
+      "pass": true,
+      "checks": {
+        "fresh_nonzero": true,
+        "no_new_success": true,
+        "expected_validation_error": true,
+        "existing_nonzero": true,
+        "exclusive_error": true,
+        "existing_success_unchanged": true
+      },
+      "fresh_exit": 1,
+      "existing_exit": 1,
+      "expected_error": "variants incomplete",
+      "existing_success_sha256": "65468554d32f882012d5898c2a283a3bc08884bc38d547661422ac18ae3a843b"
+    },
+    {
+      "id": "N06",
+      "name": "native short 1 vs 2",
+      "pass": true,
+      "checks": {
+        "fresh_nonzero": true,
+        "no_new_success": true,
+        "expected_validation_error": true,
+        "existing_nonzero": true,
+        "exclusive_error": true,
+        "existing_success_unchanged": true
+      },
+      "fresh_exit": 1,
+      "existing_exit": 1,
+      "expected_error": "requires logits and KV",
+      "existing_success_sha256": "65468554d32f882012d5898c2a283a3bc08884bc38d547661422ac18ae3a843b"
+    },
+    {
+      "id": "N07",
+      "name": "mature short 2 vs 1",
+      "pass": true,
+      "checks": {
+        "fresh_nonzero": true,
+        "no_new_success": true,
+        "expected_validation_error": true,
+        "existing_nonzero": true,
+        "exclusive_error": true,
+        "existing_success_unchanged": true
+      },
+      "fresh_exit": 1,
+      "existing_exit": 1,
+      "expected_error": "requires logits and KV",
+      "existing_success_sha256": "65468554d32f882012d5898c2a283a3bc08884bc38d547661422ac18ae3a843b"
+    },
+    {
+      "id": "N08",
+      "name": "native lacks logits",
+      "pass": true,
+      "checks": {
+        "fresh_nonzero": true,
+        "no_new_success": true,
+        "expected_validation_error": true,
+        "existing_nonzero": true,
+        "exclusive_error": true,
+        "existing_success_unchanged": true
+      },
+      "fresh_exit": 1,
+      "existing_exit": 1,
+      "expected_error": "logits role/shape/dtype",
+      "existing_success_sha256": "65468554d32f882012d5898c2a283a3bc08884bc38d547661422ac18ae3a843b"
+    },
+    {
+      "id": "N09",
+      "name": "mature lacks KV",
+      "pass": true,
+      "checks": {
+        "fresh_nonzero": true,
+        "no_new_success": true,
+        "expected_validation_error": true,
+        "existing_nonzero": true,
+        "exclusive_error": true,
+        "existing_success_unchanged": true
+      },
+      "fresh_exit": 1,
+      "existing_exit": 1,
+      "expected_error": "KV role/shape/dtype",
+      "existing_success_sha256": "65468554d32f882012d5898c2a283a3bc08884bc38d547661422ac18ae3a843b"
+    },
+    {
+      "id": "N10",
+      "name": "roles reversed",
+      "pass": true,
+      "checks": {
+        "fresh_nonzero": true,
+        "no_new_success": true,
+        "expected_validation_error": true,
+        "existing_nonzero": true,
+        "exclusive_error": true,
+        "existing_success_unchanged": true
+      },
+      "fresh_exit": 1,
+      "existing_exit": 1,
+      "expected_error": "logits role/shape/dtype",
+      "existing_success_sha256": "65468554d32f882012d5898c2a283a3bc08884bc38d547661422ac18ae3a843b"
+    },
+    {
+      "id": "N11",
+      "name": "nonfinite actual logits with matching metadata",
+      "pass": true,
+      "checks": {
+        "fresh_nonzero": true,
+        "no_new_success": true,
+        "expected_validation_error": true,
+        "existing_nonzero": true,
+        "exclusive_error": true,
+        "existing_success_unchanged": true
+      },
+      "fresh_exit": 1,
+      "existing_exit": 1,
+      "expected_error": "finite/hash mismatch",
+      "existing_success_sha256": "65468554d32f882012d5898c2a283a3bc08884bc38d547661422ac18ae3a843b"
+    },
+    {
+      "id": "N12",
+      "name": "different finite native logits with valid hash",
+      "pass": true,
+      "checks": {
+        "fresh_nonzero": true,
+        "no_new_success": true,
+        "expected_validation_error": true,
+        "existing_nonzero": true,
+        "exclusive_error": true,
+        "existing_success_unchanged": true
+      },
+      "fresh_exit": 1,
+      "existing_exit": 1,
+      "expected_error": "bitwise mismatch",
+      "existing_success_sha256": "65468554d32f882012d5898c2a283a3bc08884bc38d547661422ac18ae3a843b"
+    },
+    {
+      "id": "N13",
+      "name": "wrong raw hash",
+      "pass": true,
+      "checks": {
+        "fresh_nonzero": true,
+        "no_new_success": true,
+        "expected_validation_error": true,
+        "existing_nonzero": true,
+        "exclusive_error": true,
+        "existing_success_unchanged": true
+      },
+      "fresh_exit": 1,
+      "existing_exit": 1,
+      "expected_error": "finite/hash mismatch",
+      "existing_success_sha256": "65468554d32f882012d5898c2a283a3bc08884bc38d547661422ac18ae3a843b"
+    },
+    {
+      "id": "N14",
+      "name": "wrong shape metadata",
+      "pass": true,
+      "checks": {
+        "fresh_nonzero": true,
+        "no_new_success": true,
+        "expected_validation_error": true,
+        "existing_nonzero": true,
+        "exclusive_error": true,
+        "existing_success_unchanged": true
+      },
+      "fresh_exit": 1,
+      "existing_exit": 1,
+      "expected_error": "finite/hash mismatch",
+      "existing_success_sha256": "65468554d32f882012d5898c2a283a3bc08884bc38d547661422ac18ae3a843b"
+    },
+    {
+      "id": "N15",
+      "name": "actual FP64 logits with matching metadata",
+      "pass": true,
+      "checks": {
+        "fresh_nonzero": true,
+        "no_new_success": true,
+        "expected_validation_error": true,
+        "existing_nonzero": true,
+        "exclusive_error": true,
+        "existing_success_unchanged": true
+      },
+      "fresh_exit": 1,
+      "existing_exit": 1,
+      "expected_error": "logits role/shape/dtype",
+      "existing_success_sha256": "65468554d32f882012d5898c2a283a3bc08884bc38d547661422ac18ae3a843b"
+    }
+  ],
+  "inputs_unchanged": true,
+  "input_files_verified": 317,
+  "GPU_executions": 0,
+  "model_calls": 0,
+  "environment": {
+    "python": "3.13.9 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 19:09:58) [MSC v.1929 64 bit (AMD64)]",
+    "numpy": "2.3.5",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "utc": "2026-11-23T13:20:43.903429+00:00"
+  },
+  "scope": "offline archived gate validation only; no new performance or causal qualification",
+  "status": "CLOSED in offline gate scope"
+}

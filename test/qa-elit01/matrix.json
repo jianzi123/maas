@@ -7,8 +7,26 @@
   ],
   "protocol_regression_passed": 16,
   "required_CLI_rejections_passed": 4,
-  "ELIT_QA_01": "OPEN: empty gate vectors accepted",
-  "overall": "needs_fix",
+  "ELIT_QA_01": "CLOSED: offline gate repair at 4ab8a277efe5edb9219d83cc9aea204add36af8e; historical failure remains below",
+  "overall": "ELIT-QA-01 repaired in offline scope only; no causal/performance qualification",
+  "historical_failure": {
+    "qa_commit": "df4d45cb2c477650404da9da72a0fb0074a86b59",
+    "product_delivery": "5f8bd5d83968f9ed5e674593bb8d19078c4575ad",
+    "ELIT_QA_01": "OPEN: empty gate vectors accepted",
+    "overall": "needs_fix",
+    "preserved": ["report.md", "results.json", "reproduce_empty_gate.py"]
+  },
+  "repair": {
+    "code_commit": "3a2966225cd0102663687ad281a0264cb5e0822e",
+    "final_head": "4ab8a277efe5edb9219d83cc9aea204add36af8e",
+    "current_unique_passed": 16,
+    "current_unique_total": 16,
+    "historical_controls": 1,
+    "cli_invocations": 32,
+    "full_strict_qualified": [0, 18],
+    "source": "gate-repair-results.json",
+    "provenance": "gate-repair-provenance.json"
+  },
   "GPU_executed": false,
   "causal_or_gain_claim": false
 }

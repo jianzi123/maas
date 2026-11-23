@@ -1,0 +1,37 @@
+{
+  "product_head": "4ab8a277efe5edb9219d83cc9aea204add36af8e",
+  "execution_source_sha256": "3d4c176f257afe7a977fcf1fdcfd9da2b0df9fa29eed977256c36c9291a0639b",
+  "code_commit": "3a2966225cd0102663687ad281a0264cb5e0822e",
+  "archive_source_lock": "029fd0528e99034de769d7fde6c24bee1e4a248e",
+  "archive_delivery": "7c10e4d3397848de1f4508ec4295b7dc25324a45",
+  "final_lock": "4ab8a277efe5edb9219d83cc9aea204add36af8e",
+  "four_lock_source_commit": "7c10e4d3397848de1f4508ec4295b7dc25324a45",
+  "inventory_files_verified": 679,
+  "package_source_files_verified": 28,
+  "packages": [
+    {
+      "file": "MAAS-10-single-model-v0.23-code.zip",
+      "sha256": "1f28ac78765578148164518a8f4efa8ad7e9110b354641a9adef5591e2940689",
+      "bytes": 180790
+    },
+    {
+      "file": "MAAS-10-single-model-v0.23-evidence.zip",
+      "sha256": "dece2c5479b7ccfe792ff6de5f4ddaa396481bead9d02dd11be0f87dbff227ff",
+      "bytes": 199315
+    },
+    {
+      "file": "MAAS-10-single-model-iteration.html",
+      "sha256": "9d40b7d1fd7d0b5a2bd00a5897004bd857a045027d43017e0aff4f6b27ce2d9b",
+      "bytes": 3597
+    }
+  ],
+  "four_lock_sha256": {
+    "deploy/build-sources.lock.json": "b63b60c8304d02bc5ec8f14d1b2d4cfd2b4ef627956e7a569ad6016de0804c60",
+    "deploy/charts/maas-platform/runtime-interface.json": "fe45e58b34a01e14b48d9f6fcc3ac3899488389999140f40116c9e84dcf1a979",
+    "deploy/dependencies.lock.json": "7b4ed49f3aeaf53346a586523342e3db8eb6292c80a31f6917d3207421420bea",
+    "deploy/identities.json": "97b4e3158c5d01818047b5ad0a0f27050a654a6c0b61d2275448ca16780f7208"
+  },
+  "legacy_analyzer_bytes_preserved": true,
+  "deploymentApproved": false,
+  "result": "PASS: byte/provenance checks only"
+}
