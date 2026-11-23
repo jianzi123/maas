@@ -4,12 +4,12 @@
   "deploymentApproved": false,
   "sourceBaseline": {
     "chartBase": "e5647a2f2b44f53d39a80041be94b619f07c29d6",
-    "backendInspected": "03a31e15175704063ba52dd058e340968e10c6af",
+    "backendInspected": "8d0e7e99bf5ba8294a38079c100b2d5291552c57",
     "contracts": "MAAS-2 v0.4 + retained v0.3 + query/recovery addenda + MAAS-1 role review",
     "terminal": "3.0",
     "ticket": "3",
     "proposedTerminal": "3.1 (not enabled)",
-    "consoleInspected": "03a31e15175704063ba52dd058e340968e10c6af",
+    "consoleInspected": "8d0e7e99bf5ba8294a38079c100b2d5291552c57",
     "defaultBranch": "925d8c55be9ce823d100bf90a5c78cf19ea66d58",
     "candidatePR": null,
     "candidateState": "integrated-unmerged",
@@ -18,7 +18,7 @@
     "qaCore": "ac94a373ec0a61c5fd4dc5380a7985a4fb47840f",
     "qaEvidence": "50354a705c03383d0102d0d437119afd7ffed8b3",
     "sourceInventory": "deploy/build-sources.lock.json",
-    "sourceInventorySha256": "46162ab5ed9f7ff2cce06c707e2dfb148c3c937b3b4f617428c018e69c8eac80",
+    "sourceInventorySha256": "6dbf9108a8bf772d0fca88e1ae9dec3316053a2f82f9bc5ef76a31a06334c4f9",
     "upstreamWorkbenchDeployment": "e5647a2f2b44f53d39a80041be94b619f07c29d6",
     "backendBase": "0559fa46b4a728d6f542daf19532e794f8549b31",
     "integrationBranch": "integrate/MAAS-17-unified-20261114",
@@ -99,7 +99,7 @@
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "03a31e15175704063ba52dd058e340968e10c6af",
+      "sourceCommit": "8d0e7e99bf5ba8294a38079c100b2d5291552c57",
       "compiledAPIGroup": "serving.maas.example"
     },
     {
@@ -116,7 +116,7 @@
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "03a31e15175704063ba52dd058e340968e10c6af",
+      "sourceCommit": "8d0e7e99bf5ba8294a38079c100b2d5291552c57",
       "compiledAPIGroup": "serving.maas.example"
     },
     {
@@ -133,7 +133,7 @@
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "03a31e15175704063ba52dd058e340968e10c6af"
+      "sourceCommit": "8d0e7e99bf5ba8294a38079c100b2d5291552c57"
     },
     {
       "id": "mysql",
@@ -432,7 +432,7 @@
   "databaseIdentities": {
     "schemaVersion": "1.0",
     "scope": "installation-input-only-no-secret-values",
-    "sourceCommit": "03a31e15175704063ba52dd058e340968e10c6af",
+    "sourceCommit": "8d0e7e99bf5ba8294a38079c100b2d5291552c57",
     "productionWiringVerified": false,
     "connections": {
       "core": {
@@ -699,6 +699,7 @@
           "docs/performance/literature/notes/B06-cuda-graphs.md",
           "docs/performance/literature/notes/P02-flashinfer.md",
           "docs/performance/literature/p25-aa-method-v0.26.md",
+          "docs/performance/literature/p25-aa-result-v0.26.md",
           "docs/performance/literature/source-access.json",
           "docs/performance/literature/source-map.json",
           "docs/performance/literature/sources.json",
@@ -977,6 +978,35 @@
           "tools/perf/operators/local_gpu/evidence/aa-v0.26-preflight/manifest.json",
           "tools/perf/operators/local_gpu/evidence/aa-v0.26-preflight/run_aa_window.py.help.txt",
           "tools/perf/operators/local_gpu/evidence/aa-v0.26-preflight/run_aa_window.py.validate.txt",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.26-result/alias-pairs.csv",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.26-result/alias-ranges.json",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.26-result/batch-outcome.json",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.26-result/execution/driver.json",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.26-result/execution/foreground.log",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.26-result/execution/lease.json",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.26-result/execution/qualification.json",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.26-result/execution/window/ready.json",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.26-result/fix-tests-completion.json",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.26-result/frozen-offline-reanalysis.json",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.26-result/frozen-producer.zip",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.26-result/frozen-replay-command.json",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.26-result/manifest.json",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.26-result/plan.json",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.26-result/preregistered-manifest.json",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.26-result/run_aa_window.fixed.help.txt",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.26-result/transport-WSL-fixed-stderr.log",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.26-result/transport-WSL-fixed-stdout.log",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.26-result/transport-WSL-old_literal_escape-stderr.log",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.26-result/transport-WSL-old_literal_escape-stdout.log",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.26-result/transport-Windows-fixed-stderr.log",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.26-result/transport-Windows-fixed-stdout.log",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.26-result/transport-Windows-old_literal_escape-stderr.log",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.26-result/transport-Windows-old_literal_escape-stdout.log",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.26-result/transport-fix-disabled-plan.json",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.26-result/transport-fix-verification.json",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.26-result/transport-fixed-packet.bin",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.26-result/transport-original-counterexample.bin",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.26-result/transport-original-counterexample.json",
           "tools/perf/operators/local_gpu/evidence/cadence-v0.22/R01-calibration.json",
           "tools/perf/operators/local_gpu/evidence/cadence-v0.22/R01-run.json",
           "tools/perf/operators/local_gpu/evidence/cadence-v0.22/R01-runtime-manifest.json",
