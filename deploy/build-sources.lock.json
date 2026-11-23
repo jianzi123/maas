@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "sourceMode": "single-repository-code-commit",
   "backend": {
-    "sourceCommit": "d0b8b41a241a1b208516446d68fa8a6ca618c14d",
+    "sourceCommit": "6826427348b99ff92cf8d522638eb1c8c96a135e",
     "files": {
       ".gitattributes": "5b93b86d7f7e94c3dafdd41b284afe95a95a985e8afc719914173db11890cd36",
       ".gitignore": "46cf94096a926a26bc1a913b6cc632adacab0a96ab42d72a7dcbf216bcbaaa77",
@@ -38,6 +38,7 @@
       "docs/usage-authority-continuation.md": "a86665fc787f573f169025fc977ea8af19d1ade7a4dfa3e83c1a208ddc1ea578",
       "docs/usage-diagnostics-v2.md": "436ad870400a49506b105d6f4d5db58e63129cbe2f106ccfe9834afdb8d2c0be",
       "docs/verification.md": "663c0952067d4e4c2ef7f6ef2108a387022a9ae4e16ebe57a79e68def2cd13b7",
+      "docs/wsl-publish-resources.md": "e0dd1e34d5524f6122b13cac08d67fb6c042b542a2deb664312339083d039e5c",
       "scripts/assemble-workbench.py": "da7587ae75b54ed26cee8408810a8c5051edf652f4c2be0bab5564620e8214f1",
       "scripts/check-go.mjs": "7d2eee84a55a766888a10e826c5dc296de6c64545c433187773fa7c648826d62",
       "scripts/check-go.sh": "fcf24339c1d965536e06b399baf925a0c0c5d71391d2f40fe58d4160bd5da5d3",
@@ -405,6 +406,8 @@
       "internal/release/compiler_test.go": "d4168038539388cdb764299315e637e7c9935b6eb4e8699c29f8dd5862a72ae0",
       "internal/release/http.go": "6ac0ff7d47f38c447e62fd1043ca6c04579a01b5dd43821ebf8e82bf32131d83",
       "internal/release/http_test.go": "b46bf0226a3d58cb73bb01eae09b1ff7e92e504b7a72e990b0ad94bfd4c3bb37",
+      "internal/release/plugin_template.go": "803a02212726c1e7d6ae8fb7e2ed7e358a78761b6b1b013762bd59be8151d890",
+      "internal/release/plugin_template_test.go": "bccf0b4d39fe75102fe35f417e3e3faf9df115cd1dac2ff03ffc060eb0a65309",
       "internal/release/ports.go": "d5fe9e15fddf051cfac057909b1d6f793e43498e00c166fb9a2332c6d5c12851",
       "internal/release/reconciler.go": "9917de4cd698e0208d374b4b94099fb5f2c1639308241f47fe14f67ea4e612d6",
       "internal/release/reconciler_test.go": "9cbb12e25ed020c17badd373a1025e73cc37467288b3cf1261dbbaadf38f1d3a",
@@ -530,7 +533,7 @@
     }
   },
   "console": {
-    "sourceCommit": "d0b8b41a241a1b208516446d68fa8a6ca618c14d",
+    "sourceCommit": "6826427348b99ff92cf8d522638eb1c8c96a135e",
     "files": {
       "console/.env.fixtures": "4d5e22f8eeb4bbf5a027a34c7a4bfef806876a470f89440f9611bd01a9d8c5f7",
       "console/.env.workbench": "930edf078e756f41d37fad0f7ce87332d8af59e65dac57b11797bcf0117a9216",
@@ -677,6 +680,8 @@
       "deploy/identities.json",
       "deploy/images/Dockerfile.console",
       "deploy/images/Dockerfile.operator",
+      "deploy/local-wsl/operator-review.yaml",
+      "deploy/local-wsl/operator.Dockerfile",
       "deploy/tests/fixtures/hybrid.yaml",
       "deploy/tests/fixtures/internal.yaml",
       "docs/installation-composition.md",
@@ -750,6 +755,7 @@
       "docs/single-model-runtime-increment.md",
       "docs/unified-status.md",
       "docs/unified-workbench.md",
+      "docs/wsl-publish-resources.md",
       "internal/installation/runtime.go",
       "internal/kernel/publisher_runtime_test.go",
       "internal/kernel/relay_runtime.go",
@@ -758,6 +764,8 @@
       "internal/release/history/spec.go",
       "internal/release/management/service.go",
       "internal/release/mysqlstore/runtime.go",
+      "internal/release/plugin_template.go",
+      "internal/release/plugin_template_test.go",
       "package.json",
       "patches/higress/v2.2.5-maas-r1/0001-ext-auth-required-ticket-fail-closed.patch",
       "patches/higress/v2.2.5-maas-r1/apply.py",

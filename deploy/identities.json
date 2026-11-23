@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "scope": "installation-input-only-no-secret-values",
-  "sourceCommit": "d0b8b41a241a1b208516446d68fa8a6ca618c14d",
+  "sourceCommit": "6826427348b99ff92cf8d522638eb1c8c96a135e",
   "productionWiringVerified": false,
   "connections": {
     "core": {
@@ -192,6 +192,8 @@
         "deploy/identities.json",
         "deploy/images/Dockerfile.console",
         "deploy/images/Dockerfile.operator",
+        "deploy/local-wsl/operator-review.yaml",
+        "deploy/local-wsl/operator.Dockerfile",
         "deploy/tests/fixtures/hybrid.yaml",
         "deploy/tests/fixtures/internal.yaml",
         "docs/installation-composition.md",
@@ -265,6 +267,7 @@
         "docs/single-model-runtime-increment.md",
         "docs/unified-status.md",
         "docs/unified-workbench.md",
+        "docs/wsl-publish-resources.md",
         "internal/installation/runtime.go",
         "internal/kernel/publisher_runtime_test.go",
         "internal/kernel/relay_runtime.go",
@@ -273,6 +276,8 @@
         "internal/release/history/spec.go",
         "internal/release/management/service.go",
         "internal/release/mysqlstore/runtime.go",
+        "internal/release/plugin_template.go",
+        "internal/release/plugin_template_test.go",
         "package.json",
         "patches/higress/v2.2.5-maas-r1/0001-ext-auth-required-ticket-fail-closed.patch",
         "patches/higress/v2.2.5-maas-r1/apply.py",
