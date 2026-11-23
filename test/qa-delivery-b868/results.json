@@ -1,0 +1,1014 @@
+{
+  "package-verification.json": {
+    "compose": {
+      "bytes": 2388734,
+      "sha256": "7ee12aca97e6c2594bb4f4e401b3dcdfff803d529845776b550df6e6778a10b2",
+      "manifest_files": 840,
+      "verified": true
+    },
+    "kubernetes": {
+      "bytes": 2387364,
+      "sha256": "882974cbc0aefd395add06c3403fdeb612c6bf269674620d9bf7b9c09df95394",
+      "manifest_files": 842,
+      "verified": true
+    }
+  },
+  "full-source-and-deploy-verification.json": {
+    "packages": [
+      {
+        "archive": "C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-7-6bf78f4f3528\\workdir\\inputs\\delivery-b868\\packages\\maas-compose-b8688ecbe3f9.zip",
+        "sha256": "7ee12aca97e6c2594bb4f4e401b3dcdfff803d529845776b550df6e6778a10b2",
+        "bytes": 2388734,
+        "deliveryCommit": "b8688ecbe3f9647ac8feb1c42afd8f7a021370b7",
+        "sourceCodeCommit": "64b36c3480735ae28148bf973103678c92a76d0b",
+        "sourcePrefix": "source/",
+        "verifiedSourceFiles": {
+          "backend": 609,
+          "console": 110
+        },
+        "verifiedDeploymentFiles": 114,
+        "integrityPassed": true,
+        "scope": "archive/source integrity only; runtime, SQL, QA and real model evidence are separate"
+      },
+      {
+        "archive": "C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-7-6bf78f4f3528\\workdir\\inputs\\delivery-b868\\packages\\maas-kubernetes-b8688ecbe3f9.zip",
+        "sha256": "882974cbc0aefd395add06c3403fdeb612c6bf269674620d9bf7b9c09df95394",
+        "bytes": 2387364,
+        "deliveryCommit": "b8688ecbe3f9647ac8feb1c42afd8f7a021370b7",
+        "sourceCodeCommit": "64b36c3480735ae28148bf973103678c92a76d0b",
+        "sourcePrefix": "source/",
+        "verifiedSourceFiles": {
+          "backend": 609,
+          "console": 110
+        },
+        "verifiedDeploymentFiles": 114,
+        "integrityPassed": true,
+        "scope": "archive/source integrity only; runtime, SQL, QA and real model evidence are separate"
+      }
+    ]
+  },
+  "native-build-result.json": {
+    "exit": 0,
+    "elapsed_seconds": 25.157649517059326,
+    "command": [
+      "D:\\ProgramData\\anaconda3\\python.exe",
+      "C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-7-6bf78f4f3528\\workdir\\inputs\\delivery-b868\\compose\\source\\deploy\\release\\build_native.py",
+      "--root",
+      "C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-7-6bf78f4f3528\\workdir\\inputs\\delivery-b868\\compose",
+      "--go-cache",
+      "C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-7-6bf78f4f3528\\workdir\\qa-composition-879a\\.cache\\qa-go-build",
+      "--npm-cache",
+      "C:\\Users\\a9786\\AppData\\Local\\Temp\\multica-task-448786089\\npm-b868"
+    ]
+  },
+  "attempt1-native-build-result.json": {
+    "exit": 1,
+    "elapsed_seconds": 256.68804383277893,
+    "command": [
+      "D:\\ProgramData\\anaconda3\\python.exe",
+      "C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-7-6bf78f4f3528\\workdir\\inputs\\delivery-b868\\compose\\source\\deploy\\release\\build_native.py",
+      "--root",
+      "C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-7-6bf78f4f3528\\workdir\\inputs\\delivery-b868\\compose",
+      "--go-cache",
+      "C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-7-6bf78f4f3528\\workdir\\qa-composition-879a\\.cache\\qa-go-build",
+      "--npm-cache",
+      "C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-7-6bf78f4f3528\\workdir\\inputs\\delivery-b868\\npm-cache"
+    ]
+  },
+  "npm-cache-recovery.json": {
+    "copied_integrity_verified": 161,
+    "already_present": 1,
+    "missing_count": 25,
+    "missing": [
+      "node_modules/@rolldown/binding-android-arm-eabi",
+      "node_modules/@rolldown/binding-android-arm64",
+      "node_modules/@rolldown/binding-darwin-arm64",
+      "node_modules/@rolldown/binding-darwin-x64",
+      "node_modules/@rolldown/binding-freebsd-x64",
+      "node_modules/@rolldown/binding-linux-arm-gnueabihf",
+      "node_modules/@rolldown/binding-linux-arm64-gnu",
+      "node_modules/@rolldown/binding-linux-arm64-musl",
+      "node_modules/@rolldown/binding-linux-ppc64-gnu",
+      "node_modules/@rolldown/binding-linux-s390x-gnu",
+      "node_modules/@rolldown/binding-linux-x64-gnu",
+      "node_modules/@rolldown/binding-linux-x64-musl",
+      "node_modules/@rolldown/binding-openharmony-arm64",
+      "node_modules/@rolldown/binding-win32-arm64-msvc",
+      "node_modules/fsevents",
+      "node_modules/lightningcss-android-arm64",
+      "node_modules/lightningcss-darwin-arm64",
+      "node_modules/lightningcss-darwin-x64",
+      "node_modules/lightningcss-freebsd-x64",
+      "node_modules/lightningcss-linux-arm-gnueabihf",
+      "node_modules/lightningcss-linux-arm64-gnu",
+      "node_modules/lightningcss-linux-arm64-musl",
+      "node_modules/lightningcss-linux-x64-gnu",
+      "node_modules/lightningcss-linux-x64-musl",
+      "node_modules/lightningcss-win32-arm64-msvc"
+    ],
+    "source_cache_read_only": true,
+    "destination": "C:\\Users\\a9786\\AppData\\Local\\Temp\\multica-task-448786089\\npm-b868\\_cacache"
+  },
+  "docker-build-result.json": {
+    "exit": 0,
+    "command": [
+      "docker",
+      "compose",
+      "--parallel",
+      "1",
+      "--progress",
+      "plain",
+      "--project-directory",
+      "C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-7-6bf78f4f3528\\workdir\\inputs\\delivery-b868\\compose",
+      "-p",
+      "maas7-b868-c51fdfd0-offline",
+      "-f",
+      "C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-7-6bf78f4f3528\\workdir\\inputs\\delivery-b868\\compose\\compose.yaml",
+      "build"
+    ],
+    "elapsed_seconds": 14.528595209121704
+  },
+  "owned-installations.json": {
+    "run": "maas7-b868-c51fdfd0",
+    "offline_project": "maas7-b868-c51fdfd0-offline",
+    "external_project": "maas7-b868-c51fdfd0-external",
+    "offline_port": 53713,
+    "external_port": 53714,
+    "images": {
+      "app": "maas7-b868-c51fdfd0-app:64b36c348073",
+      "web": "maas7-b868-c51fdfd0-web:64b36c348073",
+      "migrate": "maas7-b868-c51fdfd0-migrate:64b36c348073"
+    },
+    "base": "C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-7-6bf78f4f3528\\workdir\\inputs\\delivery-b868"
+  },
+  "offline-independent-results.json": {
+    "passed": true,
+    "product_ref": "b8688ecbe3f9647ac8feb1c42afd8f7a021370b7",
+    "models": "explicit offline-controlled",
+    "actual_admission_before_cancel": true,
+    "known_parent_tokens": 20,
+    "generation_requests": 4,
+    "usage_events": 4,
+    "daily_finalized": 4,
+    "message_event_tool_usage_hash_stable": true,
+    "internal_key_cipher_hash_stable": true,
+    "same_login_across_two_restarts": true,
+    "csrf_sha256": "76c3970d0ff3266389b7f35bf4a0d29ad4cdcba061148eb20268b231f7678e3a",
+    "snapshots": {
+      "752cca2e-65f9-5869-ac28-5f53b530f8db": {
+        "messages_sha256": "3ca782eda121ffb2134577a546bc0de7c1eaaee176ea2dd2e67c3ceb7d035d7e",
+        "message_count": 7,
+        "revision": "27",
+        "runs": {
+          "fb0c1895-9025-48fe-a42c-cd90e473f5b3": {
+            "events": "b3a6d59be24ef331d54426e871556adcb8273844a737f38b09a2708b9c9798f6",
+            "tools": "bc883835b9a55a57d637fc66300b6e43eecf4a0c7f52561f02162ec2cbf3e1f1",
+            "usages": [
+              "caf9fa08a95a66f223ffffbf291d4512b5668288cbc1d801ceee9df4b1c0dd4a"
+            ],
+            "children": [
+              "617a63d6-129b-4065-8aaf-31ee53d2cf38"
+            ],
+            "state": "completed",
+            "lastSeq": "14"
+          },
+          "ea6c3490-959e-4bdf-884d-2ae2aa3ff4f4": {
+            "events": "5202edd27e2c7252c06177fdbb78c107bb367409dc33a76a3c0fc6d8e188eb3b",
+            "tools": "2ba670ddc470f2fe2ec9548bc3e9f17924e99b43901128ba0a7f32f7da95c7fe",
+            "usages": [
+              "d1add65a60adc9b0aa71369f79bdd7436e76aff949cf174f0f38417a746f410e",
+              "a095909e09c659347a92772e2630536cad4a5b0502e51def5a6b9d585a477282"
+            ],
+            "children": [
+              "59b8245b-929e-41bf-9d29-00fd3ad3c302",
+              "f75a0229-b26b-4402-8ff4-146ca05ae379"
+            ],
+            "state": "completed",
+            "lastSeq": "38"
+          }
+        }
+      },
+      "53cb5dc0-6da3-599f-9940-08fc53e7222f": {
+        "messages_sha256": "a6db34a04639694311ab7721d06df780457e3fcb20fa83faa03e8c9ad35d786d",
+        "message_count": 2,
+        "revision": "7",
+        "runs": {
+          "4e006065-b1f7-4b2a-9924-42e795800df0": {
+            "events": "33130b80c7e17f6532233a2af61e3f1d478c1f8b72f74aef900c3a3031bb2808",
+            "tools": "bc883835b9a55a57d637fc66300b6e43eecf4a0c7f52561f02162ec2cbf3e1f1",
+            "usages": [
+              "f8436282659dfca201f055afc93cf413c3bb909082040a32e435e8ba30a57363"
+            ],
+            "children": [
+              "6138fa41-7b85-4cc6-8860-36cb09d33ca0"
+            ],
+            "state": "cancelled",
+            "lastSeq": "10"
+          }
+        }
+      }
+    },
+    "trace": [
+      {
+        "method": "POST",
+        "path": "/api/admin/v1/session",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/agent/v1/sessions/752cca2e-65f9-5869-ac28-5f53b530f8db",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/agent/v1/sessions/752cca2e-65f9-5869-ac28-5f53b530f8db/runs/fb0c1895-9025-48fe-a42c-cd90e473f5b3",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/agent/v1/sessions/752cca2e-65f9-5869-ac28-5f53b530f8db/runs/fb0c1895-9025-48fe-a42c-cd90e473f5b3/events?page_size=100",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/agent/v1/sessions/752cca2e-65f9-5869-ac28-5f53b530f8db/runs/fb0c1895-9025-48fe-a42c-cd90e473f5b3/tool-calls?page_size=100",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/v1/usage/requests?request_id=617a63d6-129b-4065-8aaf-31ee53d2cf38",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/agent/v1/sessions/752cca2e-65f9-5869-ac28-5f53b530f8db/runs/ea6c3490-959e-4bdf-884d-2ae2aa3ff4f4",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/v1/usage/requests?request_id=ea6c3490-959e-4bdf-884d-2ae2aa3ff4f4",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/agent/v1/sessions/752cca2e-65f9-5869-ac28-5f53b530f8db/runs/ea6c3490-959e-4bdf-884d-2ae2aa3ff4f4/events?page_size=100",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/agent/v1/sessions/752cca2e-65f9-5869-ac28-5f53b530f8db/runs/ea6c3490-959e-4bdf-884d-2ae2aa3ff4f4/tool-calls?page_size=100",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/v1/usage/requests?request_id=59b8245b-929e-41bf-9d29-00fd3ad3c302",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/v1/usage/requests?request_id=f75a0229-b26b-4402-8ff4-146ca05ae379",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/agent/v1/sessions/53cb5dc0-6da3-599f-9940-08fc53e7222f",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/agent/v1/sessions/53cb5dc0-6da3-599f-9940-08fc53e7222f/runs/4e006065-b1f7-4b2a-9924-42e795800df0",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/agent/v1/sessions/53cb5dc0-6da3-599f-9940-08fc53e7222f/runs/4e006065-b1f7-4b2a-9924-42e795800df0/events?page_size=100",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/agent/v1/sessions/53cb5dc0-6da3-599f-9940-08fc53e7222f/runs/4e006065-b1f7-4b2a-9924-42e795800df0/tool-calls?page_size=100",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/v1/usage/requests?request_id=6138fa41-7b85-4cc6-8860-36cb09d33ca0",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/v1/session",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/agent/v1/sessions/752cca2e-65f9-5869-ac28-5f53b530f8db",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/agent/v1/sessions/752cca2e-65f9-5869-ac28-5f53b530f8db/runs/fb0c1895-9025-48fe-a42c-cd90e473f5b3",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/agent/v1/sessions/752cca2e-65f9-5869-ac28-5f53b530f8db/runs/fb0c1895-9025-48fe-a42c-cd90e473f5b3/events?page_size=100",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/agent/v1/sessions/752cca2e-65f9-5869-ac28-5f53b530f8db/runs/fb0c1895-9025-48fe-a42c-cd90e473f5b3/tool-calls?page_size=100",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/v1/usage/requests?request_id=617a63d6-129b-4065-8aaf-31ee53d2cf38",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/agent/v1/sessions/752cca2e-65f9-5869-ac28-5f53b530f8db/runs/ea6c3490-959e-4bdf-884d-2ae2aa3ff4f4",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/v1/usage/requests?request_id=ea6c3490-959e-4bdf-884d-2ae2aa3ff4f4",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/agent/v1/sessions/752cca2e-65f9-5869-ac28-5f53b530f8db/runs/ea6c3490-959e-4bdf-884d-2ae2aa3ff4f4/events?page_size=100",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/agent/v1/sessions/752cca2e-65f9-5869-ac28-5f53b530f8db/runs/ea6c3490-959e-4bdf-884d-2ae2aa3ff4f4/tool-calls?page_size=100",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/v1/usage/requests?request_id=59b8245b-929e-41bf-9d29-00fd3ad3c302",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/v1/usage/requests?request_id=f75a0229-b26b-4402-8ff4-146ca05ae379",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/agent/v1/sessions/53cb5dc0-6da3-599f-9940-08fc53e7222f",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/agent/v1/sessions/53cb5dc0-6da3-599f-9940-08fc53e7222f/runs/4e006065-b1f7-4b2a-9924-42e795800df0",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/agent/v1/sessions/53cb5dc0-6da3-599f-9940-08fc53e7222f/runs/4e006065-b1f7-4b2a-9924-42e795800df0/events?page_size=100",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/agent/v1/sessions/53cb5dc0-6da3-599f-9940-08fc53e7222f/runs/4e006065-b1f7-4b2a-9924-42e795800df0/tool-calls?page_size=100",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/v1/usage/requests?request_id=6138fa41-7b85-4cc6-8860-36cb09d33ca0",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/v1/session",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/agent/v1/sessions/752cca2e-65f9-5869-ac28-5f53b530f8db",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/agent/v1/sessions/752cca2e-65f9-5869-ac28-5f53b530f8db/runs/fb0c1895-9025-48fe-a42c-cd90e473f5b3",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/agent/v1/sessions/752cca2e-65f9-5869-ac28-5f53b530f8db/runs/fb0c1895-9025-48fe-a42c-cd90e473f5b3/events?page_size=100",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/agent/v1/sessions/752cca2e-65f9-5869-ac28-5f53b530f8db/runs/fb0c1895-9025-48fe-a42c-cd90e473f5b3/tool-calls?page_size=100",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/v1/usage/requests?request_id=617a63d6-129b-4065-8aaf-31ee53d2cf38",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/agent/v1/sessions/752cca2e-65f9-5869-ac28-5f53b530f8db/runs/ea6c3490-959e-4bdf-884d-2ae2aa3ff4f4",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/v1/usage/requests?request_id=ea6c3490-959e-4bdf-884d-2ae2aa3ff4f4",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/agent/v1/sessions/752cca2e-65f9-5869-ac28-5f53b530f8db/runs/ea6c3490-959e-4bdf-884d-2ae2aa3ff4f4/events?page_size=100",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/agent/v1/sessions/752cca2e-65f9-5869-ac28-5f53b530f8db/runs/ea6c3490-959e-4bdf-884d-2ae2aa3ff4f4/tool-calls?page_size=100",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/v1/usage/requests?request_id=59b8245b-929e-41bf-9d29-00fd3ad3c302",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/v1/usage/requests?request_id=f75a0229-b26b-4402-8ff4-146ca05ae379",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/agent/v1/sessions/53cb5dc0-6da3-599f-9940-08fc53e7222f",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/agent/v1/sessions/53cb5dc0-6da3-599f-9940-08fc53e7222f/runs/4e006065-b1f7-4b2a-9924-42e795800df0",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/agent/v1/sessions/53cb5dc0-6da3-599f-9940-08fc53e7222f/runs/4e006065-b1f7-4b2a-9924-42e795800df0/events?page_size=100",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/agent/v1/sessions/53cb5dc0-6da3-599f-9940-08fc53e7222f/runs/4e006065-b1f7-4b2a-9924-42e795800df0/tool-calls?page_size=100",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/v1/usage/requests?request_id=6138fa41-7b85-4cc6-8860-36cb09d33ca0",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/agent/v1/sessions/752cca2e-65f9-5869-ac28-5f53b530f8db",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/agent/v1/sessions/752cca2e-65f9-5869-ac28-5f53b530f8db/runs/fb0c1895-9025-48fe-a42c-cd90e473f5b3",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/agent/v1/sessions/752cca2e-65f9-5869-ac28-5f53b530f8db/runs/fb0c1895-9025-48fe-a42c-cd90e473f5b3/events?page_size=100",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/agent/v1/sessions/752cca2e-65f9-5869-ac28-5f53b530f8db/runs/fb0c1895-9025-48fe-a42c-cd90e473f5b3/tool-calls?page_size=100",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/v1/usage/requests?request_id=617a63d6-129b-4065-8aaf-31ee53d2cf38",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/agent/v1/sessions/752cca2e-65f9-5869-ac28-5f53b530f8db/runs/ea6c3490-959e-4bdf-884d-2ae2aa3ff4f4",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/v1/usage/requests?request_id=ea6c3490-959e-4bdf-884d-2ae2aa3ff4f4",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/agent/v1/sessions/752cca2e-65f9-5869-ac28-5f53b530f8db/runs/ea6c3490-959e-4bdf-884d-2ae2aa3ff4f4/events?page_size=100",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/agent/v1/sessions/752cca2e-65f9-5869-ac28-5f53b530f8db/runs/ea6c3490-959e-4bdf-884d-2ae2aa3ff4f4/tool-calls?page_size=100",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/v1/usage/requests?request_id=59b8245b-929e-41bf-9d29-00fd3ad3c302",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/v1/usage/requests?request_id=f75a0229-b26b-4402-8ff4-146ca05ae379",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/agent/v1/sessions/53cb5dc0-6da3-599f-9940-08fc53e7222f",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/agent/v1/sessions/53cb5dc0-6da3-599f-9940-08fc53e7222f/runs/4e006065-b1f7-4b2a-9924-42e795800df0",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/agent/v1/sessions/53cb5dc0-6da3-599f-9940-08fc53e7222f/runs/4e006065-b1f7-4b2a-9924-42e795800df0/events?page_size=100",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/agent/v1/sessions/53cb5dc0-6da3-599f-9940-08fc53e7222f/runs/4e006065-b1f7-4b2a-9924-42e795800df0/tool-calls?page_size=100",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/v1/usage/requests?request_id=6138fa41-7b85-4cc6-8860-36cb09d33ca0",
+        "status": 200
+      },
+      {
+        "method": "DELETE",
+        "path": "/api/admin/v1/session",
+        "status": 204
+      }
+    ],
+    "real_upstream_calls": 0
+  },
+  "runtime-permissions.json": {
+    "scope": "owned-MySQL8.4-product-runtime-default-role-checks-not-production",
+    "passed": true,
+    "checks": [
+      {
+        "check": "exact_account_and_default_roles",
+        "passed": true,
+        "identity": "maas_runtime@%\t`maas_agent_session_runtime`@`%`,`maas_kernel_runtime`@`%`,`maas_product_auth_runtime`@`%`,`maas_release_reader`@`%`"
+      },
+      {
+        "check": "session_select",
+        "allowed": true,
+        "exitCode": 0,
+        "mysqlError": null,
+        "passed": true
+      },
+      {
+        "check": "session_cas_columns",
+        "allowed": true,
+        "exitCode": 0,
+        "mysqlError": null,
+        "passed": true
+      },
+      {
+        "check": "session_insert",
+        "allowed": true,
+        "exitCode": 0,
+        "mysqlError": null,
+        "passed": true
+      },
+      {
+        "check": "no_ddl",
+        "allowed": false,
+        "exitCode": 1,
+        "mysqlError": 1142,
+        "passed": true
+      },
+      {
+        "check": "no_global_credentials",
+        "allowed": false,
+        "exitCode": 1,
+        "mysqlError": 1142,
+        "passed": true
+      },
+      {
+        "check": "no_admin_policy_write",
+        "allowed": false,
+        "exitCode": 1,
+        "mysqlError": 1142,
+        "passed": true
+      },
+      {
+        "check": "no_history_metadata",
+        "allowed": false,
+        "exitCode": 1,
+        "mysqlError": 1142,
+        "passed": true
+      },
+      {
+        "check": "no_private_payload",
+        "allowed": false,
+        "exitCode": 1,
+        "mysqlError": 1142,
+        "passed": true
+      },
+      {
+        "check": "no_management_operations",
+        "allowed": false,
+        "exitCode": 1,
+        "mysqlError": 1142,
+        "passed": true
+      }
+    ]
+  },
+  "runtime-identity-and-image-proof.json": {
+    "passed": true,
+    "roles": [
+      "maas_agent_session_runtime",
+      "maas_kernel_runtime",
+      "maas_product_auth_runtime",
+      "maas_release_reader"
+    ],
+    "images": {
+      "app": {
+        "id": "sha256:911f2d2255598355b168e22bce13cefecab156c30f865b6cf2f1c3e2b02bdf74",
+        "revision": "64b36c3480735ae28148bf973103678c92a76d0b",
+        "user": "65532:65532"
+      },
+      "web": {
+        "id": "sha256:efab4aab0f87305558a87f05247d0a8ba5d216711545ea6269da8aecf952ef94",
+        "revision": "64b36c3480735ae28148bf973103678c92a76d0b",
+        "user": "101:101"
+      },
+      "migrate": {
+        "id": "sha256:8d0a2dc4db5246c85979f1e651bb40826f29d0c7870289b85b78c4ce42e63f8a",
+        "revision": "64b36c3480735ae28148bf973103678c92a76d0b",
+        "user": "65532:65532"
+      }
+    },
+    "nonroot_user": "65532:65532",
+    "migration_secrets_absent": true,
+    "public_config_same_origin_and_no_secrets": true
+  },
+  "external-profile-and-factories.json": {
+    "passed": true,
+    "default_external_models": 0,
+    "default_has_no_synthetic_key": true,
+    "trace": [
+      {
+        "method": "POST",
+        "path": "/api/admin/v1/session",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/readyz",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/agent/v1/capabilities",
+        "status": 200
+      },
+      {
+        "method": "POST",
+        "path": "/api/agent/v1/sessions",
+        "status": 422
+      },
+      {
+        "method": "DELETE",
+        "path": "/api/admin/v1/session",
+        "status": 204
+      }
+    ],
+    "checks": [
+      {
+        "case": "profile-offline-plus-external-rejected",
+        "exit": 1,
+        "expected_error": "invalid_product_configuration",
+        "passed": true
+      },
+      {
+        "case": "management-history-core-alias-rejected",
+        "exit": 1,
+        "expected_error": "management_identity_must_be_independent",
+        "passed": true
+      },
+      {
+        "case": "management-payload-core-alias-rejected",
+        "exit": 1,
+        "expected_error": "management_identity_must_be_independent",
+        "passed": true
+      },
+      {
+        "case": "management-operations-core-alias-rejected",
+        "exit": 1,
+        "expected_error": "management_identity_must_be_independent",
+        "passed": true
+      },
+      {
+        "case": "management-publisher-core-alias-rejected",
+        "exit": 1,
+        "expected_error": "publisher_identity_must_be_independent",
+        "passed": true
+      },
+      {
+        "case": "management-reused-identity-rejected",
+        "exit": 1,
+        "expected_error": "management_identity_must_be_independent",
+        "passed": true
+      },
+      {
+        "case": "management-local-identities-no-real-registry",
+        "exit": 1,
+        "expected_error": "management_registry_unavailable",
+        "passed": true
+      },
+      {
+        "case": "legacy-direct-role",
+        "passed": true,
+        "no_silent_revoke": true
+      },
+      {
+        "case": "legacy-default-role",
+        "passed": true,
+        "no_silent_revoke": true
+      },
+      {
+        "case": "legacy-inherited-role",
+        "passed": true,
+        "no_silent_revoke": true
+      }
+    ],
+    "real_management_target_tested": false
+  },
+  "schema002-marker-observation.json": {
+    "fixture": "set only migration002 state Applying on owned valid offline DB",
+    "migration_rows": "1\tApplied\n2\tApplying\n",
+    "ordinary_serve_started": true,
+    "ready_probe_exit": 0,
+    "container_health": "healthy",
+    "expected": "serve reject incomplete migration before listen",
+    "actual": "serve remains healthy",
+    "status": "OPEN migration002 marker guard observation; no domain requests issued"
+  },
+  "schema-and-runtime-negative.json": {
+    "schema2_marker_only": "FAIL expected rejection but observed healthy; preserved observation",
+    "schema2_physical_missing": "PASS fails closed without fallback",
+    "actual_runtime_DSN_migrate": "PASS denied",
+    "business_rows_restored": "4 requests/4 usage intact"
+  },
+  "bc2-record-guard-results.json": [
+    {
+      "case": "empty",
+      "expected_preflight_accept": false,
+      "preflight_accepted": false,
+      "actual_exit": 1,
+      "network_attempts_intercepted": 0,
+      "actual_network": 0,
+      "record_and_ids_unchanged": true,
+      "passed": true,
+      "scope": "preflight only; complete GET path evidence reused from unchanged b868 body"
+    },
+    {
+      "case": "pending-empty",
+      "expected_preflight_accept": false,
+      "preflight_accepted": false,
+      "actual_exit": 1,
+      "network_attempts_intercepted": 0,
+      "actual_network": 0,
+      "record_and_ids_unchanged": true,
+      "passed": true,
+      "scope": "preflight only; complete GET path evidence reused from unchanged b868 body"
+    },
+    {
+      "case": "pending-complete",
+      "expected_preflight_accept": false,
+      "preflight_accepted": false,
+      "actual_exit": 1,
+      "network_attempts_intercepted": 0,
+      "actual_network": 0,
+      "record_and_ids_unchanged": true,
+      "passed": true,
+      "scope": "preflight only; complete GET path evidence reused from unchanged b868 body"
+    },
+    {
+      "case": "missing-usage",
+      "expected_preflight_accept": false,
+      "preflight_accepted": false,
+      "actual_exit": 1,
+      "network_attempts_intercepted": 0,
+      "actual_network": 0,
+      "record_and_ids_unchanged": true,
+      "passed": true,
+      "scope": "preflight only; complete GET path evidence reused from unchanged b868 body"
+    },
+    {
+      "case": "completed-original",
+      "expected_preflight_accept": true,
+      "preflight_accepted": true,
+      "actual_exit": 1,
+      "network_attempts_intercepted": 1,
+      "actual_network": 0,
+      "record_and_ids_unchanged": true,
+      "passed": true,
+      "scope": "preflight only; complete GET path evidence reused from unchanged b868 body"
+    },
+    {
+      "case": "cancelled-original",
+      "expected_preflight_accept": true,
+      "preflight_accepted": true,
+      "actual_exit": 1,
+      "network_attempts_intercepted": 1,
+      "actual_network": 0,
+      "record_and_ids_unchanged": true,
+      "passed": true,
+      "scope": "preflight only; complete GET path evidence reused from unchanged b868 body"
+    }
+  ],
+  "bc2-artifact-positive-negative.json": [
+    {
+      "case": "compose actual network source+bundle",
+      "passed": true,
+      "files": 834,
+      "bundle_files": 847
+    },
+    {
+      "case": "kubernetes actual network source+bundle",
+      "passed": true,
+      "files": 834,
+      "bundle_files": 849
+    },
+    {
+      "case": "corrupt-source",
+      "expected": "reject corrupted/incomplete manifest",
+      "actual_passed": false,
+      "filesChecked": 847,
+      "oracle_passed": true,
+      "failures": [
+        "source/cmd/maas-service/main.go"
+      ]
+    },
+    {
+      "case": "empty-manifest",
+      "expected": "reject corrupted/incomplete manifest",
+      "actual_passed": true,
+      "filesChecked": 0,
+      "oracle_passed": false,
+      "failures": []
+    },
+    {
+      "case": "omitted-main-entry",
+      "expected": "reject corrupted/incomplete manifest",
+      "actual_passed": true,
+      "filesChecked": 846,
+      "oracle_passed": false,
+      "failures": []
+    },
+    {
+      "case": "fetch-wrong-hash",
+      "expected": "reject without publishing source",
+      "actual": null,
+      "error": "ValueError: source hash mismatch: cmd/maas-service/main.go",
+      "source_published": false,
+      "oracle_passed": true
+    },
+    {
+      "case": "fetch-omitted-main",
+      "expected": "reject without publishing source",
+      "actual": {
+        "repositoryCommit": "bc2f7b37e540511644794a30cac4a4b88fddd96c",
+        "codeCommit": "41e8ec3f09b83f247503cf2599e2d126b8171f33",
+        "sourceFilesVerified": 833,
+        "passed": true
+      },
+      "error": null,
+      "source_published": true,
+      "oracle_passed": false
+    },
+    {
+      "case": "fetch-traversal",
+      "expected": "reject without publishing source",
+      "actual": null,
+      "error": "ValueError: unsafe source path",
+      "source_published": false,
+      "oracle_passed": true
+    }
+  ],
+  "actual-manifest-cli-results.json": [
+    {
+      "case": "corrupt-source",
+      "expected_exit": "nonzero",
+      "actual_exit": 1,
+      "command": [
+        "D:\\ProgramData\\anaconda3\\python.exe",
+        "C:\\Users\\a9786\\AppData\\Local\\Temp\\multica-task-448786089\\bc2-compose\\source\\deploy\\release\\verify_bundle.py",
+        "--root",
+        "C:\\Users\\a9786\\AppData\\Local\\Temp\\multica-task-448786089\\bc2-negative\\corrupt-source"
+      ]
+    },
+    {
+      "case": "empty-manifest",
+      "expected_exit": "nonzero",
+      "actual_exit": 0,
+      "command": [
+        "D:\\ProgramData\\anaconda3\\python.exe",
+        "C:\\Users\\a9786\\AppData\\Local\\Temp\\multica-task-448786089\\bc2-compose\\source\\deploy\\release\\verify_bundle.py",
+        "--root",
+        "C:\\Users\\a9786\\AppData\\Local\\Temp\\multica-task-448786089\\bc2-negative\\empty-manifest"
+      ]
+    },
+    {
+      "case": "omitted-main-entry",
+      "expected_exit": "nonzero",
+      "actual_exit": 0,
+      "command": [
+        "D:\\ProgramData\\anaconda3\\python.exe",
+        "C:\\Users\\a9786\\AppData\\Local\\Temp\\multica-task-448786089\\bc2-compose\\source\\deploy\\release\\verify_bundle.py",
+        "--root",
+        "C:\\Users\\a9786\\AppData\\Local\\Temp\\multica-task-448786089\\bc2-negative\\omitted-main-entry"
+      ]
+    }
+  ],
+  "fetch-compose-result.json": {
+    "repositoryCommit": "bc2f7b37e540511644794a30cac4a4b88fddd96c",
+    "codeCommit": "41e8ec3f09b83f247503cf2599e2d126b8171f33",
+    "sourceFilesVerified": 834,
+    "passed": true
+  },
+  "fetch-kubernetes-result.json": {
+    "repositoryCommit": "bc2f7b37e540511644794a30cac4a4b88fddd96c",
+    "codeCommit": "41e8ec3f09b83f247503cf2599e2d126b8171f33",
+    "sourceFilesVerified": 834,
+    "passed": true
+  },
+  "fetch-package-inputs.json": {
+    "compose": {
+      "root": "C:\\Users\\a9786\\AppData\\Local\\Temp\\multica-task-448786089\\bc2-compose",
+      "bytes": 193530,
+      "sha256": "e4c64dd8be2ab6ed1c174cbb167e1f402315f223a0a052709d6d4b3d1d955e9e",
+      "attachment_id": "01a20985-7d04-74d6-8024-0230cf25cabe",
+      "installer_manifest": 847,
+      "source_manifest": 834
+    },
+    "kubernetes": {
+      "root": "C:\\Users\\a9786\\AppData\\Local\\Temp\\multica-task-448786089\\bc2-kubernetes",
+      "bytes": 191904,
+      "sha256": "89a947b18240786042eab150932e54aa05e22d95c211ae589ced4dc47c5093b8",
+      "attachment_id": "01a20985-861d-7418-89e6-7b361549b24b",
+      "installer_manifest": 849,
+      "source_manifest": 834
+    }
+  },
+  "image-cleanup.json": [
+    {
+      "own_tag": "maas7-b868-c51fdfd0-app:64b36c348073",
+      "exit": 0,
+      "stdout": "Untagged: maas7-b868-c51fdfd0-app:64b36c348073\nDeleted: sha256:911f2d2255598355b168e22bce13cefecab156c30f865b6cf2f1c3e2b02bdf74\n",
+      "stderr": ""
+    },
+    {
+      "own_tag": "maas7-b868-c51fdfd0-web:64b36c348073",
+      "exit": 0,
+      "stdout": "Untagged: maas7-b868-c51fdfd0-web:64b36c348073\nDeleted: sha256:efab4aab0f87305558a87f05247d0a8ba5d216711545ea6269da8aecf952ef94\n",
+      "stderr": ""
+    },
+    {
+      "own_tag": "maas7-b868-c51fdfd0-migrate:64b36c348073",
+      "exit": 0,
+      "stdout": "Untagged: maas7-b868-c51fdfd0-migrate:64b36c348073\nDeleted: sha256:8d0a2dc4db5246c85979f1e651bb40826f29d0c7870289b85b78c4ce42e63f8a\n",
+      "stderr": ""
+    }
+  ],
+  "tool_context": {
+    "top": 3,
+    "leaves": 6,
+    "product_failures": 0
+  },
+  "runtime_to_new_ref_mapping": {
+    "runtime_ref": "b8688ecbe3f9647ac8feb1c42afd8f7a021370b7",
+    "runtime_code": "64b36c3480735ae28148bf973103678c92a76d0b",
+    "artifact_and_client_ref": "bc2f7b37e540511644794a30cac4a4b88fddd96c",
+    "artifact_code": "41e8ec3f09b83f247503cf2599e2d126b8171f33",
+    "production_files_diff": [],
+    "reused_business_evidence": true
+  },
+  "acceptance": {
+    "status": "PARTIAL_PASSED_ONE_BLOCKER",
+    "blocker": "QA-DEP-MANIFEST-001: empty/truncated integrity manifest accepted; fetch omission published partial source",
+    "schema002_marker": "observation needs contract/architecture decision; physical missing table failed closed; not a second declared blocker",
+    "old_record_falsepass": "reproduced at b868; bc2 preflight repaired 4negative/2positive; latter stop at network sentinel",
+    "old_R01_R02": "prior controlled close retained, not rerun",
+    "real_supplier_calls": 0,
+    "GPU_runs": 0,
+    "paid_calls": 0,
+    "target_k8s_writes": 0,
+    "real_management_target": "NOT_EXECUTED",
+    "browser": "NOT_IN_THIS_SLICE"
+  }
+}

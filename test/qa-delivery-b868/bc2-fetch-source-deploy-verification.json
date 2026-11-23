@@ -1,0 +1,36 @@
+{
+  "packages": [
+    {
+      "archive": "C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-7-6bf78f4f3528\\workdir\\inputs\\delivery-b868\\new-packages\\maas-compose-bc2f7b37e540-fetch.zip",
+      "sha256": "e4c64dd8be2ab6ed1c174cbb167e1f402315f223a0a052709d6d4b3d1d955e9e",
+      "bytes": 193530,
+      "deliveryCommit": "bc2f7b37e540511644794a30cac4a4b88fddd96c",
+      "sourceCodeCommit": "41e8ec3f09b83f247503cf2599e2d126b8171f33",
+      "sourcePrefix": "metadata/",
+      "verifiedSourceFiles": {
+        "backend": 609,
+        "console": 110
+      },
+      "verifiedDeploymentFiles": 115,
+      "sourceMode": "fetch",
+      "integrityPassed": true,
+      "scope": "archive/source integrity only; runtime, SQL, QA and real model evidence are separate"
+    },
+    {
+      "archive": "C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-7-6bf78f4f3528\\workdir\\inputs\\delivery-b868\\new-packages\\maas-kubernetes-bc2f7b37e540-fetch.zip",
+      "sha256": "89a947b18240786042eab150932e54aa05e22d95c211ae589ced4dc47c5093b8",
+      "bytes": 191904,
+      "deliveryCommit": "bc2f7b37e540511644794a30cac4a4b88fddd96c",
+      "sourceCodeCommit": "41e8ec3f09b83f247503cf2599e2d126b8171f33",
+      "sourcePrefix": "metadata/",
+      "verifiedSourceFiles": {
+        "backend": 609,
+        "console": 110
+      },
+      "verifiedDeploymentFiles": 115,
+      "sourceMode": "fetch",
+      "integrityPassed": true,
+      "scope": "archive/source integrity only; runtime, SQL, QA and real model evidence are separate"
+    }
+  ]
+}
