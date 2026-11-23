@@ -8,3 +8,5 @@ docs/contracts/* -text whitespace=cr-at-eol,-blank-at-eof
 docs/contracts/agent-runtime/** -text whitespace=cr-at-eol,-blank-at-eof
 tools/perf/contracts/* -text whitespace=cr-at-eol,-blank-at-eof
 internal/protocol/contracts/** -text
+
+console/contracts/ar1-*.json -text whitespace=cr-at-eol,-blank-at-eof
