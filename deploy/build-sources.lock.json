@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "sourceMode": "single-repository-code-commit",
   "backend": {
-    "sourceCommit": "fe09d60b4932f78ed07dd27da36878b2a375d0fd",
+    "sourceCommit": "3c9dd5d6ac1958fd6747c07f42c25b9996444c22",
     "files": {
       ".gitattributes": "5b93b86d7f7e94c3dafdd41b284afe95a95a985e8afc719914173db11890cd36",
       ".gitignore": "46cf94096a926a26bc1a913b6cc632adacab0a96ab42d72a7dcbf216bcbaaa77",
@@ -290,6 +290,12 @@
       "test/integration/management_test.go": "91a2cdf8e4f7e29f3dd528bfb4763276334a5e37e7cce56ca312490ae7c917fe",
       "test/maas17-review/delete-recovery-probe.test.ts.in": "23af6f14c58285a3b33e82b8d617fa080648dd1019e891c26ca2d79a9025758c",
       "test/maas17-review/README.md": "32096107ccb3bb05fb74b9e446c9abb3c5f7a9db2c76302f573d1b212199c7e9",
+      "test/qa-aa-cpu/audit_original.py": "d5908772dd9d8d6f8e10baec17ed630b2768342647ef0b295d1b4a335ca7d1ea",
+      "test/qa-aa-cpu/followup.py": "3b345555fd93b037ffc6d1ea83b30269e82025107c9bcfbeedf6cc28ccc48a78",
+      "test/qa-aa-cpu/matrix.json": "32394cb2474b0c13725cd63ec90bb19bb4097eaac1ca8c3ffbe245b380873ec2",
+      "test/qa-aa-cpu/report.md": "d419585a58d584c2f8ad8ecbc71c4bf3bc002d63dd859804bef5bbf650545f47",
+      "test/qa-aa-cpu/results.json": "3c5fcce1bcc12745e20be130bdf58f86036003f87bace9fe2d4809f3329a5fbe",
+      "test/qa-aa-cpu/verify.py": "ecbfc7cbcb90f619de4d2b8a33fbe9277c3391bc42f92a8ce2b436de51ae49bd",
       "test/qa-cap6/matrix.json": "5aee26f8fa9f4b8425968803e79cac3e4cd1fc30b0662d97c0bb3cd4ea19318f",
       "test/qa-cap6/report.md": "ac4b031617c37542f0dfbbe1cb81277cdd6a3ad3a552dec3980fb3d7f9ee9b1c",
       "test/qa-cap6/results.json": "d258b55818673cfcb6ad06f28c5f9b3e9129de4832d4ea266e552a7e5dc402c9",
@@ -521,7 +527,7 @@
     }
   },
   "console": {
-    "sourceCommit": "fe09d60b4932f78ed07dd27da36878b2a375d0fd",
+    "sourceCommit": "3c9dd5d6ac1958fd6747c07f42c25b9996444c22",
     "files": {
       "console/.env.fixtures": "4d5e22f8eeb4bbf5a027a34c7a4bfef806876a470f89440f9611bd01a9d8c5f7",
       "console/.env.workbench": "930edf078e756f41d37fad0f7ce87332d8af59e65dac57b11797bcf0117a9216",
@@ -794,6 +800,12 @@
       "test/integration/management_test.go",
       "test/maas17-review/README.md",
       "test/maas17-review/delete-recovery-probe.test.ts.in",
+      "test/qa-aa-cpu/audit_original.py",
+      "test/qa-aa-cpu/followup.py",
+      "test/qa-aa-cpu/matrix.json",
+      "test/qa-aa-cpu/report.md",
+      "test/qa-aa-cpu/results.json",
+      "test/qa-aa-cpu/verify.py",
       "test/qa-cap6/matrix.json",
       "test/qa-cap6/report.md",
       "test/qa-cap6/results.json",

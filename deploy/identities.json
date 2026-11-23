@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "scope": "installation-input-only-no-secret-values",
-  "sourceCommit": "fe09d60b4932f78ed07dd27da36878b2a375d0fd",
+  "sourceCommit": "3c9dd5d6ac1958fd6747c07f42c25b9996444c22",
   "productionWiringVerified": false,
   "connections": {
     "core": {
@@ -318,6 +318,12 @@
         "test/integration/management_test.go",
         "test/maas17-review/README.md",
         "test/maas17-review/delete-recovery-probe.test.ts.in",
+        "test/qa-aa-cpu/audit_original.py",
+        "test/qa-aa-cpu/followup.py",
+        "test/qa-aa-cpu/matrix.json",
+        "test/qa-aa-cpu/report.md",
+        "test/qa-aa-cpu/results.json",
+        "test/qa-aa-cpu/verify.py",
         "test/qa-cap6/matrix.json",
         "test/qa-cap6/report.md",
         "test/qa-cap6/results.json",
