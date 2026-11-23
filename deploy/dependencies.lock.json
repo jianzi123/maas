@@ -4,12 +4,12 @@
   "deploymentApproved": false,
   "sourceBaseline": {
     "chartBase": "e5647a2f2b44f53d39a80041be94b619f07c29d6",
-    "backendInspected": "7b0230e01d145484cf1b966af6feffa5e54ef2bc",
+    "backendInspected": "759a2cc3f3677ebbcc13a67346c15a00f9e510ec",
     "contracts": "MAAS-2 v0.4 + retained v0.3 + query/recovery addenda + MAAS-1 role review",
     "terminal": "3.0",
     "ticket": "3",
     "proposedTerminal": "3.1 (not enabled)",
-    "consoleInspected": "7b0230e01d145484cf1b966af6feffa5e54ef2bc",
+    "consoleInspected": "759a2cc3f3677ebbcc13a67346c15a00f9e510ec",
     "defaultBranch": "925d8c55be9ce823d100bf90a5c78cf19ea66d58",
     "candidatePR": null,
     "candidateState": "integrated-unmerged",
@@ -18,7 +18,7 @@
     "qaCore": "ac94a373ec0a61c5fd4dc5380a7985a4fb47840f",
     "qaEvidence": "50354a705c03383d0102d0d437119afd7ffed8b3",
     "sourceInventory": "deploy/build-sources.lock.json",
-    "sourceInventorySha256": "a0d72d35a55c7c8241afc89363cf4243039a6cb1b1f9e3209f428b4563fd2faf",
+    "sourceInventorySha256": "eb771a1acdbf6928075ea8392855e81337ad6d404705277f67777a0f6f8ba6a3",
     "upstreamWorkbenchDeployment": "e5647a2f2b44f53d39a80041be94b619f07c29d6",
     "backendBase": "0559fa46b4a728d6f542daf19532e794f8549b31",
     "integrationBranch": "integrate/MAAS-17-unified-20261114",
@@ -99,7 +99,7 @@
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "7b0230e01d145484cf1b966af6feffa5e54ef2bc",
+      "sourceCommit": "759a2cc3f3677ebbcc13a67346c15a00f9e510ec",
       "compiledAPIGroup": "serving.maas.example"
     },
     {
@@ -116,7 +116,7 @@
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "7b0230e01d145484cf1b966af6feffa5e54ef2bc",
+      "sourceCommit": "759a2cc3f3677ebbcc13a67346c15a00f9e510ec",
       "compiledAPIGroup": "serving.maas.example"
     },
     {
@@ -133,7 +133,7 @@
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "7b0230e01d145484cf1b966af6feffa5e54ef2bc"
+      "sourceCommit": "759a2cc3f3677ebbcc13a67346c15a00f9e510ec"
     },
     {
       "id": "mysql",
@@ -432,7 +432,7 @@
   "databaseIdentities": {
     "schemaVersion": "1.0",
     "scope": "installation-input-only-no-secret-values",
-    "sourceCommit": "7b0230e01d145484cf1b966af6feffa5e54ef2bc",
+    "sourceCommit": "759a2cc3f3677ebbcc13a67346c15a00f9e510ec",
     "productionWiringVerified": false,
     "connections": {
       "core": {
@@ -630,9 +630,11 @@
           "deploy/images/Dockerfile.operator",
           "deploy/tests/fixtures/hybrid.yaml",
           "deploy/tests/fixtures/internal.yaml",
+          "docs/agent-feature-status.md",
           "docs/agent-runtime-review-fixes.md",
           "docs/agent-runtime-v1.md",
           "docs/agent-runtime-verification.md",
+          "docs/agent-tool-interface.md",
           "docs/contracts/agent-runtime/ar1-draft2/ADR-chat-agent.md",
           "docs/contracts/agent-runtime/ar1-draft2/AR-B01-B02.md",
           "docs/contracts/agent-runtime/ar1-draft2/openapi.json",
@@ -706,6 +708,7 @@
           "docs/performance/templates/experiment-record.md",
           "docs/performance/templates/optimization-goal.md",
           "docs/performance/templates/weekly-summary.md",
+          "docs/product-service-verification.md",
           "docs/product-service.md",
           "docs/single-model-runtime-increment.md",
           "docs/unified-status.md",
@@ -733,6 +736,8 @@
           "internal/agentruntime/service.go",
           "internal/agentruntime/service_test.go",
           "internal/agentruntime/store.go",
+          "internal/agentruntime/tool_context.go",
+          "internal/agentruntime/tool_context_test.go",
           "internal/agentruntime/tools.go",
           "internal/agentruntime/types.go",
           "internal/app/auth.go",
@@ -741,7 +746,9 @@
           "internal/app/ledger.go",
           "internal/app/migrations/001_product.sql",
           "internal/app/models.go",
+          "internal/app/models_test.go",
           "internal/app/runtime.go",
+          "internal/app/runtime_test.go",
           "internal/installation/runtime.go",
           "internal/kernel/access.go",
           "internal/kernel/agent_runtime_mysql_test.go",
@@ -767,6 +774,7 @@
           "scripts/test-agent-mysql.sh",
           "scripts/test-agent-runtime.ps1",
           "scripts/test-mysql.sh",
+          "scripts/test-product-mysql.sh",
           "scripts/test-r5.sh",
           "scripts/tests/test_unified_sources.py",
           "scripts/unified_sources.py",
@@ -781,6 +789,9 @@
           "test/controlled/maas20/ar1/windows-tests.jsonl",
           "test/controlled/maas20/headless.jsonl",
           "test/controlled/maas20/mysql.jsonl",
+          "test/controlled/maas20/product-service/mysql-server.log",
+          "test/controlled/maas20/product-service/product-final.jsonl",
+          "test/controlled/maas20/product-service/product-pre-fix.jsonl",
           "test/controlled/maas20/tests.jsonl",
           "test/independent/README.md",
           "test/independent/browser.sh",
