@@ -7,11 +7,57 @@ import tempfile
 import urllib.request
 import zipfile
 
+METADATA = ('deploy/build-sources.lock.json', 'deploy/dependencies.lock.json',
+            'deploy/identities.json', 'deploy/charts/maas-platform/runtime-interface.json')
+
+
+def source_manifest(root, version):
+    raw = (root / 'SOURCE.sha256.json').read_bytes()
+    if hashlib.sha256(raw).hexdigest() != version.get('sourceManifestSha256'):
+        raise ValueError('source manifest digest missing or changed')
+    manifest = json.loads(raw)
+    if not isinstance(manifest, dict) or not manifest or len(manifest) != version.get('sourceFileCount'):
+        raise ValueError('source manifest empty or incomplete')
+    if set(version.get('sourceLockSha256', {})) != set(METADATA):
+        raise ValueError('four source metadata hashes required')
+    locked = {}
+    for name in METADATA:
+        path = root / 'metadata' / name
+        if not path.is_file():
+            path = root / 'source' / name
+        content = path.read_bytes()
+        actual = hashlib.sha256(content).hexdigest()
+        if actual != version['sourceLockSha256'][name] or manifest.get(name, {}).get('sha256') != actual:
+            raise ValueError('source metadata not bound: ' + name)
+        if name == METADATA[0]:
+            locked = json.loads(content)
+    required = set(METADATA)
+    for component in ('backend', 'console', 'deployment'):
+        entry = locked.get(component, {})
+        inventory = entry.get('files')
+        if entry.get('sourceCommit') != version['codeCommit'] or not isinstance(inventory, dict) or not inventory:
+            raise ValueError('complete locked component required: ' + component)
+        required.update(inventory)
+        for name, expected in inventory.items():
+            if manifest.get(name, {}).get('sha256') != expected:
+                raise ValueError('required source omitted or changed: ' + name)
+    if set(manifest) != required:
+        raise ValueError('source manifest differs from complete locked source set')
+    if not {'cmd/maas-service/main.go', 'go.mod', 'go.sum', 'console/package.json', 'console/src/main.ts'} <= required:
+        raise ValueError('required product entry source missing')
+    for name, row in manifest.items():
+        parts = PurePosixPath(name).parts
+        if '\\' in name or name.startswith('/') or '..' in parts or ':' in parts[0]:
+            raise ValueError('unsafe source path')
+        if not isinstance(row.get('bytes'), int) or row['bytes'] < 0:
+            raise ValueError('source byte size missing: ' + name)
+    return manifest
+
 
 def fetch(root):
     root = Path(root).resolve()
     version = json.loads((root / 'VERSION.json').read_text(encoding='utf-8'))
-    manifest = json.loads((root / 'SOURCE.sha256.json').read_text(encoding='utf-8'))
+    manifest = source_manifest(root, version)
     commit = version['repositoryCommit']
     if len(commit) != 40 or any(c not in '0123456789abcdef' for c in commit):
         raise ValueError('invalid immutable source commit')

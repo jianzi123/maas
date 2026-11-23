@@ -10,18 +10,20 @@ def package(ref,out,source_mode="full"):
     out.mkdir(parents=True,exist_ok=True)
     with snapshot(ROOT,ref) as (commit,source):
         code,checks=verify(ROOT,commit,source)
+        source_manifest={f.relative_to(source).as_posix():{"sha256":digest(f),"bytes":f.stat().st_size} for f in sorted(source.rglob("*")) if f.is_file()}
+        source_manifest_bytes=(json.dumps(source_manifest,indent=2)+"\n").encode("utf-8")
         version={"repositoryCommit":commit,"codeCommit":code,"imageTag":code[:12],"sourceChecks":checks,
                  "sourceLockSha256":{name:digest(source/name) for name in ("deploy/build-sources.lock.json","deploy/dependencies.lock.json","deploy/identities.json","deploy/charts/maas-platform/runtime-interface.json")},
                  "platform":"linux/amd64", "productEntry":"./cmd/maas-service", "modes":["migrate","serve"],
-                 "sourceMode":source_mode,"scope":"same-source-two-installers-not-model-approval"}
+                 "sourceMode":source_mode,"sourceManifestSha256":hashlib.sha256(source_manifest_bytes).hexdigest(),
+                 "sourceFileCount":len(source_manifest),"scope":"same-source-two-installers-not-model-approval"}
         with tempfile.TemporaryDirectory(prefix="release-") as temp:
             for kind in ("compose","kubernetes"):
                 root=Path(temp)/kind;root.mkdir()
+                (root/"SOURCE.sha256.json").write_bytes(source_manifest_bytes)
                 if source_mode=="full":
                     shutil.copytree(source,root/"source")
                 else:
-                    source_manifest={f.relative_to(source).as_posix():{"sha256":digest(f),"bytes":f.stat().st_size} for f in sorted(source.rglob("*")) if f.is_file()}
-                    (root/"SOURCE.sha256.json").write_text(json.dumps(source_manifest,indent=2)+"\n",encoding="utf-8")
                     shutil.copy2(source/"deploy/release/fetch_source.py",root/"fetch_source.py")
                     for name in version["sourceLockSha256"]:
                         dest=root/"metadata"/name;dest.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(source/name,dest)
@@ -32,7 +34,7 @@ def package(ref,out,source_mode="full"):
                     if f.is_dir():shutil.copytree(f,dest)
                     else:shutil.copy2(f,dest)
                 shutil.copy2(source/"deploy/release/VALIDATION.md",root/"VALIDATION.md")
-                (root/"VERSION.json").write_text(json.dumps(version,indent=2)+"\n",encoding="utf-8")
+                (root/"VERSION.json").write_text(json.dumps({**version,"installer":kind},indent=2)+"\n",encoding="utf-8")
                 for f in root.rglob("*"):
                     # Only installer tags are rendered; archived source bytes stay exact.
                     if f.is_file() and not set(f.relative_to(root).parts)&{"source","metadata"}:

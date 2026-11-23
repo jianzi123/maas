@@ -29,9 +29,15 @@ def main():
         qa["postQaChangesAreLocalServiceAndDocsOnly"] = False
         qa["scope"] = "Historical R1-R3 controlled QA at targetCommit only; not unified-candidate or production acceptance"
         inventories = {name: inventory(source, name) for name in ("backend", "console")}
+        metadata = {"deploy/build-sources.lock.json", "deploy/dependencies.lock.json",
+                    "deploy/identities.json", "deploy/charts/maas-platform/runtime-interface.json"}
+        deployment_files = {p.relative_to(source).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
+                            for p in (source / "deploy").rglob("*")
+                            if p.is_file() and p.relative_to(source).as_posix() not in metadata}
         source_lock = {
             "schemaVersion": "1.0", "sourceMode": "single-repository-code-commit",
             **{name: {"sourceCommit": commit, "files": inventories[name]} for name in inventories},
+            "deployment": {"sourceCommit": commit, "files": deployment_files},
             "qa": qa,
         }
         inventory_path = deploy / "build-sources.lock.json"
