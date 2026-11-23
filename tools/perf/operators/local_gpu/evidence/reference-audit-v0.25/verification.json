@@ -1,0 +1,23 @@
+{
+  "new_tests": 11,
+  "test_command": [
+    "D:\\ProgramData\\anaconda3\\python.exe",
+    "-X",
+    "utf8",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "repo/tools/perf/operators/local_gpu",
+    "-p",
+    "test_representativeness_audit.py",
+    "-v"
+  ],
+  "exit_code": 0,
+  "old36_or_QA16_32_rerun": false,
+  "GPU_execution": false,
+  "initial_development_failure": "new CSV helper lacked io import; actual-data regression caught NameError, fixed before final11/11",
+  "audit_source_sha256": "b0db2752398f113caa7c1b710465756059e0723440184ab9762047b5ce561066",
+  "test_source_sha256": "45d195c818533c94a5259ad042f4c3fd1bfdb0aae5e0c5a600a2baf08a5bb5f2",
+  "no_claim_that_final_commit_existed_at_command_time": true
+}

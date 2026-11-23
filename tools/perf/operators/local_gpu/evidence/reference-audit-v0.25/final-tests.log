@@ -1,0 +1,16 @@
+test_all_real_rows_and_signed_failures_preserved (test_representativeness_audit.AuditTests.test_all_real_rows_and_signed_failures_preserved) ... ok
+test_disjoint_not_double_counted (test_representativeness_audit.AuditTests.test_disjoint_not_double_counted) ... ok
+test_idle_retains_wait_without_fake_query (test_representativeness_audit.AuditTests.test_idle_retains_wait_without_fake_query) ... ok
+test_missing_boundary_rejected (test_representativeness_audit.AuditTests.test_missing_boundary_rejected) ... ok
+test_missing_measurement_rejected (test_representativeness_audit.AuditTests.test_missing_measurement_rejected) ... ok
+test_other_clock_rejected (test_representativeness_audit.AuditTests.test_other_clock_rejected) ... ok
+test_prefix_order_overlap_rejected (test_representativeness_audit.AuditTests.test_prefix_order_overlap_rejected) ... ok
+test_previous_clock_coordinate_rejected (test_representativeness_audit.AuditTests.test_previous_clock_coordinate_rejected) ... ok
+test_query_beyond_submit_rejected (test_representativeness_audit.AuditTests.test_query_beyond_submit_rejected) ... ok
+test_root_bookkeeping_explicitly_unobserved (test_representativeness_audit.AuditTests.test_root_bookkeeping_explicitly_unobserved) ... ok
+test_wrong_query_identity_rejected (test_representativeness_audit.AuditTests.test_wrong_query_identity_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.113s
+
+OK

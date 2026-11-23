@@ -1,5 +1,7 @@
 # MaaS 性能与框架工程手册
 
+本轮：[代表性审计与新的采前设计v0.25](literature/elit01-representativeness-audit-v0.25.md)。解释16层前缀/prepare/query差异、状态缺口和固定目标的适用性；仅离线，P25-AA是待评审资格设计，不启动GPU或主比较。
+
 本轮：[真实参考模板资格小窗v0.24](literature/elit01-reference-qualification-v0.24.md)。一个GPU进程128块完整，holdout仅34/64匹配，模板不合格；已停在资格阶段并保留完整超差与最小复现。
 
 单模型接线：[第23章](engineering/23-single-model-capture.md)，含ELIT-QA-01完整向量拒绝修复、实际客户端SSE采集与原角色输入缺口。

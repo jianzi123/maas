@@ -28,3 +28,5 @@ Engine只做过导入，模型生成、scheduler/serving及质量未验证。手
 本轮另有 check_native_kv_state.py / compare_native_kv_state.py：直接读取原生图实际写槽的30层K/V，24份FP16数组逐位核对；24置零/10陈旧快照负控全部拒绝。采集与成本计时分开，复现命令见第19章。
 
 参考模板资格入口：reference_protocol.py / bench_cadence_reference.py / analyze_cadence_reference.py。一次128块小窗、共同先验目标和独立holdout，见[资格方法v0.24](../../../../docs/performance/literature/elit01-reference-qualification-v0.24.md)。只做资格，不重跑旧108 cluster；未取得有效门禁独立签收与模板资格时不得进入新主比较。
+
+离线代表性审计：audit_reference_representativeness.py仅消费v0.24原件，输出128行不重叠时间分解和16层均值差，见[审计及新采前设计v0.25](../../../../docs/performance/literature/elit01-representativeness-audit-v0.25.md)。不启动GPU、采集器或主比较；旧bank/hash/34/64不变。
