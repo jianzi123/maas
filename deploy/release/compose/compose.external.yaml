@@ -1,0 +1,89 @@
+name: ${COMPOSE_PROJECT_NAME:-maas}
+services:
+  migrate:
+    image: ${MAAS_MIGRATE_IMAGE:-maas-migrate:__IMAGE_TAG__}
+    build:
+      context: ./source
+      dockerfile: ${MAAS_DOCKERFILE:-deploy/release/Dockerfile}
+      target: migrate
+      args:
+        APP_PACKAGE: ./cmd/maas-service
+        SOURCE_REVISION: __SOURCE_COMMIT__
+    restart: 'no'
+    environment:
+      MAAS_INSTALL_PROVISION_ROLES: ${MAAS_INSTALL_PROVISION_ROLES:-1}
+    depends_on: {}
+    volumes:
+    - ./config/migration.json:/etc/maas/migration.json:ro
+    - ./.secrets/migration:/run/secrets:ro
+    platform: linux/amd64
+  maas:
+    image: ${MAAS_APP_IMAGE:-maas-app:__IMAGE_TAG__}
+    build:
+      context: ./source
+      dockerfile: ${MAAS_DOCKERFILE:-deploy/release/Dockerfile}
+      target: app
+      args:
+        APP_PACKAGE: ./cmd/maas-service
+        SOURCE_REVISION: __SOURCE_COMMIT__
+    command:
+    - serve
+    - --config
+    - /etc/maas/product.json
+    restart: unless-stopped
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    volumes:
+    - ./config/product.json:/etc/maas/product.json:ro
+    - ./config/console-config.json:/app/console/console-config.json:ro
+    - ./.secrets/runtime:/run/secrets:ro
+    healthcheck:
+      test:
+      - CMD
+      - /maas-probe
+      - http://127.0.0.1:8080/readyz
+      interval: 5s
+      timeout: 3s
+      start_period: 15s
+      retries: 20
+    stop_grace_period: 45s
+    read_only: true
+    tmpfs:
+    - /tmp
+    mem_limit: 768m
+    platform: linux/amd64
+  web:
+    image: ${MAAS_WEB_IMAGE:-maas-web:__IMAGE_TAG__}
+    build:
+      context: ./source
+      dockerfile: ${MAAS_DOCKERFILE:-deploy/release/Dockerfile}
+      target: web
+      args:
+        SOURCE_REVISION: __SOURCE_COMMIT__
+    restart: unless-stopped
+    depends_on:
+      maas:
+        condition: service_healthy
+    ports:
+    - ${HTTP_BIND:-127.0.0.1}:${HTTP_PORT:-18080}:8080
+    volumes:
+    - ./config/console-config.json:/usr/share/nginx/html/console-config.json:ro
+    healthcheck:
+      test:
+      - CMD
+      - wget
+      - -q
+      - -O
+      - /dev/null
+      - http://127.0.0.1:8080/healthz
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    mem_limit: 128m
+    platform: linux/amd64
+volumes:
+  mysql_data: null
+secrets:
+  mysql_root_password:
+    file: ./.secrets/mysql-root-password

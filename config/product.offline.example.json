@@ -1,0 +1,56 @@
+{
+  "listen": "0.0.0.0:8080",
+  "origin": "http://localhost:8080",
+  "cluster_id": "replace-with-stable-installation-id",
+  "static_dir": "/usr/share/maas/console",
+  "contract_file": "/etc/maas/ar1/openapi.json",
+  "mysql": {
+    "runtime_dsn_file": "/run/secrets/maas_runtime_dsn",
+    "migration_dsn_file": "/run/secrets/maas_migration_dsn"
+  },
+  "auth": {
+    "admin_id": "4c421973-919f-4b8a-997f-909fc6fd010a",
+    "username": "admin",
+    "password_file": "/run/secrets/maas_bootstrap_password",
+    "session_ttl_seconds": 28800,
+    "secure_cookie": false
+  },
+  "secrets": {
+    "key_pepper_file": "/run/secrets/maas_key_pepper",
+    "cursor_key_file": "/run/secrets/maas_cursor_key"
+  },
+  "ledger": {
+    "rate_revision": "offline-controlled-rate-v1",
+    "initial_rate_epoch": 1,
+    "window_ms": 3600000,
+    "global_limit": 1000,
+    "key_limit": 1000,
+    "slots": 4
+  },
+  "agent": {
+    "limits": {
+      "max_steps": 4,
+      "max_model_calls": 4,
+      "max_tool_calls": 8,
+      "max_duration_ms": 600000,
+      "tool_timeout_ms": 5000,
+      "max_tool_output_bytes": 8192,
+      "max_context_tokens": 32768,
+      "no_progress_limit": 3,
+      "max_tokens": "100000",
+      "max_money_atomic": "1000000000",
+      "currency": "USD"
+    },
+    "input_bytes": 262144,
+    "max_events": 10000,
+    "approval_ttl_ms": 30000,
+    "concurrency": 4
+  },
+  "models": [],
+  "gateway": {},
+  "offline_controlled": {
+    "enabled": true,
+    "require_approval": true,
+    "step_delay_ms": 200
+  }
+}

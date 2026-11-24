@@ -1,0 +1,66 @@
+--- a/plugins/wasm-go/extensions/ext-auth/main.go
++++ b/plugins/wasm-go/extensions/ext-auth/main.go
+@@ -63,12 +63,11 @@
+ )
+ 
+ func onHttpRequestHeaders(ctx wrapper.HttpContext, config config.ExtAuthConfig) types.Action {
+-	matchRequest, err := buildMatchRequest(ctx, config.MatchRules)
+-	if err != nil {
+-		log.Errorf("failed to read request headers for match rules: %v; continuing external authorization", err)
+-	} else if !config.MatchRules.Matches(matchRequest) {
+-		ctx.DontReadRequestBody()
+-		return types.ActionContinue
++	// Dedicated MaaS variant: every selected request must pass authorization.
++	headers, headerErr := proxywasm.GetHttpRequestHeaders()
++	if headerErr != nil || !maasRequiredHeaders(headers) {
++		_ = sendResponse(http.StatusForbidden, "maas.authorization_headers", nil, nil)
++		return types.HeaderStopAllIterationAndWatermark
+ 	}
+ 
+ 	// Disable the route re-calculation since the plugin may modify some headers related to the chosen route.
+@@ -227,15 +226,7 @@
+ }
+ 
+ func callExtAuthServerErrorHandler(config config.ExtAuthConfig, statusCode int, extAuthRespHeaders http.Header, responseBody []byte, requestPaused bool) {
+-	if statusCode >= http.StatusInternalServerError && config.FailureModeAllow {
+-		if config.FailureModeAllowHeaderAdd {
+-			_ = replaceHttpRequestHeader(HeaderFailureModeAllow, "true")
+-		}
+-		if requestPaused {
+-			resumeHttpRequest()
+-		}
+-		return
+-	}
++	// MaaS never treats authorization failure as permission to send upstream.
+ 
+ 	var respHeaders = extAuthRespHeaders
+ 	if config.HttpService.AuthorizationResponse.AllowedClientHeaders != nil {
+--- /dev/null
++++ b/plugins/wasm-go/extensions/ext-auth/maas_guard.go
+@@ -0,0 +1,8 @@
++// Dedicated MaaS fork-local guard; does not verify or manufacture tickets.
++package main
++import "strings"
++func maasRequiredHeaders(headers [][2]string) bool {
++ counts:=map[string]int{}
++ for _,h:=range headers {name:=strings.ToLower(h[0]);if h[1]==""{counts[name]+=2}else{counts[name]++}}
++ return counts["x-request-id"]==1 && counts["x-maas-admission-ticket"]==1 && counts["x-maas-reservation-plan"]==1
++}
+--- /dev/null
++++ b/plugins/wasm-go/extensions/ext-auth/maas_guard_test.go
+@@ -0,0 +1,15 @@
++package main
++import "testing"
++func TestMaaSRequiredHeaders(t *testing.T){
++ good:=[][2]string{{"X-Request-ID","r"},{"X-Maas-Admission-Ticket","t"},{"X-Maas-Reservation-Plan","p"}}
++ if !maasRequiredHeaders(good){t.Fatal("valid header set rejected")}
++ for i:=range good {
++  missing:=append([][2]string{},good[:i]...);missing=append(missing,good[i+1:]...)
++  if maasRequiredHeaders(missing){t.Fatal("missing header accepted")}
++  empty:=append([][2]string{},good...);empty[i][1]=""
++  if maasRequiredHeaders(empty){t.Fatal("empty header accepted")}
++  duplicate:=append(append([][2]string{},good...),good[i])
++  if maasRequiredHeaders(duplicate){t.Fatal("duplicate accepted")}
++ }
++ if maasRequiredHeaders(nil){t.Fatal("empty list accepted")}
++}
