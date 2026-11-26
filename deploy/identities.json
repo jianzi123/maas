@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "scope": "installation-input-only-no-secret-values",
-  "sourceCommit": "b2a79c7f352eef865dc827bd22735a47c396c21a",
+  "sourceCommit": "db55c5835fe1c1e438ead66cb137d1c6fc6928fb",
   "productionWiringVerified": false,
   "connections": {
     "core": {
@@ -508,6 +508,11 @@
         "test/controlled/maas20/fc1-tools/maas20-sql-signed-schema-failure.jsonl",
         "test/controlled/maas20/fc1-tools/mysql-test-server.log",
         "test/controlled/maas20/fc1-tools/product-service-mysql.jsonl",
+        "test/controlled/maas20/fc1-tools/validate-traces.py",
+        "test/controlled/maas20/fc1-tools/wire-capture.jsonl",
+        "test/controlled/maas20/fc1-tools/wire/complete.json",
+        "test/controlled/maas20/fc1-tools/wire/invalid_second_tool.json",
+        "test/controlled/maas20/fc1-tools/wire/schema-validation.json",
         "test/controlled/maas20/headless.jsonl",
         "test/controlled/maas20/mysql.jsonl",
         "test/controlled/maas20/product-offline/final-sql.jsonl",

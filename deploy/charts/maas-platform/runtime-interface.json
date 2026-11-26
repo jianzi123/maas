@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "scope": "observed-source-interface-not-production-readiness",
   "backend": {
-    "sourceCommit": "b2a79c7f352eef865dc827bd22735a47c396c21a",
+    "sourceCommit": "db55c5835fe1c1e438ead66cb137d1c6fc6928fb",
     "apiGroup": "serving.maas.example",
     "operator": {
       "command": [
@@ -80,7 +80,7 @@
       "docs/maas17-r5-history.md": "55cac7cac9bd0699ebca3cc03bd24483bd090854174be4688457cf80726b87b9",
       "docs/mysql-release.md": "5d2e4944aa779febc082398bf759604fd447fead5a738022579dd709676c35db",
       "docs/mysql-verification.md": "000a58429425df972b3bff59c3535e9050ca7e4ae55cb52a8f527b8299a07e96",
-      "docs/product-fc1-tools-verification.md": "2ad9ae3980f8304542203cb0475b1731d42093d804439d85d7a5c8f694744898",
+      "docs/product-fc1-tools-verification.md": "4475323c704527a8f6d705dc6e543a8b24c033095147c1cd6da1c09a4b26e38f",
       "docs/product-management-and-offline.md": "33e8ad0c7134e44532a38df0601145ec67c883d047b6418cae82d59fed020717",
       "docs/product-migration-readiness.md": "b36326503ed25ca7a52f766d2c428819166e6a484238d4cc12b9167f72796a7b",
       "docs/product-offline-verification.md": "8e21119eadae27a32ec9c584efecb495540c5978c827ae48641c00614bff77fc",
@@ -426,12 +426,17 @@
       "test/controlled/maas20/fc1-tools/maas20-sql-signed-schema-failure.jsonl": "2eb84fff7132ecf2d0a440fc0ccaf67928b8b812a9c02d94e0e2c19230994e91",
       "test/controlled/maas20/fc1-tools/mysql-test-server.log": "8e34e2547babeadb21d7999ce750fc2475b8ca913889820387d0b8fc2833cf3d",
       "test/controlled/maas20/fc1-tools/product-service-mysql.jsonl": "60c7d32f30ebef7045fc63e536c8d332ec9e986ca4ad5a67ad451accd4fe76d0",
+      "test/controlled/maas20/fc1-tools/validate-traces.py": "44f1caf2bd92b013428b74fd35727ca44b7ddbc4281f6cecc7b71e45c3c74834",
+      "test/controlled/maas20/fc1-tools/wire-capture.jsonl": "696d1dcc1f6b55d25eeca54b2c7e76e3b9cb792e9758aa23a68eac72e6dde973",
       "test/controlled/maas20/product-offline/final-sql.jsonl": "a2a0d37fc3ab4c5f0e914bb294847a602cf6a649ed770e536e62603408e8b0d0",
       "test/controlled/maas20/product-offline/first-assertions-harness-exit2.jsonl": "f731ba36b2ed3e2344967c061c55602cc574f5280b48dfe78c5bb14b4e152eac",
       "test/controlled/maas20/product-offline/mysql-server.log": "3ac73ac7d8897ce27c027c2e40e6665c522425742d648305022970904e5f0806",
       "test/controlled/maas20/product-service/mysql-server.log": "5ecc18025208954bd44ea393d5e760a37e8610e3e02f857702d25bf1cd2b46fa",
       "test/controlled/maas20/product-service/product-final.jsonl": "f2966e1d9540c0faebb2267c9924e40c2a637926bd2aeecfa4f6577dffaa2ef7",
       "test/controlled/maas20/product-service/product-pre-fix.jsonl": "5cb9d01654b176c691606f4c13b7f2b73fe7d52a5d3b7789160313049173f0f5",
+      "test/controlled/maas20/fc1-tools/wire/complete.json": "70c23e906eb1164307b5d051b877ee7acd7b579868281b8f622419fcabf7ddb6",
+      "test/controlled/maas20/fc1-tools/wire/invalid_second_tool.json": "aa619a507348932eba7526bb3a046d409961d4029e530e6264cc4d32e68a8663",
+      "test/controlled/maas20/fc1-tools/wire/schema-validation.json": "1b5e031257e15c4a5a2072e2c738c36f66f88e18444c998e8dd7b01f009053d1",
       "scripts/tests/test_unified_sources.py": "9baa0c1b26691e7068e030ab10386a1bfa406ef794aa067150c85d7566d95735",
       "patches/higress/v2.2.5-maas-r1/0001-ext-auth-required-ticket-fail-closed.patch": "555da93be1fdcede71f989cc647689a199dbe00b8d6d5d5632fa3f88ca258be9",
       "patches/higress/v2.2.5-maas-r1/apply.py": "5a117ca56eb3e322416414e57a4d3b34ce1aa9bf90e7b9d86befa93c57b7c824",
@@ -481,7 +486,7 @@
       "internal/app/runtime.go": "bb9b977ad788b80fffd2e2f24702327f94400493c7ba2423d73e6bbc554fadad",
       "internal/app/runtime_test.go": "c5512a21ddb1181511106afd6eff765e5a8b91819c273c1ef216859669a95cb0",
       "internal/app/schema_readiness_test.go": "83ec77cefd8fcb82f1f6f13f7a96424f03558a7089570abfa46275f1b874a32d",
-      "internal/app/tools_loop_test.go": "b695bec69768455c2b4b98ab91876a8ee4b17418b7b7625db564c5d02bdc9a2d",
+      "internal/app/tools_loop_test.go": "3507bd4fc68900f584e57570fef77b465b29870e29d4a5efa6960f9fdaba0dcb",
       "internal/controlapi/history_http_test.go": "05b420317c4cda3a41abf9cafed41c5fe3cd51f1c6621c78612c4c8a39853d37",
       "internal/controlapi/http.go": "f5f034f116c823c0ff81e6ac2df83dd4e28abc380f242f81600e123a0babb5cd",
       "internal/controlapi/mysql_test.go": "eaf06fad59a457f9776e4b5acb8f00349bd13edfae9cabb3355f536c106dc7f7",
@@ -710,7 +715,7 @@
     }
   },
   "console": {
-    "sourceCommit": "b2a79c7f352eef865dc827bd22735a47c396c21a",
+    "sourceCommit": "db55c5835fe1c1e438ead66cb137d1c6fc6928fb",
     "build": "npm ci && npm run build",
     "output": "console/dist",
     "localBridge": "development-and-explicit-workbench-mode-only",
