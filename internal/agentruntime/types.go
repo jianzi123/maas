@@ -31,11 +31,12 @@ type Model struct {
 	Protocol string `json:"protocol"` // text-v1 or tools-v1; never inferred
 }
 type Part struct {
-	Type      string          `json:"type"`
-	Text      string          `json:"text,omitempty"`
-	CallID    string          `json:"call_id,omitempty"`
-	Name      string          `json:"name,omitempty"`
-	Arguments json.RawMessage `json:"arguments,omitempty"`
+	SourceCallID string          `json:"source_call_id,omitempty"`
+	Type         string          `json:"type"`
+	Text         string          `json:"text,omitempty"`
+	CallID       string          `json:"call_id,omitempty"`
+	Name         string          `json:"name,omitempty"`
+	Arguments    json.RawMessage `json:"arguments,omitempty"`
 }
 type Message struct {
 	ID       string    `json:"id"`

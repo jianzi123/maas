@@ -4,6 +4,7 @@ import (
 	"context"
 	"crypto/hmac"
 	"crypto/sha256"
+	"database/sql"
 	"encoding/base64"
 	"encoding/json"
 	"strconv"
@@ -17,6 +18,7 @@ import (
 )
 
 type Models struct {
+	DB     *sql.DB
 	Config Config
 	Core   *kernel.Store
 	Gate   kernel.ActiveGate
@@ -24,7 +26,11 @@ type Models struct {
 	relay  *kernel.Relay
 }
 
-func (m *Models) Open() error { return nil }
+func (m *Models) Open() error {
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+	return m.diagnosticReady(ctx)
+}
 func (m *Models) Close() {
 	m.mu.Lock()
 	defer m.mu.Unlock()
@@ -83,8 +89,12 @@ func (m *Models) Resolve(ctx context.Context, p a.Principal, alias, mode string)
 	if !p.Permissions["models.read"] {
 		return a.Model{}, a.ErrForbidden
 	}
-	if mode == "agent" || e.Protocol != "text-v1" {
+	if mode == "agent" && (e.Protocol != "tools-v1" || !toolsConfigured(e, profile)) {
 		return a.Model{}, a.NewFailure(422, "tools_protocol_unavailable")
+	}
+	modelProtocol := "text-v1"
+	if mode == "agent" {
+		modelProtocol = "tools-v1"
 	}
 	view, err := m.Core.AdminModels(ctx, m.Gate, map[string]bool{profile.Namespace: true})
 	if err != nil {
@@ -105,10 +115,13 @@ func (m *Models) Resolve(ctx context.Context, p a.Principal, alias, mode string)
 	if _, err = secret(e.PlatformKeyFile, 40, 128); err != nil {
 		return a.Model{}, a.NewFailure(503, "model_credentials_unavailable")
 	}
+	if err = m.diagnosticReady(ctx); err != nil {
+		return a.Model{}, err
+	}
 	if _, err = m.openRelay(); err != nil {
 		return a.Model{}, err
 	}
-	return a.Model{Alias: alias, Source: profile.SourceID, Revision: profile.ConfigRevision, Protocol: "text-v1"}, nil
+	return a.Model{Alias: alias, Source: profile.SourceID, Revision: profile.ConfigRevision, Protocol: modelProtocol}, nil
 }
 func (m *Models) Modes(ctx context.Context, p a.Principal) ([]map[string]any, error) {
 	out := []map[string]any{}
@@ -121,16 +134,20 @@ func (m *Models) Modes(ctx context.Context, p a.Principal) ([]map[string]any, er
 		if _, err = m.Resolve(ctx, p, e.Alias, "chat"); err == nil {
 			state = "approved"
 		}
-		out = append(out, map[string]any{"model_alias": e.Alias, "text_protocol": "text-v1", "tools_protocol": nil, "capability_revision": revision, "approval_state": state})
+		var tools any
+		if toolsConfigured(e, profile) && state == "approved" {
+			tools = "tools-v1"
+		}
+		out = append(out, map[string]any{"model_alias": e.Alias, "text_protocol": "text-v1", "tools_protocol": tools, "capability_revision": revision, "approval_state": state})
 	}
 	return out, nil
 }
 func (m *Models) Supports(ctx context.Context, model a.Model) error {
-	_, p, e := m.profile(ctx, model.Alias)
+	c, p, e := m.profile(ctx, model.Alias)
 	if e != nil {
 		return e
 	}
-	if model.Protocol != "text-v1" {
+	if model.Protocol != "text-v1" && (model.Protocol != "tools-v1" || !toolsConfigured(c, p)) {
 		return a.NewFailure(422, "tools_protocol_unavailable")
 	}
 	if model.Source != p.SourceID || model.Revision != p.ConfigRevision {
@@ -178,11 +195,17 @@ func (m *Models) Generate(ctx context.Context, req a.Request, emit func(string) 
 	return client.Generate(ctx, req, emit)
 }
 func (m *Models) prepare(ctx context.Context, req a.Request) (kernel.RelayCall, error) {
+	if err := m.diagnosticReady(ctx); err != nil {
+		return kernel.RelayCall{}, err
+	}
 	e, p, err := m.profile(ctx, req.Model.Alias)
 	if err != nil {
 		return kernel.RelayCall{}, err
 	}
-	if len(req.Tools) > 0 || req.Model.Protocol != "text-v1" {
+	if err := m.Supports(ctx, req.Model); err != nil {
+		return kernel.RelayCall{}, err
+	}
+	if len(req.Tools) > 0 && req.Model.Protocol != "tools-v1" {
 		return kernel.RelayCall{}, a.NewFailure(422, "tools_protocol_unavailable")
 	}
 	raw, err := secret(e.PlatformKeyFile, 40, 128)
@@ -212,6 +235,9 @@ func (m *Models) prepare(ctx context.Context, req a.Request) (kernel.RelayCall, 
 	}
 	messages := []map[string]string{}
 	for _, msg := range req.Messages {
+		if req.Model.Protocol == "tools-v1" {
+			break
+		}
 		if msg.Role != "user" && msg.Role != "assistant" {
 			return kernel.RelayCall{}, a.NewFailure(422, "text_context_unsupported")
 		}
@@ -224,11 +250,31 @@ func (m *Models) prepare(ctx context.Context, req a.Request) (kernel.RelayCall, 
 		}
 		messages = append(messages, map[string]string{"role": msg.Role, "content": text})
 	}
-	body, err := json.Marshal(map[string]any{"model": p.UpstreamModel, "messages": messages, "stream": true, "max_tokens": p.OutputUpper, "stream_options": map[string]any{"include_usage": true}})
+	requestBody := map[string]any{"model": p.UpstreamModel, "messages": messages, "stream": true, "max_tokens": p.OutputUpper, "stream_options": map[string]any{"include_usage": true}}
+	if req.Model.Protocol == "tools-v1" {
+		wire, e := kernelmodel.ToolMessages(req.Messages)
+		if e != nil {
+			return kernel.RelayCall{}, e
+		}
+		definitions, e := kernelmodel.ToolDefinitions(req.Tools)
+		if e != nil {
+			return kernel.RelayCall{}, e
+		}
+		requestBody["messages"] = wire
+		if len(definitions) > 0 {
+			requestBody["tools"] = definitions
+		}
+		requestBody["thinking"] = map[string]string{"type": "disabled"}
+	}
+	body, err := json.Marshal(requestBody)
 	if err != nil {
 		return kernel.RelayCall{}, err
 	}
-	body, err = protocol.Canonical(body)
+	if req.Model.Protocol == "tools-v1" {
+		body, err = protocol.CanonicalToolJSON(body)
+	} else {
+		body, err = protocol.Canonical(body)
+	}
 	if err != nil || len(body) > m.Config.Agent.InputBytes {
 		return kernel.RelayCall{}, a.ErrInvalid
 	}
@@ -280,7 +326,11 @@ func (m *Models) prepare(ctx context.Context, req a.Request) (kernel.RelayCall, 
 		return kernel.RelayCall{}, a.ErrInvalid
 	}
 	in := kernel.Input{Purpose: "serving", RequestID: req.RequestID, KeyID: keyID, KeyEpoch: epoch, Owner: g.Owner, TicketHash: verified.Digest, Profile: p, Plan: plan, Received: now, Issued: now, Expires: expires, Deadline: deadline}
-	return kernel.RelayCall{Input: in, Body: body, Ticket: ticket, PlanHeader: encoded, Stream: true}, nil
+	return kernel.RelayCall{Input: in, Body: body, Ticket: ticket, PlanHeader: encoded, Stream: true, Protocol: req.Model.Protocol}, nil
+}
+
+func toolsConfigured(c ModelConfig, p kernel.Profile) bool {
+	return c.Protocol == "tools-v1" && c.Adapter == "deepseek-chat-tools/1" && c.Mode == "non-thinking" && p.SupportsTools()
 }
 func (m *Models) record(ctx context.Context, id string) (map[string]any, error) {
 	v, e := m.Core.LookupRequest(ctx, id)

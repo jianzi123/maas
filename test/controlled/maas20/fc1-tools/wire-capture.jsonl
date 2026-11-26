@@ -1,0 +1,28 @@
+{"Time":"2026-11-26T05:44:49.592820479-08:00","Action":"start","Package":"github.com/jianzi123/maas/internal/app"}
+{"Time":"2026-11-26T05:44:49.883876447-08:00","Action":"run","Package":"github.com/jianzi123/maas/internal/app","Test":"TestProductToolsProtectedLoopAndWholeBatch"}
+{"Time":"2026-11-26T05:44:49.883943841-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/app","Test":"TestProductToolsProtectedLoopAndWholeBatch","Output":"=== RUN   TestProductToolsProtectedLoopAndWholeBatch\n"}
+{"Time":"2026-11-26T05:44:49.884007558-08:00","Action":"run","Package":"github.com/jianzi123/maas/internal/app","Test":"TestProductToolsProtectedLoopAndWholeBatch/complete"}
+{"Time":"2026-11-26T05:44:49.884015313-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/app","Test":"TestProductToolsProtectedLoopAndWholeBatch/complete","Output":"=== RUN   TestProductToolsProtectedLoopAndWholeBatch/complete\n"}
+{"Time":"2026-11-26T05:44:54.066012021-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/app","Test":"TestProductToolsProtectedLoopAndWholeBatch/complete","Output":"    tools_loop_test.go:310: saved controlled trace: artifacts/fc1-wire/complete.json (no login/cookie/CSRF captured)\n"}
+{"Time":"2026-11-26T05:44:54.767224816-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/app","Test":"TestProductToolsProtectedLoopAndWholeBatch/complete","Output":"--- PASS: TestProductToolsProtectedLoopAndWholeBatch/complete (4.88s)\n"}
+{"Time":"2026-11-26T05:44:54.76729223-08:00","Action":"pass","Package":"github.com/jianzi123/maas/internal/app","Test":"TestProductToolsProtectedLoopAndWholeBatch/complete","Elapsed":4.88}
+{"Time":"2026-11-26T05:44:54.768780489-08:00","Action":"run","Package":"github.com/jianzi123/maas/internal/app","Test":"TestProductToolsProtectedLoopAndWholeBatch/invalid_second_tool"}
+{"Time":"2026-11-26T05:44:54.768795649-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/app","Test":"TestProductToolsProtectedLoopAndWholeBatch/invalid_second_tool","Output":"=== RUN   TestProductToolsProtectedLoopAndWholeBatch/invalid_second_tool\n"}
+{"Time":"2026-11-26T05:44:57.719019997-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/app","Test":"TestProductToolsProtectedLoopAndWholeBatch/invalid_second_tool","Output":"    tools_loop_test.go:310: saved controlled trace: artifacts/fc1-wire/invalid_second_tool.json (no login/cookie/CSRF captured)\n"}
+{"Time":"2026-11-26T05:44:58.346503016-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/app","Test":"TestProductToolsProtectedLoopAndWholeBatch/invalid_second_tool","Output":"--- PASS: TestProductToolsProtectedLoopAndWholeBatch/invalid_second_tool (3.58s)\n"}
+{"Time":"2026-11-26T05:44:58.346563618-08:00","Action":"pass","Package":"github.com/jianzi123/maas/internal/app","Test":"TestProductToolsProtectedLoopAndWholeBatch/invalid_second_tool","Elapsed":3.58}
+{"Time":"2026-11-26T05:44:58.346578633-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/app","Test":"TestProductToolsProtectedLoopAndWholeBatch","Output":"--- PASS: TestProductToolsProtectedLoopAndWholeBatch (8.46s)\n"}
+{"Time":"2026-11-26T05:44:58.346584698-08:00","Action":"pass","Package":"github.com/jianzi123/maas/internal/app","Test":"TestProductToolsProtectedLoopAndWholeBatch","Elapsed":8.46}
+{"Time":"2026-11-26T05:44:58.34658982-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/app","Output":"PASS\n"}
+{"Time":"2026-11-26T05:44:58.355956634-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/app","Output":"ok  \tgithub.com/jianzi123/maas/internal/app\t8.764s\n"}
+{"Time":"2026-11-26T05:44:58.359030516-08:00","Action":"pass","Package":"github.com/jianzi123/maas/internal/app","Elapsed":8.768}
+{"Time":"2026-11-26T05:45:13.498780634-08:00","Action":"start","Package":"github.com/jianzi123/maas/internal/agentruntime"}
+{"Time":"2026-11-26T05:45:13.843547885-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/agentruntime","Output":"testing: warning: no tests to run\n"}
+{"Time":"2026-11-26T05:45:13.843617653-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/agentruntime","Output":"PASS\n"}
+{"Time":"2026-11-26T05:45:13.861437473-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/agentruntime","Output":"ok  \tgithub.com/jianzi123/maas/internal/agentruntime\t0.363s [no tests to run]\n"}
+{"Time":"2026-11-26T05:45:13.861519716-08:00","Action":"pass","Package":"github.com/jianzi123/maas/internal/agentruntime","Elapsed":0.363}
+{"Time":"2026-11-26T05:45:30.336838364-08:00","Action":"start","Package":"github.com/jianzi123/maas/internal/kernel"}
+{"Time":"2026-11-26T05:45:30.600267681-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/kernel","Output":"testing: warning: no tests to run\n"}
+{"Time":"2026-11-26T05:45:30.600365905-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/kernel","Output":"PASS\n"}
+{"Time":"2026-11-26T05:45:30.607012648-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/kernel","Output":"ok  \tgithub.com/jianzi123/maas/internal/kernel\t0.270s [no tests to run]\n"}
+{"Time":"2026-11-26T05:45:30.607080442-08:00","Action":"pass","Package":"github.com/jianzi123/maas/internal/kernel","Elapsed":0.27}

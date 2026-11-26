@@ -20,6 +20,7 @@
     "cursor_key_file": "/run/secrets/maas_cursor_key"
   },
   "ledger": {
+	"diagnostics": {"max_records":64,"max_bytes":262144,"retention_policy_ref":"choose-explicit-installation-retention-policy"},
     "rate_revision": "choose-explicit-installation-rate-v1",
     "initial_rate_epoch": 1,
     "window_ms": 1000,

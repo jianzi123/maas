@@ -1,0 +1,57 @@
+{"Time":"2026-11-26T05:17:10.237725056-08:00","Action":"start","Package":"github.com/jianzi123/maas/internal/app"}
+{"Time":"2026-11-26T05:17:10.492953188-08:00","Action":"run","Package":"github.com/jianzi123/maas/internal/app","Test":"TestProductToolsProtectedLoopAndWholeBatch"}
+{"Time":"2026-11-26T05:17:10.493008529-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/app","Test":"TestProductToolsProtectedLoopAndWholeBatch","Output":"=== RUN   TestProductToolsProtectedLoopAndWholeBatch\n"}
+{"Time":"2026-11-26T05:17:10.493050784-08:00","Action":"run","Package":"github.com/jianzi123/maas/internal/app","Test":"TestProductToolsProtectedLoopAndWholeBatch/complete"}
+{"Time":"2026-11-26T05:17:10.4930542-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/app","Test":"TestProductToolsProtectedLoopAndWholeBatch/complete","Output":"=== RUN   TestProductToolsProtectedLoopAndWholeBatch/complete\n"}
+{"Time":"2026-11-26T05:17:13.801297261-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/app","Test":"TestProductToolsProtectedLoopAndWholeBatch/complete","Output":"--- PASS: TestProductToolsProtectedLoopAndWholeBatch/complete (3.31s)\n"}
+{"Time":"2026-11-26T05:17:13.801353542-08:00","Action":"pass","Package":"github.com/jianzi123/maas/internal/app","Test":"TestProductToolsProtectedLoopAndWholeBatch/complete","Elapsed":3.31}
+{"Time":"2026-11-26T05:17:13.802615567-08:00","Action":"run","Package":"github.com/jianzi123/maas/internal/app","Test":"TestProductToolsProtectedLoopAndWholeBatch/invalid_second_tool"}
+{"Time":"2026-11-26T05:17:13.802630196-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/app","Test":"TestProductToolsProtectedLoopAndWholeBatch/invalid_second_tool","Output":"=== RUN   TestProductToolsProtectedLoopAndWholeBatch/invalid_second_tool\n"}
+{"Time":"2026-11-26T05:17:16.547135806-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/app","Test":"TestProductToolsProtectedLoopAndWholeBatch/invalid_second_tool","Output":"--- PASS: TestProductToolsProtectedLoopAndWholeBatch/invalid_second_tool (2.75s)\n"}
+{"Time":"2026-11-26T05:17:16.547200735-08:00","Action":"pass","Package":"github.com/jianzi123/maas/internal/app","Test":"TestProductToolsProtectedLoopAndWholeBatch/invalid_second_tool","Elapsed":2.75}
+{"Time":"2026-11-26T05:17:16.547217508-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/app","Test":"TestProductToolsProtectedLoopAndWholeBatch","Output":"--- PASS: TestProductToolsProtectedLoopAndWholeBatch (6.06s)\n"}
+{"Time":"2026-11-26T05:17:16.547223239-08:00","Action":"pass","Package":"github.com/jianzi123/maas/internal/app","Test":"TestProductToolsProtectedLoopAndWholeBatch","Elapsed":6.06}
+{"Time":"2026-11-26T05:17:16.547235454-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/app","Output":"PASS\n"}
+{"Time":"2026-11-26T05:17:16.554884787-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/app","Output":"ok  \tgithub.com/jianzi123/maas/internal/app\t6.316s\n"}
+{"Time":"2026-11-26T05:17:16.557529763-08:00","Action":"pass","Package":"github.com/jianzi123/maas/internal/app","Elapsed":6.32}
+{"Time":"2026-11-26T05:17:30.71069419-08:00","Action":"start","Package":"github.com/jianzi123/maas/internal/agentruntime"}
+{"Time":"2026-11-26T05:17:30.962594204-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/agentruntime","Output":"testing: warning: no tests to run\n"}
+{"Time":"2026-11-26T05:17:30.962714575-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/agentruntime","Output":"PASS\n"}
+{"Time":"2026-11-26T05:17:30.970381034-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/agentruntime","Output":"ok  \tgithub.com/jianzi123/maas/internal/agentruntime\t0.260s [no tests to run]\n"}
+{"Time":"2026-11-26T05:17:30.970438609-08:00","Action":"pass","Package":"github.com/jianzi123/maas/internal/agentruntime","Elapsed":0.26}
+{"Time":"2026-11-26T05:17:48.177938301-08:00","Action":"start","Package":"github.com/jianzi123/maas/internal/kernel"}
+{"Time":"2026-11-26T05:17:48.361788233-08:00","Action":"run","Package":"github.com/jianzi123/maas/internal/kernel","Test":"TestMySQLToolsRelayOriginalLedger"}
+{"Time":"2026-11-26T05:17:48.361838161-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/kernel","Test":"TestMySQLToolsRelayOriginalLedger","Output":"=== RUN   TestMySQLToolsRelayOriginalLedger\n"}
+{"Time":"2026-11-26T05:17:48.361872448-08:00","Action":"run","Package":"github.com/jianzi123/maas/internal/kernel","Test":"TestMySQLToolsRelayOriginalLedger/complete"}
+{"Time":"2026-11-26T05:17:48.361876066-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/kernel","Test":"TestMySQLToolsRelayOriginalLedger/complete","Output":"=== RUN   TestMySQLToolsRelayOriginalLedger/complete\n"}
+{"Time":"2026-11-26T05:17:50.11723839-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/kernel","Test":"TestMySQLToolsRelayOriginalLedger/complete","Output":"--- PASS: TestMySQLToolsRelayOriginalLedger/complete (1.76s)\n"}
+{"Time":"2026-11-26T05:17:50.117305571-08:00","Action":"pass","Package":"github.com/jianzi123/maas/internal/kernel","Test":"TestMySQLToolsRelayOriginalLedger/complete","Elapsed":1.76}
+{"Time":"2026-11-26T05:17:50.117325531-08:00","Action":"run","Package":"github.com/jianzi123/maas/internal/kernel","Test":"TestMySQLToolsRelayOriginalLedger/invalid_arguments"}
+{"Time":"2026-11-26T05:17:50.117329799-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/kernel","Test":"TestMySQLToolsRelayOriginalLedger/invalid_arguments","Output":"=== RUN   TestMySQLToolsRelayOriginalLedger/invalid_arguments\n"}
+{"Time":"2026-11-26T05:17:52.040722576-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/kernel","Test":"TestMySQLToolsRelayOriginalLedger/invalid_arguments","Output":"--- PASS: TestMySQLToolsRelayOriginalLedger/invalid_arguments (1.92s)\n"}
+{"Time":"2026-11-26T05:17:52.04077479-08:00","Action":"pass","Package":"github.com/jianzi123/maas/internal/kernel","Test":"TestMySQLToolsRelayOriginalLedger/invalid_arguments","Elapsed":1.92}
+{"Time":"2026-11-26T05:17:52.04078466-08:00","Action":"run","Package":"github.com/jianzi123/maas/internal/kernel","Test":"TestMySQLToolsRelayOriginalLedger/missing_usage"}
+{"Time":"2026-11-26T05:17:52.040788367-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/kernel","Test":"TestMySQLToolsRelayOriginalLedger/missing_usage","Output":"=== RUN   TestMySQLToolsRelayOriginalLedger/missing_usage\n"}
+{"Time":"2026-11-26T05:17:53.745279709-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/kernel","Test":"TestMySQLToolsRelayOriginalLedger/missing_usage","Output":"--- PASS: TestMySQLToolsRelayOriginalLedger/missing_usage (1.70s)\n"}
+{"Time":"2026-11-26T05:17:53.745331963-08:00","Action":"pass","Package":"github.com/jianzi123/maas/internal/kernel","Test":"TestMySQLToolsRelayOriginalLedger/missing_usage","Elapsed":1.7}
+{"Time":"2026-11-26T05:17:53.745341542-08:00","Action":"run","Package":"github.com/jianzi123/maas/internal/kernel","Test":"TestMySQLToolsRelayOriginalLedger/partial_cache"}
+{"Time":"2026-11-26T05:17:53.745345139-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/kernel","Test":"TestMySQLToolsRelayOriginalLedger/partial_cache","Output":"=== RUN   TestMySQLToolsRelayOriginalLedger/partial_cache\n"}
+{"Time":"2026-11-26T05:17:55.5909653-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/kernel","Test":"TestMySQLToolsRelayOriginalLedger/partial_cache","Output":"--- PASS: TestMySQLToolsRelayOriginalLedger/partial_cache (1.85s)\n"}
+{"Time":"2026-11-26T05:17:55.591029858-08:00","Action":"pass","Package":"github.com/jianzi123/maas/internal/kernel","Test":"TestMySQLToolsRelayOriginalLedger/partial_cache","Elapsed":1.85}
+{"Time":"2026-11-26T05:17:55.591044638-08:00","Action":"run","Package":"github.com/jianzi123/maas/internal/kernel","Test":"TestMySQLToolsRelayOriginalLedger/eof"}
+{"Time":"2026-11-26T05:17:55.591048355-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/kernel","Test":"TestMySQLToolsRelayOriginalLedger/eof","Output":"=== RUN   TestMySQLToolsRelayOriginalLedger/eof\n"}
+{"Time":"2026-11-26T05:17:57.407476209-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/kernel","Test":"TestMySQLToolsRelayOriginalLedger/eof","Output":"--- PASS: TestMySQLToolsRelayOriginalLedger/eof (1.82s)\n"}
+{"Time":"2026-11-26T05:17:57.407518513-08:00","Action":"pass","Package":"github.com/jianzi123/maas/internal/kernel","Test":"TestMySQLToolsRelayOriginalLedger/eof","Elapsed":1.82}
+{"Time":"2026-11-26T05:17:57.407530587-08:00","Action":"run","Package":"github.com/jianzi123/maas/internal/kernel","Test":"TestMySQLToolsRelayOriginalLedger/source_error"}
+{"Time":"2026-11-26T05:17:57.407534345-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/kernel","Test":"TestMySQLToolsRelayOriginalLedger/source_error","Output":"=== RUN   TestMySQLToolsRelayOriginalLedger/source_error\n"}
+{"Time":"2026-11-26T05:17:59.150413386-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/kernel","Test":"TestMySQLToolsRelayOriginalLedger/source_error","Output":"--- PASS: TestMySQLToolsRelayOriginalLedger/source_error (1.74s)\n"}
+{"Time":"2026-11-26T05:17:59.150466853-08:00","Action":"pass","Package":"github.com/jianzi123/maas/internal/kernel","Test":"TestMySQLToolsRelayOriginalLedger/source_error","Elapsed":1.74}
+{"Time":"2026-11-26T05:17:59.150480951-08:00","Action":"run","Package":"github.com/jianzi123/maas/internal/kernel","Test":"TestMySQLToolsRelayOriginalLedger/cancel"}
+{"Time":"2026-11-26T05:17:59.150485209-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/kernel","Test":"TestMySQLToolsRelayOriginalLedger/cancel","Output":"=== RUN   TestMySQLToolsRelayOriginalLedger/cancel\n"}
+{"Time":"2026-11-26T05:18:01.024098651-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/kernel","Test":"TestMySQLToolsRelayOriginalLedger/cancel","Output":"--- PASS: TestMySQLToolsRelayOriginalLedger/cancel (1.87s)\n"}
+{"Time":"2026-11-26T05:18:01.024165764-08:00","Action":"pass","Package":"github.com/jianzi123/maas/internal/kernel","Test":"TestMySQLToolsRelayOriginalLedger/cancel","Elapsed":1.87}
+{"Time":"2026-11-26T05:18:01.024182016-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/kernel","Test":"TestMySQLToolsRelayOriginalLedger","Output":"--- PASS: TestMySQLToolsRelayOriginalLedger (12.66s)\n"}
+{"Time":"2026-11-26T05:18:01.024191255-08:00","Action":"pass","Package":"github.com/jianzi123/maas/internal/kernel","Test":"TestMySQLToolsRelayOriginalLedger","Elapsed":12.66}
+{"Time":"2026-11-26T05:18:01.024200794-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/kernel","Output":"PASS\n"}
+{"Time":"2026-11-26T05:18:01.030650667-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/kernel","Output":"ok  \tgithub.com/jianzi123/maas/internal/kernel\t12.855s\n"}
+{"Time":"2026-11-26T05:18:01.030718291-08:00","Action":"pass","Package":"github.com/jianzi123/maas/internal/kernel","Elapsed":12.855}

@@ -54,7 +54,7 @@ func compile(raw []byte) (*jsonschema.Schema, error) {
 	return c.Compile("inmemory://tool.json")
 }
 func validate(t Tool, b []byte) error {
-	if _, e := protocol.Canonical(b); e != nil {
+	if _, e := protocol.CanonicalToolJSON(b); e != nil {
 		return ErrInvalid
 	}
 	s, e := compile(t.Spec().Schema)

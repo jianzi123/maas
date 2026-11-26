@@ -1,0 +1,16 @@
+{"Time":"2026-11-26T05:20:26.4839055-08:00","Action":"start","Package":"github.com/jianzi123/maas/internal/protocol"}
+{"Time":"2026-11-26T05:20:27.3065687-08:00","Action":"run","Package":"github.com/jianzi123/maas/internal/protocol","Test":"TestCanonicalRejectsAmbiguity"}
+{"Time":"2026-11-26T05:20:27.3070618-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/protocol","Test":"TestCanonicalRejectsAmbiguity","Output":"=== RUN   TestCanonicalRejectsAmbiguity\n"}
+{"Time":"2026-11-26T05:20:27.3086683-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/protocol","Test":"TestCanonicalRejectsAmbiguity","Output":"--- PASS: TestCanonicalRejectsAmbiguity (0.00s)\n"}
+{"Time":"2026-11-26T05:20:27.3086683-08:00","Action":"pass","Package":"github.com/jianzi123/maas/internal/protocol","Test":"TestCanonicalRejectsAmbiguity","Elapsed":0}
+{"Time":"2026-11-26T05:20:27.3092203-08:00","Action":"run","Package":"github.com/jianzi123/maas/internal/protocol","Test":"TestTicketV3StrictPurposeAndPlan"}
+{"Time":"2026-11-26T05:20:27.3092203-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/protocol","Test":"TestTicketV3StrictPurposeAndPlan","Output":"=== RUN   TestTicketV3StrictPurposeAndPlan\n"}
+{"Time":"2026-11-26T05:20:27.3092203-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/protocol","Test":"TestTicketV3StrictPurposeAndPlan","Output":"--- PASS: TestTicketV3StrictPurposeAndPlan (0.00s)\n"}
+{"Time":"2026-11-26T05:20:27.3092203-08:00","Action":"pass","Package":"github.com/jianzi123/maas/internal/protocol","Test":"TestTicketV3StrictPurposeAndPlan","Elapsed":0}
+{"Time":"2026-11-26T05:20:27.3092203-08:00","Action":"run","Package":"github.com/jianzi123/maas/internal/protocol","Test":"TestToolJSONSignedDomainKeepsFinancialDomainStrict"}
+{"Time":"2026-11-26T05:20:27.3092203-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/protocol","Test":"TestToolJSONSignedDomainKeepsFinancialDomainStrict","Output":"=== RUN   TestToolJSONSignedDomainKeepsFinancialDomainStrict\n"}
+{"Time":"2026-11-26T05:20:27.3092203-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/protocol","Test":"TestToolJSONSignedDomainKeepsFinancialDomainStrict","Output":"--- PASS: TestToolJSONSignedDomainKeepsFinancialDomainStrict (0.00s)\n"}
+{"Time":"2026-11-26T05:20:27.3092203-08:00","Action":"pass","Package":"github.com/jianzi123/maas/internal/protocol","Test":"TestToolJSONSignedDomainKeepsFinancialDomainStrict","Elapsed":0}
+{"Time":"2026-11-26T05:20:27.3092203-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/protocol","Output":"PASS\n"}
+{"Time":"2026-11-26T05:20:27.3143174-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/protocol","Output":"ok  \tgithub.com/jianzi123/maas/internal/protocol\t0.829s\n"}
+{"Time":"2026-11-26T05:20:27.3148251-08:00","Action":"pass","Package":"github.com/jianzi123/maas/internal/protocol","Elapsed":0.831}

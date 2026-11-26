@@ -8,6 +8,7 @@ import (
 	"errors"
 	"github.com/google/uuid"
 	"github.com/jianzi123/maas/internal/protocol"
+	"github.com/jianzi123/maas/internal/toolwire"
 	"io"
 	"net/http"
 	"time"
@@ -60,6 +61,12 @@ func (d *relayDiagnostics) append(kind string, u *Usage, cause string) error {
 // until the one successful terminal is confirmed; it is never a public midstream
 // accounting claim. No redirect, retry, fallback or direct supplier path exists.
 func (r *Relay) Forward(ctx context.Context, w http.ResponseWriter, call RelayCall) (returnErr error) {
+	if call.Protocol != "" && call.Protocol != "text-v1" && call.Protocol != "tools-v1" {
+		return ErrConflict
+	}
+	if call.Protocol == "tools-v1" && (!call.Stream || !call.Input.Profile.SupportsTools()) {
+		return ErrConflict
+	}
 	if r == nil || r.core == nil || r.client == nil || r.endpoint == "" || len(call.Body) == 0 || int64(len(call.Body)) > r.maxBytes || !validUUID(call.Input.RequestID) {
 		return ErrUnavailable
 	}
@@ -317,6 +324,7 @@ func (r *Relay) Forward(ctx context.Context, w http.ResponseWriter, call RelayCa
 	authority := usageAuthority{policy: call.Input.Profile.UsagePolicy}
 	var first *int64
 	seenFinish, seenDone := false, false
+	tools := &toolwire.Stream{}
 	for {
 		data, err := reader.Next()
 		receivedAt := time.Now() // before receipt DB work or downstream Write/Flush
@@ -353,6 +361,17 @@ func (r *Relay) Forward(ctx context.Context, w http.ResponseWriter, call RelayCa
 			seenDone = true
 			continue
 		}
+		if call.Protocol == "tools-v1" {
+			// Reject duplicate keys before any alias mapping can erase them.
+			canonical, e := protocol.Canonical(data)
+			if e != nil {
+				return abort("parse_invalid", "failed", "not_provided", "upstream_protocol_error", first)
+			}
+			data, e = toolwire.NormalizeUsage(canonical)
+			if e != nil {
+				return abort("parse_invalid", "failed", "not_provided", "upstream_protocol_error", first)
+			}
+		}
 		u, ok, parseErr := parseUsage(data)
 		if parseErr != nil {
 			cancel()
@@ -367,7 +386,16 @@ func (r *Relay) Forward(ctx context.Context, w http.ResponseWriter, call RelayCa
 				return abort("usage_conflict", "failed", "not_provided", "upstream_protocol_error", first)
 			}
 		}
-		out, finished, err := normalizeChunk(data, call.Input)
+		var out map[string]any
+		var finished bool
+		if call.Protocol == "tools-v1" {
+			var choices []any
+			choices, finished, err = tools.Push(data, call.Input.Profile.UpstreamModel)
+			out = publicRoot(call.Input, true)
+			out["choices"] = choices
+		} else {
+			out, finished, err = normalizeChunk(data, call.Input)
+		}
 		if err != nil {
 			cancel()
 			return abort("parse_invalid", "failed", "not_provided", "upstream_protocol_error", first)
