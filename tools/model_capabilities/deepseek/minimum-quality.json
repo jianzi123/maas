@@ -1,0 +1,28 @@
+{
+  "version": "0.7",
+  "synthetic": true,
+  "approved_real_sample_count": null,
+  "approved_real_total_tokens": null,
+  "approved_real_spend_atomic": null,
+  "quality_threshold_approval_ref": null,
+  "actual_model_scores": null,
+  "cases": [
+    {
+      "id": "Q01",
+      "prompt": "计算17乘23，只输出结果。",
+      "gold": "391"
+    },
+    {
+      "id": "Q02",
+      "prompt": "提取合成订单编号A-17和数量3，输出JSON字段order_id和quantity。",
+      "gold": "{\"order_id\":\"A-17\",\"quantity\":3}"
+    },
+    {
+      "id": "Q06",
+      "prompt": "原样复制：猫🙂GPU-7",
+      "gold": "猫🙂GPU-7"
+    }
+  ],
+  "real_entry": "same platform Go->Higress path only, original request_id/usage/terminal evidence required",
+  "tools_are_not_real_call_runners": true
+}

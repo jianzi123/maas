@@ -1,0 +1,516 @@
+{
+  "version": "0.7",
+  "scope": "controlled source shape samples only",
+  "cases": [
+    {
+      "id": "DS01_normal",
+      "synthetic": true,
+      "mode": "non-thinking",
+      "binding": {
+        "request_id": "00000000-0000-4000-8000-000000000100",
+        "publication_id": "00000000-0000-4000-8000-000000000011",
+        "upstream_id": "ds-synthetic-1",
+        "upstream_model": "deepseek-flash",
+        "profile_revision": "controlled-deepseek-0.7"
+      },
+      "response": {
+        "http_status": 200,
+        "content_type": "text/event-stream",
+        "wire": "data: {\"id\": \"ds-synthetic-1\", \"object\": \"chat.completion.chunk\", \"created\": 1794787200, \"model\": \"deepseek-flash\", \"system_fingerprint\": \"synthetic-only\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \"391\"}, \"finish_reason\": null}]}\r\n\r\ndata: {\"id\": \"ds-synthetic-1\", \"object\": \"chat.completion.chunk\", \"created\": 1794787200, \"model\": \"deepseek-flash\", \"system_fingerprint\": \"synthetic-only\", \"choices\": [{\"index\": 0, \"delta\": {}, \"finish_reason\": \"stop\"}], \"usage\": {\"prompt_tokens\": 12, \"completion_tokens\": 7, \"total_tokens\": 19, \"prompt_cache_hit_tokens\": 4, \"prompt_cache_miss_tokens\": 8, \"prompt_tokens_details\": {\"cached_tokens\": 4}, \"completion_tokens_details\": {\"reasoning_tokens\": 0}}}\r\n\r\ndata: [DONE]\r\n\r\n",
+        "kind": "stream",
+        "transport_end": "clean"
+      },
+      "fixture_timing_ms": null,
+      "expected": "final_candidate",
+      "actual_provider_run": false
+    },
+    {
+      "id": "DS02_heartbeat_null",
+      "synthetic": true,
+      "mode": "non-thinking",
+      "binding": {
+        "request_id": "00000000-0000-4000-8000-000000000100",
+        "publication_id": "00000000-0000-4000-8000-000000000011",
+        "upstream_id": "ds-synthetic-1",
+        "upstream_model": "deepseek-flash",
+        "profile_revision": "controlled-deepseek-0.7"
+      },
+      "response": {
+        "http_status": 200,
+        "content_type": "text/event-stream",
+        "wire": ": keep-alive\r\n\r\ndata: {\"id\": \"ds-synthetic-1\", \"object\": \"chat.completion.chunk\", \"created\": 1794787200, \"model\": \"deepseek-flash\", \"system_fingerprint\": \"synthetic-only\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \"猫🙂\"}, \"finish_reason\": null}], \"usage\": null}\r\n\r\n: keep-alive\r\n\r\ndata: {\"id\": \"ds-synthetic-1\", \"object\": \"chat.completion.chunk\", \"created\": 1794787200, \"model\": \"deepseek-flash\", \"system_fingerprint\": \"synthetic-only\", \"choices\": [{\"index\": 0, \"delta\": {}, \"finish_reason\": \"stop\"}], \"usage\": {\"prompt_tokens\": 12, \"completion_tokens\": 7, \"total_tokens\": 19, \"prompt_cache_hit_tokens\": 4, \"prompt_cache_miss_tokens\": 8, \"prompt_tokens_details\": {\"cached_tokens\": 4}, \"completion_tokens_details\": {\"reasoning_tokens\": 0}}}\r\n\r\ndata: [DONE]\r\n\r\n",
+        "kind": "stream",
+        "transport_end": "clean"
+      },
+      "fixture_timing_ms": null,
+      "expected": "final_candidate",
+      "actual_provider_run": false
+    },
+    {
+      "id": "DS03_truncated",
+      "synthetic": true,
+      "mode": "non-thinking",
+      "binding": {
+        "request_id": "00000000-0000-4000-8000-000000000100",
+        "publication_id": "00000000-0000-4000-8000-000000000011",
+        "upstream_id": "ds-synthetic-1",
+        "upstream_model": "deepseek-flash",
+        "profile_revision": "controlled-deepseek-0.7"
+      },
+      "response": {
+        "http_status": 200,
+        "content_type": "text/event-stream",
+        "wire": "data: {\"id\": \"ds-synthetic-1\", \"object\": \"chat.completion.chunk\", \"created\": 1794787200, \"model\": \"deepseek-flash\", \"system_fingerprint\": \"synthetic-only\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \"391\"}, \"finish_reason\": null}]}\r\n\r\ndata: {\"id\": \"ds-synthetic-1\", \"object\": \"chat.completion.chunk\", \"created\": 1794787200, \"model\": \"deepseek-flash\", \"system_fingerprint\": \"synthetic-only\", \"choices\": [{\"index\": 0, \"delta\": {}, \"finish_reason\": \"length\"}], \"usage\": {\"prompt_tokens\": 12, \"completion_tokens\": 7, \"total_tokens\": 19, \"prompt_cache_hit_tokens\": 4, \"prompt_cache_miss_tokens\": 8, \"prompt_tokens_details\": {\"cached_tokens\": 4}, \"completion_tokens_details\": {\"reasoning_tokens\": 0}}}\r\n\r\ndata: [DONE]\r\n\r\n",
+        "kind": "stream",
+        "transport_end": "clean"
+      },
+      "fixture_timing_ms": null,
+      "expected": "final_candidate_quality_truncated",
+      "actual_provider_run": false
+    },
+    {
+      "id": "DS04_missing_usage",
+      "synthetic": true,
+      "mode": "non-thinking",
+      "binding": {
+        "request_id": "00000000-0000-4000-8000-000000000100",
+        "publication_id": "00000000-0000-4000-8000-000000000011",
+        "upstream_id": "ds-synthetic-1",
+        "upstream_model": "deepseek-flash",
+        "profile_revision": "controlled-deepseek-0.7"
+      },
+      "response": {
+        "http_status": 200,
+        "content_type": "text/event-stream",
+        "wire": "data: {\"id\": \"ds-synthetic-1\", \"object\": \"chat.completion.chunk\", \"created\": 1794787200, \"model\": \"deepseek-flash\", \"system_fingerprint\": \"synthetic-only\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \"391\"}, \"finish_reason\": null}]}\r\n\r\ndata: {\"id\": \"ds-synthetic-1\", \"object\": \"chat.completion.chunk\", \"created\": 1794787200, \"model\": \"deepseek-flash\", \"system_fingerprint\": \"synthetic-only\", \"choices\": [{\"index\": 0, \"delta\": {}, \"finish_reason\": \"stop\"}]}\r\n\r\ndata: [DONE]\r\n\r\n",
+        "kind": "stream",
+        "transport_end": "clean"
+      },
+      "fixture_timing_ms": null,
+      "expected": "usage_unavailable",
+      "actual_provider_run": false
+    },
+    {
+      "id": "DS05_progress_not_final",
+      "synthetic": true,
+      "mode": "non-thinking",
+      "binding": {
+        "request_id": "00000000-0000-4000-8000-000000000100",
+        "publication_id": "00000000-0000-4000-8000-000000000011",
+        "upstream_id": "ds-synthetic-1",
+        "upstream_model": "deepseek-flash",
+        "profile_revision": "controlled-deepseek-0.7"
+      },
+      "response": {
+        "http_status": 200,
+        "content_type": "text/event-stream",
+        "wire": "data: {\"id\": \"ds-synthetic-1\", \"object\": \"chat.completion.chunk\", \"created\": 1794787200, \"model\": \"deepseek-flash\", \"system_fingerprint\": \"synthetic-only\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \"x\"}, \"finish_reason\": null}], \"usage\": {\"prompt_tokens\": 12, \"completion_tokens\": 5, \"total_tokens\": 17, \"prompt_cache_hit_tokens\": 4, \"prompt_cache_miss_tokens\": 8, \"prompt_tokens_details\": {\"cached_tokens\": 4}, \"completion_tokens_details\": {\"reasoning_tokens\": 0}}}\r\n\r\ndata: {\"id\": \"ds-synthetic-1\", \"object\": \"chat.completion.chunk\", \"created\": 1794787200, \"model\": \"deepseek-flash\", \"system_fingerprint\": \"synthetic-only\", \"choices\": [{\"index\": 0, \"delta\": {}, \"finish_reason\": \"stop\"}], \"usage\": {\"prompt_tokens\": 12, \"completion_tokens\": 7, \"total_tokens\": 19, \"prompt_cache_hit_tokens\": 4, \"prompt_cache_miss_tokens\": 8, \"prompt_tokens_details\": {\"cached_tokens\": 4}, \"completion_tokens_details\": {\"reasoning_tokens\": 0}}}\r\n\r\ndata: [DONE]\r\n\r\n",
+        "kind": "stream",
+        "transport_end": "clean"
+      },
+      "fixture_timing_ms": null,
+      "expected": "protocol_rejected",
+      "actual_provider_run": false
+    },
+    {
+      "id": "DS06_duplicate_finish",
+      "synthetic": true,
+      "mode": "non-thinking",
+      "binding": {
+        "request_id": "00000000-0000-4000-8000-000000000100",
+        "publication_id": "00000000-0000-4000-8000-000000000011",
+        "upstream_id": "ds-synthetic-1",
+        "upstream_model": "deepseek-flash",
+        "profile_revision": "controlled-deepseek-0.7"
+      },
+      "response": {
+        "http_status": 200,
+        "content_type": "text/event-stream",
+        "wire": "data: {\"id\": \"ds-synthetic-1\", \"object\": \"chat.completion.chunk\", \"created\": 1794787200, \"model\": \"deepseek-flash\", \"system_fingerprint\": \"synthetic-only\", \"choices\": [{\"index\": 0, \"delta\": {}, \"finish_reason\": \"stop\"}], \"usage\": {\"prompt_tokens\": 12, \"completion_tokens\": 7, \"total_tokens\": 19, \"prompt_cache_hit_tokens\": 4, \"prompt_cache_miss_tokens\": 8, \"prompt_tokens_details\": {\"cached_tokens\": 4}, \"completion_tokens_details\": {\"reasoning_tokens\": 0}}}\r\n\r\ndata: {\"id\": \"ds-synthetic-1\", \"object\": \"chat.completion.chunk\", \"created\": 1794787200, \"model\": \"deepseek-flash\", \"system_fingerprint\": \"synthetic-only\", \"choices\": [{\"index\": 0, \"delta\": {}, \"finish_reason\": \"stop\"}], \"usage\": {\"prompt_tokens\": 12, \"completion_tokens\": 7, \"total_tokens\": 19, \"prompt_cache_hit_tokens\": 4, \"prompt_cache_miss_tokens\": 8, \"prompt_tokens_details\": {\"cached_tokens\": 4}, \"completion_tokens_details\": {\"reasoning_tokens\": 0}}}\r\n\r\ndata: [DONE]\r\n\r\n",
+        "kind": "stream",
+        "transport_end": "clean"
+      },
+      "fixture_timing_ms": null,
+      "expected": "protocol_rejected",
+      "actual_provider_run": false
+    },
+    {
+      "id": "DS07_conflicting_finish",
+      "synthetic": true,
+      "mode": "non-thinking",
+      "binding": {
+        "request_id": "00000000-0000-4000-8000-000000000100",
+        "publication_id": "00000000-0000-4000-8000-000000000011",
+        "upstream_id": "ds-synthetic-1",
+        "upstream_model": "deepseek-flash",
+        "profile_revision": "controlled-deepseek-0.7"
+      },
+      "response": {
+        "http_status": 200,
+        "content_type": "text/event-stream",
+        "wire": "data: {\"id\": \"ds-synthetic-1\", \"object\": \"chat.completion.chunk\", \"created\": 1794787200, \"model\": \"deepseek-flash\", \"system_fingerprint\": \"synthetic-only\", \"choices\": [{\"index\": 0, \"delta\": {}, \"finish_reason\": \"stop\"}], \"usage\": {\"prompt_tokens\": 12, \"completion_tokens\": 7, \"total_tokens\": 19, \"prompt_cache_hit_tokens\": 4, \"prompt_cache_miss_tokens\": 8, \"prompt_tokens_details\": {\"cached_tokens\": 4}, \"completion_tokens_details\": {\"reasoning_tokens\": 0}}}\r\n\r\ndata: {\"id\": \"ds-synthetic-1\", \"object\": \"chat.completion.chunk\", \"created\": 1794787200, \"model\": \"deepseek-flash\", \"system_fingerprint\": \"synthetic-only\", \"choices\": [{\"index\": 0, \"delta\": {}, \"finish_reason\": \"stop\"}], \"usage\": {\"prompt_tokens\": 12, \"completion_tokens\": 8, \"total_tokens\": 20, \"prompt_cache_hit_tokens\": 4, \"prompt_cache_miss_tokens\": 8, \"prompt_tokens_details\": {\"cached_tokens\": 4}, \"completion_tokens_details\": {\"reasoning_tokens\": 0}}}\r\n\r\ndata: [DONE]\r\n\r\n",
+        "kind": "stream",
+        "transport_end": "clean"
+      },
+      "fixture_timing_ms": null,
+      "expected": "protocol_rejected",
+      "actual_provider_run": false
+    },
+    {
+      "id": "DS08_eof_before_done",
+      "synthetic": true,
+      "mode": "non-thinking",
+      "binding": {
+        "request_id": "00000000-0000-4000-8000-000000000100",
+        "publication_id": "00000000-0000-4000-8000-000000000011",
+        "upstream_id": "ds-synthetic-1",
+        "upstream_model": "deepseek-flash",
+        "profile_revision": "controlled-deepseek-0.7"
+      },
+      "response": {
+        "http_status": 200,
+        "content_type": "text/event-stream",
+        "wire": "data: {\"id\": \"ds-synthetic-1\", \"object\": \"chat.completion.chunk\", \"created\": 1794787200, \"model\": \"deepseek-flash\", \"system_fingerprint\": \"synthetic-only\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \"x\"}, \"finish_reason\": null}]}\r\n\r\ndata: {\"id\": \"ds-synthetic-1\", \"object\": \"chat.completion.chunk\", \"created\": 1794787200, \"model\": \"deepseek-flash\", \"system_fingerprint\": \"synthetic-only\", \"choices\": [{\"index\": 0, \"delta\": {}, \"finish_reason\": \"stop\"}], \"usage\": {\"prompt_tokens\": 12, \"completion_tokens\": 7, \"total_tokens\": 19, \"prompt_cache_hit_tokens\": 4, \"prompt_cache_miss_tokens\": 8, \"prompt_tokens_details\": {\"cached_tokens\": 4}, \"completion_tokens_details\": {\"reasoning_tokens\": 0}}}\r\n\r\n",
+        "kind": "stream",
+        "transport_end": "clean"
+      },
+      "fixture_timing_ms": null,
+      "expected": "interrupted",
+      "actual_provider_run": false
+    },
+    {
+      "id": "DS09_cancel",
+      "synthetic": true,
+      "mode": "non-thinking",
+      "binding": {
+        "request_id": "00000000-0000-4000-8000-000000000100",
+        "publication_id": "00000000-0000-4000-8000-000000000011",
+        "upstream_id": "ds-synthetic-1",
+        "upstream_model": "deepseek-flash",
+        "profile_revision": "controlled-deepseek-0.7"
+      },
+      "response": {
+        "http_status": 200,
+        "content_type": "text/event-stream",
+        "wire": "data: {\"id\": \"ds-synthetic-1\", \"object\": \"chat.completion.chunk\", \"created\": 1794787200, \"model\": \"deepseek-flash\", \"system_fingerprint\": \"synthetic-only\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \"x\"}, \"finish_reason\": null}]}\r\n\r\ndata: {\"id\": \"ds-synthetic-1\", \"object\": \"chat.completion.chunk\", \"created\": 1794787200, \"model\": \"deepseek-flash\", \"system_fingerprint\": \"synthetic-only\", \"choices\": [{\"index\": 0, \"delta\": {}, \"finish_reason\": \"stop\"}], \"usage\": {\"prompt_tokens\": 12, \"completion_tokens\": 7, \"total_tokens\": 19, \"prompt_cache_hit_tokens\": 4, \"prompt_cache_miss_tokens\": 8, \"prompt_tokens_details\": {\"cached_tokens\": 4}, \"completion_tokens_details\": {\"reasoning_tokens\": 0}}}\r\n\r\ndata: [DONE]\r\n\r\n",
+        "kind": "stream",
+        "transport_end": "cancelled"
+      },
+      "fixture_timing_ms": null,
+      "expected": "interrupted",
+      "actual_provider_run": false
+    },
+    {
+      "id": "DS10_error_done",
+      "synthetic": true,
+      "mode": "non-thinking",
+      "binding": {
+        "request_id": "00000000-0000-4000-8000-000000000100",
+        "publication_id": "00000000-0000-4000-8000-000000000011",
+        "upstream_id": "ds-synthetic-1",
+        "upstream_model": "deepseek-flash",
+        "profile_revision": "controlled-deepseek-0.7"
+      },
+      "response": {
+        "http_status": 200,
+        "content_type": "text/event-stream",
+        "wire": "data: {\"id\": \"ds-synthetic-1\", \"object\": \"chat.completion.chunk\", \"created\": 1794787200, \"model\": \"deepseek-flash\", \"system_fingerprint\": \"synthetic-only\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \"x\"}, \"finish_reason\": null}]}\r\n\r\ndata: {\"error\": {\"code\": \"synthetic\", \"message\": \"upstream error\"}}\r\n\r\ndata: [DONE]\r\n\r\n",
+        "kind": "stream",
+        "transport_end": "clean"
+      },
+      "fixture_timing_ms": null,
+      "expected": "protocol_rejected",
+      "actual_provider_run": false
+    },
+    {
+      "id": "DS11_post_done_data",
+      "synthetic": true,
+      "mode": "non-thinking",
+      "binding": {
+        "request_id": "00000000-0000-4000-8000-000000000100",
+        "publication_id": "00000000-0000-4000-8000-000000000011",
+        "upstream_id": "ds-synthetic-1",
+        "upstream_model": "deepseek-flash",
+        "profile_revision": "controlled-deepseek-0.7"
+      },
+      "response": {
+        "http_status": 200,
+        "content_type": "text/event-stream",
+        "wire": "data: {\"id\": \"ds-synthetic-1\", \"object\": \"chat.completion.chunk\", \"created\": 1794787200, \"model\": \"deepseek-flash\", \"system_fingerprint\": \"synthetic-only\", \"choices\": [{\"index\": 0, \"delta\": {}, \"finish_reason\": \"stop\"}], \"usage\": {\"prompt_tokens\": 12, \"completion_tokens\": 7, \"total_tokens\": 19, \"prompt_cache_hit_tokens\": 4, \"prompt_cache_miss_tokens\": 8, \"prompt_tokens_details\": {\"cached_tokens\": 4}, \"completion_tokens_details\": {\"reasoning_tokens\": 0}}}\r\n\r\ndata: [DONE]\r\n\r\ndata: {\"id\": \"ds-synthetic-1\", \"object\": \"chat.completion.chunk\", \"created\": 1794787200, \"model\": \"deepseek-flash\", \"system_fingerprint\": \"synthetic-only\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \"late\"}, \"finish_reason\": null}]}\r\n\r\n",
+        "kind": "stream",
+        "transport_end": "clean"
+      },
+      "fixture_timing_ms": null,
+      "expected": "protocol_rejected",
+      "actual_provider_run": false
+    },
+    {
+      "id": "DS12_cache_alias_conflict",
+      "synthetic": true,
+      "mode": "non-thinking",
+      "binding": {
+        "request_id": "00000000-0000-4000-8000-000000000100",
+        "publication_id": "00000000-0000-4000-8000-000000000011",
+        "upstream_id": "ds-synthetic-1",
+        "upstream_model": "deepseek-flash",
+        "profile_revision": "controlled-deepseek-0.7"
+      },
+      "response": {
+        "http_status": 200,
+        "content_type": "text/event-stream",
+        "wire": "data: {\"id\": \"ds-synthetic-1\", \"object\": \"chat.completion.chunk\", \"created\": 1794787200, \"model\": \"deepseek-flash\", \"system_fingerprint\": \"synthetic-only\", \"choices\": [{\"index\": 0, \"delta\": {}, \"finish_reason\": \"stop\"}], \"usage\": {\"prompt_tokens\": 12, \"completion_tokens\": 7, \"total_tokens\": 19, \"prompt_cache_hit_tokens\": 4, \"prompt_cache_miss_tokens\": 8, \"prompt_tokens_details\": {\"cached_tokens\": 5}, \"completion_tokens_details\": {\"reasoning_tokens\": 0}}}\r\n\r\ndata: [DONE]\r\n\r\n",
+        "kind": "stream",
+        "transport_end": "clean"
+      },
+      "fixture_timing_ms": null,
+      "expected": "protocol_rejected",
+      "actual_provider_run": false
+    },
+    {
+      "id": "DS13_reasoning_mode_drift",
+      "synthetic": true,
+      "mode": "non-thinking",
+      "binding": {
+        "request_id": "00000000-0000-4000-8000-000000000100",
+        "publication_id": "00000000-0000-4000-8000-000000000011",
+        "upstream_id": "ds-synthetic-1",
+        "upstream_model": "deepseek-flash",
+        "profile_revision": "controlled-deepseek-0.7"
+      },
+      "response": {
+        "http_status": 200,
+        "content_type": "text/event-stream",
+        "wire": "data: {\"id\": \"ds-synthetic-1\", \"object\": \"chat.completion.chunk\", \"created\": 1794787200, \"model\": \"deepseek-flash\", \"system_fingerprint\": \"synthetic-only\", \"choices\": [{\"index\": 0, \"delta\": {}, \"finish_reason\": \"stop\"}], \"usage\": {\"prompt_tokens\": 12, \"completion_tokens\": 7, \"total_tokens\": 19, \"prompt_cache_hit_tokens\": 4, \"prompt_cache_miss_tokens\": 8, \"prompt_tokens_details\": {\"cached_tokens\": 4}, \"completion_tokens_details\": {\"reasoning_tokens\": 3}}}\r\n\r\ndata: [DONE]\r\n\r\n",
+        "kind": "stream",
+        "transport_end": "clean"
+      },
+      "fixture_timing_ms": null,
+      "expected": "protocol_rejected",
+      "actual_provider_run": false
+    },
+    {
+      "id": "DS14_billed_tool",
+      "synthetic": true,
+      "mode": "non-thinking",
+      "binding": {
+        "request_id": "00000000-0000-4000-8000-000000000100",
+        "publication_id": "00000000-0000-4000-8000-000000000011",
+        "upstream_id": "ds-synthetic-1",
+        "upstream_model": "deepseek-flash",
+        "profile_revision": "controlled-deepseek-0.7"
+      },
+      "response": {
+        "http_status": 200,
+        "content_type": "text/event-stream",
+        "wire": "data: {\"id\": \"ds-synthetic-1\", \"object\": \"chat.completion.chunk\", \"created\": 1794787200, \"model\": \"deepseek-flash\", \"system_fingerprint\": \"synthetic-only\", \"choices\": [{\"index\": 0, \"delta\": {}, \"finish_reason\": \"stop\"}], \"usage\": {\"prompt_tokens\": 12, \"completion_tokens\": 7, \"total_tokens\": 19, \"prompt_cache_hit_tokens\": 4, \"prompt_cache_miss_tokens\": 8, \"prompt_tokens_details\": {\"cached_tokens\": 4}, \"completion_tokens_details\": {\"reasoning_tokens\": 0}, \"server_tool_use\": {\"tool_search\": 1, \"tool_fetch\": 0}}}\r\n\r\ndata: [DONE]\r\n\r\n",
+        "kind": "stream",
+        "transport_end": "clean"
+      },
+      "fixture_timing_ms": null,
+      "expected": "protocol_rejected",
+      "actual_provider_run": false
+    },
+    {
+      "id": "DS15_safety_subset",
+      "synthetic": true,
+      "mode": "non-thinking",
+      "binding": {
+        "request_id": "00000000-0000-4000-8000-000000000100",
+        "publication_id": "00000000-0000-4000-8000-000000000011",
+        "upstream_id": "ds-synthetic-1",
+        "upstream_model": "deepseek-flash",
+        "profile_revision": "controlled-deepseek-0.7"
+      },
+      "response": {
+        "http_status": 200,
+        "content_type": "text/event-stream",
+        "wire": "data: {\"id\": \"ds-synthetic-1\", \"object\": \"chat.completion.chunk\", \"created\": 1794787200, \"model\": \"deepseek-flash\", \"system_fingerprint\": \"synthetic-only\", \"choices\": [{\"index\": 0, \"delta\": {}, \"finish_reason\": \"stop\"}], \"usage\": {\"prompt_tokens\": 12, \"completion_tokens\": 7, \"total_tokens\": 19, \"prompt_cache_hit_tokens\": 4, \"prompt_cache_miss_tokens\": 8, \"prompt_tokens_details\": {\"cached_tokens\": 4}, \"completion_tokens_details\": {\"reasoning_tokens\": 0, \"safety_tokens\": 2}}}\r\n\r\ndata: [DONE]\r\n\r\n",
+        "kind": "stream",
+        "transport_end": "clean"
+      },
+      "fixture_timing_ms": null,
+      "expected": "final_candidate",
+      "actual_provider_run": false
+    },
+    {
+      "id": "DS16_invalid_safety_subset",
+      "synthetic": true,
+      "mode": "non-thinking",
+      "binding": {
+        "request_id": "00000000-0000-4000-8000-000000000100",
+        "publication_id": "00000000-0000-4000-8000-000000000011",
+        "upstream_id": "ds-synthetic-1",
+        "upstream_model": "deepseek-flash",
+        "profile_revision": "controlled-deepseek-0.7"
+      },
+      "response": {
+        "http_status": 200,
+        "content_type": "text/event-stream",
+        "wire": "data: {\"id\": \"ds-synthetic-1\", \"object\": \"chat.completion.chunk\", \"created\": 1794787200, \"model\": \"deepseek-flash\", \"system_fingerprint\": \"synthetic-only\", \"choices\": [{\"index\": 0, \"delta\": {}, \"finish_reason\": \"stop\"}], \"usage\": {\"prompt_tokens\": 12, \"completion_tokens\": 7, \"total_tokens\": 19, \"prompt_cache_hit_tokens\": 4, \"prompt_cache_miss_tokens\": 8, \"prompt_tokens_details\": {\"cached_tokens\": 4}, \"completion_tokens_details\": {\"reasoning_tokens\": 0, \"safety_tokens\": 8}}}\r\n\r\ndata: [DONE]\r\n\r\n",
+        "kind": "stream",
+        "transport_end": "clean"
+      },
+      "fixture_timing_ms": null,
+      "expected": "protocol_rejected",
+      "actual_provider_run": false
+    },
+    {
+      "id": "DS17_usage_only_wrong_source",
+      "synthetic": true,
+      "mode": "non-thinking",
+      "binding": {
+        "request_id": "00000000-0000-4000-8000-000000000100",
+        "publication_id": "00000000-0000-4000-8000-000000000011",
+        "upstream_id": "ds-synthetic-1",
+        "upstream_model": "deepseek-flash",
+        "profile_revision": "controlled-deepseek-0.7"
+      },
+      "response": {
+        "http_status": 200,
+        "content_type": "text/event-stream",
+        "wire": "data: {\"id\": \"ds-synthetic-1\", \"object\": \"chat.completion.chunk\", \"created\": 1794787200, \"model\": \"deepseek-flash\", \"system_fingerprint\": \"synthetic-only\", \"choices\": [{\"index\": 0, \"delta\": {}, \"finish_reason\": \"stop\"}]}\r\n\r\ndata: {\"id\": \"ds-synthetic-1\", \"object\": \"chat.completion.chunk\", \"created\": 1794787200, \"model\": \"deepseek-flash\", \"system_fingerprint\": \"synthetic-only\", \"choices\": [], \"usage\": {\"prompt_tokens\": 12, \"completion_tokens\": 7, \"total_tokens\": 19, \"prompt_cache_hit_tokens\": 4, \"prompt_cache_miss_tokens\": 8, \"prompt_tokens_details\": {\"cached_tokens\": 4}, \"completion_tokens_details\": {\"reasoning_tokens\": 0}}}\r\n\r\ndata: [DONE]\r\n\r\n",
+        "kind": "stream",
+        "transport_end": "clean"
+      },
+      "fixture_timing_ms": null,
+      "expected": "protocol_rejected",
+      "actual_provider_run": false
+    },
+    {
+      "id": "DS18_heartbeat_does_not_extend_total",
+      "synthetic": true,
+      "mode": "non-thinking",
+      "binding": {
+        "request_id": "00000000-0000-4000-8000-000000000100",
+        "publication_id": "00000000-0000-4000-8000-000000000011",
+        "upstream_id": "ds-synthetic-1",
+        "upstream_model": "deepseek-flash",
+        "profile_revision": "controlled-deepseek-0.7"
+      },
+      "response": {
+        "http_status": 200,
+        "content_type": "text/event-stream",
+        "wire": ": keep-alive\r\n\r\ndata: {\"id\": \"ds-synthetic-1\", \"object\": \"chat.completion.chunk\", \"created\": 1794787200, \"model\": \"deepseek-flash\", \"system_fingerprint\": \"synthetic-only\", \"choices\": [{\"index\": 0, \"delta\": {}, \"finish_reason\": \"stop\"}], \"usage\": {\"prompt_tokens\": 12, \"completion_tokens\": 7, \"total_tokens\": 19, \"prompt_cache_hit_tokens\": 4, \"prompt_cache_miss_tokens\": 8, \"prompt_tokens_details\": {\"cached_tokens\": 4}, \"completion_tokens_details\": {\"reasoning_tokens\": 0}}}\r\n\r\ndata: [DONE]\r\n\r\n",
+        "kind": "stream",
+        "transport_end": "clean"
+      },
+      "fixture_timing_ms": {
+        "total_deadline": 100,
+        "observed_end": 101,
+        "numbers_are_synthetic_not_runtime_defaults": true
+      },
+      "expected": "interrupted",
+      "actual_provider_run": false
+    },
+    {
+      "id": "DS19_zero",
+      "synthetic": true,
+      "mode": "non-thinking",
+      "binding": {
+        "request_id": "00000000-0000-4000-8000-000000000100",
+        "publication_id": "00000000-0000-4000-8000-000000000011",
+        "upstream_id": "ds-synthetic-1",
+        "upstream_model": "deepseek-flash",
+        "profile_revision": "controlled-deepseek-0.7"
+      },
+      "response": {
+        "http_status": 200,
+        "content_type": "text/event-stream",
+        "wire": "data: {\"id\": \"ds-synthetic-1\", \"object\": \"chat.completion.chunk\", \"created\": 1794787200, \"model\": \"deepseek-flash\", \"system_fingerprint\": \"synthetic-only\", \"choices\": [{\"index\": 0, \"delta\": {}, \"finish_reason\": \"stop\"}], \"usage\": {\"prompt_tokens\": 0, \"completion_tokens\": 0, \"total_tokens\": 0, \"prompt_cache_hit_tokens\": 0, \"prompt_cache_miss_tokens\": 0, \"completion_tokens_details\": {\"reasoning_tokens\": 0}}}\r\n\r\ndata: [DONE]\r\n\r\n",
+        "kind": "stream",
+        "transport_end": "clean"
+      },
+      "fixture_timing_ms": null,
+      "expected": "final_candidate",
+      "actual_provider_run": false
+    },
+    {
+      "id": "DS20_nonstream",
+      "synthetic": true,
+      "mode": "non-thinking",
+      "binding": {
+        "request_id": "00000000-0000-4000-8000-000000000100",
+        "publication_id": "00000000-0000-4000-8000-000000000011",
+        "upstream_id": "ds-synthetic-1",
+        "upstream_model": "deepseek-flash",
+        "profile_revision": "controlled-deepseek-0.7"
+      },
+      "response": {
+        "http_status": 200,
+        "content_type": "application/json",
+        "wire": "{\"id\": \"ds-synthetic-1\", \"object\": \"chat.completion\", \"created\": 1794787200, \"model\": \"deepseek-flash\", \"system_fingerprint\": \"synthetic-only\", \"choices\": [{\"index\": 0, \"message\": {\"role\": \"assistant\", \"content\": \"391\"}, \"finish_reason\": \"stop\"}], \"usage\": {\"prompt_tokens\": 12, \"completion_tokens\": 7, \"total_tokens\": 19, \"prompt_cache_hit_tokens\": 4, \"prompt_cache_miss_tokens\": 8, \"prompt_tokens_details\": {\"cached_tokens\": 4}, \"completion_tokens_details\": {\"reasoning_tokens\": 0}}}",
+        "kind": "json",
+        "transport_end": "clean"
+      },
+      "fixture_timing_ms": null,
+      "expected": "final_candidate",
+      "actual_provider_run": false
+    },
+    {
+      "id": "DS21_nonstream_error",
+      "synthetic": true,
+      "mode": "non-thinking",
+      "binding": {
+        "request_id": "00000000-0000-4000-8000-000000000100",
+        "publication_id": "00000000-0000-4000-8000-000000000011",
+        "upstream_id": "ds-synthetic-1",
+        "upstream_model": "deepseek-flash",
+        "profile_revision": "controlled-deepseek-0.7"
+      },
+      "response": {
+        "http_status": 200,
+        "content_type": "application/json",
+        "wire": "{\"error\": {\"message\": \"synthetic\"}}",
+        "kind": "json",
+        "transport_end": "clean"
+      },
+      "fixture_timing_ms": null,
+      "expected": "protocol_rejected",
+      "actual_provider_run": false
+    },
+    {
+      "id": "DS22_429",
+      "synthetic": true,
+      "mode": "non-thinking",
+      "binding": {
+        "request_id": "00000000-0000-4000-8000-000000000100",
+        "publication_id": "00000000-0000-4000-8000-000000000011",
+        "upstream_id": "ds-synthetic-1",
+        "upstream_model": "deepseek-flash",
+        "profile_revision": "controlled-deepseek-0.7"
+      },
+      "response": {
+        "http_status": 429,
+        "content_type": "application/json",
+        "wire": "{\"error\": {\"message\": \"synthetic\"}}",
+        "kind": "json",
+        "transport_end": "clean"
+      },
+      "fixture_timing_ms": null,
+      "expected": "upstream_http_error",
+      "actual_provider_run": false
+    },
+    {
+      "id": "DS23_nonstream_cancel",
+      "synthetic": true,
+      "mode": "non-thinking",
+      "binding": {
+        "request_id": "00000000-0000-4000-8000-000000000100",
+        "publication_id": "00000000-0000-4000-8000-000000000011",
+        "upstream_id": "ds-synthetic-1",
+        "upstream_model": "deepseek-flash",
+        "profile_revision": "controlled-deepseek-0.7"
+      },
+      "response": {
+        "http_status": 200,
+        "content_type": "application/json",
+        "wire": "{\"id\": \"ds-synthetic-1\", \"object\": \"chat.completion\", \"created\": 1794787200, \"model\": \"deepseek-flash\", \"system_fingerprint\": \"synthetic-only\", \"choices\": [{\"index\": 0, \"message\": {\"role\": \"assistant\", \"content\": \"391\"}, \"finish_reason\": \"stop\"}], \"usage\": {\"prompt_tokens\": 12, \"completion_tokens\": 7, \"total_tokens\": 19, \"prompt_cache_hit_tokens\": 4, \"prompt_cache_miss_tokens\": 8, \"prompt_tokens_details\": {\"cached_tokens\": 4}, \"completion_tokens_details\": {\"reasoning_tokens\": 0}}}",
+        "kind": "json",
+        "transport_end": "cancelled"
+      },
+      "fixture_timing_ms": null,
+      "expected": "interrupted",
+      "actual_provider_run": false
+    }
+  ]
+}

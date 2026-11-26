@@ -1,5 +1,7 @@
 # MAAS-9 offline capability inputs
 
+Tool capability v0.8: `tool_calls.py` and `tool-calls/` provide a proposed `tools-v1` ModelClient turn schema, complete controlled captures and local pure-function feedback. See `docs/model-capabilities/tool-calls-v0.8.md`. MAAS-2/20 review and real source approval remain pending.
+
 Three candidate/controlled profiles, source-pinned evidence, synthetic adapter/quality vectors and consumer lock conditions. All profiles are pending approval and execution_enabled=false. Nothing here launches a model, accesses an endpoint/Secret, settles usage or grants production permission.
 
 From repository root:
@@ -16,3 +18,5 @@ See docs/model-capabilities/README.md for fixed revisions, metadata conflicts, p
 v0.4 KV/page与Prefill/Decode输入、职责自查、运行命令见 docs/model-capabilities/kv-pd-inputs-v0.4.md。比较基线v0.5.6/7ae368e，原v0.5.18仍为部署候选，不混比。
 
 v0.5 source-backed Usage progress/final/boundary vectors and bounded scheduling inputs: docs/model-capabilities/usage-finality-v0.5.md. Run python tools/model_capabilities/usage_finality.py; output candidates are diagnostic only, never production authority.
+
+MAAS-18 DeepSeek-only v0.7: docs/model-capabilities/deepseek-single-model-v0.7.md. Run python tools/model_capabilities/deepseek_milestone.py. Only controlled source samples; all real approvals remain pending and no call runner is provided.

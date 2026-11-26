@@ -1,0 +1,225 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:maas:proposal:model-tool-turn:0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "contract_version": {
+      "const": "maas.model-tool-turn/0.1-draft"
+    },
+    "model_client_protocol": {
+      "const": "tools-v1"
+    },
+    "binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "session_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "run_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "step_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "child_request_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "profile_revision": {
+          "type": "string",
+          "minLength": 1
+        },
+        "model": {
+          "type": "string",
+          "minLength": 1
+        },
+        "model_revision": {
+          "type": "string",
+          "minLength": 1
+        },
+        "mode": {
+          "type": "string",
+          "minLength": 1
+        },
+        "upstream_response_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "session_id",
+        "run_id",
+        "step_id",
+        "child_request_id",
+        "source_id",
+        "profile_revision",
+        "model",
+        "model_revision",
+        "mode",
+        "upstream_response_id"
+      ]
+    },
+    "finish_reason": {
+      "enum": [
+        "stop",
+        "tool_calls",
+        "length",
+        "content_filter",
+        "insufficient_system_resource",
+        "aborted"
+      ]
+    },
+    "message": {
+      "$ref": "#/$defs/assistant"
+    },
+    "usage_snapshot": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "termination": {
+      "const": "controlled_clean_DONE"
+    },
+    "accounting_authority": {
+      "const": false
+    }
+  },
+  "required": [
+    "contract_version",
+    "model_client_protocol",
+    "binding",
+    "finish_reason",
+    "message",
+    "usage_snapshot",
+    "termination",
+    "accounting_authority"
+  ],
+  "$defs": {
+    "assistant": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "role": {
+          "const": "assistant"
+        },
+        "content": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "tool_calls": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 2,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "type": {
+                "const": "function"
+              },
+              "function": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "pattern": "^[A-Za-z0-9_-]+$"
+                  },
+                  "arguments": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name",
+                  "arguments"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "type",
+              "function"
+            ]
+          }
+        }
+      },
+      "required": [
+        "role",
+        "content"
+      ]
+    },
+    "toolResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "role": {
+          "const": "tool"
+        },
+        "tool_call_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "content": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "role",
+        "tool_call_id",
+        "content"
+      ]
+    },
+    "toolCall": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "const": "function"
+        },
+        "function": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "name": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]+$"
+            },
+            "arguments": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "name",
+            "arguments"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "type",
+        "function"
+      ]
+    }
+  },
+  "$comment": "MAAS-9 proposed normalized ModelClient turn only. MAAS-2 owns public Agent API/events. Runtime idempotency and authorization cannot be proven by this schema."
+}

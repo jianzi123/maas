@@ -1,0 +1,52 @@
+{
+  "version": "0.8",
+  "harness_commit": "2e39e70496aa02986ca6a820c5d497e816b69d7e",
+  "sources": [
+    {
+      "id": "harness-architecture",
+      "url": "https://raw.githubusercontent.com/deepseek-ai/deepseek-harness/2e39e70496aa02986ca6a820c5d497e816b69d7e/docs/architecture.md",
+      "captured_at_utc": "2026-11-19T03:30:46.143228+00:00",
+      "bytes": 19132,
+      "sha256": "ce18b33a980af9ff0ae0e78597603d70a2afcdbb6cd5c2ba0c2cd70d9a4d8b50",
+      "kind": "fixed_official_source",
+      "provider_runtime_or_account_evidence": false
+    },
+    {
+      "id": "harness-packages",
+      "url": "https://raw.githubusercontent.com/deepseek-ai/deepseek-harness/2e39e70496aa02986ca6a820c5d497e816b69d7e/packages/README.md",
+      "captured_at_utc": "2026-11-19T03:30:46.086312+00:00",
+      "bytes": 8847,
+      "sha256": "6545d90f4b0b1b3c36ddbd9f939b29a20ed6f1f0beec2c7bc826dd0c5b3eb4f8",
+      "kind": "fixed_official_source",
+      "provider_runtime_or_account_evidence": false
+    },
+    {
+      "id": "tool-guide",
+      "url": "https://api-docs.deepseek.com/guides/tool_calls/",
+      "captured_at_utc": "2026-11-19T03:30:45.804368+00:00",
+      "bytes": 78573,
+      "sha256": "02f703fc301358d45f2482c4ff2d0ca331eeb2b225a9988d6607256ea6a6dac2",
+      "kind": "mutable_official_document_snapshot",
+      "provider_runtime_or_account_evidence": false
+    },
+    {
+      "id": "chat-api",
+      "url": "https://api-docs.deepseek.com/api/create-chat-completion/",
+      "captured_at_utc": "2026-11-19T03:30:45.796353+00:00",
+      "bytes": 143150,
+      "sha256": "67e776249cf03fa31d7468b4cc46efa4e0a75366f68e2593d9750efeef49da50",
+      "kind": "mutable_official_document_snapshot",
+      "provider_runtime_or_account_evidence": false
+    },
+    {
+      "id": "pricing",
+      "url": "https://api-docs.deepseek.com/quick_start/pricing/",
+      "captured_at_utc": "2026-11-19T03:30:45.827555+00:00",
+      "bytes": 29430,
+      "sha256": "1cfdcd452dbb2b59f32d220190237d4a839fcd807ff4a14887b43c23186c9cfc",
+      "kind": "mutable_official_document_snapshot",
+      "provider_runtime_or_account_evidence": false
+    }
+  ],
+  "real_provider_calls": 0
+}

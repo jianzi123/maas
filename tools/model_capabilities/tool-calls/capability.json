@@ -1,0 +1,135 @@
+{
+  "version": "0.8",
+  "contract_version": "maas.model-tool-turn/0.1-draft",
+  "shared_status": "pending_MAAS-2_and_MAAS-20_review",
+  "controlled_profile": {
+    "id": "maas-controlled-tool-model/0.1",
+    "revision": "controlled-tools-0.1",
+    "model": "maas-controlled-tool-model",
+    "model_revision": "fixture-set-0.1",
+    "mode": "non-thinking",
+    "source_id": "controlled-artifact-only",
+    "evidence": "synthetic_source_replay_and_real_local_pure_functions_only",
+    "real_source_approved": false,
+    "production_execution_enabled": false,
+    "model_client_protocol": "tools-v1",
+    "tool_calls": true,
+    "model_multi_call_interleaving": "controlled_vectors_only",
+    "tool_execution": "serial",
+    "test_limits": {
+      "calls_per_turn": 2,
+      "model_turns": 3,
+      "arguments_bytes": 256,
+      "wire_bytes": 65536,
+      "output_bytes": 512,
+      "hard_deadline_ms": 1000
+    },
+    "tools": [
+      {
+        "name": "sum_ints",
+        "version": "1",
+        "effect": "pure",
+        "approval": "controlled_fixture_only",
+        "parameters": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "a": {
+              "type": "integer",
+              "minimum": -1000,
+              "maximum": 1000
+            },
+            "b": {
+              "type": "integer",
+              "minimum": -1000,
+              "maximum": 1000
+            }
+          },
+          "required": [
+            "a",
+            "b"
+          ]
+        }
+      },
+      {
+        "name": "echo_text",
+        "version": "1",
+        "effect": "pure",
+        "approval": "controlled_fixture_only",
+        "parameters": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "text": {
+              "type": "string",
+              "maxLength": 64
+            }
+          },
+          "required": [
+            "text"
+          ]
+        }
+      }
+    ]
+  },
+  "external_candidate": {
+    "provider": "DeepSeek",
+    "model_alias_proposal": "deepseek-flash",
+    "document_version_label": "DeepSeek-V4.1-Flash-1017",
+    "explicit_mode_proposal": {
+      "thinking": {
+        "type": "disabled"
+      }
+    },
+    "protocol": "Chat Completions",
+    "document_tool_support": true,
+    "actual_account_model_tool_support": null,
+    "immutable_provider_revision": null,
+    "execution_enabled": false,
+    "approved_tool_profile": null,
+    "approved_public_agent_protocol": null,
+    "parallel_emission_guarantee": null,
+    "parallel_tool_calls_request_parameter": "not documented in captured Chat API; do not invent or send",
+    "strict_mode_beta": "not selected; beta source requires separate approval",
+    "same_v07_text_profile_approval_inherited": false,
+    "real_limits": null,
+    "approval_record_refs": null,
+    "credential_channel_ref": null,
+    "price_snapshot": null,
+    "allowed_calls_and_spend": null
+  },
+  "approval_gaps": [
+    {
+      "field": "exact_model_site_mode_version_tool_capability",
+      "owner": "member/Mika + MAAS-9/2/3",
+      "existing_input": "EXT-01/02; I01/02"
+    },
+    {
+      "field": "Agent protocol version and bounded ModelClient bridge",
+      "owner": "MAAS-2/20/3",
+      "existing_input": "new explicit protocol, not public text v0.4"
+    },
+    {
+      "field": "tool registry schemas/version/permission/bounds/resume policy",
+      "owner": "MAAS-20/2 + QA",
+      "existing_input": "new Agent scoped inputs"
+    },
+    {
+      "field": "all billed input/output bound, price, call caps, Secret and identity refs",
+      "owner": "existing EXT-01..06 owners",
+      "existing_input": "reuse v0.6/v0.7; no second approval source"
+    }
+  ],
+  "harness": {
+    "commit": "2e39e70496aa02986ca6a820c5d497e816b69d7e",
+    "purpose": "architecture composition reference only",
+    "DSH_session_is_MaaS_provider": false
+  },
+  "invalidation": [
+    "source/model/mode/profile/protocol/schema drift",
+    "undeclared reasoning or server-side billable tool",
+    "missing termination observer/expired approval/price",
+    "tool schema/permission/side-effect change",
+    "changed tool-call arguments invalidates old approval"
+  ]
+}
