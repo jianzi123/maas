@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "scope": "installation-input-only-no-secret-values",
-  "sourceCommit": "bee3ae513068791a857c2b41489b55058ce67720",
+  "sourceCommit": "febb4f7a23b5beef44b0539bb0fa1a0793a6da79",
   "productionWiringVerified": false,
   "connections": {
     "core": {
@@ -148,6 +148,7 @@
         "console/docs/deployment.md",
         "console/docs/review-recovery-fixes.md",
         "console/docs/single-model-continuation.md",
+        "console/docs/site-validation-20261126.md",
         "console/docs/ui16-redesign.md",
         "console/examples/console-config.controlled.json",
         "console/package-lock.json",
@@ -161,7 +162,9 @@
         "console/scripts/chat-browser.mjs",
         "console/scripts/consumer-binding-browser.mjs",
         "console/scripts/deployed-build-browser.mjs",
+        "console/scripts/deployed-restart.mjs",
         "console/scripts/deployed-smoke.mjs",
+        "console/scripts/deployed-workbench.mjs",
         "console/scripts/generate-ar1-types.mjs",
         "console/scripts/local-control.mjs",
         "console/scripts/redesign-browser.mjs",
@@ -198,6 +201,7 @@
         "console/src/review-recovery.test.ts",
         "console/src/single-model-mode.test.ts",
         "console/src/single-model-replay.test.ts",
+        "console/src/site-entry.test.ts",
         "console/src/style.css",
         "console/src/ui.ts",
         "console/src/usage-exact-interleaving.test.ts",
