@@ -120,7 +120,9 @@ async function send() {
 function stop() {
   controller?.abort();
 }
-onMounted(loadModels);
+onMounted(() => {
+  if (props.inferenceAvailable) void loadModels();
+});
 onBeforeUnmount(() => {
   alive = false;
   requestEpoch++;
@@ -143,14 +145,18 @@ onBeforeUnmount(() => {
     }}</span>
   </div>
   <div v-if="props.inferenceAvailable === false" class="notice">
-    当前 Go 服务尚未开放推理入口。可先查看模型、创建 Key
-    或管理发布；模型满足网关及验证条件后再进行实际试用。<button
-      @click="emit('navigate', 'releases')"
+    当前安装未启用此在线试用入口。请使用 Chat
+    工作台查看已配置模型、对话和原请求用量。<button
+      @click="emit('navigate', 'chat')"
     >
-      查看模型发布
+      前往 Chat 工作台
     </button>
   </div>
-  <form class="play-workspace" @submit.prevent="send">
+  <form
+    v-if="props.inferenceAvailable"
+    class="play-workspace"
+    @submit.prevent="send"
+  >
     <section class="panel invocation-settings">
       <h2>调用设置</h2>
       <p class="caption">选择模型与本次调用凭证</p>
@@ -250,10 +256,7 @@ POST /v1/chat/completions
           <button
             class="primary"
             :disabled="
-              props.inferenceAvailable === false ||
-              state === 'streaming' ||
-              !prompt.trim() ||
-              !selected?.callable
+              state === 'streaming' || !prompt.trim() || !selected?.callable
             "
           >
             发送请求</button
@@ -270,7 +273,7 @@ POST /v1/chat/completions
     </div>
   </form>
   <p v-if="message" role="alert" class="notice">{{ message }}</p>
-  <section class="panel">
+  <section v-if="props.inferenceAvailable || id" class="panel">
     <h2>本次请求结果</h2>
     <details>
       <summary>技术状态代码</summary>

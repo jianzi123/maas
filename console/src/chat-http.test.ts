@@ -653,3 +653,361 @@ for (const [state, attempt] of [
     },
   );
 }
+
+// QA-CHAT-RACE-001: real consumer + component, opposite late-return orders.
+describe("foreground stop/approval supersedes an older poll", () => {
+  for (const action of ["cancel", "approve"] as const)
+    for (const order of ["late-stream", "late-page"] as const) {
+      it(
+        action +
+          " / " +
+          order +
+          " publishes B without a false protocol alarm or replay",
+        async () => {
+          const { mount, flushPromises } = await import("@vue/test-utils");
+          const { default: ChatWorkspace } =
+            await import("./pages/ChatWorkspace.vue");
+          const agent = action === "approve";
+          const approval = {
+            id: eid,
+            run_id: rid,
+            call_id: mid,
+            tool_revision: "1",
+            args_sha256: "a".repeat(64),
+            policy_revision: "policy-1",
+            scope_sha256: "b".repeat(64),
+            expires_at: "2099-01-01T00:00:00Z",
+            state: "pending",
+            tool_name: "bounded_arithmetic",
+            arguments: { a: 6, b: 7, op: "multiply" },
+          };
+          const call = (done: boolean) => ({
+            id: mid,
+            run_id: rid,
+            step_id: eid,
+            name: "bounded_arithmetic",
+            tool_revision: "1",
+            args_sha256: "a".repeat(64),
+            state: done ? "succeeded" : "waiting_approval",
+            effect: "pure",
+            attempt: done ? 1 : 0,
+            idempotency_key: eid,
+            source_call_id: "source-1",
+            arguments: { a: 6, b: 7, op: "multiply" },
+            result: done
+              ? {
+                  type: "tool_result",
+                  call_id: mid,
+                  outcome: "succeeded",
+                  result: { value: 42 },
+                }
+              : null,
+          });
+          const doc = (done: boolean) => {
+            const seq = done ? "2" : "1",
+              cursor = done ? "opaque-B" : "opaque-A";
+            const s = snapshot(
+              [
+                run({
+                  mode: agent ? "agent" : "chat",
+                  protocol_revision: agent ? "tools-v1" : "text-v1",
+                  state: done
+                    ? agent
+                      ? "completed"
+                      : "cancelled"
+                    : agent
+                      ? "waiting_approval"
+                      : "running",
+                  last_event_seq: seq,
+                  resume_cursor: cursor,
+                  finished_at: done ? date : null,
+                }),
+              ],
+              [message(done ? "你好" : "你")],
+              seq,
+              cursor,
+            );
+            s.conversation.revision = done ? "2" : "1";
+            if (done) s.conversation.active_run_id = null as any;
+            return s;
+          };
+          let acted = false,
+            roots = 0,
+            toolReads = 0,
+            streams = 0;
+          let oldController!: ReadableStreamDefaultController<Uint8Array>;
+          let announce!: () => void;
+          const oldStarted = new Promise<void>((resolve) => {
+            announce = resolve;
+          });
+          let announceB!: () => void;
+          const bStarted = new Promise<void>((resolve) => {
+            announceB = resolve;
+          });
+          let releaseB!: (r: Response) => void;
+          const bPage = new Promise<Response>((resolve) => {
+            releaseB = resolve;
+          });
+          let releaseOld!: (r: Response) => void;
+          const oldPage = new Promise<Response>((resolve) => {
+            releaseOld = resolve;
+          });
+          const writes: string[] = [];
+          const fetcher = vi.fn(
+            async (path: string, init?: RequestInit): Promise<Response> => {
+              const method = init?.method ?? "GET";
+              if (method !== "GET") {
+                writes.push(method + " " + path);
+                acted = true;
+                if (action === "cancel")
+                  return json(run({ ...(doc(true).runs[0] as any) }), 202);
+                return json({ ...approval, state: "allowed" });
+              }
+              if (path === root + "/capabilities") return json(caps);
+              if (path.startsWith(root + "/sessions?"))
+                return json({
+                  data: [doc(false).conversation],
+                  next_cursor: null,
+                });
+              if (path === root + "/sessions/" + sid) {
+                roots++;
+                if (acted && order === "late-stream" && roots === 2) {
+                  announceB();
+                  return bPage;
+                }
+                const s = doc(acted);
+                return json(s, 200, {
+                  ETag: '"' + s.conversation.revision + '"',
+                });
+              }
+              if (path.includes("/approvals/"))
+                return json({
+                  ...approval,
+                  state: acted ? "allowed" : "pending",
+                });
+              if (path.includes("/events?"))
+                return json({
+                  data: [
+                    {
+                      ...sse(approval, "1"),
+                      type: "approval.required",
+                      cursor: "opaque-A",
+                    },
+                  ],
+                  next_cursor: null,
+                });
+              if (path.includes("/events/stream")) {
+                streams++;
+                if (order === "late-stream" && streams === 1)
+                  return new Response(
+                    new ReadableStream<Uint8Array>({
+                      start(c) {
+                        oldController = c;
+                        announce();
+                      },
+                    }),
+                    { headers: { "Content-Type": "text/event-stream" } },
+                  );
+                return new Response(": heartbeat\n\n", {
+                  headers: { "Content-Type": "text/event-stream" },
+                });
+              }
+              const tools = path.includes("/tool-calls?");
+              if (tools) {
+                toolReads++;
+                if (order === "late-page" && toolReads === 2) {
+                  announce();
+                  return oldPage;
+                }
+              }
+              return json(
+                {
+                  data: tools && agent ? [call(acted)] : [],
+                  next_cursor: null,
+                },
+                200,
+                { ETag: acted ? '"2"' : '"1"' },
+              );
+            },
+          );
+          const service = new HTTPChat(
+            config,
+            new Api(fetcher as typeof fetch),
+          );
+          const events = service.events.bind(service);
+          let firstPoll: ReturnType<typeof events> | undefined;
+          vi.spyOn(service, "events").mockImplementation((...args) => {
+            const promise = events(...args);
+            if (!firstPoll) {
+              firstPoll = promise;
+              void promise.catch(() => {});
+            }
+            return promise;
+          });
+          location.hash = "chat/" + sid;
+          const view = mount(ChatWorkspace, { props: { service } });
+          try {
+            await flushPromises();
+            await oldStarted;
+            await view
+              .findAll("button")
+              .find((b) => b.text() === (agent ? "批准此次工具" : "停止运行"))!
+              .trigger("click");
+            await flushPromises();
+            if (order === "late-stream") {
+              await bStarted;
+              oldController.close();
+              await flushPromises();
+              releaseB(json(doc(true), 200, { ETag: '"2"' }));
+            } else {
+              await flushPromises();
+              releaseOld(
+                json(
+                  { data: agent ? [call(false)] : [], next_cursor: null },
+                  200,
+                  { ETag: '"1"' },
+                ),
+              );
+            }
+            await flushPromises();
+            await expect(firstPoll).rejects.toMatchObject({
+              name: "AbortError",
+            });
+            await flushPromises();
+            expect(view.find(".chat-controls .badge").text()).toBe(
+              agent ? "completed" : "cancelled",
+            );
+            expect(view.text()).not.toContain("AR-1 响应关联或格式异常");
+            expect(view.findAll('[role="alert"]')).toHaveLength(0);
+            expect(writes).toHaveLength(1);
+            expect(writes.some((p) => p.endsWith("/runs"))).toBe(false);
+            expect(roots).toBe(order === "late-stream" ? 2 : 3);
+            const peek = await service.events(sid, rid, "opaque-B");
+            expect(peek.snapshot.runs[0]!.state).toBe(
+              agent ? "completed" : "cancelled",
+            );
+          } finally {
+            view.unmount();
+            location.hash = "";
+            releaseB?.(json(doc(true), 200, { ETag: '"2"' }));
+            releaseOld?.(json({ data: [], next_cursor: null }));
+            try {
+              oldController?.close();
+            } catch {}
+            service.dispose();
+          }
+        },
+      );
+    }
+  it("an idle timeout still reads the authoritative snapshot", async () => {
+    vi.useFakeTimers();
+    let roots = 0;
+    const fetcher = vi.fn(async (path: string, init?: RequestInit) => {
+      if (path.includes("/events/stream"))
+        return new Response(
+          new ReadableStream({
+            start(c) {
+              init?.signal?.addEventListener("abort", () =>
+                c.error(new DOMException("idle", "AbortError")),
+              );
+            },
+          }),
+          { headers: { "Content-Type": "text/event-stream" } },
+        );
+      if (path === root + "/sessions/" + sid) {
+        roots++;
+        return json(snapshot([run()], [], "1", "opaque-A"));
+      }
+      return json({ data: [], next_cursor: null });
+    });
+    const service = new HTTPChat(config, new Api(fetcher as typeof fetch));
+    try {
+      await service.read(sid);
+      const poll = service.events(sid, rid, "opaque-A");
+      await vi.advanceTimersByTimeAsync(1200);
+      expect((await poll).snapshot.id).toBe(sid);
+      expect(roots).toBe(2);
+    } finally {
+      service.dispose();
+      vi.useRealTimers();
+    }
+  });
+  it("a timed-out current reader cannot mask a genuinely foreign event", async () => {
+    vi.useFakeTimers();
+    let controller!: ReadableStreamDefaultController<Uint8Array>,
+      roots = 0;
+    const fetcher = vi.fn(async (path: string) => {
+      if (path.includes("/events/stream"))
+        return new Response(
+          new ReadableStream<Uint8Array>({
+            start(c) {
+              controller = c;
+            },
+          }),
+          { headers: { "Content-Type": "text/event-stream" } },
+        );
+      if (path === root + "/sessions/" + sid) {
+        roots++;
+        return json(snapshot([run()], [message("你")], "1", "opaque-A"));
+      }
+      return json({ data: [], next_cursor: null });
+    });
+    const service = new HTTPChat(config, new Api(fetcher as typeof fetch));
+    try {
+      await service.read(sid);
+      const poll = service.events(sid, rid, "opaque-A");
+      const rejected = expect(poll).rejects.toMatchObject({
+        code: "protocol_error",
+      });
+      await vi.advanceTimersByTimeAsync(1200);
+      controller.enqueue(
+        new TextEncoder().encode(
+          frame(sse({ message_id: mid, offset: "3", text: "🙂" }, "2", owner)),
+        ),
+      );
+      controller.close();
+      await rejected;
+      expect(roots).toBe(1);
+    } finally {
+      service.dispose();
+      vi.useRealTimers();
+    }
+  });
+});
+
+for (const pending of [false, true])
+  it(
+    "server capability/approval, never a model alias, controls Agent admission; pending=" +
+      pending,
+    async () => {
+      const alias = "alias-claims-tools-v1";
+      const value = {
+        ...caps,
+        model_modes: [
+          {
+            ...caps.model_modes[0]!,
+            model_alias: alias,
+            tools_protocol: pending ? "tools-v1" : null,
+            approval_state: pending ? "pending" : "approved",
+          },
+        ],
+      };
+      const fetcher = vi.fn(async () => json(value));
+      const service = new HTTPChat(config, new Api(fetcher as typeof fetch));
+      const [model] = await service.models();
+      expect(model!.modes).toEqual(pending ? [] : ["chat"]);
+      expect(model!.capability.tools).toBe(pending ? "tools-v1" : null);
+      expect(model!.capability.approval).toBe(pending ? "pending" : "approved");
+      await expect(
+        service.start({
+          sessionId: sid,
+          commandId: crypto.randomUUID(),
+          content: "No generation",
+          model: alias,
+          mode: "agent",
+        }),
+      ).rejects.toMatchObject({ code: "capability_unsupported" });
+      expect(service.hasPending()).toBe(false);
+      expect(fetcher).toHaveBeenCalledTimes(1);
+    },
+  );
