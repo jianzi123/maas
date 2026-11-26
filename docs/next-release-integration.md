@@ -17,6 +17,20 @@ Multica 的本单、MAAS-8、MAAS-3 PR 关联表本轮仍为空；以下状态�
 
 本任务独立分支 `agent/maas/cd9359fccf3e` 本地按 #12→#20→#11 以 Merge commit 保留祖先，初始组合为 `7a26cee07c0e23bd9f80a4de3d2bdb5af68f2f02`。三个 PR 的 identities/dependencies/runtime-interface 经结构化比较，除生成来源/库存/历史 QA 差异外语义相同；冲突仅四份生成元数据，保留当前语义，最终代码提交后再跑标准锁脚本并独立提交四锁。没有远端合并这些 PR。
 
+## 后续实测截点（2026-11-26）
+
+- 已继续保留祖先纳入原运维 PR22 `7cc6b06eb9c93e0a1cf17554d81a51743c80f6c4`；组合代码 `1380c4921d72cde058d6693653429697a46a8b9b`，四锁 `999b3e63f414699d76d33a291b1c624a47685f32`。它新增自有 kind/kubeconfig/namespace 的验证/保留数据升级脚本及低并发构建参数；19项安装器/编排回归通过，其中11项为新夹具，不是K8s实装。
+- 原生运行实际门禁仍未通过：原运维最终实测可用1029MiB低于4096MiB测试预设，创建前拒绝。没有创建节点、拉节点镜像或写K8s资源；不接管无法证明本任务归属的既有集群。WSL Docker在Desktop恢复后已实际可用，启动前的不可用结论不再作为当前SQL阻断。
+- publisher配置/mTLS与模板测试实际3顶层、26测试及子测试通过，0失败/跳过；Go1.26 Windows publisher构建成功。安装器8项和来源锁6项原回归也通过，分别记录。
+- 新增真实 MySQL8.4.7＋TLS＋独立publisher进程用例 `TestPublisherMySQLService` 整体通过。使用独立无网络容器、Unix socket、专属卷；客户端及publisher为UID65532，DB使用独立publisher角色。实际覆盖关闭候选、缺生产证明拒绝Activate、同ID命令幂等/冲突、5条1142/1143拒绝、完成hook权限失败回滚、重开原状态、真正CLI存活204/就绪503与优雅退出，原业务表保持未写入。该结果是集成实测，不是独立QA或生产发布成功。
+- 首次Go准备失败（继承错误GOROOT）与两次SQL环境失败保留。SQL最初误连Docker初始化临时mysqld，日志显示临时实例关停导致1053/CLI不可用；另一次/proc exe读取权限导致就绪探测超时。最终使用PID1命令名＋认证ping排除临时实例，再运行未改的原oracle；诊断测试改动已恢复，未通过放宽产品或用例断言取得通过。所有自有容器及卷清理完成。
+- FC-1已经裁定迁移政策：002 Applying即使表完整也不可serve/ready；kernel1–3、release1–3、product1–2须Applied/摘要/结构权限，agent001无journal不能伪造状态。运行漂移须阻止新dispatch。原后端实现/同SHA独立复验仍待交接，不能把规范当代码已修。
+- R-P01已有原前端独立站点实证：旧试用目录可进入，但合成无效Key的POST返回405/Allow GET,HEAD，无请求ID，request/usage增量0。它不是供应商失败；原前端正以可选playground能力开关和Chat引导处理，并修登录bootstrap晚到401竞态。
+- 独立QA在4402/d27真实Chrome站点新增10项唯一断言，9过1失败。开放 `QA-CHAT-RACE-001/P2`：实际已准入取消后后端cancelled，界面仍running并假报协议异常；停止/批准与旧poll尾部read的两种迟到顺序须由原前端修复，再交原QA定向复验。不得把补抓正常当关闭；畸形关联仍须拒绝、原ID不重放/不重计。102条历史/真实410、工具批准、双重启及只读业务hash的已通过范围保留在4402，不外推新UI。
+- PR9后续作者修复为 `0cea087d21cac94d41f2f93443a48c3a7eaef00f` → `82284e8fae1c8c11f437e2506aa125694b1f7f99`，已读回新远端head，独立CPU复验仍待完成。研究线继续分离，不将整个PR9或CPU通过写成产品/GPU加速。
+
+以下初始审查表保留发现时点；本节和最终主单验证矩阵覆盖其后续“待定/验证中”状态。最后组合的完整SHA、四锁、两包与仍未验项以最终VERSION和交付记录为准。
+
 ## 入口与依赖图
 
 ```mermaid
