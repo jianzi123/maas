@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "sourceMode": "single-repository-code-commit",
   "backend": {
-    "sourceCommit": "1380c4921d72cde058d6693653429697a46a8b9b",
+    "sourceCommit": "c8dbe8a201b1a76da2b25029dae16b767944d4db",
     "files": {
       ".gitattributes": "dfd50b4d90593dde1621efa8da5b6dc071c7cf1844c139932e5b26df2607e6d5",
       ".gitignore": "46cf94096a926a26bc1a913b6cc632adacab0a96ab42d72a7dcbf216bcbaaa77",
@@ -35,7 +35,7 @@
       "docs/maas17-r5-history.md": "55cac7cac9bd0699ebca3cc03bd24483bd090854174be4688457cf80726b87b9",
       "docs/mysql-release.md": "5d2e4944aa779febc082398bf759604fd447fead5a738022579dd709676c35db",
       "docs/mysql-verification.md": "000a58429425df972b3bff59c3535e9050ca7e4ae55cb52a8f527b8299a07e96",
-      "docs/next-release-integration.md": "08cccf5dc6e88ac30487a6e5ba1d17ce667eca4bc0643a8373278d560bb54d62",
+      "docs/next-release-integration.md": "7d7a603cb44b6251c35a678719f4b49ed8266355d4b9d3d64baef0ab47eb01e2",
       "docs/product-management-and-offline.md": "33e8ad0c7134e44532a38df0601145ec67c883d047b6418cae82d59fed020717",
       "docs/product-offline-verification.md": "8e21119eadae27a32ec9c584efecb495540c5978c827ae48641c00614bff77fc",
       "docs/product-service-verification.md": "dbd6fa1ea3e894c80c9d64cabb08550defb97f314b22791e5024959c10fc62cd",
@@ -631,7 +631,7 @@
     }
   },
   "console": {
-    "sourceCommit": "1380c4921d72cde058d6693653429697a46a8b9b",
+    "sourceCommit": "c8dbe8a201b1a76da2b25029dae16b767944d4db",
     "files": {
       "console/.env.fixtures": "4d5e22f8eeb4bbf5a027a34c7a4bfef806876a470f89440f9611bd01a9d8c5f7",
       "console/.env.workbench": "930edf078e756f41d37fad0f7ce87332d8af59e65dac57b11797bcf0117a9216",
@@ -746,7 +746,7 @@
     }
   },
   "deployment": {
-    "sourceCommit": "1380c4921d72cde058d6693653429697a46a8b9b",
+    "sourceCommit": "c8dbe8a201b1a76da2b25029dae16b767944d4db",
     "files": {
       "deploy/.gitattributes": "a79691a93b46e49ce460c26ef22afcc03d6eca1e63bf2edbc20e96159510f6c9",
       "deploy/.gitignore": "b03ab30ac646ab4bdab424be43b1d1c707eb62736b452fc9f27d3658455e8b22",
