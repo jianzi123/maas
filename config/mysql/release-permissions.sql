@@ -15,6 +15,7 @@ GRANT SELECT ON __MAAS_DATABASE__.release_schema_migrations TO maas_release_publ
 -- interface. The Go kernel's connection owns business writes, and needs SELECT
 -- on these release tables for LockActive in its one admission transaction.
 CREATE ROLE IF NOT EXISTS maas_release_reader;
+GRANT SELECT ON __MAAS_DATABASE__.release_schema_migrations TO maas_release_reader;
 GRANT SELECT ON __MAAS_DATABASE__.release_links TO maas_release_reader;
 GRANT SELECT ON __MAAS_DATABASE__.publications TO maas_release_reader;
 GRANT SELECT ON __MAAS_DATABASE__.active_model_bindings TO maas_release_reader;

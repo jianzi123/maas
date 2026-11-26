@@ -120,10 +120,15 @@ func Open(ctx context.Context, c Config) (*Runtime, error) {
 	if e != nil {
 		return nil, e
 	}
-	s.Reauthorize = sessions.Reauthorize
+	s.Reauthorize = func(ctx context.Context, p a.Principal) (a.Principal, error) {
+		if e := r.checkReady(ctx); e != nil {
+			return a.Principal{}, a.ErrUnavailable
+		}
+		return sessions.Reauthorize(ctx, p)
+	}
 	s.CountContext = models.CountContext
 	r.Service = s
-	host, e := a.NewHost(root, s, c.Agent.Concurrency, sessions.Reauthorize)
+	host, e := a.NewHost(root, s, c.Agent.Concurrency, s.Reauthorize)
 	if e != nil {
 		return nil, e
 	}
@@ -132,7 +137,7 @@ func Open(ctx context.Context, c Config) (*Runtime, error) {
 	if e != nil {
 		return nil, errors.New("agent_contract_unavailable")
 	}
-	agent, e := a.NewARHandler(s, sessions, models, l, cursor, contract, 20*time.Second)
+	agent, e := a.NewARHandler(s, readyAuthenticator{sessions, r.checkReady}, models, l, cursor, contract, 20*time.Second)
 	if e != nil {
 		return nil, e
 	}
@@ -152,7 +157,7 @@ func Open(ctx context.Context, c Config) (*Runtime, error) {
 		case q.URL.Path == "/readyz":
 			check, done := context.WithTimeout(q.Context(), 2*time.Second)
 			defer done()
-			if r.ctx.Err() != nil || db.PingContext(check) != nil {
+			if r.checkReady(check) != nil {
 				http.Error(w, "not ready", 503)
 				return
 			}
@@ -223,6 +228,39 @@ func Open(ctx context.Context, c Config) (*Runtime, error) {
 	return r, nil
 }
 func (r *Runtime) Done() <-chan struct{} { return r.ctx.Done() }
+
+// A healthy pool connection is insufficient: dispatch belongs to the pinned
+// scheduler connection and all required migrations must remain ready.
+func (r *Runtime) checkReady(ctx context.Context) error {
+	if ctx.Err() != nil {
+		return ctx.Err()
+	}
+	if r.ctx.Err() != nil {
+		return a.ErrUnavailable
+	}
+	var own int
+	if validateSchema(ctx, r.DB) != nil || r.lease.QueryRowContext(ctx, "SELECT IS_USED_LOCK(CONCAT('maas-product-runtime:',DATABASE()))=CONNECTION_ID()").Scan(&own) != nil || own != 1 {
+		// A caller cancelling its own HTTP request must not retire the service.
+		if ctx.Err() != nil {
+			return ctx.Err()
+		}
+		r.cancel()
+		return a.ErrUnavailable
+	}
+	return nil
+}
+
+type readyAuthenticator struct {
+	sessions *Sessions
+	check    func(context.Context) error
+}
+
+func (guard readyAuthenticator) Authenticate(q *http.Request, write bool) (a.Principal, error) {
+	if e := guard.check(q.Context()); e != nil {
+		return a.Principal{}, e
+	}
+	return guard.sessions.Authenticate(q, write)
+}
 func (r *Runtime) Close() {
 	r.closeOnce.Do(func() {
 		r.cancel()
