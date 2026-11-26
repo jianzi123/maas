@@ -6,3 +6,4 @@ finality/*.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-a
 finality/source-samples/* -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 deepseek/*.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 tool-calls/*.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+http-vectors/*.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

@@ -1,0 +1,876 @@
+{
+  "version": "0.9",
+  "unified_source": "4402c456a155646ee4111e5f4a1f285621c11273",
+  "inherited_input_head": "037be34aba15563aa77c3dc1dcd1068c591f620b",
+  "public_protocol": "AR-1 draft.2 / ar.session.event/1.0; keep text-v1 tools-v1 separate",
+  "mappings": [
+    {
+      "id": "TC01",
+      "original_vector_sha256": "7438ea077999fa9b19d789aed78aca4f887bdf60e5ea107bd71efbca0bf6c7d1",
+      "HTTP_replay_assertion": {
+        "status": "completed",
+        "tool_executions": 1,
+        "fixture_model_turns_read": 2
+      },
+      "formal_consumer_assertion": "source parse/termination before Response.Calls; original protected terminal before TerminalConfirmed; whole Registry batch before tool execution",
+      "base_gate_expected": "tools-v1 rejected before Prepare",
+      "fixture_tool_warning": "sum_ints/echo_text are v0.8 oracle tools, not formal registry names; use consumer-cases for actual tool schemas",
+      "consumer_locations": [
+        "kernelmodel tools parser -> Response.Calls",
+        "Service.Drive whole batch validation",
+        "Message.Parts internal id -> Step.Call.SourceID feedback"
+      ],
+      "specific_assertion": "For complete source tool finish, preserve index order and all original IDs; only approved registry executes serially. Next request uses original assistant/tool roles and source IDs; stop completes only current child."
+    },
+    {
+      "id": "TC02_interleaved_two_calls_serial_execution",
+      "original_vector_sha256": "e5fbc4281ee69216a1f4f2a6f1843346915e223d1f6163e07dc2878b63a80b62",
+      "HTTP_replay_assertion": {
+        "status": "completed",
+        "tool_executions": 2,
+        "fixture_model_turns_read": 2
+      },
+      "formal_consumer_assertion": "source parse/termination before Response.Calls; original protected terminal before TerminalConfirmed; whole Registry batch before tool execution",
+      "base_gate_expected": "tools-v1 rejected before Prepare",
+      "fixture_tool_warning": "sum_ints/echo_text are v0.8 oracle tools, not formal registry names; use consumer-cases for actual tool schemas",
+      "consumer_locations": [
+        "kernelmodel tools parser -> Response.Calls",
+        "Service.Drive whole batch validation",
+        "Message.Parts internal id -> Step.Call.SourceID feedback"
+      ],
+      "specific_assertion": "For complete source tool finish, preserve index order and all original IDs; only approved registry executes serially. Next request uses original assistant/tool roles and source IDs; stop completes only current child."
+    },
+    {
+      "id": "TC03_illegal_argument_JSON",
+      "original_vector_sha256": "76c781f6662f6ac72d1b175068771372f63741c7878a366583d7ee3ac97edfbe",
+      "HTTP_replay_assertion": {
+        "status": "rejected",
+        "tool_executions": 0,
+        "fixture_model_turns_read": 1,
+        "reason": "invalid_json"
+      },
+      "formal_consumer_assertion": "source parse/termination before Response.Calls; original protected terminal before TerminalConfirmed; whole Registry batch before tool execution",
+      "base_gate_expected": "tools-v1 rejected before Prepare",
+      "fixture_tool_warning": "sum_ints/echo_text are v0.8 oracle tools, not formal registry names; use consumer-cases for actual tool schemas",
+      "consumer_locations": [
+        "source argument concatenation",
+        "protocol.Canonical raw JSON",
+        "Service.validate tool arguments"
+      ],
+      "specific_assertion": "Invalid/duplicate-key/non-finite arguments reject before any tool in batch; do not normalize through a map first and erase duplicate keys. Already-completed model usage is retained independently."
+    },
+    {
+      "id": "TC04_unknown_tool",
+      "original_vector_sha256": "661efda6d25811cfb61b1ef5ed4397b3e4b8bf59eaa97aee00815af086733244",
+      "HTTP_replay_assertion": {
+        "status": "rejected",
+        "tool_executions": 0,
+        "fixture_model_turns_read": 1,
+        "reason": "unknown_tool"
+      },
+      "formal_consumer_assertion": "source parse/termination before Response.Calls; original protected terminal before TerminalConfirmed; whole Registry batch before tool execution",
+      "base_gate_expected": "tools-v1 rejected before Prepare",
+      "fixture_tool_warning": "sum_ints/echo_text are v0.8 oracle tools, not formal registry names; use consumer-cases for actual tool schemas",
+      "consumer_locations": [
+        "Service.Drive registry Lookup/permissions/selectedTool",
+        "ToolSpec.Schema validation before tools checkpoint"
+      ],
+      "specific_assertion": "Whole batch unknown/unauthorized/invalid tool rejection before first execution. Use actual bounded_arithmetic@1/list_visible_models@1 schemas; never silently alias original fixture names."
+    },
+    {
+      "id": "TC05_unauthorized_tool",
+      "original_vector_sha256": "cc93ce1d11809aabf430c945d4b652f1e7639d163dd626ade5011c4ae55e75d5",
+      "HTTP_replay_assertion": {
+        "status": "rejected",
+        "tool_executions": 0,
+        "fixture_model_turns_read": 1,
+        "reason": "tool_not_authorized"
+      },
+      "formal_consumer_assertion": "source parse/termination before Response.Calls; original protected terminal before TerminalConfirmed; whole Registry batch before tool execution",
+      "base_gate_expected": "tools-v1 rejected before Prepare",
+      "fixture_tool_warning": "sum_ints/echo_text are v0.8 oracle tools, not formal registry names; use consumer-cases for actual tool schemas",
+      "consumer_locations": [
+        "Service.Drive registry Lookup/permissions/selectedTool",
+        "ToolSpec.Schema validation before tools checkpoint"
+      ],
+      "specific_assertion": "Whole batch unknown/unauthorized/invalid tool rejection before first execution. Use actual bounded_arithmetic@1/list_visible_models@1 schemas; never silently alias original fixture names."
+    },
+    {
+      "id": "TC06_duplicate_call_ID",
+      "original_vector_sha256": "05708bf4c130435cedac797cdd3284e8df20ce805ffc32d8fc4d0870814f36c0",
+      "HTTP_replay_assertion": {
+        "status": "rejected",
+        "tool_executions": 0,
+        "fixture_model_turns_read": 1,
+        "reason": "duplicate_call_id"
+      },
+      "formal_consumer_assertion": "source parse/termination before Response.Calls; original protected terminal before TerminalConfirmed; whole Registry batch before tool execution",
+      "base_gate_expected": "tools-v1 rejected before Prepare",
+      "fixture_tool_warning": "sum_ints/echo_text are v0.8 oracle tools, not formal registry names; use consumer-cases for actual tool schemas",
+      "consumer_locations": [
+        "source tool.index accumulator",
+        "Response.Calls provider IDs",
+        "Service Call.ID duplicate/size guard"
+      ],
+      "specific_assertion": "Reject repeated/switched metadata, duplicate IDs, sparse/negative indexes or over-limit argument bytes; no execution from a partial argument prefix."
+    },
+    {
+      "id": "TC07_metadata_repeated",
+      "original_vector_sha256": "58c08dd9d8927ba06ed6db35462f4e5812f1a55016def3c2cf11da956a343a5b",
+      "HTTP_replay_assertion": {
+        "status": "rejected",
+        "tool_executions": 0,
+        "fixture_model_turns_read": 1,
+        "reason": "call_metadata_repeated_or_changed"
+      },
+      "formal_consumer_assertion": "source parse/termination before Response.Calls; original protected terminal before TerminalConfirmed; whole Registry batch before tool execution",
+      "base_gate_expected": "tools-v1 rejected before Prepare",
+      "fixture_tool_warning": "sum_ints/echo_text are v0.8 oracle tools, not formal registry names; use consumer-cases for actual tool schemas",
+      "consumer_locations": [
+        "source tool.index accumulator",
+        "Response.Calls provider IDs",
+        "Service Call.ID duplicate/size guard"
+      ],
+      "specific_assertion": "Reject repeated/switched metadata, duplicate IDs, sparse/negative indexes or over-limit argument bytes; no execution from a partial argument prefix."
+    },
+    {
+      "id": "TC08_sparse_index",
+      "original_vector_sha256": "bed5ee321b6925608a7590eb147cdc8bc7d5d3ed8221cc9e906b8cf4499e94aa",
+      "HTTP_replay_assertion": {
+        "status": "rejected",
+        "tool_executions": 0,
+        "fixture_model_turns_read": 1,
+        "reason": "sparse_indexes"
+      },
+      "formal_consumer_assertion": "source parse/termination before Response.Calls; original protected terminal before TerminalConfirmed; whole Registry batch before tool execution",
+      "base_gate_expected": "tools-v1 rejected before Prepare",
+      "fixture_tool_warning": "sum_ints/echo_text are v0.8 oracle tools, not formal registry names; use consumer-cases for actual tool schemas",
+      "consumer_locations": [
+        "source tool.index accumulator",
+        "Response.Calls provider IDs",
+        "Service Call.ID duplicate/size guard"
+      ],
+      "specific_assertion": "Reject repeated/switched metadata, duplicate IDs, sparse/negative indexes or over-limit argument bytes; no execution from a partial argument prefix."
+    },
+    {
+      "id": "TC09_negative_index",
+      "original_vector_sha256": "649fdc73be3ad3ba7ea46dcf7fe9a944501922688f18f7b4eb6881190f1f00a2",
+      "HTTP_replay_assertion": {
+        "status": "rejected",
+        "tool_executions": 0,
+        "fixture_model_turns_read": 1,
+        "reason": "call_index"
+      },
+      "formal_consumer_assertion": "source parse/termination before Response.Calls; original protected terminal before TerminalConfirmed; whole Registry batch before tool execution",
+      "base_gate_expected": "tools-v1 rejected before Prepare",
+      "fixture_tool_warning": "sum_ints/echo_text are v0.8 oracle tools, not formal registry names; use consumer-cases for actual tool schemas",
+      "consumer_locations": [
+        "source tool.index accumulator",
+        "Response.Calls provider IDs",
+        "Service Call.ID duplicate/size guard"
+      ],
+      "specific_assertion": "Reject repeated/switched metadata, duplicate IDs, sparse/negative indexes or over-limit argument bytes; no execution from a partial argument prefix."
+    },
+    {
+      "id": "TC10_duplicate_JSON_keys",
+      "original_vector_sha256": "ae53cd8dea2ab0f59a9cbeafd434a97c880a04aabff3ce6d4ef1c1310a07107c",
+      "HTTP_replay_assertion": {
+        "status": "rejected",
+        "tool_executions": 0,
+        "fixture_model_turns_read": 1,
+        "reason": "invalid_json"
+      },
+      "formal_consumer_assertion": "source parse/termination before Response.Calls; original protected terminal before TerminalConfirmed; whole Registry batch before tool execution",
+      "base_gate_expected": "tools-v1 rejected before Prepare",
+      "fixture_tool_warning": "sum_ints/echo_text are v0.8 oracle tools, not formal registry names; use consumer-cases for actual tool schemas",
+      "consumer_locations": [
+        "source argument concatenation",
+        "protocol.Canonical raw JSON",
+        "Service.validate tool arguments"
+      ],
+      "specific_assertion": "Invalid/duplicate-key/non-finite arguments reject before any tool in batch; do not normalize through a map first and erase duplicate keys. Already-completed model usage is retained independently."
+    },
+    {
+      "id": "TC11_argument_schema",
+      "original_vector_sha256": "e9f2de3a839d8a19d1d66c694388401fa1dbbe737827fcede06c44fb82701ba1",
+      "HTTP_replay_assertion": {
+        "status": "rejected",
+        "tool_executions": 0,
+        "fixture_model_turns_read": 1
+      },
+      "formal_consumer_assertion": "source parse/termination before Response.Calls; original protected terminal before TerminalConfirmed; whole Registry batch before tool execution",
+      "base_gate_expected": "tools-v1 rejected before Prepare",
+      "fixture_tool_warning": "sum_ints/echo_text are v0.8 oracle tools, not formal registry names; use consumer-cases for actual tool schemas",
+      "consumer_locations": [
+        "Service.Drive registry Lookup/permissions/selectedTool",
+        "ToolSpec.Schema validation before tools checkpoint"
+      ],
+      "specific_assertion": "Whole batch unknown/unauthorized/invalid tool rejection before first execution. Use actual bounded_arithmetic@1/list_visible_models@1 schemas; never silently alias original fixture names."
+    },
+    {
+      "id": "TC12_argument_limit",
+      "original_vector_sha256": "63246850590954703a13c3e442d8df0308167b6aad0814b69cc911388c64fdac",
+      "HTTP_replay_assertion": {
+        "status": "rejected",
+        "tool_executions": 0,
+        "fixture_model_turns_read": 1,
+        "reason": "arguments_limit"
+      },
+      "formal_consumer_assertion": "source parse/termination before Response.Calls; original protected terminal before TerminalConfirmed; whole Registry batch before tool execution",
+      "base_gate_expected": "tools-v1 rejected before Prepare",
+      "fixture_tool_warning": "sum_ints/echo_text are v0.8 oracle tools, not formal registry names; use consumer-cases for actual tool schemas",
+      "consumer_locations": [
+        "source tool.index accumulator",
+        "Response.Calls provider IDs",
+        "Service Call.ID duplicate/size guard"
+      ],
+      "specific_assertion": "Reject repeated/switched metadata, duplicate IDs, sparse/negative indexes or over-limit argument bytes; no execution from a partial argument prefix."
+    },
+    {
+      "id": "TC13_missing_result",
+      "original_vector_sha256": "a5ee499eee906a538488baf1bd07960876fafd060b3e9cd65e0e202b6f9dba6d",
+      "HTTP_replay_assertion": {
+        "status": "rejected",
+        "tool_executions": 1,
+        "fixture_model_turns_read": 1,
+        "reason": "missing_result"
+      },
+      "formal_consumer_assertion": "source parse/termination before Response.Calls; original protected terminal before TerminalConfirmed; whole Registry batch before tool execution",
+      "base_gate_expected": "tools-v1 rejected before Prepare",
+      "fixture_tool_warning": "sum_ints/echo_text are v0.8 oracle tools, not formal registry names; use consumer-cases for actual tool schemas",
+      "consumer_locations": [
+        "Step.Calls SourceID/internal ID mapping",
+        "committed tool_result history serializer"
+      ],
+      "specific_assertion": "Require exactly one completed result for each pending original source ID; reject missing/foreign/duplicate role/ID. Internal Part.CallID is not the provider tool_call_id."
+    },
+    {
+      "id": "TC14_wrong_result_ID",
+      "original_vector_sha256": "1cf49171c3f644249d3a71642e133640fd92826fb327f17e28ea2dcaeeb0feef",
+      "HTTP_replay_assertion": {
+        "status": "rejected",
+        "tool_executions": 1,
+        "fixture_model_turns_read": 1,
+        "reason": "result_binding"
+      },
+      "formal_consumer_assertion": "source parse/termination before Response.Calls; original protected terminal before TerminalConfirmed; whole Registry batch before tool execution",
+      "base_gate_expected": "tools-v1 rejected before Prepare",
+      "fixture_tool_warning": "sum_ints/echo_text are v0.8 oracle tools, not formal registry names; use consumer-cases for actual tool schemas",
+      "consumer_locations": [
+        "Step.Calls SourceID/internal ID mapping",
+        "committed tool_result history serializer"
+      ],
+      "specific_assertion": "Require exactly one completed result for each pending original source ID; reject missing/foreign/duplicate role/ID. Internal Part.CallID is not the provider tool_call_id."
+    },
+    {
+      "id": "TC15_wrong_result_role",
+      "original_vector_sha256": "72575d1121b301b8b678b5c25ec3102032b07fed9460d800b37c6b63ecb5ffe6",
+      "HTTP_replay_assertion": {
+        "status": "rejected",
+        "tool_executions": 1,
+        "fixture_model_turns_read": 1,
+        "reason": "result_role"
+      },
+      "formal_consumer_assertion": "source parse/termination before Response.Calls; original protected terminal before TerminalConfirmed; whole Registry batch before tool execution",
+      "base_gate_expected": "tools-v1 rejected before Prepare",
+      "fixture_tool_warning": "sum_ints/echo_text are v0.8 oracle tools, not formal registry names; use consumer-cases for actual tool schemas",
+      "consumer_locations": [
+        "Step.Calls SourceID/internal ID mapping",
+        "committed tool_result history serializer"
+      ],
+      "specific_assertion": "Require exactly one completed result for each pending original source ID; reject missing/foreign/duplicate role/ID. Internal Part.CallID is not the provider tool_call_id."
+    },
+    {
+      "id": "TC16_progress_usage_not_final",
+      "original_vector_sha256": "f3c7502cffb3fb2a0fb157eac1b471bb87bdfa0163b42b9705069a656f27d11e",
+      "HTTP_replay_assertion": {
+        "status": "rejected",
+        "tool_executions": 0,
+        "fixture_model_turns_read": 1,
+        "reason": "progress_is_not_final"
+      },
+      "formal_consumer_assertion": "source parse/termination before Response.Calls; original protected terminal before TerminalConfirmed; whole Registry batch before tool execution",
+      "base_gate_expected": "tools-v1 rejected before Prepare",
+      "fixture_tool_warning": "sum_ints/echo_text are v0.8 oracle tools, not formal registry names; use consumer-cases for actual tool schemas",
+      "consumer_locations": [
+        "kernel usageAuthority and approved UsagePolicy",
+        "original ledger read -> Response.Usage",
+        "Response.TerminalConfirmed"
+      ],
+      "specific_assertion": "Nonnull progress is not final. Missing actual stays null, true zero remains zero; contradictory finals reject. HTTP/source candidate never supplies TerminalConfirmed or authority to settle."
+    },
+    {
+      "id": "TC17_usage_missing_unknown",
+      "original_vector_sha256": "c0fa8c122a4d548e07222e3d3f951f664f04b9989ec24a28134e90305f33e999",
+      "HTTP_replay_assertion": {
+        "status": "completed",
+        "tool_executions": 1,
+        "fixture_model_turns_read": 2
+      },
+      "formal_consumer_assertion": "source parse/termination before Response.Calls; original protected terminal before TerminalConfirmed; whole Registry batch before tool execution",
+      "base_gate_expected": "tools-v1 rejected before Prepare",
+      "fixture_tool_warning": "sum_ints/echo_text are v0.8 oracle tools, not formal registry names; use consumer-cases for actual tool schemas",
+      "consumer_locations": [
+        "kernel usageAuthority and approved UsagePolicy",
+        "original ledger read -> Response.Usage",
+        "Response.TerminalConfirmed"
+      ],
+      "specific_assertion": "Nonnull progress is not final. Missing actual stays null, true zero remains zero; contradictory finals reject. HTTP/source candidate never supplies TerminalConfirmed or authority to settle."
+    },
+    {
+      "id": "TC18_usage_conflict",
+      "original_vector_sha256": "ae4e12a519533b61bdd3b4466a332036bc06d3d5fbf36a49076d17eb3b18f77c",
+      "HTTP_replay_assertion": {
+        "status": "rejected",
+        "tool_executions": 0,
+        "fixture_model_turns_read": 1
+      },
+      "formal_consumer_assertion": "source parse/termination before Response.Calls; original protected terminal before TerminalConfirmed; whole Registry batch before tool execution",
+      "base_gate_expected": "tools-v1 rejected before Prepare",
+      "fixture_tool_warning": "sum_ints/echo_text are v0.8 oracle tools, not formal registry names; use consumer-cases for actual tool schemas",
+      "consumer_locations": [
+        "kernel usageAuthority and approved UsagePolicy",
+        "original ledger read -> Response.Usage",
+        "Response.TerminalConfirmed"
+      ],
+      "specific_assertion": "Nonnull progress is not final. Missing actual stays null, true zero remains zero; contradictory finals reject. HTTP/source candidate never supplies TerminalConfirmed or authority to settle."
+    },
+    {
+      "id": "TC19_EOF_before_DONE",
+      "original_vector_sha256": "82c5b35663cfa7afd90a2e0a1071461a0f85205b8e883a148b9915b6a60d47d8",
+      "HTTP_replay_assertion": {
+        "status": "interrupted",
+        "tool_executions": 0,
+        "fixture_model_turns_read": 1
+      },
+      "formal_consumer_assertion": "source parse/termination before Response.Calls; original protected terminal before TerminalConfirmed; whole Registry batch before tool execution",
+      "base_gate_expected": "tools-v1 rejected before Prepare",
+      "fixture_tool_warning": "sum_ints/echo_text are v0.8 oracle tools, not formal registry names; use consumer-cases for actual tool schemas",
+      "consumer_locations": [
+        "bounded source finish/DONE/EOF parser",
+        "Relay cause latch and original child terminal",
+        "Service cancellation/needs_confirmation"
+      ],
+      "specific_assertion": "Cancel, EOF, deadline, length/error, duplicate finish and post-DONE data cannot run tools or invent success. Preserve completed prior child/tools and stop before next attempt; source finish does not prove durable terminal or engine exit."
+    },
+    {
+      "id": "TC20_cancel_after_final_chunk",
+      "original_vector_sha256": "fe42f8db16b8842c603911fbf6e25e0dbcfaa6620a3dc511e94d2bcaf60e63ab",
+      "HTTP_replay_assertion": {
+        "status": "interrupted",
+        "tool_executions": 0,
+        "fixture_model_turns_read": 1
+      },
+      "formal_consumer_assertion": "source parse/termination before Response.Calls; original protected terminal before TerminalConfirmed; whole Registry batch before tool execution",
+      "base_gate_expected": "tools-v1 rejected before Prepare",
+      "fixture_tool_warning": "sum_ints/echo_text are v0.8 oracle tools, not formal registry names; use consumer-cases for actual tool schemas",
+      "consumer_locations": [
+        "bounded source finish/DONE/EOF parser",
+        "Relay cause latch and original child terminal",
+        "Service cancellation/needs_confirmation"
+      ],
+      "specific_assertion": "Cancel, EOF, deadline, length/error, duplicate finish and post-DONE data cannot run tools or invent success. Preserve completed prior child/tools and stop before next attempt; source finish does not prove durable terminal or engine exit."
+    },
+    {
+      "id": "TC21_total_deadline",
+      "original_vector_sha256": "e8bbe4482c35d1629bab2f4a02e858a826fbf4a52f2afdabb1714a9e00b2568c",
+      "HTTP_replay_assertion": {
+        "status": "interrupted",
+        "tool_executions": 0,
+        "fixture_model_turns_read": 1
+      },
+      "formal_consumer_assertion": "source parse/termination before Response.Calls; original protected terminal before TerminalConfirmed; whole Registry batch before tool execution",
+      "base_gate_expected": "tools-v1 rejected before Prepare",
+      "fixture_tool_warning": "sum_ints/echo_text are v0.8 oracle tools, not formal registry names; use consumer-cases for actual tool schemas",
+      "consumer_locations": [
+        "bounded source finish/DONE/EOF parser",
+        "Relay cause latch and original child terminal",
+        "Service cancellation/needs_confirmation"
+      ],
+      "specific_assertion": "Cancel, EOF, deadline, length/error, duplicate finish and post-DONE data cannot run tools or invent success. Preserve completed prior child/tools and stop before next attempt; source finish does not prove durable terminal or engine exit."
+    },
+    {
+      "id": "TC22_finish_length_no_execution",
+      "original_vector_sha256": "a3c6c549bedc6e3e054d9af0fe4777fd8780f919ebe8df21dfe62cf67bcc6669",
+      "HTTP_replay_assertion": {
+        "status": "truncated",
+        "tool_executions": 0,
+        "fixture_model_turns_read": 1
+      },
+      "formal_consumer_assertion": "source parse/termination before Response.Calls; original protected terminal before TerminalConfirmed; whole Registry batch before tool execution",
+      "base_gate_expected": "tools-v1 rejected before Prepare",
+      "fixture_tool_warning": "sum_ints/echo_text are v0.8 oracle tools, not formal registry names; use consumer-cases for actual tool schemas",
+      "consumer_locations": [
+        "bounded source finish/DONE/EOF parser",
+        "Relay cause latch and original child terminal",
+        "Service cancellation/needs_confirmation"
+      ],
+      "specific_assertion": "Cancel, EOF, deadline, length/error, duplicate finish and post-DONE data cannot run tools or invent success. Preserve completed prior child/tools and stop before next attempt; source finish does not prove durable terminal or engine exit."
+    },
+    {
+      "id": "TC23_stop_with_calls",
+      "original_vector_sha256": "d90151ab7d4426a39b78567d7187020f0a41fb05833d252c8bde2bb2d333f47f",
+      "HTTP_replay_assertion": {
+        "status": "rejected",
+        "tool_executions": 0,
+        "fixture_model_turns_read": 1,
+        "reason": "stop_with_calls"
+      },
+      "formal_consumer_assertion": "source parse/termination before Response.Calls; original protected terminal before TerminalConfirmed; whole Registry batch before tool execution",
+      "base_gate_expected": "tools-v1 rejected before Prepare",
+      "fixture_tool_warning": "sum_ints/echo_text are v0.8 oracle tools, not formal registry names; use consumer-cases for actual tool schemas",
+      "consumer_locations": [
+        "bounded source finish/DONE/EOF parser",
+        "Relay cause latch and original child terminal",
+        "Service cancellation/needs_confirmation"
+      ],
+      "specific_assertion": "Cancel, EOF, deadline, length/error, duplicate finish and post-DONE data cannot run tools or invent success. Preserve completed prior child/tools and stop before next attempt; source finish does not prove durable terminal or engine exit."
+    },
+    {
+      "id": "TC24_tool_finish_without_calls",
+      "original_vector_sha256": "28ee004201ae59909946fa772fbd303c5ddbab2e132d06a077150585c39ff7e1",
+      "HTTP_replay_assertion": {
+        "status": "rejected",
+        "tool_executions": 0,
+        "fixture_model_turns_read": 1,
+        "reason": "missing_tool_calls"
+      },
+      "formal_consumer_assertion": "source parse/termination before Response.Calls; original protected terminal before TerminalConfirmed; whole Registry batch before tool execution",
+      "base_gate_expected": "tools-v1 rejected before Prepare",
+      "fixture_tool_warning": "sum_ints/echo_text are v0.8 oracle tools, not formal registry names; use consumer-cases for actual tool schemas",
+      "consumer_locations": [
+        "bounded source finish/DONE/EOF parser",
+        "Relay cause latch and original child terminal",
+        "Service cancellation/needs_confirmation"
+      ],
+      "specific_assertion": "Cancel, EOF, deadline, length/error, duplicate finish and post-DONE data cannot run tools or invent success. Preserve completed prior child/tools and stop before next attempt; source finish does not prove durable terminal or engine exit."
+    },
+    {
+      "id": "TC25_finish_error",
+      "original_vector_sha256": "28ec298dcdc1e17136ce9e434d89ee1e442c93fb6fa5650b8cb37dee427b40fc",
+      "HTTP_replay_assertion": {
+        "status": "model_failed",
+        "tool_executions": 0,
+        "fixture_model_turns_read": 1
+      },
+      "formal_consumer_assertion": "source parse/termination before Response.Calls; original protected terminal before TerminalConfirmed; whole Registry batch before tool execution",
+      "base_gate_expected": "tools-v1 rejected before Prepare",
+      "fixture_tool_warning": "sum_ints/echo_text are v0.8 oracle tools, not formal registry names; use consumer-cases for actual tool schemas",
+      "consumer_locations": [
+        "bounded source finish/DONE/EOF parser",
+        "Relay cause latch and original child terminal",
+        "Service cancellation/needs_confirmation"
+      ],
+      "specific_assertion": "Cancel, EOF, deadline, length/error, duplicate finish and post-DONE data cannot run tools or invent success. Preserve completed prior child/tools and stop before next attempt; source finish does not prove durable terminal or engine exit."
+    },
+    {
+      "id": "TC26_source_error_then_DONE",
+      "original_vector_sha256": "19a3d6157e2bbd68fed71bcbb9055a491f15a3754a61158ebbdddbd9d4ea1a2c",
+      "HTTP_replay_assertion": {
+        "status": "rejected",
+        "tool_executions": 0,
+        "fixture_model_turns_read": 1,
+        "reason": "source_error"
+      },
+      "formal_consumer_assertion": "source parse/termination before Response.Calls; original protected terminal before TerminalConfirmed; whole Registry batch before tool execution",
+      "base_gate_expected": "tools-v1 rejected before Prepare",
+      "fixture_tool_warning": "sum_ints/echo_text are v0.8 oracle tools, not formal registry names; use consumer-cases for actual tool schemas",
+      "consumer_locations": [
+        "bounded source finish/DONE/EOF parser",
+        "Relay cause latch and original child terminal",
+        "Service cancellation/needs_confirmation"
+      ],
+      "specific_assertion": "Cancel, EOF, deadline, length/error, duplicate finish and post-DONE data cannot run tools or invent success. Preserve completed prior child/tools and stop before next attempt; source finish does not prove durable terminal or engine exit."
+    },
+    {
+      "id": "TC27_capability_unsupported_text_profile",
+      "original_vector_sha256": "4a5b1ac753ee02fbe2945bf46103c2f618f0e039ae096c793e0f03a14fab4a23",
+      "HTTP_replay_assertion": {
+        "status": "capability_unsupported",
+        "tool_executions": 0,
+        "fixture_model_turns_read": 0
+      },
+      "formal_consumer_assertion": "source parse/termination before Response.Calls; original protected terminal before TerminalConfirmed; whole Registry batch before tool execution",
+      "base_gate_expected": "tools-v1 rejected before Prepare",
+      "fixture_tool_warning": "sum_ints/echo_text are v0.8 oracle tools, not formal registry names; use consumer-cases for actual tool schemas",
+      "consumer_locations": [
+        "Models.Resolve/Supports/prepare and RelayModel.Supports",
+        "trusted profile/protocol/source binding",
+        "session/request history ownership"
+      ],
+      "specific_assertion": "Explicit tools-v1, source/profile/model/mode and original child identity required. Text/unknown capabilities reject before Prepare/HTTP; do not forward undeclared extensions, forged history, duplicated child IDs or unapproved parallel execution."
+    },
+    {
+      "id": "TC28_parallel_execution_not_approved",
+      "original_vector_sha256": "f030dc6abc659420fa4d76f130c3578db97e5e48a235a0ac78cff3c5f60ddc62",
+      "HTTP_replay_assertion": {
+        "status": "rejected",
+        "tool_executions": 0,
+        "fixture_model_turns_read": 0,
+        "reason": "parallel_execution_not_approved"
+      },
+      "formal_consumer_assertion": "source parse/termination before Response.Calls; original protected terminal before TerminalConfirmed; whole Registry batch before tool execution",
+      "base_gate_expected": "tools-v1 rejected before Prepare",
+      "fixture_tool_warning": "sum_ints/echo_text are v0.8 oracle tools, not formal registry names; use consumer-cases for actual tool schemas",
+      "consumer_locations": [
+        "Models.Resolve/Supports/prepare and RelayModel.Supports",
+        "trusted profile/protocol/source binding",
+        "session/request history ownership"
+      ],
+      "specific_assertion": "Explicit tools-v1, source/profile/model/mode and original child identity required. Text/unknown capabilities reject before Prepare/HTTP; do not forward undeclared extensions, forged history, duplicated child IDs or unapproved parallel execution."
+    },
+    {
+      "id": "TC29_source_identity_drift",
+      "original_vector_sha256": "032f170dffef9ad647bd3707604d72eda6fb99ba45025633c378d031d2fcc199",
+      "HTTP_replay_assertion": {
+        "status": "rejected",
+        "tool_executions": 0,
+        "fixture_model_turns_read": 1,
+        "reason": "source_identity"
+      },
+      "formal_consumer_assertion": "source parse/termination before Response.Calls; original protected terminal before TerminalConfirmed; whole Registry batch before tool execution",
+      "base_gate_expected": "tools-v1 rejected before Prepare",
+      "fixture_tool_warning": "sum_ints/echo_text are v0.8 oracle tools, not formal registry names; use consumer-cases for actual tool schemas",
+      "consumer_locations": [
+        "Models.Resolve/Supports/prepare and RelayModel.Supports",
+        "trusted profile/protocol/source binding",
+        "session/request history ownership"
+      ],
+      "specific_assertion": "Explicit tools-v1, source/profile/model/mode and original child identity required. Text/unknown capabilities reject before Prepare/HTTP; do not forward undeclared extensions, forged history, duplicated child IDs or unapproved parallel execution."
+    },
+    {
+      "id": "TC30_reasoning_mode_drift",
+      "original_vector_sha256": "553a52ecb813a1071024c1df5d72c668d89ce41555ec0acfe9c98ccdcfb30c92",
+      "HTTP_replay_assertion": {
+        "status": "rejected",
+        "tool_executions": 0,
+        "fixture_model_turns_read": 1,
+        "reason": "undeclared_delta"
+      },
+      "formal_consumer_assertion": "source parse/termination before Response.Calls; original protected terminal before TerminalConfirmed; whole Registry batch before tool execution",
+      "base_gate_expected": "tools-v1 rejected before Prepare",
+      "fixture_tool_warning": "sum_ints/echo_text are v0.8 oracle tools, not formal registry names; use consumer-cases for actual tool schemas",
+      "consumer_locations": [
+        "Models.Resolve/Supports/prepare and RelayModel.Supports",
+        "trusted profile/protocol/source binding",
+        "session/request history ownership"
+      ],
+      "specific_assertion": "Explicit tools-v1, source/profile/model/mode and original child identity required. Text/unknown capabilities reject before Prepare/HTTP; do not forward undeclared extensions, forged history, duplicated child IDs or unapproved parallel execution."
+    },
+    {
+      "id": "TC31_duplicate_finish",
+      "original_vector_sha256": "ef6e368ecb2325548b4ded2b33f5eadbf8536d2d3793973825354ce482de8449",
+      "HTTP_replay_assertion": {
+        "status": "rejected",
+        "tool_executions": 0,
+        "fixture_model_turns_read": 1,
+        "reason": "data_after_finish"
+      },
+      "formal_consumer_assertion": "source parse/termination before Response.Calls; original protected terminal before TerminalConfirmed; whole Registry batch before tool execution",
+      "base_gate_expected": "tools-v1 rejected before Prepare",
+      "fixture_tool_warning": "sum_ints/echo_text are v0.8 oracle tools, not formal registry names; use consumer-cases for actual tool schemas",
+      "consumer_locations": [
+        "bounded source finish/DONE/EOF parser",
+        "Relay cause latch and original child terminal",
+        "Service cancellation/needs_confirmation"
+      ],
+      "specific_assertion": "Cancel, EOF, deadline, length/error, duplicate finish and post-DONE data cannot run tools or invent success. Preserve completed prior child/tools and stop before next attempt; source finish does not prove durable terminal or engine exit."
+    },
+    {
+      "id": "TC32_post_DONE_data",
+      "original_vector_sha256": "7f340b15c9f58872901372bfc267019bb26b763a04e0c7dcdc7e7f3536593548",
+      "HTTP_replay_assertion": {
+        "status": "rejected",
+        "tool_executions": 0,
+        "fixture_model_turns_read": 1,
+        "reason": "after_DONE"
+      },
+      "formal_consumer_assertion": "source parse/termination before Response.Calls; original protected terminal before TerminalConfirmed; whole Registry batch before tool execution",
+      "base_gate_expected": "tools-v1 rejected before Prepare",
+      "fixture_tool_warning": "sum_ints/echo_text are v0.8 oracle tools, not formal registry names; use consumer-cases for actual tool schemas",
+      "consumer_locations": [
+        "bounded source finish/DONE/EOF parser",
+        "Relay cause latch and original child terminal",
+        "Service cancellation/needs_confirmation"
+      ],
+      "specific_assertion": "Cancel, EOF, deadline, length/error, duplicate finish and post-DONE data cannot run tools or invent success. Preserve completed prior child/tools and stop before next attempt; source finish does not prove durable terminal or engine exit."
+    },
+    {
+      "id": "TC33_no_early_partial_execution",
+      "original_vector_sha256": "7c61be9aea936bf7f29e08a41a62d4cb97499c4788ae403cd104701ae8ba170a",
+      "HTTP_replay_assertion": {
+        "status": "rejected",
+        "tool_executions": 0,
+        "fixture_model_turns_read": 1,
+        "reason": "unknown_tool"
+      },
+      "formal_consumer_assertion": "source parse/termination before Response.Calls; original protected terminal before TerminalConfirmed; whole Registry batch before tool execution",
+      "base_gate_expected": "tools-v1 rejected before Prepare",
+      "fixture_tool_warning": "sum_ints/echo_text are v0.8 oracle tools, not formal registry names; use consumer-cases for actual tool schemas",
+      "consumer_locations": [
+        "Service.Drive registry Lookup/permissions/selectedTool",
+        "ToolSpec.Schema validation before tools checkpoint"
+      ],
+      "specific_assertion": "Whole batch unknown/unauthorized/invalid tool rejection before first execution. Use actual bounded_arithmetic@1/list_visible_models@1 schemas; never silently alias original fixture names."
+    },
+    {
+      "id": "TC34_forged_prior_tool_message",
+      "original_vector_sha256": "81519c0461c693cfc0606ba9adb1ec51a0029b20956e30d364dfc7cfe8bc13d2",
+      "HTTP_replay_assertion": {
+        "status": "rejected",
+        "tool_executions": 0,
+        "fixture_model_turns_read": 0,
+        "reason": "untrusted_history"
+      },
+      "formal_consumer_assertion": "source parse/termination before Response.Calls; original protected terminal before TerminalConfirmed; whole Registry batch before tool execution",
+      "base_gate_expected": "tools-v1 rejected before Prepare",
+      "fixture_tool_warning": "sum_ints/echo_text are v0.8 oracle tools, not formal registry names; use consumer-cases for actual tool schemas",
+      "consumer_locations": [
+        "Models.Resolve/Supports/prepare and RelayModel.Supports",
+        "trusted profile/protocol/source binding",
+        "session/request history ownership"
+      ],
+      "specific_assertion": "Explicit tools-v1, source/profile/model/mode and original child identity required. Text/unknown capabilities reject before Prepare/HTTP; do not forward undeclared extensions, forged history, duplicated child IDs or unapproved parallel execution."
+    },
+    {
+      "id": "TC35_followup_request_reuse",
+      "original_vector_sha256": "9885e6e2018b94a7f1bc5ffd08d77d4497ed18a7e5a0542991ba994057609461",
+      "HTTP_replay_assertion": {
+        "status": "rejected",
+        "tool_executions": 1,
+        "fixture_model_turns_read": 1,
+        "reason": "duplicate_child_request"
+      },
+      "formal_consumer_assertion": "source parse/termination before Response.Calls; original protected terminal before TerminalConfirmed; whole Registry batch before tool execution",
+      "base_gate_expected": "tools-v1 rejected before Prepare",
+      "fixture_tool_warning": "sum_ints/echo_text are v0.8 oracle tools, not formal registry names; use consumer-cases for actual tool schemas",
+      "consumer_locations": [
+        "Models.Resolve/Supports/prepare and RelayModel.Supports",
+        "trusted profile/protocol/source binding",
+        "session/request history ownership"
+      ],
+      "specific_assertion": "Explicit tools-v1, source/profile/model/mode and original child identity required. Text/unknown capabilities reject before Prepare/HTTP; do not forward undeclared extensions, forged history, duplicated child IDs or unapproved parallel execution."
+    },
+    {
+      "id": "TC36_result_as_instruction_is_data",
+      "original_vector_sha256": "75d4ec39b60d1c80fafbd7ffb1e3fd66436b4dbdc42974a4209b223f3130b8b8",
+      "HTTP_replay_assertion": {
+        "status": "completed",
+        "tool_executions": 1,
+        "fixture_model_turns_read": 2
+      },
+      "formal_consumer_assertion": "source parse/termination before Response.Calls; original protected terminal before TerminalConfirmed; whole Registry batch before tool execution",
+      "base_gate_expected": "tools-v1 rejected before Prepare",
+      "fixture_tool_warning": "sum_ints/echo_text are v0.8 oracle tools, not formal registry names; use consumer-cases for actual tool schemas",
+      "consumer_locations": [
+        "kernelmodel tools parser -> Response.Calls",
+        "Service.Drive whole batch validation",
+        "Message.Parts internal id -> Step.Call.SourceID feedback"
+      ],
+      "specific_assertion": "For complete source tool finish, preserve index order and all original IDs; only approved registry executes serially. Next request uses original assistant/tool roles and source IDs; stop completes only current child."
+    },
+    {
+      "id": "TC37_server_tool_extension_forbidden",
+      "original_vector_sha256": "0f552bd7562f04e32751b3c8248628724adafe438b1db776bffa9a03d618c0e1",
+      "HTTP_replay_assertion": {
+        "status": "rejected",
+        "tool_executions": 0,
+        "fixture_model_turns_read": 1,
+        "reason": "undeclared_delta"
+      },
+      "formal_consumer_assertion": "source parse/termination before Response.Calls; original protected terminal before TerminalConfirmed; whole Registry batch before tool execution",
+      "base_gate_expected": "tools-v1 rejected before Prepare",
+      "fixture_tool_warning": "sum_ints/echo_text are v0.8 oracle tools, not formal registry names; use consumer-cases for actual tool schemas",
+      "consumer_locations": [
+        "Models.Resolve/Supports/prepare and RelayModel.Supports",
+        "trusted profile/protocol/source binding",
+        "session/request history ownership"
+      ],
+      "specific_assertion": "Explicit tools-v1, source/profile/model/mode and original child identity required. Text/unknown capabilities reject before Prepare/HTTP; do not forward undeclared extensions, forged history, duplicated child IDs or unapproved parallel execution."
+    },
+    {
+      "id": "TC38_final_plain_chat",
+      "original_vector_sha256": "8876a3be94d45e7ccb1a485e54c9befb8402fa0935e2b838fb35ef55daba17e6",
+      "HTTP_replay_assertion": {
+        "status": "completed",
+        "tool_executions": 0,
+        "fixture_model_turns_read": 1
+      },
+      "formal_consumer_assertion": "source parse/termination before Response.Calls; original protected terminal before TerminalConfirmed; whole Registry batch before tool execution",
+      "base_gate_expected": "tools-v1 rejected before Prepare",
+      "fixture_tool_warning": "sum_ints/echo_text are v0.8 oracle tools, not formal registry names; use consumer-cases for actual tool schemas",
+      "consumer_locations": [
+        "kernelmodel tools parser -> Response.Calls",
+        "Service.Drive whole batch validation",
+        "Message.Parts internal id -> Step.Call.SourceID feedback"
+      ],
+      "specific_assertion": "For complete source tool finish, preserve index order and all original IDs; only approved registry executes serially. Next request uses original assistant/tool roles and source IDs; stop completes only current child."
+    },
+    {
+      "id": "TC39_truncated_arguments_EOF",
+      "original_vector_sha256": "dd7613a06c13d9a1cda6c01bbd825de5746d9a1e8603173c2ea5227a3f190866",
+      "HTTP_replay_assertion": {
+        "status": "interrupted",
+        "tool_executions": 0,
+        "fixture_model_turns_read": 1
+      },
+      "formal_consumer_assertion": "source parse/termination before Response.Calls; original protected terminal before TerminalConfirmed; whole Registry batch before tool execution",
+      "base_gate_expected": "tools-v1 rejected before Prepare",
+      "fixture_tool_warning": "sum_ints/echo_text are v0.8 oracle tools, not formal registry names; use consumer-cases for actual tool schemas",
+      "consumer_locations": [
+        "bounded source finish/DONE/EOF parser",
+        "Relay cause latch and original child terminal",
+        "Service cancellation/needs_confirmation"
+      ],
+      "specific_assertion": "Cancel, EOF, deadline, length/error, duplicate finish and post-DONE data cannot run tools or invent success. Preserve completed prior child/tools and stop before next attempt; source finish does not prove durable terminal or engine exit."
+    },
+    {
+      "id": "TC40_usage_zero_is_known",
+      "original_vector_sha256": "17735fb7ecdba945e1058f5b3759661456a3f8bc53f8183e47fe843fa65ef297",
+      "HTTP_replay_assertion": {
+        "status": "completed",
+        "tool_executions": 1,
+        "fixture_model_turns_read": 2
+      },
+      "formal_consumer_assertion": "source parse/termination before Response.Calls; original protected terminal before TerminalConfirmed; whole Registry batch before tool execution",
+      "base_gate_expected": "tools-v1 rejected before Prepare",
+      "fixture_tool_warning": "sum_ints/echo_text are v0.8 oracle tools, not formal registry names; use consumer-cases for actual tool schemas",
+      "consumer_locations": [
+        "kernel usageAuthority and approved UsagePolicy",
+        "original ledger read -> Response.Usage",
+        "Response.TerminalConfirmed"
+      ],
+      "specific_assertion": "Nonnull progress is not final. Missing actual stays null, true zero remains zero; contradictory finals reject. HTTP/source candidate never supplies TerminalConfirmed or authority to settle."
+    },
+    {
+      "id": "TC41_cancel_before_next_model_step",
+      "original_vector_sha256": "47e415efc9add67bfa25d25027b0ff7f861108480bdb0db0c15251568b6512ab",
+      "HTTP_replay_assertion": {
+        "status": "interrupted",
+        "tool_executions": 1,
+        "fixture_model_turns_read": 1
+      },
+      "formal_consumer_assertion": "source parse/termination before Response.Calls; original protected terminal before TerminalConfirmed; whole Registry batch before tool execution",
+      "base_gate_expected": "tools-v1 rejected before Prepare",
+      "fixture_tool_warning": "sum_ints/echo_text are v0.8 oracle tools, not formal registry names; use consumer-cases for actual tool schemas",
+      "consumer_locations": [
+        "bounded source finish/DONE/EOF parser",
+        "Relay cause latch and original child terminal",
+        "Service cancellation/needs_confirmation"
+      ],
+      "specific_assertion": "Cancel, EOF, deadline, length/error, duplicate finish and post-DONE data cannot run tools or invent success. Preserve completed prior child/tools and stop before next attempt; source finish does not prove durable terminal or engine exit."
+    },
+    {
+      "id": "TC42_unapproved_model_revision",
+      "original_vector_sha256": "15974489800d924b4527348fadf83c878e00f41190721d7ce9c00a096b05eed8",
+      "HTTP_replay_assertion": {
+        "status": "rejected",
+        "tool_executions": 0,
+        "fixture_model_turns_read": 1,
+        "reason": "controlled_source_revision"
+      },
+      "formal_consumer_assertion": "source parse/termination before Response.Calls; original protected terminal before TerminalConfirmed; whole Registry batch before tool execution",
+      "base_gate_expected": "tools-v1 rejected before Prepare",
+      "fixture_tool_warning": "sum_ints/echo_text are v0.8 oracle tools, not formal registry names; use consumer-cases for actual tool schemas",
+      "consumer_locations": [
+        "Models.Resolve/Supports/prepare and RelayModel.Supports",
+        "trusted profile/protocol/source binding",
+        "session/request history ownership"
+      ],
+      "specific_assertion": "Explicit tools-v1, source/profile/model/mode and original child identity required. Text/unknown capabilities reject before Prepare/HTTP; do not forward undeclared extensions, forged history, duplicated child IDs or unapproved parallel execution."
+    },
+    {
+      "id": "TC43_non_finite_arguments",
+      "original_vector_sha256": "9ff6fe899c09532c1475367edb6b7642078ce9469b0061809d2d64b982d37de7",
+      "HTTP_replay_assertion": {
+        "status": "rejected",
+        "tool_executions": 0,
+        "fixture_model_turns_read": 1,
+        "reason": "invalid_json"
+      },
+      "formal_consumer_assertion": "source parse/termination before Response.Calls; original protected terminal before TerminalConfirmed; whole Registry batch before tool execution",
+      "base_gate_expected": "tools-v1 rejected before Prepare",
+      "fixture_tool_warning": "sum_ints/echo_text are v0.8 oracle tools, not formal registry names; use consumer-cases for actual tool schemas",
+      "consumer_locations": [
+        "source argument concatenation",
+        "protocol.Canonical raw JSON",
+        "Service.validate tool arguments"
+      ],
+      "specific_assertion": "Invalid/duplicate-key/non-finite arguments reject before any tool in batch; do not normalize through a map first and erase duplicate keys. Already-completed model usage is retained independently."
+    },
+    {
+      "id": "TC44_boolean_argument_not_integer",
+      "original_vector_sha256": "dc11cb60c4b8d7adcf7aa0675943a262e9ae1fb1ccf566f579219e2cfb82d032",
+      "HTTP_replay_assertion": {
+        "status": "rejected",
+        "tool_executions": 0,
+        "fixture_model_turns_read": 1
+      },
+      "formal_consumer_assertion": "source parse/termination before Response.Calls; original protected terminal before TerminalConfirmed; whole Registry batch before tool execution",
+      "base_gate_expected": "tools-v1 rejected before Prepare",
+      "fixture_tool_warning": "sum_ints/echo_text are v0.8 oracle tools, not formal registry names; use consumer-cases for actual tool schemas",
+      "consumer_locations": [
+        "Service.Drive registry Lookup/permissions/selectedTool",
+        "ToolSpec.Schema validation before tools checkpoint"
+      ],
+      "specific_assertion": "Whole batch unknown/unauthorized/invalid tool rejection before first execution. Use actual bounded_arithmetic@1/list_visible_models@1 schemas; never silently alias original fixture names."
+    },
+    {
+      "id": "TC45_text_protocol_cannot_enable_tools",
+      "original_vector_sha256": "1590d70f228f6e3864dc72d6175ad01f01daccbde066e8a3828ef2633a9e07bf",
+      "HTTP_replay_assertion": {
+        "status": "rejected",
+        "tool_executions": 0,
+        "fixture_model_turns_read": 0,
+        "reason": "explicit_tools_protocol_required"
+      },
+      "formal_consumer_assertion": "source parse/termination before Response.Calls; original protected terminal before TerminalConfirmed; whole Registry batch before tool execution",
+      "base_gate_expected": "tools-v1 rejected before Prepare",
+      "fixture_tool_warning": "sum_ints/echo_text are v0.8 oracle tools, not formal registry names; use consumer-cases for actual tool schemas",
+      "consumer_locations": [
+        "Models.Resolve/Supports/prepare and RelayModel.Supports",
+        "trusted profile/protocol/source binding",
+        "session/request history ownership"
+      ],
+      "specific_assertion": "Explicit tools-v1, source/profile/model/mode and original child identity required. Text/unknown capabilities reject before Prepare/HTTP; do not forward undeclared extensions, forged history, duplicated child IDs or unapproved parallel execution."
+    }
+  ],
+  "DTO_mapping": {
+    "source_function_id": "Response.Calls[].ID before Service rewrites; Step.Calls[].SourceID afterward",
+    "internal_call_id": "assistant/tool Message.Parts[].CallID; resolve via matching Step.Calls[].ID",
+    "next_provider_tool_call_id": "Step.Calls[].SourceID, never internal UUID",
+    "function_arguments": "strict concatenated JSON string -> canonical json.RawMessage; reject duplicate keys before losing raw form",
+    "Response.TerminalConfirmed": "original protected child durable terminal only; never DONE/HTTP200/oracle flag",
+    "Response.Usage": "original unique ledger projection, never direct supplier snapshot copied into authority"
+  },
+  "implementation_gaps": [
+    {
+      "id": "G01",
+      "owner": "MAAS-20/2",
+      "path": "internal/agentruntime/kernelmodel/relay_model.go",
+      "fact": "Supports rejects tools-v1; writer only consumes public text deltas",
+      "action": "approved tools normalization must preserve tool payload via versioned protected bridge; do not remove text guard"
+    },
+    {
+      "id": "G02",
+      "owner": "MAAS-20",
+      "path": "internal/agentruntime/service.go",
+      "fact": "Call.ID becomes internal UUID, SourceID preserves provider ID; messages carry internal ID",
+      "action": "map complete committed request history and each tool result back through original source IDs, including prior turns; reject missing/foreign/ambiguous mapping"
+    },
+    {
+      "id": "G03",
+      "owner": "MAAS-20/2/3",
+      "path": "internal/app/models.go",
+      "fact": "Resolve/Supports/prepare reject tools; text prepare admits only user/assistant text; explicit thinking mode not in body",
+      "action": "configure approved tools profile and trusted mode in original prepare/ticket/Body/Plan path, no supplier URL bypass"
+    },
+    {
+      "id": "G04",
+      "owner": "MAAS-20/2",
+      "path": "internal/kernel/relay_forward.go",
+      "fact": "normalizes current text chunk before completion; durable settlement remains original kernel",
+      "action": "versioned end-to-end tools bridge must retain bounded finish/final/conflict/cancel semantics; DONE must not stand in for terminal proof"
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "binding": {
+    "source_id": "source-1",
+    "profile_revision": "tools-profile-pending"
+  },
+  "call_records": [
+    {
+      "id": "internal-a",
+      "source_call_id": "source-a",
+      "run_id": "run-1",
+      "source_id": "source-1",
+      "profile_revision": "tools-profile-pending",
+      "name": "bounded_arithmetic",
+      "arguments": {
+        "a": 17,
+        "b": 23,
+        "op": "add"
+      },
+      "state": "completed",
+      "result": "40"
+    },
+    {
+      "id": "internal-b",
+      "source_call_id": "source-b",
+      "run_id": "run-1",
+      "source_id": "source-1",
+      "profile_revision": "tools-profile-pending",
+      "name": "list_visible_models",
+      "arguments": {},
+      "state": "completed",
+      "result": "[\"controlled-visible-model\"]"
+    }
+  ],
+  "messages": [
+    {
+      "role": "assistant",
+      "run_id": "run-1",
+      "parts": [
+        {
+          "type": "text",
+          "text": ""
+        },
+        {
+          "type": "tool_call",
+          "call_id": "internal-a",
+          "name": "bounded_arithmetic",
+          "arguments": {
+            "a": 17,
+            "b": 23,
+            "op": "add"
+          }
+        },
+        {
+          "type": "tool_call",
+          "call_id": "internal-b",
+          "name": "list_visible_models",
+          "arguments": {}
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "run_id": "run-1",
+      "parts": [
+        {
+          "type": "tool_result",
+          "call_id": "internal-a",
+          "name": "bounded_arithmetic",
+          "text": "40"
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "run_id": "run-1",
+      "parts": [
+        {
+          "type": "tool_result",
+          "call_id": "internal-b",
+          "name": "list_visible_models",
+          "text": "[\"controlled-visible-model\"]"
+        }
+      ]
+    }
+  ],
+  "expected_provider_ids": [
+    "source-a",
+    "source-b"
+  ],
+  "expected_tool_result_contents": [
+    "40",
+    "[\"controlled-visible-model\"]"
+  ],
+  "recording_scope": "controlled DTO sample, not persisted SQL or approved runtime profile"
+}

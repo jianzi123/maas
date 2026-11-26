@@ -174,7 +174,7 @@ def validate_feedback(message, feedback):
     require(seen == expected, 'deterministic_result_order')
 
 
-def replay(case, widths=(1, 7, 3)):
+def replay(case, widths=(1, 7, 3), turn_reader=None):
     profile = load(DATA / 'capability.json')['controlled_profile']
     out = {'id': case['id'], 'status': 'rejected', 'fixture_model_turns_read': 0, 'tool_executions': [], 'model_usage_snapshots': [],
            'transcript': copy.deepcopy(case['messages']), 'supplier_calls': 0, 'ledger_write_authority': False, 'model_support_verified': False}
@@ -202,7 +202,8 @@ def replay(case, widths=(1, 7, 3)):
             require(binding['step_id'] == f'step-{pos + 1}', 'step_order')
             request_ids.add(binding['child_request_id'])
             out['fixture_model_turns_read'] += 1
-            result = inspect_turn(turn, profile, widths)
+            observed = turn_reader(turn, pos, copy.deepcopy(out['transcript'])) if turn_reader else turn
+            result = inspect_turn(observed, profile, widths)
             out['model_usage_snapshots'].append({'child_request_id': binding['child_request_id'], 'usage': result['usage_snapshot'], 'authority': False})
             if result['status'] != 'ready':
                 out['status'] = result['status']

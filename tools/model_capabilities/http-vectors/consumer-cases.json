@@ -1,0 +1,264 @@
+{
+  "version": "0.9",
+  "scope": "existing exported Go ModelClient gates and Registry/Tool execution; no production client adapter or ledger",
+  "cases": [
+    {
+      "id": "CP01_tools_gate",
+      "input": {
+        "operation": "supports",
+        "protocol": "tools-v1"
+      },
+      "expected": {
+        "status": "rejected",
+        "reason": "model_capability_unavailable",
+        "prepare_calls": 0,
+        "supplier_calls": 0,
+        "terminal_confirmed": false
+      }
+    },
+    {
+      "id": "CP02_text_protocol_gate_only",
+      "input": {
+        "operation": "supports",
+        "protocol": "text-v1"
+      },
+      "expected": {
+        "status": "protocol_supported",
+        "prepare_calls": 0,
+        "supplier_calls": 0
+      }
+    },
+    {
+      "id": "CP03_unknown_protocol_gate",
+      "input": {
+        "operation": "supports",
+        "protocol": "future-v99"
+      },
+      "expected": {
+        "status": "rejected",
+        "reason": "model_capability_unavailable",
+        "prepare_calls": 0,
+        "supplier_calls": 0
+      }
+    },
+    {
+      "id": "CP04_actual_two_tool_specs",
+      "input": {
+        "operation": "specs",
+        "permissions": {
+          "tools.calculate": true,
+          "models.read": true
+        }
+      },
+      "expected": {
+        "status": "specs",
+        "executions": 0
+      }
+    },
+    {
+      "id": "CP05_registry_actual_compute_and_read",
+      "input": {
+        "operation": "batch",
+        "permissions": {
+          "tools.calculate": true,
+          "models.read": true
+        },
+        "calls": [
+          {
+            "id": "source-a",
+            "name": "bounded_arithmetic",
+            "arguments": {
+              "a": 17,
+              "b": 23,
+              "op": "add"
+            }
+          },
+          {
+            "id": "source-b",
+            "name": "list_visible_models",
+            "arguments": {}
+          }
+        ]
+      },
+      "expected": {
+        "status": "completed",
+        "executions": 2,
+        "results": [
+          "40",
+          "[\"controlled-visible-model\"]"
+        ]
+      }
+    },
+    {
+      "id": "CP06_batch_unknown_second_no_execution",
+      "input": {
+        "operation": "batch",
+        "permissions": {
+          "tools.calculate": true,
+          "models.read": true
+        },
+        "calls": [
+          {
+            "id": "source-a",
+            "name": "bounded_arithmetic",
+            "arguments": {
+              "a": 17,
+              "b": 23,
+              "op": "add"
+            }
+          },
+          {
+            "id": "source-b",
+            "name": "shell",
+            "arguments": {}
+          }
+        ]
+      },
+      "expected": {
+        "status": "rejected",
+        "reason": "unknown_tool",
+        "executions": 0
+      }
+    },
+    {
+      "id": "CP07_unauthorized_tool",
+      "input": {
+        "operation": "batch",
+        "permissions": {},
+        "calls": [
+          {
+            "id": "source-a",
+            "name": "bounded_arithmetic",
+            "arguments": {
+              "a": 17,
+              "b": 23,
+              "op": "add"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "rejected",
+        "reason": "tool_forbidden",
+        "executions": 0
+      }
+    },
+    {
+      "id": "CP08_old_tool_name_not_silently_supported",
+      "input": {
+        "operation": "batch",
+        "permissions": {
+          "tools.calculate": true,
+          "models.read": true
+        },
+        "calls": [
+          {
+            "id": "source-a",
+            "name": "sum_ints",
+            "arguments": {
+              "a": 17,
+              "b": 23
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "rejected",
+        "reason": "unknown_tool",
+        "executions": 0
+      }
+    },
+    {
+      "id": "CP09_missing_op_not_silently_defaulted",
+      "input": {
+        "operation": "batch",
+        "permissions": {
+          "tools.calculate": true,
+          "models.read": true
+        },
+        "calls": [
+          {
+            "id": "source-a",
+            "name": "bounded_arithmetic",
+            "arguments": {
+              "a": 17,
+              "b": 23
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "rejected",
+        "reason": "arguments_schema",
+        "executions": 0
+      }
+    },
+    {
+      "id": "CP10_duplicate_call_id",
+      "input": {
+        "operation": "batch",
+        "permissions": {
+          "tools.calculate": true,
+          "models.read": true
+        },
+        "calls": [
+          {
+            "id": "same",
+            "name": "bounded_arithmetic",
+            "arguments": {
+              "a": 1,
+              "b": 2,
+              "op": "add"
+            }
+          },
+          {
+            "id": "same",
+            "name": "list_visible_models",
+            "arguments": {}
+          }
+        ]
+      },
+      "expected": {
+        "status": "rejected",
+        "reason": "duplicate_or_empty_call_id",
+        "executions": 0
+      }
+    },
+    {
+      "id": "CP11_bool_is_not_int",
+      "input": {
+        "operation": "batch",
+        "permissions": {
+          "tools.calculate": true,
+          "models.read": true
+        },
+        "calls": [
+          {
+            "id": "source-a",
+            "name": "bounded_arithmetic",
+            "arguments": {
+              "a": true,
+              "b": 2,
+              "op": "add"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "rejected",
+        "reason": "arguments_schema",
+        "executions": 0
+      }
+    },
+    {
+      "id": "CP12_duplicate_argument_key",
+      "input": null,
+      "input_raw": "{\"operation\":\"batch\",\"permissions\":{\"tools.calculate\":true},\"calls\":[{\"id\":\"source-a\",\"name\":\"bounded_arithmetic\",\"arguments\":{\"a\":17,\"a\":9,\"b\":23,\"op\":\"add\"}}]}",
+      "expected": {
+        "status": "rejected",
+        "reason": "invalid_or_duplicate_JSON",
+        "executions": 0
+      }
+    }
+  ]
+}

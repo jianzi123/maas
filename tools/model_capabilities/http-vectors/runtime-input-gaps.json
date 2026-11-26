@@ -1,0 +1,349 @@
+{
+  "version": "0.9",
+  "approved_direction_already_known": "DeepSeek ExternalAPI; do not re-request this scope choice",
+  "record_scope": "reviewed issue handoffs and original EXT card; no credentials/owner secrets accessed",
+  "real_validation_calls": 0,
+  "existing_EXT_fields": [
+    {
+      "card": "EXT-01",
+      "field": "provider",
+      "approved_value": null,
+      "approval_record_ref": null,
+      "owner": "MAAS-9 + member",
+      "blocks": "Select approved external source/profile and prevent unapproved routing.",
+      "state": "not_found_in_reviewed_approval_records"
+    },
+    {
+      "card": "EXT-01",
+      "field": "exact_model_id_and_revision",
+      "approved_value": null,
+      "approval_record_ref": null,
+      "owner": "MAAS-9 + member",
+      "blocks": "Select approved external source/profile and prevent unapproved routing.",
+      "state": "not_found_in_reviewed_approval_records"
+    },
+    {
+      "card": "EXT-01",
+      "field": "site_or_region",
+      "approved_value": null,
+      "approval_record_ref": null,
+      "owner": "MAAS-9 + member",
+      "blocks": "Select approved external source/profile and prevent unapproved routing.",
+      "state": "not_found_in_reviewed_approval_records"
+    },
+    {
+      "card": "EXT-01",
+      "field": "endpoint_reference",
+      "approved_value": null,
+      "approval_record_ref": null,
+      "owner": "MAAS-9 + member",
+      "blocks": "Select approved external source/profile and prevent unapproved routing.",
+      "state": "not_found_in_reviewed_approval_records"
+    },
+    {
+      "card": "EXT-01",
+      "field": "fixed_source_id",
+      "approved_value": null,
+      "approval_record_ref": null,
+      "owner": "MAAS-9 + member",
+      "blocks": "Select approved external source/profile and prevent unapproved routing.",
+      "state": "not_found_in_reviewed_approval_records"
+    },
+    {
+      "card": "EXT-02",
+      "field": "profile_id_revision_approval",
+      "approved_value": null,
+      "approval_record_ref": null,
+      "owner": "MAAS-9; MAAS-2 only for actual contract divergence",
+      "blocks": "Block hard-budget admission/final settlement when authoritative usage and bounds are not established.",
+      "state": "not_found_in_reviewed_approval_records"
+    },
+    {
+      "card": "EXT-02",
+      "field": "input_context_limit",
+      "approved_value": null,
+      "approval_record_ref": null,
+      "owner": "MAAS-9; MAAS-2 only for actual contract divergence",
+      "blocks": "Block hard-budget admission/final settlement when authoritative usage and bounds are not established.",
+      "state": "not_found_in_reviewed_approval_records"
+    },
+    {
+      "card": "EXT-02",
+      "field": "complete_billed_output_bound",
+      "approved_value": null,
+      "approval_record_ref": null,
+      "owner": "MAAS-9; MAAS-2 only for actual contract divergence",
+      "blocks": "Block hard-budget admission/final settlement when authoritative usage and bounds are not established.",
+      "state": "not_found_in_reviewed_approval_records"
+    },
+    {
+      "card": "EXT-02",
+      "field": "max_tokens_mapping",
+      "approved_value": null,
+      "approval_record_ref": null,
+      "owner": "MAAS-9; MAAS-2 only for actual contract divergence",
+      "blocks": "Block hard-budget admission/final settlement when authoritative usage and bounds are not established.",
+      "state": "not_found_in_reviewed_approval_records"
+    },
+    {
+      "card": "EXT-02",
+      "field": "usage_progress_final_discriminator",
+      "approved_value": null,
+      "approval_record_ref": null,
+      "owner": "MAAS-9; MAAS-2 only for actual contract divergence",
+      "blocks": "Block hard-budget admission/final settlement when authoritative usage and bounds are not established.",
+      "state": "not_found_in_reviewed_approval_records"
+    },
+    {
+      "card": "EXT-02",
+      "field": "trusted_logical_termination",
+      "approved_value": null,
+      "approval_record_ref": null,
+      "owner": "MAAS-9; MAAS-2 only for actual contract divergence",
+      "blocks": "Block hard-budget admission/final settlement when authoritative usage and bounds are not established.",
+      "state": "not_found_in_reviewed_approval_records"
+    },
+    {
+      "card": "EXT-02",
+      "field": "usage_subsets_and_price_categories",
+      "approved_value": null,
+      "approval_record_ref": null,
+      "owner": "MAAS-9; MAAS-2 only for actual contract divergence",
+      "blocks": "Block hard-budget admission/final settlement when authoritative usage and bounds are not established.",
+      "state": "not_found_in_reviewed_approval_records"
+    },
+    {
+      "card": "EXT-02",
+      "field": "profile_expiry_invalidation",
+      "approved_value": null,
+      "approval_record_ref": null,
+      "owner": "MAAS-9; MAAS-2 only for actual contract divergence",
+      "blocks": "Block hard-budget admission/final settlement when authoritative usage and bounds are not established.",
+      "state": "not_found_in_reviewed_approval_records"
+    },
+    {
+      "card": "EXT-03",
+      "field": "secret_reference_namespace_name_key",
+      "approved_value": null,
+      "approval_record_ref": null,
+      "owner": "MAAS-8 + member; MAAS-3 consumes reference",
+      "blocks": "Block authenticated provider access; no raw API key in this file.",
+      "state": "not_found_in_reviewed_approval_records"
+    },
+    {
+      "card": "EXT-03",
+      "field": "credential_delivery_channel",
+      "approved_value": null,
+      "approval_record_ref": null,
+      "owner": "MAAS-8 + member; MAAS-3 consumes reference",
+      "blocks": "Block authenticated provider access; no raw API key in this file.",
+      "state": "not_found_in_reviewed_approval_records"
+    },
+    {
+      "card": "EXT-03",
+      "field": "runtime_principal_and_access_scope",
+      "approved_value": null,
+      "approval_record_ref": null,
+      "owner": "MAAS-8 + member; MAAS-3 consumes reference",
+      "blocks": "Block authenticated provider access; no raw API key in this file.",
+      "state": "not_found_in_reviewed_approval_records"
+    },
+    {
+      "card": "EXT-04",
+      "field": "price_table_id_revision",
+      "approved_value": null,
+      "approval_record_ref": null,
+      "owner": "Member-approved records; MAAS-9/3 validate interpretation",
+      "blocks": "Block real validation/spend and exact reservation; no invented budget/price defaults.",
+      "state": "not_found_in_reviewed_approval_records"
+    },
+    {
+      "card": "EXT-04",
+      "field": "currency_atomic_precision",
+      "approved_value": null,
+      "approval_record_ref": null,
+      "owner": "Member-approved records; MAAS-9/3 validate interpretation",
+      "blocks": "Block real validation/spend and exact reservation; no invented budget/price defaults.",
+      "state": "not_found_in_reviewed_approval_records"
+    },
+    {
+      "card": "EXT-04",
+      "field": "pricing_categories_effective_time",
+      "approved_value": null,
+      "approval_record_ref": null,
+      "owner": "Member-approved records; MAAS-9/3 validate interpretation",
+      "blocks": "Block real validation/spend and exact reservation; no invented budget/price defaults.",
+      "state": "not_found_in_reviewed_approval_records"
+    },
+    {
+      "card": "EXT-04",
+      "field": "budget_period_timezone",
+      "approved_value": null,
+      "approval_record_ref": null,
+      "owner": "Member-approved records; MAAS-9/3 validate interpretation",
+      "blocks": "Block real validation/spend and exact reservation; no invented budget/price defaults.",
+      "state": "not_found_in_reviewed_approval_records"
+    },
+    {
+      "card": "EXT-04",
+      "field": "request_token_money_limits",
+      "approved_value": null,
+      "approval_record_ref": null,
+      "owner": "Member-approved records; MAAS-9/3 validate interpretation",
+      "blocks": "Block real validation/spend and exact reservation; no invented budget/price defaults.",
+      "state": "not_found_in_reviewed_approval_records"
+    },
+    {
+      "card": "EXT-04",
+      "field": "verification_key_reference",
+      "approved_value": null,
+      "approval_record_ref": null,
+      "owner": "Member-approved records; MAAS-9/3 validate interpretation",
+      "blocks": "Block real validation/spend and exact reservation; no invented budget/price defaults.",
+      "state": "not_found_in_reviewed_approval_records"
+    },
+    {
+      "card": "EXT-04",
+      "field": "allowed_validation_call_count_and_spend",
+      "approved_value": null,
+      "approval_record_ref": null,
+      "owner": "Member-approved records; MAAS-9/3 validate interpretation",
+      "blocks": "Block real validation/spend and exact reservation; no invented budget/price defaults.",
+      "state": "not_found_in_reviewed_approval_records"
+    },
+    {
+      "card": "EXT-04",
+      "field": "timeout_concurrency_and_stop_conditions",
+      "approved_value": null,
+      "approval_record_ref": null,
+      "owner": "Member-approved records; MAAS-9/3 validate interpretation",
+      "blocks": "Block real validation/spend and exact reservation; no invented budget/price defaults.",
+      "state": "not_found_in_reviewed_approval_records"
+    },
+    {
+      "card": "EXT-05",
+      "field": "approved_execution_environment",
+      "approved_value": null,
+      "approval_record_ref": null,
+      "owner": "MAAS-8 with MAAS-3",
+      "blocks": "Block actual gateway/Secret/validation proof and production Callable; ExternalAPI does not require GPU.",
+      "state": "not_found_in_reviewed_approval_records"
+    },
+    {
+      "card": "EXT-05",
+      "field": "egress_and_endpoint_allowlist",
+      "approved_value": null,
+      "approval_record_ref": null,
+      "owner": "MAAS-8 with MAAS-3",
+      "blocks": "Block actual gateway/Secret/validation proof and production Callable; ExternalAPI does not require GPU.",
+      "state": "not_found_in_reviewed_approval_records"
+    },
+    {
+      "card": "EXT-05",
+      "field": "Higress_controller_plugin_versions_and_digests",
+      "approved_value": null,
+      "approval_record_ref": null,
+      "owner": "MAAS-8 with MAAS-3",
+      "blocks": "Block actual gateway/Secret/validation proof and production Callable; ExternalAPI does not require GPU.",
+      "state": "not_found_in_reviewed_approval_records"
+    },
+    {
+      "card": "EXT-05",
+      "field": "routing_listener_and_instance_boot_coverage",
+      "approved_value": null,
+      "approval_record_ref": null,
+      "owner": "MAAS-8 with MAAS-3",
+      "blocks": "Block actual gateway/Secret/validation proof and production Callable; ExternalAPI does not require GPU.",
+      "state": "not_found_in_reviewed_approval_records"
+    },
+    {
+      "card": "EXT-05",
+      "field": "TLS_and_protected_validation_identity",
+      "approved_value": null,
+      "approval_record_ref": null,
+      "owner": "MAAS-8 with MAAS-3",
+      "blocks": "Block actual gateway/Secret/validation proof and production Callable; ExternalAPI does not require GPU.",
+      "state": "not_found_in_reviewed_approval_records"
+    },
+    {
+      "card": "EXT-06",
+      "field": "actual_publisher_factory",
+      "approved_value": null,
+      "approval_record_ref": null,
+      "owner": "MAAS-3, also owns MAAS-11/4/6 implementation",
+      "blocks": "Code/temporary controlled assembly may proceed independently; true proof producers still required.",
+      "state": "not_found_in_reviewed_approval_records"
+    },
+    {
+      "card": "EXT-06",
+      "field": "core_publisher_operation_metadata_payload_DSN_role_map",
+      "approved_value": null,
+      "approval_record_ref": null,
+      "owner": "MAAS-3, also owns MAAS-11/4/6 implementation",
+      "blocks": "Code/temporary controlled assembly may proceed independently; true proof producers still required.",
+      "state": "not_found_in_reviewed_approval_records"
+    },
+    {
+      "card": "EXT-06",
+      "field": "Secret_gateway_validation_runtime_adapter_entrypoints",
+      "approved_value": null,
+      "approval_record_ref": null,
+      "owner": "MAAS-3, also owns MAAS-11/4/6 implementation",
+      "blocks": "Code/temporary controlled assembly may proceed independently; true proof producers still required.",
+      "state": "not_found_in_reviewed_approval_records"
+    },
+    {
+      "card": "EXT-06",
+      "field": "request_publication_price_binding",
+      "approved_value": null,
+      "approval_record_ref": null,
+      "owner": "MAAS-3, also owns MAAS-11/4/6 implementation",
+      "blocks": "Code/temporary controlled assembly may proceed independently; true proof producers still required.",
+      "state": "not_found_in_reviewed_approval_records"
+    },
+    {
+      "card": "EXT-06",
+      "field": "authoritative_request_and_nonempty_usage_evidence",
+      "approved_value": null,
+      "approval_record_ref": null,
+      "owner": "MAAS-3, also owns MAAS-11/4/6 implementation",
+      "blocks": "Code/temporary controlled assembly may proceed independently; true proof producers still required.",
+      "state": "not_found_in_reviewed_approval_records"
+    }
+  ],
+  "only_remaining_input_groups": [
+    {
+      "EXT": [
+        "EXT-01",
+        "EXT-02"
+      ],
+      "need": "exact approved account/site/model/mode and tools profile/adapter revisions, evidence scope and expiry; explicit tools-v1 bridge signoff",
+      "owner": "member/Mika + MAAS-9/2/20"
+    },
+    {
+      "EXT": [
+        "EXT-02",
+        "EXT-04"
+      ],
+      "need": "verified full billable input/output bounds and actual source final/termination observer, production deadlines and approved price/currency/precision/validity; no HTML price copied as approval",
+      "owner": "MAAS-9/2/3/20 + member"
+    },
+    {
+      "EXT": [
+        "EXT-03",
+        "EXT-05",
+        "EXT-06"
+      ],
+      "need": "nonsecret refs for platform Key, Higress upstream Secret and TLS/ticket/producer identity; approved endpoint/source/publication binding; runtime/validation scope",
+      "owner": "MAAS-8/3/20 + member"
+    },
+    {
+      "EXT": [
+        "EXT-04",
+        "EXT-06"
+      ],
+      "need": "allowed calls/Token/amount/time window and stop conditions, target indicators and trusted environment; original protected kernel required before first request",
+      "owner": "member/Mika + original runtime owners"
+    }
+  ]
+}

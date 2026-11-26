@@ -1,5 +1,7 @@
 # MAAS-9 offline capability inputs
 
+HTTP consumer v0.9: `http_tool_vectors.py` replays the original 45 captures over real loopback HTTP/SSE. `http-vectors/consumer-map.json` maps them to current ModelClient/Registry/AR-1 assertions; `consumerprobe/` consumes existing Go component interfaces. See `docs/model-capabilities/http-tools-v0.9.md` for current source facts, original/internal call ID mapping, runtime gaps and explicit limits. No production tool adapter or supplier approval is supplied.
+
 Tool capability v0.8: `tool_calls.py` and `tool-calls/` provide a proposed `tools-v1` ModelClient turn schema, complete controlled captures and local pure-function feedback. See `docs/model-capabilities/tool-calls-v0.8.md`. MAAS-2/20 review and real source approval remain pending.
 
 Three candidate/controlled profiles, source-pinned evidence, synthetic adapter/quality vectors and consumer lock conditions. All profiles are pending approval and execution_enabled=false. Nothing here launches a model, accesses an endpoint/Secret, settles usage or grants production permission.

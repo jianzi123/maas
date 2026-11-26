@@ -1,0 +1,54 @@
+{
+  "version": "0.9",
+  "sources": [
+    {
+      "id": "chat",
+      "url": "https://api-docs.deepseek.com/api/create-chat-completion/",
+      "captured_at_utc": "2026-11-26T11:58:03.553995+00:00",
+      "sha256": "6a167a2e87ffdaf3e1f0904d2cc4d26fc1753599500db4e9621e18a33bb1f65f",
+      "bytes": 143189,
+      "evidence": "official_document_snapshot_not_provider_or_account_validation"
+    },
+    {
+      "id": "tools",
+      "url": "https://api-docs.deepseek.com/guides/tool_calls/",
+      "captured_at_utc": "2026-11-26T11:58:03.702687+00:00",
+      "sha256": "c225fab6610a124c57ece6e6ee2c3481a99d0857bca8510cc010e65ef0330d8b",
+      "bytes": 78612,
+      "evidence": "official_document_snapshot_not_provider_or_account_validation"
+    },
+    {
+      "id": "pricing",
+      "url": "https://api-docs.deepseek.com/quick_start/pricing/",
+      "captured_at_utc": "2026-11-26T11:58:03.134730+00:00",
+      "sha256": "7071504b4645de71022ea8130d4d2edf910b7ea9226c0c9aeca2680e935fc5d8",
+      "bytes": 29510,
+      "evidence": "official_document_snapshot_not_provider_or_account_validation"
+    },
+    {
+      "id": "rate",
+      "url": "https://api-docs.deepseek.com/quick_start/rate_limit/",
+      "captured_at_utc": "2026-11-26T11:58:03.125518+00:00",
+      "sha256": "de4c86686644d13afafa8cb67335a86acb2eae864f72dec63736e0b8710a1226",
+      "bytes": 39592,
+      "evidence": "official_document_snapshot_not_provider_or_account_validation"
+    }
+  ],
+  "current_document_observation": {
+    "flash_alias": "deepseek-flash",
+    "version_label": "DeepSeek-V4.1-Flash-1017",
+    "mode_proposal": {
+      "thinking": {
+        "type": "disabled"
+      }
+    },
+    "tool_calls_documented": true,
+    "parallel_guarantee_or_parallel_request_parameter": null,
+    "context_and_output": "documentation only, not BoundVerified",
+    "real_model_tool_support_verified": false,
+    "pricing_delta": "2026-11-18 12:00 Beijing: model-triggered server search/fetch no longer billed per-use; their context remains billed as model tokens. Direct Search/Fetch API fees remain separate. These server tools remain outside selected function-only profile."
+  },
+  "old_profiles_preserved": "v0.7/v0.8 remain historical snapshots; reject undeclared server tools for capability drift, not proof of current per-use fee",
+  "harness_reference_unchanged": "2e39e70496aa02986ca6a820c5d497e816b69d7e",
+  "real_supplier_calls": 0
+}
