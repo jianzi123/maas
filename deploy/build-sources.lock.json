@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "sourceMode": "single-repository-code-commit",
   "backend": {
-    "sourceCommit": "e8fdfce2b32fe594274721da4d41ae551a113c89",
+    "sourceCommit": "b0c68540f2565a697482e964f21167b18f914312",
     "files": {
       ".gitattributes": "dfd50b4d90593dde1621efa8da5b6dc071c7cf1844c139932e5b26df2607e6d5",
       ".gitignore": "46cf94096a926a26bc1a913b6cc632adacab0a96ab42d72a7dcbf216bcbaaa77",
@@ -616,7 +616,7 @@
     }
   },
   "console": {
-    "sourceCommit": "e8fdfce2b32fe594274721da4d41ae551a113c89",
+    "sourceCommit": "b0c68540f2565a697482e964f21167b18f914312",
     "files": {
       "console/.env.fixtures": "4d5e22f8eeb4bbf5a027a34c7a4bfef806876a470f89440f9611bd01a9d8c5f7",
       "console/.env.workbench": "930edf078e756f41d37fad0f7ce87332d8af59e65dac57b11797bcf0117a9216",
@@ -731,7 +731,7 @@
     }
   },
   "deployment": {
-    "sourceCommit": "e8fdfce2b32fe594274721da4d41ae551a113c89",
+    "sourceCommit": "b0c68540f2565a697482e964f21167b18f914312",
     "files": {
       "deploy/.gitattributes": "a79691a93b46e49ce460c26ef22afcc03d6eca1e63bf2edbc20e96159510f6c9",
       "deploy/.gitignore": "b03ab30ac646ab4bdab424be43b1d1c707eb62736b452fc9f27d3658455e8b22",
@@ -811,14 +811,14 @@
       "deploy/release/kubernetes/.gitignore": "49f49075d2380d860d67a38e0a03f5a3a2e6c93eff055a16efda2c9c7afa23af",
       "deploy/release/kubernetes/application.yaml": "19a74538500f1958a051b05a8426f5f923e231d3f689adbeb09e11121fb1e647",
       "deploy/release/kubernetes/LOCAL-VERIFICATION.md": "559c4d3dc5e75db1cfae77e2a9107534e255d48213d276bb161755b17f8738d6",
-      "deploy/release/kubernetes/local_verify.py": "a1f534bf8fc881d1c7df8292f60707c1ade7efbd69b1112c1a3aa170052e798b",
+      "deploy/release/kubernetes/local_verify.py": "0a75165eeba683fd2f3a11215f19b6fb38b0b8a39ba61289b86118f5c0b19452",
       "deploy/release/kubernetes/migration.yaml": "82ee4df11c4cd144116d9524714282cb3631c0a1aa0c1ff2fbdefc3fe1216373",
       "deploy/release/kubernetes/mysql.yaml": "3b023be2f24736756bbdbb7407cd5fbf902846ee57c9afbcefbe0b0f5eb0bfa0",
       "deploy/release/kubernetes/namespace.yaml": "cebca18385de141bd990d39df80634fcf31bcc22b585086ca1d8db98e21d7b4e",
       "deploy/release/kubernetes/README.md": "5f03ab6ff283130a52216c59dc0db528df89d5a4f9908b79bf1885a8f7e38a68",
       "deploy/release/kubernetes/secrets.yaml.example": "1e234a84bd74b572712c6ec655b27700a17c579436af2cf2da9f7e7677c61003",
       "deploy/release/tests/test_installers.py": "93889168cd608f7a80a2d24192b0a7ce7fc1e8803b824789702ec755211fd0d2",
-      "deploy/release/tests/test_native_local.py": "bca68ccf78159f2467ba5da9ccc4733064413ce7d165e56852efb4ea44213481",
+      "deploy/release/tests/test_native_local.py": "f2297174d83874b72ec78659fc1267f88e7a7ad11ce328da289559d14c432a1f",
       "deploy/evidence/history/4330883-candidate-validation.json": "a826f2bcc064b8e4a83b5260daa2a8301d16a6e0a82361b1b9440154732f72b4",
       "deploy/evidence/history/4330883-candidate-wiring.json": "284277577d47afdefc3ed691787848b43306fa889c99d897f2dcb5ed214a648d",
       "deploy/evidence/history/4330883-permissions.json": "971bcb114a560ff37e54f051281554bd518781f79146c24d9c19097de6cb4cdb",
