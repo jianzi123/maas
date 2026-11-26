@@ -1,0 +1,547 @@
+{
+  "scope": "offline-review-consistency-and-source-excerpts-only",
+  "passed": true,
+  "errors": [],
+  "checks": [
+    {
+      "check": "intake_is_not_runtime_configuration",
+      "passed": true
+    },
+    {
+      "check": "no_target_deployment_approval",
+      "passed": true
+    },
+    {
+      "check": "external_api.execution_disabled",
+      "passed": true
+    },
+    {
+      "check": "external_api.groups",
+      "passed": true
+    },
+    {
+      "check": "external_api.EXT-01.no_group_approval",
+      "passed": true
+    },
+    {
+      "check": "external_api.EXT-01.complete_field_resolution",
+      "passed": true
+    },
+    {
+      "check": "external_api.EXT-01.provider",
+      "passed": true
+    },
+    {
+      "check": "external_api.EXT-01.exact_model_id_and_revision",
+      "passed": true
+    },
+    {
+      "check": "external_api.EXT-01.site_or_region",
+      "passed": true
+    },
+    {
+      "check": "external_api.EXT-01.endpoint_reference",
+      "passed": true
+    },
+    {
+      "check": "external_api.EXT-01.fixed_source_id",
+      "passed": true
+    },
+    {
+      "check": "external_api.EXT-02.no_group_approval",
+      "passed": true
+    },
+    {
+      "check": "external_api.EXT-02.complete_field_resolution",
+      "passed": true
+    },
+    {
+      "check": "external_api.EXT-02.profile_id_revision_approval",
+      "passed": true
+    },
+    {
+      "check": "external_api.EXT-02.input_context_limit",
+      "passed": true
+    },
+    {
+      "check": "external_api.EXT-02.complete_billed_output_bound",
+      "passed": true
+    },
+    {
+      "check": "external_api.EXT-02.max_tokens_mapping",
+      "passed": true
+    },
+    {
+      "check": "external_api.EXT-02.usage_progress_final_discriminator",
+      "passed": true
+    },
+    {
+      "check": "external_api.EXT-02.trusted_logical_termination",
+      "passed": true
+    },
+    {
+      "check": "external_api.EXT-02.usage_subsets_and_price_categories",
+      "passed": true
+    },
+    {
+      "check": "external_api.EXT-02.profile_expiry_invalidation",
+      "passed": true
+    },
+    {
+      "check": "external_api.EXT-03.no_group_approval",
+      "passed": true
+    },
+    {
+      "check": "external_api.EXT-03.complete_field_resolution",
+      "passed": true
+    },
+    {
+      "check": "external_api.EXT-03.secret_reference_namespace_name_key",
+      "passed": true
+    },
+    {
+      "check": "external_api.EXT-03.credential_delivery_channel",
+      "passed": true
+    },
+    {
+      "check": "external_api.EXT-03.runtime_principal_and_access_scope",
+      "passed": true
+    },
+    {
+      "check": "external_api.EXT-04.no_group_approval",
+      "passed": true
+    },
+    {
+      "check": "external_api.EXT-04.complete_field_resolution",
+      "passed": true
+    },
+    {
+      "check": "external_api.EXT-04.price_table_id_revision",
+      "passed": true
+    },
+    {
+      "check": "external_api.EXT-04.currency_atomic_precision",
+      "passed": true
+    },
+    {
+      "check": "external_api.EXT-04.pricing_categories_effective_time",
+      "passed": true
+    },
+    {
+      "check": "external_api.EXT-04.budget_period_timezone",
+      "passed": true
+    },
+    {
+      "check": "external_api.EXT-04.request_token_money_limits",
+      "passed": true
+    },
+    {
+      "check": "external_api.EXT-04.verification_key_reference",
+      "passed": true
+    },
+    {
+      "check": "external_api.EXT-04.allowed_validation_call_count_and_spend",
+      "passed": true
+    },
+    {
+      "check": "external_api.EXT-04.timeout_concurrency_and_stop_conditions",
+      "passed": true
+    },
+    {
+      "check": "external_api.EXT-05.no_group_approval",
+      "passed": true
+    },
+    {
+      "check": "external_api.EXT-05.complete_field_resolution",
+      "passed": true
+    },
+    {
+      "check": "external_api.EXT-05.approved_execution_environment",
+      "passed": true
+    },
+    {
+      "check": "external_api.EXT-05.egress_and_endpoint_allowlist",
+      "passed": true
+    },
+    {
+      "check": "external_api.EXT-05.Higress_controller_plugin_versions_and_digests",
+      "passed": true
+    },
+    {
+      "check": "external_api.EXT-05.routing_listener_and_instance_boot_coverage",
+      "passed": true
+    },
+    {
+      "check": "external_api.EXT-05.TLS_and_protected_validation_identity",
+      "passed": true
+    },
+    {
+      "check": "external_api.EXT-06.no_group_approval",
+      "passed": true
+    },
+    {
+      "check": "external_api.EXT-06.complete_field_resolution",
+      "passed": true
+    },
+    {
+      "check": "external_api.EXT-06.actual_publisher_factory",
+      "passed": true
+    },
+    {
+      "check": "external_api.EXT-06.core_publisher_operation_metadata_payload_DSN_role_map",
+      "passed": true
+    },
+    {
+      "check": "external_api.EXT-06.Secret_gateway_validation_runtime_adapter_entrypoints",
+      "passed": true
+    },
+    {
+      "check": "external_api.EXT-06.request_publication_price_binding",
+      "passed": true
+    },
+    {
+      "check": "external_api.EXT-06.authoritative_request_and_nonempty_usage_evidence",
+      "passed": true
+    },
+    {
+      "check": "self_hosted.execution_disabled",
+      "passed": true
+    },
+    {
+      "check": "self_hosted.groups",
+      "passed": true
+    },
+    {
+      "check": "self_hosted.SELF-01.no_group_approval",
+      "passed": true
+    },
+    {
+      "check": "self_hosted.SELF-01.complete_field_resolution",
+      "passed": true
+    },
+    {
+      "check": "self_hosted.SELF-01.exact_model_architecture_revision",
+      "passed": true
+    },
+    {
+      "check": "self_hosted.SELF-01.license_approval",
+      "passed": true
+    },
+    {
+      "check": "self_hosted.SELF-01.existing_weight_path",
+      "passed": true
+    },
+    {
+      "check": "self_hosted.SELF-01.weight_checksum",
+      "passed": true
+    },
+    {
+      "check": "self_hosted.SELF-01.tokenizer_template_digest",
+      "passed": true
+    },
+    {
+      "check": "self_hosted.SELF-01.dtype_quantization",
+      "passed": true
+    },
+    {
+      "check": "self_hosted.SELF-02.no_group_approval",
+      "passed": true
+    },
+    {
+      "check": "self_hosted.SELF-02.complete_field_resolution",
+      "passed": true
+    },
+    {
+      "check": "self_hosted.SELF-02.engine_actual_commit",
+      "passed": true
+    },
+    {
+      "check": "self_hosted.SELF-02.image_digest",
+      "passed": true
+    },
+    {
+      "check": "self_hosted.SELF-02.attention_allocator_backend",
+      "passed": true
+    },
+    {
+      "check": "self_hosted.SELF-02.context_output_and_billed_usage_bounds",
+      "passed": true
+    },
+    {
+      "check": "self_hosted.SELF-02.cancel_rid_device_stop_and_same_group_capacity_observation",
+      "passed": true
+    },
+    {
+      "check": "self_hosted.SELF-03.no_group_approval",
+      "passed": true
+    },
+    {
+      "check": "self_hosted.SELF-03.complete_field_resolution",
+      "passed": true
+    },
+    {
+      "check": "self_hosted.SELF-03.LWS_K8s_CRD_versions",
+      "passed": true
+    },
+    {
+      "check": "self_hosted.SELF-03.leader_worker_group_topology",
+      "passed": true
+    },
+    {
+      "check": "self_hosted.SELF-03.parallelism_and_placement",
+      "passed": true
+    },
+    {
+      "check": "self_hosted.SELF-03.complete_group_GPU_memory_and_interconnect",
+      "passed": true
+    },
+    {
+      "check": "self_hosted.SELF-03.KV_activation_graph_workspace_and_rollout_headroom",
+      "passed": true
+    },
+    {
+      "check": "self_hosted.SELF-04.no_group_approval",
+      "passed": true
+    },
+    {
+      "check": "self_hosted.SELF-04.complete_field_resolution",
+      "passed": true
+    },
+    {
+      "check": "self_hosted.SELF-04.approved_target_environment_and_actions",
+      "passed": true
+    },
+    {
+      "check": "self_hosted.SELF-04.namespace_storage_pull_secret_refs",
+      "passed": true
+    },
+    {
+      "check": "self_hosted.SELF-04.existing_weights_mount",
+      "passed": true
+    },
+    {
+      "check": "self_hosted.SELF-04.network_service_TLS_gateway_identity",
+      "passed": true
+    },
+    {
+      "check": "self_hosted.SELF-05.no_group_approval",
+      "passed": true
+    },
+    {
+      "check": "self_hosted.SELF-05.complete_field_resolution",
+      "passed": true
+    },
+    {
+      "check": "self_hosted.SELF-05.profile_price_budget_and_validation_approval_refs",
+      "passed": true
+    },
+    {
+      "check": "self_hosted.SELF-05.same_unique_Go_MySQL_kernel_binding",
+      "passed": true
+    },
+    {
+      "check": "self_hosted.SELF-05.publisher_gateway_Secret_validation_proof_sources",
+      "passed": true
+    },
+    {
+      "check": "self_hosted.SELF-05.fixed_source_and_original_request_usage_projection",
+      "passed": true
+    },
+    {
+      "check": "self_hosted.SELF-06.no_group_approval",
+      "passed": true
+    },
+    {
+      "check": "self_hosted.SELF-06.complete_field_resolution",
+      "passed": true
+    },
+    {
+      "check": "self_hosted.SELF-06.installation_upgrade_rollback",
+      "passed": true
+    },
+    {
+      "check": "self_hosted.SELF-06.drain_UID_inventory_retention",
+      "passed": true
+    },
+    {
+      "check": "self_hosted.SELF-06.backup_restore_RPO_RTO_retention_approval",
+      "passed": true
+    },
+    {
+      "check": "self_hosted.SELF-06.observability_and_original_request_trace_sources",
+      "passed": true
+    },
+    {
+      "check": "five_roles_match_existing_plan",
+      "passed": true
+    },
+    {
+      "check": "publisher_is_explicit_argument",
+      "passed": true
+    },
+    {
+      "check": "four_real_env_names",
+      "passed": true
+    },
+    {
+      "check": "target_reference_still_pending.core",
+      "passed": true
+    },
+    {
+      "check": "target_reference_still_pending.publisher",
+      "passed": true
+    },
+    {
+      "check": "target_reference_still_pending.historyReader",
+      "passed": true
+    },
+    {
+      "check": "target_reference_still_pending.payloadReader",
+      "passed": true
+    },
+    {
+      "check": "target_reference_still_pending.operationReader",
+      "passed": true
+    },
+    {
+      "check": "source_observations_present",
+      "passed": true
+    },
+    {
+      "check": "source_bytes_and_excerpt.publisher-factory",
+      "passed": true
+    },
+    {
+      "check": "source_bytes_and_excerpt.local-five-identities",
+      "passed": true
+    },
+    {
+      "check": "source_bytes_and_excerpt.local-publisher-consumer",
+      "passed": true
+    },
+    {
+      "check": "source_bytes_and_excerpt.control-env-consumers",
+      "passed": true
+    },
+    {
+      "check": "source_bytes_and_excerpt.operator-not-wired",
+      "passed": true
+    },
+    {
+      "check": "source_bytes_and_excerpt.actual-Secret-library",
+      "passed": true
+    },
+    {
+      "check": "source_bytes_and_excerpt.Secret-agent",
+      "passed": true
+    },
+    {
+      "check": "source_bytes_and_excerpt.gateway-receipt-library",
+      "passed": true
+    },
+    {
+      "check": "source_bytes_and_excerpt.private-plan",
+      "passed": true
+    },
+    {
+      "check": "source_bytes_and_excerpt.CR-fields",
+      "passed": true
+    },
+    {
+      "check": "source_bytes_and_excerpt.Chart-references",
+      "passed": true
+    },
+    {
+      "check": "source_bytes_and_excerpt.publisher-grants",
+      "passed": true
+    },
+    {
+      "check": "source_bytes_and_excerpt.projection-grants",
+      "passed": true
+    },
+    {
+      "check": "source_bytes_and_excerpt.private-candidate",
+      "passed": true
+    },
+    {
+      "check": "source_bytes_and_excerpt.external-candidate",
+      "passed": true
+    },
+    {
+      "check": "source_bytes_and_excerpt.weight-history",
+      "passed": true
+    },
+    {
+      "check": "no_invented_target_group_numbers",
+      "passed": true
+    }
+  ],
+  "field_count": 62,
+  "target_runtime_verified": false,
+  "permissions_retested": false,
+  "source_baseline": "8dbf99ef59c847da775b83d0eeb7dc8f8bf48a9a",
+  "limitations": [
+    "Hashes/excerpts are not Go semantic verification.",
+    "No Secret bodies, network, Kubernetes, MySQL, model or GPU accessed.",
+    "No runtime configuration or authorization is emitted."
+  ],
+  "negative_cases": [
+    {
+      "case": "execution_enabled",
+      "rejected": true,
+      "errors": [
+        "external_api.execution_disabled"
+      ]
+    },
+    {
+      "case": "unbacked_approved_field",
+      "rejected": true,
+      "errors": [
+        "external_api.EXT-03.credential_delivery_channel"
+      ]
+    },
+    {
+      "case": "invented_publisher_env",
+      "rejected": true,
+      "errors": [
+        "publisher_is_explicit_argument",
+        "four_real_env_names"
+      ]
+    },
+    {
+      "case": "publisher_inherits_core",
+      "rejected": true,
+      "errors": [
+        "five_roles_match_existing_plan"
+      ]
+    },
+    {
+      "case": "source_hash_drift",
+      "rejected": true,
+      "errors": [
+        "source_bytes_and_excerpt.publisher-factory"
+      ]
+    },
+    {
+      "case": "shared_env_replaces_reader",
+      "rejected": true,
+      "errors": [
+        "four_real_env_names"
+      ]
+    },
+    {
+      "case": "swapped_reader_envs",
+      "rejected": true,
+      "errors": [
+        "four_real_env_names"
+      ]
+    },
+    {
+      "case": "invented_target_GPU_count",
+      "rejected": true,
+      "errors": [
+        "no_invented_target_group_numbers"
+      ]
+    }
+  ]
+}
