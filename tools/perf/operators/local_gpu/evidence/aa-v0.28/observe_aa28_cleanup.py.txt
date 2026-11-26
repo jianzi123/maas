@@ -1,0 +1,40 @@
+import json,os,time,subprocess,fcntl
+from pathlib import Path
+import sys
+ROOT=Path("/mnt/c/Users/a9786/multica_workspaces_desktop-api.multica.ai/maas-007-da4ec7313117/maas-10-79a30240b357/workdir")
+sys.path.insert(0,str(ROOT/"repo/tools/perf/operators/local_gpu"))
+from aa_control import clock_domain
+out=ROOT/"deliverables/aa-v0.28";window=out/"execution-fixed-01/window"
+parent=json.loads((window/"parent.json").read_text());control=parent["budget_control"];lease=parent["budget"]
+elapsed=time.monotonic_ns()-control["origin_ns"]
+remaining=600000000000-lease["driver_elapsed_at_send_ns"]-elapsed
+pids=[parent["pid"]]+[l["pid"] for l in parent["lifecycle"]]
+receipt={"kind":"post_collection_observation_only","window_id":parent["window_id"],"clock_domain_same":clock_domain()==control["domain"],
+ "parent_elapsed_at_check_ns":elapsed,"conservative_whole_budget_remaining_ns":remaining,
+ "known_owned_Linux_PIDs":{},"model_workers_started":len(parent["lifecycle"]),"GPU_model_allocation":"none; workers were not started",
+ "research_lock_reacquired":False,"VRAM_checked":False,"no_third_model_worker":True}
+for pid in pids:
+ proc=Path("/proc")/str(pid)
+ exists=proc.exists()
+ matches=False
+ if exists:
+  try:matches=str(out/"plan.json").encode() in (proc/"cmdline").read_bytes()
+  except OSError:pass
+ receipt["known_owned_Linux_PIDs"][str(pid)]={"exists":exists,"cmdline_matches_this_plan":matches}
+if receipt["clock_domain_same"] and remaining>10000000000:
+ guard=Path("/var/tmp/maas-10-gpu-01a1a5ba/gpu0-research.lock").open("a")
+ try:
+  try:fcntl.flock(guard,fcntl.LOCK_EX|fcntl.LOCK_NB);receipt["research_lock_reacquired"]=True
+  except BlockingIOError:receipt["lock_check"]="busy; no wait or query"
+  if receipt["research_lock_reacquired"]:
+   cmd=["/usr/lib/wsl/lib/nvidia-smi","--id=0","--query-gpu=index,name,memory.free,memory.used,memory.total,driver_version","--format=csv,noheader,nounits"]
+   start=time.monotonic_ns();r=subprocess.run(cmd,capture_output=True,text=True,timeout=5)
+   receipt.update(VRAM_checked=True,VRAM_command=cmd,VRAM_returncode=r.returncode,VRAM_csv=r.stdout.strip(),
+     observation_ns=time.monotonic_ns()-start)
+ finally:guard.close()
+ receipt["lock_probe_handle_closed"]=True
+else:receipt["check_limited"]="budget/domain not sufficient; no resource or lock probe"
+receipt["conservative_budget_elapsed_at_finish_ns"]=lease["driver_elapsed_at_send_ns"]+time.monotonic_ns()-control["origin_ns"]
+receipt["interpretation"]="Only own PID and global free-memory observations; no attribution of other GPU consumers, no claim of a model context reclaimed"
+(out/"cleanup-observation.json").write_text(json.dumps(receipt,indent=2)+chr(10))
+print(json.dumps(receipt))

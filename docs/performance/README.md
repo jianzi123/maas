@@ -85,3 +85,5 @@ K1算子实验可在GPU资源和运行库条件满足后独立推进，不等待
 机器可读[目标登记表](optimization-goals.json)与真实实验计划均保持execution_enabled=false。模型/权重/GPU、目标环境、SLO、调用额度与预算按具体任务的授权推进。课程和静态合并预演不自动启动框架实现、模型实验或部署。
 
 本轮：[AA-CPU-01预算与控制传输修复v0.27](literature/aa-cpu01-fix-v0.27.md)。仅CPU，原529正控接受、550坏job拒绝，待MAAS-7独立关闭；不重开GPU窗口。
+
+本轮：[修复版P25-AA v0.28资源门槛结果](literature/p25-aa-fixed-result-v0.28.md)。17源码沿独立CPU签收未变，新窗口因GPU0仅215MiB空闲而拒绝，128缺测、0模型调用，不重试；A/A仍未检验。

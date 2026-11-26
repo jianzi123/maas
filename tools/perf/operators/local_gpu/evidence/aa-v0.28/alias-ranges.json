@@ -1,0 +1,98 @@
+{
+  "bare_graph/B3/mature/boundary_first": {
+    "planned_pairs": 2,
+    "complete_pairs": 0,
+    "difference_ns": null,
+    "ratio": null
+  },
+  "bare_graph/B3/mature/interior": {
+    "planned_pairs": 2,
+    "complete_pairs": 0,
+    "difference_ns": null,
+    "ratio": null
+  },
+  "bare_graph/B3/native/boundary_first": {
+    "planned_pairs": 2,
+    "complete_pairs": 0,
+    "difference_ns": null,
+    "ratio": null
+  },
+  "bare_graph/B3/native/interior": {
+    "planned_pairs": 2,
+    "complete_pairs": 0,
+    "difference_ns": null,
+    "ratio": null
+  },
+  "bare_graph/B8/mature/boundary_first": {
+    "planned_pairs": 2,
+    "complete_pairs": 0,
+    "difference_ns": null,
+    "ratio": null
+  },
+  "bare_graph/B8/mature/interior": {
+    "planned_pairs": 2,
+    "complete_pairs": 0,
+    "difference_ns": null,
+    "ratio": null
+  },
+  "bare_graph/B8/native/boundary_first": {
+    "planned_pairs": 2,
+    "complete_pairs": 0,
+    "difference_ns": null,
+    "ratio": null
+  },
+  "bare_graph/B8/native/interior": {
+    "planned_pairs": 2,
+    "complete_pairs": 0,
+    "difference_ns": null,
+    "ratio": null
+  },
+  "full/B3/mature/boundary_first": {
+    "planned_pairs": 2,
+    "complete_pairs": 0,
+    "difference_ns": null,
+    "ratio": null
+  },
+  "full/B3/mature/interior": {
+    "planned_pairs": 2,
+    "complete_pairs": 0,
+    "difference_ns": null,
+    "ratio": null
+  },
+  "full/B3/native/boundary_first": {
+    "planned_pairs": 2,
+    "complete_pairs": 0,
+    "difference_ns": null,
+    "ratio": null
+  },
+  "full/B3/native/interior": {
+    "planned_pairs": 2,
+    "complete_pairs": 0,
+    "difference_ns": null,
+    "ratio": null
+  },
+  "full/B8/mature/boundary_first": {
+    "planned_pairs": 2,
+    "complete_pairs": 0,
+    "difference_ns": null,
+    "ratio": null
+  },
+  "full/B8/mature/interior": {
+    "planned_pairs": 2,
+    "complete_pairs": 0,
+    "difference_ns": null,
+    "ratio": null
+  },
+  "full/B8/native/boundary_first": {
+    "planned_pairs": 2,
+    "complete_pairs": 0,
+    "difference_ns": null,
+    "ratio": null
+  },
+  "full/B8/native/interior": {
+    "planned_pairs": 2,
+    "complete_pairs": 0,
+    "difference_ns": null,
+    "ratio": null
+  }
+}

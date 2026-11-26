@@ -36,3 +36,5 @@ P25-AA opt-in入口：aa_protocol.py / launch_aa_window.py / run_aa_window.py / 
 P25-AA本次实际窗口在启动报文阶段失败，未启动模型worker；原15源码/128缺测和CPU修复见[结果v0.26](../../../../docs/performance/literature/p25-aa-result-v0.26.md)。当前22项CPU检查不等于GPU验证；旧plan需用冻结producer离线复核。
 
 AA-CPU-01修复见[控制预算v0.27](../../../../docs/performance/literature/aa-cpu01-fix-v0.27.md)：soft/hard各自不超过原lease，接收与新job2使用同一父起点，旧job1仅metadata验证。
+
+新阶段P25-AA v0.28只读冻结后尝试一次，GPU0空闲215MiB＜1024MiB，在REF前收口。见[新结果](../../../../docs/performance/literature/p25-aa-fixed-result-v0.28.md)；17执行源码不变，原CPU关闭不扩GPU签收。

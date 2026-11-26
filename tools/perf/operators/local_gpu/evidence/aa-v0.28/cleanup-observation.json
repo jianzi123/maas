@@ -1,0 +1,30 @@
+{
+  "kind": "post_collection_observation_only",
+  "window_id": "P25_AA_FIXED_20261126_01-cb124a042f43",
+  "clock_domain_same": true,
+  "parent_elapsed_at_check_ns": 139430681746,
+  "conservative_whole_budget_remaining_ns": 459641315754,
+  "known_owned_Linux_PIDs": {
+    "9206": {
+      "exists": false,
+      "cmdline_matches_this_plan": false
+    }
+  },
+  "model_workers_started": 0,
+  "GPU_model_allocation": "none; workers were not started",
+  "research_lock_reacquired": true,
+  "VRAM_checked": true,
+  "no_third_model_worker": true,
+  "VRAM_command": [
+    "/usr/lib/wsl/lib/nvidia-smi",
+    "--id=0",
+    "--query-gpu=index,name,memory.free,memory.used,memory.total,driver_version",
+    "--format=csv,noheader,nounits"
+  ],
+  "VRAM_returncode": 0,
+  "VRAM_csv": "0, NVIDIA GeForce RTX 4070 Laptop GPU, 145, 7804, 8188, 581.29",
+  "observation_ns": 59516581,
+  "lock_probe_handle_closed": true,
+  "conservative_budget_elapsed_at_finish_ns": 140418535503,
+  "interpretation": "Only own PID and global free-memory observations; no attribution of other GPU consumers, no claim of a model context reclaimed"
+}

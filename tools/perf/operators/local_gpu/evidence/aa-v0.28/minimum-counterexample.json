@@ -1,0 +1,13 @@
+{
+  "kind": "resource_gate_counterexample",
+  "phase": "before_REF_model_worker",
+  "GPU_index": 0,
+  "free_MiB": 215,
+  "required_free_MiB": 1024,
+  "deficit_MiB": 809,
+  "comparison": "215*1048576 < 1073741824",
+  "raw_csv": "0, NVIDIA GeForce RTX 4070 Laptop GPU, 215, 8188, 581.29",
+  "source_preflight_sha256": "d593be04a27c387a2ef00f32c6389c43e366a31ed857e585a5f73ffd0cd87455",
+  "no_claim_about_other_GPU_consumers": true,
+  "no_model_initialization": true
+}

@@ -1,0 +1,9 @@
+{
+  "pid": 34520,
+  "role": "Windows WSL relay",
+  "exists": false,
+  "driver_wait_collected": true,
+  "driver_child_exit": 2,
+  "python_launcher_self_PID": "not logged by frozen entry",
+  "observation_UTC": "2026-11-26T13:21:55.3599389Z"
+}

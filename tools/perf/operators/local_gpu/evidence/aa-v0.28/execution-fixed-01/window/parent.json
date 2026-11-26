@@ -1,0 +1,38 @@
+{
+  "schema": "P25-AA-parent2",
+  "pid": 9206,
+  "window_id": "P25_AA_FIXED_20261126_01-cb124a042f43",
+  "plan_sha256": "3593858c29da10b668366b3bc3e7885c1dfade2482ab32451ecee089047e1a08",
+  "clock_scope": "parent/pid9206",
+  "budget": {
+    "driver_elapsed_at_send_ns": 928002500,
+    "hard_remaining_ns": 598071997500,
+    "protected_daemon_pid": 34524,
+    "soft_remaining_ns": 538071997500,
+    "stop_new_seconds": 540,
+    "total_seconds": 600,
+    "window_id": "P25_AA_FIXED_20261126_01-cb124a042f43"
+  },
+  "budget_control": {
+    "kind": "local-monotonic-v1",
+    "domain": "546136a8a11a5d039547c0090cd626e91a93ad54163cf4e09581dd096f509187",
+    "origin_ns": 5016984486199,
+    "window_id": "P25_AA_FIXED_20261126_01-cb124a042f43",
+    "owner_pid": 9206
+  },
+  "control_receive": {
+    "control_receive_elapsed_ns": 247279682,
+    "soft_remaining_at_receive_ns": 537824717818,
+    "hard_remaining_at_receive_ns": 597824717818,
+    "driver_elapsed_at_send_ns": 928002500,
+    "accounting": "origin before ready; overlap with sender may be charged twice, never credited"
+  },
+  "control_binding_sha256": "97460eb7de6a2e2d514bd94d01efe370c13ff89415bbd59928127ef9b75d30db",
+  "lifecycle": [],
+  "failure": {
+    "type": "ValueError",
+    "message": "startup GPU0/free memory"
+  },
+  "elapsed_ns": 478908170,
+  "worker_count": 0
+}

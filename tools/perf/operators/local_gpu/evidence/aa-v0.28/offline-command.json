@@ -1,0 +1,19 @@
+{
+  "command": [
+    "D:\\ProgramData\\anaconda3\\python.exe",
+    "-X",
+    "utf8",
+    "C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-10-79a30240b357\\workdir\\repo\\tools\\perf\\operators\\local_gpu\\analyze_aa_window.py",
+    "--plan",
+    "C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-10-79a30240b357\\workdir\\deliverables\\aa-v0.28\\plan.json",
+    "--root",
+    "C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-10-79a30240b357\\workdir\\deliverables\\aa-v0.28\\execution-fixed-01\\window",
+    "--output",
+    "C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-10-79a30240b357\\workdir\\deliverables\\aa-v0.28\\offline-reanalysis.json"
+  ],
+  "exit_code": 2,
+  "stdout": "{\"engineering_repeatability_qualified\": false, \"measured_rows\": 0, \"holdout_matched\": 0, \"integrity_valid\": false}\n",
+  "stderr": "",
+  "report_equal": true,
+  "GPU_started": false
+}
