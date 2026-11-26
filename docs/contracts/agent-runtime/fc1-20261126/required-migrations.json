@@ -1,0 +1,148 @@
+{
+  "kind": "normative_required_inventory_for_current_release",
+  "head": "4402c456a155646ee4111e5f4a1f285621c11273",
+  "migrations": [
+    {
+      "domain": "kernel",
+      "version": 1,
+      "file": "internal/kernel/schema/0001_kernel.sql",
+      "sha256": "56616e6b64a6eba2cb2ee5ee152d56563220a9b98efa7fcd3eba951598e5a61c",
+      "journal": "kernel_schema_migrations",
+      "required_state": "Applied",
+      "physical_tables": [
+        "kernel_guard",
+        "platform_keys",
+        "budget_windows",
+        "rate_window_grants",
+        "invocation_profiles",
+        "generation_requests",
+        "concurrency_slots",
+        "usage_events",
+        "usage_daily",
+        "slot_release_log"
+      ],
+      "required_current_service": true
+    },
+    {
+      "domain": "kernel",
+      "version": 2,
+      "file": "internal/kernel/schema/0002_control.sql",
+      "sha256": "0141b9219f0dae0edab942c73559d4baf81663364b9109ea3ee63150f7b9ff07",
+      "journal": "kernel_schema_migrations",
+      "required_state": "Applied",
+      "physical_tables": [
+        "key_metadata",
+        "rate_rebuilds",
+        "publication_proofs",
+        "validation_intents",
+        "validation_receipts"
+      ],
+      "required_current_service": true
+    },
+    {
+      "domain": "kernel",
+      "version": 3,
+      "file": "internal/kernel/schema/0003_diagnostics.sql",
+      "sha256": "bdba48449e0685435f9dc0fca30a2827d2a51e245b0ecf783ef52542725a6015",
+      "journal": "kernel_schema_migrations",
+      "required_state": "Applied",
+      "physical_tables": [
+        "request_snapshot_digests",
+        "diagnostic_policy",
+        "request_usage_diagnostics"
+      ],
+      "required_current_service": true
+    },
+    {
+      "domain": "release",
+      "version": 1,
+      "file": "internal/release/mysqlstore/schema/0001_release.sql",
+      "sha256": "91ea4dc8699fafa8ae8e9433c637828fce60f43878fe71c4ae1b688fffed69d5",
+      "journal": "release_schema_migrations",
+      "required_state": "Applied",
+      "physical_tables": [
+        "release_links",
+        "release_revisions",
+        "publications",
+        "publish_intents",
+        "active_model_bindings",
+        "resource_inventory",
+        "release_operations"
+      ],
+      "required_current_service": true
+    },
+    {
+      "domain": "release",
+      "version": 2,
+      "file": "internal/release/mysqlstore/schema/0002_history.sql",
+      "sha256": "9294d4f9ca23354014607540fc52a472915c3e40f59dada293db74ae2f5b9193",
+      "journal": "release_schema_migrations",
+      "required_state": "Applied",
+      "physical_tables": [
+        "release_history_owners",
+        "retained_release_snapshots",
+        "release_history_retention",
+        "release_history_legacy_audit"
+      ],
+      "required_current_service": true
+    },
+    {
+      "domain": "release",
+      "version": 3,
+      "file": "internal/release/management/schema.sql",
+      "sha256": "e02acd8ce3ea6b9b92f77e384cc363dfd85d11f8254a63f8981b682cdcb0ad84",
+      "journal": "release_schema_migrations",
+      "required_state": "Applied",
+      "physical_tables": [
+        "release_management_operations"
+      ],
+      "required_current_service": true
+    },
+    {
+      "domain": "agent",
+      "version": 1,
+      "file": "internal/agentruntime/migrations/001_sessions.sql",
+      "sha256": "a9934c1bcd8fef5abaf078f9d1d7316601918c6552b82d26f91b1c832749509a",
+      "journal": null,
+      "required_state": "physical shape/version/permissions; no journal invented",
+      "physical_tables": [
+        "agent_sessions_v1"
+      ],
+      "required_current_service": true
+    },
+    {
+      "domain": "product",
+      "version": 1,
+      "file": "internal/app/migrations/001_product.sql",
+      "sha256": "90b596cbfbdf8ec137b464cf0bce7c22bd189d28281380b24f6bfb6ac18df29f",
+      "journal": "product_schema_migrations",
+      "required_state": "Applied",
+      "physical_tables": [
+        "product_admins",
+        "product_sessions",
+        "product_login_attempts"
+      ],
+      "required_current_service": true
+    },
+    {
+      "domain": "product",
+      "version": 2,
+      "file": "internal/app/migrations/002_offline.sql",
+      "sha256": "7dc3ec482b90c55b187dc226758cc465a107b0c31a8b4ff748c44e14f6303eef",
+      "journal": "product_schema_migrations",
+      "required_state": "Applied",
+      "physical_tables": [
+        "product_offline_state"
+      ],
+      "required_current_service": true
+    }
+  ],
+  "readiness_requires": [
+    "all required journal rows Applied and exact release digest",
+    "required table/column/index shape and narrow runtime access",
+    "stable cluster/identity plus runtime ownership",
+    "DB available and configured required modules valid"
+  ],
+  "agent_has_no_own_journal": true,
+  "no_runtime_DDL_or_marker_write": true
+}

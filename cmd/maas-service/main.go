@@ -15,7 +15,7 @@ import (
 
 func run(args []string) error {
 	if len(args) == 0 {
-		return fmt.Errorf("usage: maas-service migrate|serve --config FILE")
+		return fmt.Errorf("usage: maas-service migrate|reconcile-product-002|serve --config FILE")
 	}
 	flags := flag.NewFlagSet(args[0], flag.ContinueOnError)
 	file := flags.String("config", "", "product configuration file")
@@ -28,13 +28,18 @@ func run(args []string) error {
 	}
 	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
 	defer stop()
-	if args[0] == "migrate" {
+	if args[0] == "migrate" || args[0] == "reconcile-product-002" {
 		bounded, cancel := context.WithTimeout(ctx, 2*time.Minute)
 		defer cancel()
-		if e = app.Migrate(bounded, cfg); e != nil {
+		if args[0] == "reconcile-product-002" {
+			e = app.ReconcileProduct002(bounded, cfg)
+		} else {
+			e = app.Migrate(bounded, cfg)
+		}
+		if e != nil {
 			return e
 		}
-		fmt.Println("product migrations applied")
+		fmt.Println("product migration operation completed")
 		return nil
 	}
 	if args[0] != "serve" {
