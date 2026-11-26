@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "sourceMode": "single-repository-code-commit",
   "backend": {
-    "sourceCommit": "febb4f7a23b5beef44b0539bb0fa1a0793a6da79",
+    "sourceCommit": "da77b39a65bcb70d656880248759c795c0331e09",
     "files": {
       ".gitattributes": "dfd50b4d90593dde1621efa8da5b6dc071c7cf1844c139932e5b26df2607e6d5",
       ".gitignore": "46cf94096a926a26bc1a913b6cc632adacab0a96ab42d72a7dcbf216bcbaaa77",
@@ -616,7 +616,7 @@
     }
   },
   "console": {
-    "sourceCommit": "febb4f7a23b5beef44b0539bb0fa1a0793a6da79",
+    "sourceCommit": "da77b39a65bcb70d656880248759c795c0331e09",
     "files": {
       "console/.env.fixtures": "4d5e22f8eeb4bbf5a027a34c7a4bfef806876a470f89440f9611bd01a9d8c5f7",
       "console/.env.workbench": "930edf078e756f41d37fad0f7ce87332d8af59e65dac57b11797bcf0117a9216",
@@ -660,7 +660,7 @@
       "console/scripts/consumer-binding-browser.mjs": "29bcf530d12bbd4e5045fcb22e69a1d7ddf038ce31687f02e934bb508af7418d",
       "console/scripts/deployed-build-browser.mjs": "335b9276c84ce6c4bbabf739bc9caccf6d023e40f654ee83a38e8744706e8359",
       "console/scripts/deployed-restart.mjs": "40d2c3a5f0ad3ad88a60495fdc6a302d8970449b635f3ec5713016d86201b06d",
-      "console/scripts/deployed-smoke.mjs": "84dcdb2f2f49be85da6b4345eda6431e3ac57d1b31556c068ead11da37f20b25",
+      "console/scripts/deployed-smoke.mjs": "c0e4ce4f2c83ec31180692e30c9ba74e02bef178ceaa208270026f5916d69ee5",
       "console/scripts/deployed-workbench.mjs": "b217040b537abebdd07914b016e65e240c97f37adac0335387d204e1ca819301",
       "console/scripts/generate-ar1-types.mjs": "3c7419549b4a674ada7c1f9df3c77ef92cf5b81f93f3d2fbd5cb7ad726ebc9ff",
       "console/scripts/generate-types.mjs": "033087fb02d67e361f8102e26d0ed43cbec47f1d114d6e59233381ff491ec3b0",
@@ -735,7 +735,7 @@
     }
   },
   "deployment": {
-    "sourceCommit": "febb4f7a23b5beef44b0539bb0fa1a0793a6da79",
+    "sourceCommit": "da77b39a65bcb70d656880248759c795c0331e09",
     "files": {
       "deploy/.gitattributes": "a79691a93b46e49ce460c26ef22afcc03d6eca1e63bf2edbc20e96159510f6c9",
       "deploy/.gitignore": "b03ab30ac646ab4bdab424be43b1d1c707eb62736b452fc9f27d3658455e8b22",
