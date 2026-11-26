@@ -340,6 +340,7 @@ def stop(r):
     r.owned(); r.assert_namespace()
     # Default stop retains the owner record, cluster, PVC, Secret and all data.
     r.kub(["scale", "deployment/maas", "deployment/web", "--replicas=0"], "stop-app")
+    r.kub(["wait", "--for=delete", "pod", "-l", "app=maas", "--timeout=90s"], "stop-scheduler-gone", timeout=110)
     r.kub(["scale", "statefulset/mysql", "--replicas=0"], "stop-mysql")
     return {"stopped": True, "pvcAndSecretsRetained": True}
 

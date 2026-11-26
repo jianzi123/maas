@@ -114,5 +114,15 @@ class NativeGates(unittest.TestCase):
                 with self.assertRaises(ValueError): native.install(r)
             kub.assert_not_called()
 
+    def test_stop_keeps_mysql_until_scheduler_has_exited(self):
+        with tempfile.TemporaryDirectory() as d:
+            r = native.Runner(d); steps = []
+            def kub(args, name, **kw):
+                steps.append(name)
+                if name == "stop-scheduler-gone": raise RuntimeError("scheduler still alive")
+            with patch.object(r, "owned"), patch.object(r, "assert_namespace"), patch.object(r, "kub", side_effect=kub):
+                with self.assertRaises(RuntimeError): native.stop(r)
+            self.assertNotIn("stop-mysql", steps)
+
 
 if __name__ == "__main__": unittest.main()
