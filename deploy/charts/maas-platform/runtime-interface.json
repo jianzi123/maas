@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "scope": "observed-source-interface-not-production-readiness",
   "backend": {
-    "sourceCommit": "db55c5835fe1c1e438ead66cb137d1c6fc6928fb",
+    "sourceCommit": "7a3013fe5d10a8dd39a6b25475f4910cd6345ab6",
     "apiGroup": "serving.maas.example",
     "operator": {
       "command": [
@@ -426,7 +426,7 @@
       "test/controlled/maas20/fc1-tools/maas20-sql-signed-schema-failure.jsonl": "2eb84fff7132ecf2d0a440fc0ccaf67928b8b812a9c02d94e0e2c19230994e91",
       "test/controlled/maas20/fc1-tools/mysql-test-server.log": "8e34e2547babeadb21d7999ce750fc2475b8ca913889820387d0b8fc2833cf3d",
       "test/controlled/maas20/fc1-tools/product-service-mysql.jsonl": "60c7d32f30ebef7045fc63e536c8d332ec9e986ca4ad5a67ad451accd4fe76d0",
-      "test/controlled/maas20/fc1-tools/validate-traces.py": "44f1caf2bd92b013428b74fd35727ca44b7ddbc4281f6cecc7b71e45c3c74834",
+      "test/controlled/maas20/fc1-tools/validate-traces.py": "2ba8bea5791b686a2f0976fb14888ab1846c99ca1db9d36a9e7d81dc18b8067a",
       "test/controlled/maas20/fc1-tools/wire-capture.jsonl": "696d1dcc1f6b55d25eeca54b2c7e76e3b9cb792e9758aa23a68eac72e6dde973",
       "test/controlled/maas20/product-offline/final-sql.jsonl": "a2a0d37fc3ab4c5f0e914bb294847a602cf6a649ed770e536e62603408e8b0d0",
       "test/controlled/maas20/product-offline/first-assertions-harness-exit2.jsonl": "f731ba36b2ed3e2344967c061c55602cc574f5280b48dfe78c5bb14b4e152eac",
@@ -715,7 +715,7 @@
     }
   },
   "console": {
-    "sourceCommit": "db55c5835fe1c1e438ead66cb137d1c6fc6928fb",
+    "sourceCommit": "7a3013fe5d10a8dd39a6b25475f4910cd6345ab6",
     "build": "npm ci && npm run build",
     "output": "console/dist",
     "localBridge": "development-and-explicit-workbench-mode-only",
