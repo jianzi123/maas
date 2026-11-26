@@ -1,0 +1,9 @@
+apiVersion: networking.higress.io/v1
+kind: McpBridge
+metadata:
+  name: default
+  namespace: higress-system
+  labels:
+    app.kubernetes.io/managed-by: maas-local-installation
+spec:
+  registries: []
