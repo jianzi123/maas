@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "sourceMode": "single-repository-code-commit",
   "backend": {
-    "sourceCommit": "bee3ae513068791a857c2b41489b55058ce67720",
+    "sourceCommit": "e8fdfce2b32fe594274721da4d41ae551a113c89",
     "files": {
       ".gitattributes": "dfd50b4d90593dde1621efa8da5b6dc071c7cf1844c139932e5b26df2607e6d5",
       ".gitignore": "46cf94096a926a26bc1a913b6cc632adacab0a96ab42d72a7dcbf216bcbaaa77",
@@ -616,7 +616,7 @@
     }
   },
   "console": {
-    "sourceCommit": "bee3ae513068791a857c2b41489b55058ce67720",
+    "sourceCommit": "e8fdfce2b32fe594274721da4d41ae551a113c89",
     "files": {
       "console/.env.fixtures": "4d5e22f8eeb4bbf5a027a34c7a4bfef806876a470f89440f9611bd01a9d8c5f7",
       "console/.env.workbench": "930edf078e756f41d37fad0f7ce87332d8af59e65dac57b11797bcf0117a9216",
@@ -731,7 +731,7 @@
     }
   },
   "deployment": {
-    "sourceCommit": "bee3ae513068791a857c2b41489b55058ce67720",
+    "sourceCommit": "e8fdfce2b32fe594274721da4d41ae551a113c89",
     "files": {
       "deploy/.gitattributes": "a79691a93b46e49ce460c26ef22afcc03d6eca1e63bf2edbc20e96159510f6c9",
       "deploy/.gitignore": "b03ab30ac646ab4bdab424be43b1d1c707eb62736b452fc9f27d3658455e8b22",
@@ -785,7 +785,7 @@
       "deploy/probe/main_test.go": "42c71942a322988ae57b0b1a8357a4d82a68c94cbb77866f7b3009f446432df8",
       "deploy/release/.dockerignore": "513f00bbf8720f05776d07eca518f6d14c7a9d0b05113371e2ee53b31a7fa230",
       "deploy/release/.gitignore": "f64f584e595722872f59ae5ac206f994d472b25c05734514b61198b9fdefd644",
-      "deploy/release/build_native.py": "45d65991b72cb0b8c77f468eb7a2f60b67d06d5c305baf35884f7df5ff448e97",
+      "deploy/release/build_native.py": "9b6d0095b25351f5608bacebf72b7a8f0493a5272ad311008984a4313ba4ab66",
       "deploy/release/configure.py": "88c5db4c1b8ff3becbeef6404a0693242006a17787691223dbf98f1e1987b51c",
       "deploy/release/Dockerfile": "ba4bb596fa64ad3d2f1669fcd92a9090b9ea40a9f36f400dfe18702f78ac9ca1",
       "deploy/release/Dockerfile.dockerignore": "6127ef283981ccb3ae5c7bc5cdedc5271638a323a7fceef284b55a116cd20ca6",
@@ -810,12 +810,15 @@
       "deploy/release/compose/README.md": "deade755c58ce9af3effdd14d93b64acc17a64d6c78a336ebafca296625019a1",
       "deploy/release/kubernetes/.gitignore": "49f49075d2380d860d67a38e0a03f5a3a2e6c93eff055a16efda2c9c7afa23af",
       "deploy/release/kubernetes/application.yaml": "19a74538500f1958a051b05a8426f5f923e231d3f689adbeb09e11121fb1e647",
+      "deploy/release/kubernetes/LOCAL-VERIFICATION.md": "559c4d3dc5e75db1cfae77e2a9107534e255d48213d276bb161755b17f8738d6",
+      "deploy/release/kubernetes/local_verify.py": "a1f534bf8fc881d1c7df8292f60707c1ade7efbd69b1112c1a3aa170052e798b",
       "deploy/release/kubernetes/migration.yaml": "82ee4df11c4cd144116d9524714282cb3631c0a1aa0c1ff2fbdefc3fe1216373",
       "deploy/release/kubernetes/mysql.yaml": "3b023be2f24736756bbdbb7407cd5fbf902846ee57c9afbcefbe0b0f5eb0bfa0",
       "deploy/release/kubernetes/namespace.yaml": "cebca18385de141bd990d39df80634fcf31bcc22b585086ca1d8db98e21d7b4e",
-      "deploy/release/kubernetes/README.md": "f671695d89f20fb76c16dbba2899af8a213b844b9b19cbc41046490ac7159ac5",
+      "deploy/release/kubernetes/README.md": "5f03ab6ff283130a52216c59dc0db528df89d5a4f9908b79bf1885a8f7e38a68",
       "deploy/release/kubernetes/secrets.yaml.example": "1e234a84bd74b572712c6ec655b27700a17c579436af2cf2da9f7e7677c61003",
       "deploy/release/tests/test_installers.py": "93889168cd608f7a80a2d24192b0a7ce7fc1e8803b824789702ec755211fd0d2",
+      "deploy/release/tests/test_native_local.py": "bca68ccf78159f2467ba5da9ccc4733064413ce7d165e56852efb4ea44213481",
       "deploy/evidence/history/4330883-candidate-validation.json": "a826f2bcc064b8e4a83b5260daa2a8301d16a6e0a82361b1b9440154732f72b4",
       "deploy/evidence/history/4330883-candidate-wiring.json": "284277577d47afdefc3ed691787848b43306fa889c99d897f2dcb5ed214a648d",
       "deploy/evidence/history/4330883-permissions.json": "971bcb114a560ff37e54f051281554bd518781f79146c24d9c19097de6cb4cdb",
@@ -1008,8 +1011,10 @@
       "deploy/release/fetch_source.py",
       "deploy/release/identity_smoke.py",
       "deploy/release/kubernetes/.gitignore",
+      "deploy/release/kubernetes/LOCAL-VERIFICATION.md",
       "deploy/release/kubernetes/README.md",
       "deploy/release/kubernetes/application.yaml",
+      "deploy/release/kubernetes/local_verify.py",
       "deploy/release/kubernetes/migration.yaml",
       "deploy/release/kubernetes/mysql.yaml",
       "deploy/release/kubernetes/namespace.yaml",
@@ -1020,6 +1025,7 @@
       "deploy/release/permission_smoke.py",
       "deploy/release/smoke.py",
       "deploy/release/tests/test_installers.py",
+      "deploy/release/tests/test_native_local.py",
       "deploy/release/verify_bundle.py",
       "deploy/single-model/combination.json",
       "deploy/tests/fixtures/hybrid.yaml",
