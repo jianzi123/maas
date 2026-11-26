@@ -2,6 +2,8 @@
 
 本包为可由kubectl执行的原生资源，非Helm包装。完整source与Compose包同一VERSION/四锁，镜像不预设存在于公开仓库。使用本包源码重建三镜像，并按目标获准方式加载到节点或推送到批准私库；本任务不公开推镜像。
 
+新增自有本地隔离验证/升级入口：见source/deploy/release/kubernetes/LOCAL-VERIFICATION.md和local_verify.py。它有资源/集群归属门禁，使用独立kubeconfig、版本化Job、实际SQL分权和原HTTP smoke/PVC恢复验证；当前真实执行范围以任务证据为准，存在脚本不表示已经实装。
+
 ## 准备 / 构建
 
 需要Docker、Python3.10+、Go1.26.0、Node22.23.4和已获准K8s上下文。验证schema基线1.36.0；实际集群安装情况见VALIDATION.md。单实例MySQL/PVC需要默认StorageClass或在mysql.yaml明确设置批准存储类。
