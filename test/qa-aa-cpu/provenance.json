@@ -1,0 +1,42 @@
+{
+  "product_ref": "82284e8fae1c8c11f437e2506aa125694b1f7f99",
+  "product_code": "0cea087d21cac94d41f2f93443a48c3a7eaef00f",
+  "source": "C:\\Users\\a9786\\AppData\\Local\\Temp\\multica-codex-warm-793607593\\tmp\\a27\\s",
+  "source_sha256": {
+    "aa_control.py": "d3de2cd3d9a5d314c60883e1151d931f1cf11a4f4683cbb7fa8a7498029bacaf",
+    "test_aa_cpu01.py": "0fd200da09fc293d3979e302374bfd9dfb0eb031303e8f6c8f660539661ffa8a",
+    "test_aa_window.py": "04e572c502063e99d1736fe9e4092c1a8127b41a0f6fa1fa513ad8a870795139",
+    "aa_protocol.py": "920bdd78bc9128fa12952c29b99367b1c4b4b49b328822201d31db3b34a96fcb",
+    "aa_runtime.py": "e28b1795cd5a1fcc793cb9250b57f8ac2d1a9c73cc49ddb5512feec687394f50",
+    "aa_worker.py": "021caf3a36c1c9ed83f1dac2af6d3371b9729b79d2f87383c574828138b16abf",
+    "run_aa_window.py": "12bf6d5fcff715357b409fafe5f317b7e60a073a015999780b092bb038344685",
+    "analyze_aa_window.py": "96cc9c9429a600621ab645dd8fbc7840e55879f8178da54e1f8ad036aaa4d1d8",
+    "launch_aa_window.py": "a01c9eaa4500c251f29297246d4880d986bdee4b4e67bee56205d241b0f7c082",
+    "reference_runtime.py": "e00d867403a9d0a8cb87c26ced5a9e5f0050d25244b1c93272a5a6792fe38ad5",
+    "native_kv_binding.py": "8d03d465e964a70c7dedcf358097628a47779902b0f4635633e5f2c783d00149",
+    "analyze_kv_cadence.py": "3d4c176f257afe7a977fcf1fdcfd9da2b0df9fa29eed977256c36c9291a0639b",
+    "run_decode.py": "b747254afc705de607e31071c7388948ca6c9fbbdd0f723d326ac880064fe7dd",
+    "decode_path.py": "0ec39daec3debde3594c969559d8b9f46371f18f1b0d8741dc2c1c18f4b51561",
+    "cadence_protocol.py": "b58cc3467a0e3a34c0f5f49ad812ac89bc4740b897d6d35d40e0ba84fec2ac9f",
+    "decode-source-lock.json": "fc91e7d18da871fa5f234e24c8ebde3f686ee614f59211b9f0f8b9cc6020ea70",
+    "evidence/framework-v0.18/framework-source-lock.json": "1b8e855ba811073f6e13ceb87a071f5cfc9dcd08601402040cbcff96d80d9b9e"
+  },
+  "short_root": "C:\\Users\\a9786\\AppData\\Local\\Temp\\multica-codex-warm-793607593\\tmp\\a27",
+  "legacy_ref": "d9ca7ff7742cf706f26b06d3f81f5733e12fbc25",
+  "legacy_sha256": {
+    "followup.py": "3b345555fd93b037ffc6d1ea83b30269e82025107c9bcfbeedf6cc28ccc48a78",
+    "matrix.json": "32394cb2474b0c13725cd63ec90bb19bb4097eaac1ca8c3ffbe245b380873ec2",
+    "report.md": "d419585a58d584c2f8ad8ecbc71c4bf3bc002d63dd859804bef5bbf650545f47",
+    "results.json": "3c5fcce1bcc12745e20be130bdf58f86036003f87bace9fe2d4809f3329a5fbe",
+    "verify.py": "ecbfc7cbcb90f619de4d2b8a33fbe9277c3391bc42f92a8ce2b436de51ae49bd"
+  },
+  "protected_daemon_pid": 34524,
+  "initial_checkout_error": "Git filename too long in historical NPZ; no tests executed; retry command-local core.longpaths=true succeeded.",
+  "four_locks_sha256": {
+    "deploy/build-sources.lock.json": "d2dcf7abe5e554b4c60a3d4591ead81cacd7e185b6c15e8756f64104d3ebe377",
+    "deploy/dependencies.lock.json": "017607315414f44f46df2e58efe7ea2b12364257eccc7a67ccebd0a7bf7d65bd",
+    "deploy/identities.json": "4a35cdc50f9b17eccfd5f1ece043f89dc6ffbdbbf7325473a1fc32a0980a4b97",
+    "deploy/charts/maas-platform/runtime-interface.json": "72525c6f83f13aa1438b45527fa82eb5dd4b3d7307b8843e85c6d2f3d0a97fee"
+  },
+  "executed_source_matches_code_commit": true
+}

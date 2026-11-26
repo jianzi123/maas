@@ -1,0 +1,22 @@
+{
+  "previous_QA_commit": "d9ca7ff7742cf706f26b06d3f81f5733e12fbc25",
+  "original_39_record": "history-d9ca/results.json",
+  "AA_CPU_01": {
+    "status": "CLOSED_CPU_ONLY",
+    "fixed_ref": "82284e8fae1c8c11f437e2506aa125694b1f7f99",
+    "oracle": "valid lease driver10/soft529/hard589; job soft550 rejected by function and CLI with soft budget reset; legal529 accepted",
+    "coverage": "results.json: 28 unique affected cases, Windows and WSL; cross-OS pipe supplemental, do not add counts to old39"
+  },
+  "A34": {
+    "acceptance": "NOT_ACCEPTED",
+    "AA_repeatability": "NOT_TESTED",
+    "gain": null,
+    "note": "CPU budget-control defect only closed. No GPU window, serving/model/quality/performance acceptance."
+  },
+  "product_QA_preserved": {
+    "QA_ref": "1c9b33a0dd836b200b0862275a1dd756292d2187",
+    "browser_results": "9 PASS / 1 FAIL",
+    "QA_CHAT_RACE_001": "OPEN",
+    "879_R01_R02_and_d27_MANIFEST": "original closed scopes unchanged"
+  }
+}

@@ -1,0 +1,8 @@
+--- history-d9ca/followup.py
++++ effective oracle in retest-82284e8.py::soft_original
+@@
+-bad=run("AA-CPU-01-real-CLI",base+["--job",root/"AA-CPU-01-job.json"]);assert bad.returncode==0 and json.loads(bad.stdout)["validated"]
++# Current-source disabled plan and original otherwise-valid lease/job:
++reject(lambda: validate_job(plan,bad), "soft budget reset")
++worker("bad550-fresh",bad,False,"soft budget reset")
++worker("bad550-existing",bad,False,"soft budget reset",True)
