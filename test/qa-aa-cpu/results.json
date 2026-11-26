@@ -1,0 +1,659 @@
+{
+  "AA_CPU_01": "CLOSED_CPU_ONLY",
+  "product_ref": "82284e8fae1c8c11f437e2506aa125694b1f7f99",
+  "product_code": "0cea087d21cac94d41f2f93443a48c3a7eaef00f",
+  "legacy_39_result": "38 PASS / 1 FAIL at d9ca7ff retained, not rewritten",
+  "unique_targeted_cases": 28,
+  "windows_effective": {
+    "pass": 28,
+    "fail": 0,
+    "first_attempt": {
+      "pass": 27,
+      "QA_fixture_failure": 1
+    },
+    "followup_attempt_2": "CRLF readiness fixture failed; no valid summary/collection receipt",
+    "followup_attempt_3": {
+      "pass": 1,
+      "fail": 0
+    }
+  },
+  "WSL_effective": {
+    "pass": 28,
+    "fail": 0
+  },
+  "cross_OS_transport_instances": 1,
+  "author_test_methods_run": 0,
+  "source_sha256": {
+    "aa_control.py": "d3de2cd3d9a5d314c60883e1151d931f1cf11a4f4683cbb7fa8a7498029bacaf",
+    "test_aa_cpu01.py": "0fd200da09fc293d3979e302374bfd9dfb0eb031303e8f6c8f660539661ffa8a",
+    "test_aa_window.py": "04e572c502063e99d1736fe9e4092c1a8127b41a0f6fa1fa513ad8a870795139",
+    "aa_protocol.py": "920bdd78bc9128fa12952c29b99367b1c4b4b49b328822201d31db3b34a96fcb",
+    "aa_runtime.py": "e28b1795cd5a1fcc793cb9250b57f8ac2d1a9c73cc49ddb5512feec687394f50",
+    "aa_worker.py": "021caf3a36c1c9ed83f1dac2af6d3371b9729b79d2f87383c574828138b16abf",
+    "run_aa_window.py": "12bf6d5fcff715357b409fafe5f317b7e60a073a015999780b092bb038344685",
+    "analyze_aa_window.py": "96cc9c9429a600621ab645dd8fbc7840e55879f8178da54e1f8ad036aaa4d1d8",
+    "launch_aa_window.py": "a01c9eaa4500c251f29297246d4880d986bdee4b4e67bee56205d241b0f7c082",
+    "reference_runtime.py": "e00d867403a9d0a8cb87c26ced5a9e5f0050d25244b1c93272a5a6792fe38ad5",
+    "native_kv_binding.py": "8d03d465e964a70c7dedcf358097628a47779902b0f4635633e5f2c783d00149",
+    "analyze_kv_cadence.py": "3d4c176f257afe7a977fcf1fdcfd9da2b0df9fa29eed977256c36c9291a0639b",
+    "run_decode.py": "b747254afc705de607e31071c7388948ca6c9fbbdd0f723d326ac880064fe7dd",
+    "decode_path.py": "0ec39daec3debde3594c969559d8b9f46371f18f1b0d8741dc2c1c18f4b51561",
+    "cadence_protocol.py": "b58cc3467a0e3a34c0f5f49ad812ac89bc4740b897d6d35d40e0ba84fec2ac9f",
+    "decode-source-lock.json": "fc91e7d18da871fa5f234e24c8ebde3f686ee614f59211b9f0f8b9cc6020ea70",
+    "evidence/framework-v0.18/framework-source-lock.json": "1b8e855ba811073f6e13ceb87a071f5cfc9dcd08601402040cbcff96d80d9b9e"
+  },
+  "checks": [
+    {
+      "id": "AA-CPU-01-original-function-and-CLI",
+      "windows": {
+        "id": "AA-CPU-01-original-function-and-CLI",
+        "status": "PASS",
+        "details": {
+          "positive_soft": 529,
+          "bad_soft": 550,
+          "hard": 589,
+          "driver_elapsed": 10,
+          "function_reason": "per-process soft budget reset",
+          "CLI_negative_samples": 2
+        }
+      },
+      "WSL": {
+        "id": "AA-CPU-01-original-function-and-CLI",
+        "status": "PASS",
+        "details": {
+          "positive_soft": 529,
+          "bad_soft": 550,
+          "hard": 589,
+          "driver_elapsed": 10,
+          "function_reason": "per-process soft budget reset",
+          "CLI_negative_samples": 2
+        }
+      }
+    },
+    {
+      "id": "BUDGET-corresponding-caps-and-short-control",
+      "windows": {
+        "id": "BUDGET-corresponding-caps-and-short-control",
+        "status": "PASS",
+        "details": "each cap+1ns rejected; original equals and smaller caps accepted"
+      },
+      "WSL": {
+        "id": "BUDGET-corresponding-caps-and-short-control",
+        "status": "PASS",
+        "details": "each cap+1ns rejected; original equals and smaller caps accepted"
+      }
+    },
+    {
+      "id": "BUDGET-integer-only",
+      "windows": {
+        "id": "BUDGET-integer-only",
+        "status": "PASS",
+        "details": "bool not integer ns"
+      },
+      "WSL": {
+        "id": "BUDGET-integer-only",
+        "status": "PASS",
+        "details": "bool not integer ns"
+      }
+    },
+    {
+      "id": "JOB1-metadata-not-live-authority",
+      "windows": {
+        "id": "JOB1-metadata-not-live-authority",
+        "status": "PASS",
+        "details": "execution requires timed job2"
+      },
+      "WSL": {
+        "id": "JOB1-metadata-not-live-authority",
+        "status": "PASS",
+        "details": "execution requires timed job2"
+      }
+    },
+    {
+      "id": "BUDGET-HOLD-original-control-and-caps",
+      "windows": {
+        "id": "BUDGET-HOLD-original-control-and-caps",
+        "status": "PASS",
+        "details": "one original lease/control/binding; original600/540 minus driver10 kept"
+      },
+      "WSL": {
+        "id": "BUDGET-HOLD-original-control-and-caps",
+        "status": "PASS",
+        "details": "one original lease/control/binding; original600/540 minus driver10 kept"
+      }
+    },
+    {
+      "id": "BUDGET-HOLD-origin-reset-rejected",
+      "windows": {
+        "id": "BUDGET-HOLD-origin-reset-rejected",
+        "status": "PASS",
+        "details": {
+          "exit": 1,
+          "reason": "original parent",
+          "report_unchanged": true
+        }
+      },
+      "WSL": {
+        "id": "BUDGET-HOLD-origin-reset-rejected",
+        "status": "PASS",
+        "details": {
+          "exit": 1,
+          "reason": "original parent",
+          "report_unchanged": true
+        }
+      }
+    },
+    {
+      "id": "JOB-HOLD-missing-bank-reject",
+      "windows": {
+        "id": "JOB-HOLD-missing-bank-reject",
+        "status": "PASS",
+        "details": "bank stage"
+      },
+      "WSL": {
+        "id": "JOB-HOLD-missing-bank-reject",
+        "status": "PASS",
+        "details": "bank stage"
+      }
+    },
+    {
+      "id": "JOB2-live-local-positive",
+      "windows": {
+        "id": "JOB2-live-local-positive",
+        "status": "PASS",
+        "details": {
+          "validated": true,
+          "GPU_imports": false,
+          "rows": 128,
+          "control_elapsed_ns": 468107200,
+          "metadata_only": false
+        }
+      },
+      "WSL": {
+        "id": "JOB2-live-local-positive",
+        "status": "PASS",
+        "details": {
+          "validated": true,
+          "GPU_imports": false,
+          "rows": 128,
+          "control_elapsed_ns": 363274496,
+          "metadata_only": false
+        }
+      }
+    },
+    {
+      "id": "JOB2-original-parent-binding",
+      "windows": {
+        "id": "JOB2-original-parent-binding",
+        "status": "PASS",
+        "details": {
+          "exit": 1,
+          "reason": "original parent",
+          "report_unchanged": true
+        }
+      },
+      "WSL": {
+        "id": "JOB2-original-parent-binding",
+        "status": "PASS",
+        "details": {
+          "exit": 1,
+          "reason": "original parent",
+          "report_unchanged": true
+        }
+      }
+    },
+    {
+      "id": "JOB2-local-domain-not-performance-clock",
+      "windows": {
+        "id": "JOB2-local-domain-not-performance-clock",
+        "status": "PASS",
+        "details": {
+          "exit": 1,
+          "reason": "foreign control",
+          "report_unchanged": true
+        }
+      },
+      "WSL": {
+        "id": "JOB2-local-domain-not-performance-clock",
+        "status": "PASS",
+        "details": {
+          "exit": 1,
+          "reason": "foreign control",
+          "report_unchanged": true
+        }
+      }
+    },
+    {
+      "id": "JOB2-expired-rejected-before-work",
+      "windows": {
+        "id": "JOB2-expired-rejected-before-work",
+        "status": "PASS",
+        "details": {
+          "exit": 1,
+          "reason": "late job",
+          "report_unchanged": true
+        }
+      },
+      "WSL": {
+        "id": "JOB2-expired-rejected-before-work",
+        "status": "PASS",
+        "details": {
+          "exit": 1,
+          "reason": "late job",
+          "report_unchanged": true
+        }
+      }
+    },
+    {
+      "id": "JOB2-future-origin-rejected",
+      "windows": {
+        "id": "JOB2-future-origin-rejected",
+        "status": "PASS",
+        "details": {
+          "exit": 1,
+          "reason": "future control",
+          "report_unchanged": true
+        }
+      },
+      "WSL": {
+        "id": "JOB2-future-origin-rejected",
+        "status": "PASS",
+        "details": {
+          "exit": 1,
+          "reason": "future control",
+          "report_unchanged": true
+        }
+      }
+    },
+    {
+      "id": "JOB2-owner-and-window",
+      "windows": {
+        "id": "JOB2-owner-and-window",
+        "status": "PASS",
+        "details": "owner and window contradictions rejected"
+      },
+      "WSL": {
+        "id": "JOB2-owner-and-window",
+        "status": "PASS",
+        "details": "owner and window contradictions rejected"
+      }
+    },
+    {
+      "id": "PIPE-LF-EOF",
+      "windows": {
+        "id": "PIPE-LF-EOF",
+        "status": "PASS",
+        "details": {
+          "lease_validated": true,
+          "GPU_imports": false,
+          "window_id": "MAAS7_CPU_ONLY",
+          "control_receive_elapsed_ns": 36311100,
+          "soft_remaining_at_receive_ns": 528963688900,
+          "hard_remaining_at_receive_ns": 588963688900,
+          "driver_elapsed_at_send_ns": 10000000000,
+          "accounting": "origin before ready; overlap with sender may be charged twice, never credited"
+        }
+      },
+      "WSL": {
+        "id": "PIPE-LF-EOF",
+        "status": "PASS",
+        "details": {
+          "lease_validated": true,
+          "GPU_imports": false,
+          "window_id": "MAAS7_CPU_ONLY",
+          "control_receive_elapsed_ns": 100371689,
+          "soft_remaining_at_receive_ns": 528899628311,
+          "hard_remaining_at_receive_ns": 588899628311,
+          "driver_elapsed_at_send_ns": 10000000000,
+          "accounting": "origin before ready; overlap with sender may be charged twice, never credited"
+        }
+      }
+    },
+    {
+      "id": "PIPE-old-5c6e",
+      "windows": {
+        "id": "PIPE-old-5c6e",
+        "status": "PASS",
+        "details": {
+          "exit": 1,
+          "elapsed_ns": 295968900,
+          "reason": "\"lease framing requires actual LF\")\r\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\Users\\a9786\\AppData\\Local\\Temp\\multica-codex-warm-793607593\\tmp\\a27\\s\\aa_protocol.py\", line 23, in need\r\n    if not ok:raise ValueError(message)\r\n              ^^^^^^^^^^^^^^^^^^^^^^^^^\r\nValueError: lease framing requires actual LF\r\n",
+          "report_unchanged": true
+        }
+      },
+      "WSL": {
+        "id": "PIPE-old-5c6e",
+        "status": "PASS",
+        "details": {
+          "exit": 1,
+          "elapsed_ns": 559722878,
+          "reason": "ultica-codex-warm-793607593/tmp/a27/s/aa_protocol.py\", line 79, in read_lease\n    need(line.endswith(chr(10)),\"lease framing requires actual LF\")\n  File \"/mnt/c/Users/a9786/AppData/Local/Temp/multica-codex-warm-793607593/tmp/a27/s/aa_protocol.py\", line 23, in need\n    if not ok:raise ValueError(message)\nValueError: lease framing requires actual LF\n",
+          "report_unchanged": true
+        }
+      }
+    },
+    {
+      "id": "PIPE-empty",
+      "windows": {
+        "id": "PIPE-empty",
+        "status": "PASS",
+        "details": {
+          "exit": 1,
+          "elapsed_ns": 307492800,
+          "reason": "\"lease framing requires actual LF\")\r\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\Users\\a9786\\AppData\\Local\\Temp\\multica-codex-warm-793607593\\tmp\\a27\\s\\aa_protocol.py\", line 23, in need\r\n    if not ok:raise ValueError(message)\r\n              ^^^^^^^^^^^^^^^^^^^^^^^^^\r\nValueError: lease framing requires actual LF\r\n",
+          "report_unchanged": true
+        }
+      },
+      "WSL": {
+        "id": "PIPE-empty",
+        "status": "PASS",
+        "details": {
+          "exit": 1,
+          "elapsed_ns": 437683352,
+          "reason": "ultica-codex-warm-793607593/tmp/a27/s/aa_protocol.py\", line 79, in read_lease\n    need(line.endswith(chr(10)),\"lease framing requires actual LF\")\n  File \"/mnt/c/Users/a9786/AppData/Local/Temp/multica-codex-warm-793607593/tmp/a27/s/aa_protocol.py\", line 23, in need\n    if not ok:raise ValueError(message)\nValueError: lease framing requires actual LF\n",
+          "report_unchanged": true
+        }
+      }
+    },
+    {
+      "id": "PIPE-truncated",
+      "windows": {
+        "id": "PIPE-truncated",
+        "status": "PASS",
+        "details": {
+          "exit": 1,
+          "elapsed_ns": 312356500,
+          "reason": "45, in decode\r\n    obj, end = self.raw_decode(s, idx=_w(s, 0).end())\r\n               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"D:\\ProgramData\\anaconda3\\Lib\\json\\decoder.py\", line 363, in raw_decode\r\n    raise JSONDecodeError(\"Expecting value\", s, err.value) from None\r\njson.decoder.JSONDecodeError: Expecting value: line 1 column 31 (char 30)\r\n",
+          "report_unchanged": true
+        }
+      },
+      "WSL": {
+        "id": "PIPE-truncated",
+        "status": "PASS",
+        "details": {
+          "exit": 1,
+          "elapsed_ns": 418720728,
+          "reason": "ecoder.decode(s)\n  File \"/usr/lib/python3.10/json/decoder.py\", line 337, in decode\n    obj, end = self.raw_decode(s, idx=_w(s, 0).end())\n  File \"/usr/lib/python3.10/json/decoder.py\", line 355, in raw_decode\n    raise JSONDecodeError(\"Expecting value\", s, err.value) from None\njson.decoder.JSONDecodeError: Expecting value: line 1 column 31 (char 30)\n",
+          "report_unchanged": true
+        }
+      }
+    },
+    {
+      "id": "PIPE-extra-frame-LF-and-data",
+      "windows": {
+        "id": "PIPE-extra-frame-LF-and-data",
+        "status": "PASS",
+        "details": [
+          {
+            "exit": 1,
+            "elapsed_ns": 296315000,
+            "reason": "need(not tail,\"exactly one lease frame required\")\r\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\Users\\a9786\\AppData\\Local\\Temp\\multica-codex-warm-793607593\\tmp\\a27\\s\\aa_protocol.py\", line 23, in need\r\n    if not ok:raise ValueError(message)\r\n              ^^^^^^^^^^^^^^^^^^^^^^^^^\r\nValueError: exactly one lease frame required\r\n",
+            "report_unchanged": true
+          },
+          {
+            "exit": 1,
+            "elapsed_ns": 319045700,
+            "reason": "need(not tail,\"exactly one lease frame required\")\r\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\Users\\a9786\\AppData\\Local\\Temp\\multica-codex-warm-793607593\\tmp\\a27\\s\\aa_protocol.py\", line 23, in need\r\n    if not ok:raise ValueError(message)\r\n              ^^^^^^^^^^^^^^^^^^^^^^^^^\r\nValueError: exactly one lease frame required\r\n",
+            "report_unchanged": true
+          },
+          {
+            "exit": 1,
+            "elapsed_ns": 297535300,
+            "reason": "need(not tail,\"exactly one lease frame required\")\r\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\Users\\a9786\\AppData\\Local\\Temp\\multica-codex-warm-793607593\\tmp\\a27\\s\\aa_protocol.py\", line 23, in need\r\n    if not ok:raise ValueError(message)\r\n              ^^^^^^^^^^^^^^^^^^^^^^^^^\r\nValueError: exactly one lease frame required\r\n",
+            "report_unchanged": true
+          }
+        ]
+      },
+      "WSL": {
+        "id": "PIPE-extra-frame-LF-and-data",
+        "status": "PASS",
+        "details": [
+          {
+            "exit": 1,
+            "elapsed_ns": 424511763,
+            "reason": "Local/Temp/multica-codex-warm-793607593/tmp/a27/s/aa_control.py\", line 89, in receive_lease\n    need(not tail,\"exactly one lease frame required\")\n  File \"/mnt/c/Users/a9786/AppData/Local/Temp/multica-codex-warm-793607593/tmp/a27/s/aa_protocol.py\", line 23, in need\n    if not ok:raise ValueError(message)\nValueError: exactly one lease frame required\n",
+            "report_unchanged": true
+          },
+          {
+            "exit": 1,
+            "elapsed_ns": 426183590,
+            "reason": "Local/Temp/multica-codex-warm-793607593/tmp/a27/s/aa_control.py\", line 89, in receive_lease\n    need(not tail,\"exactly one lease frame required\")\n  File \"/mnt/c/Users/a9786/AppData/Local/Temp/multica-codex-warm-793607593/tmp/a27/s/aa_protocol.py\", line 23, in need\n    if not ok:raise ValueError(message)\nValueError: exactly one lease frame required\n",
+            "report_unchanged": true
+          },
+          {
+            "exit": 1,
+            "elapsed_ns": 431550916,
+            "reason": "Local/Temp/multica-codex-warm-793607593/tmp/a27/s/aa_control.py\", line 89, in receive_lease\n    need(not tail,\"exactly one lease frame required\")\n  File \"/mnt/c/Users/a9786/AppData/Local/Temp/multica-codex-warm-793607593/tmp/a27/s/aa_protocol.py\", line 23, in need\n    if not ok:raise ValueError(message)\nValueError: exactly one lease frame required\n",
+            "report_unchanged": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "PIPE-ready-wait-charged-and-driver-kept",
+      "windows": {
+        "id": "PIPE-ready-wait-charged-and-driver-kept",
+        "status": "PASS",
+        "details": {
+          "lease_validated": true,
+          "GPU_imports": false,
+          "window_id": "MAAS7_CPU_ONLY",
+          "control_receive_elapsed_ns": 167701100,
+          "soft_remaining_at_receive_ns": 528832298900,
+          "hard_remaining_at_receive_ns": 588832298900,
+          "driver_elapsed_at_send_ns": 10000000000,
+          "accounting": "origin before ready; overlap with sender may be charged twice, never credited"
+        }
+      },
+      "WSL": {
+        "id": "PIPE-ready-wait-charged-and-driver-kept",
+        "status": "PASS",
+        "details": {
+          "lease_validated": true,
+          "GPU_imports": false,
+          "window_id": "MAAS7_CPU_ONLY",
+          "control_receive_elapsed_ns": 251484923,
+          "soft_remaining_at_receive_ns": 528748515077,
+          "hard_remaining_at_receive_ns": 588748515077,
+          "driver_elapsed_at_send_ns": 10000000000,
+          "accounting": "origin before ready; overlap with sender may be charged twice, never credited"
+        }
+      }
+    },
+    {
+      "id": "PIPE-no-EOF-self-bounded",
+      "windows": {
+        "id": "PIPE-no-EOF-self-bounded",
+        "status": "PASS",
+        "details": {
+          "exit": 1,
+          "elapsed_ns": 500761800,
+          "reason": "Local\\Temp\\multica-codex-warm-793607593\\tmp\\a27\\s\\aa_control.py\", line 82, in receive_lease\r\n    if remaining<=0:raise TimeoutError(\"control channel deadline before complete acceptance\")\r\n                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\nTimeoutError: control channel deadline before complete acceptance\r\n",
+          "report_unchanged": true
+        }
+      },
+      "WSL": {
+        "id": "PIPE-no-EOF-self-bounded",
+        "status": "PASS",
+        "details": {
+          "exit": 1,
+          "elapsed_ns": 656851986,
+          "reason": " main\n    lease,timing=receive_lease(sys.stdin,origin,timeout)\n  File \"/mnt/c/Users/a9786/AppData/Local/Temp/multica-codex-warm-793607593/tmp/a27/s/aa_control.py\", line 82, in receive_lease\n    if remaining<=0:raise TimeoutError(\"control channel deadline before complete acceptance\")\nTimeoutError: control channel deadline before complete acceptance\n",
+          "report_unchanged": true
+        }
+      }
+    },
+    {
+      "id": "PIPE-first-line-tightens-only",
+      "windows": {
+        "id": "PIPE-first-line-tightens-only",
+        "status": "PASS",
+        "details": {
+          "exit": 1,
+          "elapsed_ns": 403041100,
+          "reason": "Local\\Temp\\multica-codex-warm-793607593\\tmp\\a27\\s\\aa_control.py\", line 82, in receive_lease\r\n    if remaining<=0:raise TimeoutError(\"control channel deadline before complete acceptance\")\r\n                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\nTimeoutError: control channel deadline before complete acceptance\r\n",
+          "report_unchanged": true
+        }
+      },
+      "WSL": {
+        "id": "PIPE-first-line-tightens-only",
+        "status": "PASS",
+        "details": {
+          "exit": 1,
+          "elapsed_ns": 508916043,
+          "reason": " main\n    lease,timing=receive_lease(sys.stdin,origin,timeout)\n  File \"/mnt/c/Users/a9786/AppData/Local/Temp/multica-codex-warm-793607593/tmp/a27/s/aa_control.py\", line 82, in receive_lease\n    if remaining<=0:raise TimeoutError(\"control channel deadline before complete acceptance\")\nTimeoutError: control channel deadline before complete acceptance\n",
+          "report_unchanged": true
+        }
+      }
+    },
+    {
+      "id": "PIPE-late-valid-frame-rejected",
+      "windows": {
+        "id": "PIPE-late-valid-frame-rejected",
+        "status": "PASS",
+        "details": {
+          "exit": 1,
+          "elapsed_ns": 515805200,
+          "reason": "Local\\Temp\\multica-codex-warm-793607593\\tmp\\a27\\s\\aa_control.py\", line 82, in receive_lease\r\n    if remaining<=0:raise TimeoutError(\"control channel deadline before complete acceptance\")\r\n                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\nTimeoutError: control channel deadline before complete acceptance\r\n",
+          "report_unchanged": true
+        }
+      },
+      "WSL": {
+        "id": "PIPE-late-valid-frame-rejected",
+        "status": "PASS",
+        "details": {
+          "exit": 1,
+          "elapsed_ns": 672853170,
+          "reason": " main\n    lease,timing=receive_lease(sys.stdin,origin,timeout)\n  File \"/mnt/c/Users/a9786/AppData/Local/Temp/multica-codex-warm-793607593/tmp/a27/s/aa_control.py\", line 82, in receive_lease\n    if remaining<=0:raise TimeoutError(\"control channel deadline before complete acceptance\")\nTimeoutError: control channel deadline before complete acceptance\n",
+          "report_unchanged": true
+        }
+      }
+    },
+    {
+      "id": "PIPE-first-line-cannot-expand",
+      "windows": {
+        "id": "PIPE-first-line-cannot-expand",
+        "status": "PASS",
+        "details": {
+          "exit": 1,
+          "elapsed_ns": 510783900,
+          "reason": "Local\\Temp\\multica-codex-warm-793607593\\tmp\\a27\\s\\aa_control.py\", line 82, in receive_lease\r\n    if remaining<=0:raise TimeoutError(\"control channel deadline before complete acceptance\")\r\n                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\nTimeoutError: control channel deadline before complete acceptance\r\n",
+          "report_unchanged": true
+        }
+      },
+      "WSL": {
+        "id": "PIPE-first-line-cannot-expand",
+        "status": "PASS",
+        "details": {
+          "exit": 1,
+          "elapsed_ns": 546291827,
+          "reason": " main\n    lease,timing=receive_lease(sys.stdin,origin,timeout)\n  File \"/mnt/c/Users/a9786/AppData/Local/Temp/multica-codex-warm-793607593/tmp/a27/s/aa_control.py\", line 82, in receive_lease\n    if remaining<=0:raise TimeoutError(\"control channel deadline before complete acceptance\")\nTimeoutError: control channel deadline before complete acceptance\n",
+          "report_unchanged": true
+        }
+      }
+    },
+    {
+      "id": "PIPE-failure-preserves-success-report",
+      "windows": {
+        "id": "PIPE-failure-preserves-success-report",
+        "status": "PASS",
+        "details": {
+          "exit": 1,
+          "elapsed_ns": 297885600,
+          "reason": "need(not tail,\"exactly one lease frame required\")\r\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\Users\\a9786\\AppData\\Local\\Temp\\multica-codex-warm-793607593\\tmp\\a27\\s\\aa_protocol.py\", line 23, in need\r\n    if not ok:raise ValueError(message)\r\n              ^^^^^^^^^^^^^^^^^^^^^^^^^\r\nValueError: exactly one lease frame required\r\n",
+          "report_unchanged": true
+        }
+      },
+      "WSL": {
+        "id": "PIPE-failure-preserves-success-report",
+        "status": "PASS",
+        "details": {
+          "exit": 1,
+          "elapsed_ns": 455115691,
+          "reason": "Local/Temp/multica-codex-warm-793607593/tmp/a27/s/aa_control.py\", line 89, in receive_lease\n    need(not tail,\"exactly one lease frame required\")\n  File \"/mnt/c/Users/a9786/AppData/Local/Temp/multica-codex-warm-793607593/tmp/a27/s/aa_protocol.py\", line 23, in need\n    if not ok:raise ValueError(message)\nValueError: exactly one lease frame required\n",
+          "report_unchanged": true
+        }
+      }
+    },
+    {
+      "id": "SOURCE-current-disabled-plan-and-negative-pin",
+      "windows": {
+        "id": "SOURCE-current-disabled-plan-and-negative-pin",
+        "status": "PASS",
+        "details": "rejected by source pin, distinct from bad550 soft rejection"
+      },
+      "WSL": {
+        "id": "SOURCE-current-disabled-plan-and-negative-pin",
+        "status": "PASS",
+        "details": "rejected by source pin, distinct from bad550 soft rejection"
+      }
+    },
+    {
+      "id": "REPORT-analyzer-exclusive-no-overwrite",
+      "windows": {
+        "id": "REPORT-analyzer-exclusive-no-overwrite",
+        "status": "PASS",
+        "details": "old followup report guard preserved"
+      },
+      "WSL": {
+        "id": "REPORT-analyzer-exclusive-no-overwrite",
+        "status": "PASS",
+        "details": "old followup report guard preserved"
+      }
+    },
+    {
+      "id": "OWNED-CPU-failure-collected",
+      "windows": {
+        "id": "OWNED-CPU-failure-collected",
+        "status": "PASS",
+        "details": {
+          "exit_code": 7,
+          "soft_signal_ns": null,
+          "forced_kill": false
+        }
+      },
+      "WSL": {
+        "id": "OWNED-CPU-failure-collected",
+        "status": "PASS",
+        "details": {
+          "exit_code": 7,
+          "soft_signal_ns": null,
+          "forced_kill": false
+        }
+      }
+    },
+    {
+      "id": "OWNED-CPU-timeout-collected",
+      "windows": {
+        "id": "OWNED-CPU-timeout-collected",
+        "status": "PASS",
+        "details": {
+          "exit_code": 1,
+          "soft_signal_ns": 63919700,
+          "forced_kill": true
+        }
+      },
+      "WSL": {
+        "id": "OWNED-CPU-timeout-collected",
+        "status": "PASS",
+        "details": {
+          "exit_code": -9,
+          "soft_signal_ns": 62875147,
+          "forced_kill": true
+        }
+      }
+    }
+  ],
+  "GPU_execution": false,
+  "second_window_started": false,
+  "original_result": {
+    "missing": 128,
+    "completed_calls": 0,
+    "alias_pairs": 32,
+    "alias_differences": null,
+    "AA_repeatability_tested": false,
+    "legacy_holdout_match": "34/64",
+    "Full_strict": "0/18",
+    "gain": null
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "candidate": "4bed4b4be2ca294b9305cfb28fe1ab03f6164ec0",
+  "unique_CPU_cases": 39,
+  "passed": 38,
+  "failed": 1,
+  "AA_CPU_01": "OPEN: soft deadline increase accepted",
+  "original_model_calls": 0,
+  "original_missing": 128,
+  "original_alias_pairs_observed": 0,
+  "alias_difference": null,
+  "matching_rate": null,
+  "QA_GPU_execution": false,
+  "second_window_authorized": false
+}
