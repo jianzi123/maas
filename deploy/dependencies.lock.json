@@ -4,12 +4,12 @@
   "deploymentApproved": false,
   "sourceBaseline": {
     "chartBase": "e5647a2f2b44f53d39a80041be94b619f07c29d6",
-    "backendInspected": "0cea087d21cac94d41f2f93443a48c3a7eaef00f",
+    "backendInspected": "0aca80e3f8f170711ffada9d22298917c1cc126e",
     "contracts": "MAAS-2 v0.4 + retained v0.3 + query/recovery addenda + MAAS-1 role review",
     "terminal": "3.0",
     "ticket": "3",
     "proposedTerminal": "3.1 (not enabled)",
-    "consoleInspected": "0cea087d21cac94d41f2f93443a48c3a7eaef00f",
+    "consoleInspected": "0aca80e3f8f170711ffada9d22298917c1cc126e",
     "defaultBranch": "925d8c55be9ce823d100bf90a5c78cf19ea66d58",
     "candidatePR": null,
     "candidateState": "integrated-unmerged",
@@ -18,7 +18,7 @@
     "qaCore": "ac94a373ec0a61c5fd4dc5380a7985a4fb47840f",
     "qaEvidence": "50354a705c03383d0102d0d437119afd7ffed8b3",
     "sourceInventory": "deploy/build-sources.lock.json",
-    "sourceInventorySha256": "d2dcf7abe5e554b4c60a3d4591ead81cacd7e185b6c15e8756f64104d3ebe377",
+    "sourceInventorySha256": "aae44acf63cfb8a6acb0d37643edcd6d682c232caf85da4216f9214294359b8e",
     "upstreamWorkbenchDeployment": "e5647a2f2b44f53d39a80041be94b619f07c29d6",
     "backendBase": "0559fa46b4a728d6f542daf19532e794f8549b31",
     "integrationBranch": "integrate/MAAS-17-unified-20261114",
@@ -99,7 +99,7 @@
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "0cea087d21cac94d41f2f93443a48c3a7eaef00f",
+      "sourceCommit": "0aca80e3f8f170711ffada9d22298917c1cc126e",
       "compiledAPIGroup": "serving.maas.example"
     },
     {
@@ -116,7 +116,7 @@
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "0cea087d21cac94d41f2f93443a48c3a7eaef00f",
+      "sourceCommit": "0aca80e3f8f170711ffada9d22298917c1cc126e",
       "compiledAPIGroup": "serving.maas.example"
     },
     {
@@ -133,7 +133,7 @@
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "0cea087d21cac94d41f2f93443a48c3a7eaef00f"
+      "sourceCommit": "0aca80e3f8f170711ffada9d22298917c1cc126e"
     },
     {
       "id": "mysql",
@@ -432,7 +432,7 @@
   "databaseIdentities": {
     "schemaVersion": "1.0",
     "scope": "installation-input-only-no-secret-values",
-    "sourceCommit": "0cea087d21cac94d41f2f93443a48c3a7eaef00f",
+    "sourceCommit": "0aca80e3f8f170711ffada9d22298917c1cc126e",
     "productionWiringVerified": false,
     "connections": {
       "core": {
@@ -699,6 +699,7 @@
           "docs/performance/literature/notes/B05-flash-decoding.md",
           "docs/performance/literature/notes/B06-cuda-graphs.md",
           "docs/performance/literature/notes/P02-flashinfer.md",
+          "docs/performance/literature/p25-aa-fixed-result-v0.28.md",
           "docs/performance/literature/p25-aa-method-v0.26.md",
           "docs/performance/literature/p25-aa-result-v0.26.md",
           "docs/performance/literature/source-access.json",
@@ -1058,6 +1059,29 @@
           "tools/perf/operators/local_gpu/evidence/aa-v0.26-result/transport-fixed-packet.bin",
           "tools/perf/operators/local_gpu/evidence/aa-v0.26-result/transport-original-counterexample.bin",
           "tools/perf/operators/local_gpu/evidence/aa-v0.26-result/transport-original-counterexample.json",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.28/Windows-PID-observation.json",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.28/actual-plan-validation.json",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.28/alias-pairs.csv",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.28/alias-ranges.json",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.28/batch-outcome.json",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.28/cleanup-observation.json",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.28/execution-fixed-01/driver.json",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.28/execution-fixed-01/foreground.log",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.28/execution-fixed-01/lease.json",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.28/execution-fixed-01/qualification.json",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.28/execution-fixed-01/window/REF-preflight.json",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.28/execution-fixed-01/window/control.json",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.28/execution-fixed-01/window/parent.json",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.28/execution-fixed-01/window/ready.json",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.28/freeze_fixed_aa28.py.txt",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.28/manifest.json",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.28/minimum-counterexample.json",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.28/observe_aa28_cleanup.py.txt",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.28/offline-command.json",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.28/offline-reanalysis.json",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.28/plan.json",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.28/preregistered-manifest.json",
+          "tools/perf/operators/local_gpu/evidence/aa-v0.28/signed-source-verification.json",
           "tools/perf/operators/local_gpu/evidence/cadence-v0.22/R01-calibration.json",
           "tools/perf/operators/local_gpu/evidence/cadence-v0.22/R01-run.json",
           "tools/perf/operators/local_gpu/evidence/cadence-v0.22/R01-runtime-manifest.json",
