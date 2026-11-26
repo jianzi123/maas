@@ -1,14 +1,20 @@
+import argparse
 import json
 from pathlib import Path
 from jsonschema import Draft202012Validator
 
 root = Path.cwd()
+parser = argparse.ArgumentParser()
+parser.add_argument('--input-dir', default='test/controlled/maas20/fc1-tools/wire')
+parser.add_argument('--output')
+args = parser.parse_args()
+wire_dir = root / args.input_dir
 contract = json.loads((root / 'docs/contracts/agent-runtime/ar1-draft2/openapi.json').read_text(encoding='utf-8'))
 event_schema = json.loads((root / 'docs/contracts/agent-runtime/ar1-draft2/session-event.schema.json').read_text(encoding='utf-8'))
 event_validator = Draft202012Validator(event_schema)
 results = []
 for name in ('complete', 'invalid_second_tool'):
-    path = root / 'artifacts/fc1-wire' / (name + '.json')
+    path = wire_dir / (name + '.json')
     doc = json.loads(path.read_text(encoding='utf-8'))
     samples = 0
     for row in doc['http']:
@@ -29,5 +35,6 @@ for name in ('complete', 'invalid_second_tool'):
         assert forbidden not in serialized.lower(), forbidden
     results.append({'case': name, 'http_samples': samples, 'persisted_events': len(events), 'original_children': expected, 'official_schema': 'passed'})
 output = {'scope': 'actual controlled HTTP and persisted MySQL sample validation, no real supplier', 'cases': results}
-(root / 'artifacts/fc1-wire/schema-validation.json').write_text(json.dumps(output, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+if args.output:
+    (root / args.output).write_text(json.dumps(output, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
 print(json.dumps(output))
