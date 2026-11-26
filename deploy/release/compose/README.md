@@ -69,6 +69,23 @@ create只在显式demo配置使用，真实供应商/付费调用需对应批准
 
 Kubernetes、真实供应商/生产Higress/Secret/付费/公开镜像发布分别按对应批准，不能由本包健康结果推定已验。
 
+### 必需迁移门禁与显式002维护恢复
+
+本版本的正常服务在启动、就绪和新派发前核对必需迁移的Applied/摘要及结构权限；002即使表完整、只要仍Applying也不能serve。运行身份需要最新SQL模板新增的两项journal SELECT，不能用授予DDL/UPDATE迁移标记来排除故障。已有配置、MySQL卷、pepper/cursor和原预算/unknown-held必须保留。
+
+只对**本安装、同版本迁移镜像、已经备份且独立核实完整的002 Applying**执行下面维护流程。先核对VERSION/OCI source标签及原迁移字节、布局/原加密Key/seed，停止并确认旧scheduler退出；若有另行装配的publisher/Operator等写者，按其批准维护范围处理。普通基础安装可用：
+
+```sh
+docker compose stop maas
+docker compose run --rm --no-deps --entrypoint /maas migrate reconcile-product-002 --config /etc/maas/migration.json
+docker compose run --rm --no-deps migrate
+docker compose up -d --wait --wait-timeout 300
+```
+
+每一步必须退出0再继续。reconcile命令复用migrate服务的独立迁移DSN和原Secret，只校验/提交本版本完整002，遇活动scheduler、错hash/缺对象/未知高版本或孤立seed拒绝。它不重放DDL、不改checksum、不新建业务请求、不重置预算，也不是全部域的在线升级锁；任一步失败保留现场，不能直接UPDATE为Applied或清库。第二步之后再运行正常迁移入口，使最新最窄角色模板生效；serve不参与授予权限。
+
+这是维护入口说明，实际CLI、最窄身份及同版进程重启的独立结果以最终验证矩阵为准。完整边界见 `source/docs/product-migration-readiness.md`。
+
 ### 已准入停止与原ID验证
 
 离线站点启动后可显式运行（只允许loopback、正常MySQL离线profile）：

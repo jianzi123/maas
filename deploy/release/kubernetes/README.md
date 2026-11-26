@@ -54,3 +54,18 @@ config.yaml由生成器实际生成Secret与ConfigMap，须留本地受保护位
 外置MySQL时不要应用mysql.yaml，生成器--database-host指向批准数据库，并按Compose README同样的安装/运行凭证和DBA预配说明配置；migration Job与app仍只用各自DSN。shared实例禁止默认叠加全局同名角色，DBA预置后在Job环境设置MAAS_INSTALL_PROVISION_ROLES=0。未验证目标、TLS、存储或权限时不能声称已完成安装。
 
 10–15分钟演示、工具接口/功能状态见source/console/docs；无GPU基础安装保留自托管源代码和既有配置但不自动部署GPU/LWS。原生产Higress/Secret/validation/真实模型与独立QA结果分开记录。
+
+## 必需迁移门禁与002显式维护
+
+新服务要求kernel/release/product必需版本Applied＋准确摘要和结构权限，Agent沿原表/索引/文档版本；002 Applying不能因表完整而就绪。维护前保留PVC、原配置/Secret及预算/unknown-held，备份并确认旧scheduler已停止。仅在明确批准的kubeconfig/context与本安装namespace执行，不使用默认context或接管他人集群。
+
+需要恢复本版本完整002 Applying时，基于**同版** `migration.yaml` 复制一个独立审阅Job：保留原迁移镜像、配置/迁移Secret、UID65532和只读挂载；更换唯一Job名，设 `backoffLimit: 0`，只修改迁移容器入口如下：
+
+```yaml
+command: ["/maas"]
+args: ["reconcile-product-002", "--config", "/etc/maas/migration.json"]
+```
+
+按 `source/docs/product-migration-readiness.md` 核对迁移字节/布局及原seed/Key，确认无活动写者，应用该维护Job并检查明确成功。它只提交本版本完整002标记，不修任意部分DDL、不改checksum/重置数据，不是在线跨域迁移锁。成功后再使用正常迁移Job应用最新最窄角色模板，最后恢复maas/web；任一步失败保持停止并保留现场，不能给runtime增加UPDATE/DDL或手改Applied。Job重复/ACK未知先查原Job和原marker，不能自动改成新业务操作。
+
+本节提供原生维护接点；当前K8s真实安装、维护Job及PVC重启仍以实际环境/最终矩阵记已验或未验，不由SQL函数或夹具结果代替。
