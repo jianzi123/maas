@@ -4,12 +4,12 @@
   "deploymentApproved": false,
   "sourceBaseline": {
     "chartBase": "e5647a2f2b44f53d39a80041be94b619f07c29d6",
-    "backendInspected": "bee3ae513068791a857c2b41489b55058ce67720",
+    "backendInspected": "8970fe57e6480ba0f6973480e713c403a6c77ed7",
     "contracts": "MAAS-2 v0.4 + retained v0.3 + query/recovery addenda + MAAS-1 role review",
     "terminal": "3.0",
     "ticket": "3",
     "proposedTerminal": "3.1 (not enabled)",
-    "consoleInspected": "bee3ae513068791a857c2b41489b55058ce67720",
+    "consoleInspected": "8970fe57e6480ba0f6973480e713c403a6c77ed7",
     "defaultBranch": "925d8c55be9ce823d100bf90a5c78cf19ea66d58",
     "candidatePR": null,
     "candidateState": "integrated-unmerged",
@@ -18,7 +18,7 @@
     "qaCore": "ac94a373ec0a61c5fd4dc5380a7985a4fb47840f",
     "qaEvidence": "50354a705c03383d0102d0d437119afd7ffed8b3",
     "sourceInventory": "deploy/build-sources.lock.json",
-    "sourceInventorySha256": "208966c143029858f2ca4eca2d8c047608d7a552727fcb5de6f5ef0d5b7108ec",
+    "sourceInventorySha256": "ecb6d7b4c17502a55676ab53905c69c3af0615d7173b4f99d2749b2ba3479c44",
     "upstreamWorkbenchDeployment": "e5647a2f2b44f53d39a80041be94b619f07c29d6",
     "backendBase": "0559fa46b4a728d6f542daf19532e794f8549b31",
     "integrationBranch": "integrate/MAAS-17-unified-20261114",
@@ -99,7 +99,7 @@
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "bee3ae513068791a857c2b41489b55058ce67720",
+      "sourceCommit": "8970fe57e6480ba0f6973480e713c403a6c77ed7",
       "compiledAPIGroup": "serving.maas.example"
     },
     {
@@ -116,7 +116,7 @@
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "bee3ae513068791a857c2b41489b55058ce67720",
+      "sourceCommit": "8970fe57e6480ba0f6973480e713c403a6c77ed7",
       "compiledAPIGroup": "serving.maas.example"
     },
     {
@@ -133,7 +133,7 @@
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "bee3ae513068791a857c2b41489b55058ce67720"
+      "sourceCommit": "8970fe57e6480ba0f6973480e713c403a6c77ed7"
     },
     {
       "id": "mysql",
@@ -432,7 +432,7 @@
   "databaseIdentities": {
     "schemaVersion": "1.0",
     "scope": "installation-input-only-no-secret-values",
-    "sourceCommit": "bee3ae513068791a857c2b41489b55058ce67720",
+    "sourceCommit": "8970fe57e6480ba0f6973480e713c403a6c77ed7",
     "productionWiringVerified": false,
     "connections": {
       "core": {
@@ -941,6 +941,24 @@
           "test/integration/management_test.go",
           "test/maas17-review/README.md",
           "test/maas17-review/delete-recovery-probe.test.ts.in",
+          "test/qa-aa-cpu/.gitattributes",
+          "test/qa-aa-cpu/cleanup.json",
+          "test/qa-aa-cpu/cpu-receipts.zip",
+          "test/qa-aa-cpu/cross_pipe.py",
+          "test/qa-aa-cpu/executed-source.zip",
+          "test/qa-aa-cpu/history-d9ca/followup.py",
+          "test/qa-aa-cpu/history-d9ca/matrix.json",
+          "test/qa-aa-cpu/history-d9ca/report.md",
+          "test/qa-aa-cpu/history-d9ca/results.json",
+          "test/qa-aa-cpu/history-d9ca/verify.py",
+          "test/qa-aa-cpu/manifest.json",
+          "test/qa-aa-cpu/matrix.json",
+          "test/qa-aa-cpu/oracle-change.diff",
+          "test/qa-aa-cpu/provenance.json",
+          "test/qa-aa-cpu/readiness-before-crlf-fix.py",
+          "test/qa-aa-cpu/report.md",
+          "test/qa-aa-cpu/results.json",
+          "test/qa-aa-cpu/retest-82284e8.py",
           "test/qa-cap6/matrix.json",
           "test/qa-cap6/report.md",
           "test/qa-cap6/results.json",
