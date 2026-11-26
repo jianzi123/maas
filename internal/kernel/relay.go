@@ -40,6 +40,7 @@ func NewRelay(core *Store, endpoint string, transport *http.Transport, maxBytes 
 }
 
 type RelayCall struct {
+	Protocol           string // private tools-v1; empty keeps the strict public text schema
 	Input              Input
 	Body               []byte
 	Ticket, PlanHeader string

@@ -12,6 +12,8 @@ import (
 
 	a "github.com/jianzi123/maas/internal/agentruntime"
 	"github.com/jianzi123/maas/internal/kernel"
+	"github.com/jianzi123/maas/internal/protocol"
+	"github.com/jianzi123/maas/internal/toolwire"
 )
 
 // RelayModel consumes the existing protected Relay. Prepare must use the original
@@ -30,7 +32,7 @@ type RelayModel struct {
 }
 
 func (m RelayModel) Supports(_ context.Context, v a.Model) error {
-	if v.Protocol != "text-v1" {
+	if v.Protocol != "text-v1" && v.Protocol != "tools-v1" {
 		return a.ErrCapability
 	}
 	if m.Relay == nil || m.Prepare == nil || m.Usage == nil {
@@ -43,7 +45,7 @@ func (m RelayModel) Generate(ctx context.Context, req a.Request, emit func(strin
 	if e := m.Supports(ctx, req.Model); e != nil {
 		return out, e
 	}
-	if len(req.Tools) != 0 {
+	if len(req.Tools) != 0 && req.Model.Protocol != "tools-v1" {
 		return out, a.ErrCapability
 	}
 	call, e := m.Prepare(ctx, req)
@@ -56,7 +58,17 @@ func (m RelayModel) Generate(ctx context.Context, req a.Request, emit func(strin
 	if e = checkPlan(req, call.Input.Plan); e != nil {
 		return out, e
 	}
+	if call.Protocol != req.Model.Protocol && !(req.Model.Protocol == "text-v1" && call.Protocol == "") {
+		return out, a.ErrConflict
+	}
+	if req.Model.Protocol == "tools-v1" && (call.Protocol != "tools-v1" || !call.Input.Profile.SupportsTools()) {
+		return out, a.ErrCapability
+	}
 	w := &relayWriter{header: http.Header{}, emit: emit}
+	if req.Model.Protocol == "tools-v1" {
+		w.tools = &toolwire.Stream{}
+		w.model = req.Model.Alias
+	}
 	e = m.Relay.Forward(ctx, w, call)
 	if e != nil {
 		out.OutcomeUnknown = true
@@ -86,10 +98,25 @@ func (m RelayModel) Generate(ctx context.Context, req a.Request, emit func(strin
 		return out, io.ErrUnexpectedEOF
 	}
 	out.Finish = "stop"
+	if w.tools != nil {
+		out.Finish = w.tools.Finish
+	}
 	out.Usage, e = m.Usage(ctx, req.RequestID)
 	out.TerminalConfirmed = e == nil
 	if e != nil {
 		out.OutcomeUnknown = true
+	}
+	if e == nil && w.tools != nil {
+		if out.Finish != "stop" && out.Finish != "tool_calls" {
+			return out, a.ErrInvalid
+		}
+		for _, c := range w.tools.Calls {
+			args, err := protocol.CanonicalToolJSON([]byte(c.Arguments))
+			if err != nil || len(args) == 0 || args[0] != '{' {
+				return out, a.ErrInvalid
+			}
+			out.Calls = append(out.Calls, a.Call{ID: c.ID, Name: c.Name, Arguments: args})
+		}
 	}
 	return out, e
 }
@@ -112,6 +139,8 @@ func checkPlan(req a.Request, p kernel.Plan) error {
 }
 
 type relayWriter struct {
+	tools   *toolwire.Stream
+	model   string
 	header  http.Header
 	status  int
 	pending []byte
@@ -152,9 +181,19 @@ func (w *relayWriter) Write(b []byte) (int, error) {
 				continue
 			}
 			data := strings.TrimPrefix(line, "data: ")
+			if w.done {
+				w.err = a.ErrInvalid
+				return 0, w.err
+			}
 			if data == "[DONE]" {
 				w.done = true
 				continue
+			}
+			if w.tools != nil {
+				if _, _, e := w.tools.Push([]byte(data), w.model); e != nil {
+					w.err = e
+					return 0, e
+				}
 			}
 			var value struct {
 				Choices []struct {

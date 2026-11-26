@@ -84,12 +84,22 @@ func Validate(name string, v any) error {
 // Canonical rejects duplicate object keys at EVERY level, trailing values,
 // fractional/exponent/unsafe numeric spellings and unknown fields via Schema.
 func Canonical(b []byte) ([]byte, error) {
+	return canonicalNumbers(b, false)
+}
+
+// CanonicalToolJSON is the separate JSON domain for tool schemas/arguments.
+// Financial tickets, plans and counters keep Canonical's nonnegative rule.
+// Both domains reject duplicates, floats, exponents and unsafe integers.
+func CanonicalToolJSON(b []byte) ([]byte, error) {
+	return canonicalNumbers(b, true)
+}
+func canonicalNumbers(b []byte, signed bool) ([]byte, error) {
 	if !json.Valid(b) {
 		return nil, ErrInvalid
 	}
 	d := json.NewDecoder(bytes.NewReader(b))
 	d.UseNumber()
-	v, e := read(d)
+	v, e := readNumbers(d, signed)
 	if e != nil {
 		return nil, e
 	}
@@ -99,6 +109,9 @@ func Canonical(b []byte) ([]byte, error) {
 	return json.Marshal(v)
 }
 func read(d *json.Decoder) (any, error) {
+	return readNumbers(d, false)
+}
+func readNumbers(d *json.Decoder, signed bool) (any, error) {
 	t, e := d.Token()
 	if e != nil {
 		return nil, ErrInvalid
@@ -119,7 +132,7 @@ func read(d *json.Decoder) (any, error) {
 				if _, ok = m[key]; ok {
 					return nil, ErrInvalid
 				}
-				x, e := read(d)
+				x, e := readNumbers(d, signed)
 				if e != nil {
 					return nil, e
 				}
@@ -131,7 +144,7 @@ func read(d *json.Decoder) (any, error) {
 		if v == '[' {
 			a := []any{}
 			for d.More() {
-				x, e := read(d)
+				x, e := readNumbers(d, signed)
 				if e != nil {
 					return nil, e
 				}
@@ -143,7 +156,11 @@ func read(d *json.Decoder) (any, error) {
 		return nil, ErrInvalid
 	case json.Number:
 		n, e := strconv.ParseInt(v.String(), 10, 64)
-		if e != nil || n < 0 || n > 9007199254740991 || strconv.FormatInt(n, 10) != v.String() {
+		minimum := int64(0)
+		if signed {
+			minimum = -9007199254740991
+		}
+		if e != nil || n < minimum || n > 9007199254740991 || strconv.FormatInt(n, 10) != v.String() {
 			return nil, ErrInvalid
 		}
 		return v, nil

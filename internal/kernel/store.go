@@ -390,6 +390,9 @@ func (s *Store) key(ctx context.Context, tx *sql.Tx, id string) (Policy, int64, 
 	return p, epoch, e
 }
 func (s *Store) RegisterProfile(ctx context.Context, p Profile) error {
+	if p.Tools != nil && !p.SupportsTools() {
+		return ErrPolicy
+	}
 	if !validUUID(p.CRUID) || !validUUID(p.Binding.PublicationID) || !validUUID(p.SourceID) || p.ApprovalRef == "" || p.Alias == "" || p.RouteDigest == "" || p.GatewayEpoch < 1 {
 		return ErrPolicy
 	}

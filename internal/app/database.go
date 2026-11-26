@@ -109,6 +109,9 @@ func Migrate(ctx context.Context, c Config) error {
 	if e = initializeLedger(ctx, db, c); e != nil {
 		return e
 	}
+	if e = initializeRelayDiagnostics(ctx, db, c); e != nil {
+		return e
+	}
 	if e = applyExtraMigration(ctx, conn, 2, offlineMigration); e != nil {
 		return e
 	}

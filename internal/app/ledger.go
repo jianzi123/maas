@@ -9,12 +9,13 @@ import (
 )
 
 type LedgerConfig struct {
-	Revision    string `json:"rate_revision"`
-	Epoch       int64  `json:"initial_rate_epoch"`
-	WindowMS    int64  `json:"window_ms"`
-	GlobalLimit int64  `json:"global_limit"`
-	KeyLimit    int64  `json:"key_limit"`
-	Slots       int64  `json:"slots"`
+	Diagnostics *DiagnosticConfig `json:"diagnostics,omitempty"`
+	Revision    string            `json:"rate_revision"`
+	Epoch       int64             `json:"initial_rate_epoch"`
+	WindowMS    int64             `json:"window_ms"`
+	GlobalLimit int64             `json:"global_limit"`
+	KeyLimit    int64             `json:"key_limit"`
+	Slots       int64             `json:"slots"`
 }
 
 func initializeLedger(ctx context.Context, db *sql.DB, c Config) error {

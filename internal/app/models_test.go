@@ -18,6 +18,12 @@ import (
 )
 
 func TestProductConfiguredModelPreparesOriginalTicketWithoutSending(t *testing.T) {
+	testConfiguredModel(t, false)
+}
+func TestProductToolsModelPreparesOriginalTicketAndFeedback(t *testing.T) {
+	testConfiguredModel(t, true)
+}
+func testConfiguredModel(t *testing.T, tools bool) *Models {
 	c, db := productFixture(t)
 	ctx := context.Background()
 	if e := Migrate(ctx, c); e != nil {
@@ -43,6 +49,11 @@ func TestProductConfiguredModelPreparesOriginalTicketWithoutSending(t *testing.T
 	p := kernel.Profile{CRUID: desired.CRUID, Namespace: desired.Namespace, Name: desired.Name, Alias: desired.Alias, Binding: *state.Candidate, SourceID: uuid.NewString(), SourceType: "external", UpstreamModel: "configured-upstream", ConfigRevision: "config-test-v1", CapabilityRevision: "text-test-v1", RouteDigest: strings.Repeat("b", 64), RouteName: "configured-route", GatewayBinding: "configured-binding", GatewayInstance: uuid.NewString(), GatewayEpoch: 1, Host: "approved.internal", SafetyProfile: "test-only", ApprovalRef: "controlled-setup-not-production", BoundVerified: true, InputUpper: 100, OutputUpper: 40}
 	p.Price = &kernel.Price{ID: uuid.NewString(), Version: "test-price", Source: p.SourceID, Model: p.UpstreamModel, Currency: "USD", Scale: 9, Unit: 1000000, Effective: "2026-01-01T00:00:00Z", Input: "2000000000", Cached: "2000000000", Output: "8000000000", Reasoning: "8000000000"}
 	p.RouteID = "configured-route-id"
+	if tools {
+		p.Tools = &kernel.ToolCapability{Protocol: "tools-v1", Adapter: "deepseek-chat-tools/1", Mode: "non-thinking"}
+		p.UsagePolicy = &kernel.UsagePolicy{AdapterRevision: "deepseek-chat-tools/1", Mode: "final_only"}
+		p.Catalog = &kernel.CatalogMetadata{DisplayName: "controlled-tools-adapter-test", Capabilities: map[string]any{"streaming": true, "verified_max_output_tokens": 40, "temperature_supported": false, "usage_available": "verified", "capability_revision": p.CapabilityRevision, "hard_budget_status": "verified", "budget_unavailable_reason": nil, "protocols": []string{"chat_completions"}}}
+	}
 	if e = core.RegisterProfile(ctx, p); e != nil {
 		t.Fatal(e)
 	}
@@ -62,9 +73,19 @@ func TestProductConfiguredModelPreparesOriginalTicketWithoutSending(t *testing.T
 		t.Fatal(e)
 	}
 	c.Models = []ModelConfig{{Alias: p.Alias, PublicationID: p.Binding.PublicationID, PlatformKeyFile: keyfile, Protocol: "text-v1", TimeoutMS: 5000}}
+	if tools {
+		c.Models[0].Protocol = "tools-v1"
+		c.Models[0].Adapter = "deepseek-chat-tools/1"
+		c.Models[0].Mode = "non-thinking"
+	}
 	c.Gateway = GatewayConfig{AdmissionKeyFile: signfile, Kid: "test-signer", Owner: uuid.NewString(), RateRevision: c.Ledger.Revision, TicketTTLMS: 1000}
-	m := &Models{Config: c, Core: core, Gate: gate}
+	m := &Models{Config: c, Core: core, Gate: gate, DB: db}
 	req := a.Request{RequestID: uuid.NewString(), Model: a.Model{Alias: p.Alias, Source: p.SourceID, Revision: p.ConfigRevision, Protocol: "text-v1"}, Messages: []a.Message{{Role: "user", Parts: []a.Part{{Type: "text", Text: "configuration witness"}}}}, TokenUpper: 1000, MoneyUpper: 1000000, Currency: "USD", ContextTokenLimit: 100}
+	if tools {
+		req.Model.Protocol = "tools-v1"
+		req.Tools = []a.ToolSpec{{Name: "bounded_arithmetic", Version: "1", Schema: json.RawMessage(`{"type":"object","properties":{"a":{"type":"integer"}},"required":["a"],"additionalProperties":false}`)}}
+		req.Messages = append(req.Messages, a.Message{Role: "assistant", Parts: []a.Part{{Type: "tool_call", CallID: "runtime-uuid", SourceCallID: "provider-call", Name: "bounded_arithmetic", Arguments: json.RawMessage(`{"a":6}`)}}}, a.Message{Role: "tool", Parts: []a.Part{{Type: "tool_result", CallID: "runtime-uuid", Text: "6"}}})
+	}
 	call, e := m.prepare(ctx, req)
 	if e != nil {
 		t.Fatal(e)
@@ -81,17 +102,24 @@ func TestProductConfiguredModelPreparesOriginalTicketWithoutSending(t *testing.T
 	if body["model"] != p.UpstreamModel || body["max_tokens"] != float64(40) {
 		t.Fatal("body did not consume profile")
 	}
+	if tools {
+		wire := body["messages"].([]any)
+		if wire[2].(map[string]any)["tool_call_id"] != "provider-call" || body["thinking"].(map[string]any)["type"] != "disabled" || len(body["tools"].([]any)) != 1 || body["parallel_tool_calls"] != nil || call.Protocol != "tools-v1" {
+			t.Fatal("tools body not consumed", body)
+		}
+	}
 	if bound, e := m.CountContext(ctx, req); e != nil || bound != 100 {
 		t.Fatal(bound, e)
 	}
 	req.Model.Protocol = "tools-v1"
-	if e = m.Supports(ctx, req.Model); e == nil {
+	if e = m.Supports(ctx, req.Model); (e == nil) != tools {
 		t.Fatal("tools mode silently accepted")
 	}
 	var n int
 	if e = db.QueryRow("SELECT COUNT(*) FROM generation_requests").Scan(&n); e != nil || n != 0 {
 		t.Fatal("prepare sent/admitted a model call", n, e)
 	}
+	return m
 }
 
 func TestProductUsageReadsAuthoritativeReleaseAndHeld(t *testing.T) {

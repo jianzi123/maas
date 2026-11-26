@@ -61,6 +61,7 @@ type Price struct {
 // Profile is an immutable, installation-approved metadata snapshot. It contains
 // no endpoint URL, Secret value, or claim that the gateway actually applied it.
 type Profile struct {
+	Tools                                                                   *ToolCapability  `json:",omitempty"`
 	UsagePolicy                                                             *UsagePolicy     `json:",omitempty"`
 	Catalog                                                                 *CatalogMetadata `json:",omitempty"`
 	CRUID, Namespace, Name, Alias                                           string
@@ -73,6 +74,18 @@ type Profile struct {
 	BoundVerified                                                           bool
 	InputUpper, OutputUpper                                                 int64
 	Price                                                                   *Price
+}
+
+// ToolCapability is part of the immutable, installation-approved publication.
+// An old text capability never grants tools through a runtime configuration edit.
+type ToolCapability struct {
+	Protocol string `json:"protocol"`
+	Adapter  string `json:"adapter"`
+	Mode     string `json:"mode"`
+}
+
+func (p Profile) SupportsTools() bool {
+	return p.Tools != nil && p.Tools.Protocol == "tools-v1" && p.Tools.Adapter == "deepseek-chat-tools/1" && p.Tools.Mode == "non-thinking" && p.CapabilityRevision != "" && p.ApprovalRef != "" && p.UsagePolicy != nil && p.UsagePolicy.AdapterRevision == p.Tools.Adapter && p.UsagePolicy.Mode == "final_only"
 }
 
 type CatalogMetadata struct {

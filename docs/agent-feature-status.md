@@ -1,7 +1,7 @@
 Agent功能状态（本轮正常产品接线）
 =================================
 
-本清单随本轮代码提交并由标准四锁引用；最终Compose/K8s组合由MAAS-21更新精确SHA和独立验收结果。旧a4c的AR-R01/R02作者修复保留，独立未关闭不能被本轮作者测试抵销。
+本清单随本轮代码提交并由标准四锁引用；最终Compose/K8s组合由MAAS-21更新精确SHA和独立验收结果。2026-11-26增量从统一4402c456续接，保留原AR-R01/R02及879受控关闭范围，不外推本次新代码的独立QA。未更新的历史验证数字继续以各自报告截点为准。
 
 | 功能 | 当前状态 | 入口/依据与限制 |
 | --- | --- | --- |
@@ -14,7 +14,8 @@ Agent功能状态（本轮正常产品接线）
 | Session/Run/Step/Message/Event/Checkpoint | 已实现，待最终组合独立验收 | 原AR-1 draft.2；a4c的revision410/attempt修复保留，历史不同SHA不混为本次独立通过 |
 | Chat流式/停止/只读恢复 | 已实现，待正常入口同版本浏览器验证 | 正常API与原页面接点明确；旧前端207/6组为其原a4c作者范围，不外推新组合 |
 | 模型配置/文本适配 | 已实现正式接线，待真实网关/来源验证 | config/product.example.json models/gateway；原Profile、平台Key、预算Plan、v3票据、Relay；缺真实输入准确失败关闭 |
-| tools-v1正式模型 | 未实现可用的正式归一化/批准装配 | 当前明确tools_protocol_unavailable；结构化ModelClient端口与受控模型测试已存在，不能冒充真实tools能力 |
+| tools-v1正式模型 | 已实现受保护适配候选；真实来源仍未验 | product-tools-v1.md：显式配置＋不可变Profile能力/UsagePolicy双绑定，原签票/Higress Relay/唯一计量；缺批准仍tools_protocol_unavailable，不切受控模型 |
+| 必需迁移启动/ready/调度门禁 | 已实现FC-M增量，验证见本轮报告 | kernel/release1–3、product1–2摘要/Applied；Agent原表/索引/文档版本；无运行DDL/补标或数据回退 |
 | bounded_arithmetic@1 | 已实现并验证 | 原Calculator白名单整数计算；工具Scope/Schema、限值、取消和结果回填 |
 | list_visible_models@1 | 已实现，正常目录接原MySQL Profile | 当前可信scope过滤配置引用的耐久Profile；测试目录适配与正式目录分开 |
 | 工具接口/执行上下文 | 已实现，新增类型测试 | tool_context.go、agent-tool-interface.md；run/step/call/request/trace/deadline/fence/幂等key均由服务端生成 |
