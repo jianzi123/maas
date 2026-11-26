@@ -9,6 +9,7 @@ MAAS-20 FC-1 与受保护 tools-v1 作者验证（2026-11-26 UTC）
 | 完整protocol包 | 3个顶层/3项，exit0；包含原票据验证与新增工具JSON安全整数域。与上行有重叠，不相加。 |
 | 最终正常产品/真实MySQL批次 | **18个顶层、含子测试57项，0失败/0跳过，整体exit0。** 包含全部Product、原ARReview、MySQLToolsRelay；详见原始JSONL，不累加旧879或其他角色成绩。 |
 | 正式程序构建/定向vet | GOMAXPROCS=1、-p=1、GOMEMLIMIT=256MiB，go build及变更相关go vet均exit0。两个纯迁移隔离快照也分别构建成功。 |
+| 实际HTTP/持久事件样本 | 仅补充可选测试制品导出，产品逻辑与b2a79c7相同。定向闭环1顶层/含子测3项exit0；成功案例23 HTTP样本/33持久事件/2原child，非法后项11 HTTP样本/9事件/1原child。独立Python jsonschema用官方OpenAPI及事件Schema逐份通过；未捕获登录、Cookie、CSRF或原始Key。 |
 | 清理 | 专属skip-networking MySQL8.4.7，/tmp/maas11-mysql.*私有socket/数据；日志确认正常shutdown。HTTP/TLS服务器、Host与自有连接均在测试中关闭/join，无自有常驻服务。未停止其他项目。 |
 
 最终SQL的具体断言
@@ -60,6 +61,8 @@ bash scripts/test-mysql.sh
 ```
 
 最终原始记录位于test/controlled/maas20/fc1-tools；早期失败文件单列，不截取通过片段抵销非零exit。标准锁必须从已提交代码运行，四锁另交；不能沿用本分支锁覆盖集成最终树。
+
+wire/complete.json与wire/invalid_second_tool.json包含实际HTTP响应、完整MySQL Session/事件/checkpoint及原child查询记录。wire/schema-validation.json为独立官方Schema结果；validate-traces.py可在仓库根复验。重采样时对原runner增加`MAAS_CAPTURE_PRODUCT_TOOLS=1`、只选`^TestProductToolsProtectedLoop`，输出到artifacts/fc1-wire，不重放已有持久请求。
 
 仍未验/后续交接
 --------------

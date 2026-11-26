@@ -11,6 +11,9 @@ import (
 	"net/http"
 	"net/http/cookiejar"
 	"net/http/httptest"
+	"os"
+	"path/filepath"
+	"strings"
 	"sync"
 	"sync/atomic"
 	"testing"
@@ -207,6 +210,7 @@ func TestProductToolsProtectedLoopAndWholeBatch(t *testing.T) {
 			jar, _ := cookiejar.New(nil)
 			httpClient := &http.Client{Jar: jar, Timeout: 10 * time.Second}
 			csrf := ""
+			httpTrace := []map[string]any{}
 			do := func(method, path string, value any, etag string, status int) (map[string]any, http.Header) {
 				t.Helper()
 				b, _ := json.Marshal(value)
@@ -225,6 +229,9 @@ func TestProductToolsProtectedLoopAndWholeBatch(t *testing.T) {
 				raw, _ := io.ReadAll(res.Body)
 				if res.StatusCode != status {
 					t.Fatalf("%s %s %d: %s", method, path, res.StatusCode, raw)
+				}
+				if os.Getenv("MAAS_CAPTURE_PRODUCT_TOOLS") == "1" && strings.HasPrefix(path, "/api/agent/v1/") {
+					httpTrace = append(httpTrace, map[string]any{"method": method, "path": path, "status": res.StatusCode, "etag": res.Header.Get("ETag"), "body": json.RawMessage(raw)})
 				}
 				var out map[string]any
 				if len(raw) > 0 && json.Unmarshal(raw, &out) != nil {
@@ -269,6 +276,39 @@ func TestProductToolsProtectedLoopAndWholeBatch(t *testing.T) {
 						t.Fatal("invalid batch erased settled model usage", run)
 					}
 					do("GET", base+"/events?page_size=100", nil, "", 200)
+					if os.Getenv("MAAS_CAPTURE_PRODUCT_TOOLS") == "1" {
+						document, e := runtime.Service.Store.Get(ctx, sid)
+						if e != nil {
+							t.Fatal(e)
+						}
+						children := []any{}
+						for _, run := range document.Runs {
+							for _, step := range run.Steps {
+								record, e := core.LookupRequest(ctx, step.RequestID)
+								if e != nil {
+									t.Fatal(e)
+								}
+								children = append(children, record)
+							}
+						}
+						root, e := filepath.Abs("../..")
+						if e != nil {
+							t.Fatal(e)
+						}
+						dir := filepath.Join(root, "artifacts", "fc1-wire")
+						if e = os.MkdirAll(dir, 0700); e != nil {
+							t.Fatal(e)
+						}
+						trace := map[string]any{"kind": "actual-controlled-http-and-mysql; no real supplier", "generated_at": time.Now().UTC(), "http": httpTrace, "persisted_session": document, "original_child_records": children}
+						b, e := json.MarshalIndent(trace, "", "  ")
+						if e != nil {
+							t.Fatal(e)
+						}
+						if e = os.WriteFile(filepath.Join(dir, name+".json"), append(b, '\n'), 0600); e != nil {
+							t.Fatal(e)
+						}
+						t.Log("saved controlled trace: artifacts/fc1-wire/" + name + ".json (no login/cookie/CSRF captured)")
+					}
 					break
 				}
 				if time.Now().After(deadline) {
