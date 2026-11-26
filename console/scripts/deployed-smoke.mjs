@@ -203,11 +203,40 @@ try {
   await page
     .getByRole("button", { name: "＋ 新建会话", exact: true })
     .waitFor();
+  if (hash.startsWith("#chat/")) {
+    const expectedId = decodeURIComponent(hash.slice(6));
+    await page.getByRole("button", { name: "重命名", exact: true }).waitFor();
+    await page.waitForFunction(
+      async (id) => {
+        const r = await fetch(
+          "/api/agent/v1/sessions/" + encodeURIComponent(id),
+          { credentials: "same-origin", cache: "no-store", redirect: "error" },
+        );
+        if (!r.ok) return false;
+        const s = await r.json(),
+          run =
+            s.runs.find((x) => x.id === s.conversation.active_run_id) ??
+            s.runs.at(-1);
+        return (
+          document.querySelector(".chat-main h1")?.textContent?.trim() ===
+            s.conversation.title &&
+          (!run ||
+            document.querySelector(".chat-controls .badge")?.textContent ===
+              run.state) &&
+          document.querySelectorAll(".chat-message").length >= s.messages.length
+        );
+      },
+      expectedId,
+      { polling: 200, timeout: 15000 },
+    );
+  }
   assert.equal(new URL(page.url()).hash, hash);
   assert.equal(runPosts(), before);
   checks.push(
     "Installed refresh keeps session URL; GET recovery adds no generation",
   );
+  if (await page.locator(".agent-trace").count())
+    await page.locator(".agent-trace").scrollIntoViewIfNeeded();
   await page.screenshot({ path: dir + "/console.png", fullPage: false });
   await page.getByRole("button", { name: "退出会话", exact: true }).click();
   await page.getByRole("button", { name: "登录", exact: true }).waitFor();
