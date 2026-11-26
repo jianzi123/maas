@@ -32,6 +32,7 @@ type Runtime struct {
 	cancel         context.CancelFunc
 	host           *a.Host
 	lease          *sql.Conn
+	leaseID        int64
 	closeOnce      sync.Once
 	models         modelSource
 	done           chan struct{}
@@ -81,6 +82,9 @@ func Open(ctx context.Context, c Config) (*Runtime, error) {
 	var locked int
 	if e = lease.QueryRowContext(ctx, "SELECT GET_LOCK(CONCAT('maas-product-runtime:',DATABASE()),0)").Scan(&locked); e != nil || locked != 1 {
 		return nil, errors.New("runtime_already_owned")
+	}
+	if e = lease.QueryRowContext(root, "SELECT CONNECTION_ID()").Scan(&r.leaseID); e != nil || r.leaseID < 1 {
+		return nil, errors.New("runtime_ownership_unavailable")
 	}
 	pepper, e := secret(c.Secrets.PepperFile, 32, 4096)
 	if e != nil {
@@ -238,8 +242,10 @@ func (r *Runtime) checkReady(ctx context.Context) error {
 	if r.ctx.Err() != nil {
 		return a.ErrUnavailable
 	}
-	var own int
-	if validateSchema(ctx, r.DB) != nil || r.lease.QueryRowContext(ctx, "SELECT IS_USED_LOCK(CONCAT('maas-product-runtime:',DATABASE()))=CONNECTION_ID()").Scan(&own) != nil || own != 1 {
+	var owner sql.NullInt64
+	// Request cancellation may discard a pooled connection, but must never
+	// touch the physical connection retaining GET_LOCK. Compare its saved ID.
+	if validateSchema(ctx, r.DB) != nil || r.DB.QueryRowContext(ctx, "SELECT IS_USED_LOCK(CONCAT('maas-product-runtime:',DATABASE()))").Scan(&owner) != nil || !owner.Valid || owner.Int64 != r.leaseID {
 		// A caller cancelling its own HTTP request must not retire the service.
 		if ctx.Err() != nil {
 			return ctx.Err()
