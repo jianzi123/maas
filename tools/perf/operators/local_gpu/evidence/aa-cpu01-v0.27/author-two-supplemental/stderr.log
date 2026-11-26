@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "C:\Users\a9786\multica_workspaces_desktop-api.multica.ai\maas-007-da4ec7313117\maas-10-79a30240b357\workdir\repo\tools\perf\operators\local_gpu\analyze_aa_window.py", line 201, in <module>
+    if __name__=="__main__":raise SystemExit(main())
+                                             ~~~~^^
+  File "C:\Users\a9786\multica_workspaces_desktop-api.multica.ai\maas-007-da4ec7313117\maas-10-79a30240b357\workdir\repo\tools\perf\operators\local_gpu\analyze_aa_window.py", line 198, in main
+    write_json(a.output,v,exclusive=True)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\a9786\multica_workspaces_desktop-api.multica.ai\maas-007-da4ec7313117\maas-10-79a30240b357\workdir\repo\tools\perf\operators\local_gpu\cadence_protocol.py", line 63, in write_json
+    with Path(path).open("x" if exclusive else "w", encoding="utf-8", newline="\n") as f:
+         ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ProgramData\anaconda3\Lib\pathlib\_local.py", line 537, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileExistsError: [Errno 17] File exists: 'C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-10-79a30240b357\\workdir\\deliverables\\aa-cpu01-v0.27\\author-two-supplemental\\old-report.json'

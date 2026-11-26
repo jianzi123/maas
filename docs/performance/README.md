@@ -83,3 +83,5 @@ K1算子实验可在GPU资源和运行库条件满足后独立推进，不等待
 票据v3、终态3.0、ObservationEnvelope1.0保持原样。Go/MySQL为唯一业务准入与耐久结算真源，Higress实际选路；未知用量、slot、停止与财务held分开处理。真实导出适配和H1–H4装配列为明确接线工作。
 
 机器可读[目标登记表](optimization-goals.json)与真实实验计划均保持execution_enabled=false。模型/权重/GPU、目标环境、SLO、调用额度与预算按具体任务的授权推进。课程和静态合并预演不自动启动框架实现、模型实验或部署。
+
+本轮：[AA-CPU-01预算与控制传输修复v0.27](literature/aa-cpu01-fix-v0.27.md)。仅CPU，原529正控接受、550坏job拒绝，待MAAS-7独立关闭；不重开GPU窗口。

@@ -1,0 +1,47 @@
+from pathlib import Path
+import subprocess,sys,json,time,os
+root=Path.cwd().resolve();out=root/"deliverables/aa-cpu01-v0.27";folder=out/"Windows-to-WSL-control";folder.mkdir(exist_ok=False)
+src=root/"repo/tools/perf/operators/local_gpu";sys.path.insert(0,str(src))
+from aa_protocol import encode_lease
+d=subprocess.run([os.environ["MULTICA_CLI_PATH"],"daemon","status","--output","json"],capture_output=True,text=True,encoding="utf-8")
+assert d.returncode==0;pid=json.loads(d.stdout)["pid"]
+plan=out/"pipes-Windows/disabled-plan.json";assert not json.loads(plan.read_text())["execution_enabled"]
+def lx(p):
+ s=str(p.resolve()).replace(chr(92),"/")
+ return "/mnt/"+s[0].lower()+s[2:]
+guard=out/"pipes-Windows/guard";ready=folder/"ready.json";sentinel=folder/"success.json";sentinel.write_bytes(b"CPU_SUCCESS_SENTINEL")
+cmd=["wsl.exe","-d","Ubuntu-22.04","--","/usr/bin/env",
+     "PYTHONPATH="+lx(guard)+":"+lx(src),"PYTHONDONTWRITEBYTECODE=1",
+     "/var/tmp/maas-10-gpu-01a1a5ba/bin/python",lx(src/"run_aa_window.py"),"--plan",lx(plan),
+     "--validate-lease-only","--control-timeout-ms","4000","--control-ready-file",lx(ready),"--output",lx(sentinel)]
+start=time.monotonic_ns();child=subprocess.Popen(cmd,stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+try:
+ until=time.monotonic()+6
+ while not ready.exists() and child.poll() is None and time.monotonic()<until:time.sleep(.01)
+ assert ready.exists()
+ time.sleep(.25)
+ elapsed=time.monotonic_ns()-start
+ lease={"window_id":"CPU_CROSS_OS_CONTROL","total_seconds":600,"stop_new_seconds":540,
+        "driver_elapsed_at_send_ns":elapsed,"soft_remaining_ns":540000000000-elapsed-1000000000,
+        "hard_remaining_ns":600000000000-elapsed-1000000000,"protected_daemon_pid":pid}
+ packet=encode_lease(lease);(folder/"stdin.bin").write_bytes(packet)
+ child.stdin.write(packet);child.stdin.flush();child.stdin.close();child.stdin=None
+ stdout,stderr=child.communicate(timeout=6)
+finally:
+ if child.poll() is None:
+  assert child.pid not in (pid,os.getpid());child.kill()
+ child.wait()
+(folder/"stdout.log").write_bytes(stdout);(folder/"stderr.log").write_bytes(stderr)
+assert child.returncode==0,stderr.decode(errors="replace")
+v=json.loads(stdout);assert v["GPU_imports"] is False
+assert v["driver_elapsed_at_send_ns"]==elapsed
+assert v["control_receive_elapsed_ns"]>=200000000
+assert v["soft_remaining_at_receive_ns"]+v["control_receive_elapsed_ns"]==lease["soft_remaining_ns"]
+assert sentinel.read_bytes()==b"CPU_SUCCESS_SENTINEL"
+receipt={"command":cmd,"exit_code":child.returncode,"pid":child.pid,"own_child_collected":True,
+ "driver_elapsed_actual_ns":elapsed,"receiver":v,"full_CPU_wall_ns":time.monotonic_ns()-start,
+ "execution_enabled":False,"GPU_execution":False,"shared_research_lock_used":False,
+ "note":"Real Windows-to-WSL validation-only pipe; no comparison of absolute cross-OS clock coordinates"}
+(folder/"receipt.json").write_text(json.dumps(receipt,indent=2)+chr(10))
+print(json.dumps({"driver_elapsed_actual_ns":elapsed,"receiver_wait_ns":v["control_receive_elapsed_ns"],
+                 "both_charged":True,"GPU_execution":False}))

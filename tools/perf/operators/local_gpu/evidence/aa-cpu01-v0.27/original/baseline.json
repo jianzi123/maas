@@ -1,0 +1,42 @@
+{
+  "fixed_candidate": "4bed4b4be2ca294b9305cfb28fe1ab03f6164ec0",
+  "QA": "d9ca7ff7742cf706f26b06d3f81f5733e12fbc25",
+  "records": [
+    {
+      "case": "legal_soft529",
+      "command": [
+        "D:\\ProgramData\\anaconda3\\python.exe",
+        "-X",
+        "utf8",
+        "C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-10-79a30240b357\\workdir\\repo\\tools\\perf\\operators\\local_gpu\\aa_worker.py",
+        "--plan",
+        "deliverables\\aa-cpu01-v0.27\\original\\plan.json",
+        "--job",
+        "deliverables\\aa-cpu01-v0.27\\original\\legal_soft529.json",
+        "--validate-only"
+      ],
+      "exit_code": 0,
+      "function_accepted": true,
+      "expected_after_fix": "accept"
+    },
+    {
+      "case": "AA_CPU_01_soft550",
+      "command": [
+        "D:\\ProgramData\\anaconda3\\python.exe",
+        "-X",
+        "utf8",
+        "C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-10-79a30240b357\\workdir\\repo\\tools\\perf\\operators\\local_gpu\\aa_worker.py",
+        "--plan",
+        "deliverables\\aa-cpu01-v0.27\\original\\plan.json",
+        "--job",
+        "deliverables\\aa-cpu01-v0.27\\original\\AA_CPU_01_soft550.json",
+        "--validate-only"
+      ],
+      "exit_code": 0,
+      "function_accepted": true,
+      "expected_after_fix": "reject"
+    }
+  ],
+  "GPU_executed": false,
+  "execution_enabled": false
+}

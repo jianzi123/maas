@@ -3,14 +3,20 @@ import argparse,json,math,os,signal,time,uuid
 from pathlib import Path
 from cadence_protocol import digest,canonical,write_json
 from aa_protocol import CONFIG,load,need,check_budget,check_binding
+from aa_control import validate_control_shape,validate_job_time
 class WindowStopped(RuntimeError):pass
 def validate_job(plan,job):
  need(job["plan_sha256"]==digest(plan) and job["process"] in ("REF","HOLD"),"job identity")
  check_budget(job["budget"])
  need(job["budget_lease_sha256"]==digest(job["budget"]) and job["window_id"]==job["budget"]["window_id"],"job budget origin")
  need(job["parent_pid"]>0 and job["research_lock_fd"]>=0,"parent/lock")
+ for name in ("launch_parent_elapsed_ns","soft_parent_deadline_ns","hard_parent_deadline_ns"):
+  need(type(job[name]) is int,"job deadlines must be integer ns")
+ need(job["soft_parent_deadline_ns"]<=job["budget"]["soft_remaining_ns"],"per-process soft budget reset")
  need(0<=job["launch_parent_elapsed_ns"]<job["soft_parent_deadline_ns"]<job["hard_parent_deadline_ns"],"late launch/reset budget")
  need(job["hard_parent_deadline_ns"]<=job["budget"]["hard_remaining_ns"],"per-process budget reset")
+ need(job.get("schema") in (None,"P25-AA-job1","P25-AA-job2"),"job schema")
+ if job.get("schema")=="P25-AA-job2":validate_control_shape(job)
  need((job["process"]=="REF" and job["bank_sha256"] is None) or (job["process"]=="HOLD" and job["bank_sha256"]),"bank stage")
 def main():
  p=argparse.ArgumentParser(description=__doc__);p.add_argument("--plan",type=Path,required=True);p.add_argument("--job",type=Path)
@@ -18,8 +24,11 @@ def main():
  a=p.parse_args();plan=load(a.plan);job=json.loads(a.job.read_text()) if a.job else None
  if job:validate_job(plan,job)
  if a.validate_only:
-  print(json.dumps({"validated":True,"GPU_imports":False,"rows":128}));return 0
+  need(not any(n in __import__("sys").modules for n in ("torch","sglang","pynvml")),"GPU import in job validation")
+  control_elapsed=validate_job_time(job) if job and job.get("schema")=="P25-AA-job2" else None
+  print(json.dumps({"validated":True,"GPU_imports":False,"rows":128,"control_elapsed_ns":control_elapsed,"metadata_only":control_elapsed is None}));return 0
  need(a.execute and plan["execution_enabled"] and job is not None and a.output is not None,"explicit authorized execution required")
+ live_start_elapsed=validate_job_time(job)
  need(os.name=="posix" and os.getppid()==job["parent_pid"],"worker must be child of supervisor")
  import fcntl
  fd=job["research_lock_fd"];st=os.fstat(fd);lockst=os.stat(CONFIG["resources"]["lock"])
@@ -38,13 +47,15 @@ def main():
   pending.clear();end=time.perf_counter_ns();item={"id":f"IO{len(ios)}","reason":reason,"row_ids":ids,
     "begin_ns":begin,"end_ns":end,"clock_scope":clock};ios.append(item);return item["id"]
  try:
+  validate_job_time(job)
   from aa_runtime import AARuntime
   rt=AARuntime(a.output)
+  validate_job_time(job)
   need(all(f["observer_removed"] for f in rt.capture_facts.values()),"capture observer remains")
   rt.metadata.update(runner_object=id(rt.runner),forward_function=id(rt.runner.forward.__func__),graph_replay_function=id(rt.torch.cuda.CUDAGraph.replay),execution_stream=rt.torch.cuda.current_stream(0).cuda_stream)
   runtime={"schema":"P25-AA-runtime1","window_id":job["window_id"],"process":job["process"],"pid":os.getpid(),"parent_pid":os.getppid(),"evidence_kind":"local_GPU_static_dummy",
     "clock_scope":clock,"job_sha256":digest(job),"plan_sha256":digest(plan),"metadata":rt.metadata,
-    "budget_lease_sha256":job["budget_lease_sha256"],"root_observed_done_ns":time.perf_counter_ns(),
+    "budget_lease_sha256":job["budget_lease_sha256"],"budget_control":job["budget_control"],"control_binding_sha256":job["control_binding_sha256"],"control_elapsed_at_start_ns":live_start_elapsed,"root_observed_done_ns":time.perf_counter_ns(),
     "hot_query":False,"hot_profiler":False,"internal_capture_calls":"unknown"}
   previous_done=runtime["root_observed_done_ns"]
   write_json(a.output/"runtime.json",runtime,exclusive=True)
@@ -53,6 +64,7 @@ def main():
    need(digest(bank)==job["bank_sha256"] and bank["parameter_sha256"]==rt.parameter_sha,"cross-process parameters")
   for scope in CONFIG["scopes"]:
    for bs in CONFIG["batches"]:
+    validate_job_time(job)
     stage=f"{scope}/B{bs}";begin=time.perf_counter_ns();rt.resources();rt.scope=scope
     fb=rt.cell(bs);gates.append(rt.gate(fb,"before"));rt.warm(fb)
     inp=rt.input_state(fb);value_key={k:v for k,v in inp.items() if k!="path"}
@@ -67,6 +79,7 @@ def main():
           "begin_ns":begin,"ready_ns":time.perf_counter_ns()}
     cells.append(cell);write_json(a.output/"cells.json",cells)
     for scheduled in [r for r in expected if r["scope"]==scope and r["batch"]==bs]:
+     validate_job_time(job)
      ioid=None
      if scheduled["role"]=="boundary_first":
       ioid=checkpoint("pair-boundary");observe0=time.perf_counter_ns();resource=rt.resources()
@@ -93,10 +106,12 @@ def main():
      previous_done=done;previous_id=row["id"];records.append(row);pending.append(row)
      canonical(row);row["bookkeeping_end_ns"]=time.perf_counter_ns()
      need(used,"eager fallback")
+    validate_job_time(job)
     gates.append(rt.gate(fb,"after"))
     need(rt.input_state(fb)==inp and rt.graph_identity()==rt.identity,"input/graph changed within cell")
     write_json(a.output/"gates.json",gates)
     print(json.dumps({"process":job["process"],"scope":scope,"batch":bs,"measured":len(records)}),flush=True)
+  validate_job_time(job)
   need(rt.parameter_hash()==rt.parameter_sha,"parameter changed")
   write_json(a.output/"final-invariants.json",{"parameter_sha256":rt.parameter_sha,"graphs_unchanged":rt.graph_identity()==rt.identity,
               "resource":rt.resources(),"peak_torch_bytes":rt.torch.cuda.max_memory_allocated()})

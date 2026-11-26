@@ -1,0 +1,1 @@
+{"lease_validated": true, "GPU_imports": false, "window_id": "CPU_CROSS_OS_CONTROL", "control_receive_elapsed_ns": 609598040, "soft_remaining_at_receive_ns": 535636059660, "hard_remaining_at_receive_ns": 595636059660, "driver_elapsed_at_send_ns": 2754342300, "accounting": "origin before ready; overlap with sender may be charged twice, never credited"}

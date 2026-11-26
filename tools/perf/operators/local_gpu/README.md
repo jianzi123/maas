@@ -34,3 +34,5 @@ Engine只做过导入，模型生成、scheduler/serving及质量未验证。手
 P25-AA opt-in入口：aa_protocol.py / launch_aa_window.py / run_aa_window.py / aa_worker.py / analyze_aa_window.py。采前18项门禁、报文修复后22项CPU检查；双进程共用600s，别名直接同一method，结果仅为本窗重复性。见[采前协议v0.26](../../../../docs/performance/literature/p25-aa-method-v0.26.md)。旧query bank与v0.25设计不回写。
 
 P25-AA本次实际窗口在启动报文阶段失败，未启动模型worker；原15源码/128缺测和CPU修复见[结果v0.26](../../../../docs/performance/literature/p25-aa-result-v0.26.md)。当前22项CPU检查不等于GPU验证；旧plan需用冻结producer离线复核。
+
+AA-CPU-01修复见[控制预算v0.27](../../../../docs/performance/literature/aa-cpu01-fix-v0.27.md)：soft/hard各自不超过原lease，接收与新job2使用同一父起点，旧job1仅metadata验证。

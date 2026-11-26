@@ -1,0 +1,41 @@
+{
+  "command": [
+    "wsl.exe",
+    "-d",
+    "Ubuntu-22.04",
+    "--",
+    "/usr/bin/env",
+    "PYTHONPATH=/mnt/c/Users/a9786/multica_workspaces_desktop-api.multica.ai/maas-007-da4ec7313117/maas-10-79a30240b357/workdir/deliverables/aa-cpu01-v0.27/pipes-Windows/guard:/mnt/c/Users/a9786/multica_workspaces_desktop-api.multica.ai/maas-007-da4ec7313117/maas-10-79a30240b357/workdir/repo/tools/perf/operators/local_gpu",
+    "PYTHONDONTWRITEBYTECODE=1",
+    "/var/tmp/maas-10-gpu-01a1a5ba/bin/python",
+    "/mnt/c/Users/a9786/multica_workspaces_desktop-api.multica.ai/maas-007-da4ec7313117/maas-10-79a30240b357/workdir/repo/tools/perf/operators/local_gpu/run_aa_window.py",
+    "--plan",
+    "/mnt/c/Users/a9786/multica_workspaces_desktop-api.multica.ai/maas-007-da4ec7313117/maas-10-79a30240b357/workdir/deliverables/aa-cpu01-v0.27/pipes-Windows/disabled-plan.json",
+    "--validate-lease-only",
+    "--control-timeout-ms",
+    "4000",
+    "--control-ready-file",
+    "/mnt/c/Users/a9786/multica_workspaces_desktop-api.multica.ai/maas-007-da4ec7313117/maas-10-79a30240b357/workdir/deliverables/aa-cpu01-v0.27/Windows-to-WSL-control/ready.json",
+    "--output",
+    "/mnt/c/Users/a9786/multica_workspaces_desktop-api.multica.ai/maas-007-da4ec7313117/maas-10-79a30240b357/workdir/deliverables/aa-cpu01-v0.27/Windows-to-WSL-control/success.json"
+  ],
+  "exit_code": 0,
+  "pid": 37812,
+  "own_child_collected": true,
+  "driver_elapsed_actual_ns": 2754342300,
+  "receiver": {
+    "lease_validated": true,
+    "GPU_imports": false,
+    "window_id": "CPU_CROSS_OS_CONTROL",
+    "control_receive_elapsed_ns": 609598040,
+    "soft_remaining_at_receive_ns": 535636059660,
+    "hard_remaining_at_receive_ns": 595636059660,
+    "driver_elapsed_at_send_ns": 2754342300,
+    "accounting": "origin before ready; overlap with sender may be charged twice, never credited"
+  },
+  "full_CPU_wall_ns": 2827543500,
+  "execution_enabled": false,
+  "GPU_execution": false,
+  "shared_research_lock_used": false,
+  "note": "Real Windows-to-WSL validation-only pipe; no comparison of absolute cross-OS clock coordinates"
+}

@@ -1,0 +1,27 @@
+{
+  "cases": [
+    {
+      "id": "HOLD-missing-bank-reject",
+      "status": "passed"
+    },
+    {
+      "id": "analyzer-exclusive-no-overwrite",
+      "status": "passed"
+    }
+  ],
+  "command": [
+    "D:\\ProgramData\\anaconda3\\python.exe",
+    "C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-10-79a30240b357\\workdir\\repo\\tools\\perf\\operators\\local_gpu\\analyze_aa_window.py",
+    "--plan",
+    "C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-10-79a30240b357\\workdir\\deliverables\\aa-cpu01-v0.27\\author-two-supplemental\\plan.json",
+    "--root",
+    "C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-10-79a30240b357\\workdir\\deliverables\\aa-cpu01-v0.27\\author-two-supplemental\\empty",
+    "--output",
+    "C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-10-79a30240b357\\workdir\\deliverables\\aa-cpu01-v0.27\\author-two-supplemental\\old-report.json"
+  ],
+  "exit_code": 1,
+  "success_sentinel_hash_unchanged": "f57daba7a8e34c191db2262baf0a59ce7dbedbc2c9452d327dc1d9d9d7369eb8",
+  "GPU_execution": false,
+  "author_run_not_independent_QA": true,
+  "original_followup_not_rewritten": "its bad-job-accepted oracle belongs to old defect confirmation; QA must update independently"
+}

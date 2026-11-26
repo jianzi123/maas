@@ -1,0 +1,112 @@
+"""Author CPU receipts only: disabled plans, guarded validator children, no execution."""
+import argparse,copy,hashlib,json,os,subprocess,sys,time
+from pathlib import Path
+p=argparse.ArgumentParser();p.add_argument("--source",type=Path,required=True);p.add_argument("--output",type=Path,required=True);p.add_argument("--protected-pid",type=int,required=True)
+a=p.parse_args();src=a.source.resolve();out=a.output.resolve();out.mkdir(parents=True,exist_ok=False)
+sys.path.insert(0,str(src))
+from aa_protocol import make_plan,encode_lease
+from aa_worker import validate_job
+from aa_control import control_scope,make_job,control_binding
+from cadence_protocol import digest,write_json
+assert not any(n in sys.modules for n in ("torch","sglang","pynvml","aa_runtime"))
+plan=make_plan("AA_CPU01_RECEIPT","4bed4b4be2ca294b9305cfb28fe1ab03f6164ec0",False)
+write_json(out/"disabled-plan.json",plan)
+guard=out/"guard";guard.mkdir()
+(guard/"sitecustomize.py").write_text("""import sys,importlib.abc
+class CPUOnly(importlib.abc.MetaPathFinder):
+ def find_spec(self,fullname,path=None,target=None):
+  if fullname.split('.')[0] in {'torch','sglang','pynvml','aa_runtime'}:raise RuntimeError('FORBIDDEN_GPU_IMPORT')
+sys.meta_path.insert(0,CPUOnly())
+def protect(event,args):
+ if event=='open' and str(args[0]).endswith('gpu0-research.lock'):raise RuntimeError('FORBIDDEN_SHARED_LOCK')
+ if event=='subprocess.Popen' and 'nvidia-smi' in str(args):raise RuntimeError('FORBIDDEN_GPU_QUERY')
+sys.addaudithook(protect)
+""")
+env=dict(os.environ,PYTHONPATH=str(guard)+os.pathsep+str(src),PYTHONDONTWRITEBYTECODE="1")
+lease={"window_id":"QA_CPU_WINDOW","total_seconds":600,"stop_new_seconds":540,
+ "driver_elapsed_at_send_ns":10000000000,"soft_remaining_ns":529000000000,"hard_remaining_ns":589000000000,
+ "protected_daemon_pid":a.protected_pid}
+job={"schema":"P25-AA-job1","plan_sha256":digest(plan),"process":"REF","window_id":lease["window_id"],"budget":lease,
+ "budget_lease_sha256":digest(lease),"parent_pid":os.getpid(),"research_lock_fd":7,"launch_parent_elapsed_ns":0,
+ "soft_parent_deadline_ns":529000000000,"hard_parent_deadline_ns":589000000000,"bank_sha256":None,"bank_path":None}
+commands=[]
+def collect(child):
+ try:return child.communicate(timeout=5)
+ finally:
+  if child.poll() is None:
+   assert child.pid not in (a.protected_pid,os.getpid());child.kill()
+  child.wait()
+def job_case(name,value,accept,old_binding=None,existing=True):
+ folder=out/name;folder.mkdir();write_json(folder/"job.json",value)
+ report=folder/"success.json"
+ if existing:report.write_bytes(b"CPU_SUCCESS_SENTINEL")
+ before=hashlib.sha256(report.read_bytes()).hexdigest() if report.exists() else None
+ runenv=dict(env)
+ if value.get("schema")=="P25-AA-job2":runenv["AA_PARENT_CONTROL_BINDING"]=old_binding or value["control_binding_sha256"]
+ cmd=[sys.executable,"-u",str(src/"aa_worker.py"),"--plan",str(out/"disabled-plan.json"),
+      "--job",str(folder/"job.json"),"--validate-only","--output",str(report)]
+ start=time.monotonic_ns();child=subprocess.Popen(cmd,env=runenv,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+ stdout,stderr=collect(child);elapsed=time.monotonic_ns()-start
+ (folder/"stdout.log").write_bytes(stdout);(folder/"stderr.log").write_bytes(stderr)
+ after=hashlib.sha256(report.read_bytes()).hexdigest() if report.exists() else None
+ assert before==after and (child.returncode==0)==accept and b"FORBIDDEN" not in stderr
+ commands.append({"case":name,"argv":cmd,"pid":child.pid,"exit_code":child.returncode,"accept":accept,
+  "wall_elapsed_ns":elapsed,"old_report_hash_before":before,"old_report_hash_after":after,
+  "own_CPU_child_collected":True,"execution_enabled":False})
+job_case("soft529-positive",job,True)
+bad=copy.deepcopy(job);bad["soft_parent_deadline_ns"]=550000000000
+try:validate_job(plan,bad);raise AssertionError("bad function accepted")
+except ValueError as e:assert "soft budget reset" in str(e)
+job_case("AA-CPU-01-soft550",bad,False)
+job_case("AA-CPU-01-no-new-report",bad,False,existing=False)
+hard=copy.deepcopy(job);hard["hard_parent_deadline_ns"]=600000000000;job_case("hard600-reject",hard,False)
+control=control_scope(lease["window_id"],os.getpid(),time.monotonic_ns())
+ref=make_job(plan,"REF",lease,control,7)
+hold=make_job(plan,"HOLD",copy.deepcopy(lease),copy.deepcopy(control),7,"b"*64,"bank")
+write_json(out/"shared-REF.json",ref);write_json(out/"shared-HOLD.json",hold)
+assert ref["control_binding_sha256"]==hold["control_binding_sha256"]
+job_case("HOLD-original-origin-positive",hold,True)
+renewed=copy.deepcopy(hold);renewed["budget_control"]["origin_ns"]=time.monotonic_ns()
+renewed["launch_parent_elapsed_ns"]=0
+renewed["control_binding_sha256"]=control_binding(lease,renewed["budget_control"])
+job_case("HOLD-origin-renew-reject",renewed,False,hold["control_binding_sha256"])
+origin=time.monotonic_ns()-530000000000
+old=control_scope(lease["window_id"],os.getpid(),origin)
+expired=make_job(plan,"REF",lease,old,7,now_ns=origin+1000)
+job_case("job-delivered-late-reject",expired,False)
+def pipe_case(name,value,delay=0,no_eof=False,accept=True,limit_ms=1100):
+ folder=out/name;folder.mkdir();ready=folder/"ready.json"
+ report=folder/"success.json";report.write_bytes(b"CPU_SUCCESS_SENTINEL")
+ before=hashlib.sha256(report.read_bytes()).hexdigest()
+ packet=encode_lease(value);(folder/"stdin.bin").write_bytes(packet)
+ cmd=[sys.executable,"-u",str(src/"run_aa_window.py"),"--plan",str(out/"disabled-plan.json"),
+ "--validate-lease-only","--control-timeout-ms",str(limit_ms),"--control-ready-file",str(ready),"--output",str(report)]
+ start=time.monotonic_ns();child=subprocess.Popen(cmd,env=env,stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+ try:
+  until=time.monotonic()+4
+  while not ready.exists() and child.poll() is None and time.monotonic()<until:time.sleep(.005)
+  assert ready.exists()
+  if delay:time.sleep(delay)
+  child.stdin.write(packet);child.stdin.flush()
+  if no_eof:child.wait(timeout=3)
+  child.stdin.close();child.stdin=None
+  stdout,stderr=collect(child)
+ finally:
+  if child.poll() is None:
+   assert child.pid not in (a.protected_pid,os.getpid());child.kill();child.wait()
+ (folder/"stdout.log").write_bytes(stdout);(folder/"stderr.log").write_bytes(stderr)
+ after=hashlib.sha256(report.read_bytes()).hexdigest()
+ assert (child.returncode==0)==accept and before==after and b"FORBIDDEN" not in stderr
+ decoded=json.loads(stdout) if child.returncode==0 else None
+ commands.append({"case":name,"argv":cmd,"pid":child.pid,"exit_code":child.returncode,
+  "wall_elapsed_ns":time.monotonic_ns()-start,"delay_after_ready_seconds":delay,"withheld_EOF":no_eof,
+  "validator_stdout":decoded,"old_report_hash_before":before,"old_report_hash_after":after,
+  "own_CPU_child_collected":True,"execution_enabled":False})
+pipe_case("pipe-delay-charged-positive",lease,delay=.2)
+tiny=dict(lease,driver_elapsed_at_send_ns=539800000000,soft_remaining_ns=100000000,hard_remaining_ns=60100000000)
+pipe_case("pipe-expired-lease-reject",tiny,delay=.4,accept=False)
+pipe_case("pipe-no-EOF-timeout",lease,no_eof=True,accept=False,limit_ms=200)
+write_json(out/"receipt.json",{"commands":commands,"GPU_execution":False,"shared_research_lock_used":False,
+ "all_plans_disabled":True,"positive_soft529_preserved":True,"AA_CPU_01_rejected":True,
+ "author_evidence_not_independent_signoff":True,"source_hashes":plan["sources"]})
+print(json.dumps({"cases":len(commands),"all_disabled":True,"bad550_rejected":True,"GPU_execution":False}))

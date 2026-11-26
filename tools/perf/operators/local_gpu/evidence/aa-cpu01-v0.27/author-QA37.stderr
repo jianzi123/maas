@@ -1,0 +1,19 @@
+Traceback (most recent call last):
+  File "C:\Users\a9786\multica_workspaces_desktop-api.multica.ai\maas-007-da4ec7313117\maas-10-79a30240b357\workdir\deliverables\aa-cpu01-v0.27\original-QA\verify.py", line 111, in <module>
+    fixture=AATests("runTest");fixture.setUp()
+                               ~~~~~~~~~~~~~^^
+  File "C:\Users\a9786\multica_workspaces_desktop-api.multica.ai\maas-007-da4ec7313117\maas-10-79a30240b357\workdir\repo\tools\perf\operators\local_gpu\test_aa_window.py", line 49, in setUp
+    if not path.exists():np.savez_compressed(path,value=x)
+                         ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "D:\ProgramData\anaconda3\Lib\site-packages\numpy\lib\_npyio_impl.py", line 766, in savez_compressed
+    _savez(file, args, kwds, True, allow_pickle=allow_pickle)
+    ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ProgramData\anaconda3\Lib\site-packages\numpy\lib\_npyio_impl.py", line 792, in _savez
+    zipf = zipfile_factory(file, mode="w", compression=compression)
+  File "D:\ProgramData\anaconda3\Lib\site-packages\numpy\lib\_npyio_impl.py", line 112, in zipfile_factory
+    return zipfile.ZipFile(file, *args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ProgramData\anaconda3\Lib\zipfile\__init__.py", line 1367, in __init__
+    self.fp = io.open(file, filemode)
+              ~~~~~~~^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-10-79a30240b357\\workdir\\deliverables\\aa-cpu01-v0.27\\author-run-original-QA37\\.cache\\aa\\tmpj9mkxqbh\\window\\REF\\snapshots\\2349005bc555b540e4f1fd707a3ce791320cfa0043c4a187c28d287f8a2d09ae.npz'

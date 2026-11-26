@@ -1,0 +1,26 @@
+test_CPU_supervisor_collects_failure (test_aa_cpu01.CPU01Tests.test_CPU_supervisor_collects_failure) ... ok
+test_CPU_supervisor_uses_one_origin_and_private_lock (test_aa_cpu01.CPU01Tests.test_CPU_supervisor_uses_one_origin_and_private_lock) ... ok
+test_delayed_worker_rejected (test_aa_cpu01.CPU01Tests.test_delayed_worker_rejected) ... ok
+test_expired_control_rejected (test_aa_cpu01.CPU01Tests.test_expired_control_rejected) ... ok
+test_foreign_control_domain_rejected (test_aa_cpu01.CPU01Tests.test_foreign_control_domain_rejected) ... ok
+test_future_origin_rejected (test_aa_cpu01.CPU01Tests.test_future_origin_rejected) ... ok
+test_hard_increase_rejected (test_aa_cpu01.CPU01Tests.test_hard_increase_rejected) ... ok
+test_hold_after_original_soft_cannot_reset (test_aa_cpu01.CPU01Tests.test_hold_after_original_soft_cannot_reset) ... ok
+test_hold_control_origin_cannot_be_renewed (test_aa_cpu01.CPU01Tests.test_hold_control_origin_cannot_be_renewed) ... ok
+test_hold_reuses_original_lease_by_value (test_aa_cpu01.CPU01Tests.test_hold_reuses_original_lease_by_value) ... ok
+test_job2_CLI_fresh_and_expired (test_aa_cpu01.CPU01Tests.test_job2_CLI_fresh_and_expired) ... ok
+test_legacy_job_is_not_execution_authority (test_aa_cpu01.CPU01Tests.test_legacy_job_is_not_execution_authority) ... ok
+test_no_EOF_is_bounded_without_new_report (test_aa_cpu01.CPU01Tests.test_no_EOF_is_bounded_without_new_report) ... ok
+test_original_529_positive_and_550_reject (test_aa_cpu01.CPU01Tests.test_original_529_positive_and_550_reject) ... ok
+test_provisional_lease_shortens_EOF_deadline (test_aa_cpu01.CPU01Tests.test_provisional_lease_shortens_EOF_deadline) ... ok
+test_real_HOLD_origin_reset_rejects_parent_binding (test_aa_cpu01.CPU01Tests.test_real_HOLD_origin_reset_rejects_parent_binding) ... ok
+test_real_bad_job_CLI_preserves_existing_report (test_aa_cpu01.CPU01Tests.test_real_bad_job_CLI_preserves_existing_report) ... ok
+test_real_bad_job_CLI_rejects_no_report (test_aa_cpu01.CPU01Tests.test_real_bad_job_CLI_rejects_no_report) ... ok
+test_real_positive_CLI (test_aa_cpu01.CPU01Tests.test_real_positive_CLI) ... ok
+test_receive_delay_is_charged (test_aa_cpu01.CPU01Tests.test_receive_delay_is_charged) ... ok
+test_smaller_deadlines_remain_legal (test_aa_cpu01.CPU01Tests.test_smaller_deadlines_remain_legal) ... ok
+
+----------------------------------------------------------------------
+Ran 21 tests in 11.414s
+
+OK

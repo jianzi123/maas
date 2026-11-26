@@ -1,0 +1,36 @@
+[
+  {
+    "command": [
+      "D:\\ProgramData\\anaconda3\\python.exe",
+      "-X",
+      "utf8",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "repo/tools/perf/operators/local_gpu",
+      "-p",
+      "test_aa_cpu01.py",
+      "-v"
+    ],
+    "exit_code": 0,
+    "elapsed_ns": 12189669500
+  },
+  {
+    "command": [
+      "D:\\ProgramData\\anaconda3\\python.exe",
+      "-X",
+      "utf8",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "repo/tools/perf/operators/local_gpu",
+      "-p",
+      "test_aa_window.py",
+      "-v"
+    ],
+    "exit_code": 0,
+    "elapsed_ns": 18042214100
+  }
+]

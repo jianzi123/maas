@@ -104,6 +104,11 @@ def analyze(plan,root):
         runtime["budget_lease_sha256"]==digest(parent["budget"]),"runtime binding")
    life_item=next(l for l in parent["lifecycle"] if l["process"]==proc)
    need(job["parent_pid"]==parent["pid"]==runtime["parent_pid"] and runtime["pid"]==life_item["pid"],"process lifecycle identity")
+   if job.get("schema")=="P25-AA-job2":
+    need(job["budget_control"]==parent["budget_control"]==runtime["budget_control"],"shared control origin changed")
+    need(job["control_binding_sha256"]==parent["control_binding_sha256"]==runtime["control_binding_sha256"],"original control binding changed")
+    need(0<=parent["control_receive"]["control_receive_elapsed_ns"]<=job["launch_parent_elapsed_ns"]
+         <=runtime["control_elapsed_at_start_ns"]<job["soft_parent_deadline_ns"],"control wait/start time lost")
    need(result["failure"] is None and result["job_sha256"]==digest(job),"worker failure")
    need(len(cells)==4 and len(cmap)==4,"input cell coverage")
    end=read(folder,"final-invariants.json",{})

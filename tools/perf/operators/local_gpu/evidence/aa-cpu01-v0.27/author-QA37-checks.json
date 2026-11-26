@@ -1,0 +1,158 @@
+{
+  "candidate": "4bed4b4be2ca294b9305cfb28fe1ab03f6164ec0",
+  "checks": [
+    {
+      "id": "LEASE-01-shared-encode-read-valid",
+      "status": "passed"
+    },
+    {
+      "id": "BUDGET-01-original-soft-positive",
+      "status": "passed"
+    },
+    {
+      "id": "AA-CPU-01-soft-increase-must-reject",
+      "status": "passed"
+    },
+    {
+      "id": "JOB-hard-reset",
+      "status": "passed"
+    },
+    {
+      "id": "JOB-late-launch",
+      "status": "passed"
+    },
+    {
+      "id": "JOB-plan-hash",
+      "status": "passed"
+    },
+    {
+      "id": "JOB-lease-hash",
+      "status": "passed"
+    },
+    {
+      "id": "JOB-window",
+      "status": "passed"
+    },
+    {
+      "id": "JOB-phase",
+      "status": "passed"
+    },
+    {
+      "id": "JOB-REF-bank",
+      "status": "passed"
+    },
+    {
+      "id": "BUDGET-02-HOLD-shares-original-lease",
+      "status": "passed"
+    },
+    {
+      "id": "LEASE-reject-soft_remaining_ns",
+      "status": "passed"
+    },
+    {
+      "id": "LEASE-reject-hard_remaining_ns",
+      "status": "passed"
+    },
+    {
+      "id": "PIPE-LF-EOF",
+      "status": "passed"
+    },
+    {
+      "id": "PIPE-old-5c6e",
+      "status": "passed"
+    },
+    {
+      "id": "PIPE-empty",
+      "status": "passed"
+    },
+    {
+      "id": "PIPE-truncated",
+      "status": "passed"
+    },
+    {
+      "id": "PIPE-json-truncated-LF",
+      "status": "passed"
+    },
+    {
+      "id": "PIPE-multiframe",
+      "status": "passed"
+    },
+    {
+      "id": "PIPE-extra-data",
+      "status": "passed"
+    },
+    {
+      "id": "PIPE-extra-LF",
+      "status": "passed"
+    },
+    {
+      "id": "PIPE-no-EOF-bounded",
+      "status": "passed"
+    },
+    {
+      "id": "PIPE-delayed-control-rejected",
+      "status": "passed"
+    },
+    {
+      "id": "PIPE-delayed-EOF-valid-and-duration-kept",
+      "status": "passed"
+    },
+    {
+      "id": "PIPE-no-overwrite-old-report",
+      "status": "passed"
+    },
+    {
+      "id": "WORKER-real-validate-only",
+      "status": "passed"
+    },
+    {
+      "id": "SYNTHETIC-complete-not-GPU-qualified",
+      "status": "passed"
+    },
+    {
+      "id": "METADATA-clock",
+      "status": "passed"
+    },
+    {
+      "id": "METADATA-binding-hash",
+      "status": "passed"
+    },
+    {
+      "id": "METADATA-bank-hash",
+      "status": "passed"
+    },
+    {
+      "id": "METADATA-input-hash",
+      "status": "passed"
+    },
+    {
+      "id": "IDENTITY-alias-callable-reject",
+      "status": "passed"
+    },
+    {
+      "id": "IDENTITY-graph-reject",
+      "status": "passed"
+    },
+    {
+      "id": "METADATA-late-bank-reject",
+      "status": "passed"
+    },
+    {
+      "id": "IDENTITY-frozen-source-reject",
+      "status": "passed"
+    },
+    {
+      "id": "LIFECYCLE-stub-timeout",
+      "status": "passed"
+    },
+    {
+      "id": "LIFECYCLE-stub-failure",
+      "status": "passed"
+    }
+  ],
+  "unique_cases": 37,
+  "passed": 37,
+  "failed": 0,
+  "GPU_executed": false,
+  "original_test_methods_run": 0
+}

@@ -16,7 +16,7 @@ CONFIG={"environment":{"torch":"2.8.0","torch_build":"2.8.0+cu128","CUDA":"12.8"
  "extra_calls":{"warmup":192,"gate_forward":32,"extend_prefill":8,"internal_capture":"unknown, all consume parent budget","registry_prepare":16,"readable_input_snapshots":16},
  "claim":"window measurement repeatability only; not zero alias bias/statistical equivalence/NM gain",
  "hot_query":False,"hot_profiler":False,"extra_hot_sync":False,"third_worker":False}
-FILES=("test_aa_window.py","aa_protocol.py","aa_runtime.py","aa_worker.py","run_aa_window.py","analyze_aa_window.py","launch_aa_window.py",
+FILES=("aa_control.py","test_aa_cpu01.py","test_aa_window.py","aa_protocol.py","aa_runtime.py","aa_worker.py","run_aa_window.py","analyze_aa_window.py","launch_aa_window.py",
  "reference_runtime.py","native_kv_binding.py","analyze_kv_cadence.py","run_decode.py","decode_path.py",
  "cadence_protocol.py","decode-source-lock.json","evidence/framework-v0.18/framework-source-lock.json")
 def need(ok,message):
@@ -65,6 +65,8 @@ def match(value,target):
  limit=max(CONFIG["stream_abs_tolerance_ns"],CONFIG["stream_relative_tolerance"]*target)
  return {"target_stream_ns":target,"error_ns":value-target,"limit_ns":limit,"matched":abs(value-target)<=limit}
 def check_budget(lease):
+ for name in ("driver_elapsed_at_send_ns","soft_remaining_ns","hard_remaining_ns"):
+  need(type(lease[name]) is int,"lease budget must be integer ns")
  need(lease["window_id"] and lease["total_seconds"]==600 and lease["stop_new_seconds"]==540,"budget origin")
  need(0<=lease["driver_elapsed_at_send_ns"]<600_000_000_000,"driver elapsed")
  need(0<lease["soft_remaining_ns"]<=540_000_000_000-lease["driver_elapsed_at_send_ns"],"budget reset soft")

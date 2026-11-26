@@ -1,0 +1,23 @@
+{
+  "schema": "P25-AA-job1",
+  "plan_sha256": "92a510a7cbebd90a5f9f78a3db95f512cff4d1057b0c57dd6fbaa0a74ed27874",
+  "process": "REF",
+  "window_id": "QA_CPU_WINDOW",
+  "budget": {
+    "window_id": "QA_CPU_WINDOW",
+    "total_seconds": 600,
+    "stop_new_seconds": 540,
+    "driver_elapsed_at_send_ns": 10000000000,
+    "soft_remaining_ns": 529000000000,
+    "hard_remaining_ns": 589000000000,
+    "protected_daemon_pid": 45968
+  },
+  "budget_lease_sha256": "557dec1cf52800c65b092a50855d5104a3a50e66aa12cd8e37b7f36a57c55335",
+  "parent_pid": 45968,
+  "research_lock_fd": 7,
+  "launch_parent_elapsed_ns": 0,
+  "soft_parent_deadline_ns": 550000000000,
+  "hard_parent_deadline_ns": 589000000000,
+  "bank_sha256": null,
+  "bank_path": null
+}
