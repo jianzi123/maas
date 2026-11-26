@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "scope": "installation-input-only-no-secret-values",
-  "sourceCommit": "c2dcc4e4bd2fceac02f2d35eac1aa54fc7c67876",
+  "sourceCommit": "1380c4921d72cde058d6693653429697a46a8b9b",
   "productionWiringVerified": false,
   "connections": {
     "core": {
@@ -289,8 +289,10 @@
         "deploy/release/fetch_source.py",
         "deploy/release/identity_smoke.py",
         "deploy/release/kubernetes/.gitignore",
+        "deploy/release/kubernetes/LOCAL-VERIFICATION.md",
         "deploy/release/kubernetes/README.md",
         "deploy/release/kubernetes/application.yaml",
+        "deploy/release/kubernetes/local_verify.py",
         "deploy/release/kubernetes/migration.yaml",
         "deploy/release/kubernetes/mysql.yaml",
         "deploy/release/kubernetes/namespace.yaml",
@@ -301,6 +303,7 @@
         "deploy/release/permission_smoke.py",
         "deploy/release/smoke.py",
         "deploy/release/tests/test_installers.py",
+        "deploy/release/tests/test_native_local.py",
         "deploy/release/verify_bundle.py",
         "deploy/single-model/combination.json",
         "deploy/tests/fixtures/hybrid.yaml",
