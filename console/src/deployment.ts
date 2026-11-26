@@ -2,6 +2,7 @@ import { checked } from "./chat/ar1-contracts";
 import type { HTTPChatConfig } from "./chat/http";
 export type Deployment = {
   schema_version: "maas.console/1";
+  playground?: { enabled: boolean };
   chat: { enabled: false } | ({ enabled: true } & HTTPChatConfig);
 };
 let installed: Deployment | undefined;
@@ -21,7 +22,17 @@ function keys(value: Record<string, unknown>, expected: string[]) {
 }
 export function parseDeployment(value: unknown): Deployment {
   const root = object(value);
-  keys(root, ["schema_version", "chat"]);
+  keys(
+    root,
+    Object.hasOwn(root, "playground")
+      ? ["schema_version", "chat", "playground"]
+      : ["schema_version", "chat"],
+  );
+  if (Object.hasOwn(root, "playground")) {
+    const feature = object(root.playground);
+    keys(feature, ["enabled"]);
+    if (typeof feature.enabled !== "boolean") throw failure();
+  }
   if (root.schema_version !== "maas.console/1") throw failure();
   const chat = object(root.chat);
   if (chat.enabled === false) keys(chat, ["enabled"]);

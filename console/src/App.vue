@@ -1,5 +1,11 @@
 <script setup lang="ts">
-import { onMounted, onBeforeUnmount, ref, defineAsyncComponent } from "vue";
+import {
+  computed,
+  onMounted,
+  onBeforeUnmount,
+  ref,
+  defineAsyncComponent,
+} from "vue";
 import { api } from "./api/client";
 import { explain } from "./ui";
 import { loadDeployment } from "./deployment";
@@ -37,14 +43,20 @@ const ar1Controlled =
 const ar1Enabled = ref(
   import.meta.env.DEV && import.meta.env.VITE_CHAT_AR1_ENABLED === "true",
 );
+const playgroundEnabled = ref(false);
 async function configureDeployment() {
-  if (!import.meta.env.DEV)
-    ar1Enabled.value = (await loadDeployment(api.fetcher)).chat.enabled;
+  if (!import.meta.env.DEV) {
+    const installed = await loadDeployment(api.fetcher);
+    ar1Enabled.value = installed.chat.enabled;
+    playgroundEnabled.value = installed.playground?.enabled === true;
+    if (!location.hash && installed.chat.enabled) tab.value = "chat";
+  }
 }
-const inferenceAvailable =
-  !local ||
-  (import.meta.env.DEV &&
-    import.meta.env.VITE_LOCAL_INFERENCE_ENABLED === "true");
+const inferenceAvailable = computed(() =>
+  import.meta.env.DEV
+    ? !local || import.meta.env.VITE_LOCAL_INFERENCE_ENABLED === "true"
+    : playgroundEnabled.value,
+);
 const demo =
   import.meta.env.DEV && import.meta.env.VITE_CONSOLE_FIXTURES === "true";
 async function boot() {
@@ -213,12 +225,14 @@ const nav = [
           <label
             >管理员账号<input
               v-model="username"
+              :disabled="busy"
               autocomplete="username"
               required
               maxlength="64" /></label
           ><label
             >密码<input
               v-model="password"
+              :disabled="busy"
               type="password"
               autocomplete="current-password"
               required

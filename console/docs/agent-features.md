@@ -1,32 +1,26 @@
-# 当前 Chat / Agent 功能与证据范围
+# Chat / Agent 功能与当前证据
 
-本表描述本次前端源码和已读Go候选，不替代MAAS-21最终组合状态。来源：前端原PR17/f939f3b及其本轮增量；后端原PR18/a4c。最终代码/镜像/迁移组合由集成负责人锁定，测试结果见本轮delivery记录；旧207项和6组不自动升级为新部署验收。
+2026-11-26，原前端在统一基线4402/d27上增量修复。表中“本轮作者”指自有正常Go/MySQL同源站点＋明确离线模型；不是独立QA或真实供应商。原217/11条件skip、静态HTTP夹具范围与独立QA4402九项通过各自保留，不累计全仓。QA-CHAT-RACE-001必须由原QA按新准确SHA签收，补抓正常不自行关项。
 
-| 功能 | 当前状态 | 实际入口/源码 | 限制 |
+| 功能 | 状态和本轮范围 | 源码/入口 | 限制 |
 |---|---|---|---|
-| 正式静态构建与部署时公开配置 | 已实现，见本轮构建/静态产物检查 | console/src/deployment.ts、public/console-config.json；npm run build | 正式MySQL部署组合另验；不允许配置API URL/Secret |
-| 同源登录/恢复/退出、CSRF | 已实现；正式服务接合待验证 | console/src/App.vue、src/api/client.ts；/api/admin/v1/session | 一个Go会话来源，非双Cookie拼装；静态夹具不证明真实权限 |
-| 会话列表/新建/重命名/删除 | 已实现，旧受控Go已作者验证；新MySQL组合待验 | pages/ChatWorkspace.vue、chat/http.ts；/api/agent/v1/sessions | owner与跨用户授权由Go核验，浏览器不提供owner选择 |
-| 多轮/持久历史/编辑/重新生成 | 已实现，旧受控Go已作者验证；新MySQL重启待验 | 同上；operation=send/edit/regenerate | 编辑/再生成是显式新操作，保留消息/原命令关联，不自动重放 |
-| 普通Chat/Agent同页面、模型能力限制 | 已实现；新部署产物有定向验证入口 | ChatWorkspace.vue、HTTPChat.models/start | text-v1无tools能力时禁止Agent；pending来源不启用 |
-| Markdown/代码/工具输出安全显示 | 已实现并有回归 | components/ChatMarkdown.vue、chat/render.ts | Markdown净化、工具结果仅文本；不是执行代码功能 |
-| SSE/中文UTF8 offset/超安全整数seq | 已实现；旧Go作者证据保留，本轮静态HTTP回归 | chat/http.ts；events/stream | 原seq/offset严格校验，失败不猜成功 |
-| 410/首张页ETag/有界只读恢复 | 已实现并有定向回归 | HTTPChat.read/readSnapshot/events | 整批最多3次重建；持续写入可暂停同步并人工只读重连，不保证收敛时限 |
-| 停止/审批/needs_confirmation | 已实现；新Go/MySQL浏览器组合待验 | ChatWorkspace.vue、HTTPChat.cancel/approve | 停止ACK不等于终态；批准需实际策略；unknown不提供批准重跑 |
-| 原命令ACK未知恢复 | 已实现，旧受控Go及单测验证 | HTTPChat.pending/recover；session-creation-commands、commands | 只存非秘密operation/hash/session，404/503不能解锁成重新生成 |
-| 父run/child用量、known/unknown/held分组 | 已实现；最终SQL唯一结算另验 | chat/http.ts、ChatWorkspace.vue；pages/Usage.vue | aggregation_complete与执行完成分开，不补零、不合并币种 |
-| 模型目录/平台Key预算/发布/管理用量 | 已实现，原修复保留；最终服务接线待验 | pages/Models.vue、Keys.vue、Releases.vue、Playground.vue、Usage.vue | 上游Secret不入浏览器，Key不持久化浏览器；发布可调用依实际屏障 |
-| Session/Run/Message/Step/ToolCall/Event/Checkpoint | 原后端已实现；正式MySQL装配待本轮交付 | internal/agentruntime：service.go、ar_http.go、store.go及实际文件 | 前端不另建内核/账本，Checkpoint不是可编辑前端对象 |
-| 工具注册/Schema/作用域/授权/幂等/超时/取消 | 原后端已实现；最终受控验证/独立QA分列 | internal/agentruntime/tools.go、service.go、AR-1契约 | 可信主体/策略由Go核验，浏览器不能批准未知结果重跑 |
-| bounded_arithmetic@1 | 原Go真实工具实现，旧受控结果已交；最终安装待验 | tools.go Calculator；参数a/b/op | 仅有界整数add/subtract/multiply，不是Python/shell执行 |
-| list_visible_models@1 | 原Go真实只读工具实现，旧受控结果已交；最终安装待验 | tools.go ModelDirectory；参数{} | 目录必须按可信scope过滤，不能绕过授权读取所有来源 |
-| MySQL会话/事件与唯一准入计量 | 原后端实现与作者SQL证据存在；本轮正式入口/重启待验 | internal/agentruntime/store.go及安装组合；实际迁移由MAAS-20/21列版 | 不允许正式默认文件/内存/SQLite回退；UI不能证明SQL持久化 |
-| 真实上游tools-v1与模型适配 | 按实际批准/适配分别确认，不能只凭UI宣称已验 | Go ModelClient/准入网关适配，capabilities | 真实端点/凭据/额度未具备时准确标未执行，不回退测试模型冒充真实 |
-| 文件上传、文件读写、shell、MCP | 未实现产品能力 | 无可用前端入口 | 不列已实现；如有接口设计也不等于可用工具 |
-| 检索/向量库/长期记忆 | 未实现产品能力 | 无产品入口 | 持久聊天历史不等于检索或长期记忆系统 |
-| 子Agent/多Agent/外部工具市场 | 未实现产品能力 | 无产品入口 | 可替换工具边界只属于受控扩展设计 |
+| 生产静态构建/公开配置 | 已实现并作者站点验证 | src/deployment.ts，public/console-config.json；/console-config.json | 白名单无URL/Secret；可选playground.enabled默认false，生产不读Vite开发变量 |
+| 同源登录/CSRF/会话 | 作者验证；首次401输入竞态已修 | App.vue、api/client.ts；/api/admin/v1/session | 输入在bootstrap期间禁用；重启同Cookie/CSRF的受控结果不等于跨用户完整矩阵 |
+| 旧在线试用 R-P01 | 已实证405并修页面门禁/Chat引导 | pages/Playground.vue、App.vue | d27未挂/v1；不输入真实Key探路、不直连供应商。原受保护入口只有安装者明确声明才启用 |
+| 会话/多轮/流式Markdown | 已实现，作者正常Go/MySQL受控Chat验证 | pages/ChatWorkspace.vue、chat/http.ts、ChatMarkdown.vue | 中文/emoji观察与原child关联已记录；真实供应商流/费用另验 |
+| 模型能力/批准可用性 | 实际capabilities展示；空生产模型负例和本地拒绝回归 | HTTPChat.models/create/start，ModelChoice | 不根据别名猜Agent；未批准/无tools能力在写入前拒绝，准确capability_unsupported |
+| 工具参数/批准/结果 | 作者站点验证两个真实安全工具 | /api/agent/v1会话/Run/ToolCall/Approval；chat/http.ts | 内部Call.id用于API；供应商SourceID回填由Go处理，不由浏览器拼装 |
+| 拒绝/工具错误/未知 | 原拒绝记录纯GET恢复，终止/隔离视图回归 | ChatWorkspace.stepOutput、HTTPChat.approve | 终止无结果不永久等待；needs_confirmation不自动批准/重跑。真实上游EOF/错误/未知消费本轮未验 |
+| 停止与轮询并发 | 作者验证已准入child→ACK202→cancelled；六项定向顺序/负例 | HTTPChat.eventEpoch/readEpoch，ChatWorkspace.cancel/approval | 原QA失败保留，待独立签收；不拿自然完成当停止成功 |
+| 410/首张页ETag | 当前站点真实工具页410、旧102消息QA范围保留 | HTTPChat.read/readSnapshot/events | 整批作废；三轮GET＋25/75ms有界等待；事件cursor依持久seq，元数据变更不一概失效 |
+| 断开/刷新/重启恢复 | 作者同源站点原ID/哈希/计数验证 | deployed-smoke/workbench/restart.mjs | 断开只停止GET观察；重启只操作自有Compose，保留卷与身份，不重发生成 |
+| 原命令未知ACK | 原实现保留，相关消费者回归 | HTTPChat.pending/recover；创建命令/会话命令 | 只存非秘密operation/hash/session，不存正文/Key；404/503不证明未执行 |
+| 父run/child和用量 | 作者实际Go/MySQL原ID只读核对 | ChatWorkspace计量区、pages/Usage.vue | 不把completed等同聚合完成；未知不补0，币种/价表不合并，不由前端结算 |
+| Key预算/模型发布/完整管理 | 原实现保留，本轮未验真实目标 | Keys/Models/Releases/Usage页面 | 默认管理装配受限；不能据正常健康或受控目录声称完整Operator/发布目标可用 |
+| Session/Run/Message/Step/ToolCall/Event/Checkpoint | 原Go已实现，当前消费正常MySQL服务 | cmd/maas-service、internal/agentruntime、internal/app | 不另建内核/账本。FC-1迁移/锁ctx及新正式tools桥仍由MAAS-20/21收口 |
+| bounded_arithmetic@1 / list_visible_models@1 | 作者实际参数/必要批准/结果/attempt验证 | internal/agentruntime/tools.go | 有界整数计算与可信scope目录，不是shell或任意代码 |
+| 正式供应商 tools-v1 | 新适配沿原后端推进，本前端未接固定新Go头验收 | ModelClient/Go-Higress唯一准入与计量；既有AR-1字段 | 不把离线模型或空models当作真实源通过；没有新增真实调用/付费/Secret授权 |
+| 文件/shell/MCP/外部HTTP工具 | 未实现产品执行能力 | 无产品入口 | 扩展接口设计不计已实现，不添加空按钮 |
+| 检索/长期记忆/子Agent/多Agent | 未实现产品执行能力 | 无产品入口 | MySQL会话历史不等于长期记忆/检索系统 |
 
-后端工具接口文档由MAAS-20原负责人交付；本表不另写一套协议。最终交付负责人应按实际组合更新“待验”与入口命令，并保留作者、独立QA、真实模型和部署四类证据边界。
-
-
-2026-11-23正式入口接点补充：原后端已交cmd/maas-service的migrate/serve与严格product JSON约定，首期单活MySQL调度；最终SHA和装配验证仍由MAAS-20/21回传。本轮所述正式真实上游工具能力应明确标为“tools-v1未装配，准确拒绝”，而不是泛称真实Agent工具已可用。旧受控ModelClient下的真实安全工具实现/作者结果保留；不把它们升级为正式MySQL/上游工具验收。
+构建/差异回归、原失败、截图与受控/未验范围按本轮准确提交交付；测试脚本不是用户业务存储。只有Go/MySQL是业务准入、计量与会话真源，前端不补造状态或账本。

@@ -21,12 +21,15 @@ if (!process.env.MAAS_SMOKE_USERNAME || !process.env.MAAS_SMOKE_PASSWORD)
   throw Error(
     "Set temporary administrator credentials in MAAS_SMOKE_USERNAME/PASSWORD; never put them in CLI args or logs",
   );
-const dir = "artifacts/deployed-site";
+const dir = process.env.MAAS_SMOKE_OUTPUT || "artifacts/deployed-site";
 await fs.mkdir(dir, { recursive: true });
 const checks = [],
   network = [],
+  responses = [],
+  assets = [],
   errors = [];
 let browser, page;
+let controlledFlow;
 try {
   browser = await chromium.launch({
     executablePath:
@@ -36,6 +39,20 @@ try {
   });
   page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
   page.on("pageerror", (e) => errors.push(e.message));
+  page.on("response", (r) => {
+    const url = new URL(r.url());
+    if (url.origin === origin.origin && url.pathname.startsWith("/assets/"))
+      assets.push({ path: url.pathname, status: r.status() });
+    if (url.origin === origin.origin && url.pathname.startsWith("/api/"))
+      responses.push({
+        method: r.request().method(),
+        path: url.pathname,
+        status: r.status(),
+        etag: r.headers()["etag"] ?? null,
+        eventStream:
+          r.headers()["content-type"]?.startsWith("text/event-stream") ?? false,
+      });
+  });
   page.on("request", (r) => {
     const u = new URL(r.url());
     if (u.origin === origin.origin && u.pathname.startsWith("/api/"))
@@ -79,7 +96,40 @@ try {
   const runPosts = () =>
     network.filter((r) => r.method === "POST" && r.path.endsWith("/runs"))
       .length;
-  if (process.env.MAAS_SMOKE_SEND === "1") {
+  if (process.env.MAAS_SMOKE_RECOVER_REJECTED_RECORD) {
+    if (process.env.MAAS_SMOKE_FLOW || process.env.MAAS_SMOKE_VERIFY_RECORD)
+      throw Error("Choose recovery only; never resubmit a known operation");
+    const { recoverDeniedRecord } = await import("./deployed-workbench.mjs");
+    controlledFlow = await recoverDeniedRecord({
+      page,
+      origin: origin.origin,
+      file: process.env.MAAS_SMOKE_RECOVER_REJECTED_RECORD,
+      output: dir,
+      checks,
+    });
+  } else if (process.env.MAAS_SMOKE_VERIFY_RECORD) {
+    if (process.env.MAAS_SMOKE_FLOW)
+      throw Error("Choose verification OR a new controlled flow");
+    const { verifyControlledRecord } = await import("./deployed-workbench.mjs");
+    controlledFlow = await verifyControlledRecord({
+      page,
+      origin: origin.origin,
+      file: process.env.MAAS_SMOKE_VERIFY_RECORD,
+      checks,
+    });
+  } else if (process.env.MAAS_SMOKE_FLOW) {
+    const { controlledWorkbench } = await import("./deployed-workbench.mjs");
+    controlledFlow = await controlledWorkbench({
+      page,
+      origin: origin.origin,
+      config: config.value,
+      caps,
+      network,
+      checks,
+      dir,
+      flow: process.env.MAAS_SMOKE_FLOW,
+    });
+  } else if (process.env.MAAS_SMOKE_SEND === "1") {
     // This switch is an action request, never an authorization for a paid provider.
     if (!process.env.MAAS_SMOKE_MODEL)
       throw Error("Generation requires an explicit approved MAAS_SMOKE_MODEL");
@@ -175,7 +225,11 @@ try {
         checks,
         errors,
         network,
+        responses,
+        assets,
+        modelModes: caps.model_modes,
         generationEnabled: process.env.MAAS_SMOKE_SEND === "1",
+        controlledFlow,
         notExecuted: [
           "Application/MySQL restarts",
           "Independent QA",
@@ -193,6 +247,29 @@ try {
       runPosts: runPosts(),
     }),
   );
+} catch (error) {
+  const safe = String(error?.message ?? error)
+    .split(process.env.MAAS_SMOKE_PASSWORD)
+    .join("[REDACTED]");
+  await fs.writeFile(
+    dir + "/failure.json",
+    JSON.stringify(
+      {
+        scope: "installed site failure; preserve original operation IDs",
+        message: safe,
+        checks,
+        errors,
+        network,
+      },
+      null,
+      2,
+    ),
+  );
+  await page
+    ?.screenshot({ path: dir + "/failure.png", fullPage: false })
+    .catch(() => {});
+  console.error(safe);
+  process.exitCode = 1;
 } finally {
   await browser?.close();
 }

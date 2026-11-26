@@ -213,3 +213,80 @@ it("failed first read reconnects its target rather than the previously selected 
   expect(w.findAll("button").some((x) => x.text() === "只读重连")).toBe(false);
   expect(start).not.toHaveBeenCalled();
 });
+
+for (const state of ["failed", "cancelled", "needs_confirmation"] as const) {
+  it(
+    "a terminal or isolated run does not promise a pending tool result: " +
+      state,
+    async () => {
+      const session = {
+        id: "terminal-session",
+        title: "terminal",
+        updatedAt: "2026-11-26T00:00:00Z",
+        messages: [],
+        runs: [
+          {
+            id: "terminal-run",
+            commandId: "command",
+            model: "dev",
+            mode: "agent" as const,
+            state,
+            cancelRequested: true,
+            assistantId: "",
+            cursor: 0,
+            steps: [
+              {
+                id: "call",
+                callId: "call",
+                label: "bounded_arithmetic@1 · 实际尝试 0",
+                state: "proposed",
+                input: "{}",
+              },
+            ],
+            usage: { tokens: null, reason: null },
+            error: state === "failed" ? "approval_denied" : undefined,
+          },
+        ],
+      };
+      const start = vi.fn(),
+        approve = vi.fn();
+      const service = {
+        models: async () => [
+          {
+            id: "dev",
+            label: "dev",
+            modes: ["chat" as const, "agent" as const],
+          },
+        ],
+        list: async () => [session],
+        read: async () => session,
+        create: async () => session,
+        start,
+        events: async () => ({ events: [], snapshot: session }),
+        approve,
+        cancel: async () => {},
+        rename: async () => {},
+        remove: async () => {},
+        clear: async () => {},
+      };
+      location.hash = "chat/terminal-session";
+      w = mount(ChatWorkspace, { props: { service } });
+      await flushPromises();
+      expect(w.get(".agent-trace").text()).not.toContain("等待结果");
+      expect(w.get(".agent-trace").text()).toContain(
+        state === "needs_confirmation" ? "结果未知" : "本次运行已结束",
+      );
+      if (state === "failed")
+        expect(w.text()).toContain("工具执行申请已被拒绝");
+      expect(w.findAll("button").some((b) => b.text() === "批准此次工具")).toBe(
+        false,
+      );
+      if (state === "cancelled")
+        expect(w.get(".chat-controls").text()).not.toContain("等待实际终止");
+      if (state === "needs_confirmation")
+        expect(w.get(".chat-controls").text()).toContain("结果待核验");
+      expect(start).not.toHaveBeenCalled();
+      expect(approve).not.toHaveBeenCalled();
+    },
+  );
+}
