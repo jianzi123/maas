@@ -1,0 +1,630 @@
+{
+  "network": [
+    {
+      "stage": "login",
+      "method": "GET",
+      "path": "/",
+      "has_csrf": false
+    },
+    {
+      "stage": "login",
+      "status": 200,
+      "path": "/"
+    },
+    {
+      "stage": "login",
+      "method": "GET",
+      "path": "/assets/index-BhvyXQDj.js",
+      "has_csrf": false
+    },
+    {
+      "stage": "login",
+      "method": "GET",
+      "path": "/assets/index-BeJHohIj.css",
+      "has_csrf": false
+    },
+    {
+      "stage": "login",
+      "status": 200,
+      "path": "/assets/index-BeJHohIj.css"
+    },
+    {
+      "stage": "login",
+      "status": 200,
+      "path": "/assets/index-BhvyXQDj.js"
+    },
+    {
+      "stage": "login",
+      "method": "GET",
+      "path": "/console-config.json",
+      "has_csrf": false
+    },
+    {
+      "stage": "login",
+      "status": 200,
+      "path": "/console-config.json"
+    },
+    {
+      "stage": "login",
+      "method": "GET",
+      "path": "/api/admin/v1/session",
+      "has_csrf": false
+    },
+    {
+      "stage": "login",
+      "status": 401,
+      "path": "/api/admin/v1/session"
+    },
+    {
+      "stage": "login",
+      "method": "GET",
+      "path": "/console-config.json",
+      "has_csrf": false
+    },
+    {
+      "stage": "login",
+      "status": 200,
+      "path": "/console-config.json"
+    },
+    {
+      "stage": "login",
+      "method": "POST",
+      "path": "/api/admin/v1/session",
+      "has_csrf": false
+    },
+    {
+      "stage": "login",
+      "status": 200,
+      "path": "/api/admin/v1/session"
+    },
+    {
+      "stage": "login",
+      "method": "GET",
+      "path": "/assets/ChatWorkspace-e8WVUcSB.js",
+      "has_csrf": false
+    },
+    {
+      "stage": "login",
+      "status": 200,
+      "path": "/assets/ChatWorkspace-e8WVUcSB.js"
+    },
+    {
+      "stage": "login",
+      "method": "GET",
+      "path": "/assets/http-DApDTGYo.js",
+      "has_csrf": false
+    },
+    {
+      "stage": "login",
+      "status": 200,
+      "path": "/assets/http-DApDTGYo.js"
+    },
+    {
+      "stage": "login",
+      "method": "GET",
+      "path": "/api/agent/v1/capabilities",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/capabilities"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions?page_size=100",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "method": "POST",
+      "path": "/api/agent/v1/sessions",
+      "has_csrf": true
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions"
+    },
+    {
+      "stage": "create",
+      "status": 201,
+      "path": "/api/agent/v1/sessions"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/session-creation-commands/4c45669b-a21f-4ac2-9a94-2fdffc69bfbd",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/session-creation-commands/4c45669b-a21f-4ac2-9a94-2fdffc69bfbd"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions?page_size=100",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866"
+    },
+    {
+      "stage": "create",
+      "method": "POST",
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs",
+      "has_csrf": true
+    },
+    {
+      "stage": "create",
+      "status": 202,
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs/235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6/steps?page_size=100",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs/235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6/steps"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs/235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6/steps?page_size=100",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs/235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6/steps"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs/235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6/tool-calls?page_size=100",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs/235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6/tool-calls"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs/235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6/events/stream?after=d2f40507fea58e305abdea8e0333d57abdc25f76a9450ff4e5283abdc043e28c",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs/235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6/events/stream"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs/235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6/steps?page_size=100",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs/235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6/steps"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs/235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6/tool-calls?page_size=100",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs/235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6/tool-calls"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions?page_size=100",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs/235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6/events/stream?after=d2f40507fea58e305abdea8e0333d57abdc25f76a9450ff4e5283abdc043e28c",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs/235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6/events/stream"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs/235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6/steps?page_size=100",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs/235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6/steps"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs/235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6/tool-calls?page_size=100",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs/235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6/tool-calls"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions?page_size=100",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs/235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6/events/stream?after=d2f40507fea58e305abdea8e0333d57abdc25f76a9450ff4e5283abdc043e28c",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs/235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6/events/stream"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs/235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6/steps?page_size=100",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs/235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6/steps"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs/235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6/tool-calls?page_size=100",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs/235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6/tool-calls"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions?page_size=100",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs/235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6/events/stream?after=d2f40507fea58e305abdea8e0333d57abdc25f76a9450ff4e5283abdc043e28c",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs/235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6/events/stream"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs/235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6/steps?page_size=100",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs/235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6/steps"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs/235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6/tool-calls?page_size=100",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs/235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6/tool-calls"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs/235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6/events?page_size=100",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs/235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6/events"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs/235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6/approvals/96a73cf0-9e63-4ecd-af97-bdf487a97d46",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs/235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6/approvals/96a73cf0-9e63-4ecd-af97-bdf487a97d46"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions?page_size=100",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions"
+    },
+    {
+      "stage": "freeze-old-poll-last-GET",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs/235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6/events/stream?after=ce82948ec258fd342b15ff3ef7bdc74b5a341e923c473b767a4f431303ef77d7",
+      "has_csrf": false
+    },
+    {
+      "stage": "freeze-old-poll-last-GET",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs/235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6/events/stream"
+    },
+    {
+      "stage": "freeze-old-poll-last-GET",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866",
+      "has_csrf": false
+    },
+    {
+      "stage": "freeze-old-poll-last-GET",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866"
+    },
+    {
+      "stage": "freeze-old-poll-last-GET",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs/235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6/steps?page_size=100",
+      "has_csrf": false
+    },
+    {
+      "stage": "freeze-old-poll-last-GET",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs/235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6/steps"
+    },
+    {
+      "stage": "freeze-old-poll-last-GET",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs/235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6/tool-calls?page_size=100",
+      "has_csrf": false
+    },
+    {
+      "stage": "freeze-old-poll-last-GET",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs/235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6/tool-calls"
+    },
+    {
+      "stage": "freeze-old-poll-last-GET",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs/235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6/events?page_size=100",
+      "has_csrf": false
+    },
+    {
+      "stage": "freeze-old-poll-last-GET",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs/235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6/events"
+    },
+    {
+      "stage": "freeze-old-poll-last-GET",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs/235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6/approvals/96a73cf0-9e63-4ecd-af97-bdf487a97d46",
+      "has_csrf": false
+    },
+    {
+      "stage": "foreground-approve",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs/235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6/approvals/96a73cf0-9e63-4ecd-af97-bdf487a97d46",
+      "has_csrf": false
+    },
+    {
+      "stage": "foreground-approve",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs/235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6/approvals/96a73cf0-9e63-4ecd-af97-bdf487a97d46"
+    },
+    {
+      "stage": "foreground-approve",
+      "method": "POST",
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs/235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6/approvals/96a73cf0-9e63-4ecd-af97-bdf487a97d46/decision",
+      "has_csrf": true
+    },
+    {
+      "stage": "foreground-approve",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs/235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6/approvals/96a73cf0-9e63-4ecd-af97-bdf487a97d46/decision"
+    },
+    {
+      "stage": "foreground-approve",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866",
+      "has_csrf": false
+    },
+    {
+      "stage": "release-old-before-new",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs/235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6/approvals/96a73cf0-9e63-4ecd-af97-bdf487a97d46"
+    },
+    {
+      "stage": "release-old-before-new",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs/235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6/approvals/96a73cf0-9e63-4ecd-af97-bdf487a97d46",
+      "has_csrf": false
+    },
+    {
+      "stage": "release-old-before-new",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs/235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6/approvals/96a73cf0-9e63-4ecd-af97-bdf487a97d46"
+    },
+    {
+      "stage": "release-old-before-new",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866"
+    },
+    {
+      "stage": "release-old-before-new",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs/235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6/steps?page_size=100",
+      "has_csrf": false
+    },
+    {
+      "stage": "release-old-before-new",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs/235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6/steps"
+    },
+    {
+      "stage": "release-old-before-new",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs/235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6/tool-calls?page_size=100",
+      "has_csrf": false
+    },
+    {
+      "stage": "release-old-before-new",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs/235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6/tool-calls"
+    }
+  ],
+  "exceptions": [
+    {
+      "stage": "release-old-before-new",
+      "text": "AbortError: 快照读取已由新操作替代"
+    },
+    {
+      "stage": "release-old-before-new",
+      "text": "AbortError: 快照读取已由新操作替代"
+    }
+  ]
+}

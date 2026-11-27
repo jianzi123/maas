@@ -1,0 +1,2916 @@
+{
+  "before": {
+    "run": {
+      "aggregation_complete": true,
+      "cancel_requested": false,
+      "child_request_ids": [
+        "78b34bcc-3223-4bdf-9b94-203f885ce13b",
+        "91f8f2d5-a0f0-4e72-9086-fac98581f8d3"
+      ],
+      "client_operation_id": "40e1fddb-6b0d-44d4-97b6-aa380ffabdf3",
+      "created_at": "2026-11-27T02:45:08.882116631Z",
+      "deadline_at": "2026-11-27T02:55:08.882745577Z",
+      "fence": "3",
+      "finished_at": "2026-11-27T02:45:36.272469547Z",
+      "id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+      "input_head_message_id": "377cb6ed-3125-47cb-89ec-5db8b8c50baf",
+      "last_event_seq": "38",
+      "limits": {
+        "max_steps": 4,
+        "max_model_calls": 4,
+        "max_tool_calls": 8,
+        "max_duration_ms": 600000,
+        "tool_timeout_ms": 5000,
+        "max_tool_output_bytes": 8192,
+        "max_context_tokens": 32768,
+        "no_progress_limit": 3,
+        "max_tokens": "100000",
+        "max_money_atomic": "1000000000",
+        "currency": "USD"
+      },
+      "mode": "agent",
+      "model_alias": "offline-controlled",
+      "protocol_revision": "tools-v1",
+      "reason": null,
+      "resume_cursor": "ac4028bd903becb30fd43d770e043acac28a94e2feb32395663bb8a4e5079dde",
+      "revision": "20",
+      "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+      "state": "completed",
+      "step_count": 2,
+      "usage_groups": [
+        {
+          "currency": "USD",
+          "price_version": "offline-controlled-price-v1",
+          "known_tokens": "20",
+          "held_tokens": "0",
+          "inflight_tokens": "0",
+          "known_money_atomic": "20",
+          "held_money_atomic": "0",
+          "inflight_money_atomic": "0"
+        }
+      ]
+    },
+    "steps": {
+      "data": [
+        {
+          "child_request_id": "78b34bcc-3223-4bdf-9b94-203f885ce13b",
+          "id": "f38ec404-e0e7-4e48-a41e-4069c940349c",
+          "index": 1,
+          "input_sha256": "8e4e09ca8a41ccf5087b760fc5d74f692b724826911896c09a9a289e2c46f18c",
+          "model_call_id": "7d98a774-9821-52bf-92ff-bde5842ef6cd",
+          "output_sha256": "3af051d42d2bdd3f5469c0b36a078e022c829c5b10c808dbe09f7d0eb520a2c1",
+          "protocol_revision": "tools-v1",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "state": "completed"
+        },
+        {
+          "child_request_id": "91f8f2d5-a0f0-4e72-9086-fac98581f8d3",
+          "id": "449d5fdb-f341-4647-94a9-9d184845482e",
+          "index": 2,
+          "input_sha256": "05ebadc703abe77647d6a12985e1f8db0023baef058014397033117ad1111870",
+          "model_call_id": "30e0723c-23fa-5920-bdc2-c169365f8e4b",
+          "output_sha256": "32d7a987fd842ff7bcc53ae519c752b46f0f02ecef89774ad6e72a3a014abb4e",
+          "protocol_revision": "tools-v1",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "state": "completed"
+        }
+      ],
+      "next_cursor": null
+    },
+    "tools": {
+      "data": [
+        {
+          "args_sha256": "6db557534ae2736cb6f2a5d1343959798a915de7bfbeb064cfe62510675af617",
+          "arguments": {
+            "a": 6,
+            "b": 7,
+            "op": "multiply"
+          },
+          "attempt": 1,
+          "effect": "pure",
+          "id": "2af42c03-9394-47c5-8026-78c075159ec7",
+          "idempotency_key": "bf167f45-a3eb-58a2-8744-49538f40c961",
+          "name": "bounded_arithmetic",
+          "result": {
+            "call_id": "2af42c03-9394-47c5-8026-78c075159ec7",
+            "outcome": "succeeded",
+            "result": "42",
+            "type": "tool_result"
+          },
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "source_call_id": "7f2e45bf-7f65-5ea9-848c-5e5d0b285b42",
+          "state": "succeeded",
+          "step_id": "f38ec404-e0e7-4e48-a41e-4069c940349c",
+          "tool_revision": "1"
+        },
+        {
+          "args_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "arguments": {},
+          "attempt": 1,
+          "effect": "read_only",
+          "id": "1672ac23-e310-4e8c-bad8-33d3cc1d48f7",
+          "idempotency_key": "8902ff1c-a2ca-50b4-bf7b-212776fcf903",
+          "name": "list_visible_models",
+          "result": {
+            "call_id": "1672ac23-e310-4e8c-bad8-33d3cc1d48f7",
+            "outcome": "succeeded",
+            "result": "[\"offline-controlled\"]",
+            "type": "tool_result"
+          },
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "source_call_id": "7dc69f9b-b415-5624-823d-3711e1c14c39",
+          "state": "succeeded",
+          "step_id": "f38ec404-e0e7-4e48-a41e-4069c940349c",
+          "tool_revision": "1"
+        }
+      ],
+      "next_cursor": null
+    },
+    "events": {
+      "data": [
+        {
+          "version": "ar.session.event/1.0",
+          "id": "feb7ca0f-c6a9-426e-880d-808711c1cf4c",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "1",
+          "cursor": "58268d415a6403be9110de75641a73cc2d2c21513856912541efee1c2c150c43",
+          "created_at": "2026-11-27T02:45:08.882789994Z",
+          "type": "run.accepted",
+          "data": {
+            "id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "mode": "agent",
+            "fence": "1",
+            "state": "accepted",
+            "limits": {
+              "currency": "USD",
+              "max_steps": 4,
+              "max_tokens": "100000",
+              "max_tool_calls": 8,
+              "max_duration_ms": 600000,
+              "max_model_calls": 4,
+              "tool_timeout_ms": 5000,
+              "max_money_atomic": "1000000000",
+              "no_progress_limit": 3,
+              "max_context_tokens": 32768,
+              "max_tool_output_bytes": 8192
+            },
+            "reason": null,
+            "revision": "2",
+            "created_at": "2026-11-27T02:45:08.882116631Z",
+            "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+            "step_count": 0,
+            "deadline_at": "2026-11-27T02:55:08.882745577Z",
+            "finished_at": null,
+            "model_alias": "offline-controlled",
+            "usage_groups": [],
+            "resume_cursor": "58268d415a6403be9110de75641a73cc2d2c21513856912541efee1c2c150c43",
+            "last_event_seq": "1",
+            "cancel_requested": false,
+            "child_request_ids": [],
+            "protocol_revision": "tools-v1",
+            "client_operation_id": "40e1fddb-6b0d-44d4-97b6-aa380ffabdf3",
+            "aggregation_complete": false,
+            "input_head_message_id": "377cb6ed-3125-47cb-89ec-5db8b8c50baf"
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "7142ae07-bf21-4adb-9fab-356908503390",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "2",
+          "cursor": "7062b93fa1e6c819212935cb63b3978c59156df7245d11ad50d8fae2434ef624",
+          "created_at": "2026-11-27T02:45:08.882845352Z",
+          "type": "message.created",
+          "data": {
+            "id": "377cb6ed-3125-47cb-89ec-5db8b8c50baf",
+            "role": "user",
+            "parts": [
+              {
+                "text": "393独立批准：计算6乘7并列出可见模型。",
+                "type": "text"
+              }
+            ],
+            "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "status": "committed",
+            "position": "1",
+            "created_at": "2026-11-27T02:45:08.882746098Z",
+            "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+            "supersedes_message_id": null
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "8662c7ca-e859-4b4e-8071-056645ecea8b",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "3",
+          "cursor": "ea0c7f31acef74b404ff6b0d9c7d52d0e924ca6301f71f810ef0b01ba511dc6d",
+          "created_at": "2026-11-27T02:45:08.882940609Z",
+          "type": "message.committed",
+          "data": {
+            "id": "377cb6ed-3125-47cb-89ec-5db8b8c50baf",
+            "role": "user",
+            "parts": [
+              {
+                "text": "393独立批准：计算6乘7并列出可见模型。",
+                "type": "text"
+              }
+            ],
+            "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "status": "committed",
+            "position": "1",
+            "created_at": "2026-11-27T02:45:08.882746098Z",
+            "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+            "supersedes_message_id": null
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "dbeb5607-90eb-4508-a274-8b9581477760",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "4",
+          "cursor": "b20a4accc7bc9e38ee92759e39966f88b7c0f3b3b9b6a51b7494d01bda0bc43a",
+          "created_at": "2026-11-27T02:45:08.910645638Z",
+          "type": "run.started",
+          "data": {
+            "id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "mode": "agent",
+            "fence": "2",
+            "state": "running",
+            "limits": {
+              "currency": "USD",
+              "max_steps": 4,
+              "max_tokens": "100000",
+              "max_tool_calls": 8,
+              "max_duration_ms": 600000,
+              "max_model_calls": 4,
+              "tool_timeout_ms": 5000,
+              "max_money_atomic": "1000000000",
+              "no_progress_limit": 3,
+              "max_context_tokens": 32768,
+              "max_tool_output_bytes": 8192
+            },
+            "reason": null,
+            "revision": "3",
+            "created_at": "2026-11-27T02:45:08.882116631Z",
+            "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+            "step_count": 0,
+            "deadline_at": "2026-11-27T02:55:08.882745577Z",
+            "finished_at": null,
+            "model_alias": "offline-controlled",
+            "usage_groups": [],
+            "resume_cursor": "b20a4accc7bc9e38ee92759e39966f88b7c0f3b3b9b6a51b7494d01bda0bc43a",
+            "last_event_seq": "4",
+            "cancel_requested": false,
+            "child_request_ids": [],
+            "protocol_revision": "tools-v1",
+            "client_operation_id": "40e1fddb-6b0d-44d4-97b6-aa380ffabdf3",
+            "aggregation_complete": false,
+            "input_head_message_id": "377cb6ed-3125-47cb-89ec-5db8b8c50baf"
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "50966e1b-5cbc-447b-8cb5-70ce5b498a73",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "5",
+          "cursor": "cb56af4b2e7c5a41d2f3107231acda80ce829e78ddbdddd7b1cb6c3777fcae23",
+          "created_at": "2026-11-27T02:45:08.93697356Z",
+          "type": "message.created",
+          "data": {
+            "id": "a82227f5-1786-4332-9043-d890e1c67eaf",
+            "role": "assistant",
+            "parts": [
+              {
+                "text": "",
+                "type": "text"
+              }
+            ],
+            "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "status": "partial",
+            "position": "2",
+            "created_at": "2026-11-27T02:45:08.936966877Z",
+            "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+            "supersedes_message_id": null
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "4c7cbfdc-b655-40da-9e4c-69eec592d481",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "6",
+          "cursor": "4e9bd8d4bd4f35ffcd60945445ddb4c11e615a51f292bc0d90575209579bbd8b",
+          "created_at": "2026-11-27T02:45:08.93700418Z",
+          "type": "checkpoint.saved",
+          "data": {
+            "fence": "2",
+            "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "revision": "4",
+            "context_sha256": "fd8722bd2fdcf73975b00c2b4e90d8df41d6c87cd9321b81b4e94dc7479b40ae",
+            "last_event_seq": "6",
+            "message_head_id": "377cb6ed-3125-47cb-89ec-5db8b8c50baf",
+            "policy_revision": "771934d3-e159-46be-b7f8-ba3d4d966769",
+            "registry_sha256": "af85c2b25f3d065b99ce6306b437ca01d17a5d795d4f16380b358620e37a93c2",
+            "last_completed_step": 0,
+            "pending_tool_call_ids": [],
+            "context_strategy_revision": "reject-over-cap-v1",
+            "pending_child_request_ids": [
+              "78b34bcc-3223-4bdf-9b94-203f885ce13b"
+            ]
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "a13314ba-1b9d-4b88-842f-98ee83161808",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "7",
+          "cursor": "767a6845e2f2fc8a115c66e152eb4875466621f55af317ac7ad0af03f3e5b59d",
+          "created_at": "2026-11-27T02:45:08.937027305Z",
+          "type": "step.started",
+          "data": {
+            "id": "f38ec404-e0e7-4e48-a41e-4069c940349c",
+            "index": 1,
+            "state": "model_running",
+            "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "input_sha256": "8e4e09ca8a41ccf5087b760fc5d74f692b724826911896c09a9a289e2c46f18c",
+            "model_call_id": "7d98a774-9821-52bf-92ff-bde5842ef6cd",
+            "output_sha256": null,
+            "child_request_id": "78b34bcc-3223-4bdf-9b94-203f885ce13b",
+            "protocol_revision": "tools-v1"
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "a065caeb-067d-43a0-ab25-1d574ba41e2a",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "8",
+          "cursor": "3901872c60c9d20779267221858c0422d334a540a63b2fd0adf8bc19418933d1",
+          "created_at": "2026-11-27T02:45:14.019487238Z",
+          "type": "run.usage",
+          "data": {
+            "groups": [
+              {
+                "currency": "USD",
+                "held_tokens": "0",
+                "known_tokens": "10",
+                "price_version": "offline-controlled-price-v1",
+                "inflight_tokens": "0",
+                "held_money_atomic": "0",
+                "known_money_atomic": "10",
+                "inflight_money_atomic": "0"
+              }
+            ],
+            "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4"
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "94f1cee3-284c-4977-82d8-27aaac844d23",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "9",
+          "cursor": "18225cb34d81ed0d843fcc2d4151c7639b9ccda9d1bf8824cefdcab7fe8051e4",
+          "created_at": "2026-11-27T02:45:14.027338262Z",
+          "type": "tool.proposed",
+          "data": {
+            "id": "2af42c03-9394-47c5-8026-78c075159ec7",
+            "name": "bounded_arithmetic",
+            "state": "proposed",
+            "effect": "pure",
+            "result": null,
+            "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "attempt": 0,
+            "step_id": "f38ec404-e0e7-4e48-a41e-4069c940349c",
+            "arguments": {
+              "a": 6,
+              "b": 7,
+              "op": "multiply"
+            },
+            "args_sha256": "6db557534ae2736cb6f2a5d1343959798a915de7bfbeb064cfe62510675af617",
+            "tool_revision": "1",
+            "source_call_id": "7f2e45bf-7f65-5ea9-848c-5e5d0b285b42",
+            "idempotency_key": "bf167f45-a3eb-58a2-8744-49538f40c961"
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "71c2018d-7011-4480-954f-0dc7272f3b94",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "10",
+          "cursor": "c887783fc9c280475b4df9ac053bdd73fd2da0bdc3d5303bd0ea353905c2cb6f",
+          "created_at": "2026-11-27T02:45:14.027367439Z",
+          "type": "tool.proposed",
+          "data": {
+            "id": "1672ac23-e310-4e8c-bad8-33d3cc1d48f7",
+            "name": "list_visible_models",
+            "state": "proposed",
+            "effect": "read_only",
+            "result": null,
+            "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "attempt": 0,
+            "step_id": "f38ec404-e0e7-4e48-a41e-4069c940349c",
+            "arguments": {},
+            "args_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+            "tool_revision": "1",
+            "source_call_id": "7dc69f9b-b415-5624-823d-3711e1c14c39",
+            "idempotency_key": "8902ff1c-a2ca-50b4-bf7b-212776fcf903"
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "4f938a3f-1702-4576-ab68-e6ff62284d6b",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "11",
+          "cursor": "998794338e9caf8e5ce75b9a98ae2c9f222124c8ccd9a2dd1066e00c40790c52",
+          "created_at": "2026-11-27T02:45:14.027383881Z",
+          "type": "message.committed",
+          "data": {
+            "id": "a82227f5-1786-4332-9043-d890e1c67eaf",
+            "role": "assistant",
+            "parts": [
+              {
+                "text": "",
+                "type": "text"
+              },
+              {
+                "name": "bounded_arithmetic",
+                "type": "tool_call",
+                "call_id": "2af42c03-9394-47c5-8026-78c075159ec7",
+                "arguments": {
+                  "a": 6,
+                  "b": 7,
+                  "op": "multiply"
+                },
+                "args_sha256": "6db557534ae2736cb6f2a5d1343959798a915de7bfbeb064cfe62510675af617",
+                "tool_revision": "1"
+              },
+              {
+                "name": "list_visible_models",
+                "type": "tool_call",
+                "call_id": "1672ac23-e310-4e8c-bad8-33d3cc1d48f7",
+                "arguments": {},
+                "args_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                "tool_revision": "1"
+              }
+            ],
+            "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "status": "committed",
+            "position": "2",
+            "created_at": "2026-11-27T02:45:08.936966877Z",
+            "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+            "supersedes_message_id": null
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "0cf24a8c-31f2-477d-8409-3123ec368ba9",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "12",
+          "cursor": "a820c6baf0238ad24fdc4372f2159a5fd69b90867dddb06cd7a71635ed3b99fc",
+          "created_at": "2026-11-27T02:45:14.027405533Z",
+          "type": "checkpoint.saved",
+          "data": {
+            "fence": "2",
+            "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "revision": "6",
+            "context_sha256": "fd8722bd2fdcf73975b00c2b4e90d8df41d6c87cd9321b81b4e94dc7479b40ae",
+            "last_event_seq": "12",
+            "message_head_id": "377cb6ed-3125-47cb-89ec-5db8b8c50baf",
+            "policy_revision": "771934d3-e159-46be-b7f8-ba3d4d966769",
+            "registry_sha256": "af85c2b25f3d065b99ce6306b437ca01d17a5d795d4f16380b358620e37a93c2",
+            "last_completed_step": 0,
+            "pending_tool_call_ids": [],
+            "context_strategy_revision": "reject-over-cap-v1",
+            "pending_child_request_ids": []
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "5cdb01be-5833-4fe8-ade9-a9137934677c",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "13",
+          "cursor": "06396fc3f846b0124c2d077d1dd3514792ac846eee4e4a57981ab715e23aa390",
+          "created_at": "2026-11-27T02:45:14.047223175Z",
+          "type": "approval.required",
+          "data": {
+            "id": "3ea77012-d68d-45bb-932d-ae9f64bbc77c",
+            "state": "pending",
+            "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "call_id": "2af42c03-9394-47c5-8026-78c075159ec7",
+            "arguments": {
+              "a": 6,
+              "b": 7,
+              "op": "multiply"
+            },
+            "tool_name": "bounded_arithmetic",
+            "expires_at": "2026-11-27T02:45:44.047197334Z",
+            "args_sha256": "6db557534ae2736cb6f2a5d1343959798a915de7bfbeb064cfe62510675af617",
+            "scope_sha256": "ddb061c7cf27dde19f7d0c739a227752134fd502e559bf8be33891db920b98c9",
+            "tool_revision": "1",
+            "policy_revision": "771934d3-e159-46be-b7f8-ba3d4d966769"
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "02e32df6-b184-48d4-9246-fe6da10b1031",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "14",
+          "cursor": "6b04823a58a919769ff3ac979695e4ef65416aa24c9abbdc7ed654d79e0e6f95",
+          "created_at": "2026-11-27T02:45:15.858202182Z",
+          "type": "approval.resolved",
+          "data": {
+            "id": "3ea77012-d68d-45bb-932d-ae9f64bbc77c",
+            "state": "allowed",
+            "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "call_id": "2af42c03-9394-47c5-8026-78c075159ec7",
+            "arguments": {
+              "a": 6,
+              "b": 7,
+              "op": "multiply"
+            },
+            "tool_name": "bounded_arithmetic",
+            "expires_at": "2026-11-27T02:45:44.047197334Z",
+            "args_sha256": "6db557534ae2736cb6f2a5d1343959798a915de7bfbeb064cfe62510675af617",
+            "scope_sha256": "ddb061c7cf27dde19f7d0c739a227752134fd502e559bf8be33891db920b98c9",
+            "tool_revision": "1",
+            "policy_revision": "771934d3-e159-46be-b7f8-ba3d4d966769"
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "e1c807f2-7a99-4a2c-96e0-7eab91c2a3e7",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "15",
+          "cursor": "9cd4cb19a02199ad630688b61827af0ffc628bb2cfc2b44fc5da131bdd321fd7",
+          "created_at": "2026-11-27T02:45:15.906419634Z",
+          "type": "run.started",
+          "data": {
+            "id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "mode": "agent",
+            "fence": "3",
+            "state": "running",
+            "limits": {
+              "currency": "USD",
+              "max_steps": 4,
+              "max_tokens": "100000",
+              "max_tool_calls": 8,
+              "max_duration_ms": 600000,
+              "max_model_calls": 4,
+              "tool_timeout_ms": 5000,
+              "max_money_atomic": "1000000000",
+              "no_progress_limit": 3,
+              "max_context_tokens": 32768,
+              "max_tool_output_bytes": 8192
+            },
+            "reason": null,
+            "revision": "9",
+            "created_at": "2026-11-27T02:45:08.882116631Z",
+            "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+            "step_count": 1,
+            "deadline_at": "2026-11-27T02:55:08.882745577Z",
+            "finished_at": null,
+            "model_alias": "offline-controlled",
+            "usage_groups": [
+              {
+                "currency": "USD",
+                "held_tokens": "0",
+                "known_tokens": "10",
+                "price_version": "offline-controlled-price-v1",
+                "inflight_tokens": "0",
+                "held_money_atomic": "0",
+                "known_money_atomic": "10",
+                "inflight_money_atomic": "0"
+              }
+            ],
+            "resume_cursor": "9cd4cb19a02199ad630688b61827af0ffc628bb2cfc2b44fc5da131bdd321fd7",
+            "last_event_seq": "15",
+            "cancel_requested": false,
+            "child_request_ids": [
+              "78b34bcc-3223-4bdf-9b94-203f885ce13b"
+            ],
+            "protocol_revision": "tools-v1",
+            "client_operation_id": "40e1fddb-6b0d-44d4-97b6-aa380ffabdf3",
+            "aggregation_complete": true,
+            "input_head_message_id": "377cb6ed-3125-47cb-89ec-5db8b8c50baf"
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "c1085288-8dca-422f-82c0-d23a5f6f99c3",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "16",
+          "cursor": "e329d18387a1c54718cc8bf8522f6680105d067cb1fb2769c579fb928be34dd6",
+          "created_at": "2026-11-27T02:45:15.931779579Z",
+          "type": "tool.started",
+          "data": {
+            "id": "2af42c03-9394-47c5-8026-78c075159ec7",
+            "name": "bounded_arithmetic",
+            "state": "running",
+            "effect": "pure",
+            "result": null,
+            "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "attempt": 1,
+            "step_id": "f38ec404-e0e7-4e48-a41e-4069c940349c",
+            "arguments": {
+              "a": 6,
+              "b": 7,
+              "op": "multiply"
+            },
+            "args_sha256": "6db557534ae2736cb6f2a5d1343959798a915de7bfbeb064cfe62510675af617",
+            "tool_revision": "1",
+            "source_call_id": "7f2e45bf-7f65-5ea9-848c-5e5d0b285b42",
+            "idempotency_key": "bf167f45-a3eb-58a2-8744-49538f40c961"
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "687e835c-008c-4d36-a891-241bd660c7be",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "17",
+          "cursor": "f7ca3c492db31472b98023b73ed29132e6589bbdb2da31b449d96eddfb920b45",
+          "created_at": "2026-11-27T02:45:15.94696477Z",
+          "type": "tool.result",
+          "data": {
+            "type": "tool_result",
+            "result": "42",
+            "call_id": "2af42c03-9394-47c5-8026-78c075159ec7",
+            "outcome": "succeeded"
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "213c5489-fbfe-4f1f-b001-c54701ce8319",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "18",
+          "cursor": "f7cc5e841851ca934db643765b4ae368a3947de1ead6e66723dddd66ea741f83",
+          "created_at": "2026-11-27T02:45:15.946991752Z",
+          "type": "message.created",
+          "data": {
+            "id": "e9f0a9d3-1a60-4f91-adf2-3c74ac316dc5",
+            "role": "tool",
+            "parts": [
+              {
+                "type": "tool_result",
+                "result": "42",
+                "call_id": "2af42c03-9394-47c5-8026-78c075159ec7",
+                "outcome": "succeeded"
+              }
+            ],
+            "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "status": "committed",
+            "position": "3",
+            "created_at": "2026-11-27T02:45:15.946950742Z",
+            "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+            "supersedes_message_id": null
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "0634fd3c-b7d0-4dad-ac4f-89e06171157d",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "19",
+          "cursor": "4afc777f5ff2bed7c3cd4c2e329e1e430163835cac3d43dafa8207d7c25d37ba",
+          "created_at": "2026-11-27T02:45:15.947020659Z",
+          "type": "message.committed",
+          "data": {
+            "id": "e9f0a9d3-1a60-4f91-adf2-3c74ac316dc5",
+            "role": "tool",
+            "parts": [
+              {
+                "type": "tool_result",
+                "result": "42",
+                "call_id": "2af42c03-9394-47c5-8026-78c075159ec7",
+                "outcome": "succeeded"
+              }
+            ],
+            "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "status": "committed",
+            "position": "3",
+            "created_at": "2026-11-27T02:45:15.946950742Z",
+            "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+            "supersedes_message_id": null
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "5a878a94-d14f-44d7-b7c3-c1cadc7b9603",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "20",
+          "cursor": "eb7dc380b88e0ec60c79e13e32209674e517d728ac9a8bb9445f37552cd12362",
+          "created_at": "2026-11-27T02:45:15.947042412Z",
+          "type": "checkpoint.saved",
+          "data": {
+            "fence": "3",
+            "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "revision": "11",
+            "context_sha256": "fd8722bd2fdcf73975b00c2b4e90d8df41d6c87cd9321b81b4e94dc7479b40ae",
+            "last_event_seq": "20",
+            "message_head_id": "377cb6ed-3125-47cb-89ec-5db8b8c50baf",
+            "policy_revision": "771934d3-e159-46be-b7f8-ba3d4d966769",
+            "registry_sha256": "af85c2b25f3d065b99ce6306b437ca01d17a5d795d4f16380b358620e37a93c2",
+            "last_completed_step": 0,
+            "pending_tool_call_ids": [],
+            "context_strategy_revision": "reject-over-cap-v1",
+            "pending_child_request_ids": []
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "18e8cff8-703c-424b-991d-d2a5408a69c9",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "21",
+          "cursor": "1bd4e220a1ef99ad8ca83b9d45658bfcad38a42daf978c7b40e13937d25924b6",
+          "created_at": "2026-11-27T02:45:15.977780501Z",
+          "type": "tool.started",
+          "data": {
+            "id": "1672ac23-e310-4e8c-bad8-33d3cc1d48f7",
+            "name": "list_visible_models",
+            "state": "running",
+            "effect": "read_only",
+            "result": null,
+            "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "attempt": 1,
+            "step_id": "f38ec404-e0e7-4e48-a41e-4069c940349c",
+            "arguments": {},
+            "args_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+            "tool_revision": "1",
+            "source_call_id": "7dc69f9b-b415-5624-823d-3711e1c14c39",
+            "idempotency_key": "8902ff1c-a2ca-50b4-bf7b-212776fcf903"
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "cc20c0d1-f1bf-4685-972e-047b9c5b5d36",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "22",
+          "cursor": "7ce474f44a3fa67f700ac29f8776c69e2110afce6fb9390a37efdeb0d5cc5e6e",
+          "created_at": "2026-11-27T02:45:15.991229427Z",
+          "type": "tool.result",
+          "data": {
+            "type": "tool_result",
+            "result": "[\"offline-controlled\"]",
+            "call_id": "1672ac23-e310-4e8c-bad8-33d3cc1d48f7",
+            "outcome": "succeeded"
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "67de306b-f104-4f14-9915-705d7175d8cc",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "23",
+          "cursor": "06ccb9d2840ced5c3cc4d49a961cf610faab14bcf6be5358e34ee7b50dd1e8ed",
+          "created_at": "2026-11-27T02:45:15.991248214Z",
+          "type": "message.created",
+          "data": {
+            "id": "32b691a4-e1b0-40c4-bad5-fb28d62ad54b",
+            "role": "tool",
+            "parts": [
+              {
+                "type": "tool_result",
+                "result": "[\"offline-controlled\"]",
+                "call_id": "1672ac23-e310-4e8c-bad8-33d3cc1d48f7",
+                "outcome": "succeeded"
+              }
+            ],
+            "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "status": "committed",
+            "position": "4",
+            "created_at": "2026-11-27T02:45:15.991220139Z",
+            "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+            "supersedes_message_id": null
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "b90e71cf-551e-46b6-88af-03fb71571af6",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "24",
+          "cursor": "1f16f8e0f0f90adec527f64c14d87e0c12e1d4875a6b964abfc9469bb05f1455",
+          "created_at": "2026-11-27T02:45:15.991264616Z",
+          "type": "message.committed",
+          "data": {
+            "id": "32b691a4-e1b0-40c4-bad5-fb28d62ad54b",
+            "role": "tool",
+            "parts": [
+              {
+                "type": "tool_result",
+                "result": "[\"offline-controlled\"]",
+                "call_id": "1672ac23-e310-4e8c-bad8-33d3cc1d48f7",
+                "outcome": "succeeded"
+              }
+            ],
+            "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "status": "committed",
+            "position": "4",
+            "created_at": "2026-11-27T02:45:15.991220139Z",
+            "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+            "supersedes_message_id": null
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "26c7a5c3-acf1-4519-bc71-b24d4aaed90c",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "25",
+          "cursor": "537d8958882fca3d15c6f064c678bf5a0c61d31040592a8119c5daa217d3f9a0",
+          "created_at": "2026-11-27T02:45:15.99127683Z",
+          "type": "checkpoint.saved",
+          "data": {
+            "fence": "3",
+            "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "revision": "13",
+            "context_sha256": "fd8722bd2fdcf73975b00c2b4e90d8df41d6c87cd9321b81b4e94dc7479b40ae",
+            "last_event_seq": "25",
+            "message_head_id": "377cb6ed-3125-47cb-89ec-5db8b8c50baf",
+            "policy_revision": "771934d3-e159-46be-b7f8-ba3d4d966769",
+            "registry_sha256": "af85c2b25f3d065b99ce6306b437ca01d17a5d795d4f16380b358620e37a93c2",
+            "last_completed_step": 0,
+            "pending_tool_call_ids": [],
+            "context_strategy_revision": "reject-over-cap-v1",
+            "pending_child_request_ids": []
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "73d18535-4bdc-4352-95ab-dd7a7609b5b1",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "26",
+          "cursor": "8d25ecf9821228400e850539fa475fe2241722743ed74ea58bf467a0c1edc756",
+          "created_at": "2026-11-27T02:45:16.01760285Z",
+          "type": "step.finished",
+          "data": {
+            "id": "f38ec404-e0e7-4e48-a41e-4069c940349c",
+            "index": 1,
+            "state": "completed",
+            "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "input_sha256": "8e4e09ca8a41ccf5087b760fc5d74f692b724826911896c09a9a289e2c46f18c",
+            "model_call_id": "7d98a774-9821-52bf-92ff-bde5842ef6cd",
+            "output_sha256": "3af051d42d2bdd3f5469c0b36a078e022c829c5b10c808dbe09f7d0eb520a2c1",
+            "child_request_id": "78b34bcc-3223-4bdf-9b94-203f885ce13b",
+            "protocol_revision": "tools-v1"
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "1c808796-f11a-4ebb-a2b6-42568f60ba11",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "27",
+          "cursor": "a349dbeab6ad6d2ae6ff5ea5f161e818a735bc99c32961b31425194c7e293f9c",
+          "created_at": "2026-11-27T02:45:16.01764849Z",
+          "type": "checkpoint.saved",
+          "data": {
+            "fence": "3",
+            "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "revision": "14",
+            "context_sha256": "fd8722bd2fdcf73975b00c2b4e90d8df41d6c87cd9321b81b4e94dc7479b40ae",
+            "last_event_seq": "27",
+            "message_head_id": "377cb6ed-3125-47cb-89ec-5db8b8c50baf",
+            "policy_revision": "771934d3-e159-46be-b7f8-ba3d4d966769",
+            "registry_sha256": "af85c2b25f3d065b99ce6306b437ca01d17a5d795d4f16380b358620e37a93c2",
+            "last_completed_step": 1,
+            "pending_tool_call_ids": [],
+            "context_strategy_revision": "reject-over-cap-v1",
+            "pending_child_request_ids": []
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "0bbe23e3-7358-4305-b2ba-e8c8e1d83534",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "28",
+          "cursor": "bc725020ee16f7c53772fa1d315e3771ccc5f1c80c01acae4698a6e8a5ba63d5",
+          "created_at": "2026-11-27T02:45:16.044720026Z",
+          "type": "message.created",
+          "data": {
+            "id": "9e8f2208-fa1f-44f6-a438-c0469580f9e6",
+            "role": "assistant",
+            "parts": [
+              {
+                "text": "",
+                "type": "text"
+              }
+            ],
+            "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "status": "partial",
+            "position": "5",
+            "created_at": "2026-11-27T02:45:16.044712782Z",
+            "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+            "supersedes_message_id": null
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "4e8cdc08-d167-4701-abbd-692796e00888",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "29",
+          "cursor": "0fe48feb5dd751f9f839e47cdb3d2b08ab69c04e402b59fd758f6d2ac4baf2c8",
+          "created_at": "2026-11-27T02:45:16.044752469Z",
+          "type": "checkpoint.saved",
+          "data": {
+            "fence": "3",
+            "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "revision": "15",
+            "context_sha256": "9c10ad89e7e4849c18eef575e10558c79597fe2a6fb5f0ae4bc65a7f79b7a0e6",
+            "last_event_seq": "29",
+            "message_head_id": "377cb6ed-3125-47cb-89ec-5db8b8c50baf",
+            "policy_revision": "771934d3-e159-46be-b7f8-ba3d4d966769",
+            "registry_sha256": "af85c2b25f3d065b99ce6306b437ca01d17a5d795d4f16380b358620e37a93c2",
+            "last_completed_step": 1,
+            "pending_tool_call_ids": [],
+            "context_strategy_revision": "reject-over-cap-v1",
+            "pending_child_request_ids": [
+              "91f8f2d5-a0f0-4e72-9086-fac98581f8d3"
+            ]
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "2f5ee22d-8614-48fc-b5c9-17f6ba5e6bb1",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "30",
+          "cursor": "94f7bb27a4b8e7ad0e6acdefc699c26b3353750658551a6198c4e34e787951e1",
+          "created_at": "2026-11-27T02:45:16.044781817Z",
+          "type": "step.started",
+          "data": {
+            "id": "449d5fdb-f341-4647-94a9-9d184845482e",
+            "index": 2,
+            "state": "model_running",
+            "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "input_sha256": "05ebadc703abe77647d6a12985e1f8db0023baef058014397033117ad1111870",
+            "model_call_id": "30e0723c-23fa-5920-bdc2-c169365f8e4b",
+            "output_sha256": null,
+            "child_request_id": "91f8f2d5-a0f0-4e72-9086-fac98581f8d3",
+            "protocol_revision": "tools-v1"
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "c0e150a2-1b39-4d0d-9abf-04e30d56ace2",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "31",
+          "cursor": "847ddff5c6e61599e3d9409a8ff2e1c687980d66f54c9d3ea03eabb66e2a783c",
+          "created_at": "2026-11-27T02:45:21.133225272Z",
+          "type": "message.delta",
+          "data": {
+            "text": "【离线受控模型；未调用真实供应商】",
+            "offset": "0",
+            "message_id": "9e8f2208-fa1f-44f6-a438-c0469580f9e6"
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "fca80a00-b88a-4fa5-b7a5-7a1dc7025828",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "32",
+          "cursor": "55ee5bcffd8ae6431a49da17aa9ef080be48fbb5d5bd5732d11b7cd6410c975d",
+          "created_at": "2026-11-27T02:45:26.155338183Z",
+          "type": "message.delta",
+          "data": {
+            "text": "6 × 7 = 42。",
+            "offset": "51",
+            "message_id": "9e8f2208-fa1f-44f6-a438-c0469580f9e6"
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "c656c8da-7f04-46a0-a8e2-8c94d5a24d9a",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "33",
+          "cursor": "bc3ddd585be624bd0ab63b98c35d6835d2ea01b32905a5c2dec0d977a283a53a",
+          "created_at": "2026-11-27T02:45:31.179146983Z",
+          "type": "message.delta",
+          "data": {
+            "text": "目录工具仅返回当前授权的离线模型。",
+            "offset": "65",
+            "message_id": "9e8f2208-fa1f-44f6-a438-c0469580f9e6"
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "cc55c3f2-98ce-43c5-abc1-efde46942f96",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "34",
+          "cursor": "e811a226c545081d4834b4b9ed86d18dbb722fe9c6d786412cbd59e44b0b36f7",
+          "created_at": "2026-11-27T02:45:36.245013822Z",
+          "type": "run.usage",
+          "data": {
+            "groups": [
+              {
+                "currency": "USD",
+                "held_tokens": "0",
+                "known_tokens": "20",
+                "price_version": "offline-controlled-price-v1",
+                "inflight_tokens": "0",
+                "held_money_atomic": "0",
+                "known_money_atomic": "20",
+                "inflight_money_atomic": "0"
+              }
+            ],
+            "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4"
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "b5d426db-9015-4299-b325-ebdeea8cb1ce",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "35",
+          "cursor": "c42665f31a51ba3c92d155863f5c5f1685b84e0f6573c7b847de0fca2851d0dd",
+          "created_at": "2026-11-27T02:45:36.272398608Z",
+          "type": "message.committed",
+          "data": {
+            "id": "9e8f2208-fa1f-44f6-a438-c0469580f9e6",
+            "role": "assistant",
+            "parts": [
+              {
+                "text": "【离线受控模型；未调用真实供应商】6 × 7 = 42。目录工具仅返回当前授权的离线模型。",
+                "type": "text"
+              }
+            ],
+            "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "status": "committed",
+            "position": "5",
+            "created_at": "2026-11-27T02:45:16.044712782Z",
+            "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+            "supersedes_message_id": null
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "84684908-d38b-43a6-a2ad-304e0b42b147",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "36",
+          "cursor": "3dda93dc741ebfbd441eeef21ba9ad19315f66c9589751ed17e107d6fcae6ec7",
+          "created_at": "2026-11-27T02:45:36.272444498Z",
+          "type": "step.finished",
+          "data": {
+            "id": "449d5fdb-f341-4647-94a9-9d184845482e",
+            "index": 2,
+            "state": "completed",
+            "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "input_sha256": "05ebadc703abe77647d6a12985e1f8db0023baef058014397033117ad1111870",
+            "model_call_id": "30e0723c-23fa-5920-bdc2-c169365f8e4b",
+            "output_sha256": "32d7a987fd842ff7bcc53ae519c752b46f0f02ecef89774ad6e72a3a014abb4e",
+            "child_request_id": "91f8f2d5-a0f0-4e72-9086-fac98581f8d3",
+            "protocol_revision": "tools-v1"
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "3ae5b32f-edd4-45e7-9c4f-062a23473324",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "37",
+          "cursor": "1b11fab25c9bda95781fa78e971eee416e0e5d9d2174831f2f47727201204291",
+          "created_at": "2026-11-27T02:45:36.272477002Z",
+          "type": "run.completed",
+          "data": {
+            "id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "mode": "agent",
+            "fence": "3",
+            "state": "completed",
+            "limits": {
+              "currency": "USD",
+              "max_steps": 4,
+              "max_tokens": "100000",
+              "max_tool_calls": 8,
+              "max_duration_ms": 600000,
+              "max_model_calls": 4,
+              "tool_timeout_ms": 5000,
+              "max_money_atomic": "1000000000",
+              "no_progress_limit": 3,
+              "max_context_tokens": 32768,
+              "max_tool_output_bytes": 8192
+            },
+            "reason": null,
+            "revision": "20",
+            "created_at": "2026-11-27T02:45:08.882116631Z",
+            "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+            "step_count": 2,
+            "deadline_at": "2026-11-27T02:55:08.882745577Z",
+            "finished_at": "2026-11-27T02:45:36.272469547Z",
+            "model_alias": "offline-controlled",
+            "usage_groups": [
+              {
+                "currency": "USD",
+                "held_tokens": "0",
+                "known_tokens": "20",
+                "price_version": "offline-controlled-price-v1",
+                "inflight_tokens": "0",
+                "held_money_atomic": "0",
+                "known_money_atomic": "20",
+                "inflight_money_atomic": "0"
+              }
+            ],
+            "resume_cursor": "1b11fab25c9bda95781fa78e971eee416e0e5d9d2174831f2f47727201204291",
+            "last_event_seq": "37",
+            "cancel_requested": false,
+            "child_request_ids": [
+              "78b34bcc-3223-4bdf-9b94-203f885ce13b",
+              "91f8f2d5-a0f0-4e72-9086-fac98581f8d3"
+            ],
+            "protocol_revision": "tools-v1",
+            "client_operation_id": "40e1fddb-6b0d-44d4-97b6-aa380ffabdf3",
+            "aggregation_complete": true,
+            "input_head_message_id": "377cb6ed-3125-47cb-89ec-5db8b8c50baf"
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "f5194b8f-b7e9-4abc-8503-42d15ae8be77",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "38",
+          "cursor": "ac4028bd903becb30fd43d770e043acac28a94e2feb32395663bb8a4e5079dde",
+          "created_at": "2026-11-27T02:45:36.272550686Z",
+          "type": "checkpoint.saved",
+          "data": {
+            "fence": "3",
+            "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "revision": "20",
+            "context_sha256": "9c10ad89e7e4849c18eef575e10558c79597fe2a6fb5f0ae4bc65a7f79b7a0e6",
+            "last_event_seq": "38",
+            "message_head_id": "377cb6ed-3125-47cb-89ec-5db8b8c50baf",
+            "policy_revision": "771934d3-e159-46be-b7f8-ba3d4d966769",
+            "registry_sha256": "af85c2b25f3d065b99ce6306b437ca01d17a5d795d4f16380b358620e37a93c2",
+            "last_completed_step": 2,
+            "pending_tool_call_ids": [],
+            "context_strategy_revision": "reject-over-cap-v1",
+            "pending_child_request_ids": []
+          }
+        }
+      ],
+      "next_cursor": null
+    },
+    "usage": [
+      {
+        "data": [
+          {
+            "admitted_at": "2026-11-27T02:45:08.967929Z",
+            "budget_accounting": {
+              "cost_actual_atomic": "10",
+              "cost_state": "known",
+              "currency": "USD",
+              "missing_reason": null,
+              "money": {
+                "known_used": "10",
+                "overrun": "0",
+                "released": "86",
+                "reserved": "96",
+                "state": "known",
+                "unknown_held": "0"
+              },
+              "policy_revision": "003005c7-2d72-4913-a7f6-f3993f7e0c1d",
+              "price_snapshot_id": "b912484e-0c22-5f98-ab60-fb05a679faa6",
+              "price_version": "offline-controlled-price-v1",
+              "request": {
+                "known_used": "1",
+                "overrun": "0",
+                "released": "0",
+                "reserved": "1",
+                "state": "known",
+                "unknown_held": "0"
+              },
+              "token": {
+                "known_used": "10",
+                "overrun": "0",
+                "released": "86",
+                "reserved": "96",
+                "state": "known",
+                "unknown_held": "0"
+              },
+              "token_actual": "10",
+              "token_basis": "upstream_total",
+              "window_end": "2026-11-28T00:00:00Z",
+              "window_kind": "utc_day",
+              "window_start": "2026-11-27T00:00:00Z"
+            },
+            "config_revision": "offline-controlled-v1",
+            "duration_ms": 5044,
+            "error_code": null,
+            "finished_at": "2026-11-27T02:45:13.999533Z",
+            "first_chunk_ms": null,
+            "invocation_binding": {
+              "activation_epoch": 1,
+              "admission_purpose": "serving",
+              "model_release_generation": 1,
+              "model_release_name": "offline-controlled",
+              "model_release_namespace": "maas-offline",
+              "model_release_uid": "ac5aa1c5-1e08-503c-8eb4-678902cbf8a3",
+              "price_snapshot_id": "b912484e-0c22-5f98-ab60-fb05a679faa6",
+              "price_version": "offline-controlled-price-v1",
+              "publication_id": "194e5552-a401-4964-951a-dd3666477b47",
+              "release_revision": "06410b139bb5376431d85007d3821fb7da9a8077e8e03979108412c857da4e1a",
+              "route_binding_sha256": "06410b139bb5376431d85007d3821fb7da9a8077e8e03979108412c857da4e1a"
+            },
+            "key_id": "68f8b691-6805-4991-9d40-87af5c566e37",
+            "metering_state": "complete",
+            "model_alias": "offline-controlled",
+            "quota_consumed": 1,
+            "quota_date": "2026-11-27",
+            "rate_witness": {
+              "permit_id": "cd7228e3-d3ee-4f9b-90df-39b0ffe8ef04",
+              "policy_id": "offline-controlled-rate-v1",
+              "policy_revision": "offline-controlled-rate-v1",
+              "rate_epoch": "1",
+              "windows": [
+                {
+                  "limit": "1000",
+                  "scope_id": "global",
+                  "window_end": "2026-11-27T03:00:00Z",
+                  "window_start": "2026-11-27T02:00:00Z"
+                },
+                {
+                  "limit": "1000",
+                  "scope_id": "key/68f8b691-6805-4991-9d40-87af5c566e37",
+                  "window_end": "2026-11-27T03:00:00Z",
+                  "window_start": "2026-11-27T02:00:00Z"
+                }
+              ]
+            },
+            "received_at": "2026-11-27T02:45:08.955Z",
+            "request_id": "78b34bcc-3223-4bdf-9b94-203f885ce13b",
+            "reservation_plan": {
+              "schema_version": "1.0",
+              "model_alias": "offline-controlled",
+              "source_id": "2760be51-dd8c-5d8e-83e3-d37bd6b909cc",
+              "config_revision": "offline-controlled-v1",
+              "capability_revision": "offline-controlled-tools-v1",
+              "budget_policy_revision": "003005c7-2d72-4913-a7f6-f3993f7e0c1d",
+              "window_kind": "utc_day",
+              "token_metric": "prompt_plus_completion",
+              "request_reserved": "1",
+              "input_upper_tokens": "64",
+              "output_upper_tokens": "32",
+              "total_upper_tokens": "96",
+              "token_reserved": "96",
+              "money_reserved_atomic": "96",
+              "currency": "USD",
+              "price_snapshot_id": "b912484e-0c22-5f98-ab60-fb05a679faa6",
+              "price_snapshot_sha256": "5086568d8fbf1da3936ea7591450a161bcac5202bc01845ee71143d01dcc0aba",
+              "price_version": "offline-controlled-price-v1",
+              "rate_policy_revision": "offline-controlled-rate-v1"
+            },
+            "source_id": "2760be51-dd8c-5d8e-83e3-d37bd6b909cc",
+            "source_type": "internal",
+            "status": "succeeded",
+            "submission_state": "submitted",
+            "upstream_model": "offline-controlled-v1",
+            "usage": {
+              "input_cached_tokens": 0,
+              "input_tokens": 6,
+              "missing_reason": null,
+              "output_tokens": 4,
+              "reasoning_tokens": 0,
+              "source": "upstream",
+              "total_tokens": 10
+            }
+          }
+        ],
+        "data_complete": true,
+        "lookup": {
+          "capacity": {
+            "data_source": "release_log",
+            "release_reason": "transport_closed",
+            "state": "released"
+          },
+          "evidence_source": "generation_request",
+          "reason": null,
+          "rejection_code": null,
+          "request_id": "78b34bcc-3223-4bdf-9b94-203f885ce13b",
+          "resolution": "recorded"
+        },
+        "next_cursor": null
+      },
+      {
+        "data": [
+          {
+            "admitted_at": "2026-11-27T02:45:16.089714Z",
+            "budget_accounting": {
+              "cost_actual_atomic": "10",
+              "cost_state": "known",
+              "currency": "USD",
+              "missing_reason": null,
+              "money": {
+                "known_used": "10",
+                "overrun": "0",
+                "released": "86",
+                "reserved": "96",
+                "state": "known",
+                "unknown_held": "0"
+              },
+              "policy_revision": "003005c7-2d72-4913-a7f6-f3993f7e0c1d",
+              "price_snapshot_id": "b912484e-0c22-5f98-ab60-fb05a679faa6",
+              "price_version": "offline-controlled-price-v1",
+              "request": {
+                "known_used": "1",
+                "overrun": "0",
+                "released": "0",
+                "reserved": "1",
+                "state": "known",
+                "unknown_held": "0"
+              },
+              "token": {
+                "known_used": "10",
+                "overrun": "0",
+                "released": "86",
+                "reserved": "96",
+                "state": "known",
+                "unknown_held": "0"
+              },
+              "token_actual": "10",
+              "token_basis": "upstream_total",
+              "window_end": "2026-11-28T00:00:00Z",
+              "window_kind": "utc_day",
+              "window_start": "2026-11-27T00:00:00Z"
+            },
+            "config_revision": "offline-controlled-v1",
+            "duration_ms": 20136,
+            "error_code": null,
+            "finished_at": "2026-11-27T02:45:36.211195Z",
+            "first_chunk_ms": null,
+            "invocation_binding": {
+              "activation_epoch": 1,
+              "admission_purpose": "serving",
+              "model_release_generation": 1,
+              "model_release_name": "offline-controlled",
+              "model_release_namespace": "maas-offline",
+              "model_release_uid": "ac5aa1c5-1e08-503c-8eb4-678902cbf8a3",
+              "price_snapshot_id": "b912484e-0c22-5f98-ab60-fb05a679faa6",
+              "price_version": "offline-controlled-price-v1",
+              "publication_id": "194e5552-a401-4964-951a-dd3666477b47",
+              "release_revision": "06410b139bb5376431d85007d3821fb7da9a8077e8e03979108412c857da4e1a",
+              "route_binding_sha256": "06410b139bb5376431d85007d3821fb7da9a8077e8e03979108412c857da4e1a"
+            },
+            "key_id": "68f8b691-6805-4991-9d40-87af5c566e37",
+            "metering_state": "complete",
+            "model_alias": "offline-controlled",
+            "quota_consumed": 1,
+            "quota_date": "2026-11-27",
+            "rate_witness": {
+              "permit_id": "9a45fe7a-1a39-44bf-b4dc-08485807bfc1",
+              "policy_id": "offline-controlled-rate-v1",
+              "policy_revision": "offline-controlled-rate-v1",
+              "rate_epoch": "1",
+              "windows": [
+                {
+                  "limit": "1000",
+                  "scope_id": "global",
+                  "window_end": "2026-11-27T03:00:00Z",
+                  "window_start": "2026-11-27T02:00:00Z"
+                },
+                {
+                  "limit": "1000",
+                  "scope_id": "key/68f8b691-6805-4991-9d40-87af5c566e37",
+                  "window_end": "2026-11-27T03:00:00Z",
+                  "window_start": "2026-11-27T02:00:00Z"
+                }
+              ]
+            },
+            "received_at": "2026-11-27T02:45:16.075Z",
+            "request_id": "91f8f2d5-a0f0-4e72-9086-fac98581f8d3",
+            "reservation_plan": {
+              "schema_version": "1.0",
+              "model_alias": "offline-controlled",
+              "source_id": "2760be51-dd8c-5d8e-83e3-d37bd6b909cc",
+              "config_revision": "offline-controlled-v1",
+              "capability_revision": "offline-controlled-tools-v1",
+              "budget_policy_revision": "003005c7-2d72-4913-a7f6-f3993f7e0c1d",
+              "window_kind": "utc_day",
+              "token_metric": "prompt_plus_completion",
+              "request_reserved": "1",
+              "input_upper_tokens": "64",
+              "output_upper_tokens": "32",
+              "total_upper_tokens": "96",
+              "token_reserved": "96",
+              "money_reserved_atomic": "96",
+              "currency": "USD",
+              "price_snapshot_id": "b912484e-0c22-5f98-ab60-fb05a679faa6",
+              "price_snapshot_sha256": "5086568d8fbf1da3936ea7591450a161bcac5202bc01845ee71143d01dcc0aba",
+              "price_version": "offline-controlled-price-v1",
+              "rate_policy_revision": "offline-controlled-rate-v1"
+            },
+            "source_id": "2760be51-dd8c-5d8e-83e3-d37bd6b909cc",
+            "source_type": "internal",
+            "status": "succeeded",
+            "submission_state": "submitted",
+            "upstream_model": "offline-controlled-v1",
+            "usage": {
+              "input_cached_tokens": 0,
+              "input_tokens": 6,
+              "missing_reason": null,
+              "output_tokens": 4,
+              "reasoning_tokens": 0,
+              "source": "upstream",
+              "total_tokens": 10
+            }
+          }
+        ],
+        "data_complete": true,
+        "lookup": {
+          "capacity": {
+            "data_source": "release_log",
+            "release_reason": "transport_closed",
+            "state": "released"
+          },
+          "evidence_source": "generation_request",
+          "reason": null,
+          "rejection_code": null,
+          "request_id": "91f8f2d5-a0f0-4e72-9086-fac98581f8d3",
+          "resolution": "recorded"
+        },
+        "next_cursor": null
+      }
+    ]
+  },
+  "after": {
+    "run": {
+      "aggregation_complete": true,
+      "cancel_requested": false,
+      "child_request_ids": [
+        "78b34bcc-3223-4bdf-9b94-203f885ce13b",
+        "91f8f2d5-a0f0-4e72-9086-fac98581f8d3"
+      ],
+      "client_operation_id": "40e1fddb-6b0d-44d4-97b6-aa380ffabdf3",
+      "created_at": "2026-11-27T02:45:08.882116631Z",
+      "deadline_at": "2026-11-27T02:55:08.882745577Z",
+      "fence": "3",
+      "finished_at": "2026-11-27T02:45:36.272469547Z",
+      "id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+      "input_head_message_id": "377cb6ed-3125-47cb-89ec-5db8b8c50baf",
+      "last_event_seq": "38",
+      "limits": {
+        "max_steps": 4,
+        "max_model_calls": 4,
+        "max_tool_calls": 8,
+        "max_duration_ms": 600000,
+        "tool_timeout_ms": 5000,
+        "max_tool_output_bytes": 8192,
+        "max_context_tokens": 32768,
+        "no_progress_limit": 3,
+        "max_tokens": "100000",
+        "max_money_atomic": "1000000000",
+        "currency": "USD"
+      },
+      "mode": "agent",
+      "model_alias": "offline-controlled",
+      "protocol_revision": "tools-v1",
+      "reason": null,
+      "resume_cursor": "ac4028bd903becb30fd43d770e043acac28a94e2feb32395663bb8a4e5079dde",
+      "revision": "20",
+      "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+      "state": "completed",
+      "step_count": 2,
+      "usage_groups": [
+        {
+          "currency": "USD",
+          "price_version": "offline-controlled-price-v1",
+          "known_tokens": "20",
+          "held_tokens": "0",
+          "inflight_tokens": "0",
+          "known_money_atomic": "20",
+          "held_money_atomic": "0",
+          "inflight_money_atomic": "0"
+        }
+      ]
+    },
+    "steps": {
+      "data": [
+        {
+          "child_request_id": "78b34bcc-3223-4bdf-9b94-203f885ce13b",
+          "id": "f38ec404-e0e7-4e48-a41e-4069c940349c",
+          "index": 1,
+          "input_sha256": "8e4e09ca8a41ccf5087b760fc5d74f692b724826911896c09a9a289e2c46f18c",
+          "model_call_id": "7d98a774-9821-52bf-92ff-bde5842ef6cd",
+          "output_sha256": "3af051d42d2bdd3f5469c0b36a078e022c829c5b10c808dbe09f7d0eb520a2c1",
+          "protocol_revision": "tools-v1",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "state": "completed"
+        },
+        {
+          "child_request_id": "91f8f2d5-a0f0-4e72-9086-fac98581f8d3",
+          "id": "449d5fdb-f341-4647-94a9-9d184845482e",
+          "index": 2,
+          "input_sha256": "05ebadc703abe77647d6a12985e1f8db0023baef058014397033117ad1111870",
+          "model_call_id": "30e0723c-23fa-5920-bdc2-c169365f8e4b",
+          "output_sha256": "32d7a987fd842ff7bcc53ae519c752b46f0f02ecef89774ad6e72a3a014abb4e",
+          "protocol_revision": "tools-v1",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "state": "completed"
+        }
+      ],
+      "next_cursor": null
+    },
+    "tools": {
+      "data": [
+        {
+          "args_sha256": "6db557534ae2736cb6f2a5d1343959798a915de7bfbeb064cfe62510675af617",
+          "arguments": {
+            "a": 6,
+            "b": 7,
+            "op": "multiply"
+          },
+          "attempt": 1,
+          "effect": "pure",
+          "id": "2af42c03-9394-47c5-8026-78c075159ec7",
+          "idempotency_key": "bf167f45-a3eb-58a2-8744-49538f40c961",
+          "name": "bounded_arithmetic",
+          "result": {
+            "call_id": "2af42c03-9394-47c5-8026-78c075159ec7",
+            "outcome": "succeeded",
+            "result": "42",
+            "type": "tool_result"
+          },
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "source_call_id": "7f2e45bf-7f65-5ea9-848c-5e5d0b285b42",
+          "state": "succeeded",
+          "step_id": "f38ec404-e0e7-4e48-a41e-4069c940349c",
+          "tool_revision": "1"
+        },
+        {
+          "args_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "arguments": {},
+          "attempt": 1,
+          "effect": "read_only",
+          "id": "1672ac23-e310-4e8c-bad8-33d3cc1d48f7",
+          "idempotency_key": "8902ff1c-a2ca-50b4-bf7b-212776fcf903",
+          "name": "list_visible_models",
+          "result": {
+            "call_id": "1672ac23-e310-4e8c-bad8-33d3cc1d48f7",
+            "outcome": "succeeded",
+            "result": "[\"offline-controlled\"]",
+            "type": "tool_result"
+          },
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "source_call_id": "7dc69f9b-b415-5624-823d-3711e1c14c39",
+          "state": "succeeded",
+          "step_id": "f38ec404-e0e7-4e48-a41e-4069c940349c",
+          "tool_revision": "1"
+        }
+      ],
+      "next_cursor": null
+    },
+    "events": {
+      "data": [
+        {
+          "version": "ar.session.event/1.0",
+          "id": "feb7ca0f-c6a9-426e-880d-808711c1cf4c",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "1",
+          "cursor": "58268d415a6403be9110de75641a73cc2d2c21513856912541efee1c2c150c43",
+          "created_at": "2026-11-27T02:45:08.882789994Z",
+          "type": "run.accepted",
+          "data": {
+            "id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "mode": "agent",
+            "fence": "1",
+            "state": "accepted",
+            "limits": {
+              "currency": "USD",
+              "max_steps": 4,
+              "max_tokens": "100000",
+              "max_tool_calls": 8,
+              "max_duration_ms": 600000,
+              "max_model_calls": 4,
+              "tool_timeout_ms": 5000,
+              "max_money_atomic": "1000000000",
+              "no_progress_limit": 3,
+              "max_context_tokens": 32768,
+              "max_tool_output_bytes": 8192
+            },
+            "reason": null,
+            "revision": "2",
+            "created_at": "2026-11-27T02:45:08.882116631Z",
+            "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+            "step_count": 0,
+            "deadline_at": "2026-11-27T02:55:08.882745577Z",
+            "finished_at": null,
+            "model_alias": "offline-controlled",
+            "usage_groups": [],
+            "resume_cursor": "58268d415a6403be9110de75641a73cc2d2c21513856912541efee1c2c150c43",
+            "last_event_seq": "1",
+            "cancel_requested": false,
+            "child_request_ids": [],
+            "protocol_revision": "tools-v1",
+            "client_operation_id": "40e1fddb-6b0d-44d4-97b6-aa380ffabdf3",
+            "aggregation_complete": false,
+            "input_head_message_id": "377cb6ed-3125-47cb-89ec-5db8b8c50baf"
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "7142ae07-bf21-4adb-9fab-356908503390",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "2",
+          "cursor": "7062b93fa1e6c819212935cb63b3978c59156df7245d11ad50d8fae2434ef624",
+          "created_at": "2026-11-27T02:45:08.882845352Z",
+          "type": "message.created",
+          "data": {
+            "id": "377cb6ed-3125-47cb-89ec-5db8b8c50baf",
+            "role": "user",
+            "parts": [
+              {
+                "text": "393独立批准：计算6乘7并列出可见模型。",
+                "type": "text"
+              }
+            ],
+            "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "status": "committed",
+            "position": "1",
+            "created_at": "2026-11-27T02:45:08.882746098Z",
+            "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+            "supersedes_message_id": null
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "8662c7ca-e859-4b4e-8071-056645ecea8b",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "3",
+          "cursor": "ea0c7f31acef74b404ff6b0d9c7d52d0e924ca6301f71f810ef0b01ba511dc6d",
+          "created_at": "2026-11-27T02:45:08.882940609Z",
+          "type": "message.committed",
+          "data": {
+            "id": "377cb6ed-3125-47cb-89ec-5db8b8c50baf",
+            "role": "user",
+            "parts": [
+              {
+                "text": "393独立批准：计算6乘7并列出可见模型。",
+                "type": "text"
+              }
+            ],
+            "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "status": "committed",
+            "position": "1",
+            "created_at": "2026-11-27T02:45:08.882746098Z",
+            "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+            "supersedes_message_id": null
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "dbeb5607-90eb-4508-a274-8b9581477760",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "4",
+          "cursor": "b20a4accc7bc9e38ee92759e39966f88b7c0f3b3b9b6a51b7494d01bda0bc43a",
+          "created_at": "2026-11-27T02:45:08.910645638Z",
+          "type": "run.started",
+          "data": {
+            "id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "mode": "agent",
+            "fence": "2",
+            "state": "running",
+            "limits": {
+              "currency": "USD",
+              "max_steps": 4,
+              "max_tokens": "100000",
+              "max_tool_calls": 8,
+              "max_duration_ms": 600000,
+              "max_model_calls": 4,
+              "tool_timeout_ms": 5000,
+              "max_money_atomic": "1000000000",
+              "no_progress_limit": 3,
+              "max_context_tokens": 32768,
+              "max_tool_output_bytes": 8192
+            },
+            "reason": null,
+            "revision": "3",
+            "created_at": "2026-11-27T02:45:08.882116631Z",
+            "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+            "step_count": 0,
+            "deadline_at": "2026-11-27T02:55:08.882745577Z",
+            "finished_at": null,
+            "model_alias": "offline-controlled",
+            "usage_groups": [],
+            "resume_cursor": "b20a4accc7bc9e38ee92759e39966f88b7c0f3b3b9b6a51b7494d01bda0bc43a",
+            "last_event_seq": "4",
+            "cancel_requested": false,
+            "child_request_ids": [],
+            "protocol_revision": "tools-v1",
+            "client_operation_id": "40e1fddb-6b0d-44d4-97b6-aa380ffabdf3",
+            "aggregation_complete": false,
+            "input_head_message_id": "377cb6ed-3125-47cb-89ec-5db8b8c50baf"
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "50966e1b-5cbc-447b-8cb5-70ce5b498a73",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "5",
+          "cursor": "cb56af4b2e7c5a41d2f3107231acda80ce829e78ddbdddd7b1cb6c3777fcae23",
+          "created_at": "2026-11-27T02:45:08.93697356Z",
+          "type": "message.created",
+          "data": {
+            "id": "a82227f5-1786-4332-9043-d890e1c67eaf",
+            "role": "assistant",
+            "parts": [
+              {
+                "text": "",
+                "type": "text"
+              }
+            ],
+            "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "status": "partial",
+            "position": "2",
+            "created_at": "2026-11-27T02:45:08.936966877Z",
+            "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+            "supersedes_message_id": null
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "4c7cbfdc-b655-40da-9e4c-69eec592d481",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "6",
+          "cursor": "4e9bd8d4bd4f35ffcd60945445ddb4c11e615a51f292bc0d90575209579bbd8b",
+          "created_at": "2026-11-27T02:45:08.93700418Z",
+          "type": "checkpoint.saved",
+          "data": {
+            "fence": "2",
+            "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "revision": "4",
+            "context_sha256": "fd8722bd2fdcf73975b00c2b4e90d8df41d6c87cd9321b81b4e94dc7479b40ae",
+            "last_event_seq": "6",
+            "message_head_id": "377cb6ed-3125-47cb-89ec-5db8b8c50baf",
+            "policy_revision": "771934d3-e159-46be-b7f8-ba3d4d966769",
+            "registry_sha256": "af85c2b25f3d065b99ce6306b437ca01d17a5d795d4f16380b358620e37a93c2",
+            "last_completed_step": 0,
+            "pending_tool_call_ids": [],
+            "context_strategy_revision": "reject-over-cap-v1",
+            "pending_child_request_ids": [
+              "78b34bcc-3223-4bdf-9b94-203f885ce13b"
+            ]
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "a13314ba-1b9d-4b88-842f-98ee83161808",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "7",
+          "cursor": "767a6845e2f2fc8a115c66e152eb4875466621f55af317ac7ad0af03f3e5b59d",
+          "created_at": "2026-11-27T02:45:08.937027305Z",
+          "type": "step.started",
+          "data": {
+            "id": "f38ec404-e0e7-4e48-a41e-4069c940349c",
+            "index": 1,
+            "state": "model_running",
+            "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "input_sha256": "8e4e09ca8a41ccf5087b760fc5d74f692b724826911896c09a9a289e2c46f18c",
+            "model_call_id": "7d98a774-9821-52bf-92ff-bde5842ef6cd",
+            "output_sha256": null,
+            "child_request_id": "78b34bcc-3223-4bdf-9b94-203f885ce13b",
+            "protocol_revision": "tools-v1"
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "a065caeb-067d-43a0-ab25-1d574ba41e2a",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "8",
+          "cursor": "3901872c60c9d20779267221858c0422d334a540a63b2fd0adf8bc19418933d1",
+          "created_at": "2026-11-27T02:45:14.019487238Z",
+          "type": "run.usage",
+          "data": {
+            "groups": [
+              {
+                "currency": "USD",
+                "held_tokens": "0",
+                "known_tokens": "10",
+                "price_version": "offline-controlled-price-v1",
+                "inflight_tokens": "0",
+                "held_money_atomic": "0",
+                "known_money_atomic": "10",
+                "inflight_money_atomic": "0"
+              }
+            ],
+            "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4"
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "94f1cee3-284c-4977-82d8-27aaac844d23",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "9",
+          "cursor": "18225cb34d81ed0d843fcc2d4151c7639b9ccda9d1bf8824cefdcab7fe8051e4",
+          "created_at": "2026-11-27T02:45:14.027338262Z",
+          "type": "tool.proposed",
+          "data": {
+            "id": "2af42c03-9394-47c5-8026-78c075159ec7",
+            "name": "bounded_arithmetic",
+            "state": "proposed",
+            "effect": "pure",
+            "result": null,
+            "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "attempt": 0,
+            "step_id": "f38ec404-e0e7-4e48-a41e-4069c940349c",
+            "arguments": {
+              "a": 6,
+              "b": 7,
+              "op": "multiply"
+            },
+            "args_sha256": "6db557534ae2736cb6f2a5d1343959798a915de7bfbeb064cfe62510675af617",
+            "tool_revision": "1",
+            "source_call_id": "7f2e45bf-7f65-5ea9-848c-5e5d0b285b42",
+            "idempotency_key": "bf167f45-a3eb-58a2-8744-49538f40c961"
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "71c2018d-7011-4480-954f-0dc7272f3b94",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "10",
+          "cursor": "c887783fc9c280475b4df9ac053bdd73fd2da0bdc3d5303bd0ea353905c2cb6f",
+          "created_at": "2026-11-27T02:45:14.027367439Z",
+          "type": "tool.proposed",
+          "data": {
+            "id": "1672ac23-e310-4e8c-bad8-33d3cc1d48f7",
+            "name": "list_visible_models",
+            "state": "proposed",
+            "effect": "read_only",
+            "result": null,
+            "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "attempt": 0,
+            "step_id": "f38ec404-e0e7-4e48-a41e-4069c940349c",
+            "arguments": {},
+            "args_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+            "tool_revision": "1",
+            "source_call_id": "7dc69f9b-b415-5624-823d-3711e1c14c39",
+            "idempotency_key": "8902ff1c-a2ca-50b4-bf7b-212776fcf903"
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "4f938a3f-1702-4576-ab68-e6ff62284d6b",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "11",
+          "cursor": "998794338e9caf8e5ce75b9a98ae2c9f222124c8ccd9a2dd1066e00c40790c52",
+          "created_at": "2026-11-27T02:45:14.027383881Z",
+          "type": "message.committed",
+          "data": {
+            "id": "a82227f5-1786-4332-9043-d890e1c67eaf",
+            "role": "assistant",
+            "parts": [
+              {
+                "text": "",
+                "type": "text"
+              },
+              {
+                "name": "bounded_arithmetic",
+                "type": "tool_call",
+                "call_id": "2af42c03-9394-47c5-8026-78c075159ec7",
+                "arguments": {
+                  "a": 6,
+                  "b": 7,
+                  "op": "multiply"
+                },
+                "args_sha256": "6db557534ae2736cb6f2a5d1343959798a915de7bfbeb064cfe62510675af617",
+                "tool_revision": "1"
+              },
+              {
+                "name": "list_visible_models",
+                "type": "tool_call",
+                "call_id": "1672ac23-e310-4e8c-bad8-33d3cc1d48f7",
+                "arguments": {},
+                "args_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                "tool_revision": "1"
+              }
+            ],
+            "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "status": "committed",
+            "position": "2",
+            "created_at": "2026-11-27T02:45:08.936966877Z",
+            "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+            "supersedes_message_id": null
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "0cf24a8c-31f2-477d-8409-3123ec368ba9",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "12",
+          "cursor": "a820c6baf0238ad24fdc4372f2159a5fd69b90867dddb06cd7a71635ed3b99fc",
+          "created_at": "2026-11-27T02:45:14.027405533Z",
+          "type": "checkpoint.saved",
+          "data": {
+            "fence": "2",
+            "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "revision": "6",
+            "context_sha256": "fd8722bd2fdcf73975b00c2b4e90d8df41d6c87cd9321b81b4e94dc7479b40ae",
+            "last_event_seq": "12",
+            "message_head_id": "377cb6ed-3125-47cb-89ec-5db8b8c50baf",
+            "policy_revision": "771934d3-e159-46be-b7f8-ba3d4d966769",
+            "registry_sha256": "af85c2b25f3d065b99ce6306b437ca01d17a5d795d4f16380b358620e37a93c2",
+            "last_completed_step": 0,
+            "pending_tool_call_ids": [],
+            "context_strategy_revision": "reject-over-cap-v1",
+            "pending_child_request_ids": []
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "5cdb01be-5833-4fe8-ade9-a9137934677c",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "13",
+          "cursor": "06396fc3f846b0124c2d077d1dd3514792ac846eee4e4a57981ab715e23aa390",
+          "created_at": "2026-11-27T02:45:14.047223175Z",
+          "type": "approval.required",
+          "data": {
+            "id": "3ea77012-d68d-45bb-932d-ae9f64bbc77c",
+            "state": "pending",
+            "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "call_id": "2af42c03-9394-47c5-8026-78c075159ec7",
+            "arguments": {
+              "a": 6,
+              "b": 7,
+              "op": "multiply"
+            },
+            "tool_name": "bounded_arithmetic",
+            "expires_at": "2026-11-27T02:45:44.047197334Z",
+            "args_sha256": "6db557534ae2736cb6f2a5d1343959798a915de7bfbeb064cfe62510675af617",
+            "scope_sha256": "ddb061c7cf27dde19f7d0c739a227752134fd502e559bf8be33891db920b98c9",
+            "tool_revision": "1",
+            "policy_revision": "771934d3-e159-46be-b7f8-ba3d4d966769"
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "02e32df6-b184-48d4-9246-fe6da10b1031",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "14",
+          "cursor": "6b04823a58a919769ff3ac979695e4ef65416aa24c9abbdc7ed654d79e0e6f95",
+          "created_at": "2026-11-27T02:45:15.858202182Z",
+          "type": "approval.resolved",
+          "data": {
+            "id": "3ea77012-d68d-45bb-932d-ae9f64bbc77c",
+            "state": "allowed",
+            "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "call_id": "2af42c03-9394-47c5-8026-78c075159ec7",
+            "arguments": {
+              "a": 6,
+              "b": 7,
+              "op": "multiply"
+            },
+            "tool_name": "bounded_arithmetic",
+            "expires_at": "2026-11-27T02:45:44.047197334Z",
+            "args_sha256": "6db557534ae2736cb6f2a5d1343959798a915de7bfbeb064cfe62510675af617",
+            "scope_sha256": "ddb061c7cf27dde19f7d0c739a227752134fd502e559bf8be33891db920b98c9",
+            "tool_revision": "1",
+            "policy_revision": "771934d3-e159-46be-b7f8-ba3d4d966769"
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "e1c807f2-7a99-4a2c-96e0-7eab91c2a3e7",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "15",
+          "cursor": "9cd4cb19a02199ad630688b61827af0ffc628bb2cfc2b44fc5da131bdd321fd7",
+          "created_at": "2026-11-27T02:45:15.906419634Z",
+          "type": "run.started",
+          "data": {
+            "id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "mode": "agent",
+            "fence": "3",
+            "state": "running",
+            "limits": {
+              "currency": "USD",
+              "max_steps": 4,
+              "max_tokens": "100000",
+              "max_tool_calls": 8,
+              "max_duration_ms": 600000,
+              "max_model_calls": 4,
+              "tool_timeout_ms": 5000,
+              "max_money_atomic": "1000000000",
+              "no_progress_limit": 3,
+              "max_context_tokens": 32768,
+              "max_tool_output_bytes": 8192
+            },
+            "reason": null,
+            "revision": "9",
+            "created_at": "2026-11-27T02:45:08.882116631Z",
+            "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+            "step_count": 1,
+            "deadline_at": "2026-11-27T02:55:08.882745577Z",
+            "finished_at": null,
+            "model_alias": "offline-controlled",
+            "usage_groups": [
+              {
+                "currency": "USD",
+                "held_tokens": "0",
+                "known_tokens": "10",
+                "price_version": "offline-controlled-price-v1",
+                "inflight_tokens": "0",
+                "held_money_atomic": "0",
+                "known_money_atomic": "10",
+                "inflight_money_atomic": "0"
+              }
+            ],
+            "resume_cursor": "9cd4cb19a02199ad630688b61827af0ffc628bb2cfc2b44fc5da131bdd321fd7",
+            "last_event_seq": "15",
+            "cancel_requested": false,
+            "child_request_ids": [
+              "78b34bcc-3223-4bdf-9b94-203f885ce13b"
+            ],
+            "protocol_revision": "tools-v1",
+            "client_operation_id": "40e1fddb-6b0d-44d4-97b6-aa380ffabdf3",
+            "aggregation_complete": true,
+            "input_head_message_id": "377cb6ed-3125-47cb-89ec-5db8b8c50baf"
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "c1085288-8dca-422f-82c0-d23a5f6f99c3",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "16",
+          "cursor": "e329d18387a1c54718cc8bf8522f6680105d067cb1fb2769c579fb928be34dd6",
+          "created_at": "2026-11-27T02:45:15.931779579Z",
+          "type": "tool.started",
+          "data": {
+            "id": "2af42c03-9394-47c5-8026-78c075159ec7",
+            "name": "bounded_arithmetic",
+            "state": "running",
+            "effect": "pure",
+            "result": null,
+            "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "attempt": 1,
+            "step_id": "f38ec404-e0e7-4e48-a41e-4069c940349c",
+            "arguments": {
+              "a": 6,
+              "b": 7,
+              "op": "multiply"
+            },
+            "args_sha256": "6db557534ae2736cb6f2a5d1343959798a915de7bfbeb064cfe62510675af617",
+            "tool_revision": "1",
+            "source_call_id": "7f2e45bf-7f65-5ea9-848c-5e5d0b285b42",
+            "idempotency_key": "bf167f45-a3eb-58a2-8744-49538f40c961"
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "687e835c-008c-4d36-a891-241bd660c7be",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "17",
+          "cursor": "f7ca3c492db31472b98023b73ed29132e6589bbdb2da31b449d96eddfb920b45",
+          "created_at": "2026-11-27T02:45:15.94696477Z",
+          "type": "tool.result",
+          "data": {
+            "type": "tool_result",
+            "result": "42",
+            "call_id": "2af42c03-9394-47c5-8026-78c075159ec7",
+            "outcome": "succeeded"
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "213c5489-fbfe-4f1f-b001-c54701ce8319",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "18",
+          "cursor": "f7cc5e841851ca934db643765b4ae368a3947de1ead6e66723dddd66ea741f83",
+          "created_at": "2026-11-27T02:45:15.946991752Z",
+          "type": "message.created",
+          "data": {
+            "id": "e9f0a9d3-1a60-4f91-adf2-3c74ac316dc5",
+            "role": "tool",
+            "parts": [
+              {
+                "type": "tool_result",
+                "result": "42",
+                "call_id": "2af42c03-9394-47c5-8026-78c075159ec7",
+                "outcome": "succeeded"
+              }
+            ],
+            "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "status": "committed",
+            "position": "3",
+            "created_at": "2026-11-27T02:45:15.946950742Z",
+            "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+            "supersedes_message_id": null
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "0634fd3c-b7d0-4dad-ac4f-89e06171157d",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "19",
+          "cursor": "4afc777f5ff2bed7c3cd4c2e329e1e430163835cac3d43dafa8207d7c25d37ba",
+          "created_at": "2026-11-27T02:45:15.947020659Z",
+          "type": "message.committed",
+          "data": {
+            "id": "e9f0a9d3-1a60-4f91-adf2-3c74ac316dc5",
+            "role": "tool",
+            "parts": [
+              {
+                "type": "tool_result",
+                "result": "42",
+                "call_id": "2af42c03-9394-47c5-8026-78c075159ec7",
+                "outcome": "succeeded"
+              }
+            ],
+            "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "status": "committed",
+            "position": "3",
+            "created_at": "2026-11-27T02:45:15.946950742Z",
+            "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+            "supersedes_message_id": null
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "5a878a94-d14f-44d7-b7c3-c1cadc7b9603",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "20",
+          "cursor": "eb7dc380b88e0ec60c79e13e32209674e517d728ac9a8bb9445f37552cd12362",
+          "created_at": "2026-11-27T02:45:15.947042412Z",
+          "type": "checkpoint.saved",
+          "data": {
+            "fence": "3",
+            "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "revision": "11",
+            "context_sha256": "fd8722bd2fdcf73975b00c2b4e90d8df41d6c87cd9321b81b4e94dc7479b40ae",
+            "last_event_seq": "20",
+            "message_head_id": "377cb6ed-3125-47cb-89ec-5db8b8c50baf",
+            "policy_revision": "771934d3-e159-46be-b7f8-ba3d4d966769",
+            "registry_sha256": "af85c2b25f3d065b99ce6306b437ca01d17a5d795d4f16380b358620e37a93c2",
+            "last_completed_step": 0,
+            "pending_tool_call_ids": [],
+            "context_strategy_revision": "reject-over-cap-v1",
+            "pending_child_request_ids": []
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "18e8cff8-703c-424b-991d-d2a5408a69c9",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "21",
+          "cursor": "1bd4e220a1ef99ad8ca83b9d45658bfcad38a42daf978c7b40e13937d25924b6",
+          "created_at": "2026-11-27T02:45:15.977780501Z",
+          "type": "tool.started",
+          "data": {
+            "id": "1672ac23-e310-4e8c-bad8-33d3cc1d48f7",
+            "name": "list_visible_models",
+            "state": "running",
+            "effect": "read_only",
+            "result": null,
+            "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "attempt": 1,
+            "step_id": "f38ec404-e0e7-4e48-a41e-4069c940349c",
+            "arguments": {},
+            "args_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+            "tool_revision": "1",
+            "source_call_id": "7dc69f9b-b415-5624-823d-3711e1c14c39",
+            "idempotency_key": "8902ff1c-a2ca-50b4-bf7b-212776fcf903"
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "cc20c0d1-f1bf-4685-972e-047b9c5b5d36",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "22",
+          "cursor": "7ce474f44a3fa67f700ac29f8776c69e2110afce6fb9390a37efdeb0d5cc5e6e",
+          "created_at": "2026-11-27T02:45:15.991229427Z",
+          "type": "tool.result",
+          "data": {
+            "type": "tool_result",
+            "result": "[\"offline-controlled\"]",
+            "call_id": "1672ac23-e310-4e8c-bad8-33d3cc1d48f7",
+            "outcome": "succeeded"
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "67de306b-f104-4f14-9915-705d7175d8cc",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "23",
+          "cursor": "06ccb9d2840ced5c3cc4d49a961cf610faab14bcf6be5358e34ee7b50dd1e8ed",
+          "created_at": "2026-11-27T02:45:15.991248214Z",
+          "type": "message.created",
+          "data": {
+            "id": "32b691a4-e1b0-40c4-bad5-fb28d62ad54b",
+            "role": "tool",
+            "parts": [
+              {
+                "type": "tool_result",
+                "result": "[\"offline-controlled\"]",
+                "call_id": "1672ac23-e310-4e8c-bad8-33d3cc1d48f7",
+                "outcome": "succeeded"
+              }
+            ],
+            "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "status": "committed",
+            "position": "4",
+            "created_at": "2026-11-27T02:45:15.991220139Z",
+            "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+            "supersedes_message_id": null
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "b90e71cf-551e-46b6-88af-03fb71571af6",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "24",
+          "cursor": "1f16f8e0f0f90adec527f64c14d87e0c12e1d4875a6b964abfc9469bb05f1455",
+          "created_at": "2026-11-27T02:45:15.991264616Z",
+          "type": "message.committed",
+          "data": {
+            "id": "32b691a4-e1b0-40c4-bad5-fb28d62ad54b",
+            "role": "tool",
+            "parts": [
+              {
+                "type": "tool_result",
+                "result": "[\"offline-controlled\"]",
+                "call_id": "1672ac23-e310-4e8c-bad8-33d3cc1d48f7",
+                "outcome": "succeeded"
+              }
+            ],
+            "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "status": "committed",
+            "position": "4",
+            "created_at": "2026-11-27T02:45:15.991220139Z",
+            "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+            "supersedes_message_id": null
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "26c7a5c3-acf1-4519-bc71-b24d4aaed90c",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "25",
+          "cursor": "537d8958882fca3d15c6f064c678bf5a0c61d31040592a8119c5daa217d3f9a0",
+          "created_at": "2026-11-27T02:45:15.99127683Z",
+          "type": "checkpoint.saved",
+          "data": {
+            "fence": "3",
+            "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "revision": "13",
+            "context_sha256": "fd8722bd2fdcf73975b00c2b4e90d8df41d6c87cd9321b81b4e94dc7479b40ae",
+            "last_event_seq": "25",
+            "message_head_id": "377cb6ed-3125-47cb-89ec-5db8b8c50baf",
+            "policy_revision": "771934d3-e159-46be-b7f8-ba3d4d966769",
+            "registry_sha256": "af85c2b25f3d065b99ce6306b437ca01d17a5d795d4f16380b358620e37a93c2",
+            "last_completed_step": 0,
+            "pending_tool_call_ids": [],
+            "context_strategy_revision": "reject-over-cap-v1",
+            "pending_child_request_ids": []
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "73d18535-4bdc-4352-95ab-dd7a7609b5b1",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "26",
+          "cursor": "8d25ecf9821228400e850539fa475fe2241722743ed74ea58bf467a0c1edc756",
+          "created_at": "2026-11-27T02:45:16.01760285Z",
+          "type": "step.finished",
+          "data": {
+            "id": "f38ec404-e0e7-4e48-a41e-4069c940349c",
+            "index": 1,
+            "state": "completed",
+            "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "input_sha256": "8e4e09ca8a41ccf5087b760fc5d74f692b724826911896c09a9a289e2c46f18c",
+            "model_call_id": "7d98a774-9821-52bf-92ff-bde5842ef6cd",
+            "output_sha256": "3af051d42d2bdd3f5469c0b36a078e022c829c5b10c808dbe09f7d0eb520a2c1",
+            "child_request_id": "78b34bcc-3223-4bdf-9b94-203f885ce13b",
+            "protocol_revision": "tools-v1"
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "1c808796-f11a-4ebb-a2b6-42568f60ba11",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "27",
+          "cursor": "a349dbeab6ad6d2ae6ff5ea5f161e818a735bc99c32961b31425194c7e293f9c",
+          "created_at": "2026-11-27T02:45:16.01764849Z",
+          "type": "checkpoint.saved",
+          "data": {
+            "fence": "3",
+            "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "revision": "14",
+            "context_sha256": "fd8722bd2fdcf73975b00c2b4e90d8df41d6c87cd9321b81b4e94dc7479b40ae",
+            "last_event_seq": "27",
+            "message_head_id": "377cb6ed-3125-47cb-89ec-5db8b8c50baf",
+            "policy_revision": "771934d3-e159-46be-b7f8-ba3d4d966769",
+            "registry_sha256": "af85c2b25f3d065b99ce6306b437ca01d17a5d795d4f16380b358620e37a93c2",
+            "last_completed_step": 1,
+            "pending_tool_call_ids": [],
+            "context_strategy_revision": "reject-over-cap-v1",
+            "pending_child_request_ids": []
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "0bbe23e3-7358-4305-b2ba-e8c8e1d83534",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "28",
+          "cursor": "bc725020ee16f7c53772fa1d315e3771ccc5f1c80c01acae4698a6e8a5ba63d5",
+          "created_at": "2026-11-27T02:45:16.044720026Z",
+          "type": "message.created",
+          "data": {
+            "id": "9e8f2208-fa1f-44f6-a438-c0469580f9e6",
+            "role": "assistant",
+            "parts": [
+              {
+                "text": "",
+                "type": "text"
+              }
+            ],
+            "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "status": "partial",
+            "position": "5",
+            "created_at": "2026-11-27T02:45:16.044712782Z",
+            "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+            "supersedes_message_id": null
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "4e8cdc08-d167-4701-abbd-692796e00888",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "29",
+          "cursor": "0fe48feb5dd751f9f839e47cdb3d2b08ab69c04e402b59fd758f6d2ac4baf2c8",
+          "created_at": "2026-11-27T02:45:16.044752469Z",
+          "type": "checkpoint.saved",
+          "data": {
+            "fence": "3",
+            "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "revision": "15",
+            "context_sha256": "9c10ad89e7e4849c18eef575e10558c79597fe2a6fb5f0ae4bc65a7f79b7a0e6",
+            "last_event_seq": "29",
+            "message_head_id": "377cb6ed-3125-47cb-89ec-5db8b8c50baf",
+            "policy_revision": "771934d3-e159-46be-b7f8-ba3d4d966769",
+            "registry_sha256": "af85c2b25f3d065b99ce6306b437ca01d17a5d795d4f16380b358620e37a93c2",
+            "last_completed_step": 1,
+            "pending_tool_call_ids": [],
+            "context_strategy_revision": "reject-over-cap-v1",
+            "pending_child_request_ids": [
+              "91f8f2d5-a0f0-4e72-9086-fac98581f8d3"
+            ]
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "2f5ee22d-8614-48fc-b5c9-17f6ba5e6bb1",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "30",
+          "cursor": "94f7bb27a4b8e7ad0e6acdefc699c26b3353750658551a6198c4e34e787951e1",
+          "created_at": "2026-11-27T02:45:16.044781817Z",
+          "type": "step.started",
+          "data": {
+            "id": "449d5fdb-f341-4647-94a9-9d184845482e",
+            "index": 2,
+            "state": "model_running",
+            "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "input_sha256": "05ebadc703abe77647d6a12985e1f8db0023baef058014397033117ad1111870",
+            "model_call_id": "30e0723c-23fa-5920-bdc2-c169365f8e4b",
+            "output_sha256": null,
+            "child_request_id": "91f8f2d5-a0f0-4e72-9086-fac98581f8d3",
+            "protocol_revision": "tools-v1"
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "c0e150a2-1b39-4d0d-9abf-04e30d56ace2",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "31",
+          "cursor": "847ddff5c6e61599e3d9409a8ff2e1c687980d66f54c9d3ea03eabb66e2a783c",
+          "created_at": "2026-11-27T02:45:21.133225272Z",
+          "type": "message.delta",
+          "data": {
+            "text": "【离线受控模型；未调用真实供应商】",
+            "offset": "0",
+            "message_id": "9e8f2208-fa1f-44f6-a438-c0469580f9e6"
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "fca80a00-b88a-4fa5-b7a5-7a1dc7025828",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "32",
+          "cursor": "55ee5bcffd8ae6431a49da17aa9ef080be48fbb5d5bd5732d11b7cd6410c975d",
+          "created_at": "2026-11-27T02:45:26.155338183Z",
+          "type": "message.delta",
+          "data": {
+            "text": "6 × 7 = 42。",
+            "offset": "51",
+            "message_id": "9e8f2208-fa1f-44f6-a438-c0469580f9e6"
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "c656c8da-7f04-46a0-a8e2-8c94d5a24d9a",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "33",
+          "cursor": "bc3ddd585be624bd0ab63b98c35d6835d2ea01b32905a5c2dec0d977a283a53a",
+          "created_at": "2026-11-27T02:45:31.179146983Z",
+          "type": "message.delta",
+          "data": {
+            "text": "目录工具仅返回当前授权的离线模型。",
+            "offset": "65",
+            "message_id": "9e8f2208-fa1f-44f6-a438-c0469580f9e6"
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "cc55c3f2-98ce-43c5-abc1-efde46942f96",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "34",
+          "cursor": "e811a226c545081d4834b4b9ed86d18dbb722fe9c6d786412cbd59e44b0b36f7",
+          "created_at": "2026-11-27T02:45:36.245013822Z",
+          "type": "run.usage",
+          "data": {
+            "groups": [
+              {
+                "currency": "USD",
+                "held_tokens": "0",
+                "known_tokens": "20",
+                "price_version": "offline-controlled-price-v1",
+                "inflight_tokens": "0",
+                "held_money_atomic": "0",
+                "known_money_atomic": "20",
+                "inflight_money_atomic": "0"
+              }
+            ],
+            "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4"
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "b5d426db-9015-4299-b325-ebdeea8cb1ce",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "35",
+          "cursor": "c42665f31a51ba3c92d155863f5c5f1685b84e0f6573c7b847de0fca2851d0dd",
+          "created_at": "2026-11-27T02:45:36.272398608Z",
+          "type": "message.committed",
+          "data": {
+            "id": "9e8f2208-fa1f-44f6-a438-c0469580f9e6",
+            "role": "assistant",
+            "parts": [
+              {
+                "text": "【离线受控模型；未调用真实供应商】6 × 7 = 42。目录工具仅返回当前授权的离线模型。",
+                "type": "text"
+              }
+            ],
+            "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "status": "committed",
+            "position": "5",
+            "created_at": "2026-11-27T02:45:16.044712782Z",
+            "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+            "supersedes_message_id": null
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "84684908-d38b-43a6-a2ad-304e0b42b147",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "36",
+          "cursor": "3dda93dc741ebfbd441eeef21ba9ad19315f66c9589751ed17e107d6fcae6ec7",
+          "created_at": "2026-11-27T02:45:36.272444498Z",
+          "type": "step.finished",
+          "data": {
+            "id": "449d5fdb-f341-4647-94a9-9d184845482e",
+            "index": 2,
+            "state": "completed",
+            "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "input_sha256": "05ebadc703abe77647d6a12985e1f8db0023baef058014397033117ad1111870",
+            "model_call_id": "30e0723c-23fa-5920-bdc2-c169365f8e4b",
+            "output_sha256": "32d7a987fd842ff7bcc53ae519c752b46f0f02ecef89774ad6e72a3a014abb4e",
+            "child_request_id": "91f8f2d5-a0f0-4e72-9086-fac98581f8d3",
+            "protocol_revision": "tools-v1"
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "3ae5b32f-edd4-45e7-9c4f-062a23473324",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "37",
+          "cursor": "1b11fab25c9bda95781fa78e971eee416e0e5d9d2174831f2f47727201204291",
+          "created_at": "2026-11-27T02:45:36.272477002Z",
+          "type": "run.completed",
+          "data": {
+            "id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "mode": "agent",
+            "fence": "3",
+            "state": "completed",
+            "limits": {
+              "currency": "USD",
+              "max_steps": 4,
+              "max_tokens": "100000",
+              "max_tool_calls": 8,
+              "max_duration_ms": 600000,
+              "max_model_calls": 4,
+              "tool_timeout_ms": 5000,
+              "max_money_atomic": "1000000000",
+              "no_progress_limit": 3,
+              "max_context_tokens": 32768,
+              "max_tool_output_bytes": 8192
+            },
+            "reason": null,
+            "revision": "20",
+            "created_at": "2026-11-27T02:45:08.882116631Z",
+            "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+            "step_count": 2,
+            "deadline_at": "2026-11-27T02:55:08.882745577Z",
+            "finished_at": "2026-11-27T02:45:36.272469547Z",
+            "model_alias": "offline-controlled",
+            "usage_groups": [
+              {
+                "currency": "USD",
+                "held_tokens": "0",
+                "known_tokens": "20",
+                "price_version": "offline-controlled-price-v1",
+                "inflight_tokens": "0",
+                "held_money_atomic": "0",
+                "known_money_atomic": "20",
+                "inflight_money_atomic": "0"
+              }
+            ],
+            "resume_cursor": "1b11fab25c9bda95781fa78e971eee416e0e5d9d2174831f2f47727201204291",
+            "last_event_seq": "37",
+            "cancel_requested": false,
+            "child_request_ids": [
+              "78b34bcc-3223-4bdf-9b94-203f885ce13b",
+              "91f8f2d5-a0f0-4e72-9086-fac98581f8d3"
+            ],
+            "protocol_revision": "tools-v1",
+            "client_operation_id": "40e1fddb-6b0d-44d4-97b6-aa380ffabdf3",
+            "aggregation_complete": true,
+            "input_head_message_id": "377cb6ed-3125-47cb-89ec-5db8b8c50baf"
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "f5194b8f-b7e9-4abc-8503-42d15ae8be77",
+          "session_id": "0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+          "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+          "seq": "38",
+          "cursor": "ac4028bd903becb30fd43d770e043acac28a94e2feb32395663bb8a4e5079dde",
+          "created_at": "2026-11-27T02:45:36.272550686Z",
+          "type": "checkpoint.saved",
+          "data": {
+            "fence": "3",
+            "run_id": "4478c63b-b7e0-4fb9-9da0-afac681bf3e4",
+            "revision": "20",
+            "context_sha256": "9c10ad89e7e4849c18eef575e10558c79597fe2a6fb5f0ae4bc65a7f79b7a0e6",
+            "last_event_seq": "38",
+            "message_head_id": "377cb6ed-3125-47cb-89ec-5db8b8c50baf",
+            "policy_revision": "771934d3-e159-46be-b7f8-ba3d4d966769",
+            "registry_sha256": "af85c2b25f3d065b99ce6306b437ca01d17a5d795d4f16380b358620e37a93c2",
+            "last_completed_step": 2,
+            "pending_tool_call_ids": [],
+            "context_strategy_revision": "reject-over-cap-v1",
+            "pending_child_request_ids": []
+          }
+        }
+      ],
+      "next_cursor": null
+    },
+    "usage": [
+      {
+        "data": [
+          {
+            "admitted_at": "2026-11-27T02:45:08.967929Z",
+            "budget_accounting": {
+              "cost_actual_atomic": "10",
+              "cost_state": "known",
+              "currency": "USD",
+              "missing_reason": null,
+              "money": {
+                "known_used": "10",
+                "overrun": "0",
+                "released": "86",
+                "reserved": "96",
+                "state": "known",
+                "unknown_held": "0"
+              },
+              "policy_revision": "003005c7-2d72-4913-a7f6-f3993f7e0c1d",
+              "price_snapshot_id": "b912484e-0c22-5f98-ab60-fb05a679faa6",
+              "price_version": "offline-controlled-price-v1",
+              "request": {
+                "known_used": "1",
+                "overrun": "0",
+                "released": "0",
+                "reserved": "1",
+                "state": "known",
+                "unknown_held": "0"
+              },
+              "token": {
+                "known_used": "10",
+                "overrun": "0",
+                "released": "86",
+                "reserved": "96",
+                "state": "known",
+                "unknown_held": "0"
+              },
+              "token_actual": "10",
+              "token_basis": "upstream_total",
+              "window_end": "2026-11-28T00:00:00Z",
+              "window_kind": "utc_day",
+              "window_start": "2026-11-27T00:00:00Z"
+            },
+            "config_revision": "offline-controlled-v1",
+            "duration_ms": 5044,
+            "error_code": null,
+            "finished_at": "2026-11-27T02:45:13.999533Z",
+            "first_chunk_ms": null,
+            "invocation_binding": {
+              "activation_epoch": 1,
+              "admission_purpose": "serving",
+              "model_release_generation": 1,
+              "model_release_name": "offline-controlled",
+              "model_release_namespace": "maas-offline",
+              "model_release_uid": "ac5aa1c5-1e08-503c-8eb4-678902cbf8a3",
+              "price_snapshot_id": "b912484e-0c22-5f98-ab60-fb05a679faa6",
+              "price_version": "offline-controlled-price-v1",
+              "publication_id": "194e5552-a401-4964-951a-dd3666477b47",
+              "release_revision": "06410b139bb5376431d85007d3821fb7da9a8077e8e03979108412c857da4e1a",
+              "route_binding_sha256": "06410b139bb5376431d85007d3821fb7da9a8077e8e03979108412c857da4e1a"
+            },
+            "key_id": "68f8b691-6805-4991-9d40-87af5c566e37",
+            "metering_state": "complete",
+            "model_alias": "offline-controlled",
+            "quota_consumed": 1,
+            "quota_date": "2026-11-27",
+            "rate_witness": {
+              "permit_id": "cd7228e3-d3ee-4f9b-90df-39b0ffe8ef04",
+              "policy_id": "offline-controlled-rate-v1",
+              "policy_revision": "offline-controlled-rate-v1",
+              "rate_epoch": "1",
+              "windows": [
+                {
+                  "limit": "1000",
+                  "scope_id": "global",
+                  "window_end": "2026-11-27T03:00:00Z",
+                  "window_start": "2026-11-27T02:00:00Z"
+                },
+                {
+                  "limit": "1000",
+                  "scope_id": "key/68f8b691-6805-4991-9d40-87af5c566e37",
+                  "window_end": "2026-11-27T03:00:00Z",
+                  "window_start": "2026-11-27T02:00:00Z"
+                }
+              ]
+            },
+            "received_at": "2026-11-27T02:45:08.955Z",
+            "request_id": "78b34bcc-3223-4bdf-9b94-203f885ce13b",
+            "reservation_plan": {
+              "schema_version": "1.0",
+              "model_alias": "offline-controlled",
+              "source_id": "2760be51-dd8c-5d8e-83e3-d37bd6b909cc",
+              "config_revision": "offline-controlled-v1",
+              "capability_revision": "offline-controlled-tools-v1",
+              "budget_policy_revision": "003005c7-2d72-4913-a7f6-f3993f7e0c1d",
+              "window_kind": "utc_day",
+              "token_metric": "prompt_plus_completion",
+              "request_reserved": "1",
+              "input_upper_tokens": "64",
+              "output_upper_tokens": "32",
+              "total_upper_tokens": "96",
+              "token_reserved": "96",
+              "money_reserved_atomic": "96",
+              "currency": "USD",
+              "price_snapshot_id": "b912484e-0c22-5f98-ab60-fb05a679faa6",
+              "price_snapshot_sha256": "5086568d8fbf1da3936ea7591450a161bcac5202bc01845ee71143d01dcc0aba",
+              "price_version": "offline-controlled-price-v1",
+              "rate_policy_revision": "offline-controlled-rate-v1"
+            },
+            "source_id": "2760be51-dd8c-5d8e-83e3-d37bd6b909cc",
+            "source_type": "internal",
+            "status": "succeeded",
+            "submission_state": "submitted",
+            "upstream_model": "offline-controlled-v1",
+            "usage": {
+              "input_cached_tokens": 0,
+              "input_tokens": 6,
+              "missing_reason": null,
+              "output_tokens": 4,
+              "reasoning_tokens": 0,
+              "source": "upstream",
+              "total_tokens": 10
+            }
+          }
+        ],
+        "data_complete": true,
+        "lookup": {
+          "capacity": {
+            "data_source": "release_log",
+            "release_reason": "transport_closed",
+            "state": "released"
+          },
+          "evidence_source": "generation_request",
+          "reason": null,
+          "rejection_code": null,
+          "request_id": "78b34bcc-3223-4bdf-9b94-203f885ce13b",
+          "resolution": "recorded"
+        },
+        "next_cursor": null
+      },
+      {
+        "data": [
+          {
+            "admitted_at": "2026-11-27T02:45:16.089714Z",
+            "budget_accounting": {
+              "cost_actual_atomic": "10",
+              "cost_state": "known",
+              "currency": "USD",
+              "missing_reason": null,
+              "money": {
+                "known_used": "10",
+                "overrun": "0",
+                "released": "86",
+                "reserved": "96",
+                "state": "known",
+                "unknown_held": "0"
+              },
+              "policy_revision": "003005c7-2d72-4913-a7f6-f3993f7e0c1d",
+              "price_snapshot_id": "b912484e-0c22-5f98-ab60-fb05a679faa6",
+              "price_version": "offline-controlled-price-v1",
+              "request": {
+                "known_used": "1",
+                "overrun": "0",
+                "released": "0",
+                "reserved": "1",
+                "state": "known",
+                "unknown_held": "0"
+              },
+              "token": {
+                "known_used": "10",
+                "overrun": "0",
+                "released": "86",
+                "reserved": "96",
+                "state": "known",
+                "unknown_held": "0"
+              },
+              "token_actual": "10",
+              "token_basis": "upstream_total",
+              "window_end": "2026-11-28T00:00:00Z",
+              "window_kind": "utc_day",
+              "window_start": "2026-11-27T00:00:00Z"
+            },
+            "config_revision": "offline-controlled-v1",
+            "duration_ms": 20136,
+            "error_code": null,
+            "finished_at": "2026-11-27T02:45:36.211195Z",
+            "first_chunk_ms": null,
+            "invocation_binding": {
+              "activation_epoch": 1,
+              "admission_purpose": "serving",
+              "model_release_generation": 1,
+              "model_release_name": "offline-controlled",
+              "model_release_namespace": "maas-offline",
+              "model_release_uid": "ac5aa1c5-1e08-503c-8eb4-678902cbf8a3",
+              "price_snapshot_id": "b912484e-0c22-5f98-ab60-fb05a679faa6",
+              "price_version": "offline-controlled-price-v1",
+              "publication_id": "194e5552-a401-4964-951a-dd3666477b47",
+              "release_revision": "06410b139bb5376431d85007d3821fb7da9a8077e8e03979108412c857da4e1a",
+              "route_binding_sha256": "06410b139bb5376431d85007d3821fb7da9a8077e8e03979108412c857da4e1a"
+            },
+            "key_id": "68f8b691-6805-4991-9d40-87af5c566e37",
+            "metering_state": "complete",
+            "model_alias": "offline-controlled",
+            "quota_consumed": 1,
+            "quota_date": "2026-11-27",
+            "rate_witness": {
+              "permit_id": "9a45fe7a-1a39-44bf-b4dc-08485807bfc1",
+              "policy_id": "offline-controlled-rate-v1",
+              "policy_revision": "offline-controlled-rate-v1",
+              "rate_epoch": "1",
+              "windows": [
+                {
+                  "limit": "1000",
+                  "scope_id": "global",
+                  "window_end": "2026-11-27T03:00:00Z",
+                  "window_start": "2026-11-27T02:00:00Z"
+                },
+                {
+                  "limit": "1000",
+                  "scope_id": "key/68f8b691-6805-4991-9d40-87af5c566e37",
+                  "window_end": "2026-11-27T03:00:00Z",
+                  "window_start": "2026-11-27T02:00:00Z"
+                }
+              ]
+            },
+            "received_at": "2026-11-27T02:45:16.075Z",
+            "request_id": "91f8f2d5-a0f0-4e72-9086-fac98581f8d3",
+            "reservation_plan": {
+              "schema_version": "1.0",
+              "model_alias": "offline-controlled",
+              "source_id": "2760be51-dd8c-5d8e-83e3-d37bd6b909cc",
+              "config_revision": "offline-controlled-v1",
+              "capability_revision": "offline-controlled-tools-v1",
+              "budget_policy_revision": "003005c7-2d72-4913-a7f6-f3993f7e0c1d",
+              "window_kind": "utc_day",
+              "token_metric": "prompt_plus_completion",
+              "request_reserved": "1",
+              "input_upper_tokens": "64",
+              "output_upper_tokens": "32",
+              "total_upper_tokens": "96",
+              "token_reserved": "96",
+              "money_reserved_atomic": "96",
+              "currency": "USD",
+              "price_snapshot_id": "b912484e-0c22-5f98-ab60-fb05a679faa6",
+              "price_snapshot_sha256": "5086568d8fbf1da3936ea7591450a161bcac5202bc01845ee71143d01dcc0aba",
+              "price_version": "offline-controlled-price-v1",
+              "rate_policy_revision": "offline-controlled-rate-v1"
+            },
+            "source_id": "2760be51-dd8c-5d8e-83e3-d37bd6b909cc",
+            "source_type": "internal",
+            "status": "succeeded",
+            "submission_state": "submitted",
+            "upstream_model": "offline-controlled-v1",
+            "usage": {
+              "input_cached_tokens": 0,
+              "input_tokens": 6,
+              "missing_reason": null,
+              "output_tokens": 4,
+              "reasoning_tokens": 0,
+              "source": "upstream",
+              "total_tokens": 10
+            }
+          }
+        ],
+        "data_complete": true,
+        "lookup": {
+          "capacity": {
+            "data_source": "release_log",
+            "release_reason": "transport_closed",
+            "state": "released"
+          },
+          "evidence_source": "generation_request",
+          "reason": null,
+          "rejection_code": null,
+          "request_id": "91f8f2d5-a0f0-4e72-9086-fac98581f8d3",
+          "resolution": "recorded"
+        },
+        "next_cursor": null
+      }
+    ]
+  }
+}

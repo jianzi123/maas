@@ -1,0 +1,99 @@
+{
+  "name": "maas7-ui393-76e89ce8",
+  "services": {
+    "mysql": {
+      "image": "mysql:8.0.44",
+      "environment": {
+        "MYSQL_ALLOW_EMPTY_PASSWORD": "yes",
+        "MYSQL_DATABASE": "maas"
+      },
+      "command": [
+        "--skip-networking",
+        "--mysqlx=0",
+        "--socket=/tmp/maas11-mysql.maas7-ui393-76e89ce8/mysql.sock",
+        "--innodb-buffer-pool-size=64M",
+        "--performance-schema=OFF"
+      ],
+      "mem_limit": "384m",
+      "volumes": [
+        "data:/var/lib/mysql",
+        "socket:/tmp/maas11-mysql.maas7-ui393-76e89ce8"
+      ],
+      "healthcheck": {
+        "test": [
+          "CMD",
+          "mysqladmin",
+          "--socket=/tmp/maas11-mysql.maas7-ui393-76e89ce8/mysql.sock",
+          "-uroot",
+          "ping",
+          "--silent"
+        ],
+        "interval": "2s",
+        "timeout": "2s",
+        "retries": 60
+      }
+    },
+    "installer": {
+      "image": "mysql:8.0.44",
+      "profiles": [
+        "install"
+      ],
+      "entrypoint": [
+        "/bin/bash",
+        "/install.sh"
+      ],
+      "environment": {
+        "MAAS_INSTALL_DATABASE": "maas"
+      },
+      "volumes": [
+        "C:\\Users\\a9786\\AppData\\Local\\Temp\\multica-codex-warm-2751329217\\tmp\\s393:/work:ro",
+        "C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-7-6bf78f4f3528\\workdir\\inputs\\combined-393\\bin:/qa:ro",
+        "socket:/tmp/maas11-mysql.maas7-ui393-76e89ce8",
+        "C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-7-6bf78f4f3528\\workdir\\inputs\\combined-393\\config:/etc/maas:ro",
+        "private_migration:/run/secrets:ro",
+        "C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-7-6bf78f4f3528\\workdir\\inputs\\combined-393\\bin\\maas-service:/maas:ro",
+        "C:\\Users\\a9786\\AppData\\Local\\Temp\\multica-codex-warm-2751329217\\tmp\\s393\\deploy\\release\\migrate.sh:/install.sh:ro",
+        "C:\\Users\\a9786\\AppData\\Local\\Temp\\multica-codex-warm-2751329217\\tmp\\s393\\config\\mysql\\release-permissions.sql:/app/sql/release-permissions.sql:ro",
+        "C:\\Users\\a9786\\AppData\\Local\\Temp\\multica-codex-warm-2751329217\\tmp\\s393\\config\\mysql\\kernel-permissions.sql:/app/sql/kernel-permissions.sql:ro",
+        "C:\\Users\\a9786\\AppData\\Local\\Temp\\multica-codex-warm-2751329217\\tmp\\s393\\config\\mysql\\controlapi-projections.sql:/app/sql/controlapi-projections.sql:ro",
+        "C:\\Users\\a9786\\AppData\\Local\\Temp\\multica-codex-warm-2751329217\\tmp\\s393\\deploy\\agent\\session-role.sql:/app/sql/agent-runtime-role.sql:ro"
+      ]
+    },
+    "app": {
+      "image": "alpine:latest",
+      "profiles": [
+        "site"
+      ],
+      "entrypoint": [
+        "/qa/maas-service"
+      ],
+      "command": [
+        "serve",
+        "--config",
+        "/etc/maas/runtime.json"
+      ],
+      "environment": {
+        "GOMAXPROCS": "1",
+        "GOMEMLIMIT": "128MiB"
+      },
+      "mem_limit": "192m",
+      "ports": [
+        "127.0.0.1:57359:8080"
+      ],
+      "volumes": [
+        "C:\\Users\\a9786\\AppData\\Local\\Temp\\multica-codex-warm-2751329217\\tmp\\s393:/work:ro",
+        "C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-7-6bf78f4f3528\\workdir\\inputs\\combined-393\\bin:/qa:ro",
+        "socket:/tmp/maas11-mysql.maas7-ui393-76e89ce8",
+        "C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-7-6bf78f4f3528\\workdir\\inputs\\combined-393\\config:/etc/maas:ro",
+        "private_runtime:/run/secrets:ro",
+        "C:\\Users\\a9786\\AppData\\Local\\Temp\\multica-codex-warm-2751329217\\tmp\\s393\\console\\dist:/frontend:ro"
+      ]
+    }
+  },
+  "volumes": {
+    "data": {},
+    "socket": {},
+    "private_runtime": {},
+    "private_migration": {}
+  }
+}

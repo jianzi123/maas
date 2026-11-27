@@ -1,0 +1,1064 @@
+{
+  "before": {
+    "run": {
+      "aggregation_complete": true,
+      "cancel_requested": true,
+      "child_request_ids": [
+        "7bdcf271-1344-4880-8d48-326d82eaf796"
+      ],
+      "client_operation_id": "6f5e756b-f784-4de0-9c9d-593025e59f9b",
+      "created_at": "2026-11-27T02:42:23.388851963Z",
+      "deadline_at": "2026-11-27T02:52:23.389507756Z",
+      "fence": "2",
+      "finished_at": "2026-11-27T02:42:24.972673117Z",
+      "id": "29df8249-b6b1-4d9a-9c1f-0d505a00dcad",
+      "input_head_message_id": "9aa89ca9-81fe-4298-8afd-8922423cb231",
+      "last_event_seq": "10",
+      "limits": {
+        "max_steps": 4,
+        "max_model_calls": 1,
+        "max_tool_calls": 8,
+        "max_duration_ms": 600000,
+        "tool_timeout_ms": 5000,
+        "max_tool_output_bytes": 8192,
+        "max_context_tokens": 32768,
+        "no_progress_limit": 3,
+        "max_tokens": "100000",
+        "max_money_atomic": "1000000000",
+        "currency": "USD"
+      },
+      "mode": "chat",
+      "model_alias": "offline-controlled",
+      "protocol_revision": "text-v1",
+      "reason": "execution_stopped",
+      "resume_cursor": "eb817cfc9824d78985ab984371b2bde8dfb91afdac188018aa2612b9eded9966",
+      "revision": "7",
+      "session_id": "f284ee17-40b0-5f15-8b93-c6ff4273bcc5",
+      "state": "cancelled",
+      "step_count": 1,
+      "usage_groups": [
+        {
+          "currency": "USD",
+          "price_version": "offline-controlled-price-v1",
+          "known_tokens": "10",
+          "held_tokens": "0",
+          "inflight_tokens": "0",
+          "known_money_atomic": "10",
+          "held_money_atomic": "0",
+          "inflight_money_atomic": "0"
+        }
+      ]
+    },
+    "steps": {
+      "data": [
+        {
+          "child_request_id": "7bdcf271-1344-4880-8d48-326d82eaf796",
+          "id": "540d29ea-1c27-44bc-a2f5-c2c139f3b464",
+          "index": 1,
+          "input_sha256": "ec40cf36c2916fc5adbe6c3f5555c923358a5c197c49bfb267edce648479ce4e",
+          "model_call_id": "cb3e00e1-f979-5196-add7-fcfb0193dc47",
+          "output_sha256": null,
+          "protocol_revision": "text-v1",
+          "run_id": "29df8249-b6b1-4d9a-9c1f-0d505a00dcad",
+          "state": "failed"
+        }
+      ],
+      "next_cursor": null
+    },
+    "tools": {
+      "data": [],
+      "next_cursor": null
+    },
+    "events": {
+      "data": [
+        {
+          "version": "ar.session.event/1.0",
+          "id": "70d1630e-56c5-4467-8c3a-ab7a2de7628a",
+          "session_id": "f284ee17-40b0-5f15-8b93-c6ff4273bcc5",
+          "run_id": "29df8249-b6b1-4d9a-9c1f-0d505a00dcad",
+          "seq": "1",
+          "cursor": "67b66162deedd4e3d6204cc69706b8ba26f6bed47f80dcd0cc1e94efbd819264",
+          "created_at": "2026-11-27T02:42:23.389534849Z",
+          "type": "run.accepted",
+          "data": {
+            "id": "29df8249-b6b1-4d9a-9c1f-0d505a00dcad",
+            "mode": "chat",
+            "fence": "1",
+            "state": "accepted",
+            "limits": {
+              "currency": "USD",
+              "max_steps": 4,
+              "max_tokens": "100000",
+              "max_tool_calls": 8,
+              "max_duration_ms": 600000,
+              "max_model_calls": 1,
+              "tool_timeout_ms": 5000,
+              "max_money_atomic": "1000000000",
+              "no_progress_limit": 3,
+              "max_context_tokens": 32768,
+              "max_tool_output_bytes": 8192
+            },
+            "reason": null,
+            "revision": "2",
+            "created_at": "2026-11-27T02:42:23.388851963Z",
+            "session_id": "f284ee17-40b0-5f15-8b93-c6ff4273bcc5",
+            "step_count": 0,
+            "deadline_at": "2026-11-27T02:52:23.389507756Z",
+            "finished_at": null,
+            "model_alias": "offline-controlled",
+            "usage_groups": [],
+            "resume_cursor": "67b66162deedd4e3d6204cc69706b8ba26f6bed47f80dcd0cc1e94efbd819264",
+            "last_event_seq": "1",
+            "cancel_requested": false,
+            "child_request_ids": [],
+            "protocol_revision": "text-v1",
+            "client_operation_id": "6f5e756b-f784-4de0-9c9d-593025e59f9b",
+            "aggregation_complete": false,
+            "input_head_message_id": "9aa89ca9-81fe-4298-8afd-8922423cb231"
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "ee7f6eb1-f01a-428a-a891-acf1d7652158",
+          "session_id": "f284ee17-40b0-5f15-8b93-c6ff4273bcc5",
+          "run_id": "29df8249-b6b1-4d9a-9c1f-0d505a00dcad",
+          "seq": "2",
+          "cursor": "7e58d16638a099e0924b23cea05aedb11368683ace5dd8048e0d9bb9c0a37c06",
+          "created_at": "2026-11-27T02:42:23.389581451Z",
+          "type": "message.created",
+          "data": {
+            "id": "9aa89ca9-81fe-4298-8afd-8922423cb231",
+            "role": "user",
+            "parts": [
+              {
+                "text": "393独立停止：必须已实际准入。",
+                "type": "text"
+              }
+            ],
+            "run_id": "29df8249-b6b1-4d9a-9c1f-0d505a00dcad",
+            "status": "committed",
+            "position": "1",
+            "created_at": "2026-11-27T02:42:23.389508107Z",
+            "session_id": "f284ee17-40b0-5f15-8b93-c6ff4273bcc5",
+            "supersedes_message_id": null
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "4aa9fe36-4295-453b-8bf8-c18527968b00",
+          "session_id": "f284ee17-40b0-5f15-8b93-c6ff4273bcc5",
+          "run_id": "29df8249-b6b1-4d9a-9c1f-0d505a00dcad",
+          "seq": "3",
+          "cursor": "2bb3e49df1545625f9a927c9674e86cbd2da0f553aa791e46642af3b534a4b0b",
+          "created_at": "2026-11-27T02:42:23.389595338Z",
+          "type": "message.committed",
+          "data": {
+            "id": "9aa89ca9-81fe-4298-8afd-8922423cb231",
+            "role": "user",
+            "parts": [
+              {
+                "text": "393独立停止：必须已实际准入。",
+                "type": "text"
+              }
+            ],
+            "run_id": "29df8249-b6b1-4d9a-9c1f-0d505a00dcad",
+            "status": "committed",
+            "position": "1",
+            "created_at": "2026-11-27T02:42:23.389508107Z",
+            "session_id": "f284ee17-40b0-5f15-8b93-c6ff4273bcc5",
+            "supersedes_message_id": null
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "9002981c-ebcd-4e7b-8ef7-689a015a641c",
+          "session_id": "f284ee17-40b0-5f15-8b93-c6ff4273bcc5",
+          "run_id": "29df8249-b6b1-4d9a-9c1f-0d505a00dcad",
+          "seq": "4",
+          "cursor": "04fac5c0671e9ad9e63295d400975fe4e8c0ca68b7c82ed3b99f41e72febcdf5",
+          "created_at": "2026-11-27T02:42:23.417252883Z",
+          "type": "run.started",
+          "data": {
+            "id": "29df8249-b6b1-4d9a-9c1f-0d505a00dcad",
+            "mode": "chat",
+            "fence": "2",
+            "state": "running",
+            "limits": {
+              "currency": "USD",
+              "max_steps": 4,
+              "max_tokens": "100000",
+              "max_tool_calls": 8,
+              "max_duration_ms": 600000,
+              "max_model_calls": 1,
+              "tool_timeout_ms": 5000,
+              "max_money_atomic": "1000000000",
+              "no_progress_limit": 3,
+              "max_context_tokens": 32768,
+              "max_tool_output_bytes": 8192
+            },
+            "reason": null,
+            "revision": "3",
+            "created_at": "2026-11-27T02:42:23.388851963Z",
+            "session_id": "f284ee17-40b0-5f15-8b93-c6ff4273bcc5",
+            "step_count": 0,
+            "deadline_at": "2026-11-27T02:52:23.389507756Z",
+            "finished_at": null,
+            "model_alias": "offline-controlled",
+            "usage_groups": [],
+            "resume_cursor": "04fac5c0671e9ad9e63295d400975fe4e8c0ca68b7c82ed3b99f41e72febcdf5",
+            "last_event_seq": "4",
+            "cancel_requested": false,
+            "child_request_ids": [],
+            "protocol_revision": "text-v1",
+            "client_operation_id": "6f5e756b-f784-4de0-9c9d-593025e59f9b",
+            "aggregation_complete": false,
+            "input_head_message_id": "9aa89ca9-81fe-4298-8afd-8922423cb231"
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "17a346ff-cd76-4ea7-a9b9-27617235ce21",
+          "session_id": "f284ee17-40b0-5f15-8b93-c6ff4273bcc5",
+          "run_id": "29df8249-b6b1-4d9a-9c1f-0d505a00dcad",
+          "seq": "5",
+          "cursor": "b74af39ecfa71d1bbfd4055742d7f7729b07f5562eec72686a76192620c2d09d",
+          "created_at": "2026-11-27T02:42:23.448634427Z",
+          "type": "message.created",
+          "data": {
+            "id": "628bbb72-9f1e-423f-8ee5-ebf7d98f6036",
+            "role": "assistant",
+            "parts": [
+              {
+                "text": "",
+                "type": "text"
+              }
+            ],
+            "run_id": "29df8249-b6b1-4d9a-9c1f-0d505a00dcad",
+            "status": "partial",
+            "position": "2",
+            "created_at": "2026-11-27T02:42:23.448629276Z",
+            "session_id": "f284ee17-40b0-5f15-8b93-c6ff4273bcc5",
+            "supersedes_message_id": null
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "361ea86a-2e5e-4580-a883-264cb868d25c",
+          "session_id": "f284ee17-40b0-5f15-8b93-c6ff4273bcc5",
+          "run_id": "29df8249-b6b1-4d9a-9c1f-0d505a00dcad",
+          "seq": "6",
+          "cursor": "1cb1a4953c7e501eb7f067d328622274048b26690fceee445cf4f52652b5c20a",
+          "created_at": "2026-11-27T02:42:23.448664215Z",
+          "type": "checkpoint.saved",
+          "data": {
+            "fence": "2",
+            "run_id": "29df8249-b6b1-4d9a-9c1f-0d505a00dcad",
+            "revision": "4",
+            "context_sha256": "f6dfb3b39cc6a0f109115a158209747caf1035fc016fb436b2a8580a43aadba9",
+            "last_event_seq": "6",
+            "message_head_id": "9aa89ca9-81fe-4298-8afd-8922423cb231",
+            "policy_revision": "771934d3-e159-46be-b7f8-ba3d4d966769",
+            "registry_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "last_completed_step": 0,
+            "pending_tool_call_ids": [],
+            "context_strategy_revision": "reject-over-cap-v1",
+            "pending_child_request_ids": [
+              "7bdcf271-1344-4880-8d48-326d82eaf796"
+            ]
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "c0a257b0-30c0-4c9b-9194-d2528b5463ec",
+          "session_id": "f284ee17-40b0-5f15-8b93-c6ff4273bcc5",
+          "run_id": "29df8249-b6b1-4d9a-9c1f-0d505a00dcad",
+          "seq": "7",
+          "cursor": "74604512000ed61b74271671d3c41f50f9206ae86eb27a09723ea03db520a8fe",
+          "created_at": "2026-11-27T02:42:23.448687841Z",
+          "type": "step.started",
+          "data": {
+            "id": "540d29ea-1c27-44bc-a2f5-c2c139f3b464",
+            "index": 1,
+            "state": "model_running",
+            "run_id": "29df8249-b6b1-4d9a-9c1f-0d505a00dcad",
+            "input_sha256": "ec40cf36c2916fc5adbe6c3f5555c923358a5c197c49bfb267edce648479ce4e",
+            "model_call_id": "cb3e00e1-f979-5196-add7-fcfb0193dc47",
+            "output_sha256": null,
+            "child_request_id": "7bdcf271-1344-4880-8d48-326d82eaf796",
+            "protocol_revision": "text-v1"
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "657d28ba-ba5c-46e7-a3fd-d51b761e6902",
+          "session_id": "f284ee17-40b0-5f15-8b93-c6ff4273bcc5",
+          "run_id": "29df8249-b6b1-4d9a-9c1f-0d505a00dcad",
+          "seq": "8",
+          "cursor": "3537b9fd79820afc68eba5b7a92359103ca34a3056d75e875f7e06a12f718c78",
+          "created_at": "2026-11-27T02:42:24.91993402Z",
+          "type": "run.cancel_requested",
+          "data": {
+            "run_id": "29df8249-b6b1-4d9a-9c1f-0d505a00dcad"
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "a0684a62-ee5d-43e2-9b0b-cb58d4d4f618",
+          "session_id": "f284ee17-40b0-5f15-8b93-c6ff4273bcc5",
+          "run_id": "29df8249-b6b1-4d9a-9c1f-0d505a00dcad",
+          "seq": "9",
+          "cursor": "0a16e0afd2cbb6d77285dc3efd5c1620c87517132ceec835b47130acde80c053",
+          "created_at": "2026-11-27T02:42:24.961750853Z",
+          "type": "run.usage",
+          "data": {
+            "groups": [
+              {
+                "currency": "USD",
+                "held_tokens": "0",
+                "known_tokens": "10",
+                "price_version": "offline-controlled-price-v1",
+                "inflight_tokens": "0",
+                "held_money_atomic": "0",
+                "known_money_atomic": "10",
+                "inflight_money_atomic": "0"
+              }
+            ],
+            "run_id": "29df8249-b6b1-4d9a-9c1f-0d505a00dcad"
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "80aa97a0-a095-4894-bb0e-20359ce357c8",
+          "session_id": "f284ee17-40b0-5f15-8b93-c6ff4273bcc5",
+          "run_id": "29df8249-b6b1-4d9a-9c1f-0d505a00dcad",
+          "seq": "10",
+          "cursor": "eb817cfc9824d78985ab984371b2bde8dfb91afdac188018aa2612b9eded9966",
+          "created_at": "2026-11-27T02:42:24.972692034Z",
+          "type": "run.cancelled",
+          "data": {
+            "id": "29df8249-b6b1-4d9a-9c1f-0d505a00dcad",
+            "mode": "chat",
+            "fence": "2",
+            "state": "cancelled",
+            "limits": {
+              "currency": "USD",
+              "max_steps": 4,
+              "max_tokens": "100000",
+              "max_tool_calls": 8,
+              "max_duration_ms": 600000,
+              "max_model_calls": 1,
+              "tool_timeout_ms": 5000,
+              "max_money_atomic": "1000000000",
+              "no_progress_limit": 3,
+              "max_context_tokens": 32768,
+              "max_tool_output_bytes": 8192
+            },
+            "reason": "execution_stopped",
+            "revision": "7",
+            "created_at": "2026-11-27T02:42:23.388851963Z",
+            "session_id": "f284ee17-40b0-5f15-8b93-c6ff4273bcc5",
+            "step_count": 1,
+            "deadline_at": "2026-11-27T02:52:23.389507756Z",
+            "finished_at": "2026-11-27T02:42:24.972673117Z",
+            "model_alias": "offline-controlled",
+            "usage_groups": [
+              {
+                "currency": "USD",
+                "held_tokens": "0",
+                "known_tokens": "10",
+                "price_version": "offline-controlled-price-v1",
+                "inflight_tokens": "0",
+                "held_money_atomic": "0",
+                "known_money_atomic": "10",
+                "inflight_money_atomic": "0"
+              }
+            ],
+            "resume_cursor": "eb817cfc9824d78985ab984371b2bde8dfb91afdac188018aa2612b9eded9966",
+            "last_event_seq": "10",
+            "cancel_requested": true,
+            "child_request_ids": [
+              "7bdcf271-1344-4880-8d48-326d82eaf796"
+            ],
+            "protocol_revision": "text-v1",
+            "client_operation_id": "6f5e756b-f784-4de0-9c9d-593025e59f9b",
+            "aggregation_complete": true,
+            "input_head_message_id": "9aa89ca9-81fe-4298-8afd-8922423cb231"
+          }
+        }
+      ],
+      "next_cursor": null
+    },
+    "usage": [
+      {
+        "data": [
+          {
+            "admitted_at": "2026-11-27T02:42:23.477152Z",
+            "budget_accounting": {
+              "cost_actual_atomic": "10",
+              "cost_state": "known",
+              "currency": "USD",
+              "missing_reason": null,
+              "money": {
+                "known_used": "10",
+                "overrun": "0",
+                "released": "86",
+                "reserved": "96",
+                "state": "known",
+                "unknown_held": "0"
+              },
+              "policy_revision": "003005c7-2d72-4913-a7f6-f3993f7e0c1d",
+              "price_snapshot_id": "b912484e-0c22-5f98-ab60-fb05a679faa6",
+              "price_version": "offline-controlled-price-v1",
+              "request": {
+                "known_used": "1",
+                "overrun": "0",
+                "released": "0",
+                "reserved": "1",
+                "state": "known",
+                "unknown_held": "0"
+              },
+              "token": {
+                "known_used": "10",
+                "overrun": "0",
+                "released": "86",
+                "reserved": "96",
+                "state": "known",
+                "unknown_held": "0"
+              },
+              "token_actual": "10",
+              "token_basis": "upstream_total",
+              "window_end": "2026-11-28T00:00:00Z",
+              "window_kind": "utc_day",
+              "window_start": "2026-11-27T00:00:00Z"
+            },
+            "config_revision": "offline-controlled-v1",
+            "duration_ms": 1478,
+            "error_code": "client_cancelled",
+            "finished_at": "2026-11-27T02:42:24.939005Z",
+            "first_chunk_ms": null,
+            "invocation_binding": {
+              "activation_epoch": 1,
+              "admission_purpose": "serving",
+              "model_release_generation": 1,
+              "model_release_name": "offline-controlled",
+              "model_release_namespace": "maas-offline",
+              "model_release_uid": "ac5aa1c5-1e08-503c-8eb4-678902cbf8a3",
+              "price_snapshot_id": "b912484e-0c22-5f98-ab60-fb05a679faa6",
+              "price_version": "offline-controlled-price-v1",
+              "publication_id": "194e5552-a401-4964-951a-dd3666477b47",
+              "release_revision": "06410b139bb5376431d85007d3821fb7da9a8077e8e03979108412c857da4e1a",
+              "route_binding_sha256": "06410b139bb5376431d85007d3821fb7da9a8077e8e03979108412c857da4e1a"
+            },
+            "key_id": "68f8b691-6805-4991-9d40-87af5c566e37",
+            "metering_state": "complete",
+            "model_alias": "offline-controlled",
+            "quota_consumed": 1,
+            "quota_date": "2026-11-27",
+            "rate_witness": {
+              "permit_id": "8ff76a64-1ea1-4e64-966a-48011e8938b4",
+              "policy_id": "offline-controlled-rate-v1",
+              "policy_revision": "offline-controlled-rate-v1",
+              "rate_epoch": "1",
+              "windows": [
+                {
+                  "limit": "1000",
+                  "scope_id": "global",
+                  "window_end": "2026-11-27T03:00:00Z",
+                  "window_start": "2026-11-27T02:00:00Z"
+                },
+                {
+                  "limit": "1000",
+                  "scope_id": "key/68f8b691-6805-4991-9d40-87af5c566e37",
+                  "window_end": "2026-11-27T03:00:00Z",
+                  "window_start": "2026-11-27T02:00:00Z"
+                }
+              ]
+            },
+            "received_at": "2026-11-27T02:42:23.461Z",
+            "request_id": "7bdcf271-1344-4880-8d48-326d82eaf796",
+            "reservation_plan": {
+              "schema_version": "1.0",
+              "model_alias": "offline-controlled",
+              "source_id": "2760be51-dd8c-5d8e-83e3-d37bd6b909cc",
+              "config_revision": "offline-controlled-v1",
+              "capability_revision": "offline-controlled-tools-v1",
+              "budget_policy_revision": "003005c7-2d72-4913-a7f6-f3993f7e0c1d",
+              "window_kind": "utc_day",
+              "token_metric": "prompt_plus_completion",
+              "request_reserved": "1",
+              "input_upper_tokens": "64",
+              "output_upper_tokens": "32",
+              "total_upper_tokens": "96",
+              "token_reserved": "96",
+              "money_reserved_atomic": "96",
+              "currency": "USD",
+              "price_snapshot_id": "b912484e-0c22-5f98-ab60-fb05a679faa6",
+              "price_snapshot_sha256": "5086568d8fbf1da3936ea7591450a161bcac5202bc01845ee71143d01dcc0aba",
+              "price_version": "offline-controlled-price-v1",
+              "rate_policy_revision": "offline-controlled-rate-v1"
+            },
+            "source_id": "2760be51-dd8c-5d8e-83e3-d37bd6b909cc",
+            "source_type": "internal",
+            "status": "cancelled",
+            "submission_state": "submitted",
+            "upstream_model": "offline-controlled-v1",
+            "usage": {
+              "input_cached_tokens": 0,
+              "input_tokens": 6,
+              "missing_reason": null,
+              "output_tokens": 4,
+              "reasoning_tokens": 0,
+              "source": "upstream",
+              "total_tokens": 10
+            }
+          }
+        ],
+        "data_complete": true,
+        "lookup": {
+          "capacity": {
+            "data_source": "release_log",
+            "release_reason": "transport_closed",
+            "state": "released"
+          },
+          "evidence_source": "generation_request",
+          "reason": null,
+          "rejection_code": null,
+          "request_id": "7bdcf271-1344-4880-8d48-326d82eaf796",
+          "resolution": "recorded"
+        },
+        "next_cursor": null
+      }
+    ]
+  },
+  "after": {
+    "run": {
+      "aggregation_complete": true,
+      "cancel_requested": true,
+      "child_request_ids": [
+        "7bdcf271-1344-4880-8d48-326d82eaf796"
+      ],
+      "client_operation_id": "6f5e756b-f784-4de0-9c9d-593025e59f9b",
+      "created_at": "2026-11-27T02:42:23.388851963Z",
+      "deadline_at": "2026-11-27T02:52:23.389507756Z",
+      "fence": "2",
+      "finished_at": "2026-11-27T02:42:24.972673117Z",
+      "id": "29df8249-b6b1-4d9a-9c1f-0d505a00dcad",
+      "input_head_message_id": "9aa89ca9-81fe-4298-8afd-8922423cb231",
+      "last_event_seq": "10",
+      "limits": {
+        "max_steps": 4,
+        "max_model_calls": 1,
+        "max_tool_calls": 8,
+        "max_duration_ms": 600000,
+        "tool_timeout_ms": 5000,
+        "max_tool_output_bytes": 8192,
+        "max_context_tokens": 32768,
+        "no_progress_limit": 3,
+        "max_tokens": "100000",
+        "max_money_atomic": "1000000000",
+        "currency": "USD"
+      },
+      "mode": "chat",
+      "model_alias": "offline-controlled",
+      "protocol_revision": "text-v1",
+      "reason": "execution_stopped",
+      "resume_cursor": "eb817cfc9824d78985ab984371b2bde8dfb91afdac188018aa2612b9eded9966",
+      "revision": "7",
+      "session_id": "f284ee17-40b0-5f15-8b93-c6ff4273bcc5",
+      "state": "cancelled",
+      "step_count": 1,
+      "usage_groups": [
+        {
+          "currency": "USD",
+          "price_version": "offline-controlled-price-v1",
+          "known_tokens": "10",
+          "held_tokens": "0",
+          "inflight_tokens": "0",
+          "known_money_atomic": "10",
+          "held_money_atomic": "0",
+          "inflight_money_atomic": "0"
+        }
+      ]
+    },
+    "steps": {
+      "data": [
+        {
+          "child_request_id": "7bdcf271-1344-4880-8d48-326d82eaf796",
+          "id": "540d29ea-1c27-44bc-a2f5-c2c139f3b464",
+          "index": 1,
+          "input_sha256": "ec40cf36c2916fc5adbe6c3f5555c923358a5c197c49bfb267edce648479ce4e",
+          "model_call_id": "cb3e00e1-f979-5196-add7-fcfb0193dc47",
+          "output_sha256": null,
+          "protocol_revision": "text-v1",
+          "run_id": "29df8249-b6b1-4d9a-9c1f-0d505a00dcad",
+          "state": "failed"
+        }
+      ],
+      "next_cursor": null
+    },
+    "tools": {
+      "data": [],
+      "next_cursor": null
+    },
+    "events": {
+      "data": [
+        {
+          "version": "ar.session.event/1.0",
+          "id": "70d1630e-56c5-4467-8c3a-ab7a2de7628a",
+          "session_id": "f284ee17-40b0-5f15-8b93-c6ff4273bcc5",
+          "run_id": "29df8249-b6b1-4d9a-9c1f-0d505a00dcad",
+          "seq": "1",
+          "cursor": "67b66162deedd4e3d6204cc69706b8ba26f6bed47f80dcd0cc1e94efbd819264",
+          "created_at": "2026-11-27T02:42:23.389534849Z",
+          "type": "run.accepted",
+          "data": {
+            "id": "29df8249-b6b1-4d9a-9c1f-0d505a00dcad",
+            "mode": "chat",
+            "fence": "1",
+            "state": "accepted",
+            "limits": {
+              "currency": "USD",
+              "max_steps": 4,
+              "max_tokens": "100000",
+              "max_tool_calls": 8,
+              "max_duration_ms": 600000,
+              "max_model_calls": 1,
+              "tool_timeout_ms": 5000,
+              "max_money_atomic": "1000000000",
+              "no_progress_limit": 3,
+              "max_context_tokens": 32768,
+              "max_tool_output_bytes": 8192
+            },
+            "reason": null,
+            "revision": "2",
+            "created_at": "2026-11-27T02:42:23.388851963Z",
+            "session_id": "f284ee17-40b0-5f15-8b93-c6ff4273bcc5",
+            "step_count": 0,
+            "deadline_at": "2026-11-27T02:52:23.389507756Z",
+            "finished_at": null,
+            "model_alias": "offline-controlled",
+            "usage_groups": [],
+            "resume_cursor": "67b66162deedd4e3d6204cc69706b8ba26f6bed47f80dcd0cc1e94efbd819264",
+            "last_event_seq": "1",
+            "cancel_requested": false,
+            "child_request_ids": [],
+            "protocol_revision": "text-v1",
+            "client_operation_id": "6f5e756b-f784-4de0-9c9d-593025e59f9b",
+            "aggregation_complete": false,
+            "input_head_message_id": "9aa89ca9-81fe-4298-8afd-8922423cb231"
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "ee7f6eb1-f01a-428a-a891-acf1d7652158",
+          "session_id": "f284ee17-40b0-5f15-8b93-c6ff4273bcc5",
+          "run_id": "29df8249-b6b1-4d9a-9c1f-0d505a00dcad",
+          "seq": "2",
+          "cursor": "7e58d16638a099e0924b23cea05aedb11368683ace5dd8048e0d9bb9c0a37c06",
+          "created_at": "2026-11-27T02:42:23.389581451Z",
+          "type": "message.created",
+          "data": {
+            "id": "9aa89ca9-81fe-4298-8afd-8922423cb231",
+            "role": "user",
+            "parts": [
+              {
+                "text": "393独立停止：必须已实际准入。",
+                "type": "text"
+              }
+            ],
+            "run_id": "29df8249-b6b1-4d9a-9c1f-0d505a00dcad",
+            "status": "committed",
+            "position": "1",
+            "created_at": "2026-11-27T02:42:23.389508107Z",
+            "session_id": "f284ee17-40b0-5f15-8b93-c6ff4273bcc5",
+            "supersedes_message_id": null
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "4aa9fe36-4295-453b-8bf8-c18527968b00",
+          "session_id": "f284ee17-40b0-5f15-8b93-c6ff4273bcc5",
+          "run_id": "29df8249-b6b1-4d9a-9c1f-0d505a00dcad",
+          "seq": "3",
+          "cursor": "2bb3e49df1545625f9a927c9674e86cbd2da0f553aa791e46642af3b534a4b0b",
+          "created_at": "2026-11-27T02:42:23.389595338Z",
+          "type": "message.committed",
+          "data": {
+            "id": "9aa89ca9-81fe-4298-8afd-8922423cb231",
+            "role": "user",
+            "parts": [
+              {
+                "text": "393独立停止：必须已实际准入。",
+                "type": "text"
+              }
+            ],
+            "run_id": "29df8249-b6b1-4d9a-9c1f-0d505a00dcad",
+            "status": "committed",
+            "position": "1",
+            "created_at": "2026-11-27T02:42:23.389508107Z",
+            "session_id": "f284ee17-40b0-5f15-8b93-c6ff4273bcc5",
+            "supersedes_message_id": null
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "9002981c-ebcd-4e7b-8ef7-689a015a641c",
+          "session_id": "f284ee17-40b0-5f15-8b93-c6ff4273bcc5",
+          "run_id": "29df8249-b6b1-4d9a-9c1f-0d505a00dcad",
+          "seq": "4",
+          "cursor": "04fac5c0671e9ad9e63295d400975fe4e8c0ca68b7c82ed3b99f41e72febcdf5",
+          "created_at": "2026-11-27T02:42:23.417252883Z",
+          "type": "run.started",
+          "data": {
+            "id": "29df8249-b6b1-4d9a-9c1f-0d505a00dcad",
+            "mode": "chat",
+            "fence": "2",
+            "state": "running",
+            "limits": {
+              "currency": "USD",
+              "max_steps": 4,
+              "max_tokens": "100000",
+              "max_tool_calls": 8,
+              "max_duration_ms": 600000,
+              "max_model_calls": 1,
+              "tool_timeout_ms": 5000,
+              "max_money_atomic": "1000000000",
+              "no_progress_limit": 3,
+              "max_context_tokens": 32768,
+              "max_tool_output_bytes": 8192
+            },
+            "reason": null,
+            "revision": "3",
+            "created_at": "2026-11-27T02:42:23.388851963Z",
+            "session_id": "f284ee17-40b0-5f15-8b93-c6ff4273bcc5",
+            "step_count": 0,
+            "deadline_at": "2026-11-27T02:52:23.389507756Z",
+            "finished_at": null,
+            "model_alias": "offline-controlled",
+            "usage_groups": [],
+            "resume_cursor": "04fac5c0671e9ad9e63295d400975fe4e8c0ca68b7c82ed3b99f41e72febcdf5",
+            "last_event_seq": "4",
+            "cancel_requested": false,
+            "child_request_ids": [],
+            "protocol_revision": "text-v1",
+            "client_operation_id": "6f5e756b-f784-4de0-9c9d-593025e59f9b",
+            "aggregation_complete": false,
+            "input_head_message_id": "9aa89ca9-81fe-4298-8afd-8922423cb231"
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "17a346ff-cd76-4ea7-a9b9-27617235ce21",
+          "session_id": "f284ee17-40b0-5f15-8b93-c6ff4273bcc5",
+          "run_id": "29df8249-b6b1-4d9a-9c1f-0d505a00dcad",
+          "seq": "5",
+          "cursor": "b74af39ecfa71d1bbfd4055742d7f7729b07f5562eec72686a76192620c2d09d",
+          "created_at": "2026-11-27T02:42:23.448634427Z",
+          "type": "message.created",
+          "data": {
+            "id": "628bbb72-9f1e-423f-8ee5-ebf7d98f6036",
+            "role": "assistant",
+            "parts": [
+              {
+                "text": "",
+                "type": "text"
+              }
+            ],
+            "run_id": "29df8249-b6b1-4d9a-9c1f-0d505a00dcad",
+            "status": "partial",
+            "position": "2",
+            "created_at": "2026-11-27T02:42:23.448629276Z",
+            "session_id": "f284ee17-40b0-5f15-8b93-c6ff4273bcc5",
+            "supersedes_message_id": null
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "361ea86a-2e5e-4580-a883-264cb868d25c",
+          "session_id": "f284ee17-40b0-5f15-8b93-c6ff4273bcc5",
+          "run_id": "29df8249-b6b1-4d9a-9c1f-0d505a00dcad",
+          "seq": "6",
+          "cursor": "1cb1a4953c7e501eb7f067d328622274048b26690fceee445cf4f52652b5c20a",
+          "created_at": "2026-11-27T02:42:23.448664215Z",
+          "type": "checkpoint.saved",
+          "data": {
+            "fence": "2",
+            "run_id": "29df8249-b6b1-4d9a-9c1f-0d505a00dcad",
+            "revision": "4",
+            "context_sha256": "f6dfb3b39cc6a0f109115a158209747caf1035fc016fb436b2a8580a43aadba9",
+            "last_event_seq": "6",
+            "message_head_id": "9aa89ca9-81fe-4298-8afd-8922423cb231",
+            "policy_revision": "771934d3-e159-46be-b7f8-ba3d4d966769",
+            "registry_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "last_completed_step": 0,
+            "pending_tool_call_ids": [],
+            "context_strategy_revision": "reject-over-cap-v1",
+            "pending_child_request_ids": [
+              "7bdcf271-1344-4880-8d48-326d82eaf796"
+            ]
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "c0a257b0-30c0-4c9b-9194-d2528b5463ec",
+          "session_id": "f284ee17-40b0-5f15-8b93-c6ff4273bcc5",
+          "run_id": "29df8249-b6b1-4d9a-9c1f-0d505a00dcad",
+          "seq": "7",
+          "cursor": "74604512000ed61b74271671d3c41f50f9206ae86eb27a09723ea03db520a8fe",
+          "created_at": "2026-11-27T02:42:23.448687841Z",
+          "type": "step.started",
+          "data": {
+            "id": "540d29ea-1c27-44bc-a2f5-c2c139f3b464",
+            "index": 1,
+            "state": "model_running",
+            "run_id": "29df8249-b6b1-4d9a-9c1f-0d505a00dcad",
+            "input_sha256": "ec40cf36c2916fc5adbe6c3f5555c923358a5c197c49bfb267edce648479ce4e",
+            "model_call_id": "cb3e00e1-f979-5196-add7-fcfb0193dc47",
+            "output_sha256": null,
+            "child_request_id": "7bdcf271-1344-4880-8d48-326d82eaf796",
+            "protocol_revision": "text-v1"
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "657d28ba-ba5c-46e7-a3fd-d51b761e6902",
+          "session_id": "f284ee17-40b0-5f15-8b93-c6ff4273bcc5",
+          "run_id": "29df8249-b6b1-4d9a-9c1f-0d505a00dcad",
+          "seq": "8",
+          "cursor": "3537b9fd79820afc68eba5b7a92359103ca34a3056d75e875f7e06a12f718c78",
+          "created_at": "2026-11-27T02:42:24.91993402Z",
+          "type": "run.cancel_requested",
+          "data": {
+            "run_id": "29df8249-b6b1-4d9a-9c1f-0d505a00dcad"
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "a0684a62-ee5d-43e2-9b0b-cb58d4d4f618",
+          "session_id": "f284ee17-40b0-5f15-8b93-c6ff4273bcc5",
+          "run_id": "29df8249-b6b1-4d9a-9c1f-0d505a00dcad",
+          "seq": "9",
+          "cursor": "0a16e0afd2cbb6d77285dc3efd5c1620c87517132ceec835b47130acde80c053",
+          "created_at": "2026-11-27T02:42:24.961750853Z",
+          "type": "run.usage",
+          "data": {
+            "groups": [
+              {
+                "currency": "USD",
+                "held_tokens": "0",
+                "known_tokens": "10",
+                "price_version": "offline-controlled-price-v1",
+                "inflight_tokens": "0",
+                "held_money_atomic": "0",
+                "known_money_atomic": "10",
+                "inflight_money_atomic": "0"
+              }
+            ],
+            "run_id": "29df8249-b6b1-4d9a-9c1f-0d505a00dcad"
+          }
+        },
+        {
+          "version": "ar.session.event/1.0",
+          "id": "80aa97a0-a095-4894-bb0e-20359ce357c8",
+          "session_id": "f284ee17-40b0-5f15-8b93-c6ff4273bcc5",
+          "run_id": "29df8249-b6b1-4d9a-9c1f-0d505a00dcad",
+          "seq": "10",
+          "cursor": "eb817cfc9824d78985ab984371b2bde8dfb91afdac188018aa2612b9eded9966",
+          "created_at": "2026-11-27T02:42:24.972692034Z",
+          "type": "run.cancelled",
+          "data": {
+            "id": "29df8249-b6b1-4d9a-9c1f-0d505a00dcad",
+            "mode": "chat",
+            "fence": "2",
+            "state": "cancelled",
+            "limits": {
+              "currency": "USD",
+              "max_steps": 4,
+              "max_tokens": "100000",
+              "max_tool_calls": 8,
+              "max_duration_ms": 600000,
+              "max_model_calls": 1,
+              "tool_timeout_ms": 5000,
+              "max_money_atomic": "1000000000",
+              "no_progress_limit": 3,
+              "max_context_tokens": 32768,
+              "max_tool_output_bytes": 8192
+            },
+            "reason": "execution_stopped",
+            "revision": "7",
+            "created_at": "2026-11-27T02:42:23.388851963Z",
+            "session_id": "f284ee17-40b0-5f15-8b93-c6ff4273bcc5",
+            "step_count": 1,
+            "deadline_at": "2026-11-27T02:52:23.389507756Z",
+            "finished_at": "2026-11-27T02:42:24.972673117Z",
+            "model_alias": "offline-controlled",
+            "usage_groups": [
+              {
+                "currency": "USD",
+                "held_tokens": "0",
+                "known_tokens": "10",
+                "price_version": "offline-controlled-price-v1",
+                "inflight_tokens": "0",
+                "held_money_atomic": "0",
+                "known_money_atomic": "10",
+                "inflight_money_atomic": "0"
+              }
+            ],
+            "resume_cursor": "eb817cfc9824d78985ab984371b2bde8dfb91afdac188018aa2612b9eded9966",
+            "last_event_seq": "10",
+            "cancel_requested": true,
+            "child_request_ids": [
+              "7bdcf271-1344-4880-8d48-326d82eaf796"
+            ],
+            "protocol_revision": "text-v1",
+            "client_operation_id": "6f5e756b-f784-4de0-9c9d-593025e59f9b",
+            "aggregation_complete": true,
+            "input_head_message_id": "9aa89ca9-81fe-4298-8afd-8922423cb231"
+          }
+        }
+      ],
+      "next_cursor": null
+    },
+    "usage": [
+      {
+        "data": [
+          {
+            "admitted_at": "2026-11-27T02:42:23.477152Z",
+            "budget_accounting": {
+              "cost_actual_atomic": "10",
+              "cost_state": "known",
+              "currency": "USD",
+              "missing_reason": null,
+              "money": {
+                "known_used": "10",
+                "overrun": "0",
+                "released": "86",
+                "reserved": "96",
+                "state": "known",
+                "unknown_held": "0"
+              },
+              "policy_revision": "003005c7-2d72-4913-a7f6-f3993f7e0c1d",
+              "price_snapshot_id": "b912484e-0c22-5f98-ab60-fb05a679faa6",
+              "price_version": "offline-controlled-price-v1",
+              "request": {
+                "known_used": "1",
+                "overrun": "0",
+                "released": "0",
+                "reserved": "1",
+                "state": "known",
+                "unknown_held": "0"
+              },
+              "token": {
+                "known_used": "10",
+                "overrun": "0",
+                "released": "86",
+                "reserved": "96",
+                "state": "known",
+                "unknown_held": "0"
+              },
+              "token_actual": "10",
+              "token_basis": "upstream_total",
+              "window_end": "2026-11-28T00:00:00Z",
+              "window_kind": "utc_day",
+              "window_start": "2026-11-27T00:00:00Z"
+            },
+            "config_revision": "offline-controlled-v1",
+            "duration_ms": 1478,
+            "error_code": "client_cancelled",
+            "finished_at": "2026-11-27T02:42:24.939005Z",
+            "first_chunk_ms": null,
+            "invocation_binding": {
+              "activation_epoch": 1,
+              "admission_purpose": "serving",
+              "model_release_generation": 1,
+              "model_release_name": "offline-controlled",
+              "model_release_namespace": "maas-offline",
+              "model_release_uid": "ac5aa1c5-1e08-503c-8eb4-678902cbf8a3",
+              "price_snapshot_id": "b912484e-0c22-5f98-ab60-fb05a679faa6",
+              "price_version": "offline-controlled-price-v1",
+              "publication_id": "194e5552-a401-4964-951a-dd3666477b47",
+              "release_revision": "06410b139bb5376431d85007d3821fb7da9a8077e8e03979108412c857da4e1a",
+              "route_binding_sha256": "06410b139bb5376431d85007d3821fb7da9a8077e8e03979108412c857da4e1a"
+            },
+            "key_id": "68f8b691-6805-4991-9d40-87af5c566e37",
+            "metering_state": "complete",
+            "model_alias": "offline-controlled",
+            "quota_consumed": 1,
+            "quota_date": "2026-11-27",
+            "rate_witness": {
+              "permit_id": "8ff76a64-1ea1-4e64-966a-48011e8938b4",
+              "policy_id": "offline-controlled-rate-v1",
+              "policy_revision": "offline-controlled-rate-v1",
+              "rate_epoch": "1",
+              "windows": [
+                {
+                  "limit": "1000",
+                  "scope_id": "global",
+                  "window_end": "2026-11-27T03:00:00Z",
+                  "window_start": "2026-11-27T02:00:00Z"
+                },
+                {
+                  "limit": "1000",
+                  "scope_id": "key/68f8b691-6805-4991-9d40-87af5c566e37",
+                  "window_end": "2026-11-27T03:00:00Z",
+                  "window_start": "2026-11-27T02:00:00Z"
+                }
+              ]
+            },
+            "received_at": "2026-11-27T02:42:23.461Z",
+            "request_id": "7bdcf271-1344-4880-8d48-326d82eaf796",
+            "reservation_plan": {
+              "schema_version": "1.0",
+              "model_alias": "offline-controlled",
+              "source_id": "2760be51-dd8c-5d8e-83e3-d37bd6b909cc",
+              "config_revision": "offline-controlled-v1",
+              "capability_revision": "offline-controlled-tools-v1",
+              "budget_policy_revision": "003005c7-2d72-4913-a7f6-f3993f7e0c1d",
+              "window_kind": "utc_day",
+              "token_metric": "prompt_plus_completion",
+              "request_reserved": "1",
+              "input_upper_tokens": "64",
+              "output_upper_tokens": "32",
+              "total_upper_tokens": "96",
+              "token_reserved": "96",
+              "money_reserved_atomic": "96",
+              "currency": "USD",
+              "price_snapshot_id": "b912484e-0c22-5f98-ab60-fb05a679faa6",
+              "price_snapshot_sha256": "5086568d8fbf1da3936ea7591450a161bcac5202bc01845ee71143d01dcc0aba",
+              "price_version": "offline-controlled-price-v1",
+              "rate_policy_revision": "offline-controlled-rate-v1"
+            },
+            "source_id": "2760be51-dd8c-5d8e-83e3-d37bd6b909cc",
+            "source_type": "internal",
+            "status": "cancelled",
+            "submission_state": "submitted",
+            "upstream_model": "offline-controlled-v1",
+            "usage": {
+              "input_cached_tokens": 0,
+              "input_tokens": 6,
+              "missing_reason": null,
+              "output_tokens": 4,
+              "reasoning_tokens": 0,
+              "source": "upstream",
+              "total_tokens": 10
+            }
+          }
+        ],
+        "data_complete": true,
+        "lookup": {
+          "capacity": {
+            "data_source": "release_log",
+            "release_reason": "transport_closed",
+            "state": "released"
+          },
+          "evidence_source": "generation_request",
+          "reason": null,
+          "rejection_code": null,
+          "request_id": "7bdcf271-1344-4880-8d48-326d82eaf796",
+          "resolution": "recorded"
+        },
+        "next_cursor": null
+      }
+    ]
+  }
+}

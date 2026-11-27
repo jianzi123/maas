@@ -1,0 +1,10 @@
+locator.waitFor: Error: strict mode violation: locator('.badge').filter({ hasText: /^completed$/ }) resolved to 3 elements:
+    1) <span class="badge">completed</span> aka getByText('completed').first()
+    2) <span class="badge">completed</span> aka getByText('completed').nth(1)
+    3) <span class="badge">completed</span> aka getByText('completed').nth(2)
+
+Call log:
+[2m  - waiting for locator('.badge').filter({ hasText: /^completed$/ }) to be visible[22m
+
+    at raceCase (C:\Users\a9786\multica_workspaces_desktop-api.multica.ai\maas-007-da4ec7313117\maas-7-6bf78f4f3528\workdir\inputs\combined-393\browser.mjs:37:72)
+    at async file:///C:/Users/a9786/multica_workspaces_desktop-api.multica.ai/maas-007-da4ec7313117/maas-7-6bf78f4f3528/workdir/inputs/combined-393/browser.mjs:54:161

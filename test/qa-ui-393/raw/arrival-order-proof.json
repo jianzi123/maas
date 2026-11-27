@@ -1,0 +1,46 @@
+[
+  {
+    "case": "cancel-old-before-new",
+    "old_response_index": 0,
+    "fresh_snapshot_response_index": 1,
+    "observed_order": "old-before-new",
+    "abort": [
+      "AbortError: 快照读取已由新操作替代",
+      "AbortError: 快照读取已由新操作替代"
+    ],
+    "source_trace": "inputs\\combined-393\\raw\\cancel-old-before-new-network.json"
+  },
+  {
+    "case": "cancel-old-after-new",
+    "old_response_index": 2,
+    "fresh_snapshot_response_index": 0,
+    "observed_order": "old-after-new",
+    "abort": [
+      "AbortError: 快照读取已由新操作替代",
+      "AbortError: 快照读取已由新操作替代"
+    ],
+    "source_trace": "inputs\\combined-393\\raw\\cancel-old-after-new-network.json"
+  },
+  {
+    "case": "approve-old-before-new",
+    "old_response_index": 0,
+    "fresh_snapshot_response_index": 2,
+    "observed_order": "old-before-new",
+    "abort": [
+      "AbortError: 快照读取已由新操作替代",
+      "AbortError: 快照读取已由新操作替代"
+    ],
+    "source_trace": "inputs\\combined-393\\raw\\attempt2\\approve-old-before-new-network.json"
+  },
+  {
+    "case": "approve-old-after-new",
+    "old_response_index": 3,
+    "fresh_snapshot_response_index": 0,
+    "observed_order": "old-after-new",
+    "abort": [
+      "AbortError: 快照读取已由新操作替代",
+      "AbortError: 快照读取已由新操作替代"
+    ],
+    "source_trace": "inputs\\combined-393\\raw\\approve-old-after-new-network.json"
+  }
+]

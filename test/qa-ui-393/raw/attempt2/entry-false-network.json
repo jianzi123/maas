@@ -1,0 +1,54 @@
+[
+  {
+    "method": "GET",
+    "path": "/"
+  },
+  {
+    "method": "GET",
+    "path": "/assets/index-BhvyXQDj.js"
+  },
+  {
+    "method": "GET",
+    "path": "/assets/index-BeJHohIj.css"
+  },
+  {
+    "method": "GET",
+    "path": "/console-config.json"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/v1/session"
+  },
+  {
+    "method": "GET",
+    "path": "/console-config.json"
+  },
+  {
+    "method": "POST",
+    "path": "/api/admin/v1/session"
+  },
+  {
+    "method": "GET",
+    "path": "/assets/ChatWorkspace-e8WVUcSB.js"
+  },
+  {
+    "method": "GET",
+    "path": "/assets/http-DApDTGYo.js"
+  },
+  {
+    "method": "GET",
+    "path": "/api/agent/v1/capabilities"
+  },
+  {
+    "method": "GET",
+    "path": "/api/agent/v1/sessions"
+  },
+  {
+    "method": "GET",
+    "path": "/api/agent/v1/capabilities"
+  },
+  {
+    "method": "GET",
+    "path": "/api/agent/v1/sessions"
+  }
+]
