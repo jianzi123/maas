@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "scope": "installation-input-only-no-secret-values",
-  "sourceCommit": "5fffa8b8c2371cd659839ab29e11fdc93fbdb5d7",
+  "sourceCommit": "339630480207c46c44dbe3f796be9bb1047a89ad",
   "productionWiringVerified": false,
   "connections": {
     "core": {
@@ -391,6 +391,7 @@
         "docs/single-model-runtime-increment.md",
         "docs/unified-status.md",
         "docs/unified-workbench.md",
+        "internal/agentruntime/ar_auth_dependency_test.go",
         "internal/agentruntime/ar_commands.go",
         "internal/agentruntime/ar_host_test.go",
         "internal/agentruntime/ar_http.go",
@@ -421,6 +422,7 @@
         "internal/agentruntime/tool_context_test.go",
         "internal/agentruntime/tools.go",
         "internal/agentruntime/types.go",
+        "internal/app/ar_dependency_http_test.go",
         "internal/app/auth.go",
         "internal/app/config.go",
         "internal/app/database.go",
@@ -521,6 +523,11 @@
         "test/controlled/maas20/fc1-tools/wire/schema-validation.json",
         "test/controlled/maas20/headless.jsonl",
         "test/controlled/maas20/mysql.jsonl",
+        "test/controlled/maas20/obs-ar-dependency-403/container.txt",
+        "test/controlled/maas20/obs-ar-dependency-403/obs403-reg.txt",
+        "test/controlled/maas20/obs-ar-dependency-403/obs403-vet.txt",
+        "test/controlled/maas20/obs-ar-dependency-403/obs403.txt",
+        "test/controlled/maas20/obs-ar-dependency-403/version.txt",
         "test/controlled/maas20/product-offline/final-sql.jsonl",
         "test/controlled/maas20/product-offline/first-assertions-harness-exit2.jsonl",
         "test/controlled/maas20/product-offline/mysql-server.log",

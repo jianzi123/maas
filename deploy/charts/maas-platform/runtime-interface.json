@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "scope": "observed-source-interface-not-production-readiness",
   "backend": {
-    "sourceCommit": "5fffa8b8c2371cd659839ab29e11fdc93fbdb5d7",
+    "sourceCommit": "339630480207c46c44dbe3f796be9bb1047a89ad",
     "apiGroup": "serving.maas.example",
     "operator": {
       "command": [
@@ -430,6 +430,11 @@
       "test/controlled/maas20/fc1-tools/product-service-mysql.jsonl": "60c7d32f30ebef7045fc63e536c8d332ec9e986ca4ad5a67ad451accd4fe76d0",
       "test/controlled/maas20/fc1-tools/validate-traces.py": "2ba8bea5791b686a2f0976fb14888ab1846c99ca1db9d36a9e7d81dc18b8067a",
       "test/controlled/maas20/fc1-tools/wire-capture.jsonl": "696d1dcc1f6b55d25eeca54b2c7e76e3b9cb792e9758aa23a68eac72e6dde973",
+      "test/controlled/maas20/obs-ar-dependency-403/container.txt": "86e9ff6439653931c76d838b6fa892eabfdd53c3e406ef221f9f84dccabc5084",
+      "test/controlled/maas20/obs-ar-dependency-403/obs403-reg.txt": "740a4fca46a5dc27ead7c46a6caffcc73dd94d494ff74877fd16da43d221f68a",
+      "test/controlled/maas20/obs-ar-dependency-403/obs403-vet.txt": "4179612bbe1ced881997bbc50930baa3349f454317620508d8088cd8f09610b8",
+      "test/controlled/maas20/obs-ar-dependency-403/obs403.txt": "96347eec09cdbe8a498cb44c27fc2d9c55f23895e4faa69ab41c390d99ec064c",
+      "test/controlled/maas20/obs-ar-dependency-403/version.txt": "9f6c0aaaabdb42c83e82439bf2c9d1b7f39f82211d7988d55c09dc59556617d5",
       "test/controlled/maas20/product-offline/final-sql.jsonl": "a2a0d37fc3ab4c5f0e914bb294847a602cf6a649ed770e536e62603408e8b0d0",
       "test/controlled/maas20/product-offline/first-assertions-harness-exit2.jsonl": "f731ba36b2ed3e2344967c061c55602cc574f5280b48dfe78c5bb14b4e152eac",
       "test/controlled/maas20/product-offline/mysql-server.log": "3ac73ac7d8897ce27c027c2e40e6665c522425742d648305022970904e5f0806",
@@ -452,9 +457,10 @@
       "patches/higress/v2.2.5-maas-r1/manifest.json": "296a6733c37ce8fa644bc55d1d148f2c5bdfbf76377c9696210bcfbf765b846f",
       "internal/admission/handler.go": "ac61df7e4e1a995cba390e7bc9757e51368788c8d0dd3c9cf171299d7edfddc1",
       "internal/admission/handler_test.go": "2a1d8c9548af0cee333fbb67a08d7f4e9b0ff8bc073152cf84141aa049a7b70a",
+      "internal/agentruntime/ar_auth_dependency_test.go": "08fb8f88df92c37a5b2cb87345d02066765a1433e752a6a9b0ef66209f544683",
       "internal/agentruntime/ar_commands.go": "bc2fcac859d6c7e0bb8e56151150cdf0d1976e1e5aa7e7f60a7de678eaa52ac3",
       "internal/agentruntime/ar_host_test.go": "55013f7973fdc07d14598d99fb51b10aa426da088e3076b2b473004cca3b4362",
-      "internal/agentruntime/ar_http.go": "09c5cd23cc2989beec24b6661523be50d70ff4548e2ffd6f127d348c0fcf1cc8",
+      "internal/agentruntime/ar_http.go": "d4326a810a9d134a9367db56ce9d1b8cc3fd18f98140654368d9b5c92f2d42d7",
       "internal/agentruntime/ar_http_test.go": "9e5fec9f185ecc0afb956a037f52a145377b6afa8db002e9390ac4509df157e7",
       "internal/agentruntime/ar_mysql_test.go": "c9fbe9527e7674309789eb3badfedb1b46c7128a9f00081b673e9699f4a21d75",
       "internal/agentruntime/ar_projection.go": "9d473637e71b26cc5911729f8d889cfb5d83c6e83e1949d8d84e32f007e07482",
@@ -477,6 +483,7 @@
       "internal/agentruntime/tool_context.go": "415fe508b8e22c73ad9f504b287438903f29864dd9e31a382bcc074965ddb35b",
       "internal/agentruntime/tool_context_test.go": "d5da284e7de3bdb02bf1987bf81c1503d8663e4fcfb4f395e9b92d19feb0cac3",
       "internal/agentruntime/types.go": "c6025a37a39fcd9b1dbd51fd89d1ce269ff1a1ad59beb9db05983aaa5fe06851",
+      "internal/app/ar_dependency_http_test.go": "ecb5e79329dd4b50fc321cda491b154bf5a9df2395beaaf6ad1034bbc2d6a7bb",
       "internal/app/auth.go": "a03f30f0b788688f913278e228333be014071d8d08df0972b388789440cba65a",
       "internal/app/config.go": "c6197a3a0be8bc9249770dbbb611cf97b984c481cea96da07e2c17dce8746674",
       "internal/app/database.go": "5a1fa8f28f88818a694fe3411655525c35129495937201238cdc112e5f1661d1",
@@ -728,7 +735,7 @@
     }
   },
   "console": {
-    "sourceCommit": "5fffa8b8c2371cd659839ab29e11fdc93fbdb5d7",
+    "sourceCommit": "339630480207c46c44dbe3f796be9bb1047a89ad",
     "build": "npm ci && npm run build",
     "output": "console/dist",
     "localBridge": "development-and-explicit-workbench-mode-only",
