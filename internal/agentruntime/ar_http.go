@@ -185,6 +185,10 @@ func (h *ARHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			fail(arFailure(401, "unauthenticated"))
 			return
 		}
+		if errors.Is(e, ErrUnavailable) {
+			fail(ErrUnavailable)
+			return
+		}
 		fail(ErrForbidden)
 		return
 	}

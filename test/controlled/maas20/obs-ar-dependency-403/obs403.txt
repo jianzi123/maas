@@ -1,0 +1,73 @@
+=== RUN   TestProductARDependency503PreservesAuthAndLedger
+--- PASS: TestProductARDependency503PreservesAuthAndLedger (2.57s)
+=== RUN   TestProductPhysicalGateWithOriginalFourRoles
+--- PASS: TestProductPhysicalGateWithOriginalFourRoles (2.87s)
+=== RUN   TestProductPhysicalGateRejectsMissingObjectsAndTerminalKeys
+=== RUN   TestProductPhysicalGateRejectsMissingObjectsAndTerminalKeys/missing_usage_events
+=== RUN   TestProductPhysicalGateRejectsMissingObjectsAndTerminalKeys/missing_only_terminal
+=== RUN   TestProductPhysicalGateRejectsMissingObjectsAndTerminalKeys/missing_private_history
+=== RUN   TestProductPhysicalGateRejectsMissingObjectsAndTerminalKeys/nonunique_terminal_key
+=== RUN   TestProductPhysicalGateRejectsMissingObjectsAndTerminalKeys/partial_terminal_key
+=== RUN   TestProductPhysicalGateRejectsMissingObjectsAndTerminalKeys/wrong_terminal_column_order
+=== RUN   TestProductPhysicalGateRejectsMissingObjectsAndTerminalKeys/nullable_terminal_identity
+--- PASS: TestProductPhysicalGateRejectsMissingObjectsAndTerminalKeys (3.82s)
+    --- PASS: TestProductPhysicalGateRejectsMissingObjectsAndTerminalKeys/missing_usage_events (0.22s)
+    --- PASS: TestProductPhysicalGateRejectsMissingObjectsAndTerminalKeys/missing_only_terminal (0.20s)
+    --- PASS: TestProductPhysicalGateRejectsMissingObjectsAndTerminalKeys/missing_private_history (0.22s)
+    --- PASS: TestProductPhysicalGateRejectsMissingObjectsAndTerminalKeys/nonunique_terminal_key (0.22s)
+    --- PASS: TestProductPhysicalGateRejectsMissingObjectsAndTerminalKeys/partial_terminal_key (0.21s)
+    --- PASS: TestProductPhysicalGateRejectsMissingObjectsAndTerminalKeys/wrong_terminal_column_order (0.25s)
+    --- PASS: TestProductPhysicalGateRejectsMissingObjectsAndTerminalKeys/nullable_terminal_identity (0.29s)
+PASS
+ok  	github.com/jianzi123/maas/internal/app	9.454s
+=== RUN   TestARAuthDependencyClassificationAndNoActions
+=== RUN   TestARAuthDependencyClassificationAndNoActions/dependency/GET
+=== RUN   TestARAuthDependencyClassificationAndNoActions/dependency/POST
+=== RUN   TestARAuthDependencyClassificationAndNoActions/wrapped_dependency/GET
+=== RUN   TestARAuthDependencyClassificationAndNoActions/wrapped_dependency/POST
+=== RUN   TestARAuthDependencyClassificationAndNoActions/dependency_with_principal/GET
+=== RUN   TestARAuthDependencyClassificationAndNoActions/dependency_with_principal/POST
+=== RUN   TestARAuthDependencyClassificationAndNoActions/unauthenticated/GET
+=== RUN   TestARAuthDependencyClassificationAndNoActions/unauthenticated/POST
+=== RUN   TestARAuthDependencyClassificationAndNoActions/forbidden/GET
+=== RUN   TestARAuthDependencyClassificationAndNoActions/forbidden/POST
+=== RUN   TestARAuthDependencyClassificationAndNoActions/wrapped_forbidden/GET
+=== RUN   TestARAuthDependencyClassificationAndNoActions/wrapped_forbidden/POST
+=== RUN   TestARAuthDependencyClassificationAndNoActions/unknown_error/GET
+=== RUN   TestARAuthDependencyClassificationAndNoActions/unknown_error/POST
+=== RUN   TestARAuthDependencyClassificationAndNoActions/status_error_is_not_dependency/GET
+=== RUN   TestARAuthDependencyClassificationAndNoActions/status_error_is_not_dependency/POST
+=== RUN   TestARAuthDependencyClassificationAndNoActions/missing_principal/GET
+=== RUN   TestARAuthDependencyClassificationAndNoActions/missing_principal/POST
+=== RUN   TestARAuthDependencyClassificationAndNoActions/missing_revision/GET
+=== RUN   TestARAuthDependencyClassificationAndNoActions/missing_revision/POST
+=== RUN   TestARAuthDependencyClassificationAndNoActions/invalid_subject/GET
+=== RUN   TestARAuthDependencyClassificationAndNoActions/invalid_subject/POST
+--- PASS: TestARAuthDependencyClassificationAndNoActions (1.19s)
+    --- PASS: TestARAuthDependencyClassificationAndNoActions/dependency/GET (0.07s)
+    --- PASS: TestARAuthDependencyClassificationAndNoActions/dependency/POST (0.05s)
+    --- PASS: TestARAuthDependencyClassificationAndNoActions/wrapped_dependency/GET (0.05s)
+    --- PASS: TestARAuthDependencyClassificationAndNoActions/wrapped_dependency/POST (0.05s)
+    --- PASS: TestARAuthDependencyClassificationAndNoActions/dependency_with_principal/GET (0.06s)
+    --- PASS: TestARAuthDependencyClassificationAndNoActions/dependency_with_principal/POST (0.05s)
+    --- PASS: TestARAuthDependencyClassificationAndNoActions/unauthenticated/GET (0.05s)
+    --- PASS: TestARAuthDependencyClassificationAndNoActions/unauthenticated/POST (0.04s)
+    --- PASS: TestARAuthDependencyClassificationAndNoActions/forbidden/GET (0.06s)
+    --- PASS: TestARAuthDependencyClassificationAndNoActions/forbidden/POST (0.06s)
+    --- PASS: TestARAuthDependencyClassificationAndNoActions/wrapped_forbidden/GET (0.05s)
+    --- PASS: TestARAuthDependencyClassificationAndNoActions/wrapped_forbidden/POST (0.05s)
+    --- PASS: TestARAuthDependencyClassificationAndNoActions/unknown_error/GET (0.05s)
+    --- PASS: TestARAuthDependencyClassificationAndNoActions/unknown_error/POST (0.06s)
+    --- PASS: TestARAuthDependencyClassificationAndNoActions/status_error_is_not_dependency/GET (0.06s)
+    --- PASS: TestARAuthDependencyClassificationAndNoActions/status_error_is_not_dependency/POST (0.06s)
+    --- PASS: TestARAuthDependencyClassificationAndNoActions/missing_principal/GET (0.04s)
+    --- PASS: TestARAuthDependencyClassificationAndNoActions/missing_principal/POST (0.05s)
+    --- PASS: TestARAuthDependencyClassificationAndNoActions/missing_revision/GET (0.05s)
+    --- PASS: TestARAuthDependencyClassificationAndNoActions/missing_revision/POST (0.05s)
+    --- PASS: TestARAuthDependencyClassificationAndNoActions/invalid_subject/GET (0.06s)
+    --- PASS: TestARAuthDependencyClassificationAndNoActions/invalid_subject/POST (0.06s)
+=== RUN   TestARAuthInitialStreamDependencyAndSecurityControls
+--- PASS: TestARAuthInitialStreamDependencyAndSecurityControls (0.15s)
+PASS
+ok  	github.com/jianzi123/maas/internal/agentruntime	1.492s
+exit=0

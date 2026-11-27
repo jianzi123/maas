@@ -1,0 +1,3 @@
+ok  	github.com/jianzi123/maas/internal/agentruntime	41.130s
+ok  	github.com/jianzi123/maas/internal/app	41.831s
+exit=0
