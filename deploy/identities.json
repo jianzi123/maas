@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "scope": "installation-input-only-no-secret-values",
-  "sourceCommit": "a9a30ba073c7e37ee64fbd60fd353302244b767a",
+  "sourceCommit": "9b8a44d3fbd9e0d8860ce0b7ffaae7254ca61bf5",
   "productionWiringVerified": false,
   "connections": {
     "core": {
@@ -298,6 +298,7 @@
         "deploy/release/fetch_source.py",
         "deploy/release/identity_smoke.py",
         "deploy/release/install_compose.py",
+        "deploy/release/install_kubernetes.py",
         "deploy/release/kubernetes/.gitignore",
         "deploy/release/kubernetes/LOCAL-VERIFICATION.md",
         "deploy/release/kubernetes/README.md",

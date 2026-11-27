@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "scope": "observed-source-interface-not-production-readiness",
   "backend": {
-    "sourceCommit": "a9a30ba073c7e37ee64fbd60fd353302244b767a",
+    "sourceCommit": "9b8a44d3fbd9e0d8860ce0b7ffaae7254ca61bf5",
     "apiGroup": "serving.maas.example",
     "operator": {
       "command": [
@@ -732,7 +732,7 @@
     }
   },
   "console": {
-    "sourceCommit": "a9a30ba073c7e37ee64fbd60fd353302244b767a",
+    "sourceCommit": "9b8a44d3fbd9e0d8860ce0b7ffaae7254ca61bf5",
     "build": "npm ci && npm run build",
     "output": "console/dist",
     "localBridge": "development-and-explicit-workbench-mode-only",
