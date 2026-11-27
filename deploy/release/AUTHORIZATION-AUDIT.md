@@ -1,5 +1,7 @@
 # 安装/升级有效授权前置（FC-M-AUTH-PRE-1）
 
+接合基准是主单冻结cd34c02bdc379f135ca21c216406a00639879193（含eab5d69祖先），不是未锁46181。授权审计、物理形状和页面/工具矩阵分别验收。
+
 本前置在一次性安装镜像内执行，不进入Go运行核心，也不给runtime增加mysql.*读取。自动provision和`MAAS_INSTALL_PROVISION_ROLES=0`两种模式都必须完整审计成功；0仅跳过provision。
 
 ## 批准基准
@@ -53,6 +55,8 @@ python source/deploy/release/install_compose.py --file compose.yaml
 
 它停止旧maas/web，每次运行新的migrate/audit容器；审计非零不执行候选up，不复用旧completed容器。原始`docker compose`分步命令仅为底层维护接口，不能将跳过此顺序视作完整安装。
 
-自有kind验证的local_verify.py每次显式install/upgrade创建新命名迁移Job，拒绝并发/不明前次Job；只在本次Job成功后装应用，旧Complete不能证明本次授权。所有原生安装维护步骤须保留同一顺序。直接`serve`、人为跳过迁移的primitive YAML、自动容器restart不是独立全effective硬拦或连续防漂移，需列未具备；该运行期切片由原MAAS-20收口，不在本前置扩runtime权限。
+原生包用 `python source/deploy/release/install_kubernetes.py --directory . --kubeconfig APPROVED_KUBECONFIG --context APPROVED_CONTEXT --namespace maas`，外置DB加`--external-database`。它包装既有清单，不建集群。自有kind验证的local_verify.py同样每次显式install/upgrade创建新命名迁移Job，拒绝并发/不明前次Job；只在本次Job成功后装应用，旧Complete不能证明本次授权。直接`serve`、人为跳过迁移的primitive YAML、自动容器restart不是独立全effective硬拦或连续防漂移，需列未具备；该运行期切片由原MAAS-20收口，不在本前置扩runtime权限。
+
+控制验证使用无网络/无宿主端口的独立MySQL8.4.7，表/列名从实际GRANT声明生成权限夹具，产品migrator明确为桩。它能验证真实ACL/provision/audit顺序和拒绝后旧授权保留，不能当作真实产品DDL、完整Compose/K8s安装、业务或物理形状通过。首次CURRENT_ROLE二进制JSON串导致正控安全拒绝，已通过源SQL显式UTF8转换修复，旧失败保留。
 
 独立reconcile-product-002是维护命令，不等于安装完成；之后仍须正常migrate/audit再启动。完整物理形状门禁与授权审计分别验收，不以任一通过关闭另一项或生产/真实模型验收。

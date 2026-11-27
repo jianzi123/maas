@@ -27,6 +27,8 @@ docker build --target migrate -t maas-migrate:<tag> --build-arg SOURCE_REVISION=
 
 ## 原生应用顺序
 
+安装有效授权前置见source/deploy/release/AUTHORIZATION-AUDIT.md。下方包装器每次创建新审计迁移Job，旧Complete不能放行新候选；缺权限/缺元数据非零。外置预供账号模式只跳provision，不跳audit。直接逐条应用资源不等于完成该前置。
+
 确认当前context为明确批准目标，namespace maas未被其他项目占用或这是保留原Secret的同一安装。
 ```sh
 python source/deploy/release/install_kubernetes.py --directory . --kubeconfig APPROVED_KUBECONFIG --context APPROVED_CONTEXT --namespace maas
