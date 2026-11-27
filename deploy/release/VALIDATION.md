@@ -20,3 +20,15 @@ PR25已修R-P01未挂载试用入口、登录bootstrap及旧poll淘汰新open的
 真实供应商/生产Higress、管理目标、目标集群、付费/GPU及整体A01–A34本轮未验。新包构建/校验、准确ref及后续独立签收以主单原件为准。工具接口见source/docs/agent-tool-interface.md，演示见source/console/docs/demo-15min.md，功能表与完整问题/负责人见source/docs/delivery-feature-matrix.md和next-release-integration.md。
 
 升级/回滚保留MySQL、原request/usage/held、会话/事件/checkpoint及安装身份/Secret；停旧写者后迁移，仅schema兼容时换应用镜像。不清库、重结算、自动重放未知执行或serve自动DDL。
+
+2026-11-27修订补充（覆盖上方旧待实现/待QA状态）：
+
+原PR24 eab5d69/5fffa8b物理门禁已纳主组合46181fab，正常Linux入口/测试二进制/定向vet通过，41对象50键生成完全匹配；九份DDL/console/API不变。原三反例及12对象SHOW VIEW按组合定向复验，实际结果和最终ref由主单给出；P1仍待原QA同树签回。旧安装须由获准安装身份应用最新12对象元数据授权，不加私有SELECT或给runtime补标/DDL。
+
+页面竞态已在393/c99正常受控Go/MySQL8.0.44/Chrome158由独立QA关闭，9页面＋4只读契约通过，4Run/6child和6request/6usage/6finalized；无重发/重计。原4402失败件保留，QA PR26/ca97证据锁不覆盖产品。R-P01引导不关闭公共消费Key API。本组合console/API零差异，保留该独立范围。
+
+**正式安装启动前effective-grants audit仍未完成，本候选不能签稳定安装。** FC-M-AUTH-PRE-1要求自动/预供、新建/升级都完整核授权；PROVISION_ROLES=0不得跳audit。当前脚本只核角色边/default，不证明无额外direct/列权或role模板越权。原MAAS-8唯一收口一次性入口，缺合法元数据非零，不借管理DSN/给runtime mysql.*或造skip旁路。运行期full权限漂移守卫为原后端独立后续，本版未实现。
+
+原生K8s历史6285确有镜像/专属kind/PVC基础设施，但mysql-ready exit124，未迁移Job/App/业务；自有MySQL/节点已停并保留数据身份，Exit137不称优雅或完整恢复通过，不外推本版K8s验收。
+
+组合46181fab实际结果：MySQL8.4.7六顶层/22测试及子项全部通过（原三反例＋变体/最窄元数据权限/原journal/reconcile/unknown-held/查询中取消）；另原正常HTTP工具闭环一顶层/3测试及子项通过，完整与非法第二工具分别保持原唯一child用量语义。两阶段均exit0、0失败/skip，专属容器/卷已精确清理。正常Linux产品构建、测试二进制与定向vet通过，九DDL、console和公共AR-1相对393零差异。以上为集成证据，不替代原QA三反例关闭或安装effective-grants验收。最终code/ref由VERSION给出；其后本次只补报告和标准四锁。
