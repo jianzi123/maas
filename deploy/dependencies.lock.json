@@ -4,12 +4,12 @@
   "deploymentApproved": false,
   "sourceBaseline": {
     "chartBase": "e5647a2f2b44f53d39a80041be94b619f07c29d6",
-    "backendInspected": "86be4b814a22695ed98cc2d8047619c8a9d8a647",
+    "backendInspected": "02969aeb7ad1ac00f8e4db9f08d42f0164a68501",
     "contracts": "MAAS-2 v0.4 + retained v0.3 + query/recovery addenda + MAAS-1 role review",
     "terminal": "3.0",
     "ticket": "3",
     "proposedTerminal": "3.1 (not enabled)",
-    "consoleInspected": "86be4b814a22695ed98cc2d8047619c8a9d8a647",
+    "consoleInspected": "02969aeb7ad1ac00f8e4db9f08d42f0164a68501",
     "defaultBranch": "925d8c55be9ce823d100bf90a5c78cf19ea66d58",
     "candidatePR": null,
     "candidateState": "integrated-unmerged",
@@ -18,7 +18,7 @@
     "qaCore": "ac94a373ec0a61c5fd4dc5380a7985a4fb47840f",
     "qaEvidence": "50354a705c03383d0102d0d437119afd7ffed8b3",
     "sourceInventory": "deploy/build-sources.lock.json",
-    "sourceInventorySha256": "00af4d3404fa28841e56b3897059bbe3a6723c6c8581762fe4c9f328fe40d036",
+    "sourceInventorySha256": "f31d17065579ea47857f9c7fc0b199535c7cea8fc2a3691586512b96a1c0d82a",
     "upstreamWorkbenchDeployment": "e5647a2f2b44f53d39a80041be94b619f07c29d6",
     "backendBase": "0559fa46b4a728d6f542daf19532e794f8549b31",
     "integrationBranch": "integrate/MAAS-17-unified-20261114",
@@ -99,7 +99,7 @@
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "86be4b814a22695ed98cc2d8047619c8a9d8a647",
+      "sourceCommit": "02969aeb7ad1ac00f8e4db9f08d42f0164a68501",
       "compiledAPIGroup": "serving.maas.example"
     },
     {
@@ -116,7 +116,7 @@
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "86be4b814a22695ed98cc2d8047619c8a9d8a647",
+      "sourceCommit": "02969aeb7ad1ac00f8e4db9f08d42f0164a68501",
       "compiledAPIGroup": "serving.maas.example"
     },
     {
@@ -133,7 +133,7 @@
         "ExternalAPI",
         "SelfHosted"
       ],
-      "sourceCommit": "86be4b814a22695ed98cc2d8047619c8a9d8a647"
+      "sourceCommit": "02969aeb7ad1ac00f8e4db9f08d42f0164a68501"
     },
     {
       "id": "mysql",
@@ -432,7 +432,7 @@
   "databaseIdentities": {
     "schemaVersion": "1.0",
     "scope": "installation-input-only-no-secret-values",
-    "sourceCommit": "86be4b814a22695ed98cc2d8047619c8a9d8a647",
+    "sourceCommit": "02969aeb7ad1ac00f8e4db9f08d42f0164a68501",
     "productionWiringVerified": false,
     "connections": {
       "core": {
@@ -842,6 +842,7 @@
           "docs/unified-status.md",
           "docs/unified-workbench.md",
           "docs/wsl-publish-resources.md",
+          "internal/agentruntime/ar_auth_dependency_test.go",
           "internal/agentruntime/ar_commands.go",
           "internal/agentruntime/ar_host_test.go",
           "internal/agentruntime/ar_http.go",
@@ -872,6 +873,7 @@
           "internal/agentruntime/tool_context_test.go",
           "internal/agentruntime/tools.go",
           "internal/agentruntime/types.go",
+          "internal/app/ar_dependency_http_test.go",
           "internal/app/auth.go",
           "internal/app/config.go",
           "internal/app/database.go",
@@ -983,6 +985,11 @@
           "test/controlled/maas20/fc1-tools/wire/schema-validation.json",
           "test/controlled/maas20/headless.jsonl",
           "test/controlled/maas20/mysql.jsonl",
+          "test/controlled/maas20/obs-ar-dependency-403/container.txt",
+          "test/controlled/maas20/obs-ar-dependency-403/obs403-reg.txt",
+          "test/controlled/maas20/obs-ar-dependency-403/obs403-vet.txt",
+          "test/controlled/maas20/obs-ar-dependency-403/obs403.txt",
+          "test/controlled/maas20/obs-ar-dependency-403/version.txt",
           "test/controlled/maas20/product-offline/final-sql.jsonl",
           "test/controlled/maas20/product-offline/first-assertions-harness-exit2.jsonl",
           "test/controlled/maas20/product-offline/mysql-server.log",
