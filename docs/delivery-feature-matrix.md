@@ -4,7 +4,7 @@
 
 | 能力 | 状态 | 实际入口/源码与证据 | 限制 |
 | --- | --- | --- | --- |
-| 正常进程、迁移/运行身份与恢复 | journal/取消隔离/维护已验证；物理结构P1开放 | cmd/maas-service migrate/serve/reconcile-product-002；Applied/hash、Agent形状/版本；实际查询中取消保留原lease，其他owner拒绝 | 独立QA固定1f8a1e2为47过/3失：缺usage_events、only_terminal唯一索引或retained_release_snapshots仍被接受。原后端修复中，不能称完整结构门禁通过；runtime不得DDL/补标 |
+| 正常进程、迁移/运行身份与恢复 | 物理门禁修订已纳入并构建；P1独立复验待签 | 正常migrate/serve/reconcile；原journal/owner/取消隔离，新增41对象/50原唯一键/terminal非NULL；组合46181fab | eab5d69只读检查与12 SHOW VIEW元数据，不读私有数据或DDL；旧1f8的47/3原件保留，不用作者结果关闭独立P1 |
 | 管理员/Cookie/CSRF稳定身份 | 已实现并验证 | internal/app/auth.go；独立QA879a正常入口、集成真实站点；应用/MySQL重启恢复 | 单管理员试点；固定安装ID/pepper/cursor/数据库跨升级保留 |
 | 会话列表/创建/改名/删除、多轮/编辑/重新生成 | 已实现，已在受控API验证；最终组合独立复验另列 | internal/agentruntime/ar_http.go、ar_commands.go；console/src/chat/http.ts、ChatWorkspace.vue | 新操作保留原消息/命令关联；空models不能创建可用会话 |
 | 普通Chat中文/Markdown/代码、SSE | 已实现并完成正常MySQL离线站点验证 | same-origin /api/agent/v1；安装smoke的chat及SSE cursor检查 | 离线回答为固定受控响应，不代表真实模型质量 |
@@ -12,7 +12,7 @@
 | Session/Message/Run/Step/ToolCall/Event/Checkpoint/审批持久化 | 已实现并验证受控范围 | MySQLStore单CAS聚合文档、原AR-1事件；独立QA的存储/并发/原ID恢复 | 单会话聚合文档32MiB上限；不是长期记忆系统 |
 | 工具描述/Schema/可信执行上下文 | 已实现并验证 | tools.go、tool_context.go；docs/agent-tool-interface.md；name/version/description/input/output、scope、run/step/call/child request/trace/deadline/fence/幂等 | 旧Execute的输出仍是string；目录结果为JSON数组的字符串，不能谎报通用JSON执行器 |
 | 工具取消/超时/attempt/未知结果屏障 | 已实现，受控后端有独立QA | AR-R02在879a受控范围关闭；safe/read/受控write矩阵；未知写needs_confirmation、不重放 | 原QA结果不自动覆盖最终新profile；外部副作用执行器未实现 |
-| 停止已实际准入child | 后端已验证；前端竞态作者修复，独立关闭待验 | 原cancel API/Host与原Admit/Finalize；PR25修旧poll淘汰新open，组合停止/批准两种迟到顺序测试通过 | QA-CHAT-RACE-001在4402真实浏览器失败保留；不能以作者演示或取消ACK替代独立关闭；unknown不自动释放/重跑 |
+| 停止已实际准入child | 后端已验证；页面竞态在393受控范围独立关闭 | 原cancel/Admit/Finalize；QA-CHAT-RACE-001四迟到顺序、idle正例及畸形负例，9页面＋4只读契约通过 | QA站点MySQL8.0.44/Chrome158；本次console/API零差异保留该范围，ACK不等于外部资源已终止，unknown不自动释放/重跑 |
 | 刷新/断线/410只读恢复 | 已实现，固定后端有独立QA | AR-R01在879a关闭；Step/Tool分页及中文/98/100/102边界；新站点浏览器刷新Run POST0 | 持续写入可触发有界暂停重取；不保证任意时刻分页立即收敛 |
 | 父Run/child/known/inflight/held唯一计量 | 已实现并验证受控范围 | 原kernel.Admit/Finalize及usage；独立QA两child known/mixed样本；离线站点两模型child known20，重复命令原Run返回 | 合成价表与真实模型分列；unknown不补0，父Run不再扣量 |
 | 消息/工具/事件/原child消费跨重启 | 已实现并完成离线应用/MySQL只读验证 | 安装smoke create记录原IDs/数据hash；verify仅GET业务记录（登录/退出除外） | 最终同版Compose/独立QA结果在交付验证清单注明 |
@@ -24,7 +24,7 @@
 | MCP/外部HTTP工具/文件/shell | 未实现产品执行器 | 只有原Tool接口可受控扩展 | 不提供任意执行/文件上传按钮冒充后端能力 |
 | 检索/向量库/长期记忆/子Agent | 未实现 | 原Session/Checkpoint可持久化，但不是这些能力 | 未来实现需沿scope/预算/审批/幂等/unknown规则 |
 
-当前下一版来源：统一4402（tree=d27）及原PR11/12/20/22/24/25祖先；后端完整候选53284632、前端eec33eb、运维7cc6b06已进入主单隔离组合，尚未远端默认分支合入。最终code/四锁ref由包根VERSION.json与主单记录给出。源码图和问题/回滚路线见next-release-integration.md；delivery-integration-review.md保留上一里程碑范围。
+当前下一版来源：统一4402（tree=d27）及原PR11/12/20/22/24/25祖先；后端物理修订eab5d69（保留532祖先）、前端eec33eb、运维7cc6b06已进入主单隔离组合，尚未远端默认分支合入。最终code/四锁ref由包根VERSION.json与主单记录给出。源码图和问题/回滚路线见next-release-integration.md；delivery-integration-review.md保留上一里程碑范围。
 
 独立QA固定879a7aa（代码07b00d8）：AR-R01/R02受控关闭；MySQL5顶层、正常DML/迁移/第二owner/旧在途needs_confirmation及同Cookie跨重启通过。QA代码00adf077→四锁66139c99，报告附件01a20919-d75b-7cfa-87ef-7edae4f1c565，证据SHA25619fc82766ea7110a51f58c5510c8c93841a7aa112995354713eeeb5e9e58aba4。后续最终profile/安装/新UI需按差异独立补验，不把历史数量相加。
 
@@ -43,7 +43,7 @@
 - 正式工具桥已纳入，组合Go协议/向量/AR回归30顶层124测试子项通过；正常HTTP/Cookie/CSRF→受控mTLS→原Admit/Finalize→两个实际工具→原ID反馈与第二child的SQL组合通过。模型/Higress-H4/rate/publication/closure为测试注入，不是供应商或生产Higress。
 - 正式模型要求显式ledger.diagnostics安装策略，迁移只补缺行、冲突拒绝，runtime只读；示例值需安装者核定。旧models=[]/显式offline配置兼容，缺字段的正式配置启动失败与运行期缺策略503分开。
 - 工具Schema/参数使用独立有符号安全整数JSON域，原票据/计划/财务域仍非负。公共AR-1投影不增加supplier字段；内部历史从原Run/Step.Call恢复sourceID，未完成/伪造反馈拒绝。
-- 原前端PR25已纳入：公开playground.enabled可选且缺省关闭、引导Chat；登录bootstrap禁输入；被新open淘汰的poll读为Abort，真实畸形关联仍拒绝。组合64项受影响测试通过，QA-CHAT-RACE-001仍待原QA同树独立关闭；作者浏览器结果单列。
+- 原前端PR25已纳入：公开playground.enabled可选且缺省关闭、引导Chat；登录bootstrap禁输入；被新open淘汰的poll读为Abort，真实畸形关联仍拒绝。组合64项受影响测试通过，QA-CHAT-RACE-001已在393受控正常站点由原QA独立关闭；作者浏览器与QA结果仍分列。
 - 旧在线试用引导Chat不关闭原M03公共消费Key API验收。历史partial/interrupted逐条标记、恢复阶段可观察性仍是前端评审提出的后续体验项，不能统称已完成。
 - 原生K8s自有验证/升级脚本19fixture及旧14资源schema有证据；资源条件变化后已交原运维按锁定纯迁移ref续办，实际安装/PVC/重启结果未到，不把计划当通过。最终新头只按实际差异接续。
 - 历史8db来源卡在新journal只读授权后有publisher-grants文件摘要漂移；保留历史快照/未批准值，旧检查通过不外推当前，当前真正权限以最新模板及独立验证为准。
@@ -51,3 +51,15 @@
 - 原QA的QA-MIG-SHAPE-001/P1仍开放，47/3保留原反例与CLI ready200证据。原后端正在补物理对象/唯一约束门禁，私有元数据只读可见性须维持最窄身份；尚未据作者结果签独立关闭。
 
 真实来源/安全引用、准确模型/显式模式、全计费上界/final usage、价表/额度/预算、Higress信任/实例boot/插件digest/receipt/validation、四身份同数据域和管理目标仍须具体批准。MCP/外部HTTP工具/文件/shell/长时记忆/子Agent没有新增执行器。A01–A34整体与GPU/性能结论仍按原独立范围。
+
+## 2026-11-27物理门禁与独立页面复验
+
+本地保全祖先组合46181fab=393edc9＋原PR24 eab5d69（代码5fffa8b）。新SQL权限增量精确为原maas_release_reader的12对象SHOW VIEW，旧9份DDL/AR-1/console均未变；41对象/50键生成与gofmt后原件完全匹配，组合正常Linux产品构建/定向vet通过。物理三缺口、变体、最窄角色、原journal/reconcile/unknown-held及查询中取消按组合定向验证，实际结果由同版VALIDATION及主单列出；P1须原QA签回。
+
+页面独立QA固定393/c99（console=eec33eb）关闭QA-CHAT-RACE-001：9唯一页面用例＋4只读契约，正常Go/MySQL8.0.44/Chrome158；4原Run/6child，6request/6usage/6finalized，迟到GET只延迟真实响应、无自动重发/重计。R-P01/default false与bootstrap真实401通过，公共消费Key API不销项。报告评论01a21af8-56a4，证据SHA f6ad550d83610b26419b7c073e96935e0c18aa052d28da73dddc5f9ab566e4ad；QA分支ca97证据锁不得覆盖产品锁。本组合console/API schema字节不变，保留该独立范围。
+
+FC-M-AUTH-PRE-1（原架构01a21aed-52b6）要求自动和pre-provisioned安装/升级都在候选启动前审完整effective grants，PROVISION_ROLES=0只跳provision，不得跳audit。当前migrate.sh尚未完成该增量，原MAAS-8唯一负责，不能以4 default roles或旧10项SQL宣称完整最小授权。精确主体/角色闭包、直接/列级/角色内容、mandatory/代理/动态权限等须对最终锁定模板核验；缺合法可见元数据非零退出，不借管理DSN/授runtime mysql.*或造旁路。连续运行期full权限漂移守卫是原MAAS-20独立后续，本版本未实现，不把安装通过当持续证明。
+
+原生K8s历史6285曾构建三镜像/建群Ready/PVC Bound，但mysql-ready exit124，未执行迁移Job/App/业务；恢复将自有MySQL缩0、节点停止，保留PVC/Secret/容器身份，Exit137不称优雅或数据恢复通过。138文件证据SHA 1f4f98576f3931eebdb246581fbba0710ef9e6a741e852125ad07a7b6fb53720；不外推本组合K8s完成。
+
+组合46181fab实际结果：MySQL8.4.7六顶层/22测试及子项全部通过（原三反例＋变体/最窄元数据权限/原journal/reconcile/unknown-held/查询中取消）；另原正常HTTP工具闭环一顶层/3测试及子项通过，完整与非法第二工具分别保持原唯一child用量语义。两阶段均exit0、0失败/skip，专属容器/卷已精确清理。正常Linux产品构建、测试二进制与定向vet通过，九DDL、console和公共AR-1相对393零差异。以上为集成证据，不替代原QA三反例关闭或安装effective-grants验收。最终code/ref由VERSION给出；其后本次只补报告和标准四锁。

@@ -186,6 +186,9 @@ func validateRequiredSchema(ctx context.Context, db *sql.DB, reconciling002 bool
 	if mysqlstore.ValidateMigrations(ctx, db) != nil {
 		return errors.New("release_schema_not_ready")
 	}
+	if e := validatePhysicalSchema(ctx, db); e != nil {
+		return e
+	}
 	// Both migrations are unconditional in Migrate, including installations
 	// without the offline profile. Physical tables alone are not a commit marker.
 	var extra int
