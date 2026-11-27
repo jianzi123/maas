@@ -1,0 +1,9 @@
+{
+  "window_id": "P25_AA_FIXED_20261127_01-fce858101e05",
+  "total_seconds": 600,
+  "stop_new_seconds": 540,
+  "driver_elapsed_at_send_ns": 1218315800,
+  "soft_remaining_ns": 537781684200,
+  "hard_remaining_ns": 597781684200,
+  "protected_daemon_pid": 34524
+}

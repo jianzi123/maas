@@ -1,0 +1,17 @@
+{
+  "command": [
+    "D:\\ProgramData\\anaconda3\\python.exe",
+    "-X",
+    "utf8",
+    "C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-10-79a30240b357\\workdir\\repo\\tools\\perf\\operators\\local_gpu\\launch_aa_window.py",
+    "--plan",
+    "C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-10-79a30240b357\\workdir\\deliverables\\aa-v0.29\\plan.json",
+    "--output",
+    "C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-10-79a30240b357\\workdir\\deliverables\\aa-v0.29\\execution-fixed-01",
+    "--validate-only"
+  ],
+  "exit_code": 0,
+  "stdout": "{\"validated\": true, \"GPU_imports\": false, \"two_worker_parent_budget\": 600}\n",
+  "stderr": "",
+  "GPU_started": false
+}

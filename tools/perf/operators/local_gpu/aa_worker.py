@@ -92,7 +92,7 @@ def main():
      need(binding==bindings[v],"binding/graph/stream changed")
      ready=time.perf_counter_ns();submit=time.perf_counter_ns();cpu0=time.thread_time_ns()
      rt.begin.record();last=None
-     for _ in range(10):last=selected()
+     for _ in range(10):last=selected(fb) if scope=="full" else selected()
      rt.end.record();enqueue=time.perf_counter_ns();cpu1=time.thread_time_ns()
      rt.end.synchronize();done=time.perf_counter_ns()
      value=rt.begin.elapsed_time(rt.end)*1e6

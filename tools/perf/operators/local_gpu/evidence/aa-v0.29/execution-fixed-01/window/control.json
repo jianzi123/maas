@@ -1,0 +1,26 @@
+{
+  "budget": {
+    "driver_elapsed_at_send_ns": 1218315800,
+    "hard_remaining_ns": 597781684200,
+    "protected_daemon_pid": 34524,
+    "soft_remaining_ns": 537781684200,
+    "stop_new_seconds": 540,
+    "total_seconds": 600,
+    "window_id": "P25_AA_FIXED_20261127_01-fce858101e05"
+  },
+  "budget_control": {
+    "kind": "local-monotonic-v1",
+    "domain": "546136a8a11a5d039547c0090cd626e91a93ad54163cf4e09581dd096f509187",
+    "origin_ns": 38894527794464,
+    "window_id": "P25_AA_FIXED_20261127_01-fce858101e05",
+    "owner_pid": 42994
+  },
+  "control_binding_sha256": "9e7ab9887d3ffa8b7f085984aeb21db2ca186b31685dadd43634b0edbb554d5d",
+  "receive": {
+    "control_receive_elapsed_ns": 268173776,
+    "soft_remaining_at_receive_ns": 537513510424,
+    "hard_remaining_at_receive_ns": 597513510424,
+    "driver_elapsed_at_send_ns": 1218315800,
+    "accounting": "origin before ready; overlap with sender may be charged twice, never credited"
+  }
+}

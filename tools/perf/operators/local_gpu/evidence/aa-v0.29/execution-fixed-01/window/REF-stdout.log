@@ -1,0 +1,15 @@
+/usr/local/lib/python3.10/dist-packages/torch/cuda/__init__.py:63: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  import pynvml  # type: ignore[import]
+INFO 11-27 02:13:15 [__init__.py:216] Automatically detected platform cuda.
+`torch_dtype` is deprecated! Use `dtype` instead!
+WARNING:sglang.srt.configs.model_config:Casting torch.bfloat16 to torch.float16.
+WARNING:sglang.srt.distributed.device_communicators.custom_all_reduce_utils:Failed to import pynvml with ModuleNotFoundError("No module named 'pynvml'")
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+WARNING:sglang.srt.layers.moe.utils:MOE_RUNNER_BACKEND is not initialized, using triton backend
+  0%|          | 0/4 [00:00<?, ?it/s]Capturing batches (bs=8 avail_mem=6.56 GB):   0%|          | 0/4 [00:00<?, ?it/s]Capturing batches (bs=8 avail_mem=6.56 GB):  25%|██▌       | 1/4 [00:09<00:29,  9.70s/it]Capturing batches (bs=4 avail_mem=6.54 GB):  25%|██▌       | 1/4 [00:09<00:29,  9.70s/it]Capturing batches (bs=4 avail_mem=6.54 GB):  50%|█████     | 2/4 [00:10<00:08,  4.21s/it]Capturing batches (bs=2 avail_mem=6.53 GB):  50%|█████     | 2/4 [00:10<00:08,  4.21s/it]Capturing batches (bs=2 avail_mem=6.53 GB):  75%|███████▌  | 3/4 [00:10<00:02,  2.38s/it]Capturing batches (bs=1 avail_mem=6.53 GB):  75%|███████▌  | 3/4 [00:10<00:02,  2.38s/it]Capturing batches (bs=1 avail_mem=6.53 GB): 100%|██████████| 4/4 [00:11<00:00,  2.09s/it]Capturing batches (bs=1 avail_mem=6.53 GB): 100%|██████████| 4/4 [00:11<00:00,  2.98s/it]
+max_total_num_tokens=512
+  0%|          | 0/4 [00:00<?, ?it/s]Capturing batches (bs=8 avail_mem=6.50 GB):   0%|          | 0/4 [00:00<?, ?it/s]Capturing batches (bs=8 avail_mem=6.50 GB):  25%|██▌       | 1/4 [00:00<00:01,  2.31it/s]Capturing batches (bs=4 avail_mem=6.48 GB):  25%|██▌       | 1/4 [00:00<00:01,  2.31it/s]Capturing batches (bs=4 avail_mem=6.48 GB):  50%|█████     | 2/4 [00:00<00:00,  3.88it/s]Capturing batches (bs=2 avail_mem=6.47 GB):  50%|█████     | 2/4 [00:00<00:00,  3.88it/s]Capturing batches (bs=2 avail_mem=6.47 GB):  75%|███████▌  | 3/4 [00:00<00:00,  4.94it/s]Capturing batches (bs=1 avail_mem=6.47 GB):  75%|███████▌  | 3/4 [00:00<00:00,  4.94it/s]Capturing batches (bs=1 avail_mem=6.47 GB): 100%|██████████| 4/4 [00:00<00:00,  5.08it/s]
+{"process": "REF", "failure": {"stage": "full/B3", "type": "TypeError", "message": "ModelRunner.forward() missing 1 required positional argument: 'forward_batch'"}, "measured": 0}

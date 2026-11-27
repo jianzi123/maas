@@ -1,0 +1,56 @@
+[
+  {
+    "cell_id": "R01/full/B3",
+    "phase": "before",
+    "all30_layers": true,
+    "status": "passed",
+    "snapshots": {
+      "native": [
+        {
+          "path": "snapshots/323fec701b4f9aaec5643f753f84579e2f122d40f758caef9578489620aedd48.npz",
+          "raw_sha256": "f000a3c32e8a0da4eff169106ec7cac7f412863e3e6487715c8249dbb7bb1247",
+          "shape": [
+            3,
+            49152
+          ],
+          "dtype": "float32"
+        },
+        {
+          "path": "snapshots/c0699e0becd93a6679593904fd38d70b09c26aa6d02ea35d4cbb14e4de950d21.npz",
+          "raw_sha256": "03dbf5d72012cf3db791543d272490a9230b8d49af2579a9c78e2f017247793f",
+          "shape": [
+            30,
+            2,
+            3,
+            3,
+            64
+          ],
+          "dtype": "float16"
+        }
+      ],
+      "mature": [
+        {
+          "path": "snapshots/323fec701b4f9aaec5643f753f84579e2f122d40f758caef9578489620aedd48.npz",
+          "raw_sha256": "f000a3c32e8a0da4eff169106ec7cac7f412863e3e6487715c8249dbb7bb1247",
+          "shape": [
+            3,
+            49152
+          ],
+          "dtype": "float32"
+        },
+        {
+          "path": "snapshots/c0699e0becd93a6679593904fd38d70b09c26aa6d02ea35d4cbb14e4de950d21.npz",
+          "raw_sha256": "03dbf5d72012cf3db791543d272490a9230b8d49af2579a9c78e2f017247793f",
+          "shape": [
+            30,
+            2,
+            3,
+            3,
+            64
+          ],
+          "dtype": "float16"
+        }
+      ]
+    }
+  }
+]

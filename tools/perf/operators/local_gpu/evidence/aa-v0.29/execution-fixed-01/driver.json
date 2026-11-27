@@ -1,0 +1,30 @@
+{
+  "schema": "P25-AA-driver1",
+  "window_id": "P25_AA_FIXED_20261127_01-fce858101e05",
+  "plan_sha256": "e473636fcc4b2a499f2e7a5274a57fccc6e0901906efbf30ae9c76760aa5905a",
+  "execution_checkout": "a8de5f8117898da7d92dca14d7d77db9e678a4ce",
+  "command": [
+    "wsl.exe",
+    "-d",
+    "Ubuntu-22.04",
+    "--",
+    "/var/tmp/maas-10-gpu-01a1a5ba/bin/python",
+    "/mnt/c/Users/a9786/multica_workspaces_desktop-api.multica.ai/maas-007-da4ec7313117/maas-10-79a30240b357/workdir/repo/tools/perf/operators/local_gpu/run_aa_window.py",
+    "--plan",
+    "/mnt/c/Users/a9786/multica_workspaces_desktop-api.multica.ai/maas-007-da4ec7313117/maas-10-79a30240b357/workdir/deliverables/aa-v0.29/plan.json",
+    "--output",
+    "/mnt/c/Users/a9786/multica_workspaces_desktop-api.multica.ai/maas-007-da4ec7313117/maas-10-79a30240b357/workdir/deliverables/aa-v0.29/execution-fixed-01/window",
+    "--execute"
+  ],
+  "UTC_start": "2026-11-27T10:12:12.134311+00:00",
+  "parent_total_seconds": 600,
+  "stop_new_seconds": 540,
+  "attempts": 1,
+  "owned_WSL_pid": 20064,
+  "exit_code": 2,
+  "wall_elapsed_ns": 104172348500,
+  "own_process_collected": true,
+  "failure": null,
+  "UTC_end": "2026-11-27T10:13:56.229767+00:00",
+  "within_600s": true
+}

@@ -1,0 +1,69 @@
+{
+  "schema": "P25-AA-fixed-window-prereg1",
+  "created_UTC": "2026-11-27T10:11:14.924006+00:00",
+  "experiment": "P25_AA_FIXED_20261127_01",
+  "execution_checkout": "a8de5f8117898da7d92dca14d7d77db9e678a4ce",
+  "execution_checkout_note": "a8de5f8 adds only v0.28 result docs/evidence and source locks over 82284e8; 17 executed sources byte-identical to QA-signed set",
+  "implementation_commit": "0cea087d21cac94d41f2f93443a48c3a7eaef00f",
+  "CPU_QA_head": "e191827072cb64473599ce74db568bc4d830f994",
+  "trigger": "01a21c76-9061-71b1-a839-dab2e4913855",
+  "resource_action": "member authorized freeing VRAM; stopped docker container drama-sglang (restartable via docker start)",
+  "plan_sha256": "e473636fcc4b2a499f2e7a5274a57fccc6e0901906efbf30ae9c76760aa5905a",
+  "plan_file_sha256": "57af1277766c69688e556009cb93417eee3e0fb61ddd64bb647258388daa27ef",
+  "sources": {
+    "aa_control.py": "d3de2cd3d9a5d314c60883e1151d931f1cf11a4f4683cbb7fa8a7498029bacaf",
+    "test_aa_cpu01.py": "0fd200da09fc293d3979e302374bfd9dfb0eb031303e8f6c8f660539661ffa8a",
+    "test_aa_window.py": "04e572c502063e99d1736fe9e4092c1a8127b41a0f6fa1fa513ad8a870795139",
+    "aa_protocol.py": "920bdd78bc9128fa12952c29b99367b1c4b4b49b328822201d31db3b34a96fcb",
+    "aa_runtime.py": "e28b1795cd5a1fcc793cb9250b57f8ac2d1a9c73cc49ddb5512feec687394f50",
+    "aa_worker.py": "021caf3a36c1c9ed83f1dac2af6d3371b9729b79d2f87383c574828138b16abf",
+    "run_aa_window.py": "12bf6d5fcff715357b409fafe5f317b7e60a073a015999780b092bb038344685",
+    "analyze_aa_window.py": "96cc9c9429a600621ab645dd8fbc7840e55879f8178da54e1f8ad036aaa4d1d8",
+    "launch_aa_window.py": "a01c9eaa4500c251f29297246d4880d986bdee4b4e67bee56205d241b0f7c082",
+    "reference_runtime.py": "e00d867403a9d0a8cb87c26ced5a9e5f0050d25244b1c93272a5a6792fe38ad5",
+    "native_kv_binding.py": "8d03d465e964a70c7dedcf358097628a47779902b0f4635633e5f2c783d00149",
+    "analyze_kv_cadence.py": "3d4c176f257afe7a977fcf1fdcfd9da2b0df9fa29eed977256c36c9291a0639b",
+    "run_decode.py": "b747254afc705de607e31071c7388948ca6c9fbbdd0f723d326ac880064fe7dd",
+    "decode_path.py": "0ec39daec3debde3594c969559d8b9f46371f18f1b0d8741dc2c1c18f4b51561",
+    "cadence_protocol.py": "b58cc3467a0e3a34c0f5f49ad812ac89bc4740b897d6d35d40e0ba84fec2ac9f",
+    "decode-source-lock.json": "fc91e7d18da871fa5f234e24c8ebde3f686ee614f59211b9f0f8b9cc6020ea70",
+    "evidence/framework-v0.18/framework-source-lock.json": "1b8e855ba811073f6e13ceb87a071f5cfc9dcd08601402040cbcff96d80d9b9e"
+  },
+  "output_directory": "C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-10-79a30240b357\\workdir\\deliverables\\aa-v0.29\\execution-fixed-01",
+  "allowed_windows_this_stage": 1,
+  "protected_daemon_pid": 34524,
+  "CPU_closed_sources_identical": true,
+  "counts": {
+    "reference": 48,
+    "holdout": 64,
+    "transition": 16,
+    "blocks": 128,
+    "calls": 1280,
+    "alias_pairs": 32
+  },
+  "capture_order": [
+    "native",
+    "mature"
+  ],
+  "resources": {
+    "GPU": 0,
+    "allocator_fraction": 0.2,
+    "planner_fraction": 0.2,
+    "req": 8,
+    "KV": 512,
+    "context": 128,
+    "min_free_bytes": 1073741824,
+    "parent_total_seconds": 600,
+    "parent_stop_new_seconds": 540,
+    "child_cleanup_grace_seconds": 10,
+    "final_record_reserve_seconds": 20,
+    "lock": "/var/tmp/maas-10-gpu-01a1a5ba/gpu0-research.lock"
+  },
+  "stream_tolerance": {
+    "abs_ns": 250000,
+    "relative": 0.05
+  },
+  "old_window_data_unchanged": true,
+  "no_NM_comparison": true,
+  "no_profiler": true
+}

@@ -1,0 +1,60 @@
+{
+  "schema": "P25-AA-parent2",
+  "pid": 42994,
+  "window_id": "P25_AA_FIXED_20261127_01-fce858101e05",
+  "plan_sha256": "e473636fcc4b2a499f2e7a5274a57fccc6e0901906efbf30ae9c76760aa5905a",
+  "clock_scope": "parent/pid42994",
+  "budget": {
+    "driver_elapsed_at_send_ns": 1218315800,
+    "hard_remaining_ns": 597781684200,
+    "protected_daemon_pid": 34524,
+    "soft_remaining_ns": 537781684200,
+    "stop_new_seconds": 540,
+    "total_seconds": 600,
+    "window_id": "P25_AA_FIXED_20261127_01-fce858101e05"
+  },
+  "budget_control": {
+    "kind": "local-monotonic-v1",
+    "domain": "546136a8a11a5d039547c0090cd626e91a93ad54163cf4e09581dd096f509187",
+    "origin_ns": 38894527794464,
+    "window_id": "P25_AA_FIXED_20261127_01-fce858101e05",
+    "owner_pid": 42994
+  },
+  "control_receive": {
+    "control_receive_elapsed_ns": 268173776,
+    "soft_remaining_at_receive_ns": 537513510424,
+    "hard_remaining_at_receive_ns": 597513510424,
+    "driver_elapsed_at_send_ns": 1218315800,
+    "accounting": "origin before ready; overlap with sender may be charged twice, never credited"
+  },
+  "control_binding_sha256": "9e7ab9887d3ffa8b7f085984aeb21db2ca186b31685dadd43634b0edbb554d5d",
+  "lifecycle": [
+    {
+      "process": "REF",
+      "pid": 42997,
+      "start_ns": 394529764,
+      "end_ns": 103114407975,
+      "command": [
+        "/var/tmp/maas-10-gpu-01a1a5ba/bin/python",
+        "/mnt/c/Users/a9786/multica_workspaces_desktop-api.multica.ai/maas-007-da4ec7313117/maas-10-79a30240b357/workdir/repo/tools/perf/operators/local_gpu/aa_worker.py",
+        "--plan",
+        "/mnt/c/Users/a9786/multica_workspaces_desktop-api.multica.ai/maas-007-da4ec7313117/maas-10-79a30240b357/workdir/deliverables/aa-v0.29/plan.json",
+        "--job",
+        "/mnt/c/Users/a9786/multica_workspaces_desktop-api.multica.ai/maas-007-da4ec7313117/maas-10-79a30240b357/workdir/deliverables/aa-v0.29/execution-fixed-01/window/REF-job.json",
+        "--output",
+        "/mnt/c/Users/a9786/multica_workspaces_desktop-api.multica.ai/maas-007-da4ec7313117/maas-10-79a30240b357/workdir/deliverables/aa-v0.29/execution-fixed-01/window/REF",
+        "--execute"
+      ],
+      "exit_code": 2,
+      "soft_signal_ns": null,
+      "forced_kill": false,
+      "clock_scope": "P25_AA_FIXED_20261127_01-fce858101e05/parent/pid42994"
+    }
+  ],
+  "failure": {
+    "type": "ValueError",
+    "message": "worker failed/stopped: REF"
+  },
+  "elapsed_ns": 103115150902,
+  "worker_count": 1
+}

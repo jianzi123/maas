@@ -1,0 +1,21 @@
+{
+  "process": "REF",
+  "job_sha256": "26e1bdd19c90848db0310c862170325600f44b6a4ab109ccdf8d493044d8fbdc",
+  "clock_scope": "P25_AA_FIXED_20261127_01-fce858101e05/REF/pid42997-c0fe0b68",
+  "failure": {
+    "stage": "full/B3",
+    "type": "TypeError",
+    "message": "ModelRunner.forward() missing 1 required positional argument: 'forward_batch'"
+  },
+  "elapsed_ns": 97435113222,
+  "measured": 0,
+  "planned": 56,
+  "budget_lease_sha256": "ed1f4843df44cdec51acf69473301c37e5ac58ba1ae6103536ffc84a082efb70",
+  "additional_calls": {
+    "warmup_returned": 24,
+    "warmup_cells_synchronized": 1,
+    "gate_forward_returned": 2,
+    "input_snapshots": 1,
+    "padding_slot_initializations": 1
+  }
+}

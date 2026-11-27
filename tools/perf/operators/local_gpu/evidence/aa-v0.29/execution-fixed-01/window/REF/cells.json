@@ -1,0 +1,178 @@
+[
+  {
+    "scope": "full",
+    "batch": 3,
+    "clock_scope": "P25_AA_FIXED_20261127_01-fce858101e05/REF/pid42997-c0fe0b68",
+    "input_state": {
+      "token_metadata_sha256": "b326ea88ac30c4b08aadf54fed66af741992f9e7f2ee3df870ae0c1bf31c5033",
+      "KV_sha256": "762c5c488a2d66150e5a84f4a95f09aec4438f26377d9b6c005044c020d81a72",
+      "read_slots": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39
+      ],
+      "KV_shape": [
+        30,
+        2,
+        40,
+        3,
+        64
+      ],
+      "KV_dtype": "float16",
+      "path": "inputs/05035449208af8adc903d204d4b43b9911dcaad74e2b98028c81d349df70d70c.npz"
+    },
+    "bindings": {
+      "native": {
+        "batch": 3,
+        "padded_batch": 4,
+        "implementation": "native",
+        "scope": "full",
+        "aliases": {
+          "A": {
+            "callable_object": 134136930019648,
+            "callable_self": 134137726322144,
+            "callable_function": 134137727858672,
+            "method": "ModelRunner.forward",
+            "graph_object": 134136957866272,
+            "stream": 0,
+            "inputs": {
+              "input_ids": 34567353344,
+              "positions": 34567355392,
+              "seq_lens": 34567354368,
+              "out_cache_loc": 34567354880,
+              "req_pool_indices": 34567353856
+            },
+            "scratch": 34807023104,
+            "indices": 34481319424,
+            "pool": [
+              0,
+              1
+            ]
+          },
+          "Aprime": {
+            "callable_object": 134136930019648,
+            "callable_self": 134137726322144,
+            "callable_function": 134137727858672,
+            "method": "ModelRunner.forward",
+            "graph_object": 134136957866272,
+            "stream": 0,
+            "inputs": {
+              "input_ids": 34567353344,
+              "positions": 34567355392,
+              "seq_lens": 34567354368,
+              "out_cache_loc": 34567354880,
+              "req_pool_indices": 34567353856
+            },
+            "scratch": 34807023104,
+            "indices": 34481319424,
+            "pool": [
+              0,
+              1
+            ]
+          }
+        },
+        "callable_object": 134136930019648,
+        "graph_object": 134136957866272,
+        "custom_wrapper": false,
+        "eager": false,
+        "capture_caller_verified": true,
+        "registry_identity_checked": true
+      },
+      "mature": {
+        "batch": 3,
+        "padded_batch": 4,
+        "implementation": "mature",
+        "scope": "full",
+        "aliases": {
+          "A": {
+            "callable_object": 134135682990464,
+            "callable_self": 134137726322144,
+            "callable_function": 134137727858672,
+            "method": "ModelRunner.forward",
+            "graph_object": 134136931671616,
+            "stream": 0,
+            "inputs": {
+              "input_ids": 34481342976,
+              "positions": 34481345024,
+              "seq_lens": 34481344000,
+              "out_cache_loc": 34481344512,
+              "req_pool_indices": 34481343488
+            },
+            "scratch": 34807170560,
+            "indices": 34481333760,
+            "pool": [
+              0,
+              2
+            ]
+          },
+          "Aprime": {
+            "callable_object": 134135682990464,
+            "callable_self": 134137726322144,
+            "callable_function": 134137727858672,
+            "method": "ModelRunner.forward",
+            "graph_object": 134136931671616,
+            "stream": 0,
+            "inputs": {
+              "input_ids": 34481342976,
+              "positions": 34481345024,
+              "seq_lens": 34481344000,
+              "out_cache_loc": 34481344512,
+              "req_pool_indices": 34481343488
+            },
+            "scratch": 34807170560,
+            "indices": 34481333760,
+            "pool": [
+              0,
+              2
+            ]
+          }
+        },
+        "callable_object": 134135682990464,
+        "graph_object": 134136931671616,
+        "custom_wrapper": false,
+        "eager": false,
+        "capture_caller_verified": true,
+        "registry_identity_checked": true
+      }
+    },
+    "begin_ns": 38989006914086,
+    "ready_ns": 38992798162761
+  }
+]
