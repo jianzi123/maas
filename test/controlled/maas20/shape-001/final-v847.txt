@@ -1,0 +1,43 @@
+=== RUN   TestProductSchemaMetadataPrivilegeDoesNotReadHistory
+--- PASS: TestProductSchemaMetadataPrivilegeDoesNotReadHistory (2.23s)
+=== RUN   TestProductPhysicalGateWithOriginalFourRoles
+--- PASS: TestProductPhysicalGateWithOriginalFourRoles (3.14s)
+=== RUN   TestProductPhysicalGateRejectsMissingObjectsAndTerminalKeys
+=== RUN   TestProductPhysicalGateRejectsMissingObjectsAndTerminalKeys/missing_usage_events
+=== RUN   TestProductPhysicalGateRejectsMissingObjectsAndTerminalKeys/missing_only_terminal
+=== RUN   TestProductPhysicalGateRejectsMissingObjectsAndTerminalKeys/missing_private_history
+=== RUN   TestProductPhysicalGateRejectsMissingObjectsAndTerminalKeys/nonunique_terminal_key
+=== RUN   TestProductPhysicalGateRejectsMissingObjectsAndTerminalKeys/partial_terminal_key
+=== RUN   TestProductPhysicalGateRejectsMissingObjectsAndTerminalKeys/wrong_terminal_column_order
+=== RUN   TestProductPhysicalGateRejectsMissingObjectsAndTerminalKeys/nullable_terminal_identity
+--- PASS: TestProductPhysicalGateRejectsMissingObjectsAndTerminalKeys (3.89s)
+    --- PASS: TestProductPhysicalGateRejectsMissingObjectsAndTerminalKeys/missing_usage_events (0.24s)
+    --- PASS: TestProductPhysicalGateRejectsMissingObjectsAndTerminalKeys/missing_only_terminal (0.21s)
+    --- PASS: TestProductPhysicalGateRejectsMissingObjectsAndTerminalKeys/missing_private_history (0.23s)
+    --- PASS: TestProductPhysicalGateRejectsMissingObjectsAndTerminalKeys/nonunique_terminal_key (0.26s)
+    --- PASS: TestProductPhysicalGateRejectsMissingObjectsAndTerminalKeys/partial_terminal_key (0.22s)
+    --- PASS: TestProductPhysicalGateRejectsMissingObjectsAndTerminalKeys/wrong_terminal_column_order (0.22s)
+    --- PASS: TestProductPhysicalGateRejectsMissingObjectsAndTerminalKeys/nullable_terminal_identity (0.30s)
+=== RUN   TestProductRequiredMigrationBarrier
+=== RUN   TestProductRequiredMigrationBarrier/Applying
+=== RUN   TestProductRequiredMigrationBarrier/Failed
+=== RUN   TestProductRequiredMigrationBarrier/Unknown
+=== RUN   TestProductRequiredMigrationBarrier/kernel-1
+=== RUN   TestProductRequiredMigrationBarrier/kernel-2
+=== RUN   TestProductRequiredMigrationBarrier/kernel-3
+=== RUN   TestProductRequiredMigrationBarrier/release-1
+=== RUN   TestProductRequiredMigrationBarrier/release-2
+=== RUN   TestProductRequiredMigrationBarrier/release-3
+--- PASS: TestProductRequiredMigrationBarrier (2.97s)
+    --- PASS: TestProductRequiredMigrationBarrier/Applying (0.04s)
+    --- PASS: TestProductRequiredMigrationBarrier/Failed (0.04s)
+    --- PASS: TestProductRequiredMigrationBarrier/Unknown (0.04s)
+    --- PASS: TestProductRequiredMigrationBarrier/kernel-1 (0.01s)
+    --- PASS: TestProductRequiredMigrationBarrier/kernel-2 (0.02s)
+    --- PASS: TestProductRequiredMigrationBarrier/kernel-3 (0.01s)
+    --- PASS: TestProductRequiredMigrationBarrier/release-1 (0.01s)
+    --- PASS: TestProductRequiredMigrationBarrier/release-2 (0.01s)
+    --- PASS: TestProductRequiredMigrationBarrier/release-3 (0.01s)
+=== RUN   TestProductMigrationRecoveryPreservesUnknownHeldAndHistory
+--- PASS: TestProductMigrationRecoveryPreservesUnknownHeldAndHistory (2.97s)
+PASS
