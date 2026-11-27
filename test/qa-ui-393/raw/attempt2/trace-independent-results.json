@@ -1,0 +1,57 @@
+{
+  "product_ref": "393edc9c25a2bea55969af87d29158b2f0d74f94",
+  "provided_validator_execution": {
+    "scope": "actual controlled HTTP and persisted MySQL sample validation, no real supplier",
+    "cases": [
+      {
+        "case": "complete",
+        "http_samples": 23,
+        "persisted_events": 33,
+        "original_children": 2,
+        "official_schema": "passed"
+      },
+      {
+        "case": "invalid_second_tool",
+        "http_samples": 11,
+        "persisted_events": 9,
+        "original_children": 1,
+        "official_schema": "passed"
+      }
+    ]
+  },
+  "independent_checks": [
+    {
+      "id": "TRACE-complete",
+      "status": "PASS",
+      "sha256": "70c23e906eb1164307b5d051b877ee7acd7b579868281b8f622419fcabf7ddb6",
+      "http": 23,
+      "events": 33,
+      "distinct_original_child_ids": [
+        "12a2a06c-778a-4230-8d2e-ec900ee60932",
+        "a514e7c1-3c7e-4304-8c43-6fbff3f49228"
+      ]
+    },
+    {
+      "id": "TRACE-invalid_second_tool",
+      "status": "PASS",
+      "sha256": "aa619a507348932eba7526bb3a046d409961d4029e530e6264cc4d32e68a8663",
+      "http": 11,
+      "events": 9,
+      "distinct_original_child_ids": [
+        "33c4a7be-9b4c-4915-8e85-2e68102098b9"
+      ]
+    },
+    {
+      "id": "STRICT-HTTP-extra-field-rejected",
+      "status": "PASS"
+    },
+    {
+      "id": "STRICT-EVENT-extra-field-rejected",
+      "status": "PASS",
+      "validator": "oneOf"
+    }
+  ],
+  "public_schema_unchanged_from_4402": true,
+  "live_supplier_calls": 0,
+  "classification": "retained controlled HTTP/MySQL producer samples; not independently regenerated runtime"
+}

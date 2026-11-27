@@ -1,0 +1,17 @@
+
+> @maas/console@0.1.0 build
+> vue-tsc --noEmit && vite build
+
+vite v8.3.6 building client environment for production...
+transforming...
+✓ 142 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                          0.45 kB │ gzip:   0.31 kB
+dist/assets/index-BeJHohIj.css          22.81 kB │ gzip:   5.68 kB
+dist/assets/development-DfiPZtEA.js      5.53 kB │ gzip:   2.41 kB
+dist/assets/http-DApDTGYo.js            15.75 kB │ gzip:   6.18 kB
+dist/assets/ChatWorkspace-e8WVUcSB.js   96.26 kB │ gzip:  32.85 kB
+dist/assets/index-BhvyXQDj.js          599.89 kB │ gzip: 127.39 kB
+
+✓ built in 1.17s

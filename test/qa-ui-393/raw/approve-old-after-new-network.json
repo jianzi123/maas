@@ -1,0 +1,762 @@
+{
+  "network": [
+    {
+      "stage": "login",
+      "method": "GET",
+      "path": "/",
+      "has_csrf": false
+    },
+    {
+      "stage": "login",
+      "status": 200,
+      "path": "/"
+    },
+    {
+      "stage": "login",
+      "method": "GET",
+      "path": "/assets/index-BhvyXQDj.js",
+      "has_csrf": false
+    },
+    {
+      "stage": "login",
+      "method": "GET",
+      "path": "/assets/index-BeJHohIj.css",
+      "has_csrf": false
+    },
+    {
+      "stage": "login",
+      "status": 200,
+      "path": "/assets/index-BeJHohIj.css"
+    },
+    {
+      "stage": "login",
+      "status": 200,
+      "path": "/assets/index-BhvyXQDj.js"
+    },
+    {
+      "stage": "login",
+      "method": "GET",
+      "path": "/console-config.json",
+      "has_csrf": false
+    },
+    {
+      "stage": "login",
+      "status": 200,
+      "path": "/console-config.json"
+    },
+    {
+      "stage": "login",
+      "method": "GET",
+      "path": "/api/admin/v1/session",
+      "has_csrf": false
+    },
+    {
+      "stage": "login",
+      "status": 401,
+      "path": "/api/admin/v1/session"
+    },
+    {
+      "stage": "login",
+      "method": "GET",
+      "path": "/console-config.json",
+      "has_csrf": false
+    },
+    {
+      "stage": "login",
+      "status": 200,
+      "path": "/console-config.json"
+    },
+    {
+      "stage": "login",
+      "method": "POST",
+      "path": "/api/admin/v1/session",
+      "has_csrf": false
+    },
+    {
+      "stage": "login",
+      "status": 200,
+      "path": "/api/admin/v1/session"
+    },
+    {
+      "stage": "login",
+      "method": "GET",
+      "path": "/assets/ChatWorkspace-e8WVUcSB.js",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/assets/ChatWorkspace-e8WVUcSB.js"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/assets/http-DApDTGYo.js",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/assets/http-DApDTGYo.js"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/capabilities",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/capabilities"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions?page_size=100",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions"
+    },
+    {
+      "stage": "create",
+      "method": "POST",
+      "path": "/api/agent/v1/sessions",
+      "has_csrf": true
+    },
+    {
+      "stage": "create",
+      "status": 201,
+      "path": "/api/agent/v1/sessions"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/session-creation-commands/db18cb8f-fe01-4f9e-a537-256540ac31e7",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/session-creation-commands/db18cb8f-fe01-4f9e-a537-256540ac31e7"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions?page_size=100",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee"
+    },
+    {
+      "stage": "create",
+      "method": "POST",
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs",
+      "has_csrf": true
+    },
+    {
+      "stage": "create",
+      "status": 202,
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs/4478c63b-b7e0-4fb9-9da0-afac681bf3e4/steps?page_size=100",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs/4478c63b-b7e0-4fb9-9da0-afac681bf3e4/steps"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs/4478c63b-b7e0-4fb9-9da0-afac681bf3e4/steps?page_size=100",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs/4478c63b-b7e0-4fb9-9da0-afac681bf3e4/steps"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs/4478c63b-b7e0-4fb9-9da0-afac681bf3e4/tool-calls?page_size=100",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs/4478c63b-b7e0-4fb9-9da0-afac681bf3e4/tool-calls"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs/4478c63b-b7e0-4fb9-9da0-afac681bf3e4/events/stream?after=767a6845e2f2fc8a115c66e152eb4875466621f55af317ac7ad0af03f3e5b59d",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs/4478c63b-b7e0-4fb9-9da0-afac681bf3e4/events/stream"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs/4478c63b-b7e0-4fb9-9da0-afac681bf3e4/steps?page_size=100",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs/4478c63b-b7e0-4fb9-9da0-afac681bf3e4/steps"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs/4478c63b-b7e0-4fb9-9da0-afac681bf3e4/tool-calls?page_size=100",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs/4478c63b-b7e0-4fb9-9da0-afac681bf3e4/tool-calls"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions?page_size=100",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs/4478c63b-b7e0-4fb9-9da0-afac681bf3e4/events/stream?after=767a6845e2f2fc8a115c66e152eb4875466621f55af317ac7ad0af03f3e5b59d",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs/4478c63b-b7e0-4fb9-9da0-afac681bf3e4/events/stream"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs/4478c63b-b7e0-4fb9-9da0-afac681bf3e4/steps?page_size=100",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs/4478c63b-b7e0-4fb9-9da0-afac681bf3e4/steps"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs/4478c63b-b7e0-4fb9-9da0-afac681bf3e4/tool-calls?page_size=100",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs/4478c63b-b7e0-4fb9-9da0-afac681bf3e4/tool-calls"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions?page_size=100",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs/4478c63b-b7e0-4fb9-9da0-afac681bf3e4/events/stream?after=767a6845e2f2fc8a115c66e152eb4875466621f55af317ac7ad0af03f3e5b59d",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs/4478c63b-b7e0-4fb9-9da0-afac681bf3e4/events/stream"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs/4478c63b-b7e0-4fb9-9da0-afac681bf3e4/steps?page_size=100",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs/4478c63b-b7e0-4fb9-9da0-afac681bf3e4/steps"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs/4478c63b-b7e0-4fb9-9da0-afac681bf3e4/tool-calls?page_size=100",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs/4478c63b-b7e0-4fb9-9da0-afac681bf3e4/tool-calls"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions?page_size=100",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs/4478c63b-b7e0-4fb9-9da0-afac681bf3e4/events/stream?after=767a6845e2f2fc8a115c66e152eb4875466621f55af317ac7ad0af03f3e5b59d",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs/4478c63b-b7e0-4fb9-9da0-afac681bf3e4/events/stream"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs/4478c63b-b7e0-4fb9-9da0-afac681bf3e4/steps?page_size=100",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs/4478c63b-b7e0-4fb9-9da0-afac681bf3e4/steps"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs/4478c63b-b7e0-4fb9-9da0-afac681bf3e4/tool-calls?page_size=100",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs/4478c63b-b7e0-4fb9-9da0-afac681bf3e4/tool-calls"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs/4478c63b-b7e0-4fb9-9da0-afac681bf3e4/events?page_size=100",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs/4478c63b-b7e0-4fb9-9da0-afac681bf3e4/events"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs/4478c63b-b7e0-4fb9-9da0-afac681bf3e4/approvals/3ea77012-d68d-45bb-932d-ae9f64bbc77c",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs/4478c63b-b7e0-4fb9-9da0-afac681bf3e4/approvals/3ea77012-d68d-45bb-932d-ae9f64bbc77c"
+    },
+    {
+      "stage": "create",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions?page_size=100",
+      "has_csrf": false
+    },
+    {
+      "stage": "create",
+      "status": 200,
+      "path": "/api/agent/v1/sessions"
+    },
+    {
+      "stage": "freeze-old-poll-last-GET",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs/4478c63b-b7e0-4fb9-9da0-afac681bf3e4/events/stream?after=06396fc3f846b0124c2d077d1dd3514792ac846eee4e4a57981ab715e23aa390",
+      "has_csrf": false
+    },
+    {
+      "stage": "freeze-old-poll-last-GET",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs/4478c63b-b7e0-4fb9-9da0-afac681bf3e4/events/stream"
+    },
+    {
+      "stage": "freeze-old-poll-last-GET",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+      "has_csrf": false
+    },
+    {
+      "stage": "freeze-old-poll-last-GET",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee"
+    },
+    {
+      "stage": "freeze-old-poll-last-GET",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs/4478c63b-b7e0-4fb9-9da0-afac681bf3e4/steps?page_size=100",
+      "has_csrf": false
+    },
+    {
+      "stage": "freeze-old-poll-last-GET",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs/4478c63b-b7e0-4fb9-9da0-afac681bf3e4/steps"
+    },
+    {
+      "stage": "freeze-old-poll-last-GET",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs/4478c63b-b7e0-4fb9-9da0-afac681bf3e4/tool-calls?page_size=100",
+      "has_csrf": false
+    },
+    {
+      "stage": "freeze-old-poll-last-GET",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs/4478c63b-b7e0-4fb9-9da0-afac681bf3e4/tool-calls"
+    },
+    {
+      "stage": "freeze-old-poll-last-GET",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs/4478c63b-b7e0-4fb9-9da0-afac681bf3e4/events?page_size=100",
+      "has_csrf": false
+    },
+    {
+      "stage": "freeze-old-poll-last-GET",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs/4478c63b-b7e0-4fb9-9da0-afac681bf3e4/events"
+    },
+    {
+      "stage": "freeze-old-poll-last-GET",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs/4478c63b-b7e0-4fb9-9da0-afac681bf3e4/approvals/3ea77012-d68d-45bb-932d-ae9f64bbc77c",
+      "has_csrf": false
+    },
+    {
+      "stage": "foreground-approve",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs/4478c63b-b7e0-4fb9-9da0-afac681bf3e4/approvals/3ea77012-d68d-45bb-932d-ae9f64bbc77c",
+      "has_csrf": false
+    },
+    {
+      "stage": "foreground-approve",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs/4478c63b-b7e0-4fb9-9da0-afac681bf3e4/approvals/3ea77012-d68d-45bb-932d-ae9f64bbc77c"
+    },
+    {
+      "stage": "foreground-approve",
+      "method": "POST",
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs/4478c63b-b7e0-4fb9-9da0-afac681bf3e4/approvals/3ea77012-d68d-45bb-932d-ae9f64bbc77c/decision",
+      "has_csrf": true
+    },
+    {
+      "stage": "foreground-approve",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs/4478c63b-b7e0-4fb9-9da0-afac681bf3e4/approvals/3ea77012-d68d-45bb-932d-ae9f64bbc77c/decision"
+    },
+    {
+      "stage": "foreground-approve",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+      "has_csrf": false
+    },
+    {
+      "stage": "release-old-after-new",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee"
+    },
+    {
+      "stage": "release-old-after-new",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs/4478c63b-b7e0-4fb9-9da0-afac681bf3e4/steps?page_size=100",
+      "has_csrf": false
+    },
+    {
+      "stage": "release-old-after-new",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs/4478c63b-b7e0-4fb9-9da0-afac681bf3e4/steps"
+    },
+    {
+      "stage": "release-old-after-new",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs/4478c63b-b7e0-4fb9-9da0-afac681bf3e4/tool-calls?page_size=100",
+      "has_csrf": false
+    },
+    {
+      "stage": "release-old-after-new",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs/4478c63b-b7e0-4fb9-9da0-afac681bf3e4/tool-calls"
+    },
+    {
+      "stage": "release-old-after-new",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs/4478c63b-b7e0-4fb9-9da0-afac681bf3e4/approvals/3ea77012-d68d-45bb-932d-ae9f64bbc77c"
+    },
+    {
+      "stage": "release-old-after-new",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs/4478c63b-b7e0-4fb9-9da0-afac681bf3e4/approvals/3ea77012-d68d-45bb-932d-ae9f64bbc77c",
+      "has_csrf": false
+    },
+    {
+      "stage": "release-old-after-new",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs/4478c63b-b7e0-4fb9-9da0-afac681bf3e4/approvals/3ea77012-d68d-45bb-932d-ae9f64bbc77c"
+    },
+    {
+      "stage": "reload-original-GET",
+      "method": "GET",
+      "path": "/",
+      "has_csrf": false
+    },
+    {
+      "stage": "reload-original-GET",
+      "status": 200,
+      "path": "/"
+    },
+    {
+      "stage": "reload-original-GET",
+      "method": "GET",
+      "path": "/assets/index-BhvyXQDj.js",
+      "has_csrf": false
+    },
+    {
+      "stage": "reload-original-GET",
+      "method": "GET",
+      "path": "/assets/index-BeJHohIj.css",
+      "has_csrf": false
+    },
+    {
+      "stage": "reload-original-GET",
+      "status": 200,
+      "path": "/assets/index-BeJHohIj.css"
+    },
+    {
+      "stage": "reload-original-GET",
+      "status": 200,
+      "path": "/assets/index-BhvyXQDj.js"
+    },
+    {
+      "stage": "reload-original-GET",
+      "method": "GET",
+      "path": "/console-config.json",
+      "has_csrf": false
+    },
+    {
+      "stage": "reload-original-GET",
+      "status": 200,
+      "path": "/console-config.json"
+    },
+    {
+      "stage": "reload-original-GET",
+      "method": "GET",
+      "path": "/api/admin/v1/session",
+      "has_csrf": false
+    },
+    {
+      "stage": "reload-original-GET",
+      "status": 200,
+      "path": "/api/admin/v1/session"
+    },
+    {
+      "stage": "reload-original-GET",
+      "method": "GET",
+      "path": "/assets/ChatWorkspace-e8WVUcSB.js",
+      "has_csrf": false
+    },
+    {
+      "stage": "reload-original-GET",
+      "status": 200,
+      "path": "/assets/ChatWorkspace-e8WVUcSB.js"
+    },
+    {
+      "stage": "reload-original-GET",
+      "method": "GET",
+      "path": "/assets/http-DApDTGYo.js",
+      "has_csrf": false
+    },
+    {
+      "stage": "reload-original-GET",
+      "status": 200,
+      "path": "/assets/http-DApDTGYo.js"
+    },
+    {
+      "stage": "reload-original-GET",
+      "method": "GET",
+      "path": "/api/agent/v1/capabilities",
+      "has_csrf": false
+    },
+    {
+      "stage": "reload-original-GET",
+      "status": 200,
+      "path": "/api/agent/v1/capabilities"
+    },
+    {
+      "stage": "reload-original-GET",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions?page_size=100",
+      "has_csrf": false
+    },
+    {
+      "stage": "reload-original-GET",
+      "status": 200,
+      "path": "/api/agent/v1/sessions"
+    },
+    {
+      "stage": "reload-original-GET",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee",
+      "has_csrf": false
+    },
+    {
+      "stage": "reload-original-GET",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee"
+    },
+    {
+      "stage": "reload-original-GET",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs/4478c63b-b7e0-4fb9-9da0-afac681bf3e4/steps?page_size=100",
+      "has_csrf": false
+    },
+    {
+      "stage": "reload-original-GET",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs/4478c63b-b7e0-4fb9-9da0-afac681bf3e4/steps"
+    },
+    {
+      "stage": "reload-original-GET",
+      "method": "GET",
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs/4478c63b-b7e0-4fb9-9da0-afac681bf3e4/tool-calls?page_size=100",
+      "has_csrf": false
+    },
+    {
+      "stage": "reload-original-GET",
+      "status": 200,
+      "path": "/api/agent/v1/sessions/0f283c1e-273c-5210-8ff6-2f6ec6627dee/runs/4478c63b-b7e0-4fb9-9da0-afac681bf3e4/tool-calls"
+    }
+  ],
+  "exceptions": [
+    {
+      "stage": "release-old-after-new",
+      "text": "AbortError: 快照读取已由新操作替代"
+    },
+    {
+      "stage": "release-old-after-new",
+      "text": "AbortError: 快照读取已由新操作替代"
+    }
+  ]
+}

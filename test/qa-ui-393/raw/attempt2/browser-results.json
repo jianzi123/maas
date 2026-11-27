@@ -1,0 +1,177 @@
+{
+  "product_ref": "393edc9c25a2bea55969af87d29158b2f0d74f94",
+  "browser": "158.0.8127.38",
+  "checks": [
+    {
+      "id": "BOOTSTRAP-late-real401-input-gate",
+      "status": "PASS",
+      "login_posts_before_release": 0
+    },
+    {
+      "id": "RP01-missing",
+      "status": "PASS",
+      "public_v1_requests": 0,
+      "login_POSTs": 1
+    },
+    {
+      "id": "RP01-false",
+      "status": "PASS",
+      "public_v1_requests": 0,
+      "login_POSTs": 1
+    },
+    {
+      "id": "RACE-cancel-old-before-new",
+      "status": "PASS",
+      "name": "cancel-old-before-new",
+      "action": "cancel",
+      "order": "old-before-new",
+      "sid": "8960109b-d719-59ea-90d7-ffea993d04af",
+      "rid": "74291e98-9b96-4209-ad8f-49a8cbc3e30e",
+      "old_get": {
+        "path": "/api/agent/v1/sessions/8960109b-d719-59ea-90d7-ffea993d04af/runs/74291e98-9b96-4209-ad8f-49a8cbc3e30e/tool-calls?page_size=100",
+        "status": 200,
+        "etag": "\"4\"",
+        "sha256": "05532354076ec2173ec2aca88193c465ac3f5e7afe8f28c037b80fbcbb8b19ad"
+      },
+      "admitted_child": "50049f2c-d2e8-4dc6-a6a6-266bffb442ca",
+      "action_path": "/api/agent/v1/sessions/8960109b-d719-59ea-90d7-ffea993d04af/runs/74291e98-9b96-4209-ad8f-49a8cbc3e30e/cancel",
+      "action_status": 202,
+      "children": [
+        "50049f2c-d2e8-4dc6-a6a6-266bffb442ca"
+      ],
+      "backend_terminal": "cancelled",
+      "business_hash": "abe1b5207b234a666444463f2cd0bdc8ab701eccc8bb315dae85d3fb40d9ceb6",
+      "idle_stream_reads": 1,
+      "snapshots": 7,
+      "superseded_abort": 2,
+      "passed": true
+    },
+    {
+      "id": "RACE-cancel-old-after-new",
+      "status": "PASS",
+      "name": "cancel-old-after-new",
+      "action": "cancel",
+      "order": "old-after-new",
+      "sid": "f284ee17-40b0-5f15-8b93-c6ff4273bcc5",
+      "rid": "29df8249-b6b1-4d9a-9c1f-0d505a00dcad",
+      "old_get": {
+        "path": "/api/agent/v1/sessions/f284ee17-40b0-5f15-8b93-c6ff4273bcc5/runs/29df8249-b6b1-4d9a-9c1f-0d505a00dcad/tool-calls?page_size=100",
+        "status": 200,
+        "etag": "\"4\"",
+        "sha256": "05532354076ec2173ec2aca88193c465ac3f5e7afe8f28c037b80fbcbb8b19ad"
+      },
+      "admitted_child": "7bdcf271-1344-4880-8d48-326d82eaf796",
+      "action_path": "/api/agent/v1/sessions/f284ee17-40b0-5f15-8b93-c6ff4273bcc5/runs/29df8249-b6b1-4d9a-9c1f-0d505a00dcad/cancel",
+      "action_status": 202,
+      "children": [
+        "7bdcf271-1344-4880-8d48-326d82eaf796"
+      ],
+      "backend_terminal": "cancelled",
+      "business_hash": "303f252ff37b08fa52cd22ea9b5469f44336e8cdd7b752c4a1b4e5c0b2d372de",
+      "idle_stream_reads": 1,
+      "snapshots": 7,
+      "superseded_abort": 2,
+      "passed": true
+    },
+    {
+      "id": "RACE-approve-old-before-new",
+      "status": "FAIL",
+      "name": "approve-old-before-new",
+      "action": "approve",
+      "order": "old-before-new",
+      "sid": "76fefa74-61d0-5539-8cad-eae6c4439866",
+      "rid": "235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6",
+      "old_get": {
+        "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs/235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6/approvals/96a73cf0-9e63-4ecd-af97-bdf487a97d46",
+        "status": 200,
+        "etag": "\"7\"",
+        "sha256": "fe20f4e95272507c8743b3e35f04401be6a51246a45e948ba282aaf986fee24a"
+      },
+      "action_path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs/235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6/approvals/96a73cf0-9e63-4ecd-af97-bdf487a97d46/decision",
+      "action_status": 200,
+      "children": [
+        "45db83db-72f4-4a29-ae24-064896b25c99",
+        "30f4a806-47f6-4ab7-b3a9-4418322cdf77"
+      ],
+      "backend_terminal": "completed",
+      "stage": "release-old-before-new",
+      "error": "locator.waitFor: Error: strict mode violation: locator('.badge').filter({ hasText: /^completed$/ }) resolved to 3 elements:\n    1) <span class=\"badge\">completed</span> aka getByText('completed').first()\n    2) <span class=\"badge\">completed</span> aka getByText('completed').nth(1)\n    3) <span class=\"badge\">completed</span> aka getByText('completed').nth(2)\n\nCall log:\n\u001b[2m  - waiting for locator('.badge').filter({ hasText: /^completed$/ }) to be visible\u001b[22m\n\n    at raceCase (C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-7-6bf78f4f3528\\workdir\\inputs\\combined-393\\browser.mjs:37:72)\n    at async file:///C:/Users/a9786/multica_workspaces_desktop-api.multica.ai/maas-007-da4ec7313117/maas-7-6bf78f4f3528/workdir/inputs/combined-393/browser.mjs:54:161"
+    }
+  ],
+  "journals": [
+    {
+      "name": "cancel-old-before-new",
+      "action": "cancel",
+      "order": "old-before-new",
+      "sid": "8960109b-d719-59ea-90d7-ffea993d04af",
+      "rid": "74291e98-9b96-4209-ad8f-49a8cbc3e30e",
+      "old_get": {
+        "path": "/api/agent/v1/sessions/8960109b-d719-59ea-90d7-ffea993d04af/runs/74291e98-9b96-4209-ad8f-49a8cbc3e30e/tool-calls?page_size=100",
+        "status": 200,
+        "etag": "\"4\"",
+        "sha256": "05532354076ec2173ec2aca88193c465ac3f5e7afe8f28c037b80fbcbb8b19ad"
+      },
+      "admitted_child": "50049f2c-d2e8-4dc6-a6a6-266bffb442ca",
+      "action_path": "/api/agent/v1/sessions/8960109b-d719-59ea-90d7-ffea993d04af/runs/74291e98-9b96-4209-ad8f-49a8cbc3e30e/cancel",
+      "action_status": 202,
+      "children": [
+        "50049f2c-d2e8-4dc6-a6a6-266bffb442ca"
+      ],
+      "backend_terminal": "cancelled",
+      "business_hash": "abe1b5207b234a666444463f2cd0bdc8ab701eccc8bb315dae85d3fb40d9ceb6",
+      "idle_stream_reads": 1,
+      "snapshots": 7,
+      "superseded_abort": 2,
+      "passed": true
+    },
+    {
+      "name": "cancel-old-after-new",
+      "action": "cancel",
+      "order": "old-after-new",
+      "sid": "f284ee17-40b0-5f15-8b93-c6ff4273bcc5",
+      "rid": "29df8249-b6b1-4d9a-9c1f-0d505a00dcad",
+      "old_get": {
+        "path": "/api/agent/v1/sessions/f284ee17-40b0-5f15-8b93-c6ff4273bcc5/runs/29df8249-b6b1-4d9a-9c1f-0d505a00dcad/tool-calls?page_size=100",
+        "status": 200,
+        "etag": "\"4\"",
+        "sha256": "05532354076ec2173ec2aca88193c465ac3f5e7afe8f28c037b80fbcbb8b19ad"
+      },
+      "admitted_child": "7bdcf271-1344-4880-8d48-326d82eaf796",
+      "action_path": "/api/agent/v1/sessions/f284ee17-40b0-5f15-8b93-c6ff4273bcc5/runs/29df8249-b6b1-4d9a-9c1f-0d505a00dcad/cancel",
+      "action_status": 202,
+      "children": [
+        "7bdcf271-1344-4880-8d48-326d82eaf796"
+      ],
+      "backend_terminal": "cancelled",
+      "business_hash": "303f252ff37b08fa52cd22ea9b5469f44336e8cdd7b752c4a1b4e5c0b2d372de",
+      "idle_stream_reads": 1,
+      "snapshots": 7,
+      "superseded_abort": 2,
+      "passed": true
+    },
+    {
+      "name": "approve-old-before-new",
+      "action": "approve",
+      "order": "old-before-new",
+      "sid": "76fefa74-61d0-5539-8cad-eae6c4439866",
+      "rid": "235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6",
+      "old_get": {
+        "path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs/235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6/approvals/96a73cf0-9e63-4ecd-af97-bdf487a97d46",
+        "status": 200,
+        "etag": "\"7\"",
+        "sha256": "fe20f4e95272507c8743b3e35f04401be6a51246a45e948ba282aaf986fee24a"
+      },
+      "action_path": "/api/agent/v1/sessions/76fefa74-61d0-5539-8cad-eae6c4439866/runs/235f8acd-43e9-4a30-b8ba-e1f4ca8d49d6/approvals/96a73cf0-9e63-4ecd-af97-bdf487a97d46/decision",
+      "action_status": 200,
+      "children": [
+        "45db83db-72f4-4a29-ae24-064896b25c99",
+        "30f4a806-47f6-4ab7-b3a9-4418322cdf77"
+      ],
+      "backend_terminal": "completed",
+      "stage": "release-old-before-new",
+      "error": "locator.waitFor: Error: strict mode violation: locator('.badge').filter({ hasText: /^completed$/ }) resolved to 3 elements:\n    1) <span class=\"badge\">completed</span> aka getByText('completed').first()\n    2) <span class=\"badge\">completed</span> aka getByText('completed').nth(1)\n    3) <span class=\"badge\">completed</span> aka getByText('completed').nth(2)\n\nCall log:\n\u001b[2m  - waiting for locator('.badge').filter({ hasText: /^completed$/ }) to be visible\u001b[22m\n\n    at raceCase (C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-7-6bf78f4f3528\\workdir\\inputs\\combined-393\\browser.mjs:37:72)\n    at async file:///C:/Users/a9786/multica_workspaces_desktop-api.multica.ai/maas-007-da4ec7313117/maas-7-6bf78f4f3528/workdir/inputs/combined-393/browser.mjs:54:161"
+    }
+  ],
+  "passed": 5,
+  "failed": 1
+}

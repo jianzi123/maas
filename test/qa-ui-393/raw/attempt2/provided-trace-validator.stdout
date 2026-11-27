@@ -1,0 +1,1 @@
+{"scope": "actual controlled HTTP and persisted MySQL sample validation, no real supplier", "cases": [{"case": "complete", "http_samples": 23, "persisted_events": 33, "original_children": 2, "official_schema": "passed"}, {"case": "invalid_second_tool", "http_samples": 11, "persisted_events": 9, "original_children": 1, "official_schema": "passed"}]}

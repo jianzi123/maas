@@ -1,0 +1,12 @@
+{
+  "project": "maas7-ui393-76e89ce8",
+  "port": 57359,
+  "origin": "http://127.0.0.1:57359",
+  "socket": "/tmp/maas11-mysql.maas7-ui393-76e89ce8/mysql.sock",
+  "base": "C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-7-6bf78f4f3528\\workdir\\inputs\\combined-393",
+  "source": "C:\\Users\\a9786\\AppData\\Local\\Temp\\multica-codex-warm-2751329217\\tmp\\s393",
+  "product_ref": "393edc9c25a2bea55969af87d29158b2f0d74f94",
+  "code": "c99e5dfccfabec17b6a582892cd155a37a49b0a4",
+  "profile": "offline-controlled/5000ms/requireApproval",
+  "mysql_image": "mysql:8.0.44"
+}

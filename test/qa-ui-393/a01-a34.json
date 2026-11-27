@@ -1,0 +1,220 @@
+{
+  "rows": [
+    {
+      "id": "A01",
+      "requirement": "经 Higress 配置获准外部 GPT 类真实模型并查询列表",
+      "acceptance": "NOT_ACCEPTED",
+      "this_round": "本轮未执行；保留原已关闭范围和未验条件。"
+    },
+    {
+      "id": "A02",
+      "requirement": "未登录访问管理面；登录后创建 Key；退出再访问",
+      "acceptance": "NOT_ACCEPTED",
+      "this_round": "本轮未执行；保留原已关闭范围和未验条件。"
+    },
+    {
+      "id": "A03",
+      "requirement": "有效 Key 分别调用非流式和流式",
+      "acceptance": "NOT_ACCEPTED",
+      "this_round": "本轮未执行；保留原已关闭范围和未验条件。"
+    },
+    {
+      "id": "A04",
+      "requirement": "缺失、伪造、撤销 Key；提交未知模型或非法消息",
+      "acceptance": "NOT_ACCEPTED",
+      "this_round": "本轮未执行；保留原已关闭范围和未验条件。"
+    },
+    {
+      "id": "A05",
+      "requirement": "Go 服务至少两副本，每日限额设 2，先调用 1 次，再经 Higress 同时发 10 次",
+      "acceptance": "NOT_ACCEPTED",
+      "this_round": "本轮未执行；保留原已关闭范围和未验条件。"
+    },
+    {
+      "id": "A06",
+      "requirement": "用受控时钟跨 UTC 00:00；将额度改到小于已用量",
+      "acceptance": "NOT_ACCEPTED",
+      "this_round": "本轮未执行；保留原已关闭范围和未验条件。"
+    },
+    {
+      "id": "A07",
+      "requirement": "首响应前注入上游失败/超时；首分片后断流",
+      "acceptance": "NOT_ACCEPTED",
+      "this_round": "本轮未执行；保留原已关闭范围和未验条件。"
+    },
+    {
+      "id": "A08",
+      "requirement": "试用页停止及 API 客户端断开",
+      "acceptance": "NOT_ACCEPTED",
+      "this_round": "实际准入停止及旧GET双迟到顺序在393通过，原界面竞态受控关闭；真实供应商断流未验。"
+    },
+    {
+      "id": "A09",
+      "requirement": "上游返回实际 Token；另一次不返回 Token",
+      "acceptance": "NOT_ACCEPTED",
+      "this_round": "本轮未执行；保留原已关闭范围和未验条件。"
+    },
+    {
+      "id": "A10",
+      "requirement": "请求结束后查询，并重复投递计量终态事件",
+      "acceptance": "NOT_ACCEPTED",
+      "this_round": "4原Run/6child的重复GET/页面恢复业务哈希不变、6request6usage；全重复终态/HA矩阵不外推。"
+    },
+    {
+      "id": "A11",
+      "requirement": "挂起 5 个已提交请求，再发第 6 个，随后释放一个",
+      "acceptance": "NOT_ACCEPTED",
+      "this_round": "本轮未执行；保留原已关闭范围和未验条件。"
+    },
+    {
+      "id": "A12",
+      "requirement": "计量存储不可用；请求在途时模拟服务重启",
+      "acceptance": "NOT_ACCEPTED",
+      "this_round": "本轮未执行；保留原已关闭范围和未验条件。"
+    },
+    {
+      "id": "A13",
+      "requirement": "从全新获准环境按文档启动并检查日志",
+      "acceptance": "NOT_ACCEPTED",
+      "this_round": "本轮正常Go/MySQL页面站点；迁移P1仍开放，393不含物理门禁修订。"
+    },
+    {
+      "id": "A14",
+      "requirement": "Vue + TypeScript 控制台登录→模型列表→创建 Key→试用→用量→撤销→重试",
+      "acceptance": "NOT_ACCEPTED",
+      "this_round": "默认试用关闭/引导Chat、bootstrap、停止/批准及坏关联拒绝通过；公共消费Key API/全部管理功能未验。"
+    },
+    {
+      "id": "A15",
+      "requirement": "配置一个外部与一个受控内网端点，按不同别名调用；提交未注册别名或自定义 URL",
+      "acceptance": "NOT_ACCEPTED",
+      "this_round": "本轮未执行；保留原已关闭范围和未验条件。"
+    },
+    {
+      "id": "A16",
+      "requirement": "仅内网模式关闭外部来源并阻断公网出网，执行控制台与模型闭环；再在获准混合模式调用外部接口",
+      "acceptance": "NOT_ACCEPTED",
+      "this_round": "本轮未执行；保留原已关闭范围和未验条件。"
+    },
+    {
+      "id": "A17",
+      "requirement": "在获准 K8s 测试集群按版本矩阵 Helm 安装、升级、回滚",
+      "acceptance": "NOT_ACCEPTED",
+      "this_round": "本轮未执行；保留原已关闭范围和未验条件。"
+    },
+    {
+      "id": "A18",
+      "requirement": "经多个服务副本撤销 Key、压满全局并发；流式期间滚动升级",
+      "acceptance": "NOT_ACCEPTED",
+      "this_round": "本轮未执行；保留原已关闭范围和未验条件。"
+    },
+    {
+      "id": "A19",
+      "requirement": "单独启用请求数、Token、金额限额及组合限额；跨副本并发仅允许可用预算覆盖的请求，未获准不命中上游；可解释各类余额及拒绝原因。",
+      "acceptance": "NOT_ACCEPTED",
+      "this_round": "本轮未执行；保留原已关闭范围和未验条件。"
+    },
+    {
+      "id": "A20",
+      "requirement": "流式最坏上界预留与实际结算；失败、取消、缺失/部分 usage、发送未知和重复终态不产生漏计、双扣或不安全退款；无可信上界时明确能力限制。",
+      "acceptance": "NOT_ACCEPTED",
+      "this_round": "当前受控live样本known10/20、held0；unknown-held沿原1f8证据，本轮未重新触发。"
+    },
+    {
+      "id": "A21",
+      "requirement": "多 Higress/Go 副本 Redis 限流一致；Redis 不可用、重启、丢状态或主从切换时不静默扩大放行，不绕过 MySQL 业务额度。",
+      "acceptance": "NOT_ACCEPTED",
+      "this_round": "本轮未执行；保留原已关闭范围和未验条件。"
+    },
+    {
+      "id": "A22",
+      "requirement": "MySQL 事务、撤销、跨日、全局并发及 Redis/MySQL 部分成功/断网/ACK未知/恢复；没有分布式原子承诺的空白窗口，唯一结算及 slot 回收仍正确。",
+      "acceptance": "NOT_ACCEPTED",
+      "this_round": "本轮未执行；保留原已关闭范围和未验条件。"
+    },
+    {
+      "id": "A23",
+      "requirement": "多模型/价格类别、价表变更、币种/精度/舍入、金额不足与未知用量；请求用固定价格快照，汇总可追溯，不把未知成本当0。",
+      "acceptance": "NOT_ACCEPTED",
+      "this_round": "本轮未执行；保留原已关闭范围和未验条件。"
+    },
+    {
+      "id": "A24",
+      "requirement": "在获准 WSL 本地路径复现单管理员→Key→Higress→DeepSeek→用量/预算→撤销闭环；Codex 按确定的渠道单列兼容证据；本地受控验证与真实付费调用、Helm 验收分别记录。",
+      "acceptance": "NOT_ACCEPTED",
+      "this_round": "本轮未执行；保留原已关闭范围和未验条件。"
+    },
+    {
+      "id": "A25",
+      "requirement": "校验私有/外部两类 CR；来源互斥、非法参数/别名冲突/未经允许的目标或 Secret 引用被拒绝，错误可定位；示例及状态中无真实秘密。",
+      "acceptance": "NOT_ACCEPTED",
+      "this_round": "本轮未执行；保留原已关闭范围和未验条件。"
+    },
+    {
+      "id": "A26",
+      "requirement": "提交一个私有 CR，自动协调选定 LWS/引擎、Service 和 Higress 资源；同一 CR 重复提交不产生重复组或路由，完成真实可调用验证后才 Ready。缺 GPU 时仅可记录静态或受控验证。",
+      "acceptance": "NOT_ACCEPTED",
+      "this_round": "本轮未执行；保留原已关闭范围和未验条件。"
+    },
+    {
+      "id": "A27",
+      "requirement": "提交一个外部 API CR，只建立外部来源与发布结构，不创建 LWS/推理 Pod/GPU；调用仍经过 Go 唯一准入、Redis 限流和 MySQL 三维预算/计量。",
+      "acceptance": "NOT_ACCEPTED",
+      "this_round": "本轮未执行；保留原已关闭范围和未验条件。"
+    },
+    {
+      "id": "A28",
+      "requirement": "工作负载、依赖、网关配置或业务登记任一未就绪时，不对新修订放行；status 精确反映 observedGeneration、活动修订和失败原因；配置已写入不能冒充网关已应用。",
+      "acceptance": "NOT_ACCEPTED",
+      "this_round": "本轮未执行；保留原已关闭范围和未验条件。"
+    },
+    {
+      "id": "A29",
+      "requirement": "控制器重启、重复/乱序协调、资源漂移及更新冲突后收敛；不重复部署、覆盖非本模型资源或使发布状态虚假成功；依赖/节点故障明确可观察。",
+      "acceptance": "NOT_ACCEPTED",
+      "this_round": "本轮未执行；保留原已关闭范围和未验条件。"
+    },
+    {
+      "id": "A30",
+      "requirement": "带在途流更新并回滚一个模型；新旧修订、可信路由、请求价格快照和计量绑定正确，无跨来源回退或重复上游尝试；资源不足时按约定明确可用性结果。",
+      "acceptance": "NOT_ACCEPTED",
+      "this_round": "本轮未执行；保留原已关闭范围和未验条件。"
+    },
+    {
+      "id": "A31",
+      "requirement": "暂停/删除一个 CR，按约定停新准入、排空、撤路由及清理专属资源；共享对象中其他模型的配置、用户 Secret/PVC/权重和历史账本均保留；中断后可恢复。",
+      "acceptance": "NOT_ACCEPTED",
+      "this_round": "本轮未执行；保留原已关闭范围和未验条件。"
+    },
+    {
+      "id": "A32",
+      "requirement": "两个模型并发发布/删除并轮换凭证，namespace/RBAC、共享配置合并与 Secret 注入边界正确；一个模型的改动不影响另一个，也不绕过预算。",
+      "acceptance": "NOT_ACCEPTED",
+      "this_round": "本轮未执行；保留原已关闭范围和未验条件。"
+    },
+    {
+      "id": "A33",
+      "requirement": "Helm 安装/升级/回滚检查 CRD、Operator、LWS、Higress、GPU/存储依赖及版本；缺依赖时模型 CR 明确失败而不擅自改集群基础设施；WSL受控与真实GPU结果分开。",
+      "acceptance": "NOT_ACCEPTED",
+      "this_round": "本轮未执行；保留原已关闭范围和未验条件。"
+    },
+    {
+      "id": "A34",
+      "requirement": "SGLang 固定条件基线与一次经证据定位的优化对照可复现，质量/取消/三维预算/计量回归通过；无 GPU 或基线时只交方案与未执行项，不宣称性能提升。",
+      "acceptance": "NOT_ACCEPTED",
+      "this_round": "本轮无CPU/GPU性能实验；原PR23 AA-CPU-01 CPU独立关闭保留，A/A及性能未验。"
+    }
+  ],
+  "preserved_closed": [
+    "879/R01/R02",
+    "d27 MANIFEST",
+    "822 PR23 CPU AA-CPU-01"
+  ],
+  "new_closed": [
+    "QA-CHAT-RACE-001 controlled at393"
+  ],
+  "open": [
+    "QA-MIG-SHAPE-001"
+  ],
+  "public_Key_API": "NOT_TESTED"
+}

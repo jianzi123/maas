@@ -1,0 +1,24 @@
+{
+  "argv": [
+    "docker",
+    "compose",
+    "-f",
+    "C:\\Users\\a9786\\multica_workspaces_desktop-api.multica.ai\\maas-007-da4ec7313117\\maas-7-6bf78f4f3528\\workdir\\inputs\\combined-393\\compose.json",
+    "exec",
+    "-T",
+    "mysql",
+    "mysql",
+    "--socket=/tmp/maas11-mysql.maas7-ui393-76e89ce8/mysql.sock",
+    "-uroot",
+    "--batch",
+    "--skip-column-names",
+    "maas",
+    "-e",
+    "SELECT COUNT(*) FROM generation_requests; SELECT COUNT(*) FROM usage_events; SELECT COALESCE(SUM(finalized_total),0) FROM usage_daily;"
+  ],
+  "rows": [
+    "6",
+    "6",
+    "6"
+  ]
+}

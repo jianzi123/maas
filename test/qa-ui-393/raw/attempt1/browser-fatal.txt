@@ -1,0 +1,6 @@
+locator.isDisabled: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for getByRole('button', { name: '登录', exact: true })[22m
+
+    at entryCases (C:\Users\a9786\multica_workspaces_desktop-api.multica.ai\maas-007-da4ec7313117\maas-7-6bf78f4f3528\workdir\inputs\combined-393\browser.mjs:49:280)
+    at async file:///C:/Users/a9786/multica_workspaces_desktop-api.multica.ai/maas-007-da4ec7313117/maas-7-6bf78f4f3528/workdir/inputs/combined-393/browser.mjs:54:31

@@ -1,0 +1,22 @@
+[
+  {
+    "method": "GET",
+    "path": "/"
+  },
+  {
+    "method": "GET",
+    "path": "/assets/index-BhvyXQDj.js"
+  },
+  {
+    "method": "GET",
+    "path": "/assets/index-BeJHohIj.css"
+  },
+  {
+    "method": "GET",
+    "path": "/console-config.json"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/v1/session"
+  }
+]

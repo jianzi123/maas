@@ -1,0 +1,33 @@
+{
+  "product_head": "393edc9c25a2bea55969af87d29158b2f0d74f94",
+  "product_code": "c99e5dfccfabec17b6a582892cd155a37a49b0a4",
+  "source_hashes": {
+    "console/src/chat/http.ts": "35f7a4284d7c1dc4b11ed165048894b5982957bd4c0b048c8d6b4ee6279ae4e4",
+    "console/src/pages/ChatWorkspace.vue": "0eb2b417f5986863fe395609a69d60eaf74f54c5963002f32427fe7be75cbe90",
+    "console/src/App.vue": "41119b81df36a70264ae0fcf0c8dcfc54b3ce82a80a66949f332202c528749ef",
+    "console/src/pages/Playground.vue": "cdf4294ae13ede61852e812d74eb08c2e6edf1142c9947828017726b0e674ac9",
+    "console/src/deployment.ts": "728501c2ec6a92dff9a557552fec1c4d46908506f7c1df53b35c84d5e2855d97",
+    "console/package-lock.json": "eaeb8882831ec2ded9bc0659d2ba4dd0bc9e6864ed4903dd6fb2ca88fd369a37",
+    "go.mod": "3fc1c612237e81b1a61efdf59eb3e108980b170fd85b8b2c855db0f08240457b",
+    "go.sum": "34ef9b8203162cccd56bdd7aa590ca1df2683c9a794ba118d3db0ff242609fb1",
+    "docs/contracts/agent-runtime/ar1-draft2/openapi.json": "b8a503492a847c419e5a844cd9582567d6f0532d1c7782b5b4685be072f209a8",
+    "docs/contracts/agent-runtime/ar1-draft2/session-event.schema.json": "b2513e7799729e7bbfe38262bdc0f8155d777ebb36e7c49d66d0d434125ba089"
+  },
+  "Go": "1.26.0 linux/amd64 CGO0 GOMAXPROCS1 -p1 GOMEMLIMIT256MiB",
+  "Node": "22.23.4",
+  "browser": "158.0.8127.38",
+  "MySQL": "8.0.44",
+  "service_binary_sha256": "4992705ec377aed76461fa47dc7aea3b6962d78428f8f3ff03f3275eb1d2f385",
+  "built_js": {
+    "ChatWorkspace-e8WVUcSB.js": "d8f4347b4e248955625fd25331e16b83f5537cbaa3dfbdfc488e3c8079cd8a53",
+    "development-DfiPZtEA.js": "6ced22feca3fb975cf9b5a6bfca5950c04015e775085451549e24c0125dabbf3",
+    "http-DApDTGYo.js": "1fe919960ce13b20f9f7faf845a598660ce8f4b9b33d11f318513bb5b9cec4ee",
+    "index-BhvyXQDj.js": "ff340d3d51fd89472546f9f0195f686bbe7f44fb7d4fbd8f0e66183ea8f623bc"
+  },
+  "profile": "offline-controlled/5000ms/requireApproval",
+  "original_bundle_sha256": "fe98c0a5cfa83f695b11708baf3cb383ae7a6c3bd650f2a70435c82f0c08beed",
+  "browser_layer": "real headless Chrome + normal Go/MySQL, controlled GET response delay; no jsdom",
+  "schema_layer": "retained controlled producer wire samples; not new formal upstream execution",
+  "QA_CHAT_RACE_001": "CLOSED_CONTROLLED_AT_393",
+  "QA_MIG_SHAPE_001": "OPEN_NOT_RETESTED_IN_THIS_RUN"
+}
