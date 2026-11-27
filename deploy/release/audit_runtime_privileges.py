@@ -250,10 +250,12 @@ def evaluate(policy, rows, allow_missing=False):
 
 
 def authenticate_runtime(client, expected_server):
-    rows = client.collect([("runtime", "SELECT JSON_ARRAY('runtime',CURRENT_USER(),DATABASE(),@@GLOBAL.server_uuid,CURRENT_ROLE(),@@proxy_user,VERSION())")])
+    # CURRENT_ROLE() is a binary SQL string in8.4.7; JSON would otherwise emit a
+    # base64:type15 marker. Convert at source, never accept opaque encoded roles.
+    rows = client.collect([("runtime", "SELECT JSON_ARRAY('runtime',CURRENT_USER(),DATABASE(),@@GLOBAL.server_uuid,CONVERT(CURRENT_ROLE() USING utf8mb4),@@proxy_user,VERSION())")])
     if len(rows["runtime"]) != 1: raise AuditError("runtime_identity_unavailable")
     user, db, server, roles, proxy, version = rows["runtime"][0]
-    tokens = roles.split(",")
+    tokens = [token.strip() for token in roles.split(",")]
     if any(not re.fullmatch(r"`[a-z0-9_]+`@`%`", token) for token in tokens): raise AuditError("runtime_role_activation_not_approved")
     active = [token.split("`")[1] for token in tokens]
     if user != RUNTIME+"@%" or proxy is not None or db != expected_server["database"] or server != expected_server["serverUUID"] or version != expected_server["serverVersion"] or len(active) != 4 or set(active) != ROLES:
