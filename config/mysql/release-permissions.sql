@@ -20,6 +20,22 @@ GRANT SELECT ON __MAAS_DATABASE__.release_links TO maas_release_reader;
 GRANT SELECT ON __MAAS_DATABASE__.publications TO maas_release_reader;
 GRANT SELECT ON __MAAS_DATABASE__.active_model_bindings TO maas_release_reader;
 
+-- FC-M physical readiness metadata only. SHOW VIEW makes these objects and
+-- indexes visible to information_schema without granting private row SELECT,
+-- column access, DML, DDL, or borrowing History/Payload/Operations roles.
+GRANT SHOW VIEW ON __MAAS_DATABASE__.release_revisions TO maas_release_reader;
+GRANT SHOW VIEW ON __MAAS_DATABASE__.publish_intents TO maas_release_reader;
+GRANT SHOW VIEW ON __MAAS_DATABASE__.resource_inventory TO maas_release_reader;
+GRANT SHOW VIEW ON __MAAS_DATABASE__.release_operations TO maas_release_reader;
+GRANT SHOW VIEW ON __MAAS_DATABASE__.release_history_owners TO maas_release_reader;
+GRANT SHOW VIEW ON __MAAS_DATABASE__.retained_release_snapshots TO maas_release_reader;
+GRANT SHOW VIEW ON __MAAS_DATABASE__.release_history_retention TO maas_release_reader;
+GRANT SHOW VIEW ON __MAAS_DATABASE__.release_history_legacy_audit TO maas_release_reader;
+GRANT SHOW VIEW ON __MAAS_DATABASE__.release_management_operations TO maas_release_reader;
+GRANT SHOW VIEW ON __MAAS_DATABASE__.release_history_directory TO maas_release_reader;
+GRANT SHOW VIEW ON __MAAS_DATABASE__.release_history_projection TO maas_release_reader;
+GRANT SHOW VIEW ON __MAAS_DATABASE__.release_history_completeness TO maas_release_reader;
+
 -- The existing core must separately grant only the required guard/evidence
 -- reads to the publisher adapter. Its exact DDL/ownership is not in this repo.
 -- Publisher guard reads use FOR SHARE (SELECT only), not FOR UPDATE, which

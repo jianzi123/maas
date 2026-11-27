@@ -95,7 +95,9 @@ class NativeGates(unittest.TestCase):
                 def kub(args, name, **kw):
                     events.append(name)
                     if name == "migration-complete" and failed: raise RuntimeError("migration-complete: exit 1")
+                    if name == "existing-migration-jobs":return 0, '{"items":[]}', ''
                     return 0, "deployment.apps/maas" if name == "existing-app" else "", ""
+                (Path(d)/'migration.yaml').write_text('apiVersion: batch/v1\nkind: Job\nmetadata: {name: fixture}\nspec: {}\n')
                 with patch.object(r, "owned", return_value=state), patch.object(r, "run", return_value=(0, state["revision"], "")), patch.object(r, "kub", side_effect=kub), patch.object(r, "schema", side_effect=lambda *a: events.append("schema-check")):
                     if failed:
                         with self.assertRaises(RuntimeError): native.install(r)

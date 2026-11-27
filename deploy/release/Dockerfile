@@ -38,12 +38,19 @@ LABEL org.opencontainers.image.revision=${SOURCE_REVISION}
 USER 101:101
 EXPOSE 8080
 ENTRYPOINT ["nginx","-g","daemon off;"]
-FROM ${MYSQL_IMAGE} AS migrate
-COPY --from=backend-build /out/maas /maas
-COPY docs/contracts/agent-runtime /app/docs/contracts/agent-runtime
+FROM ${MYSQL_IMAGE} AS installer-audit
+USER 0:0
+RUN microdnf install -y python3 && microdnf clean all
 COPY config/mysql/ /app/sql/
 COPY deploy/agent/session-role.sql /app/sql/agent-runtime-role.sql
+COPY deploy/release/audit_runtime_privileges.py /app/audit_runtime_privileges.py
 COPY deploy/release/migrate.sh /app/migrate.sh
+COPY deploy/build-sources.lock.json /app/build-sources.lock.json
+ARG SOURCE_REVISION=uncommitted
+LABEL org.opencontainers.image.revision=${SOURCE_REVISION}
+FROM installer-audit AS migrate
+COPY --from=backend-build /out/maas /maas
+COPY docs/contracts/agent-runtime /app/docs/contracts/agent-runtime
 WORKDIR /app
 ARG SOURCE_REVISION=uncommitted
 LABEL org.opencontainers.image.revision=${SOURCE_REVISION}
