@@ -29,16 +29,8 @@ docker build --target migrate -t maas-migrate:<tag> --build-arg SOURCE_REVISION=
 
 确认当前context为明确批准目标，namespace maas未被其他项目占用或这是保留原Secret的同一安装。
 ```sh
-kubectl apply -f namespace.yaml
-kubectl apply -f config.yaml
-kubectl apply -f mysql.yaml
-kubectl -n maas rollout status statefulset/mysql --timeout=300s
-kubectl apply -f migration.yaml
-kubectl -n maas wait --for=condition=complete job/maas-migrate-<tag> --timeout=180s
-kubectl apply -f application.yaml
-kubectl -n maas rollout status deployment/maas --timeout=180s
-kubectl -n maas rollout status deployment/web --timeout=180s
-kubectl -n maas port-forward service/web 18080:8080
+python source/deploy/release/install_kubernetes.py --directory . --kubeconfig APPROVED_KUBECONFIG --context APPROVED_CONTEXT --namespace maas
+kubectl --kubeconfig APPROVED_KUBECONFIG --context APPROVED_CONTEXT -n maas port-forward service/web 18080:8080
 ```
 
 config.yaml由生成器实际生成Secret与ConfigMap，须留本地受保护位置、不提交Git/评论；包含mysql root、独立runtime和migration三类Secret及公开console配置。浏览器 http://localhost:18080；admin初始化密码仅在.secrets/migration/maas_bootstrap_password。若使用批准域名/TLS，应在生成器--origin选择真实URL，设置secure_cookie并按目标入口安装；默认不创建公网Ingress/LoadBalancer。

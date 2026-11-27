@@ -14,7 +14,7 @@ python source/deploy/release/configure.py --format compose --directory . --port 
 python source/deploy/release/build_native.py --root .
 export MAAS_DOCKERFILE=deploy/release/Dockerfile.native
 docker compose --parallel 1 build
-docker compose up -d --wait --wait-timeout 300
+python source/deploy/release/install_compose.py --file compose.yaml
 docker compose ps
 ```
 

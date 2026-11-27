@@ -6,6 +6,7 @@ RELEASE=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(RELEASE))
 import audit_runtime_privileges as audit
 import install_compose
+import install_kubernetes
 
 
 def locked_policy(root):
@@ -143,6 +144,30 @@ class PrivilegeAuditTest(unittest.TestCase):
         with self.assertRaises(RuntimeError):install_compose.install(['docker','compose'],execute)
         self.assertEqual(commands[-1][-4:],['run','--rm','--no-deps','migrate'])
         self.assertFalse(any('up' in args for args in commands))
+
+    def native_files(self):
+        for name,kind in (('namespace','Namespace'),('config','ConfigMap'),('migration','Job'),('application','Deployment')):
+            doc={'apiVersion':'v1','kind':kind,'metadata':{'name':'maas' if kind=='Namespace' else 'fixture','namespace':'maas'},'spec':{}}
+            (self.root/(name+'.yaml')).write_text(json.dumps(doc))
+
+    def test_native_old_complete_does_not_bypass_new_failed_audit(self):
+        self.native_files();commands=[];submitted=[]
+        old={'spec':{'template':{'metadata':{'labels':{'app':'maas-migrate'}}}},'status':{'conditions':[{'type':'Complete','status':'True'}]}}
+        def execute(args,capture=False,data=None):
+            commands.append(args)
+            if args[:2]==['get','deployment']:return 'deployment/maas'
+            if args[:2]==['get','jobs']:return json.dumps({'items':[old]})
+            if args==['create','-f','-']:submitted.append(json.loads(json.dumps(__import__('yaml').safe_load(data)))['metadata']['name'])
+            if args[:2]==['wait','--for=condition=complete']:raise RuntimeError('new audit failed')
+            return ''
+        with self.assertRaises(RuntimeError):install_kubernetes.install(self.root,'maas',execute,True)
+        self.assertEqual(len(submitted),1);self.assertNotEqual(submitted[0],'fixture')
+        self.assertFalse(any('application.yaml' in str(a) for a in commands))
+
+    def test_native_wrong_namespace_refused_before_api_writes(self):
+        self.native_files();calls=[]
+        with self.assertRaises(ValueError):install_kubernetes.install(self.root,'other',lambda *a,**k:calls.append(a),True)
+        self.assertFalse(calls)
 
 
 if __name__=='__main__':unittest.main()
