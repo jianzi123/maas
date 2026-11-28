@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "scope": "observed-source-interface-not-production-readiness",
   "backend": {
-    "sourceCommit": "02969aeb7ad1ac00f8e4db9f08d42f0164a68501",
+    "sourceCommit": "460dbc6058eaf8f4b0da4bae6681dd2b8c0d7b0e",
     "apiGroup": "serving.maas.example",
     "operator": {
       "command": [
@@ -713,6 +713,7 @@
       "config/crd/modelreleases.yaml": "1169272473c5fa8a484245cb82fc0a4b1c32db4a759f33e4add1fcc389ae1aa1",
       "config/mysql/controlapi-projections.sql": "d35292ff6229b8c5ea858b1cba864ee093ffd61acb846805010a6b00ebc22a0c",
       "config/mysql/kernel-permissions.sql": "45b6696ac95968e80935c32715f0e490e67ad5040309a9e234c3fb1d1d651f02",
+      "config/mysql/product-auth-permissions.sql": "e43cee47758c5c2d0a0e63fc310058b525c75ecd50bccb6a6c976a75d561c80d",
       "config/mysql/release-permissions.sql": "2f3e2dda2eac90664ae6943841192f038591b45c9cead70638db8c7922ff1e3d",
       "config/publisher/publisher.example.json": "8e39d5042e1ea20d18b8d344393dbe93c46d3f2770d9d02b0b87dd13bc950d48",
       "config/samples/MAAS-2-modelrelease-externalapi-v0.4.example.yaml": "1bab331661c9c909576a326ce9be94a83b87414399dd310f8402ae8575bebbda",
@@ -751,7 +752,7 @@
     }
   },
   "console": {
-    "sourceCommit": "02969aeb7ad1ac00f8e4db9f08d42f0164a68501",
+    "sourceCommit": "460dbc6058eaf8f4b0da4bae6681dd2b8c0d7b0e",
     "build": "npm ci && npm run build",
     "output": "console/dist",
     "localBridge": "development-and-explicit-workbench-mode-only",
