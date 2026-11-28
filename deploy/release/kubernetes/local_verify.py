@@ -19,6 +19,7 @@ import sys
 import time
 import urllib.error
 import urllib.request
+import uuid
 
 import yaml
 
@@ -300,8 +301,18 @@ def install(r):
     if raw.strip():
         r.kub(["scale", "deployment/maas", "--replicas=0"], "stop-old-scheduler")
         r.kub(["wait", "--for=delete", "pod", "-l", "app=maas", "--timeout=90s"], "old-scheduler-gone", timeout=110)
-    job = "maas-migrate-" + state["tag"]
-    r.kub(["apply", "-f", str(r.root / "migration.yaml")], "apply-migration")
+    # Never consume a previous Job's Complete as a fresh install authorization.
+    # Refuse active/ambiguous predecessor migrations before another explicit run.
+    _, raw, _ = r.kub(["get", "jobs", "-o", "json"], "existing-migration-jobs", log=False)
+    for old in json.loads(raw)["items"]:
+        if old.get("spec", {}).get("template", {}).get("metadata", {}).get("labels", {}).get("app") != "maas-migrate":continue
+        terminal = any(c.get("type") in ("Complete", "Failed") and c.get("status") == "True" for c in old.get("status", {}).get("conditions", []))
+        if not terminal:raise RuntimeError("prior_migration_job_not_terminal_inspect_original")
+    manifest = yaml.safe_load((r.root / "migration.yaml").read_text(encoding="utf-8"))
+    job = "maas-migrate-" + state["tag"] + "-" + uuid.uuid4().hex[:8]
+    manifest["metadata"]["name"] = job
+    (r.logs / (job + ".json")).write_text(json.dumps({"job": job, "repositoryCommit": state.get("repositoryCommit"), "sourceCodeCommit": state["revision"]}, indent=2) + "\n", encoding="utf-8")
+    r.kub(["create", "-f", "-"], "apply-migration", data=yaml.safe_dump(manifest))
     try:
         r.kub(["wait", "--for=condition=complete", "job/" + job, "--timeout=180s"], "migration-complete", timeout=200)
     finally:
