@@ -185,6 +185,10 @@ func (h *ARHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			fail(arFailure(401, "unauthenticated"))
 			return
 		}
+		if errors.Is(e, ErrUnavailable) {
+			fail(ErrUnavailable)
+			return
+		}
 		fail(ErrForbidden)
 		return
 	}
@@ -674,5 +678,5 @@ func arManifest(s ToolSpec, l Limits) map[string]any {
 	if len(output) == 0 {
 		output = json.RawMessage(`{"type":"string"}`)
 	}
-	return map[string]any{"name": s.Name, "revision": s.Version, "schema_sha256": rawHash(mustCanonical(s.Schema)), "input_schema": s.Schema, "output_schema": output, "effect": arEffect(s.Effect), "required_scope": []string{s.Permission}, "requires_approval": s.Approval, "timeout_ms": l.ToolTimeout.Milliseconds(), "max_output_bytes": l.OutputBytes}
+	return map[string]any{"name": s.Name, "revision": s.Version, "schema_sha256": rawHash(toolCanonical(s.Schema)), "input_schema": s.Schema, "output_schema": output, "effect": arEffect(s.Effect), "required_scope": []string{s.Permission}, "requires_approval": s.Approval, "timeout_ms": l.ToolTimeout.Milliseconds(), "max_output_bytes": l.OutputBytes}
 }

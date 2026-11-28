@@ -1,6 +1,7 @@
 -- Review-only template. Replace __MAAS_DATABASE__ and apply using an authorized
 -- provisioning identity. No users, passwords or target-environment mutation.
 CREATE ROLE IF NOT EXISTS maas_kernel_runtime;
+GRANT SELECT ON __MAAS_DATABASE__.kernel_schema_migrations TO maas_kernel_runtime;
 GRANT SELECT,UPDATE ON __MAAS_DATABASE__.kernel_guard TO maas_kernel_runtime;
 GRANT SELECT,INSERT,UPDATE ON __MAAS_DATABASE__.platform_keys TO maas_kernel_runtime;
 GRANT SELECT,INSERT,UPDATE ON __MAAS_DATABASE__.budget_windows TO maas_kernel_runtime;

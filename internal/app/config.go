@@ -42,6 +42,8 @@ type AgentConfig struct {
 	Concurrency   int        `json:"concurrency"`
 }
 type ModelConfig struct {
+	Adapter         string `json:"adapter,omitempty"`
+	Mode            string `json:"mode,omitempty"`
 	Alias           string `json:"alias"`
 	PublicationID   string `json:"publication_id"`
 	PlatformKeyFile string `json:"platform_key_file"`
@@ -98,6 +100,12 @@ func LoadConfig(name string) (Config, error) {
 	return c, c.Validate()
 }
 func (c Config) Validate() error {
+	if len(c.Models) > 0 && c.Ledger.Diagnostics == nil {
+		return errors.New("relay_diagnostic_policy_configuration_required")
+	}
+	if c.Ledger.Diagnostics != nil && !c.Ledger.Diagnostics.valid() {
+		return ErrConfig
+	}
 	if c.Offline.Enabled && (len(c.Models) > 0 || c.Management.Enabled || c.Offline.StepDelayMS < 0 || c.Offline.StepDelayMS > 10000) {
 		return ErrConfig
 	}
@@ -129,6 +137,9 @@ func (c Config) Validate() error {
 	}
 	seen := map[string]bool{}
 	for _, m := range c.Models {
+		if m.Protocol == "tools-v1" && (m.Adapter != "deepseek-chat-tools/1" || m.Mode != "non-thinking") {
+			return ErrConfig
+		}
 		if m.Alias == "" || seen[m.Alias] || m.PlatformKeyFile == "" || m.TimeoutMS < 1 || m.TimeoutMS > int((24*time.Hour).Milliseconds()) || (m.Protocol != "text-v1" && m.Protocol != "tools-v1") {
 			return ErrConfig
 		}

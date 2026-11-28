@@ -1,0 +1,16 @@
+{
+  "source_issue": "01a1a543-6c03-7ee2-abe9-684e92b1c661",
+  "attachment_id": "01a217bb-385f-716c-be1d-07dc722781cc",
+  "archive_sha256": "a3474f93ec21602817ddba04f3ec17b915570d84bdad87a28a4376283bebee2b",
+  "baseline": "4402c456a155646ee4111e5f4a1f285621c11273",
+  "files": ["MAAS-2-formal-closure-20261126.md", "required-migrations.json"],
+  "preserved_original_bytes": true,
+  "scope": "FC-M/FC-T/FC-I normative handoff, not runtime evidence",
+  "model_inputs": {
+    "v08_attachment": "01a1f1e8-5340-79f2-ac00-5da4fc7c75ca",
+    "v08_head": "037be34aba15563aa77c3dc1dcd1068c591f620b",
+    "v09_attachment": "01a217c5-0f37-7677-9889-f499870b7dbb",
+    "v09_head": "e5033c327368323740d14ee7d795096952c67d26",
+    "v09_scope": "consumer-map and feedback assertions read; original baseline CP01 capability rejection is not current implementation evidence"
+  }
+}

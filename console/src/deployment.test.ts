@@ -92,3 +92,21 @@ for (const response of [
     expect(() => deployedChatConfig()).toThrow("尚未启用");
   });
 }
+
+it("legacy Playground is an explicit boolean deployment capability, no URL or credential fields", () => {
+  expect(parseDeployment(example).playground).toBeUndefined();
+  for (const enabled of [false, true])
+    expect(
+      parseDeployment({ ...example, playground: { enabled } }).playground
+        ?.enabled,
+    ).toBe(enabled);
+  for (const feature of [
+    { enabled: "true" },
+    { enabled: true, api_url: "https://invalid.example" },
+    null,
+    {},
+  ])
+    expect(() =>
+      parseDeployment({ ...example, playground: feature }),
+    ).toThrow();
+});

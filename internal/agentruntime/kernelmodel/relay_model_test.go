@@ -11,7 +11,7 @@ import (
 
 func TestUnavailableCapabilitiesAndStreamingFrameBoundaries(t *testing.T) {
 	m := RelayModel{}
-	if e := m.Supports(context.Background(), a.Model{Protocol: "tools-v1"}); !errors.Is(e, a.ErrCapability) {
+	if e := m.Supports(context.Background(), a.Model{Protocol: "unapproved-v2"}); !errors.Is(e, a.ErrCapability) {
 		t.Fatal(e)
 	}
 	if e := m.Supports(context.Background(), a.Model{Protocol: "text-v1"}); !errors.Is(e, a.ErrUnavailable) {

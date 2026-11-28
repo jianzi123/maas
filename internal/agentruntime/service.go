@@ -1,6 +1,7 @@
 package agentruntime
 
 import (
+	"bytes"
 	"context"
 	"crypto/sha256"
 	"encoding/hex"
@@ -12,6 +13,7 @@ import (
 	"unicode/utf8"
 
 	"github.com/google/uuid"
+	"github.com/jianzi123/maas/internal/protocol"
 )
 
 type Service struct {
@@ -441,6 +443,64 @@ func history(v Session, r Run) []Message {
 	}
 	return msgs
 }
+
+// Derive provider IDs from the original qualified Run/Step.Call, rather than
+// trusting a duplicate message field. This also restores older stored messages
+// without source_call_id and rejects incomplete or mismatched tool feedback.
+func modelHistory(v Session, r Run) ([]Message, error) {
+	msgs := history(v, r)
+	for i := range msgs {
+		msgs[i].Parts = append([]Part(nil), msgs[i].Parts...)
+		for j := range msgs[i].Parts {
+			part := &msgs[i].Parts[j]
+			if part.Type != "tool_call" && part.Type != "tool_result" {
+				continue
+			}
+			old := run(&v, msgs[i].RunID)
+			if old == nil {
+				return nil, ErrInvalid
+			}
+			var bound *Call
+			for si := range old.Steps {
+				for ci := range old.Steps[si].Calls {
+					c := &old.Steps[si].Calls[ci]
+					if c.ID == part.CallID {
+						if bound != nil {
+							return nil, ErrInvalid
+						}
+						bound = c
+					}
+				}
+			}
+			if bound == nil || bound.State != "completed" || bound.Name != part.Name {
+				return nil, ErrInvalid
+			}
+			if part.Type == "tool_call" {
+				if msgs[i].Role != "assistant" {
+					return nil, ErrInvalid
+				}
+				args, e := protocol.CanonicalToolJSON(part.Arguments)
+				if e != nil {
+					return nil, ErrInvalid
+				}
+				original, e := protocol.CanonicalToolJSON(bound.Arguments)
+				if e != nil || !bytes.Equal(args, original) {
+					return nil, ErrInvalid
+				}
+				part.SourceCallID = bound.SourceID
+				if part.SourceCallID == "" {
+					if old.AR != nil {
+						return nil, ErrInvalid
+					}
+					part.SourceCallID = bound.ID
+				}
+			} else if msgs[i].Role != "tool" || part.Text != bound.Result {
+				return nil, ErrInvalid
+			}
+		}
+	}
+	return msgs, nil
+}
 func (s *Service) Drive(ctx context.Context, p Principal, id, rid string) (result error) {
 	token := uuid.NewString()
 	v, e := s.mutate(ctx, p, id, func(v *Session) error {
@@ -717,7 +777,11 @@ func (s *Service) Drive(ctx context.Context, p Principal, id, rid string) (resul
 				}
 			}
 		}
-		req := Request{Principal: ep, SessionID: id, RunID: rid, RequestID: requestID, Model: r.Model, Messages: history(v, r), Tools: specs, TokenUpper: r.Limits.Tokens - usedT, MoneyUpper: r.Limits.Money - usedM, Currency: r.Limits.Currency}
+		messages, historyErr := modelHistory(v, r)
+		if historyErr != nil {
+			return stop("failed", "tool_context_invalid")
+		}
+		req := Request{Principal: ep, SessionID: id, RunID: rid, RequestID: requestID, Model: r.Model, Messages: messages, Tools: specs, TokenUpper: r.Limits.Tokens - usedT, MoneyUpper: r.Limits.Money - usedM, Currency: r.Limits.Currency}
 		contextBytes, _ := json.Marshal(struct {
 			Messages []Message
 			Tools    []ToolSpec
@@ -851,8 +915,8 @@ func (s *Service) Drive(ctx context.Context, p Principal, id, rid string) (resul
 				c.SourceID = c.ID
 				c.ID = uuid.NewString()
 				c.Effect = t.Spec().Effect
-				c.Arguments = mustCanonical(c.Arguments)
-				c.ArgsHash = rawHash(mustCanonical(c.Arguments))
+				c.Arguments = toolCanonical(c.Arguments)
+				c.ArgsHash = rawHash(toolCanonical(c.Arguments))
 				c.ApprovalID = uuid.NewString()
 			}
 			c.State = "pending"
@@ -872,7 +936,7 @@ func (s *Service) Drive(ctx context.Context, p Principal, id, rid string) (resul
 			r.Usage = aggregate(r.Steps)
 			parts := []Part{{Type: "text", Text: text}}
 			for _, c := range res.Calls {
-				parts = append(parts, Part{Type: "tool_call", CallID: c.ID, Name: c.Name, Arguments: c.Arguments})
+				parts = append(parts, Part{Type: "tool_call", CallID: c.ID, SourceCallID: c.SourceID, Name: c.Name, Arguments: c.Arguments})
 				event(v, r, "tool.call", c)
 			}
 			if r.AR == nil {

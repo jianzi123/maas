@@ -24,6 +24,13 @@ func mustCanonical(b []byte) []byte {
 	}
 	return v
 }
+func toolCanonical(b []byte) []byte {
+	v, e := protocol.CanonicalToolJSON(b)
+	if e != nil {
+		return nil
+	}
+	return v
+}
 func selectedTool(r Run, name, revision string) bool {
 	if r.AR == nil {
 		return true

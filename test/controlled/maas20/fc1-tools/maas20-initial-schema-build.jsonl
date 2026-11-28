@@ -1,0 +1,12 @@
+{"ImportPath":"github.com/jianzi123/maas/internal/kernel","Action":"build-output","Output":"# github.com/jianzi123/maas/internal/kernel\n"}
+{"ImportPath":"github.com/jianzi123/maas/internal/kernel","Action":"build-output","Output":"internal/kernel/relay_forward.go:11:2: could not import github.com/jianzi123/maas/internal/toolwire (open : no such file or directory)\n"}
+{"ImportPath":"github.com/jianzi123/maas/internal/kernel","Action":"build-fail"}
+{"Time":"2026-11-26T04:07:58.637691329-08:00","Action":"start","Package":"github.com/jianzi123/maas/internal/app"}
+{"Time":"2026-11-26T04:07:58.640041153-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/app","Output":"FAIL\tgithub.com/jianzi123/maas/internal/app [build failed]\n"}
+{"Time":"2026-11-26T04:07:58.640069382-08:00","Action":"fail","Package":"github.com/jianzi123/maas/internal/app","Elapsed":0.002,"FailedBuild":"github.com/jianzi123/maas/internal/kernel"}
+{"Time":"2026-11-26T04:07:58.643453783-08:00","Action":"start","Package":"github.com/jianzi123/maas/internal/agentruntime"}
+{"Time":"2026-11-26T04:07:58.643480729-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/agentruntime","Output":"FAIL\tgithub.com/jianzi123/maas/internal/agentruntime [build failed]\n"}
+{"Time":"2026-11-26T04:07:58.643491876-08:00","Action":"fail","Package":"github.com/jianzi123/maas/internal/agentruntime","Elapsed":0,"FailedBuild":"github.com/jianzi123/maas/internal/kernel"}
+{"Time":"2026-11-26T04:07:58.75341648-08:00","Action":"start","Package":"github.com/jianzi123/maas/internal/kernel"}
+{"Time":"2026-11-26T04:07:58.753462072-08:00","Action":"output","Package":"github.com/jianzi123/maas/internal/kernel","Output":"FAIL\tgithub.com/jianzi123/maas/internal/kernel [build failed]\n"}
+{"Time":"2026-11-26T04:07:58.753474041-08:00","Action":"fail","Package":"github.com/jianzi123/maas/internal/kernel","Elapsed":0,"FailedBuild":"github.com/jianzi123/maas/internal/kernel"}

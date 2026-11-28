@@ -109,6 +109,9 @@ func Migrate(ctx context.Context, c Config) error {
 	if e = initializeLedger(ctx, db, c); e != nil {
 		return e
 	}
+	if e = initializeRelayDiagnostics(ctx, db, c); e != nil {
+		return e
+	}
 	if e = applyExtraMigration(ctx, conn, 2, offlineMigration); e != nil {
 		return e
 	}
@@ -174,16 +177,59 @@ func applyExtraMigration(ctx context.Context, conn *sql.Conn, version int, migra
 	return e
 }
 func validateSchema(ctx context.Context, db *sql.DB) error {
-	var sha, state string
-	if e := db.QueryRowContext(ctx, "SELECT sha256,state FROM product_schema_migrations WHERE version=1").Scan(&sha, &state); e != nil || sha != sum(productMigration) || state != "Applied" {
+	return validateRequiredSchema(ctx, db, false)
+}
+func validateRequiredSchema(ctx context.Context, db *sql.DB, reconciling002 bool) error {
+	if kernel.ValidateMigrations(ctx, db) != nil {
+		return errors.New("kernel_schema_not_ready")
+	}
+	if mysqlstore.ValidateMigrations(ctx, db) != nil {
+		return errors.New("release_schema_not_ready")
+	}
+	if e := validatePhysicalSchema(ctx, db); e != nil {
+		return e
+	}
+	// Both migrations are unconditional in Migrate, including installations
+	// without the offline profile. Physical tables alone are not a commit marker.
+	var extra int
+	if e := db.QueryRowContext(ctx, "SELECT COUNT(*) FROM product_schema_migrations WHERE version NOT IN (1,2)").Scan(&extra); e != nil || extra != 0 {
 		return errors.New("product_schema_not_ready")
 	}
-	for _, q := range []string{"SELECT session_id,owner_id,revision,document FROM agent_sessions_v1 LIMIT 0", "SELECT admin_id,username,salt,verifier,policy_revision,enabled FROM product_admins LIMIT 0", "SELECT token_sha256,admin_id,csrf_token,expires_at,revoked FROM product_sessions LIMIT 0", "SELECT request_id,result FROM generation_requests LIMIT 0"} {
+	for _, required := range []struct {
+		version int
+		body    string
+	}{{1, productMigration}, {2, offlineMigration}} {
+		var sha, state string
+		if e := db.QueryRowContext(ctx, "SELECT sha256,state FROM product_schema_migrations WHERE version=?", required.version).Scan(&sha, &state); e != nil || sha != sum(required.body) || (state != "Applied" && !(reconciling002 && required.version == 2 && state == "Applying")) {
+			return errors.New("product_schema_not_ready")
+		}
+	}
+	for _, q := range []string{"SELECT session_id,owner_id,revision,document FROM agent_sessions_v1 LIMIT 0", "SELECT admin_id,username,salt,verifier,policy_revision,enabled FROM product_admins LIMIT 0", "SELECT token_sha256,admin_id,csrf_token,expires_at,revoked FROM product_sessions LIMIT 0", "SELECT request_id,result FROM generation_requests LIMIT 0", "SELECT id,cluster_id,publication_id,key_id,key_cipher FROM product_offline_state LIMIT 0", "SELECT identity_sha256,window_start,attempts FROM product_login_attempts LIMIT 0"} {
 		rows, e := db.QueryContext(ctx, q)
 		if e != nil {
 			return errors.New("runtime_schema_or_permissions_unavailable")
 		}
 		rows.Close()
+	}
+	if e := validateOfflineLayout(ctx, db); e != nil {
+		return e
+	}
+	return validateAgentShape(ctx, db)
+}
+
+func validateAgentShape(ctx context.Context, db *sql.DB) error {
+	var primary, owners int
+	// Agent has no journal: validate the existing shape rather than invent one.
+	if e := db.QueryRowContext(ctx, `SELECT COUNT(*) FROM information_schema.statistics WHERE table_schema=DATABASE() AND table_name='agent_sessions_v1' AND index_name='PRIMARY' AND column_name='session_id' AND seq_in_index=1 AND non_unique=0`).Scan(&primary); e != nil || primary != 1 {
+		return errors.New("agent_schema_not_ready")
+	}
+	if e := db.QueryRowContext(ctx, `SELECT COUNT(*) FROM information_schema.statistics WHERE table_schema=DATABASE() AND table_name='agent_sessions_v1' AND index_name='owner_sessions' AND ((column_name='owner_id' AND seq_in_index=1) OR (column_name='session_id' AND seq_in_index=2))`).Scan(&owners); e != nil || owners != 2 {
+		return errors.New("agent_schema_not_ready")
+	}
+	var invalid int
+	e := db.QueryRowContext(ctx, `SELECT 1 FROM agent_sessions_v1 WHERE JSON_EXTRACT(document,'$.schema_version') IS NULL OR JSON_EXTRACT(document,'$.id') IS NULL OR JSON_EXTRACT(document,'$.owner') IS NULL OR JSON_EXTRACT(document,'$.revision') IS NULL OR JSON_UNQUOTE(JSON_EXTRACT(document,'$.schema_version'))<>? OR JSON_UNQUOTE(JSON_EXTRACT(document,'$.id'))<>session_id OR JSON_UNQUOTE(JSON_EXTRACT(document,'$.owner'))<>owner_id OR JSON_EXTRACT(document,'$.revision')<>revision LIMIT 1`, a.Version).Scan(&invalid)
+	if e != sql.ErrNoRows {
+		return errors.New("agent_document_version_not_ready")
 	}
 	return nil
 }

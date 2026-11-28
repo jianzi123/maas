@@ -103,8 +103,19 @@ export interface StartInput {
   replaces?: string;
   operation?: "send" | "edit" | "regenerate";
 }
+export interface ModelChoice {
+  id: string;
+  label: string;
+  modes: Mode[];
+  capability?: {
+    approval: "controlled" | "approved" | "pending";
+    text: "text-v1";
+    tools: "tools-v1" | null;
+    revision: string;
+  };
+}
 export interface ChatService {
-  models(): Promise<{ id: string; label: string; modes: Mode[] }[]>;
+  models(): Promise<ModelChoice[]>;
   list(): Promise<Session[]>;
   create(model?: string): Promise<Session>;
   rename(id: string, title: string): Promise<void>;

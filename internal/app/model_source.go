@@ -19,7 +19,7 @@ func openModelSource(ctx context.Context, db *sql.DB, c Config, pepper []byte) (
 		if e != nil {
 			return nil, nil, nil, e
 		}
-		m := &Models{Config: c, Core: core, Gate: gate}
+		m := &Models{Config: c, Core: core, Gate: gate, DB: db}
 		if e = m.Open(); e != nil {
 			return nil, nil, nil, e
 		}

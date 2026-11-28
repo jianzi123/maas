@@ -1,0 +1,100 @@
+apiVersion: v1
+kind: Namespace
+metadata: {name: maas-system}
+---
+apiVersion: v1
+kind: Namespace
+metadata: {name: maas-models-example}
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata: {name: maas-operator, namespace: maas-system}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata: {name: maas-local-modelrelease-reader}
+rules:
+- apiGroups: [serving.maas.example]
+  resources: [modelreleases]
+  verbs: [get, list, watch]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata: {name: maas-local-modelrelease-reader}
+roleRef: {apiGroup: rbac.authorization.k8s.io, kind: ClusterRole, name: maas-local-modelrelease-reader}
+subjects:
+- {kind: ServiceAccount, name: maas-operator, namespace: maas-system}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata: {name: maas-operator-model-writer, namespace: maas-models-example}
+rules:
+- apiGroups: [serving.maas.example]
+  resources: [modelreleases, modelreleases/status, modelreleases/finalizers]
+  verbs: [get, update, patch]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata: {name: maas-operator-model-writer, namespace: maas-models-example}
+roleRef: {apiGroup: rbac.authorization.k8s.io, kind: Role, name: maas-operator-model-writer}
+subjects:
+- {kind: ServiceAccount, name: maas-operator, namespace: maas-system}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata: {name: maas-operator-leader, namespace: maas-system}
+rules:
+- apiGroups: [coordination.k8s.io]
+  resources: [leases]
+  verbs: [get, list, watch, create, update, patch]
+- apiGroups: [""]
+  resources: [events]
+  verbs: [create, patch]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata: {name: maas-operator-leader, namespace: maas-system}
+roleRef: {apiGroup: rbac.authorization.k8s.io, kind: Role, name: maas-operator-leader}
+subjects:
+- {kind: ServiceAccount, name: maas-operator, namespace: maas-system}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata: {name: maas-operator, namespace: maas-system}
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: maas-operator-local}
+  template:
+    metadata:
+      labels: {app: maas-operator-local}
+    spec:
+      serviceAccountName: maas-operator
+      securityContext: {runAsNonRoot: true, runAsUser: 65532, runAsGroup: 65532, fsGroup: 65532}
+      containers:
+      - name: operator
+        image: __MAAS_OPERATOR_IMAGE__
+        imagePullPolicy: Never
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities: {drop: [ALL]}
+        resources:
+          requests: {cpu: 100m, memory: 128Mi}
+          limits: {cpu: "1", memory: 512Mi}
+        livenessProbe:
+          exec:
+            command: [wget, -q, -O, /dev/null, "http://127.0.0.1:8081/healthz"]
+          initialDelaySeconds: 10
+          periodSeconds: 15
+        readinessProbe:
+          exec:
+            command: [wget, -q, -O, /dev/null, "http://127.0.0.1:8081/readyz"]
+          initialDelaySeconds: 10
+          periodSeconds: 15
+        volumeMounts:
+        - name: webhook-tls
+          mountPath: /tmp/k8s-webhook-server/serving-certs
+          readOnly: true
+      volumes:
+      - name: webhook-tls
+        secret: {secretName: maas-operator-webhook, defaultMode: 288}

@@ -142,15 +142,19 @@ for (const mode of ["known", "unknown", "eof", "error", "stop"]) {
     },
   );
 }
-it("unavailable inference never sends POST even if catalogue is callable", async () => {
+it("unavailable playground requests no catalogue or consumption Key and directs to Chat", async () => {
   const f = vi.fn(fixtureFetch);
   api.fetcher = f;
   const w = (wrapper = mount(Playground, {
     props: { initialModel: "model-a", inferenceAvailable: false },
   }));
   await flushPromises();
-  await w.get("textarea").setValue("blocked");
-  await w.get("form").trigger("submit");
-  await flushPromises();
-  expect(f.mock.calls.some(([, i]) => i?.method === "POST")).toBe(false);
+  expect(w.find('input[type="password"]').exists()).toBe(false);
+  expect(w.find("textarea").exists()).toBe(false);
+  expect(f).not.toHaveBeenCalled();
+  await w
+    .findAll("button")
+    .find((b) => b.text() === "前往 Chat 工作台")!
+    .trigger("click");
+  expect(w.emitted("navigate")).toEqual([["chat"]]);
 });

@@ -1,6 +1,13 @@
 <script setup lang="ts">
 import { computed, onMounted, onBeforeUnmount, ref, shallowRef } from "vue";
-import type { ChatService, Session, Run, Mode, Message } from "../chat/types";
+import type {
+  ChatService,
+  Session,
+  Run,
+  Mode,
+  Message,
+  ModelChoice,
+} from "../chat/types";
 import ChatMarkdown from "../components/ChatMarkdown.vue";
 import PanelDialog from "../components/PanelDialog.vue";
 import { deployedChatConfig } from "../deployment";
@@ -32,7 +39,10 @@ const service = shallowRef<ChatService>(),
   deleting = ref(false),
   editing = ref<string>(),
   initialized = ref(false);
-const models = ref<{ id: string; label: string; modes: Mode[] }[]>([]);
+const models = ref<ModelChoice[]>([]);
+const selectedModel = computed(() =>
+  models.value.find((item) => item.id === model.value),
+);
 let alive = true,
   epoch = 0,
   openTarget: string | undefined,
@@ -64,6 +74,22 @@ function messageContent(m: Message) {
     ].includes(state)
     ? "本次运行未返回文本。"
     : "等待响应…";
+}
+function stepOutput(step: Run["steps"][number]) {
+  if (step.output !== undefined) return step.output;
+  if (
+    currentRun.value?.state === "needs_confirmation" ||
+    step.state === "unknown"
+  )
+    return "结果未知，请核对原运行记录。";
+  if (
+    ["completed", "failed", "cancelled", "limit_reached"].includes(
+      currentRun.value?.state ?? "",
+    ) ||
+    ["succeeded", "failed", "cancelled"].includes(step.state)
+  )
+    return "本次运行已结束，未返回结果。";
+  return "等待结果";
 }
 function report(e: unknown) {
   error.value = e instanceof Error ? e.message : "操作未完成，请重读会话。";
@@ -448,7 +474,7 @@ onBeforeUnmount(() => {
         持久保存，模型为受控适配，工具是真实安全实现；测试用量不代表供应商账单。
       </div>
       <div v-else-if="initialized && !service" class="notice">
-        Chat 会话服务未启用，请核对安装配置。现有在线试用和管理功能仍可使用。
+        Chat 会话服务未启用，请联系管理员核对部署配置。
       </div>
       <p v-if="error" role="alert" class="error">{{ error }}</p>
       <div v-if="uncertain" class="notice">
@@ -479,10 +505,31 @@ onBeforeUnmount(() => {
           断开事件连接</button
         ><button v-if="!connected" @click="reconnect">只读重连</button
         ><span v-if="currentRun" class="badge">{{ currentRun.state }}</span>
-        <span v-if="currentRun?.cancelRequested" class="badge"
-          >取消已请求 · 等待实际终止</span
-        >
+        <span v-if="currentRun?.cancelRequested && running" class="badge">{{
+          currentRun?.state === "needs_confirmation"
+            ? "取消已请求 · 结果待核验"
+            : "取消已请求 · 等待实际终止"
+        }}</span>
       </div>
+      <p
+        v-if="selectedModel?.capability"
+        class="muted"
+        aria-label="当前模型能力"
+      >
+        {{
+          selectedModel.capability.approval === "controlled"
+            ? "受控模型"
+            : selectedModel.capability.approval === "pending"
+              ? "模型待批准"
+              : "安装已批准模型"
+        }}
+        ·
+        {{
+          selectedModel.capability.tools === "tools-v1"
+            ? "支持普通 Chat 和 Agent 工具调用"
+            : "仅支持普通 Chat，工具能力尚未开放"
+        }}
+      </p>
       <p v-if="initialized && service && !modelAllowed" class="notice">
         当前没有支持所选模式的获准模型，请核对模型能力或选择其他模式。
       </p>
@@ -555,7 +602,7 @@ onBeforeUnmount(() => {
           <details open>
             <summary>工具输入 / 结果</summary>
             <pre>{{ step.input }}</pre>
-            <pre>{{ step.output ?? "等待结果" }}</pre>
+            <pre>{{ stepOutput(step) }}</pre>
           </details>
         </article>
         <div v-if="currentRun.state === 'waiting_approval'" class="notice">
@@ -643,7 +690,14 @@ onBeforeUnmount(() => {
         </article>
       </details>
       <div v-if="currentRun?.error" role="alert" class="error">
-        {{ currentRun.error }}
+        {{
+          currentRun.error === "approval_denied"
+            ? "工具执行申请已被拒绝，此运行已结束。"
+            : currentRun.error
+        }}
+        <small v-if="currentRun.error === 'approval_denied'"
+          >错误代码：{{ currentRun.error }}</small
+        >
       </div>
       <form class="chat-composer" @submit.prevent="send()">
         <p v-if="editing">

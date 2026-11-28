@@ -92,6 +92,7 @@ export class HTTPChat implements ChatService {
   private readEpoch = new Map<string, number>();
   private approvals = new Map<string, AR["Approval"]>();
   private controller?: AbortController;
+  private eventEpoch = 0;
   constructor(
     private config: HTTPChatConfig,
     private client: Api = api,
@@ -206,6 +207,12 @@ export class HTTPChat implements ChatService {
     this.caps = await this.json(ROOT + "/capabilities", "Capabilities");
     return this.caps.model_modes.map((m) => ({
       id: m.model_alias,
+      capability: {
+        approval: m.approval_state,
+        text: m.text_protocol,
+        tools: m.tools_protocol,
+        revision: m.capability_revision,
+      },
       label:
         m.model_alias +
         (m.approval_state === "controlled"
@@ -261,11 +268,12 @@ export class HTTPChat implements ChatService {
   }
   async create(model?: string) {
     this.guard();
-    owns(
-      this.caps?.model_modes.some(
+    if (
+      !this.caps?.model_modes.some(
         (m) => m.model_alias === model && m.approval_state !== "pending",
-      ),
-    );
+      )
+    )
+      throw new ChatHTTPError("capability_unsupported");
     const payload = {
       client_operation_id: crypto.randomUUID(),
       title: "新会话",
@@ -398,6 +406,8 @@ export class HTTPChat implements ChatService {
     const epoch = (this.readEpoch.get(id) ?? 0) + 1;
     this.readEpoch.set(id, epoch);
     for (let attempt = 0; attempt < 3; attempt++) {
+      if (this.readEpoch.get(id) !== epoch)
+        throw new DOMException("快照读取已由新操作替代", "AbortError");
       const previous = this.snapshots.get(id);
       try {
         return await this.readSnapshot(id, epoch);
@@ -411,6 +421,10 @@ export class HTTPChat implements ChatService {
           throw e;
         // Discard only this read's obsolete cache, never a newer B snapshot.
         if (this.snapshots.get(id) === previous) this.snapshots.delete(id);
+        if (attempt < 2)
+          await new Promise((resolve) =>
+            setTimeout(resolve, attempt === 0 ? 25 : 75),
+          );
       }
     }
     throw Error("会话持续变化，已停止自动恢复。请稍后只读重连。");
@@ -551,7 +565,8 @@ export class HTTPChat implements ChatService {
       })),
       runs,
     };
-    owns(this.readEpoch.get(id) === epoch);
+    if (this.readEpoch.get(id) !== epoch)
+      throw new DOMException("快照读取已由新操作替代", "AbortError");
     const old = this.snapshots.get(id);
     if (old?.revision && BigInt(old.revision) > BigInt(result.revision!))
       return structuredClone(old);
@@ -560,14 +575,15 @@ export class HTTPChat implements ChatService {
   }
   async start(i: StartInput) {
     this.guard();
-    owns(
-      this.caps?.model_modes.some(
+    if (
+      !this.caps?.model_modes.some(
         (m) =>
           m.model_alias === i.model &&
           m.approval_state !== "pending" &&
           (i.mode === "chat" || m.tools_protocol === "tools-v1"),
-      ),
-    );
+      )
+    )
+      throw new ChatHTTPError("capability_unsupported");
     if (
       i.mode === "agent" &&
       !this.config.tools.every((t) =>
@@ -630,6 +646,7 @@ export class HTTPChat implements ChatService {
     }
   }
   stopEvents() {
+    this.eventEpoch++;
     this.controller?.abort();
     this.controller = undefined;
   }
@@ -639,6 +656,12 @@ export class HTTPChat implements ChatService {
       original = previous?.runs.find((r) => r.id === rid);
     owns(previous && original && original.cursor === after);
     this.stopEvents();
+    const epoch = this.eventEpoch;
+    const current = () => {
+      if (epoch !== this.eventEpoch)
+        throw new DOMException("事件读取已由新操作替代", "AbortError");
+    };
+    let reset = false;
     const controller = (this.controller = new AbortController());
     const timer = setTimeout(() => controller.abort(), 1200);
     const events: AR["SessionEvent"][] = [];
@@ -721,23 +744,34 @@ export class HTTPChat implements ChatService {
       }
       if (done && buffer.trim()) throw new ChatHTTPError("protocol_error");
     } catch (e) {
+      current();
       if (
         e instanceof ChatHTTPError &&
         e.status === 410 &&
         e.code === "cursor_expired"
       )
-        return { events: [], snapshot: await this.read(sid) };
-      if (!controller.signal.aborted) throw e;
+        reset = true;
+      else if (
+        !controller.signal.aborted ||
+        !e ||
+        typeof e !== "object" ||
+        !("name" in e) ||
+        e.name !== "AbortError"
+      )
+        throw e;
     } finally {
       clearTimeout(timer);
       await reader?.cancel().catch(() => {});
       if (this.controller === controller) this.controller = undefined;
     }
-    const snapshot = await this.read(sid),
-      current = snapshot.runs.find((r) => r.id === rid);
+    current();
+    const snapshot = await this.read(sid);
+    current();
+    if (reset) return { events: [], snapshot };
+    const restoredRun = snapshot.runs.find((r) => r.id === rid);
     owns(
-      current &&
-        BigInt(current.sequence ?? "0") >=
+      restoredRun &&
+        BigInt(restoredRun.sequence ?? "0") >=
           BigInt(events.at(-1)?.seq ?? original.sequence ?? "0"),
     );
     return {

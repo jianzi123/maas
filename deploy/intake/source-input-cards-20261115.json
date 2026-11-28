@@ -1,0 +1,1221 @@
+{
+  "schema": "maas-execution-input-handoff-1.0",
+  "checked_on_utc": "2026-11-15",
+  "scope_source": "mention://issue/01a1a543-63ec-7f22-9307-5eba7c972016",
+  "member_scope_approval": "01a1dd36-84f6-75bd-af24-3c115678066c",
+  "purpose": "Existing-role intake checklist; not runtime configuration, adapter approval, or permission to call a provider/deploy.",
+  "rules": [
+    "Owners first reuse existing approved records; report only genuinely remaining gaps.",
+    "Secret values must never be included; store non-secret references/approval IDs only.",
+    "Null means not verified in this handoff, never an invented default.",
+    "Existing local GPU research authorization remains valid; target platform deployment/model selection/weight downloads are separate.",
+    "Real invocation requires all applicable approval fields and actual fail-closed gateway/kernel/validation assembly.",
+    "Observed candidates and source excerpts do not populate approved runtime values."
+  ],
+  "external_api": {
+    "priority_hint": "DeepSeek per existing project decision; exact model/region is not selected by this file",
+    "confirmed_interface": "Chat Completions; fixed source; streaming and non-streaming",
+    "real_execution_enabled": false,
+    "inputs": [
+      {
+        "id": "EXT-01",
+        "fields": [
+          "provider",
+          "exact_model_id_and_revision",
+          "site_or_region",
+          "endpoint_reference",
+          "fixed_source_id"
+        ],
+        "owner": "MAAS-9 + member",
+        "value": null,
+        "status": "needs_existing_approval_or_missing_field_resolution",
+        "member_approval_required": true,
+        "impact": "Select approved external source/profile and prevent unapproved routing.",
+        "field_resolution": {
+          "provider": {
+            "status": "awaiting_model_owner",
+            "owner": "MAAS-9 + member",
+            "approved_value": null,
+            "observation": "Not an MAAS-8 approval; original model/kernel owner resolves.",
+            "evidence": [],
+            "next_action": "Reuse the original owner's approved record; otherwise report the exact missing field."
+          },
+          "exact_model_id_and_revision": {
+            "status": "awaiting_model_owner",
+            "owner": "MAAS-9 + member",
+            "approved_value": null,
+            "observation": "Not an MAAS-8 approval; original model/kernel owner resolves.",
+            "evidence": [],
+            "next_action": "Reuse the original owner's approved record; otherwise report the exact missing field."
+          },
+          "site_or_region": {
+            "status": "awaiting_model_owner",
+            "owner": "MAAS-9 + member",
+            "approved_value": null,
+            "observation": "Not an MAAS-8 approval; original model/kernel owner resolves.",
+            "evidence": [],
+            "next_action": "Reuse the original owner's approved record; otherwise report the exact missing field."
+          },
+          "endpoint_reference": {
+            "status": "awaiting_model_owner",
+            "owner": "MAAS-9 + member",
+            "approved_value": null,
+            "observation": "Not an MAAS-8 approval; original model/kernel owner resolves.",
+            "evidence": [],
+            "next_action": "Reuse the original owner's approved record; otherwise report the exact missing field."
+          },
+          "fixed_source_id": {
+            "status": "awaiting_model_owner",
+            "owner": "MAAS-9 + member",
+            "approved_value": null,
+            "observation": "Not an MAAS-8 approval; original model/kernel owner resolves.",
+            "evidence": [],
+            "next_action": "Reuse the original owner's approved record; otherwise report the exact missing field."
+          }
+        }
+      },
+      {
+        "id": "EXT-02",
+        "fields": [
+          "profile_id_revision_approval",
+          "input_context_limit",
+          "complete_billed_output_bound",
+          "max_tokens_mapping",
+          "usage_progress_final_discriminator",
+          "trusted_logical_termination",
+          "usage_subsets_and_price_categories",
+          "profile_expiry_invalidation"
+        ],
+        "owner": "MAAS-9; MAAS-2 only for actual contract divergence",
+        "value": null,
+        "status": "needs_existing_approval_or_missing_field_resolution",
+        "member_approval_required": false,
+        "impact": "Block hard-budget admission/final settlement when authoritative usage and bounds are not established.",
+        "field_resolution": {
+          "profile_id_revision_approval": {
+            "status": "awaiting_model_owner",
+            "owner": "MAAS-9; MAAS-2 only for actual contract divergence",
+            "approved_value": null,
+            "observation": "Not an MAAS-8 approval; original model/kernel owner resolves.",
+            "evidence": [],
+            "next_action": "Reuse the original owner's approved record; otherwise report the exact missing field."
+          },
+          "input_context_limit": {
+            "status": "awaiting_model_owner",
+            "owner": "MAAS-9; MAAS-2 only for actual contract divergence",
+            "approved_value": null,
+            "observation": "Not an MAAS-8 approval; original model/kernel owner resolves.",
+            "evidence": [],
+            "next_action": "Reuse the original owner's approved record; otherwise report the exact missing field."
+          },
+          "complete_billed_output_bound": {
+            "status": "awaiting_model_owner",
+            "owner": "MAAS-9; MAAS-2 only for actual contract divergence",
+            "approved_value": null,
+            "observation": "Not an MAAS-8 approval; original model/kernel owner resolves.",
+            "evidence": [],
+            "next_action": "Reuse the original owner's approved record; otherwise report the exact missing field."
+          },
+          "max_tokens_mapping": {
+            "status": "awaiting_model_owner",
+            "owner": "MAAS-9; MAAS-2 only for actual contract divergence",
+            "approved_value": null,
+            "observation": "Not an MAAS-8 approval; original model/kernel owner resolves.",
+            "evidence": [],
+            "next_action": "Reuse the original owner's approved record; otherwise report the exact missing field."
+          },
+          "usage_progress_final_discriminator": {
+            "status": "awaiting_model_owner",
+            "owner": "MAAS-9; MAAS-2 only for actual contract divergence",
+            "approved_value": null,
+            "observation": "Not an MAAS-8 approval; original model/kernel owner resolves.",
+            "evidence": [],
+            "next_action": "Reuse the original owner's approved record; otherwise report the exact missing field."
+          },
+          "trusted_logical_termination": {
+            "status": "awaiting_model_owner",
+            "owner": "MAAS-9; MAAS-2 only for actual contract divergence",
+            "approved_value": null,
+            "observation": "Not an MAAS-8 approval; original model/kernel owner resolves.",
+            "evidence": [],
+            "next_action": "Reuse the original owner's approved record; otherwise report the exact missing field."
+          },
+          "usage_subsets_and_price_categories": {
+            "status": "awaiting_model_owner",
+            "owner": "MAAS-9; MAAS-2 only for actual contract divergence",
+            "approved_value": null,
+            "observation": "Not an MAAS-8 approval; original model/kernel owner resolves.",
+            "evidence": [],
+            "next_action": "Reuse the original owner's approved record; otherwise report the exact missing field."
+          },
+          "profile_expiry_invalidation": {
+            "status": "awaiting_model_owner",
+            "owner": "MAAS-9; MAAS-2 only for actual contract divergence",
+            "approved_value": null,
+            "observation": "Not an MAAS-8 approval; original model/kernel owner resolves.",
+            "evidence": [],
+            "next_action": "Reuse the original owner's approved record; otherwise report the exact missing field."
+          }
+        }
+      },
+      {
+        "id": "EXT-03",
+        "fields": [
+          "secret_reference_namespace_name_key",
+          "credential_delivery_channel",
+          "runtime_principal_and_access_scope"
+        ],
+        "owner": "MAAS-8 + member; MAAS-3 consumes reference",
+        "value": null,
+        "status": "needs_existing_approval_or_missing_field_resolution",
+        "member_approval_required": true,
+        "impact": "Block authenticated provider access; no raw API key in this file.",
+        "field_resolution": {
+          "secret_reference_namespace_name_key": {
+            "status": "repository_defined_target_pending",
+            "owner": "MAAS-8 + member; MAAS-3 production consumer",
+            "approved_value": null,
+            "observation": "SecretRef and KubernetesSecretReader/SecretAgent library exist. Chart references existing Secrets; target reference, UID/resourceVersion, access identity and delivery channel remain unverified.",
+            "evidence": [
+              "api/v1alpha1/types.go",
+              "internal/gateway/kubernetes_secret.go",
+              "internal/gateway/secret.go",
+              "deploy/charts/maas-platform/templates/workloads.yaml"
+            ],
+            "next_action": "Record approved namespace/name/key and UID/resourceVersion, issuer/access scope and safe delivery reference; MAAS-3 wires the real agent. Never place the credential in this card."
+          },
+          "credential_delivery_channel": {
+            "status": "repository_defined_target_pending",
+            "owner": "MAAS-8 + member; MAAS-3 production consumer",
+            "approved_value": null,
+            "observation": "SecretRef and KubernetesSecretReader/SecretAgent library exist. Chart references existing Secrets; target reference, UID/resourceVersion, access identity and delivery channel remain unverified.",
+            "evidence": [
+              "api/v1alpha1/types.go",
+              "internal/gateway/kubernetes_secret.go",
+              "internal/gateway/secret.go",
+              "deploy/charts/maas-platform/templates/workloads.yaml"
+            ],
+            "next_action": "Record approved namespace/name/key and UID/resourceVersion, issuer/access scope and safe delivery reference; MAAS-3 wires the real agent. Never place the credential in this card."
+          },
+          "runtime_principal_and_access_scope": {
+            "status": "repository_defined_target_pending",
+            "owner": "MAAS-8 + member; MAAS-3 production consumer",
+            "approved_value": null,
+            "observation": "SecretRef and KubernetesSecretReader/SecretAgent library exist. Chart references existing Secrets; target reference, UID/resourceVersion, access identity and delivery channel remain unverified.",
+            "evidence": [
+              "api/v1alpha1/types.go",
+              "internal/gateway/kubernetes_secret.go",
+              "internal/gateway/secret.go",
+              "deploy/charts/maas-platform/templates/workloads.yaml"
+            ],
+            "next_action": "Record approved namespace/name/key and UID/resourceVersion, issuer/access scope and safe delivery reference; MAAS-3 wires the real agent. Never place the credential in this card."
+          }
+        }
+      },
+      {
+        "id": "EXT-04",
+        "fields": [
+          "price_table_id_revision",
+          "currency_atomic_precision",
+          "pricing_categories_effective_time",
+          "budget_period_timezone",
+          "request_token_money_limits",
+          "verification_key_reference",
+          "allowed_validation_call_count_and_spend",
+          "timeout_concurrency_and_stop_conditions"
+        ],
+        "owner": "Member-approved records; MAAS-9/3 validate interpretation",
+        "value": null,
+        "status": "needs_existing_approval_or_missing_field_resolution",
+        "member_approval_required": true,
+        "impact": "Block real validation/spend and exact reservation; no invented budget/price defaults.",
+        "field_resolution": {
+          "price_table_id_revision": {
+            "status": "awaiting_model_owner",
+            "owner": "Member-approved records; MAAS-9/3 validate interpretation",
+            "approved_value": null,
+            "observation": "Not an MAAS-8 approval; original model/kernel owner resolves.",
+            "evidence": [],
+            "next_action": "Reuse the original owner's approved record; otherwise report the exact missing field."
+          },
+          "currency_atomic_precision": {
+            "status": "awaiting_model_owner",
+            "owner": "Member-approved records; MAAS-9/3 validate interpretation",
+            "approved_value": null,
+            "observation": "Not an MAAS-8 approval; original model/kernel owner resolves.",
+            "evidence": [],
+            "next_action": "Reuse the original owner's approved record; otherwise report the exact missing field."
+          },
+          "pricing_categories_effective_time": {
+            "status": "awaiting_model_owner",
+            "owner": "Member-approved records; MAAS-9/3 validate interpretation",
+            "approved_value": null,
+            "observation": "Not an MAAS-8 approval; original model/kernel owner resolves.",
+            "evidence": [],
+            "next_action": "Reuse the original owner's approved record; otherwise report the exact missing field."
+          },
+          "budget_period_timezone": {
+            "status": "awaiting_model_owner",
+            "owner": "Member-approved records; MAAS-9/3 validate interpretation",
+            "approved_value": null,
+            "observation": "Not an MAAS-8 approval; original model/kernel owner resolves.",
+            "evidence": [],
+            "next_action": "Reuse the original owner's approved record; otherwise report the exact missing field."
+          },
+          "request_token_money_limits": {
+            "status": "awaiting_model_owner",
+            "owner": "Member-approved records; MAAS-9/3 validate interpretation",
+            "approved_value": null,
+            "observation": "Not an MAAS-8 approval; original model/kernel owner resolves.",
+            "evidence": [],
+            "next_action": "Reuse the original owner's approved record; otherwise report the exact missing field."
+          },
+          "verification_key_reference": {
+            "status": "awaiting_model_owner",
+            "owner": "Member-approved records; MAAS-9/3 validate interpretation",
+            "approved_value": null,
+            "observation": "Not an MAAS-8 approval; original model/kernel owner resolves.",
+            "evidence": [],
+            "next_action": "Reuse the original owner's approved record; otherwise report the exact missing field."
+          },
+          "allowed_validation_call_count_and_spend": {
+            "status": "awaiting_model_owner",
+            "owner": "Member-approved records; MAAS-9/3 validate interpretation",
+            "approved_value": null,
+            "observation": "Not an MAAS-8 approval; original model/kernel owner resolves.",
+            "evidence": [],
+            "next_action": "Reuse the original owner's approved record; otherwise report the exact missing field."
+          },
+          "timeout_concurrency_and_stop_conditions": {
+            "status": "awaiting_model_owner",
+            "owner": "Member-approved records; MAAS-9/3 validate interpretation",
+            "approved_value": null,
+            "observation": "Not an MAAS-8 approval; original model/kernel owner resolves.",
+            "evidence": [],
+            "next_action": "Reuse the original owner's approved record; otherwise report the exact missing field."
+          }
+        }
+      },
+      {
+        "id": "EXT-05",
+        "fields": [
+          "approved_execution_environment",
+          "egress_and_endpoint_allowlist",
+          "Higress_controller_plugin_versions_and_digests",
+          "routing_listener_and_instance_boot_coverage",
+          "TLS_and_protected_validation_identity"
+        ],
+        "owner": "MAAS-8 with MAAS-3",
+        "value": null,
+        "status": "needs_existing_approval_or_missing_field_resolution",
+        "member_approval_required": true,
+        "impact": "Block actual gateway/Secret/validation proof and production Callable; ExternalAPI does not require GPU.",
+        "field_resolution": {
+          "approved_execution_environment": {
+            "status": "pending_approved_input",
+            "owner": "MAAS-8 + member; MAAS-3 real adapters",
+            "approved_value": null,
+            "observation": "Target cluster/K8s/namespace/authorization are null in dependencies.lock.json. Higress reuse and four DSN refs are expressible, not target network or listener evidence.",
+            "evidence": [
+              "deploy/dependencies.lock.json",
+              "deploy/charts/maas-platform/values.yaml",
+              "deploy/charts/maas-platform/templates/networkpolicy.yaml"
+            ],
+            "next_action": "Resolve approved context/actions, namespace, DNS/services, egress allowlist, fixed artifact digests, listener/mTLS SAN/CA and validation identity; collect actual boot/config receipts only in the approved target."
+          },
+          "egress_and_endpoint_allowlist": {
+            "status": "pending_approved_input",
+            "owner": "MAAS-8 + member; MAAS-3 real adapters",
+            "approved_value": null,
+            "observation": "Target cluster/K8s/namespace/authorization are null in dependencies.lock.json. Higress reuse and four DSN refs are expressible, not target network or listener evidence.",
+            "evidence": [
+              "deploy/dependencies.lock.json",
+              "deploy/charts/maas-platform/values.yaml",
+              "deploy/charts/maas-platform/templates/networkpolicy.yaml"
+            ],
+            "next_action": "Resolve approved context/actions, namespace, DNS/services, egress allowlist, fixed artifact digests, listener/mTLS SAN/CA and validation identity; collect actual boot/config receipts only in the approved target."
+          },
+          "Higress_controller_plugin_versions_and_digests": {
+            "status": "candidate_not_approved",
+            "owner": "MAAS-8 + gateway owner; MAAS-3",
+            "approved_value": null,
+            "observation": "Higress 2.2.5 is a historical candidate, not a locked artifact. Chart, controller/gateway/Envoy, CRD, plugin/Wasm ABI/digest and mirror remain pending.",
+            "evidence": [
+              "deploy/dependencies.lock.json"
+            ],
+            "next_action": "Enumerate and approve the complete gateway artifact set; do not copy latest documentation or a tag into a verified digest."
+          },
+          "routing_listener_and_instance_boot_coverage": {
+            "status": "pending_approved_input",
+            "owner": "MAAS-8 + member; MAAS-3 real adapters",
+            "approved_value": null,
+            "observation": "Target cluster/K8s/namespace/authorization are null in dependencies.lock.json. Higress reuse and four DSN refs are expressible, not target network or listener evidence.",
+            "evidence": [
+              "deploy/dependencies.lock.json",
+              "deploy/charts/maas-platform/values.yaml",
+              "deploy/charts/maas-platform/templates/networkpolicy.yaml"
+            ],
+            "next_action": "Resolve approved context/actions, namespace, DNS/services, egress allowlist, fixed artifact digests, listener/mTLS SAN/CA and validation identity; collect actual boot/config receipts only in the approved target."
+          },
+          "TLS_and_protected_validation_identity": {
+            "status": "pending_approved_input",
+            "owner": "MAAS-8 + member; MAAS-3 real adapters",
+            "approved_value": null,
+            "observation": "Target cluster/K8s/namespace/authorization are null in dependencies.lock.json. Higress reuse and four DSN refs are expressible, not target network or listener evidence.",
+            "evidence": [
+              "deploy/dependencies.lock.json",
+              "deploy/charts/maas-platform/values.yaml",
+              "deploy/charts/maas-platform/templates/networkpolicy.yaml"
+            ],
+            "next_action": "Resolve approved context/actions, namespace, DNS/services, egress allowlist, fixed artifact digests, listener/mTLS SAN/CA and validation identity; collect actual boot/config receipts only in the approved target."
+          }
+        }
+      },
+      {
+        "id": "EXT-06",
+        "fields": [
+          "actual_publisher_factory",
+          "core_publisher_operation_metadata_payload_DSN_role_map",
+          "Secret_gateway_validation_runtime_adapter_entrypoints",
+          "request_publication_price_binding",
+          "authoritative_request_and_nonempty_usage_evidence"
+        ],
+        "owner": "MAAS-3, also owns MAAS-11/4/6 implementation",
+        "value": null,
+        "status": "needs_existing_approval_or_missing_field_resolution",
+        "member_approval_required": false,
+        "impact": "Code/temporary controlled assembly may proceed independently; true proof producers still required.",
+        "field_resolution": {
+          "actual_publisher_factory": {
+            "status": "repository_defined_target_pending",
+            "owner": "MAAS-3 implementation; MAAS-8 installation",
+            "approved_value": null,
+            "observation": "OpenPublisher takes an explicit DSN and enables the narrow completion hook; workbench supplies five identities. control-api has four env consumers and its ModelGate reads via the core DB. Production publisher consumer is absent.",
+            "evidence": [
+              "internal/release/mysqlstore/runtime.go",
+              "cmd/workbench/main.go",
+              "cmd/workbench/identities.go",
+              "cmd/control-api/main.go",
+              "config/mysql/controlapi-projections.sql",
+              "config/mysql/release-permissions.sql"
+            ],
+            "next_action": "Reuse the factory and five role templates. Backend defines the actual production consumer; ops then binds approved independent references and verifies effective grants."
+          },
+          "core_publisher_operation_metadata_payload_DSN_role_map": {
+            "status": "repository_defined_target_pending",
+            "owner": "MAAS-3 implementation; MAAS-8 installation",
+            "approved_value": null,
+            "observation": "OpenPublisher takes an explicit DSN and enables the narrow completion hook; workbench supplies five identities. control-api has four env consumers and its ModelGate reads via the core DB. Production publisher consumer is absent.",
+            "evidence": [
+              "internal/release/mysqlstore/runtime.go",
+              "cmd/workbench/main.go",
+              "cmd/workbench/identities.go",
+              "cmd/control-api/main.go",
+              "config/mysql/controlapi-projections.sql",
+              "config/mysql/release-permissions.sql"
+            ],
+            "next_action": "Reuse the factory and five role templates. Backend defines the actual production consumer; ops then binds approved independent references and verifies effective grants."
+          },
+          "Secret_gateway_validation_runtime_adapter_entrypoints": {
+            "status": "production_entrypoint_missing",
+            "owner": "MAAS-3; MAAS-8 binds approved identities",
+            "approved_value": null,
+            "observation": "Secret/receipt libraries and kernel validation persistence exist; cmd/operator constructs an empty Reconciler and rejects readiness. Libraries/fixture producers do not prove production H1-H4 or candidate validation wiring.",
+            "evidence": [
+              "cmd/operator/main.go",
+              "internal/gateway/kubernetes_secret.go",
+              "internal/gateway/receipt.go",
+              "internal/release/ports.go"
+            ],
+            "next_action": "Wire real publisher, agent, reporter/receipt, protected validation and runtime ports in the existing backend flow; keep DependencyMissing until evidence is valid."
+          },
+          "request_publication_price_binding": {
+            "status": "awaiting_model_owner",
+            "owner": "MAAS-3, also owns MAAS-11/4/6 implementation",
+            "approved_value": null,
+            "observation": "Not an MAAS-8 approval; original model/kernel owner resolves.",
+            "evidence": [],
+            "next_action": "Reuse the original owner's approved record; otherwise report the exact missing field."
+          },
+          "authoritative_request_and_nonempty_usage_evidence": {
+            "status": "awaiting_model_owner",
+            "owner": "MAAS-3, also owns MAAS-11/4/6 implementation",
+            "approved_value": null,
+            "observation": "Not an MAAS-8 approval; original model/kernel owner resolves.",
+            "evidence": [],
+            "next_action": "Reuse the original owner's approved record; otherwise report the exact missing field."
+          }
+        }
+      }
+    ],
+    "ops_extension": {
+      "target": {
+        "cluster_context_reference": null,
+        "namespace": null,
+        "authorization_ref": null,
+        "actions": null,
+        "service_names": null,
+        "dns_host": null,
+        "TLS_secret_reference": null,
+        "mTLS_CA_SAN_identity": null,
+        "upstream_endpoint_allowlist": null,
+        "egress_policy_reference": null,
+        "actual_CNI_egress_evidence": null
+      },
+      "chart": {
+        "path": "deploy/charts/maas-platform",
+        "observed_version": "0.2.3",
+        "approved_target_version": null,
+        "artifact_digest": null
+      },
+      "images_and_plugins": {
+        "approved_versions": null,
+        "image_digests": null,
+        "Wasm_ABI_digest": null,
+        "mirror_mapping": null,
+        "pull_secret_references": null
+      },
+      "boot_coverage": {
+        "actual_serving_set_reference": null,
+        "instance_boot_ids": null,
+        "receipt_issuer": null,
+        "config_route_plugin_digest": null,
+        "credential_UID_resourceVersion": null,
+        "evidence_expiry_and_revocation_sync": null
+      },
+      "note": "ExternalAPI does not require GPU, LWS or weights; all applicable core/gateway/identity gates still apply."
+    }
+  },
+  "self_hosted": {
+    "confirmed_scope": "Same ModelRelease/publishing/kernel lifecycle; LWS+SGLang candidate, exact deployment combination pending verification",
+    "real_execution_enabled": false,
+    "inputs": [
+      {
+        "id": "SELF-01",
+        "fields": [
+          "exact_model_architecture_revision",
+          "license_approval",
+          "existing_weight_path",
+          "weight_checksum",
+          "tokenizer_template_digest",
+          "dtype_quantization"
+        ],
+        "owner": "MAAS-9 + member; MAAS-8 verifies storage",
+        "value": null,
+        "status": "needs_existing_approval_or_missing_field_resolution",
+        "member_approval_required": true,
+        "impact": "Block loading/deploying specific model; no new weight download granted.",
+        "field_resolution": {
+          "exact_model_architecture_revision": {
+            "status": "candidate_not_approved",
+            "owner": "MAAS-9 + member; MAAS-8 storage verification",
+            "approved_value": null,
+            "observation": "7B candidate metadata pins revision 916b56a44061fd5cd7d6a8fb632557ed4f724f60 but execution=false/approval=pending. Separate local engine-preflight recorded missing SmolLM-135M weights; it is historical, not current filesystem verification or target selection.",
+            "evidence": [
+              "tools/model_capabilities/profiles/sglang-r1-distill-qwen7b-candidate.json",
+              "tools/perf/operators/local_gpu/evidence/engine-preflight.json"
+            ],
+            "next_action": "Model owner supplies approved immutable model/license/tokenizer/template/dtype and existing storage reference. Ops verifies path/PVC/mount/read-only/checksum in that authorized environment; no download or default model."
+          },
+          "license_approval": {
+            "status": "candidate_not_approved",
+            "owner": "MAAS-9 + member; MAAS-8 storage verification",
+            "approved_value": null,
+            "observation": "7B candidate metadata pins revision 916b56a44061fd5cd7d6a8fb632557ed4f724f60 but execution=false/approval=pending. Separate local engine-preflight recorded missing SmolLM-135M weights; it is historical, not current filesystem verification or target selection.",
+            "evidence": [
+              "tools/model_capabilities/profiles/sglang-r1-distill-qwen7b-candidate.json",
+              "tools/perf/operators/local_gpu/evidence/engine-preflight.json"
+            ],
+            "next_action": "Model owner supplies approved immutable model/license/tokenizer/template/dtype and existing storage reference. Ops verifies path/PVC/mount/read-only/checksum in that authorized environment; no download or default model."
+          },
+          "existing_weight_path": {
+            "status": "candidate_not_approved",
+            "owner": "MAAS-9 + member; MAAS-8 storage verification",
+            "approved_value": null,
+            "observation": "7B candidate metadata pins revision 916b56a44061fd5cd7d6a8fb632557ed4f724f60 but execution=false/approval=pending. Separate local engine-preflight recorded missing SmolLM-135M weights; it is historical, not current filesystem verification or target selection.",
+            "evidence": [
+              "tools/model_capabilities/profiles/sglang-r1-distill-qwen7b-candidate.json",
+              "tools/perf/operators/local_gpu/evidence/engine-preflight.json"
+            ],
+            "next_action": "Model owner supplies approved immutable model/license/tokenizer/template/dtype and existing storage reference. Ops verifies path/PVC/mount/read-only/checksum in that authorized environment; no download or default model."
+          },
+          "weight_checksum": {
+            "status": "candidate_not_approved",
+            "owner": "MAAS-9 + member; MAAS-8 storage verification",
+            "approved_value": null,
+            "observation": "7B candidate metadata pins revision 916b56a44061fd5cd7d6a8fb632557ed4f724f60 but execution=false/approval=pending. Separate local engine-preflight recorded missing SmolLM-135M weights; it is historical, not current filesystem verification or target selection.",
+            "evidence": [
+              "tools/model_capabilities/profiles/sglang-r1-distill-qwen7b-candidate.json",
+              "tools/perf/operators/local_gpu/evidence/engine-preflight.json"
+            ],
+            "next_action": "Model owner supplies approved immutable model/license/tokenizer/template/dtype and existing storage reference. Ops verifies path/PVC/mount/read-only/checksum in that authorized environment; no download or default model."
+          },
+          "tokenizer_template_digest": {
+            "status": "candidate_not_approved",
+            "owner": "MAAS-9 + member; MAAS-8 storage verification",
+            "approved_value": null,
+            "observation": "7B candidate metadata pins revision 916b56a44061fd5cd7d6a8fb632557ed4f724f60 but execution=false/approval=pending. Separate local engine-preflight recorded missing SmolLM-135M weights; it is historical, not current filesystem verification or target selection.",
+            "evidence": [
+              "tools/model_capabilities/profiles/sglang-r1-distill-qwen7b-candidate.json",
+              "tools/perf/operators/local_gpu/evidence/engine-preflight.json"
+            ],
+            "next_action": "Model owner supplies approved immutable model/license/tokenizer/template/dtype and existing storage reference. Ops verifies path/PVC/mount/read-only/checksum in that authorized environment; no download or default model."
+          },
+          "dtype_quantization": {
+            "status": "candidate_not_approved",
+            "owner": "MAAS-9 + member; MAAS-8 storage verification",
+            "approved_value": null,
+            "observation": "7B candidate metadata pins revision 916b56a44061fd5cd7d6a8fb632557ed4f724f60 but execution=false/approval=pending. Separate local engine-preflight recorded missing SmolLM-135M weights; it is historical, not current filesystem verification or target selection.",
+            "evidence": [
+              "tools/model_capabilities/profiles/sglang-r1-distill-qwen7b-candidate.json",
+              "tools/perf/operators/local_gpu/evidence/engine-preflight.json"
+            ],
+            "next_action": "Model owner supplies approved immutable model/license/tokenizer/template/dtype and existing storage reference. Ops verifies path/PVC/mount/read-only/checksum in that authorized environment; no download or default model."
+          }
+        }
+      },
+      {
+        "id": "SELF-02",
+        "fields": [
+          "engine_actual_commit",
+          "image_digest",
+          "attention_allocator_backend",
+          "context_output_and_billed_usage_bounds",
+          "cancel_rid_device_stop_and_same_group_capacity_observation"
+        ],
+        "owner": "MAAS-9 with MAAS-3/8",
+        "value": null,
+        "status": "needs_existing_approval_or_missing_field_resolution",
+        "member_approval_required": false,
+        "impact": "Block compatibility/upper-bound/cancel validation; research sample is not deployment approval.",
+        "field_resolution": {
+          "engine_actual_commit": {
+            "status": "candidate_not_approved",
+            "owner": "MAAS-9 + MAAS-8",
+            "approved_value": null,
+            "observation": "Deployment candidate SGLang v0.5.18/71de97b264b04dcd514cf904003028aefe9775c8; LWS v1.0.0/588881cada4fcc145e83eced00b88af920892ec6. Image existence/digest not verified. Local SGLang 0.5.2 research is separate.",
+            "evidence": [
+              "tools/model_capabilities/profiles/sglang-r1-distill-qwen7b-candidate.json",
+              "tools/perf/operators/local_gpu/evidence/engine-preflight.json"
+            ],
+            "next_action": "Approve one model/engine/driver/CUDA/torch/NCCL/device-plugin combination and immutable image digest/mirror, keeping source-inspection and local research separate."
+          },
+          "image_digest": {
+            "status": "candidate_not_approved",
+            "owner": "MAAS-9 + MAAS-8",
+            "approved_value": null,
+            "observation": "Deployment candidate SGLang v0.5.18/71de97b264b04dcd514cf904003028aefe9775c8; LWS v1.0.0/588881cada4fcc145e83eced00b88af920892ec6. Image existence/digest not verified. Local SGLang 0.5.2 research is separate.",
+            "evidence": [
+              "tools/model_capabilities/profiles/sglang-r1-distill-qwen7b-candidate.json",
+              "tools/perf/operators/local_gpu/evidence/engine-preflight.json"
+            ],
+            "next_action": "Approve one model/engine/driver/CUDA/torch/NCCL/device-plugin combination and immutable image digest/mirror, keeping source-inspection and local research separate."
+          },
+          "attention_allocator_backend": {
+            "status": "awaiting_model_owner",
+            "owner": "MAAS-9 with MAAS-3/8",
+            "approved_value": null,
+            "observation": "Not an MAAS-8 approval; original model/kernel owner resolves.",
+            "evidence": [],
+            "next_action": "Reuse the original owner's approved record; otherwise report the exact missing field."
+          },
+          "context_output_and_billed_usage_bounds": {
+            "status": "awaiting_model_owner",
+            "owner": "MAAS-9 with MAAS-3/8",
+            "approved_value": null,
+            "observation": "Not an MAAS-8 approval; original model/kernel owner resolves.",
+            "evidence": [],
+            "next_action": "Reuse the original owner's approved record; otherwise report the exact missing field."
+          },
+          "cancel_rid_device_stop_and_same_group_capacity_observation": {
+            "status": "awaiting_model_owner",
+            "owner": "MAAS-9 with MAAS-3/8",
+            "approved_value": null,
+            "observation": "Not an MAAS-8 approval; original model/kernel owner resolves.",
+            "evidence": [],
+            "next_action": "Reuse the original owner's approved record; otherwise report the exact missing field."
+          }
+        }
+      },
+      {
+        "id": "SELF-03",
+        "fields": [
+          "LWS_K8s_CRD_versions",
+          "leader_worker_group_topology",
+          "parallelism_and_placement",
+          "complete_group_GPU_memory_and_interconnect",
+          "KV_activation_graph_workspace_and_rollout_headroom"
+        ],
+        "owner": "MAAS-8 + MAAS-9",
+        "value": null,
+        "status": "needs_existing_approval_or_missing_field_resolution",
+        "member_approval_required": false,
+        "impact": "Block actual placement and complete-group capacity; local operator/GPU tests do not prove platform deployment readiness.",
+        "field_resolution": {
+          "LWS_K8s_CRD_versions": {
+            "status": "pending_approved_input",
+            "owner": "MAAS-8 + MAAS-9; target owner",
+            "approved_value": null,
+            "observation": "CR has groups/podsPerGroup/gpusPerPod, CPU/memory, TP/PP and placementProfileRef. Compile emits NONDEPLOYABLE ConfigMap plan, not an LWS. Candidate 1x1x1/TP1/PP1 is unapproved; no target placement or peak VRAM established.",
+            "evidence": [
+              "api/v1alpha1/types.go",
+              "internal/release/compiler.go",
+              "tools/model_capabilities/profiles/sglang-r1-distill-qwen7b-candidate.json"
+            ],
+            "next_action": "Fill approved group topology, homogeneous or per-Pod GPU requests, node/zone/links, GPU resource name, selectors/affinity/taints, storage locality and old+new rollout peaks. MAAS-3 provides the runtime/placement compiler."
+          },
+          "leader_worker_group_topology": {
+            "status": "pending_approved_input",
+            "owner": "MAAS-8 + MAAS-9; target owner",
+            "approved_value": null,
+            "observation": "CR has groups/podsPerGroup/gpusPerPod, CPU/memory, TP/PP and placementProfileRef. Compile emits NONDEPLOYABLE ConfigMap plan, not an LWS. Candidate 1x1x1/TP1/PP1 is unapproved; no target placement or peak VRAM established.",
+            "evidence": [
+              "api/v1alpha1/types.go",
+              "internal/release/compiler.go",
+              "tools/model_capabilities/profiles/sglang-r1-distill-qwen7b-candidate.json"
+            ],
+            "next_action": "Fill approved group topology, homogeneous or per-Pod GPU requests, node/zone/links, GPU resource name, selectors/affinity/taints, storage locality and old+new rollout peaks. MAAS-3 provides the runtime/placement compiler."
+          },
+          "parallelism_and_placement": {
+            "status": "pending_approved_input",
+            "owner": "MAAS-8 + MAAS-9; target owner",
+            "approved_value": null,
+            "observation": "CR has groups/podsPerGroup/gpusPerPod, CPU/memory, TP/PP and placementProfileRef. Compile emits NONDEPLOYABLE ConfigMap plan, not an LWS. Candidate 1x1x1/TP1/PP1 is unapproved; no target placement or peak VRAM established.",
+            "evidence": [
+              "api/v1alpha1/types.go",
+              "internal/release/compiler.go",
+              "tools/model_capabilities/profiles/sglang-r1-distill-qwen7b-candidate.json"
+            ],
+            "next_action": "Fill approved group topology, homogeneous or per-Pod GPU requests, node/zone/links, GPU resource name, selectors/affinity/taints, storage locality and old+new rollout peaks. MAAS-3 provides the runtime/placement compiler."
+          },
+          "complete_group_GPU_memory_and_interconnect": {
+            "status": "pending_approved_input",
+            "owner": "MAAS-8 + MAAS-9; target owner",
+            "approved_value": null,
+            "observation": "CR has groups/podsPerGroup/gpusPerPod, CPU/memory, TP/PP and placementProfileRef. Compile emits NONDEPLOYABLE ConfigMap plan, not an LWS. Candidate 1x1x1/TP1/PP1 is unapproved; no target placement or peak VRAM established.",
+            "evidence": [
+              "api/v1alpha1/types.go",
+              "internal/release/compiler.go",
+              "tools/model_capabilities/profiles/sglang-r1-distill-qwen7b-candidate.json"
+            ],
+            "next_action": "Fill approved group topology, homogeneous or per-Pod GPU requests, node/zone/links, GPU resource name, selectors/affinity/taints, storage locality and old+new rollout peaks. MAAS-3 provides the runtime/placement compiler."
+          },
+          "KV_activation_graph_workspace_and_rollout_headroom": {
+            "status": "pending_approved_input",
+            "owner": "MAAS-8 + MAAS-9; target owner",
+            "approved_value": null,
+            "observation": "CR has groups/podsPerGroup/gpusPerPod, CPU/memory, TP/PP and placementProfileRef. Compile emits NONDEPLOYABLE ConfigMap plan, not an LWS. Candidate 1x1x1/TP1/PP1 is unapproved; no target placement or peak VRAM established.",
+            "evidence": [
+              "api/v1alpha1/types.go",
+              "internal/release/compiler.go",
+              "tools/model_capabilities/profiles/sglang-r1-distill-qwen7b-candidate.json"
+            ],
+            "next_action": "Fill approved group topology, homogeneous or per-Pod GPU requests, node/zone/links, GPU resource name, selectors/affinity/taints, storage locality and old+new rollout peaks. MAAS-3 provides the runtime/placement compiler."
+          }
+        }
+      },
+      {
+        "id": "SELF-04",
+        "fields": [
+          "approved_target_environment_and_actions",
+          "namespace_storage_pull_secret_refs",
+          "existing_weights_mount",
+          "network_service_TLS_gateway_identity"
+        ],
+        "owner": "MAAS-8 + member",
+        "value": null,
+        "status": "needs_existing_approval_or_missing_field_resolution",
+        "member_approval_required": true,
+        "impact": "Block target writes/installation; approved local GPU research continues separately.",
+        "field_resolution": {
+          "approved_target_environment_and_actions": {
+            "status": "pending_approved_input",
+            "owner": "MAAS-8 + member",
+            "approved_value": null,
+            "observation": "Target action authorization, namespace/PVC/pull-secret refs, weight mount, service/DNS/TLS and gateway identity are not established in the reviewed target locks. Local GPU research authorization remains separate.",
+            "evidence": [
+              "deploy/dependencies.lock.json",
+              "deploy/charts/maas-platform/values.yaml"
+            ],
+            "next_action": "Reuse a specific approved target/action record and non-secret references; otherwise request only those missing values. Do not inspect unrelated credentials, create a cluster or write the target."
+          },
+          "namespace_storage_pull_secret_refs": {
+            "status": "pending_approved_input",
+            "owner": "MAAS-8 + member",
+            "approved_value": null,
+            "observation": "Target action authorization, namespace/PVC/pull-secret refs, weight mount, service/DNS/TLS and gateway identity are not established in the reviewed target locks. Local GPU research authorization remains separate.",
+            "evidence": [
+              "deploy/dependencies.lock.json",
+              "deploy/charts/maas-platform/values.yaml"
+            ],
+            "next_action": "Reuse a specific approved target/action record and non-secret references; otherwise request only those missing values. Do not inspect unrelated credentials, create a cluster or write the target."
+          },
+          "existing_weights_mount": {
+            "status": "pending_approved_input",
+            "owner": "MAAS-8 + member",
+            "approved_value": null,
+            "observation": "Target action authorization, namespace/PVC/pull-secret refs, weight mount, service/DNS/TLS and gateway identity are not established in the reviewed target locks. Local GPU research authorization remains separate.",
+            "evidence": [
+              "deploy/dependencies.lock.json",
+              "deploy/charts/maas-platform/values.yaml"
+            ],
+            "next_action": "Reuse a specific approved target/action record and non-secret references; otherwise request only those missing values. Do not inspect unrelated credentials, create a cluster or write the target."
+          },
+          "network_service_TLS_gateway_identity": {
+            "status": "pending_approved_input",
+            "owner": "MAAS-8 + member",
+            "approved_value": null,
+            "observation": "Target action authorization, namespace/PVC/pull-secret refs, weight mount, service/DNS/TLS and gateway identity are not established in the reviewed target locks. Local GPU research authorization remains separate.",
+            "evidence": [
+              "deploy/dependencies.lock.json",
+              "deploy/charts/maas-platform/values.yaml"
+            ],
+            "next_action": "Reuse a specific approved target/action record and non-secret references; otherwise request only those missing values. Do not inspect unrelated credentials, create a cluster or write the target."
+          }
+        }
+      },
+      {
+        "id": "SELF-05",
+        "fields": [
+          "profile_price_budget_and_validation_approval_refs",
+          "same_unique_Go_MySQL_kernel_binding",
+          "publisher_gateway_Secret_validation_proof_sources",
+          "fixed_source_and_original_request_usage_projection"
+        ],
+        "owner": "MAAS-3 consumes MAAS-9/8 approved inputs",
+        "value": null,
+        "status": "needs_existing_approval_or_missing_field_resolution",
+        "member_approval_required": false,
+        "impact": "Block platform Callable and real nonempty usage evidence; no second ledger or bypass.",
+        "field_resolution": {
+          "profile_price_budget_and_validation_approval_refs": {
+            "status": "awaiting_model_owner",
+            "owner": "MAAS-3 consumes MAAS-9/8 approved inputs",
+            "approved_value": null,
+            "observation": "Not an MAAS-8 approval; original model/kernel owner resolves.",
+            "evidence": [],
+            "next_action": "Reuse the original owner's approved record; otherwise report the exact missing field."
+          },
+          "same_unique_Go_MySQL_kernel_binding": {
+            "status": "awaiting_model_owner",
+            "owner": "MAAS-3 consumes MAAS-9/8 approved inputs",
+            "approved_value": null,
+            "observation": "Not an MAAS-8 approval; original model/kernel owner resolves.",
+            "evidence": [],
+            "next_action": "Reuse the original owner's approved record; otherwise report the exact missing field."
+          },
+          "publisher_gateway_Secret_validation_proof_sources": {
+            "status": "production_entrypoint_missing",
+            "owner": "MAAS-3; MAAS-8 identity binding",
+            "approved_value": null,
+            "observation": "Same existing factory/library gaps as EXT-06. Local five-identity workbench does not produce production gateway/runtime evidence.",
+            "evidence": [
+              "cmd/operator/main.go",
+              "internal/release/compiler.go",
+              "internal/release/mysqlstore/runtime.go"
+            ],
+            "next_action": "Original backend implements actual proof producers/consumers; ops records namespaced identities and instance boot/config binding once available."
+          },
+          "fixed_source_and_original_request_usage_projection": {
+            "status": "awaiting_model_owner",
+            "owner": "MAAS-3 consumes MAAS-9/8 approved inputs",
+            "approved_value": null,
+            "observation": "Not an MAAS-8 approval; original model/kernel owner resolves.",
+            "evidence": [],
+            "next_action": "Reuse the original owner's approved record; otherwise report the exact missing field."
+          }
+        }
+      },
+      {
+        "id": "SELF-06",
+        "fields": [
+          "installation_upgrade_rollback",
+          "drain_UID_inventory_retention",
+          "backup_restore_RPO_RTO_retention_approval",
+          "observability_and_original_request_trace_sources"
+        ],
+        "owner": "MAAS-8; original MAAS-7 verifies new candidates",
+        "value": null,
+        "status": "needs_existing_approval_or_missing_field_resolution",
+        "member_approval_required": false,
+        "impact": "Block corresponding M09/A01-A34 delivery acceptance, not independent controlled implementation.",
+        "field_resolution": {
+          "installation_upgrade_rollback": {
+            "status": "repository_defined_target_pending",
+            "owner": "MAAS-8; MAAS-7 independent acceptance",
+            "approved_value": null,
+            "observation": "Existing runbook covers Chart/CRD/DDL ownership, drain/UID and held separation, backup/restore. Target RPO/RTO/retention null; no target install/upgrade/restore evidence.",
+            "evidence": [
+              "deploy/docs/runbook.md",
+              "deploy/docs/readiness.md",
+              "deploy/docs/log-fields.json",
+              "deploy/docs/signals.csv"
+            ],
+            "next_action": "Reuse runbook and historical evidence, approve target recovery/retention values, then independently verify new candidate installation, rollout/drain, unchanged original IDs and fail-closed recovery. No forced cleanup/refund."
+          },
+          "drain_UID_inventory_retention": {
+            "status": "repository_defined_target_pending",
+            "owner": "MAAS-8; MAAS-7 independent acceptance",
+            "approved_value": null,
+            "observation": "Existing runbook covers Chart/CRD/DDL ownership, drain/UID and held separation, backup/restore. Target RPO/RTO/retention null; no target install/upgrade/restore evidence.",
+            "evidence": [
+              "deploy/docs/runbook.md",
+              "deploy/docs/readiness.md",
+              "deploy/docs/log-fields.json",
+              "deploy/docs/signals.csv"
+            ],
+            "next_action": "Reuse runbook and historical evidence, approve target recovery/retention values, then independently verify new candidate installation, rollout/drain, unchanged original IDs and fail-closed recovery. No forced cleanup/refund."
+          },
+          "backup_restore_RPO_RTO_retention_approval": {
+            "status": "repository_defined_target_pending",
+            "owner": "MAAS-8; MAAS-7 independent acceptance",
+            "approved_value": null,
+            "observation": "Existing runbook covers Chart/CRD/DDL ownership, drain/UID and held separation, backup/restore. Target RPO/RTO/retention null; no target install/upgrade/restore evidence.",
+            "evidence": [
+              "deploy/docs/runbook.md",
+              "deploy/docs/readiness.md",
+              "deploy/docs/log-fields.json",
+              "deploy/docs/signals.csv"
+            ],
+            "next_action": "Reuse runbook and historical evidence, approve target recovery/retention values, then independently verify new candidate installation, rollout/drain, unchanged original IDs and fail-closed recovery. No forced cleanup/refund."
+          },
+          "observability_and_original_request_trace_sources": {
+            "status": "repository_defined_target_pending",
+            "owner": "MAAS-8; MAAS-7 independent acceptance",
+            "approved_value": null,
+            "observation": "Existing runbook covers Chart/CRD/DDL ownership, drain/UID and held separation, backup/restore. Target RPO/RTO/retention null; no target install/upgrade/restore evidence.",
+            "evidence": [
+              "deploy/docs/runbook.md",
+              "deploy/docs/readiness.md",
+              "deploy/docs/log-fields.json",
+              "deploy/docs/signals.csv"
+            ],
+            "next_action": "Reuse runbook and historical evidence, approve target recovery/retention values, then independently verify new candidate installation, rollout/drain, unchanged original IDs and fail-closed recovery. No forced cleanup/refund."
+          }
+        }
+      }
+    ],
+    "ops_extension": {
+      "group_resources": {
+        "groups": null,
+        "pods_per_group": null,
+        "gpus_per_pod": null,
+        "old_groups_at_peak": null,
+        "new_groups_at_peak": null,
+        "gpu_memory_peak_bytes_each": null,
+        "GPU_count_formula": "old_groups_at_peak*old_pods_per_group*old_GPUs_per_pod + new_groups_at_peak*new_pods_per_group*new_GPUs_per_pod",
+        "per_device_memory_components": [
+          "resident_weights",
+          "KV",
+          "activations",
+          "CUDA_graph",
+          "workspace",
+          "fragmentation",
+          "system_reserve"
+        ],
+        "placement_profile_reference": null,
+        "node_selector_affinity_tolerations": null,
+        "topology_interconnect_and_storage_locality": null,
+        "when_insufficient": "Report Pending/blocked; use only an approved staged/downtime policy, never forced slot release."
+      },
+      "weights_storage": {
+        "approved_existing_path": null,
+        "PVC_reference": null,
+        "manifest_hash": null,
+        "license_approval_reference": null,
+        "readonly_mount_and_pull_secret": null
+      },
+      "recovery": {
+        "RPO": null,
+        "RTO": null,
+        "retention": null,
+        "restore_target_and_authorization": null,
+        "unknown_held_refund_on_slot_or_resource_cleanup": false
+      },
+      "note": "Historical local RTX4070 Laptop/8188MiB record is not target LWS approval or current free-memory evidence."
+    }
+  },
+  "acceptance": {
+    "owner": "MAAS-7",
+    "segments": [
+      "external_real_call_to_authoritative_nonempty_usage",
+      "self_hosted_CR_to_actual_inference_via_gateway",
+      "full_model_release_lifecycle",
+      "budget_identity_cancel_unknown_usage_faults",
+      "approved_environment_install_upgrade_rollback_recovery"
+    ],
+    "historical_results": "Reuse original SHA/scope. UI16 b73d96b/1e4a1af and existing GPU/QA windows are not rerun without a new affected change."
+  },
+  "artifact_kind": "ops-review-intake-not-runtime-configuration",
+  "reviewed_on_utc": "2026-11-15",
+  "source_baseline": "8dbf99ef59c847da775b83d0eeb7dc8f8bf48a9a",
+  "deployment_approved": false,
+  "upstream_attachment_id": "01a1dd45-d880-7278-8b79-3d0df92a8253",
+  "upstream_sha256": "a3c4072a9e4271f075f6e9a74ec7b7c04184465916fd20a128d2539990cd0329",
+  "review_owner": "MAAS-8",
+  "approval_search_scope": [
+    "MAAS-8 description and both discussion threads",
+    "MAAS-12 supplied issue-wide comment delta",
+    "MAAS-9 latest source/profile delivery thread",
+    "current unified repository deployment locks and capability profiles"
+  ],
+  "database_wiring": {
+    "core": {
+      "roles": [
+        "maas_kernel_runtime",
+        "maas_release_reader"
+      ],
+      "environment_name": "MAAS_MYSQL_DSN",
+      "injection": "existing_Secret_secretKeyRef",
+      "secret_reference": {
+        "namespace": null,
+        "name": null,
+        "key": null
+      },
+      "principal_reference": null,
+      "production_wiring_verified": false,
+      "current_consumer": "cmd/control-api/main.go",
+      "chart_support": "core.databaseSecrets.core",
+      "scope": "source-inspected; target principals/default roles/inherited grants not verified"
+    },
+    "publisher": {
+      "roles": [
+        "maas_release_publisher"
+      ],
+      "environment_name": null,
+      "injection": "explicit_function_argument",
+      "secret_reference": {
+        "namespace": null,
+        "name": null,
+        "key": null
+      },
+      "principal_reference": null,
+      "production_wiring_verified": false,
+      "current_consumer": "cmd/workbench/main.go:OpenPublisher",
+      "chart_support": "no production publisher env consumer",
+      "scope": "source-inspected; target principals/default roles/inherited grants not verified"
+    },
+    "historyReader": {
+      "roles": [
+        "maas_release_history_reader"
+      ],
+      "environment_name": "MAAS_HISTORY_READER_DSN",
+      "injection": "existing_Secret_secretKeyRef",
+      "secret_reference": {
+        "namespace": null,
+        "name": null,
+        "key": null
+      },
+      "principal_reference": null,
+      "production_wiring_verified": false,
+      "current_consumer": "cmd/control-api/main.go",
+      "chart_support": "core.databaseSecrets.historyReader",
+      "scope": "source-inspected; target principals/default roles/inherited grants not verified"
+    },
+    "payloadReader": {
+      "roles": [
+        "maas_history_payload_reader"
+      ],
+      "environment_name": "MAAS_HISTORY_PAYLOAD_DSN",
+      "injection": "existing_Secret_secretKeyRef",
+      "secret_reference": {
+        "namespace": null,
+        "name": null,
+        "key": null
+      },
+      "principal_reference": null,
+      "production_wiring_verified": false,
+      "current_consumer": "cmd/control-api/main.go",
+      "chart_support": "core.databaseSecrets.payloadReader",
+      "scope": "source-inspected; target principals/default roles/inherited grants not verified"
+    },
+    "operationReader": {
+      "roles": [
+        "maas_release_operations_runtime"
+      ],
+      "environment_name": "MAAS_OPERATIONS_DSN",
+      "injection": "existing_Secret_secretKeyRef",
+      "secret_reference": {
+        "namespace": null,
+        "name": null,
+        "key": null
+      },
+      "principal_reference": null,
+      "production_wiring_verified": false,
+      "current_consumer": "cmd/control-api/main.go",
+      "chart_support": "core.databaseSecrets.operationReader",
+      "scope": "source-inspected; target principals/default roles/inherited grants not verified"
+    }
+  },
+  "source_observations": [
+    {
+      "id": "publisher-factory",
+      "path": "internal/release/mysqlstore/runtime.go",
+      "sha256": "1e75972d2d588ebff3e7839974eb2f5e0e075ea95d8ddb22245b2ff2e606d47c",
+      "anchors": [
+        "func OpenPublisher(",
+        "store.WithManagementOperations()",
+        "SELECT CURRENT_ROLE()"
+      ],
+      "first_anchor_line": 25
+    },
+    {
+      "id": "local-five-identities",
+      "path": "cmd/workbench/identities.go",
+      "sha256": "e9de64739b385f10cabc6a3ab09a8fe84be8c83a00c765f8c259a39877338e66",
+      "anchors": [
+        "PublisherDSN",
+        "installLocalConnections"
+      ],
+      "first_anchor_line": 20
+    },
+    {
+      "id": "local-publisher-consumer",
+      "path": "cmd/workbench/main.go",
+      "sha256": "a172832f9bf102336fd26262e2ac1f8e26ef00cb16fbf20898ab7bba4052b061",
+      "anchors": [
+        "mysqlstore.OpenPublisher(ctx, connections.PublisherDSN",
+        "corev1.Namespace"
+      ],
+      "first_anchor_line": 140
+    },
+    {
+      "id": "control-env-consumers",
+      "path": "cmd/control-api/main.go",
+      "sha256": "38cac312ea6fd081b0f6449a4ab034966a992cf92fa5ef348ecc589d83d6d6d5",
+      "anchors": [
+        "MAAS_MYSQL_DSN",
+        "MAAS_HISTORY_READER_DSN",
+        "MAAS_HISTORY_PAYLOAD_DSN",
+        "MAAS_OPERATIONS_DSN",
+        "h.ModelGate = publisher"
+      ],
+      "first_anchor_line": 44
+    },
+    {
+      "id": "operator-not-wired",
+      "path": "cmd/operator/main.go",
+      "sha256": "539a006cbcfb20076d5f5e4186c8ccb4a3917478ee193349ad768ecb3e71001c",
+      "anchors": [
+        "reconciler := &release.Reconciler{}",
+        "return release.ErrDependencyMissing"
+      ],
+      "first_anchor_line": 29
+    },
+    {
+      "id": "actual-Secret-library",
+      "path": "internal/gateway/kubernetes_secret.go",
+      "sha256": "68dc75c5a5685c11d626e214339a15d5fc3c07359835d7fdc81443cd0d361cd4",
+      "anchors": [
+        "r.Reader.Get(ctx",
+        "s.ResourceVersion != ref.ResourceVersion"
+      ],
+      "first_anchor_line": 22
+    },
+    {
+      "id": "Secret-agent",
+      "path": "internal/gateway/secret.go",
+      "sha256": "8df94f8624a3571e3e88db8224778331f404d0531160f31b9f35be4234626d7e",
+      "anchors": [
+        "func NewSecretAgent(",
+        "func (a *SecretAgent) Revoke("
+      ],
+      "first_anchor_line": 36
+    },
+    {
+      "id": "gateway-receipt-library",
+      "path": "internal/gateway/receipt.go",
+      "sha256": "114b7fee8f84822b395836bb642cf65f7a1796658173d4e59e86806a6be0bcdf",
+      "anchors": [
+        "CredentialGeneration",
+        "r.Instance != peer"
+      ],
+      "first_anchor_line": 24
+    },
+    {
+      "id": "private-plan",
+      "path": "internal/release/compiler.go",
+      "sha256": "ddfc0c56cc4a013e15793ddebfaa2c03efa86b75f24e796ed94359afcdd4d9b0",
+      "anchors": [
+        "NONDEPLOYABLE: approved runtime and placement compiler required",
+        "\"kind\": \"ConfigMap\""
+      ],
+      "first_anchor_line": 63
+    },
+    {
+      "id": "CR-fields",
+      "path": "api/v1alpha1/types.go",
+      "sha256": "839bfd01f621fc02c2d93db093ca0ac6b87b4dc59005af89f39c1fc140549a06",
+      "anchors": [
+        "PlacementProfileRef",
+        "GPUsPerPod",
+        "CPUPerPod",
+        "CredentialSecretRef"
+      ],
+      "first_anchor_line": 41
+    },
+    {
+      "id": "Chart-references",
+      "path": "deploy/charts/maas-platform/templates/workloads.yaml",
+      "sha256": "9ea3589da84232107e97ca5ae4d6577ab10d7ad114606ecaa90c03c12d116418",
+      "anchors": [
+        "secretKeyRef:",
+        "optional: false",
+        "MAAS_OPERATIONS_DSN",
+        "automountServiceAccountToken:"
+      ],
+      "first_anchor_line": 65
+    },
+    {
+      "id": "publisher-grants",
+      "path": "config/mysql/release-permissions.sql",
+      "sha256": "50306ce5ab11484daf31d143ca49f14da4dd60c6d0c998e0610cb08dce507056",
+      "anchors": [
+        "GRANT UPDATE(state,reason,publication_id,updated_at)",
+        "maas_release_history_reader"
+      ],
+      "first_anchor_line": 34
+    },
+    {
+      "id": "projection-grants",
+      "path": "config/mysql/controlapi-projections.sql",
+      "sha256": "d35292ff6229b8c5ea858b1cba864ee093ffd61acb846805010a6b00ebc22a0c",
+      "anchors": [
+        "CREATE ROLE IF NOT EXISTS maas_history_payload_reader",
+        "GRANT SELECT,INSERT"
+      ],
+      "first_anchor_line": 11
+    },
+    {
+      "id": "private-candidate",
+      "path": "tools/model_capabilities/profiles/sglang-r1-distill-qwen7b-candidate.json",
+      "sha256": "87a78dd1ff499158eb49dde7605e29c2f36223d5515d75c2b8eedb145a7c2f16",
+      "anchors": [
+        "\"execution_enabled\": false",
+        "\"profile_approved\": false",
+        "71de97b264b04dcd514cf904003028aefe9775c8"
+      ],
+      "first_anchor_line": 4
+    },
+    {
+      "id": "external-candidate",
+      "path": "tools/model_capabilities/profiles/deepseek-external-candidate.json",
+      "sha256": "c62727f63d3bff27e64861450283279905217e939f56acf65e122f10abaf9415",
+      "anchors": [
+        "\"execution_enabled\": false",
+        "\"model_id\": null"
+      ],
+      "first_anchor_line": 4
+    },
+    {
+      "id": "weight-history",
+      "path": "tools/perf/operators/local_gpu/evidence/engine-preflight.json",
+      "sha256": "9eb19a412a6de5796599262f65c8c8b81021048560b7a97b060fed97dfee72ac",
+      "anchors": [
+        "\"weights_present\": false",
+        "\"generation_executed\": false"
+      ],
+      "first_anchor_line": 7
+    }
+  ]
+}
