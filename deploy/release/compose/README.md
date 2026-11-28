@@ -4,6 +4,8 @@
 
 ## 准备与首次安装
 
+安装授权前置见source/deploy/release/AUTHORIZATION-AUDIT.md。新装/升级使用下方install_compose.py，每次执行新审计容器；PROVISION_ROLES=0也必须核验实际账号/完整授权。缺合法元数据可见性非零，不自动撤旧授权或换root；安装凭据不进常驻服务。
+
 验证路径：Linux/已有WSL＋Docker Engine/Compose、Python3.10+、Go1.26.0、Node22.23.4。Node锁依赖最低22.22.2。无GPU要求。首次构建需要获取公开依赖与基础镜像；本包不声称全离线介质。Windows可在PowerShell运行Python/Go/Node构建，在已有WSL运行Docker Compose。
 
 ```sh
@@ -14,7 +16,7 @@ python source/deploy/release/configure.py --format compose --directory . --port 
 python source/deploy/release/build_native.py --root .
 export MAAS_DOCKERFILE=deploy/release/Dockerfile.native
 docker compose --parallel 1 build
-docker compose up -d --wait --wait-timeout 300
+python source/deploy/release/install_compose.py --file compose.yaml
 docker compose ps
 ```
 
